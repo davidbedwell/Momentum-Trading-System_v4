@@ -100,7 +100,7 @@ Examples:
 
 ```text
 configuration:
-max_workers = 4
+worker_ceiling = <optional_configured_limit>
 
 policy:
 live Decision tasks have higher priority than background research
