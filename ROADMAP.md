@@ -565,6 +565,18 @@ Data Intake
 
 This is the first major proof that MTS is capable of governed learning rather than merely executing scripts.
 
+### Deterministic Measurement Convergence Campaign
+
+As part of the first historical scientific loop, MTS shall run the governed Deterministic Measurement Convergence Campaign.
+
+The campaign uses repeated five-ticker cohorts to evaluate and rerank the shared deterministic measurement universe. Research Director performs a Measurement Convergence Assessment after each cohort and continues the campaign until sufficient convergence is established by stable successive rankings/classifications and the absence of important recurring analytical tool-coverage deficiencies.
+
+The campaign does not impose a fixed ticker-count endpoint and does not remove lower-ranked measurements from the shared governed computation library.
+
+Canonical campaign procedure:
+
+`Documentation/Campaigns/DETERMINISTIC_MEASUREMENT_CONVERGENCE_CAMPAIGN.md`
+
 ---
 
 # Phase 12 — Market Discovery
@@ -923,6 +935,22 @@ Research Director
 → Accountability
 → SoK
 ```
+
+## Milestone E2 — Deterministic Measurement Convergence
+
+```text
+complete applicable deterministic measurement universe
+→ five-ticker cohort
+→ Analysis
+→ Research Director convergence assessment
+→ reranking + retrospective tool-coverage review
+→ repeat until sufficient convergence
+→ evidence-based routine Intake measurement set
+```
+
+Campaign:
+
+`Documentation/Campaigns/DETERMINISTIC_MEASUREMENT_CONVERGENCE_CAMPAIGN.md`
 
 ## Milestone F — Historical Learning Proof
 
