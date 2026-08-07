@@ -1,10 +1,10 @@
-# Momentum Trading System v2 — Data-Intake Engine Architecture
+# Momentum Trading System v2 — Data-Intake Engine Architecture and Legacy Comparison
 
 **Status:** Draft for implementation
 
 ## 1. Mission
 
-The Data-Intake Engine converts external observations into validated, normalized, objectively reproducible MTS data and deterministic measurements, then publishes governed artifacts through the Research Nexus.
+The Data-Intake Engine converts external observations into validated, normalized, objectively reproducible MTS data, applies only a deliberately small governed baseline of routine measurements, and publishes governed artifacts through the Research Nexus.
 
 It must never assign meaning, significance, predictive value, importance, trading implication, or scientific authority to the measurements it produces.
 
@@ -23,10 +23,8 @@ Data Intake owns:
 - normalization;
 - canonical identifiers, timestamps, and units;
 - objective data-quality measurements;
-- deterministic transformations;
-- deterministic technical calculations;
-- deterministic market-context comparisons;
-- deterministic institutional-data measurements;
+- execution of the governed Intake-baseline measurement subset;
+- reuse of governed Tool Library measurement definitions when assigned to Intake;
 - canonical tabular representation;
 - measurement-definition execution;
 - publication requests to the Research Nexus;
@@ -61,9 +59,9 @@ Structural / Data-Quality Validation
     ↓
 Normalization
     ↓
-Baseline Measurement Plan
+Minimal Intake Baseline Plan
     ↓
-Deterministic Measurement Modules
+Governed Baseline Measurement Modules
     ↓
 Canonical Dataset Representation
     ↓
@@ -140,21 +138,33 @@ Examples:
 
 Both OBSERVED and DERIVED values are data. Their provenance must distinguish them.
 
-## 6. Hybrid Measurement Model
+## 6. Shared Tool Library and Intake Materialization Policy
 
-The Measurement Library may contain thousands of deterministic formulas. The engine must not materialize every possible measurement blindly.
+MTS maintains a shared governed Tool Library containing reusable measurement definitions and analytical capabilities. The Data-Intake Engine does not own the full Tool Library and must not materialize every available measurement by default.
 
-### BASELINE
-Automatically calculated when applicable source data is ingested.
+The absence of a measurement from Intake output must never imply that the measurement is unavailable to downstream Analysis. Analysis may retrieve canonical observations from the Research Nexus and invoke any governed Tool Library capability permitted by its contract.
 
-A baseline measurement should generally be objective, widely reusable, reasonably economical, stable in definition, and supported by available inputs.
+### INTAKE_BASELINE
+Automatically calculated by Data Intake when applicable source data is ingested.
 
-The baseline should be intentionally broad so downstream Analysis is not starved of factual context.
+The initial Intake baseline should be deliberately small. A baseline measurement should generally be:
+- universally or near-universally reusable;
+- inexpensive to calculate and store;
+- stable in definition;
+- supported by routinely available inputs; and
+- operationally valuable enough to justify materialization on substantially every compatible ticker.
 
-### ON_DEMAND
-Known, governed, reproducible measurement calculated only when requested because it is specialized, expensive, unusually dependent, or narrowly applicable.
+Baseline membership is an operational materialization decision, not a scientific-value judgment.
 
-Once calculated, reusable output should be published so later research does not recompute it unnecessarily.
+### ANALYSIS_ON_DEMAND
+A governed measurement or analytical capability available to Analysis without requiring prior Intake materialization. Analysis may calculate these from canonical Nexus data when needed to execute a Research Proposal or standard analysis contract.
+
+Analysis is not constrained by the Intake baseline. It may also create candidate deterministic tools when existing governed tools are insufficient, subject to validation and governance before broad reuse.
+
+### EVIDENCE-DRIVEN PROMOTION / DEMOTION
+Tool use, contribution, redundancy, applicability, computational cost, and repeated research value are tracked downstream. Research Cache evidence may support recommending that a reusable measurement be promoted into the Intake baseline.
+
+A measurement may later be demoted from Intake materialization if routine computation is no longer justified. Demotion removes automatic materialization only; it does not delete the governed tool from the shared Tool Library.
 
 ### EXTERNAL_DATA_REQUIRED
 A defined measurement that cannot currently be produced because required external observations are unavailable.
@@ -224,9 +234,9 @@ Optional but useful:
 - deprecation_state
 - replacement_measurement_id
 
-## 9. Measurement Module Architecture
+## 9. Tool and Measurement Module Architecture
 
-Legacy "feature plugins" become v2 measurement modules.
+Legacy "feature plugins" become governed Tool Library modules. Measurement modules may be executed by Data Intake when assigned to the Intake baseline or by Analysis when requested on demand. Engine ownership must not be encoded into the mathematical definition itself.
 
 Each module declares:
 - module_id
@@ -252,45 +262,25 @@ Execution produces a runtime audit with:
 
 The engine should calculate families in batches rather than repeatedly inserting one column at a time.
 
-## 10. Initial Baseline Measurement Families
+## 10. Initial Intake Baseline
 
-For daily OHLCV, the first baseline should be generous.
+For daily OHLCV, the first Intake baseline should be deliberately minimal and sufficient to establish a trustworthy canonical record.
 
-### Source and identity
-ticker/instrument identity, date/timestamp, source metadata, frequency, adjustment state, corporate-action fields when supplied, source-status fields.
+### Required canonical observations and identity
+ticker/instrument identity, date/timestamp, raw OHLCV, source metadata, frequency, adjustment state, corporate-action fields when supplied, and source-status fields.
 
-### Price / return
-raw OHLC, adjusted price where valid, typical price, simple returns, log returns, gaps, close/open relationships, distance and percent-distance measures.
+### Required data-quality facts
+missingness, duplicate status, timestamp-order validation, invalid OHLC relationships, source completeness, and other inexpensive integrity facts required to certify the canonical dataset.
 
-### Candle geometry
-range, body, upper/lower wick, close/open location, adjacent-bar overlap, inside/outside-bar geometry, higher/lower high/low facts.
+### Small universal derived baseline
+Only a limited set of cheap, broadly reusable derived measurements should be materialized initially. Exact membership is governed separately from this architecture and may include measurements such as simple return, log return, dollar volume, true range/ATR normalization, or other primitives demonstrated to justify universal materialization.
 
-These names describe geometry only; they carry no predictive meaning.
+ATR or comparable volatility normalization may be included where required by the standard downstream characterization contract, but Intake must not become responsible for opportunity recognition or research interpretation.
 
-### Volume / liquidity
-raw volume, dollar volume, rolling volume statistics, rolling dollar-volume statistics, relative volume, volume dispersion, turnover when inputs exist, objective liquidity proxies.
+### Not automatically materialized
+Moving-average families, oscillators, advanced volatility estimators, market-structure calculations, signal-processing transforms, retrospective outcome geometry, and other specialized measurements remain available through the shared Tool Library unless separately promoted into the Intake baseline.
 
-### Moving / smoothed measurements
-SMA families, EMA families, distances from averages, slopes, and objective cross/ordering states.
-
-A cross is a fact. "Bullish crossover" is interpretation and is prohibited.
-
-### Volatility / range
-true range, ATR families, realized volatility, range-normalized volatility, Parkinson, Garman-Klass, Rogers-Satchell, and Bollinger components as mathematical bands/distances.
-
-### Momentum / oscillators
-ROC, RSI, MACD components, PPO, stochastic values, Williams %R, CCI, MFI, TRIX, Aroon calculations.
-
-No downstream implication is attached.
-
-### Rolling structure
-rolling high/low, distance from rolling high/low, range position, new-high/new-low facts, rolling drawdown, recovery distance, slope and dispersion measures.
-
-### Context / relative market
-when benchmark inputs exist: benchmark return, relative return, rolling correlation, relative volatility, ratios, and beta-like deterministic estimates under governed definitions.
-
-### Data quality
-missingness, duplicate status, monotonic timestamp status, invalid OHLC relationships, stale observations, gap counts, sample count, warmup availability, and source completeness.
+The legacy Engine 08 measurement registry is therefore treated as a Tool Library seed inventory, not as a mandate to attach every legacy measurement to every ticker.
 
 ## 11. Future Data Families
 
@@ -298,27 +288,29 @@ The same architecture extends to options, dark pools/blocks, fundamentals, insid
 
 The rule remains: normalize observations, calculate reproducible measurements, make no inference about meaning.
 
-## 12. Research-Request Interaction
+## 12. Research-Request and Analysis Interaction
 
 ```text
-Research need
+Research need / standard Analysis task
     ↓
-Measurement requirement
+Required measurement or analytical capability
     ↓
-Does governed definition already exist?
-    ├─ yes → calculate/retrieve as needed
-    └─ no  → define + validate deterministic measurement
+Does governed Tool Library capability already exist?
+    ├─ yes → Analysis retrieves/reuses or calculates from canonical Nexus data
+    └─ no  → Analysis may create a candidate tool
                 ↓
-            add to Measurement Library
+            validate + govern reusable definition
                 ↓
-            calculate
+            add to shared Tool Library when approved
                 ↓
-            publish reusable output
+            execute
+                ↓
+            publish exploratory output to Research Cache
 ```
 
-A research request does not make a measurement campaign-local by default.
+Data Intake is not the gatekeeper of Analysis capability. A research request does not require the needed measurement to have been materialized at intake.
 
-Reusable objective measurements should become reusable MTS assets.
+Exploratory Analysis outputs belong first in the governed Research Cache. Durable attachment or promotion is a separate lifecycle decision. Frequently useful and demonstrably valuable measurement tools may later be recommended for Intake-baseline promotion.
 
 ## 13. Implementation Conformance
 
@@ -327,23 +319,25 @@ The Data-Intake Engine is not conformant until tests prove:
 1. arbitrary supported external formats enter through adapters;
 2. malformed input fails before publication;
 3. normalization is deterministic;
-4. baseline measurements reproduce exactly from the same inputs/version;
-5. on-demand measurements can be requested independently;
-6. reuse prevents unnecessary recomputation;
-7. OBSERVED and DERIVED provenance remain distinguishable;
-8. CONTEMPORANEOUS and RETROSPECTIVE measurements cannot be confused;
-9. interpretation is absent from Data-Intake outputs;
-10. canonical tabular artifacts publish through the Research Nexus;
-11. Nexus retrieval reproduces the published dataset;
-12. integrity verification succeeds;
-13. transient input is removed only after verified publication;
-14. failed publication preserves transient input for retry;
-15. identical intake is idempotent;
-16. no durable state is written directly outside Nexus;
-17. no hard-coded repository path is required;
-18. baseline calculation is batched/vectorized sufficiently for scale;
-19. EXTERNAL_DATA_REQUIRED definitions remain registered without invented values;
-20. adding a source adapter does not change the public Data-Intake contract.
+4. Intake-baseline measurements reproduce exactly from the same inputs/version;
+5. Analysis capability is not constrained by Intake-baseline membership;
+6. governed Tool Library measurements can be calculated downstream from canonical Nexus data without engine-to-engine bypass;
+7. reuse prevents unnecessary recomputation;
+8. OBSERVED and DERIVED provenance remain distinguishable;
+9. CONTEMPORANEOUS and RETROSPECTIVE measurements cannot be confused;
+10. interpretation is absent from Data-Intake outputs;
+11. canonical tabular artifacts publish through the Research Nexus;
+12. Nexus retrieval reproduces the published dataset;
+13. integrity verification succeeds;
+14. transient input is removed only after verified publication;
+15. failed publication preserves transient input for retry;
+16. identical intake is idempotent;
+17. no durable state is written directly outside Nexus;
+18. no hard-coded repository path is required;
+19. baseline calculation is batched/vectorized sufficiently for scale;
+20. EXTERNAL_DATA_REQUIRED definitions remain registered without invented values;
+21. adding a source adapter does not change the public Data-Intake contract.
+
 
 ## 14. First Vertical Slice
 
@@ -354,7 +348,7 @@ generic CSV adapter
     ↓
 canonical OHLCV observations
     ↓
-initial broad baseline measurement families
+minimal governed Intake baseline
     ↓
 canonical Parquet
     ↓
@@ -369,17 +363,19 @@ AAPL is a useful first fixture, but no Yahoo- or AAPL-specific assumption belong
 
 ## 15. Architectural Decision
 
-The Data-Intake Engine is deliberately data-rich and interpretation-free.
+The Data-Intake Engine is deliberately lean, deterministic, and interpretation-free.
 
 Its permanent design centers on:
-- broad objective measurement;
-- reproducibility;
-- versioned definitions;
-- a reusable governed Measurement Library;
+- trustworthy acquisition and normalization of external observations;
+- a deliberately small, governed Intake baseline;
+- reproducibility and versioned definitions;
+- a shared governed Tool Library that is not owned or limited by Intake;
 - source/format-independent adapters;
-- measurement modules;
-- rich baseline measurements plus an on-demand long tail;
+- reusable measurement modules executable by authorized engines;
+- downstream Analysis freedom beyond the Intake baseline;
+- evidence-driven promotion and demotion of routine materialization;
 - explicit temporal availability;
-- Research Nexus publication and reuse.
+- Research Nexus publication, retrieval, and reuse;
+- no direct engine-to-engine data bypass.
 
 Legacy migration decisions belong in the separate migration record and are not part of this engine's permanent identity.
