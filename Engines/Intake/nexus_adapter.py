@@ -46,8 +46,17 @@ def market_history_payload(artifact: IntakeArtifact) -> dict[str, Any]:
         {str(k): _json_scalar(v) for k, v in row.items()}
         for row in artifact.observations.to_dict(orient="records")
     ]
+    # Runtime telemetry is deliberately excluded from canonical scientific
+    # content. Recomputing identical source data must reproduce identical
+    # immutable payload bytes.
+    non_semantic_audit_fields = {"elapsed_seconds"}
+
     audit = [
-        {str(k): _json_scalar(v) for k, v in row.items()}
+        {
+            str(k): _json_scalar(v)
+            for k, v in row.items()
+            if k not in non_semantic_audit_fields
+        }
         for row in artifact.execution_audit.to_dict(orient="records")
     ]
     return {
