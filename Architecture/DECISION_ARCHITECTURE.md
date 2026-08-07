@@ -775,6 +775,40 @@ The architecture supports increasing automation without requiring a redesign.
 
 ---
 
+
+### 30.1 Pre-Live Validation Progression
+
+The canonical development progression toward real-money execution is:
+
+```text
+broad-universe / representative Decision evaluation
+        ↓
+successful + failed outcomes evaluated
+        ↓
+governed Learning / validation
+        ↓
+Live Paper Validation
+$10,000 finite simulated portfolio
+live market conditions
+        ↓
+objective qualification result
+        ↓
+PASS → eligible for live-authorization review
+        ↓
+separately granted live authority
+        ↓
+real-money execution
+```
+
+Live Paper Validation is an integrated prospective Decision/execution test, not
+an additional research gate and not a per-trade Accountability approval.
+
+The Decision Engine must operate against the current finite paper-account state,
+including capital already committed to open positions, reserved capital,
+realized gains/losses, concentration, and buying power.
+
+Paper-trading success does not automatically authorize live execution.
+
 ## 31. Execution Boundary
 
 Execution is distinct from Decision Intelligence.

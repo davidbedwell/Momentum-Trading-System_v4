@@ -170,6 +170,36 @@ historical learning/research
 → Outcome evaluation
 ```
 
+
+### Live Paper Validation
+
+Before real-money execution eligibility, validation must include a prospective
+Live Paper Validation campaign using live current-market inputs and a finite
+simulated portfolio.
+
+The initial development profile begins with $10,000 simulated equity.
+
+A qualifying campaign must:
+
+- begin only after broad or sufficiently representative Decision evaluation;
+- include evaluation of both successful and failed outcomes;
+- prevent forward-information leakage;
+- use predeclared objective acceptance criteria;
+- account for realistic execution costs and fill behavior where practical;
+- preserve finite cash, buying power, positions, exposure, and portfolio state;
+- prevent cherry-picking or retrospective exclusion of inconvenient trades;
+- preserve exact material software, knowledge, policy, model, and configuration
+  versions;
+- distinguish Decision quality, execution quality, risk behavior, portfolio
+  behavior, and market outcome;
+- fail closed against live execution.
+
+A campaign result must not be interpreted as live authority. Passing Live Paper
+Validation establishes eligibility for a separate live-authorization process.
+
+Material changes during a qualifying campaign must be versioned and may require
+a new qualifying campaign or separately identified validation phase.
+
 ## 18. `NO_ACTION`
 
 Tests must treat `NO_ACTION` as a valid semantic result.

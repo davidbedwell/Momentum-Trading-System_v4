@@ -560,6 +560,31 @@ distinct concerns. The MTS Control Interface may expose system administration,
 research, task, Accountability, and health functions, while the trader-facing
 interface presents current investment candidates and governed Decision state.
 
+
+### 25.2 Live Paper Validation
+
+Before MTS becomes eligible for real-money execution, the integrated Decision
+and execution system must complete governed Live Paper Validation.
+
+The initial development validation profile uses a finite simulated portfolio
+with $10,000 starting equity and live current-market inputs.
+
+Live Paper Validation occurs only after Decision behavior has been evaluated
+across a broad universe or sufficiently large and representative sample of
+trade opportunities and both successful and failed outcomes have been evaluated
+through governed learning and validation.
+
+The paper stage must preserve the same governed Decision, risk, task,
+portfolio-state, and execution semantics intended for live operation wherever
+technically possible. The execution destination is paper; the Decision standard
+is not relaxed.
+
+A passing paper-validation result creates eligibility for a separately governed
+live-authorization process. It does not itself grant live brokerage authority.
+
+Paper and live execution destinations must remain explicitly distinguishable
+and fail closed against accidental live routing.
+
 ## 26. Architectural Conformance
 
 A conforming component respects the Charter and responsibility

@@ -762,6 +762,23 @@ Later outcomes are revealed only after the simulated decision is frozen.
 
 ---
 
+
+### Live Paper Validation
+
+After broad or sufficiently representative Decision evaluation and governed
+evaluation of both successful and failed outcomes, MTS must complete Live Paper
+Validation before becoming eligible for real-money execution.
+
+The initial qualifying development profile uses a finite $10,000 simulated
+portfolio under live market conditions.
+
+Paper validation must preserve temporal causality and must operate against
+current simulated account state rather than evaluating each trade as if the
+entire starting balance remained independently available.
+
+A passing campaign makes MTS eligible for separate live-authorization review.
+It does not itself enable live trading.
+
 ## 48. Adaptation
 
 MTS may adapt after outcomes are observed.

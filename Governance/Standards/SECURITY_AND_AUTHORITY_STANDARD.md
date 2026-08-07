@@ -195,6 +195,25 @@ Initial v2 should require human approval for material changes to:
 
 This boundary may evolve only through explicit governance.
 
+
+### Live Paper to Live Authority Boundary
+
+Live Paper Validation and live brokerage authority are separate authority
+states.
+
+A `PASS` from a Live Paper Validation campaign:
+
+- may establish eligibility for live-authorization review;
+- does not connect brokerage credentials;
+- does not enable live order submission;
+- does not expand Decision authority;
+- does not waive risk or automation requirements.
+
+Paper execution must fail closed when execution destination is absent,
+ambiguous, invalid, or inconsistent with the active authority profile.
+
+Live brokerage authority requires separate affirmative governed enablement.
+
 ## 14. Automation Authority
 
 Automation may perform only actions explicitly granted by policy.

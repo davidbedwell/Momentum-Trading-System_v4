@@ -736,6 +736,27 @@ are insufficient unless operationally defined.
 
 ---
 
+
+### Live Paper Validation Campaign Evaluation
+
+Learning & Governance evaluates Live Paper Validation as a campaign-level body
+of prospective evidence.
+
+Evaluation must include both successful and failed Decisions and should
+distinguish:
+
+- Decision quality;
+- execution quality;
+- risk discipline;
+- portfolio behavior;
+- implementation cost;
+- stochastic market outcome.
+
+Learning must not treat campaign profit alone as sufficient validation and must
+not treat a losing trade alone as proof of Decision defect.
+
+A campaign-level recommendation cannot itself grant live brokerage authority.
+
 ## 47. Recommendation State
 
 Recommendations should have governed states such as:
