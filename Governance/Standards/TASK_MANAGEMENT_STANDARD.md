@@ -493,7 +493,7 @@ A worker is eligible when:
 - policy allows assignment;
 - worker is healthy.
 
-The Task Manager should not route based solely on engine folder/name.
+The Task Manager must route by governed capability and task requirements, not by filename, directory location, repository hierarchy, component numbering, or physical execution order.
 
 ---
 
@@ -1170,7 +1170,7 @@ The following are prohibited:
 
 - private per-engine schedulers for governed work;
 - relying solely on in-memory task state;
-- hard-coded Engine 08/09/10 routing;
+- hard-coded component-number routing;
 - infinite retries;
 - silent dependency bypass;
 - treating timeout as insufficient evidence;

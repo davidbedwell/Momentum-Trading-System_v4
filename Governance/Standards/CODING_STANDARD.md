@@ -18,11 +18,11 @@ When implementation convenience conflicts with a canonical contract, standard, o
 
 Do not weaken architecture merely to make an old implementation pass.
 
-## 4. No Legacy-by-Default
+## 4. Canonical Implementation Only
 
 MTS v2 is a clean architecture.
 
-Legacy behavior, import paths, file layouts, compatibility aliases, adapters, or duplicated interfaces must not be retained unless there is an explicit current requirement for them.
+Unsupported behavior, import paths, file layouts, compatibility aliases, adapters, or duplicated interfaces must not be retained unless there is an explicit current requirement for them.
 
 “Something might still use it” is not sufficient justification.
 
@@ -74,7 +74,6 @@ Do not hard-code:
 ```text
 /Users/...
 /Volumes/...
-Warehouse/...
 Research/...
 ```
 
@@ -556,7 +555,7 @@ Material implementation review should ask:
 3. Could it leak future information?
 4. Does it create hidden durable state?
 5. Does it survive restart/retry?
-6. Does it introduce legacy coupling?
+6. Does it introduce noncanonical coupling?
 7. Is the behavior objectively testable?
 8. Will the same contract work on the future server?
 
@@ -565,7 +564,7 @@ Material implementation review should ask:
 Initial automated coding/governance checks should detect at least:
 
 - hard-coded developer paths;
-- legacy `Research/` or `Warehouse/` implementation references;
+- obsolete or noncanonical implementation-path references;
 - forbidden cross-engine imports;
 - obvious direct Nexus filesystem writes;
 - committed secrets patterns where feasible;
@@ -584,7 +583,7 @@ Code conforms when it:
 6. separates domain results from execution failures;
 7. preserves provenance and point-in-time integrity;
 8. is restart/retry/concurrency aware;
-9. avoids unnecessary legacy compatibility;
+9. avoids unnecessary compatibility layers;
 10. is objectively testable;
 11. remains portable to the intended future deployment.
 

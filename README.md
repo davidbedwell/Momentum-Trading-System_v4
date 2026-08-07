@@ -14,7 +14,7 @@ MTS is organized around three fundamental responsibilities:
 
 **The Research Nexus preserves and connects durable state.**
 
-**The Orchestrator routes work between components.**
+**The Task Manager schedules, routes, and supervises work.**
 
 No individual engine owns the Research Nexus.
 
@@ -27,7 +27,7 @@ No individual engine owns the Research Nexus.
 - Decision Engine
 - Learning & Governance
 - Research Nexus
-- Orchestrator
+- Task Manager
 
 These component names describe the current architectural direction. Detailed responsibilities and contracts are governed by the architecture rather than this README.
 
@@ -35,7 +35,7 @@ These component names describe the current architectural direction. Detailed res
 
 - `Architecture/` — system structure, component architecture, and architectural decisions
 - `Governance/` — standards, contracts, schemas, policies, project management, and utilities
-- `Core/` — shared MTS software including Research Nexus services, orchestration, configuration, messaging, and observability
+- `Core/` — shared MTS software including Research Nexus services, task management, configuration, messaging, and observability
 - `Engines/` — independently bounded work-performing components
 - `Tests/` — unit, contract, integration, and end-to-end validation
 - `Control-Center/` — operational control and system visibility
@@ -50,11 +50,3 @@ Research Nexus durable data does **not** live inside the Git repository.
 Its physical location is deployment configuration.
 
 This allows the same MTS software to operate with locally attached storage, external storage such as Drobo, network storage, or future server infrastructure without redesigning the engines.
-
-## Development Principle
-
-MTS v2 is a clean implementation.
-
-Validated knowledge, data, algorithms, and useful lessons from the original MTS may be deliberately migrated.
-
-Legacy filesystem assumptions, compatibility layers, obsolete APIs, and historical implementation structure are not inherited automatically.

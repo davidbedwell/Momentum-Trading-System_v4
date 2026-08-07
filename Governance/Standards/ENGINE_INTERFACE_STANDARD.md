@@ -86,7 +86,6 @@ engine:learning-governance
 
 Additional engines may be added through governance.
 
-Legacy labels such as Engine 08, 09, and 10 are migration references only.
 
 ---
 
@@ -192,7 +191,7 @@ It is responsible for functions such as:
 - recovery after interruption;
 - concurrency control.
 
-Engines do not create private competing orchestration systems.
+Engines do not create private competing task-coordination systems.
 
 ---
 
@@ -798,7 +797,7 @@ During migration, the system may support more than one interface version.
 
 Compatibility adapters must be explicit and temporary/governed.
 
-Legacy compatibility code must not become an undocumented permanent alternate architecture.
+Compatibility code must not become an undocumented permanent alternate architecture.
 
 ---
 

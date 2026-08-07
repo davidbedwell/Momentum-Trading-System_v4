@@ -20,7 +20,7 @@ It governs:
 - cache and staging behavior;
 - backup and retention;
 - data movement through the Research Nexus;
-- migration of valuable v1 data into v2;
+- governed adoption of imported or preexisting data;
 - portability from local development to external storage and server deployment.
 
 This architecture intentionally avoids prescribing exact directory trees, file formats, database engines, object stores, partition strategies, or vendor-specific implementations. Those belong in technical design.
@@ -931,11 +931,11 @@ Permanent durable artifacts are normally retired, superseded, or archived rather
 
 ---
 
-## 30. Data Migration from v1
+## 30. Adoption of Imported and Preexisting Data
 
-v1 migration must preserve meaning, not folder structure.
+Data adoption must preserve meaning and provenance, not source folder structure.
 
-The v1 source remains intact as the source/reference system.
+The source remains intact until governed adoption and verification are complete.
 
 Migration flow:
 
@@ -963,7 +963,7 @@ Verify durable publication
 Record migration audit
 ```
 
-### Eligible Migration Candidates
+### Eligible Adoption Candidates
 
 Examples:
 
@@ -1008,7 +1008,7 @@ The initial proof should use a narrow real dataset, such as AAPL, and demonstrat
 12. cache retirement eligibility;
 13. relocation of the Research Nexus root without engine code change.
 
-Only after this passes should broad data migration begin.
+Only after this passes should broad data adoption begin.
 
 ---
 
@@ -1071,7 +1071,7 @@ An implementation conforms when it:
 11. preserves live/historical semantics without creating duplicate systems of record;
 12. supports backend relocation without engine changes;
 13. prevents ungoverned deletion;
-14. supports deliberate v1 migration;
+14. supports deliberate governed data adoption;
 15. remains scalable to the mature server model.
 
 ---

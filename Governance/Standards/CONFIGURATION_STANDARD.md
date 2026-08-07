@@ -759,7 +759,7 @@ Deprecated configuration keys should have:
 - removal version;
 - migration instructions.
 
-Unknown legacy keys must not be silently ignored if they could indicate intended behavior is not being applied.
+Unknown deprecated or unsupported keys must not be silently ignored if they could indicate intended behavior is not being applied.
 
 ---
 

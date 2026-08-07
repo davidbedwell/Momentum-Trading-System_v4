@@ -222,23 +222,23 @@ Momentum Trader Pro communicates.
 
 ## State of Knowledge
 
-At any point in time, the Research Nexus collectively represents MTS's **State of Knowledge (SoK)**.
+At any point in time, MTS may assemble a governed **State of Knowledge (SoK)** from the Research Nexus for a defined subject, time, and use.
 
-The State of Knowledge includes not only what MTS currently considers supported, but also:
+The SoK is a point-in-time logical view of current applicable canonical knowledge. It may include:
 
-- supporting evidence,
-- contradictory evidence,
-- confidence and uncertainty,
-- applicability conditions,
-- limitations,
-- superseded findings,
-- rejected hypotheses,
-- unresolved questions,
-- and identified gaps requiring further research.
+- confidence and uncertainty;
+- applicability conditions;
+- limitations;
+- validation context;
+- recency;
+- decision-eligibility state;
+- and provenance references required to explain the knowledge.
 
-The State of Knowledge must therefore never be treated as a static collection of unquestionable truths.
+The Research Nexus also preserves governed research state and justified historical lineage needed to investigate what remains uncertain, contradictory, unresolved, superseded, or insufficiently studied.
 
-It is an evidence-supported, evolving representation of what MTS currently knows and does not know.
+Those research states are not automatically canonical knowledge and are not automatically included in a Decision SoK.
+
+The SoK must therefore never be treated as a static collection of unquestionable truths. It is a governed current view whose content, applicability, uncertainty, and eligibility may change as evidence changes.
 
 ---
 

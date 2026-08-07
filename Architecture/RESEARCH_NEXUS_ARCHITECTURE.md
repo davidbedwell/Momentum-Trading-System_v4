@@ -25,7 +25,7 @@ This document defines:
 - cache and retirement behavior;
 - engine and Task Manager interaction;
 - portability and deployment independence;
-- migration rules for imported v1 assets.
+- adoption rules for imported or preexisting assets.
 
 This document intentionally does **not** prescribe specific databases, directory trees, object-store products, serialization formats, or physical storage devices. Those choices belong in technical design.
 
@@ -56,7 +56,7 @@ mature system.
 
 ## 3. Architectural Role
 
-The Research Nexus replaces the v1 concept of a file-oriented Warehouse with a broader, semantic system of record.
+The Research Nexus is the semantic system of record for durable MTS scientific and operational state.
 
 The Nexus is responsible for durable MTS state across the research and decision lifecycle.
 
@@ -1011,45 +1011,41 @@ Failure states should be observable and auditable.
 
 ---
 
-## 26. Migration from MTS v1
+## 26. Adoption of Imported and Preexisting Assets
 
-MTS v2 may import valuable assets from the original MTS repository and Warehouse, but migration must be semantic rather than structural.
+Assets entering the Research Nexus from outside the current governed workflow must be adopted by semantic meaning rather than by source location or physical structure.
 
-The v1 directory tree is not the v2 schema.
+### 26.1 Assets Eligible for Deliberate Adoption
 
-### 26.1 Assets Eligible for Deliberate Migration
+Potential candidates include:
 
-Potential migration candidates include:
-
-- raw historical market files;
-- validated source datasets;
+- source datasets whose meaning and provenance can be established;
 - canonical evidence;
 - reproducible findings;
 - knowledge objects;
-- valuable research conclusions;
 - research plans with continuing value;
-- contradiction records;
+- material contradiction-resolution lineage that satisfies retention criteria;
 - material provenance;
-- decision/outcome history if valid and interpretable.
+- decision/outcome history that is valid and interpretable.
 
-### 26.2 Assets Not Automatically Migrated
+### 26.2 Assets Not Automatically Adopted
 
-The following do not migrate merely because they exist:
+The following do not become canonical merely because they exist:
 
 - caches;
 - scratch output;
 - temporary proof-of-concept runs;
 - duplicated publications;
-- stale compatibility artifacts;
+- unsupported compatibility artifacts;
 - obsolete schemas;
-- engine-private filesystem assumptions;
+- private filesystem assumptions;
 - patch bundles as runtime dependencies;
 - unclassified files;
 - artifacts whose meaning or provenance cannot be established.
 
-### 26.3 Migration Process
+### 26.3 Adoption Process
 
-Migration should proceed:
+Adoption should proceed:
 
 ```text
 Inventory
@@ -1060,23 +1056,20 @@ Verify source integrity
    ↓
 Map semantic type
    ↓
-Assign v2 identity/metadata
+Assign governed identity/metadata
    ↓
-Preserve original provenance
+Preserve source provenance
    ↓
 Validate
    ↓
-Publish to v2 Nexus
+Publish to Research Nexus
    ↓
 Verify durable publication
    ↓
-Record migration audit
+Record adoption audit
 ```
 
-Imported assets must identify their legacy origin.
-
-Migration does not rewrite or destroy the v1 source repository.
-
+Source location, filename, directory hierarchy, or prior component numbering must not determine canonical identity, routing, ownership, authority, or lifecycle.
 ---
 
 ## 27. Initial v2 Build Boundary
@@ -1115,10 +1108,10 @@ The proof must demonstrate:
 - storage-class assignment;
 - retention classification;
 - backup classification;
-- no dependency on v1 paths;
+- no dependency on source-specific physical paths;
 - reproducibility.
 
-Only after the core Nexus contract is proven should larger v1 data migration begin.
+Only after the core Nexus contract is proven should broader asset adoption begin.
 
 ---
 
@@ -1194,7 +1187,7 @@ A Research Nexus implementation conforms to this architecture when it:
 14. preserves policy versions required for reproducibility;
 15. supports the State of Knowledge model;
 16. allows future artifact and engine types without redesigning the core architecture;
-17. supports deliberate, auditable migration from v1;
+17. supports deliberate, auditable adoption of imported and preexisting assets;
 18. fails without corrupting canonical state.
 
 ---

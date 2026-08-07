@@ -313,7 +313,7 @@ A patch is incomplete when the system cannot subsequently detect reintroduction 
 
 ## 30. No Patch-Fix Architecture
 
-Tests must protect architectural contracts, not merely preserve accidental legacy behavior.
+Tests must protect current architectural contracts, not accidental historical or implementation behavior.
 
 When a defect reveals an architectural violation, correct the architecture and test the intended contract rather than accumulating compatibility hacks.
 
@@ -470,7 +470,7 @@ Some governance requirements should be machine-enforced.
 
 Examples:
 
-- prohibited legacy paths;
+- prohibited noncanonical paths;
 - missing required metadata;
 - invalid artifact class;
 - unsupported schema versions;
@@ -483,7 +483,7 @@ Automated checks may verify:
 
 - no generated durable data committed;
 - no secret files;
-- no forbidden legacy hierarchy references;
+- no forbidden physical-hierarchy dependencies;
 - canonical directory rules;
 - required governance files.
 

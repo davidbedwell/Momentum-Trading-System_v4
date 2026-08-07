@@ -368,7 +368,7 @@ May not:
 
 May:
 
-- inspect State of Knowledge;
+- inspect State of Knowledge and Active Research State;
 - formulate research questions;
 - create research plans;
 - request additional intake or analysis;
@@ -903,13 +903,11 @@ server deployment
 
 ---
 
-## 32. Naming and Numbering
+## 32. Component Identity
 
-Engines are identified by function rather than historical numbers.
+Canonical engine identity is defined by enduring responsibility and declared capability.
 
-Canonical engine names should describe enduring responsibility.
-
-Examples:
+Current engine responsibilities are:
 
 ```text
 Data Intake Engine
@@ -920,33 +918,11 @@ Decision Engine
 Learning & Governance
 ```
 
-Legacy labels such as Engine 08, Engine 09, Engine 10, Engine 14, and Engine 15 are migration references only and should not define v2 architecture.
+Engine identity, routing, authority, dependency, and workflow must not derive from numbering, filename, directory location, repository hierarchy, or physical execution order.
 
 ---
 
-## 33. Repository Organization
-
-Engine source code belongs under:
-
-```text
-Engines/
-    Data-Intake/
-    Discovery/
-    Research-Director/
-    Market-Discovery/
-    Decision/
-    Learning-Governance/
-```
-
-Shared coordination and common infrastructure belong under `Core/`.
-
-The repository structure is organizational.
-
-Engine identity and task routing must not depend on absolute filesystem paths.
-
----
-
-## 34. Conformance Requirements
+## 33. Conformance Requirements
 
 An engine conforms to this architecture when it:
 

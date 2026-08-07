@@ -90,11 +90,15 @@ Canonical durable content should be stored once when practical and
 referenced by stable identity. Engines create artifacts but do not own
 their permanent storage.
 
-Collectively the Nexus represents the **State of Knowledge (SoK)**:
-supported knowledge, supporting and contradictory evidence, confidence,
-uncertainty, applicability, limitations, superseded findings, rejected
-hypotheses, unresolved questions, knowledge gaps, provenance, and
-relevant outcomes.
+The Nexus can assemble a governed **State of Knowledge (SoK)** as a
+point-in-time logical view of current applicable canonical knowledge for
+a defined subject and use. The SoK may include uncertainty, applicability,
+limitations, validation context, recency, decision eligibility, and
+provenance references.
+
+Unresolved contradictions, hypotheses, open questions, gaps, and other
+research working state remain governed Research Nexus state but are not
+automatically canonical knowledge or part of an ordinary Decision SoK.
 
 ## 6. Three Storage and Persistence Classes
 
@@ -119,7 +123,7 @@ small deliberate fixtures, and documentation required to rebuild MTS.
 ### 6.2 Class II --- Durable Research Nexus Assets
 
 Includes accepted source datasets, evidence, material findings,
-knowledge, research state, valuable research plans, contradictions,
+knowledge, research state, valuable research plans, material active research state,
 decisions, outcomes, applied operational-policy versions, provenance,
 validation history, and supersession/retirement history.
 
@@ -337,7 +341,7 @@ self-promote findings to unquestionable knowledge.
 
 ### Research Director
 
-Directs iterative inquiry: formulates questions, inspects SoK,
+Directs iterative inquiry: formulates questions, inspects SoK and Active Research State,
 identifies gaps/contradictions, creates research plans, requests
 intake/analysis, evaluates findings, asks follow-ups, reports missing
 tools/evidence, converges or terminates by governed criteria, and

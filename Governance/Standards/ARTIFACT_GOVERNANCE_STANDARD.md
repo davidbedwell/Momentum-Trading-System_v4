@@ -937,11 +937,11 @@ Backup policy does not change artifact identity.
 
 ---
 
-## 48. Migration From v1
+## 48. Adoption of Imported or Preexisting Artifacts
 
-v1 artifacts must be migrated according to semantic meaning, not copied according to old directory structure.
+Imported or preexisting artifacts must be adopted according to semantic meaning, not copied according to source directory structure.
 
-Migration should determine:
+Adoption should determine:
 
 - artifact type;
 - identity;
@@ -953,7 +953,7 @@ Migration should determine:
 - relationships;
 - whether the asset remains scientifically useful.
 
-Obsolete v1 implementation artifacts need not be migrated merely because they exist.
+Obsolete or noncanonical implementation artifacts need not be adopted merely because they exist.
 
 ---
 

@@ -501,7 +501,6 @@ engine:decision
 engine:learning-governance
 ```
 
-Legacy labels such as Engine 08/09/10 are migration references only.
 
 ---
 
@@ -781,21 +780,21 @@ If such an object becomes durable or scientifically significant, it must receive
 
 ---
 
-## 34. Migration Identity
+## 34. Imported Asset Identity
 
-v1 assets migrated into v2 must receive v2 governed identity.
+Imported or preexisting assets adopted into MTS must receive governed identity.
 
-Migration metadata should preserve:
+Adoption metadata should preserve:
 
 ```text
-legacy_system
-legacy_path
-legacy_identifier
-migration_timestamp
-migration_execution_ref
+source_system
+source_locator
+source_identifier
+adoption_timestamp
+adoption_execution_ref
 ```
 
-Legacy paths may be retained as provenance.
+Source locators may be retained as provenance but do not define canonical identity.
 
 They must not become the new canonical identity.
 
