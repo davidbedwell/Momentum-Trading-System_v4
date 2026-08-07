@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:governed-reference:1",
+  "schema_id": "mts.governed-reference",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Governed Reference",
+  "description": "Portable reference to a governed MTS identity domain. Physical locators are intentionally excluded.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ref_type", "ref_id"],
+  "properties": {
+    "ref_type": {"$ref": "controlled_vocabularies.schema.json#/$defs/reference_type"},
+    "ref_id": {"type": "string", "minLength": 1},
+    "ref_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional governed version rendered canonically as a string for cross-domain portability. Artifact operations use the stricter artifact_reference schema."
+    }
+  }
+}

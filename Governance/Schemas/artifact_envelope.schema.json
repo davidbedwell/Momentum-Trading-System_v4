@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:artifact-envelope:1",
+  "schema_id": "mts.artifact-envelope",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Artifact Envelope",
+  "description": "Common semantic metadata for governed Research Nexus artifacts. Artifact payloads are composed with this envelope rather than inheriting fields into it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_id", "artifact_version", "artifact_type", "schema_id", "schema_version",
+    "created_at", "producer", "provenance", "lifecycle_state", "persistence_class",
+    "retention_class", "backup_requirement"
+  ],
+  "properties": {
+    "artifact_id": {"type": "string", "minLength": 1},
+    "artifact_version": {"type": "integer", "minimum": 1},
+    "artifact_type": {"$ref": "controlled_vocabularies.schema.json#/$defs/artifact_type"},
+    "schema_id": {"type": "string", "minLength": 1},
+    "schema_version": {"type": "integer", "minimum": 1},
+    "created_at": {"type": "string", "format": "date-time", "description": "Offset-aware production timestamp."},
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["producer_type", "producer_id"],
+      "properties": {
+        "producer_type": {"$ref": "controlled_vocabularies.schema.json#/$defs/producer_type"},
+        "producer_id": {"type": "string", "minLength": 1}
+      },
+      "description": "Logical producing authority. Worker/execution/software details belong in provenance rather than being duplicated here."
+    },
+    "provenance": {"$ref": "provenance.schema.json"},
+    "lifecycle_state": {"$ref": "controlled_vocabularies.schema.json#/$defs/lifecycle_state"},
+    "persistence_class": {"$ref": "controlled_vocabularies.schema.json#/$defs/persistence_class"},
+    "retention_class": {"$ref": "controlled_vocabularies.schema.json#/$defs/retention_class"},
+    "backup_requirement": {"$ref": "controlled_vocabularies.schema.json#/$defs/backup_requirement"},
+    "tags": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true,
+      "default": [],
+      "description": "Non-authoritative discovery labels. Tags never replace governed identity, relationships, lifecycle, or scientific status."
+    }
+  }
+}

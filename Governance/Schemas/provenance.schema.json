@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:provenance:1",
+  "schema_id": "mts.provenance",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Provenance",
+  "description": "Portable provenance for reproducibility without duplicating producer identity or relationship state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["input_refs"],
+  "properties": {
+    "input_refs": {
+      "type": "array",
+      "items": {"$ref": "artifact_reference.schema.json"},
+      "uniqueItems": true,
+      "default": [],
+      "description": "Artifact inputs materially consumed to create this artifact. Relationship records carry more specific edge semantics when required."
+    },
+    "execution_ref": {
+      "anyOf": [
+        {"$ref": "governed_reference.schema.json"},
+        {"type": "null"}
+      ],
+      "description": "Execution identity when the artifact was produced by a governed execution."
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {"$ref": "governed_reference.schema.json"},
+      "uniqueItems": true,
+      "default": []
+    },
+    "configuration_refs": {
+      "type": "array",
+      "items": {"$ref": "governed_reference.schema.json"},
+      "uniqueItems": true,
+      "default": []
+    },
+    "software_version": {"type": ["string", "null"], "minLength": 1},
+    "model_version": {"type": ["string", "null"], "minLength": 1},
+    "method_id": {"type": ["string", "null"], "minLength": 1},
+    "parameters": {
+      "type": "object",
+      "description": "Method parameters required for reproducibility when material. Artifact-specific contracts govern their semantics."
+    }
+  }
+}
