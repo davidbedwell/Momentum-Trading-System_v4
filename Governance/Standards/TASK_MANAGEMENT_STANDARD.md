@@ -495,6 +495,12 @@ A worker is eligible when:
 
 The Task Manager must route by governed capability and task requirements, not by filename, directory location, repository hierarchy, component numbering, or physical execution order.
 
+For task classes governed by Research Admission, the Task Manager must verify a
+valid applicable Accountability admission verdict before releasing execution.
+
+The Task Manager does not evaluate the scientific merits of the Research Plan
+itself. It enforces the presence and validity of the required gate state.
+
 ---
 
 ## 26. Assignment
@@ -1171,6 +1177,7 @@ The following are prohibited:
 - private per-engine schedulers for governed work;
 - relying solely on in-memory task state;
 - hard-coded component-number routing;
+- executing gated research without the required Research Admission verdict;
 - infinite retries;
 - silent dependency bypass;
 - treating timeout as insufficient evidence;

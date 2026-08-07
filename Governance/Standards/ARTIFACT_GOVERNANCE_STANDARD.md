@@ -45,7 +45,6 @@ An artifact becoming available does not automatically make it:
 - valid;
 - accepted;
 - current;
-- trusted;
 - decision-eligible;
 - permanent.
 
@@ -53,9 +52,9 @@ Those meanings require explicit governed state.
 
 ---
 
-## 3. No Nebulous Trust State
+## 3. Objective Scientific Acceptance State
 
-MTS SHALL NOT use an undefined concept such as “trusted knowledge” as a scientific acceptance criterion.
+MTS SHALL NOT use undefined confidence language as a scientific acceptance criterion.
 
 Artifact status must instead be based on observable and auditable properties such as:
 
@@ -303,11 +302,32 @@ Examples may include:
 - recency requirements;
 - outcome evidence.
 
-“Looks good,” “seems reliable,” and undefined “trust” are not valid promotion criteria.
+Narrative confidence, persuasive wording, and successful execution are not valid promotion criteria.
 
 ---
 
-## 13. Scientific Status
+
+## 13. Independent Research Gate Artifacts
+
+When policy requires independent Accountability review, Research Admission and
+Knowledge Promotion verdicts are governed artifacts.
+
+A gate artifact must identify:
+
+- evaluated proposal/candidate;
+- gate type;
+- applicable policy/criteria version;
+- evidence references;
+- criterion results;
+- verdict;
+- limits or blocking reasons;
+- producer;
+- effective timestamp.
+
+The interested research proposer may not manufacture the independent gate
+artifact required to promote its own output.
+
+## 14. Scientific Status
 
 Scientific status is distinct from lifecycle status.
 
@@ -328,7 +348,7 @@ These properties should be measurable rather than collapsed prematurely into one
 
 ---
 
-## 14. Knowledge Ranking
+## 15. Knowledge Ranking
 
 MTS may rank knowledge for retrieval, prioritization, or decision context.
 
@@ -355,7 +375,7 @@ A frequently accessed artifact does not become valid merely through use.
 
 ---
 
-## 15. Current State of Knowledge
+## 16. Current State of Knowledge
 
 The State of Knowledge (SoK) is a governed logical view assembled from Research Nexus artifacts.
 
@@ -380,7 +400,7 @@ SoK assembly must preserve references to the underlying canonical knowledge iden
 
 ---
 
-## 16. Evidence Preservation
+## 17. Evidence Preservation
 
 Evidence retention is selective and governed by scientific value, reproducibility, active dependency, and reconstruction cost.
 
@@ -396,7 +416,7 @@ MTS is not required to preserve every failed hypothesis, transient contradiction
 
 ---
 
-## 17. Findings vs Knowledge
+## 18. Findings vs Knowledge
 
 A `FINDING` is an observed or derived scientific result.
 
@@ -408,7 +428,7 @@ Knowledge must reference its supporting evidence/findings and applicability.
 
 ---
 
-## 18. Observation Is Not Causation
+## 19. Observation Is Not Causation
 
 Discovery and analysis artifacts must distinguish:
 
@@ -427,7 +447,7 @@ MTS must not silently promote correlation into causation.
 
 ---
 
-## 19. Contradiction
+## 20. Contradiction
 
 Contradiction is a governed research condition, not a class of canonical knowledge.
 
@@ -445,7 +465,7 @@ Resolved contradictions should normally leave a compact durable resolution recor
 
 ---
 
-## 20. Applicability
+## 21. Applicability
 
 Knowledge and findings must define where they apply when applicability is material.
 
@@ -468,7 +488,7 @@ An artifact cannot be assumed universal merely because applicability metadata is
 
 ---
 
-## 21. Uncertainty
+## 22. Uncertainty
 
 Material research artifacts must represent uncertainty where scientifically relevant.
 
@@ -487,7 +507,7 @@ Uncertainty must not be hidden by a binary accepted/rejected label.
 
 ---
 
-## 22. Insufficient Evidence
+## 23. Insufficient Evidence
 
 `INSUFFICIENT_EVIDENCE` is a legitimate research result.
 
@@ -505,7 +525,7 @@ Such results should be preserved when they prevent repeated unproductive researc
 
 ---
 
-## 23. Missing Capability
+## 24. Missing Capability
 
 A research or decision process may determine that MTS lacks the data, tool, feature, model, or engine capability required to answer a question.
 
@@ -517,7 +537,7 @@ It must not cause the system to fabricate a conclusion.
 
 ---
 
-## 24. Supersession
+## 25. Supersession
 
 Supersession preserves history.
 
@@ -529,7 +549,7 @@ Supersession does not imply deletion.
 
 ---
 
-## 25. Invalidation
+## 26. Invalidation
 
 Invalidation is stronger than supersession.
 
@@ -553,7 +573,7 @@ Invalidated artifacts must not silently disappear.
 
 ---
 
-## 26. Retirement
+## 27. Retirement
 
 Retirement means an artifact is no longer active/current for ordinary use.
 
@@ -569,7 +589,7 @@ Retirement must respect retention and dependency rules.
 
 ---
 
-## 27. Deletion
+## 28. Deletion
 
 Deletion is a storage lifecycle action, not a scientific status.
 
@@ -585,7 +605,7 @@ Deletion eligibility is governed by persistence class, retention policy, depende
 
 ---
 
-## 28. Dependency Protection
+## 29. Dependency Protection
 
 An artifact must not be deleted while required by a durable dependent artifact unless the dependent can remain scientifically and operationally valid without it.
 
@@ -601,7 +621,7 @@ Dependency checks must consider:
 
 ---
 
-## 29. Cache Promotion
+## 30. Cache Promotion
 
 Class III material may become scientifically significant.
 
@@ -620,7 +640,7 @@ A file does not become durable knowledge merely because someone decides not to d
 
 ---
 
-## 30. Raw Source Preservation
+## 31. Raw Source Preservation
 
 Canonical raw source data that is admitted as durable scientific input should be immutable.
 
@@ -634,7 +654,7 @@ Raw source mutation in place undermines reproducibility.
 
 ---
 
-## 31. Derived Artifact Reproducibility
+## 32. Derived Artifact Reproducibility
 
 Derived artifacts should record enough information to reproduce them where practical.
 
@@ -651,7 +671,7 @@ Whether the derived payload itself is permanent or rebuildable is a separate sto
 
 ---
 
-## 32. Decision Artifacts
+## 33. Decision Artifacts
 
 Decision artifacts are durable when they materially affect or explain investment action.
 
@@ -670,7 +690,7 @@ Decision artifacts must not rewrite the underlying research artifacts they consu
 
 ---
 
-## 33. Outcome Artifacts
+## 34. Outcome Artifacts
 
 Outcomes must be preserved separately from the decisions that preceded them.
 
@@ -691,7 +711,7 @@ They do not retroactively alter what the Decision Engine knew at decision time.
 
 ---
 
-## 34. Temporal Integrity
+## 35. Temporal Integrity
 
 MTS must preserve what was knowable at the relevant time.
 
@@ -704,7 +724,7 @@ Future information must not be silently inserted into historical decision contex
 
 ---
 
-## 35. Relationship Governance
+## 36. Relationship Governance
 
 Artifacts may be connected using governed relationship types.
 
@@ -733,7 +753,7 @@ Relationship schemas and controlled vocabulary belong in Governance/Schemas.
 
 ---
 
-## 36. Producer Authority
+## 37. Producer Authority
 
 An engine may publish only artifact families authorized by its contract.
 
@@ -749,7 +769,7 @@ An engine must not acquire authority merely because it can technically write to 
 
 ---
 
-## 37. Publication Boundary
+## 38. Publication Boundary
 
 Engines should publish through governed Research Nexus interfaces.
 
@@ -767,7 +787,7 @@ The publication boundary must enforce:
 
 ---
 
-## 38. Idempotency
+## 39. Idempotency
 
 Repeated submission of the same governed artifact/version must not create uncontrolled duplicates.
 
@@ -779,7 +799,7 @@ Silent overwrite is prohibited.
 
 ---
 
-## 39. Objective Promotion Records
+## 40. Objective Promotion Records
 
 Every promotion must be explainable.
 
@@ -799,7 +819,7 @@ Human approval, when required, should also be recorded as an explicit governed i
 
 ---
 
-## 40. Demotion and Re-evaluation
+## 41. Demotion and Re-evaluation
 
 Scientific standing may decline when new evidence appears.
 
@@ -816,7 +836,7 @@ Prior promotion history remains preserved.
 
 ---
 
-## 41. Ranking Is Not Lifecycle
+## 42. Ranking Is Not Lifecycle
 
 Retrieval rank and lifecycle status are independent.
 
@@ -833,7 +853,7 @@ A ranking engine must not silently mutate lifecycle.
 
 ---
 
-## 42. Permanent vs Semi-Permanent Knowledge
+## 43. Permanent vs Semi-Permanent Knowledge
 
 Knowledge artifacts expected to remain part of the durable scientific record are Class II Permanent.
 
@@ -848,7 +868,7 @@ The classification must be metadata-driven.
 
 ---
 
-## 43. Artifact Registry
+## 44. Artifact Registry
 
 The Research Nexus must maintain a canonical catalog/registry capable of resolving:
 
@@ -869,7 +889,7 @@ Physical directory enumeration is not an artifact registry.
 
 ---
 
-## 44. Auditability
+## 45. Auditability
 
 Material lifecycle actions must be auditable.
 
@@ -889,7 +909,7 @@ Audit records should be append-oriented.
 
 ---
 
-## 45. Human-Readable Reports
+## 46. Human-Readable Reports
 
 Human-readable reports are views unless explicitly registered as canonical artifacts.
 
@@ -899,7 +919,7 @@ A PDF, text file, dashboard, or UI rendering must not become the only copy of sc
 
 ---
 
-## 46. Git Boundary
+## 47. Git Boundary
 
 Class I system-definition assets belong in Git according to repository policy.
 
@@ -920,7 +940,7 @@ The Research Nexus governs durable scientific/operational state.
 
 ---
 
-## 47. Backup Boundary
+## 48. Backup Boundary
 
 Backup status is artifact metadata.
 
@@ -937,7 +957,7 @@ Backup policy does not change artifact identity.
 
 ---
 
-## 48. Adoption of Imported or Preexisting Artifacts
+## 49. Adoption of Imported or Preexisting Artifacts
 
 Imported or preexisting artifacts must be adopted according to semantic meaning, not copied according to source directory structure.
 
@@ -957,7 +977,7 @@ Obsolete or noncanonical implementation artifacts need not be adopted merely bec
 
 ---
 
-## 49. Initial Implementation Requirements
+## 50. Initial Implementation Requirements
 
 The first Research Nexus implementation must support at least:
 
@@ -978,7 +998,7 @@ It does not need every future artifact family before the architecture can operat
 
 ---
 
-## 50. Testing Requirements
+## 51. Testing Requirements
 
 Artifact governance tests must include:
 
@@ -998,7 +1018,7 @@ Artifact governance tests must include:
 
 ---
 
-## 51. Conformance
+## 52. Conformance
 
 A component conforms when it:
 
@@ -1018,7 +1038,7 @@ A component conforms when it:
 
 ---
 
-## 52. Companion Governance
+## 53. Companion Governance
 
 This standard operates with:
 
@@ -1038,7 +1058,7 @@ Governance/Schemas/
 
 ---
 
-## 53. Closing Principle
+## 54. Closing Principle
 
 MTS must never confuse:
 

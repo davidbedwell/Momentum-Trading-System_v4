@@ -90,7 +90,8 @@ Actors should receive only the permissions required for their governed function.
 Examples:
 
 - Discovery may read approved research inputs and publish findings, but may not approve knowledge promotion.
-- Research Director may request research but may not schedule workers directly.
+- Research Director may propose research but may not schedule workers directly or independently pass the Accountability gate for its own proposal/output.
+- Accountability may issue research gate verdicts but may not alter its own gate criteria, schedule workers, own canonical knowledge, or approve individual trades.
 - Task Manager may coordinate work but may not change scientific conclusions.
 - Decision may produce Decision artifacts but may not silently modify research knowledge.
 - Learning & Governance may recommend changes but may not silently deploy production changes.
@@ -124,7 +125,30 @@ Research Director may not, solely by its own authority:
 - delete permanent evidence;
 - expand its own permissions.
 
-## 10. Decision Authority
+## 10. Accountability Authority
+
+Accountability Engine may:
+
+- evaluate proposed Research Plans at Research Admission;
+- evaluate Knowledge Candidates at Knowledge Promotion;
+- inspect evidence required by applicable gate policy;
+- issue structured gate verdicts and limits.
+
+Accountability Engine may not:
+
+- author the scientific conclusion it gates;
+- alter the Charter, Standards, or Policies defining its criteria;
+- expand its own authority;
+- schedule workers;
+- own canonical knowledge;
+- make investment Decisions;
+- approve or reject individual trades.
+
+The same Accountability Engine may control both research gates because the
+function is consistent enforcement of Charter-derived criteria. The two gate
+verdicts remain distinct governed actions.
+
+## 11. Decision Authority
 
 Decision Engine may create governed Decision artifacts within applicable policy.
 
@@ -137,7 +161,7 @@ Decision authority does not automatically include:
 - deletion of historical Decisions;
 - research truth authority.
 
-## 11. Trade Execution Authority
+## 12. Trade Execution Authority
 
 If a broker/execution capability is introduced, it must be treated as a separate high-authority capability.
 
@@ -154,7 +178,7 @@ Execution authority must define:
 
 Decision output alone must not automatically grant unrestricted brokerage access.
 
-## 12. Human Approval
+## 13. Human Approval
 
 Some actions may require explicit human approval.
 
@@ -171,7 +195,7 @@ Initial v2 should require human approval for material changes to:
 
 This boundary may evolve only through explicit governance.
 
-## 13. Automation Authority
+## 14. Automation Authority
 
 Automation may perform only actions explicitly granted by policy.
 
@@ -186,7 +210,7 @@ Examples of lower-risk automation may include:
 
 Automation does not inherit all authority of the human who configured it.
 
-## 14. Self-Modification
+## 15. Self-Modification
 
 No engine or automated service may silently modify:
 
@@ -201,13 +225,13 @@ No engine or automated service may silently modify:
 
 Such changes require governed change/promotion processes.
 
-## 15. Privilege Escalation
+## 16. Privilege Escalation
 
 An actor must not be able to expand its own permissions through ordinary configuration or artifact publication.
 
 Privilege changes require separate authority.
 
-## 16. Separation of Duties
+## 17. Separation of Duties
 
 High-impact workflows should separate proposal from approval where practical.
 
@@ -232,7 +256,7 @@ Decision proposes action
 
 The same component should not silently become proposer, validator, approver, and executor for high-risk actions unless explicitly governed.
 
-## 17. Secrets
+## 18. Secrets
 
 Secrets include:
 
@@ -253,31 +277,31 @@ Secrets must not be stored in:
 - task payloads unless specifically protected;
 - filenames.
 
-## 18. Secret References
+## 19. Secret References
 
 Configuration should reference secrets through approved secret mechanisms.
 
 Code should consume resolved secret values only at the boundary where needed.
 
-## 19. Secret Rotation
+## 20. Secret Rotation
 
 Credential systems should support rotation without rewriting scientific logic.
 
 Rotation should not change artifact identity or scientific provenance unless provider/account semantics change.
 
-## 20. Secret Leakage
+## 21. Secret Leakage
 
 Telemetry, exceptions, debugging output, and crash reports must avoid emitting secrets.
 
 Redaction should occur before protected data leaves the owning boundary.
 
-## 21. Provider Credentials
+## 22. Provider Credentials
 
 Provider credentials should be scoped to the minimum required service/data family where possible.
 
 A Data Intake credential should not automatically grant unrelated administrative capability.
 
-## 22. Brokerage Credentials
+## 23. Brokerage Credentials
 
 Brokerage credentials are high-risk secrets.
 
@@ -289,13 +313,13 @@ They should be:
 - excluded from development/test environments unless explicitly required;
 - auditable when used.
 
-## 23. Environment Separation
+## 24. Environment Separation
 
 Development, test, staging, and production-like environments must have distinct authority boundaries where practical.
 
 Test code must not accidentally acquire production credentials or write production durable state.
 
-## 24. Test Safety
+## 25. Test Safety
 
 Tests must use:
 
@@ -306,7 +330,7 @@ Tests must use:
 
 A test must never submit a live order merely because a credential exists on the machine.
 
-## 25. Storage Permissions
+## 26. Storage Permissions
 
 Class II durable state should be protected against unauthorized mutation and deletion.
 
@@ -317,7 +341,7 @@ Where practical:
 - delete authority should be tightly controlled;
 - backup destinations should be protected from ordinary engine mutation.
 
-## 26. Research Nexus Authority
+## 27. Research Nexus Authority
 
 Research Nexus interfaces should enforce authorization for:
 
@@ -330,7 +354,7 @@ Research Nexus interfaces should enforce authorization for:
 
 Direct filesystem access must not become a bypass around Nexus authority.
 
-## 27. Artifact Publication Authority
+## 28. Artifact Publication Authority
 
 An actor may publish only artifact types it is authorized to create.
 
@@ -342,25 +366,25 @@ Examples:
 - Decision publishes Decision artifacts;
 - Learning & Governance publishes evaluations/recommendations.
 
-## 28. Lifecycle Authority
+## 29. Lifecycle Authority
 
 Publication, promotion, supersession, retirement, archival, and deletion are distinct permissions.
 
 Possession of publication authority does not imply lifecycle authority.
 
-## 29. Knowledge Promotion Authority
+## 30. Knowledge Promotion Authority
 
 Knowledge promotion requires the objective criteria defined by governance and the authority defined by policy.
 
 The proposing component must not self-certify unless governance explicitly grants that authority.
 
-## 30. Decision Eligibility Authority
+## 31. Decision Eligibility Authority
 
 Changing whether knowledge is eligible for Decision use is a material governed action.
 
 It must be attributable and auditable.
 
-## 31. Model Promotion Authority
+## 32. Model Promotion Authority
 
 A model may be trained or evaluated without being production-eligible.
 
@@ -372,19 +396,19 @@ Promotion to production Decision use requires:
 - version identity;
 - rollback capability where appropriate.
 
-## 32. Policy Change Authority
+## 33. Policy Change Authority
 
 Policy changes require explicit authority.
 
 Runtime configuration must not silently override a hard policy.
 
-## 33. Configuration Authority
+## 34. Configuration Authority
 
 Configuration changes should be scoped by domain.
 
 An operator who may change log verbosity should not necessarily be able to alter Decision risk limits.
 
-## 34. Task Submission Authority
+## 35. Task Submission Authority
 
 Not every actor may submit every Task type.
 
@@ -396,7 +420,7 @@ Examples:
 - maintenance service may request integrity checks;
 - ordinary engines may not submit unrestricted destructive deletion tasks.
 
-## 35. Task Override Authority
+## 36. Task Override Authority
 
 Administrative actions such as:
 
@@ -408,7 +432,7 @@ Administrative actions such as:
 
 must be permission-controlled and auditable.
 
-## 36. Destructive Actions
+## 37. Destructive Actions
 
 Destructive actions include:
 
@@ -420,7 +444,7 @@ Destructive actions include:
 
 These actions require stronger controls than ordinary read/write operations.
 
-## 37. Deletion Authority
+## 38. Deletion Authority
 
 Permanent or material Class II deletion requires:
 
@@ -433,7 +457,7 @@ Permanent or material Class II deletion requires:
 
 An engine must not delete durable evidence merely because it no longer needs it locally.
 
-## 38. Contradictory Research Deletion
+## 39. Contradictory Research Deletion
 
 Contradictory working material is default-to-expire only after the governing Research Plan is resolved and retention criteria are satisfied.
 
@@ -441,7 +465,7 @@ The authority to retire/delete it remains governed by retention policy.
 
 This prevents both infinite retention and premature deletion.
 
-## 39. Emergency Stop
+## 40. Emergency Stop
 
 Future live-trading deployment should include an explicit emergency stop/kill capability.
 
@@ -452,13 +476,13 @@ The kill capability should be able to:
 - preserve audit state;
 - leave research/data systems operational unless broader shutdown is required.
 
-## 40. Emergency Authority
+## 41. Emergency Authority
 
 Emergency-stop authority should be narrowly assigned and highly visible.
 
 Use of emergency controls must create durable audit records.
 
-## 41. Fail-Safe Behavior
+## 42. Fail-Safe Behavior
 
 When authority cannot be verified, high-risk actions must fail closed.
 
@@ -469,11 +493,11 @@ Examples:
 - invalid policy signature/version → do not activate;
 - missing production credential → do not substitute another account.
 
-## 42. Read-Only Degradation
+## 43. Read-Only Degradation
 
 Where possible, systems should degrade to read-only or no-action modes rather than taking unauthorized fallback actions.
 
-## 43. Security Events
+## 44. Security Events
 
 Security-relevant events may include:
 
@@ -488,7 +512,7 @@ Security-relevant events may include:
 
 Material events should be auditable.
 
-## 44. Security Logging
+## 45. Security Logging
 
 Security logs must preserve useful context without exposing secrets.
 
@@ -502,7 +526,7 @@ They should identify:
 - timestamp;
 - correlation IDs where applicable.
 
-## 45. Audit Requirement
+## 46. Audit Requirement
 
 Material authority decisions must be auditable.
 
@@ -514,19 +538,19 @@ The system should be able to answer:
 - whether the action was allowed or denied;
 - what changed.
 
-## 46. Approval Records
+## 47. Approval Records
 
 Approval should be represented as structured governed state where material.
 
 A chat message, terminal note, or memory of approval is not sufficient for production-like authority changes.
 
-## 47. Effective Time
+## 48. Effective Time
 
 Authority, policy, and model changes should have effective times.
 
 Actions before and after the change must remain attributable to the governing state then in force.
 
-## 48. Expiring Authority
+## 49. Expiring Authority
 
 Temporary permissions should support expiration.
 
@@ -538,25 +562,25 @@ Examples:
 
 Expired permissions must not remain active silently.
 
-## 49. Revocation
+## 50. Revocation
 
 Permissions and credentials should support revocation.
 
 Revocation state should propagate to affected components promptly enough for the risk involved.
 
-## 50. Service Identity
+## 51. Service Identity
 
 Future server deployment should assign service identities to independent services/workers where practical.
 
 Workers should not all share one unrestricted identity merely for convenience.
 
-## 51. Multi-User Deployment
+## 52. Multi-User Deployment
 
 If multiple human users are introduced, MTS should support distinct identities and permissions.
 
 Shared generic administrator accounts should be avoided for material governance actions.
 
-## 52. Network Boundaries
+## 53. Network Boundaries
 
 Remote services should expose only required interfaces.
 
@@ -564,7 +588,7 @@ Internal service availability must not be treated as authorization.
 
 Network placement is an additional control, not the primary authority model.
 
-## 53. External Integrations
+## 54. External Integrations
 
 External systems translate/provide information or execute authorized services.
 
@@ -572,19 +596,19 @@ They do not define MTS authority semantics.
 
 Provider-side permissions and MTS-side permissions should both be respected.
 
-## 54. Integrity of Governance Assets
+## 55. Integrity of Governance Assets
 
 Class I governance and architecture assets should be protected by source-control history and review.
 
 Material changes should be traceable to a specific Git revision.
 
-## 55. Integrity of Runtime Policy
+## 56. Integrity of Runtime Policy
 
 Production-like active policy/model/configuration state should be verifiable by version/hash/reference where material.
 
 Unexpected mismatch should block or degrade high-risk actions according to policy.
 
-## 56. Supply-Chain Awareness
+## 57. Supply-Chain Awareness
 
 External dependencies and packages may introduce security risk.
 
@@ -595,25 +619,25 @@ Dependency management should support:
 - controlled updates;
 - vulnerability review appropriate to risk.
 
-## 57. Command Execution
+## 58. Command Execution
 
 Code must not execute untrusted strings as shell commands.
 
 Subprocess invocation should use argument-safe mechanisms where practical.
 
-## 58. File Input Safety
+## 59. File Input Safety
 
 External files should be treated as untrusted input until validated.
 
 File names and paths must not be trusted as authority or identity.
 
-## 59. Data Provider Input Safety
+## 60. Data Provider Input Safety
 
 Provider data may be malformed, corrupted, or semantically changed.
 
 Security/integrity validation and Data Quality validation are distinct and both may apply.
 
-## 60. Denial Is a Valid Result
+## 61. Denial Is a Valid Result
 
 Authorization denial is a legitimate system result.
 
@@ -623,7 +647,7 @@ It must not be converted into:
 - alternative unapproved path;
 - fabricated output.
 
-## 61. Initial v2 Authority Model
+## 62. Initial v2 Authority Model
 
 Initial v2 should implement at least:
 
@@ -638,7 +662,7 @@ Initial v2 should implement at least:
 9. fail-closed behavior for high-risk actions;
 10. no live execution authority unless explicitly introduced.
 
-## 62. Initial v2 Security Scope
+## 63. Initial v2 Security Scope
 
 Initial v2 need not begin with a complex enterprise IAM platform.
 
@@ -650,7 +674,7 @@ A simple local implementation is acceptable if the contracts preserve:
 - auditable decisions;
 - future service/multi-user expansion.
 
-## 63. Initial Proof
+## 64. Initial Proof
 
 A valid initial proof should demonstrate:
 
@@ -676,7 +700,7 @@ operator requests destructive action
 → action audited
 ```
 
-## 64. Testing Requirements
+## 65. Testing Requirements
 
 Tests should include:
 
@@ -695,7 +719,7 @@ Tests should include:
 - authority audit record;
 - production credential unavailable in test.
 
-## 65. Prohibited Practices
+## 66. Prohibited Practices
 
 The following are prohibited:
 
@@ -705,14 +729,14 @@ The following are prohibited:
 - engine capability treated as permission;
 - runtime configuration silently widening hard authority;
 - automated self-promotion of permissions;
-- Research Director self-certifying canonical knowledge without granted authority;
+- Research Director independently passing the required Accountability promotion gate for its own Knowledge Candidate;
 - Decision Engine directly acquiring unrestricted brokerage credentials;
 - unaudited destructive deletion;
 - unauthorized fallback accounts/providers;
 - live-order submission from ordinary tests;
 - silent security/authorization failure.
 
-## 66. Conformance
+## 67. Conformance
 
 A component conforms when it:
 
@@ -727,7 +751,7 @@ A component conforms when it:
 9. prevents configuration from bypassing policy;
 10. supports future multi-user/service expansion without redesign.
 
-## 67. Companion Governance
+## 68. Companion Governance
 
 This standard operates with:
 
@@ -746,7 +770,7 @@ CODING_STANDARD.md
 
 and applicable Contracts, Schemas, and Policies.
 
-## 68. Closing Principle
+## 69. Closing Principle
 
 MTS must always be able to answer:
 

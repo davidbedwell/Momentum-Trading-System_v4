@@ -165,7 +165,7 @@ Examples:
 
 - Data Intake does not make investment decisions.
 - Discovery does not execute trades.
-- Research Director does not silently become the scheduler.
+- Research Director does not silently become the scheduler or its own independent research gatekeeper.
 - Decision does not rewrite research evidence.
 - Learning & Governance does not retroactively alter historical Decision context.
 
@@ -214,7 +214,29 @@ Research intent flows to the Task Manager as governed work.
 
 ---
 
-## 11. MTS Control Interface Boundary
+
+## 11. Accountability Boundary
+
+The Accountability Engine consumes governed proposals/candidates, applicable
+policy, and required evidence through stable interfaces.
+
+It produces governed gate verdicts for:
+
+```text
+RESEARCH_ADMISSION
+KNOWLEDGE_PROMOTION
+```
+
+The interface must not give Accountability direct authority to schedule workers,
+mutate another engine's private state, or approve individual trades.
+
+Research Director must submit proposed Research Plans and Knowledge Candidates
+through governed Accountability interfaces when policy requires those gates.
+
+Task Manager must be able to verify required Research Admission status without
+depending on Accountability's private filesystem or process memory.
+
+## 12. MTS Control Interface Boundary
 
 The `mts` control interface may initiate governed work.
 
@@ -234,7 +256,7 @@ The control interface does not bypass engine contracts or acquire engine authori
 
 ---
 
-## 12. Task Request
+## 13. Task Request
 
 Engines must receive governed Task Requests rather than undocumented positional command sequences for material work.
 
@@ -256,7 +278,7 @@ Exact structure belongs in Governance/Schemas.
 
 ---
 
-## 13. Input by Reference
+## 14. Input by Reference
 
 Durable engine inputs should normally be referenced by governed identity.
 
@@ -274,7 +296,7 @@ This prevents Task Requests from becoming giant duplicated payloads and prevents
 
 ---
 
-## 14. Small Inline Inputs
+## 15. Small Inline Inputs
 
 Small immutable parameters may be included directly in a Task Request when governed by schema.
 
@@ -292,7 +314,7 @@ Inline values must not become a way to bypass provenance for material scientific
 
 ---
 
-## 15. Input Validation
+## 16. Input Validation
 
 Before scientific execution, an engine must validate that:
 
@@ -307,7 +329,7 @@ Invalid input must fail explicitly.
 
 ---
 
-## 16. Output Publication
+## 17. Output Publication
 
 Material outputs must be published through governed Research Nexus interfaces.
 
@@ -325,7 +347,7 @@ An engine must not treat “file written successfully” as equivalent to “art
 
 ---
 
-## 17. Output by Reference
+## 18. Output by Reference
 
 Task completion should return governed output references rather than making downstream components scrape directories.
 
@@ -341,7 +363,7 @@ Human-readable reports may additionally be produced as views.
 
 ---
 
-## 18. Task Execution State vs Semantic Result
+## 19. Task Execution State vs Semantic Result
 
 Task-execution state and scientific/business result are distinct.
 
@@ -371,7 +393,7 @@ A software failure must not masquerade as a legitimate semantic result.
 
 ---
 
-## 19. Explicit Failure
+## 20. Explicit Failure
 
 Engines must fail explicitly.
 
@@ -386,7 +408,7 @@ They must not:
 
 ---
 
-## 20. Retryability
+## 21. Retryability
 
 Failures must indicate whether retry is meaningful.
 
@@ -409,7 +431,7 @@ Exact classification belongs in task governance.
 
 ---
 
-## 21. Idempotency
+## 22. Idempotency
 
 Material engine tasks should be designed for safe retry.
 
@@ -421,7 +443,7 @@ Where a new execution legitimately creates a new version or occurrence, that dis
 
 ---
 
-## 22. Execution Identity
+## 23. Execution Identity
 
 Every material attempt receives a distinct `execution_id`.
 
@@ -436,7 +458,7 @@ Execution records must not erase prior failed attempts.
 
 ---
 
-## 23. Provenance
+## 24. Provenance
 
 Every material output must identify its producing execution.
 
@@ -457,7 +479,7 @@ timestamps
 
 ---
 
-## 24. Software Version
+## 25. Software Version
 
 Material execution records must identify the software version sufficiently to support reproducibility and debugging.
 
@@ -469,7 +491,7 @@ Production-like scientific publication should normally use identifiable source s
 
 ---
 
-## 25. Configuration
+## 26. Configuration
 
 Engines must receive configuration through governed configuration mechanisms.
 
@@ -483,7 +505,7 @@ Scientific parameters that materially affect results must be preserved in proven
 
 ---
 
-## 26. Storage Independence
+## 27. Storage Independence
 
 Engines must not own Research Nexus physical paths.
 
@@ -497,7 +519,7 @@ Moving the Nexus to different hardware must not require rewriting engine scienti
 
 ---
 
-## 27. Private Working Storage
+## 28. Private Working Storage
 
 An engine may use private Class III working storage for:
 
@@ -512,7 +534,7 @@ Any scientifically significant result that must survive must be published into g
 
 ---
 
-## 28. No Cross-Engine Private Filesystem Contract
+## 29. No Cross-Engine Private Filesystem Contract
 
 One engine must not require another engine to read its private working directory.
 
@@ -526,7 +548,7 @@ This prevents hidden coupling.
 
 ---
 
-## 29. Concurrency
+## 30. Concurrency
 
 Engine interfaces must assume that multiple tasks may eventually execute concurrently.
 
@@ -542,7 +564,7 @@ Concurrency safety is part of interface correctness.
 
 ---
 
-## 30. Resource Awareness
+## 31. Resource Awareness
 
 Tasks may declare or estimate resource needs where useful.
 
@@ -564,7 +586,7 @@ An engine must not assume unlimited resources.
 
 ---
 
-## 31. Cancellation
+## 32. Cancellation
 
 Long-running tasks should support governed cancellation where practical.
 
@@ -578,7 +600,7 @@ Cancellation must:
 
 ---
 
-## 32. Timeout
+## 33. Timeout
 
 Tasks subject to timeout must distinguish timeout from scientific insufficiency.
 
@@ -586,7 +608,7 @@ A timed-out analysis is not evidence that no relationship exists.
 
 ---
 
-## 33. Progress
+## 34. Progress
 
 Long-running engines may emit structured progress/heartbeat information.
 
@@ -596,7 +618,7 @@ Progress reporting should not require polling private engine files.
 
 ---
 
-## 34. Heartbeats and Leases
+## 35. Heartbeats and Leases
 
 Server-scale workers may use heartbeat/lease mechanisms so the Task Manager can detect lost workers.
 
@@ -606,7 +628,7 @@ Heartbeat state is normally Class III operational state unless materialized into
 
 ---
 
-## 35. Observability
+## 36. Observability
 
 Engines must emit sufficient structured diagnostics to support:
 
@@ -629,7 +651,7 @@ Important scientific facts must not exist only in logs.
 
 ---
 
-## 36. Metrics
+## 37. Metrics
 
 Operational metrics may include:
 
@@ -645,7 +667,7 @@ Metrics do not replace execution records.
 
 ---
 
-## 37. Determinism
+## 38. Determinism
 
 Where an engine operation is expected to be deterministic, repeated execution with the same:
 
@@ -659,7 +681,7 @@ Where nondeterminism is intentional, its source should be controlled or recorded
 
 ---
 
-## 38. Randomness
+## 39. Randomness
 
 Scientific engines using randomness should record:
 
@@ -671,7 +693,7 @@ This supports reproducibility.
 
 ---
 
-## 39. Data Intake Interface
+## 40. Data Intake Interface
 
 Data Intake should accept governed acquisition/intake work and produce governed data artifacts and QA results.
 
@@ -683,7 +705,7 @@ It must not:
 
 ---
 
-## 40. Discovery Interface
+## 41. Discovery Interface
 
 Discovery should accept governed discovery/measurement work and produce observations, measurements, evidence, and findings within its authority.
 
@@ -693,7 +715,7 @@ It must distinguish measurement from interpretation and action.
 
 ---
 
-## 41. Research Director Interface
+## 42. Research Director Interface
 
 Research Director should consume the State of Knowledge and research context, then produce governed research intent such as:
 
@@ -708,7 +730,7 @@ It must not implement private scheduling logic that bypasses the Task Manager.
 
 ---
 
-## 42. Market Discovery Interface
+## 43. Market Discovery Interface
 
 Market Discovery should search current/live market state for conditions, patterns, candidates, and opportunities within its governed scope.
 
@@ -718,7 +740,7 @@ It does not make the final investment decision merely because it found a candida
 
 ---
 
-## 43. Decision Interface
+## 44. Decision Interface
 
 Decision consumes governed current state, SoK/knowledge, market context, portfolio/risk context, and policy.
 
@@ -728,7 +750,7 @@ Decision task success is distinct from a semantic `NO_ACTION`.
 
 ---
 
-## 44. Learning & Governance Interface
+## 45. Learning & Governance Interface
 
 Learning & Governance consumes decisions, outcomes, evidence, and performance history.
 
@@ -744,7 +766,7 @@ It must not silently rewrite prior decisions or evidence.
 
 ---
 
-## 45. Engine-to-Engine Requests
+## 46. Engine-to-Engine Requests
 
 An engine should not directly command another worker outside governed coordination.
 
@@ -760,7 +782,7 @@ This preserves:
 
 ---
 
-## 46. Capability Gaps
+## 47. Capability Gaps
 
 When an engine cannot complete a scientifically valid task because a required capability is absent, it should return a governed `MISSING_CAPABILITY` semantic result and, where authorized, create/reference a `RESEARCH_NEED` or capability need.
 
@@ -768,7 +790,7 @@ It must then release the task according to Task Manager rules rather than blocki
 
 ---
 
-## 47. Insufficient Evidence
+## 48. Insufficient Evidence
 
 When execution succeeds but available evidence cannot answer the scientific question, the engine should return `INSUFFICIENT_EVIDENCE` or the appropriate governed semantic result.
 
@@ -776,7 +798,7 @@ This is not `FAILED_TERMINAL`.
 
 ---
 
-## 48. Interface Versioning
+## 49. Interface Versioning
 
 Cross-component engine interfaces must have explicit versions.
 
@@ -791,7 +813,7 @@ Engine implementation versions and interface versions are distinct.
 
 ---
 
-## 49. Backward Compatibility
+## 50. Backward Compatibility
 
 During migration, the system may support more than one interface version.
 
@@ -801,7 +823,7 @@ Compatibility code must not become an undocumented permanent alternate architect
 
 ---
 
-## 50. Engine Replacement
+## 51. Engine Replacement
 
 A compliant engine implementation should be replaceable if the replacement:
 
@@ -815,7 +837,7 @@ Other engines should not require redesign solely because the implementation chan
 
 ---
 
-## 51. New Engine Addition
+## 52. New Engine Addition
 
 Adding a future engine should require:
 
@@ -831,7 +853,7 @@ It should not require redesigning the Research Nexus.
 
 ---
 
-## 52. Security and Least Authority
+## 53. Security and Least Authority
 
 Engines should receive only the permissions required for their function.
 
@@ -846,7 +868,7 @@ A compromised or defective engine should not automatically have unrestricted Nex
 
 ---
 
-## 53. Testability
+## 54. Testability
 
 Every engine interface must support isolated testing.
 
@@ -862,7 +884,7 @@ Tests must not require production data or production storage.
 
 ---
 
-## 54. Contract Tests
+## 55. Contract Tests
 
 Each engine must pass contract tests verifying at least:
 
@@ -880,7 +902,7 @@ Each engine must pass contract tests verifying at least:
 
 ---
 
-## 55. Integration Tests
+## 56. Integration Tests
 
 Integration tests should verify:
 
@@ -896,7 +918,7 @@ without relying on private filesystem coupling.
 
 ---
 
-## 56. End-to-End Tests
+## 57. End-to-End Tests
 
 Representative end-to-end tests should prove that governed work can move through multiple engines while preserving:
 
@@ -909,7 +931,7 @@ Representative end-to-end tests should prove that governed work can move through
 
 ---
 
-## 57. Initial v2 Implementation
+## 58. Initial v2 Implementation
 
 The initial engine interface layer should provide:
 
@@ -928,7 +950,7 @@ Its contracts must remain valid when workers later run on the server.
 
 ---
 
-## 58. Prohibited Practices
+## 59. Prohibited Practices
 
 The following are prohibited:
 
@@ -946,7 +968,7 @@ The following are prohibited:
 
 ---
 
-## 59. Conformance
+## 60. Conformance
 
 An engine conforms when it:
 
@@ -967,7 +989,7 @@ An engine conforms when it:
 
 ---
 
-## 60. Companion Governance
+## 61. Companion Governance
 
 This standard operates with:
 
@@ -986,7 +1008,7 @@ Governance/Schemas/
 
 ---
 
-## 61. Closing Principle
+## 62. Closing Principle
 
 MTS must always be able to replace:
 

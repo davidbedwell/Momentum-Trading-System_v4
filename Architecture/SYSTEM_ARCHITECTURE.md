@@ -342,10 +342,26 @@ self-promote findings to unquestionable knowledge.
 ### Research Director
 
 Directs iterative inquiry: formulates questions, inspects SoK and Active Research State,
-identifies gaps/contradictions, creates research plans, requests
-intake/analysis, evaluates findings, asks follow-ups, reports missing
-tools/evidence, converges or terminates by governed criteria, and
-proposes knowledge. Coordination does not grant truth authority.
+identifies gaps/contradictions, creates proposed Research Plans, requests
+intake/analysis after Research Admission, evaluates findings, asks follow-ups,
+reports missing tools/evidence, converges or terminates by governed criteria,
+and proposes Knowledge Candidates. Scientific authorship does not grant
+independent gate authority.
+
+### Accountability Engine
+
+Controls two independent research gates by applying Charter-derived,
+policy-defined, machine-inspectable criteria:
+
+1. **Research Admission** — determines whether a proposed Research Plan may
+   consume governed MTS research resources.
+2. **Knowledge Promotion** — determines whether a Knowledge Candidate has
+   satisfied the required objective gates for promotion.
+
+Accountability evaluates alignment and gate compliance. It does not formulate
+scientific conclusions, schedule workers, own canonical knowledge, make
+investment Decisions, approve individual trades, or alter the criteria it
+enforces.
 
 ### Market Discovery Engine
 
@@ -365,15 +381,16 @@ need.
 
 ### Learning & Governance
 
-Evaluates knowledge and decisions after application using objective
-governed criteria: usefulness, stability, generalization, outcomes,
-contradiction, decay, promotion eligibility, degradation, supersession,
-and retirement. Research may propose knowledge; subsequent
-evaluation/promotion authority is separated according to policy.
+Evaluates knowledge and decisions after application using objective governed
+criteria: usefulness, stability, generalization, outcomes, contradiction,
+decay, degradation, supersession, retirement, and whether the research and
+Accountability gates are producing useful system outcomes. It may recommend
+changes to knowledge, models, or policy but does not retroactively replace an
+Accountability gate verdict.
 
 ## 14. Research Loop
 
-`Question/Gap → Research Director → Research Plan → Task Manager → Data Intake/Discovery → Research Nexus → Evidence/Findings → Research Director → follow-up or convergence → Knowledge Proposal/Conclusion → Research Nexus`
+`Question/Gap → Research Director → Proposed Research Plan → Accountability: Research Admission → Task Manager → Data Intake/Discovery → Research Nexus → Evidence/Findings → Research Director → follow-up or convergence → Knowledge Candidate → Accountability: Knowledge Promotion → governed lifecycle transition → Research Nexus`
 
 Research may iterate. Insufficient evidence, contradiction, and missing
 tooling are valid outcomes; convergence must not be forced.
@@ -397,19 +414,24 @@ logic.
 
 Data Intake publishes governed data but not investment meaning.
 Discovery publishes evidence/findings but not canonical truth. Research
-Director directs and proposes but does not self-certify without governed
-authority. Research Nexus preserves state but does not perform
-scientific judgment by storage. Task Manager routes but does not judge.
-Decision Intelligence acts on knowledge but does not silently rewrite
-it. Learning & Governance evaluates outcomes/lifecycle under objective
-criteria. Human and automation authority are policy-controlled.
+Director directs inquiry, authors Research Plans, and proposes Knowledge
+Candidates but does not control the independent gates applied to those
+proposals. Accountability controls Research Admission and Knowledge Promotion
+by applying governed criteria, but does not author the scientific conclusion,
+schedule execution, own canonical state, make investment Decisions, or approve
+individual trades. Research Nexus preserves state but does not perform
+scientific judgment by storage. Task Manager routes admitted work but does not
+judge scientific merit. Decision Intelligence may independently exercise
+trade authority already granted by Decision/Risk/Automation policy; the
+research Accountability gates do not constitute per-trade approval.
+Learning & Governance evaluates outcomes and recommends lifecycle/policy
+changes under objective criteria. Human and automation authority are
+policy-controlled.
 
 ## 18. Validation and Promotion
 
 Publication, structural validation, scientific validation, and knowledge
-promotion are distinct. Promotion criteria must be objective,
-reproducible, governed, and appropriate to artifact type. "Trust" is not
-a substitute for measurable criteria.
+promotion are distinct. Promotion criteria must be objective, reproducible, governed, and appropriate to artifact type. Promotion status must be derived from inspectable evidence and explicit gate results.
 
 ## 19. Failure and Missing Information
 

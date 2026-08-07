@@ -83,6 +83,8 @@ If a material knowledge gap prevents a valid decision, it may generate a governe
 
 ## 5. Decision Engine Authority
 
+Research Accountability gates do not approve individual investment Decisions. The Decision Engine may independently exercise authority already granted by applicable Decision, Risk, and Automation policy.
+
 The Decision Engine may determine, within policy:
 
 - whether an actionable opportunity exists;

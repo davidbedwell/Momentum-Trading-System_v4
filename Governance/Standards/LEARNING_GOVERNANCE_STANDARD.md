@@ -398,6 +398,12 @@ The response must be based on objective criteria.
 
 Learning & Governance may recommend that a Knowledge Candidate be promoted.
 
+Where current governance requires independent Accountability review, a
+recommendation does not replace the Knowledge Promotion gate verdict. Learning
+may evaluate whether Accountability's admission/promotion gates are themselves
+producing stable, useful, resource-efficient outcomes and may recommend policy
+changes.
+
 Promotion requires the objective criteria defined by artifact/research governance.
 
 Learning cannot bypass those gates because a recent trade was successful.

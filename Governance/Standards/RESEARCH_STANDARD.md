@@ -92,18 +92,32 @@ It does not own worker scheduling.
 
 ---
 
-## 6. Task Manager Role
+## 6. Accountability Role
+
+The Accountability Engine independently controls two research gates under policy:
+
+1. Research Admission for proposed Research Plans;
+2. Knowledge Promotion for Knowledge Candidates.
+
+It evaluates whether required objective criteria have been demonstrated. It
+does not author the scientific conclusion, schedule workers, or approve
+individual investment Decisions.
+
+## 7. Task Manager Role
 
 The Task Manager owns execution coordination.
 
-The Research Director expresses research intent through governed Task Requests and dependencies.
+The Research Director expresses admitted research intent through governed Task
+Requests and dependencies.
 
 Conceptually:
 
 ```text
 Research Director
       ↓
-Research Plan / Task Requests
+Proposed Research Plan
+      ↓
+Accountability — Research Admission
       ↓
 Task Manager
       ↓
@@ -112,13 +126,17 @@ eligible engines/workers
 evidence/findings
       ↓
 Research Director
+      ↓
+Knowledge Candidate
+      ↓
+Accountability — Knowledge Promotion
 ```
 
-This boundary prevents research logic and infrastructure scheduling from becoming one monolith.
+This boundary separates scientific authorship, independent gatekeeping, and infrastructure scheduling.
 
 ---
 
-## 7. Discovery Role
+## 8. Discovery Role
 
 Discovery performs governed measurement, comparison, pattern search, relationship analysis, and other empirical work within its declared capabilities.
 
@@ -128,7 +146,7 @@ Discovery produces evidence and findings for governed evaluation.
 
 ---
 
-## 8. Data Intake Role
+## 9. Data Intake Role
 
 Data Intake acquires, validates, normalizes, and publishes governed data required by research.
 
@@ -138,7 +156,7 @@ Research Director must not privately acquire data in a way that bypasses Intake 
 
 ---
 
-## 9. Research Campaign
+## 10. Research Campaign
 
 A Research Campaign is a durable grouping of related research work.
 
@@ -157,7 +175,7 @@ Campaign identity must survive multiple questions and executions.
 
 ---
 
-## 10. Research Question
+## 11. Research Question
 
 A Research Question is a governed artifact.
 
@@ -180,7 +198,7 @@ Exact schema belongs in Governance/Schemas.
 
 ---
 
-## 11. Question Types
+## 12. Question Types
 
 Initial research-question taxonomy may include:
 
@@ -201,7 +219,7 @@ Question type guides method; it does not predetermine the answer.
 
 ---
 
-## 12. Questions Must Be Testable
+## 13. Questions Must Be Testable
 
 A governed research question must be sufficiently precise that MTS can determine:
 
@@ -215,7 +233,7 @@ Vague curiosity may initiate question formation, but must be refined before gove
 
 ---
 
-## 13. Hypothesis
+## 14. Hypothesis
 
 Where appropriate, a question may include one or more hypotheses.
 
@@ -227,7 +245,7 @@ MTS must distinguish exploratory from confirmatory work.
 
 ---
 
-## 14. Research Plan
+## 15. Research Plan
 
 A Research Plan translates a question into executable evidence requirements.
 
@@ -248,11 +266,11 @@ limitations
 
 The Research Plan is not the execution queue.
 
-The Task Manager converts/runs its work through governed tasks.
+After required Research Admission, the Task Manager converts/runs its work through governed tasks.
 
 ---
 
-## 15. Research Plan Versioning
+## 16. Research Plan Versioning
 
 A materially changed Research Plan must be versioned or superseded.
 
@@ -262,7 +280,7 @@ Research history must not be rewritten to make later methodology appear to have 
 
 ---
 
-## 16. Iterative Research
+## 17. Iterative Research
 
 After evidence returns, the Research Director must evaluate what was learned and what remains unresolved.
 
@@ -282,7 +300,7 @@ Exact vocabulary belongs in schemas.
 
 ---
 
-## 17. Next-Question Generation
+## 18. Next-Question Generation
 
 A new question should arise from an identifiable research reason.
 
@@ -303,7 +321,7 @@ The Research Director must preserve the link from the new question to the eviden
 
 ---
 
-## 18. No Infinite Question Loop
+## 19. No Infinite Question Loop
 
 Iterative questioning must have governed stopping criteria.
 
@@ -313,7 +331,7 @@ Research continues when expected information value justifies additional work und
 
 ---
 
-## 19. Convergence
+## 20. Convergence
 
 Convergence means the governed research objective has reached a state where additional permitted research is not expected to materially change the current conclusion enough to justify its cost or delay.
 
@@ -323,7 +341,7 @@ It must be based on objective evidence criteria.
 
 ---
 
-## 20. Convergence Criteria
+## 21. Convergence Criteria
 
 Depending on the research family, criteria may include:
 
@@ -341,7 +359,7 @@ Criteria must be defined before a research workflow can claim convergence.
 
 ---
 
-## 21. Insufficient Evidence
+## 22. Insufficient Evidence
 
 `INSUFFICIENT_EVIDENCE` is a legitimate research result.
 
@@ -357,7 +375,7 @@ The Research Director may request more research or close the question as unresol
 
 ---
 
-## 22. Missing Capability
+## 23. Missing Capability
 
 `MISSING_CAPABILITY` means MTS lacks a required tool, data source, method, engine capability, or interface necessary to answer the question validly.
 
@@ -372,7 +390,7 @@ Then it proceeds according to campaign policy rather than blocking indefinitely.
 
 ---
 
-## 23. Research Need
+## 24. Research Need
 
 A Research Need is a durable request for capability or evidence not currently available.
 
@@ -393,7 +411,7 @@ It enters governance/prioritization.
 
 ---
 
-## 24. Evidence
+## 25. Evidence
 
 Evidence is governed material bearing on a research question.
 
@@ -409,7 +427,7 @@ Evidence must not exist only as prose inside a report.
 
 ---
 
-## 25. Finding
+## 26. Finding
 
 A Finding is a structured interpretation of measured evidence within a defined scope.
 
@@ -429,7 +447,7 @@ A Finding is not automatically durable knowledge.
 
 ---
 
-## 26. Negative Findings
+## 27. Negative Findings
 
 Negative findings may be scientifically useful and must not be suppressed merely because they are not actionable.
 
@@ -437,7 +455,7 @@ Retention is proportional to value. Material negative findings that prevent repe
 
 ---
 
-## 27. Contradictory Evidence
+## 28. Contradictory Evidence
 
 Contradictory evidence initiates or informs Active Research State; it is not promoted as contradictory “knowledge.”
 
@@ -454,7 +472,7 @@ After resolution, contradictory working material is default-to-expire. Preserve 
 
 ---
 
-## 28. Replication
+## 29. Replication
 
 Important findings should be replicated when required by policy.
 
@@ -471,7 +489,7 @@ Repeating the same computation on the same data is not independent replication.
 
 ---
 
-## 29. Robustness
+## 30. Robustness
 
 Research should evaluate whether a finding depends excessively on:
 
@@ -487,7 +505,7 @@ Robustness requirements should scale with the importance of the conclusion.
 
 ---
 
-## 30. Generalization
+## 31. Generalization
 
 MTS must distinguish:
 
@@ -503,7 +521,7 @@ Applicability must be explicit.
 
 ---
 
-## 31. Context
+## 32. Context
 
 Research should test whether relationships vary by context.
 
@@ -524,7 +542,7 @@ Context can be part of the edge rather than noise to eliminate.
 
 ---
 
-## 32. Temporal Stability
+## 33. Temporal Stability
 
 A relationship may change over time.
 
@@ -541,7 +559,7 @@ Knowledge must be capable of representing:
 
 ---
 
-## 33. Economic Value
+## 34. Economic Value
 
 Statistical relationship alone is not enough for decision relevance.
 
@@ -560,7 +578,7 @@ Research evaluates these properties; Decision determines whether to act.
 
 ---
 
-## 34. Tradable Directional Opportunity
+## 35. Tradable Directional Opportunity
 
 Research must not require bull/bear labels as its primary conceptual framework.
 
@@ -575,7 +593,7 @@ with duration, magnitude, risk/reward, context, and implementation characteristi
 
 ---
 
-## 35. Opportunity Definitions Are Researchable
+## 36. Opportunity Definitions Are Researchable
 
 Thresholds for:
 
@@ -588,7 +606,7 @@ must be treated as hypotheses/parameters subject to empirical evaluation rather 
 
 ---
 
-## 36. Event Research
+## 37. Event Research
 
 MTS treats “event” as a broad extensible category.
 
@@ -609,7 +627,7 @@ No current event taxonomy is assumed complete.
 
 ---
 
-## 37. New Pattern Discovery
+## 38. New Pattern Discovery
 
 Discovery or Market Discovery may surface a pattern not represented in current knowledge.
 
@@ -619,7 +637,7 @@ It must not become knowledge merely because it was detected repeatedly in a shor
 
 ---
 
-## 38. Feature Research
+## 39. Feature Research
 
 Feature research should determine not merely whether a feature correlates with an outcome, but:
 
@@ -633,7 +651,7 @@ Feature research should determine not merely whether a feature correlates with a
 
 ---
 
-## 39. Feature Classification
+## 40. Feature Classification
 
 Where useful, feature research may classify features using governed categories such as:
 
@@ -652,7 +670,7 @@ Classification criteria must be objective and versioned.
 
 ---
 
-## 40. Interaction Research
+## 41. Interaction Research
 
 A feature with weak standalone contribution may still be important in interaction.
 
@@ -662,7 +680,7 @@ Interaction evidence must be evaluated separately.
 
 ---
 
-## 41. Redundancy
+## 42. Redundancy
 
 Redundant features may remain scientifically valid while offering little incremental decision value.
 
@@ -672,7 +690,7 @@ Research should identify what information is duplicated and under what contexts.
 
 ---
 
-## 42. Data Snooping
+## 43. Data Snooping
 
 Exploratory search across many features, thresholds, horizons, or patterns increases false-discovery risk.
 
@@ -680,7 +698,7 @@ MTS must record search scope and apply appropriate validation/holdout/replicatio
 
 ---
 
-## 43. Holdout Integrity
+## 44. Holdout Integrity
 
 Holdout data must remain unavailable to the process whose performance it is intended to evaluate.
 
@@ -688,7 +706,7 @@ A model/research process must not adapt repeatedly to the same nominal holdout a
 
 ---
 
-## 44. Forward-Looking Integrity
+## 45. Forward-Looking Integrity
 
 When evaluating Decision-like behavior historically, MTS must restrict the simulated decision to information available at the decision timestamp.
 
@@ -696,7 +714,7 @@ Future outcomes may be used only for later evaluation.
 
 ---
 
-## 45. Overlap
+## 46. Overlap
 
 Research involving opportunities or events must define overlap rules.
 
@@ -704,7 +722,7 @@ If overlapping opportunities are excluded, the exclusion algorithm must be deter
 
 ---
 
-## 46. Sample Construction
+## 47. Sample Construction
 
 Research must preserve how samples were selected.
 
@@ -719,7 +737,7 @@ A result must be able to answer:
 
 ---
 
-## 47. Research Reproducibility
+## 48. Research Reproducibility
 
 A material research result should be reproducible from:
 
@@ -732,7 +750,7 @@ A material research result should be reproducible from:
 
 ---
 
-## 48. Research Reports
+## 49. Research Reports
 
 Human-readable research reports are views of governed research artifacts.
 
@@ -749,7 +767,7 @@ The report itself must not be the only location of canonical findings.
 
 ---
 
-## 49. Knowledge Candidate
+## 50. Knowledge Candidate
 
 A sufficiently supported Finding or synthesis may become a Knowledge Candidate.
 
@@ -765,11 +783,13 @@ A candidate must identify:
 
 Candidate status does not itself make it decision-eligible.
 
+The Research Director may author a Knowledge Candidate but may not independently pass the Accountability gate governing promotion of its own candidate.
+
 ---
 
-## 50. Knowledge Promotion
+## 51. Knowledge Promotion
 
-Promotion from Knowledge Candidate to governed Knowledge must satisfy objective criteria defined by artifact governance/policy.
+Promotion from Knowledge Candidate to a knowledge-authority state requiring independent review must satisfy objective criteria defined by artifact governance/policy and receive the required Accountability Knowledge Promotion verdict.
 
 Possible criteria may include:
 
@@ -785,7 +805,7 @@ Promotion criteria must be inspectable.
 
 ---
 
-## 51. Scientific Validity vs Retrieval Priority
+## 52. Scientific Validity vs Retrieval Priority
 
 Scientific validity and retrieval priority are separate.
 
@@ -797,7 +817,7 @@ Usage frequency must not determine scientific validity.
 
 ---
 
-## 52. Knowledge Ranking
+## 53. Knowledge Ranking
 
 Knowledge ranking may consider dimensions such as:
 
@@ -815,7 +835,7 @@ It must not rewrite the underlying evidence status.
 
 ---
 
-## 53. State of Knowledge
+## 54. State of Knowledge
 
 The State of Knowledge (SoK) is a governed point-in-time logical view over current relevant canonical knowledge.
 
@@ -836,7 +856,7 @@ Active contradictions, unresolved questions, rejected hypotheses, and bulky rese
 
 ---
 
-## 54. SoK Query
+## 55. SoK Query
 
 A SoK query should be scoped to the question/decision being addressed.
 
@@ -846,7 +866,7 @@ Relevant knowledge should be retrieved through governed indexing/ranking.
 
 ---
 
-## 55. Supersession
+## 56. Supersession
 
 New research may supersede prior knowledge.
 
@@ -861,7 +881,7 @@ Supersession does not mean deletion.
 
 ---
 
-## 56. Knowledge Retirement
+## 57. Knowledge Retirement
 
 Knowledge may be retired from current decision eligibility when objective criteria indicate:
 
@@ -876,7 +896,7 @@ Retirement status and reason must be explicit.
 
 ---
 
-## 57. Research Cost
+## 58. Research Cost
 
 Research consumes:
 
@@ -892,7 +912,7 @@ Cheap but low-value questions should not crowd out high-information research ind
 
 ---
 
-## 58. Research Priority
+## 59. Research Priority
 
 Research priority may consider:
 
@@ -909,7 +929,7 @@ Priority is governed separately from scientific validity.
 
 ---
 
-## 59. Autonomous Research
+## 60. Autonomous Research
 
 MTS may perform autonomous research within governed limits.
 
@@ -926,7 +946,7 @@ Autonomy must still preserve:
 
 ---
 
-## 60. Research Continuation After Restart
+## 61. Research Continuation After Restart
 
 Active campaigns, questions, plans, and dependencies required for continuation are durable Class II state.
 
@@ -934,7 +954,7 @@ The Research Director must be able to resume without relying on conversational/i
 
 ---
 
-## 61. Research Failure
+## 62. Research Failure
 
 Software/execution failure is distinct from research outcome.
 
@@ -950,7 +970,7 @@ missing required capability → research result/capability need
 
 ---
 
-## 62. Research Audit
+## 63. Research Audit
 
 MTS should be able to reconstruct:
 
@@ -969,7 +989,7 @@ This chain is part of scientific provenance.
 
 ---
 
-## 63. Human Intervention
+## 64. Human Intervention
 
 Human researchers may:
 
@@ -983,7 +1003,7 @@ Human intervention must not silently rewrite prior research history.
 
 ---
 
-## 64. Initial v2 Research Implementation
+## 65. Initial v2 Research Implementation
 
 The first implementation should support:
 
@@ -992,20 +1012,22 @@ The first implementation should support:
 3. Research Plan;
 4. Research Need;
 5. iterative next-question generation;
-6. Task Manager submission;
-7. Finding;
-8. `INSUFFICIENT_EVIDENCE`;
-9. `MISSING_CAPABILITY`;
-10. contradiction links;
-11. objective stopping/convergence criteria;
-12. Knowledge Candidate;
+6. Accountability Research Admission;
+7. Task Manager submission;
+8. Finding;
+9. `INSUFFICIENT_EVIDENCE`;
+10. `MISSING_CAPABILITY`;
+11. contradiction links;
+12. objective stopping/convergence criteria;
+13. Knowledge Candidate;
+14. Accountability Knowledge Promotion gate;
 13. full question-to-evidence lineage.
 
 It need not begin with every advanced statistical method.
 
 ---
 
-## 65. Initial Proof of Concept
+## 66. Initial Proof of Concept
 
 A valid v2 Research Director proof should demonstrate:
 
@@ -1035,7 +1057,7 @@ The next question must depend on returned evidence.
 
 ---
 
-## 66. Testing Requirements
+## 67. Testing Requirements
 
 Research tests should include:
 
@@ -1057,7 +1079,7 @@ Research tests should include:
 
 ---
 
-## 67. Prohibited Practices
+## 68. Prohibited Practices
 
 The following are prohibited:
 
@@ -1075,7 +1097,7 @@ The following are prohibited:
 
 ---
 
-## 68. Conformance
+## 69. Conformance
 
 A research system conforms when it:
 
@@ -1095,7 +1117,7 @@ A research system conforms when it:
 
 ---
 
-## 69. Companion Governance
+## 70. Companion Governance
 
 This standard operates with:
 
@@ -1114,7 +1136,7 @@ Governance/Schemas/
 
 ---
 
-## 70. Closing Principle
+## 71. Closing Principle
 
 MTS must always be able to answer:
 

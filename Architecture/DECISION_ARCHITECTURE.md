@@ -1,6 +1,6 @@
 # Momentum Trading System — Decision Architecture
 
-**Status:** Canonical  
+**Status:** Canonical
 **Authority:** Governing decision architecture subordinate to `CHARTER.md`, `Architecture/SYSTEM_ARCHITECTURE.md`, `Architecture/RESEARCH_NEXUS_ARCHITECTURE.md`, `Architecture/ENGINE_ARCHITECTURE.md`, and `Architecture/DATA_ARCHITECTURE.md`
 
 ---
@@ -37,6 +37,8 @@ This architecture intentionally does not prescribe trading strategies, numerical
 Research and decision-making are related but distinct.
 
 The Decision Engine may consume knowledge, evidence, uncertainty, current market state, portfolio context, and policy.
+
+Research Accountability gates do not approve individual investment Decisions. The Decision Engine may exercise trade authority already granted by applicable Decision, Risk, and Automation policy.
 
 It may not silently create new scientific conclusions while deciding.
 

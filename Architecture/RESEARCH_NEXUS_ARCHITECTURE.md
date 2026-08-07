@@ -537,6 +537,8 @@ A published finding is not automatically knowledge.
 
 A published knowledge candidate is not automatically canonical knowledge.
 
+When policy requires independent Accountability review, the Nexus may record a higher knowledge-authority transition only when a valid applicable Knowledge Promotion gate verdict is present.
+
 ### 10.2 Retirement Is Not Erasure
 
 Retirement normally means an artifact is removed from normal active use.
@@ -870,7 +872,17 @@ Retrieves governed inputs and publishes evidence and findings.
 
 ### Research Director
 
-Retrieves SoK and research artifacts; publishes questions, plans, conclusions, research needs, and knowledge proposals.
+Retrieves SoK and research artifacts; publishes questions, proposed Research
+Plans, conclusions, research needs, and Knowledge Candidates.
+
+### Accountability
+
+Retrieves proposed Research Plans, Knowledge Candidates, applicable policy,
+validation/provenance state, and related evidence; publishes governed Research
+Admission and Knowledge Promotion verdicts.
+
+Gate verdicts are durable governed artifacts when they authorize, limit, block,
+or materially explain research execution or knowledge lifecycle state.
 
 ### Market Discovery
 

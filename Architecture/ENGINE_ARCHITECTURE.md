@@ -1,6 +1,6 @@
 # Momentum Trading System — Engine Architecture
 
-**Status:** Canonical  
+**Status:** Canonical
 **Authority:** Governing engine architecture subordinate to `CHARTER.md`, `Architecture/SYSTEM_ARCHITECTURE.md`, and `Architecture/RESEARCH_NEXUS_ARCHITECTURE.md`
 
 ---
@@ -98,6 +98,7 @@ Examples:
 - Data Intake Engine;
 - Discovery Engine;
 - Research Director;
+- Accountability Engine;
 - Market Discovery Engine;
 - Decision Engine;
 - Learning & Governance.
@@ -370,19 +371,44 @@ May:
 
 - inspect State of Knowledge and Active Research State;
 - formulate research questions;
-- create research plans;
-- request additional intake or analysis;
+- create proposed Research Plans;
+- respond to Accountability gate outcomes;
+- request additional intake or analysis after Research Admission;
 - evaluate returned findings;
 - generate follow-up research;
 - publish research conclusions;
-- propose knowledge.
+- propose Knowledge Candidates.
 
 May not:
 
-- self-certify unlimited canonical truth;
+- admit its own Research Plan across the independent Research Admission gate;
+- promote its own Knowledge Candidate across the independent Knowledge Promotion gate;
 - make investment decisions merely because it understands research;
 - bypass the Task Manager for scheduled work;
 - own persistent research state outside the Nexus.
+
+### Accountability Engine
+
+May:
+
+- evaluate proposed Research Plans against the Research Admission policy;
+- evaluate Knowledge Candidates against Knowledge Promotion policy;
+- inspect required evidence, provenance, validation, resource, duplication,
+  Charter-alignment, applicability, and contradiction state;
+- issue governed gate verdicts;
+- require revision, narrower scope, more research, or explicit unresolved state
+  when objective gate criteria are not satisfied.
+
+May not:
+
+- formulate the scientific conclusion it is evaluating;
+- create research merely to justify its own verdict;
+- schedule workers;
+- alter gate criteria or policy;
+- own canonical knowledge;
+- make investment decisions;
+- approve or reject an individual trade;
+- expand its own authority.
 
 ### Market Discovery Engine
 
@@ -506,9 +532,10 @@ Outputs must include enough provenance to reproduce the analysis.
 
 The Research Director is the scientific coordination intelligence of MTS.
 
-It decides what research should happen next.
+It determines what research it proposes should happen next.
 
-It does not schedule workers directly.
+It does not schedule workers directly and does not control the independent
+Research Admission or Knowledge Promotion gates.
 
 Conceptually:
 
@@ -517,7 +544,9 @@ Question / Knowledge Gap
         ↓
 Research Director
         ↓
-Research Plan
+Proposed Research Plan
+        ↓
+Accountability — Research Admission
         ↓
 Task Manager
         ↓
@@ -530,6 +559,10 @@ Returned Evidence / Findings
 Research Director
         ↓
 Follow-up / Convergence
+        ↓
+Knowledge Candidate
+        ↓
+Accountability — Knowledge Promotion
 ```
 
 The Research Director must support iterative questioning.
@@ -549,7 +582,62 @@ Forced convergence is prohibited.
 
 ---
 
-## 18. Market Discovery Engine Architecture
+## 18. Accountability Engine Architecture
+
+The Accountability Engine is the independent research gatekeeper of MTS.
+
+It applies Charter-derived criteria expressed through current governance. Its
+purpose is to prevent research resources and knowledge authority from being
+granted solely by the component proposing the work or conclusion.
+
+It controls two gates:
+
+```text
+GATE 1 — RESEARCH ADMISSION
+Proposed Research Plan
+        ↓
+Accountability evaluation
+        ↓
+ADMIT / ADMIT_WITH_LIMITS / REVISION_REQUIRED / DUPLICATIVE / DEFER / REJECT
+
+GATE 2 — KNOWLEDGE PROMOTION
+Knowledge Candidate
+        ↓
+Accountability evaluation
+        ↓
+GATES_PASSED / GATES_PASSED_WITH_SCOPE / RESEARCH_REQUIRED /
+INSUFFICIENT_EVIDENCE / BLOCKED
+```
+
+A gate verdict must identify:
+
+- the proposal/candidate evaluated;
+- policy and criteria version;
+- evidence used by the gate;
+- criteria passed;
+- criteria failed;
+- criteria inapplicable;
+- blocking reason where applicable;
+- scope/limits imposed;
+- timestamp and producer identity.
+
+The engine evaluates whether the required case has been demonstrated. It does
+not substitute a new scientific hypothesis for the Research Director's
+hypothesis.
+
+Accountability must itself remain auditable, reproducible where deterministic
+criteria apply, and challengeable through governed policy/lifecycle processes.
+
+The same engine controls both research gates so Charter alignment is applied
+consistently at admission and promotion, but the two verdict types remain
+distinct governed artifacts.
+
+Accountability does not approve individual investment Decisions. Decision
+Engine retains the authority granted by Decision, Risk, and Automation policy.
+
+---
+
+## 19. Market Discovery Engine Architecture
 
 The Market Discovery Engine is a live/current-state discovery component.
 
@@ -571,7 +659,7 @@ Low-latency internal paths are permitted provided material durable outputs are e
 
 ---
 
-## 19. Decision Engine Architecture
+## 20. Decision Engine Architecture
 
 The Decision Engine converts current state plus governed knowledge into action.
 
@@ -604,7 +692,7 @@ The Decision Engine must preserve enough reasoning references and provenance to 
 
 ---
 
-## 20. Learning & Governance Architecture
+## 21. Learning & Governance Architecture
 
 Learning & Governance closes the outcome loop.
 
@@ -628,7 +716,7 @@ Promotion, degradation, supersession, and retirement criteria must be governed a
 
 ---
 
-## 21. Concurrency Model
+## 22. Concurrency Model
 
 Concurrency is architectural, even when initial execution is serial.
 
@@ -648,7 +736,7 @@ Concurrency-sensitive implementation mechanisms belong in technical design.
 
 ---
 
-## 22. Resource Model
+## 23. Resource Model
 
 Tasks may declare resource needs.
 
@@ -669,7 +757,7 @@ Scientific components should not directly decide CPU-core allocation.
 
 ---
 
-## 23. Retry and Idempotency
+## 24. Retry and Idempotency
 
 Where practical, engine tasks should be designed so retries do not corrupt durable state or duplicate canonical artifacts.
 
@@ -685,7 +773,7 @@ Canonical artifact identity should help prevent duplicate durable publication.
 
 ---
 
-## 24. Failure Isolation
+## 25. Failure Isolation
 
 An engine failure must not corrupt the Research Nexus or unrelated engine state.
 
@@ -715,7 +803,7 @@ Partial outputs may be retained as diagnostic artifacts when useful but may not 
 
 ---
 
-## 25. Crash Recovery
+## 26. Crash Recovery
 
 The architecture must support recovery after:
 
@@ -734,7 +822,7 @@ The first local implementation should follow the same durable task semantics.
 
 ---
 
-## 26. Work Prioritization
+## 27. Work Prioritization
 
 The Task Manager must support governed priority.
 
@@ -755,7 +843,7 @@ Priority does not alter scientific validity.
 
 ---
 
-## 27. Capability Expansion
+## 28. Capability Expansion
 
 A new engine may be added without restructuring existing engines when it provides:
 
@@ -783,7 +871,7 @@ The list is not exhaustive.
 
 ---
 
-## 28. Shared Core Services
+## 29. Shared Core Services
 
 Capabilities used by many engines may belong in `Core/` rather than being duplicated.
 
@@ -802,7 +890,7 @@ Shared services must remain scientifically neutral unless explicitly granted dom
 
 ---
 
-## 29. Observability
+## 30. Observability
 
 Every engine must expose enough operational information to determine:
 
@@ -822,7 +910,7 @@ Material execution provenance must be durable when required to explain or reprod
 
 ---
 
-## 30. Testing Model
+## 31. Testing Model
 
 Engine validation must include:
 
@@ -854,7 +942,7 @@ The first v2 proof of concept should include at least one end-to-end path across
 
 ---
 
-## 31. Initial v2 Engine Implementation
+## 32. Initial v2 Engine Implementation
 
 Initial v2 should implement only the minimum capabilities needed to prove the architecture while preserving mature boundaries.
 
@@ -903,7 +991,7 @@ server deployment
 
 ---
 
-## 32. Component Identity
+## 33. Component Identity
 
 Canonical engine identity is defined by enduring responsibility and declared capability.
 
@@ -913,6 +1001,7 @@ Current engine responsibilities are:
 Data Intake Engine
 Discovery Engine
 Research Director
+Accountability Engine
 Market Discovery Engine
 Decision Engine
 Learning & Governance
@@ -922,7 +1011,7 @@ Engine identity, routing, authority, dependency, and workflow must not derive fr
 
 ---
 
-## 33. Conformance Requirements
+## 34. Conformance Requirements
 
 An engine conforms to this architecture when it:
 
