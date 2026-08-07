@@ -100,11 +100,11 @@ Unresolved contradictions, hypotheses, open questions, gaps, and other
 research working state remain governed Research Nexus state but are not
 automatically canonical knowledge or part of an ordinary Decision SoK.
 
-## 6. Three Storage and Persistence Classes
+## 6. Three Persistence Classes
 
 Every managed artifact receives a persistence class. Semantic type
-answers **what it means**; storage class answers **how it is
-preserved**.
+answers **what it means**; persistence class answers **how durably it must
+persist**.
 
 ### 6.1 Class I --- Source-Controlled System Assets
 
@@ -169,7 +169,7 @@ requirement may expire by policy.
 
 ## 7. Meaning and Persistence Are Independent
 
-Example: `artifact_type=EVIDENCE`, `storage_class=DURABLE_NEXUS`,
+Example: `artifact_type=EVIDENCE`, `persistence_class=DURABLE_NEXUS`,
 `retention_class=SEMI_PERMANENT`, `lifecycle_state=VALIDATED`. A
 materialized query may instead be `TRANSIENT_CACHE/TEMPORARY/ACTIVE`.
 
@@ -180,7 +180,7 @@ govern, discover, relate, reproduce, retain, back up, and retire it.
 Filenames and paths are not canonical identity.
 
 Durable artifacts provide or inherit as applicable: `artifact_id`,
-`artifact_type`, `artifact_family`, `storage_class`, `retention_class`,
+`artifact_type`, `artifact_family`, `persistence_class`, `retention_class`,
 `lifecycle_state`, `created_at`, `producer`, `producer_version`,
 `schema_id`, `schema_version`, `content_hash`, provenance,
 source/dependency references, validation status, backup
@@ -188,7 +188,7 @@ requirement/status, supersession relationships,
 research/campaign/decision relationships, and tags.
 
 Transient managed artifacts carry enough metadata to determine identity,
-producer/owner, storage class, lifecycle, dependencies, expiration, and
+producer/owner, persistence class, lifecycle, dependencies, expiration, and
 deletion eligibility.
 
 Governed classification fields use controlled values. Flexible tags may
@@ -613,7 +613,7 @@ and fail closed against accidental live routing.
 
 A conforming component respects the Charter and responsibility
 boundaries; communicates by governed contracts; preserves
-identity/provenance; assigns metadata/storage/retention classes; keeps
+identity/provenance; assigns metadata/persistence/retention classes; keeps
 Nexus data out of Git; uses Nexus durable state; preserves backend
 independence; fails safely; respects lifecycle/authority; and supports
 reproducibility appropriate to its role.

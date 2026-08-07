@@ -283,7 +283,7 @@ Every initial durable publication SHALL carry a governed artifact envelope conta
 artifact_id
 artifact_type
 artifact_family
-storage_class
+persistence_class
 retention_class
 lifecycle_state
 created_at
@@ -545,7 +545,7 @@ Initial `query()` SHALL support governed criteria required by the vertical slice
 - artifact ID;
 - artifact type/family;
 - lifecycle state;
-- storage/retention class;
+- persistence/retention class;
 - producer;
 - schema ID/version;
 - ticker/instrument tag or governed field where applicable;
@@ -818,7 +818,7 @@ Initial test groups:
 
 ### Lifecycle/Classification
 
-- storage class validation;
+- persistence class validation;
 - retention class validation;
 - publication distinct from promotion;
 - prohibited transition rejection for implemented transitions.
@@ -892,7 +892,7 @@ The first system acceptance test SHALL execute one deliberately small AAPL resea
 16. successful retrieval, SoK reconstruction, and lineage traversal after restart;
 17. identical logical identities despite clients having no knowledge of payload paths;
 18. schema and integrity verification;
-19. explicit storage/retention/backup classifications;
+19. explicit persistence/retention/backup classifications;
 20. proof that low access frequency cannot silently invalidate knowledge or trigger unsafe deletion.
 
 This test SHALL use the real Nexus interfaces, not direct fixture-directory coupling.

@@ -287,7 +287,7 @@ Required or inheritable metadata includes, as applicable:
 artifact_id
 artifact_type
 artifact_family
-storage_class
+persistence_class
 retention_class
 lifecycle_state
 created_at
@@ -351,7 +351,7 @@ Examples:
 
 - artifact type;
 - lifecycle state;
-- storage class;
+- persistence class;
 - retention class;
 - validation state.
 
@@ -505,7 +505,7 @@ Deletion is policy-driven.
 
 Lifecycle state describes where an artifact stands in its governed existence.
 
-Storage class and lifecycle state are separate concepts.
+Persistence class and lifecycle state are separate concepts.
 
 Illustrative durable lifecycle states may include:
 
@@ -672,7 +672,7 @@ Retrieval tier is not lifecycle state and is not archival state.
 
 `COLD` means valid canonical knowledge is kept outside the ordinary hot
 retrieval path while remaining discoverable through governed targeted
-retrieval. `ARCHIVE` remains a storage/retention condition governed separately.
+retrieval. `ARCHIVE` remains a retention/storage-implementation condition governed separately.
 
 Retrieval optimization must preserve a path for context-triggered discovery of
 cold knowledge so that low rank does not become a self-fulfilling reason for
@@ -1166,7 +1166,7 @@ The proof must demonstrate:
 - schema validation;
 - publish/retrieve;
 - relationship traversal;
-- storage-class assignment;
+- persistence-class assignment;
 - retention classification;
 - backup classification;
 - no dependency on source-specific physical paths;

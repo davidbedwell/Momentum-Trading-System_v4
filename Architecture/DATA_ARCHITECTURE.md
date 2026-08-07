@@ -367,7 +367,7 @@ Example:
 
 ```text
 artifact_type: EVIDENCE
-storage_class: DURABLE_NEXUS
+persistence_class: DURABLE_NEXUS
 retention_class: SEMI_PERMANENT
 lifecycle_state: VALIDATED
 ```
@@ -376,7 +376,7 @@ Another:
 
 ```text
 artifact_type: MATERIALIZED_QUERY
-storage_class: TRANSIENT_CACHE
+persistence_class: TRANSIENT_CACHE
 retention_class: TEMPORARY
 lifecycle_state: ACTIVE
 ```
@@ -393,7 +393,7 @@ Every governed durable data artifact must provide or inherit, as applicable:
 artifact_id
 artifact_type
 artifact_family
-storage_class
+persistence_class
 retention_class
 lifecycle_state
 created_at
@@ -1002,7 +1002,7 @@ The initial proof should use a narrow real dataset, such as AAPL, and demonstrat
 6. deterministic measurement generation;
 7. evidence production;
 8. lineage traversal;
-9. storage-class assignment;
+9. persistence-class assignment;
 10. backup classification;
 11. cache creation;
 12. cache retirement eligibility;
