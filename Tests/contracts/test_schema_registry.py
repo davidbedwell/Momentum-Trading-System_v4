@@ -20,6 +20,7 @@ EXPECTED_IDENTITIES = {
     ("mts.artifact-reference", 1),
     ("mts.controlled-vocabularies", 1),
     ("mts.governed-reference", 1),
+    ("mts.market-history", 1),
     ("mts.provenance", 1),
     ("mts.relationship", 1),
 }
