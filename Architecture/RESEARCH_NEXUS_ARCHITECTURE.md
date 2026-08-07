@@ -1,6 +1,6 @@
 # Momentum Trading System — Research Nexus Architecture
 
-**Status:** Canonical  
+**Status:** Canonical
 **Authority:** Governing Research Nexus architecture subordinate to `CHARTER.md` and `Architecture/SYSTEM_ARCHITECTURE.md`
 
 ---
@@ -445,10 +445,7 @@ Canonical home: Research Nexus.
 
 Git: prohibited except small deliberate fixtures or examples.
 
-Independent backup: every Class II artifact has an explicit governed
-backup requirement. Permanent Class II assets require independent
-verified backup. Semi-permanent Class II assets may be designated
-recoverable-from-source or independently backed up according to policy.
+Independent backup: required according to policy.
 
 Class II has two retention levels.
 
@@ -590,30 +587,43 @@ Thresholds belong in governed policy and may evolve with evidence.
 
 ## 12. State of Knowledge Architecture
 
-The State of Knowledge is a logical view assembled from Nexus artifacts and relationships.
+The Research Nexus is the canonical body of durable MTS scientific and operational state.
 
-The SoK is not a single file or table.
+The State of Knowledge (SoK) is a governed point-in-time logical view assembled from the subset of canonical knowledge relevant to a defined subject and use. The SoK is not a single file or table, and it is not synonymous with everything stored in the Nexus.
 
-For a subject, the SoK should be capable of returning:
+For Decision use, a SoK view should be capable of returning:
 
-- current applicable knowledge;
-- supporting evidence;
-- contradictory evidence;
-- relevant findings;
+- current applicable canonical knowledge;
 - applicability conditions;
-- uncertainty;
-- sample and validation context;
+- uncertainty or confidence qualification;
+- validation context;
 - recency;
-- superseded knowledge;
-- unresolved research questions;
+- decision-eligibility state;
+- material limitations;
+- provenance references needed to explain the knowledge.
+
+Research additionally operates over **Active Research State**, which may contain:
+
+- unresolved contradictory evidence;
+- open questions;
+- hypotheses;
+- research plans;
+- anomalies;
 - known tooling/data gaps;
-- relevant decisions and outcomes.
+- temporary research working material.
 
-The Research Director uses the SoK to determine what is known and what remains unanswered.
+Active Research State is not automatically part of the Decision SoK.
 
-The Decision Engine uses the SoK to determine which knowledge is applicable to current conditions.
+The Nexus may also preserve **Historical Research Lineage** sufficient for reproducibility, audit, and learning. This does not require permanent retention of every contradictory, negative, duplicate, or reproducible intermediate artifact.
 
-Learning & Governance uses the SoK and outcomes to re-evaluate knowledge.
+Contradictory working material is default-to-expire after its Research Plan is resolved. Durable retention requires objective justification. When a contradiction materially changes knowledge, applicability, uncertainty, decision eligibility, supersession, retirement, or a material historical Decision, MTS should normally preserve the minimum necessary evidence and a compact durable resolution record.
+
+The Research Director may query canonical knowledge, Active Research State, and justified historical lineage to determine what is known and what remains unanswered.
+
+The Decision Engine normally consumes the scoped SoK rather than unresolved research debris.
+
+Learning & Governance uses Decisions, Outcomes, current knowledge, and justified lineage to evaluate whether knowledge remains useful.
+
 
 ---
 
@@ -722,12 +732,6 @@ A cache object that becomes scientifically valuable must be durably published or
 ## 17. Backup Architecture
 
 Backup is a governed Nexus responsibility for Class II assets.
-
-Every Class II artifact must carry an explicit backup requirement.
-Permanent Class II assets require independent verified backup.
-Semi-permanent Class II assets may be independently backed up or
-classified as recoverable from a governed recovery source according to
-retention, reacquisition cost, and recoverability policy.
 
 Backup policy must be metadata-driven.
 
@@ -927,13 +931,8 @@ implementation may be simpler. These are technical mechanisms beneath
 the same permanent architectural boundary.
 
 Task state required for crash recovery must survive Task Manager
-process interruption. Governed Task Requests, dependency records, and
-material execution records that provide this durable recovery/provenance
-state are Class II Nexus artifacts.
-
-Transient queue representations, worker-local scheduling caches, and
-other reconstructable scheduling optimizations may remain Class III
-when they can be rebuilt from durable task state.
+process interruption. Transient scheduling optimizations may remain
+Class III when they can be reconstructed from durable task state.
 
 ---
 
