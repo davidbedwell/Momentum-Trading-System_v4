@@ -164,7 +164,7 @@ An engine may technically be capable of constructing an artifact but may publish
 Examples:
 
 - Data Intake does not make investment decisions.
-- Discovery does not execute trades.
+- Analysis does not execute trades.
 - Research Director does not silently become the scheduler or its own independent research gatekeeper.
 - Decision does not rewrite research evidence.
 - Learning & Governance does not retroactively alter historical Decision context.
@@ -705,11 +705,11 @@ It must not:
 
 ---
 
-## 41. Discovery Interface
+## 41. Analysis Interface
 
-Discovery should accept governed discovery/measurement work and produce observations, measurements, evidence, and findings within its authority.
+Analysis should accept governed analysis/measurement work and produce observations, measurements, evidence, and findings within its authority.
 
-Discovery may proactively search for patterns when tasked to do so.
+Analysis may proactively search for patterns when tasked to do so.
 
 It must distinguish measurement from interpretation and action.
 
@@ -770,7 +770,7 @@ It must not silently rewrite prior decisions or evidence.
 
 An engine should not directly command another worker outside governed coordination.
 
-If Discovery determines Data Intake work is required, or Research Director needs additional analysis, it creates or causes creation of governed work for the Task Manager.
+If Analysis determines Data Intake work is required, or Research Director needs additional analysis, it creates or causes creation of governed work for the Task Manager.
 
 This preserves:
 

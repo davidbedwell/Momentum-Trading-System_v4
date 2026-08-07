@@ -323,7 +323,7 @@ They should not become an untyped substitute for domain contracts at major compo
 
 Provider-specific formats and semantics belong behind Data Intake/provider adapters.
 
-Do not leak vendor-specific field names throughout Discovery, Research, or Decision code when canonical normalized fields exist.
+Do not leak vendor-specific field names throughout Analysis, Research, or Decision code when canonical normalized fields exist.
 
 ## 41. Scientific Calculations
 

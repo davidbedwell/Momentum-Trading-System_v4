@@ -901,7 +901,7 @@ Engines interact with the Research Nexus through governed interfaces.
 
 Publishes accepted data, observations, validation records, and provenance.
 
-### Discovery
+### Analysis
 
 Retrieves governed inputs and publishes evidence and findings.
 
@@ -1033,7 +1033,7 @@ Components should receive only the permissions necessary for their responsibilit
 Examples:
 
 - an intake component may publish data but not promote knowledge;
-- a Discovery component may publish findings but not alter prior canonical knowledge;
+- an Analysis component may publish findings but not alter prior canonical knowledge;
 - a Decision component may publish decisions but not rewrite historical evidence;
 - backup services may replicate artifacts but not change semantic lifecycle;
 - migration utilities may write imported artifacts only under governed migration authority.

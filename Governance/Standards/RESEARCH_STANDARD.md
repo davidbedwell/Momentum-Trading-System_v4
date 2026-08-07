@@ -136,9 +136,9 @@ This boundary separates scientific authorship, independent gatekeeping, and infr
 
 ---
 
-## 8. Discovery Role
+## 8. Analysis Role
 
-Discovery performs governed measurement, comparison, pattern search, relationship analysis, and other empirical work within its declared capabilities.
+Analysis performs governed measurement, comparison, pattern search, relationship analysis, and other empirical work within its declared capabilities.
 
 Discovery does not determine by itself that a measured relationship is durable knowledge.
 

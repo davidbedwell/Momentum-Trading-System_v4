@@ -96,7 +96,7 @@ A logical capability domain.
 Examples:
 
 - Data Intake Engine;
-- Discovery Engine;
+- Analysis Engine;
 - Research Director;
 - Accountability Engine;
 - Market Discovery Engine;
@@ -348,7 +348,7 @@ May not:
 - promote findings to knowledge;
 - make investment decisions.
 
-### Discovery Engine
+### Analysis Engine
 
 May:
 
@@ -502,9 +502,9 @@ It must not silently repair missing or invalid data in a way that changes scient
 
 ---
 
-## 16. Discovery Engine Architecture
+## 16. Analysis Engine Architecture
 
-The Discovery Engine converts governed inputs into reproducible evidence and findings.
+The Analysis Engine converts governed inputs into reproducible evidence and findings.
 
 Its purpose is not to confirm predefined narratives.
 
@@ -938,7 +938,7 @@ Validate safe behavior under simultaneous execution where relevant.
 
 Validate retry, interruption, restart, and partial-failure behavior.
 
-The first v2 proof of concept should include at least one end-to-end path across Data Intake, Discovery, Research Director, Task Manager, and Research Nexus.
+The first v2 proof of concept should include at least one end-to-end path across Data Intake, Analysis, Research Director, Task Manager, and Research Nexus.
 
 ---
 
@@ -999,7 +999,7 @@ Current engine responsibilities are:
 
 ```text
 Data Intake Engine
-Discovery Engine
+Analysis Engine
 Research Director
 Accountability Engine
 Market Discovery Engine

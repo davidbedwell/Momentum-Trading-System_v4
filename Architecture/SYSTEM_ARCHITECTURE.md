@@ -317,7 +317,7 @@ contracts. Point-to-point implementation dependencies are prohibited
 unless explicitly justified. A requester need not know how the receiver
 performs the work.
 
-`Decision Engine → Research Need → Research Nexus → Task Manager → Research Director → Research Plan → Research Nexus → Task Manager → Data Intake and/or Discovery`
+`Decision Engine → Research Need → Research Nexus → Task Manager → Research Director → Research Plan → Research Nexus → Task Manager → Data Intake and/or Analysis`
 
 Transport technology is technical design.
 
@@ -336,7 +336,7 @@ Acquires, interprets, normalizes, measures, quality-checks, validates,
 and publishes data for scientific use. It establishes intake integrity,
 not economic meaning.
 
-### Discovery Engine
+### Analysis Engine
 
 Converts governed data/evidence into reproducible analytical findings
 and searches/tests relationships, temporal effects, conditions,
@@ -394,7 +394,7 @@ Accountability gate verdict.
 
 ## 14. Research Loop
 
-`Question/Gap → Research Director → Proposed Research Plan → Accountability: Research Admission → Task Manager → Data Intake/Discovery → Research Nexus → Evidence/Findings → Research Director → follow-up or convergence → Knowledge Candidate → Accountability: Knowledge Promotion → governed lifecycle transition → Research Nexus`
+`Question/Gap → Research Director → Proposed Research Plan → Accountability: Research Admission → Task Manager → Data Intake/Analysis → Research Nexus → Evidence/Findings → Research Director → follow-up or convergence → Knowledge Candidate → Accountability: Knowledge Promotion → governed lifecycle transition → Research Nexus`
 
 Research may iterate. Insufficient evidence, contradiction, and missing
 tooling are valid outcomes; convergence must not be forced.
@@ -417,7 +417,7 @@ logic.
 ## 17. Authority Boundaries
 
 Data Intake publishes governed data but not investment meaning.
-Discovery publishes evidence/findings but not canonical truth. Research
+Analysis publishes evidence/findings but not canonical truth. Research
 Director directs inquiry, authors Research Plans, and proposes Knowledge
 Candidates but does not control the independent gates applied to those
 proposals. Accountability controls Research Admission and Knowledge Promotion

@@ -89,7 +89,7 @@ Actors should receive only the permissions required for their governed function.
 
 Examples:
 
-- Discovery may read approved research inputs and publish findings, but may not approve knowledge promotion.
+- Analysis may read approved research inputs and publish findings, but may not approve knowledge promotion.
 - Research Director may propose research but may not schedule workers directly or independently pass the Accountability gate for its own proposal/output.
 - Accountability may issue research gate verdicts but may not alter its own gate criteria, schedule workers, own canonical knowledge, or approve individual trades.
 - Task Manager may coordinate work but may not change scientific conclusions.
@@ -380,7 +380,7 @@ An actor may publish only artifact types it is authorized to create.
 Examples:
 
 - Data Intake publishes data/quality artifacts;
-- Discovery publishes evidence/findings;
+- Analysis publishes evidence/findings;
 - Research Director publishes research state/proposals;
 - Decision publishes Decision artifacts;
 - Learning & Governance publishes evaluations/recommendations.

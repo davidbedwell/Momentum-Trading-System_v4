@@ -467,7 +467,7 @@ Knowledge must reference its supporting evidence/findings and applicability.
 
 ## 19. Observation Is Not Causation
 
-Discovery and analysis artifacts must distinguish:
+Analysis artifacts must distinguish:
 
 ```text
 observed association
@@ -797,7 +797,7 @@ An engine may publish only artifact families authorized by its contract.
 Examples:
 
 - Data Intake may publish governed source/normalized datasets and intake QA;
-- Discovery may publish observations, measurements, evidence, and findings;
+- Analysis may publish observations, measurements, evidence, and findings;
 - Research Director may publish questions, hypotheses, plans, research needs, and governed research conclusions within its authority;
 - Decision may publish decisions;
 - Learning & Governance may publish outcome evaluations and governance recommendations.

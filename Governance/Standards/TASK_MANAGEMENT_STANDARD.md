@@ -319,7 +319,7 @@ or:
 
 ```text
 Research Plan
-   ├── Discovery Task A
+   ├── Analysis Task A
    ├── Data Intake Task B
    └── Analysis Task C
          ↓

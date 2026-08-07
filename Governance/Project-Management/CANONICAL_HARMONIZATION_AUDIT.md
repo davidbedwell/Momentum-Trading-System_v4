@@ -59,7 +59,7 @@ Removed historical engine numbers, Warehouse examples, v1 labels, and legacy-spe
 - Research Nexus: canonical durable state, semantic identity, provenance, relationships, lifecycle, retrieval.
 - Task Manager: scheduling, routing, dependencies, concurrency, retries, recovery, worker supervision.
 - Data Intake Engine: acquisition, normalization, deterministic measurement, intake quality/provenance, governed publication.
-- Discovery Engine: empirical analysis, evidence, findings, relationships, temporal/context behavior.
+- Analysis Engine: empirical analysis, evidence, findings, relationships, temporal/context behavior.
 - Research Director: iterative questions, Research Plans, gaps, contradictions, convergence, knowledge proposals.
 - Market Discovery Engine: current-market scanning for known opportunities, anomalies, emerging or research-worthy phenomena.
 - Decision Engine: action/no-action judgment using current state, applicable SoK, uncertainty, constraints, and risk.

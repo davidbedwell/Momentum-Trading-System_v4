@@ -329,7 +329,7 @@ Downstream scientific schemas remain provider-neutral where appropriate.
 
 Changing providers should primarily affect Data Intake/provider adapters and configuration.
 
-It should not require rewriting Discovery, Research, or Decision logic that consumes normalized governed data.
+It should not require rewriting Analysis, Research, or Decision logic that consumes normalized governed data.
 
 ---
 

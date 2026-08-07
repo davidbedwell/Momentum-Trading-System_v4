@@ -44,7 +44,7 @@ The completed MTS is expected to contain, at minimum:
 - shared Core services;
 - Task Manager;
 - engine runtime and interface substrate;
-- Discovery / Analysis;
+- Analysis;
 - Accountability;
 - Research Director;
 - Learning & Governance;
@@ -357,11 +357,11 @@ Do not ask downstream research to compensate for ambiguous source data.
 
 ---
 
-# Phase 7 — Discovery / Analysis
+# Phase 7 — Analysis
 
 ## 12. Convert Governed Data Into Evidence-Producing Analysis
 
-Discovery / Analysis should consume Nexus-resolved inputs through governed tasks and publish measurable findings.
+Analysis should consume Nexus-resolved inputs through governed tasks and publish measurable findings.
 
 Initial capabilities may include:
 
@@ -455,7 +455,7 @@ It does not:
 
 ## 14. Build the Iterative Research Intelligence Layer
 
-Only after Nexus, Task Manager, Data Intake, Discovery, and Accountability exist should Research Director become autonomous.
+Only after Nexus, Task Manager, Data Intake, Analysis, and Accountability exist should Research Director become autonomous.
 
 Required loop:
 
@@ -465,7 +465,7 @@ question / gap
 → Proposed Research Plan
 → Accountability Research Admission
 → Task Manager
-→ Data Intake / Discovery
+→ Data Intake / Analysis
 → Evidence / Findings
 → Research Director evaluation
 → follow-up question OR convergence
@@ -550,7 +550,7 @@ Required proof:
 Data Intake
 → Nexus
 → Task Manager
-→ Discovery
+→ Analysis
 → Nexus
 → Research Director
 → Accountability
@@ -920,7 +920,7 @@ recovery
 Data Intake
 → Nexus
 → Task Manager
-→ Discovery
+→ Analysis
 → Nexus
 ```
 

@@ -624,7 +624,7 @@ A meaningful MTS v2 E2E proof should eventually demonstrate:
 ```text
 Data Intake
 → quality acceptance
-→ Discovery
+→ Analysis
 → Research Director iteration
 → knowledge candidate / SoK
 → Market Discovery candidate

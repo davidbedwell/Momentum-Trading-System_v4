@@ -496,7 +496,7 @@ Data Intake publication
   ↓
 accepted/normalized artifact
   ↓
-Discovery execution
+Analysis execution
   ↓
 Finding
   ↓
@@ -870,7 +870,7 @@ The first system acceptance test SHALL execute one deliberately small AAPL resea
 3. governed query discovery;
 4. Data Intake output publication;
 5. provenance from intake output to source;
-6. Discovery consumption by artifact reference;
+6. Analysis consumption by artifact reference;
 7. Finding publication;
 8. Finding-to-input relationship traversal;
 9. selective evidence/Finding retrieval through governed index interfaces;
@@ -941,7 +941,7 @@ Development SHALL proceed in this order unless a discovered dependency requires 
 19. Complete Nexus conformance tests
 20. Run AAPL Nexus-only acceptance path
 21. Add the minimum Data Intake adapter
-22. Add the minimum Discovery adapter
+22. Add the minimum Analysis adapter
 23. Add the minimum Research Director adapter
 24. Run full AAPL vertical slice through Knowledge Management/SoK
 25. Audit against architecture/governance and v1 regression lessons
