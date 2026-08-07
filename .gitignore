@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs and runtime state
+*.log
+logs/
+tmp/
+temp/
+
+# Research Nexus data plane
+Research-Nexus/
+research_nexus_data/
+data/
+
+# Local configuration
+config.local.*
