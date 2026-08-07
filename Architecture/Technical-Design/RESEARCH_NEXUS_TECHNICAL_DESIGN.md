@@ -27,6 +27,10 @@ Finding
     ↓
 Research Nexus
     ↓
+Knowledge Management
+    ↓
+State of Knowledge / Active Research State
+    ↓
 Research Director
     ↓
 Next Question / Conclusion
@@ -54,6 +58,10 @@ The implementation SHALL follow these principles from its first usable version:
 10. **Core grows only where an immediate shared dependency exists.**
 11. **Initial simplicity may reduce deployment complexity, not semantic rigor.**
 12. **Concurrency safety is designed in even when an initial workload happens to execute serially.**
+13. **Knowledge Management is a first-class Nexus subsystem, not engine-local storage or cleanup logic.**
+14. **Raw analytical volume is not equivalent to knowledge; evidence must remain queryable without requiring wholesale materialization.**
+15. **Scientific quality, decision utility, and access priority remain distinct governed dimensions.**
+16. **Retrieval frequency may influence operational priority but SHALL NOT establish scientific validity.**
 
 ---
 
@@ -65,10 +73,14 @@ The first Research Nexus implementation SHALL use three logical layers:
 Nexus Client/API
       ↓
 Nexus Services
+  ┌───────────────┬──────────────────────┐
+  │ Core Artifact │ Knowledge Management │
+  │ Services      │ Services             │
+  └───────────────┴──────────────────────┘
       ↓
 Storage Ports
-   ↙       ↘
-Catalog    Payload Store
+   ↙         ↓         ↘
+Catalog   Index Store   Payload Store
 ```
 
 ### 3.1 Nexus Client/API
@@ -84,6 +96,10 @@ query(...)
 add_relationship(...)
 get_relationships(...)
 verify(...)
+get_state_of_knowledge(...)
+get_active_research_state(...)
+query_evidence(...)
+rank_knowledge(...)
 ```
 
 Clients SHALL NOT receive or require knowledge of physical catalog rows, payload directories, SQLite row IDs, filesystem layouts, or backend-specific keys as semantic identity.
@@ -105,6 +121,23 @@ The service layer SHALL coordinate:
 - post-write verification;
 - retrieval and governed query translation.
 
+Knowledge Management SHALL be implemented as a first-class service boundary within the Nexus service layer. Its durable responsibilities include:
+
+- knowledge identity and version lineage;
+- evidence-to-claim synthesis records;
+- scientific-status representation;
+- contradiction state;
+- applicability and recency state;
+- knowledge promotion/demotion records when authorized by governance;
+- State of Knowledge assembly;
+- Active Research State assembly;
+- knowledge ranking and retrieval-tier metadata;
+- provenance from knowledge back to findings/evidence;
+- archival/cold-retrieval eligibility signals;
+- durable explanation of why a knowledge object is ranked, promoted, demoted, superseded, or retained.
+
+Knowledge Management SHALL NOT independently invent scientific truth, bypass Accountability/governance gates, or convert usage frequency into scientific validity. Engines and governed authorities produce/evaluate research; the Nexus preserves, connects, indexes, and serves the resulting governed state.
+
 ### 3.3 Storage Ports
 
 Storage behavior SHALL be expressed behind interfaces/protocols so physical mechanisms can later be replaced.
@@ -113,10 +146,15 @@ Initial ports:
 
 ```text
 CatalogStore
+IndexStore
 PayloadStore
 ```
 
-Future implementations may add specialized index, object-store, graph, cache, backup, or distributed transaction mechanisms without changing Nexus semantic contracts.
+`IndexStore` is a permanent logical boundary even when its first implementation shares the same SQLite database as `CatalogStore`. It exists so evidence and knowledge can be queried selectively without requiring clients to load complete artifact payloads or million-row publications into memory.
+
+The initial `IndexStore` SHALL support the vertical-slice retrieval predicates required for evidence, findings, knowledge, State of Knowledge, and Active Research State. Later implementations may move indexing to a server relational index, columnar query service, search engine, graph/index service, or other scalable backend without changing Nexus client contracts.
+
+Future implementations may add specialized object-store, graph, cache, backup, or distributed transaction mechanisms without changing Nexus semantic contracts.
 
 ---
 
@@ -141,7 +179,17 @@ SQLite is an implementation mechanism, not MTS architecture. No engine or domain
 
 The design SHALL avoid assumptions that prevent later migration to a server database.
 
-### 4.2 Payload Store: Filesystem-Backed Content Store
+### 4.2 Index Store: SQLite-Backed Governed Index
+
+The initial `IndexStore` SHALL use SQLite-backed indexed tables or views colocated with the catalog where practical.
+
+This implementation SHALL support selective retrieval of evidence and knowledge metadata without copying durable payloads into engine-private working directories.
+
+Index records SHALL reference stable Nexus artifact identities and representation identities. Index rows are discovery/retrieval structures; they SHALL NOT become an alternate source of truth for artifact content.
+
+The design SHALL permit later separation of `IndexStore` from the catalog database without changing the public Nexus API.
+
+### 4.3 Payload Store: Filesystem-Backed Content Store
 
 Initial artifact payloads SHALL be stored outside Git beneath the configured Research Nexus root using a filesystem-backed `PayloadStore`.
 
@@ -151,7 +199,7 @@ The physical payload path SHALL NOT be the artifact identity.
 
 A future object-store implementation must be substitutable behind the same storage port.
 
-### 4.3 Serialization
+### 4.4 Serialization
 
 Initial structured metadata and small structured payloads SHOULD use deterministic JSON where appropriate.
 
@@ -276,6 +324,10 @@ representations
 relationships
 validation_records
 publication_records
+scientific_status_records
+knowledge_rank_records
+retrieval_tier_records
+research_dependency_records
 ```
 
 ### 9.1 `artifacts`
@@ -320,6 +372,28 @@ Relationship vocabulary validation SHALL occur before durable insertion.
 ### 9.4 Validation and Publication Records
 
 Material validation/publication facts SHALL be preserved sufficiently to explain whether an artifact was accepted and how publication completed.
+
+### 9.5 Knowledge Management Records
+
+The catalog SHALL be able to represent knowledge-management state without rewriting immutable historical artifacts. At minimum this includes separable records for:
+
+```text
+scientific_status
+knowledge_quality inputs/results
+decision_utility inputs/results
+access_priority inputs/results
+retrieval_tier
+contradiction state
+applicability state
+recency state
+promotion/demotion/gate references
+open research dependencies
+supersession/current-view status
+```
+
+Scientific status, lifecycle state, Decision eligibility, active utility, retrieval rank, retrieval tier, and physical retention state SHALL NOT be collapsed into one opaque status field.
+
+Ranking/retrieval records SHALL identify the policy/model version and evidence inputs that produced them so ranking changes remain auditable without rewriting scientific history.
 
 The catalog schema SHALL use explicit schema migrations rather than ad hoc mutation.
 
@@ -484,9 +558,83 @@ Query results SHALL return stable Nexus artifact references/envelopes, not expos
 
 Query capability SHALL be extensible without breaking callers.
 
+For potentially large evidence-bearing artifacts, `query_evidence()` SHALL support selective predicate-based retrieval through `IndexStore`. Callers SHALL NOT be required to retrieve the entire publication merely to inspect matching evidence.
+
+The first implementation SHOULD support bounded result sets and deterministic pagination/cursors for query surfaces that can grow without practical bound.
+
 ---
 
-## 17. Lifecycle Scope for the First Slice
+## 17. Knowledge Management and State-of-Knowledge Services
+
+Knowledge Management is a first-class Research Nexus subsystem.
+
+The initial implementation SHALL establish permanent contracts for these distinct concepts:
+
+```text
+Evidence / Finding
+      ↓ synthesis + provenance
+Knowledge Candidate / Knowledge Artifact
+      ↓ governed scientific assessment
+Scientific Status
+      ↓ governed promotion authority
+Lifecycle / Decision Eligibility
+      ↓ context-sensitive retrieval
+State of Knowledge
+```
+
+The Nexus SHALL preserve the distinction between:
+
+1. **Knowledge Quality** — evidence strength, replication, independent evidence, stability, coverage, contradiction burden, provenance sufficiency, and demonstrated generalization/applicability.
+2. **Decision Utility** — observed predictive/economic contribution, material Decision use, outcome history, and incremental value when applicable.
+3. **Access Priority** — relevance to the current question/context, recency, retrieval/use frequency, applicable-opportunity exposure, computational cost, and operational urgency.
+
+These dimensions MAY contribute to a governed retrieval/ranking model, but SHALL remain inspectable separately. A high Access Priority SHALL NOT imply high Knowledge Quality. A rarely used artifact SHALL NOT be demoted scientifically solely because it is rarely accessed.
+
+### 17.1 State of Knowledge
+
+`get_state_of_knowledge(subject, context, as_of, ...)` SHALL assemble a governed logical view from canonical Nexus artifacts and relationships rather than rely on a monolithic knowledge file.
+
+The initial SoK contract SHALL be capable of returning, where present:
+
+- current applicable knowledge;
+- scientific-status qualification;
+- applicability conditions;
+- recency qualification;
+- Decision-eligibility state;
+- material limitations;
+- supporting/contradictory provenance references;
+- supersession/current-view information;
+- retrieval rank/tier metadata with explanation.
+
+Ordinary Decision SoK retrieval SHALL prefer governed current knowledge and SHALL NOT indiscriminately load rejected hypotheses, unresolved research debris, or every atomic finding.
+
+### 17.2 Active Research State
+
+`get_active_research_state(...)` SHALL expose unresolved questions, contradictions, missing evidence, open research plans/jobs, known tooling/data gaps, and dependencies that remain scientifically or operationally active.
+
+This state SHALL remain distinct from the ordinary Decision SoK so unfinished research does not masquerade as canonical knowledge.
+
+### 17.3 Knowledge Ranking
+
+The first implementation SHALL provide a deterministic, policy-versioned ranking interface even if the initial ranking model is intentionally simple.
+
+Ranking inputs SHALL be explicit and auditable. Usage frequency alone SHALL never establish scientific validity.
+
+Ranking SHALL NOT mutate knowledge content. A new ranking assessment creates new governed ranking state referencing the knowledge artifact and applicable policy/model version.
+
+### 17.4 Retrieval Tiers and Retention
+
+The Nexus SHALL support the operational retrieval concepts `HOT`, `NORMAL`, and `COLD` when the applicable governance vocabulary authorizes them.
+
+Retrieval tier is not lifecycle state and is not scientific status.
+
+`COLD` canonical knowledge remains governed and directly retrievable. Physical archival/deletion decisions remain subject to storage-retention policy, provenance/dependency checks, open research plans, unresolved evidence dependencies, legal/governance constraints, and reproducibility requirements.
+
+The Nexus SHALL NOT retire or delete an artifact merely because it is low-ranked or infrequently used.
+
+---
+
+## 18. Lifecycle Scope for the First Slice
 
 The first implementation SHALL support only lifecycle transitions immediately required by its artifact contracts while preserving a generic transition-validation mechanism.
 
@@ -498,7 +646,7 @@ Future Accountability and Learning/Governance services will invoke governed life
 
 ---
 
-## 18. Backup Classification
+## 19. Backup Classification
 
 Every durable artifact SHALL carry explicit backup requirement/status metadata as required by governance.
 
@@ -510,7 +658,7 @@ Verified backup requires integrity verification according to policy.
 
 ---
 
-## 19. Concurrency and Locking
+## 20. Concurrency and Locking
 
 The first implementation may operate under modest local concurrency, but it SHALL be safe for multiple execution instances.
 
@@ -524,7 +672,7 @@ Concurrency limits belong to Task Management/configuration rather than hard-code
 
 ---
 
-## 20. Crash Recovery
+## 21. Crash Recovery
 
 Publication design SHALL tolerate interruption between major publication stages.
 
@@ -536,7 +684,7 @@ Missing or hash-invalid durable payloads SHALL surface as integrity failures; th
 
 ---
 
-## 21. Configuration
+## 22. Configuration
 
 Initial Nexus configuration SHALL be provided through the canonical MTS configuration layer as it is implemented.
 
@@ -558,7 +706,7 @@ Tests SHALL prove operation independent of current working directory and reposit
 
 ---
 
-## 22. Python Package Boundary
+## 23. Python Package Boundary
 
 Initial implementation target:
 
@@ -574,12 +722,18 @@ Core/research_nexus/
     query.py
     relationships.py
     integrity.py
+    knowledge.py
+    state_of_knowledge.py
+    ranking.py
+    research_state.py
     config.py
     storage/
         __init__.py
         catalog.py
+        index.py
         payload.py
         sqlite_catalog.py
+        sqlite_index.py
         filesystem_payload.py
 ```
 
@@ -591,7 +745,7 @@ Shared mechanisms that become independently useful across multiple MTS component
 
 ---
 
-## 23. Error Model
+## 24. Error Model
 
 Nexus operations SHALL fail with explicit typed errors rather than ambiguous booleans or silent fallback.
 
@@ -608,6 +762,9 @@ ArtifactNotFoundError
 StorageUnavailableError
 IntegrityError
 LifecycleError
+KnowledgeStateError
+RankingError
+ResearchDependencyError
 AuthorizationError
 ```
 
@@ -615,7 +772,7 @@ Error details SHALL avoid exposing secrets while preserving sufficient diagnosti
 
 ---
 
-## 24. Initial Test Architecture
+## 25. Initial Test Architecture
 
 Tests SHALL be implemented concurrently with production code.
 
@@ -666,6 +823,20 @@ Initial test groups:
 - publication distinct from promotion;
 - prohibited transition rejection for implemented transitions.
 
+### Knowledge Management / Retrieval
+
+- selective evidence retrieval does not require full payload materialization;
+- deterministic bounded evidence query/pagination;
+- SoK excludes unfinished research debris from ordinary Decision retrieval;
+- Active Research State exposes unresolved questions/dependencies;
+- Knowledge Quality, Decision Utility, and Access Priority remain separately inspectable;
+- usage frequency alone cannot alter scientific validity;
+- ranking is deterministic for the same inputs/policy version;
+- ranking changes do not rewrite knowledge content/history;
+- `HOT`/`NORMAL`/`COLD` do not mutate lifecycle/scientific status;
+- `COLD` canonical knowledge remains directly retrievable;
+- open research plans or unresolved dependencies block unsafe retirement/deletion.
+
 ### Concurrency/Recovery
 
 - independent publication staging;
@@ -675,7 +846,7 @@ Initial test groups:
 
 ---
 
-## 25. First Vertical-Slice Artifact Set
+## 26. First Vertical-Slice Artifact Set
 
 Do not implement every future MTS artifact type initially.
 
@@ -685,7 +856,10 @@ Implement the minimum governed schemas/contracts required to prove:
 Source Dataset / Raw Source Reference
 Accepted or Normalized Dataset
 Finding
-Research Question or Research State
+Knowledge Candidate or minimal Knowledge Artifact
+Scientific/Ranking Assessment required for the slice
+State of Knowledge projection
+Active Research State / Research Question
 Research Conclusion / Follow-up Question
 Relationship / Provenance records
 ```
@@ -694,7 +868,7 @@ Exact names SHALL follow the existing governed contracts/schemas. If a required 
 
 ---
 
-## 26. First Acceptance Test
+## 27. First Acceptance Test
 
 The Nexus foundation is not accepted merely because unit tests pass.
 
@@ -708,19 +882,24 @@ The first system acceptance test SHALL execute one deliberately small AAPL resea
 6. Discovery consumption by artifact reference;
 7. Finding publication;
 8. Finding-to-input relationship traversal;
-9. Research Director retrieval of the Finding;
-10. publication of a next question or conclusion;
-11. restart of the process;
-12. successful retrieval and lineage traversal after restart;
-13. identical logical identities despite clients having no knowledge of payload paths;
-14. schema and integrity verification;
-15. explicit storage/retention/backup classifications.
+9. selective evidence/Finding retrieval through governed index interfaces;
+10. minimal Knowledge Management synthesis/assessment for the Finding;
+11. assembly and retrieval of a State of Knowledge view;
+12. separate retrieval of Active Research State where unresolved work exists;
+13. Research Director retrieval through Nexus interfaces rather than private files;
+14. publication of a next question or conclusion;
+15. restart of the process;
+16. successful retrieval, SoK reconstruction, and lineage traversal after restart;
+17. identical logical identities despite clients having no knowledge of payload paths;
+18. schema and integrity verification;
+19. explicit storage/retention/backup classifications;
+20. proof that low access frequency cannot silently invalidate knowledge or trigger unsafe deletion.
 
 This test SHALL use the real Nexus interfaces, not direct fixture-directory coupling.
 
 ---
 
-## 27. Explicitly Deferred Capabilities
+## 28. Explicitly Deferred Capabilities
 
 The following SHALL NOT block the minimum vertical slice unless implementation proves one is immediately necessary:
 
@@ -730,9 +909,10 @@ The following SHALL NOT block the minimum vertical slice unless implementation p
 - full-text/vector search;
 - high-volume market streaming;
 - generalized event bus;
-- automated cache ranking;
-- complete SoK materialization/ranking;
-- all knowledge lifecycle automation;
+- advanced/adaptive cache ranking beyond the governed minimum ranking interface;
+- precomputed or fully materialized SoK acceleration beyond logical SoK assembly;
+- autonomous knowledge promotion/demotion without the required governance/Accountability gates;
+- advanced learned ranking models beyond the deterministic initial policy;
 - full backup transport/replication system;
 - multi-node locking;
 - production authentication infrastructure;
@@ -744,7 +924,7 @@ Deferral does not remove the governing architectural requirement. Interfaces mus
 
 ---
 
-## 28. Implementation Sequence
+## 29. Implementation Sequence
 
 Development SHALL proceed in this order unless a discovered dependency requires an explicitly documented adjustment:
 
@@ -752,32 +932,37 @@ Development SHALL proceed in this order unless a discovered dependency requires 
 1. Confirm/create minimum governed contracts and schemas
 2. Implement Nexus configuration/root resolution
 3. Implement artifact envelope models + identity
-4. Define CatalogStore and PayloadStore ports
+4. Define CatalogStore, IndexStore, and PayloadStore ports
 5. Implement filesystem PayloadStore
 6. Implement SQLite CatalogStore + migrations
-7. Implement schema/metadata/provenance validation
-8. Implement transactional publication coordinator
-9. Implement get/query
-10. Implement relationships + traversal
-11. Implement integrity verification
-12. Implement idempotency/conflict behavior
-13. Implement recovery/reconciliation behavior
-14. Complete Nexus conformance tests
-15. Run AAPL Nexus-only acceptance path
-16. Add the minimum Data Intake adapter
-17. Add the minimum Discovery adapter
-18. Add the minimum Research Director adapter
-19. Run full AAPL vertical slice
-20. Audit against architecture/governance
-21. Commit/freeze the proven Nexus contract
-22. Begin Nexus hardening before high-volume producers
+7. Implement SQLite-backed IndexStore + bounded query/pagination
+8. Implement schema/metadata/provenance validation
+9. Implement transactional publication coordinator
+10. Implement get/query + selective evidence retrieval
+11. Implement relationships + traversal
+12. Implement integrity verification
+13. Implement idempotency/conflict behavior
+14. Implement minimum Knowledge Management records/services
+15. Implement logical SoK + Active Research State assembly
+16. Implement deterministic three-dimension knowledge ranking interface
+17. Implement retrieval-tier metadata without lifecycle conflation
+18. Implement recovery/reconciliation behavior
+19. Complete Nexus conformance tests
+20. Run AAPL Nexus-only acceptance path
+21. Add the minimum Data Intake adapter
+22. Add the minimum Discovery adapter
+23. Add the minimum Research Director adapter
+24. Run full AAPL vertical slice through Knowledge Management/SoK
+25. Audit against architecture/governance and v1 regression lessons
+26. Commit/freeze the proven Nexus contract
+27. Begin Nexus hardening before high-volume producers
 ```
 
 This sequence intentionally builds permanent infrastructure through a narrow end-to-end use case rather than constructing speculative breadth.
 
 ---
 
-## 29. Definition of Done — Minimum Durable Nexus
+## 30. Definition of Done — Minimum Durable Nexus
 
 The minimum durable Nexus is complete when all of the following are true:
 
@@ -798,12 +983,19 @@ The minimum durable Nexus is complete when all of the following are true:
 - restart does not lose canonical state;
 - backend relocation does not alter semantic identity;
 - failures do not silently create alternate canonical state;
+- an IndexStore contract supports selective evidence/knowledge retrieval without full publication materialization;
+- Knowledge Management is available as a Nexus service rather than engine-private state;
+- State of Knowledge and Active Research State are separately retrievable;
+- Knowledge Quality, Decision Utility, and Access Priority remain distinct and auditable;
+- ranking is policy/model versioned and does not rewrite scientific history;
+- retrieval tier is distinct from lifecycle/scientific status;
+- low usage or low rank cannot independently authorize deletion of canonical knowledge;
 - tests prove the required conformance behaviors;
 - the AAPL vertical slice runs through the Nexus without engines sharing private filesystem state.
 
 ---
 
-## 30. Design Evolution Rule
+## 31. Design Evolution Rule
 
 When the initial mechanisms become insufficient, MTS SHALL replace or extend mechanisms behind stable contracts rather than allowing implementation convenience to redefine architecture.
 
@@ -813,6 +1005,10 @@ Examples:
 SQLite CatalogStore
         ↓ later
 Server relational CatalogStore
+
+SQLite-backed IndexStore
+        ↓ later
+Server/search/columnar IndexStore
 
 Filesystem PayloadStore
         ↓ later
@@ -827,10 +1023,10 @@ Migration must preserve governed identity, provenance, lifecycle, relationships,
 
 ---
 
-## 31. Closing Principle
+## 32. Closing Principle
 
 The first Research Nexus implementation is deliberately small in **breadth**, not small in **correctness**.
 
-We build only enough functionality to prove the first real research path, but every boundary we establish must be one we are willing to preserve when MTS operates on a server with concurrent workers, large historical datasets, live-market activity, autonomous research, Decision Intelligence, outcomes, and continuous learning.
+We build only enough functionality to prove the first real research path, but every boundary we establish must be one we are willing to preserve when MTS operates on a server with concurrent workers, large historical datasets, live-market activity, autonomous research, durable Knowledge Management, Decision Intelligence, outcomes, and continuous learning.
 
 > **Build the permanent contract now. Replace and scale the mechanisms later.**
