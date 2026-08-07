@@ -284,6 +284,46 @@ A Decision artifact should preserve, as applicable:
 - freshness horizon;
 - Research Need if unresolved.
 
+### 10.1 Trader Interface Projection Requirements
+
+Decision outputs must expose sufficient structured information for a future
+trader-facing graphical interface to render the highest-ranked active Decision
+candidates without recreating Decision logic in the frontend.
+
+The initial interface target is simultaneous presentation of the six
+highest-ranked active candidates.
+
+For each candidate, Decision output and associated current-state contracts must
+make available, when applicable:
+
+- instrument identity;
+- candidate rank;
+- current Decision state;
+- current price/market timestamp;
+- historical and live-forming candlestick state through the appropriate
+  market-data interface;
+- prospective entry level or zone;
+- prospective scaling/add conditions;
+- stop, invalidation, reduce, and exit conditions or levels;
+- expected holding horizon;
+- expected return/risk-reward information used by Decision;
+- liquidity/scalability constraints;
+- material applicable knowledge references;
+- material current-state evidence;
+- uncertainty and confidence representation;
+- blocking conditions preventing entry or additional action;
+- conditions capable of changing the current Decision state.
+
+The interface may visualize this information but must not derive an alternate
+Decision from it.
+
+A trader-facing state such as `WATCH`, `ENTER`, `HOLD`, `ADD`, `REDUCE`,
+`EXIT`, or `NO_ACTION` must resolve to governed Decision semantics rather than
+frontend-specific interpretation.
+
+Exact schema fields belong in Governance/Schemas and exact transport contracts
+belong in Governance/Contracts.
+
 ---
 
 ## 11. No-Action Is a First-Class Decision

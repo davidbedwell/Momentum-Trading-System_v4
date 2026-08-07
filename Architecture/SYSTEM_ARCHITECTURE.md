@@ -506,6 +506,60 @@ governance/architecture, execute live trades, increase risk, or delete
 permanent artifacts. The architecture supports increasing automation
 without requiring removal of human control boundaries.
 
+### 25.1 Trader-Facing Graphical Interface
+
+MTS shall support a future trader-facing graphical interface capable of
+presenting the highest-ranked active Decision candidates in a simultaneous,
+decision-oriented view.
+
+The initial interface target shall support six active candidate charts at once.
+
+For each candidate, the interface architecture must be capable of presenting:
+
+- historical candlestick data;
+- the currently forming live candlestick;
+- current price/market state;
+- current governed Decision state;
+- prospective entry levels or zones where applicable;
+- prospective add, reduce, exit, stop, invalidation, or other action levels
+  when produced by the Decision Engine;
+- expected horizon and relevant risk/reward information when available;
+- the material current-state evidence, applicable knowledge, constraints,
+  uncertainty, and conditions influencing the Decision;
+- the conditions that would materially change the current Decision state.
+
+The interface must be able to represent states such as:
+
+```text
+WATCH
+ENTER
+HOLD
+ADD
+REDUCE
+EXIT
+NO_ACTION
+```
+
+Exact display layout, chart interval choices, visual styling, and frontend
+technology belong in later interface specifications and implementation.
+
+The graphical interface is a presentation and authorized control surface. It
+must not independently create scientific findings, reinterpret canonical
+knowledge, calculate investment Decisions, or become a parallel source of
+trading logic.
+
+Displayed Decision states, prospective action levels, and material reasons must
+originate from governed MTS Decision outputs and current-state data.
+
+The interface must consume stable, machine-readable contracts rather than
+engine-private files, repository paths, process memory, or implementation
+details.
+
+Administrative system control and trader-facing Decision presentation are
+distinct concerns. The MTS Control Interface may expose system administration,
+research, task, Accountability, and health functions, while the trader-facing
+interface presents current investment candidates and governed Decision state.
+
 ## 26. Architectural Conformance
 
 A conforming component respects the Charter and responsibility
