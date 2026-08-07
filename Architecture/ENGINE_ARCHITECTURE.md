@@ -969,7 +969,7 @@ Research Nexus
 Initial constraints may include:
 
 ```text
-max_workers = 1
+effective_concurrency = runtime_determined
 single local machine
 one ticker
 one research campaign

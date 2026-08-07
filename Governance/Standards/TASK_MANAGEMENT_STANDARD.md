@@ -475,7 +475,7 @@ definition of system capacity.
 Example constrained ceiling:
 
 ```text
-max_workers = 1
+effective_concurrency = runtime_determined
 ```
 
 This is an operational constraint, not an architectural assumption or

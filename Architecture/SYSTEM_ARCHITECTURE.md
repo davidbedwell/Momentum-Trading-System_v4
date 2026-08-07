@@ -293,7 +293,7 @@ multiple concurrent research, intake, discovery, live-market, decision,
 and lifecycle workloads without requiring a new coordination
 architecture.
 
-The first implementation MAY use `max_workers = 1`. The mature
+The initial implementation determines effective concurrency dynamically from discovered runtime resource capacity, task characteristics, applicable constraints, and configured ceilings or reservations where present. The mature
 implementation MAY use many local or distributed workers. Both use the
 same architectural task contracts and responsibility boundary.
 
