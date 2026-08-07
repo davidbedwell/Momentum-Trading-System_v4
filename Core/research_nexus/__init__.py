@@ -21,14 +21,24 @@ from .publication import (
     PublicationResult,
     PublicationVerificationError,
 )
+from .retrieval import (
+    ArtifactNotFoundError,
+    IntegrityError,
+    RepresentationNotFoundError,
+    RetrievalError,
+    RetrievalService,
+    RetrievedArtifact,
+)
 from .schema_registry import GovernedSchema, SchemaRegistry
 from .validation import SchemaValidator
 
 __all__ = [
     "ArtifactEnvelope",
+    "ArtifactNotFoundError",
     "ArtifactReference",
     "GovernedReference",
     "GovernedSchema",
+    "IntegrityError",
     "Producer",
     "Provenance",
     "PublicationConflictError",
@@ -36,6 +46,10 @@ __all__ = [
     "PublicationError",
     "PublicationResult",
     "PublicationVerificationError",
+    "RepresentationNotFoundError",
+    "RetrievalError",
+    "RetrievalService",
+    "RetrievedArtifact",
     "SchemaConflictError",
     "SchemaError",
     "SchemaNotFoundError",

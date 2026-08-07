@@ -4,7 +4,6 @@ import hashlib
 import json
 import sqlite3
 from contextlib import contextmanager
-from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
@@ -12,6 +11,7 @@ from typing import Any, Iterable, Mapping, Sequence
 from Core.research_nexus.models import (
     ArtifactEnvelope,
     ArtifactReference,
+    GovernedReference,
     Producer,
     Provenance,
 )
@@ -404,7 +404,22 @@ class SQLiteCatalogStore:
         )
 
     @staticmethod
-    def _envelope_from_row(row: sqlite3.Row) -> ArtifactEnvelope:
+    def _artifact_ref_from_dict(data: Mapping[str, Any]) -> ArtifactReference:
+        return ArtifactReference(
+            artifact_id=data["artifact_id"],
+            artifact_version=data["artifact_version"],
+        )
+
+    @staticmethod
+    def _governed_ref_from_dict(data: Mapping[str, Any]) -> GovernedReference:
+        return GovernedReference(
+            ref_type=data["ref_type"],
+            ref_id=data["ref_id"],
+            ref_version=data.get("ref_version"),
+        )
+
+    @classmethod
+    def _envelope_from_row(cls, row: sqlite3.Row) -> ArtifactEnvelope:
         producer_data = json.loads(row["producer_json"])
         provenance_data = json.loads(row["provenance_json"])
 
@@ -422,7 +437,23 @@ class SQLiteCatalogStore:
                 producer_id=producer_data["producer_id"],
             ),
             provenance=Provenance(
-                input_refs=tuple(),
+                input_refs=tuple(
+                    cls._artifact_ref_from_dict(item)
+                    for item in provenance_data.get("input_refs", [])
+                ),
+                execution_ref=(
+                    cls._governed_ref_from_dict(provenance_data["execution_ref"])
+                    if "execution_ref" in provenance_data
+                    else None
+                ),
+                policy_refs=tuple(
+                    cls._governed_ref_from_dict(item)
+                    for item in provenance_data.get("policy_refs", [])
+                ),
+                configuration_refs=tuple(
+                    cls._governed_ref_from_dict(item)
+                    for item in provenance_data.get("configuration_refs", [])
+                ),
                 software_version=provenance_data.get("software_version"),
                 model_version=provenance_data.get("model_version"),
                 method_id=provenance_data.get("method_id"),
