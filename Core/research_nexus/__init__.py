@@ -5,6 +5,7 @@ from .errors import (
     SchemaRegistryError,
     SchemaValidationError,
 )
+from .facade import NexusServices, ResearchNexus
 from .identity import new_artifact_id
 from .models import (
     ArtifactEnvelope,
@@ -39,6 +40,7 @@ __all__ = [
     "GovernedReference",
     "GovernedSchema",
     "IntegrityError",
+    "NexusServices",
     "Producer",
     "Provenance",
     "PublicationConflictError",
@@ -47,6 +49,7 @@ __all__ = [
     "PublicationResult",
     "PublicationVerificationError",
     "RepresentationNotFoundError",
+    "ResearchNexus",
     "RetrievalError",
     "RetrievalService",
     "RetrievedArtifact",
