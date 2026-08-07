@@ -5,11 +5,25 @@ from .errors import (
     SchemaRegistryError,
     SchemaValidationError,
 )
+from .identity import new_artifact_id
+from .models import (
+    ArtifactEnvelope,
+    ArtifactReference,
+    GovernedReference,
+    Producer,
+    Provenance,
+    create_artifact_envelope,
+)
 from .schema_registry import GovernedSchema, SchemaRegistry
 from .validation import SchemaValidator
 
 __all__ = [
+    "ArtifactEnvelope",
+    "ArtifactReference",
+    "GovernedReference",
     "GovernedSchema",
+    "Producer",
+    "Provenance",
     "SchemaConflictError",
     "SchemaError",
     "SchemaNotFoundError",
@@ -17,4 +31,6 @@ __all__ = [
     "SchemaRegistryError",
     "SchemaValidationError",
     "SchemaValidator",
+    "create_artifact_envelope",
+    "new_artifact_id",
 ]
