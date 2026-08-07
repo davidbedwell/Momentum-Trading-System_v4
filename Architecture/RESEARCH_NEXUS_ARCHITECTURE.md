@@ -629,6 +629,55 @@ Learning & Governance uses Decisions, Outcomes, current knowledge, and justified
 
 ---
 
+
+### Active Utility and Retrieval-Tier Architecture
+
+The Nexus must represent active utility separately from lifecycle state,
+scientific status, Decision eligibility, and physical retention.
+
+Where implemented, active-utility metadata should be capable of representing:
+
+```text
+last_relevant_access
+last_material_decision_use
+last_material_research_use
+decision_use_count
+material_decision_use_count
+eligible_opportunities_since_use
+applicable_context_count
+incremental_utility_evidence
+retrieval_tier
+utility_review_status
+```
+
+These fields are operational evidence for retrieval and lifecycle review. They
+are not themselves scientific conclusions.
+
+A maintenance read, backup, migration, integrity check, index scan, or other
+technical touch must not be recorded as relevant scientific/Decision use.
+
+Non-use should be interpreted against applicable-opportunity exposure where
+measurable. Knowledge intended for rare conditions must not be demoted merely
+because those conditions have not occurred.
+
+The Nexus may maintain retrieval treatment such as:
+
+```text
+HOT
+NORMAL
+COLD
+```
+
+Retrieval tier is not lifecycle state and is not archival state.
+
+`COLD` means valid canonical knowledge is kept outside the ordinary hot
+retrieval path while remaining discoverable through governed targeted
+retrieval. `ARCHIVE` remains a storage/retention condition governed separately.
+
+Retrieval optimization must preserve a path for context-triggered discovery of
+cold knowledge so that low rank does not become a self-fulfilling reason for
+permanent non-use.
+
 ## 13. Discovery and Retrieval
 
 The Nexus must support discovery by logical meaning rather than only path lookup.

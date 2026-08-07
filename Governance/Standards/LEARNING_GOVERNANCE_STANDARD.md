@@ -317,6 +317,37 @@ Rarely used knowledge can be highly valid.
 
 ---
 
+
+### 18.1 Active Utility and Applicable-Opportunity Exposure
+
+Learning & Governance may evaluate active utility separately from scientific
+validity.
+
+Where measurable, evaluation should distinguish:
+
+- elapsed time since use;
+- relevant access;
+- material Decision use;
+- material research use;
+- number of genuinely applicable opportunities since use;
+- incremental effect on Decision/ranking/risk/sizing/timing/exit;
+- value of avoided bad Decisions or avoided repeated research;
+- redundancy with other current knowledge.
+
+Persistent lack of material use across sufficient applicable opportunities is
+evidence of low demonstrated utility and may support retrieval demotion, cold
+treatment, redundancy review, revalidation, or retirement review according to
+policy.
+
+Elapsed time or raw access count alone is insufficient.
+
+Rare-condition knowledge must remain eligible for context-triggered retrieval
+when the applicable condition returns.
+
+Learning may recommend retrieval-tier or utility-state changes but may not use
+those recommendations to silently change scientific status, Decision
+eligibility, lifecycle authority, or physical deletion status.
+
 ## 19. Instability
 
 Learning should detect when previously useful relationships become unstable.

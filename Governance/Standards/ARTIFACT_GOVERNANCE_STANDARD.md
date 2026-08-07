@@ -375,6 +375,38 @@ A frequently accessed artifact does not become valid merely through use.
 
 ---
 
+
+### 15.1 Active Utility
+
+Active utility is the demonstrated operational value of keeping knowledge close
+to ordinary Decision/research retrieval.
+
+Active utility is distinct from:
+
+- scientific status;
+- lifecycle state;
+- Decision eligibility;
+- retrieval rank itself;
+- physical storage/retention state.
+
+Active utility may use objective evidence including relevant access, material
+Decision/research use, applicable-opportunity exposure, incremental Decision
+effect, redundancy, and economic relevance.
+
+Persistent non-use across a sufficient number of genuinely applicable
+opportunities may support lower retrieval priority or utility review. It must
+not by itself invalidate scientific knowledge.
+
+Maintenance/technical access must not be treated as relevant use.
+
+Where retrieval tiers are implemented, `HOT`, `NORMAL`, and `COLD` are
+operational retrieval treatments. They must not be represented as lifecycle
+states.
+
+`COLD` retrieval and `ARCHIVED` storage are distinct. Cold canonical knowledge
+remains governed and target-retrievable even when it is not held in the active
+working set.
+
 ## 16. Current State of Knowledge
 
 The State of Knowledge (SoK) is a governed logical view assembled from Research Nexus artifacts.

@@ -428,6 +428,30 @@ Learning & Governance evaluates outcomes and recommends lifecycle/policy
 changes under objective criteria. Human and automation authority are
 policy-controlled.
 
+
+### Knowledge Working-Set Optimization
+
+MTS must maintain a bounded active knowledge working set without confusing
+retrieval optimization with scientific authority.
+
+Knowledge authority/lifecycle standing, current scientific status, Decision
+eligibility, active utility/retrieval priority, and physical retention are
+separate governed dimensions.
+
+Operationally useful knowledge may remain in a hot retrieval path. Valid but
+infrequently useful knowledge may move to normal or cold retrieval while
+remaining scientifically resolvable and available for targeted retrieval.
+
+Persistent non-use across sufficient applicable opportunities may justify
+utility review or retrieval demotion. Mere age or raw access frequency does not
+invalidate knowledge.
+
+Cold retrieval is not archival storage, and neither condition independently
+changes Decision eligibility.
+
+This separation allows MTS to prevent Nexus bloat while preserving rare but
+economically important knowledge and historical scientific lineage.
+
 ## 18. Validation and Promotion
 
 Publication, structural validation, scientific validation, and knowledge
