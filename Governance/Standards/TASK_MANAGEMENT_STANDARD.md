@@ -44,28 +44,24 @@ A task must remain understandable independently of:
 
 Task management must be designed for the mature MTS deployment from the beginning.
 
-The same task model must support evolution from:
+The same task model must support evolution across constrained local and
+high-capacity server deployments without architectural redesign.
 
-```text
-single Mac
-one active worker
-sequential execution
-```
+Engines define capabilities. Tasks define work. Workers are execution instances
+dynamically allocated as needed.
 
-to:
+Workers are not permanently assigned to engines and do not inherently
+correspond to CPU cores.
 
-```text
-server deployment
-multiple workers
-parallel execution
-resource-aware scheduling
-live and batch workloads
-long-running research campaigns
-```
+Task Manager shall discover effective compute and resource capacity at runtime
+and determine safe and efficient concurrency according to task resource
+requirements, priority, dependencies, capability requirements, current resource
+pressure, provider limits, and applicable policy/configuration.
 
-Initial worker count may be one.
+A constrained deployment may operate with one active worker. That is a
+deployment state, not the conceptual worker model.
 
-The task model must not assume one.
+The task model must remain dynamically multi-worker capable.
 
 ---
 
@@ -469,17 +465,24 @@ Resource requirements help the Task Manager avoid overload.
 
 ## 24. Resource Limits
 
-The Task Manager must respect configured resource limits.
+The Task Manager must respect configured resource limits and should discover
+effective runtime resource capacity where technically available.
 
-Initial deployment may use:
+Configured worker counts are optional ceilings, reservations, or deployment
+overrides. They are not fixed allocations to engines and are not the primary
+definition of system capacity.
+
+Example constrained ceiling:
 
 ```text
 max_workers = 1
 ```
 
-This is an operational limit, not an architectural assumption.
+This is an operational constraint, not an architectural assumption or
+CPU-to-worker mapping.
 
-Future server deployment may raise limits without changing task contracts.
+A larger deployment may increase available execution capacity without changing
+task contracts.
 
 ---
 
@@ -877,11 +880,15 @@ They must not be encoded as permanent architectural assumptions.
 
 ## 52. Parallelism
 
-Future deployment may execute multiple independent tasks concurrently.
+Task Manager may execute multiple independent tasks concurrently whenever doing
+so is safe, efficient, and permitted by current authority, dependencies, and
+resource conditions.
 
-The scheduler must respect:
+The scheduler must consider:
 
-- resource limits;
+- discovered compute/resource capacity;
+- task resource requirements;
+- configured ceilings/reservations/overrides;
 - dependencies;
 - exclusive resources;
 - data/provider quotas;
@@ -890,13 +897,19 @@ The scheduler must respect:
 
 ---
 
-## 53. One Task Per Worker
+## 53. Worker Execution Model
 
-A worker may initially execute one active task at a time.
+Workers are execution instances dynamically allocated as needed.
 
-Future workers may support internal concurrency only if explicitly governed and observable.
+A worker does not inherently correspond to a CPU core and is not permanently
+owned by an engine.
 
-The Task Manager must retain system-wide authority over resource concurrency.
+An execution instance may process work according to its declared execution model
+and resource contract. Internal concurrency is permitted only when explicitly
+governed and observable.
+
+The Task Manager must retain system-wide authority over safe and efficient
+resource concurrency.
 
 ---
 
@@ -1105,7 +1118,7 @@ The first Task Manager implementation should support:
 
 1. durable Task Request storage;
 2. durable dependency records;
-3. one local worker at a time;
+3. a constrained one-worker deployment profile and dynamic worker-allocation behavior;
 4. capability-based routing;
 5. task/execution identity separation;
 6. explicit task and execution states;
@@ -1165,8 +1178,9 @@ Task management tests must include:
 - lost worker handling;
 - duplicate submission/idempotency;
 - output publication failure;
-- one-worker resource limit;
-- future multi-worker simulation.
+- constrained-resource profile;
+- runtime resource discovery;
+- dynamic multi-worker allocation.
 
 ---
 

@@ -333,23 +333,36 @@ It should not require rewriting Discovery, Research, or Decision logic that cons
 
 ---
 
-## 22. Worker Configuration
+## 22. Dynamic Worker Allocation and Resource Configuration
 
-Worker counts and resource limits are deployment configuration.
+Workers are execution instances dynamically allocated as needed.
 
-Examples:
+Worker counts do not define engine identity, are not fixed engine allocations,
+and do not inherently correspond to CPU cores.
+
+Task Manager should discover effective runtime compute/resource capacity and
+determine safe and efficient concurrency dynamically.
+
+Deployment configuration may optionally impose ceilings, reservations, or
+overrides such as:
 
 ```text
 max_workers
 max_discovery_workers
 max_decision_workers
+reserved_decision_capacity
+CPU_utilization_ceiling
 memory_limit
-CPU concurrency
+provider_quota
 ```
 
-The initial deployment may use one worker.
+These values constrain or reserve dynamic allocation; they do not define how
+many workers an engine owns.
 
-The architecture must remain multi-worker capable.
+A constrained deployment may use one worker. A larger deployment may use many
+execution instances without architecture changes.
+
+The architecture must remain dynamically multi-worker capable.
 
 ---
 
@@ -357,14 +370,19 @@ The architecture must remain multi-worker capable.
 
 Task Manager configuration may include:
 
-- worker limits;
+- optional worker ceilings/reservations/overrides;
 - queue polling interval;
 - retry/backoff parameters;
 - heartbeat interval;
 - lease duration;
 - task aging parameters;
 - maintenance cadence;
-- resource quotas.
+- resource quotas;
+- runtime resource-utilization targets;
+- reserved capacity for latency-sensitive work.
+
+Configuration constrains dynamic allocation; it does not replace runtime
+resource discovery.
 
 Material behavioral rules should remain policy where appropriate.
 
@@ -497,7 +515,7 @@ Each profile should be governed and inspectable.
 
 A development profile may permit:
 
-- one worker;
+- constrained worker capacity;
 - local SSD;
 - synthetic fixtures;
 - non-production provider endpoints;
@@ -829,8 +847,8 @@ Tests should include:
 - repository move;
 - Nexus move;
 - primary/backup collision;
-- one-worker development profile;
-- multi-worker server profile;
+- constrained development profile;
+- dynamically allocated multi-worker server profile;
 - secret absent;
 - configuration snapshot reproducibility.
 
