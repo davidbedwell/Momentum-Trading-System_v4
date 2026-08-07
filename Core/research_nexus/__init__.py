@@ -14,6 +14,13 @@ from .models import (
     Provenance,
     create_artifact_envelope,
 )
+from .publication import (
+    PublicationConflictError,
+    PublicationCoordinator,
+    PublicationError,
+    PublicationResult,
+    PublicationVerificationError,
+)
 from .schema_registry import GovernedSchema, SchemaRegistry
 from .validation import SchemaValidator
 
@@ -24,6 +31,11 @@ __all__ = [
     "GovernedSchema",
     "Producer",
     "Provenance",
+    "PublicationConflictError",
+    "PublicationCoordinator",
+    "PublicationError",
+    "PublicationResult",
+    "PublicationVerificationError",
     "SchemaConflictError",
     "SchemaError",
     "SchemaNotFoundError",
