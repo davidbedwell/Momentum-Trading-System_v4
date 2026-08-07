@@ -16,6 +16,13 @@ from Core.research_nexus import (
 
 
 EXPECTED_IDENTITIES = {
+    ("mts.analysis-task", 1),
+    ("mts.scientific-execution-context", 1),
+    ("mts.analysis-execution", 1),
+    ("mts.analysis-evidence", 1),
+    ("mts.analysis-finding", 1),
+    ("mts.analysis-missing-evidence", 1),
+    ("mts.analysis-missing-capability", 1),
     ("mts.artifact-envelope", 1),
     ("mts.artifact-reference", 1),
     ("mts.controlled-vocabularies", 1),

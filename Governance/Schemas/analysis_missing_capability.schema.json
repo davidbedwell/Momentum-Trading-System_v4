@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:analysis-missing-capability:1",
+  "schema_id": "mts.analysis-missing-capability",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Analysis Missing Capability Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_type",
+    "task_id",
+    "affected_question",
+    "missing_capability",
+    "why_required",
+    "available_alternatives",
+    "scientific_consequence"
+  ],
+  "properties": {
+    "report_type": {
+      "const": "MISSING_CAPABILITY"
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "affected_question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "missing_capability": {
+      "type": "string",
+      "minLength": 1
+    },
+    "why_required": {
+      "type": "string",
+      "minLength": 1
+    },
+    "available_alternatives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "scientific_consequence": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

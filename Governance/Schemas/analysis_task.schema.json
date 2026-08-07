@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:analysis-task:1",
+  "schema_id": "mts.analysis-task",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Analysis Task",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "task_version",
+    "task_type",
+    "research_plan_ref",
+    "question_ref",
+    "input_artifact_refs",
+    "requested_objective",
+    "requested_method_ids",
+    "allowed_method_families",
+    "method_selection_policy",
+    "scope",
+    "sample_spec",
+    "temporal_spec",
+    "overlap_spec",
+    "outcome_spec",
+    "comparison_spec",
+    "required_evaluation_criteria",
+    "stopping_conditions",
+    "configuration",
+    "authority_metadata"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "task_type": {
+      "const": "ANALYSIS"
+    },
+    "research_plan_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_version"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "question_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_version"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "input_artifact_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "artifact_id",
+          "artifact_version"
+        ],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifact_version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "requested_objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requested_method_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "allowed_method_families": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "method_selection_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "object"
+    },
+    "sample_spec": {
+      "type": "object"
+    },
+    "temporal_spec": {
+      "type": "object"
+    },
+    "overlap_spec": {
+      "type": "object"
+    },
+    "outcome_spec": {
+      "type": "object"
+    },
+    "comparison_spec": {
+      "type": "object"
+    },
+    "required_evaluation_criteria": {
+      "type": "object"
+    },
+    "stopping_conditions": {
+      "type": "object"
+    },
+    "configuration": {
+      "type": "object"
+    },
+    "random_seed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "authority_metadata": {
+      "type": "object"
+    }
+  }
+}

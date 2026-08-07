@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:analysis-missing-evidence:1",
+  "schema_id": "mts.analysis-missing-evidence",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Analysis Missing Evidence Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_type",
+    "task_id",
+    "affected_question",
+    "required_input",
+    "reason",
+    "valid_alternative_available",
+    "scientific_consequence"
+  ],
+  "properties": {
+    "report_type": {
+      "const": "MISSING_EVIDENCE"
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "affected_question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_input": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "valid_alternative_available": {
+      "type": "boolean"
+    },
+    "scientific_consequence": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}
