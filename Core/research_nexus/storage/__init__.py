@@ -20,6 +20,11 @@ from .sqlite_catalog import (
     RelationshipQueryError,
     SQLiteCatalogStore,
 )
+from .sqlite_index import (
+    IndexStoreError,
+    SQLiteIndexStore,
+    UnsupportedIndexCriterionError,
+)
 
 __all__ = [
     "CatalogConflictError",
@@ -28,6 +33,7 @@ __all__ = [
     "FilesystemPayloadStore",
     "IndexDocument",
     "IndexStore",
+    "IndexStoreError",
     "InvalidLocatorError",
     "PayloadNotFoundError",
     "PayloadStore",
@@ -38,4 +44,6 @@ __all__ = [
     "RelationshipRecord",
     "RepresentationRecord",
     "SQLiteCatalogStore",
+    "SQLiteIndexStore",
+    "UnsupportedIndexCriterionError",
 ]
