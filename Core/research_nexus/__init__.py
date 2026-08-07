@@ -1,3 +1,4 @@
+from .bootstrap import ResearchNexusConfig, build_research_nexus
 from .errors import (
     SchemaConflictError,
     SchemaError,
@@ -50,6 +51,7 @@ __all__ = [
     "PublicationVerificationError",
     "RepresentationNotFoundError",
     "ResearchNexus",
+    "ResearchNexusConfig",
     "RetrievalError",
     "RetrievalService",
     "RetrievedArtifact",
@@ -60,6 +62,7 @@ __all__ = [
     "SchemaRegistryError",
     "SchemaValidationError",
     "SchemaValidator",
+    "build_research_nexus",
     "create_artifact_envelope",
     "new_artifact_id",
 ]
