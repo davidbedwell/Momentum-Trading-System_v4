@@ -1,3 +1,9 @@
+from .filesystem_payload import (
+    FilesystemPayloadStore,
+    InvalidLocatorError,
+    PayloadNotFoundError,
+    PayloadStoreError,
+)
 from .ports import (
     CatalogStore,
     IndexDocument,
@@ -11,9 +17,13 @@ from .ports import (
 
 __all__ = [
     "CatalogStore",
+    "FilesystemPayloadStore",
     "IndexDocument",
     "IndexStore",
+    "InvalidLocatorError",
+    "PayloadNotFoundError",
     "PayloadStore",
+    "PayloadStoreError",
     "PayloadWriteResult",
     "PublicationRecord",
     "RelationshipRecord",
