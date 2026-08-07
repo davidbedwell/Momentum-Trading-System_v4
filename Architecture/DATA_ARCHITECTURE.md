@@ -391,32 +391,18 @@ Every governed durable data artifact must provide or inherit, as applicable:
 
 ```text
 artifact_id
+artifact_version
 artifact_type
-artifact_family
-persistence_class
-retention_class
-lifecycle_state
-created_at
-producer
-producer_version
 schema_id
 schema_version
-source_provider
-source_refs
-parent_refs
-dependency_refs
-content_hash
-validation_status
-backup_requirement
-backup_status
-campaign_id
-research_plan_id
-decision_id
-policy_refs
-supersedes
-superseded_by
-tags
+created_at
+producer
 provenance
+lifecycle_state
+persistence_class
+retention_class
+backup_requirement
+tags
 ```
 
 Exact required combinations belong in schemas and standards.

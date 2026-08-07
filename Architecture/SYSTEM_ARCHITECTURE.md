@@ -179,13 +179,17 @@ No managed artifact may exist without sufficient metadata to identify,
 govern, discover, relate, reproduce, retain, back up, and retire it.
 Filenames and paths are not canonical identity.
 
-Durable artifacts provide or inherit as applicable: `artifact_id`,
-`artifact_type`, `artifact_family`, `persistence_class`, `retention_class`,
-`lifecycle_state`, `created_at`, `producer`, `producer_version`,
-`schema_id`, `schema_version`, `content_hash`, provenance,
-source/dependency references, validation status, backup
-requirement/status, supersession relationships,
-research/campaign/decision relationships, and tags.
+Durable artifacts provide or inherit the common semantic envelope defined by
+Governance/Schemas. The common envelope contains governed identity/version,
+artifact type, schema identity/version, creation/producer information,
+provenance, lifecycle state, persistence class, retention class, backup
+requirement, and optional discovery tags.
+
+Representation integrity, physical locators, validation state, backup execution
+status, supersession, dependencies, campaign/research/decision context, and
+other cross-object associations are maintained in their appropriate governed
+representation, validation, audit, or relationship records rather than
+duplicated into every artifact envelope.
 
 Transient managed artifacts carry enough metadata to determine identity,
 producer/owner, persistence class, lifecycle, dependencies, expiration, and

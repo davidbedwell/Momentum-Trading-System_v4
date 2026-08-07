@@ -164,10 +164,15 @@ lifecycle_state
 persistence_class
 retention_class
 backup_requirement
-content_hash where applicable
 ```
 
 Additional required fields are defined by artifact-specific schemas.
+
+Representation integrity metadata such as content hash, physical locator,
+media/serialization type, representation size, and verification state belongs
+to the governed representation/integrity record associated with an artifact
+version. Those properties must not be duplicated into the universal semantic
+artifact envelope merely because an artifact has a physical representation.
 
 ---
 

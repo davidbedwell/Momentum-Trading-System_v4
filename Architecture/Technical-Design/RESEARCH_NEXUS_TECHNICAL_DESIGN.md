@@ -281,31 +281,18 @@ Every initial durable publication SHALL carry a governed artifact envelope conta
 
 ```text
 artifact_id
+artifact_version
 artifact_type
-artifact_family
-persistence_class
-retention_class
-lifecycle_state
-created_at
-producer
-producer_version
 schema_id
 schema_version
-content_hash
-validation_status
-backup_requirement
-backup_status
-source_refs
-parent_refs
-dependency_refs
-campaign_id
-research_plan_id
-decision_id
-policy_refs
-supersedes
-superseded_by
-tags
+created_at
+producer
 provenance
+lifecycle_state
+persistence_class
+retention_class
+backup_requirement
+tags
 ```
 
 Required combinations SHALL be determined by governed schemas/contracts, not merely by Python optional fields.
@@ -351,23 +338,27 @@ Stores explicit governed edges such as:
 
 ```text
 DERIVED_FROM
-SUPPORTED_BY
-CONTRADICTED_BY
-PRODUCED_BY
-VALIDATED_BY
-USED_BY
-GOVERNED_BY
+SUPPORTS
+CONTRADICTS
 SUPERSEDES
-SUPERSEDED_BY
-PART_OF_CAMPAIGN
-ANSWERS_QUESTION
-REQUIRES
-GENERATED_REQUEST
-RESULTED_IN
-EVALUATED_BY
+INVALIDATES
+DEPENDS_ON
+ANSWERS
+TESTS
+GENERATED_BY
+REQUESTED_BY
+USED_IN_DECISION
+PRODUCED_OUTCOME
+APPLIES_TO
+REQUIRES_CAPABILITY
 ```
 
 Relationship vocabulary validation SHALL occur before durable insertion.
+
+Relationship endpoints SHALL use governed identity references rather than
+physical locators. Endpoints may represent artifacts, tasks, executions,
+instruments, policies, research state, campaigns, capabilities, or other
+governed identity domains authorized by schema.
 
 ### 9.4 Validation and Publication Records
 
