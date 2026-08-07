@@ -30,6 +30,7 @@ from Engines.Analysis import (
     ResearchMode,
     ScientificOutcome,
 )
+from Engines.Analysis.cache import ResearchCache
 from Engines.Analysis.compatibility import CompatibilityInput
 from Engines.Analysis.context import ScientificContextBuilder
 from Engines.Analysis.deterministic import DeterministicMeasurementResolver
@@ -274,6 +275,20 @@ def main() -> None:
         first = analyze_once(task, resolved, as_of)
         second = analyze_once(task, resolved, as_of)
 
+        research_cache = ResearchCache(
+            Path(temp) / "analysis-cache",
+            task_id=task.task_id,
+        )
+        cache_entry = research_cache.put_json(
+            "candidate-comparison",
+            {
+                "pairwise": first["pairwise"],
+                "sample_fingerprint": first["sample"].record.sample_fingerprint,
+                "candidate_only": True,
+            },
+        )
+        cache_created = research_cache.exists(cache_entry)
+
         evidence_same = (
             first["evidence"].semantic_fingerprint
             == second["evidence"].semantic_fingerprint
@@ -332,6 +347,9 @@ def main() -> None:
             expected_artifact_types=("FINDING",),
         )
 
+        research_cache.clear_task()
+        cache_deleted = not cache_entry.path.exists()
+
         retry_e = publisher.publish_evidence(
             second["evidence"],
             created_at=as_of,
@@ -361,6 +379,16 @@ def main() -> None:
                 set(first["deterministic"].measurements_computed)
                 == {"return_close", "sma_20"}
             ),
+            "cache_is_transient": (
+                cache_created
+                and cache_entry.persistence_class == "CLASS_III"
+                and cache_entry.authoritative is False
+                and cache_deleted
+            ),
+            "durable_output_survives_cache_deletion": (
+                loaded_e.integrity_state == "VERIFIED"
+                and loaded_f.integrity_state == "VERIFIED"
+            ),
             "finding_schema_valid": loaded_f.schema_name == "mts.analysis-finding",
             "finding_retrievable": loaded_f.artifact_ref == first_f.artifact_ref,
             "finding_integrity_verification": loaded_f.integrity_state == "VERIFIED",
@@ -385,6 +413,10 @@ def main() -> None:
             f"measurements_reused: {first['deterministic'].measurements_reused}",
             f"measurements_computed_on_demand: {first['deterministic'].measurements_computed}",
             f"methods_executed: {tuple(first['outcomes'])}",
+            f"cache_created: {cache_created}",
+            f"cache_persistence_class: {cache_entry.persistence_class}",
+            f"cache_authoritative: {cache_entry.authoritative}",
+            f"cache_deleted_before_final_retry: {cache_deleted}",
             f"comparison: {json.dumps(first['pairwise'], sort_keys=True)}",
             f"evidence_ref: {first_e.artifact_ref}",
             f"finding_ref: {first_f.artifact_ref}",
