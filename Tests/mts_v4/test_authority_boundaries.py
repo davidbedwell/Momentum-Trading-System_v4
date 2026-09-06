@@ -70,10 +70,16 @@ class _FakeRD:
                     finding_id="finding:1",
                     subject_id="AAPL",
                     statement="Exploratory relationship result retained for future research.",
-                    significance="RD judged this result materially informative.",
-                    status="EXPLORATORY",
                     supporting_result_ids=(result.result_id,),
                     evidence_ids=result.evidence_ids,
+                    metadata={
+                        "significance": "RD judged this result materially informative.",
+                        "status": "EXPLORATORY",
+                        "novel_unanticipated_label": {
+                            "name": "volume-path asymmetry candidate",
+                            "confidence": "provisional",
+                        },
+                    },
                 ),
             ),
             close_reason="RD_CLOSED",
@@ -176,7 +182,8 @@ class V4AuthorityBoundaryTests(unittest.TestCase):
         self.assertEqual(len(analysis.requests), 1)
         self.assertEqual(analysis.requests[0].request_id, "request:repaired")
         self.assertEqual(outcome.findings_promoted, 1)
-        self.assertEqual(len(nexus.findings_for_subject("AAPL")), 1)
+        finding = nexus.findings_for_subject("AAPL")[0]
+        self.assertEqual(finding.metadata["novel_unanticipated_label"]["confidence"], "provisional")
         self.assertEqual(rd.available_methods_seen[0]["method_id"], "relationship.correlation")
         self.assertNotIn("score", rd.available_methods_seen[0])
         self.assertNotIn("rank", rd.available_methods_seen[0])
