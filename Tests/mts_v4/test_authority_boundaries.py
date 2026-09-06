@@ -30,8 +30,10 @@ class _FakeAnalysis:
 class _FakeRD:
     def __init__(self):
         self.repairs = []
+        self.available_methods_seen = None
 
-    def begin_research(self, **kwargs):
+    def begin_research(self, *, available_methods, **kwargs):
+        self.available_methods_seen = tuple(available_methods)
         return ResearchDecision(
             continue_research=True,
             next_request=AnalysisRequest(
@@ -85,12 +87,14 @@ class V4AuthorityBoundaryTests(unittest.TestCase):
                 MethodSpec(
                     method_id="relationship.correlation",
                     artifact_types=("NORMALIZED_DATASET",),
+                    description="Measure a pairwise relationship without inferring causation.",
                     parameters=(
                         ParameterContract(
                             name="columns",
                             required=True,
                             python_types=(list, tuple),
                             exact_length=2,
+                            meaning="exactly two RD-selected relationship columns",
                         ),
                     ),
                 )
@@ -160,6 +164,7 @@ class V4AuthorityBoundaryTests(unittest.TestCase):
             analysis=analysis,
             nexus=nexus,
             cache=cache,
+            available_methods=self.catalog.capability_payloads(),
         )
         outcome = orchestrator.run(
             subject=SubjectMetadata(subject_id="AAPL", ticker="AAPL"),
@@ -172,6 +177,9 @@ class V4AuthorityBoundaryTests(unittest.TestCase):
         self.assertEqual(analysis.requests[0].request_id, "request:repaired")
         self.assertEqual(outcome.findings_promoted, 1)
         self.assertEqual(len(nexus.findings_for_subject("AAPL")), 1)
+        self.assertEqual(rd.available_methods_seen[0]["method_id"], "relationship.correlation")
+        self.assertNotIn("score", rd.available_methods_seen[0])
+        self.assertNotIn("rank", rd.available_methods_seen[0])
 
 
 if __name__ == "__main__":
