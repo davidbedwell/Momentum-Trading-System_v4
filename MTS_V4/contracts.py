@@ -102,16 +102,21 @@ class AnalysisResult:
 
 @dataclass(frozen=True, slots=True)
 class Finding:
+    """Minimal durable envelope around open-ended AI-authored science.
+
+    Deterministic code may enforce only the identity and lineage envelope below.
+    The ``metadata`` namespace is intentionally open: RD may create arbitrary
+    scientific labels, nested structures, classifications, caveats, confidence
+    judgments, relationships, applicability descriptions, or new concepts that
+    were not anticipated by deterministic code.
+    """
+
     finding_id: str
     subject_id: str
     statement: str
-    significance: str
-    status: str
     supporting_result_ids: tuple[str, ...]
     evidence_ids: tuple[str, ...]
-    applicability: Mapping[str, Any] = field(default_factory=dict)
-    limitations: tuple[str, ...] = ()
-    relationships: tuple[str, ...] = ()
+    metadata: Mapping[str, Any] = field(default_factory=dict)
 
 
 @dataclass(frozen=True, slots=True)
