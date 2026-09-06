@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import unittest
 
-from MTS_V4.contracts import ResearchPhase
+from MTS_V4.contracts import EvidenceDescriptor, ResearchPhase
 from MTS_V4.openai_compatible_provider import OpenAICompatibleResearchDirector
 from MTS_V4.rd_codec import ResearchDecisionCodec, ResearchDecisionDecodeError
 
@@ -13,6 +13,58 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
         self.assertEqual(
             OpenAICompatibleResearchDirector._json_safe(ResearchPhase.EXPLORATION),
             "EXPLORATION",
+        )
+
+    def test_every_deterministic_request_requirement_is_exposed_to_rd(self):
+        evidence = EvidenceDescriptor(
+            evidence_id="ev:1",
+            subject_id="AAPL",
+            evidence_type="OHLCV",
+            artifact_type="NORMALIZED_DATASET",
+            source_identity="fixture-source",
+            coverage_start="2020-01-01",
+            coverage_end="2026-01-01",
+            row_count=100,
+            schema=("date", "close", "volume"),
+            cache_key="cache:private:1",
+            provenance={"pulled_at": "2026-09-06T10:00:00-07:00"},
+            neutral_semantics="Observed path and aggregate volume.",
+        )
+        method = {
+            "method_id": "analysis.relationship.correlation",
+            "artifact_types": ["NORMALIZED_DATASET"],
+            "parameters": [
+                {
+                    "name": "columns",
+                    "required": True,
+                    "types": ["list"],
+                    "exact_length": 2,
+                    "minimum_length": None,
+                    "maximum_length": None,
+                    "allowed_values": [],
+                    "meaning": "RD-selected pair of columns.",
+                }
+            ],
+            "minimum_sample": 3,
+            "exploration_allowed": True,
+            "validation_allowed": True,
+            "allows_future_information": False,
+        }
+        requirements = OpenAICompatibleResearchDirector._execution_requirements(
+            evidence=(evidence,),
+            available_methods=(method,),
+        )
+        self.assertIn("must be disclosed", requirements["visibility_rule"])
+        self.assertEqual(
+            requirements["analysis_request"]["method_contracts"][0]["parameters"][0]["exact_length"],
+            2,
+        )
+        supplied = requirements["available_evidence"][0]
+        self.assertEqual(supplied["schema"], ["date", "close", "volume"])
+        self.assertEqual(supplied["source_identity"], "fixture-source")
+        self.assertNotIn("cache_key", supplied)
+        self.assertTrue(
+            requirements["evidence_continuity"]["changed_is_not_scientific_failure"]
         )
 
     def test_continuation_requires_ai_authored_next_request(self):
