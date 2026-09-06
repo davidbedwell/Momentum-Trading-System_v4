@@ -6,7 +6,7 @@ import unittest
 from MTS_V4.bootstrap import build_runtime
 from MTS_V4.contracts import AnalysisRequest, EvidenceDescriptor, Finding, ResearchDecision, ResearchPhase, SubjectMetadata
 from MTS_V4.intake import IntakeEngine, IntakePayload
-from MTS_V4.standard_methods import forward_path_measurement, standard_method_catalog
+from MTS_V4.standard_methods import forward_path_measurement, percent_change_series, standard_method_catalog
 from MTS_V4.validation import ObjectiveContractValidator
 
 
@@ -33,8 +33,10 @@ class _Source:
 class _FakeAIResearchDirector:
     def __init__(self):
         self.seen_result = None
+        self.begin_context = None
 
-    def begin_research(self, *, subject, evidence, **kwargs):
+    def begin_research(self, *, subject, evidence, nexus_context, **kwargs):
+        self.begin_context = nexus_context
         return ResearchDecision(
             continue_research=True,
             next_request=AnalysisRequest(
@@ -84,6 +86,22 @@ class V4StandardMethodsTests(unittest.TestCase):
         spec = standard_method_catalog().get("analysis.relationship.correlation")
         columns = next(item for item in spec.parameters if item.name == "columns")
         self.assertEqual(columns.exact_length, 2)
+
+    def test_percent_change_requires_rd_selected_column_and_lag(self):
+        spec = standard_method_catalog().get("analysis.transform.percent_change")
+        parameters = {item.name: item for item in spec.parameters}
+        self.assertEqual(set(parameters), {"column", "lag"})
+        self.assertTrue(parameters["column"].required)
+        self.assertTrue(parameters["lag"].required)
+        self.assertEqual(parameters["lag"].minimum_value, 1)
+        result = percent_change_series(
+            {"ev:1": [{"close": 100.0}, {"close": 110.0}, {"close": 121.0}]},
+            {"column": "close", "lag": 1},
+        )
+        self.assertEqual(result["observation_count"], 2)
+        self.assertAlmostEqual(result["observations"][0]["value"], 0.10)
+        self.assertAlmostEqual(result["observations"][1]["value"], 0.10)
+        self.assertEqual(result["interpretation_boundary"], "MEASUREMENT_ONLY_RD_INTERPRETS")
 
     def test_forward_path_contract_exposes_all_scientific_parameters_and_lookahead_boundary(self):
         spec = standard_method_catalog().get("analysis.path.forward_measurement")
@@ -160,6 +178,20 @@ class V4StandardMethodsTests(unittest.TestCase):
             self.assertEqual(rd.seen_result.method_id, "analysis.relationship.correlation")
             self.assertGreater(rd.seen_result.outputs["correlation"], 0.9)
             self.assertEqual(len(runtime.nexus.findings_for_subject("AAPL")), 1)
+            self.assertGreater(len(runtime.concepts.all()), 10)
+            self.assertEqual(
+                rd.begin_context["research_concept_policy"]["authority"],
+                "NON_AUTHORITATIVE_IDEA_SEEDS",
+            )
+            self.assertTrue(
+                rd.begin_context["research_concept_policy"]["rd_may_generate_additional_concepts"]
+            )
+            self.assertTrue(
+                any(
+                    item["concept_id"] == "human.support_resistance"
+                    for item in rd.begin_context["research_concepts"]
+                )
+            )
             # Raw evidence remains in temporary cache, not Nexus.
             self.assertEqual(len(runtime.cache.active_keys()), 1)
 
