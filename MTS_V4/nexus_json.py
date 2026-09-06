@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict
+from datetime import datetime, timezone
 from pathlib import Path
 
-from .contracts import EvidenceMetadata, Finding, SubjectMetadata
+from .contracts import EvidenceMetadata, Finding, FindingRetraction, SubjectMetadata
 from .nexus import NexusError
 
 
@@ -15,6 +16,10 @@ class JsonResearchNexus:
     significant RD findings. It contains no raw evidence payload, temporary cache
     key, or dataset publication API. Finding science lives in an open metadata
     namespace inside a small deterministic identity/lineage envelope.
+
+    Retracted findings remain durably preserved for audit, but normal finding
+    retrieval excludes them so contaminated findings cannot seep into future RD
+    research context.
     """
 
     def __init__(self, path: str | Path) -> None:
@@ -22,6 +27,7 @@ class JsonResearchNexus:
         self._subjects: dict[str, SubjectMetadata] = {}
         self._evidence_metadata: dict[str, EvidenceMetadata] = {}
         self._findings: dict[str, Finding] = {}
+        self._finding_retractions: dict[str, FindingRetraction] = {}
         self._load()
 
     def upsert_subject(self, metadata: SubjectMetadata) -> None:
@@ -44,8 +50,38 @@ class JsonResearchNexus:
         existing = self._findings.get(finding.finding_id)
         if existing is not None and existing != finding:
             raise NexusError(f"finding_id already exists with different content: {finding.finding_id}")
+        if finding.finding_id in self._finding_retractions:
+            raise NexusError(f"cannot republish retracted finding_id: {finding.finding_id}")
         self._findings[finding.finding_id] = finding
         self._flush()
+
+    def retract_finding(
+        self,
+        finding_id: str,
+        *,
+        reason: str,
+        initiated_by: str,
+        replacement_finding_id: str | None = None,
+    ) -> FindingRetraction:
+        if finding_id not in self._findings:
+            raise NexusError(f"cannot retract unknown finding_id: {finding_id}")
+        if not reason.strip():
+            raise NexusError("retraction reason cannot be blank")
+        if not initiated_by.strip():
+            raise NexusError("retraction initiator cannot be blank")
+        existing = self._finding_retractions.get(finding_id)
+        if existing is not None:
+            return existing
+        retraction = FindingRetraction(
+            finding_id=finding_id,
+            reason=reason,
+            initiated_by=initiated_by,
+            retracted_at_utc=datetime.now(timezone.utc).isoformat(),
+            replacement_finding_id=replacement_finding_id,
+        )
+        self._finding_retractions[finding_id] = retraction
+        self._flush()
+        return retraction
 
     def get_subject(self, subject_id: str) -> SubjectMetadata | None:
         return self._subjects.get(subject_id)
@@ -61,14 +97,19 @@ class JsonResearchNexus:
         )
 
     def get_finding(self, finding_id: str) -> Finding | None:
+        if finding_id in self._finding_retractions:
+            return None
         return self._findings.get(finding_id)
 
     def findings_for_subject(self, subject_id: str) -> tuple[Finding, ...]:
         return tuple(
             finding
-            for _, finding in sorted(self._findings.items())
-            if finding.subject_id == subject_id
+            for finding_id, finding in sorted(self._findings.items())
+            if finding.subject_id == subject_id and finding_id not in self._finding_retractions
         )
+
+    def get_finding_retraction(self, finding_id: str) -> FindingRetraction | None:
+        return self._finding_retractions.get(finding_id)
 
     def _load(self) -> None:
         if not self._path.exists():
@@ -104,6 +145,10 @@ class JsonResearchNexus:
 
             finding = Finding(**raw)
             self._findings[finding.finding_id] = finding
+        for raw in document.get("finding_retractions", []):
+            retraction = FindingRetraction(**raw)
+            if retraction.finding_id in self._findings:
+                self._finding_retractions[retraction.finding_id] = retraction
 
     def _flush(self) -> None:
         self._path.parent.mkdir(parents=True, exist_ok=True)
@@ -114,6 +159,10 @@ class JsonResearchNexus:
                 asdict(self._evidence_metadata[key]) for key in sorted(self._evidence_metadata)
             ],
             "findings": [asdict(self._findings[key]) for key in sorted(self._findings)],
+            "finding_retractions": [
+                asdict(self._finding_retractions[key])
+                for key in sorted(self._finding_retractions)
+            ],
         }
         temporary = self._path.with_suffix(self._path.suffix + ".tmp")
         temporary.write_text(
