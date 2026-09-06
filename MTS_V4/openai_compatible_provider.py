@@ -5,6 +5,7 @@ import os
 import urllib.error
 import urllib.request
 from dataclasses import asdict
+from enum import Enum
 from typing import Mapping, Sequence
 
 from .contracts import AnalysisRequest, AnalysisResult, ContractDefect, EvidenceDescriptor, ResearchDecision, SubjectMetadata
@@ -202,7 +203,7 @@ class OpenAICompatibleResearchDirector:
 
     @staticmethod
     def _json_safe(value):
-        if hasattr(value, "value") and value.__class__.__module__ == "enum":
+        if isinstance(value, Enum):
             return value.value
         if isinstance(value, Mapping):
             return {str(k): OpenAICompatibleResearchDirector._json_safe(v) for k, v in value.items()}
