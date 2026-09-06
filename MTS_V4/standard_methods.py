@@ -318,6 +318,11 @@ def compose_aligned_dataset(evidence_payloads: Mapping[str, object], parameters:
     common_keys = set(keyed_rows[aligned_input_names[0]])
     for input_name in aligned_input_names[1:]:
         common_keys.intersection_update(keyed_rows[input_name])
+    ordered_common_keys = [
+        logical_key
+        for logical_key in keyed_rows[aligned_input_names[0]]
+        if logical_key in common_keys
+    ]
 
     normalized_selections: list[tuple[str, str, str]] = []
     output_names: set[str] = {"alignment_key"}
@@ -337,7 +342,7 @@ def compose_aligned_dataset(evidence_payloads: Mapping[str, object], parameters:
         normalized_selections.append((input_name, column, output_name))
 
     composed_rows: list[Mapping[str, Any]] = []
-    for logical_key in sorted(common_keys, key=lambda value: (type(value).__name__, repr(value))):
+    for logical_key in ordered_common_keys:
         row_out: dict[str, Any] = {"alignment_key": logical_key}
         for input_name, column, output_name in normalized_selections:
             source_row = keyed_rows[input_name][logical_key]
@@ -356,6 +361,7 @@ def compose_aligned_dataset(evidence_payloads: Mapping[str, object], parameters:
         ],
         "input_row_counts": {name: len(rows) for name, rows in keyed_rows.items()},
         "aligned_row_count": len(composed_rows),
+        "output_order": "PRESERVES_FIRST_RD_AUTHORED_ALIGNMENT_INPUT_ORDER",
         **derived,
         "interpretation_boundary": "MECHANICAL_ALIGNMENT_ONLY_RD_SELECTS_INPUTS_KEYS_COLUMNS_AND_MEANING",
     }
@@ -413,7 +419,7 @@ def standard_method_catalog() -> MethodCatalog:
                     "ROW_POSITION": "logical key is the zero-based row position of that supplied dataset; useful when a derived dataset's explicit index refers to source row position",
                     "COLUMN": "logical key is the exact value in the RD-selected column",
                 },
-                "execution_semantics": "Only rows whose explicit logical keys exist in every aligned input are retained for INNER. Analysis does not infer time matching, nearest-neighbor matching, lagging, filling, interpolation, column choice, or aliases.",
+                "execution_semantics": "Only rows whose explicit logical keys exist in every aligned input are retained for INNER. Output row order preserves the first RD-authored alignment input order. Analysis does not infer time matching, nearest-neighbor matching, lagging, filling, interpolation, column choice, aliases, or scientific ordering.",
             },
         ),
         MethodSpec("analysis.performance.binary_classification", ("NORMALIZED_DATASET",), "Measure binary classification performance for RD-selected predicted/actual fields and positive label.", (ParameterContract("predicted_column", True, (str,), meaning="RD-selected prediction field"), ParameterContract("actual_column", True, (str,), meaning="RD-selected outcome field"), ParameterContract("positive_value", True, (str, int, float, bool), meaning="RD-selected positive label")), 1),
