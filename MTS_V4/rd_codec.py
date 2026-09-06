@@ -14,7 +14,8 @@ class ResearchDecisionCodec:
     """Strict representation codec for AI-authored scientific decisions.
 
     Parsing and schema enforcement are deterministic representation duties.
-    The codec does not supply missing scientific content.
+    The codec does not supply missing scientific content and does not restrict
+    the open scientific metadata namespace of a finding.
     """
 
     @staticmethod
@@ -107,27 +108,36 @@ class ResearchDecisionCodec:
             "finding_id",
             "subject_id",
             "statement",
-            "significance",
-            "status",
             "supporting_result_ids",
             "evidence_ids",
         )
         missing = [key for key in required if key not in raw]
         if missing:
             raise ResearchDecisionDecodeError(
-                f"finding missing required fields: {missing}"
+                f"finding missing required envelope fields: {missing}"
             )
+
+        supporting_result_ids = raw["supporting_result_ids"]
+        evidence_ids = raw["evidence_ids"]
+        metadata = raw.get("metadata", {})
+        if not isinstance(supporting_result_ids, list) or not all(
+            isinstance(value, str) for value in supporting_result_ids
+        ):
+            raise ResearchDecisionDecodeError("supporting_result_ids must be a list of strings")
+        if not isinstance(evidence_ids, list) or not all(
+            isinstance(value, str) for value in evidence_ids
+        ):
+            raise ResearchDecisionDecodeError("finding evidence_ids must be a list of strings")
+        if not isinstance(metadata, Mapping):
+            raise ResearchDecisionDecodeError("finding metadata must be an object")
+
         return Finding(
             finding_id=str(raw["finding_id"]),
             subject_id=str(raw["subject_id"]),
             statement=str(raw["statement"]),
-            significance=str(raw["significance"]),
-            status=str(raw["status"]),
-            supporting_result_ids=tuple(str(x) for x in raw["supporting_result_ids"]),
-            evidence_ids=tuple(str(x) for x in raw["evidence_ids"]),
-            applicability=dict(raw.get("applicability", {})),
-            limitations=tuple(str(x) for x in raw.get("limitations", [])),
-            relationships=tuple(str(x) for x in raw.get("relationships", [])),
+            supporting_result_ids=tuple(supporting_result_ids),
+            evidence_ids=tuple(evidence_ids),
+            metadata=dict(metadata),
         )
 
     @staticmethod
