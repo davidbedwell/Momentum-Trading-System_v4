@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 from MTS_V4.cache import TemporaryResearchCache
-from MTS_V4.contracts import Finding, SubjectMetadata
+from MTS_V4.contracts import EvidenceMetadata, Finding, SubjectMetadata
 from MTS_V4.intake import IntakeEngine, IntakePayload
 from MTS_V4.nexus_json import JsonResearchNexus
 
@@ -38,12 +38,29 @@ class V4DataBoundaryTests(unittest.TestCase):
         self.assertEqual(descriptor.evidence_type, "OHLCV")
         self.assertEqual(cache.get(descriptor.cache_key)[0]["close"], 100.0)
         self.assertFalse(hasattr(descriptor, "payload"))
+        durable = descriptor.durable_metadata()
+        self.assertFalse(hasattr(durable, "cache_key"))
 
-    def test_json_nexus_persists_metadata_and_findings_not_raw_dataset(self):
+    def test_json_nexus_persists_ticker_evidence_metadata_and_findings_not_raw_dataset(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "nexus.json"
             nexus = JsonResearchNexus(path)
             nexus.upsert_subject(SubjectMetadata(subject_id="AAPL", ticker="AAPL"))
+            nexus.upsert_evidence_metadata(
+                EvidenceMetadata(
+                    evidence_id="ev:1",
+                    subject_id="AAPL",
+                    evidence_type="OHLCV",
+                    artifact_type="NORMALIZED_DATASET",
+                    source_identity="fixture-source",
+                    coverage_start="2026-01-01",
+                    coverage_end="2026-01-01",
+                    row_count=1,
+                    schema=("date", "close", "volume"),
+                    provenance={"vendor": "fixture"},
+                    neutral_semantics="Observed price and aggregate volume only.",
+                )
+            )
             nexus.publish_finding(
                 Finding(
                     finding_id="f:1",
@@ -57,13 +74,21 @@ class V4DataBoundaryTests(unittest.TestCase):
             )
             document = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual(document["format"], "MTS_V4_RESEARCH_NEXUS_V1")
-            self.assertEqual(set(document), {"format", "subjects", "findings"})
+            self.assertEqual(
+                set(document),
+                {"format", "subjects", "evidence_metadata", "findings"},
+            )
             serialized = path.read_text(encoding="utf-8")
             self.assertNotIn('"payload"', serialized)
             self.assertNotIn('"rows"', serialized)
+            self.assertNotIn('"cache_key"', serialized)
 
             reopened = JsonResearchNexus(path)
             self.assertEqual(reopened.get_subject("AAPL").ticker, "AAPL")
+            self.assertEqual(
+                reopened.get_evidence_metadata("ev:1").source_identity,
+                "fixture-source",
+            )
             self.assertEqual(reopened.get_finding("f:1").statement, "Significant result")
 
 
