@@ -64,6 +64,34 @@ class OpenAICompatibleResearchDirector:
             },
         )
 
+    def resume_research(
+        self,
+        *,
+        mission: str,
+        subject: SubjectMetadata,
+        prior_decision: ResearchDecision,
+        evidence_continuity: Mapping[str, object],
+        evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
+        nexus_context: Mapping[str, object],
+    ) -> ResearchDecision:
+        return self._request_decision(
+            operation="RESUME_RESEARCH",
+            mission=mission,
+            payload={
+                "subject": asdict(subject),
+                "prior_decision": self._json_safe(asdict(prior_decision)),
+                "evidence_continuity": self._json_safe(evidence_continuity),
+                "evidence": [asdict(item) for item in evidence],
+                "available_analysis_methods": self._json_safe(available_methods),
+                "objective_execution_requirements": self._execution_requirements(
+                    evidence=evidence,
+                    available_methods=available_methods,
+                ),
+                "nexus_context": self._json_safe(nexus_context),
+            },
+        )
+
     def repair_request(
         self,
         *,
@@ -268,6 +296,7 @@ class OpenAICompatibleResearchDirector:
                 "If continue_research is true, next_request must be fully authored by you.",
                 "Choose the scientific method yourself from available_analysis_methods; capability metadata describes execution requirements but does not recommend a method.",
                 "Review objective_execution_requirements before authoring a request or finding; these are the deterministic conditions either can be judged against.",
+                "If operation is RESUME_RESEARCH, inspect evidence_continuity and decide its scientific consequence yourself; CHANGED is not an automatic failure.",
                 "If an objective contract defect is supplied, repair only by making your own scientific choice; do not expect the validator to invent a value or substitute a method.",
                 "Promote findings only when you judge them scientifically significant enough for durable research memory.",
                 "The finding envelope is closed and minimal; the metadata namespace is scientifically open-ended and does not require an approved vocabulary.",
