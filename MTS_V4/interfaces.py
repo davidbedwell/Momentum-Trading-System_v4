@@ -25,6 +25,18 @@ class ResearchDirectorProvider(Protocol):
         nexus_context: Mapping[str, object],
     ) -> ResearchDecision: ...
 
+    def resume_research(
+        self,
+        *,
+        mission: str,
+        subject: SubjectMetadata,
+        prior_decision: ResearchDecision,
+        evidence_continuity: Mapping[str, object],
+        evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
+        nexus_context: Mapping[str, object],
+    ) -> ResearchDecision: ...
+
     def repair_request(
         self,
         *,
