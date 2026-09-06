@@ -144,7 +144,7 @@ class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
 
 class UnusualWhalesFlowAlertsSource(_UnusualWhalesBase):
     def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
-        rows = self._get("/api/option-trades/flow-alerts", {"ticker": subject.ticker.upper(), "limit": self.limit})
+        rows = self._get("/api/option-trades/flow-alerts", {"ticker_symbol": subject.ticker.upper(), "limit": self.limit})
         start, end = _coverage(rows, ("start_time", "end_time", "executed_at", "created_at", "date"))
         yield IntakePayload(
             payload=rows,
@@ -155,7 +155,7 @@ class UnusualWhalesFlowAlertsSource(_UnusualWhalesBase):
             coverage_end=end,
             row_count=len(rows),
             schema=_schema(rows),
-            provenance={"provider": "Unusual Whales", "endpoint": "/api/option-trades/flow-alerts", "ticker": subject.ticker.upper(), "limit": self.limit, "acquired_at_utc": datetime.now(timezone.utc).isoformat()},
+            provenance={"provider": "Unusual Whales", "endpoint": "/api/option-trades/flow-alerts", "ticker_symbol": subject.ticker.upper(), "limit": self.limit, "acquired_at_utc": datetime.now(timezone.utc).isoformat()},
             neutral_semantics=("Unusual Whales source-defined options flow alerts aggregate option transactions that meet provider alert rules. Large or unusual option activity may reflect directional exposure, hedging, volatility positioning, spreads, liquidity provision, opening or closing activity, or combinations of these. Ask-side calls are not inherently bullish and bid-side puts are not inherently bearish; multi-leg context can materially change interpretation."),
         )
 
