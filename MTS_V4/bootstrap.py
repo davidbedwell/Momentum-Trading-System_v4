@@ -12,6 +12,7 @@ from .method_catalog import MethodCatalog
 from .nexus import InMemoryResearchNexus, ResearchNexus
 from .nexus_json import JsonResearchNexus
 from .orchestrator import ResearchLoopOrchestrator
+from .scientific_toolkit import scientific_toolkit_analysis_method, scientific_toolkit_method_spec
 from .standard_methods import standard_analysis_methods, standard_method_catalog
 from .validation import ObjectiveContractValidator
 
@@ -61,12 +62,14 @@ def build_runtime(
 
     catalog = standard_method_catalog()
     catalog.register(cross_evidence_method_spec())
+    catalog.register(scientific_toolkit_method_spec())
     concepts = concept_library or seed_market_concepts()
     validator = ObjectiveContractValidator(catalog)
     analysis = ExactMethodAnalysisExecutor()
     for method in standard_analysis_methods():
         analysis.register(method)
     analysis.register(cross_evidence_analysis_method())
+    analysis.register(scientific_toolkit_analysis_method())
 
     orchestrator = ResearchLoopOrchestrator(
         mission=mission,
