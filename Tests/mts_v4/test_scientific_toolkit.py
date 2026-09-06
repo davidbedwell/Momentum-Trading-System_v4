@@ -3,7 +3,6 @@ from __future__ import annotations
 import unittest
 
 from MTS_V4.scientific_toolkit import (
-    ScientificToolkitError,
     execute_scientific_toolkit,
     scientific_tool_count,
     scientific_toolkit_method_spec,
@@ -18,11 +17,12 @@ class ScientificToolkitTests(unittest.TestCase):
         self.assertEqual(spec.metadata["tool_count"], count)
         self.assertFalse(spec.metadata["deterministic_ranking"])
         self.assertEqual(spec.metadata["scientific_selection"], "AI_RESEARCH_DIRECTOR_ONLY")
-        index = spec.metadata["tool_index"]
-        self.assertTrue(any(str(item).startswith("scipy.stats.pearsonr") for item in index))
-        self.assertTrue(any(str(item).startswith("scipy.stats.spearmanr") for item in index))
-        self.assertTrue(any(str(item).startswith("scipy.signal.") for item in index))
-        self.assertTrue(any(str(item).startswith("scipy.special.") for item in index))
+        tool_contract = next(item for item in spec.parameters if item.name == "tool_id")
+        tool_ids = tool_contract.allowed_values
+        self.assertTrue(any(str(item) == "scipy.stats.pearsonr" for item in tool_ids))
+        self.assertTrue(any(str(item) == "scipy.stats.spearmanr" for item in tool_ids))
+        self.assertTrue(any(str(item).startswith("scipy.signal.") for item in tool_ids))
+        self.assertTrue(any(str(item).startswith("scipy.special.") for item in tool_ids))
 
     def test_rd_selected_pearsonr_returns_inferential_output(self):
         rows = [
@@ -48,15 +48,19 @@ class ScientificToolkitTests(unittest.TestCase):
 
     def test_toolkit_does_not_silently_drop_missing_values(self):
         rows = [{"x": 1.0}, {"x": None}, {"x": 3.0}]
-        with self.assertRaises(ScientificToolkitError):
-            execute_scientific_toolkit(
-                {"evidence:1": rows},
-                {
-                    "tool_id": "scipy.stats.describe",
-                    "args": [{"column": "x"}],
-                    "kwargs": {},
-                },
-            )
+        result = execute_scientific_toolkit(
+            {"evidence:1": rows},
+            {
+                "tool_id": "scipy.stats.describe",
+                "args": [{"column": "x"}],
+                "kwargs": {},
+            },
+        )
+        self.assertIn("execution_error", result)
+        self.assertEqual(
+            result["interpretation_boundary"],
+            "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP",
+        )
 
 
 if __name__ == "__main__":
