@@ -56,6 +56,10 @@ class OpenAICompatibleResearchDirector:
                 "subject": asdict(subject),
                 "evidence": [asdict(item) for item in evidence],
                 "available_analysis_methods": self._json_safe(available_methods),
+                "objective_execution_requirements": self._execution_requirements(
+                    evidence=evidence,
+                    available_methods=available_methods,
+                ),
                 "nexus_context": self._json_safe(nexus_context),
             },
         )
@@ -80,6 +84,10 @@ class OpenAICompatibleResearchDirector:
                 "objective_contract_defects": [asdict(item) for item in defects],
                 "evidence": [asdict(item) for item in evidence],
                 "available_analysis_methods": self._json_safe(available_methods),
+                "objective_execution_requirements": self._execution_requirements(
+                    evidence=evidence,
+                    available_methods=available_methods,
+                ),
                 "nexus_context": self._json_safe(nexus_context),
             },
         )
@@ -104,9 +112,91 @@ class OpenAICompatibleResearchDirector:
                 "analysis_result": self._json_safe(asdict(result)),
                 "evidence": [asdict(item) for item in evidence],
                 "available_analysis_methods": self._json_safe(available_methods),
+                "objective_execution_requirements": self._execution_requirements(
+                    evidence=evidence,
+                    available_methods=available_methods,
+                ),
                 "nexus_context": self._json_safe(nexus_context),
             },
         )
+
+    @classmethod
+    def _execution_requirements(
+        cls,
+        *,
+        evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
+    ) -> Mapping[str, object]:
+        """Publish every deterministic condition RD can be held to.
+
+        A deterministic validator may not reject an RD-authored request for a
+        condition that was hidden from RD. Method-specific parameter/sample/
+        phase requirements remain authored by the capability catalog and are
+        repeated here as the objective execution contract, not as scientific
+        recommendations.
+        """
+        return {
+            "visibility_rule": (
+                "Any deterministic requirement that can reject or block an AI Research "
+                "Director request must be disclosed to the Research Director before the "
+                "request is judged against it."
+            ),
+            "analysis_request": {
+                "method_id": "must identify an available_analysis_methods entry exactly",
+                "subject_id": "must equal the active subject_id",
+                "evidence_ids": "must identify supplied evidence exactly",
+                "method_contracts": cls._json_safe(available_methods),
+                "no_hidden_defaults": (
+                    "Scientifically meaningful missing parameters are not inferred, defaulted, "
+                    "or substituted by deterministic code."
+                ),
+            },
+            "available_evidence": [
+                {
+                    "evidence_id": item.evidence_id,
+                    "subject_id": item.subject_id,
+                    "evidence_type": item.evidence_type,
+                    "artifact_type": item.artifact_type,
+                    "source_identity": item.source_identity,
+                    "coverage_start": item.coverage_start,
+                    "coverage_end": item.coverage_end,
+                    "row_count": item.row_count,
+                    "schema": list(item.schema),
+                    "provenance": cls._json_safe(item.provenance),
+                    "neutral_semantics": item.neutral_semantics,
+                }
+                for item in evidence
+            ],
+            "evidence_continuity": {
+                "comparison_statuses": ["SAME", "CHANGED", "UNVERIFIABLE"],
+                "changed_is_not_scientific_failure": True,
+                "comparison_fields": [
+                    "subject_id",
+                    "evidence_type",
+                    "artifact_type",
+                    "source_identity",
+                    "coverage_start",
+                    "coverage_end",
+                    "row_count",
+                    "schema",
+                    "provenance",
+                    "neutral_semantics",
+                ],
+                "meaning": (
+                    "If evidence is reacquired, deterministic code reports objective changes. "
+                    "The Research Director determines their scientific consequence."
+                ),
+            },
+            "hard_execution_failures": [
+                "malformed AI decision representation",
+                "nonexistent requested method",
+                "missing required method parameter disclosed in method_contracts",
+                "invalid parameter type/cardinality/value disclosed in method_contracts",
+                "missing requested evidence identity",
+                "subject/evidence/result lineage mismatch",
+                "required evidence payload unavailable for execution",
+            ],
+        }
 
     def _request_decision(
         self,
@@ -121,11 +211,14 @@ class OpenAICompatibleResearchDirector:
             "hypotheses, method choice, scientifically meaningful parameters, interpretation, "
             "significance, and next research direction. The available Analysis methods are "
             "described neutrally in the supplied capability catalog; select from that catalog "
-            "when requesting Analysis. Deterministic code validates only objective execution "
-            "contracts and may return exact defects for you to repair. Do not ask deterministic "
-            "code to choose science for you. Nexus is durable research memory for subject "
-            "metadata and significant findings, not a raw-data repository. Return exactly one "
-            "JSON object matching the required decision schema and no prose."
+            "when requesting Analysis. Every deterministic condition that can block your request "
+            "must be disclosed in objective_execution_requirements before it is enforced. "
+            "Deterministic code validates only objective execution contracts and may return exact "
+            "defects for you to repair. Do not ask deterministic code to choose science for you. "
+            "A changed evidence reacquisition is reported to you as evidence continuity metadata, "
+            "not automatically treated as scientific failure. Nexus is durable research memory "
+            "for subject metadata and significant findings, not a raw-data repository. Return "
+            "exactly one JSON object matching the required decision schema and no prose."
         )
         user = {
             "operation": operation,
@@ -162,6 +255,7 @@ class OpenAICompatibleResearchDirector:
             "instructions": [
                 "If continue_research is true, next_request must be fully authored by you.",
                 "Choose the scientific method yourself from available_analysis_methods; capability metadata describes execution requirements but does not recommend a method.",
+                "Review objective_execution_requirements before authoring a request; these are the deterministic conditions the request can be judged against.",
                 "If an objective contract defect is supplied, repair only by making your own scientific choice; do not expect the validator to invent a value or substitute a method.",
                 "Promote findings only when you judge them scientifically significant enough for durable research memory.",
                 "Do not place raw/reproducible datasets in findings or research_state.",
