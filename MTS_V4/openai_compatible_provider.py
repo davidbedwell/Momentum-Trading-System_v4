@@ -9,7 +9,7 @@ from enum import Enum
 from typing import Any, Mapping, Sequence
 
 from .contracts import AnalysisRequest, AnalysisResult, ContractDefect, EvidenceDescriptor, ResearchDecision, SubjectMetadata
-from .rd_codec import ResearchDecisionCodec
+from .rd_codec import ResearchDecisionCodec, ResearchDecisionDecodeError
 
 
 class ResearchDirectorTransportError(RuntimeError):
@@ -60,9 +60,9 @@ class OpenAICompatibleResearchDirector:
             "analysis_request": {
                 "method_id": "must identify an available_analysis_methods entry exactly",
                 "subject_id": "must equal the active subject_id",
-                "evidence_ids": "must identify supplied raw evidence exactly; may be empty when execution uses only explicit analysis_inputs",
+                "evidence_ids": "must always be present as a list; identify supplied raw evidence exactly, or use [] when execution uses no raw evidence",
                 "analysis_inputs": (
-                    "optional explicit references to prior campaign-local Analysis outputs. Each entry "
+                    "must always be present as a list; use [] when no prior Analysis output is used. Each entry "
                     "must supply result_id, exact output_path, and input_name. output_path is always "
                     "relative to analysis_result.outputs; do not include an initial 'outputs' component. "
                     "Reusable row datasets are advertised in derived_dataset_catalog with their exact "
@@ -121,6 +121,12 @@ class OpenAICompatibleResearchDirector:
                 "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP. Deterministic code does not choose a "
                 "replacement method, input, preprocessing step, or scientific response."
             ),
+            "decision_representation_repair_policy": (
+                "If your returned JSON cannot be decoded because a required representation field is "
+                "missing or malformed, the transport may return the exact decode defect to you once and "
+                "ask you to author a corrected complete decision. Deterministic code does not fill the "
+                "missing field or alter your scientific choices."
+            ),
         }
 
     def _request_decision(self, *, operation: str, mission: str, payload: Mapping[str, object]) -> ResearchDecision:
@@ -144,7 +150,7 @@ class OpenAICompatibleResearchDirector:
                     "subject_id": "string",
                     "question": "string",
                     "method_id": "string from available_analysis_methods",
-                    "evidence_ids": ["string"],
+                    "evidence_ids": "REQUIRED list of raw evidence IDs; use [] when none",
                     "analysis_inputs": [
                         {
                             "result_id": "exact prior analysis_result.result_id",
@@ -182,11 +188,14 @@ class OpenAICompatibleResearchDirector:
             },
             "instructions": [
                 "If continue_research is true, next_request must be fully authored by you.",
+                "Every next_request must explicitly contain both evidence_ids and analysis_inputs. Use [] for either list when you intentionally use none; never omit either field.",
                 "Choose the scientific method yourself from available_analysis_methods; capability metadata describes execution requirements but does not recommend a method.",
                 "Review objective_execution_requirements before authoring a request or finding; these are the deterministic conditions either can be judged against.",
                 "When analysis_result.outputs.derived_dataset_catalog advertises a dataset needed by your next method, use its exact output_path in analysis_inputs. output_path is relative to analysis_result.outputs, so never prefix it with 'outputs'.",
+                "Syntactic chaining example only: if the current result_id is analysis-result:1 and its catalog advertises output_path [\"derived_datasets\", \"forward_path_observations\"], a request using only that dataset must contain evidence_ids: [] and analysis_inputs: [{\"result_id\":\"analysis-result:1\",\"output_path\":[\"derived_datasets\",\"forward_path_observations\"],\"input_name\":\"forward_path_observations\"}]. This illustrates representation only and does not recommend any scientific method, horizon, field, or question.",
                 "Select only columns actually listed in the chosen derived dataset schema. Do not silently revert to raw evidence columns when your question concerns a derived quantity.",
-                "Do not expect deterministic code to infer which prior result, derived dataset, output path, or derived field you intended; if you omit analysis_inputs, only evidence_ids are supplied as execution payloads.",
+                "Do not expect deterministic code to infer which prior result, derived dataset, output path, or derived field you intended; if analysis_inputs is [], only evidence_ids are supplied as execution payloads.",
+                "For analysis.toolkit.scientific_function, each item in args is one positional argument to the selected SciPy function. A {\"column\":\"field\"} item binds one complete column as one positional argument. Do not list multiple columns as separate args unless the selected SciPy signature actually accepts those arrays as separate positional arguments.",
                 "Derived Analysis outputs are campaign-local temporary data. If a process restart makes a referenced result unavailable, deterministic validation will report MISSING_ANALYSIS_RESULT and you decide whether regenerating that derived result is scientifically appropriate.",
                 "An Analysis result with interpretation_boundary OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP reports an objective failure of the exact method you requested; decide the scientific next step yourself rather than assuming the runtime substituted another method.",
                 "If operation is RESUME_RESEARCH, inspect evidence_continuity and decide its scientific consequence yourself; CHANGED is not an automatic failure.",
@@ -202,29 +211,75 @@ class OpenAICompatibleResearchDirector:
             ],
             "context": payload,
         }
-        body = json.dumps({"model": self._model, "messages": [{"role": "system", "content": system}, {"role": "user", "content": json.dumps(user, sort_keys=True, default=str)}], "temperature": 0.2}).encode("utf-8")
+        messages = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": json.dumps(user, sort_keys=True, default=str)},
+        ]
+        content = self._chat_completion(messages)
+        try:
+            return ResearchDecisionCodec.decode(content)
+        except ResearchDecisionDecodeError as exc:
+            repair_instruction = {
+                "operation": "REPAIR_DECISION_REPRESENTATION",
+                "decode_defect": str(exc),
+                "instruction": (
+                    "Return one complete corrected decision JSON object. Preserve or revise your own "
+                    "scientific choices as you judge appropriate, but satisfy the required decision "
+                    "representation. Deterministic code will not fill any missing scientific field for you. "
+                    "If continue_research is true, next_request must explicitly include evidence_ids and "
+                    "analysis_inputs; use [] when you intentionally use none."
+                ),
+            }
+            repaired_content = self._chat_completion(
+                messages
+                + [
+                    {"role": "assistant", "content": content},
+                    {"role": "user", "content": json.dumps(repair_instruction, sort_keys=True)},
+                ]
+            )
+            return ResearchDecisionCodec.decode(repaired_content)
+
+    def _chat_completion(self, messages: Sequence[Mapping[str, str]]) -> str:
+        body = json.dumps(
+            {
+                "model": self._model,
+                "messages": list(messages),
+                "temperature": 0.2,
+            }
+        ).encode("utf-8")
         headers = {"Content-Type": "application/json"}
         if self._api_key:
             headers["Authorization"] = f"Bearer {self._api_key}"
-        request = urllib.request.Request(f"{self._base_url}/v1/chat/completions", data=body, headers=headers, method="POST")
+        request = urllib.request.Request(
+            f"{self._base_url}/v1/chat/completions",
+            data=body,
+            headers=headers,
+            method="POST",
+        )
         try:
             with urllib.request.urlopen(request, timeout=self._timeout_seconds) as response:
                 document = json.loads(response.read().decode("utf-8"))
         except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError) as exc:
-            raise ResearchDirectorTransportError(f"AI Research Director transport failed: {type(exc).__name__}: {exc}") from exc
+            raise ResearchDirectorTransportError(
+                f"AI Research Director transport failed: {type(exc).__name__}: {exc}"
+            ) from exc
 
         try:
             message = document["choices"][0]["message"]
             content = message.get("content")
         except (KeyError, IndexError, TypeError, AttributeError) as exc:
-            raise ResearchDirectorTransportError("OpenAI-compatible response is missing choices[0].message") from exc
+            raise ResearchDirectorTransportError(
+                "OpenAI-compatible response is missing choices[0].message"
+            ) from exc
         if not isinstance(content, str) or not content.strip():
             reasoning_content = message.get("reasoning_content") if isinstance(message, Mapping) else None
             if isinstance(reasoning_content, str) and reasoning_content.strip():
                 content = reasoning_content
             else:
-                raise ResearchDirectorTransportError("AI Research Director returned no textual decision")
-        return ResearchDecisionCodec.decode(content)
+                raise ResearchDirectorTransportError(
+                    "AI Research Director returned no textual decision"
+                )
+        return content
 
     @classmethod
     def _analysis_result_payload(cls, result: AnalysisResult) -> Mapping[str, object]:
