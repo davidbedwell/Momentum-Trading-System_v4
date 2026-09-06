@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from typing import Any, Mapping
 
-from .contracts import AnalysisRequest, Finding, ResearchDecision, ResearchPhase
+from .contracts import AnalysisRequest, AnalysisResultInput, Finding, ResearchDecision, ResearchPhase
 
 
 class ResearchDecisionDecodeError(ValueError):
@@ -83,6 +83,13 @@ class ResearchDecisionCodec:
             raise ResearchDecisionDecodeError("evidence_ids must be a list of strings")
         if not isinstance(parameters, Mapping):
             raise ResearchDecisionDecodeError("parameters must be an object")
+        analysis_inputs_raw = raw.get("analysis_inputs", [])
+        if not isinstance(analysis_inputs_raw, list):
+            raise ResearchDecisionDecodeError("analysis_inputs must be a list")
+        analysis_inputs = tuple(
+            ResearchDecisionCodec._decode_analysis_input(item)
+            for item in analysis_inputs_raw
+        )
         try:
             phase = ResearchPhase(str(raw["research_phase"]))
         except ValueError as exc:
@@ -98,6 +105,37 @@ class ResearchDecisionCodec:
             parameters=dict(parameters),
             research_phase=phase,
             rationale=str(raw.get("rationale", "")),
+            analysis_inputs=analysis_inputs,
+        )
+
+    @staticmethod
+    def _decode_analysis_input(raw: Any) -> AnalysisResultInput:
+        if not isinstance(raw, Mapping):
+            raise ResearchDecisionDecodeError("each analysis_inputs entry must be an object")
+        required = ("result_id", "output_path", "input_name")
+        missing = [key for key in required if key not in raw]
+        if missing:
+            raise ResearchDecisionDecodeError(
+                f"analysis input missing required fields: {missing}"
+            )
+        output_path = raw["output_path"]
+        if not isinstance(output_path, list) or not all(
+            isinstance(value, (str, int)) and not isinstance(value, bool)
+            for value in output_path
+        ):
+            raise ResearchDecisionDecodeError(
+                "analysis input output_path must be a list of string/integer path components"
+            )
+        result_id = raw["result_id"]
+        input_name = raw["input_name"]
+        if not isinstance(result_id, str) or not result_id.strip():
+            raise ResearchDecisionDecodeError("analysis input result_id must be a nonblank string")
+        if not isinstance(input_name, str) or not input_name.strip():
+            raise ResearchDecisionDecodeError("analysis input input_name must be a nonblank string")
+        return AnalysisResultInput(
+            result_id=result_id,
+            output_path=tuple(output_path),
+            input_name=input_name,
         )
 
     @staticmethod
