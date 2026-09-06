@@ -4,20 +4,22 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from .contracts import Finding, SubjectMetadata
+from .contracts import EvidenceMetadata, Finding, SubjectMetadata
 from .nexus import NexusError
 
 
 class JsonResearchNexus:
     """Small durable v4 Nexus reference implementation.
 
-    The on-disk document contains only subject metadata and significant findings.
-    There is no raw-evidence payload field and no dataset publication API.
+    The on-disk document contains ticker/subject metadata, evidence metadata, and
+    significant RD findings. It contains no raw evidence payload, temporary cache
+    key, or dataset publication API.
     """
 
     def __init__(self, path: str | Path) -> None:
         self._path = Path(path)
         self._subjects: dict[str, SubjectMetadata] = {}
+        self._evidence_metadata: dict[str, EvidenceMetadata] = {}
         self._findings: dict[str, Finding] = {}
         self._load()
 
@@ -25,6 +27,14 @@ class JsonResearchNexus:
         if not metadata.subject_id:
             raise NexusError("subject_id cannot be blank")
         self._subjects[metadata.subject_id] = metadata
+        self._flush()
+
+    def upsert_evidence_metadata(self, metadata: EvidenceMetadata) -> None:
+        if metadata.subject_id not in self._subjects:
+            raise NexusError(
+                f"Cannot persist evidence metadata for unknown subject: {metadata.subject_id}"
+            )
+        self._evidence_metadata[metadata.evidence_id] = metadata
         self._flush()
 
     def publish_finding(self, finding: Finding) -> None:
@@ -38,6 +48,16 @@ class JsonResearchNexus:
 
     def get_subject(self, subject_id: str) -> SubjectMetadata | None:
         return self._subjects.get(subject_id)
+
+    def get_evidence_metadata(self, evidence_id: str) -> EvidenceMetadata | None:
+        return self._evidence_metadata.get(evidence_id)
+
+    def evidence_metadata_for_subject(self, subject_id: str) -> tuple[EvidenceMetadata, ...]:
+        return tuple(
+            metadata
+            for _, metadata in sorted(self._evidence_metadata.items())
+            if metadata.subject_id == subject_id
+        )
 
     def get_finding(self, finding_id: str) -> Finding | None:
         return self._findings.get(finding_id)
@@ -56,6 +76,11 @@ class JsonResearchNexus:
         for raw in document.get("subjects", []):
             metadata = SubjectMetadata(**raw)
             self._subjects[metadata.subject_id] = metadata
+        for raw in document.get("evidence_metadata", []):
+            raw = dict(raw)
+            raw["schema"] = tuple(raw.get("schema", ()))
+            metadata = EvidenceMetadata(**raw)
+            self._evidence_metadata[metadata.evidence_id] = metadata
         for raw in document.get("findings", []):
             raw = dict(raw)
             raw["supporting_result_ids"] = tuple(raw.get("supporting_result_ids", ()))
@@ -70,6 +95,9 @@ class JsonResearchNexus:
         document = {
             "format": "MTS_V4_RESEARCH_NEXUS_V1",
             "subjects": [asdict(self._subjects[key]) for key in sorted(self._subjects)],
+            "evidence_metadata": [
+                asdict(self._evidence_metadata[key]) for key in sorted(self._evidence_metadata)
+            ],
             "findings": [asdict(self._findings[key]) for key in sorted(self._findings)],
         }
         temporary = self._path.with_suffix(self._path.suffix + ".tmp")
