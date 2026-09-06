@@ -80,8 +80,9 @@ class V4DataBoundaryTests(unittest.TestCase):
             self.assertEqual(document["format"], "MTS_V4_RESEARCH_NEXUS_V1")
             self.assertEqual(
                 set(document),
-                {"format", "subjects", "evidence_metadata", "findings"},
+                {"format", "subjects", "evidence_metadata", "findings", "finding_retractions"},
             )
+            self.assertEqual(document["finding_retractions"], [])
             serialized = path.read_text(encoding="utf-8")
             self.assertNotIn('"payload"', serialized)
             self.assertNotIn('"rows"', serialized)
