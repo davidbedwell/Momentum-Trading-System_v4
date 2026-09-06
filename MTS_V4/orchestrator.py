@@ -36,6 +36,10 @@ class ResearchLoopOrchestrator:
 
     Optional checkpoint callbacks receive only AI-authored decision state and
     mechanical counters. Resume never reconstructs or guesses scientific state.
+
+    Research concepts are descriptive idea seeds only. They are exposed to RD
+    as context and never selected, ranked, promoted, or treated as evidence by
+    the orchestrator.
     """
 
     def __init__(
@@ -48,6 +52,7 @@ class ResearchLoopOrchestrator:
         nexus: ResearchNexus,
         cache: TemporaryResearchCache,
         available_methods: Sequence[Mapping[str, Any]],
+        research_concepts: Sequence[Mapping[str, Any]] = (),
         max_contract_repairs: int = 3,
     ) -> None:
         if max_contract_repairs < 0:
@@ -59,6 +64,7 @@ class ResearchLoopOrchestrator:
         self._nexus = nexus
         self._cache = cache
         self._available_methods = tuple(dict(method) for method in available_methods)
+        self._research_concepts = tuple(dict(concept) for concept in research_concepts)
         self._max_contract_repairs = max_contract_repairs
 
     def run(
@@ -236,4 +242,13 @@ class ResearchLoopOrchestrator:
             "subject": self._nexus.get_subject(subject_id),
             "evidence_metadata": self._nexus.evidence_metadata_for_subject(subject_id),
             "significant_findings": self._nexus.findings_for_subject(subject_id),
+            "research_concepts": self._research_concepts,
+            "research_concept_policy": {
+                "authority": "NON_AUTHORITATIVE_IDEA_SEEDS",
+                "treat_as_evidence": False,
+                "must_test_before_acceptance": True,
+                "rd_may_reject_or_reformulate": True,
+                "rd_may_generate_additional_concepts": True,
+                "deterministic_selection_or_ranking": False,
+            },
         }
