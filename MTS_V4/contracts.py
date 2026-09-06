@@ -69,6 +69,20 @@ class EvidenceDescriptor:
 
 
 @dataclass(frozen=True, slots=True)
+class AnalysisResultInput:
+    """Explicit RD-authored reference to a prior campaign-local Analysis output.
+
+    Deterministic code may verify that the result and output path exist and then
+    resolve exactly that value for execution. It may not select a prior result,
+    output path, alias, transformation, or substitute another input.
+    """
+
+    result_id: str
+    output_path: tuple[str | int, ...]
+    input_name: str
+
+
+@dataclass(frozen=True, slots=True)
 class AnalysisRequest:
     request_id: str
     subject_id: str
@@ -78,6 +92,7 @@ class AnalysisRequest:
     parameters: Mapping[str, Any]
     research_phase: ResearchPhase
     rationale: str = ""
+    analysis_inputs: tuple[AnalysisResultInput, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
