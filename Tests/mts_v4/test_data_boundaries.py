@@ -66,10 +66,14 @@ class V4DataBoundaryTests(unittest.TestCase):
                     finding_id="f:1",
                     subject_id="AAPL",
                     statement="Significant result",
-                    significance="RD promoted",
-                    status="SUPPORTED",
                     supporting_result_ids=("r:1",),
                     evidence_ids=("ev:1",),
+                    metadata={
+                        "significance": "RD promoted",
+                        "status": "SUPPORTED",
+                        "novel_labels": ["regime-alpha", "path-shape-unknown-to-code"],
+                        "nested_science": {"hypothesis_family": "RD_DEFINED"},
+                    },
                 )
             )
             document = json.loads(path.read_text(encoding="utf-8"))
@@ -89,7 +93,41 @@ class V4DataBoundaryTests(unittest.TestCase):
                 reopened.get_evidence_metadata("ev:1").source_identity,
                 "fixture-source",
             )
-            self.assertEqual(reopened.get_finding("f:1").statement, "Significant result")
+            finding = reopened.get_finding("f:1")
+            self.assertEqual(finding.statement, "Significant result")
+            self.assertEqual(finding.metadata["nested_science"]["hypothesis_family"], "RD_DEFINED")
+
+    def test_early_v4_closed_scientific_fields_migrate_into_open_metadata(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "nexus.json"
+            path.write_text(
+                json.dumps(
+                    {
+                        "format": "MTS_V4_RESEARCH_NEXUS_V1",
+                        "subjects": [{"subject_id": "AAPL", "ticker": "AAPL", "asset_class": "EQUITY", "attributes": {}}],
+                        "evidence_metadata": [],
+                        "findings": [
+                            {
+                                "finding_id": "legacy:f1",
+                                "subject_id": "AAPL",
+                                "statement": "Legacy early-v4 finding",
+                                "significance": "important",
+                                "status": "EXPLORATORY",
+                                "supporting_result_ids": [],
+                                "evidence_ids": [],
+                                "applicability": {"regime": "unknown"},
+                                "limitations": ["legacy"],
+                                "relationships": ["candidate"],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            finding = JsonResearchNexus(path).get_finding("legacy:f1")
+            self.assertEqual(finding.metadata["significance"], "important")
+            self.assertEqual(finding.metadata["status"], "EXPLORATORY")
+            self.assertEqual(finding.metadata["applicability"]["regime"], "unknown")
 
 
 if __name__ == "__main__":
