@@ -20,6 +20,8 @@ class ParameterContract:
     exact_length: int | None = None
     minimum_length: int | None = None
     maximum_length: int | None = None
+    minimum_value: float | int | None = None
+    maximum_value: float | int | None = None
     allowed_values: tuple[Any, ...] = ()
     meaning: str = ""
 
@@ -31,6 +33,8 @@ class ParameterContract:
             "exact_length": self.exact_length,
             "minimum_length": self.minimum_length,
             "maximum_length": self.maximum_length,
+            "minimum_value": self.minimum_value,
+            "maximum_value": self.maximum_value,
             "allowed_values": list(self.allowed_values),
             "meaning": self.meaning,
         }
