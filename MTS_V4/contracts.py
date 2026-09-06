@@ -120,6 +120,22 @@ class Finding:
 
 
 @dataclass(frozen=True, slots=True)
+class FindingRetraction:
+    """Durable audit record that quarantines a finding from active research memory.
+
+    Retraction is an externally initiated governance action, not a deterministic
+    scientific judgment. The original finding remains preserved for audit while
+    normal Nexus retrieval excludes it from future Research Director context.
+    """
+
+    finding_id: str
+    reason: str
+    initiated_by: str
+    retracted_at_utc: str
+    replacement_finding_id: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class ResearchDecision:
     """Scientific decision authored by the AI Research Director.
 
