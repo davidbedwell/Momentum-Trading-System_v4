@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any, Callable, Mapping, Sequence
 
 from .cache import TemporaryResearchCache
-from .contracts import EvidenceDescriptor, ResearchDecision, SubjectMetadata
+from .contracts import AnalysisResult, EvidenceDescriptor, ResearchDecision, SubjectMetadata
 from .interfaces import AnalysisExecutor, ResearchDirectorProvider
 from .nexus import ResearchNexus
 from .validation import ObjectiveContractValidator
@@ -98,6 +98,7 @@ class ResearchLoopOrchestrator:
         decisions = initial_decisions
         analyses = initial_analyses
         promoted = 0
+        analysis_results: dict[str, AnalysisResult] = {}
 
         if initial_decision is None:
             decision = self._rd.begin_research(
@@ -143,7 +144,11 @@ class ResearchLoopOrchestrator:
 
             repairs = 0
             while True:
-                defects = self._validator.validate(decision.next_request, evidence_map)
+                defects = self._validator.validate(
+                    decision.next_request,
+                    evidence_map,
+                    analysis_results,
+                )
                 if not defects:
                     break
                 if repairs >= self._max_contract_repairs:
@@ -183,6 +188,12 @@ class ResearchLoopOrchestrator:
             for evidence_id in request.evidence_ids:
                 descriptor = evidence_map[evidence_id]
                 payloads[evidence_id] = self._cache.get(descriptor.cache_key)
+            for reference in request.analysis_inputs:
+                source_result = analysis_results[reference.result_id]
+                payloads[reference.input_name] = self._validator.resolve_analysis_input(
+                    reference,
+                    source_result,
+                )
 
             result = self._analysis.execute(request, payloads)
             analyses += 1
@@ -195,9 +206,38 @@ class ResearchLoopOrchestrator:
                     "Analysis substituted a method; v4 requires exact method execution"
                 )
 
+            lineage_evidence_ids: list[str] = list(request.evidence_ids)
+            analysis_input_lineage: list[Mapping[str, object]] = []
+            for reference in request.analysis_inputs:
+                source_result = analysis_results[reference.result_id]
+                for evidence_id in source_result.evidence_ids:
+                    if evidence_id not in lineage_evidence_ids:
+                        lineage_evidence_ids.append(evidence_id)
+                analysis_input_lineage.append(
+                    {
+                        "input_name": reference.input_name,
+                        "result_id": reference.result_id,
+                        "output_path": list(reference.output_path),
+                    }
+                )
+            execution_metadata = dict(result.execution_metadata)
+            if analysis_input_lineage:
+                execution_metadata["analysis_input_lineage"] = analysis_input_lineage
+            result = replace(
+                result,
+                evidence_ids=tuple(lineage_evidence_ids),
+                execution_metadata=execution_metadata,
+            )
+            if result.result_id in analysis_results:
+                raise ResearchLoopError(f"duplicate Analysis result_id: {result.result_id}")
+            analysis_results[result.result_id] = result
+
             # If the process dies after Analysis but before RD interpretation, the
             # last checkpoint still contains the AI-authored request. Resume may
-            # safely re-execute that exact deterministic Analysis request.
+            # safely re-execute that exact deterministic Analysis request. Derived
+            # outputs themselves are not persisted; if a resumed request references
+            # an unavailable prior result, objective validation returns that defect
+            # to RD so RD may choose whether to regenerate it.
             self._checkpoint(state_callback, decision, decisions, analyses)
 
             decision = self._rd.interpret_result(
