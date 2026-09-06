@@ -6,6 +6,7 @@ from pathlib import Path
 from .analysis import ExactMethodAnalysisExecutor
 from .cache import TemporaryResearchCache
 from .interfaces import ResearchDirectorProvider
+from .method_catalog import MethodCatalog
 from .nexus import InMemoryResearchNexus, ResearchNexus
 from .nexus_json import JsonResearchNexus
 from .orchestrator import ResearchLoopOrchestrator
@@ -25,6 +26,7 @@ class V4Runtime:
     mission: str
     cache: TemporaryResearchCache
     nexus: ResearchNexus
+    catalog: MethodCatalog
     validator: ObjectiveContractValidator
     analysis: ExactMethodAnalysisExecutor
     orchestrator: ResearchLoopOrchestrator
@@ -62,12 +64,14 @@ def build_runtime(
         analysis=analysis,
         nexus=nexus,
         cache=cache,
+        available_methods=catalog.capability_payloads(),
         max_contract_repairs=max_contract_repairs,
     )
     return V4Runtime(
         mission=mission,
         cache=cache,
         nexus=nexus,
+        catalog=catalog,
         validator=validator,
         analysis=analysis,
         orchestrator=orchestrator,
