@@ -127,19 +127,12 @@ class OpenAICompatibleResearchDirector:
         evidence: Sequence[EvidenceDescriptor],
         available_methods: Sequence[Mapping[str, Any]],
     ) -> Mapping[str, object]:
-        """Publish every deterministic condition RD can be held to.
-
-        A deterministic validator may not reject an RD-authored request for a
-        condition that was hidden from RD. Method-specific parameter/sample/
-        phase requirements remain authored by the capability catalog and are
-        repeated here as the objective execution contract, not as scientific
-        recommendations.
-        """
+        """Publish every deterministic condition RD can be held to."""
         return {
             "visibility_rule": (
                 "Any deterministic requirement that can reject or block an AI Research "
-                "Director request must be disclosed to the Research Director before the "
-                "request is judged against it."
+                "Director request or finding must be disclosed to the Research Director before "
+                "the request or finding is judged against it."
             ),
             "analysis_request": {
                 "method_id": "must identify an available_analysis_methods entry exactly",
@@ -149,6 +142,27 @@ class OpenAICompatibleResearchDirector:
                 "no_hidden_defaults": (
                     "Scientifically meaningful missing parameters are not inferred, defaulted, "
                     "or substituted by deterministic code."
+                ),
+            },
+            "finding_envelope": {
+                "closed_required_fields": [
+                    "finding_id",
+                    "subject_id",
+                    "statement",
+                    "supporting_result_ids",
+                    "evidence_ids",
+                ],
+                "metadata": (
+                    "open-ended object authored by RD; arbitrary scientific labels, nested "
+                    "structures, classifications, applicability, limitations, relationships, "
+                    "confidence judgments, or previously unanticipated concepts are permitted"
+                ),
+                "scientific_taxonomy_is_open": True,
+                "deterministic_scientific_veto": False,
+                "meaning": (
+                    "Deterministic code may validate only representation, identity, and lineage. "
+                    "It may not reject a finding because its scientific conclusion, category, "
+                    "label, or metadata was not anticipated by code."
                 ),
             },
             "available_evidence": [
@@ -195,6 +209,7 @@ class OpenAICompatibleResearchDirector:
                 "missing requested evidence identity",
                 "subject/evidence/result lineage mismatch",
                 "required evidence payload unavailable for execution",
+                "malformed finding envelope disclosed in finding_envelope",
             ],
         }
 
@@ -209,16 +224,17 @@ class OpenAICompatibleResearchDirector:
             "You are the AI Research Director for Momentum Trading System v4. "
             "You are the scientific reasoning authority. Determine scientific questions, "
             "hypotheses, method choice, scientifically meaningful parameters, interpretation, "
-            "significance, and next research direction. The available Analysis methods are "
-            "described neutrally in the supplied capability catalog; select from that catalog "
+            "significance, findings, and next research direction. The available Analysis methods "
+            "are described neutrally in the supplied capability catalog; select from that catalog "
             "when requesting Analysis. Every deterministic condition that can block your request "
-            "must be disclosed in objective_execution_requirements before it is enforced. "
-            "Deterministic code validates only objective execution contracts and may return exact "
-            "defects for you to repair. Do not ask deterministic code to choose science for you. "
-            "A changed evidence reacquisition is reported to you as evidence continuity metadata, "
-            "not automatically treated as scientific failure. Nexus is durable research memory "
-            "for subject metadata and significant findings, not a raw-data repository. Return "
-            "exactly one JSON object matching the required decision schema and no prose."
+            "or finding must be disclosed in objective_execution_requirements before it is "
+            "enforced. Deterministic code validates only objective execution and representation "
+            "contracts and may return exact defects for you to repair. It may not veto a scientific "
+            "finding because the conclusion or metadata taxonomy was not anticipated. A changed "
+            "evidence reacquisition is reported to you as evidence continuity metadata, not "
+            "automatically treated as scientific failure. Nexus is durable research memory for "
+            "subject metadata and significant findings, not a raw-data repository. Return exactly "
+            "one JSON object matching the required decision schema and no prose."
         )
         user = {
             "operation": operation,
@@ -240,13 +256,9 @@ class OpenAICompatibleResearchDirector:
                         "finding_id": "string",
                         "subject_id": "string",
                         "statement": "string",
-                        "significance": "string",
-                        "status": "string",
                         "supporting_result_ids": ["string"],
                         "evidence_ids": ["string"],
-                        "applicability": {},
-                        "limitations": ["string"],
-                        "relationships": ["string"],
+                        "metadata": "open-ended object; arbitrary RD-authored scientific metadata allowed",
                     }
                 ],
                 "research_state": {},
@@ -255,9 +267,10 @@ class OpenAICompatibleResearchDirector:
             "instructions": [
                 "If continue_research is true, next_request must be fully authored by you.",
                 "Choose the scientific method yourself from available_analysis_methods; capability metadata describes execution requirements but does not recommend a method.",
-                "Review objective_execution_requirements before authoring a request; these are the deterministic conditions the request can be judged against.",
+                "Review objective_execution_requirements before authoring a request or finding; these are the deterministic conditions either can be judged against.",
                 "If an objective contract defect is supplied, repair only by making your own scientific choice; do not expect the validator to invent a value or substitute a method.",
                 "Promote findings only when you judge them scientifically significant enough for durable research memory.",
+                "The finding envelope is closed and minimal; the metadata namespace is scientifically open-ended and does not require an approved vocabulary.",
                 "Do not place raw/reproducible datasets in findings or research_state.",
             ],
             "context": payload,
