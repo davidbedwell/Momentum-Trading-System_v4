@@ -111,10 +111,17 @@ class ResearchDecisionCodec:
             "supporting_result_ids",
             "evidence_ids",
         )
+        allowed = set(required) | {"metadata"}
         missing = [key for key in required if key not in raw]
         if missing:
             raise ResearchDecisionDecodeError(
                 f"finding missing required envelope fields: {missing}"
+            )
+        unexpected = sorted(str(key) for key in raw if key not in allowed)
+        if unexpected:
+            raise ResearchDecisionDecodeError(
+                "finding has fields outside the closed envelope: "
+                f"{unexpected}; place additional scientific labels under metadata"
             )
 
         supporting_result_ids = raw["supporting_result_ids"]
