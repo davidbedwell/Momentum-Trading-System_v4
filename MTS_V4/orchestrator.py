@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 from .cache import TemporaryResearchCache
 from .contracts import EvidenceDescriptor, ResearchDecision, SubjectMetadata
@@ -40,6 +40,7 @@ class ResearchLoopOrchestrator:
         analysis: AnalysisExecutor,
         nexus: ResearchNexus,
         cache: TemporaryResearchCache,
+        available_methods: Sequence[Mapping[str, Any]],
         max_contract_repairs: int = 3,
     ) -> None:
         if max_contract_repairs < 0:
@@ -50,6 +51,7 @@ class ResearchLoopOrchestrator:
         self._analysis = analysis
         self._nexus = nexus
         self._cache = cache
+        self._available_methods = tuple(dict(method) for method in available_methods)
         self._max_contract_repairs = max_contract_repairs
 
     def run(
@@ -80,6 +82,7 @@ class ResearchLoopOrchestrator:
             mission=self._mission,
             subject=subject,
             evidence=evidence,
+            available_methods=self._available_methods,
             nexus_context=self._nexus_context(subject.subject_id),
         )
         decisions += 1
@@ -115,6 +118,7 @@ class ResearchLoopOrchestrator:
                     prior_decision=decision,
                     defects=defects,
                     evidence=evidence,
+                    available_methods=self._available_methods,
                     nexus_context=self._nexus_context(subject.subject_id),
                 )
                 decisions += 1
@@ -156,6 +160,7 @@ class ResearchLoopOrchestrator:
                 request=request,
                 result=result,
                 evidence=evidence,
+                available_methods=self._available_methods,
                 nexus_context=self._nexus_context(subject.subject_id),
             )
             decisions += 1
