@@ -21,18 +21,46 @@ class ParameterContract:
     minimum_length: int | None = None
     maximum_length: int | None = None
     allowed_values: tuple[Any, ...] = ()
+    meaning: str = ""
+
+    def capability_payload(self) -> dict[str, Any]:
+        return {
+            "name": self.name,
+            "required": self.required,
+            "types": [value.__name__ for value in self.python_types],
+            "exact_length": self.exact_length,
+            "minimum_length": self.minimum_length,
+            "maximum_length": self.maximum_length,
+            "allowed_values": list(self.allowed_values),
+            "meaning": self.meaning,
+        }
 
 
 @dataclass(frozen=True, slots=True)
 class MethodSpec:
     method_id: str
     artifact_types: tuple[str, ...]
+    description: str = ""
     parameters: tuple[ParameterContract, ...] = ()
     minimum_sample: int = 0
     exploration_allowed: bool = True
     validation_allowed: bool = True
     allows_future_information: bool = False
     metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def capability_payload(self) -> dict[str, Any]:
+        """Neutral capability description supplied to the AI Research Director."""
+        return {
+            "method_id": self.method_id,
+            "description": self.description,
+            "artifact_types": list(self.artifact_types),
+            "parameters": [parameter.capability_payload() for parameter in self.parameters],
+            "minimum_sample": self.minimum_sample,
+            "exploration_allowed": self.exploration_allowed,
+            "validation_allowed": self.validation_allowed,
+            "allows_future_information": self.allows_future_information,
+            "metadata": dict(self.metadata),
+        }
 
 
 class MethodCatalog:
@@ -62,3 +90,6 @@ class MethodCatalog:
 
     def all(self) -> tuple[MethodSpec, ...]:
         return tuple(self._specs[key] for key in sorted(self._specs))
+
+    def capability_payloads(self) -> tuple[dict[str, Any], ...]:
+        return tuple(spec.capability_payload() for spec in self.all())
