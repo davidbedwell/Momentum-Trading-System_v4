@@ -50,7 +50,7 @@ class OpenAICompatibleResearchDirector:
         return self._request_decision(operation="REPAIR_OBJECTIVE_CONTRACT", mission=mission, payload={"subject": asdict(subject), "prior_decision": self._json_safe(asdict(prior_decision)), "objective_contract_defects": [asdict(item) for item in defects], "evidence": [asdict(item) for item in evidence], "available_analysis_methods": self._json_safe(available_methods), "objective_execution_requirements": self._execution_requirements(evidence=evidence, available_methods=available_methods), "nexus_context": self._json_safe(nexus_context)})
 
     def interpret_result(self, *, mission: str, subject: SubjectMetadata, request: AnalysisRequest, result: AnalysisResult, evidence: Sequence[EvidenceDescriptor], available_methods: Sequence[Mapping[str, Any]], nexus_context: Mapping[str, object]) -> ResearchDecision:
-        return self._request_decision(operation="INTERPRET_ANALYSIS_RESULT", mission=mission, payload={"subject": asdict(subject), "analysis_request": self._json_safe(asdict(request)), "analysis_result": self._json_safe(asdict(result)), "evidence": [asdict(item) for item in evidence], "available_analysis_methods": self._json_safe(available_methods), "objective_execution_requirements": self._execution_requirements(evidence=evidence, available_methods=available_methods), "nexus_context": self._json_safe(nexus_context)})
+        return self._request_decision(operation="INTERPRET_ANALYSIS_RESULT", mission=mission, payload={"subject": asdict(subject), "analysis_request": self._json_safe(asdict(request)), "analysis_result": self._analysis_result_payload(result), "evidence": [asdict(item) for item in evidence], "available_analysis_methods": self._json_safe(available_methods), "objective_execution_requirements": self._execution_requirements(evidence=evidence, available_methods=available_methods), "nexus_context": self._json_safe(nexus_context)})
 
     @classmethod
     def _execution_requirements(cls, *, evidence: Sequence[EvidenceDescriptor], available_methods: Sequence[Mapping[str, Any]]) -> Mapping[str, object]:
@@ -63,11 +63,13 @@ class OpenAICompatibleResearchDirector:
                 "evidence_ids": "must identify supplied raw evidence exactly; may be empty when execution uses only explicit analysis_inputs",
                 "analysis_inputs": (
                     "optional explicit references to prior campaign-local Analysis outputs. Each entry "
-                    "must supply result_id, exact output_path, and input_name. Deterministic code may "
-                    "resolve only the exact RD-authored reference and may not choose or substitute a "
-                    "prior result or output. Prior derived outputs are temporary and are not persisted "
-                    "through process restart; an unavailable result is returned as an objective defect "
-                    "so RD may decide whether to regenerate it."
+                    "must supply result_id, exact output_path, and input_name. output_path is always "
+                    "relative to analysis_result.outputs; do not include an initial 'outputs' component. "
+                    "Reusable row datasets are advertised in derived_dataset_catalog with their exact "
+                    "output_path and schema. Deterministic code resolves only the exact RD-authored "
+                    "reference and may not choose or substitute a prior result or output. Prior derived "
+                    "outputs are temporary and are not persisted through process restart; an unavailable "
+                    "result is returned as an objective defect so RD may decide whether to regenerate it."
                 ),
                 "method_contracts": cls._json_safe(available_methods),
                 "no_hidden_defaults": "Scientifically meaningful missing parameters are not inferred, defaulted, or substituted by deterministic code.",
@@ -113,6 +115,12 @@ class OpenAICompatibleResearchDirector:
                 "required evidence payload unavailable for execution",
                 "malformed finding envelope disclosed in finding_envelope",
             ],
+            "analysis_execution_error_policy": (
+                "If the exact requested Analysis method encounters an objective execution error, the "
+                "error is returned as an Analysis result with interpretation_boundary "
+                "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP. Deterministic code does not choose a "
+                "replacement method, input, preprocessing step, or scientific response."
+            ),
         }
 
     def _request_decision(self, *, operation: str, mission: str, payload: Mapping[str, object]) -> ResearchDecision:
@@ -121,6 +129,7 @@ class OpenAICompatibleResearchDirector:
             "You are the scientific reasoning authority. Determine scientific questions, hypotheses, method choice, scientifically meaningful parameters, interpretation, significance, findings, and next research direction. "
             "The available Analysis methods are described neutrally in the supplied capability catalog; select from that catalog when requesting Analysis. "
             "You may explicitly chain a prior Analysis output into a later Analysis request using analysis_inputs; you decide which prior result and exact output path are scientifically appropriate. Deterministic code only resolves your exact reference and preserves its lineage. "
+            "Reusable derived row datasets are temporary campaign-local Analysis outputs advertised in derived_dataset_catalog; their row payloads are withheld from model transport but remain mechanically available to later Analysis execution through the catalog's exact output_path. "
             "Every deterministic condition that can block your request or finding must be disclosed in objective_execution_requirements before it is enforced. Deterministic code validates only objective execution and representation contracts and may return exact defects for you to repair. It may not veto a scientific finding because the conclusion or metadata taxonomy was not anticipated. "
             "A changed evidence reacquisition is reported to you as evidence continuity metadata, not automatically treated as scientific failure. A missing calculation capability, data resource, or other research resource is also not scientific closure. Record such an unanswered question as LACK_RESOURCE in research_state, identify the resource needed, and continue to another scientifically useful answerable question whenever one remains. "
             "Resource gaps are operational research state, never scientific findings for Nexus. Nexus is durable research memory for subject metadata and significant findings, not a raw-data repository. Return exactly one JSON object matching the required decision schema and no prose."
@@ -139,7 +148,7 @@ class OpenAICompatibleResearchDirector:
                     "analysis_inputs": [
                         {
                             "result_id": "exact prior analysis_result.result_id",
-                            "output_path": ["string or integer path component"],
+                            "output_path": ["path components relative to analysis_result.outputs; never prefix with outputs"],
                             "input_name": "unique string name for this resolved execution payload",
                         }
                     ],
@@ -175,9 +184,11 @@ class OpenAICompatibleResearchDirector:
                 "If continue_research is true, next_request must be fully authored by you.",
                 "Choose the scientific method yourself from available_analysis_methods; capability metadata describes execution requirements but does not recommend a method.",
                 "Review objective_execution_requirements before authoring a request or finding; these are the deterministic conditions either can be judged against.",
-                "When a prior Analysis result contains a derived dataset needed by your next method, use analysis_inputs to identify the exact prior result_id and output_path. For example, a transform result whose derived rows are under observations can be referenced with output_path [\"observations\"], and you must then select columns that actually exist in those derived rows rather than silently reverting to raw evidence columns.",
-                "Do not expect deterministic code to infer which prior result, output path, or derived field you intended; if you omit analysis_inputs, only evidence_ids are supplied as execution payloads.",
+                "When analysis_result.outputs.derived_dataset_catalog advertises a dataset needed by your next method, use its exact output_path in analysis_inputs. output_path is relative to analysis_result.outputs, so never prefix it with 'outputs'.",
+                "Select only columns actually listed in the chosen derived dataset schema. Do not silently revert to raw evidence columns when your question concerns a derived quantity.",
+                "Do not expect deterministic code to infer which prior result, derived dataset, output path, or derived field you intended; if you omit analysis_inputs, only evidence_ids are supplied as execution payloads.",
                 "Derived Analysis outputs are campaign-local temporary data. If a process restart makes a referenced result unavailable, deterministic validation will report MISSING_ANALYSIS_RESULT and you decide whether regenerating that derived result is scientifically appropriate.",
+                "An Analysis result with interpretation_boundary OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP reports an objective failure of the exact method you requested; decide the scientific next step yourself rather than assuming the runtime substituted another method.",
                 "If operation is RESUME_RESEARCH, inspect evidence_continuity and decide its scientific consequence yourself; CHANGED is not an automatic failure.",
                 "If an objective contract defect is supplied, repair only by making your own scientific choice; do not expect the validator to invent a value or substitute a method.",
                 "If a scientifically relevant question cannot be answered because a needed capability, dataset, field, coverage interval, or other resource is unavailable, append it to research_state.lack_resource with the required resources and reason, then move to another answerable question rather than ending the campaign solely for that gap.",
@@ -214,6 +225,30 @@ class OpenAICompatibleResearchDirector:
             else:
                 raise ResearchDirectorTransportError("AI Research Director returned no textual decision")
         return ResearchDecisionCodec.decode(content)
+
+    @classmethod
+    def _analysis_result_payload(cls, result: AnalysisResult) -> Mapping[str, object]:
+        raw = asdict(result)
+        outputs = dict(raw.get("outputs", {}))
+        derived = outputs.pop("derived_datasets", None)
+        if isinstance(derived, Mapping):
+            catalog = outputs.get("derived_dataset_catalog")
+            if not isinstance(catalog, Mapping):
+                catalog = {
+                    str(name): {
+                        "row_count": len(rows) if isinstance(rows, (list, tuple)) else None,
+                        "output_path": ["derived_datasets", str(name)],
+                        "temporary": True,
+                    }
+                    for name, rows in derived.items()
+                }
+                outputs["derived_dataset_catalog"] = catalog
+            outputs["derived_dataset_transport"] = (
+                "Row payload withheld from RD transport; available to later Analysis execution only "
+                "through explicit analysis_inputs using the catalog's output_path."
+            )
+        raw["outputs"] = outputs
+        return cls._json_safe(raw)
 
     @staticmethod
     def _json_safe(value):
