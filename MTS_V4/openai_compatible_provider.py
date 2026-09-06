@@ -1,0 +1,213 @@
+from __future__ import annotations
+
+import json
+import os
+import urllib.error
+import urllib.request
+from dataclasses import asdict
+from typing import Mapping, Sequence
+
+from .contracts import AnalysisRequest, AnalysisResult, ContractDefect, EvidenceDescriptor, ResearchDecision, SubjectMetadata
+from .rd_codec import ResearchDecisionCodec
+
+
+class ResearchDirectorTransportError(RuntimeError):
+    pass
+
+
+class OpenAICompatibleResearchDirector:
+    """OpenAI-compatible transport for the v4 AI Research Director.
+
+    Configuration is environment-driven so credentials and endpoint details are
+    deferred to integration time and never embedded in source control.
+    """
+
+    def __init__(
+        self,
+        *,
+        base_url: str | None = None,
+        model: str | None = None,
+        api_key: str | None = None,
+        timeout_seconds: int = 180,
+    ) -> None:
+        self._base_url = (base_url or os.getenv("MTS_RD_BASE_URL") or "").rstrip("/")
+        self._model = model or os.getenv("MTS_RD_MODEL") or ""
+        self._api_key = api_key if api_key is not None else os.getenv("MTS_RD_API_KEY", "")
+        self._timeout_seconds = timeout_seconds
+        if not self._base_url:
+            raise ValueError("MTS_RD_BASE_URL or base_url is required")
+        if not self._model:
+            raise ValueError("MTS_RD_MODEL or model is required")
+
+    def begin_research(
+        self,
+        *,
+        mission: str,
+        subject: SubjectMetadata,
+        evidence: Sequence[EvidenceDescriptor],
+        nexus_context: Mapping[str, object],
+    ) -> ResearchDecision:
+        return self._request_decision(
+            operation="BEGIN_RESEARCH",
+            mission=mission,
+            payload={
+                "subject": asdict(subject),
+                "evidence": [asdict(item) for item in evidence],
+                "nexus_context": self._json_safe(nexus_context),
+            },
+        )
+
+    def repair_request(
+        self,
+        *,
+        mission: str,
+        subject: SubjectMetadata,
+        prior_decision: ResearchDecision,
+        defects: Sequence[ContractDefect],
+        evidence: Sequence[EvidenceDescriptor],
+        nexus_context: Mapping[str, object],
+    ) -> ResearchDecision:
+        return self._request_decision(
+            operation="REPAIR_OBJECTIVE_CONTRACT",
+            mission=mission,
+            payload={
+                "subject": asdict(subject),
+                "prior_decision": self._json_safe(asdict(prior_decision)),
+                "objective_contract_defects": [asdict(item) for item in defects],
+                "evidence": [asdict(item) for item in evidence],
+                "nexus_context": self._json_safe(nexus_context),
+            },
+        )
+
+    def interpret_result(
+        self,
+        *,
+        mission: str,
+        subject: SubjectMetadata,
+        request: AnalysisRequest,
+        result: AnalysisResult,
+        evidence: Sequence[EvidenceDescriptor],
+        nexus_context: Mapping[str, object],
+    ) -> ResearchDecision:
+        return self._request_decision(
+            operation="INTERPRET_ANALYSIS_RESULT",
+            mission=mission,
+            payload={
+                "subject": asdict(subject),
+                "analysis_request": self._json_safe(asdict(request)),
+                "analysis_result": self._json_safe(asdict(result)),
+                "evidence": [asdict(item) for item in evidence],
+                "nexus_context": self._json_safe(nexus_context),
+            },
+        )
+
+    def _request_decision(
+        self,
+        *,
+        operation: str,
+        mission: str,
+        payload: Mapping[str, object],
+    ) -> ResearchDecision:
+        system = (
+            "You are the AI Research Director for Momentum Trading System v4. "
+            "You are the scientific reasoning authority. Determine scientific questions, "
+            "hypotheses, method choice, scientifically meaningful parameters, interpretation, "
+            "significance, and next research direction. Deterministic code validates only "
+            "objective execution contracts and may return exact defects for you to repair. "
+            "Do not ask deterministic code to choose science for you. Nexus is durable research "
+            "memory for subject metadata and significant findings, not a raw-data repository. "
+            "Return exactly one JSON object matching the required decision schema and no prose."
+        )
+        user = {
+            "operation": operation,
+            "mission": mission,
+            "required_decision_schema": {
+                "continue_research": "boolean",
+                "next_request": {
+                    "request_id": "string",
+                    "subject_id": "string",
+                    "question": "string",
+                    "method_id": "string",
+                    "evidence_ids": ["string"],
+                    "parameters": {},
+                    "research_phase": "EXPLORATION or VALIDATION",
+                    "rationale": "string",
+                },
+                "promote_findings": [
+                    {
+                        "finding_id": "string",
+                        "subject_id": "string",
+                        "statement": "string",
+                        "significance": "string",
+                        "status": "string",
+                        "supporting_result_ids": ["string"],
+                        "evidence_ids": ["string"],
+                        "applicability": {},
+                        "limitations": ["string"],
+                        "relationships": ["string"],
+                    }
+                ],
+                "research_state": {},
+                "close_reason": "string or null",
+            },
+            "instructions": [
+                "If continue_research is true, next_request must be fully authored by you.",
+                "If an objective contract defect is supplied, repair only by making your own scientific choice; do not expect the validator to invent a value or substitute a method.",
+                "Promote findings only when you judge them scientifically significant enough for durable research memory.",
+                "Do not place raw/reproducible datasets in findings or research_state.",
+            ],
+            "context": payload,
+        }
+        body = json.dumps(
+            {
+                "model": self._model,
+                "messages": [
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": json.dumps(user, sort_keys=True, default=str)},
+                ],
+                "temperature": 0.2,
+            }
+        ).encode("utf-8")
+        headers = {"Content-Type": "application/json"}
+        if self._api_key:
+            headers["Authorization"] = f"Bearer {self._api_key}"
+        request = urllib.request.Request(
+            f"{self._base_url}/v1/chat/completions",
+            data=body,
+            headers=headers,
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=self._timeout_seconds) as response:
+                document = json.loads(response.read().decode("utf-8"))
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError) as exc:
+            raise ResearchDirectorTransportError(
+                f"AI Research Director transport failed: {type(exc).__name__}: {exc}"
+            ) from exc
+
+        try:
+            message = document["choices"][0]["message"]
+            content = message.get("content")
+        except (KeyError, IndexError, TypeError, AttributeError) as exc:
+            raise ResearchDirectorTransportError(
+                "OpenAI-compatible response is missing choices[0].message"
+            ) from exc
+        if not isinstance(content, str) or not content.strip():
+            reasoning_content = message.get("reasoning_content") if isinstance(message, Mapping) else None
+            if isinstance(reasoning_content, str) and reasoning_content.strip():
+                content = reasoning_content
+            else:
+                raise ResearchDirectorTransportError("AI Research Director returned no textual decision")
+        return ResearchDecisionCodec.decode(content)
+
+    @staticmethod
+    def _json_safe(value):
+        if hasattr(value, "value") and value.__class__.__module__ == "enum":
+            return value.value
+        if isinstance(value, Mapping):
+            return {str(k): OpenAICompatibleResearchDirector._json_safe(v) for k, v in value.items()}
+        if isinstance(value, (list, tuple)):
+            return [OpenAICompatibleResearchDirector._json_safe(v) for v in value]
+        if hasattr(value, "__dataclass_fields__"):
+            return OpenAICompatibleResearchDirector._json_safe(asdict(value))
+        return value
