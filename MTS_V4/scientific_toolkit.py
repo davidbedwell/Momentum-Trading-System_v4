@@ -89,22 +89,22 @@ def scientific_tool_count() -> int:
 
 def scientific_toolkit_method_spec() -> MethodSpec:
     tools = _public_calculation_tools()
-    tool_ids = tuple(tool.tool_id for tool in tools)
     return MethodSpec(
         method_id=TOOLKIT_METHOD_ID,
         artifact_types=("NORMALIZED_DATASET",),
         description=(
-            "Invoke one exact installed public numerical function. RD selects the function and "
-            "authors every scientifically meaningful argument. The allowed tool_id values are "
-            "the calculation choices; standard SciPy function signatures apply."
+            "Invoke one exact installed public numerical function from the listed SciPy namespaces. "
+            "RD selects the function and authors every scientifically meaningful argument."
         ),
         parameters=(
             ParameterContract(
                 "tool_id",
                 True,
                 (str,),
-                allowed_values=tool_ids,
-                meaning="exact installed calculation function selected by RD",
+                meaning=(
+                    "exact installed public function ID in one of metadata.namespaces, for example "
+                    "scipy.stats.pearsonr; existence is checked mechanically at execution"
+                ),
             ),
             ParameterContract(
                 "args",
@@ -130,6 +130,22 @@ def scientific_toolkit_method_spec() -> MethodSpec:
         metadata={
             "tool_count": len(tools),
             "namespaces": list(_TOOLKIT_NAMESPACES),
+            "tool_id_contract": (
+                "Any installed public calculation function in the listed namespaces is eligible "
+                "unless mechanically excluded for execution safety. No deterministic ranking, "
+                "recommendation, or scientific whitelist is applied."
+            ),
+            "examples_not_recommendations": [
+                "scipy.stats.pearsonr",
+                "scipy.stats.spearmanr",
+                "scipy.stats.kendalltau",
+                "scipy.stats.ttest_ind",
+                "scipy.stats.mannwhitneyu",
+                "scipy.stats.chi2_contingency",
+                "scipy.signal.find_peaks",
+                "scipy.fft.fft",
+                "scipy.spatial.distance.correlation",
+            ],
             "argument_contract": {
                 "column_binding": {"column": "exact schema field name"},
                 "literal_values": "passed exactly as authored by RD",
@@ -229,8 +245,15 @@ def execute_scientific_toolkit(
     registry = {tool.tool_id: tool for tool in _public_calculation_tools()}
     try:
         tool = registry[tool_id]
-    except KeyError as exc:
-        raise ScientificToolkitError(f"tool_id is not available: {tool_id}") from exc
+    except KeyError:
+        return {
+            "tool_id": tool_id,
+            "execution_error": (
+                "LACK_RESOURCE: requested tool_id is not an installed eligible public calculation "
+                "function in the disclosed toolkit namespaces"
+            ),
+            "interpretation_boundary": "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP",
+        }
 
     try:
         args = _resolve(list(parameters["args"]), rows)
