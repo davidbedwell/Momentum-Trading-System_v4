@@ -260,9 +260,14 @@ class OpenAICompatibleResearchDirector:
             "contracts and may return exact defects for you to repair. It may not veto a scientific "
             "finding because the conclusion or metadata taxonomy was not anticipated. A changed "
             "evidence reacquisition is reported to you as evidence continuity metadata, not "
-            "automatically treated as scientific failure. Nexus is durable research memory for "
-            "subject metadata and significant findings, not a raw-data repository. Return exactly "
-            "one JSON object matching the required decision schema and no prose."
+            "automatically treated as scientific failure. A missing calculation capability, data "
+            "resource, or other research resource is also not scientific closure. Record such an "
+            "unanswered question as LACK_RESOURCE in research_state, identify the resource needed, "
+            "and continue to another scientifically useful answerable question whenever one remains. "
+            "Resource gaps are operational research state, never scientific findings for Nexus. "
+            "Nexus is durable research memory for subject metadata and significant findings, not a "
+            "raw-data repository. Return exactly one JSON object matching the required decision "
+            "schema and no prose."
         )
         user = {
             "operation": operation,
@@ -289,7 +294,18 @@ class OpenAICompatibleResearchDirector:
                         "metadata": "open-ended object; arbitrary RD-authored scientific metadata allowed",
                     }
                 ],
-                "research_state": {},
+                "research_state": {
+                    "questions_answered": "cumulative integer count maintained by RD",
+                    "questions_unanswered_lack_resource": "cumulative integer count maintained by RD",
+                    "lack_resource": [
+                        {
+                            "question": "unanswered scientific question",
+                            "required_resources": ["resource, evidence, calculation, or capability needed"],
+                            "reason": "brief explanation of why current resources cannot answer it",
+                        }
+                    ],
+                    "other_state": "arbitrary additional AI-authored research state may be included",
+                },
                 "close_reason": "string or null",
             },
             "instructions": [
@@ -298,6 +314,11 @@ class OpenAICompatibleResearchDirector:
                 "Review objective_execution_requirements before authoring a request or finding; these are the deterministic conditions either can be judged against.",
                 "If operation is RESUME_RESEARCH, inspect evidence_continuity and decide its scientific consequence yourself; CHANGED is not an automatic failure.",
                 "If an objective contract defect is supplied, repair only by making your own scientific choice; do not expect the validator to invent a value or substitute a method.",
+                "If a scientifically relevant question cannot be answered because a needed capability, dataset, field, coverage interval, or other resource is unavailable, append it to research_state.lack_resource with the required resources and reason, then move to another answerable question rather than ending the campaign solely for that gap.",
+                "Maintain cumulative research_state.questions_answered and research_state.questions_unanswered_lack_resource so the final decision reports how many questions were answered and how many remain unanswered for lack of resources.",
+                "When the campaign eventually closes, preserve the full cumulative research_state.lack_resource list as the end-of-run resource request report.",
+                "Do not promote missing tools, missing data, unsupported calculations, or other resource/capability limitations as scientific findings; they belong in research_state only.",
+                "Set continue_research false for lack of resources only if, in your scientific judgment, no other meaningful answerable research question remains or the campaign is otherwise complete.",
                 "Promote findings only when you judge them scientifically significant enough for durable research memory.",
                 "The finding envelope is closed and minimal; the metadata namespace is scientifically open-ended and does not require an approved vocabulary.",
                 "Do not place raw/reproducible datasets in findings or research_state.",
