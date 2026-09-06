@@ -106,7 +106,7 @@ class ResearchLoopOrchestrator:
                 subject=subject,
                 evidence=evidence,
                 available_methods=self._available_methods,
-                nexus_context=self._nexus_context(subject.subject_id),
+                nexus_context=self._nexus_context(subject.subject_id, analysis_results),
             )
             decisions += 1
             promoted += self._publish_promotions(decision)
@@ -121,7 +121,7 @@ class ResearchLoopOrchestrator:
                     evidence_continuity=evidence_continuity,
                     evidence=evidence,
                     available_methods=self._available_methods,
-                    nexus_context=self._nexus_context(subject.subject_id),
+                    nexus_context=self._nexus_context(subject.subject_id, analysis_results),
                 )
                 decisions += 1
                 promoted += self._publish_promotions(decision)
@@ -163,7 +163,7 @@ class ResearchLoopOrchestrator:
                     defects=defects,
                     evidence=evidence,
                     available_methods=self._available_methods,
-                    nexus_context=self._nexus_context(subject.subject_id),
+                    nexus_context=self._nexus_context(subject.subject_id, analysis_results),
                 )
                 decisions += 1
                 promoted += self._publish_promotions(decision)
@@ -247,7 +247,7 @@ class ResearchLoopOrchestrator:
                 result=result,
                 evidence=evidence,
                 available_methods=self._available_methods,
-                nexus_context=self._nexus_context(subject.subject_id),
+                nexus_context=self._nexus_context(subject.subject_id, analysis_results),
             )
             decisions += 1
             promoted += self._publish_promotions(decision)
@@ -277,7 +277,46 @@ class ResearchLoopOrchestrator:
         if callback is not None:
             callback(decision, decisions, analyses)
 
-    def _nexus_context(self, subject_id: str) -> Mapping[str, object]:
+    @staticmethod
+    def _analysis_result_catalog(
+        analysis_results: Mapping[str, AnalysisResult],
+    ) -> tuple[Mapping[str, object], ...]:
+        """Compact campaign-local inventory of reusable Analysis outputs for RD.
+
+        This catalog contains no raw/derived row payloads and is not persisted to
+        Nexus or campaign checkpoints. It gives RD enough mechanical visibility to
+        author an exact analysis_inputs reference without deterministic result
+        selection or substitution.
+        """
+        catalog: list[Mapping[str, object]] = []
+        for result in analysis_results.values():
+            derived_catalog = result.outputs.get("derived_dataset_catalog")
+            reusable: Mapping[str, object]
+            if isinstance(derived_catalog, Mapping):
+                reusable = {
+                    str(name): dict(metadata)
+                    for name, metadata in derived_catalog.items()
+                    if isinstance(metadata, Mapping)
+                }
+            else:
+                reusable = {}
+            catalog.append(
+                {
+                    "result_id": result.result_id,
+                    "request_id": result.request_id,
+                    "method_id": result.method_id,
+                    "evidence_ids": list(result.evidence_ids),
+                    "execution_status": result.execution_metadata.get("execution_status"),
+                    "reusable_derived_datasets": reusable,
+                }
+            )
+        return tuple(catalog)
+
+    def _nexus_context(
+        self,
+        subject_id: str,
+        analysis_results: Mapping[str, AnalysisResult] | None = None,
+    ) -> Mapping[str, object]:
         return {
             "subject": self._nexus.get_subject(subject_id),
             "evidence_metadata": self._nexus.evidence_metadata_for_subject(subject_id),
@@ -290,5 +329,16 @@ class ResearchLoopOrchestrator:
                 "rd_may_reject_or_reformulate": True,
                 "rd_may_generate_additional_concepts": True,
                 "deterministic_selection_or_ranking": False,
+            },
+            "campaign_analysis_result_catalog": self._analysis_result_catalog(
+                analysis_results or {}
+            ),
+            "campaign_analysis_result_catalog_policy": {
+                "persistence": "CAMPAIGN_LOCAL_NOT_NEXUS",
+                "contains_row_payloads": False,
+                "purpose": (
+                    "Mechanical visibility only: RD selects any prior result and exact reusable output "
+                    "path it judges scientifically appropriate; deterministic code does not select one."
+                ),
             },
         }
