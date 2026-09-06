@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install v4 scientific calculation dependencies
+        run: python -m pip install --disable-pip-version-check -q numpy scipy
       - name: Compile v4 package
         run: python -m compileall -q MTS_V4
       - name: Run v4 authority tests
