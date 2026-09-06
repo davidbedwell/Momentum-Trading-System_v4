@@ -73,6 +73,7 @@ class ResearchLoopOrchestrator:
                 raise ResearchLoopError(
                     f"evidence {item.evidence_id} does not belong to {subject.subject_id}"
                 )
+            self._nexus.upsert_evidence_metadata(item.durable_metadata())
 
         decisions = 0
         analyses = 0
@@ -182,5 +183,6 @@ class ResearchLoopOrchestrator:
     def _nexus_context(self, subject_id: str) -> Mapping[str, object]:
         return {
             "subject": self._nexus.get_subject(subject_id),
+            "evidence_metadata": self._nexus.evidence_metadata_for_subject(subject_id),
             "significant_findings": self._nexus.findings_for_subject(subject_id),
         }
