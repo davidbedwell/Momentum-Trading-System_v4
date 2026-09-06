@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Mapping, Protocol, Sequence
+from typing import Any, Mapping, Protocol, Sequence
 
 from .contracts import (
     AnalysisRequest,
@@ -21,6 +21,7 @@ class ResearchDirectorProvider(Protocol):
         mission: str,
         subject: SubjectMetadata,
         evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
     ) -> ResearchDecision: ...
 
@@ -32,6 +33,7 @@ class ResearchDirectorProvider(Protocol):
         prior_decision: ResearchDecision,
         defects: Sequence[ContractDefect],
         evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
     ) -> ResearchDecision: ...
 
@@ -43,6 +45,7 @@ class ResearchDirectorProvider(Protocol):
         request: AnalysisRequest,
         result: AnalysisResult,
         evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
     ) -> ResearchDecision: ...
 
