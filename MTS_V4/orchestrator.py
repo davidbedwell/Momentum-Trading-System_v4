@@ -1,0 +1,181 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Mapping, Sequence
+
+from .cache import TemporaryResearchCache
+from .contracts import EvidenceDescriptor, ResearchDecision, SubjectMetadata
+from .interfaces import AnalysisExecutor, ResearchDirectorProvider
+from .nexus import ResearchNexus
+from .validation import ObjectiveContractValidator
+
+
+class ResearchLoopError(RuntimeError):
+    pass
+
+
+@dataclass(frozen=True, slots=True)
+class ResearchLoopOutcome:
+    decisions: int
+    analyses_executed: int
+    findings_promoted: int
+    closed: bool
+    close_reason: str | None
+
+
+class ResearchLoopOrchestrator:
+    """Mechanical RD -> validate -> Analysis -> RD loop.
+
+    The orchestrator contains no scientific selection logic. Every question,
+    method, scientifically meaningful parameter, interpretation, finding, and
+    continue/stop decision comes from the ResearchDirectorProvider.
+    """
+
+    def __init__(
+        self,
+        *,
+        mission: str,
+        rd: ResearchDirectorProvider,
+        validator: ObjectiveContractValidator,
+        analysis: AnalysisExecutor,
+        nexus: ResearchNexus,
+        cache: TemporaryResearchCache,
+        max_contract_repairs: int = 3,
+    ) -> None:
+        if max_contract_repairs < 0:
+            raise ValueError("max_contract_repairs cannot be negative")
+        self._mission = mission
+        self._rd = rd
+        self._validator = validator
+        self._analysis = analysis
+        self._nexus = nexus
+        self._cache = cache
+        self._max_contract_repairs = max_contract_repairs
+
+    def run(
+        self,
+        *,
+        subject: SubjectMetadata,
+        evidence: Sequence[EvidenceDescriptor],
+        max_analyses: int,
+    ) -> ResearchLoopOutcome:
+        if max_analyses <= 0:
+            raise ValueError("max_analyses must be positive")
+
+        self._nexus.upsert_subject(subject)
+        evidence_map = {item.evidence_id: item for item in evidence}
+        if len(evidence_map) != len(evidence):
+            raise ResearchLoopError("duplicate evidence_id")
+        for item in evidence:
+            if item.subject_id != subject.subject_id:
+                raise ResearchLoopError(
+                    f"evidence {item.evidence_id} does not belong to {subject.subject_id}"
+                )
+
+        decisions = 0
+        analyses = 0
+        promoted = 0
+
+        decision = self._rd.begin_research(
+            mission=self._mission,
+            subject=subject,
+            evidence=evidence,
+            nexus_context=self._nexus_context(subject.subject_id),
+        )
+        decisions += 1
+        promoted += self._publish_promotions(decision)
+
+        while decision.continue_research:
+            if analyses >= max_analyses:
+                return ResearchLoopOutcome(
+                    decisions=decisions,
+                    analyses_executed=analyses,
+                    findings_promoted=promoted,
+                    closed=False,
+                    close_reason="ANALYSIS_BUDGET_EXHAUSTED",
+                )
+            if decision.next_request is None:
+                raise ResearchLoopError(
+                    "RD requested continuation without an AnalysisRequest"
+                )
+
+            repairs = 0
+            while True:
+                defects = self._validator.validate(decision.next_request, evidence_map)
+                if not defects:
+                    break
+                if repairs >= self._max_contract_repairs:
+                    raise ResearchLoopError(
+                        "objective contract repair budget exhausted: "
+                        + "; ".join(defect.message for defect in defects)
+                    )
+                decision = self._rd.repair_request(
+                    mission=self._mission,
+                    subject=subject,
+                    prior_decision=decision,
+                    defects=defects,
+                    evidence=evidence,
+                    nexus_context=self._nexus_context(subject.subject_id),
+                )
+                decisions += 1
+                promoted += self._publish_promotions(decision)
+                repairs += 1
+                if not decision.continue_research:
+                    return ResearchLoopOutcome(
+                        decisions=decisions,
+                        analyses_executed=analyses,
+                        findings_promoted=promoted,
+                        closed=True,
+                        close_reason=decision.close_reason,
+                    )
+                if decision.next_request is None:
+                    raise ResearchLoopError(
+                        "RD repair requested continuation without an AnalysisRequest"
+                    )
+
+            request = decision.next_request
+            payloads: dict[str, object] = {}
+            for evidence_id in request.evidence_ids:
+                descriptor = evidence_map[evidence_id]
+                payloads[evidence_id] = self._cache.get(descriptor.cache_key)
+
+            result = self._analysis.execute(request, payloads)
+            analyses += 1
+            if result.request_id != request.request_id:
+                raise ResearchLoopError("Analysis result request lineage mismatch")
+            if result.subject_id != subject.subject_id:
+                raise ResearchLoopError("Analysis result subject lineage mismatch")
+            if result.method_id != request.method_id:
+                raise ResearchLoopError(
+                    "Analysis substituted a method; v4 requires exact method execution"
+                )
+
+            decision = self._rd.interpret_result(
+                mission=self._mission,
+                subject=subject,
+                request=request,
+                result=result,
+                evidence=evidence,
+                nexus_context=self._nexus_context(subject.subject_id),
+            )
+            decisions += 1
+            promoted += self._publish_promotions(decision)
+
+        return ResearchLoopOutcome(
+            decisions=decisions,
+            analyses_executed=analyses,
+            findings_promoted=promoted,
+            closed=True,
+            close_reason=decision.close_reason,
+        )
+
+    def _publish_promotions(self, decision: ResearchDecision) -> int:
+        for finding in decision.promote_findings:
+            self._nexus.publish_finding(finding)
+        return len(decision.promote_findings)
+
+    def _nexus_context(self, subject_id: str) -> Mapping[str, object]:
+        return {
+            "subject": self._nexus.get_subject(subject_id),
+            "significant_findings": self._nexus.findings_for_subject(subject_id),
+        }
