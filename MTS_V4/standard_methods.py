@@ -57,6 +57,21 @@ def _numeric_summary(values: list[float]) -> Mapping[str, Any]:
     }
 
 
+def _derived_dataset(name: str, rows: list[Mapping[str, Any]]) -> Mapping[str, Any]:
+    schema = tuple(str(key) for key in rows[0]) if rows else ()
+    return {
+        "derived_dataset_catalog": {
+            name: {
+                "row_count": len(rows),
+                "schema": list(schema),
+                "output_path": ["derived_datasets", name],
+                "temporary": True,
+            }
+        },
+        "derived_datasets": {name: rows},
+    }
+
+
 def descriptive_statistics(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
     rows = _rows(evidence_payloads)
     summaries = {}
@@ -111,7 +126,8 @@ def percent_change_series(evidence_payloads: Mapping[str, object], parameters: M
         if current is None or prior is None: bad+=1; continue
         if prior==0: zero+=1; continue
         observations.append({"index":index,"value":(current-prior)/prior})
-    return {"column":column,"lag":lag,"observation_count":len(observations),"excluded_non_numeric":bad,"excluded_zero_base":zero,"observations":observations,"interpretation_boundary":"MEASUREMENT_ONLY_RD_INTERPRETS"}
+    derived = _derived_dataset("percent_change", observations)
+    return {"column":column,"lag":lag,"observation_count":len(observations),"excluded_non_numeric":bad,"excluded_zero_base":zero,"observations":observations,**derived,"interpretation_boundary":"MEASUREMENT_ONLY_RD_INTERPRETS"}
 
 
 def rolling_statistics(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -126,7 +142,8 @@ def rolling_statistics(evidence_payloads: Mapping[str, object], parameters: Mapp
         elif statistic=="maximum": value=max(nums)
         else: value=statistics.median(nums)
         observations.append({"index":index,"value":value})
-    return {"column":column,"window":window,"statistic":statistic,"observations":observations,"excluded_windows":excluded,"interpretation_boundary":"MEASUREMENT_ONLY_RD_INTERPRETS"}
+    derived = _derived_dataset("rolling_statistic", observations)
+    return {"column":column,"window":window,"statistic":statistic,"observations":observations,"excluded_windows":excluded,**derived,"interpretation_boundary":"MEASUREMENT_ONLY_RD_INTERPRETS"}
 
 
 def threshold_event_indices(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -136,12 +153,13 @@ def threshold_event_indices(evidence_payloads: Mapping[str, object], parameters:
     for index,row in enumerate(rows):
         value=_numeric(row.get(column))
         if value is not None and predicate(value): events.append({"index":index,"value":value})
-    return {"column":column,"operator":op,"threshold":threshold,"event_count":len(events),"events":events,"interpretation_boundary":"EVENT_SELECTION_EXACTLY_AS_RD_PARAMETERIZED"}
+    derived = _derived_dataset("threshold_events", events)
+    return {"column":column,"operator":op,"threshold":threshold,"event_count":len(events),"events":events,**derived,"interpretation_boundary":"EVENT_SELECTION_EXACTLY_AS_RD_PARAMETERIZED"}
 
 
 def forward_path_measurement(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
     rows=_rows(evidence_payloads); price_column=str(parameters["price_column"]); horizon=int(parameters["horizon"]); direction=str(parameters["direction"]); factor=1.0 if direction=="LONG" else -1.0
-    terminal=[]; favorable=[]; adverse=[]; bars_favorable=[]; bars_adverse=[]; bad=zero=0
+    terminal=[]; favorable=[]; adverse=[]; bars_favorable=[]; bars_adverse=[]; derived_rows=[]; bad=zero=0
     for index in range(0,max(0,len(rows)-horizon)):
         values=[_numeric(rows[index+offset].get(price_column)) for offset in range(0,horizon+1)]
         if any(v is None for v in values): bad+=1; continue
@@ -150,8 +168,20 @@ def forward_path_measurement(evidence_payloads: Mapping[str, object], parameters
         future=[float(v) for v in values[1:]]
         directional=[factor*((v-entry)/entry) for v in future]
         best=max(directional); worst=min(directional)
-        terminal.append(directional[-1]); favorable.append(best); adverse.append(worst)
-        bars_favorable.append(float(directional.index(best)+1)); bars_adverse.append(float(directional.index(worst)+1))
+        terminal_value=directional[-1]
+        bars_favorable_value=float(directional.index(best)+1)
+        bars_adverse_value=float(directional.index(worst)+1)
+        terminal.append(terminal_value); favorable.append(best); adverse.append(worst)
+        bars_favorable.append(bars_favorable_value); bars_adverse.append(bars_adverse_value)
+        derived_rows.append({
+            "index": index,
+            "terminal_directional_return": terminal_value,
+            "max_favorable_directional_return": best,
+            "max_adverse_directional_return": worst,
+            "bars_to_max_favorable": bars_favorable_value,
+            "bars_to_max_adverse": bars_adverse_value,
+        })
+    derived = _derived_dataset("forward_path_observations", derived_rows)
     return {
         "price_column":price_column,
         "horizon":horizon,
@@ -166,9 +196,11 @@ def forward_path_measurement(evidence_payloads: Mapping[str, object], parameters
         "bars_to_max_favorable":_numeric_summary(bars_favorable),
         "bars_to_max_adverse":_numeric_summary(bars_adverse),
         "terminal_positive_fraction": (sum(value > 0 for value in terminal) / len(terminal)) if terminal else None,
+        **derived,
         "transport_semantics": (
-            "This method returns exact aggregate measurements rather than every row-level path so the "
-            "AI Research Director can receive the complete method result within model context."
+            "Aggregate measurements are transported directly to RD. The exact row-level derived "
+            "dataset remains campaign-local and is advertised by derived_dataset_catalog for explicit "
+            "RD-authored chaining into later Analysis requests."
         ),
         "interpretation_boundary":"LOOKAHEAD_MEASUREMENT_ONLY_RD_INTERPRETS",
     }
@@ -192,10 +224,10 @@ def standard_method_catalog() -> MethodCatalog:
     return MethodCatalog([
         MethodSpec("analysis.descriptive.statistics",("NORMALIZED_DATASET",),"Compute descriptive summaries for RD-selected columns.",(ParameterContract("columns",True,(list,tuple),minimum_length=1,meaning="RD-selected numeric columns"),),1),
         MethodSpec("analysis.relationship.correlation",("NORMALIZED_DATASET",),"Measure pairwise Pearson or Spearman association without causal interpretation.",(ParameterContract("columns",True,(list,tuple),exact_length=2,meaning="two RD-selected numeric columns"),ParameterContract("correlation_type",True,(str,),allowed_values=("pearson","spearman"),meaning="statistic selected by RD")),2),
-        MethodSpec("analysis.transform.percent_change",("NORMALIZED_DATASET",),"Compute backward-looking percent change for an RD-selected field and lag.",(ParameterContract("column",True,(str,),meaning="RD-selected numeric field"),ParameterContract("lag",True,(int,),minimum_value=1,meaning="RD-selected backward row lag")),2,metadata={"temporal_semantics":"present/prior rows only"}),
-        MethodSpec("analysis.rolling.statistics",("NORMALIZED_DATASET",),"Compute a rolling statistic using an RD-selected field, window, and statistic.",(ParameterContract("column",True,(str,),meaning="RD-selected numeric field"),ParameterContract("window",True,(int,),minimum_value=1,meaning="RD-selected window"),ParameterContract("statistic",True,(str,),allowed_values=("mean","median","stddev_sample","minimum","maximum"),meaning="RD-selected statistic")),1),
-        MethodSpec("analysis.events.threshold",("NORMALIZED_DATASET",),"Identify rows satisfying an RD-authored numeric threshold condition.",(ParameterContract("column",True,(str,),meaning="RD-selected field"),ParameterContract("operator",True,(str,),allowed_values=("GT","GE","LT","LE"),meaning="RD-selected comparison"),ParameterContract("threshold",True,(int,float),meaning="RD-selected threshold")),1),
-        MethodSpec("analysis.path.forward_measurement",("NORMALIZED_DATASET",),"Exploration-only look-ahead path measurement over an RD-selected horizon and direction, returned as exact aggregate path statistics.",(ParameterContract("price_column",True,(str,),meaning="RD-selected price field"),ParameterContract("horizon",True,(int,),minimum_value=1,meaning="RD-selected forward rows"),ParameterContract("direction",True,(str,),allowed_values=("LONG","SHORT"),meaning="RD-selected directional frame")),2,True,False,True,{"scientific_selection":"none","output_shape":"bounded exact aggregate statistics"}),
+        MethodSpec("analysis.transform.percent_change",("NORMALIZED_DATASET",),"Compute backward-looking percent change for an RD-selected field and lag.",(ParameterContract("column",True,(str,),meaning="RD-selected numeric field"),ParameterContract("lag",True,(int,),minimum_value=1,meaning="RD-selected backward row lag")),2,metadata={"temporal_semantics":"present/prior rows only","reusable_derived_dataset":True}),
+        MethodSpec("analysis.rolling.statistics",("NORMALIZED_DATASET",),"Compute a rolling statistic using an RD-selected field, window, and statistic.",(ParameterContract("column",True,(str,),meaning="RD-selected numeric field"),ParameterContract("window",True,(int,),minimum_value=1,meaning="RD-selected window"),ParameterContract("statistic",True,(str,),allowed_values=("mean","median","stddev_sample","minimum","maximum"),meaning="RD-selected statistic")),1,metadata={"reusable_derived_dataset":True}),
+        MethodSpec("analysis.events.threshold",("NORMALIZED_DATASET",),"Identify rows satisfying an RD-authored numeric threshold condition.",(ParameterContract("column",True,(str,),meaning="RD-selected field"),ParameterContract("operator",True,(str,),allowed_values=("GT","GE","LT","LE"),meaning="RD-selected comparison"),ParameterContract("threshold",True,(int,float),meaning="RD-selected threshold")),1,metadata={"reusable_derived_dataset":True}),
+        MethodSpec("analysis.path.forward_measurement",("NORMALIZED_DATASET",),"Exploration-only look-ahead path measurement over an RD-selected horizon and direction, returning exact aggregate statistics plus a campaign-local reusable derived observation dataset.",(ParameterContract("price_column",True,(str,),meaning="RD-selected price field"),ParameterContract("horizon",True,(int,),minimum_value=1,meaning="RD-selected forward rows"),ParameterContract("direction",True,(str,),allowed_values=("LONG","SHORT"),meaning="RD-selected directional frame")),2,True,False,True,{"scientific_selection":"none","output_shape":"bounded RD transport plus temporary reusable derived dataset","reusable_derived_dataset":True}),
         MethodSpec("analysis.performance.binary_classification",("NORMALIZED_DATASET",),"Measure binary classification performance for RD-selected predicted/actual fields and positive label.",(ParameterContract("predicted_column",True,(str,),meaning="RD-selected prediction field"),ParameterContract("actual_column",True,(str,),meaning="RD-selected outcome field"),ParameterContract("positive_value",True,(str,int,float,bool),meaning="RD-selected positive label")),1),
     ])
 
