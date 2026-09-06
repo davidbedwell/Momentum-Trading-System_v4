@@ -19,7 +19,26 @@ class SubjectMetadata:
 
 
 @dataclass(frozen=True, slots=True)
+class EvidenceMetadata:
+    """Durable evidence metadata with no reproducible payload/cache location."""
+
+    evidence_id: str
+    subject_id: str
+    evidence_type: str
+    artifact_type: str
+    source_identity: str
+    coverage_start: str | None
+    coverage_end: str | None
+    row_count: int | None
+    schema: tuple[str, ...]
+    provenance: Mapping[str, Any] = field(default_factory=dict)
+    neutral_semantics: str = ""
+
+
+@dataclass(frozen=True, slots=True)
 class EvidenceDescriptor:
+    """Campaign-local evidence reference, including the temporary cache key."""
+
     evidence_id: str
     subject_id: str
     evidence_type: str
@@ -32,6 +51,21 @@ class EvidenceDescriptor:
     cache_key: str
     provenance: Mapping[str, Any] = field(default_factory=dict)
     neutral_semantics: str = ""
+
+    def durable_metadata(self) -> EvidenceMetadata:
+        return EvidenceMetadata(
+            evidence_id=self.evidence_id,
+            subject_id=self.subject_id,
+            evidence_type=self.evidence_type,
+            artifact_type=self.artifact_type,
+            source_identity=self.source_identity,
+            coverage_start=self.coverage_start,
+            coverage_end=self.coverage_end,
+            row_count=self.row_count,
+            schema=self.schema,
+            provenance=dict(self.provenance),
+            neutral_semantics=self.neutral_semantics,
+        )
 
 
 @dataclass(frozen=True, slots=True)
