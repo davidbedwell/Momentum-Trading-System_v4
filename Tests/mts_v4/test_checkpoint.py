@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from MTS_V4.checkpoint import CampaignCheckpoint, CheckpointError, JsonCampaignCheckpointStore
+from MTS_V4.checkpoint import CampaignCheckpoint, JsonCampaignCheckpointStore
 from MTS_V4.contracts import (
     AnalysisRequest,
     EvidenceDescriptor,
@@ -14,7 +14,7 @@ from MTS_V4.contracts import (
     ResearchPhase,
     SubjectMetadata,
 )
-from MTS_V4.recovery import CampaignRecovery
+from MTS_V4.recovery import CampaignRecovery, EvidenceContinuityStatus
 
 
 class V4CheckpointTests(unittest.TestCase):
@@ -100,16 +100,30 @@ class V4CheckpointTests(unittest.TestCase):
                 JsonCampaignCheckpointStore(path).load()
 
     def test_recovery_accepts_new_cache_location_when_evidence_identity_matches(self):
-        recovered = CampaignRecovery.verify(self._checkpoint(), (self._reacquired(),))
-        self.assertEqual(recovered.recovered[0].cache_key, "cache:new-session:1")
+        assessment = CampaignRecovery.compare(self._checkpoint(), (self._reacquired(),))
+        self.assertEqual(assessment.status, EvidenceContinuityStatus.SAME)
+        self.assertEqual(assessment.recovered[0].cache_key, "cache:new-session:1")
+        self.assertEqual(assessment.differences, ())
 
-    def test_recovery_rejects_changed_evidence_without_making_scientific_judgment(self):
-        with self.assertRaises(CheckpointError) as context:
-            CampaignRecovery.verify(
-                self._checkpoint(),
-                (self._reacquired(schema=("date", "close", "volume", "future_label")),),
-            )
-        self.assertIn("changed schema", str(context.exception))
+    def test_changed_evidence_is_reported_to_rd_context_not_rejected(self):
+        assessment = CampaignRecovery.compare(
+            self._checkpoint(),
+            (
+                self._reacquired(
+                    coverage_end="2026-01-02",
+                    row_count=101,
+                    schema=("date", "close", "volume", "revision_flag"),
+                ),
+            ),
+        )
+        self.assertEqual(assessment.status, EvidenceContinuityStatus.CHANGED)
+        changed_fields = {difference.field for difference in assessment.differences}
+        self.assertEqual(changed_fields, {"coverage_end", "row_count", "schema"})
+
+    def test_missing_or_unexpected_identity_is_unverifiable_not_scientific_rejection(self):
+        assessment = CampaignRecovery.compare(self._checkpoint(), ())
+        self.assertEqual(assessment.status, EvidenceContinuityStatus.UNVERIFIABLE)
+        self.assertEqual(assessment.missing_evidence_ids, ("ev:1",))
 
 
 if __name__ == "__main__":
