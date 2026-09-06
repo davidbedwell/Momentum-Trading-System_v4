@@ -41,6 +41,22 @@ def _quantile(sorted_values: list[float], q: float) -> float | None:
     return sorted_values[lo] * (1 - weight) + sorted_values[hi] * weight
 
 
+def _numeric_summary(values: list[float]) -> Mapping[str, Any]:
+    ordered = sorted(values)
+    return {
+        "count": len(ordered),
+        "mean": statistics.fmean(ordered) if ordered else None,
+        "median": statistics.median(ordered) if ordered else None,
+        "stddev_sample": statistics.stdev(ordered) if len(ordered) >= 2 else None,
+        "minimum": min(ordered) if ordered else None,
+        "maximum": max(ordered) if ordered else None,
+        "q05": _quantile(ordered, .05),
+        "q25": _quantile(ordered, .25),
+        "q75": _quantile(ordered, .75),
+        "q95": _quantile(ordered, .95),
+    }
+
+
 def descriptive_statistics(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
     rows = _rows(evidence_payloads)
     summaries = {}
@@ -125,15 +141,37 @@ def threshold_event_indices(evidence_payloads: Mapping[str, object], parameters:
 
 def forward_path_measurement(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
     rows=_rows(evidence_payloads); price_column=str(parameters["price_column"]); horizon=int(parameters["horizon"]); direction=str(parameters["direction"]); factor=1.0 if direction=="LONG" else -1.0
-    observations=[]; bad=zero=0
+    terminal=[]; favorable=[]; adverse=[]; bars_favorable=[]; bars_adverse=[]; bad=zero=0
     for index in range(0,max(0,len(rows)-horizon)):
         values=[_numeric(rows[index+offset].get(price_column)) for offset in range(0,horizon+1)]
         if any(v is None for v in values): bad+=1; continue
         entry=float(values[0])
         if entry==0: zero+=1; continue
-        future=[float(v) for v in values[1:]]; directional=[factor*((v-entry)/entry) for v in future]; favorable=max(directional); adverse=min(directional)
-        observations.append({"start_index":index,"entry":entry,"terminal_directional_return":directional[-1],"max_favorable_directional_return":favorable,"max_adverse_directional_return":adverse,"bars_to_max_favorable":directional.index(favorable)+1,"bars_to_max_adverse":directional.index(adverse)+1})
-    return {"price_column":price_column,"horizon":horizon,"direction":direction,"eligible_start_count":max(0,len(rows)-horizon),"observation_count":len(observations),"excluded_non_numeric":bad,"excluded_zero_entry":zero,"observations":observations,"interpretation_boundary":"LOOKAHEAD_MEASUREMENT_ONLY_RD_INTERPRETS"}
+        future=[float(v) for v in values[1:]]
+        directional=[factor*((v-entry)/entry) for v in future]
+        best=max(directional); worst=min(directional)
+        terminal.append(directional[-1]); favorable.append(best); adverse.append(worst)
+        bars_favorable.append(float(directional.index(best)+1)); bars_adverse.append(float(directional.index(worst)+1))
+    return {
+        "price_column":price_column,
+        "horizon":horizon,
+        "direction":direction,
+        "eligible_start_count":max(0,len(rows)-horizon),
+        "observation_count":len(terminal),
+        "excluded_non_numeric":bad,
+        "excluded_zero_entry":zero,
+        "terminal_directional_return":_numeric_summary(terminal),
+        "max_favorable_directional_return":_numeric_summary(favorable),
+        "max_adverse_directional_return":_numeric_summary(adverse),
+        "bars_to_max_favorable":_numeric_summary(bars_favorable),
+        "bars_to_max_adverse":_numeric_summary(bars_adverse),
+        "terminal_positive_fraction": (sum(value > 0 for value in terminal) / len(terminal)) if terminal else None,
+        "transport_semantics": (
+            "This method returns exact aggregate measurements rather than every row-level path so the "
+            "AI Research Director can receive the complete method result within model context."
+        ),
+        "interpretation_boundary":"LOOKAHEAD_MEASUREMENT_ONLY_RD_INTERPRETS",
+    }
 
 
 def classification_metrics(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -157,7 +195,7 @@ def standard_method_catalog() -> MethodCatalog:
         MethodSpec("analysis.transform.percent_change",("NORMALIZED_DATASET",),"Compute backward-looking percent change for an RD-selected field and lag.",(ParameterContract("column",True,(str,),meaning="RD-selected numeric field"),ParameterContract("lag",True,(int,),minimum_value=1,meaning="RD-selected backward row lag")),2,metadata={"temporal_semantics":"present/prior rows only"}),
         MethodSpec("analysis.rolling.statistics",("NORMALIZED_DATASET",),"Compute a rolling statistic using an RD-selected field, window, and statistic.",(ParameterContract("column",True,(str,),meaning="RD-selected numeric field"),ParameterContract("window",True,(int,),minimum_value=1,meaning="RD-selected window"),ParameterContract("statistic",True,(str,),allowed_values=("mean","median","stddev_sample","minimum","maximum"),meaning="RD-selected statistic")),1),
         MethodSpec("analysis.events.threshold",("NORMALIZED_DATASET",),"Identify rows satisfying an RD-authored numeric threshold condition.",(ParameterContract("column",True,(str,),meaning="RD-selected field"),ParameterContract("operator",True,(str,),allowed_values=("GT","GE","LT","LE"),meaning="RD-selected comparison"),ParameterContract("threshold",True,(int,float),meaning="RD-selected threshold")),1),
-        MethodSpec("analysis.path.forward_measurement",("NORMALIZED_DATASET",),"Exploration-only look-ahead path measurement over an RD-selected horizon and direction.",(ParameterContract("price_column",True,(str,),meaning="RD-selected price field"),ParameterContract("horizon",True,(int,),minimum_value=1,meaning="RD-selected forward rows"),ParameterContract("direction",True,(str,),allowed_values=("LONG","SHORT"),meaning="RD-selected directional frame")),2,True,False,True,{"scientific_selection":"none"}),
+        MethodSpec("analysis.path.forward_measurement",("NORMALIZED_DATASET",),"Exploration-only look-ahead path measurement over an RD-selected horizon and direction, returned as exact aggregate path statistics.",(ParameterContract("price_column",True,(str,),meaning="RD-selected price field"),ParameterContract("horizon",True,(int,),minimum_value=1,meaning="RD-selected forward rows"),ParameterContract("direction",True,(str,),allowed_values=("LONG","SHORT"),meaning="RD-selected directional frame")),2,True,False,True,{"scientific_selection":"none","output_shape":"bounded exact aggregate statistics"}),
         MethodSpec("analysis.performance.binary_classification",("NORMALIZED_DATASET",),"Measure binary classification performance for RD-selected predicted/actual fields and positive label.",(ParameterContract("predicted_column",True,(str,),meaning="RD-selected prediction field"),ParameterContract("actual_column",True,(str,),meaning="RD-selected outcome field"),ParameterContract("positive_value",True,(str,int,float,bool),meaning="RD-selected positive label")),1),
     ])
 
