@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
 from .cache import TemporaryResearchCache
 from .contracts import EvidenceDescriptor, ResearchDecision, SubjectMetadata
@@ -14,6 +14,9 @@ class ResearchLoopError(RuntimeError):
     pass
 
 
+StateCallback = Callable[[ResearchDecision, int, int], None]
+
+
 @dataclass(frozen=True, slots=True)
 class ResearchLoopOutcome:
     decisions: int
@@ -21,6 +24,7 @@ class ResearchLoopOutcome:
     findings_promoted: int
     closed: bool
     close_reason: str | None
+    final_decision: ResearchDecision
 
 
 class ResearchLoopOrchestrator:
@@ -29,6 +33,9 @@ class ResearchLoopOrchestrator:
     The orchestrator contains no scientific selection logic. Every question,
     method, scientifically meaningful parameter, interpretation, finding, and
     continue/stop decision comes from the ResearchDirectorProvider.
+
+    Optional checkpoint callbacks receive only AI-authored decision state and
+    mechanical counters. Resume never reconstructs or guesses scientific state.
     """
 
     def __init__(
@@ -60,9 +67,16 @@ class ResearchLoopOrchestrator:
         subject: SubjectMetadata,
         evidence: Sequence[EvidenceDescriptor],
         max_analyses: int,
+        initial_decision: ResearchDecision | None = None,
+        initial_decisions: int = 0,
+        initial_analyses: int = 0,
+        evidence_continuity: Mapping[str, object] | None = None,
+        state_callback: StateCallback | None = None,
     ) -> ResearchLoopOutcome:
         if max_analyses <= 0:
             raise ValueError("max_analyses must be positive")
+        if initial_decisions < 0 or initial_analyses < 0:
+            raise ValueError("initial counters cannot be negative")
 
         self._nexus.upsert_subject(subject)
         evidence_map = {item.evidence_id: item for item in evidence}
@@ -75,19 +89,36 @@ class ResearchLoopOrchestrator:
                 )
             self._nexus.upsert_evidence_metadata(item.durable_metadata())
 
-        decisions = 0
-        analyses = 0
+        decisions = initial_decisions
+        analyses = initial_analyses
         promoted = 0
 
-        decision = self._rd.begin_research(
-            mission=self._mission,
-            subject=subject,
-            evidence=evidence,
-            available_methods=self._available_methods,
-            nexus_context=self._nexus_context(subject.subject_id),
-        )
-        decisions += 1
-        promoted += self._publish_promotions(decision)
+        if initial_decision is None:
+            decision = self._rd.begin_research(
+                mission=self._mission,
+                subject=subject,
+                evidence=evidence,
+                available_methods=self._available_methods,
+                nexus_context=self._nexus_context(subject.subject_id),
+            )
+            decisions += 1
+            promoted += self._publish_promotions(decision)
+            self._checkpoint(state_callback, decision, decisions, analyses)
+        else:
+            decision = initial_decision
+            if evidence_continuity is not None:
+                decision = self._rd.resume_research(
+                    mission=self._mission,
+                    subject=subject,
+                    prior_decision=initial_decision,
+                    evidence_continuity=evidence_continuity,
+                    evidence=evidence,
+                    available_methods=self._available_methods,
+                    nexus_context=self._nexus_context(subject.subject_id),
+                )
+                decisions += 1
+                promoted += self._publish_promotions(decision)
+                self._checkpoint(state_callback, decision, decisions, analyses)
 
         while decision.continue_research:
             if analyses >= max_analyses:
@@ -97,6 +128,7 @@ class ResearchLoopOrchestrator:
                     findings_promoted=promoted,
                     closed=False,
                     close_reason="ANALYSIS_BUDGET_EXHAUSTED",
+                    final_decision=decision,
                 )
             if decision.next_request is None:
                 raise ResearchLoopError(
@@ -125,6 +157,7 @@ class ResearchLoopOrchestrator:
                 decisions += 1
                 promoted += self._publish_promotions(decision)
                 repairs += 1
+                self._checkpoint(state_callback, decision, decisions, analyses)
                 if not decision.continue_research:
                     return ResearchLoopOutcome(
                         decisions=decisions,
@@ -132,6 +165,7 @@ class ResearchLoopOrchestrator:
                         findings_promoted=promoted,
                         closed=True,
                         close_reason=decision.close_reason,
+                        final_decision=decision,
                     )
                 if decision.next_request is None:
                     raise ResearchLoopError(
@@ -155,6 +189,11 @@ class ResearchLoopOrchestrator:
                     "Analysis substituted a method; v4 requires exact method execution"
                 )
 
+            # If the process dies after Analysis but before RD interpretation, the
+            # last checkpoint still contains the AI-authored request. Resume may
+            # safely re-execute that exact deterministic Analysis request.
+            self._checkpoint(state_callback, decision, decisions, analyses)
+
             decision = self._rd.interpret_result(
                 mission=self._mission,
                 subject=subject,
@@ -166,6 +205,7 @@ class ResearchLoopOrchestrator:
             )
             decisions += 1
             promoted += self._publish_promotions(decision)
+            self._checkpoint(state_callback, decision, decisions, analyses)
 
         return ResearchLoopOutcome(
             decisions=decisions,
@@ -173,12 +213,23 @@ class ResearchLoopOrchestrator:
             findings_promoted=promoted,
             closed=True,
             close_reason=decision.close_reason,
+            final_decision=decision,
         )
 
     def _publish_promotions(self, decision: ResearchDecision) -> int:
         for finding in decision.promote_findings:
             self._nexus.publish_finding(finding)
         return len(decision.promote_findings)
+
+    @staticmethod
+    def _checkpoint(
+        callback: StateCallback | None,
+        decision: ResearchDecision,
+        decisions: int,
+        analyses: int,
+    ) -> None:
+        if callback is not None:
+            callback(decision, decisions, analyses)
 
     def _nexus_context(self, subject_id: str) -> Mapping[str, object]:
         return {
