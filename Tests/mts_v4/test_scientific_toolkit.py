@@ -17,12 +17,14 @@ class ScientificToolkitTests(unittest.TestCase):
         self.assertEqual(spec.metadata["tool_count"], count)
         self.assertFalse(spec.metadata["deterministic_ranking"])
         self.assertEqual(spec.metadata["scientific_selection"], "AI_RESEARCH_DIRECTOR_ONLY")
+        self.assertIn("scipy.stats", spec.metadata["namespaces"])
+        self.assertIn("scipy.signal", spec.metadata["namespaces"])
+        self.assertIn("scipy.special", spec.metadata["namespaces"])
         tool_contract = next(item for item in spec.parameters if item.name == "tool_id")
-        tool_ids = tool_contract.allowed_values
-        self.assertTrue(any(str(item) == "scipy.stats.pearsonr" for item in tool_ids))
-        self.assertTrue(any(str(item) == "scipy.stats.spearmanr" for item in tool_ids))
-        self.assertTrue(any(str(item).startswith("scipy.signal.") for item in tool_ids))
-        self.assertTrue(any(str(item).startswith("scipy.special.") for item in tool_ids))
+        self.assertEqual(tool_contract.allowed_values, ())
+        examples = spec.metadata["examples_not_recommendations"]
+        self.assertIn("scipy.stats.pearsonr", examples)
+        self.assertIn("scipy.stats.spearmanr", examples)
 
     def test_rd_selected_pearsonr_returns_inferential_output(self):
         rows = [
@@ -45,6 +47,17 @@ class ScientificToolkitTests(unittest.TestCase):
         payload = result["result"]
         self.assertIn("statistic", payload)
         self.assertIn("pvalue", payload)
+
+    def test_missing_tool_is_nonfatal_objective_resource_gap(self):
+        result = execute_scientific_toolkit(
+            {"evidence:1": [{"x": 1.0}, {"x": 2.0}]},
+            {"tool_id": "scipy.stats.not_a_real_tool", "args": [], "kwargs": {}},
+        )
+        self.assertIn("LACK_RESOURCE", result["execution_error"])
+        self.assertEqual(
+            result["interpretation_boundary"],
+            "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP",
+        )
 
     def test_toolkit_does_not_silently_drop_missing_values(self):
         rows = [{"x": 1.0}, {"x": None}, {"x": 3.0}]
