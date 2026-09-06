@@ -4,9 +4,10 @@ import tempfile
 import unittest
 
 from MTS_V4.bootstrap import build_runtime
-from MTS_V4.contracts import AnalysisRequest, Finding, ResearchDecision, ResearchPhase, SubjectMetadata
+from MTS_V4.contracts import AnalysisRequest, EvidenceDescriptor, Finding, ResearchDecision, ResearchPhase, SubjectMetadata
 from MTS_V4.intake import IntakeEngine, IntakePayload
-from MTS_V4.standard_methods import standard_method_catalog
+from MTS_V4.standard_methods import forward_path_measurement, standard_method_catalog
+from MTS_V4.validation import ObjectiveContractValidator
 
 
 class _Source:
@@ -83,6 +84,61 @@ class V4StandardMethodsTests(unittest.TestCase):
         spec = standard_method_catalog().get("analysis.relationship.correlation")
         columns = next(item for item in spec.parameters if item.name == "columns")
         self.assertEqual(columns.exact_length, 2)
+
+    def test_forward_path_contract_exposes_all_scientific_parameters_and_lookahead_boundary(self):
+        spec = standard_method_catalog().get("analysis.path.forward_measurement")
+        parameters = {item.name: item for item in spec.parameters}
+        self.assertEqual(set(parameters), {"price_column", "horizon", "direction"})
+        self.assertTrue(all(item.required for item in parameters.values()))
+        self.assertEqual(parameters["horizon"].minimum_value, 1)
+        self.assertEqual(parameters["direction"].allowed_values, ("LONG", "SHORT"))
+        self.assertTrue(spec.allows_future_information)
+        self.assertTrue(spec.exploration_allowed)
+        self.assertFalse(spec.validation_allowed)
+
+    def test_forward_path_measurement_computes_path_without_interpreting_it(self):
+        result = forward_path_measurement(
+            {"ev:1": [{"close": 100.0}, {"close": 90.0}, {"close": 120.0}]},
+            {"price_column": "close", "horizon": 2, "direction": "LONG"},
+        )
+        self.assertEqual(result["observation_count"], 1)
+        observation = result["observations"][0]
+        self.assertAlmostEqual(observation["terminal_directional_return"], 0.20)
+        self.assertAlmostEqual(observation["max_favorable_directional_return"], 0.20)
+        self.assertAlmostEqual(observation["max_adverse_directional_return"], -0.10)
+        self.assertEqual(observation["bars_to_max_favorable"], 2)
+        self.assertEqual(observation["bars_to_max_adverse"], 1)
+        self.assertEqual(result["interpretation_boundary"], "LOOKAHEAD_MEASUREMENT_ONLY_RD_INTERPRETS")
+
+    def test_forward_path_hidden_range_is_not_hidden_and_validation_use_is_blocked(self):
+        evidence = EvidenceDescriptor(
+            evidence_id="ev:1",
+            subject_id="AAPL",
+            evidence_type="OHLCV",
+            artifact_type="NORMALIZED_DATASET",
+            source_identity="fixture",
+            coverage_start="2026-01-01",
+            coverage_end="2026-01-03",
+            row_count=3,
+            schema=("close",),
+            cache_key="cache:1",
+        )
+        request = AnalysisRequest(
+            request_id="r:path",
+            subject_id="AAPL",
+            question="RD-authored path question",
+            method_id="analysis.path.forward_measurement",
+            evidence_ids=("ev:1",),
+            parameters={"price_column": "close", "horizon": 0, "direction": "LONG"},
+            research_phase=ResearchPhase.VALIDATION,
+        )
+        defects = ObjectiveContractValidator(standard_method_catalog()).validate(
+            request, {"ev:1": evidence}
+        )
+        codes = {item.code for item in defects}
+        self.assertIn("INVALID_PARAMETER_RANGE", codes)
+        self.assertIn("INVALID_RESEARCH_PHASE", codes)
+        self.assertIn("TEMPORAL_CONTRACT_VIOLATION", codes)
 
     def test_credential_free_end_to_end_runtime(self):
         rd = _FakeAIResearchDirector()
