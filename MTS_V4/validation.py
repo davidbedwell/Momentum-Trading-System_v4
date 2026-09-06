@@ -205,6 +205,32 @@ class ObjectiveContractValidator:
                     )
                 )
 
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            if contract.minimum_value is not None and value < contract.minimum_value:
+                defects.append(
+                    ContractDefect(
+                        code="INVALID_PARAMETER_RANGE",
+                        message=(
+                            f"{request.method_id} parameter {contract.name} must be >= "
+                            f"{contract.minimum_value}; received {value}"
+                        ),
+                        field=contract.name,
+                        method_id=request.method_id,
+                    )
+                )
+            if contract.maximum_value is not None and value > contract.maximum_value:
+                defects.append(
+                    ContractDefect(
+                        code="INVALID_PARAMETER_RANGE",
+                        message=(
+                            f"{request.method_id} parameter {contract.name} must be <= "
+                            f"{contract.maximum_value}; received {value}"
+                        ),
+                        field=contract.name,
+                        method_id=request.method_id,
+                    )
+                )
+
         if contract.allowed_values and value not in contract.allowed_values:
             defects.append(
                 ContractDefect(
