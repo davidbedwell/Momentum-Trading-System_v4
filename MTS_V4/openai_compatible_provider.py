@@ -6,7 +6,7 @@ import urllib.error
 import urllib.request
 from dataclasses import asdict
 from enum import Enum
-from typing import Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 from .contracts import AnalysisRequest, AnalysisResult, ContractDefect, EvidenceDescriptor, ResearchDecision, SubjectMetadata
 from .rd_codec import ResearchDecisionCodec
@@ -46,6 +46,7 @@ class OpenAICompatibleResearchDirector:
         mission: str,
         subject: SubjectMetadata,
         evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
     ) -> ResearchDecision:
         return self._request_decision(
@@ -54,6 +55,7 @@ class OpenAICompatibleResearchDirector:
             payload={
                 "subject": asdict(subject),
                 "evidence": [asdict(item) for item in evidence],
+                "available_analysis_methods": self._json_safe(available_methods),
                 "nexus_context": self._json_safe(nexus_context),
             },
         )
@@ -66,6 +68,7 @@ class OpenAICompatibleResearchDirector:
         prior_decision: ResearchDecision,
         defects: Sequence[ContractDefect],
         evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
     ) -> ResearchDecision:
         return self._request_decision(
@@ -76,6 +79,7 @@ class OpenAICompatibleResearchDirector:
                 "prior_decision": self._json_safe(asdict(prior_decision)),
                 "objective_contract_defects": [asdict(item) for item in defects],
                 "evidence": [asdict(item) for item in evidence],
+                "available_analysis_methods": self._json_safe(available_methods),
                 "nexus_context": self._json_safe(nexus_context),
             },
         )
@@ -88,6 +92,7 @@ class OpenAICompatibleResearchDirector:
         request: AnalysisRequest,
         result: AnalysisResult,
         evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
     ) -> ResearchDecision:
         return self._request_decision(
@@ -98,6 +103,7 @@ class OpenAICompatibleResearchDirector:
                 "analysis_request": self._json_safe(asdict(request)),
                 "analysis_result": self._json_safe(asdict(result)),
                 "evidence": [asdict(item) for item in evidence],
+                "available_analysis_methods": self._json_safe(available_methods),
                 "nexus_context": self._json_safe(nexus_context),
             },
         )
@@ -113,11 +119,13 @@ class OpenAICompatibleResearchDirector:
             "You are the AI Research Director for Momentum Trading System v4. "
             "You are the scientific reasoning authority. Determine scientific questions, "
             "hypotheses, method choice, scientifically meaningful parameters, interpretation, "
-            "significance, and next research direction. Deterministic code validates only "
-            "objective execution contracts and may return exact defects for you to repair. "
-            "Do not ask deterministic code to choose science for you. Nexus is durable research "
-            "memory for subject metadata and significant findings, not a raw-data repository. "
-            "Return exactly one JSON object matching the required decision schema and no prose."
+            "significance, and next research direction. The available Analysis methods are "
+            "described neutrally in the supplied capability catalog; select from that catalog "
+            "when requesting Analysis. Deterministic code validates only objective execution "
+            "contracts and may return exact defects for you to repair. Do not ask deterministic "
+            "code to choose science for you. Nexus is durable research memory for subject "
+            "metadata and significant findings, not a raw-data repository. Return exactly one "
+            "JSON object matching the required decision schema and no prose."
         )
         user = {
             "operation": operation,
@@ -128,7 +136,7 @@ class OpenAICompatibleResearchDirector:
                     "request_id": "string",
                     "subject_id": "string",
                     "question": "string",
-                    "method_id": "string",
+                    "method_id": "string from available_analysis_methods",
                     "evidence_ids": ["string"],
                     "parameters": {},
                     "research_phase": "EXPLORATION or VALIDATION",
@@ -153,6 +161,7 @@ class OpenAICompatibleResearchDirector:
             },
             "instructions": [
                 "If continue_research is true, next_request must be fully authored by you.",
+                "Choose the scientific method yourself from available_analysis_methods; capability metadata describes execution requirements but does not recommend a method.",
                 "If an objective contract defect is supplied, repair only by making your own scientific choice; do not expect the validator to invent a value or substitute a method.",
                 "Promote findings only when you judge them scientifically significant enough for durable research memory.",
                 "Do not place raw/reproducible datasets in findings or research_state.",
