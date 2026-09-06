@@ -143,6 +143,56 @@ def relationship_correlation(
     }
 
 
+def percent_change_series(
+    evidence_payloads: Mapping[str, object],
+    parameters: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    """Compute backward-looking percent change over an RD-selected lag.
+
+    The operation chooses neither the field nor the lag. It uses only present
+    and prior rows, so it is mechanically safe in both exploration and
+    validation; RD remains responsible for scientific interpretation.
+    """
+    rows = _rows(evidence_payloads)
+    column = str(parameters["column"])
+    lag = int(parameters["lag"])
+    observations: list[Mapping[str, Any]] = []
+    excluded_non_numeric = 0
+    excluded_zero_base = 0
+    for index in range(lag, len(rows)):
+        current = rows[index].get(column)
+        prior = rows[index - lag].get(column)
+        if not (
+            isinstance(current, (int, float))
+            and not isinstance(current, bool)
+            and isinstance(prior, (int, float))
+            and not isinstance(prior, bool)
+            and math.isfinite(float(current))
+            and math.isfinite(float(prior))
+        ):
+            excluded_non_numeric += 1
+            continue
+        prior_value = float(prior)
+        if prior_value == 0.0:
+            excluded_zero_base += 1
+            continue
+        observations.append(
+            {
+                "index": index,
+                "value": (float(current) - prior_value) / prior_value,
+            }
+        )
+    return {
+        "column": column,
+        "lag": lag,
+        "observation_count": len(observations),
+        "excluded_non_numeric": excluded_non_numeric,
+        "excluded_zero_base": excluded_zero_base,
+        "observations": observations,
+        "interpretation_boundary": "MEASUREMENT_ONLY_RD_INTERPRETS",
+    }
+
+
 def forward_path_measurement(
     evidence_payloads: Mapping[str, object],
     parameters: Mapping[str, Any],
@@ -249,6 +299,31 @@ def standard_method_catalog() -> MethodCatalog:
                 minimum_sample=2,
             ),
             MethodSpec(
+                method_id="analysis.transform.percent_change",
+                artifact_types=("NORMALIZED_DATASET",),
+                description="Compute backward-looking percent changes for an RD-selected numeric field and lag.",
+                parameters=(
+                    ParameterContract(
+                        name="column",
+                        required=True,
+                        python_types=(str,),
+                        meaning="numeric field explicitly selected by RD",
+                    ),
+                    ParameterContract(
+                        name="lag",
+                        required=True,
+                        python_types=(int,),
+                        minimum_value=1,
+                        meaning="backward row lag explicitly selected by RD",
+                    ),
+                ),
+                minimum_sample=2,
+                metadata={
+                    "temporal_semantics": "current row versus prior row only",
+                    "scientific_selection": "none; RD supplies column and lag",
+                },
+            ),
+            MethodSpec(
                 method_id="analysis.path.forward_measurement",
                 artifact_types=("NORMALIZED_DATASET",),
                 description=(
@@ -299,6 +374,10 @@ def standard_analysis_methods() -> tuple[RegisteredAnalysisMethod, ...]:
         RegisteredAnalysisMethod(
             method_id="analysis.relationship.correlation",
             implementation=relationship_correlation,
+        ),
+        RegisteredAnalysisMethod(
+            method_id="analysis.transform.percent_change",
+            implementation=percent_change_series,
         ),
         RegisteredAnalysisMethod(
             method_id="analysis.path.forward_measurement",
