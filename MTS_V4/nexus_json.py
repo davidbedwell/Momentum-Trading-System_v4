@@ -13,7 +13,8 @@ class JsonResearchNexus:
 
     The on-disk document contains ticker/subject metadata, evidence metadata, and
     significant RD findings. It contains no raw evidence payload, temporary cache
-    key, or dataset publication API.
+    key, or dataset publication API. Finding science lives in an open metadata
+    namespace inside a small deterministic identity/lineage envelope.
     """
 
     def __init__(self, path: str | Path) -> None:
@@ -85,8 +86,22 @@ class JsonResearchNexus:
             raw = dict(raw)
             raw["supporting_result_ids"] = tuple(raw.get("supporting_result_ids", ()))
             raw["evidence_ids"] = tuple(raw.get("evidence_ids", ()))
-            raw["limitations"] = tuple(raw.get("limitations", ()))
-            raw["relationships"] = tuple(raw.get("relationships", ()))
+
+            # Compatibility for early v4 files: fields that were mistakenly
+            # deterministic top-level scientific categories are migrated into
+            # the open metadata namespace rather than discarded.
+            metadata = dict(raw.get("metadata", {}))
+            for legacy_name in (
+                "significance",
+                "status",
+                "applicability",
+                "limitations",
+                "relationships",
+            ):
+                if legacy_name in raw:
+                    metadata.setdefault(legacy_name, raw.pop(legacy_name))
+            raw["metadata"] = metadata
+
             finding = Finding(**raw)
             self._findings[finding.finding_id] = finding
 
