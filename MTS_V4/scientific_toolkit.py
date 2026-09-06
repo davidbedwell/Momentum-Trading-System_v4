@@ -222,7 +222,15 @@ def _json_safe(value: Any, *, depth: int = 0) -> Any:
                 )
             return _json_safe(value.tolist(), depth=depth + 1)
     if hasattr(value, "_asdict"):
-        return _json_safe(value._asdict(), depth=depth + 1)
+        named_result = value._asdict()
+        if isinstance(named_result, Mapping):
+            public_result = {
+                str(key): item
+                for key, item in named_result.items()
+                if not str(key).startswith("_")
+            }
+            return _json_safe(public_result, depth=depth + 1)
+        return _json_safe(named_result, depth=depth + 1)
     if isinstance(value, Mapping):
         return {str(k): _json_safe(v, depth=depth + 1) for k, v in value.items()}
     if isinstance(value, (list, tuple)):
