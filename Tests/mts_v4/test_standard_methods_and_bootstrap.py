@@ -113,6 +113,7 @@ class V4StandardMethodsTests(unittest.TestCase):
         self.assertTrue(spec.allows_future_information)
         self.assertTrue(spec.exploration_allowed)
         self.assertFalse(spec.validation_allowed)
+        self.assertEqual(spec.metadata["output_shape"], "bounded exact aggregate statistics")
 
     def test_forward_path_measurement_computes_path_without_interpreting_it(self):
         result = forward_path_measurement(
@@ -120,12 +121,13 @@ class V4StandardMethodsTests(unittest.TestCase):
             {"price_column": "close", "horizon": 2, "direction": "LONG"},
         )
         self.assertEqual(result["observation_count"], 1)
-        observation = result["observations"][0]
-        self.assertAlmostEqual(observation["terminal_directional_return"], 0.20)
-        self.assertAlmostEqual(observation["max_favorable_directional_return"], 0.20)
-        self.assertAlmostEqual(observation["max_adverse_directional_return"], -0.10)
-        self.assertEqual(observation["bars_to_max_favorable"], 2)
-        self.assertEqual(observation["bars_to_max_adverse"], 1)
+        self.assertAlmostEqual(result["terminal_directional_return"]["mean"], 0.20)
+        self.assertAlmostEqual(result["max_favorable_directional_return"]["mean"], 0.20)
+        self.assertAlmostEqual(result["max_adverse_directional_return"]["mean"], -0.10)
+        self.assertEqual(result["bars_to_max_favorable"]["mean"], 2.0)
+        self.assertEqual(result["bars_to_max_adverse"]["mean"], 1.0)
+        self.assertEqual(result["terminal_positive_fraction"], 1.0)
+        self.assertNotIn("observations", result)
         self.assertEqual(result["interpretation_boundary"], "LOOKAHEAD_MEASUREMENT_ONLY_RD_INTERPRETS")
 
     def test_forward_path_hidden_range_is_not_hidden_and_validation_use_is_blocked(self):
