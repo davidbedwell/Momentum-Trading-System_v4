@@ -1,0 +1,25 @@
+name: MTS v4 core
+
+on:
+  push:
+    branches:
+      - mts-v4-reconstruction-20260906
+  pull_request:
+    paths:
+      - 'MTS_V4/**'
+      - 'Tests/mts_v4/**'
+      - 'Architecture/MTS_V4_SYSTEM_ARCHITECTURE.md'
+      - 'ChatGPT.md'
+
+jobs:
+  authority-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile v4 package
+        run: python -m compileall -q MTS_V4
+      - name: Run v4 authority tests
+        run: python -m unittest discover -s Tests/mts_v4 -p 'test_*.py' -v
