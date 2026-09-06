@@ -18,14 +18,14 @@ def _rows(evidence_payloads: Mapping[str, object]) -> tuple[Mapping[str, Any], .
     return rows
 
 
+def _numeric(value: Any) -> float | None:
+    if isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(float(value)):
+        return float(value)
+    return None
+
+
 def _finite_numeric(values):
-    return [
-        float(value)
-        for value in values
-        if isinstance(value, (int, float))
-        and not isinstance(value, bool)
-        and math.isfinite(float(value))
-    ]
+    return [number for value in values if (number := _numeric(value)) is not None]
 
 
 def _quantile(sorted_values: list[float], q: float) -> float | None:
@@ -34,353 +34,135 @@ def _quantile(sorted_values: list[float], q: float) -> float | None:
     if len(sorted_values) == 1:
         return sorted_values[0]
     pos = (len(sorted_values) - 1) * q
-    lo = int(math.floor(pos))
-    hi = int(math.ceil(pos))
+    lo, hi = int(math.floor(pos)), int(math.ceil(pos))
     if lo == hi:
         return sorted_values[lo]
     weight = pos - lo
     return sorted_values[lo] * (1 - weight) + sorted_values[hi] * weight
 
 
-def descriptive_statistics(
-    evidence_payloads: Mapping[str, object],
-    parameters: Mapping[str, Any],
-) -> Mapping[str, Any]:
-    """Audited pre-B descriptive-statistics operation admitted into v4."""
+def descriptive_statistics(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
     rows = _rows(evidence_payloads)
-    columns = tuple(parameters["columns"])
-    summaries: dict[str, Mapping[str, Any]] = {}
-    for column in columns:
+    summaries = {}
+    for column in tuple(parameters["columns"]):
         raw = [row.get(column) for row in rows]
         values = sorted(_finite_numeric(raw))
         summaries[str(column)] = {
-            "count": len(values),
-            "missing_count": sum(value is None for value in raw),
+            "count": len(values), "missing_count": sum(value is None for value in raw),
             "mean": statistics.fmean(values) if values else None,
             "median": statistics.median(values) if values else None,
             "stddev_sample": statistics.stdev(values) if len(values) >= 2 else None,
-            "minimum": min(values) if values else None,
-            "maximum": max(values) if values else None,
-            "q05": _quantile(values, 0.05),
-            "q25": _quantile(values, 0.25),
-            "q75": _quantile(values, 0.75),
-            "q95": _quantile(values, 0.95),
+            "minimum": min(values) if values else None, "maximum": max(values) if values else None,
+            "q05": _quantile(values, .05), "q25": _quantile(values, .25),
+            "q75": _quantile(values, .75), "q95": _quantile(values, .95),
         }
-    return {
-        "row_count": len(rows),
-        "columns": summaries,
-        "interpretation_boundary": "DESCRIPTIVE_ONLY",
-    }
+    return {"row_count": len(rows), "columns": summaries, "interpretation_boundary": "DESCRIPTIVE_ONLY"}
 
 
 def _pearson(xs: list[float], ys: list[float]) -> float | None:
-    if len(xs) < 2:
-        return None
-    mx = statistics.fmean(xs)
-    my = statistics.fmean(ys)
-    dx = [x - mx for x in xs]
-    dy = [y - my for y in ys]
-    denominator = math.sqrt(sum(x * x for x in dx) * sum(y * y for y in dy))
-    if denominator == 0:
-        return None
-    return sum(x * y for x, y in zip(dx, dy)) / denominator
+    if len(xs) < 2: return None
+    mx, my = statistics.fmean(xs), statistics.fmean(ys)
+    dx, dy = [x-mx for x in xs], [y-my for y in ys]
+    denominator = math.sqrt(sum(x*x for x in dx) * sum(y*y for y in dy))
+    return None if denominator == 0 else sum(x*y for x,y in zip(dx,dy))/denominator
 
 
 def _average_ranks(values: list[float]) -> list[float]:
-    order = sorted(range(len(values)), key=lambda index: values[index])
-    ranks = [0.0] * len(values)
-    i = 0
+    order = sorted(range(len(values)), key=lambda i: values[i]); ranks=[0.0]*len(values); i=0
     while i < len(order):
-        j = i
-        while j + 1 < len(order) and values[order[j + 1]] == values[order[i]]:
-            j += 1
-        rank = (i + j + 2) / 2.0
-        for index in range(i, j + 1):
-            ranks[order[index]] = rank
-        i = j + 1
+        j=i
+        while j+1 < len(order) and values[order[j+1]] == values[order[i]]: j += 1
+        rank=(i+j+2)/2.0
+        for k in range(i,j+1): ranks[order[k]]=rank
+        i=j+1
     return ranks
 
 
-def relationship_correlation(
-    evidence_payloads: Mapping[str, object],
-    parameters: Mapping[str, Any],
-) -> Mapping[str, Any]:
-    """Audited pre-B relationship operation admitted under exact v4 scope."""
-    rows = _rows(evidence_payloads)
-    left, right = tuple(parameters["columns"])
-    correlation_type = str(parameters.get("correlation_type", "pearson")).lower()
-    if correlation_type not in {"pearson", "spearman"}:
-        raise ValueError("correlation_type must be pearson or spearman")
-
-    xs: list[float] = []
-    ys: list[float] = []
+def relationship_correlation(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
+    rows=_rows(evidence_payloads); left,right=tuple(parameters["columns"]); kind=str(parameters["correlation_type"]).lower()
+    xs=[]; ys=[]
     for row in rows:
-        x = row.get(left)
-        y = row.get(right)
-        if (
-            isinstance(x, (int, float))
-            and not isinstance(x, bool)
-            and isinstance(y, (int, float))
-            and not isinstance(y, bool)
-            and math.isfinite(float(x))
-            and math.isfinite(float(y))
-        ):
-            xs.append(float(x))
-            ys.append(float(y))
-
-    if correlation_type == "spearman":
-        value = _pearson(_average_ranks(xs), _average_ranks(ys))
-    else:
-        value = _pearson(xs, ys)
-
-    return {
-        "left": left,
-        "right": right,
-        "n": len(xs),
-        "correlation_type": correlation_type,
-        "correlation": value,
-        "interpretation_boundary": "RELATIONSHIP_NOT_CAUSATION",
-    }
+        x,y=_numeric(row.get(left)),_numeric(row.get(right))
+        if x is not None and y is not None: xs.append(x); ys.append(y)
+    value=_pearson(_average_ranks(xs),_average_ranks(ys)) if kind=="spearman" else _pearson(xs,ys)
+    return {"left":left,"right":right,"n":len(xs),"correlation_type":kind,"correlation":value,"interpretation_boundary":"RELATIONSHIP_NOT_CAUSATION"}
 
 
-def percent_change_series(
-    evidence_payloads: Mapping[str, object],
-    parameters: Mapping[str, Any],
-) -> Mapping[str, Any]:
-    """Compute backward-looking percent change over an RD-selected lag.
-
-    The operation chooses neither the field nor the lag. It uses only present
-    and prior rows, so it is mechanically safe in both exploration and
-    validation; RD remains responsible for scientific interpretation.
-    """
-    rows = _rows(evidence_payloads)
-    column = str(parameters["column"])
-    lag = int(parameters["lag"])
-    observations: list[Mapping[str, Any]] = []
-    excluded_non_numeric = 0
-    excluded_zero_base = 0
-    for index in range(lag, len(rows)):
-        current = rows[index].get(column)
-        prior = rows[index - lag].get(column)
-        if not (
-            isinstance(current, (int, float))
-            and not isinstance(current, bool)
-            and isinstance(prior, (int, float))
-            and not isinstance(prior, bool)
-            and math.isfinite(float(current))
-            and math.isfinite(float(prior))
-        ):
-            excluded_non_numeric += 1
-            continue
-        prior_value = float(prior)
-        if prior_value == 0.0:
-            excluded_zero_base += 1
-            continue
-        observations.append(
-            {
-                "index": index,
-                "value": (float(current) - prior_value) / prior_value,
-            }
-        )
-    return {
-        "column": column,
-        "lag": lag,
-        "observation_count": len(observations),
-        "excluded_non_numeric": excluded_non_numeric,
-        "excluded_zero_base": excluded_zero_base,
-        "observations": observations,
-        "interpretation_boundary": "MEASUREMENT_ONLY_RD_INTERPRETS",
-    }
+def percent_change_series(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
+    rows=_rows(evidence_payloads); column=str(parameters["column"]); lag=int(parameters["lag"]); observations=[]; bad=zero=0
+    for index in range(lag,len(rows)):
+        current,prior=_numeric(rows[index].get(column)),_numeric(rows[index-lag].get(column))
+        if current is None or prior is None: bad+=1; continue
+        if prior==0: zero+=1; continue
+        observations.append({"index":index,"value":(current-prior)/prior})
+    return {"column":column,"lag":lag,"observation_count":len(observations),"excluded_non_numeric":bad,"excluded_zero_base":zero,"observations":observations,"interpretation_boundary":"MEASUREMENT_ONLY_RD_INTERPRETS"}
 
 
-def forward_path_measurement(
-    evidence_payloads: Mapping[str, object],
-    parameters: Mapping[str, Any],
-) -> Mapping[str, Any]:
-    """Measure future path geometry exactly as parameterized by RD.
+def rolling_statistics(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
+    rows=_rows(evidence_payloads); column=str(parameters["column"]); window=int(parameters["window"]); statistic=str(parameters["statistic"]); observations=[]; excluded=0
+    for index in range(window-1,len(rows)):
+        values=[_numeric(rows[j].get(column)) for j in range(index-window+1,index+1)]
+        if any(v is None for v in values): excluded+=1; continue
+        nums=[float(v) for v in values if v is not None]
+        if statistic=="mean": value=statistics.fmean(nums)
+        elif statistic=="stddev_sample": value=statistics.stdev(nums) if len(nums)>=2 else None
+        elif statistic=="minimum": value=min(nums)
+        elif statistic=="maximum": value=max(nums)
+        else: value=statistics.median(nums)
+        observations.append({"index":index,"value":value})
+    return {"column":column,"window":window,"statistic":statistic,"observations":observations,"excluded_windows":excluded,"interpretation_boundary":"MEASUREMENT_ONLY_RD_INTERPRETS"}
 
-    This is an exploration-only look-ahead measurement primitive. It identifies
-    no event, threshold, horizon, direction, or price field on its own. RD must
-    provide all scientifically meaningful specifications explicitly.
-    """
-    rows = _rows(evidence_payloads)
-    price_column = str(parameters["price_column"])
-    horizon = int(parameters["horizon"])
-    direction = str(parameters["direction"])
-    factor = 1.0 if direction == "LONG" else -1.0
 
-    observations: list[Mapping[str, Any]] = []
-    excluded_non_numeric = 0
-    excluded_zero_entry = 0
-    for index in range(0, max(0, len(rows) - horizon)):
-        entry_raw = rows[index].get(price_column)
-        future_raw = [rows[index + offset].get(price_column) for offset in range(1, horizon + 1)]
-        values = [entry_raw, *future_raw]
-        if not all(
-            isinstance(value, (int, float))
-            and not isinstance(value, bool)
-            and math.isfinite(float(value))
-            for value in values
-        ):
-            excluded_non_numeric += 1
-            continue
-        entry = float(entry_raw)
-        if entry == 0.0:
-            excluded_zero_entry += 1
-            continue
-        future = [float(value) for value in future_raw]
-        directional_returns = [factor * ((value - entry) / entry) for value in future]
-        max_favorable = max(directional_returns)
-        max_adverse = min(directional_returns)
-        observations.append(
-            {
-                "start_index": index,
-                "entry": entry,
-                "terminal_directional_return": directional_returns[-1],
-                "max_favorable_directional_return": max_favorable,
-                "max_adverse_directional_return": max_adverse,
-                "bars_to_max_favorable": directional_returns.index(max_favorable) + 1,
-                "bars_to_max_adverse": directional_returns.index(max_adverse) + 1,
-            }
-        )
+def threshold_event_indices(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
+    rows=_rows(evidence_payloads); column=str(parameters["column"]); op=str(parameters["operator"]); threshold=float(parameters["threshold"]); events=[]
+    predicates={"GT":lambda x:x>threshold,"GE":lambda x:x>=threshold,"LT":lambda x:x<threshold,"LE":lambda x:x<=threshold}
+    predicate=predicates[op]
+    for index,row in enumerate(rows):
+        value=_numeric(row.get(column))
+        if value is not None and predicate(value): events.append({"index":index,"value":value})
+    return {"column":column,"operator":op,"threshold":threshold,"event_count":len(events),"events":events,"interpretation_boundary":"EVENT_SELECTION_EXACTLY_AS_RD_PARAMETERIZED"}
 
-    return {
-        "price_column": price_column,
-        "horizon": horizon,
-        "direction": direction,
-        "eligible_start_count": max(0, len(rows) - horizon),
-        "observation_count": len(observations),
-        "excluded_non_numeric": excluded_non_numeric,
-        "excluded_zero_entry": excluded_zero_entry,
-        "observations": observations,
-        "interpretation_boundary": "LOOKAHEAD_MEASUREMENT_ONLY_RD_INTERPRETS",
-    }
+
+def forward_path_measurement(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
+    rows=_rows(evidence_payloads); price_column=str(parameters["price_column"]); horizon=int(parameters["horizon"]); direction=str(parameters["direction"]); factor=1.0 if direction=="LONG" else -1.0
+    observations=[]; bad=zero=0
+    for index in range(0,max(0,len(rows)-horizon)):
+        values=[_numeric(rows[index+offset].get(price_column)) for offset in range(0,horizon+1)]
+        if any(v is None for v in values): bad+=1; continue
+        entry=float(values[0])
+        if entry==0: zero+=1; continue
+        future=[float(v) for v in values[1:]]; directional=[factor*((v-entry)/entry) for v in future]; favorable=max(directional); adverse=min(directional)
+        observations.append({"start_index":index,"entry":entry,"terminal_directional_return":directional[-1],"max_favorable_directional_return":favorable,"max_adverse_directional_return":adverse,"bars_to_max_favorable":directional.index(favorable)+1,"bars_to_max_adverse":directional.index(adverse)+1})
+    return {"price_column":price_column,"horizon":horizon,"direction":direction,"eligible_start_count":max(0,len(rows)-horizon),"observation_count":len(observations),"excluded_non_numeric":bad,"excluded_zero_entry":zero,"observations":observations,"interpretation_boundary":"LOOKAHEAD_MEASUREMENT_ONLY_RD_INTERPRETS"}
+
+
+def classification_metrics(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
+    rows=_rows(evidence_payloads); predicted=str(parameters["predicted_column"]); actual=str(parameters["actual_column"]); positive=parameters["positive_value"]; tp=tn=fp=fn=excluded=0
+    for row in rows:
+        if predicted not in row or actual not in row: excluded+=1; continue
+        p=row[predicted]==positive; a=row[actual]==positive
+        if p and a: tp+=1
+        elif p and not a: fp+=1
+        elif not p and a: fn+=1
+        else: tn+=1
+    n=tp+tn+fp+fn
+    def ratio(a,b): return None if b==0 else a/b
+    return {"n":n,"excluded":excluded,"true_positive":tp,"true_negative":tn,"false_positive":fp,"false_negative":fn,"accuracy":ratio(tp+tn,n),"precision":ratio(tp,tp+fp),"recall":ratio(tp,tp+fn),"specificity":ratio(tn,tn+fp),"interpretation_boundary":"PERFORMANCE_MEASUREMENT_ONLY_RD_INTERPRETS"}
 
 
 def standard_method_catalog() -> MethodCatalog:
-    """Build the initial positive-admission v4 method catalog."""
-    return MethodCatalog(
-        [
-            MethodSpec(
-                method_id="analysis.descriptive.statistics",
-                artifact_types=("NORMALIZED_DATASET",),
-                description="Compute descriptive summaries for columns explicitly selected by RD.",
-                parameters=(
-                    ParameterContract(
-                        name="columns",
-                        required=True,
-                        python_types=(list, tuple),
-                        minimum_length=1,
-                        meaning="one or more RD-selected numeric columns",
-                    ),
-                ),
-                minimum_sample=1,
-            ),
-            MethodSpec(
-                method_id="analysis.relationship.correlation",
-                artifact_types=("NORMALIZED_DATASET",),
-                description="Measure pairwise Pearson or Spearman association without causal interpretation.",
-                parameters=(
-                    ParameterContract(
-                        name="columns",
-                        required=True,
-                        python_types=(list, tuple),
-                        exact_length=2,
-                        meaning="exactly two RD-selected numeric columns",
-                    ),
-                    ParameterContract(
-                        name="correlation_type",
-                        required=False,
-                        python_types=(str,),
-                        allowed_values=("pearson", "spearman"),
-                        meaning="correlation statistic selected by RD",
-                    ),
-                ),
-                minimum_sample=2,
-            ),
-            MethodSpec(
-                method_id="analysis.transform.percent_change",
-                artifact_types=("NORMALIZED_DATASET",),
-                description="Compute backward-looking percent changes for an RD-selected numeric field and lag.",
-                parameters=(
-                    ParameterContract(
-                        name="column",
-                        required=True,
-                        python_types=(str,),
-                        meaning="numeric field explicitly selected by RD",
-                    ),
-                    ParameterContract(
-                        name="lag",
-                        required=True,
-                        python_types=(int,),
-                        minimum_value=1,
-                        meaning="backward row lag explicitly selected by RD",
-                    ),
-                ),
-                minimum_sample=2,
-                metadata={
-                    "temporal_semantics": "current row versus prior row only",
-                    "scientific_selection": "none; RD supplies column and lag",
-                },
-            ),
-            MethodSpec(
-                method_id="analysis.path.forward_measurement",
-                artifact_types=("NORMALIZED_DATASET",),
-                description=(
-                    "Exploration-only look-ahead measurement of terminal return, maximum favorable "
-                    "excursion, maximum adverse excursion, and timing over an RD-selected forward horizon."
-                ),
-                parameters=(
-                    ParameterContract(
-                        name="price_column",
-                        required=True,
-                        python_types=(str,),
-                        meaning="price field explicitly selected by RD",
-                    ),
-                    ParameterContract(
-                        name="horizon",
-                        required=True,
-                        python_types=(int,),
-                        minimum_value=1,
-                        meaning="number of forward rows explicitly selected by RD",
-                    ),
-                    ParameterContract(
-                        name="direction",
-                        required=True,
-                        python_types=(str,),
-                        allowed_values=("LONG", "SHORT"),
-                        meaning="directional frame explicitly selected by RD",
-                    ),
-                ),
-                minimum_sample=2,
-                exploration_allowed=True,
-                validation_allowed=False,
-                allows_future_information=True,
-                metadata={
-                    "row_order": "uses evidence rows in supplied order",
-                    "scientific_selection": "none; RD supplies price_column, horizon, and direction",
-                },
-            ),
-        ]
-    )
+    return MethodCatalog([
+        MethodSpec("analysis.descriptive.statistics",("NORMALIZED_DATASET",),"Compute descriptive summaries for RD-selected columns.",(ParameterContract("columns",True,(list,tuple),minimum_length=1,meaning="RD-selected numeric columns"),),1),
+        MethodSpec("analysis.relationship.correlation",("NORMALIZED_DATASET",),"Measure pairwise Pearson or Spearman association without causal interpretation.",(ParameterContract("columns",True,(list,tuple),exact_length=2,meaning="two RD-selected numeric columns"),ParameterContract("correlation_type",True,(str,),allowed_values=("pearson","spearman"),meaning="statistic selected by RD")),2),
+        MethodSpec("analysis.transform.percent_change",("NORMALIZED_DATASET",),"Compute backward-looking percent change for an RD-selected field and lag.",(ParameterContract("column",True,(str,),meaning="RD-selected numeric field"),ParameterContract("lag",True,(int,),minimum_value=1,meaning="RD-selected backward row lag")),2,metadata={"temporal_semantics":"present/prior rows only"}),
+        MethodSpec("analysis.rolling.statistics",("NORMALIZED_DATASET",),"Compute a rolling statistic using an RD-selected field, window, and statistic.",(ParameterContract("column",True,(str,),meaning="RD-selected numeric field"),ParameterContract("window",True,(int,),minimum_value=1,meaning="RD-selected window"),ParameterContract("statistic",True,(str,),allowed_values=("mean","median","stddev_sample","minimum","maximum"),meaning="RD-selected statistic")),1),
+        MethodSpec("analysis.events.threshold",("NORMALIZED_DATASET",),"Identify rows satisfying an RD-authored numeric threshold condition.",(ParameterContract("column",True,(str,),meaning="RD-selected field"),ParameterContract("operator",True,(str,),allowed_values=("GT","GE","LT","LE"),meaning="RD-selected comparison"),ParameterContract("threshold",True,(int,float),meaning="RD-selected threshold")),1),
+        MethodSpec("analysis.path.forward_measurement",("NORMALIZED_DATASET",),"Exploration-only look-ahead path measurement over an RD-selected horizon and direction.",(ParameterContract("price_column",True,(str,),meaning="RD-selected price field"),ParameterContract("horizon",True,(int,),minimum_value=1,meaning="RD-selected forward rows"),ParameterContract("direction",True,(str,),allowed_values=("LONG","SHORT"),meaning="RD-selected directional frame")),2,True,False,True,{"scientific_selection":"none"}),
+        MethodSpec("analysis.performance.binary_classification",("NORMALIZED_DATASET",),"Measure binary classification performance for RD-selected predicted/actual fields and positive label.",(ParameterContract("predicted_column",True,(str,),meaning="RD-selected prediction field"),ParameterContract("actual_column",True,(str,),meaning="RD-selected outcome field"),ParameterContract("positive_value",True,(str,int,float,bool),meaning="RD-selected positive label")),1),
+    ])
 
 
-def standard_analysis_methods() -> tuple[RegisteredAnalysisMethod, ...]:
-    return (
-        RegisteredAnalysisMethod(
-            method_id="analysis.descriptive.statistics",
-            implementation=descriptive_statistics,
-        ),
-        RegisteredAnalysisMethod(
-            method_id="analysis.relationship.correlation",
-            implementation=relationship_correlation,
-        ),
-        RegisteredAnalysisMethod(
-            method_id="analysis.transform.percent_change",
-            implementation=percent_change_series,
-        ),
-        RegisteredAnalysisMethod(
-            method_id="analysis.path.forward_measurement",
-            implementation=forward_path_measurement,
-        ),
-    )
+def standard_analysis_methods() -> tuple[RegisteredAnalysisMethod,...]:
+    return tuple(RegisteredAnalysisMethod(method_id,implementation) for method_id,implementation in (
+        ("analysis.descriptive.statistics",descriptive_statistics),("analysis.relationship.correlation",relationship_correlation),("analysis.transform.percent_change",percent_change_series),("analysis.rolling.statistics",rolling_statistics),("analysis.events.threshold",threshold_event_indices),("analysis.path.forward_measurement",forward_path_measurement),("analysis.performance.binary_classification",classification_metrics),
+    ))
