@@ -23,7 +23,9 @@ class ExactMethodAnalysisExecutor:
     """Execute exactly the method named by the validated RD request.
 
     There is intentionally no fallback, family inference, ranking, or method
-    substitution path in this executor.
+    substitution path in this executor. A method-level execution failure is
+    returned as an objective Analysis result for RD to interpret or repair; it
+    is never converted into a substitute scientific method or input.
     """
 
     def __init__(self) -> None:
@@ -49,25 +51,57 @@ class ExactMethodAnalysisExecutor:
                 f"validated method has no registered executor: {request.method_id}"
             ) from exc
 
+        self._sequence += 1
+        result_id = f"analysis-result:{self._sequence}"
         try:
             outputs = registered.implementation(evidence_payloads, request.parameters)
         except Exception as exc:
-            raise AnalysisExecutionError(
-                f"analysis method {request.method_id} failed: {type(exc).__name__}: {exc}"
-            ) from exc
-
-        if not isinstance(outputs, Mapping):
-            raise AnalysisExecutionError(
-                f"analysis method {request.method_id} must return a mapping"
+            return AnalysisResult(
+                result_id=result_id,
+                request_id=request.request_id,
+                subject_id=request.subject_id,
+                method_id=request.method_id,
+                outputs={
+                    "execution_error": f"{type(exc).__name__}: {exc}",
+                    "interpretation_boundary": "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP",
+                },
+                evidence_ids=request.evidence_ids,
+                limitations=("Requested Analysis method did not complete successfully.",),
+                execution_metadata={
+                    "executor": "MTS_V4.ExactMethodAnalysisExecutor",
+                    "execution_status": "ERROR",
+                },
             )
 
-        self._sequence += 1
+        if not isinstance(outputs, Mapping):
+            return AnalysisResult(
+                result_id=result_id,
+                request_id=request.request_id,
+                subject_id=request.subject_id,
+                method_id=request.method_id,
+                outputs={
+                    "execution_error": (
+                        f"Analysis method returned {type(outputs).__name__}; required mapping"
+                    ),
+                    "interpretation_boundary": "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP",
+                },
+                evidence_ids=request.evidence_ids,
+                limitations=("Requested Analysis method returned an invalid execution shape.",),
+                execution_metadata={
+                    "executor": "MTS_V4.ExactMethodAnalysisExecutor",
+                    "execution_status": "ERROR",
+                },
+            )
+
         return AnalysisResult(
-            result_id=f"analysis-result:{self._sequence}",
+            result_id=result_id,
             request_id=request.request_id,
             subject_id=request.subject_id,
             method_id=request.method_id,
             outputs=dict(outputs),
             evidence_ids=request.evidence_ids,
-            execution_metadata={"executor": "MTS_V4.ExactMethodAnalysisExecutor"},
+            execution_metadata={
+                "executor": "MTS_V4.ExactMethodAnalysisExecutor",
+                "execution_status": "SUCCESS",
+            },
         )
