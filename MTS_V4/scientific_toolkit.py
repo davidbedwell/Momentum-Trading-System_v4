@@ -93,8 +93,9 @@ def scientific_toolkit_method_spec() -> MethodSpec:
         method_id=TOOLKIT_METHOD_ID,
         artifact_types=("NORMALIZED_DATASET",),
         description=(
-            "Invoke one exact installed public numerical function from the listed SciPy namespaces. "
-            "RD selects the function and authors every scientifically meaningful argument."
+            "Invoke one exact installed public numerical function from the listed SciPy namespaces on "
+            "exactly one RD-selected resolved row dataset. RD selects the dataset, function, and every "
+            "scientifically meaningful argument."
         ),
         parameters=(
             ParameterContract(
@@ -113,7 +114,7 @@ def scientific_toolkit_method_spec() -> MethodSpec:
                 minimum_length=0,
                 meaning=(
                     "ordered function arguments authored by RD; {\"column\": \"field\"} binds "
-                    "the complete evidence column; all other values are passed literally"
+                    "the complete selected dataset column; all other values are passed literally"
                 ),
             ),
             ParameterContract(
@@ -135,6 +136,21 @@ def scientific_toolkit_method_spec() -> MethodSpec:
                 "unless mechanically excluded for execution safety. No deterministic ranking, "
                 "recommendation, or scientific whitelist is applied."
             ),
+            "input_payload_contract": {
+                "required_payload_count": 1,
+                "counting_rule": (
+                    "The resolved execution payload count is the total of raw datasets named in "
+                    "evidence_ids plus prior Analysis datasets named in analysis_inputs. Exactly one "
+                    "resolved row dataset is required."
+                ),
+                "derived_dataset_rule": (
+                    "When the intended columns come from one composed or other derived dataset, RD must "
+                    "use evidence_ids=[] and exactly one analysis_inputs reference to that dataset. Do not "
+                    "also supply upstream raw evidence solely for provenance; Analysis result lineage "
+                    "already preserves the upstream evidence chain."
+                ),
+                "scientific_selection": "RD selects which single dataset is scientifically appropriate",
+            },
             "examples_not_recommendations": [
                 "scipy.stats.pearsonr",
                 "scipy.stats.spearmanr",
@@ -147,7 +163,7 @@ def scientific_toolkit_method_spec() -> MethodSpec:
                 "scipy.spatial.distance.correlation",
             ],
             "argument_contract": {
-                "column_binding": {"column": "exact schema field name"},
+                "column_binding": {"column": "exact schema field name in the single selected dataset"},
                 "literal_values": "passed exactly as authored by RD",
                 "args": "resolved then passed positionally in RD-authored order",
                 "kwargs": "resolved then passed by RD-authored key",
@@ -173,11 +189,14 @@ def scientific_toolkit_method_spec() -> MethodSpec:
 
 def _single_rows(evidence_payloads: Mapping[str, object]) -> tuple[Mapping[str, Any], ...]:
     if len(evidence_payloads) != 1:
-        raise ScientificToolkitError("scientific toolkit invocation requires exactly one evidence payload")
+        raise ScientificToolkitError(
+            "scientific toolkit invocation requires exactly one resolved dataset payload; "
+            "payload count includes both evidence_ids and analysis_inputs"
+        )
     payload = next(iter(evidence_payloads.values()))
     rows = tuple(payload)  # type: ignore[arg-type]
     if not all(isinstance(row, Mapping) for row in rows):
-        raise ScientificToolkitError("evidence payload must be an iterable of row mappings")
+        raise ScientificToolkitError("resolved dataset payload must be an iterable of row mappings")
     return rows
 
 
