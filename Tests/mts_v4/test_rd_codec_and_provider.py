@@ -15,7 +15,7 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
             "EXPLORATION",
         )
 
-    def test_every_deterministic_request_requirement_is_exposed_to_rd(self):
+    def test_every_deterministic_request_and_finding_requirement_is_exposed_to_rd(self):
         evidence = EvidenceDescriptor(
             evidence_id="ev:1",
             subject_id="AAPL",
@@ -66,6 +66,19 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
         self.assertTrue(
             requirements["evidence_continuity"]["changed_is_not_scientific_failure"]
         )
+        envelope = requirements["finding_envelope"]
+        self.assertEqual(
+            envelope["closed_required_fields"],
+            [
+                "finding_id",
+                "subject_id",
+                "statement",
+                "supporting_result_ids",
+                "evidence_ids",
+            ],
+        )
+        self.assertTrue(envelope["scientific_taxonomy_is_open"])
+        self.assertFalse(envelope["deterministic_scientific_veto"])
 
     def test_continuation_requires_ai_authored_next_request(self):
         with self.assertRaisesRegex(
@@ -129,6 +142,63 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
             decision.research_state["hypothesis"],
             "volume-conditioned movement",
         )
+
+    def test_finding_metadata_accepts_unanticipated_scientific_structure(self):
+        decision = ResearchDecisionCodec.decode(
+            json.dumps(
+                {
+                    "continue_research": False,
+                    "next_request": None,
+                    "promote_findings": [
+                        {
+                            "finding_id": "f:new",
+                            "subject_id": "AAPL",
+                            "statement": "RD-authored finding.",
+                            "supporting_result_ids": ["result:1"],
+                            "evidence_ids": ["ev:1"],
+                            "metadata": {
+                                "entirely_new_scientific_label": "allowed",
+                                "nested": {
+                                    "regime": ["x", "y"],
+                                    "confidence_language": "RD-authored",
+                                },
+                            },
+                        }
+                    ],
+                    "research_state": {},
+                    "close_reason": "DONE",
+                }
+            )
+        )
+        metadata = decision.promote_findings[0].metadata
+        self.assertEqual(metadata["entirely_new_scientific_label"], "allowed")
+        self.assertEqual(metadata["nested"]["regime"], ["x", "y"])
+
+    def test_scientific_label_outside_closed_envelope_is_redirected_not_censored(self):
+        with self.assertRaisesRegex(
+            ResearchDecisionDecodeError,
+            "place additional scientific labels under metadata",
+        ):
+            ResearchDecisionCodec.decode(
+                json.dumps(
+                    {
+                        "continue_research": False,
+                        "next_request": None,
+                        "promote_findings": [
+                            {
+                                "finding_id": "f:bad-envelope",
+                                "subject_id": "AAPL",
+                                "statement": "Science remains allowed; packaging is malformed.",
+                                "supporting_result_ids": [],
+                                "evidence_ids": ["ev:1"],
+                                "new_science_type": "not an approved-list issue",
+                            }
+                        ],
+                        "research_state": {},
+                        "close_reason": "DONE",
+                    }
+                )
+            )
 
     def test_malformed_json_fails_instead_of_triggering_deterministic_scientific_repair(self):
         with self.assertRaises(ResearchDecisionDecodeError):
