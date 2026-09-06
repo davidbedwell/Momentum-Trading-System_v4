@@ -6,6 +6,7 @@ from pathlib import Path
 from .analysis import ExactMethodAnalysisExecutor
 from .cache import TemporaryResearchCache
 from .concept_library import ResearchConceptLibrary, seed_market_concepts
+from .cross_evidence import cross_evidence_analysis_method, cross_evidence_method_spec
 from .interfaces import ResearchDirectorProvider
 from .method_catalog import MethodCatalog
 from .nexus import InMemoryResearchNexus, ResearchNexus
@@ -59,11 +60,13 @@ def build_runtime(
         nexus = JsonResearchNexus(nexus_path)
 
     catalog = standard_method_catalog()
+    catalog.register(cross_evidence_method_spec())
     concepts = concept_library or seed_market_concepts()
     validator = ObjectiveContractValidator(catalog)
     analysis = ExactMethodAnalysisExecutor()
     for method in standard_analysis_methods():
         analysis.register(method)
+    analysis.register(cross_evidence_analysis_method())
 
     orchestrator = ResearchLoopOrchestrator(
         mission=mission,
