@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from collections.abc import Sized
-from typing import Mapping
+from collections.abc import Mapping as ABCMapping, Sequence, Sized
+from typing import Any, Mapping
 
-from .contracts import AnalysisRequest, ContractDefect, EvidenceDescriptor, ResearchPhase
+from .contracts import AnalysisRequest, AnalysisResult, AnalysisResultInput, ContractDefect, EvidenceDescriptor, ResearchPhase
 from .method_catalog import MethodCatalog, MethodNotFoundError, ParameterContract
 
 
@@ -11,7 +11,8 @@ class ObjectiveContractValidator:
     """Validate only objective execution contracts.
 
     This class must never select a method, rewrite a scientific question,
-    invent a parameter value, or judge scientific merit.
+    invent a parameter value, choose a prior Analysis output, or judge
+    scientific merit.
     """
 
     def __init__(self, catalog: MethodCatalog) -> None:
@@ -21,8 +22,10 @@ class ObjectiveContractValidator:
         self,
         request: AnalysisRequest,
         evidence: Mapping[str, EvidenceDescriptor],
+        analysis_results: Mapping[str, AnalysisResult] | None = None,
     ) -> tuple[ContractDefect, ...]:
         defects: list[ContractDefect] = []
+        prior_results = analysis_results or {}
 
         try:
             spec = self._catalog.get(request.method_id)
@@ -91,6 +94,18 @@ class ObjectiveContractValidator:
                 )
             resolved.append(item)
 
+        input_names: set[str] = set()
+        for reference in request.analysis_inputs:
+            defects.extend(
+                self._validate_analysis_input(
+                    request=request,
+                    reference=reference,
+                    prior_results=prior_results,
+                    input_names=input_names,
+                )
+            )
+            input_names.add(reference.input_name)
+
         if resolved and spec.artifact_types:
             incompatible = [
                 item.evidence_id
@@ -128,6 +143,92 @@ class ObjectiveContractValidator:
             defects.extend(self._validate_parameter(request, contract))
 
         return tuple(defects)
+
+    @classmethod
+    def _validate_analysis_input(
+        cls,
+        *,
+        request: AnalysisRequest,
+        reference: AnalysisResultInput,
+        prior_results: Mapping[str, AnalysisResult],
+        input_names: set[str],
+    ) -> tuple[ContractDefect, ...]:
+        defects: list[ContractDefect] = []
+        if not reference.input_name.strip():
+            defects.append(
+                ContractDefect(
+                    code="INVALID_ANALYSIS_INPUT",
+                    message="analysis input input_name cannot be blank",
+                    field="analysis_inputs",
+                    method_id=request.method_id,
+                )
+            )
+        if reference.input_name in input_names:
+            defects.append(
+                ContractDefect(
+                    code="DUPLICATE_ANALYSIS_INPUT_NAME",
+                    message=f"analysis input name is duplicated: {reference.input_name}",
+                    field="analysis_inputs",
+                    method_id=request.method_id,
+                )
+            )
+        result = prior_results.get(reference.result_id)
+        if result is None:
+            defects.append(
+                ContractDefect(
+                    code="MISSING_ANALYSIS_RESULT",
+                    message=(
+                        f"Prior Analysis result is unavailable in the active campaign runtime: "
+                        f"{reference.result_id}. The Research Director may regenerate the needed "
+                        "derived result from available evidence if scientifically appropriate."
+                    ),
+                    field="analysis_inputs",
+                    method_id=request.method_id,
+                )
+            )
+            return tuple(defects)
+        if result.subject_id != request.subject_id:
+            defects.append(
+                ContractDefect(
+                    code="LINEAGE_MISMATCH",
+                    message=(
+                        f"Analysis result {reference.result_id} belongs to {result.subject_id}, "
+                        f"not request subject {request.subject_id}"
+                    ),
+                    field="analysis_inputs",
+                    method_id=request.method_id,
+                )
+            )
+            return tuple(defects)
+        try:
+            cls.resolve_analysis_input(reference, result)
+        except (KeyError, IndexError, TypeError) as exc:
+            defects.append(
+                ContractDefect(
+                    code="MISSING_ANALYSIS_OUTPUT",
+                    message=(
+                        f"Analysis result {reference.result_id} does not contain the requested "
+                        f"output_path {reference.output_path}: {type(exc).__name__}: {exc}"
+                    ),
+                    field="analysis_inputs",
+                    method_id=request.method_id,
+                )
+            )
+        return tuple(defects)
+
+    @staticmethod
+    def resolve_analysis_input(reference: AnalysisResultInput, result: AnalysisResult) -> object:
+        value: object = result.outputs
+        for component in reference.output_path:
+            if isinstance(component, str):
+                if not isinstance(value, ABCMapping):
+                    raise TypeError(f"cannot select key {component!r} from {type(value).__name__}")
+                value = value[component]
+            else:
+                if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+                    raise TypeError(f"cannot select index {component} from {type(value).__name__}")
+                value = value[component]
+        return value
 
     @staticmethod
     def _validate_parameter(
