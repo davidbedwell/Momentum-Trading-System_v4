@@ -101,6 +101,10 @@ class V4StandardMethodsTests(unittest.TestCase):
         self.assertEqual(result["observation_count"], 2)
         self.assertAlmostEqual(result["observations"][0]["value"], 0.10)
         self.assertAlmostEqual(result["observations"][1]["value"], 0.10)
+        self.assertEqual(
+            result["derived_dataset_catalog"]["percent_change"]["output_path"],
+            ["derived_datasets", "percent_change"],
+        )
         self.assertEqual(result["interpretation_boundary"], "MEASUREMENT_ONLY_RD_INTERPRETS")
 
     def test_forward_path_contract_exposes_all_scientific_parameters_and_lookahead_boundary(self):
@@ -113,7 +117,11 @@ class V4StandardMethodsTests(unittest.TestCase):
         self.assertTrue(spec.allows_future_information)
         self.assertTrue(spec.exploration_allowed)
         self.assertFalse(spec.validation_allowed)
-        self.assertEqual(spec.metadata["output_shape"], "bounded exact aggregate statistics")
+        self.assertTrue(spec.metadata["reusable_derived_dataset"])
+        self.assertEqual(
+            spec.metadata["output_shape"],
+            "bounded RD transport plus temporary reusable derived dataset",
+        )
 
     def test_forward_path_measurement_computes_path_without_interpreting_it(self):
         result = forward_path_measurement(
@@ -127,7 +135,20 @@ class V4StandardMethodsTests(unittest.TestCase):
         self.assertEqual(result["bars_to_max_favorable"]["mean"], 2.0)
         self.assertEqual(result["bars_to_max_adverse"]["mean"], 1.0)
         self.assertEqual(result["terminal_positive_fraction"], 1.0)
-        self.assertNotIn("observations", result)
+        derived = result["derived_datasets"]["forward_path_observations"]
+        self.assertEqual(len(derived), 1)
+        self.assertAlmostEqual(derived[0]["terminal_directional_return"], 0.20)
+        self.assertEqual(
+            result["derived_dataset_catalog"]["forward_path_observations"]["schema"],
+            [
+                "index",
+                "terminal_directional_return",
+                "max_favorable_directional_return",
+                "max_adverse_directional_return",
+                "bars_to_max_favorable",
+                "bars_to_max_adverse",
+            ],
+        )
         self.assertEqual(result["interpretation_boundary"], "LOOKAHEAD_MEASUREMENT_ONLY_RD_INTERPRETS")
 
     def test_forward_path_hidden_range_is_not_hidden_and_validation_use_is_blocked(self):
