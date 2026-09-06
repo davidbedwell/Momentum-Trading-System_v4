@@ -4,7 +4,7 @@ import importlib
 import inspect
 import math
 from dataclasses import dataclass
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 from .analysis import RegisteredAnalysisMethod
 from .method_catalog import MethodSpec, ParameterContract
@@ -19,14 +19,10 @@ _TOOLKIT_NAMESPACES = (
     "scipy.spatial.distance",
 )
 
-# Mechanical execution-safety exclusions only. These names create arbitrarily
-# large synthetic sequences or require user-supplied Python callables rather
-# than operating directly on supplied evidence values.
-_BLOCKED_TOOL_NAMES = {
-    "max_len_seq",
-    "unit_impulse",
-    "vectorstrength",
-}
+# Mechanical execution-safety exclusions only. These functions can create
+# arbitrarily large synthetic sequences rather than calculating from supplied
+# evidence. Exclusion conveys no scientific judgment.
+_BLOCKED_TOOL_NAMES = {"max_len_seq", "unit_impulse", "vectorstrength"}
 
 
 class ScientificToolkitError(RuntimeError):
@@ -39,13 +35,7 @@ class ScientificTool:
     namespace: str
     name: str
     signature: str
-    summary: str
     callable_object: Any
-
-    def capability_string(self) -> str:
-        signature = self.signature.replace("\n", " ")[:220]
-        summary = self.summary.replace("\n", " ")[:140]
-        return f"{self.tool_id}{signature} :: {summary}"
 
 
 def _public_calculation_tools() -> tuple[ScientificTool, ...]:
@@ -76,31 +66,21 @@ def _public_calculation_tools() -> tuple[ScientificTool, ...]:
                     signature = f"(<{obj.nin} positional inputs>)"
                 else:
                     continue
-            doc = inspect.getdoc(obj) or ""
-            summary = doc.splitlines()[0].strip() if doc else "Public numerical calculation function."
             tools.append(
                 ScientificTool(
                     tool_id=f"{namespace}.{name}",
                     namespace=namespace,
                     name=name,
                     signature=signature,
-                    summary=summary,
                     callable_object=obj,
                 )
             )
-
-    # Stable deterministic order is representation/execution behavior only.
     return tuple(sorted(tools, key=lambda item: item.tool_id))
 
 
 def scientific_tool_index() -> tuple[str, ...]:
-    """Compact capability index supplied to RD.
-
-    Each entry is a real installed calculation function. Presence in this index
-    is not a recommendation and carries no scientific ranking or significance.
-    """
-
-    return tuple(tool.capability_string() for tool in _public_calculation_tools())
+    """Exact installed function IDs, with no scientific ranking."""
+    return tuple(tool.tool_id for tool in _public_calculation_tools())
 
 
 def scientific_tool_count() -> int:
@@ -114,8 +94,9 @@ def scientific_toolkit_method_spec() -> MethodSpec:
         method_id=TOOLKIT_METHOD_ID,
         artifact_types=("NORMALIZED_DATASET",),
         description=(
-            "Invoke one exact public numerical function from the installed scientific toolkit. "
-            "RD selects the function and supplies every scientifically meaningful argument."
+            "Invoke one exact installed public numerical function. RD selects the function and "
+            "authors every scientifically meaningful argument. The allowed tool_id values are "
+            "the calculation choices; standard SciPy function signatures apply."
         ),
         parameters=(
             ParameterContract(
@@ -123,7 +104,7 @@ def scientific_toolkit_method_spec() -> MethodSpec:
                 True,
                 (str,),
                 allowed_values=tool_ids,
-                meaning="exact calculation function selected by RD from metadata.tool_index",
+                meaning="exact installed calculation function selected by RD",
             ),
             ParameterContract(
                 "args",
@@ -131,8 +112,8 @@ def scientific_toolkit_method_spec() -> MethodSpec:
                 (list, tuple),
                 minimum_length=0,
                 meaning=(
-                    "ordered function arguments authored by RD; use {\"column\": \"field\"} "
-                    "to bind a complete evidence column, otherwise supply a literal value"
+                    "ordered function arguments authored by RD; {\"column\": \"field\"} binds "
+                    "the complete evidence column; all other values are passed literally"
                 ),
             ),
             ParameterContract(
@@ -148,24 +129,27 @@ def scientific_toolkit_method_spec() -> MethodSpec:
         minimum_sample=1,
         metadata={
             "tool_count": len(tools),
-            "tool_index": [tool.capability_string() for tool in tools],
+            "namespaces": list(_TOOLKIT_NAMESPACES),
             "argument_contract": {
                 "column_binding": {"column": "exact schema field name"},
                 "literal_values": "passed exactly as authored by RD",
                 "args": "resolved then passed positionally in RD-authored order",
                 "kwargs": "resolved then passed by RD-authored key",
+                "function_signature": (
+                    "the standard installed SciPy signature for the selected tool_id applies; "
+                    "if the library rejects an invocation, Analysis returns the exact objective "
+                    "execution error to RD rather than inventing replacement arguments"
+                ),
                 "missing_value_policy": (
-                    "No rows are silently dropped or imputed. The selected library function receives "
-                    "the supplied column values as represented; RD must explicitly choose preprocessing "
-                    "or function nan-policy parameters when scientifically relevant."
+                    "No rows are silently dropped or imputed. RD must explicitly choose preprocessing "
+                    "or a library nan-policy when scientifically relevant."
                 ),
             },
             "scientific_selection": "AI_RESEARCH_DIRECTOR_ONLY",
             "deterministic_ranking": False,
             "execution_safety": (
-                "Only public numerical functions from the listed installed namespaces are exposed; "
-                "functions requiring arbitrary user Python callbacks or unbounded synthetic-sequence "
-                "generation may be excluded mechanically."
+                "Only public numerical functions in the listed installed namespaces are exposed; "
+                "unbounded synthetic-sequence generators may be excluded mechanically."
             ),
         },
     )
@@ -248,19 +232,23 @@ def execute_scientific_toolkit(
     except KeyError as exc:
         raise ScientificToolkitError(f"tool_id is not available: {tool_id}") from exc
 
-    args = _resolve(list(parameters["args"]), rows)
-    kwargs = _resolve(dict(parameters.get("kwargs", {})), rows)
     try:
+        args = _resolve(list(parameters["args"]), rows)
+        kwargs = _resolve(dict(parameters.get("kwargs", {})), rows)
         result = tool.callable_object(*args, **kwargs)
+        safe_result = _json_safe(result)
     except Exception as exc:
-        raise ScientificToolkitError(
-            f"{tool_id} rejected the RD-authored invocation: {type(exc).__name__}: {exc}"
-        ) from exc
+        return {
+            "tool_id": tool_id,
+            "signature": tool.signature,
+            "execution_error": f"{type(exc).__name__}: {exc}",
+            "interpretation_boundary": "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP",
+        }
 
     return {
         "tool_id": tool_id,
         "signature": tool.signature,
-        "result": _json_safe(result),
+        "result": safe_result,
         "interpretation_boundary": "CALCULATION_ONLY_RD_INTERPRETS",
     }
 
