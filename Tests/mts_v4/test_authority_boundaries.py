@@ -1,0 +1,178 @@
+from __future__ import annotations
+
+import unittest
+
+from MTS_V4.cache import TemporaryResearchCache
+from MTS_V4.contracts import AnalysisRequest, EvidenceDescriptor, Finding, ResearchDecision, ResearchPhase, SubjectMetadata
+from MTS_V4.method_catalog import MethodCatalog, MethodSpec, ParameterContract
+from MTS_V4.nexus import InMemoryResearchNexus
+from MTS_V4.orchestrator import ResearchLoopOrchestrator
+from MTS_V4.validation import ObjectiveContractValidator
+
+
+class _FakeAnalysis:
+    def __init__(self):
+        self.requests = []
+
+    def execute(self, request, evidence_payloads):
+        from MTS_V4.contracts import AnalysisResult
+        self.requests.append(request)
+        return AnalysisResult(
+            result_id="result:1",
+            request_id=request.request_id,
+            subject_id=request.subject_id,
+            method_id=request.method_id,
+            outputs={"correlation": 0.5},
+            evidence_ids=request.evidence_ids,
+        )
+
+
+class _FakeRD:
+    def __init__(self):
+        self.repairs = []
+
+    def begin_research(self, **kwargs):
+        return ResearchDecision(
+            continue_research=True,
+            next_request=AnalysisRequest(
+                request_id="request:bad",
+                subject_id="AAPL",
+                question="Does price co-vary with volume?",
+                method_id="relationship.correlation",
+                evidence_ids=("ev:1",),
+                parameters={"columns": ["close", "volume", "date"]},
+                research_phase=ResearchPhase.EXPLORATION,
+            ),
+        )
+
+    def repair_request(self, *, defects, **kwargs):
+        self.repairs.append(tuple(defects))
+        return ResearchDecision(
+            continue_research=True,
+            next_request=AnalysisRequest(
+                request_id="request:repaired",
+                subject_id="AAPL",
+                question="Does price co-vary with volume?",
+                method_id="relationship.correlation",
+                evidence_ids=("ev:1",),
+                parameters={"columns": ["close", "volume"]},
+                research_phase=ResearchPhase.EXPLORATION,
+            ),
+        )
+
+    def interpret_result(self, *, result, **kwargs):
+        return ResearchDecision(
+            continue_research=False,
+            promote_findings=(
+                Finding(
+                    finding_id="finding:1",
+                    subject_id="AAPL",
+                    statement="Exploratory relationship result retained for future research.",
+                    significance="RD judged this result materially informative.",
+                    status="EXPLORATORY",
+                    supporting_result_ids=(result.result_id,),
+                    evidence_ids=result.evidence_ids,
+                ),
+            ),
+            close_reason="RD_CLOSED",
+        )
+
+
+class V4AuthorityBoundaryTests(unittest.TestCase):
+    def setUp(self):
+        self.catalog = MethodCatalog(
+            [
+                MethodSpec(
+                    method_id="relationship.correlation",
+                    artifact_types=("NORMALIZED_DATASET",),
+                    parameters=(
+                        ParameterContract(
+                            name="columns",
+                            required=True,
+                            python_types=(list, tuple),
+                            exact_length=2,
+                        ),
+                    ),
+                )
+            ]
+        )
+        self.validator = ObjectiveContractValidator(self.catalog)
+        self.evidence = EvidenceDescriptor(
+            evidence_id="ev:1",
+            subject_id="AAPL",
+            evidence_type="OHLCV",
+            artifact_type="NORMALIZED_DATASET",
+            source_identity="test-source",
+            coverage_start="2020-01-01",
+            coverage_end="2025-12-31",
+            row_count=1000,
+            schema=("date", "close", "volume"),
+            cache_key="cache:aapl",
+        )
+
+    def test_cardinality_defect_is_precise_and_does_not_choose_replacement(self):
+        request = AnalysisRequest(
+            request_id="r1",
+            subject_id="AAPL",
+            question="AI-authored question",
+            method_id="relationship.correlation",
+            evidence_ids=("ev:1",),
+            parameters={"columns": ["close", "volume", "date"]},
+            research_phase=ResearchPhase.EXPLORATION,
+        )
+        defects = self.validator.validate(request, {"ev:1": self.evidence})
+        self.assertEqual(len(defects), 1)
+        self.assertEqual(defects[0].code, "INVALID_PARAMETER_CARDINALITY")
+        self.assertIn("requires exactly 2 values; received 3", defects[0].message)
+        self.assertEqual(request.method_id, "relationship.correlation")
+        self.assertEqual(request.parameters["columns"], ["close", "volume", "date"])
+
+    def test_unknown_method_is_missing_capability_not_substitution(self):
+        request = AnalysisRequest(
+            request_id="r2",
+            subject_id="AAPL",
+            question="AI-authored question",
+            method_id="does.not.exist",
+            evidence_ids=("ev:1",),
+            parameters={},
+            research_phase=ResearchPhase.EXPLORATION,
+        )
+        defects = self.validator.validate(request, {"ev:1": self.evidence})
+        self.assertEqual(defects[0].code, "MISSING_CAPABILITY")
+        self.assertEqual(defects[0].method_id, "does.not.exist")
+
+    def test_nexus_has_no_raw_dataset_publication_api(self):
+        nexus = InMemoryResearchNexus()
+        self.assertFalse(hasattr(nexus, "publish_dataset"))
+        self.assertFalse(hasattr(nexus, "put_raw_data"))
+        self.assertFalse(hasattr(nexus, "publish_artifact"))
+
+    def test_invalid_contract_returns_to_rd_for_scientific_repair(self):
+        rd = _FakeRD()
+        analysis = _FakeAnalysis()
+        nexus = InMemoryResearchNexus()
+        cache = TemporaryResearchCache()
+        cache.put("cache:aapl", [{"close": 1.0, "volume": 10}])
+        orchestrator = ResearchLoopOrchestrator(
+            mission="discover reproducible exploitable market conditions",
+            rd=rd,
+            validator=self.validator,
+            analysis=analysis,
+            nexus=nexus,
+            cache=cache,
+        )
+        outcome = orchestrator.run(
+            subject=SubjectMetadata(subject_id="AAPL", ticker="AAPL"),
+            evidence=(self.evidence,),
+            max_analyses=2,
+        )
+        self.assertEqual(len(rd.repairs), 1)
+        self.assertEqual(rd.repairs[0][0].code, "INVALID_PARAMETER_CARDINALITY")
+        self.assertEqual(len(analysis.requests), 1)
+        self.assertEqual(analysis.requests[0].request_id, "request:repaired")
+        self.assertEqual(outcome.findings_promoted, 1)
+        self.assertEqual(len(nexus.findings_for_subject("AAPL")), 1)
+
+
+if __name__ == "__main__":
+    unittest.main()
