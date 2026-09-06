@@ -46,11 +46,7 @@ def descriptive_statistics(
     evidence_payloads: Mapping[str, object],
     parameters: Mapping[str, Any],
 ) -> Mapping[str, Any]:
-    """Audited pre-B descriptive-statistics operation admitted into v4.
-
-    Unlike the historical implementation, v4 requires RD to explicitly name
-    the columns; the method never infers a scientific scope from the dataset.
-    """
+    """Audited pre-B descriptive-statistics operation admitted into v4."""
     rows = _rows(evidence_payloads)
     columns = tuple(parameters["columns"])
     summaries: dict[str, Mapping[str, Any]] = {}
@@ -147,6 +143,70 @@ def relationship_correlation(
     }
 
 
+def forward_path_measurement(
+    evidence_payloads: Mapping[str, object],
+    parameters: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    """Measure future path geometry exactly as parameterized by RD.
+
+    This is an exploration-only look-ahead measurement primitive. It identifies
+    no event, threshold, horizon, direction, or price field on its own. RD must
+    provide all scientifically meaningful specifications explicitly.
+    """
+    rows = _rows(evidence_payloads)
+    price_column = str(parameters["price_column"])
+    horizon = int(parameters["horizon"])
+    direction = str(parameters["direction"])
+    factor = 1.0 if direction == "LONG" else -1.0
+
+    observations: list[Mapping[str, Any]] = []
+    excluded_non_numeric = 0
+    excluded_zero_entry = 0
+    for index in range(0, max(0, len(rows) - horizon)):
+        entry_raw = rows[index].get(price_column)
+        future_raw = [rows[index + offset].get(price_column) for offset in range(1, horizon + 1)]
+        values = [entry_raw, *future_raw]
+        if not all(
+            isinstance(value, (int, float))
+            and not isinstance(value, bool)
+            and math.isfinite(float(value))
+            for value in values
+        ):
+            excluded_non_numeric += 1
+            continue
+        entry = float(entry_raw)
+        if entry == 0.0:
+            excluded_zero_entry += 1
+            continue
+        future = [float(value) for value in future_raw]
+        directional_returns = [factor * ((value - entry) / entry) for value in future]
+        max_favorable = max(directional_returns)
+        max_adverse = min(directional_returns)
+        observations.append(
+            {
+                "start_index": index,
+                "entry": entry,
+                "terminal_directional_return": directional_returns[-1],
+                "max_favorable_directional_return": max_favorable,
+                "max_adverse_directional_return": max_adverse,
+                "bars_to_max_favorable": directional_returns.index(max_favorable) + 1,
+                "bars_to_max_adverse": directional_returns.index(max_adverse) + 1,
+            }
+        )
+
+    return {
+        "price_column": price_column,
+        "horizon": horizon,
+        "direction": direction,
+        "eligible_start_count": max(0, len(rows) - horizon),
+        "observation_count": len(observations),
+        "excluded_non_numeric": excluded_non_numeric,
+        "excluded_zero_entry": excluded_zero_entry,
+        "observations": observations,
+        "interpretation_boundary": "LOOKAHEAD_MEASUREMENT_ONLY_RD_INTERPRETS",
+    }
+
+
 def standard_method_catalog() -> MethodCatalog:
     """Build the initial positive-admission v4 method catalog."""
     return MethodCatalog(
@@ -154,12 +214,14 @@ def standard_method_catalog() -> MethodCatalog:
             MethodSpec(
                 method_id="analysis.descriptive.statistics",
                 artifact_types=("NORMALIZED_DATASET",),
+                description="Compute descriptive summaries for columns explicitly selected by RD.",
                 parameters=(
                     ParameterContract(
                         name="columns",
                         required=True,
                         python_types=(list, tuple),
                         minimum_length=1,
+                        meaning="one or more RD-selected numeric columns",
                     ),
                 ),
                 minimum_sample=1,
@@ -167,21 +229,62 @@ def standard_method_catalog() -> MethodCatalog:
             MethodSpec(
                 method_id="analysis.relationship.correlation",
                 artifact_types=("NORMALIZED_DATASET",),
+                description="Measure pairwise Pearson or Spearman association without causal interpretation.",
                 parameters=(
                     ParameterContract(
                         name="columns",
                         required=True,
                         python_types=(list, tuple),
                         exact_length=2,
+                        meaning="exactly two RD-selected numeric columns",
                     ),
                     ParameterContract(
                         name="correlation_type",
                         required=False,
                         python_types=(str,),
                         allowed_values=("pearson", "spearman"),
+                        meaning="correlation statistic selected by RD",
                     ),
                 ),
                 minimum_sample=2,
+            ),
+            MethodSpec(
+                method_id="analysis.path.forward_measurement",
+                artifact_types=("NORMALIZED_DATASET",),
+                description=(
+                    "Exploration-only look-ahead measurement of terminal return, maximum favorable "
+                    "excursion, maximum adverse excursion, and timing over an RD-selected forward horizon."
+                ),
+                parameters=(
+                    ParameterContract(
+                        name="price_column",
+                        required=True,
+                        python_types=(str,),
+                        meaning="price field explicitly selected by RD",
+                    ),
+                    ParameterContract(
+                        name="horizon",
+                        required=True,
+                        python_types=(int,),
+                        minimum_value=1,
+                        meaning="number of forward rows explicitly selected by RD",
+                    ),
+                    ParameterContract(
+                        name="direction",
+                        required=True,
+                        python_types=(str,),
+                        allowed_values=("LONG", "SHORT"),
+                        meaning="directional frame explicitly selected by RD",
+                    ),
+                ),
+                minimum_sample=2,
+                exploration_allowed=True,
+                validation_allowed=False,
+                allows_future_information=True,
+                metadata={
+                    "row_order": "uses evidence rows in supplied order",
+                    "scientific_selection": "none; RD supplies price_column, horizon, and direction",
+                },
             ),
         ]
     )
@@ -196,5 +299,9 @@ def standard_analysis_methods() -> tuple[RegisteredAnalysisMethod, ...]:
         RegisteredAnalysisMethod(
             method_id="analysis.relationship.correlation",
             implementation=relationship_correlation,
+        ),
+        RegisteredAnalysisMethod(
+            method_id="analysis.path.forward_measurement",
+            implementation=forward_path_measurement,
         ),
     )
