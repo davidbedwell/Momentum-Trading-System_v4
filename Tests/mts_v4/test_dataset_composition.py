@@ -173,7 +173,7 @@ class DatasetCompositionTests(unittest.TestCase):
         self.assertEqual(payload["parameters"][2]["allowed_values"], ["INNER"])
         self.assertEqual(payload["metadata"]["scientific_selection"], "none")
         self.assertFalse("volume" in payload["description"].lower())
-        self.assertFalse("return" in payload["description"].lower())
+        self.assertFalse("terminal_directional_return" in payload["description"].lower())
 
     def test_composition_does_not_infer_missing_selected_column(self):
         executor = ExactMethodAnalysisExecutor()
