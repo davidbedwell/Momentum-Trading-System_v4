@@ -3,6 +3,7 @@ from __future__ import annotations
 import unittest
 
 from MTS_V4.scientific_toolkit import (
+    ScientificToolkitError,
     execute_scientific_toolkit,
     scientific_tool_count,
     scientific_toolkit_method_spec,
@@ -47,18 +48,15 @@ class ScientificToolkitTests(unittest.TestCase):
 
     def test_toolkit_does_not_silently_drop_missing_values(self):
         rows = [{"x": 1.0}, {"x": None}, {"x": 3.0}]
-        result = execute_scientific_toolkit(
-            {"evidence:1": rows},
-            {
-                "tool_id": "scipy.stats.describe",
-                "args": [{"column": "x"}],
-                "kwargs": {},
-            },
-        )
-        # The exact library output/error semantics belong to scipy. The v4 layer
-        # must not silently alter the source rows before invocation. A successful
-        # invocation therefore still reports the exact selected tool.
-        self.assertEqual(result["tool_id"], "scipy.stats.describe")
+        with self.assertRaises(ScientificToolkitError):
+            execute_scientific_toolkit(
+                {"evidence:1": rows},
+                {
+                    "tool_id": "scipy.stats.describe",
+                    "args": [{"column": "x"}],
+                    "kwargs": {},
+                },
+            )
 
 
 if __name__ == "__main__":
