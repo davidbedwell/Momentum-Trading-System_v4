@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import unittest
 
-from MTS_V4.contracts import EvidenceDescriptor, ResearchPhase
+from MTS_V4.contracts import AnalysisResult, EvidenceDescriptor, ResearchPhase
 from MTS_V4.openai_compatible_provider import OpenAICompatibleResearchDirector
 from MTS_V4.rd_codec import ResearchDecisionCodec, ResearchDecisionDecodeError
 
@@ -14,6 +14,42 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
             OpenAICompatibleResearchDirector._json_safe(ResearchPhase.EXPLORATION),
             "EXPLORATION",
         )
+
+    def test_derived_dataset_rows_are_withheld_but_catalog_is_transport_visible(self):
+        result = AnalysisResult(
+            result_id="analysis-result:1",
+            request_id="req:1",
+            subject_id="AAPL",
+            method_id="analysis.path.forward_measurement",
+            outputs={
+                "horizon": 5,
+                "terminal_directional_return": {"count": 2, "mean": 0.01},
+                "derived_dataset_catalog": {
+                    "forward_path_observations": {
+                        "row_count": 2,
+                        "schema": ["index", "terminal_directional_return"],
+                        "output_path": ["derived_datasets", "forward_path_observations"],
+                        "temporary": True,
+                    }
+                },
+                "derived_datasets": {
+                    "forward_path_observations": [
+                        {"index": 0, "terminal_directional_return": 0.02},
+                        {"index": 1, "terminal_directional_return": 0.00},
+                    ]
+                },
+            },
+            evidence_ids=("ev:1",),
+        )
+        payload = OpenAICompatibleResearchDirector._analysis_result_payload(result)
+        outputs = payload["outputs"]
+        self.assertNotIn("derived_datasets", outputs)
+        self.assertIn("derived_dataset_catalog", outputs)
+        self.assertEqual(
+            outputs["derived_dataset_catalog"]["forward_path_observations"]["output_path"],
+            ["derived_datasets", "forward_path_observations"],
+        )
+        self.assertIn("withheld", outputs["derived_dataset_transport"].lower())
 
     def test_every_deterministic_request_and_finding_requirement_is_exposed_to_rd(self):
         evidence = EvidenceDescriptor(
@@ -59,6 +95,7 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
             requirements["analysis_request"]["method_contracts"][0]["parameters"][0]["exact_length"],
             2,
         )
+        self.assertIn("relative to analysis_result.outputs", requirements["analysis_request"]["analysis_inputs"])
         supplied = requirements["available_evidence"][0]
         self.assertEqual(supplied["schema"], ["date", "close", "volume"])
         self.assertEqual(supplied["source_identity"], "fixture-source")
