@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any, Callable, Mapping
+from uuid import uuid4
 
 from .contracts import AnalysisRequest, AnalysisResult
 
@@ -26,11 +27,13 @@ class ExactMethodAnalysisExecutor:
     substitution path in this executor. A method-level execution failure is
     returned as an objective Analysis result for RD to interpret or repair; it
     is never converted into a substitute scientific method or input.
+
+    Result identities are globally collision-resistant because result lineage is
+    now durable across campaigns while result payloads remain campaign-local.
     """
 
     def __init__(self) -> None:
         self._methods: dict[str, RegisteredAnalysisMethod] = {}
-        self._sequence = 0
 
     def register(self, method: RegisteredAnalysisMethod) -> None:
         if not method.method_id.strip():
@@ -51,8 +54,7 @@ class ExactMethodAnalysisExecutor:
                 f"validated method has no registered executor: {request.method_id}"
             ) from exc
 
-        self._sequence += 1
-        result_id = f"analysis-result:{self._sequence}"
+        result_id = f"analysis-result:{uuid4().hex}"
         try:
             outputs = registered.implementation(evidence_payloads, request.parameters)
         except Exception as exc:
@@ -136,18 +138,34 @@ class ExactMethodAnalysisExecutor:
         if method_id == "analysis.transform.percent_change":
             dataset_name = "percent_change"
             lag = int(parameters["lag"])
-            span = lambda row: (int(row["index"]) - lag, int(row["index"]), int(row["index"]))
+            span = lambda row: (
+                int(row["index"]) - lag,
+                int(row["index"]),
+                int(row["index"]),
+            )
         elif method_id == "analysis.rolling.statistics":
             dataset_name = "rolling_statistic"
             window = int(parameters["window"])
-            span = lambda row: (int(row["index"]) - window + 1, int(row["index"]), int(row["index"]))
+            span = lambda row: (
+                int(row["index"]) - window + 1,
+                int(row["index"]),
+                int(row["index"]),
+            )
         elif method_id == "analysis.events.threshold":
             dataset_name = "threshold_events"
-            span = lambda row: (int(row["index"]), int(row["index"]), int(row["index"]))
+            span = lambda row: (
+                int(row["index"]),
+                int(row["index"]),
+                int(row["index"]),
+            )
         elif method_id == "analysis.path.forward_measurement":
             dataset_name = "forward_path_observations"
             horizon = int(parameters["horizon"])
-            span = lambda row: (int(row["index"]), int(row["index"]) + horizon, int(row["index"]))
+            span = lambda row: (
+                int(row["index"]),
+                int(row["index"]) + horizon,
+                int(row["index"]),
+            )
         else:
             return outputs
 
