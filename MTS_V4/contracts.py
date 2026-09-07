@@ -18,6 +18,37 @@ class SubjectMetadata:
     attributes: Mapping[str, Any] = field(default_factory=dict)
 
 
+ACQUISITION_ONLY_PROVENANCE_KEYS = frozenset(
+    {
+        "acquired_at",
+        "acquired_at_utc",
+        "fetched_at",
+        "fetched_at_utc",
+        "pulled_at",
+        "pulled_at_utc",
+        "requested_at",
+        "requested_at_utc",
+        "retrieved_at",
+        "retrieved_at_utc",
+    }
+)
+
+
+def meaningful_evidence_provenance(provenance: Mapping[str, Any]) -> Mapping[str, Any]:
+    """Return source metadata that participates in durable evidence identity.
+
+    Acquisition timestamps remain useful campaign-local provenance, but they do
+    not change the identity of otherwise identical evidence and may not cause a
+    later reacquisition to rewrite or collide with metadata already referenced
+    by durable findings.
+    """
+    return {
+        str(key): value
+        for key, value in provenance.items()
+        if str(key).lower() not in ACQUISITION_ONLY_PROVENANCE_KEYS
+    }
+
+
 @dataclass(frozen=True, slots=True)
 class EvidenceMetadata:
     """Durable evidence metadata with no reproducible payload/cache location."""
@@ -34,6 +65,31 @@ class EvidenceMetadata:
     provenance: Mapping[str, Any] = field(default_factory=dict)
     neutral_semantics: str = ""
     content_identity: str | None = None
+
+    def identity_equivalent(self, other: "EvidenceMetadata") -> bool:
+        """Compare immutable evidence meaning while ignoring acquisition clocks.
+
+        Equivalent reacquisitions keep the first durable record unchanged. This
+        preserves historical finding references while allowing operationally new
+        fetch timestamps for identical evidence.
+        """
+        if not isinstance(other, EvidenceMetadata):
+            return False
+        return (
+            self.evidence_id == other.evidence_id
+            and self.subject_id == other.subject_id
+            and self.evidence_type == other.evidence_type
+            and self.artifact_type == other.artifact_type
+            and self.source_identity == other.source_identity
+            and self.coverage_start == other.coverage_start
+            and self.coverage_end == other.coverage_end
+            and self.row_count == other.row_count
+            and tuple(self.schema) == tuple(other.schema)
+            and dict(meaningful_evidence_provenance(self.provenance))
+            == dict(meaningful_evidence_provenance(other.provenance))
+            and self.neutral_semantics == other.neutral_semantics
+            and self.content_identity == other.content_identity
+        )
 
 
 @dataclass(frozen=True, slots=True)
