@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 from MTS_V4.cache import TemporaryResearchCache
-from MTS_V4.contracts import EvidenceMetadata, Finding, SubjectMetadata
+from MTS_V4.contracts import AnalysisResultMetadata, EvidenceMetadata, Finding, SubjectMetadata
 from MTS_V4.intake import IntakeEngine, IntakePayload
 from MTS_V4.nexus_json import JsonResearchNexus
 
@@ -38,10 +38,12 @@ class V4DataBoundaryTests(unittest.TestCase):
         self.assertEqual(descriptor.evidence_type, "OHLCV")
         self.assertEqual(cache.get(descriptor.cache_key)[0]["close"], 100.0)
         self.assertFalse(hasattr(descriptor, "payload"))
+        self.assertTrue(descriptor.content_identity.startswith("sha256:"))
         durable = descriptor.durable_metadata()
         self.assertFalse(hasattr(durable, "cache_key"))
+        self.assertEqual(durable.content_identity, descriptor.content_identity)
 
-    def test_json_nexus_persists_ticker_evidence_metadata_and_findings_not_raw_dataset(self):
+    def test_json_nexus_persists_lineage_metadata_and_findings_not_raw_dataset(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "nexus.json"
             nexus = JsonResearchNexus(path)
@@ -59,6 +61,18 @@ class V4DataBoundaryTests(unittest.TestCase):
                     schema=("date", "close", "volume"),
                     provenance={"vendor": "fixture"},
                     neutral_semantics="Observed price and aggregate volume only.",
+                    content_identity="sha256:fixture",
+                )
+            )
+            nexus.register_analysis_result_metadata(
+                AnalysisResultMetadata(
+                    result_id="r:1",
+                    request_id="req:1",
+                    subject_id="AAPL",
+                    method_id="analysis.fixture",
+                    evidence_ids=("ev:1",),
+                    future_information={"contains_future_information": False},
+                    execution_metadata={"execution_status": "SUCCESS"},
                 )
             )
             nexus.publish_finding(
@@ -80,9 +94,17 @@ class V4DataBoundaryTests(unittest.TestCase):
             self.assertEqual(document["format"], "MTS_V4_RESEARCH_NEXUS_V1")
             self.assertEqual(
                 set(document),
-                {"format", "subjects", "evidence_metadata", "findings", "finding_retractions"},
+                {
+                    "format",
+                    "subjects",
+                    "evidence_metadata",
+                    "analysis_result_metadata",
+                    "findings",
+                    "finding_retractions",
+                },
             )
             self.assertEqual(document["finding_retractions"], [])
+            self.assertEqual(document["analysis_result_metadata"][0]["result_id"], "r:1")
             serialized = path.read_text(encoding="utf-8")
             self.assertNotIn('"payload"', serialized)
             self.assertNotIn('"rows"', serialized)
@@ -94,6 +116,7 @@ class V4DataBoundaryTests(unittest.TestCase):
                 reopened.get_evidence_metadata("ev:1").source_identity,
                 "fixture-source",
             )
+            self.assertEqual(reopened.get_analysis_result_metadata("r:1").method_id, "analysis.fixture")
             finding = reopened.get_finding("f:1")
             self.assertEqual(finding.statement, "Significant result")
             self.assertEqual(finding.metadata["nested_science"]["hypothesis_family"], "RD_DEFINED")
@@ -125,10 +148,12 @@ class V4DataBoundaryTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            finding = JsonResearchNexus(path).get_finding("legacy:f1")
+            nexus = JsonResearchNexus(path)
+            finding = nexus.get_finding("legacy:f1")
             self.assertEqual(finding.metadata["significance"], "important")
             self.assertEqual(finding.metadata["status"], "EXPLORATORY")
             self.assertEqual(finding.metadata["applicability"]["regime"], "unknown")
+            self.assertIsNone(nexus.get_analysis_result_metadata("legacy-result-not-required"))
 
 
 if __name__ == "__main__":
