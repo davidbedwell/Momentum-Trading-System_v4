@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Any, Iterable, Mapping, Protocol
 
 from .cache import TemporaryResearchCache
-from .contracts import EvidenceDescriptor, SubjectMetadata
+from .contracts import EvidenceDescriptor, SubjectMetadata, meaningful_evidence_provenance
 
 
 @dataclass(frozen=True, slots=True)
@@ -34,21 +34,6 @@ class IntakeEngine:
     are content/source-derived so a later acquisition cannot silently overwrite
     durable metadata referenced by an older finding.
     """
-
-    _ACQUISITION_ONLY_PROVENANCE_KEYS = frozenset(
-        {
-            "acquired_at",
-            "acquired_at_utc",
-            "fetched_at",
-            "fetched_at_utc",
-            "pulled_at",
-            "pulled_at_utc",
-            "requested_at",
-            "requested_at_utc",
-            "retrieved_at",
-            "retrieved_at_utc",
-        }
-    )
 
     def __init__(self, cache: TemporaryResearchCache) -> None:
         self._cache = cache
@@ -127,13 +112,9 @@ class IntakeEngine:
         ).encode("utf-8")
         return "sha256:" + hashlib.sha256(encoded).hexdigest()
 
-    @classmethod
-    def meaningful_provenance(cls, provenance: Mapping[str, Any]) -> Mapping[str, Any]:
-        return {
-            str(key): value
-            for key, value in provenance.items()
-            if str(key).lower() not in cls._ACQUISITION_ONLY_PROVENANCE_KEYS
-        }
+    @staticmethod
+    def meaningful_provenance(provenance: Mapping[str, Any]) -> Mapping[str, Any]:
+        return meaningful_evidence_provenance(provenance)
 
     @staticmethod
     def _validate_payload(payload: IntakePayload) -> None:
