@@ -5,27 +5,29 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .contracts import EvidenceMetadata, Finding, FindingRetraction, SubjectMetadata
+from .contracts import (
+    AnalysisResultMetadata,
+    EvidenceMetadata,
+    Finding,
+    FindingRetraction,
+    SubjectMetadata,
+)
 from .nexus import NexusError
 
 
 class JsonResearchNexus:
     """Small durable v4 Nexus reference implementation.
 
-    The on-disk document contains ticker/subject metadata, evidence metadata, and
-    significant RD findings. It contains no raw evidence payload, temporary cache
-    key, or dataset publication API. Finding science lives in an open metadata
-    namespace inside a small deterministic identity/lineage envelope.
-
-    Retracted findings remain durably preserved for audit, but normal finding
-    retrieval excludes them so contaminated findings cannot seep into future RD
-    research context.
+    The on-disk document contains ticker/subject metadata, immutable evidence and
+    Analysis-result lineage metadata, and significant RD findings. It contains no
+    raw evidence payload, temporary cache key, or reusable Analysis result payload.
     """
 
     def __init__(self, path: str | Path) -> None:
         self._path = Path(path)
         self._subjects: dict[str, SubjectMetadata] = {}
         self._evidence_metadata: dict[str, EvidenceMetadata] = {}
+        self._analysis_result_metadata: dict[str, AnalysisResultMetadata] = {}
         self._findings: dict[str, Finding] = {}
         self._finding_retractions: dict[str, FindingRetraction] = {}
         self._load()
@@ -41,12 +43,55 @@ class JsonResearchNexus:
             raise NexusError(
                 f"Cannot persist evidence metadata for unknown subject: {metadata.subject_id}"
             )
+        existing = self._evidence_metadata.get(metadata.evidence_id)
+        if existing is not None and existing != metadata:
+            raise NexusError(
+                f"evidence_id already exists with different metadata: {metadata.evidence_id}"
+            )
         self._evidence_metadata[metadata.evidence_id] = metadata
+        self._flush()
+
+    def register_analysis_result_metadata(self, metadata: AnalysisResultMetadata) -> None:
+        if metadata.subject_id not in self._subjects:
+            raise NexusError(
+                f"Cannot persist result metadata for unknown subject: {metadata.subject_id}"
+            )
+        for evidence_id in metadata.evidence_ids:
+            evidence = self._evidence_metadata.get(evidence_id)
+            if evidence is None:
+                raise NexusError(f"result cites unknown evidence_id: {evidence_id}")
+            if evidence.subject_id != metadata.subject_id:
+                raise NexusError(f"result/evidence subject lineage mismatch: {evidence_id}")
+        existing = self._analysis_result_metadata.get(metadata.result_id)
+        if existing is not None and existing != metadata:
+            raise NexusError(
+                f"result_id already exists with different metadata: {metadata.result_id}"
+            )
+        self._analysis_result_metadata[metadata.result_id] = metadata
         self._flush()
 
     def publish_finding(self, finding: Finding) -> None:
         if finding.subject_id not in self._subjects:
             raise NexusError(f"Cannot publish finding for unknown subject: {finding.subject_id}")
+        cited_evidence = set(finding.evidence_ids)
+        for evidence_id in finding.evidence_ids:
+            evidence = self._evidence_metadata.get(evidence_id)
+            if evidence is None:
+                raise NexusError(f"finding cites unknown evidence_id: {evidence_id}")
+            if evidence.subject_id != finding.subject_id:
+                raise NexusError(f"finding/evidence subject lineage mismatch: {evidence_id}")
+        for result_id in finding.supporting_result_ids:
+            result = self._analysis_result_metadata.get(result_id)
+            if result is None:
+                raise NexusError(f"finding cites unknown result_id: {result_id}")
+            if result.subject_id != finding.subject_id:
+                raise NexusError(f"finding/result subject lineage mismatch: {result_id}")
+            missing_lineage = set(result.evidence_ids) - cited_evidence
+            if missing_lineage:
+                raise NexusError(
+                    "finding omits evidence lineage from supporting result "
+                    f"{result_id}: {sorted(missing_lineage)}"
+                )
         existing = self._findings.get(finding.finding_id)
         if existing is not None and existing != finding:
             raise NexusError(f"finding_id already exists with different content: {finding.finding_id}")
@@ -96,6 +141,16 @@ class JsonResearchNexus:
             if metadata.subject_id == subject_id
         )
 
+    def get_analysis_result_metadata(self, result_id: str) -> AnalysisResultMetadata | None:
+        return self._analysis_result_metadata.get(result_id)
+
+    def analysis_result_metadata_for_subject(self, subject_id: str) -> tuple[AnalysisResultMetadata, ...]:
+        return tuple(
+            metadata
+            for _, metadata in sorted(self._analysis_result_metadata.items())
+            if metadata.subject_id == subject_id
+        )
+
     def get_finding(self, finding_id: str) -> Finding | None:
         if finding_id in self._finding_retractions:
             return None
@@ -123,14 +178,15 @@ class JsonResearchNexus:
             raw["schema"] = tuple(raw.get("schema", ()))
             metadata = EvidenceMetadata(**raw)
             self._evidence_metadata[metadata.evidence_id] = metadata
+        for raw in document.get("analysis_result_metadata", []):
+            raw = dict(raw)
+            raw["evidence_ids"] = tuple(raw.get("evidence_ids", ()))
+            metadata = AnalysisResultMetadata(**raw)
+            self._analysis_result_metadata[metadata.result_id] = metadata
         for raw in document.get("findings", []):
             raw = dict(raw)
             raw["supporting_result_ids"] = tuple(raw.get("supporting_result_ids", ()))
             raw["evidence_ids"] = tuple(raw.get("evidence_ids", ()))
-
-            # Compatibility for early v4 files: fields that were mistakenly
-            # deterministic top-level scientific categories are migrated into
-            # the open metadata namespace rather than discarded.
             metadata = dict(raw.get("metadata", {}))
             for legacy_name in (
                 "significance",
@@ -142,7 +198,6 @@ class JsonResearchNexus:
                 if legacy_name in raw:
                     metadata.setdefault(legacy_name, raw.pop(legacy_name))
             raw["metadata"] = metadata
-
             finding = Finding(**raw)
             self._findings[finding.finding_id] = finding
         for raw in document.get("finding_retractions", []):
@@ -157,6 +212,10 @@ class JsonResearchNexus:
             "subjects": [asdict(self._subjects[key]) for key in sorted(self._subjects)],
             "evidence_metadata": [
                 asdict(self._evidence_metadata[key]) for key in sorted(self._evidence_metadata)
+            ],
+            "analysis_result_metadata": [
+                asdict(self._analysis_result_metadata[key])
+                for key in sorted(self._analysis_result_metadata)
             ],
             "findings": [asdict(self._findings[key]) for key in sorted(self._findings)],
             "finding_retractions": [
