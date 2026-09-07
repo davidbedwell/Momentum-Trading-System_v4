@@ -21,6 +21,7 @@ venv/
 .env
 .env.*
 !.env.example
+.mts_rd_ai_env
 
 # Logs and runtime state
 *.log
