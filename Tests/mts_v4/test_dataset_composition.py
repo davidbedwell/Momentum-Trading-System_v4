@@ -39,7 +39,7 @@ class _ComposeRD:
     def interpret_result(self, **kwargs):
         result = kwargs["result"]
         self.results.append(result)
-        if result.result_id == "analysis-result:1":
+        if len(self.results) == 1:
             return ResearchDecision(
                 continue_research=True,
                 next_request=AnalysisRequest(
@@ -50,7 +50,7 @@ class _ComposeRD:
                     evidence_ids=("evidence:AAPL",),
                     analysis_inputs=(
                         AnalysisResultInput(
-                            result_id="analysis-result:1",
+                            result_id=result.result_id,
                             output_path=("derived_datasets", "forward_path_observations"),
                             input_name="forward_rows",
                         ),
@@ -69,7 +69,7 @@ class _ComposeRD:
                     research_phase=ResearchPhase.EXPLORATION,
                 ),
             )
-        if result.result_id == "analysis-result:2":
+        if len(self.results) == 2:
             return ResearchDecision(
                 continue_research=True,
                 next_request=AnalysisRequest(
@@ -80,7 +80,7 @@ class _ComposeRD:
                     evidence_ids=(),
                     analysis_inputs=(
                         AnalysisResultInput(
-                            result_id="analysis-result:2",
+                            result_id=result.result_id,
                             output_path=("derived_datasets", "composed_dataset"),
                             input_name="composed",
                         ),
@@ -164,6 +164,10 @@ class DatasetCompositionTests(unittest.TestCase):
         self.assertEqual(correlation.outputs["n"], 4)
         self.assertIsNotNone(correlation.outputs["correlation"])
         self.assertEqual(correlation.evidence_ids, ("evidence:AAPL",))
+        self.assertEqual(
+            correlation.execution_metadata["analysis_input_lineage"][0]["result_id"],
+            composed.result_id,
+        )
 
     def test_composition_contract_is_neutral_and_explicit(self):
         payload = standard_method_catalog().get("analysis.dataset.compose").capability_payload()
