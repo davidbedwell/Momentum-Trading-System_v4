@@ -3,21 +3,25 @@ requires = ["setuptools>=75", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "momentum-trading-system-v2"
+name = "momentum-trading-system-v4"
 version = "0.1.0"
-description = "Momentum Trading System v2"
+description = "Momentum Trading System v4 research runtime"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+  "numpy>=2.0",
+  "scipy>=1.14",
+]
 
 [project.optional-dependencies]
 dev = [
   "pytest>=8.0",
   "jsonschema[format]>=4.23",
+  "build>=1.2",
 ]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["Core*"]
+include = ["MTS_V4*"]
 
 [tool.pytest.ini_options]
 testpaths = ["Tests"]
