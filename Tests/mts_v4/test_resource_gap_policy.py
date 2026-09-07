@@ -79,10 +79,15 @@ class ResourceGapPolicyTests(unittest.TestCase):
         system = messages[0]["content"]
         user = json.loads(messages[1]["content"])
         instruction_text = "\n".join(user["instructions"])
-        self.assertIn("LACK_RESOURCE", system)
-        self.assertIn("continue to another scientifically useful answerable question", system)
-        self.assertIn("rather than ending the campaign solely for that gap", instruction_text)
-        self.assertIn("Do not promote missing tools", instruction_text)
+
+        # Prompt wording is intentionally compact, but the governing resource-gap
+        # behavior remains explicit: gaps stay in research_state, never become
+        # findings, and do not end research while another useful question remains.
+        self.assertIn("research_state.lack_resource", system)
+        self.assertIn("not findings", system)
+        self.assertIn("another useful answerable question", instruction_text)
+        self.assertIn("when one remains", instruction_text)
+        self.assertIn("Promote only findings you judge significant", instruction_text)
         self.assertIn("questions_answered", user["required_decision_schema"]["research_state"])
         self.assertIn("questions_unanswered_lack_resource", user["required_decision_schema"]["research_state"])
 
