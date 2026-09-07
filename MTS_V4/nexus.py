@@ -4,7 +4,13 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Mapping, Protocol
 
-from .contracts import EvidenceMetadata, Finding, FindingRetraction, SubjectMetadata
+from .contracts import (
+    AnalysisResultMetadata,
+    EvidenceMetadata,
+    Finding,
+    FindingRetraction,
+    SubjectMetadata,
+)
 
 
 class NexusError(RuntimeError):
@@ -14,6 +20,7 @@ class NexusError(RuntimeError):
 class ResearchNexus(Protocol):
     def upsert_subject(self, metadata: SubjectMetadata) -> None: ...
     def upsert_evidence_metadata(self, metadata: EvidenceMetadata) -> None: ...
+    def register_analysis_result_metadata(self, metadata: AnalysisResultMetadata) -> None: ...
     def publish_finding(self, finding: Finding) -> None: ...
     def retract_finding(
         self,
@@ -26,6 +33,8 @@ class ResearchNexus(Protocol):
     def get_subject(self, subject_id: str) -> SubjectMetadata | None: ...
     def get_evidence_metadata(self, evidence_id: str) -> EvidenceMetadata | None: ...
     def evidence_metadata_for_subject(self, subject_id: str) -> tuple[EvidenceMetadata, ...]: ...
+    def get_analysis_result_metadata(self, result_id: str) -> AnalysisResultMetadata | None: ...
+    def analysis_result_metadata_for_subject(self, subject_id: str) -> tuple[AnalysisResultMetadata, ...]: ...
     def get_finding(self, finding_id: str) -> Finding | None: ...
     def findings_for_subject(self, subject_id: str) -> tuple[Finding, ...]: ...
     def get_finding_retraction(self, finding_id: str) -> FindingRetraction | None: ...
@@ -35,13 +44,15 @@ class ResearchNexus(Protocol):
 class InMemoryResearchNexus:
     """Reference durable-memory implementation for v4 tests.
 
-    This API deliberately has no raw-dataset publication method. Evidence
-    persistence is metadata-only and therefore cannot hold a campaign cache key
-    or source payload.
+    The Nexus stores immutable identity/lineage metadata, never raw datasets or
+    reusable result payloads. Reusing an existing evidence or result identity
+    with different metadata is rejected so later acquisitions cannot silently
+    rewrite the provenance of older findings.
     """
 
     _subjects: dict[str, SubjectMetadata] = field(default_factory=dict)
     _evidence_metadata: dict[str, EvidenceMetadata] = field(default_factory=dict)
+    _analysis_result_metadata: dict[str, AnalysisResultMetadata] = field(default_factory=dict)
     _findings: dict[str, Finding] = field(default_factory=dict)
     _finding_retractions: dict[str, FindingRetraction] = field(default_factory=dict)
 
@@ -55,13 +66,55 @@ class InMemoryResearchNexus:
             raise NexusError(
                 f"Cannot persist evidence metadata for unknown subject: {metadata.subject_id}"
             )
+        existing = self._evidence_metadata.get(metadata.evidence_id)
+        if existing is not None and existing != metadata:
+            raise NexusError(
+                f"evidence_id already exists with different metadata: {metadata.evidence_id}"
+            )
         self._evidence_metadata[metadata.evidence_id] = metadata
+
+    def register_analysis_result_metadata(self, metadata: AnalysisResultMetadata) -> None:
+        if metadata.subject_id not in self._subjects:
+            raise NexusError(
+                f"Cannot persist result metadata for unknown subject: {metadata.subject_id}"
+            )
+        for evidence_id in metadata.evidence_ids:
+            evidence = self._evidence_metadata.get(evidence_id)
+            if evidence is None:
+                raise NexusError(f"result cites unknown evidence_id: {evidence_id}")
+            if evidence.subject_id != metadata.subject_id:
+                raise NexusError(f"result/evidence subject lineage mismatch: {evidence_id}")
+        existing = self._analysis_result_metadata.get(metadata.result_id)
+        if existing is not None and existing != metadata:
+            raise NexusError(
+                f"result_id already exists with different metadata: {metadata.result_id}"
+            )
+        self._analysis_result_metadata[metadata.result_id] = metadata
 
     def publish_finding(self, finding: Finding) -> None:
         if finding.subject_id not in self._subjects:
             raise NexusError(
                 f"Cannot publish finding for unknown subject: {finding.subject_id}"
             )
+        cited_evidence = set(finding.evidence_ids)
+        for evidence_id in finding.evidence_ids:
+            evidence = self._evidence_metadata.get(evidence_id)
+            if evidence is None:
+                raise NexusError(f"finding cites unknown evidence_id: {evidence_id}")
+            if evidence.subject_id != finding.subject_id:
+                raise NexusError(f"finding/evidence subject lineage mismatch: {evidence_id}")
+        for result_id in finding.supporting_result_ids:
+            result = self._analysis_result_metadata.get(result_id)
+            if result is None:
+                raise NexusError(f"finding cites unknown result_id: {result_id}")
+            if result.subject_id != finding.subject_id:
+                raise NexusError(f"finding/result subject lineage mismatch: {result_id}")
+            missing_lineage = set(result.evidence_ids) - cited_evidence
+            if missing_lineage:
+                raise NexusError(
+                    "finding omits evidence lineage from supporting result "
+                    f"{result_id}: {sorted(missing_lineage)}"
+                )
         existing = self._findings.get(finding.finding_id)
         if existing is not None and existing != finding:
             raise NexusError(f"finding_id already exists with different content: {finding.finding_id}")
@@ -109,6 +162,16 @@ class InMemoryResearchNexus:
             if metadata.subject_id == subject_id
         )
 
+    def get_analysis_result_metadata(self, result_id: str) -> AnalysisResultMetadata | None:
+        return self._analysis_result_metadata.get(result_id)
+
+    def analysis_result_metadata_for_subject(self, subject_id: str) -> tuple[AnalysisResultMetadata, ...]:
+        return tuple(
+            metadata
+            for _, metadata in sorted(self._analysis_result_metadata.items())
+            if metadata.subject_id == subject_id
+        )
+
     def get_finding(self, finding_id: str) -> Finding | None:
         if finding_id in self._finding_retractions:
             return None
@@ -128,6 +191,7 @@ class InMemoryResearchNexus:
         return {
             "subjects": len(self._subjects),
             "evidence_metadata": len(self._evidence_metadata),
+            "analysis_result_metadata": len(self._analysis_result_metadata),
             "findings": len(self._findings),
             "finding_retractions": len(self._finding_retractions),
             "active_findings": len(self._findings) - len(self._finding_retractions),
