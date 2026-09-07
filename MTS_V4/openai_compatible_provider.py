@@ -503,6 +503,17 @@ class OpenAICompatibleResearchDirector:
 
     @classmethod
     def _analysis_result_payload(cls, result: AnalysisResult) -> Mapping[str, object]:
+        """Return the RD-visible result while withholding campaign-local row payloads.
+
+        Analysis methods may expose the same reusable row dataset both under
+        ``derived_datasets`` and under a convenient sibling key such as
+        ``observations`` or ``events``. Those siblings are aliases of the same
+        reproducible row payload, not additional scientific summaries. Sending
+        them defeats the transport boundary even when ``derived_datasets`` itself
+        is removed. Detect exact list/tuple aliases mechanically, withhold them,
+        and preserve their dataset identity and output path for explicit RD-owned
+        chaining. Aggregate/scalar outputs remain untouched.
+        """
         raw = asdict(result)
         outputs = dict(raw.get("outputs", {}))
         derived = outputs.pop("derived_datasets", None)
@@ -518,10 +529,48 @@ class OpenAICompatibleResearchDirector:
                     for name, rows in derived.items()
                 }
                 outputs["derived_dataset_catalog"] = catalog
+
+            withheld_aliases: dict[str, Mapping[str, object]] = {}
+            protected_keys = {
+                "derived_dataset_catalog",
+                "derived_dataset_transport",
+                "withheld_row_output_aliases",
+            }
+            for dataset_name, rows in derived.items():
+                if not isinstance(rows, (list, tuple)):
+                    continue
+                dataset_metadata = catalog.get(str(dataset_name), {}) if isinstance(catalog, Mapping) else {}
+                output_path = (
+                    dataset_metadata.get("output_path")
+                    if isinstance(dataset_metadata, Mapping)
+                    else None
+                )
+                if not isinstance(output_path, (list, tuple)):
+                    output_path = ["derived_datasets", str(dataset_name)]
+                for key, value in tuple(outputs.items()):
+                    if key in protected_keys:
+                        continue
+                    if isinstance(value, (list, tuple)) and value == rows:
+                        outputs.pop(key, None)
+                        withheld_aliases[str(key)] = {
+                            "dataset_name": str(dataset_name),
+                            "output_path": list(output_path),
+                            "row_count": len(rows),
+                        }
+
             outputs["derived_dataset_transport"] = (
                 "Row payload withheld from RD transport; available to later Analysis execution only "
                 "through explicit analysis_inputs using the catalog's output_path."
             )
+            if withheld_aliases:
+                outputs["withheld_row_output_aliases"] = {
+                    "meaning": (
+                        "These output keys were exact aliases of campaign-local derived row datasets. "
+                        "Their row payloads are withheld from model transport; use the listed output_path "
+                        "through analysis_inputs if scientifically needed."
+                    ),
+                    "aliases": withheld_aliases,
+                }
         raw["outputs"] = outputs
         return cls._json_safe(raw)
 
