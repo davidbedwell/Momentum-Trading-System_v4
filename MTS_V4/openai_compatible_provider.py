@@ -24,7 +24,13 @@ class ResearchDirectorTransportError(RuntimeError):
 
 
 class OpenAICompatibleResearchDirector:
-    """OpenAI-compatible transport for the v4 AI Research Director."""
+    """OpenAI-compatible transport for the v4 AI Research Director.
+
+    Transport is deliberately bounded around current scientific context. Durable
+    Nexus audit history may be much larger than the scientific memory that RD
+    previously promoted as significant; the former is not blindly serialized on
+    every turn. No deterministic scientific ranking or selection is performed.
+    """
 
     def __init__(
         self,
@@ -153,11 +159,14 @@ class OpenAICompatibleResearchDirector:
         available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
     ) -> dict[str, object]:
-        """Build one authoritative copy of each RD-visible catalog.
+        """Build one copy of current RD-visible evidence/method context.
 
-        Deterministic execution requirements refer to these adjacent objects by
-        path rather than serializing the method and evidence catalogs a second
-        time. No scientific information is removed or summarized.
+        The orchestrator supplies a full durable Nexus view for mechanical use.
+        Transport removes objects already supplied adjacent to it and historical
+        Analysis audit records that contain no scientific result payload. Exact
+        lineage for Analysis results cited by RD-promoted significant findings is
+        preserved. This uses RD's own promotion decisions, not deterministic
+        scientific relevance scoring.
         """
         return {
             "subject": asdict(subject),
@@ -167,8 +176,64 @@ class OpenAICompatibleResearchDirector:
                 evidence=evidence,
                 available_methods=available_methods,
             ),
-            "nexus_context": cls._json_safe(nexus_context),
+            "nexus_context": cls._compact_nexus_context(nexus_context),
         }
+
+    @classmethod
+    def _compact_nexus_context(
+        cls, nexus_context: Mapping[str, object]
+    ) -> Mapping[str, object]:
+        raw = dict(nexus_context)
+        findings = tuple(raw.get("significant_findings", ()) or ())
+        historical = tuple(raw.get("historical_analysis_result_metadata", ()) or ())
+        evidence_metadata = tuple(raw.get("evidence_metadata", ()) or ())
+
+        cited_result_ids: set[str] = set()
+        for finding in findings:
+            if isinstance(finding, Mapping):
+                values = finding.get("supporting_result_ids", ())
+            else:
+                values = getattr(finding, "supporting_result_ids", ())
+            if isinstance(values, (list, tuple, set)):
+                cited_result_ids.update(str(value) for value in values)
+
+        finding_lineage = []
+        for item in historical:
+            result_id = (
+                item.get("result_id")
+                if isinstance(item, Mapping)
+                else getattr(item, "result_id", None)
+            )
+            if result_id is None or str(result_id) not in cited_result_ids:
+                continue
+            finding_lineage.append(cls._json_safe(item))
+
+        compact = {
+            key: value
+            for key, value in raw.items()
+            if key
+            not in {
+                "subject",
+                "evidence_metadata",
+                "historical_analysis_result_metadata",
+            }
+        }
+        compact["significant_findings"] = cls._json_safe(findings)
+        compact["historical_finding_support_lineage"] = finding_lineage
+        compact["durable_inventory"] = {
+            "evidence_metadata_count": len(evidence_metadata),
+            "historical_analysis_result_metadata_count": len(historical),
+            "significant_finding_count": len(findings),
+            "historical_result_metadata_embedded_count": len(finding_lineage),
+        }
+        compact["transport_policy"] = {
+            "subject_and_evidence_are_supplied_once_adjacent_to_nexus_context": True,
+            "unpromoted_historical_analysis_results_are_audit_lineage_not_scientific_memory": True,
+            "significant_findings_are_rd_selected_not_deterministically_filtered": True,
+            "lineage_for_results_supporting_significant_findings_is_embedded": True,
+            "deterministic_scientific_ranking_or_selection": False,
+        }
+        return cls._json_safe(compact)
 
     @classmethod
     def _execution_requirements(
@@ -177,51 +242,28 @@ class OpenAICompatibleResearchDirector:
         evidence: Sequence[EvidenceDescriptor],
         available_methods: Sequence[Mapping[str, Any]],
     ) -> Mapping[str, object]:
-        """Publish every deterministic condition RD can be held to.
-
-        ``evidence`` and ``available_methods`` are accepted so callers retain one
-        stable interface. Their complete contents are already present once in the
-        same context object and are referenced here instead of duplicated.
-        """
+        """Compact disclosure of every deterministic rejection class."""
         return {
             "visibility_rule": (
-                "Any deterministic requirement that can reject or block an AI Research Director "
-                "request or finding must be disclosed to the Research Director before the request "
-                "or finding is judged against it."
+                "Any deterministic requirement that can reject or block an RD request or finding "
+                "must be disclosed before it is enforced."
             ),
             "catalog_references": {
                 "method_contracts": "context.available_analysis_methods",
                 "available_evidence": "context.evidence",
-                "meaning": (
-                    "These are exact references to the complete adjacent catalogs in this same "
-                    "request. They are not summaries and no contract/evidence metadata is omitted."
-                ),
                 "method_count": len(available_methods),
                 "evidence_count": len(evidence),
             },
             "analysis_request": {
-                "method_id": "must identify an available_analysis_methods entry exactly",
-                "subject_id": "must equal the active subject_id",
-                "evidence_ids": (
-                    "must always be present as a list; identify supplied raw evidence exactly, "
-                    "or use [] when execution uses no raw evidence"
-                ),
+                "method_id": "exact available method_id",
+                "subject_id": "active subject_id",
+                "evidence_ids": "required list; [] allowed",
                 "analysis_inputs": (
-                    "must always be present as a list; use [] when no prior Analysis output is used. "
-                    "Each entry must supply result_id, exact output_path, and input_name. output_path "
-                    "is always relative to analysis_result.outputs; do not include an initial 'outputs' "
-                    "component. Reusable row datasets are advertised in derived_dataset_catalog with "
-                    "their exact output_path and schema. Deterministic code resolves only the exact "
-                    "RD-authored reference and may not choose or substitute a prior result or output. "
-                    "Prior derived outputs are temporary and are not persisted through process restart; "
-                    "an unavailable result is returned as an objective defect so RD may decide whether "
-                    "to regenerate it."
+                    "required list; [] allowed; each item requires result_id, output_path relative to "
+                    "analysis_result.outputs, and unique input_name"
                 ),
                 "method_contracts_reference": "context.available_analysis_methods",
-                "no_hidden_defaults": (
-                    "Scientifically meaningful missing parameters are not inferred, defaulted, or "
-                    "substituted by deterministic code."
-                ),
+                "no_hidden_defaults": True,
             },
             "finding_envelope": {
                 "closed_required_fields": [
@@ -231,22 +273,10 @@ class OpenAICompatibleResearchDirector:
                     "supporting_result_ids",
                     "evidence_ids",
                 ],
-                "metadata": (
-                    "open-ended object authored by RD; arbitrary scientific labels, nested structures, "
-                    "classifications, applicability, limitations, relationships, confidence judgments, "
-                    "or previously unanticipated concepts are permitted"
-                ),
-                "reference_validation": (
-                    "evidence_ids and supporting_result_ids must resolve to durable identity/lineage "
-                    "metadata for the same subject; raw historical result payloads are not required"
-                ),
+                "metadata": "open-ended RD-authored scientific object",
+                "reference_validation": "same-subject evidence/result identity and lineage only",
                 "scientific_taxonomy_is_open": True,
                 "deterministic_scientific_veto": False,
-                "meaning": (
-                    "Deterministic code may validate only representation, identity, and lineage. It may "
-                    "not reject a finding because its scientific conclusion, category, label, or metadata "
-                    "was not anticipated by code."
-                ),
             },
             "available_evidence_reference": "context.evidence",
             "evidence_continuity": {
@@ -254,75 +284,45 @@ class OpenAICompatibleResearchDirector:
                 "changed_is_not_scientific_failure": True,
                 "content_identity_compared_separately": True,
                 "acquisition_timestamps_are_not_content_identity": True,
-                "meaning": (
-                    "If evidence is reacquired, deterministic code reports objective content/source "
-                    "changes separately from operational acquisition time. The Research Director "
-                    "determines their scientific consequence."
-                ),
             },
             "future_information_lineage": {
                 "propagated_through_analysis_chaining": True,
                 "blanket_rejection": False,
-                "meaning": (
-                    "Deterministic code records whether a result directly or transitively contains "
-                    "future information. It does not decide whether that information is scientifically "
-                    "appropriate; RD owns exploratory use and later validation design."
-                ),
+                "rd_decides_scientific_use": True,
             },
             "hard_execution_failures": [
-                "malformed AI decision representation",
-                "nonexistent requested method",
-                "missing required method parameter disclosed in available_analysis_methods",
-                "invalid parameter type/cardinality/value disclosed in available_analysis_methods",
-                "missing requested evidence identity",
-                "missing requested prior Analysis result in the active runtime",
-                "missing requested output_path in a prior Analysis result",
-                "subject/evidence/result lineage mismatch",
-                "required evidence payload unavailable for execution",
-                "malformed finding envelope disclosed in finding_envelope",
+                "malformed_decision_representation",
+                "nonexistent_method",
+                "missing_required_method_parameter",
+                "invalid_parameter_contract",
+                "missing_evidence_identity",
+                "missing_active_runtime_analysis_result",
+                "missing_prior_result_output_path",
+                "subject_evidence_result_lineage_mismatch",
+                "required_evidence_payload_unavailable",
+                "malformed_finding_envelope",
             ],
             "analysis_execution_error_policy": (
-                "If the exact requested Analysis method encounters an objective execution error, the "
-                "error is returned as an Analysis result with interpretation_boundary "
-                "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP. Deterministic code does not choose a "
-                "replacement method, input, preprocessing step, or scientific response."
+                "Return the exact execution error to RD; do not choose replacement method/input/parameter."
             ),
             "decision_representation_repair_policy": (
-                "If your returned JSON cannot be decoded because a required representation field is "
-                "missing or malformed, the transport may return the exact decode defect to you once and "
-                "ask you to author a corrected complete decision. Deterministic code does not fill the "
-                "missing field or alter your scientific choices."
+                "Return exact decode defect once; deterministic code does not fill scientific fields."
             ),
         }
 
     @staticmethod
     def _system_prompt() -> str:
         return (
-            "You are the AI Research Director for Momentum Trading System v4. "
-            "You are the scientific reasoning authority. Determine scientific questions, hypotheses, "
-            "method choice, scientifically meaningful parameters, interpretation, significance, findings, "
-            "and next research direction. The available Analysis methods are described neutrally in the "
-            "supplied capability catalog; select from that catalog when requesting Analysis. You may "
-            "explicitly chain a prior Analysis output into a later Analysis request using analysis_inputs; "
-            "you decide which prior result and exact output path are scientifically appropriate. "
-            "Deterministic code only resolves your exact reference and preserves its lineage. Reusable "
-            "derived row datasets are temporary campaign-local Analysis outputs advertised in "
-            "derived_dataset_catalog; their row payloads are withheld from model transport but remain "
-            "mechanically available to later Analysis execution through the catalog's exact output_path. "
-            "Every deterministic condition that can block your request or finding must be disclosed in "
-            "objective_execution_requirements before it is enforced. Deterministic code validates only "
-            "objective execution, identity, lineage, and representation contracts and may return exact "
-            "defects for you to repair. It may not veto a scientific finding because the conclusion or "
-            "metadata taxonomy was not anticipated. A changed evidence reacquisition is reported to you "
-            "as evidence continuity metadata, not automatically treated as scientific failure. Future-"
-            "information lineage is also reported mechanically and is not a blanket rejection rule. A "
-            "missing calculation capability, data resource, or other research resource is not scientific "
-            "closure. Record such an unanswered question as LACK_RESOURCE in research_state, identify the "
-            "resource needed, and continue to another scientifically useful answerable question whenever "
-            "one remains. Resource gaps are operational research state, never scientific findings for "
-            "Nexus. Nexus is durable research memory for subject metadata, identity/lineage metadata, and "
-            "significant findings, not a raw-data repository. Return exactly one JSON object matching the "
-            "required decision schema and no prose."
+            "You are the AI Research Director for Momentum Trading System v4 and the scientific "
+            "reasoning authority. You own questions, hypotheses, method and scientific-parameter choice, "
+            "interpretation, significance, findings, uncertainty, and next direction. Deterministic code "
+            "may enforce only disclosed execution, representation, identity, lineage, temporal-phase, and "
+            "resource-safety contracts; it may not substitute scientific judgment. Derived row datasets "
+            "remain campaign-local and are chainable only through exact analysis_inputs paths. Changed "
+            "evidence and future-information flags are provenance for you to interpret, not automatic "
+            "scientific failures. Missing resources belong in research_state.lack_resource, not findings. "
+            "Nexus stores durable significant scientific memory and lineage, not raw/reproducible data. "
+            "Return exactly one decision JSON object and no prose."
         )
 
     @classmethod
@@ -342,15 +342,13 @@ class OpenAICompatibleResearchDirector:
                     "request_id": "string",
                     "subject_id": "string",
                     "question": "string",
-                    "method_id": "string from available_analysis_methods",
-                    "evidence_ids": "REQUIRED list of raw evidence IDs; use [] when none",
+                    "method_id": "available method_id",
+                    "evidence_ids": "required list; [] allowed",
                     "analysis_inputs": [
                         {
-                            "result_id": "exact prior analysis_result.result_id",
-                            "output_path": [
-                                "path components relative to analysis_result.outputs; never prefix with outputs"
-                            ],
-                            "input_name": "unique string name for this resolved execution payload",
+                            "result_id": "exact prior result_id",
+                            "output_path": ["components relative to analysis_result.outputs"],
+                            "input_name": "unique string",
                         }
                     ],
                     "parameters": {},
@@ -364,54 +362,47 @@ class OpenAICompatibleResearchDirector:
                         "statement": "string",
                         "supporting_result_ids": ["string"],
                         "evidence_ids": ["string"],
-                        "metadata": "open-ended object; arbitrary RD-authored scientific metadata allowed",
+                        "metadata": "open-ended scientific object",
                     }
                 ],
                 "research_state": {
-                    "questions_answered": "cumulative integer count maintained by RD",
-                    "questions_unanswered_lack_resource": "cumulative integer count maintained by RD",
+                    "questions_answered": "cumulative integer",
+                    "questions_unanswered_lack_resource": "cumulative integer",
                     "lack_resource": [
                         {
-                            "question": "unanswered scientific question",
-                            "required_resources": [
-                                "resource, evidence, calculation, or capability needed"
-                            ],
-                            "reason": "brief explanation of why current resources cannot answer it",
+                            "question": "string",
+                            "required_resources": ["string"],
+                            "reason": "string",
                         }
                     ],
-                    "other_state": "arbitrary additional AI-authored research state may be included",
+                    "other_state": "arbitrary RD-authored state allowed",
                 },
                 "close_reason": "string or null",
             },
             "instructions": [
-                "If continue_research is true, next_request must be fully authored by you.",
-                "Every next_request must explicitly contain both evidence_ids and analysis_inputs. Use [] for either list when you intentionally use none; never omit either field.",
-                "Choose the scientific method yourself from available_analysis_methods; capability metadata describes execution requirements but does not recommend a method.",
-                "Review objective_execution_requirements before authoring a request or finding; these are the deterministic conditions either can be judged against. Catalog references point to complete adjacent objects in the same context and are not summaries.",
-                "When analysis_result.outputs.derived_dataset_catalog advertises a dataset needed by your next method, use its exact output_path in analysis_inputs. output_path is relative to analysis_result.outputs, so never prefix it with 'outputs'.",
-                "Syntactic chaining example only: if the current result_id is analysis-result:1 and its catalog advertises output_path [\"derived_datasets\", \"forward_path_observations\"], a request using only that dataset must contain evidence_ids: [] and analysis_inputs: [{\"result_id\":\"analysis-result:1\",\"output_path\":[\"derived_datasets\",\"forward_path_observations\"],\"input_name\":\"forward_path_observations\"}]. This illustrates representation only and does not recommend any scientific method, horizon, field, or question.",
-                "Select only columns actually listed in the chosen derived dataset schema. Do not silently revert to raw evidence columns when your question concerns a derived quantity.",
-                "Do not expect deterministic code to infer which prior result, derived dataset, output path, or derived field you intended; if analysis_inputs is [], only evidence_ids are supplied as execution payloads.",
-                "For analysis.toolkit.scientific_function, each item in args is one positional argument to the selected SciPy function. A {\"column\":\"field\"} item binds one complete column as one positional argument. Do not list multiple columns as separate args unless the selected SciPy signature actually accepts those arrays as separate positional arguments.",
-                "Derived Analysis outputs are campaign-local temporary data. If a process restart makes a referenced result unavailable, deterministic validation will report MISSING_ANALYSIS_RESULT and you decide whether regenerating that derived result is scientifically appropriate.",
-                "An Analysis result with interpretation_boundary OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP reports an objective failure of the exact method you requested; decide the scientific next step yourself rather than assuming the runtime substituted another method.",
-                "If operation is RESUME_RESEARCH, inspect evidence_continuity and decide its scientific consequence yourself; CHANGED is not an automatic failure.",
-                "If future_information lineage is present, treat it as provenance. Exploratory lookahead remains allowed; determine its scientific consequence yourself and design later validation appropriately.",
-                "If an objective contract defect is supplied, repair only by making your own scientific choice; do not expect the validator to invent a value or substitute a method.",
-                "If a scientifically relevant question cannot be answered because a needed capability, dataset, field, coverage interval, or other resource is unavailable, append it to research_state.lack_resource with the required resources and reason, then move to another answerable question rather than ending the campaign solely for that gap.",
-                "Maintain cumulative research_state.questions_answered and research_state.questions_unanswered_lack_resource so the final decision reports how many questions were answered and how many remain unanswered for lack of resources.",
-                "When the campaign eventually closes, preserve the full cumulative research_state.lack_resource list as the end-of-run resource request report.",
-                "Do not promote missing tools, missing data, unsupported calculations, or other resource/capability limitations as scientific findings; they belong in research_state only.",
-                "Set continue_research false for lack of resources only if, in your scientific judgment, no other meaningful answerable research question remains or the campaign is otherwise complete.",
-                "Promote findings only when you judge them scientifically significant enough for durable research memory.",
-                "The finding envelope is closed and minimal; the metadata namespace is scientifically open-ended and does not require an approved vocabulary.",
-                "Do not place raw/reproducible datasets in findings or research_state.",
+                "If continue_research=true, fully author next_request with evidence_ids and analysis_inputs; use [] intentionally, never omit either.",
+                "Select methods and scientifically meaningful parameters yourself from available_analysis_methods; deterministic code supplies no scientific defaults.",
+                "Use exact derived_dataset_catalog output_path values for chaining; output_path is relative to analysis_result.outputs and never begins with outputs.",
+                "Use only fields actually present in the selected evidence or derived schema.",
+                "For analysis.toolkit.scientific_function, each args item is one positional argument; {column:field} binds one whole column.",
+                "Treat objective execution defects, evidence continuity, and future-information metadata as facts for your scientific judgment, not deterministic scientific conclusions.",
+                "Record scientifically relevant unavailable resources in cumulative research_state.lack_resource and continue with another useful answerable question when one remains.",
+                "Promote only findings you judge significant; finding metadata vocabulary is open-ended; never place raw/reproducible datasets in findings or research_state.",
+                "Campaign-local derived outputs disappear across process restart unless regenerated by an RD-authored Analysis request.",
             ],
             "context": payload,
         }
         return [
             {"role": "system", "content": cls._system_prompt()},
-            {"role": "user", "content": json.dumps(user, sort_keys=True, default=str)},
+            {
+                "role": "user",
+                "content": json.dumps(
+                    user,
+                    sort_keys=True,
+                    default=str,
+                    separators=(",", ":"),
+                ),
+            },
         ]
 
     def _request_decision(
@@ -436,16 +427,22 @@ class OpenAICompatibleResearchDirector:
                 "instruction": (
                     "Return one complete corrected decision JSON object. Preserve or revise your own "
                     "scientific choices as you judge appropriate, but satisfy the required decision "
-                    "representation. Deterministic code will not fill any missing scientific field for you. "
-                    "If continue_research is true, next_request must explicitly include evidence_ids and "
-                    "analysis_inputs; use [] when you intentionally use none."
+                    "representation. Deterministic code will not fill missing scientific fields. If "
+                    "continue_research is true, next_request must contain evidence_ids and analysis_inputs."
                 ),
             }
             repaired_content = self._chat_completion(
                 messages
                 + [
                     {"role": "assistant", "content": content},
-                    {"role": "user", "content": json.dumps(repair_instruction, sort_keys=True)},
+                    {
+                        "role": "user",
+                        "content": json.dumps(
+                            repair_instruction,
+                            sort_keys=True,
+                            separators=(",", ":"),
+                        ),
+                    },
                 ]
             )
             return ResearchDecisionCodec.decode(repaired_content)
@@ -456,7 +453,8 @@ class OpenAICompatibleResearchDirector:
                 "model": self._model,
                 "messages": list(messages),
                 "temperature": 0.2,
-            }
+            },
+            separators=(",", ":"),
         ).encode("utf-8")
         headers = {"Content-Type": "application/json"}
         if self._api_key:
@@ -503,17 +501,7 @@ class OpenAICompatibleResearchDirector:
 
     @classmethod
     def _analysis_result_payload(cls, result: AnalysisResult) -> Mapping[str, object]:
-        """Return the RD-visible result while withholding campaign-local row payloads.
-
-        Analysis methods may expose the same reusable row dataset both under
-        ``derived_datasets`` and under a convenient sibling key such as
-        ``observations`` or ``events``. Those siblings are aliases of the same
-        reproducible row payload, not additional scientific summaries. Sending
-        them defeats the transport boundary even when ``derived_datasets`` itself
-        is removed. Detect exact list/tuple aliases mechanically, withhold them,
-        and preserve their dataset identity and output path for explicit RD-owned
-        chaining. Aggregate/scalar outputs remain untouched.
-        """
+        """Return the RD-visible result while withholding campaign-local row payloads."""
         raw = asdict(result)
         outputs = dict(raw.get("outputs", {}))
         derived = outputs.pop("derived_datasets", None)
@@ -539,7 +527,11 @@ class OpenAICompatibleResearchDirector:
             for dataset_name, rows in derived.items():
                 if not isinstance(rows, (list, tuple)):
                     continue
-                dataset_metadata = catalog.get(str(dataset_name), {}) if isinstance(catalog, Mapping) else {}
+                dataset_metadata = (
+                    catalog.get(str(dataset_name), {})
+                    if isinstance(catalog, Mapping)
+                    else {}
+                )
                 output_path = (
                     dataset_metadata.get("output_path")
                     if isinstance(dataset_metadata, Mapping)
@@ -565,9 +557,8 @@ class OpenAICompatibleResearchDirector:
             if withheld_aliases:
                 outputs["withheld_row_output_aliases"] = {
                     "meaning": (
-                        "These output keys were exact aliases of campaign-local derived row datasets. "
-                        "Their row payloads are withheld from model transport; use the listed output_path "
-                        "through analysis_inputs if scientifically needed."
+                        "These output keys were exact aliases of campaign-local derived row datasets; "
+                        "use the listed output_path through analysis_inputs if scientifically needed."
                     ),
                     "aliases": withheld_aliases,
                 }
