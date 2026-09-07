@@ -2,19 +2,70 @@ from __future__ import annotations
 
 import unittest
 
+from MTS_V4.contracts import SubjectMetadata
 from MTS_V4.cross_evidence import METHOD_ID, cross_evidence_analysis_method, cross_evidence_method_spec
-from MTS_V4.live_sources import FinraWeeklyOffExchangeSource, UnusualWhalesDarkPoolSource, UnusualWhalesFlowAlertsSource
+from MTS_V4.live_sources import (
+    FinraWeeklyOffExchangeSource,
+    UnusualWhalesDarkPoolSource,
+    UnusualWhalesFlowAlertsSource,
+    UnusualWhalesGreekExposureByExpirySource,
+    UnusualWhalesNetFlowByExpirySource,
+)
 
 
 class LiveSourcesAndCrossEvidenceTests(unittest.TestCase):
     def test_live_sources_accept_external_credentials_without_embedding_values(self):
         dark = UnusualWhalesDarkPoolSource(api_key="dummy")
         options = UnusualWhalesFlowAlertsSource(api_key="dummy")
+        greek_expiry = UnusualWhalesGreekExposureByExpirySource(api_key="dummy")
+        net_flow_expiry = UnusualWhalesNetFlowByExpirySource(api_key="dummy")
         finra = FinraWeeklyOffExchangeSource(client_id="dummy-id", client_secret="dummy-secret")
         self.assertEqual(dark.api_key, "dummy")
         self.assertEqual(options.api_key, "dummy")
+        self.assertEqual(greek_expiry.api_key, "dummy")
+        self.assertEqual(net_flow_expiry.api_key, "dummy")
         self.assertEqual(finra.client_id, "dummy-id")
         self.assertEqual(finra.client_secret, "dummy-secret")
+
+    def test_greek_exposure_by_expiry_uses_ticker_endpoint_and_neutral_provenance(self):
+        class CapturingSource(UnusualWhalesGreekExposureByExpirySource):
+            def __init__(self):
+                super().__init__(api_key="dummy")
+                self.calls = []
+
+            def _get(self, path, params=None):
+                self.calls.append((path, params))
+                return [{"date": "2026-09-04", "expiry": "2026-09-18", "gamma": 12.5}]
+
+        source = CapturingSource()
+        payload = next(iter(source.acquire(SubjectMetadata(subject_id="AAPL", ticker="aapl"))))
+
+        self.assertEqual(source.calls, [("/api/stock/AAPL/greek-exposure/expiry", None)])
+        self.assertEqual(payload.evidence_type, "OPTIONS_GREEK_EXPOSURE_BY_EXPIRY")
+        self.assertEqual(payload.source_identity, "UNUSUAL_WHALES_GREEK_EXPOSURE_BY_EXPIRY")
+        self.assertEqual(payload.provenance["scope"], "TICKER")
+        self.assertEqual(payload.provenance["ticker"], "AAPL")
+        self.assertIn("do not by themselves establish", payload.neutral_semantics)
+
+    def test_net_flow_by_expiry_is_explicitly_market_context_not_ticker_flow(self):
+        class CapturingSource(UnusualWhalesNetFlowByExpirySource):
+            def __init__(self):
+                super().__init__(api_key="dummy")
+                self.calls = []
+
+            def _get(self, path, params=None):
+                self.calls.append((path, params))
+                return [{"date": "2026-09-04", "expiration": "ZERO_DTE", "netCallPremium": "1000"}]
+
+        source = CapturingSource()
+        payload = next(iter(source.acquire(SubjectMetadata(subject_id="AAPL", ticker="aapl"))))
+
+        self.assertEqual(source.calls, [("/api/net-flow/expiry", None)])
+        self.assertEqual(payload.evidence_type, "MARKET_OPTIONS_NET_FLOW_BY_EXPIRY")
+        self.assertEqual(payload.source_identity, "UNUSUAL_WHALES_MARKET_NET_FLOW_BY_EXPIRY")
+        self.assertEqual(payload.provenance["scope"], "MARKET_CONTEXT_NOT_TICKER_SPECIFIC")
+        self.assertEqual(payload.provenance["campaign_subject_ticker"], "AAPL")
+        self.assertIn("must not be interpreted as ticker-specific flow", payload.neutral_semantics)
 
     def test_cross_evidence_contract_exposes_every_scientific_alignment_choice(self):
         spec = cross_evidence_method_spec()
