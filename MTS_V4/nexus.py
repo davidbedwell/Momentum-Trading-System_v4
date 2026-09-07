@@ -46,8 +46,9 @@ class InMemoryResearchNexus:
 
     The Nexus stores immutable identity/lineage metadata, never raw datasets or
     reusable result payloads. Reusing an existing evidence or result identity
-    with different metadata is rejected so later acquisitions cannot silently
-    rewrite the provenance of older findings.
+    with different meaningful metadata is rejected so later acquisitions cannot
+    silently rewrite the provenance of older findings. Acquisition-clock-only
+    differences are accepted without replacing the first durable record.
     """
 
     _subjects: dict[str, SubjectMetadata] = field(default_factory=dict)
@@ -67,10 +68,12 @@ class InMemoryResearchNexus:
                 f"Cannot persist evidence metadata for unknown subject: {metadata.subject_id}"
             )
         existing = self._evidence_metadata.get(metadata.evidence_id)
-        if existing is not None and existing != metadata:
-            raise NexusError(
-                f"evidence_id already exists with different metadata: {metadata.evidence_id}"
-            )
+        if existing is not None:
+            if not existing.identity_equivalent(metadata):
+                raise NexusError(
+                    f"evidence_id already exists with different metadata: {metadata.evidence_id}"
+                )
+            return
         self._evidence_metadata[metadata.evidence_id] = metadata
 
     def register_analysis_result_metadata(self, metadata: AnalysisResultMetadata) -> None:
