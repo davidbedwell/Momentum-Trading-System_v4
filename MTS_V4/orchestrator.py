@@ -33,13 +33,6 @@ class ResearchLoopOrchestrator:
     The orchestrator contains no scientific selection logic. Every question,
     method, scientifically meaningful parameter, interpretation, finding, and
     continue/stop decision comes from the ResearchDirectorProvider.
-
-    Optional checkpoint callbacks receive only AI-authored decision state and
-    mechanical counters. Resume never reconstructs or guesses scientific state.
-
-    Research concepts are descriptive idea seeds only. They are exposed to RD
-    as context and never selected, ranked, promoted, or treated as evidence by
-    the orchestrator.
     """
 
     def __init__(
@@ -208,6 +201,7 @@ class ResearchLoopOrchestrator:
 
             lineage_evidence_ids: list[str] = list(request.evidence_ids)
             analysis_input_lineage: list[Mapping[str, object]] = []
+            inherited_future_result_ids: list[str] = []
             for reference in request.analysis_inputs:
                 source_result = analysis_results[reference.result_id]
                 for evidence_id in source_result.evidence_ids:
@@ -220,9 +214,37 @@ class ResearchLoopOrchestrator:
                         "output_path": list(reference.output_path),
                     }
                 )
+                upstream_future = source_result.execution_metadata.get("future_information", {})
+                if isinstance(upstream_future, Mapping) and upstream_future.get(
+                    "contains_future_information"
+                ):
+                    inherited_future_result_ids.append(reference.result_id)
+
+            method_capability = next(
+                (
+                    item
+                    for item in self._available_methods
+                    if item.get("method_id") == request.method_id
+                ),
+                {},
+            )
+            direct_future = method_capability.get("allows_future_information") is True
+            future_information = {
+                "contains_future_information": bool(
+                    direct_future or inherited_future_result_ids
+                ),
+                "direct_method_allows_future_information": direct_future,
+                "inherited_from_result_ids": inherited_future_result_ids,
+                "policy": (
+                    "MECHANICAL_TEMPORAL_LINEAGE_ONLY_RD_DECIDES_SCIENTIFIC_USE; "
+                    "NO_BLANKET_REJECTION"
+                ),
+            }
+
             execution_metadata = dict(result.execution_metadata)
             if analysis_input_lineage:
                 execution_metadata["analysis_input_lineage"] = analysis_input_lineage
+            execution_metadata["future_information"] = future_information
             result = replace(
                 result,
                 evidence_ids=tuple(lineage_evidence_ids),
@@ -232,12 +254,15 @@ class ResearchLoopOrchestrator:
                 raise ResearchLoopError(f"duplicate Analysis result_id: {result.result_id}")
             analysis_results[result.result_id] = result
 
+            # Durable Nexus memory retains only result identity/lineage metadata,
+            # not result payloads or reusable derived rows. This makes historical
+            # finding references auditable without making Analysis a second
+            # scientific authority or turning Nexus into a raw-data store.
+            self._nexus.register_analysis_result_metadata(result.durable_metadata())
+
             # If the process dies after Analysis but before RD interpretation, the
             # last checkpoint still contains the AI-authored request. Resume may
-            # safely re-execute that exact deterministic Analysis request. Derived
-            # outputs themselves are not persisted; if a resumed request references
-            # an unavailable prior result, objective validation returns that defect
-            # to RD so RD may choose whether to regenerate it.
+            # safely re-execute that exact deterministic Analysis request.
             self._checkpoint(state_callback, decision, decisions, analyses)
 
             decision = self._rd.interpret_result(
@@ -281,13 +306,7 @@ class ResearchLoopOrchestrator:
     def _analysis_result_catalog(
         analysis_results: Mapping[str, AnalysisResult],
     ) -> tuple[Mapping[str, object], ...]:
-        """Compact campaign-local inventory of reusable Analysis outputs for RD.
-
-        This catalog contains no raw/derived row payloads and is not persisted to
-        Nexus or campaign checkpoints. It gives RD enough mechanical visibility to
-        author an exact analysis_inputs reference without deterministic result
-        selection or substitution.
-        """
+        """Compact campaign-local inventory of reusable Analysis outputs for RD."""
         catalog: list[Mapping[str, object]] = []
         for result in analysis_results.values():
             derived_catalog = result.outputs.get("derived_dataset_catalog")
@@ -307,6 +326,9 @@ class ResearchLoopOrchestrator:
                     "method_id": result.method_id,
                     "evidence_ids": list(result.evidence_ids),
                     "execution_status": result.execution_metadata.get("execution_status"),
+                    "future_information": result.execution_metadata.get(
+                        "future_information", {}
+                    ),
                     "reusable_derived_datasets": reusable,
                 }
             )
@@ -321,6 +343,9 @@ class ResearchLoopOrchestrator:
             "subject": self._nexus.get_subject(subject_id),
             "evidence_metadata": self._nexus.evidence_metadata_for_subject(subject_id),
             "significant_findings": self._nexus.findings_for_subject(subject_id),
+            "historical_analysis_result_metadata": self._nexus.analysis_result_metadata_for_subject(
+                subject_id
+            ),
             "research_concepts": self._research_concepts,
             "research_concept_policy": {
                 "authority": "NON_AUTHORITATIVE_IDEA_SEEDS",
