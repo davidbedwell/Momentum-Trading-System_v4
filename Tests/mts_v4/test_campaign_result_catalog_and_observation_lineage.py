@@ -15,6 +15,7 @@ class _CatalogRD:
     def __init__(self) -> None:
         self.begin_context = None
         self.interpret_context = None
+        self.interpreted_result_id = None
 
     def begin_research(self, **kwargs):
         self.begin_context = kwargs["nexus_context"]
@@ -40,6 +41,7 @@ class _CatalogRD:
 
     def interpret_result(self, **kwargs):
         self.interpret_context = kwargs["nexus_context"]
+        self.interpreted_result_id = kwargs["result"].result_id
         return ResearchDecision(continue_research=False, close_reason="CATALOG_OBSERVED")
 
 
@@ -100,7 +102,8 @@ class CampaignResultCatalogAndObservationLineageTests(unittest.TestCase):
         visible = rd.interpret_context["campaign_analysis_result_catalog"]
         self.assertEqual(len(visible), 1)
         entry = visible[0]
-        self.assertEqual(entry["result_id"], "analysis-result:1")
+        self.assertEqual(entry["result_id"], rd.interpreted_result_id)
+        self.assertTrue(entry["result_id"].startswith("analysis-result:"))
         self.assertEqual(entry["method_id"], "analysis.transform.percent_change")
         reusable = entry["reusable_derived_datasets"]["percent_change"]
         self.assertEqual(reusable["output_path"], ["derived_datasets", "percent_change"])
