@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from MTS_V4.contracts import Finding, SubjectMetadata
+from MTS_V4.contracts import AnalysisResultMetadata, EvidenceMetadata, Finding, SubjectMetadata
 from MTS_V4.nexus import InMemoryResearchNexus, NexusError
 from MTS_V4.nexus_json import JsonResearchNexus
 
@@ -21,9 +21,36 @@ class FindingRetractionTests(unittest.TestCase):
             metadata={"test_artifact": True},
         )
 
+    @staticmethod
+    def _seed_lineage(nexus) -> None:
+        nexus.upsert_subject(SubjectMetadata(subject_id="AAPL", ticker="AAPL"))
+        nexus.upsert_evidence_metadata(
+            EvidenceMetadata(
+                evidence_id="evidence:equity:AAPL:1",
+                subject_id="AAPL",
+                evidence_type="OHLCV",
+                artifact_type="NORMALIZED_DATASET",
+                source_identity="fixture",
+                coverage_start="2026-01-01",
+                coverage_end="2026-01-02",
+                row_count=2,
+                schema=("close",),
+                provenance={"vendor": "fixture"},
+            )
+        )
+        nexus.register_analysis_result_metadata(
+            AnalysisResultMetadata(
+                result_id="analysis-result:5",
+                request_id="request:5",
+                subject_id="AAPL",
+                method_id="analysis.fixture",
+                evidence_ids=("evidence:equity:AAPL:1",),
+            )
+        )
+
     def test_in_memory_retraction_excludes_finding_from_active_retrieval(self):
         nexus = InMemoryResearchNexus()
-        nexus.upsert_subject(SubjectMetadata(subject_id="AAPL", ticker="AAPL"))
+        self._seed_lineage(nexus)
         nexus.publish_finding(self._finding())
 
         retraction = nexus.retract_finding(
@@ -48,7 +75,7 @@ class FindingRetractionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "nexus.json"
             nexus = JsonResearchNexus(path)
-            nexus.upsert_subject(SubjectMetadata(subject_id="AAPL", ticker="AAPL"))
+            self._seed_lineage(nexus)
             nexus.publish_finding(self._finding())
             nexus.retract_finding(
                 "f:contaminated",
@@ -75,7 +102,7 @@ class FindingRetractionTests(unittest.TestCase):
 
     def test_retraction_requires_explicit_reason_and_initiator(self):
         nexus = InMemoryResearchNexus()
-        nexus.upsert_subject(SubjectMetadata(subject_id="AAPL", ticker="AAPL"))
+        self._seed_lineage(nexus)
         nexus.publish_finding(self._finding())
 
         with self.assertRaises(NexusError):
@@ -93,7 +120,7 @@ class FindingRetractionTests(unittest.TestCase):
 
     def test_retracted_finding_id_cannot_be_republished(self):
         nexus = InMemoryResearchNexus()
-        nexus.upsert_subject(SubjectMetadata(subject_id="AAPL", ticker="AAPL"))
+        self._seed_lineage(nexus)
         nexus.publish_finding(self._finding())
         nexus.retract_finding(
             "f:contaminated",
