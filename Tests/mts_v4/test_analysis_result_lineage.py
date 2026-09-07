@@ -49,7 +49,7 @@ class _ChainingRD:
     def interpret_result(self, **kwargs):
         result = kwargs["result"]
         self.results.append(result)
-        if result.result_id == "analysis-result:1":
+        if len(self.results) == 1:
             return ResearchDecision(
                 continue_research=True,
                 next_request=AnalysisRequest(
@@ -60,7 +60,7 @@ class _ChainingRD:
                     evidence_ids=(),
                     analysis_inputs=(
                         AnalysisResultInput(
-                            result_id="analysis-result:1",
+                            result_id=result.result_id,
                             output_path=("derived_datasets", "percent_change"),
                             input_name="daily_returns",
                         ),
@@ -69,7 +69,8 @@ class _ChainingRD:
                     research_phase=ResearchPhase.EXPLORATION,
                 ),
             )
-        if result.result_id == "analysis-result:2":
+        if len(self.results) == 2:
+            source_result_id = self.results[0].result_id
             return ResearchDecision(
                 continue_research=True,
                 next_request=AnalysisRequest(
@@ -80,7 +81,7 @@ class _ChainingRD:
                     evidence_ids=(),
                     analysis_inputs=(
                         AnalysisResultInput(
-                            result_id="analysis-result:1",
+                            result_id=source_result_id,
                             output_path=("derived_datasets", "percent_change"),
                             input_name="daily_returns",
                         ),
@@ -170,7 +171,7 @@ class AnalysisResultLineageTests(unittest.TestCase):
             described.execution_metadata["analysis_input_lineage"],
             [{
                 "input_name": "daily_returns",
-                "result_id": "analysis-result:1",
+                "result_id": returns.result_id,
                 "output_path": ["derived_datasets", "percent_change"],
             }],
         )
@@ -179,7 +180,7 @@ class AnalysisResultLineageTests(unittest.TestCase):
         self.assertEqual(rolling.evidence_ids, ("evidence:AAPL",))
         self.assertEqual(
             rolling.execution_metadata["analysis_input_lineage"][0]["result_id"],
-            "analysis-result:1",
+            returns.result_id,
         )
 
     def test_forward_horizon_is_rd_parameter_and_terminal_rows_can_feed_scipy_skew(self):
@@ -269,7 +270,7 @@ class AnalysisResultLineageTests(unittest.TestCase):
             evidence_ids=(),
             analysis_inputs=(
                 AnalysisResultInput(
-                    result_id="analysis-result:99",
+                    result_id="analysis-result:missing",
                     output_path=("derived_datasets", "percent_change"),
                     input_name="returns",
                 ),
