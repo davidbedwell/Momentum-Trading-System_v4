@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 import json
-import tempfile
 import unittest
-from pathlib import Path
 
 from MTS_V4.analysis import ExactMethodAnalysisExecutor, RegisteredAnalysisMethod
 from MTS_V4.cache import TemporaryResearchCache
@@ -103,39 +101,57 @@ class V4IntegrityRepairTests(unittest.TestCase):
         cache = TemporaryResearchCache()
         intake = IntakeEngine(cache)
         subject = SubjectMetadata(subject_id="AAPL", ticker="AAPL")
-        first = intake.ingest(subject=subject, source=_TimestampedSource("2026-09-07T20:00:00Z"))[0]
-        second = intake.ingest(subject=subject, source=_TimestampedSource("2026-09-07T21:00:00Z"))[0]
-        changed = intake.ingest(subject=subject, source=_TimestampedSource("2026-09-07T22:00:00Z", close=101.0))[0]
+        first = intake.ingest(
+            subject=subject, source=_TimestampedSource("2026-09-07T20:00:00Z")
+        )[0]
+        second = intake.ingest(
+            subject=subject, source=_TimestampedSource("2026-09-07T21:00:00Z")
+        )[0]
+        changed = intake.ingest(
+            subject=subject,
+            source=_TimestampedSource("2026-09-07T22:00:00Z", close=101.0),
+        )[0]
         self.assertEqual(first.evidence_id, second.evidence_id)
         self.assertEqual(first.content_identity, second.content_identity)
         self.assertNotEqual(first.evidence_id, changed.evidence_id)
         self.assertNotEqual(first.content_identity, changed.content_identity)
 
-    def test_nexus_refuses_evidence_identity_overwrite_and_validates_finding_lineage(self):
+    def test_nexus_refuses_evidence_identity_overwrite(self):
         nexus = InMemoryResearchNexus()
         nexus.upsert_subject(SubjectMetadata(subject_id="AAPL", ticker="AAPL"))
-        evidence = EvidenceMetadata(
-            evidence_id="ev:1",
-            subject_id="AAPL",
-            evidence_type="OHLCV",
-            artifact_type="NORMALIZED_DATASET",
-            source_identity="fixture",
-            coverage_start="2026-01-01",
-            coverage_end="2026-01-02",
-            row_count=2,
-            schema=("close",),
-            provenance={"vendor": "fixture"},
-            content_identity="sha256:one",
+        nexus.upsert_evidence_metadata(
+            EvidenceMetadata(
+                evidence_id="ev:1",
+                subject_id="AAPL",
+                evidence_type="OHLCV",
+                artifact_type="NORMALIZED_DATASET",
+                source_identity="fixture",
+                coverage_start="2026-01-01",
+                coverage_end="2026-01-02",
+                row_count=2,
+                schema=("close",),
+                provenance={"vendor": "fixture"},
+                content_identity="sha256:one",
+            )
         )
-        nexus.upsert_evidence_metadata(evidence)
         with self.assertRaisesRegex(NexusError, "different metadata"):
             nexus.upsert_evidence_metadata(
                 EvidenceMetadata(
-                    **{**evidence.__dict__}  # pragma: no cover - slots prevents this path
+                    evidence_id="ev:1",
+                    subject_id="AAPL",
+                    evidence_type="OHLCV",
+                    artifact_type="NORMALIZED_DATASET",
+                    source_identity="fixture",
+                    coverage_start="2026-01-01",
+                    coverage_end="2026-01-02",
+                    row_count=2,
+                    schema=("close",),
+                    provenance={"vendor": "fixture"},
+                    content_identity="sha256:two",
                 )
             )
 
-    def test_nexus_rejects_unknown_result_reference_without_judging_science(self):
+    def test_finding_references_require_valid_identity_and_lineage_not_scientific_taxonomy(self):
         nexus = InMemoryResearchNexus()
         nexus.upsert_subject(SubjectMetadata(subject_id="AAPL", ticker="AAPL"))
         nexus.upsert_evidence_metadata(
@@ -156,10 +172,10 @@ class V4IntegrityRepairTests(unittest.TestCase):
                 Finding(
                     finding_id="f:bad",
                     subject_id="AAPL",
-                    statement="Arbitrary scientific statement is not judged here.",
+                    statement="Scientific content is not judged here.",
                     supporting_result_ids=("result:missing",),
                     evidence_ids=("ev:1",),
-                    metadata={"unanticipated_scientific_label": "allowed"},
+                    metadata={"novel_scientific_label": "allowed"},
                 )
             )
         nexus.register_analysis_result_metadata(
@@ -175,34 +191,36 @@ class V4IntegrityRepairTests(unittest.TestCase):
             Finding(
                 finding_id="f:ok",
                 subject_id="AAPL",
-                statement="Arbitrary scientific statement is accepted with valid lineage.",
+                statement="Scientific content is accepted when lineage is valid.",
                 supporting_result_ids=("result:1",),
                 evidence_ids=("ev:1",),
-                metadata={"unanticipated_scientific_label": "allowed"},
+                metadata={"novel_scientific_label": "allowed"},
             )
         )
-        self.assertEqual(nexus.get_finding("f:ok").metadata["unanticipated_scientific_label"], "allowed")
+        self.assertEqual(
+            nexus.get_finding("f:ok").metadata["novel_scientific_label"], "allowed"
+        )
 
     def test_recovery_rebinds_legacy_checkpoint_identity_and_ignores_acquisition_timestamp(self):
         subject = SubjectMetadata(subject_id="AAPL", ticker="AAPL")
-        expected = EvidenceMetadata(
-            evidence_id="legacy:ev:1",
-            subject_id="AAPL",
-            evidence_type="OHLCV",
-            artifact_type="NORMALIZED_DATASET",
-            source_identity="fixture-source",
-            coverage_start="2026-01-01",
-            coverage_end="2026-01-01",
-            row_count=1,
-            schema=("date", "close"),
-            provenance={"vendor": "fixture", "acquired_at_utc": "old"},
-            neutral_semantics="Observed price path.",
-            content_identity=None,
-        )
         checkpoint = CampaignCheckpoint(
             campaign_id="campaign:legacy",
             subject=subject,
-            evidence_metadata=(expected,),
+            evidence_metadata=(
+                EvidenceMetadata(
+                    evidence_id="legacy:ev:1",
+                    subject_id="AAPL",
+                    evidence_type="OHLCV",
+                    artifact_type="NORMALIZED_DATASET",
+                    source_identity="fixture-source",
+                    coverage_start="2026-01-01",
+                    coverage_end="2026-01-01",
+                    row_count=1,
+                    schema=("date", "close"),
+                    provenance={"vendor": "fixture", "acquired_at_utc": "old"},
+                    neutral_semantics="Observed price path.",
+                ),
+            ),
             decision=ResearchDecision(continue_research=False, close_reason="fixture"),
             analyses_executed=0,
             decisions_made=1,
@@ -250,8 +268,7 @@ class V4IntegrityRepairTests(unittest.TestCase):
                     allows_future_information=True,
                 ),
                 MethodSpec(
-                    method_id="analysis.chain",
-                    artifact_types=("NORMALIZED_DATASET",),
+                    method_id="analysis.chain", artifact_types=("NORMALIZED_DATASET",)
                 ),
             ]
         )
@@ -295,16 +312,17 @@ class V4IntegrityRepairTests(unittest.TestCase):
             max_analyses=2,
         )
         self.assertTrue(outcome.closed)
-        self.assertTrue(rd.seen_results[0].execution_metadata["future_information"]["contains_future_information"])
-        self.assertTrue(rd.seen_results[1].execution_metadata["future_information"]["contains_future_information"])
+        first_future = rd.seen_results[0].execution_metadata["future_information"]
+        second_future = rd.seen_results[1].execution_metadata["future_information"]
+        self.assertTrue(first_future["contains_future_information"])
+        self.assertTrue(second_future["contains_future_information"])
         self.assertEqual(
-            rd.seen_results[1].execution_metadata["future_information"]["inherited_from_result_ids"],
-            [rd.seen_results[0].result_id],
+            second_future["inherited_from_result_ids"], [rd.seen_results[0].result_id]
         )
         self.assertTrue(
-            nexus.get_analysis_result_metadata(rd.seen_results[1].result_id).future_information[
-                "contains_future_information"
-            ]
+            nexus.get_analysis_result_metadata(
+                rd.seen_results[1].result_id
+            ).future_information["contains_future_information"]
         )
 
     def test_transport_has_headroom_and_does_not_duplicate_complete_catalogs(self):
@@ -363,8 +381,6 @@ class V4IntegrityRepairTests(unittest.TestCase):
             payload=payload,
         )
         serialized_characters = len(json.dumps(messages, sort_keys=True))
-        # Conservative CI guardrail for deterministic prompt growth. The live
-        # Qwen tokenizer remains the final exact token-count authority.
         self.assertLess(serialized_characters, 90000)
 
 
