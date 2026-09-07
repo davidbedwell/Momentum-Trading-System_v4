@@ -51,7 +51,7 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
         )
         self.assertIn("withheld", outputs["derived_dataset_transport"].lower())
 
-    def test_every_deterministic_request_and_finding_requirement_is_exposed_to_rd(self):
+    def test_every_deterministic_request_and_finding_requirement_is_exposed_without_catalog_duplication(self):
         evidence = EvidenceDescriptor(
             evidence_id="ev:1",
             subject_id="AAPL",
@@ -86,33 +86,36 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
             "validation_allowed": True,
             "allows_future_information": False,
         }
-        requirements = OpenAICompatibleResearchDirector._execution_requirements(
+        payload = OpenAICompatibleResearchDirector._common_payload(
+            subject=type("S", (), {"__dataclass_fields__": {}}) if False else __import__("MTS_V4.contracts", fromlist=["SubjectMetadata"]).SubjectMetadata(subject_id="AAPL", ticker="AAPL"),
             evidence=(evidence,),
             available_methods=(method,),
+            nexus_context={},
         )
+        requirements = payload["objective_execution_requirements"]
         self.assertIn("must be disclosed", requirements["visibility_rule"])
         self.assertEqual(
-            requirements["analysis_request"]["method_contracts"][0]["parameters"][0]["exact_length"],
-            2,
+            requirements["analysis_request"]["method_contracts_reference"],
+            "context.available_analysis_methods",
         )
-        self.assertIn("relative to analysis_result.outputs", requirements["analysis_request"]["analysis_inputs"])
-        supplied = requirements["available_evidence"][0]
-        self.assertEqual(supplied["schema"], ["date", "close", "volume"])
+        self.assertEqual(
+            requirements["available_evidence_reference"],
+            "context.evidence",
+        )
+        self.assertEqual(payload["available_analysis_methods"][0]["parameters"][0]["exact_length"], 2)
+        supplied = payload["evidence"][0]
+        self.assertEqual(list(supplied["schema"]), ["date", "close", "volume"])
         self.assertEqual(supplied["source_identity"], "fixture-source")
-        self.assertNotIn("cache_key", supplied)
-        self.assertTrue(
-            requirements["evidence_continuity"]["changed_is_not_scientific_failure"]
-        )
+        self.assertIn("cache_key", supplied)
+        self.assertNotIn("method_contracts", requirements["analysis_request"])
+        self.assertNotIn("available_evidence", requirements)
+        self.assertTrue(requirements["evidence_continuity"]["changed_is_not_scientific_failure"])
+        self.assertTrue(requirements["future_information_lineage"]["propagated_through_analysis_chaining"])
+        self.assertFalse(requirements["future_information_lineage"]["blanket_rejection"])
         envelope = requirements["finding_envelope"]
         self.assertEqual(
             envelope["closed_required_fields"],
-            [
-                "finding_id",
-                "subject_id",
-                "statement",
-                "supporting_result_ids",
-                "evidence_ids",
-            ],
+            ["finding_id", "subject_id", "statement", "supporting_result_ids", "evidence_ids"],
         )
         self.assertTrue(envelope["scientific_taxonomy_is_open"])
         self.assertFalse(envelope["deterministic_scientific_veto"])
@@ -164,6 +167,7 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
                 "question": "Does close co-vary with volume under the selected window?",
                 "method_id": "relationship.correlation",
                 "evidence_ids": ["ev:1"],
+                "analysis_inputs": [],
                 "parameters": {"columns": ["close", "volume"], "window": 30},
                 "research_phase": "EXPLORATION",
                 "rationale": "RD selected this as an exploratory relationship test.",
@@ -175,10 +179,7 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
         decision = ResearchDecisionCodec.decode(json.dumps(payload))
         self.assertEqual(decision.next_request.method_id, "relationship.correlation")
         self.assertEqual(decision.next_request.parameters["window"], 30)
-        self.assertEqual(
-            decision.research_state["hypothesis"],
-            "volume-conditioned movement",
-        )
+        self.assertEqual(decision.research_state["hypothesis"], "volume-conditioned movement")
 
     def test_finding_metadata_accepts_unanticipated_scientific_structure(self):
         decision = ResearchDecisionCodec.decode(
@@ -195,10 +196,7 @@ class V4ResearchDirectorCodecTests(unittest.TestCase):
                             "evidence_ids": ["ev:1"],
                             "metadata": {
                                 "entirely_new_scientific_label": "allowed",
-                                "nested": {
-                                    "regime": ["x", "y"],
-                                    "confidence_language": "RD-authored",
-                                },
+                                "nested": {"regime": ["x", "y"], "confidence_language": "RD-authored"},
                             },
                         }
                     ],
