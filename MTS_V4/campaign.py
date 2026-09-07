@@ -67,10 +67,11 @@ class CheckpointedCampaignRunner:
             raise CheckpointError("checkpointed campaign is already scientifically closed")
 
         assessment = CampaignRecovery.compare(checkpoint, reacquired_evidence)
+        recovered_evidence = assessment.recovered
         callback = self._checkpoint_callback(
             campaign_id=checkpoint.campaign_id,
             subject=checkpoint.subject,
-            evidence=reacquired_evidence,
+            evidence=recovered_evidence,
         )
 
         # SAME evidence requires no new scientific decision merely because the
@@ -82,7 +83,7 @@ class CheckpointedCampaignRunner:
 
         outcome = self._orchestrator.run(
             subject=checkpoint.subject,
-            evidence=reacquired_evidence,
+            evidence=recovered_evidence,
             max_analyses=max_analyses,
             initial_decision=checkpoint.decision,
             initial_decisions=checkpoint.decisions_made,
@@ -90,7 +91,7 @@ class CheckpointedCampaignRunner:
             evidence_continuity=continuity,
             state_callback=callback,
         )
-        self._finalize_if_closed(outcome, reacquired_evidence)
+        self._finalize_if_closed(outcome, recovered_evidence)
         return outcome
 
     def _checkpoint_callback(
