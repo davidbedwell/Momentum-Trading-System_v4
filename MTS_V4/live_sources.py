@@ -186,16 +186,17 @@ class UnusualWhalesGreekExposureByExpirySource(_UnusualWhalesBase):
         )
 
 
-class UnusualWhalesNetFlowByExpirySource(_UnusualWhalesBase):
+class UnusualWhalesFlowByExpirySource(_UnusualWhalesBase):
     def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
-        endpoint = "/api/net-flow/expiry"
+        ticker = subject.ticker.upper()
+        endpoint = f"/api/stock/{urllib.parse.quote(ticker)}/flow-per-expiry"
         rows = self._get(endpoint)
-        start, end = _coverage(rows, ("date", "start_time", "startTime", "timestamp"))
+        start, end = _coverage(rows, ("date", "timestamp", "updated_at", "created_at"))
         yield IntakePayload(
             payload=rows,
-            evidence_type="MARKET_OPTIONS_NET_FLOW_BY_EXPIRY",
+            evidence_type="OPTIONS_FLOW_BY_EXPIRY",
             artifact_type="NORMALIZED_DATASET",
-            source_identity="UNUSUAL_WHALES_MARKET_NET_FLOW_BY_EXPIRY",
+            source_identity="UNUSUAL_WHALES_FLOW_BY_EXPIRY",
             coverage_start=start,
             coverage_end=end,
             row_count=len(rows),
@@ -203,11 +204,11 @@ class UnusualWhalesNetFlowByExpirySource(_UnusualWhalesBase):
             provenance={
                 "provider": "Unusual Whales",
                 "endpoint": endpoint,
-                "scope": "MARKET_CONTEXT_NOT_TICKER_SPECIFIC",
-                "campaign_subject_ticker": subject.ticker.upper(),
+                "scope": "TICKER",
+                "ticker": ticker,
                 "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
             },
-            neutral_semantics=("Provider-defined market-wide near-dated options net-flow context grouped by expiration category and related provider buckets. Net-flow and ask-side-minus-bid-side classifications do not by themselves establish economic intent, bullishness, bearishness, causation, predictiveness, or trade utility. This evidence is market context for the research campaign and must not be interpreted as ticker-specific flow for the campaign subject."),
+            neutral_semantics=("Provider-defined options activity grouped by contract expiration for the requested ticker, including provider-returned call/put, premium, side, volume, trade-count, and related expiry-level fields where available. Ask-side, bid-side, call, put, premium, volume, and out-of-the-money classifications are observations under provider definitions; they do not by themselves establish opening or closing intent, economic direction, bullishness, bearishness, causation, predictiveness, or trade utility."),
         )
 
 
@@ -259,6 +260,6 @@ def standard_live_market_source() -> CompositeEvidenceSource:
         UnusualWhalesDarkPoolSource(),
         UnusualWhalesFlowAlertsSource(),
         UnusualWhalesGreekExposureByExpirySource(),
-        UnusualWhalesNetFlowByExpirySource(),
+        UnusualWhalesFlowByExpirySource(),
         FinraWeeklyOffExchangeSource(),
     )
