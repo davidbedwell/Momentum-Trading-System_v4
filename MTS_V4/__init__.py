@@ -3,6 +3,7 @@
 from .contracts import (
     AnalysisRequest,
     AnalysisResult,
+    AnalysisResultMetadata,
     ContractDefect,
     EvidenceDescriptor,
     EvidenceMetadata,
@@ -15,6 +16,7 @@ from .contracts import (
 __all__ = [
     "AnalysisRequest",
     "AnalysisResult",
+    "AnalysisResultMetadata",
     "ContractDefect",
     "EvidenceDescriptor",
     "EvidenceMetadata",
