@@ -3,25 +3,40 @@ name: MTS v4 core
 on:
   push:
     branches:
-      - mts-v4-reconstruction-20260906
+      - main
+      - mts-v4-integrity-repairs-20260907
   pull_request:
     paths:
       - 'MTS_V4/**'
       - 'Tests/mts_v4/**'
+      - 'Engines/Intake/adapters/**'
+      - 'Tests/intake_engine/**'
+      - 'pyproject.toml'
+      - '.github/workflows/**'
       - 'Architecture/MTS_V4_SYSTEM_ARCHITECTURE.md'
       - 'ChatGPT.md'
 
 jobs:
-  authority-boundaries:
+  v4-runtime:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install v4 scientific calculation dependencies
-        run: python -m pip install --disable-pip-version-check -q numpy scipy
+      - name: Install project and test dependencies
+        run: python -m pip install --disable-pip-version-check -q '.[dev]' pandas
       - name: Compile v4 package
         run: python -m compileall -q MTS_V4
-      - name: Run v4 authority tests
+      - name: Run v4 runtime regression tests
         run: python -m unittest discover -s Tests/mts_v4 -p 'test_*.py' -v
+      - name: Run CSV adapter regression tests
+        run: python -m pytest -q Tests/intake_engine/test_csv_adapter.py
+      - name: Build wheel and source distribution
+        run: python -m build
+      - name: Verify installed v4 outside checkout
+        run: |
+          python -m venv /tmp/mts-v4-install
+          /tmp/mts-v4-install/bin/python -m pip install --disable-pip-version-check -q dist/*.whl
+          cd /tmp
+          /tmp/mts-v4-install/bin/python -c 'import MTS_V4; import MTS_V4.production; import MTS_V4.openai_compatible_provider; print("MTS_V4_INSTALLED_IMPORT=PASS")'
