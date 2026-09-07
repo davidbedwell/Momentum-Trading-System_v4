@@ -160,6 +160,57 @@ class UnusualWhalesFlowAlertsSource(_UnusualWhalesBase):
         )
 
 
+class UnusualWhalesGreekExposureByExpirySource(_UnusualWhalesBase):
+    def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
+        ticker = subject.ticker.upper()
+        endpoint = f"/api/stock/{urllib.parse.quote(ticker)}/greek-exposure/expiry"
+        rows = self._get(endpoint)
+        start, end = _coverage(rows, ("date", "timestamp", "updated_at", "created_at"))
+        yield IntakePayload(
+            payload=rows,
+            evidence_type="OPTIONS_GREEK_EXPOSURE_BY_EXPIRY",
+            artifact_type="NORMALIZED_DATASET",
+            source_identity="UNUSUAL_WHALES_GREEK_EXPOSURE_BY_EXPIRY",
+            coverage_start=start,
+            coverage_end=end,
+            row_count=len(rows),
+            schema=_schema(rows),
+            provenance={
+                "provider": "Unusual Whales",
+                "endpoint": endpoint,
+                "scope": "TICKER",
+                "ticker": ticker,
+                "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
+            },
+            neutral_semantics=("Provider-calculated options Greek exposure aggregated by expiration for the requested ticker. Exposure values describe the provider's Greek-exposure calculations and concentration across expirations; they do not by themselves establish dealer identity, dealer positioning, hedging direction, support or resistance, future price direction, causation, predictiveness, or trade utility."),
+        )
+
+
+class UnusualWhalesNetFlowByExpirySource(_UnusualWhalesBase):
+    def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
+        endpoint = "/api/net-flow/expiry"
+        rows = self._get(endpoint)
+        start, end = _coverage(rows, ("date", "start_time", "startTime", "timestamp"))
+        yield IntakePayload(
+            payload=rows,
+            evidence_type="MARKET_OPTIONS_NET_FLOW_BY_EXPIRY",
+            artifact_type="NORMALIZED_DATASET",
+            source_identity="UNUSUAL_WHALES_MARKET_NET_FLOW_BY_EXPIRY",
+            coverage_start=start,
+            coverage_end=end,
+            row_count=len(rows),
+            schema=_schema(rows),
+            provenance={
+                "provider": "Unusual Whales",
+                "endpoint": endpoint,
+                "scope": "MARKET_CONTEXT_NOT_TICKER_SPECIFIC",
+                "campaign_subject_ticker": subject.ticker.upper(),
+                "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
+            },
+            neutral_semantics=("Provider-defined market-wide near-dated options net-flow context grouped by expiration category and related provider buckets. Net-flow and ask-side-minus-bid-side classifications do not by themselves establish economic intent, bullishness, bearishness, causation, predictiveness, or trade utility. This evidence is market context for the research campaign and must not be interpreted as ticker-specific flow for the campaign subject."),
+        )
+
+
 class FinraWeeklyOffExchangeSource:
     token_url = "https://ews.fip.finra.org/fip/rest/ews/oauth2/access_token?grant_type=client_credentials"
     data_url = "https://api.finra.org/data/group/otcMarket/name/weeklySummary"
@@ -203,4 +254,11 @@ class FinraWeeklyOffExchangeSource:
 
 
 def standard_live_market_source() -> CompositeEvidenceSource:
-    return CompositeEvidenceSource(YFinanceDailyOhlcvSource(), UnusualWhalesDarkPoolSource(), UnusualWhalesFlowAlertsSource(), FinraWeeklyOffExchangeSource())
+    return CompositeEvidenceSource(
+        YFinanceDailyOhlcvSource(),
+        UnusualWhalesDarkPoolSource(),
+        UnusualWhalesFlowAlertsSource(),
+        UnusualWhalesGreekExposureByExpirySource(),
+        UnusualWhalesNetFlowByExpirySource(),
+        FinraWeeklyOffExchangeSource(),
+    )
