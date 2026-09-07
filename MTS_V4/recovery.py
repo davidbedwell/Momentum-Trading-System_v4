@@ -27,10 +27,10 @@ class EvidenceDifference:
 class RecoveryAssessment:
     """Objective description of reacquired evidence continuity.
 
-    ``recovered`` uses checkpoint evidence identities when a logical source can
-    be matched unambiguously. This preserves old AI-authored request/checkpoint
-    references while the descriptor continues to point at the newly staged
-    temporary payload through its current cache key.
+    For SAME evidence, ``recovered`` preserves the checkpoint identity/metadata
+    while retaining the new temporary cache key. For CHANGED or UNVERIFIABLE
+    evidence, ``recovered`` contains the newly acquired identities so RD can
+    explicitly decide what to do with the changed evidence.
     """
 
     status: EvidenceContinuityStatus
@@ -41,13 +41,7 @@ class RecoveryAssessment:
 
 
 class CampaignRecovery:
-    """Compare reacquired evidence without confusing acquisition time with content.
-
-    Matching is based on stable source identity (subject/type/artifact/source),
-    not a newly minted acquisition identity. Content identity and scientifically
-    meaningful source metadata are compared separately. Operational acquisition
-    timestamps are deliberately excluded from continuity semantics.
-    """
+    """Compare content/source continuity separately from acquisition timestamps."""
 
     @staticmethod
     def compare(
@@ -66,11 +60,10 @@ class CampaignRecovery:
 
         missing: list[str] = []
         unexpected: list[str] = []
-        rebound: list[EvidenceDescriptor] = []
+        matched: list[tuple[EvidenceMetadata, EvidenceDescriptor]] = []
         differences: list[EvidenceDifference] = []
 
-        all_keys = sorted(set(expected_groups) | set(actual_groups))
-        for key in all_keys:
+        for key in sorted(set(expected_groups) | set(actual_groups)):
             expected_group = expected_groups.get(key, [])
             actual_group = actual_groups.get(key, [])
             if len(expected_group) != 1 or len(actual_group) != 1:
@@ -78,30 +71,58 @@ class CampaignRecovery:
                     missing.extend(item.evidence_id for item in expected_group[len(actual_group):])
                 if len(actual_group) > len(expected_group):
                     unexpected.extend(item.evidence_id for item in actual_group[len(expected_group):])
-                # Multiple indistinguishable logical sources cannot be rebound
-                # safely without inventing identity correspondence.
-                if len(expected_group) != 1 or len(actual_group) != 1:
-                    continue
-
+                continue
             expected = expected_group[0]
             actual = actual_group[0]
-            rebound_actual = replace(actual, evidence_id=expected.evidence_id)
-            rebound.append(rebound_actual)
-            differences.extend(CampaignRecovery._compare_one(expected, rebound_actual))
+            matched.append((expected, actual))
+            differences.extend(CampaignRecovery._compare_one(expected, actual))
 
-        if missing or unexpected or len(rebound) != len(expected_items) or len(rebound) != len(actual_items):
+        if (
+            missing
+            or unexpected
+            or len(matched) != len(expected_items)
+            or len(matched) != len(actual_items)
+        ):
             return RecoveryAssessment(
                 status=EvidenceContinuityStatus.UNVERIFIABLE,
-                recovered=tuple(rebound),
+                recovered=actual_items,
                 differences=tuple(differences),
                 missing_evidence_ids=tuple(sorted(missing)),
                 unexpected_evidence_ids=tuple(sorted(unexpected)),
             )
 
+        if differences:
+            return RecoveryAssessment(
+                status=EvidenceContinuityStatus.CHANGED,
+                recovered=actual_items,
+                differences=tuple(differences),
+            )
+
+        # SAME means the reacquired payload may safely satisfy the old AI-authored
+        # evidence reference. Preserve the checkpoint's exact durable metadata so
+        # immutable Nexus history is not rewritten merely because reacquisition
+        # happened at a new time or because a legacy checkpoint predates hashes.
+        rebound = tuple(
+            replace(
+                actual,
+                evidence_id=expected.evidence_id,
+                subject_id=expected.subject_id,
+                evidence_type=expected.evidence_type,
+                artifact_type=expected.artifact_type,
+                source_identity=expected.source_identity,
+                coverage_start=expected.coverage_start,
+                coverage_end=expected.coverage_end,
+                row_count=expected.row_count,
+                schema=expected.schema,
+                provenance=dict(expected.provenance),
+                neutral_semantics=expected.neutral_semantics,
+                content_identity=expected.content_identity,
+            )
+            for expected, actual in matched
+        )
         return RecoveryAssessment(
-            status=(EvidenceContinuityStatus.CHANGED if differences else EvidenceContinuityStatus.SAME),
+            status=EvidenceContinuityStatus.SAME,
             recovered=tuple(sorted(rebound, key=lambda item: item.evidence_id)),
-            differences=tuple(differences),
         )
 
     @staticmethod
@@ -118,12 +139,14 @@ class CampaignRecovery:
         expected: EvidenceMetadata,
         actual: EvidenceDescriptor,
     ) -> tuple[EvidenceDifference, ...]:
-        fields: Mapping[str, object] = {
+        actual_fields: Mapping[str, object] = {
             "coverage_start": actual.coverage_start,
             "coverage_end": actual.coverage_end,
             "row_count": actual.row_count,
             "schema": tuple(actual.schema),
-            "meaningful_provenance": dict(IntakeEngine.meaningful_provenance(actual.provenance)),
+            "meaningful_provenance": dict(
+                IntakeEngine.meaningful_provenance(actual.provenance)
+            ),
             "neutral_semantics": actual.neutral_semantics,
         }
         expected_fields: Mapping[str, object] = {
@@ -131,11 +154,13 @@ class CampaignRecovery:
             "coverage_end": expected.coverage_end,
             "row_count": expected.row_count,
             "schema": tuple(expected.schema),
-            "meaningful_provenance": dict(IntakeEngine.meaningful_provenance(expected.provenance)),
+            "meaningful_provenance": dict(
+                IntakeEngine.meaningful_provenance(expected.provenance)
+            ),
             "neutral_semantics": expected.neutral_semantics,
         }
         differences: list[EvidenceDifference] = []
-        for name, actual_value in fields.items():
+        for name, actual_value in actual_fields.items():
             expected_value = expected_fields[name]
             if actual_value != expected_value:
                 differences.append(
@@ -147,10 +172,13 @@ class CampaignRecovery:
                     )
                 )
 
-        # Old V1 checkpoints predate content hashes. Their source/coverage/schema
-        # metadata remains usable; absence of a historical hash is not fabricated
-        # into a change. New checkpoints compare content identity directly.
-        if expected.content_identity is not None and actual.content_identity != expected.content_identity:
+        # Legacy checkpoints may not contain a content hash. Absence of a hash is
+        # not treated as proof of change; their durable source/coverage/schema
+        # metadata remains the available continuity evidence.
+        if (
+            expected.content_identity is not None
+            and actual.content_identity != expected.content_identity
+        ):
             differences.append(
                 EvidenceDifference(
                     evidence_id=expected.evidence_id,
