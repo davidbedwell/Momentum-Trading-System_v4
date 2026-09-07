@@ -44,10 +44,15 @@ class JsonResearchNexus:
                 f"Cannot persist evidence metadata for unknown subject: {metadata.subject_id}"
             )
         existing = self._evidence_metadata.get(metadata.evidence_id)
-        if existing is not None and existing != metadata:
-            raise NexusError(
-                f"evidence_id already exists with different metadata: {metadata.evidence_id}"
-            )
+        if existing is not None:
+            if not existing.identity_equivalent(metadata):
+                raise NexusError(
+                    f"evidence_id already exists with different metadata: {metadata.evidence_id}"
+                )
+            # Preserve the first durable record byte-for-byte. A later fetch may
+            # have a new acquisition timestamp, but old findings must continue
+            # to reference the metadata that existed when they were published.
+            return
         self._evidence_metadata[metadata.evidence_id] = metadata
         self._flush()
 
