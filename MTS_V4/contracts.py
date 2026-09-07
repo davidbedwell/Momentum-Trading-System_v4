@@ -33,6 +33,7 @@ class EvidenceMetadata:
     schema: tuple[str, ...]
     provenance: Mapping[str, Any] = field(default_factory=dict)
     neutral_semantics: str = ""
+    content_identity: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -51,6 +52,7 @@ class EvidenceDescriptor:
     cache_key: str
     provenance: Mapping[str, Any] = field(default_factory=dict)
     neutral_semantics: str = ""
+    content_identity: str | None = None
 
     def durable_metadata(self) -> EvidenceMetadata:
         return EvidenceMetadata(
@@ -65,6 +67,7 @@ class EvidenceDescriptor:
             schema=self.schema,
             provenance=dict(self.provenance),
             neutral_semantics=self.neutral_semantics,
+            content_identity=self.content_identity,
         )
 
 
@@ -112,6 +115,37 @@ class AnalysisResult:
     outputs: Mapping[str, Any]
     evidence_ids: tuple[str, ...]
     limitations: tuple[str, ...] = ()
+    execution_metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def durable_metadata(self) -> "AnalysisResultMetadata":
+        future_information = self.execution_metadata.get("future_information", {})
+        if not isinstance(future_information, Mapping):
+            future_information = {"value": future_information}
+        return AnalysisResultMetadata(
+            result_id=self.result_id,
+            request_id=self.request_id,
+            subject_id=self.subject_id,
+            method_id=self.method_id,
+            evidence_ids=self.evidence_ids,
+            future_information=dict(future_information),
+            execution_metadata={
+                key: value
+                for key, value in self.execution_metadata.items()
+                if key not in {"payload", "rows", "derived_datasets"}
+            },
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class AnalysisResultMetadata:
+    """Durable result identity and lineage without reproducible result payloads."""
+
+    result_id: str
+    request_id: str
+    subject_id: str
+    method_id: str
+    evidence_ids: tuple[str, ...]
+    future_information: Mapping[str, Any] = field(default_factory=dict)
     execution_metadata: Mapping[str, Any] = field(default_factory=dict)
 
 
