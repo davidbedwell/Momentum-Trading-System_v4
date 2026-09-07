@@ -36,13 +36,13 @@ class _RD:
         self.interpret_calls = 0
 
     @staticmethod
-    def _request(request_id):
+    def _request(request_id, evidence_id="ev:1"):
         return AnalysisRequest(
             request_id=request_id,
             subject_id="AAPL",
             question="AI-authored beta research question",
             method_id="analysis.fixture",
-            evidence_ids=("ev:1",),
+            evidence_ids=(evidence_id,),
             parameters={},
             research_phase=ResearchPhase.EXPLORATION,
         )
@@ -54,13 +54,13 @@ class _RD:
             research_state={"frontier": "beta-resume-proof"},
         )
 
-    def resume_research(self, *, evidence_continuity, prior_decision, **kwargs):
+    def resume_research(self, *, evidence_continuity, prior_decision, evidence, **kwargs):
         self.resume_calls.append(evidence_continuity)
-        # This is intentionally an AI choice. Changed evidence is not a
-        # deterministic failure; RD elects to continue with a fresh request.
+        # Changed evidence is not deterministically rejected. RD explicitly
+        # chooses the newly reacquired evidence identity for its fresh request.
         return ResearchDecision(
             continue_research=True,
-            next_request=self._request("r:resume"),
+            next_request=self._request("r:resume", evidence[0].evidence_id),
             research_state={
                 **dict(prior_decision.research_state),
                 "continuity_reviewed": evidence_continuity["status"],
@@ -73,9 +73,10 @@ class _RD:
     def interpret_result(self, **kwargs):
         self.interpret_calls += 1
         if self.interpret_calls == 1:
+            evidence_id = kwargs["result"].evidence_ids[0]
             return ResearchDecision(
                 continue_research=True,
-                next_request=self._request("r:2"),
+                next_request=self._request("r:2", evidence_id),
                 research_state={"frontier": "after-first-analysis"},
             )
         return ResearchDecision(
@@ -111,10 +112,17 @@ class V4CampaignResumeTests(unittest.TestCase):
         return rd, analysis, cache, store, runner
 
     @staticmethod
-    def _evidence(cache, *, coverage_end="2026-01-01", row_count=100, cache_key="cache:1"):
+    def _evidence(
+        cache,
+        *,
+        evidence_id="ev:1",
+        coverage_end="2026-01-01",
+        row_count=100,
+        cache_key="cache:1",
+    ):
         cache.put(cache_key, [{"close": 100.0}])
         return EvidenceDescriptor(
-            evidence_id="ev:1",
+            evidence_id=evidence_id,
             subject_id="AAPL",
             evidence_type="OHLCV",
             artifact_type="NORMALIZED_DATASET",
@@ -143,7 +151,6 @@ class V4CampaignResumeTests(unittest.TestCase):
             self.assertEqual(first.close_reason, "ANALYSIS_BUDGET_EXHAUSTED")
             self.assertIsNotNone(store.load())
 
-            # Simulate process-local cache loss and reacquisition at a new key.
             cache.release(evidence.cache_key)
             cache.purge_released()
             reacquired = self._evidence(cache, cache_key="cache:reacquired")
@@ -172,6 +179,7 @@ class V4CampaignResumeTests(unittest.TestCase):
             cache.purge_released()
             changed = self._evidence(
                 cache,
+                evidence_id="ev:changed",
                 coverage_end="2026-01-02",
                 row_count=101,
                 cache_key="cache:changed",
