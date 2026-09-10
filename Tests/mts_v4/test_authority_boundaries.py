@@ -161,6 +161,52 @@ class V4AuthorityBoundaryTests(unittest.TestCase):
         self.assertEqual(request.evidence_ids, (result_id,))
         self.assertEqual(request.analysis_inputs, ())
 
+    def test_failed_analysis_result_path_gets_explicit_repair_guidance_without_rewrite(self):
+        from MTS_V4.contracts import AnalysisResult, AnalysisResultInput
+
+        result_id = "analysis-result:389afccd7a7345bc955962ac9d85448d"
+        bad_path = ("evidence", "equity:AAPL:d55932ce14a78f85aa33b1ec")
+        result = AnalysisResult(
+            result_id=result_id,
+            request_id="req:derive_volume_dataset_v7",
+            subject_id="AAPL",
+            method_id="analysis.dataset.compose",
+            outputs={"error": "compose execution failed"},
+            evidence_ids=("ev:1",),
+            execution_metadata={"execution_status": "ERROR"},
+        )
+        analysis_input = AnalysisResultInput(
+            result_id=result_id,
+            output_path=bad_path,
+            input_name="ohlcv_input_1",
+        )
+        request = AnalysisRequest(
+            request_id="r:failed-result-input",
+            subject_id="AAPL",
+            question="Compose a volume dataset.",
+            method_id="relationship.correlation",
+            evidence_ids=("ev:1",),
+            analysis_inputs=(analysis_input,),
+            parameters={"columns": ["close", "volume"]},
+            research_phase=ResearchPhase.EXPLORATION,
+        )
+
+        defects = self.validator.validate(
+            request,
+            {"ev:1": self.evidence},
+            analysis_results={result_id: result},
+        )
+
+        self.assertEqual(len(defects), 1)
+        self.assertEqual(defects[0].code, "MISSING_ANALYSIS_OUTPUT")
+        self.assertEqual(defects[0].field, "analysis_inputs")
+        self.assertIn("execution_status=ERROR", defects[0].message)
+        self.assertIn("cannot supply that analysis input", defects[0].message)
+        self.assertIn("exact advertised derived_dataset_catalog output_path", defects[0].message)
+        self.assertIn("Deterministic code will not choose among those options", defects[0].message)
+        self.assertEqual(request.analysis_inputs, (analysis_input,))
+        self.assertEqual(request.analysis_inputs[0].output_path, bad_path)
+
     def test_unknown_method_is_missing_capability_not_substitution(self):
         request = AnalysisRequest(
             request_id="r2",
