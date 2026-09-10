@@ -152,6 +152,10 @@ class AnalysisRequest:
     research_phase: ResearchPhase
     rationale: str = ""
     analysis_inputs: tuple[AnalysisResultInput, ...] = ()
+    rp_id: str | None = None
+    question_id: str | None = None
+    parent_question_id: str | None = None
+    parent_rp_id: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -245,7 +249,11 @@ class ResearchDecision:
     """Scientific decision authored by the AI Research Director.
 
     Deterministic code may validate the representation but does not manufacture
-    any of the scientific content represented here.
+    any of the scientific content represented here. ``rp_id`` identifies the
+    coherent research package to which this decision belongs. Interpretation
+    fields preserve what RD concluded from the immediately interpreted Analysis
+    result without requiring that conclusion to be promoted as a significant
+    Nexus finding.
     """
 
     continue_research: bool
@@ -253,3 +261,8 @@ class ResearchDecision:
     promote_findings: tuple[Finding, ...] = ()
     research_state: Mapping[str, Any] = field(default_factory=dict)
     close_reason: str | None = None
+    rp_id: str | None = None
+    analysis_interpretation: str | None = None
+    interpreted_request_id: str | None = None
+    interpreted_result_id: str | None = None
+    interpreted_execution_status: str | None = None
