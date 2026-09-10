@@ -6,7 +6,7 @@ from typing import Mapping, Sequence
 
 from .contracts import AnalysisRequest, AnalysisResult, EvidenceDescriptor, ResearchDecision, SubjectMetadata
 from .openai_compatible_provider import OpenAICompatibleResearchDirector
-from .rd_codec import ResearchDecisionCodec
+from .rd_codec import ResearchDecisionCodec, ResearchDecisionDecodeError
 from .research_package_store import JsonResearchPackageStore
 
 
@@ -143,18 +143,19 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             mission=mission,
             payload=enriched_payload,
         )
+        assistant_content = json.dumps(
+            asdict(decision),
+            sort_keys=True,
+            default=str,
+            separators=(",", ":"),
+        )
         for _ in range(self._MAX_RP_REPRESENTATION_REPAIRS):
             repaired = self._chat_completion(
                 messages
                 + [
                     {
                         "role": "assistant",
-                        "content": json.dumps(
-                            asdict(decision),
-                            sort_keys=True,
-                            default=str,
-                            separators=(",", ":"),
-                        ),
+                        "content": assistant_content,
                     },
                     {
                         "role": "user",
@@ -164,10 +165,11 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
                                 "decode_defect": defect,
                                 "instruction": (
                                     "Return one complete corrected decision JSON object. Correct the exact "
-                                    "objective identity/lineage defect identified above. You retain full scientific "
-                                    "authority over RP identity, question lineage, interpretation, and next "
-                                    "direction. Deterministic code will not invent, replace, or select any of "
-                                    "those scientific values; it only validates their explicit representation."
+                                    "objective identity/lineage or JSON representation defect identified above. "
+                                    "You retain full scientific authority over RP identity, question lineage, "
+                                    "interpretation, and next direction. Deterministic code will not invent, "
+                                    "replace, or select any of those scientific values; it only validates their "
+                                    "explicit representation."
                                 ),
                             },
                             sort_keys=True,
@@ -176,10 +178,22 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
                     },
                 ]
             )
-            decision = ResearchDecisionCodec.decode(repaired)
+            try:
+                decision = ResearchDecisionCodec.decode(repaired)
+            except ResearchDecisionDecodeError as exc:
+                assistant_content = repaired
+                defect = f"repair response is not valid decision JSON: {exc}"
+                continue
+
             defect = self._decision_representation_defect(operation, decision, enriched_payload)
             if defect is None:
                 return decision
+            assistant_content = json.dumps(
+                asdict(decision),
+                sort_keys=True,
+                default=str,
+                separators=(",", ":"),
+            )
 
         raise ValueError(
             "research package representation repair budget exhausted: " + defect
