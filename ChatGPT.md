@@ -65,7 +65,7 @@ Deterministic code may enforce objective execution and governance constraints, i
 - artifact existence;
 - lineage and provenance integrity;
 - temporal and look-ahead restrictions applicable to the current research phase;
-- subject/ticker seen-versus-unseen eligibility for predictive verification;
+- historical blind-verification subject eligibility;
 - permissions and authority claims;
 - reproducibility mechanics;
 - resource and execution safety;
@@ -151,7 +151,7 @@ The Research Nexus is durable research memory, not a reproducible-data warehouse
 
 Its primary contents are:
 
-- ticker or subject metadata, including durable provenance sufficient to determine whether a ticker has previously entered MTS analysis;
+- ticker or subject metadata, including durable provenance sufficient to determine whether a ticker has previously entered MTS historical analysis;
 - significant findings promoted by the AI Research Director;
 - durable hypotheses or research-state records when needed;
 - provenance and lineage needed to understand those findings;
@@ -163,7 +163,7 @@ Nexus shall not be used as the durable repository for raw or otherwise reproduci
 
 Nexus should preserve what MTS learned, not warehouse the data from which it learned it.
 
-Not every Analysis result belongs in Nexus. The AI Research Director determines scientific significance. Deterministic code may validate the promoted record's schema, lineage, integrity, provenance, and objective verification eligibility but may not decide scientific importance.
+Not every Analysis result belongs in Nexus. The AI Research Director determines scientific significance. Deterministic code may validate the promoted record's schema, lineage, integrity, provenance, and objective historical-verification eligibility but may not decide scientific importance.
 
 ## 11. B-Series Status
 
@@ -201,15 +201,15 @@ During EXPLORATION, the central objective is predictive discovery. The AI Resear
 
 Exploration should encourage prospective reasoning rather than stop at contemporaneous description. When evidence supports it, the AI Research Director should convert promising relationships into explicit, falsifiable tentative predictive hypotheses suitable for later blind testing. It should also freely reject candidate relationships that do not withstand exploratory scrutiny.
 
-Predictive verification may occur only on a ticker that has not previously been analyzed by MTS. Once a ticker has entered MTS analysis, it is permanently a seen ticker and may never later serve as an unseen predictive-verification subject. This is an objective experimental-integrity rule, not a scientific judgment about whether a hypothesis is good or whether a ticker is representative.
+For retrospective historical blind verification, a ticker may serve as the unseen verification subject only if MTS had not previously analyzed that ticker before the historical verification campaign began. Findings and tentative predictive hypotheses may arise from one or many previously analyzed tickers and may then be tested against a genuinely unseen ticker. After those historical verification results are durably recorded, that ticker may enter unrestricted EXPLORATION and its results and later findings may be folded into the cumulative research corpus. New or materially revised hypotheses arising from that enlarged corpus should be historically verified on another ticker that was unseen at the start of its verification campaign.
 
-The scientific corpus is cumulative. Findings and tentative predictive hypotheses may arise from one or many previously analyzed tickers. Eligible existing hypotheses are then blind-tested on a new unseen ticker. After those verification results are durably recorded, that ticker may enter unrestricted EXPLORATION and its verification results, findings, and subsequent exploratory learning may be folded into the cumulative research corpus. New or materially revised predictive hypotheses arising from that enlarged corpus must wait for another ticker that has not previously been analyzed by MTS.
+This historical unseen-ticker rule does not prohibit live prospective prediction or trading on a ticker MTS has analyzed before. Once the prediction point is genuinely current and the future outcome has not occurred, Qwen may make prospective predictions on previously analyzed tickers, including tickers used extensively in prior research. Such live predictions are not made invalid merely because the ticker is scientifically familiar. MTS must remain able to trade and continue evaluating signals on familiar tickers.
 
-Once a predictive hypothesis is frozen for VALIDATION on an eligible unseen ticker, the prediction stage must also be protected from temporal look-ahead. The AI Research Director may use only information available through the declared prediction point, must make and lock the prediction before hidden future information is exposed, and may then evaluate the revealed outcome against the frozen success definition.
+Within any historical blind trial, the prediction stage must also be protected from temporal look-ahead. The AI Research Director may use only information available through the declared prediction point, must make and lock the prediction before hidden future information is exposed, and may then evaluate the revealed outcome against the frozen success definition.
 
-The purpose of the validation restrictions is not to suppress predictive reasoning. They make the predictive claims discovered during exploration falsifiable and honestly testable across genuinely unseen subjects as well as unseen future outcomes.
+The purpose of the validation restrictions is not to suppress predictive reasoning. They make exploratory claims honestly testable while preserving MTS's ability to make genuine prospective predictions in live or future-facing use.
 
-Do not confuse exploratory discovery with prospective validation, and do not weaken exploratory predictive discovery merely to simplify validation controls.
+Do not confuse exploratory discovery, retrospective historical verification, and genuine live prospective prediction. The unseen-ticker restriction applies to retrospective historical blind verification, not to current or future-facing prediction/trading.
 
 No fixed threshold, horizon, normalization, indicator, method family, or trading rule should be privileged unless explicitly approved or scientifically justified by the AI Research Director from evidence. Human-approved governance thresholds, such as an explicitly approved predictive-verification success-rate floor, are permitted as objective validation rules and do not substitute for AI scientific judgment about the hypothesis itself.
 
@@ -247,9 +247,10 @@ Prefer tests that establish:
 
 - AI scientific authority is preserved;
 - exploratory research actively supports scientifically defensible prospective/predictive discovery;
-- predictive verification is mechanically rejected on any ticker previously analyzed by MTS;
-- an unseen ticker remains eligible for blind verification until it enters unrestricted analysis;
-- blind validation prevents look-ahead at the prediction stage without weakening exploratory freedom;
+- retrospective historical verification is mechanically rejected on a ticker already analyzed before that verification campaign;
+- a genuinely unseen ticker remains eligible for retrospective historical blind verification;
+- live prospective prediction remains allowed on previously analyzed tickers;
+- blind validation prevents temporal look-ahead at the prediction stage without weakening exploratory freedom;
 - deterministic validation remains objective;
 - invalid execution contracts fail with precise feedback;
 - valid scientific requests are not rejected because of deterministic scientific preference;
