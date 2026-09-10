@@ -67,13 +67,16 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             "a follow-up remains in the existing RP or starts a new child RP; deterministic code only "
             "preserves the lineage you author. A later RP never overwrites an earlier RP. A question may "
             "not name itself as its parent, and an RP may not name itself as its parent. Every new Analysis "
-            "execution attempt must use a request_id that has not already been durably used. A prior Analysis "
-            "result is chainable through analysis_inputs only when its execution_status is SUCCESS, and only "
-            "through an exact output_path advertised in that result's reusable_derived_datasets catalog. "
-            "ERROR results and results with an empty reusable_derived_datasets catalog have zero chainable "
-            "outputs. When interpreting an Analysis result, provide a substantive analysis_interpretation "
-            "even when no finding is promoted. Predictive relationships discovered before blind verification "
-            "are tentative hypotheses, not verified predictive findings."
+            "execution attempt must use a request_id that has not already been durably used. A checkpointed "
+            "pending request is reserved rather than completed: during RESUME_RESEARCH only, you may preserve "
+            "the exact prior_decision.next_request, including its request_id, when continuing that same "
+            "pending execution after process loss. If any field of that request changes, use a fresh request_id. "
+            "A prior Analysis result is chainable through analysis_inputs only when its execution_status is "
+            "SUCCESS, and only through an exact output_path advertised in that result's reusable_derived_datasets "
+            "catalog. ERROR results and results with an empty reusable_derived_datasets catalog have zero "
+            "chainable outputs. When interpreting an Analysis result, provide a substantive "
+            "analysis_interpretation even when no finding is promoted. Predictive relationships discovered "
+            "before blind verification are tentative hypotheses, not verified predictive findings."
         )
         user = json.loads(messages[1]["content"])
         schema = user["required_decision_schema"]
@@ -122,6 +125,7 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
                 "Create a new next_request.rp_id only when you judge a materially distinct research proposition has emerged; when it is a child of prior work, identify the different parent_rp_id yourself.",
                 "Never set parent_question_id equal to question_id and never set parent_rp_id equal to rp_id; self-parent lineage is mechanically invalid.",
                 "Every new Analysis execution attempt requires a new request_id. If you revise parameters, method, inputs, or any other execution contract after interpreting a prior result, assign a new request_id even when the scientific question_id remains the same.",
+                "Recovery exception: during RESUME_RESEARCH only, prior_decision.next_request may be retained with the same request_id when it is the exact checkpointed pending request and every request field remains identical. This is replay of one interrupted execution identity, not a new Analysis attempt. If you change the question, rationale, method, parameters, evidence_ids, analysis_inputs, research_phase, subject_id, rp_id, question lineage, or any other next_request field, assign a fresh request_id.",
                 "Treat context.nexus_context.campaign_analysis_result_catalog as the authoritative mechanical inventory for prior campaign-local Analysis chaining. Only a catalog entry with execution_status=SUCCESS may supply analysis_inputs, and only exact output_path values advertised under that entry's reusable_derived_datasets may be used.",
                 "If a prior Analysis catalog entry has execution_status other than SUCCESS, including ERROR, it has zero chainable outputs. If reusable_derived_datasets is empty, it has zero chainable outputs. Never invent an output_path or infer that a failed result produced a dataset.",
                 "Acquired evidence in context.evidence is distinct from prior Analysis results. Use exact evidence_ids directly when the selected method permits; do not fabricate analysis_inputs merely to name acquired evidence.",
@@ -247,17 +251,105 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             return defect
         if not decision.continue_research or decision.next_request is None:
             return None
-        request_id = decision.next_request.request_id
+
+        request = decision.next_request
+        request_id = request.request_id
+        matches: list[tuple[object, object]] = []
         for rp_id in self._research_package_store.list_ids():
             package = self._research_package_store.load(rp_id)
             if package is None:
                 continue
-            if any(item.request_id == request_id for item in package.analyses):
-                return (
-                    "next_request.request_id has already been durably used; every new Analysis "
-                    f"execution attempt requires a new request_id: {request_id}"
-                )
-        return None
+            for analysis in package.analyses:
+                if analysis.request_id == request_id:
+                    matches.append((package, analysis))
+
+        if not matches:
+            return None
+        if len(matches) != 1:
+            return f"next_request.request_id appears in multiple durable research packages: {request_id}"
+
+        package, analysis = matches[0]
+        if (
+            operation == "RESUME_RESEARCH"
+            and analysis.result_id is None
+            and self._is_exact_pending_resume_request(
+                request=request,
+                payload=payload,
+                package=package,
+                analysis=analysis,
+            )
+        ):
+            return None
+
+        if operation == "RESUME_RESEARCH" and analysis.result_id is None:
+            return (
+                "next_request.request_id belongs to a durable pending request, but RESUME_RESEARCH "
+                "changed that request's execution identity; any changed request requires a new request_id: "
+                f"{request_id}"
+            )
+
+        return (
+            "next_request.request_id has already been durably used; every new Analysis "
+            f"execution attempt requires a new request_id: {request_id}"
+        )
+
+    def _is_exact_pending_resume_request(
+        self,
+        *,
+        request: AnalysisRequest,
+        payload: Mapping[str, object],
+        package: object,
+        analysis: object,
+    ) -> bool:
+        prior_decision = payload.get("prior_decision")
+        prior_request = (
+            prior_decision.get("next_request")
+            if isinstance(prior_decision, Mapping)
+            else None
+        )
+        if not isinstance(prior_request, Mapping):
+            return False
+
+        current_request = self._json_safe(asdict(request))
+        if dict(prior_request) != current_request:
+            return False
+
+        package_rp_id = getattr(package, "rp_id", None)
+        package_subject_id = getattr(package, "subject_id", None)
+        analysis_question_id = getattr(analysis, "question_id", None)
+        analysis_method_id = getattr(analysis, "method_id", None)
+        analysis_parameters = getattr(analysis, "parameters", None)
+        analysis_evidence_ids = getattr(analysis, "evidence_ids", None)
+        analysis_inputs = getattr(analysis, "analysis_inputs", None)
+        analysis_research_phase = getattr(analysis, "research_phase", None)
+
+        if package_rp_id != request.rp_id or package_subject_id != request.subject_id:
+            return False
+        if analysis_question_id != request.question_id or analysis_method_id != request.method_id:
+            return False
+        if not isinstance(analysis_parameters, Mapping) or dict(analysis_parameters) != dict(request.parameters):
+            return False
+        if tuple(analysis_evidence_ids or ()) != tuple(request.evidence_ids):
+            return False
+        durable_inputs = tuple(dict(item) for item in (analysis_inputs or ()))
+        request_inputs = tuple(self._json_safe(asdict(item)) for item in request.analysis_inputs)
+        if durable_inputs != request_inputs:
+            return False
+        if analysis_research_phase != request.research_phase.value:
+            return False
+
+        questions = getattr(package, "questions", ())
+        question_matches = [
+            item for item in questions if getattr(item, "question_id", None) == request.question_id
+        ]
+        if len(question_matches) != 1:
+            return False
+        question = question_matches[0]
+        return (
+            getattr(question, "question", None) == request.question
+            and getattr(question, "rationale", None) == request.rationale
+            and getattr(question, "parent_question_id", None) == request.parent_question_id
+        )
 
     @staticmethod
     def _rp_representation_defect(
