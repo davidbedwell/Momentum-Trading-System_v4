@@ -4,7 +4,7 @@ from dataclasses import dataclass, replace
 from typing import Any, Callable, Mapping, Sequence
 
 from .cache import TemporaryResearchCache
-from .contracts import AnalysisResult, EvidenceDescriptor, ResearchDecision, SubjectMetadata
+from .contracts import AnalysisRequest, AnalysisResult, EvidenceDescriptor, ResearchDecision, SubjectMetadata
 from .interfaces import AnalysisExecutor, ResearchDirectorProvider
 from .nexus import ResearchNexus
 from .validation import ObjectiveContractValidator
@@ -15,6 +15,7 @@ class ResearchLoopError(RuntimeError):
 
 
 StateCallback = Callable[[ResearchDecision, int, int], None]
+AcceptedRequestCallback = Callable[[AnalysisRequest], None]
 
 
 @dataclass(frozen=True, slots=True)
@@ -71,6 +72,7 @@ class ResearchLoopOrchestrator:
         initial_analyses: int = 0,
         evidence_continuity: Mapping[str, object] | None = None,
         state_callback: StateCallback | None = None,
+        accepted_request_callback: AcceptedRequestCallback | None = None,
     ) -> ResearchLoopOutcome:
         if max_analyses <= 0:
             raise ValueError("max_analyses must be positive")
@@ -177,6 +179,9 @@ class ResearchLoopOrchestrator:
                     )
 
             request = decision.next_request
+            if accepted_request_callback is not None:
+                accepted_request_callback(request)
+
             payloads: dict[str, object] = {}
             for evidence_id in request.evidence_ids:
                 descriptor = evidence_map[evidence_id]
