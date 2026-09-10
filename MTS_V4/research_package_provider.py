@@ -63,7 +63,8 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             "only through an exact output_path advertised in that result's reusable_derived_datasets "
             "catalog. ERROR results and results with an empty reusable_derived_datasets catalog have zero "
             "chainable outputs. When interpreting an Analysis result, provide a substantive "
-            "analysis_interpretation even when no finding is promoted."
+            "analysis_interpretation even when no finding is promoted. Predictive relationships discovered "
+            "before blind verification are tentative hypotheses, not verified predictive findings."
         )
         user = json.loads(messages[1]["content"])
         schema = user["required_decision_schema"]
@@ -73,6 +74,20 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
         schema["analysis_interpretation"] = (
             "string or null; substantive string required when operation is INTERPRET_ANALYSIS_RESULT"
         )
+        research_state = schema["research_state"]
+        research_state["predictive_hypothesis_updates"] = [
+            {
+                "action": "CREATE_TENTATIVE or RECORD_VALIDATION_TRIAL",
+                "hypothesis_id": "stable string",
+                "statement": "required for CREATE_TENTATIVE; frozen predictive proposition",
+                "success_definition": "required for CREATE_TENTATIVE; predeclared objective success condition",
+                "minimum_required_trials": "required positive integer for CREATE_TENTATIVE; choose before blind testing",
+                "source_result_ids": "required list of supporting result_ids for CREATE_TENTATIVE",
+                "trial_id": "required stable string for RECORD_VALIDATION_TRIAL",
+                "result_id": "required exact interpreted VALIDATION result_id for RECORD_VALIDATION_TRIAL",
+                "success": "required boolean for RECORD_VALIDATION_TRIAL, judged against the frozen success_definition",
+            }
+        ]
         next_request = schema["next_request"]
         next_request["rp_id"] = (
             "nonblank string: RP containing the requested question; may differ from decision rp_id only when RD intentionally branches to another RP"
@@ -86,7 +101,7 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
         )
         user["instructions"].extend(
             [
-                "Use context.research_packages as durable scientific memory for prior/open RP identity, lineage, findings, unresolved issues, and closure assessments.",
+                "Use context.research_packages as durable scientific memory for prior/open RP identity, lineage, findings, predictive hypotheses, unresolved issues, and closure assessments.",
                 "Keep follow-up questions under the same rp_id when they continue the same coherent scientific line; assign parent_question_id to the different prior question that caused the follow-up.",
                 "Create a new next_request.rp_id only when you judge a materially distinct research proposition has emerged; when it is a child of prior work, identify the different parent_rp_id yourself.",
                 "Never set parent_question_id equal to question_id and never set parent_rp_id equal to rp_id; self-parent lineage is mechanically invalid.",
@@ -98,6 +113,12 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
                 "Never reuse a prior rp_id for unrelated work and never treat a new RP as replacement for an earlier RP.",
                 "On INTERPRET_ANALYSIS_RESULT, decision.rp_id must be the same RP as the Analysis request being interpreted.",
                 "On INTERPRET_ANALYSIS_RESULT, state what you learned in analysis_interpretation whether or not it is significant enough to promote as a finding.",
+                "When exploration produces a relationship you judge potentially predictive, create a durable tentative predictive hypothesis under research_state.predictive_hypothesis_updates using action=CREATE_TENTATIVE. Author the exact proposition, the objective success_definition, a scientifically appropriate positive minimum_required_trials chosen before blind testing, and the supporting source_result_ids.",
+                "A predictive hypothesis is frozen when created. Do not revise its statement, success_definition, or minimum_required_trials after blind validation begins. If scientific learning requires a materially revised proposition, create a new hypothesis_id with a fresh validation record.",
+                "Tentative predictive hypotheses must be verified without look-ahead knowledge. Request blind verification work with research_phase=VALIDATION. Future-looking exploration remains allowed in EXPLORATION, but those exploratory results do not count as verification trials.",
+                "After interpreting a no-lookahead VALIDATION result for a frozen predictive hypothesis, record one RECORD_VALIDATION_TRIAL update with a unique trial_id, exact result_id, and success=true/false judged against the predeclared success_definition.",
+                "Human governance fixes VERIFIED at cumulative success_rate >= 0.60 once the hypothesis's predeclared minimum_required_trials has been reached. Below the minimum it remains TENTATIVE. At or above the minimum, a cumulative rate below 0.60 is NOT_VERIFIED. Deterministic persistence calculates those counts/statuses; you retain scientific authority over the hypothesis, trial design, and whether a trial satisfies its frozen success_definition.",
+                "If you promote a Nexus finding about a tentative predictive relationship, include metadata.predictive_hypothesis_id and metadata.predictive_status='TENTATIVE'. If blind validation later reaches VERIFIED or NOT_VERIFIED, promote a new finding only if you judge that validation outcome scientifically significant; do not rewrite the original tentative finding.",
                 "On final scientific closure, rp_id identifies the RP being closed and close_reason states your scientific reason.",
             ]
         )
@@ -284,9 +305,13 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             nexus_context=nexus_context,
         )
         status = result.execution_metadata.get("execution_status")
+        future_information = result.execution_metadata.get("future_information", {})
+        if not isinstance(future_information, Mapping):
+            future_information = {"value": future_information}
         return replace(
             decision,
             interpreted_request_id=request.request_id,
             interpreted_result_id=result.result_id,
             interpreted_execution_status=(str(status) if status is not None else None),
+            interpreted_future_information=dict(future_information),
         )
