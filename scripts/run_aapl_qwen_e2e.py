@@ -17,6 +17,7 @@ from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.research_package_provider import ResearchPackageAwareResearchDirector
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.research_recording import CampaignResearchRecorder
+from MTS_V4.sol_provider import SolResearchPackageAwareResearchDirector
 
 
 class DiagnosticResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirector):
@@ -97,7 +98,7 @@ def main() -> None:
         research_package_store=package_store,
         timeout_seconds=timeout_seconds,
     )
-    sol_rd = ResearchPackageAwareResearchDirector(
+    sol_rd = SolResearchPackageAwareResearchDirector(
         research_package_store=package_store,
         base_url=_required_env("MTS_SOL_BASE_URL"),
         model=_required_env("MTS_SOL_MODEL"),
