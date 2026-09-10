@@ -76,6 +76,16 @@ A historical trial must not be counted as genuinely blind merely because an Anal
 
 The strict validation boundary must never be generalized backward into EXPLORATION. Its purpose is to protect the credibility of predictive claims discovered during exploration, not to reduce Qwen's freedom or incentive to discover those claims.
 
+## Historical unseen-subject rule versus live prediction
+
+Retrospective historical blind verification adds a separate subject-level integrity rule: the ticker used as the historical verification subject must not have been analyzed by MTS before that verification campaign began. Findings and tentative predictive hypotheses may come from one or many previously analyzed tickers; historical verification should then be performed against a genuinely unseen ticker.
+
+After those historical verification results are durably recorded, that ticker may enter unrestricted EXPLORATION and its results and subsequent findings may join the cumulative research corpus. New or materially revised hypotheses arising from that enlarged corpus should be historically verified on another ticker that was unseen at the start of its verification campaign.
+
+This unseen-subject requirement applies only to retrospective historical verification. It does not prohibit genuine live prospective predictions on familiar tickers. If the prediction point is current and the future outcome has not yet occurred, MTS may predict, trade, and later score outcomes on a ticker it has analyzed extensively before. Scientific familiarity with AAPL, XOM, or any other ticker must not make that ticker untradeable.
+
+Accordingly, deterministic unseen-subject eligibility checks belong only in the historical replay/holdout verification path. They must not be reused as a universal gate on prospective prediction or trading.
+
 ## Nexus representation
 
 The Research Package carries the live cumulative predictive-hypothesis record and trial ledger.
@@ -88,4 +98,4 @@ This preserves the difference between discovery and verification while retaining
 
 RD remains the scientific authority. RD chooses what relationship is worth hypothesizing, what the hypothesis says, how success is scientifically defined, the minimum blind trial count, trial design, the exact trial prediction, interpretation, and whether findings are significant enough for Nexus promotion.
 
-Deterministic code enforces only approved bookkeeping and objective validation boundaries: stable identities, frozen hypothesis definitions, prediction-lock-before-outcome ordering, historical row withholding at explicitly supplied cutoffs, isolated prediction-stage scientific memory, VALIDATION-phase/no-future-information requirements for the prediction lock, trial uniqueness, arithmetic counts/rates, and the approved `>= 0.60` verification threshold.
+Deterministic code enforces only approved bookkeeping and objective validation boundaries: stable identities, frozen hypothesis definitions, prediction-lock-before-outcome ordering, historical row withholding at explicitly supplied cutoffs, historical unseen-subject eligibility, isolated prediction-stage scientific memory, VALIDATION-phase/no-future-information requirements for the prediction lock, trial uniqueness, arithmetic counts/rates, and the approved `>= 0.60` verification threshold. The historical unseen-subject gate is not a live-trading restriction.
