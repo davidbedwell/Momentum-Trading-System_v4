@@ -1,7 +1,7 @@
 # ADR — Predictive Hypothesis Blind Validation Lifecycle
 
 Date: 2026-09-10
-Status: Approved; lifecycle bookkeeping implemented
+Status: Approved; lifecycle bookkeeping and historical blind-data boundary implemented
 
 ## Decision
 
@@ -46,11 +46,27 @@ Qwen judges whether the observed outcome satisfies the hypothesis's frozen succe
 
 Exploratory results, including results that use look-ahead, may motivate or support creation of a tentative hypothesis but do not themselves count as blind predictions.
 
-## Historical holdout requirement
+## Historical blind-data boundary
 
-The lifecycle bookkeeping above does not by itself create a historical blind-data boundary. For historical repeated validation, the execution layer must supply Qwen and Analysis only information available at the selected prediction point until the prediction has been locked. The hidden future may then be released solely for outcome evaluation.
+Historical repeated validation uses a separate mechanical prediction sandbox.
 
-A historical trial must not be counted as genuinely blind merely because its Analysis method is labeled `VALIDATION`; the evidence presented at prediction time must also be objectively withheld beyond the prediction point. That holdout/masking execution mechanism is a separate mechanical capability that must be present before historical blind trials can support production `VERIFIED` status.
+For every evidence source admitted to a historical blind trial, the caller must provide one explicit temporal window identifying the exact evidence ID, exact time field, and inclusive prediction cutoff. Deterministic code does not select those scientific trial boundaries.
+
+Before Qwen performs the blind prediction stage:
+
+- every supplied evidence payload is copied into a fresh temporary cache;
+- all rows later than that source's declared cutoff are physically withheld;
+- the RD-visible evidence descriptor reports the masked row count and cutoff rather than the original future coverage;
+- original source provenance and content identity are withheld from the prediction view so arbitrary future-derived metadata cannot leak the hidden outcome;
+- a fresh in-memory Nexus is used, containing no exploratory findings or prior Analysis-result memory;
+- the blind RD transport is deliberately separate from the RP-aware production provider, so exploratory RP history is not automatically injected;
+- the only scientific prior carried into the blind prediction context is the already-frozen hypothesis and its success definition.
+
+The sandbox refuses to reveal post-cutoff outcome rows until a prediction statement has been explicitly locked. Once locked, that prediction cannot be changed. The future rows can then be revealed for outcome scoring within the caller-declared outcome window.
+
+This is an objective withholding mechanism, not a scientific selection mechanism. Qwen remains responsible for trial design, what the frozen hypothesis predicts, what evidence is scientifically relevant, and interpretation of the blind outcome.
+
+A historical trial must not be counted as genuinely blind merely because an Analysis method is labeled `VALIDATION`; the prediction stage must use the masked cache, masked descriptors, isolated Nexus, and blind RD context described above.
 
 ## Nexus representation
 
@@ -64,4 +80,4 @@ This preserves the difference between discovery and verification while retaining
 
 RD remains the scientific authority. RD chooses what relationship is worth hypothesizing, what the hypothesis says, how success is scientifically defined, the minimum blind trial count, trial design, the exact trial prediction, interpretation, and whether findings are significant enough for Nexus promotion.
 
-Deterministic code enforces only approved bookkeeping and objective validation boundaries: stable identities, frozen hypothesis definitions, prediction-lock-before-outcome ordering, VALIDATION-phase/no-future-information requirements for the prediction lock, trial uniqueness, arithmetic counts/rates, and the approved `>= 0.60` verification threshold.
+Deterministic code enforces only approved bookkeeping and objective validation boundaries: stable identities, frozen hypothesis definitions, prediction-lock-before-outcome ordering, historical row withholding at explicitly supplied cutoffs, isolated prediction-stage scientific memory, VALIDATION-phase/no-future-information requirements for the prediction lock, trial uniqueness, arithmetic counts/rates, and the approved `>= 0.60` verification threshold.
