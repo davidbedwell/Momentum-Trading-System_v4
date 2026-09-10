@@ -113,8 +113,6 @@ def _series(rows, *, time_column: str, value_column: str, period: str, aggregati
 def temporal_correlation(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
     left_id = str(parameters["left_evidence_id"])
     right_id = str(parameters["right_evidence_id"])
-    if left_id == right_id:
-        raise ValueError("left_evidence_id and right_evidence_id must differ")
     try:
         left_rows = tuple(evidence_payloads[left_id])
         right_rows = tuple(evidence_payloads[right_id])
@@ -163,10 +161,10 @@ def cross_evidence_method_spec() -> MethodSpec:
     return MethodSpec(
         method_id=METHOD_ID,
         artifact_types=("NORMALIZED_DATASET",),
-        description=("Temporally align two RD-selected evidence datasets, aggregate each with RD-selected fields/rules, and measure Pearson or Spearman association. No causal or directional interpretation is supplied."),
+        description=("Temporally align two RD-selected series, from the same or different supplied evidence datasets, aggregate each with RD-selected fields/rules, and measure Pearson or Spearman association. No causal or directional interpretation is supplied."),
         parameters=(
-            ParameterContract("left_evidence_id", True, (str,), meaning="RD-selected first evidence id; must also appear in request evidence_ids"),
-            ParameterContract("right_evidence_id", True, (str,), meaning="RD-selected second evidence id; must also appear in request evidence_ids"),
+            ParameterContract("left_evidence_id", True, (str,), meaning="RD-selected first evidence id; must also appear in request evidence_ids; may equal right_evidence_id when both series come from the same dataset"),
+            ParameterContract("right_evidence_id", True, (str,), meaning="RD-selected second evidence id; must also appear in request evidence_ids; may equal left_evidence_id when both series come from the same dataset"),
             ParameterContract("left_time_column", True, (str,), meaning="RD-selected timestamp/date field in first evidence"),
             ParameterContract("right_time_column", True, (str,), meaning="RD-selected timestamp/date field in second evidence"),
             ParameterContract("left_value_column", True, (str,), meaning="RD-selected numeric field; ignored when left_aggregation=count"),
