@@ -6,7 +6,7 @@ from .bootstrap import V4Runtime, build_runtime
 from .campaign import CheckpointedCampaignRunner
 from .checkpoint import JsonCampaignCheckpointStore
 from .decision_journal import JsonResearchDecisionJournal
-from .research_package_provider import ResearchPackageAwareResearchDirector
+from .execution_interface import TransparentExecutionResearchDirector
 from .research_package_store import JsonResearchPackageStore
 from .research_recording import CampaignResearchRecorder
 from .runtime_config import ProductionRuntimeConfig
@@ -29,7 +29,7 @@ def build_production_runtime(config: ProductionRuntimeConfig) -> ProductionRunti
     config.state_dir.mkdir(parents=True, exist_ok=True)
     package_store = JsonResearchPackageStore(config.research_packages_path)
     rd_config = config.research_director
-    rd = ResearchPackageAwareResearchDirector(
+    rd = TransparentExecutionResearchDirector(
         research_package_store=package_store,
         base_url=rd_config.base_url,
         model=rd_config.model,
