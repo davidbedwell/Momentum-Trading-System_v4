@@ -56,18 +56,25 @@ class CampaignResearchRecorder:
         if decision.interpreted_request_id is not None:
             self._record_interpretation(decision)
 
-        if decision.next_request is not None:
-            self._record_request(
-                campaign_id=campaign_id,
-                subject=subject,
-                request=decision.next_request,
-            )
-
         self._record_predictive_hypothesis_updates(decision)
         self._record_findings(decision)
 
         if not decision.continue_research:
             self._record_closure(decision)
+
+    def record_accepted_request(
+        self,
+        *,
+        campaign_id: str,
+        subject: SubjectMetadata,
+        request: AnalysisRequest,
+    ) -> None:
+        """Persist only an Analysis request that passed objective validation."""
+        self._record_request(
+            campaign_id=campaign_id,
+            subject=subject,
+            request=request,
+        )
 
     def _record_request(
         self,
