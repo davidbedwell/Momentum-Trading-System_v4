@@ -43,6 +43,14 @@ class ProductionRuntimeConfig:
     def checkpoint_path(self) -> Path:
         return self.state_dir / "active_campaign.json"
 
+    @property
+    def research_packages_path(self) -> Path:
+        return self.state_dir / "research_packages"
+
+    @property
+    def rd_decision_journal_path(self) -> Path:
+        return self.state_dir / "rd_decisions.jsonl"
+
     @classmethod
     def from_env(cls) -> "ProductionRuntimeConfig":
         """Load runtime wiring only; this performs no network calls.
