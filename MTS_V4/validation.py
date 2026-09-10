@@ -213,13 +213,26 @@ class ObjectiveContractValidator:
         try:
             cls.resolve_analysis_input(reference, result)
         except (KeyError, IndexError, TypeError) as exc:
+            execution_status = result.execution_metadata.get("execution_status")
+            if execution_status == "ERROR":
+                message = (
+                    f"Analysis result {reference.result_id} has execution_status=ERROR and does not "
+                    f"contain the requested output_path {reference.output_path}: "
+                    f"{type(exc).__name__}: {exc}. This failed result cannot supply that analysis input. "
+                    "The Research Director may regenerate the needed result, choose another successful "
+                    "prior Analysis result and use an exact advertised derived_dataset_catalog output_path, "
+                    "use acquired evidence directly if the selected method permits, or pursue another "
+                    "scientific direction. Deterministic code will not choose among those options."
+                )
+            else:
+                message = (
+                    f"Analysis result {reference.result_id} does not contain the requested "
+                    f"output_path {reference.output_path}: {type(exc).__name__}: {exc}"
+                )
             defects.append(
                 ContractDefect(
                     code="MISSING_ANALYSIS_OUTPUT",
-                    message=(
-                        f"Analysis result {reference.result_id} does not contain the requested "
-                        f"output_path {reference.output_path}: {type(exc).__name__}: {exc}"
-                    ),
+                    message=message,
                     field="analysis_inputs",
                     method_id=request.method_id,
                 )
