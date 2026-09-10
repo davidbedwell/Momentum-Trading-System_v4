@@ -4,17 +4,60 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Mapping
 
 from MTS_V4.bootstrap import build_runtime
 from MTS_V4.campaign import CheckpointedCampaignRunner
 from MTS_V4.checkpoint import JsonCampaignCheckpointStore
-from MTS_V4.contracts import SubjectMetadata
+from MTS_V4.contracts import ResearchDecision, SubjectMetadata
 from MTS_V4.decision_journal import JsonResearchDecisionJournal
 from MTS_V4.intake import IntakeEngine
 from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.research_package_provider import ResearchPackageAwareResearchDirector
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.research_recording import CampaignResearchRecorder
+
+
+class DiagnosticResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirector):
+    """Live-run diagnostic wrapper that exposes objective RP representation defects."""
+
+    def _decision_representation_defect(
+        self,
+        operation: str,
+        decision: ResearchDecision,
+        payload: Mapping[str, object],
+    ) -> str | None:
+        defect = super()._decision_representation_defect(operation, decision, payload)
+        if defect is not None:
+            print(
+                "RP_REPRESENTATION_DEFECT="
+                + json.dumps(
+                    {
+                        "operation": operation,
+                        "defect": defect,
+                        "decision_rp_id": decision.rp_id,
+                        "next_request_id": (
+                            decision.next_request.request_id
+                            if decision.next_request is not None
+                            else None
+                        ),
+                        "next_question_id": (
+                            decision.next_request.question_id
+                            if decision.next_request is not None
+                            else None
+                        ),
+                        "next_rp_id": (
+                            decision.next_request.rp_id
+                            if decision.next_request is not None
+                            else None
+                        ),
+                    },
+                    sort_keys=True,
+                    default=str,
+                ),
+                flush=True,
+            )
+        return defect
 
 
 def main() -> None:
@@ -28,7 +71,7 @@ def main() -> None:
     subject = SubjectMetadata(subject_id="equity:AAPL", ticker="AAPL")
 
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
-    rd = ResearchPackageAwareResearchDirector(
+    rd = DiagnosticResearchPackageAwareResearchDirector(
         research_package_store=package_store,
         timeout_seconds=timeout_seconds,
     )
