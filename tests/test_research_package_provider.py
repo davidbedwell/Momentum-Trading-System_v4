@@ -236,3 +236,34 @@ def test_fresh_request_id_is_accepted_for_revised_execution_attempt(tmp_path):
     )
 
     assert defect is None
+
+
+def test_rd_messages_explicitly_mark_error_results_as_non_chainable():
+    messages = ResearchPackageAwareResearchDirector._decision_messages(
+        operation="REPAIR_OBJECTIVE_CONTRACT",
+        mission="test",
+        payload={
+            "subject": {"subject_id": "equity:AAPL"},
+            "nexus_context": {
+                "campaign_analysis_result_catalog": [
+                    {
+                        "result_id": "analysis-result:failed",
+                        "request_id": "req001",
+                        "method_id": "analysis.dataset.compose",
+                        "execution_status": "ERROR",
+                        "reusable_derived_datasets": {},
+                    }
+                ]
+            },
+        },
+    )
+
+    system_text = messages[0]["content"]
+    user = json.loads(messages[1]["content"])
+    instruction_text = " ".join(user["instructions"])
+
+    assert "execution_status is SUCCESS" in system_text
+    assert "zero chainable outputs" in system_text
+    assert "Only a catalog entry with execution_status=SUCCESS" in instruction_text
+    assert "If reusable_derived_datasets is empty, it has zero chainable outputs" in instruction_text
+    assert "Never invent an output_path" in instruction_text
