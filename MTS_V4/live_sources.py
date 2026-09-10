@@ -127,13 +127,9 @@ class _UnusualWhalesBase:
 class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
     """Acquire ticker dark-pool prints across the retrievable historical window.
 
-    The ticker dark-pool endpoint is date-scoped and otherwise defaults to the
-    latest trading day. This source walks requested dates from newest to oldest,
-    paginates full days with older_than, and stops mechanically when the provider
-    rejects an older date with HTTP 403 after newer dates were successfully
-    queried. That preserves the actual credential-limited history instead of
-    assuming a fixed provider entitlement. history_days is therefore the desired
-    maximum acquisition window, not a claim about accessible coverage.
+    This raw-print source is retained for scientifically requested drill-down.
+    The normal historical evidence path uses the provider-aggregated price-level
+    source below so research does not require exhaustive raw-print pagination.
     """
 
     def __init__(
@@ -292,6 +288,98 @@ class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
         )
 
 
+class UnusualWhalesDarkPoolPriceLevelsSource(_UnusualWhalesBase):
+    """Acquire provider-aggregated dark-pool and regular volume by price level.
+
+    One request is made per requested weekday, newest to oldest. Each returned
+    price-level row is tagged with its requested source date so the compact
+    historical representation can be aligned with other daily evidence. A 403
+    after successful newer requests is recorded as an entitlement boundary.
+    Raw dark-pool prints remain available through UnusualWhalesDarkPoolSource
+    when the Research Director requires drill-down.
+    """
+
+    def __init__(
+        self,
+        api_key: str | None = None,
+        *,
+        history_days: int = 730,
+        end_date: date_type | None = None,
+    ) -> None:
+        super().__init__(api_key=api_key)
+        if history_days < 1:
+            raise ValueError("history_days must be >= 1")
+        self.history_days = int(history_days)
+        self.end_date = end_date
+
+    def _requested_dates(self) -> tuple[date_type, ...]:
+        end = self.end_date or datetime.now(timezone.utc).date()
+        start = end - timedelta(days=self.history_days - 1)
+        return tuple(
+            start + timedelta(days=offset)
+            for offset in range(self.history_days)
+            if (start + timedelta(days=offset)).weekday() < 5
+        )
+
+    def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
+        ticker = subject.ticker.upper()
+        endpoint = f"/api/darkpool/{urllib.parse.quote(ticker)}/price-levels"
+        rows: list[dict[str, object]] = []
+        requested_dates = self._requested_dates()
+        successful_query_dates: list[date_type] = []
+        first_forbidden_date: date_type | None = None
+        request_count = 0
+
+        for requested_date in reversed(requested_dates):
+            try:
+                day_rows = self._get(endpoint, {"date": requested_date.isoformat()})
+            except LiveSourceError as exc:
+                if successful_query_dates and "HTTP Error 403" in str(exc):
+                    first_forbidden_date = requested_date
+                    break
+                raise
+
+            request_count += 1
+            successful_query_dates.append(requested_date)
+            for row in day_rows:
+                normalized = dict(row)
+                normalized.setdefault("date", requested_date.isoformat())
+                rows.append(normalized)
+
+        requested_start = requested_dates[0].isoformat() if requested_dates else None
+        requested_end = requested_dates[-1].isoformat() if requested_dates else None
+        queried_start = min(successful_query_dates).isoformat() if successful_query_dates else None
+        queried_end = max(successful_query_dates).isoformat() if successful_query_dates else None
+        yield IntakePayload(
+            payload=rows,
+            evidence_type="OFF_EXCHANGE_DARKPOOL_PRICE_LEVELS",
+            artifact_type="NORMALIZED_DATASET",
+            source_identity="UNUSUAL_WHALES_DARKPOOL_PRICE_LEVELS",
+            coverage_start=queried_start,
+            coverage_end=queried_end,
+            row_count=len(rows),
+            schema=_schema(rows),
+            provenance={
+                "provider": "Unusual Whales",
+                "endpoint": endpoint,
+                "history_days": self.history_days,
+                "requested_start_date": requested_start,
+                "requested_end_date": requested_end,
+                "requested_weekdays": len(requested_dates),
+                "queried_start_date": queried_start,
+                "queried_end_date": queried_end,
+                "queried_weekdays": len(successful_query_dates),
+                "entitlement_limited": first_forbidden_date is not None,
+                "first_forbidden_date": first_forbidden_date.isoformat() if first_forbidden_date else None,
+                "request_count": request_count,
+                "representation": "provider_aggregated_price_levels",
+                "raw_drilldown_source": "UNUSUAL_WHALES_DARKPOOL",
+                "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
+            },
+            neutral_semantics=("Provider-aggregated dark-pool and regular share volume by price level for each requested date. These rows preserve source-defined volume concentration while avoiding exhaustive raw-print transfer. They do not identify economic buyer/seller identity or intent, and they do not by themselves establish accumulation, distribution, bullishness, bearishness, price suppression, causation, predictiveness, or trade utility. Raw source prints remain separately reacquirable for scientifically requested drill-down."),
+        )
+
+
 class UnusualWhalesFlowAlertsSource(_UnusualWhalesBase):
     def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
         rows = self._get("/api/option-trades/flow-alerts", {"ticker_symbol": subject.ticker.upper(), "limit": self.limit})
@@ -407,7 +495,7 @@ class FinraWeeklyOffExchangeSource:
 def standard_live_market_source() -> CompositeEvidenceSource:
     return CompositeEvidenceSource(
         YFinanceDailyOhlcvSource(),
-        UnusualWhalesDarkPoolSource(),
+        UnusualWhalesDarkPoolPriceLevelsSource(),
         UnusualWhalesFlowAlertsSource(),
         UnusualWhalesGreekExposureByExpirySource(),
         UnusualWhalesFlowByExpirySource(),
