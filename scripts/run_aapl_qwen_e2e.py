@@ -61,14 +61,27 @@ class DiagnosticResearchPackageAwareResearchDirector(ResearchPackageAwareResearc
 
 
 def main() -> None:
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    state_dir = Path(f"/home/ubuntu/mts-v4-aapl-qwen-e2e-{stamp}")
-    state_dir.mkdir(parents=True, exist_ok=False)
-
     max_analyses = int(os.getenv("MTS_E2E_MAX_ANALYSES", "500"))
     timeout_seconds = int(os.getenv("MTS_RD_TIMEOUT_SECONDS", "600"))
-    campaign_id = f"mts-v4-aapl-qwen-e2e-{stamp}"
-    subject = SubjectMetadata(subject_id="equity:AAPL", ticker="AAPL")
+    resume_state_dir = os.getenv("MTS_E2E_RESUME_STATE_DIR")
+
+    if resume_state_dir:
+        state_dir = Path(resume_state_dir)
+        checkpoint_store = JsonCampaignCheckpointStore(state_dir / "checkpoint.json")
+        checkpoint = checkpoint_store.load()
+        if checkpoint is None:
+            raise RuntimeError(f"no active checkpoint found in resume state directory: {state_dir}")
+        campaign_id = checkpoint.campaign_id
+        subject = checkpoint.subject
+        resume = True
+    else:
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+        state_dir = Path(f"/home/ubuntu/mts-v4-aapl-qwen-e2e-{stamp}")
+        state_dir.mkdir(parents=True, exist_ok=False)
+        checkpoint_store = JsonCampaignCheckpointStore(state_dir / "checkpoint.json")
+        campaign_id = f"mts-v4-aapl-qwen-e2e-{stamp}"
+        subject = SubjectMetadata(subject_id="equity:AAPL", ticker="AAPL")
+        resume = False
 
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
     rd = DiagnosticResearchPackageAwareResearchDirector(
@@ -93,12 +106,13 @@ def main() -> None:
     runner = CheckpointedCampaignRunner(
         orchestrator=runtime.orchestrator,
         cache=runtime.cache,
-        checkpoint_store=JsonCampaignCheckpointStore(state_dir / "checkpoint.json"),
+        checkpoint_store=checkpoint_store,
         research_recorder=recorder,
     )
 
     print(f"STATE_DIR={state_dir}", flush=True)
     print(f"CAMPAIGN_ID={campaign_id}", flush=True)
+    print(f"RESUME={resume}", flush=True)
     print(f"MAX_ANALYSES={max_analyses}", flush=True)
     print(f"EVIDENCE_COUNT={len(evidence)}", flush=True)
     for item in evidence:
@@ -120,12 +134,18 @@ def main() -> None:
             flush=True,
         )
 
-    outcome = runner.run_new(
-        campaign_id=campaign_id,
-        subject=subject,
-        evidence=evidence,
-        max_analyses=max_analyses,
-    )
+    if resume:
+        outcome = runner.resume(
+            reacquired_evidence=evidence,
+            max_analyses=max_analyses,
+        )
+    else:
+        outcome = runner.run_new(
+            campaign_id=campaign_id,
+            subject=subject,
+            evidence=evidence,
+            max_analyses=max_analyses,
+        )
 
     print(f"OUTCOME_DECISIONS={outcome.decisions}", flush=True)
     print(f"OUTCOME_ANALYSES={outcome.analyses_executed}", flush=True)
