@@ -23,11 +23,12 @@ DEFAULT_MISSION = (
     "subsequent market behavior at T+1 onward, with sufficient predictive value in direction, "
     "magnitude, timing, continuation or reversal, and path quality to be practically exploitable "
     "as trades. During EXPLORATION, actively seek scientifically defensible prospective structure "
-    "and use historical look-ahead when useful for discovery. Predictive verification is reserved "
-    "for a ticker/subject that MTS has not previously analyzed. During blind VALIDATION on that "
-    "unseen subject, evaluate frozen predictive hypotheses without look-ahead knowledge at the "
-    "prediction point. After verification is recorded, the new subject may enter unrestricted "
-    "EXPLORATION and its learning may join the cumulative research corpus."
+    "and use historical look-ahead when useful for discovery. Retrospective historical blind "
+    "verification should use a ticker/subject that MTS had not previously analyzed before that "
+    "verification campaign. Genuine live prospective prediction and trading remain allowed on "
+    "previously analyzed tickers because their future outcomes have not yet occurred. During any "
+    "blind prediction, evaluate frozen predictive hypotheses without look-ahead knowledge at the "
+    "prediction point."
 )
 
 
