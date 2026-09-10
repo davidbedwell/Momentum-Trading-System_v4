@@ -98,6 +98,36 @@ class ResearchPackage:
             raise ResearchPackageError(f"missing question_id: {analysis.question_id}")
         return self._evolve(analyses=self.analyses + (analysis,))
 
+    def record_analysis_outcome(
+        self,
+        *,
+        request_id: str,
+        result_id: str,
+        execution_status: str | None,
+        interpretation: str | None,
+    ) -> "ResearchPackage":
+        self._require_open()
+        matches = [index for index, item in enumerate(self.analyses) if item.request_id == request_id]
+        if len(matches) != 1:
+            raise ResearchPackageError(
+                f"analysis outcome requires exactly one request_id match: {request_id}"
+            )
+        index = matches[0]
+        existing = self.analyses[index]
+        if existing.result_id is not None and existing.result_id != result_id:
+            raise ResearchPackageError(
+                f"analysis result_id already recorded for request_id: {request_id}"
+            )
+        updated = replace(
+            existing,
+            result_id=result_id,
+            execution_status=execution_status,
+            interpretation=interpretation,
+        )
+        analyses = list(self.analyses)
+        analyses[index] = updated
+        return self._evolve(analyses=tuple(analyses))
+
     def append_hypothesis(self, hypothesis: Mapping[str, Any]) -> "ResearchPackage":
         self._require_open()
         return self._evolve(hypotheses=self.hypotheses + (dict(hypothesis),))
