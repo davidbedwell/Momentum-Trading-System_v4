@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import json
+
 import pytest
 
 from MTS_V4.blind_validation import (
     BlindValidationError,
+    BlindValidationResearchDirector,
     HistoricalBlindValidationSession,
     HistoricalEvidenceWindow,
 )
@@ -34,6 +37,8 @@ def _fixture():
         row_count=4,
         schema=("date", "close"),
         cache_key="source:ohlcv",
+        provenance={"requested_end_date": "2026-01-06", "future_summary": "must not leak"},
+        content_identity="hash-of-full-future-bearing-dataset",
     )
     return subject, cache, evidence
 
@@ -65,7 +70,18 @@ def test_prediction_view_physically_withholds_post_cutoff_rows_and_metadata():
     )
     assert blind_descriptor.row_count == 2
     assert blind_descriptor.coverage_end == "2026-01-02"
-    assert blind_descriptor.provenance["blind_validation"]["future_rows_withheld"] is True
+    assert blind_descriptor.provenance == {
+        "blind_validation": {
+            "trial_id": "trial:1",
+            "hypothesis_id": "H-1",
+            "time_field": "date",
+            "inclusive_cutoff": "2026-01-02",
+            "future_rows_withheld": True,
+            "source_provenance_withheld_during_prediction": True,
+            "mechanical_only": True,
+        }
+    }
+    assert blind_descriptor.content_identity is None
     assert session.audits[0].withheld_row_count == 2
 
 
@@ -135,6 +151,37 @@ def test_blind_session_uses_isolated_nexus_and_exposes_only_frozen_hypothesis_co
         "statement": "Condition A predicts expansion.",
         "success_definition": "The frozen outcome occurs within the frozen horizon.",
     }
+
+
+def test_blind_rd_transport_contains_frozen_hypothesis_but_no_rp_injection_contract():
+    rd = BlindValidationResearchDirector(
+        trial_id="trial:1",
+        hypothesis_id="H-1",
+        hypothesis_statement="Condition A predicts expansion.",
+        success_definition="Expansion occurs within five trading days.",
+        base_url="http://127.0.0.1:8000",
+        model="fixture-model",
+    )
+    messages = rd._decision_messages(
+        operation="BEGIN_RESEARCH",
+        mission="blindly evaluate the frozen predictive hypothesis",
+        payload={
+            "subject": {"subject_id": "equity:AAPL", "ticker": "AAPL"},
+            "evidence": [],
+            "available_analysis_methods": [],
+            "objective_execution_requirements": {},
+            "nexus_context": {},
+        },
+    )
+    user = json.loads(messages[1]["content"])
+    assert user["blind_validation"]["prediction_stage"] is True
+    assert user["blind_validation"]["future_outcomes_available"] is False
+    assert user["blind_validation"]["exploratory_rp_history_available"] is False
+    assert user["blind_validation"]["frozen_hypothesis_statement"] == (
+        "Condition A predicts expansion."
+    )
+    assert "blind_prediction" in "\n".join(user["instructions"])
+    assert "research_packages" not in user["context"]
 
 
 def test_every_supplied_evidence_requires_an_explicit_window():
