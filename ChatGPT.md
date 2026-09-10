@@ -65,6 +65,7 @@ Deterministic code may enforce objective execution and governance constraints, i
 - artifact existence;
 - lineage and provenance integrity;
 - temporal and look-ahead restrictions applicable to the current research phase;
+- subject/ticker seen-versus-unseen eligibility for predictive verification;
 - permissions and authority claims;
 - reproducibility mechanics;
 - resource and execution safety;
@@ -150,7 +151,7 @@ The Research Nexus is durable research memory, not a reproducible-data warehouse
 
 Its primary contents are:
 
-- ticker or subject metadata;
+- ticker or subject metadata, including durable provenance sufficient to determine whether a ticker has previously entered MTS analysis;
 - significant findings promoted by the AI Research Director;
 - durable hypotheses or research-state records when needed;
 - provenance and lineage needed to understand those findings;
@@ -162,7 +163,7 @@ Nexus shall not be used as the durable repository for raw or otherwise reproduci
 
 Nexus should preserve what MTS learned, not warehouse the data from which it learned it.
 
-Not every Analysis result belongs in Nexus. The AI Research Director determines scientific significance. Deterministic code may validate the promoted record's schema, lineage, integrity, and provenance but may not decide scientific importance.
+Not every Analysis result belongs in Nexus. The AI Research Director determines scientific significance. Deterministic code may validate the promoted record's schema, lineage, integrity, provenance, and objective verification eligibility but may not decide scientific importance.
 
 ## 11. B-Series Status
 
@@ -200,9 +201,13 @@ During EXPLORATION, the central objective is predictive discovery. The AI Resear
 
 Exploration should encourage prospective reasoning rather than stop at contemporaneous description. When evidence supports it, the AI Research Director should convert promising relationships into explicit, falsifiable tentative predictive hypotheses suitable for later blind testing. It should also freely reject candidate relationships that do not withstand exploratory scrutiny.
 
-Once a predictive hypothesis is frozen for VALIDATION, the prediction stage must be protected from look-ahead. The AI Research Director may use only information available through the declared prediction point, must make and lock the prediction before hidden future information is exposed, and may then evaluate the revealed outcome against the frozen success definition. Historical, forward, holdout, or otherwise out-of-sample testing should be used as appropriate to evaluate predictive validity.
+Predictive verification may occur only on a ticker that has not previously been analyzed by MTS. Once a ticker has entered MTS analysis, it is permanently a seen ticker and may never later serve as an unseen predictive-verification subject. This is an objective experimental-integrity rule, not a scientific judgment about whether a hypothesis is good or whether a ticker is representative.
 
-The purpose of the validation restriction is not to suppress predictive reasoning. It is to make the predictive claims discovered during exploration falsifiable and honestly testable.
+The scientific corpus is cumulative. Findings and tentative predictive hypotheses may arise from one or many previously analyzed tickers. Eligible existing hypotheses are then blind-tested on a new unseen ticker. After those verification results are durably recorded, that ticker may enter unrestricted EXPLORATION and its verification results, findings, and subsequent exploratory learning may be folded into the cumulative research corpus. New or materially revised predictive hypotheses arising from that enlarged corpus must wait for another ticker that has not previously been analyzed by MTS.
+
+Once a predictive hypothesis is frozen for VALIDATION on an eligible unseen ticker, the prediction stage must also be protected from temporal look-ahead. The AI Research Director may use only information available through the declared prediction point, must make and lock the prediction before hidden future information is exposed, and may then evaluate the revealed outcome against the frozen success definition.
+
+The purpose of the validation restrictions is not to suppress predictive reasoning. They make the predictive claims discovered during exploration falsifiable and honestly testable across genuinely unseen subjects as well as unseen future outcomes.
 
 Do not confuse exploratory discovery with prospective validation, and do not weaken exploratory predictive discovery merely to simplify validation controls.
 
@@ -242,6 +247,8 @@ Prefer tests that establish:
 
 - AI scientific authority is preserved;
 - exploratory research actively supports scientifically defensible prospective/predictive discovery;
+- predictive verification is mechanically rejected on any ticker previously analyzed by MTS;
+- an unseen ticker remains eligible for blind verification until it enters unrestricted analysis;
 - blind validation prevents look-ahead at the prediction stage without weakening exploratory freedom;
 - deterministic validation remains objective;
 - invalid execution contracts fail with precise feedback;
