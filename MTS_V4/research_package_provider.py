@@ -7,6 +7,7 @@ from typing import Mapping, Sequence
 from .contracts import AnalysisRequest, AnalysisResult, EvidenceDescriptor, ResearchDecision, SubjectMetadata
 from .openai_compatible_provider import OpenAICompatibleResearchDirector
 from .rd_codec import ResearchDecisionCodec
+from .research_package_store import JsonResearchPackageStore
 
 
 class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
@@ -17,6 +18,23 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
     transport validates representation only; it never chooses those scientific
     relationships for RD.
     """
+
+    def __init__(
+        self,
+        *,
+        research_package_store: JsonResearchPackageStore,
+        base_url: str | None = None,
+        model: str | None = None,
+        api_key: str | None = None,
+        timeout_seconds: int = 180,
+    ) -> None:
+        super().__init__(
+            base_url=base_url,
+            model=model,
+            api_key=api_key,
+            timeout_seconds=timeout_seconds,
+        )
+        self._research_package_store = research_package_store
 
     @classmethod
     def _decision_messages(
@@ -60,6 +78,7 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
         )
         user["instructions"].extend(
             [
+                "Use context.research_packages as durable scientific memory for prior/open RP identity, lineage, findings, unresolved issues, and closure assessments.",
                 "Keep follow-up questions under the same rp_id when they continue the same coherent scientific line; assign parent_question_id to the question that caused the follow-up.",
                 "Create a new next_request.rp_id only when you judge a materially distinct research proposition has emerged; when it is a child of prior work, identify parent_rp_id yourself.",
                 "decision.rp_id identifies the RP owning the current interpretation/findings; next_request.rp_id identifies the RP owning the next question. They normally match, but may differ when you intentionally branch to a new RP.",
@@ -89,19 +108,27 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
         mission: str,
         payload: Mapping[str, object],
     ) -> ResearchDecision:
+        enriched_payload = dict(payload)
+        subject = enriched_payload.get("subject")
+        subject_id = subject.get("subject_id") if isinstance(subject, Mapping) else None
+        if isinstance(subject_id, str) and subject_id:
+            enriched_payload["research_packages"] = self._research_package_store.context_for_subject(
+                subject_id
+            )
+
         decision = super()._request_decision(
             operation=operation,
             mission=mission,
-            payload=payload,
+            payload=enriched_payload,
         )
-        defect = self._rp_representation_defect(operation, decision, payload)
+        defect = self._rp_representation_defect(operation, decision, enriched_payload)
         if defect is None:
             return decision
 
         messages = self._decision_messages(
             operation=operation,
             mission=mission,
-            payload=payload,
+            payload=enriched_payload,
         )
         repaired = self._chat_completion(
             messages
@@ -126,7 +153,7 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             ]
         )
         decision = ResearchDecisionCodec.decode(repaired)
-        second_defect = self._rp_representation_defect(operation, decision, payload)
+        second_defect = self._rp_representation_defect(operation, decision, enriched_payload)
         if second_defect is not None:
             raise ValueError(second_defect)
         return decision
