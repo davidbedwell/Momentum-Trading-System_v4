@@ -7,6 +7,7 @@ from .analysis import ExactMethodAnalysisExecutor
 from .cache import TemporaryResearchCache
 from .concept_library import ResearchConceptLibrary, seed_market_concepts
 from .cross_evidence import cross_evidence_analysis_method, cross_evidence_method_spec
+from .execution_interface import TransparentInputBindingValidator
 from .interfaces import ResearchDirectorProvider
 from .method_catalog import MethodCatalog
 from .nexus import InMemoryResearchNexus, ResearchNexus
@@ -14,7 +15,6 @@ from .nexus_json import JsonResearchNexus
 from .orchestrator import ResearchLoopOrchestrator
 from .scientific_toolkit import scientific_toolkit_analysis_method, scientific_toolkit_method_spec
 from .standard_methods import standard_analysis_methods, standard_method_catalog
-from .validation import ObjectiveContractValidator
 
 
 DEFAULT_MISSION = (
@@ -31,7 +31,7 @@ class V4Runtime:
     nexus: ResearchNexus
     catalog: MethodCatalog
     concepts: ResearchConceptLibrary
-    validator: ObjectiveContractValidator
+    validator: TransparentInputBindingValidator
     analysis: ExactMethodAnalysisExecutor
     orchestrator: ResearchLoopOrchestrator
 
@@ -64,7 +64,7 @@ def build_runtime(
     catalog.register(cross_evidence_method_spec())
     catalog.register(scientific_toolkit_method_spec())
     concepts = concept_library or seed_market_concepts()
-    validator = ObjectiveContractValidator(catalog)
+    validator = TransparentInputBindingValidator(catalog)
     analysis = ExactMethodAnalysisExecutor()
     for method in standard_analysis_methods():
         analysis.register(method)
