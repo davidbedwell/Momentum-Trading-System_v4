@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
+import json
 from numbers import Real
 from typing import Any, Mapping, Sequence
 
 from .cache import TemporaryResearchCache
 from .contracts import EvidenceDescriptor, SubjectMetadata
 from .nexus import InMemoryResearchNexus
+from .openai_compatible_provider import OpenAICompatibleResearchDirector
 
 
 class BlindValidationError(RuntimeError):
@@ -41,6 +43,88 @@ class BlindValidationAudit:
     withheld_row_count: int
 
 
+class BlindValidationResearchDirector(OpenAICompatibleResearchDirector):
+    """Fresh RD transport for the prediction stage of one blind trial.
+
+    This deliberately does not inherit from the RP-aware production provider.
+    Therefore it cannot automatically inject exploratory RP history. The only
+    scientific prior supplied here is the already-frozen hypothesis and its
+    success definition. A caller should pair this provider with the isolated
+    Nexus and masked evidence/cache produced by HistoricalBlindValidationSession.
+    """
+
+    def __init__(
+        self,
+        *,
+        trial_id: str,
+        hypothesis_id: str,
+        hypothesis_statement: str,
+        success_definition: str,
+        base_url: str | None = None,
+        model: str | None = None,
+        api_key: str | None = None,
+        timeout_seconds: int = 180,
+    ) -> None:
+        super().__init__(
+            base_url=base_url,
+            model=model,
+            api_key=api_key,
+            timeout_seconds=timeout_seconds,
+        )
+        self._blind_trial_id = trial_id
+        self._blind_hypothesis_id = hypothesis_id
+        self._blind_hypothesis_statement = hypothesis_statement
+        self._blind_success_definition = success_definition
+
+    def _decision_messages(
+        self,
+        *,
+        operation: str,
+        mission: str,
+        payload: Mapping[str, object],
+    ) -> list[Mapping[str, str]]:
+        messages = super()._decision_messages(
+            operation=operation,
+            mission=mission,
+            payload=payload,
+        )
+        user = json.loads(messages[1]["content"])
+        user["blind_validation"] = {
+            "trial_id": self._blind_trial_id,
+            "hypothesis_id": self._blind_hypothesis_id,
+            "frozen_hypothesis_statement": self._blind_hypothesis_statement,
+            "frozen_success_definition": self._blind_success_definition,
+            "prediction_stage": True,
+            "future_outcomes_available": False,
+            "exploratory_rp_history_available": False,
+        }
+        user["instructions"].extend(
+            [
+                "This is a historical blind-validation prediction stage. Treat the supplied evidence as ending at the declared historical cutoff; no later outcome information is available to you.",
+                "Evaluate only the frozen predictive hypothesis supplied in blind_validation. Do not revise that hypothesis or its success definition during this trial.",
+                "When you judge the available pre-cutoff evidence sufficient to make the trial prediction, preserve the exact prediction under research_state.blind_prediction with trial_id, hypothesis_id, and prediction_statement before requesting any outcome evaluation.",
+                "Exploratory RP/Nexus scientific memory is intentionally absent so prior look-ahead discoveries cannot disclose the hidden outcome for this historical trial.",
+            ]
+        )
+        system = messages[0]["content"] + (
+            " You are currently operating inside a historical blind-validation prediction sandbox. "
+            "Only pre-cutoff evidence is available. The frozen hypothesis may be evaluated but not revised, "
+            "and hidden post-cutoff outcomes must not be inferred from absent exploratory memory."
+        )
+        return [
+            {"role": "system", "content": system},
+            {
+                "role": "user",
+                "content": json.dumps(
+                    user,
+                    sort_keys=True,
+                    default=str,
+                    separators=(",", ":"),
+                ),
+            },
+        ]
+
+
 @dataclass(slots=True)
 class HistoricalBlindValidationSession:
     """Mechanically isolated historical prediction view.
@@ -48,8 +132,9 @@ class HistoricalBlindValidationSession:
     During the prediction stage every supplied evidence payload is copied into a
     fresh temporary cache after rows later than the declared cutoff are removed.
     The returned evidence descriptors expose the masked row count and cutoff, not
-    the original future coverage. A fresh in-memory Nexus is supplied so prior
-    exploratory findings/results are not transported into the blind run.
+    the original future coverage or source provenance. A fresh in-memory Nexus is
+    supplied so prior exploratory findings/results are not transported into the
+    blind run.
 
     Outcome rows cannot be revealed through this object until a prediction has
     been explicitly locked. The prediction text is immutable once locked.
@@ -82,8 +167,9 @@ class HistoricalBlindValidationSession:
         if not hypothesis_id.strip():
             raise BlindValidationError("hypothesis_id cannot be blank")
 
-        window_map = {item.evidence_id: item for item in windows}
-        if len(window_map) != len(tuple(windows)):
+        window_items = tuple(windows)
+        window_map = {item.evidence_id: item for item in window_items}
+        if len(window_map) != len(window_items):
             raise BlindValidationError("duplicate historical validation evidence window")
 
         supplied_ids = {item.evidence_id for item in evidence}
@@ -146,16 +232,17 @@ class HistoricalBlindValidationSession:
                     coverage_end=str(window.cutoff),
                     row_count=len(visible),
                     provenance={
-                        **dict(descriptor.provenance),
                         "blind_validation": {
                             "trial_id": trial_id,
                             "hypothesis_id": hypothesis_id,
                             "time_field": window.time_field,
                             "inclusive_cutoff": window.cutoff,
                             "future_rows_withheld": True,
+                            "source_provenance_withheld_during_prediction": True,
                             "mechanical_only": True,
-                        },
+                        }
                     },
+                    content_identity=None,
                 )
             )
             audits.append(
