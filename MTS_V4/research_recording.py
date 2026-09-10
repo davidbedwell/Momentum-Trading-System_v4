@@ -8,7 +8,6 @@ from .decision_journal import JsonResearchDecisionJournal
 from .research_package import (
     ResearchAnalysisRecord,
     ResearchPackage,
-    ResearchPackageError,
     ResearchQuestionRecord,
 )
 from .research_package_store import JsonResearchPackageStore
@@ -81,6 +80,7 @@ class CampaignResearchRecorder:
             raise ResearchRecordingError("RP request subject does not match active subject")
 
         package = self._packages.load(request.rp_id)
+        created = package is None
         if package is None:
             package = ResearchPackage(
                 rp_id=request.rp_id,
@@ -96,6 +96,7 @@ class CampaignResearchRecorder:
                 f"research package belongs to another campaign: {request.rp_id}"
             )
 
+        changed = False
         if not any(item.question_id == request.question_id for item in package.questions):
             package = package.append_question(
                 ResearchQuestionRecord(
@@ -106,6 +107,7 @@ class CampaignResearchRecorder:
                     research_phase=request.research_phase.value,
                 )
             )
+            changed = True
 
         if not any(item.request_id == request.request_id for item in package.analyses):
             package = package.append_analysis(
@@ -118,8 +120,14 @@ class CampaignResearchRecorder:
                     analysis_inputs=tuple(asdict(item) for item in request.analysis_inputs),
                 )
             )
+            changed = True
 
-        self._packages.save(package)
+        if changed:
+            self._packages.save(package)
+        elif created:
+            # Creation without a question/analysis cannot occur because both are
+            # required above; retained only as a defensive invariant.
+            raise ResearchRecordingError("new RP was created without durable request lineage")
 
     def _record_interpretation(self, decision: ResearchDecision) -> None:
         if decision.interpreted_result_id is None:
@@ -144,6 +152,17 @@ class CampaignResearchRecorder:
             raise ResearchRecordingError(
                 f"interpreted request is not present in a durable RP: {decision.interpreted_request_id}"
             )
+        existing = next(
+            item
+            for item in match.analyses
+            if item.request_id == decision.interpreted_request_id
+        )
+        if (
+            existing.result_id == decision.interpreted_result_id
+            and existing.execution_status == decision.interpreted_execution_status
+            and existing.interpretation == decision.analysis_interpretation
+        ):
+            return
         evolved = match.record_analysis_outcome(
             request_id=decision.interpreted_request_id,
             result_id=decision.interpreted_result_id,
