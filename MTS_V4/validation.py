@@ -71,10 +71,20 @@ class ObjectiveContractValidator:
         for evidence_id in request.evidence_ids:
             item = evidence.get(evidence_id)
             if item is None:
+                if str(evidence_id).startswith("analysis-result:"):
+                    message = (
+                        f"Evidence reference does not exist: {evidence_id}. "
+                        "analysis-result IDs are not evidence_ids; prior Analysis outputs must be "
+                        "referenced through analysis_inputs using the exact result_id and output_path. "
+                        "If acquired evidence is also required, reference its exact current evidence ID "
+                        "separately in evidence_ids."
+                    )
+                else:
+                    message = f"Evidence reference does not exist: {evidence_id}"
                 defects.append(
                     ContractDefect(
                         code="MISSING_EVIDENCE",
-                        message=f"Evidence reference does not exist: {evidence_id}",
+                        message=message,
                         field="evidence_ids",
                         method_id=spec.method_id,
                     )
