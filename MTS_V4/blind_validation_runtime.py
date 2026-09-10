@@ -10,6 +10,8 @@ from .bootstrap import V4Runtime
 from .contracts import AnalysisRequest, AnalysisResult, ContractDefect, EvidenceDescriptor, ResearchPhase
 from .execution_interface import TransparentInputBindingValidator
 from .orchestrator import ResearchLoopOrchestrator
+from .research_package_store import JsonResearchPackageStore
+from .verification_eligibility import require_unseen_verification_subject
 
 
 class BlindPredictionValidator(TransparentInputBindingValidator):
@@ -41,18 +43,26 @@ def build_blind_prediction_orchestrator(
     *,
     session: HistoricalBlindValidationSession,
     runtime: V4Runtime,
+    research_package_store: JsonResearchPackageStore,
     hypothesis_statement: str,
     success_definition: str,
     timeout_seconds: int = 180,
 ) -> ResearchLoopOrchestrator:
-    """Build a fresh Qwen/Analysis loop that cannot see historical future rows.
+    """Build a fresh Qwen/Analysis loop for an unseen verification subject.
 
-    Scientific methods remain exactly the methods registered in the supplied v4
-    runtime. The blind run receives the session's masked cache, masked evidence,
-    isolated Nexus, no exploratory concept payloads, and a non-RP-aware RD
-    transport containing only the frozen hypothesis and success definition.
+    Predictive verification is permitted only when the subject has never entered
+    unrestricted MTS EXPLORATION. The durable RP store is checked mechanically
+    before the blind Qwen runtime is created. Scientific methods remain exactly
+    the methods registered in the supplied v4 runtime. The blind run receives
+    the session's masked cache, masked evidence, isolated Nexus, no exploratory
+    concept payloads, and a non-RP-aware RD transport containing only the frozen
+    hypothesis and success definition.
     """
 
+    require_unseen_verification_subject(
+        package_store=research_package_store,
+        subject_id=session.subject.subject_id,
+    )
     rd = BlindValidationResearchDirector(
         trial_id=session.trial_id,
         hypothesis_id=session.hypothesis_id,
