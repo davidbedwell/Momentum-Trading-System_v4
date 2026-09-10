@@ -23,9 +23,9 @@ class CampaignResearchRecorder:
     """Mechanical persistence of AI-authored research structure.
 
     RD chooses RP identity, question lineage, scientific interpretation,
-    hypotheses, trial success judgments, findings, and closure. This recorder
-    validates only durable identity, lineage, frozen-hypothesis integrity, and
-    the human-approved blind-verification rule.
+    hypotheses, trial predictions, trial success judgments, findings, and
+    closure. This recorder validates only durable identity, lineage,
+    frozen-hypothesis integrity, and the human-approved verification rule.
     """
 
     def __init__(
@@ -207,8 +207,14 @@ class CampaignResearchRecorder:
             action = raw.get("action")
             if action == "CREATE_TENTATIVE":
                 evolved = self._create_tentative_predictive_hypothesis(evolved, raw)
-            elif action == "RECORD_VALIDATION_TRIAL":
-                evolved = self._record_predictive_validation_trial(
+            elif action == "LOCK_VALIDATION_TRIAL":
+                evolved = self._lock_predictive_validation_trial(
+                    evolved,
+                    raw,
+                    decision=decision,
+                )
+            elif action == "RECORD_VALIDATION_OUTCOME":
+                evolved = self._record_predictive_validation_outcome(
                     evolved,
                     raw,
                     decision=decision,
@@ -292,7 +298,7 @@ class CampaignResearchRecorder:
         )
         return package.append_predictive_hypothesis(hypothesis)
 
-    def _record_predictive_validation_trial(
+    def _lock_predictive_validation_trial(
         self,
         package: ResearchPackage,
         update: Mapping[str, Any],
@@ -301,21 +307,17 @@ class CampaignResearchRecorder:
     ) -> ResearchPackage:
         hypothesis_id = self._require_nonblank(update, "hypothesis_id")
         trial_id = self._require_nonblank(update, "trial_id")
-        result_id = self._require_nonblank(update, "result_id")
-        success = update.get("success")
-        if not isinstance(success, bool):
+        prediction_result_id = self._require_nonblank(update, "prediction_result_id")
+        prediction_statement = self._require_nonblank(update, "prediction_statement")
+        if decision.interpreted_result_id != prediction_result_id:
             raise ResearchRecordingError(
-                "RECORD_VALIDATION_TRIAL requires boolean success"
-            )
-        if decision.interpreted_result_id != result_id:
-            raise ResearchRecordingError(
-                "validation trial result_id must equal the currently interpreted result_id"
+                "prediction_result_id must equal the currently interpreted result_id"
             )
 
-        matches = [item for item in package.analyses if item.result_id == result_id]
+        matches = [item for item in package.analyses if item.result_id == prediction_result_id]
         if len(matches) != 1:
             raise ResearchRecordingError(
-                f"validation trial result_id is not unique in RP: {result_id}"
+                f"prediction result_id is not unique in RP: {prediction_result_id}"
             )
         analysis = matches[0]
         contains_future_information = bool(
@@ -323,13 +325,13 @@ class CampaignResearchRecorder:
         )
         trial = PredictiveValidationTrialRecord(
             trial_id=trial_id,
-            result_id=result_id,
-            success=success,
-            research_phase=analysis.research_phase,
-            contains_future_information=contains_future_information,
+            prediction_result_id=prediction_result_id,
+            prediction_statement=prediction_statement,
+            prediction_research_phase=analysis.research_phase,
+            prediction_contains_future_information=contains_future_information,
         )
 
-        existing_hypothesis = next(
+        hypothesis = next(
             (
                 item
                 for item in package.predictive_hypotheses
@@ -337,36 +339,109 @@ class CampaignResearchRecorder:
             ),
             None,
         )
-        if existing_hypothesis is None:
+        if hypothesis is None:
             raise ResearchRecordingError(
                 f"validation trial references unknown predictive hypothesis: {hypothesis_id}"
             )
         prior_trial = next(
             (
                 item
-                for item in existing_hypothesis.trials
-                if item.trial_id == trial_id or item.result_id == result_id
+                for item in hypothesis.trials
+                if item.trial_id == trial_id
+                or item.prediction_result_id == prediction_result_id
             ),
             None,
         )
         if prior_trial is not None:
-            same_trial = (
+            same_lock = (
                 prior_trial.trial_id == trial.trial_id
-                and prior_trial.result_id == trial.result_id
-                and prior_trial.success == trial.success
-                and prior_trial.research_phase == trial.research_phase
-                and prior_trial.contains_future_information
-                == trial.contains_future_information
+                and prior_trial.prediction_result_id == trial.prediction_result_id
+                and prior_trial.prediction_statement == trial.prediction_statement
+                and prior_trial.prediction_research_phase == trial.prediction_research_phase
+                and prior_trial.prediction_contains_future_information
+                == trial.prediction_contains_future_information
             )
-            if same_trial:
+            if same_lock:
                 return package
             raise ResearchRecordingError(
-                "predictive validation trial identity already exists with different content"
+                "predictive validation trial identity already exists with different lock content"
             )
 
-        return package.record_predictive_validation_trial(
+        return package.lock_predictive_validation_trial(
             hypothesis_id=hypothesis_id,
             trial=trial,
+        )
+
+    def _record_predictive_validation_outcome(
+        self,
+        package: ResearchPackage,
+        update: Mapping[str, Any],
+        *,
+        decision: ResearchDecision,
+    ) -> ResearchPackage:
+        hypothesis_id = self._require_nonblank(update, "hypothesis_id")
+        trial_id = self._require_nonblank(update, "trial_id")
+        outcome_result_id = self._require_nonblank(update, "outcome_result_id")
+        success = update.get("success")
+        if not isinstance(success, bool):
+            raise ResearchRecordingError(
+                "RECORD_VALIDATION_OUTCOME requires boolean success"
+            )
+        if decision.interpreted_result_id != outcome_result_id:
+            raise ResearchRecordingError(
+                "outcome_result_id must equal the currently interpreted result_id"
+            )
+
+        outcome_matches = [
+            item for item in package.analyses if item.result_id == outcome_result_id
+        ]
+        if len(outcome_matches) != 1:
+            raise ResearchRecordingError(
+                f"outcome result_id is not unique in RP: {outcome_result_id}"
+            )
+        outcome_analysis = outcome_matches[0]
+        outcome_contains_future_information = bool(
+            outcome_analysis.future_information.get("contains_future_information")
+        )
+        hypothesis = next(
+            (
+                item
+                for item in package.predictive_hypotheses
+                if item.hypothesis_id == hypothesis_id
+            ),
+            None,
+        )
+        if hypothesis is None:
+            raise ResearchRecordingError(
+                f"validation outcome references unknown predictive hypothesis: {hypothesis_id}"
+            )
+        trial = next(
+            (item for item in hypothesis.trials if item.trial_id == trial_id),
+            None,
+        )
+        if trial is None:
+            raise ResearchRecordingError(
+                f"validation outcome references unlocked trial: {trial_id}"
+            )
+        if trial.outcome_result_id is not None:
+            same_outcome = (
+                trial.outcome_result_id == outcome_result_id
+                and trial.success == success
+                and trial.outcome_contains_future_information
+                == outcome_contains_future_information
+            )
+            if same_outcome:
+                return package
+            raise ResearchRecordingError(
+                "predictive validation outcome already exists with different content"
+            )
+
+        return package.record_predictive_validation_outcome(
+            hypothesis_id=hypothesis_id,
+            trial_id=trial_id,
+            outcome_result_id=outcome_result_id,
+            success=success,
+            outcome_contains_future_information=outcome_contains_future_information,
         )
 
     def _record_findings(self, decision: ResearchDecision) -> None:
