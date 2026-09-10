@@ -77,15 +77,17 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
         research_state = schema["research_state"]
         research_state["predictive_hypothesis_updates"] = [
             {
-                "action": "CREATE_TENTATIVE or RECORD_VALIDATION_TRIAL",
+                "action": "CREATE_TENTATIVE, LOCK_VALIDATION_TRIAL, or RECORD_VALIDATION_OUTCOME",
                 "hypothesis_id": "stable string",
-                "statement": "required for CREATE_TENTATIVE; frozen predictive proposition",
-                "success_definition": "required for CREATE_TENTATIVE; predeclared objective success condition",
-                "minimum_required_trials": "required positive integer for CREATE_TENTATIVE; choose before blind testing",
-                "source_result_ids": "required list of supporting result_ids for CREATE_TENTATIVE",
-                "trial_id": "required stable string for RECORD_VALIDATION_TRIAL",
-                "result_id": "required exact interpreted VALIDATION result_id for RECORD_VALIDATION_TRIAL",
-                "success": "required boolean for RECORD_VALIDATION_TRIAL, judged against the frozen success_definition",
+                "statement": "CREATE_TENTATIVE only: frozen predictive proposition",
+                "success_definition": "CREATE_TENTATIVE only: predeclared objective success condition",
+                "minimum_required_trials": "CREATE_TENTATIVE only: positive integer chosen before blind testing",
+                "source_result_ids": "CREATE_TENTATIVE only: supporting result_ids",
+                "trial_id": "LOCK_VALIDATION_TRIAL/RECORD_VALIDATION_OUTCOME: stable trial identifier",
+                "prediction_result_id": "LOCK_VALIDATION_TRIAL only: exact currently interpreted no-lookahead result_id",
+                "prediction_statement": "LOCK_VALIDATION_TRIAL only: exact prediction locked before future outcome is exposed",
+                "outcome_result_id": "RECORD_VALIDATION_OUTCOME only: exact currently interpreted outcome result_id",
+                "success": "RECORD_VALIDATION_OUTCOME only: boolean judged against frozen success_definition",
             }
         ]
         next_request = schema["next_request"]
@@ -115,10 +117,10 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
                 "On INTERPRET_ANALYSIS_RESULT, state what you learned in analysis_interpretation whether or not it is significant enough to promote as a finding.",
                 "When exploration produces a relationship you judge potentially predictive, create a durable tentative predictive hypothesis under research_state.predictive_hypothesis_updates using action=CREATE_TENTATIVE. Author the exact proposition, the objective success_definition, a scientifically appropriate positive minimum_required_trials chosen before blind testing, and the supporting source_result_ids.",
                 "A predictive hypothesis is frozen when created. Do not revise its statement, success_definition, or minimum_required_trials after blind validation begins. If scientific learning requires a materially revised proposition, create a new hypothesis_id with a fresh validation record.",
-                "Tentative predictive hypotheses must be verified without look-ahead knowledge. Request blind verification work with research_phase=VALIDATION. Future-looking exploration remains allowed in EXPLORATION, but those exploratory results do not count as verification trials.",
-                "After interpreting a no-lookahead VALIDATION result for a frozen predictive hypothesis, record one RECORD_VALIDATION_TRIAL update with a unique trial_id, exact result_id, and success=true/false judged against the predeclared success_definition.",
-                "Human governance fixes VERIFIED at cumulative success_rate >= 0.60 once the hypothesis's predeclared minimum_required_trials has been reached. Below the minimum it remains TENTATIVE. At or above the minimum, a cumulative rate below 0.60 is NOT_VERIFIED. Deterministic persistence calculates those counts/statuses; you retain scientific authority over the hypothesis, trial design, and whether a trial satisfies its frozen success_definition.",
-                "If you promote a Nexus finding about a tentative predictive relationship, include metadata.predictive_hypothesis_id and metadata.predictive_status='TENTATIVE'. If blind validation later reaches VERIFIED or NOT_VERIFIED, promote a new finding only if you judge that validation outcome scientifically significant; do not rewrite the original tentative finding.",
+                "For each blind test, first make the prediction without look-ahead knowledge. Use research_phase=VALIDATION for the Analysis that informs that prediction. After interpreting that no-lookahead result, record action=LOCK_VALIDATION_TRIAL with a unique trial_id, exact prediction_result_id, and exact prediction_statement. The lock must exist before any future outcome is exposed.",
+                "After a trial prediction is locked, subsequent/future information may be used only to evaluate that already-locked prediction. Request whatever scientifically appropriate outcome Analysis is needed under its permitted method contract, then record action=RECORD_VALIDATION_OUTCOME with the same trial_id, exact outcome_result_id, and success=true/false judged against the frozen success_definition. Future information used for outcome scoring does not retroactively contaminate the locked blind prediction.",
+                "Only completed locked trials enter the cumulative success-rate calculation. Human governance fixes VERIFIED at cumulative success_rate >= 0.60 once the hypothesis's predeclared minimum_required_trials has been completed. Below the minimum it remains TENTATIVE. At or above the minimum, cumulative rate below 0.60 is NOT_VERIFIED. Deterministic persistence calculates counts/rates/status; you retain scientific authority over the hypothesis, prediction, trial design, success definition, and outcome judgment.",
+                "If you promote a Nexus finding about a tentative predictive relationship, include metadata.predictive_hypothesis_id and metadata.predictive_status='TENTATIVE'. If completed blind validation later reaches VERIFIED or NOT_VERIFIED, promote a new finding only if you judge that outcome scientifically significant; do not rewrite the original tentative finding.",
                 "On final scientific closure, rp_id identifies the RP being closed and close_reason states your scientific reason.",
             ]
         )
