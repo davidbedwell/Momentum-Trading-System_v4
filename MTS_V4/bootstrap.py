@@ -19,9 +19,12 @@ from .standard_methods import standard_analysis_methods, standard_method_catalog
 
 
 DEFAULT_MISSION = (
-    "Discover reproducible market conditions that can identify subsequent price "
-    "movements with sufficient magnitude, directionality, timing, and path quality "
-    "to be practically exploitable as trades."
+    "Discover reproducible relationships between market information observable at time T and "
+    "subsequent market behavior at T+1 onward, with sufficient predictive value in direction, "
+    "magnitude, timing, continuation or reversal, and path quality to be practically exploitable "
+    "as trades. During EXPLORATION, actively seek scientifically defensible prospective structure "
+    "and use historical look-ahead when useful for discovery. During VALIDATION, evaluate frozen "
+    "predictive hypotheses without look-ahead knowledge at the prediction point."
 )
 
 
