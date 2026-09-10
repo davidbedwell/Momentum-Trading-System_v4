@@ -6,6 +6,8 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from .research_package import (
+    PredictiveHypothesisRecord,
+    PredictiveValidationTrialRecord,
     ResearchAnalysisRecord,
     ResearchPackage,
     ResearchPackageError,
@@ -126,6 +128,9 @@ class JsonResearchPackageStore:
                     "originating_question": package.originating_question,
                     "originating_rationale": package.originating_rationale,
                     "hypotheses": list(package.hypotheses),
+                    "predictive_hypotheses": [
+                        asdict(item) for item in package.predictive_hypotheses
+                    ],
                     "findings": list(package.findings),
                     "unresolved_issues": list(package.unresolved_issues),
                     "status": package.status,
@@ -185,10 +190,26 @@ class JsonResearchPackageStore:
                     **item,
                     "evidence_ids": tuple(item.get("evidence_ids", ())),
                     "analysis_inputs": tuple(item.get("analysis_inputs", ())),
+                    "future_information": dict(item.get("future_information", {})),
                 }
             )
             for item in raw.get("analyses", ())
         )
+        predictive_hypotheses = []
+        for item in raw.get("predictive_hypotheses", ()):
+            trials = tuple(
+                PredictiveValidationTrialRecord(**trial)
+                for trial in item.get("trials", ())
+            )
+            predictive_hypotheses.append(
+                PredictiveHypothesisRecord(
+                    **{
+                        **item,
+                        "source_result_ids": tuple(item.get("source_result_ids", ())),
+                        "trials": trials,
+                    }
+                )
+            )
         transitions = tuple(
             ResearchPackageStateTransition(**item)
             for item in raw.get("state_transitions", ())
@@ -197,6 +218,7 @@ class JsonResearchPackageStore:
             **{
                 **raw,
                 "hypotheses": tuple(raw.get("hypotheses", ())),
+                "predictive_hypotheses": tuple(predictive_hypotheses),
                 "questions": questions,
                 "analyses": analyses,
                 "findings": tuple(raw.get("findings", ())),
