@@ -6,7 +6,7 @@ from typing import Mapping, Sequence
 
 from .cache import TemporaryResearchCache
 from .checkpoint import CampaignCheckpoint, CheckpointError, JsonCampaignCheckpointStore
-from .contracts import EvidenceDescriptor, ResearchDecision, SubjectMetadata
+from .contracts import AnalysisRequest, EvidenceDescriptor, ResearchDecision, SubjectMetadata
 from .orchestrator import ResearchLoopOrchestrator, ResearchLoopOutcome
 from .recovery import CampaignRecovery, EvidenceContinuityStatus, RecoveryAssessment
 from .research_recording import CampaignResearchRecorder
@@ -49,11 +49,16 @@ class CheckpointedCampaignRunner:
             subject=subject,
             evidence=evidence,
         )
+        accepted_request_callback = self._accepted_request_callback(
+            campaign_id=campaign_id,
+            subject=subject,
+        )
         outcome = self._orchestrator.run(
             subject=subject,
             evidence=evidence,
             max_analyses=max_analyses,
             state_callback=callback,
+            accepted_request_callback=accepted_request_callback,
         )
         self._finalize_if_closed(outcome, evidence)
         return outcome
@@ -77,6 +82,10 @@ class CheckpointedCampaignRunner:
             subject=checkpoint.subject,
             evidence=recovered_evidence,
         )
+        accepted_request_callback = self._accepted_request_callback(
+            campaign_id=checkpoint.campaign_id,
+            subject=checkpoint.subject,
+        )
 
         # SAME evidence requires no new scientific decision merely because the
         # process restarted. CHANGED or UNVERIFIABLE evidence is first reported
@@ -94,6 +103,7 @@ class CheckpointedCampaignRunner:
             initial_analyses=checkpoint.analyses_executed,
             evidence_continuity=continuity,
             state_callback=callback,
+            accepted_request_callback=accepted_request_callback,
         )
         self._finalize_if_closed(outcome, recovered_evidence)
         return outcome
@@ -125,6 +135,24 @@ class CheckpointedCampaignRunner:
                     analyses_executed=analyses,
                     decisions_made=decisions,
                 )
+            )
+
+        return save
+
+    def _accepted_request_callback(
+        self,
+        *,
+        campaign_id: str,
+        subject: SubjectMetadata,
+    ):
+        if self._research_recorder is None:
+            return None
+
+        def save(request: AnalysisRequest) -> None:
+            self._research_recorder.record_accepted_request(
+                campaign_id=campaign_id,
+                subject=subject,
+                request=request,
             )
 
         return save
