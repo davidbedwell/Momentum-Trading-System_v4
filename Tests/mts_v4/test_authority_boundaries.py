@@ -137,6 +137,30 @@ class V4AuthorityBoundaryTests(unittest.TestCase):
         self.assertEqual(request.method_id, "relationship.correlation")
         self.assertEqual(request.parameters["columns"], ["close", "volume", "date"])
 
+    def test_analysis_result_in_evidence_ids_gets_namespace_repair_guidance_without_rewrite(self):
+        result_id = "analysis-result:b3e00c2213304ffb8c69d2a735c51daf"
+        request = AnalysisRequest(
+            request_id="r:analysis-result-as-evidence",
+            subject_id="AAPL",
+            question="Characterize the derived forward path metrics.",
+            method_id="relationship.correlation",
+            evidence_ids=(result_id,),
+            analysis_inputs=(),
+            parameters={"columns": ["close", "volume"]},
+            research_phase=ResearchPhase.EXPLORATION,
+        )
+
+        defects = self.validator.validate(request, {"ev:1": self.evidence})
+
+        self.assertEqual(len(defects), 1)
+        self.assertEqual(defects[0].code, "MISSING_EVIDENCE")
+        self.assertEqual(defects[0].field, "evidence_ids")
+        self.assertIn("analysis-result IDs are not evidence_ids", defects[0].message)
+        self.assertIn("analysis_inputs", defects[0].message)
+        self.assertIn("result_id and output_path", defects[0].message)
+        self.assertEqual(request.evidence_ids, (result_id,))
+        self.assertEqual(request.analysis_inputs, ())
+
     def test_unknown_method_is_missing_capability_not_substitution(self):
         request = AnalysisRequest(
             request_id="r2",
