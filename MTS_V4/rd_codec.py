@@ -48,6 +48,16 @@ class ResearchDecisionCodec:
         if close_reason is not None and not isinstance(close_reason, str):
             raise ResearchDecisionDecodeError("close_reason must be string or null")
 
+        rp_id = raw.get("rp_id")
+        if rp_id is not None and (not isinstance(rp_id, str) or not rp_id.strip()):
+            raise ResearchDecisionDecodeError("rp_id must be a nonblank string or null")
+
+        analysis_interpretation = raw.get("analysis_interpretation")
+        if analysis_interpretation is not None and not isinstance(analysis_interpretation, str):
+            raise ResearchDecisionDecodeError(
+                "analysis_interpretation must be string or null"
+            )
+
         if continue_research and next_request is None:
             raise ResearchDecisionDecodeError(
                 "continuing research requires an AI-authored next_request"
@@ -59,6 +69,8 @@ class ResearchDecisionCodec:
             promote_findings=findings,
             research_state=dict(research_state),
             close_reason=close_reason,
+            rp_id=rp_id,
+            analysis_interpretation=analysis_interpretation,
         )
 
     @staticmethod
@@ -96,6 +108,16 @@ class ResearchDecisionCodec:
             raise ResearchDecisionDecodeError(
                 "research_phase must be EXPLORATION or VALIDATION"
             ) from exc
+
+        lineage: dict[str, str | None] = {}
+        for key in ("rp_id", "question_id", "parent_question_id", "parent_rp_id"):
+            value = raw.get(key)
+            if value is not None and (not isinstance(value, str) or not value.strip()):
+                raise ResearchDecisionDecodeError(
+                    f"next_request {key} must be a nonblank string or null"
+                )
+            lineage[key] = value
+
         return AnalysisRequest(
             request_id=str(raw["request_id"]),
             subject_id=str(raw["subject_id"]),
@@ -106,6 +128,10 @@ class ResearchDecisionCodec:
             research_phase=phase,
             rationale=str(raw.get("rationale", "")),
             analysis_inputs=analysis_inputs,
+            rp_id=lineage["rp_id"],
+            question_id=lineage["question_id"],
+            parent_question_id=lineage["parent_question_id"],
+            parent_rp_id=lineage["parent_rp_id"],
         )
 
     @staticmethod
