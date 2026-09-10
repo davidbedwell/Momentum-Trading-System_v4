@@ -253,7 +253,9 @@ class ResearchDecision:
     coherent research package to which this decision belongs. Interpretation
     fields preserve what RD concluded from the immediately interpreted Analysis
     result without requiring that conclusion to be promoted as a significant
-    Nexus finding.
+    Nexus finding. ``interpreted_future_information`` is objective Analysis
+    lineage copied into the durable RP record; it is not authored scientific
+    judgment.
     """
 
     continue_research: bool
@@ -266,3 +268,4 @@ class ResearchDecision:
     interpreted_request_id: str | None = None
     interpreted_result_id: str | None = None
     interpreted_execution_status: str | None = None
+    interpreted_future_information: Mapping[str, Any] = field(default_factory=dict)
