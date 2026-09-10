@@ -11,11 +11,11 @@ from .contracts import AnalysisRequest, AnalysisResult, ContractDefect, Evidence
 from .execution_interface import TransparentInputBindingValidator
 from .orchestrator import ResearchLoopOrchestrator
 from .research_package_store import JsonResearchPackageStore
-from .verification_eligibility import require_unseen_verification_subject
+from .verification_eligibility import require_unseen_historical_verification_subject
 
 
 class BlindPredictionValidator(TransparentInputBindingValidator):
-    """Add the objective VALIDATION-only boundary for a blind prediction run."""
+    """Add the objective VALIDATION-only boundary for a historical blind run."""
 
     def validate(
         self,
@@ -48,18 +48,20 @@ def build_blind_prediction_orchestrator(
     success_definition: str,
     timeout_seconds: int = 180,
 ) -> ResearchLoopOrchestrator:
-    """Build a fresh Qwen/Analysis loop for an unseen verification subject.
+    """Build retrospective historical blind verification on an unseen subject.
 
-    Predictive verification is permitted only when the subject has never entered
-    unrestricted MTS EXPLORATION. The durable RP store is checked mechanically
-    before the blind Qwen runtime is created. Scientific methods remain exactly
-    the methods registered in the supplied v4 runtime. The blind run receives
-    the session's masked cache, masked evidence, isolated Nexus, no exploratory
-    concept payloads, and a non-RP-aware RD transport containing only the frozen
-    hypothesis and success definition.
+    The unseen-subject requirement applies only to retrospective historical
+    replay/holdout verification. It does not govern genuine live prospective
+    prediction or trading, where the future outcome has not yet occurred.
+
+    Scientific methods remain exactly the methods registered in the supplied v4
+    runtime. The historical blind run receives the session's masked cache,
+    masked evidence, isolated Nexus, no exploratory concept payloads, and a
+    non-RP-aware RD transport containing only the frozen hypothesis and success
+    definition.
     """
 
-    require_unseen_verification_subject(
+    require_unseen_historical_verification_subject(
         package_store=research_package_store,
         subject_id=session.subject.subject_id,
     )
