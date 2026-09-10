@@ -6,7 +6,7 @@ import os
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import date as date_type, datetime, timedelta, timezone
 from typing import Iterable, Mapping, Sequence
 
 from .contracts import SubjectMetadata
@@ -125,9 +125,128 @@ class _UnusualWhalesBase:
 
 
 class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
+    """Acquire ticker dark-pool prints across a historical calendar window.
+
+    Unusual Whales' ticker dark-pool endpoint is date-scoped and otherwise
+    defaults to the latest trading day. A single unqualified request therefore
+    does not represent historical coverage. This source explicitly walks dates
+    and, where a date reaches the provider page limit, walks older_than cursors.
+    The default 730-day acquisition window matches the two-year OHLCV evidence
+    currently supplied by the standard live source and the provider's advertised
+    two-year API lookback; it is an evidence-coverage choice, not a scientific
+    threshold. Callers can supply another history_days value when appropriate.
+    """
+
+    def __init__(
+        self,
+        api_key: str | None = None,
+        *,
+        limit: int = 500,
+        history_days: int = 730,
+        end_date: date_type | None = None,
+        max_pages_per_day: int = 100,
+    ) -> None:
+        super().__init__(api_key=api_key, limit=limit)
+        if history_days < 1:
+            raise ValueError("history_days must be >= 1")
+        if max_pages_per_day < 1:
+            raise ValueError("max_pages_per_day must be >= 1")
+        self.history_days = int(history_days)
+        self.end_date = end_date
+        self.max_pages_per_day = int(max_pages_per_day)
+
+    def _requested_dates(self) -> tuple[date_type, ...]:
+        end = self.end_date or datetime.now(timezone.utc).date()
+        start = end - timedelta(days=self.history_days - 1)
+        return tuple(
+            start + timedelta(days=offset)
+            for offset in range(self.history_days)
+            if (start + timedelta(days=offset)).weekday() < 5
+        )
+
+    @staticmethod
+    def _row_identity(row: Mapping[str, object]) -> str:
+        trade_id = row.get("trade_id")
+        if trade_id not in (None, ""):
+            return "trade_id:" + str(trade_id)
+        return json.dumps(dict(row), sort_keys=True, default=str, separators=(",", ":"))
+
+    def _rows_for_date(self, endpoint: str, requested_date: date_type) -> tuple[list[dict[str, object]], int]:
+        rows: list[dict[str, object]] = []
+        seen: set[str] = set()
+        older_than: str | None = None
+        request_count = 0
+
+        for _ in range(self.max_pages_per_day):
+            params: dict[str, object] = {
+                "date": requested_date.isoformat(),
+                "limit": self.limit,
+            }
+            if older_than is not None:
+                params["older_than"] = older_than
+
+            page = self._get(endpoint, params)
+            request_count += 1
+            if not page:
+                break
+
+            new_rows = 0
+            for row in page:
+                identity = self._row_identity(row)
+                if identity not in seen:
+                    seen.add(identity)
+                    rows.append(row)
+                    new_rows += 1
+
+            if len(page) < self.limit:
+                break
+
+            timestamps = [
+                str(row["executed_at"])
+                for row in page
+                if row.get("executed_at") not in (None, "")
+            ]
+            if not timestamps:
+                raise LiveSourceError(
+                    f"dark-pool page reached limit for {requested_date.isoformat()} but lacked executed_at cursor values"
+                )
+            next_cursor = min(timestamps)
+            if older_than is not None and next_cursor >= older_than:
+                raise LiveSourceError(
+                    f"dark-pool pagination cursor did not advance for {requested_date.isoformat()}: {next_cursor}"
+                )
+            if new_rows == 0:
+                raise LiveSourceError(
+                    f"dark-pool pagination returned no new rows for {requested_date.isoformat()}"
+                )
+            older_than = next_cursor
+        else:
+            raise LiveSourceError(
+                f"dark-pool pagination exceeded max_pages_per_day={self.max_pages_per_day} for {requested_date.isoformat()}"
+            )
+
+        return rows, request_count
+
     def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
-        rows = self._get(f"/api/darkpool/{urllib.parse.quote(subject.ticker.upper())}", {"limit": self.limit})
+        ticker = subject.ticker.upper()
+        endpoint = f"/api/darkpool/{urllib.parse.quote(ticker)}"
+        rows: list[dict[str, object]] = []
+        seen: set[str] = set()
+        request_count = 0
+        requested_dates = self._requested_dates()
+
+        for requested_date in requested_dates:
+            day_rows, day_requests = self._rows_for_date(endpoint, requested_date)
+            request_count += day_requests
+            for row in day_rows:
+                identity = self._row_identity(row)
+                if identity not in seen:
+                    seen.add(identity)
+                    rows.append(row)
+
         start, end = _coverage(rows, ("executed_at", "date", "timestamp"))
+        requested_start = requested_dates[0].isoformat() if requested_dates else None
+        requested_end = requested_dates[-1].isoformat() if requested_dates else None
         yield IntakePayload(
             payload=rows,
             evidence_type="OFF_EXCHANGE_DARKPOOL_PRINTS",
@@ -137,7 +256,18 @@ class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
             coverage_end=end,
             row_count=len(rows),
             schema=_schema(rows),
-            provenance={"provider": "Unusual Whales", "endpoint": f"/api/darkpool/{subject.ticker.upper()}", "limit": self.limit, "acquired_at_utc": datetime.now(timezone.utc).isoformat()},
+            provenance={
+                "provider": "Unusual Whales",
+                "endpoint": f"/api/darkpool/{ticker}",
+                "limit": self.limit,
+                "history_days": self.history_days,
+                "requested_start_date": requested_start,
+                "requested_end_date": requested_end,
+                "requested_weekdays": len(requested_dates),
+                "request_count": request_count,
+                "pagination": "date+older_than",
+                "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
+            },
             neutral_semantics=("Source-defined dark-pool/off-exchange stock prints for the requested ticker. Off-exchange execution does not by itself establish institutional identity, buyer or seller intent, accumulation, distribution, bullishness, bearishness, price suppression, or causation. Provider-side classifications and NBBO comparisons are observations or estimates under the provider's definitions."),
         )
 
