@@ -350,7 +350,15 @@ class CampaignResearchRecorder:
             None,
         )
         if prior_trial is not None:
-            if prior_trial == trial:
+            same_trial = (
+                prior_trial.trial_id == trial.trial_id
+                and prior_trial.result_id == trial.result_id
+                and prior_trial.success == trial.success
+                and prior_trial.research_phase == trial.research_phase
+                and prior_trial.contains_future_information
+                == trial.contains_future_information
+            )
+            if same_trial:
                 return package
             raise ResearchRecordingError(
                 "predictive validation trial identity already exists with different content"
