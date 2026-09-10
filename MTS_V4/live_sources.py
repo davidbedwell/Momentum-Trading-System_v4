@@ -125,16 +125,15 @@ class _UnusualWhalesBase:
 
 
 class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
-    """Acquire ticker dark-pool prints across a historical calendar window.
+    """Acquire ticker dark-pool prints across the retrievable historical window.
 
-    Unusual Whales' ticker dark-pool endpoint is date-scoped and otherwise
-    defaults to the latest trading day. A single unqualified request therefore
-    does not represent historical coverage. This source explicitly walks dates
-    and, where a date reaches the provider page limit, walks older_than cursors.
-    The default 730-day acquisition window matches the two-year OHLCV evidence
-    currently supplied by the standard live source and the provider's advertised
-    two-year API lookback; it is an evidence-coverage choice, not a scientific
-    threshold. Callers can supply another history_days value when appropriate.
+    The ticker dark-pool endpoint is date-scoped and otherwise defaults to the
+    latest trading day. This source walks requested dates from newest to oldest,
+    paginates full days with older_than, and stops mechanically when the provider
+    rejects an older date with HTTP 403 after newer dates were successfully
+    queried. That preserves the actual credential-limited history instead of
+    assuming a fixed provider entitlement. history_days is therefore the desired
+    maximum acquisition window, not a claim about accessible coverage.
     """
 
     def __init__(
@@ -170,6 +169,10 @@ class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
         if trade_id not in (None, ""):
             return "trade_id:" + str(trade_id)
         return json.dumps(dict(row), sort_keys=True, default=str, separators=(",", ":"))
+
+    @staticmethod
+    def _is_forbidden_history_error(exc: LiveSourceError) -> bool:
+        return "HTTP Error 403" in str(exc)
 
     def _rows_for_date(self, endpoint: str, requested_date: date_type) -> tuple[list[dict[str, object]], int]:
         rows: list[dict[str, object]] = []
@@ -234,10 +237,20 @@ class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
         seen: set[str] = set()
         request_count = 0
         requested_dates = self._requested_dates()
+        successful_query_dates: list[date_type] = []
+        first_forbidden_date: date_type | None = None
 
-        for requested_date in requested_dates:
-            day_rows, day_requests = self._rows_for_date(endpoint, requested_date)
+        for requested_date in reversed(requested_dates):
+            try:
+                day_rows, day_requests = self._rows_for_date(endpoint, requested_date)
+            except LiveSourceError as exc:
+                if successful_query_dates and self._is_forbidden_history_error(exc):
+                    first_forbidden_date = requested_date
+                    break
+                raise
+
             request_count += day_requests
+            successful_query_dates.append(requested_date)
             for row in day_rows:
                 identity = self._row_identity(row)
                 if identity not in seen:
@@ -247,6 +260,8 @@ class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
         start, end = _coverage(rows, ("executed_at", "date", "timestamp"))
         requested_start = requested_dates[0].isoformat() if requested_dates else None
         requested_end = requested_dates[-1].isoformat() if requested_dates else None
+        queried_start = min(successful_query_dates).isoformat() if successful_query_dates else None
+        queried_end = max(successful_query_dates).isoformat() if successful_query_dates else None
         yield IntakePayload(
             payload=rows,
             evidence_type="OFF_EXCHANGE_DARKPOOL_PRINTS",
@@ -264,6 +279,11 @@ class UnusualWhalesDarkPoolSource(_UnusualWhalesBase):
                 "requested_start_date": requested_start,
                 "requested_end_date": requested_end,
                 "requested_weekdays": len(requested_dates),
+                "queried_start_date": queried_start,
+                "queried_end_date": queried_end,
+                "queried_weekdays": len(successful_query_dates),
+                "entitlement_limited": first_forbidden_date is not None,
+                "first_forbidden_date": first_forbidden_date.isoformat() if first_forbidden_date else None,
                 "request_count": request_count,
                 "pagination": "date+older_than",
                 "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
