@@ -58,8 +58,12 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             "in the existing RP or starts a new child RP; deterministic code only preserves the lineage "
             "you author. A later RP never overwrites an earlier RP. A question may not name itself as "
             "its parent, and an RP may not name itself as its parent. Every new Analysis execution "
-            "attempt must use a request_id that has not already been durably used. When interpreting "
-            "an Analysis result, provide a substantive analysis_interpretation even when no finding is promoted."
+            "attempt must use a request_id that has not already been durably used. A prior Analysis "
+            "result is chainable through analysis_inputs only when its execution_status is SUCCESS, and "
+            "only through an exact output_path advertised in that result's reusable_derived_datasets "
+            "catalog. ERROR results and results with an empty reusable_derived_datasets catalog have zero "
+            "chainable outputs. When interpreting an Analysis result, provide a substantive "
+            "analysis_interpretation even when no finding is promoted."
         )
         user = json.loads(messages[1]["content"])
         schema = user["required_decision_schema"]
@@ -87,6 +91,9 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
                 "Create a new next_request.rp_id only when you judge a materially distinct research proposition has emerged; when it is a child of prior work, identify the different parent_rp_id yourself.",
                 "Never set parent_question_id equal to question_id and never set parent_rp_id equal to rp_id; self-parent lineage is mechanically invalid.",
                 "Every new Analysis execution attempt requires a new request_id. If you revise parameters, method, inputs, or any other execution contract after interpreting a prior result, assign a new request_id even when the scientific question_id remains the same.",
+                "Treat context.nexus_context.campaign_analysis_result_catalog as the authoritative mechanical inventory for prior campaign-local Analysis chaining. Only a catalog entry with execution_status=SUCCESS may supply analysis_inputs, and only exact output_path values advertised under that entry's reusable_derived_datasets may be used.",
+                "If a prior Analysis catalog entry has execution_status other than SUCCESS, including ERROR, it has zero chainable outputs. If reusable_derived_datasets is empty, it has zero chainable outputs. Never invent an output_path or infer that a failed result produced a dataset.",
+                "Acquired evidence in context.evidence is distinct from prior Analysis results. Use exact evidence_ids directly when the selected method permits; do not fabricate analysis_inputs merely to name acquired evidence.",
                 "decision.rp_id identifies the RP owning the current interpretation/findings; next_request.rp_id identifies the RP owning the next question. They normally match, but may differ when you intentionally branch to a new RP.",
                 "Never reuse a prior rp_id for unrelated work and never treat a new RP as replacement for an earlier RP.",
                 "On INTERPRET_ANALYSIS_RESULT, decision.rp_id must be the same RP as the Analysis request being interpreted.",
