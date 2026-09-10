@@ -3,20 +3,23 @@ from __future__ import annotations
 from .research_package_store import JsonResearchPackageStore
 
 
-class PredictiveVerificationEligibilityError(RuntimeError):
+class HistoricalPredictiveVerificationEligibilityError(RuntimeError):
     pass
 
 
 def previously_analyzed_subject_ids(
     package_store: JsonResearchPackageStore,
 ) -> frozenset[str]:
-    """Return subjects that have ever entered unrestricted MTS exploration.
+    """Return subjects that have previously entered unrestricted MTS exploration.
 
-    This is objective provenance bookkeeping. A subject becomes permanently seen
-    when any durable RP records an EXPLORATION Analysis request for that subject.
-    Blind VALIDATION work by itself does not mark a new subject as previously
-    analyzed; after validation, the subject becomes seen when unrestricted
-    EXPLORATION begins.
+    This is objective provenance bookkeeping for retrospective historical blind
+    verification. A subject becomes historically seen when a durable RP records
+    an EXPLORATION Analysis request for that subject. Blind VALIDATION work by
+    itself does not mark a new subject as previously analyzed; after validation,
+    the subject becomes seen when unrestricted EXPLORATION begins.
+
+    This inventory does not prohibit genuine live prospective prediction or
+    trading on a familiar subject whose future outcome has not yet occurred.
     """
 
     seen: set[str] = set()
@@ -29,15 +32,19 @@ def previously_analyzed_subject_ids(
     return frozenset(seen)
 
 
-def require_unseen_verification_subject(
+def require_unseen_historical_verification_subject(
     *,
     package_store: JsonResearchPackageStore,
     subject_id: str,
 ) -> None:
-    """Reject predictive verification on any subject previously analyzed by MTS."""
+    """Reject retrospective historical blind verification on an already-seen subject.
+
+    This function governs only historical replay/holdout verification. It must
+    not be used to gate current or future-facing prospective prediction/trading.
+    """
 
     if subject_id in previously_analyzed_subject_ids(package_store):
-        raise PredictiveVerificationEligibilityError(
-            "predictive verification requires a ticker/subject not previously analyzed by MTS: "
-            f"{subject_id} is already seen"
+        raise HistoricalPredictiveVerificationEligibilityError(
+            "retrospective historical predictive verification requires a ticker/subject "
+            f"not previously analyzed by MTS: {subject_id} is already historically seen"
         )
