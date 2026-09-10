@@ -6,11 +6,13 @@ MTS v4 is a clean reconstruction. It is not a continuation of the prior RD-B ser
 
 ## 1. Governing Purpose
 
-The purpose of MTS is to discover reproducible market conditions that can identify subsequent price movements with sufficient magnitude, directionality, timing, and path quality to be practically exploitable as trades.
+The purpose of MTS is to discover reproducible relationships between market information observable at time T and subsequent market behavior at T+1 onward, with sufficient predictive value in direction, magnitude, timing, continuation or reversal, and path quality to be practically exploitable as trades.
+
+MTS is therefore fundamentally a prospective-prediction research system, not merely a descriptive market-analysis system. Descriptive and contemporaneous findings are useful when they help identify, explain, discriminate, refine, or falsify conditions that may have subsequent predictive force.
 
 A profitable price move is not necessarily a useful trading opportunity. Human utility depends on reward in relation to risk, path, adverse movement, and time.
 
-The system must support scientific discovery without hard-coding the scientific conclusions it is intended to discover.
+The system must actively support scientifically defensible predictive discovery without hard-coding the scientific conclusions it is intended to discover.
 
 ## 2. Human Authority and AI Engineering Latitude
 
@@ -39,6 +41,7 @@ The AI Research Director may use Qwen, Sol, or another explicitly approved AI re
 - interpretation of evidence;
 - selection of scientific methods and analyses;
 - scientific parameter choice where the parameter expresses scientific judgment;
+- actively seeking prospective relationships between presently observable conditions and subsequent market behavior during exploration;
 - determining relevance, novelty, uncertainty, contradiction, discrimination value, and next research direction;
 - deciding whether evidence supports, weakens, rejects, generalizes, qualifies, or leaves a hypothesis unresolved;
 - determining when a finding is scientifically significant enough for durable research memory;
@@ -124,7 +127,12 @@ It reasons backward from the MTS mission and available evidence to determine:
 - what Analysis operation should be performed;
 - what parameters are scientifically appropriate;
 - what the result means;
+- whether an observed or contemporaneous relationship has scientifically testable implications for later market behavior;
 - what should be investigated next.
+
+During EXPLORATION, the AI Research Director should actively seek scientifically defensible predictive structure. It should ask whether conditions observable at time T precede, discriminate, or improve prediction of subsequent direction, magnitude, timing, continuation or reversal, path quality, or interactions among evidence streams. Historical look-ahead is an explicitly legitimate discovery tool during this phase when scientifically useful.
+
+The AI Research Director should not manufacture predictive claims merely to satisfy the mission. It should reject unsupported relationships just as readily as it advances promising ones. A falsifiable predictive hypothesis that later fails blind validation is scientifically useful and should not be avoided merely because it may fail.
 
 The AI Research Director may revise its own requests when objective execution feedback identifies a contract defect.
 
@@ -186,13 +194,19 @@ The old v2 tree remains useful as a forensic reference and comparison control.
 
 ## 13. Scientific Exploration and Validation
 
-During exploratory learning, look-ahead may be used where explicitly appropriate to discover candidate zones, relationships, or hypotheses.
+EXPLORATION and VALIDATION intentionally operate under different information rules because they serve different scientific purposes.
 
-After hypotheses or generalizations are formed, forward, holdout, or otherwise out-of-sample testing should be used to evaluate predictive validity.
+During EXPLORATION, the central objective is predictive discovery. The AI Research Director should actively investigate whether information observable at time T has subsequent predictive force at T+1 onward. Historical look-ahead may be used freely where scientifically appropriate to discover candidate zones, relationships, horizons, directionality, continuation or reversal behavior, magnitude, timing, path characteristics, cross-evidence interactions, or other predictive structure.
 
-Do not confuse exploratory discovery with prospective validation.
+Exploration should encourage prospective reasoning rather than stop at contemporaneous description. When evidence supports it, the AI Research Director should convert promising relationships into explicit, falsifiable tentative predictive hypotheses suitable for later blind testing. It should also freely reject candidate relationships that do not withstand exploratory scrutiny.
 
-No fixed threshold, horizon, normalization, indicator, method family, or trading rule should be privileged unless explicitly approved or scientifically justified by the AI Research Director from evidence.
+Once a predictive hypothesis is frozen for VALIDATION, the prediction stage must be protected from look-ahead. The AI Research Director may use only information available through the declared prediction point, must make and lock the prediction before hidden future information is exposed, and may then evaluate the revealed outcome against the frozen success definition. Historical, forward, holdout, or otherwise out-of-sample testing should be used as appropriate to evaluate predictive validity.
+
+The purpose of the validation restriction is not to suppress predictive reasoning. It is to make the predictive claims discovered during exploration falsifiable and honestly testable.
+
+Do not confuse exploratory discovery with prospective validation, and do not weaken exploratory predictive discovery merely to simplify validation controls.
+
+No fixed threshold, horizon, normalization, indicator, method family, or trading rule should be privileged unless explicitly approved or scientifically justified by the AI Research Director from evidence. Human-approved governance thresholds, such as an explicitly approved predictive-verification success-rate floor, are permitted as objective validation rules and do not substitute for AI scientific judgment about the hypothesis itself.
 
 ## 14. Human Utility and Risk
 
@@ -227,6 +241,8 @@ Tests should prove authority boundaries and behavior, not merely encode obsolete
 Prefer tests that establish:
 
 - AI scientific authority is preserved;
+- exploratory research actively supports scientifically defensible prospective/predictive discovery;
+- blind validation prevents look-ahead at the prediction stage without weakening exploratory freedom;
 - deterministic validation remains objective;
 - invalid execution contracts fail with precise feedback;
 - valid scientific requests are not rejected because of deterministic scientific preference;
