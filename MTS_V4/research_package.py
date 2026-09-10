@@ -21,12 +21,24 @@ PREDICTIVE_STATUS_NOT_VERIFIED = "NOT_VERIFIED"
 
 @dataclass(frozen=True, slots=True)
 class PredictiveValidationTrialRecord:
+    """One blind prediction followed later by outcome evaluation.
+
+    The prediction is locked while Qwen is operating without look-ahead. The
+    outcome may then be evaluated using subsequent information because the
+    prediction is already immutable. Only completed trials enter the cumulative
+    success-rate calculation.
+    """
+
     trial_id: str
-    result_id: str
-    success: bool
-    research_phase: str
-    contains_future_information: bool
+    prediction_result_id: str
+    prediction_statement: str
+    prediction_research_phase: str
+    prediction_contains_future_information: bool
+    outcome_result_id: str | None = None
+    success: bool | None = None
+    outcome_contains_future_information: bool | None = None
     created_at: str = field(default_factory=_utc_now)
+    completed_at: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -35,9 +47,10 @@ class PredictiveHypothesisRecord:
 
     RD authors the proposition, success definition, and predeclared minimum trial
     count. Human governance fixes the verification success-rate floor at 0.60.
-    After creation the scientific proposition is immutable; only blind validation
-    trials may accumulate. A materially revised proposition requires a new
-    hypothesis_id and therefore a fresh verification record.
+    After creation the scientific proposition is immutable; only blind prediction
+    locks and their later outcome evaluations may accumulate. A materially revised
+    proposition requires a new hypothesis_id and therefore a fresh verification
+    record.
     """
 
     hypothesis_id: str
@@ -76,39 +89,91 @@ class PredictiveHypothesisRecord:
         }:
             raise ResearchPackageError(f"invalid predictive hypothesis status: {self.status}")
 
-    def record_validation_trial(
+    def lock_validation_trial(
         self,
         trial: PredictiveValidationTrialRecord,
     ) -> "PredictiveHypothesisRecord":
-        if trial.research_phase != "VALIDATION":
+        if trial.prediction_research_phase != "VALIDATION":
             raise ResearchPackageError(
-                "predictive verification trial must come from VALIDATION research_phase"
+                "predictive trial prediction must come from VALIDATION research_phase"
             )
-        if trial.contains_future_information:
+        if trial.prediction_contains_future_information:
             raise ResearchPackageError(
-                "predictive verification trial may not contain look-ahead information"
+                "predictive trial prediction may not contain look-ahead information"
+            )
+        if trial.outcome_result_id is not None or trial.success is not None:
+            raise ResearchPackageError(
+                "new predictive trial must be locked before outcome is recorded"
             )
         if any(item.trial_id == trial.trial_id for item in self.trials):
             raise ResearchPackageError(f"duplicate predictive trial_id: {trial.trial_id}")
-        if any(item.result_id == trial.result_id for item in self.trials):
+        if any(
+            item.prediction_result_id == trial.prediction_result_id
+            for item in self.trials
+        ):
             raise ResearchPackageError(
-                f"Analysis result already counted for predictive verification: {trial.result_id}"
+                "Analysis result already used to lock a predictive trial: "
+                f"{trial.prediction_result_id}"
             )
+        return replace(
+            self,
+            trials=self.trials + (trial,),
+            updated_at=_utc_now(),
+        )
 
-        trials = self.trials + (trial,)
-        success_count = sum(1 for item in trials if item.success)
-        failure_count = len(trials) - success_count
-        success_rate = success_count / len(trials)
-        if len(trials) < self.minimum_required_trials:
+    def record_validation_outcome(
+        self,
+        *,
+        trial_id: str,
+        outcome_result_id: str,
+        success: bool,
+        outcome_contains_future_information: bool,
+    ) -> "PredictiveHypothesisRecord":
+        matches = [
+            index for index, item in enumerate(self.trials) if item.trial_id == trial_id
+        ]
+        if len(matches) != 1:
+            raise ResearchPackageError(
+                f"predictive outcome requires exactly one trial match: {trial_id}"
+            )
+        if any(
+            item.outcome_result_id == outcome_result_id
+            for item in self.trials
+            if item.outcome_result_id is not None
+        ):
+            raise ResearchPackageError(
+                f"Analysis result already used as predictive outcome: {outcome_result_id}"
+            )
+        index = matches[0]
+        existing = self.trials[index]
+        if existing.outcome_result_id is not None or existing.success is not None:
+            raise ResearchPackageError(
+                f"predictive trial outcome already recorded: {trial_id}"
+            )
+        completed = replace(
+            existing,
+            outcome_result_id=outcome_result_id,
+            success=success,
+            outcome_contains_future_information=outcome_contains_future_information,
+            completed_at=_utc_now(),
+        )
+        trials = list(self.trials)
+        trials[index] = completed
+        completed_trials = [item for item in trials if item.success is not None]
+        success_count = sum(1 for item in completed_trials if item.success is True)
+        failure_count = len(completed_trials) - success_count
+        success_rate = (
+            success_count / len(completed_trials) if completed_trials else None
+        )
+        if len(completed_trials) < self.minimum_required_trials:
             status = PREDICTIVE_STATUS_TENTATIVE
-        elif success_rate >= self.verification_success_threshold:
+        elif success_rate is not None and success_rate >= self.verification_success_threshold:
             status = PREDICTIVE_STATUS_VERIFIED
         else:
             status = PREDICTIVE_STATUS_NOT_VERIFIED
-
         return replace(
             self,
-            trials=trials,
+            trials=tuple(trials),
             success_count=success_count,
             failure_count=failure_count,
             success_rate=success_rate,
@@ -257,7 +322,7 @@ class ResearchPackage:
             predictive_hypotheses=self.predictive_hypotheses + (hypothesis,)
         )
 
-    def record_predictive_validation_trial(
+    def lock_predictive_validation_trial(
         self,
         *,
         hypothesis_id: str,
@@ -274,7 +339,37 @@ class ResearchPackage:
                 f"predictive validation requires exactly one hypothesis match: {hypothesis_id}"
             )
         index = matches[0]
-        updated = self.predictive_hypotheses[index].record_validation_trial(trial)
+        updated = self.predictive_hypotheses[index].lock_validation_trial(trial)
+        hypotheses = list(self.predictive_hypotheses)
+        hypotheses[index] = updated
+        return self._evolve(predictive_hypotheses=tuple(hypotheses))
+
+    def record_predictive_validation_outcome(
+        self,
+        *,
+        hypothesis_id: str,
+        trial_id: str,
+        outcome_result_id: str,
+        success: bool,
+        outcome_contains_future_information: bool,
+    ) -> "ResearchPackage":
+        self._require_open()
+        matches = [
+            index
+            for index, item in enumerate(self.predictive_hypotheses)
+            if item.hypothesis_id == hypothesis_id
+        ]
+        if len(matches) != 1:
+            raise ResearchPackageError(
+                f"predictive validation requires exactly one hypothesis match: {hypothesis_id}"
+            )
+        index = matches[0]
+        updated = self.predictive_hypotheses[index].record_validation_outcome(
+            trial_id=trial_id,
+            outcome_result_id=outcome_result_id,
+            success=success,
+            outcome_contains_future_information=outcome_contains_future_information,
+        )
         hypotheses = list(self.predictive_hypotheses)
         hypotheses[index] = updated
         return self._evolve(predictive_hypotheses=tuple(hypotheses))
