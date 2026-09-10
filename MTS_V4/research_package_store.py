@@ -99,6 +99,52 @@ class JsonResearchPackageStore:
                 result.append(str(raw["research_package"]["rp_id"]))
         return tuple(result)
 
+    def context_for_subject(self, subject_id: str) -> Mapping[str, object]:
+        """Return bounded mechanical RP context for RD reasoning.
+
+        OPEN packages remain fully visible because they are active scientific
+        working memory. CLOSED packages are represented by durable scientific
+        summaries authored during the research itself rather than replaying all
+        historical Analysis records into every prompt. No deterministic
+        relevance ranking or scientific filtering occurs.
+        """
+        open_packages: list[Mapping[str, object]] = []
+        closed_packages: list[Mapping[str, object]] = []
+        for rp_id in self.list_ids():
+            package = self.load(rp_id)
+            if package is None or package.subject_id != subject_id:
+                continue
+            if package.status == "OPEN":
+                open_packages.append(asdict(package))
+                continue
+            closed_packages.append(
+                {
+                    "rp_id": package.rp_id,
+                    "subject_id": package.subject_id,
+                    "campaign_id": package.campaign_id,
+                    "parent_rp_id": package.parent_rp_id,
+                    "originating_question": package.originating_question,
+                    "originating_rationale": package.originating_rationale,
+                    "hypotheses": list(package.hypotheses),
+                    "findings": list(package.findings),
+                    "unresolved_issues": list(package.unresolved_issues),
+                    "status": package.status,
+                    "close_reason": package.close_reason,
+                    "final_assessment": package.final_assessment,
+                    "version": package.version,
+                }
+            )
+        return {
+            "open_research_packages": open_packages,
+            "closed_research_package_summaries": closed_packages,
+            "transport_policy": {
+                "open_packages_full": True,
+                "closed_packages_summary_only": True,
+                "raw_reproducible_data_present": False,
+                "deterministic_scientific_ranking_or_selection": False,
+            },
+        }
+
     def _document(self, package: ResearchPackage) -> str:
         document = {
             "format": self.FORMAT,
