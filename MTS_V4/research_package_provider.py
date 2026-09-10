@@ -32,35 +32,40 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             payload=payload,
         )
         system = messages[0]["content"] + (
-            " Every decision must identify its active durable research package with rp_id. "
-            "Every next_request must also include rp_id, question_id, parent_question_id, and "
-            "parent_rp_id. You decide whether a follow-up remains in the existing RP or starts a "
-            "new child RP; deterministic code only preserves the lineage you author. A later RP "
-            "never overwrites an earlier RP. When interpreting an Analysis result, provide a "
-            "substantive analysis_interpretation even when no finding is promoted."
+            " Every decision must identify the durable research package to which the current "
+            "interpretation/findings belong with rp_id. Every next_request must also include rp_id, "
+            "question_id, parent_question_id, and parent_rp_id. You decide whether a follow-up remains "
+            "in the existing RP or starts a new child RP; deterministic code only preserves the lineage "
+            "you author. A later RP never overwrites an earlier RP. When interpreting an Analysis result, "
+            "provide a substantive analysis_interpretation even when no finding is promoted."
         )
         user = json.loads(messages[1]["content"])
         schema = user["required_decision_schema"]
-        schema["rp_id"] = "nonblank string: active AI-authored durable research package"
+        schema["rp_id"] = (
+            "nonblank string: RP to which this decision's interpretation/findings belong"
+        )
         schema["analysis_interpretation"] = (
             "string or null; substantive string required when operation is INTERPRET_ANALYSIS_RESULT"
         )
         next_request = schema["next_request"]
-        next_request["rp_id"] = "nonblank string; same as decision rp_id"
+        next_request["rp_id"] = (
+            "nonblank string: RP containing the requested question; may differ from decision rp_id only when RD intentionally branches to another RP"
+        )
         next_request["question_id"] = "nonblank stable question identifier within this RP"
         next_request["parent_question_id"] = (
             "string or null; null for root question, otherwise exact prior question_id in same RP"
         )
         next_request["parent_rp_id"] = (
-            "string or null; use only when RD intentionally starts a distinct child RP"
+            "string or null; use when RD intentionally starts a distinct child RP"
         )
         user["instructions"].extend(
             [
                 "Keep follow-up questions under the same rp_id when they continue the same coherent scientific line; assign parent_question_id to the question that caused the follow-up.",
-                "Create a new rp_id only when you judge a materially distinct research proposition has emerged; when it is a child of prior work, identify parent_rp_id yourself.",
+                "Create a new next_request.rp_id only when you judge a materially distinct research proposition has emerged; when it is a child of prior work, identify parent_rp_id yourself.",
+                "decision.rp_id identifies the RP owning the current interpretation/findings; next_request.rp_id identifies the RP owning the next question. They normally match, but may differ when you intentionally branch to a new RP.",
                 "Never reuse a prior rp_id for unrelated work and never treat a new RP as replacement for an earlier RP.",
                 "On INTERPRET_ANALYSIS_RESULT, state what you learned in analysis_interpretation whether or not it is significant enough to promote as a finding.",
-                "On scientific closure, rp_id identifies the RP being closed and close_reason states your scientific reason.",
+                "On final scientific closure, rp_id identifies the RP being closed and close_reason states your scientific reason.",
             ]
         )
         return [
@@ -138,8 +143,6 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
                 return "continuing decision requires next_request"
             if not request.rp_id:
                 return "next_request requires nonblank rp_id"
-            if request.rp_id != decision.rp_id:
-                return "next_request rp_id must equal decision rp_id"
             if not request.question_id:
                 return "next_request requires nonblank question_id"
         if operation == "INTERPRET_ANALYSIS_RESULT":
