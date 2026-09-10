@@ -9,14 +9,16 @@ from .checkpoint import CampaignCheckpoint, CheckpointError, JsonCampaignCheckpo
 from .contracts import EvidenceDescriptor, ResearchDecision, SubjectMetadata
 from .orchestrator import ResearchLoopOrchestrator, ResearchLoopOutcome
 from .recovery import CampaignRecovery, EvidenceContinuityStatus, RecoveryAssessment
+from .research_recording import CampaignResearchRecorder
 
 
 class CheckpointedCampaignRunner:
     """Operational campaign lifecycle around the scientific research loop.
 
-    This layer owns restart mechanics only. It does not decide what evidence
-    changes mean scientifically, what question to ask, what Analysis to run, or
-    when scientific convergence has been reached.
+    This layer owns restart mechanics and durable recording only. It does not
+    decide what evidence changes mean scientifically, what question to ask, what
+    Analysis to run, how questions relate, what findings matter, or when
+    scientific convergence has been reached.
     """
 
     def __init__(
@@ -25,10 +27,12 @@ class CheckpointedCampaignRunner:
         orchestrator: ResearchLoopOrchestrator,
         cache: TemporaryResearchCache,
         checkpoint_store: JsonCampaignCheckpointStore,
+        research_recorder: CampaignResearchRecorder | None = None,
     ) -> None:
         self._orchestrator = orchestrator
         self._cache = cache
         self._store = checkpoint_store
+        self._research_recorder = research_recorder
 
     def run_new(
         self,
@@ -104,6 +108,14 @@ class CheckpointedCampaignRunner:
         durable_evidence = tuple(item.durable_metadata() for item in evidence)
 
         def save(decision: ResearchDecision, decisions: int, analyses: int) -> None:
+            if self._research_recorder is not None:
+                self._research_recorder.record_decision(
+                    campaign_id=campaign_id,
+                    subject=subject,
+                    decision=decision,
+                    decision_sequence=decisions,
+                    analyses_executed=analyses,
+                )
             self._store.save(
                 CampaignCheckpoint(
                     campaign_id=campaign_id,
@@ -124,9 +136,9 @@ class CheckpointedCampaignRunner:
     ) -> None:
         if not outcome.closed:
             return
-        # The orchestrator publishes RD-promoted findings before returning a
-        # closed outcome. Only then may campaign-local reproducible evidence be
-        # released. Deterministic code does not decide scientific closure.
+        # The orchestrator publishes RD-promoted findings and the campaign
+        # callback durably records the final RD decision/RP closure before this
+        # method runs. Scientific history therefore survives checkpoint cleanup.
         for item in evidence:
             try:
                 self._cache.release(item.cache_key)
