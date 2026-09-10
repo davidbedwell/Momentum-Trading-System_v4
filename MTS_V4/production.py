@@ -27,8 +27,10 @@ def build_production_runtime(config: ProductionRuntimeConfig) -> ProductionRunti
     is actually invoked by a campaign.
     """
     config.state_dir.mkdir(parents=True, exist_ok=True)
+    package_store = JsonResearchPackageStore(config.research_packages_path)
     rd_config = config.research_director
     rd = ResearchPackageAwareResearchDirector(
+        research_package_store=package_store,
         base_url=rd_config.base_url,
         model=rd_config.model,
         api_key=rd_config.api_key,
@@ -40,7 +42,7 @@ def build_production_runtime(config: ProductionRuntimeConfig) -> ProductionRunti
         max_contract_repairs=config.max_contract_repairs,
     )
     recorder = CampaignResearchRecorder(
-        package_store=JsonResearchPackageStore(config.research_packages_path),
+        package_store=package_store,
         decision_journal=JsonResearchDecisionJournal(config.rd_decision_journal_path),
     )
     runner = CheckpointedCampaignRunner(
