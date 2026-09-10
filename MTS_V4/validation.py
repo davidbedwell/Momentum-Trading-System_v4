@@ -73,14 +73,22 @@ class ObjectiveContractValidator:
             if item is None:
                 if str(evidence_id).startswith("analysis-result:"):
                     message = (
-                        f"Evidence reference does not exist: {evidence_id}. "
-                        "analysis-result IDs are not evidence_ids; prior Analysis outputs must be "
-                        "referenced through analysis_inputs using the exact result_id and output_path. "
-                        "If acquired evidence is also required, reference its exact current evidence ID "
-                        "separately in evidence_ids."
+                        f"Evidence reference does not exist in the active campaign runtime: {evidence_id}. "
+                        "Do not reuse this unavailable identifier in the repaired request. analysis-result IDs "
+                        "are not evidence_ids; prior Analysis outputs must be referenced through analysis_inputs "
+                        "using an exact result_id that is currently available in the active campaign runtime and "
+                        "an exact output_path. If acquired evidence is required, use an exact currently advertised "
+                        "evidence_id from the active evidence inventory if scientifically appropriate. Deterministic "
+                        "code will not select a replacement or scientific direction."
                     )
                 else:
-                    message = f"Evidence reference does not exist: {evidence_id}"
+                    message = (
+                        f"Evidence reference does not exist in the active campaign runtime: {evidence_id}. "
+                        "Do not reuse this unavailable evidence_id in the repaired request. If the same scientific "
+                        "work is still desired, select an exact currently advertised evidence_id from the active "
+                        "evidence inventory if scientifically appropriate, or choose another scientific direction. "
+                        "Deterministic code will not select a replacement or scientific direction."
+                    )
                 defects.append(
                     ContractDefect(
                         code="MISSING_EVIDENCE",
@@ -188,9 +196,14 @@ class ObjectiveContractValidator:
                 ContractDefect(
                     code="MISSING_ANALYSIS_RESULT",
                     message=(
-                        f"Prior Analysis result is unavailable in the active campaign runtime: "
-                        f"{reference.result_id}. The Research Director may regenerate the needed "
-                        "derived result from available evidence if scientifically appropriate."
+                        f"Prior Analysis result payload is unavailable in the active campaign runtime: "
+                        f"{reference.result_id}. Do not reference this unavailable result_id again in "
+                        "analysis_inputs of the repaired request. If the same scientific work is still desired, "
+                        "the Research Director may reconstruct or regenerate the needed intermediate result by "
+                        "issuing a new executable Analysis request from currently available evidence or other "
+                        "currently available Analysis outputs, or may choose another scientific direction. "
+                        "A regenerated execution requires its own new request_id. Deterministic code will not "
+                        "select the replacement inputs, method, parameters, or scientific direction."
                     ),
                     field="analysis_inputs",
                     method_id=request.method_id,
