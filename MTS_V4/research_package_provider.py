@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import replace
+from dataclasses import asdict, replace
 import json
 from typing import Mapping, Sequence
 
@@ -18,6 +18,8 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
     transport validates representation only; it never chooses those scientific
     relationships for RD.
     """
+
+    _MAX_RP_REPRESENTATION_REPAIRS = 3
 
     def __init__(
         self,
@@ -132,33 +134,47 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             mission=mission,
             payload=enriched_payload,
         )
-        repaired = self._chat_completion(
-            messages
-            + [
-                {
-                    "role": "user",
-                    "content": json.dumps(
-                        {
-                            "operation": "REPAIR_RESEARCH_PACKAGE_REPRESENTATION",
-                            "decode_defect": defect,
-                            "instruction": (
-                                "Return one complete corrected decision JSON object. You retain full "
-                                "scientific authority over RP identity, question lineage, interpretation, "
-                                "and next direction. Deterministic code will not invent or select any of "
-                                "those values; it only requires their explicit representation."
-                            ),
-                        },
-                        sort_keys=True,
-                        separators=(",", ":"),
-                    ),
-                }
-            ]
+        for _ in range(self._MAX_RP_REPRESENTATION_REPAIRS):
+            repaired = self._chat_completion(
+                messages
+                + [
+                    {
+                        "role": "assistant",
+                        "content": json.dumps(
+                            asdict(decision),
+                            sort_keys=True,
+                            default=str,
+                            separators=(",", ":"),
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": json.dumps(
+                            {
+                                "operation": "REPAIR_RESEARCH_PACKAGE_REPRESENTATION",
+                                "decode_defect": defect,
+                                "instruction": (
+                                    "Return one complete corrected decision JSON object. Correct the exact "
+                                    "objective lineage defect identified above. You retain full scientific "
+                                    "authority over RP identity, question lineage, interpretation, and next "
+                                    "direction. Deterministic code will not invent, replace, or select any of "
+                                    "those values; it only validates their explicit representation."
+                                ),
+                            },
+                            sort_keys=True,
+                            separators=(",", ":"),
+                        ),
+                    },
+                ]
+            )
+            decision = ResearchDecisionCodec.decode(repaired)
+            defect = self._rp_representation_defect(operation, decision, enriched_payload)
+            if defect is None:
+                return decision
+
+        raise ValueError(
+            "research package representation repair budget exhausted: " + defect
         )
-        decision = ResearchDecisionCodec.decode(repaired)
-        second_defect = self._rp_representation_defect(operation, decision, enriched_payload)
-        if second_defect is not None:
-            raise ValueError(second_defect)
-        return decision
 
     @staticmethod
     def _rp_representation_defect(
