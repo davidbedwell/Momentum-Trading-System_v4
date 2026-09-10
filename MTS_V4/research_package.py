@@ -13,6 +13,110 @@ def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+PREDICTIVE_VERIFICATION_SUCCESS_THRESHOLD = 0.60
+PREDICTIVE_STATUS_TENTATIVE = "TENTATIVE"
+PREDICTIVE_STATUS_VERIFIED = "VERIFIED"
+PREDICTIVE_STATUS_NOT_VERIFIED = "NOT_VERIFIED"
+
+
+@dataclass(frozen=True, slots=True)
+class PredictiveValidationTrialRecord:
+    trial_id: str
+    result_id: str
+    success: bool
+    research_phase: str
+    contains_future_information: bool
+    created_at: str = field(default_factory=_utc_now)
+
+
+@dataclass(frozen=True, slots=True)
+class PredictiveHypothesisRecord:
+    """Frozen predictive proposition plus cumulative blind-verification record.
+
+    RD authors the proposition, success definition, and predeclared minimum trial
+    count. Human governance fixes the verification success-rate floor at 0.60.
+    After creation the scientific proposition is immutable; only blind validation
+    trials may accumulate. A materially revised proposition requires a new
+    hypothesis_id and therefore a fresh verification record.
+    """
+
+    hypothesis_id: str
+    statement: str
+    success_definition: str
+    minimum_required_trials: int
+    source_result_ids: tuple[str, ...] = ()
+    discovered_with_lookahead: bool = False
+    verification_requires_no_lookahead: bool = True
+    verification_success_threshold: float = PREDICTIVE_VERIFICATION_SUCCESS_THRESHOLD
+    status: str = PREDICTIVE_STATUS_TENTATIVE
+    trials: tuple[PredictiveValidationTrialRecord, ...] = ()
+    success_count: int = 0
+    failure_count: int = 0
+    success_rate: float | None = None
+    created_at: str = field(default_factory=_utc_now)
+    updated_at: str = field(default_factory=_utc_now)
+
+    def __post_init__(self) -> None:
+        if not self.hypothesis_id.strip():
+            raise ResearchPackageError("predictive hypothesis_id cannot be blank")
+        if not self.statement.strip():
+            raise ResearchPackageError("predictive hypothesis statement cannot be blank")
+        if not self.success_definition.strip():
+            raise ResearchPackageError("predictive success_definition cannot be blank")
+        if self.minimum_required_trials <= 0:
+            raise ResearchPackageError("predictive minimum_required_trials must be positive")
+        if self.verification_success_threshold != PREDICTIVE_VERIFICATION_SUCCESS_THRESHOLD:
+            raise ResearchPackageError(
+                "predictive verification_success_threshold is governed at 0.60"
+            )
+        if self.status not in {
+            PREDICTIVE_STATUS_TENTATIVE,
+            PREDICTIVE_STATUS_VERIFIED,
+            PREDICTIVE_STATUS_NOT_VERIFIED,
+        }:
+            raise ResearchPackageError(f"invalid predictive hypothesis status: {self.status}")
+
+    def record_validation_trial(
+        self,
+        trial: PredictiveValidationTrialRecord,
+    ) -> "PredictiveHypothesisRecord":
+        if trial.research_phase != "VALIDATION":
+            raise ResearchPackageError(
+                "predictive verification trial must come from VALIDATION research_phase"
+            )
+        if trial.contains_future_information:
+            raise ResearchPackageError(
+                "predictive verification trial may not contain look-ahead information"
+            )
+        if any(item.trial_id == trial.trial_id for item in self.trials):
+            raise ResearchPackageError(f"duplicate predictive trial_id: {trial.trial_id}")
+        if any(item.result_id == trial.result_id for item in self.trials):
+            raise ResearchPackageError(
+                f"Analysis result already counted for predictive verification: {trial.result_id}"
+            )
+
+        trials = self.trials + (trial,)
+        success_count = sum(1 for item in trials if item.success)
+        failure_count = len(trials) - success_count
+        success_rate = success_count / len(trials)
+        if len(trials) < self.minimum_required_trials:
+            status = PREDICTIVE_STATUS_TENTATIVE
+        elif success_rate >= self.verification_success_threshold:
+            status = PREDICTIVE_STATUS_VERIFIED
+        else:
+            status = PREDICTIVE_STATUS_NOT_VERIFIED
+
+        return replace(
+            self,
+            trials=trials,
+            success_count=success_count,
+            failure_count=failure_count,
+            success_rate=success_rate,
+            status=status,
+            updated_at=_utc_now(),
+        )
+
+
 @dataclass(frozen=True, slots=True)
 class ResearchQuestionRecord:
     question_id: str
@@ -34,6 +138,8 @@ class ResearchAnalysisRecord:
     result_id: str | None = None
     execution_status: str | None = None
     interpretation: str | None = None
+    research_phase: str = "EXPLORATION"
+    future_information: Mapping[str, Any] = field(default_factory=dict)
     created_at: str = field(default_factory=_utc_now)
 
 
@@ -54,6 +160,7 @@ class ResearchPackage:
     created_by: str = "AI_RESEARCH_DIRECTOR"
     parent_rp_id: str | None = None
     hypotheses: tuple[Mapping[str, Any], ...] = ()
+    predictive_hypotheses: tuple[PredictiveHypothesisRecord, ...] = ()
     questions: tuple[ResearchQuestionRecord, ...] = ()
     analyses: tuple[ResearchAnalysisRecord, ...] = ()
     findings: tuple[Mapping[str, Any], ...] = ()
@@ -105,6 +212,7 @@ class ResearchPackage:
         result_id: str,
         execution_status: str | None,
         interpretation: str | None,
+        future_information: Mapping[str, Any] | None = None,
     ) -> "ResearchPackage":
         self._require_open()
         matches = [index for index, item in enumerate(self.analyses) if item.request_id == request_id]
@@ -123,6 +231,7 @@ class ResearchPackage:
             result_id=result_id,
             execution_status=execution_status,
             interpretation=interpretation,
+            future_information=dict(future_information or {}),
         )
         analyses = list(self.analyses)
         analyses[index] = updated
@@ -131,6 +240,44 @@ class ResearchPackage:
     def append_hypothesis(self, hypothesis: Mapping[str, Any]) -> "ResearchPackage":
         self._require_open()
         return self._evolve(hypotheses=self.hypotheses + (dict(hypothesis),))
+
+    def append_predictive_hypothesis(
+        self,
+        hypothesis: PredictiveHypothesisRecord,
+    ) -> "ResearchPackage":
+        self._require_open()
+        if any(
+            item.hypothesis_id == hypothesis.hypothesis_id
+            for item in self.predictive_hypotheses
+        ):
+            raise ResearchPackageError(
+                f"duplicate predictive hypothesis_id: {hypothesis.hypothesis_id}"
+            )
+        return self._evolve(
+            predictive_hypotheses=self.predictive_hypotheses + (hypothesis,)
+        )
+
+    def record_predictive_validation_trial(
+        self,
+        *,
+        hypothesis_id: str,
+        trial: PredictiveValidationTrialRecord,
+    ) -> "ResearchPackage":
+        self._require_open()
+        matches = [
+            index
+            for index, item in enumerate(self.predictive_hypotheses)
+            if item.hypothesis_id == hypothesis_id
+        ]
+        if len(matches) != 1:
+            raise ResearchPackageError(
+                f"predictive validation requires exactly one hypothesis match: {hypothesis_id}"
+            )
+        index = matches[0]
+        updated = self.predictive_hypotheses[index].record_validation_trial(trial)
+        hypotheses = list(self.predictive_hypotheses)
+        hypotheses[index] = updated
+        return self._evolve(predictive_hypotheses=tuple(hypotheses))
 
     def append_finding(self, finding: Mapping[str, Any]) -> "ResearchPackage":
         self._require_open()
