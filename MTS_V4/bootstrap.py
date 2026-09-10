@@ -8,6 +8,7 @@ from .cache import TemporaryResearchCache
 from .concept_library import ResearchConceptLibrary, seed_market_concepts
 from .cross_evidence import cross_evidence_analysis_method, cross_evidence_method_spec
 from .execution_interface import TransparentInputBindingValidator
+from .group_aggregation import group_aggregation_analysis_method, group_aggregation_method_spec
 from .interfaces import ResearchDirectorProvider
 from .method_catalog import MethodCatalog
 from .nexus import InMemoryResearchNexus, ResearchNexus
@@ -63,6 +64,7 @@ def build_runtime(
     catalog = standard_method_catalog()
     catalog.register(cross_evidence_method_spec())
     catalog.register(scientific_toolkit_method_spec())
+    catalog.register(group_aggregation_method_spec())
     concepts = concept_library or seed_market_concepts()
     validator = TransparentInputBindingValidator(catalog)
     analysis = ExactMethodAnalysisExecutor()
@@ -70,6 +72,7 @@ def build_runtime(
         analysis.register(method)
     analysis.register(cross_evidence_analysis_method())
     analysis.register(scientific_toolkit_analysis_method())
+    analysis.register(group_aggregation_analysis_method())
 
     orchestrator = ResearchLoopOrchestrator(
         mission=mission,
