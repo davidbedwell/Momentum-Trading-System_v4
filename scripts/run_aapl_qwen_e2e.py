@@ -14,13 +14,13 @@ from MTS_V4.contracts import ResearchDecision, SubjectMetadata
 from MTS_V4.decision_journal import JsonResearchDecisionJournal
 from MTS_V4.intake import IntakeEngine
 from MTS_V4.live_sources import standard_live_market_source
-from MTS_V4.research_package_provider import ResearchPackageAwareResearchDirector
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.research_recording import CampaignResearchRecorder
+from MTS_V4.rp_appeal_provider import RPRepresentationAppellateResearchDirector
 from MTS_V4.sol_provider import SolResearchPackageAwareResearchDirector
 
 
-class DiagnosticResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirector):
+class DiagnosticResearchPackageAwareResearchDirector(RPRepresentationAppellateResearchDirector):
     """Live-run diagnostic wrapper that exposes objective RP representation defects."""
 
     def _decision_representation_defect(
@@ -94,16 +94,17 @@ def main() -> None:
         resume = False
 
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
-    primary_rd = DiagnosticResearchPackageAwareResearchDirector(
-        research_package_store=package_store,
-        timeout_seconds=timeout_seconds,
-    )
     sol_rd = SolResearchPackageAwareResearchDirector(
         research_package_store=package_store,
         base_url=_required_env("MTS_SOL_BASE_URL"),
         model=_required_env("MTS_SOL_MODEL"),
         api_key=_required_env("MTS_SOL_API_KEY"),
         timeout_seconds=sol_timeout_seconds,
+    )
+    primary_rd = DiagnosticResearchPackageAwareResearchDirector(
+        appeal=sol_rd,
+        research_package_store=package_store,
+        timeout_seconds=timeout_seconds,
     )
     rd = AppellateResearchDirector(
         primary=primary_rd,
@@ -141,6 +142,7 @@ def main() -> None:
     print("RD_PRIMARY_PROVIDER=LOCAL_QWEN", flush=True)
     print(f"RD_APPEAL_PROVIDER={_required_env('MTS_SOL_MODEL')}", flush=True)
     print("RD_APPEAL_AFTER_PRIMARY_REPAIRS=3", flush=True)
+    print("RD_RP_REPRESENTATION_APPEAL_AFTER_PRIMARY_REPAIRS=3", flush=True)
     print(f"EVIDENCE_COUNT={len(evidence)}", flush=True)
     for item in evidence:
         print(
