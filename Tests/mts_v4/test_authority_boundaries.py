@@ -157,7 +157,8 @@ class V4AuthorityBoundaryTests(unittest.TestCase):
         self.assertEqual(defects[0].field, "evidence_ids")
         self.assertIn("analysis-result IDs are not evidence_ids", defects[0].message)
         self.assertIn("analysis_inputs", defects[0].message)
-        self.assertIn("result_id and output_path", defects[0].message)
+        self.assertIn("exact result_id", defects[0].message)
+        self.assertIn("exact output_path", defects[0].message)
         self.assertEqual(request.evidence_ids, (result_id,))
         self.assertEqual(request.analysis_inputs, ())
 
