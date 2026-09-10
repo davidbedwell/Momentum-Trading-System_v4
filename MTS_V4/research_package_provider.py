@@ -64,6 +64,7 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
                 "Create a new next_request.rp_id only when you judge a materially distinct research proposition has emerged; when it is a child of prior work, identify parent_rp_id yourself.",
                 "decision.rp_id identifies the RP owning the current interpretation/findings; next_request.rp_id identifies the RP owning the next question. They normally match, but may differ when you intentionally branch to a new RP.",
                 "Never reuse a prior rp_id for unrelated work and never treat a new RP as replacement for an earlier RP.",
+                "On INTERPRET_ANALYSIS_RESULT, decision.rp_id must be the same RP as the Analysis request being interpreted.",
                 "On INTERPRET_ANALYSIS_RESULT, state what you learned in analysis_interpretation whether or not it is significant enough to promote as a finding.",
                 "On final scientific closure, rp_id identifies the RP being closed and close_reason states your scientific reason.",
             ]
@@ -93,7 +94,7 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             mission=mission,
             payload=payload,
         )
-        defect = self._rp_representation_defect(operation, decision)
+        defect = self._rp_representation_defect(operation, decision, payload)
         if defect is None:
             return decision
 
@@ -125,7 +126,7 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             ]
         )
         decision = ResearchDecisionCodec.decode(repaired)
-        second_defect = self._rp_representation_defect(operation, decision)
+        second_defect = self._rp_representation_defect(operation, decision, payload)
         if second_defect is not None:
             raise ValueError(second_defect)
         return decision
@@ -134,6 +135,7 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
     def _rp_representation_defect(
         operation: str,
         decision: ResearchDecision,
+        payload: Mapping[str, object],
     ) -> str | None:
         if not decision.rp_id:
             return "decision requires nonblank rp_id"
@@ -145,7 +147,20 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
                 return "next_request requires nonblank rp_id"
             if not request.question_id:
                 return "next_request requires nonblank question_id"
+            if operation == "BEGIN_RESEARCH" and request.rp_id != decision.rp_id:
+                return "BEGIN_RESEARCH decision.rp_id must equal next_request.rp_id"
         if operation == "INTERPRET_ANALYSIS_RESULT":
+            analysis_request = payload.get("analysis_request")
+            interpreted_rp_id = (
+                analysis_request.get("rp_id")
+                if isinstance(analysis_request, Mapping)
+                else None
+            )
+            if interpreted_rp_id and decision.rp_id != interpreted_rp_id:
+                return (
+                    "INTERPRET_ANALYSIS_RESULT decision.rp_id must equal the interpreted "
+                    "Analysis request rp_id"
+                )
             if not decision.analysis_interpretation or not decision.analysis_interpretation.strip():
                 return "INTERPRET_ANALYSIS_RESULT requires substantive analysis_interpretation"
         return None
