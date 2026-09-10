@@ -52,19 +52,28 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
             payload=payload,
         )
         system = messages[0]["content"] + (
-            " Every decision must identify the durable research package to which the current "
-            "interpretation/findings belong with rp_id. Every next_request must also include rp_id, "
-            "question_id, parent_question_id, and parent_rp_id. You decide whether a follow-up remains "
-            "in the existing RP or starts a new child RP; deterministic code only preserves the lineage "
-            "you author. A later RP never overwrites an earlier RP. A question may not name itself as "
-            "its parent, and an RP may not name itself as its parent. Every new Analysis execution "
-            "attempt must use a request_id that has not already been durably used. A prior Analysis "
-            "result is chainable through analysis_inputs only when its execution_status is SUCCESS, and "
-            "only through an exact output_path advertised in that result's reusable_derived_datasets "
-            "catalog. ERROR results and results with an empty reusable_derived_datasets catalog have zero "
-            "chainable outputs. When interpreting an Analysis result, provide a substantive "
-            "analysis_interpretation even when no finding is promoted. Predictive relationships discovered "
-            "before blind verification are tentative hypotheses, not verified predictive findings."
+            " The central scientific purpose of MTS is prospective predictive discovery: during "
+            "EXPLORATION, actively seek scientifically defensible relationships between information "
+            "observable at time T and subsequent market behavior at T+1 onward. Historical look-ahead "
+            "is a legitimate exploratory discovery tool when scientifically useful. Do not stop at "
+            "contemporaneous description when the evidence supports investigation of direction, magnitude, "
+            "timing, continuation or reversal, path quality, or cross-evidence predictive structure. "
+            "Do not manufacture positive predictive claims; reject unsupported candidates as readily as "
+            "you advance promising ones. A falsifiable hypothesis that later fails blind validation is "
+            "scientifically useful. The strict no-look-ahead rule applies to the prediction stage of "
+            "VALIDATION, not to exploratory discovery. Every decision must identify the durable research "
+            "package to which the current interpretation/findings belong with rp_id. Every next_request "
+            "must also include rp_id, question_id, parent_question_id, and parent_rp_id. You decide whether "
+            "a follow-up remains in the existing RP or starts a new child RP; deterministic code only "
+            "preserves the lineage you author. A later RP never overwrites an earlier RP. A question may "
+            "not name itself as its parent, and an RP may not name itself as its parent. Every new Analysis "
+            "execution attempt must use a request_id that has not already been durably used. A prior Analysis "
+            "result is chainable through analysis_inputs only when its execution_status is SUCCESS, and only "
+            "through an exact output_path advertised in that result's reusable_derived_datasets catalog. "
+            "ERROR results and results with an empty reusable_derived_datasets catalog have zero chainable "
+            "outputs. When interpreting an Analysis result, provide a substantive analysis_interpretation "
+            "even when no finding is promoted. Predictive relationships discovered before blind verification "
+            "are tentative hypotheses, not verified predictive findings."
         )
         user = json.loads(messages[1]["content"])
         schema = user["required_decision_schema"]
@@ -103,6 +112,11 @@ class ResearchPackageAwareResearchDirector(OpenAICompatibleResearchDirector):
         )
         user["instructions"].extend(
             [
+                "During EXPLORATION, treat prospective predictive discovery as the central scientific objective of MTS. Actively ask whether information observable at time T precedes or improves prediction of subsequent direction, magnitude, timing, continuation or reversal, path quality, or interactions among evidence streams.",
+                "Historical look-ahead is explicitly allowed during EXPLORATION when scientifically useful for discovering candidate predictive structure, horizons, conditions, or interactions. This permission should encourage prospective investigation, not merely permit it.",
+                "Do not stop at contemporaneous or descriptive findings when they create a scientifically plausible opportunity to test subsequent behavior. Use descriptive results as stepping stones when appropriate, then investigate whether they have prospective force.",
+                "Do not manufacture a predictive relationship to satisfy the mission. Reject unsupported candidates freely. A clear predictive hypothesis that later fails blind verification is valuable scientific knowledge and should not be avoided because it may fail.",
+                "Keep the phase distinction strict: exploratory look-ahead is a discovery capability; blind VALIDATION must protect the prediction stage from future information. Never generalize validation restrictions backward into EXPLORATION.",
                 "Use context.research_packages as durable scientific memory for prior/open RP identity, lineage, findings, predictive hypotheses, unresolved issues, and closure assessments.",
                 "Keep follow-up questions under the same rp_id when they continue the same coherent scientific line; assign parent_question_id to the different prior question that caused the follow-up.",
                 "Create a new next_request.rp_id only when you judge a materially distinct research proposition has emerged; when it is a child of prior work, identify the different parent_rp_id yourself.",
