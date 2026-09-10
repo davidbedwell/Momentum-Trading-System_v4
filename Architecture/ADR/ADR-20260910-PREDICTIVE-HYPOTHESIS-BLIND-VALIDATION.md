@@ -5,9 +5,15 @@ Status: Approved; lifecycle bookkeeping and historical blind-data boundary imple
 
 ## Decision
 
-MTS v4 distinguishes exploratory predictive discovery from blind predictive verification.
+MTS v4 distinguishes exploratory predictive discovery from blind predictive verification because both are necessary to the system's governing purpose.
 
-During EXPLORATION, the AI Research Director may use look-ahead information when scientifically appropriate to discover candidate predictive relationships. A relationship that RD judges potentially predictive is preserved as a frozen predictive hypothesis with status `TENTATIVE` pending verification without look-ahead knowledge.
+MTS exists to discover reproducible relationships between information observable at time T and subsequent market behavior at T+1 onward. It is not primarily a descriptive market-analysis system. During EXPLORATION, the AI Research Director is therefore positively directed to seek scientifically defensible prospective relationships rather than merely being permitted to notice them.
+
+During EXPLORATION, the AI Research Director may use historical look-ahead where scientifically useful to investigate whether present-time conditions precede or discriminate subsequent direction, magnitude, timing, continuation or reversal, path quality, or interactions among evidence streams. Descriptive and contemporaneous findings may be valuable stepping stones when they help expose predictive structure.
+
+This encouragement is not a requirement to manufacture positive results. RD should reject unsupported candidate relationships as readily as it advances promising ones. A falsifiable predictive hypothesis that later fails verification remains useful scientific knowledge.
+
+A relationship that RD judges potentially predictive is preserved as a frozen predictive hypothesis with status `TENTATIVE` pending verification without look-ahead knowledge.
 
 The AI Research Director authors the predictive proposition, the objective success definition for an individual trial, and a scientifically appropriate positive minimum number of blind validation trials before blind testing begins. Deterministic code does not invent those scientific values.
 
@@ -67,6 +73,8 @@ The sandbox refuses to reveal post-cutoff outcome rows until a prediction statem
 This is an objective withholding mechanism, not a scientific selection mechanism. Qwen remains responsible for trial design, what the frozen hypothesis predicts, what evidence is scientifically relevant, and interpretation of the blind outcome.
 
 A historical trial must not be counted as genuinely blind merely because an Analysis method is labeled `VALIDATION`; the prediction stage must use the masked cache, masked descriptors, isolated Nexus, and blind RD context described above.
+
+The strict validation boundary must never be generalized backward into EXPLORATION. Its purpose is to protect the credibility of predictive claims discovered during exploration, not to reduce Qwen's freedom or incentive to discover those claims.
 
 ## Nexus representation
 
