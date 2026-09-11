@@ -53,7 +53,7 @@ def test_empty_executable_validation_set_exposes_only_exploration_and_rejects_va
     assert payload["human_governance"]["mechanically_executable_validation_hypothesis_ids"] == []
 
 
-def test_exact_executable_hypothesis_can_be_selected_validation_first():
+def test_exact_executable_hypothesis_can_be_selected_validation_first_on_unseen_subject():
     selector, rd = _selector(
         {
             "subject_id": "equity:JPM",
@@ -65,19 +65,50 @@ def test_exact_executable_hypothesis_can_be_selected_validation_first():
     )
     decision = selector.choose_next(
         mission="predict T+1 onward",
-        previously_seen=("equity:AAPL",),
+        previously_seen=("equity:NVDA",),
         candidate_subject_ids=("equity:NVDA", "equity:JPM"),
     )
     assert decision.mode == "VALIDATION_FIRST"
     assert decision.hypothesis_id == "H-CROSS-1"
     payload = json.loads(rd.calls[0][1]["content"])
-    assert payload["human_governance"]["allowed_selection_modes"] == [
-        "EXPLORATION",
-        "VALIDATION_FIRST",
-    ]
-    assert payload["human_governance"]["mechanically_executable_validation_hypothesis_ids"] == [
-        "H-CROSS-1"
-    ]
+    assert payload["human_governance"]["blind_validation_requires_unseen_subject"] is True
+
+
+def test_validation_first_rejects_previously_researched_subject():
+    selector, _ = _selector(
+        {
+            "subject_id": "equity:JPM",
+            "rationale": "Attempt blind validation on a previously researched subject.",
+            "mode": "VALIDATION_FIRST",
+            "hypothesis_id": "H-CROSS-1",
+        },
+        validatable=frozenset({"H-CROSS-1"}),
+    )
+    with pytest.raises(ValueError, match="requires a subject unseen"):
+        selector.choose_next(
+            mission="predict T+1 onward",
+            previously_seen=("equity:JPM",),
+            candidate_subject_ids=("equity:NVDA", "equity:JPM"),
+        )
+
+
+def test_previously_researched_subject_remains_available_for_exploration():
+    selector, _ = _selector(
+        {
+            "subject_id": "equity:JPM",
+            "rationale": "Revisit prior negative result under a new research question.",
+            "mode": "EXPLORATION",
+            "hypothesis_id": None,
+        },
+        validatable=frozenset({"H-CROSS-1"}),
+    )
+    decision = selector.choose_next(
+        mission="predict T+1 onward",
+        previously_seen=("equity:JPM",),
+        candidate_subject_ids=("equity:NVDA", "equity:JPM"),
+    )
+    assert decision.subject_id == "equity:JPM"
+    assert decision.mode == "EXPLORATION"
 
 
 def test_validation_first_rejects_hypothesis_outside_executable_set():
@@ -93,12 +124,12 @@ def test_validation_first_rejects_hypothesis_outside_executable_set():
     with pytest.raises(ValueError, match="not mechanically executable"):
         selector.choose_next(
             mission="predict T+1 onward",
-            previously_seen=("equity:AAPL",),
+            previously_seen=("equity:NVDA",),
             candidate_subject_ids=("equity:NVDA", "equity:JPM"),
         )
 
 
-def test_legacy_none_preserves_unrestricted_selector_contract():
+def test_legacy_none_preserves_unrestricted_selector_contract_for_unseen_validation():
     selector, rd = _selector(
         {
             "subject_id": "equity:NVDA",
@@ -110,7 +141,7 @@ def test_legacy_none_preserves_unrestricted_selector_contract():
     )
     decision = selector.choose_next(
         mission="predict T+1 onward",
-        previously_seen=("equity:AAPL",),
+        previously_seen=("equity:JPM",),
         candidate_subject_ids=("equity:NVDA", "equity:JPM"),
     )
     assert decision.hypothesis_id == "H-LEGACY"
