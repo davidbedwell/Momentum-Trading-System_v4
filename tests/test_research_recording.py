@@ -14,6 +14,7 @@ def request(
     question: str,
     parent_question_id: str | None = None,
     parent_rp_id: str | None = None,
+    parameters: dict | None = None,
 ) -> AnalysisRequest:
     return AnalysisRequest(
         request_id=request_id,
@@ -21,7 +22,7 @@ def request(
         question=question,
         method_id="analysis.descriptive.statistics",
         evidence_ids=("evidence:equity:AAPL:1",),
-        parameters={"column": "close"},
+        parameters={"column": "close"} if parameters is None else parameters,
         research_phase=ResearchPhase.EXPLORATION,
         rationale="AI-authored rationale",
         rp_id=rp_id,
@@ -178,6 +179,63 @@ def test_campaign_recorder_preserves_rps_question_lineage_interpretation_and_jou
     records = journal.records("campaign:aapl")
     assert [item["decision_sequence"] for item in records] == [1, 2, 3, 4]
     assert records[-1]["decision"]["close_reason"] == "AI_RD_SCIENTIFIC_CLOSURE"
+
+
+def test_decision_journal_projects_out_raw_and_cache_fields_without_changing_live_request(tmp_path):
+    packages = JsonResearchPackageStore(tmp_path / "research_packages")
+    journal = JsonResearchDecisionJournal(tmp_path / "rd_decisions.jsonl")
+    recorder = CampaignResearchRecorder(
+        package_store=packages,
+        decision_journal=journal,
+    )
+    subject = SubjectMetadata(subject_id="equity:AAPL", ticker="AAPL")
+    live_parameters = {
+        "column": "close",
+        "rows": [{"date": "2026-01-02", "close": 100.0}],
+        "nested": {
+            "cache_key": "temporary:evidence:1",
+            "payload": {"raw": [1, 2, 3]},
+            "keep": "scientific-parameter",
+        },
+    }
+    next_request = request(
+        request_id="req:raw-boundary",
+        rp_id="RP-RAW",
+        question_id="Q-RAW",
+        question="Can the durable journal exclude temporary material?",
+        parameters=live_parameters,
+    )
+    decision = ResearchDecision(
+        continue_research=True,
+        next_request=next_request,
+        rp_id="RP-RAW",
+        research_state={
+            "note": "preserve me",
+            "derived_datasets": [{"temporary": True}],
+        },
+    )
+
+    recorder.record_decision(
+        campaign_id="campaign:raw-boundary",
+        subject=subject,
+        decision=decision,
+        decision_sequence=1,
+        analyses_executed=0,
+    )
+
+    # Execution object is untouched: journaling is a projection, not mutation.
+    assert decision.next_request is not None
+    assert decision.next_request.parameters == live_parameters
+
+    record = journal.records("campaign:raw-boundary")[0]
+    serialized_decision = record["decision"]
+    assert serialized_decision["next_request"]["parameters"]["column"] == "close"
+    assert serialized_decision["next_request"]["parameters"]["nested"]["keep"] == "scientific-parameter"
+    assert "rows" not in serialized_decision["next_request"]["parameters"]
+    assert "cache_key" not in serialized_decision["next_request"]["parameters"]["nested"]
+    assert "payload" not in serialized_decision["next_request"]["parameters"]["nested"]
+    assert "derived_datasets" not in serialized_decision["research_state"]
+    assert serialized_decision["research_state"]["note"] == "preserve me"
 
 
 def test_later_rp_does_not_overwrite_closed_prior_rp(tmp_path):
