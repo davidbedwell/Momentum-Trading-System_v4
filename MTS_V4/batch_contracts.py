@@ -58,11 +58,21 @@ class ResearchPackagePlan:
 
 
 @dataclass(frozen=True, slots=True)
+class ResearchPackageClosure:
+    """AI-authored closure of one Research Package after batch interpretation."""
+
+    rp_id: str
+    close_reason: str
+    final_assessment: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class BatchResearchDecision:
     """AI-authored program-level decision containing zero or more Research Packages."""
 
     continue_research: bool
     research_packages: tuple[ResearchPackagePlan, ...] = ()
+    rp_closures: tuple[ResearchPackageClosure, ...] = ()
     promote_findings: tuple[Finding, ...] = ()
     research_state: Mapping[str, Any] = field(default_factory=dict)
     close_reason: str | None = None
