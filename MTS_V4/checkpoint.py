@@ -30,6 +30,33 @@ class CampaignCheckpoint:
     metadata: Mapping[str, Any] | None = None
 
 
+_FORBIDDEN_DURABLE_KEYS = frozenset({"payload", "cache_key", "derived_datasets"})
+
+
+def _forbidden_checkpoint_paths(value: Any, *, path: str = "checkpoint") -> tuple[str, ...]:
+    """Return forbidden raw/cache structures without matching scientific text/counts.
+
+    ``rows`` is allowed when it is a scalar aggregate statistic (for example a
+    cohort sample count). A mapping/list/tuple under ``rows`` is reusable row data
+    and remains forbidden. Other explicitly raw/cache-local durable keys are
+    forbidden regardless of value type.
+    """
+    found: list[str] = []
+    if isinstance(value, Mapping):
+        for key, item in value.items():
+            key_text = str(key)
+            child_path = f"{path}.{key_text}"
+            if key_text in _FORBIDDEN_DURABLE_KEYS:
+                found.append(child_path)
+            elif key_text == "rows" and isinstance(item, (Mapping, list, tuple)):
+                found.append(child_path)
+            found.extend(_forbidden_checkpoint_paths(item, path=child_path))
+    elif isinstance(value, (tuple, list)):
+        for index, item in enumerate(value):
+            found.extend(_forbidden_checkpoint_paths(item, path=f"{path}[{index}]"))
+    return tuple(found)
+
+
 class JsonCampaignCheckpointStore:
     """Atomic JSON checkpoint store outside the Research Nexus."""
 
@@ -49,10 +76,13 @@ class JsonCampaignCheckpointStore:
             "decisions_made": checkpoint.decisions_made,
             "metadata": dict(checkpoint.metadata or {}),
         }
+        forbidden_paths = _forbidden_checkpoint_paths(document)
+        if forbidden_paths:
+            raise CheckpointError(
+                "campaign checkpoint attempted to persist raw/cache evidence data at: "
+                + ", ".join(forbidden_paths)
+            )
         serialized = json.dumps(document, indent=2, sort_keys=True, default=str) + "\n"
-        forbidden = ('"payload"', '"rows"', '"cache_key"')
-        if any(token in serialized for token in forbidden):
-            raise CheckpointError("campaign checkpoint attempted to persist raw/cache evidence data")
         self._path.parent.mkdir(parents=True, exist_ok=True)
         temporary = self._path.with_suffix(self._path.suffix + ".tmp")
         temporary.write_text(serialized, encoding="utf-8")
