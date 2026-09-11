@@ -7,14 +7,12 @@ import json
 import os
 from pathlib import Path
 
-from MTS_V4.batch_contracts import BatchExecutionReport, BatchResearchDecision
+from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
-from MTS_V4.decision_journal import JsonResearchDecisionJournal
 from MTS_V4.intake import IntakeEngine
 from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
-from MTS_V4.research_recording import CampaignResearchRecorder
 from MTS_V4.sol_batch_provider import SolBatchResearchDirector
 
 
@@ -28,45 +26,6 @@ def _required_env(name: str) -> str:
 def _append_jsonl(path: Path, payload) -> None:
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(payload, sort_keys=True, default=str, separators=(",", ":")) + "\n")
-
-
-def _record_report_packages(
-    package_store: JsonResearchPackageStore,
-    report: BatchExecutionReport,
-) -> None:
-    for record in report.records:
-        if record.compiled_request is None or record.result is None:
-            continue
-        package = package_store.load(record.rp_id)
-        if package is None:
-            raise RuntimeError(f"batch result references missing durable RP: {record.rp_id}")
-        future = record.result.execution_metadata.get("future_information", {})
-        evolved = package.record_analysis_outcome(
-            request_id=record.compiled_request.request_id,
-            result_id=record.result.result_id,
-            execution_status=record.result.execution_metadata.get("execution_status"),
-            interpretation=None,
-            future_information=future if isinstance(future, dict) else {"value": future},
-        )
-        package_store.save(evolved)
-
-
-def _record_rp_closures(
-    package_store: JsonResearchPackageStore,
-    decision: BatchResearchDecision,
-) -> None:
-    for closure in decision.rp_closures:
-        package = package_store.load(closure.rp_id)
-        if package is None:
-            raise RuntimeError(f"RP closure references missing package: {closure.rp_id}")
-        if package.status == "CLOSED":
-            continue
-        package_store.save(
-            package.close(
-                close_reason=closure.close_reason,
-                final_assessment=closure.final_assessment,
-            )
-        )
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -105,6 +64,7 @@ def main(argv: list[str] | None = None) -> int:
     state_dir.mkdir(parents=True, exist_ok=False)
     subject = SubjectMetadata(subject_id=f"equity:{ticker}", ticker=ticker)
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
+    recorder = BatchCampaignResearchRecorder(package_store=package_store)
     rd = SolBatchResearchDirector(
         research_package_store=package_store,
         base_url=_required_env("MTS_SOL_BASE_URL"),
@@ -124,23 +84,19 @@ def main(argv: list[str] | None = None) -> int:
         source=standard_live_market_source(),
     )
     campaign_id = f"mts-v4-sol-batched-{ticker.lower()}-{stamp}"
-    compatibility_recorder = CampaignResearchRecorder(
-        package_store=package_store,
-        decision_journal=JsonResearchDecisionJournal(state_dir / "compatibility_decisions_unused.jsonl"),
-    )
 
     decision_path = state_dir / "batch_decisions.jsonl"
     report_path = state_dir / "batch_reports.jsonl"
 
     def accepted(request):
-        compatibility_recorder.record_accepted_request(
+        recorder.record_accepted_request(
             campaign_id=campaign_id,
             subject=subject,
             request=request,
         )
 
     def on_report(report, decisions, analyses):
-        _record_report_packages(package_store, report)
+        recorder.record_report(report)
         _append_jsonl(
             report_path,
             {
@@ -152,7 +108,12 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     def on_decision(decision, decisions, analyses):
-        _record_rp_closures(package_store, decision)
+        recorder.record_plan(
+            campaign_id=campaign_id,
+            subject=subject,
+            decision=decision,
+        )
+        recorder.record_closures(decision)
         _append_jsonl(
             decision_path,
             {
