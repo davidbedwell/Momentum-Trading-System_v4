@@ -26,13 +26,20 @@ class RecordingAppeal:
 
 
 class RPRepresentationAppealTests(unittest.TestCase):
+    @staticmethod
+    def _director(tmp: str, appeal: RecordingAppeal):
+        return RPRepresentationAppellateResearchDirector(
+            appeal=appeal,
+            base_url="http://127.0.0.1:8000",
+            model="test-primary-rd",
+            api_key="",
+            research_package_store=JsonResearchPackageStore(Path(tmp) / "research_packages"),
+        )
+
     def test_exhausted_primary_representation_repairs_route_to_appeal(self):
         with tempfile.TemporaryDirectory() as tmp:
             appeal = RecordingAppeal()
-            rd = RPRepresentationAppellateResearchDirector(
-                appeal=appeal,
-                research_package_store=JsonResearchPackageStore(Path(tmp) / "research_packages"),
-            )
+            rd = self._director(tmp, appeal)
             exhausted = ValueError(
                 "research package representation repair budget exhausted: "
                 "parent_rp_id may not equal rp_id"
@@ -72,10 +79,7 @@ class RPRepresentationAppealTests(unittest.TestCase):
     def test_unrelated_value_error_is_not_escalated(self):
         with tempfile.TemporaryDirectory() as tmp:
             appeal = RecordingAppeal()
-            rd = RPRepresentationAppellateResearchDirector(
-                appeal=appeal,
-                research_package_store=JsonResearchPackageStore(Path(tmp) / "research_packages"),
-            )
+            rd = self._director(tmp, appeal)
             with patch.object(
                 ResearchPackageAwareResearchDirector,
                 "_request_decision",

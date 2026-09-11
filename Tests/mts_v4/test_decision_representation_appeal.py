@@ -31,6 +31,9 @@ class DecisionRepresentationAppealTests(unittest.TestCase):
     def _director(self, tmp: str, appeal: RecordingAppeal):
         return RPRepresentationAppellateResearchDirector(
             appeal=appeal,
+            base_url="http://127.0.0.1:8000",
+            model="test-primary-rd",
+            api_key="",
             research_package_store=JsonResearchPackageStore(Path(tmp) / "research_packages"),
         )
 

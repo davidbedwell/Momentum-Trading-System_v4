@@ -176,6 +176,11 @@ def test_recorder_freezes_hypothesis_locks_blind_predictions_then_scores_outcome
         decision_sequence=1,
         analyses_executed=0,
     )
+    recorder.record_accepted_request(
+        campaign_id="campaign:aapl",
+        subject=subject,
+        request=exploration_request,
+    )
 
     first_prediction_request = _request(
         request_id="req:prediction:1",
@@ -210,6 +215,11 @@ def test_recorder_freezes_hypothesis_locks_blind_predictions_then_scores_outcome
         ),
         decision_sequence=2,
         analyses_executed=1,
+    )
+    recorder.record_accepted_request(
+        campaign_id="campaign:aapl",
+        subject=subject,
+        request=first_prediction_request,
     )
 
     outcomes = [True, False, True, False, True]
@@ -249,6 +259,11 @@ def test_recorder_freezes_hypothesis_locks_blind_predictions_then_scores_outcome
             decision=lock_decision,
             decision_sequence=sequence,
             analyses_executed=analyses_executed,
+        )
+        recorder.record_accepted_request(
+            campaign_id="campaign:aapl",
+            subject=subject,
+            request=outcome_request,
         )
         # The same scientific decision may be checkpointed again after execution
         # of its next request. The prediction lock must remain idempotent.
@@ -300,6 +315,12 @@ def test_recorder_freezes_hypothesis_locks_blind_predictions_then_scores_outcome
             decision_sequence=sequence,
             analyses_executed=analyses_executed,
         )
+        if next_prediction_request is not None:
+            recorder.record_accepted_request(
+                campaign_id="campaign:aapl",
+                subject=subject,
+                request=next_prediction_request,
+            )
         sequence += 1
         analyses_executed += 1
 

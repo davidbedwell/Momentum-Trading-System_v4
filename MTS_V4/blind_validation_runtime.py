@@ -46,6 +46,9 @@ def build_blind_prediction_orchestrator(
     research_package_store: JsonResearchPackageStore,
     hypothesis_statement: str,
     success_definition: str,
+    base_url: str | None = None,
+    model: str | None = None,
+    api_key: str | None = None,
     timeout_seconds: int = 180,
 ) -> ResearchLoopOrchestrator:
     """Build retrospective historical blind verification on an unseen subject.
@@ -59,6 +62,10 @@ def build_blind_prediction_orchestrator(
     masked evidence, isolated Nexus, no exploratory concept payloads, and a
     non-RP-aware RD transport containing only the frozen hypothesis and success
     definition.
+
+    Provider arguments are explicit when supplied so the caller can preserve the
+    approved AI scientific authority for the blind stage. If omitted, the blind
+    RD retains the legacy environment-based provider behavior.
     """
 
     require_unseen_historical_verification_subject(
@@ -70,6 +77,9 @@ def build_blind_prediction_orchestrator(
         hypothesis_id=session.hypothesis_id,
         hypothesis_statement=hypothesis_statement,
         success_definition=success_definition,
+        base_url=base_url,
+        model=model,
+        api_key=api_key,
         timeout_seconds=timeout_seconds,
     )
     validator = BlindPredictionValidator(runtime.catalog)
