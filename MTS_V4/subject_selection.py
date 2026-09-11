@@ -36,9 +36,11 @@ class SolAdaptiveSubjectSelector:
     returned identity/rationale/phase representation. It never ranks or chooses
     a ticker, hypothesis, or scientific role itself.
 
-    Previously researched subjects remain eligible for EXPLORATION. Prior MTS
-    exposure blocks only retrospective blind VALIDATION_FIRST, where unseen
-    status is part of the objective protocol integrity requirement.
+    Prior MTS exposure and completed scientific research are intentionally
+    represented separately. Prior exposure blocks only retrospective blind
+    VALIDATION_FIRST. It does not imply a completed campaign, a negative result,
+    or exploration ineligibility. Durable cross-subject memory is the mechanical
+    evidence that completed scientific work exists for a subject.
 
     ``validatable_hypothesis_ids`` is an objective execution-capability envelope.
     When supplied, Sol may choose VALIDATION_FIRST only for one of those exact
@@ -59,6 +61,43 @@ class SolAdaptiveSubjectSelector:
         self._scientific_memory = scientific_memory
         self._eligibility = eligibility
         self._validatable_hypothesis_ids = validatable_hypothesis_ids
+
+    @staticmethod
+    def _subject_history(
+        *,
+        candidate_subject_ids: Sequence[str],
+        prior_exposure_subject_ids: Sequence[str],
+        memory_context: Mapping[str, object],
+    ) -> Mapping[str, Mapping[str, object]]:
+        exposed = set(prior_exposure_subject_ids)
+        raw_records = memory_context.get("records", ())
+        durable_subjects: set[str] = set()
+        if isinstance(raw_records, Sequence) and not isinstance(raw_records, (str, bytes, bytearray)):
+            for item in raw_records:
+                if not isinstance(item, Mapping):
+                    continue
+                subject_id = item.get("subject_id")
+                if isinstance(subject_id, str) and subject_id.strip():
+                    durable_subjects.add(subject_id)
+
+        history: dict[str, Mapping[str, object]] = {}
+        for subject_id in candidate_subject_ids:
+            has_exposure = subject_id in exposed
+            has_durable_memory = subject_id in durable_subjects
+            if has_durable_memory:
+                status = "COMPLETED_RESEARCH_WITH_DURABLE_MEMORY"
+            elif has_exposure:
+                status = "PRIOR_EXPOSURE_WITHOUT_DURABLE_COMPLETED_RESEARCH"
+            else:
+                status = "UNEXPOSED"
+            history[subject_id] = {
+                "status": status,
+                "prior_mts_exposure": has_exposure,
+                "durable_scientific_memory_available": has_durable_memory,
+                "retrospective_blind_validation_eligible": not has_exposure,
+                "exploration_eligible_subject_to_other_objective_constraints": True,
+            }
+        return history
 
     def choose_next(
         self,
@@ -100,31 +139,41 @@ class SolAdaptiveSubjectSelector:
             if validation_capability_constrained and not validatable_ids
             else ["EXPLORATION", "VALIDATION_FIRST"]
         )
+        subject_history = self._subject_history(
+            candidate_subject_ids=eligible_candidates,
+            prior_exposure_subject_ids=previously_seen,
+            memory_context=memory_context,
+        )
 
         payload = {
             "operation": "SELECT_NEXT_RESEARCH_SUBJECT",
             "mission": mission,
             "eligible_candidate_subject_ids": eligible_candidates,
-            "previously_researched_subject_ids": list(previously_seen),
+            "prior_exposure_subject_ids": list(previously_seen),
+            "subject_history_by_subject": subject_history,
             "cross_subject_scientific_memory": memory_context,
             "human_governance": {
                 "selection_authority": "AI_RD",
                 "objective_eligibility_enforced_by_code": True,
                 "allowed_selection_modes": allowed_modes,
                 "mechanically_executable_validation_hypothesis_ids": validatable_ids,
-                "blind_validation_requires_unseen_subject": True,
-                "exploration_may_revisit_previously_researched_subject": True,
+                "blind_validation_requires_no_prior_mts_exposure": True,
+                "exploration_may_revisit_prior_subjects": True,
                 "scientific_guideline": (
-                    "Choose the subject that is most scientifically useful next given accumulated knowledge. "
-                    "Previously researched subjects remain eligible for EXPLORATION when revisiting them is useful; "
-                    "a prior failure or absence of findings is not an exploration exclusion. Across selections, seek "
-                    "enough variation to discriminate whether relationships generalize, reverse, weaken, or depend on "
-                    "subject characteristics, but revisit a prior subject when the Research Frontier makes that the "
-                    "better scientific choice. Prior hypotheses are context, not a mandatory agenda. If a prior frozen "
-                    "hypothesis is scientifically suitable for a retrospective blind test, VALIDATION_FIRST may be "
-                    "chosen only on a subject absent from previously_researched_subject_ids and only when its exact "
-                    "hypothesis_id appears in mechanically_executable_validation_hypothesis_ids. The blind trial must "
-                    "be completed and scored before unrestricted exploration begins on that same ticker."
+                    "Choose the subject that is most scientifically useful next given accumulated knowledge and the "
+                    "explicit subject-history distinctions. COMPLETED_RESEARCH_WITH_DURABLE_MEMORY means durable "
+                    "scientific work already exists and should be considered when deciding whether a revisit is useful. "
+                    "PRIOR_EXPOSURE_WITHOUT_DURABLE_COMPLETED_RESEARCH means MTS/model exposure occurred but no durable "
+                    "completed scientific campaign is established; infrastructure or integration failure must not be "
+                    "treated as a negative scientific result. UNEXPOSED means no prior MTS exposure is recorded. Prior "
+                    "exposure never excludes ordinary EXPLORATION. Across selections, seek enough variation to "
+                    "discriminate whether relationships generalize, reverse, weaken, or depend on subject characteristics, "
+                    "but revisit a completed or incomplete prior subject when the Research Frontier makes that the better "
+                    "scientific choice. Prior hypotheses are context, not a mandatory agenda. If a prior frozen hypothesis "
+                    "is scientifically suitable for retrospective blind testing, VALIDATION_FIRST may be chosen only on a "
+                    "subject whose subject_history_by_subject entry says retrospective_blind_validation_eligible=true and "
+                    "only when its exact hypothesis_id appears in mechanically_executable_validation_hypothesis_ids. The "
+                    "blind trial must be completed and scored before unrestricted exploration begins on that same ticker."
                 ),
             },
             "required_schema": {
@@ -172,7 +221,7 @@ class SolAdaptiveSubjectSelector:
             )
         if mode == "VALIDATION_FIRST":
             if subject_id in set(previously_seen):
-                raise ValueError("VALIDATION_FIRST requires a subject unseen by prior MTS research")
+                raise ValueError("VALIDATION_FIRST requires a subject with no prior MTS exposure")
             if not isinstance(hypothesis_id, str) or not hypothesis_id.strip():
                 raise ValueError("VALIDATION_FIRST selection requires nonblank hypothesis_id")
             if (
