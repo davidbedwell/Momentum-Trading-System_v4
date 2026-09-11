@@ -39,17 +39,25 @@ def test_cross_subject_memory_excludes_active_subject_and_has_no_raw_rows():
     assert context["policy"]["mandatory_research_agenda"] is False
 
 
-def test_subject_selector_leaves_scientific_choice_to_rd_but_enforces_eligibility():
-    rd = StubRD([json.dumps({"subject_id": "XOM", "rationale": "Energy subject discriminates sector dependence."})])
+def test_subject_selector_keeps_prior_subjects_eligible_for_exploration():
+    rd = StubRD([json.dumps({"subject_id": "AAPL", "rationale": "Revisit prior subject under a new frontier question."})])
     memory = InMemoryCrossSubjectScientificMemory()
     selector = SolAdaptiveSubjectSelector(
         rd=rd,
         scientific_memory=memory,
-        eligibility=SubjectEligibilityEnvelope(approved_subject_ids=frozenset({"XOM", "MSFT"})),
+        eligibility=SubjectEligibilityEnvelope(approved_subject_ids=frozenset({"AAPL", "XOM", "MSFT"})),
+        validatable_hypothesis_ids=frozenset(),
     )
-    decision = selector.choose_next(mission="predict T+1 onward", previously_seen=("AAPL",), candidate_subject_ids=("AAPL", "XOM", "MSFT"))
-    assert decision.subject_id == "XOM"
-    assert "AAPL" not in json.loads(rd.calls[0][1]["content"])["eligible_candidate_subject_ids"]
+    decision = selector.choose_next(
+        mission="predict T+1 onward",
+        previously_seen=("AAPL",),
+        candidate_subject_ids=("AAPL", "XOM", "MSFT"),
+    )
+    assert decision.subject_id == "AAPL"
+    payload = json.loads(rd.calls[0][1]["content"])
+    assert "AAPL" in payload["eligible_candidate_subject_ids"]
+    assert "AAPL" in payload["previously_researched_subject_ids"]
+    assert payload["human_governance"]["exploration_may_revisit_previously_researched_subject"] is True
 
 
 def test_batch_hard_stops_after_three_subjects():
@@ -63,6 +71,14 @@ def test_batch_hard_stops_after_three_subjects():
     assert controller.validate_selection(subject_id="MSFT", rationale="next", previously_seen=()) == ("three-subject autonomous batch limit reached; human review required",)
     with pytest.raises(RuntimeError):
         controller.accept_selection(subject_id="MSFT", rationale="next")
+
+
+def test_batch_rejects_duplicate_subject_inside_same_batch_but_not_prior_history():
+    controller = ThreeSubjectBatchController(batch_id="B1")
+    assert controller.validate_selection(subject_id="AAPL", rationale="revisit", previously_seen=("AAPL",)) == ()
+    controller.accept_selection(subject_id="AAPL", rationale="revisit")
+    defects = controller.validate_selection(subject_id="AAPL", rationale="duplicate", previously_seen=("AAPL",))
+    assert defects == ("subject is already selected in the current batch: AAPL",)
 
 
 def test_batch_synthesis_requires_zero_finding_diagnosis():
@@ -80,7 +96,7 @@ def test_batch_synthesis_requires_zero_finding_diagnosis():
         "zero_finding_diagnoses": {"AAPL": "Tentative hypothesis correctly not promoted pending blind validation."},
         "frontier_update": {},
         "cohort_discrimination_assessment": "insufficient after one subject",
-        "next_subject_selection_direction": "choose a scientifically discriminating unseen subject",
+        "next_subject_selection_direction": "choose the scientifically most useful next subject",
     }
     synthesizer = SolBatchScientificSynthesizer(rd=StubRD([json.dumps(response)]), scientific_memory=InMemoryCrossSubjectScientificMemory())
     result = synthesizer.synthesize(mission="predict", ledger=ledger)
