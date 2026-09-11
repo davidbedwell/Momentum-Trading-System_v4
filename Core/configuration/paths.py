@@ -3,15 +3,15 @@ from __future__ import annotations
 from functools import lru_cache
 from pathlib import Path
 
-_PROJECT_NAME = "momentum-trading-system-v2"
+_PROJECT_NAME = "momentum-trading-system-v4"
 _MARKER_FILE = "pyproject.toml"
 
 
 class RepositoryRootNotFoundError(RuntimeError):
-    """Raised when the MTS v2 repository root cannot be identified."""
+    """Raised when the MTS v4 repository root cannot be identified."""
 
 
-def _is_mts_v2_root(path: Path) -> bool:
+def _is_mts_v4_root(path: Path) -> bool:
     marker = path / _MARKER_FILE
     if not marker.is_file():
         return False
@@ -26,7 +26,7 @@ def _is_mts_v2_root(path: Path) -> bool:
 
 @lru_cache(maxsize=1)
 def repository_root() -> Path:
-    """Return the canonical MTS v2 repository root.
+    """Return the canonical MTS v4 repository root.
 
     Discovery is semantic: walk upward from this module and identify the
     repository by its pyproject project name. No caller-visible behavior
@@ -35,7 +35,7 @@ def repository_root() -> Path:
     start = Path(__file__).resolve().parent
 
     for candidate in (start, *start.parents):
-        if _is_mts_v2_root(candidate):
+        if _is_mts_v4_root(candidate):
             return candidate
 
     raise RepositoryRootNotFoundError(

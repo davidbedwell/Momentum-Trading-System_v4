@@ -14,7 +14,7 @@ def test_repository_root_is_semantically_identified():
 
     assert pyproject.is_file()
     text = pyproject.read_text(encoding="utf-8")
-    assert 'name = "momentum-trading-system-v2"' in text
+    assert 'name = "momentum-trading-system-v4"' in text
 
 
 def test_repository_root_is_independent_of_cwd(tmp_path, monkeypatch):
@@ -38,7 +38,7 @@ def test_root_detection_does_not_depend_on_fixed_parent_depth(tmp_path):
     module_dir.mkdir(parents=True)
 
     (repo / "pyproject.toml").write_text(
-        '[project]\nname = "momentum-trading-system-v2"\nversion = "0.0.0"\n',
+        '[project]\nname = "momentum-trading-system-v4"\nversion = "0.0.0"\n',
         encoding="utf-8",
     )
 
