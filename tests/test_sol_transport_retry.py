@@ -45,7 +45,7 @@ def _director(tmp_path) -> SolResearchPackageAwareResearchDirector:
     )
 
 
-def test_sol_transport_retries_transient_500_then_succeeds(monkeypatch, tmp_path):
+def test_sol_transport_retries_transient_500_then_succeeds(monkeypatch, tmp_path, capsys):
     calls = 0
 
     def fake_urlopen(request, timeout):
@@ -62,9 +62,10 @@ def test_sol_transport_retries_transient_500_then_succeeds(monkeypatch, tmp_path
 
     assert result == "ok"
     assert calls == 2
+    assert "Sol transport transient HTTP 500; retry 1/6 in 2s" in capsys.readouterr().err
 
 
-def test_sol_transport_exhausts_bounded_retries_for_repeated_500(monkeypatch, tmp_path):
+def test_sol_transport_exhausts_bounded_retries_for_repeated_500(monkeypatch, tmp_path, capsys):
     calls = 0
 
     def fake_urlopen(request, timeout):
@@ -78,10 +79,13 @@ def test_sol_transport_exhausts_bounded_retries_for_repeated_500(monkeypatch, tm
     with pytest.raises(ResearchDirectorTransportError, match="HTTPError"):
         _director(tmp_path)._chat_completion([{"role": "user", "content": "test"}])
 
-    assert calls == 4
+    assert calls == 7
+    stderr = capsys.readouterr().err
+    assert "retry 1/6 in 2s" in stderr
+    assert "retry 6/6 in 60s" in stderr
 
 
-def test_sol_transport_does_not_retry_nontransient_400(monkeypatch, tmp_path):
+def test_sol_transport_does_not_retry_nontransient_400(monkeypatch, tmp_path, capsys):
     calls = 0
 
     def fake_urlopen(request, timeout):
@@ -96,3 +100,4 @@ def test_sol_transport_does_not_retry_nontransient_400(monkeypatch, tmp_path):
         _director(tmp_path)._chat_completion([{"role": "user", "content": "test"}])
 
     assert calls == 1
+    assert capsys.readouterr().err == ""
