@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 from .research_package import (
     PredictiveHypothesisRecord,
@@ -150,18 +150,41 @@ class JsonResearchPackageStore:
             },
         }
 
+    @classmethod
+    def _contains_forbidden_raw_cache_structure(cls, value: object) -> bool:
+        """Detect actual raw/cache persistence structures, not scientific vocabulary.
+
+        Durable scientific summaries may legitimately use a scalar field named
+        ``rows`` to report an aggregate sample count. What is forbidden is a
+        reusable raw-row collection or cache/payload structure. The check is
+        therefore structural rather than a substring scan of serialized JSON.
+        """
+        if isinstance(value, Mapping):
+            for key, child in value.items():
+                normalized = str(key)
+                if normalized in {"payload", "cache_key"}:
+                    return True
+                if normalized == "rows" and isinstance(child, (Mapping, Sequence)) and not isinstance(
+                    child, (str, bytes, bytearray)
+                ):
+                    return True
+                if cls._contains_forbidden_raw_cache_structure(child):
+                    return True
+            return False
+        if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
+            return any(cls._contains_forbidden_raw_cache_structure(item) for item in value)
+        return False
+
     def _document(self, package: ResearchPackage) -> str:
         document = {
             "format": self.FORMAT,
             "research_package": asdict(package),
         }
-        serialized = json.dumps(document, indent=2, sort_keys=True, default=str) + "\n"
-        forbidden = ('"payload"', '"rows"', '"cache_key"')
-        if any(token in serialized for token in forbidden):
+        if self._contains_forbidden_raw_cache_structure(document):
             raise ResearchPackageError(
                 "research package attempted to persist raw/cache evidence data"
             )
-        return serialized
+        return json.dumps(document, indent=2, sort_keys=True, default=str) + "\n"
 
     def _write_new(self, path: Path, package: ResearchPackage) -> None:
         self._directory.mkdir(parents=True, exist_ok=True)
