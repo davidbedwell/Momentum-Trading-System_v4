@@ -39,8 +39,9 @@ class SolAdaptiveSubjectSelector:
     Prior MTS exposure and completed scientific research are intentionally
     represented separately. Prior exposure blocks only retrospective blind
     VALIDATION_FIRST. It does not imply a completed campaign, a negative result,
-    or exploration ineligibility. Durable cross-subject memory is the mechanical
-    evidence that completed scientific work exists for a subject.
+    exploration ineligibility, or lower scientific priority for EXPLORATION.
+    Durable cross-subject memory is the mechanical evidence that completed
+    scientific work exists for a subject.
 
     ``validatable_hypothesis_ids`` is an objective execution-capability envelope.
     When supplied, Sol may choose VALIDATION_FIRST only for one of those exact
@@ -168,6 +169,8 @@ class SolAdaptiveSubjectSelector:
                 "blind_validation_requires_no_prior_mts_exposure": True,
                 "exploration_may_revisit_previously_researched_subject": True,
                 "exploration_may_revisit_prior_subjects": True,
+                "exploration_exposure_priority": "SCIENTIFICALLY_NEUTRAL",
+                "validation_eligibility_must_not_rank_exploration_subjects": True,
                 "scientific_guideline": (
                     "Choose the subject that is most scientifically useful next given accumulated knowledge and the "
                     "explicit subject-history distinctions. COMPLETED_RESEARCH_WITH_DURABLE_MEMORY means durable "
@@ -175,18 +178,23 @@ class SolAdaptiveSubjectSelector:
                     "PRIOR_EXPOSURE_WITHOUT_DURABLE_COMPLETED_RESEARCH means MTS/model exposure occurred but no durable "
                     "completed scientific campaign is established; infrastructure or integration failure must not be "
                     "treated as a negative scientific result. UNEXPOSED means no prior MTS exposure is recorded. Prior "
-                    "exposure never excludes ordinary EXPLORATION. Across selections, seek enough variation to "
-                    "discriminate whether relationships generalize, reverse, weaken, or depend on subject characteristics, "
-                    "but do not let a prior relationship or Research Frontier become an implicit queue that narrows later "
-                    "EXPLORATION. Selecting a subject for EXPLORATION does not bind its Research Director to any inherited "
-                    "lookback, forward horizon, threshold, target, method, evidence stream, or hypothesis. The subject may "
-                    "be useful for replicating prior work, broadening or changing its parameterization, investigating a "
-                    "different horizon or outcome, combining other evidence, or pursuing an entirely different scientifically "
-                    "promising proposition. The within-subject Research Director retains authority over those choices. Revisit "
-                    "a completed or incomplete prior subject when that is the better scientific choice, not merely because it "
-                    "appears in the Research Frontier. Prior hypotheses and frontier entries are context, not a mandatory "
-                    "agenda. If a prior frozen hypothesis is scientifically suitable for retrospective blind testing, "
-                    "VALIDATION_FIRST may be chosen only on a subject whose subject_history_by_subject entry says "
+                    "exposure never excludes ordinary EXPLORATION and unexposed status confers no inherent EXPLORATION "
+                    "priority. Retrospective blind-validation eligibility is a phase-specific execution constraint, not a "
+                    "scientific ranking signal for EXPLORATION. When VALIDATION_FIRST is not in allowed_selection_modes, "
+                    "ignore retrospective_blind_validation_eligible when ranking EXPLORATION candidates; do not prefer an "
+                    "unexposed ticker merely because a future blind-validation campaign might need one. Across selections, "
+                    "seek enough variation to discriminate whether relationships generalize, reverse, weaken, or depend on "
+                    "subject characteristics, but do not let a prior relationship or Research Frontier become an implicit "
+                    "queue that narrows later EXPLORATION. Selecting a subject for EXPLORATION does not bind its Research "
+                    "Director to any inherited lookback, forward horizon, threshold, target, method, evidence stream, or "
+                    "hypothesis. The subject may be useful for replicating prior work, broadening or changing its "
+                    "parameterization, investigating a different horizon or outcome, combining other evidence, or pursuing "
+                    "an entirely different scientifically promising proposition. The within-subject Research Director "
+                    "retains authority over those choices. Revisit a completed or incomplete prior subject when accumulated "
+                    "knowledge reveals important unresolved questions, when prior work was methodologically narrow, or when "
+                    "that is otherwise the better scientific choice. Prior hypotheses and frontier entries are context, not "
+                    "a mandatory agenda. If a prior frozen hypothesis is scientifically suitable for retrospective blind "
+                    "testing, VALIDATION_FIRST may be chosen only on a subject whose subject_history_by_subject entry says "
                     "retrospective_blind_validation_eligible=true and only when its exact hypothesis_id appears in "
                     "mechanically_executable_validation_hypothesis_ids. The blind trial must be completed and scored before "
                     "unrestricted exploration begins on that same ticker."
@@ -211,7 +219,10 @@ class SolAdaptiveSubjectSelector:
                         "its scientifically useful first role is unrestricted EXPLORATION or blind VALIDATION_FIRST "
                         "of an existing frozen hypothesis. Scientific subject/role selection is your authority. "
                         "Deterministic code only enforces the supplied objective eligibility and phase-order rules. "
-                        "Return one JSON object only."
+                        "For EXPLORATION, prior exposure versus unexposed status is scientifically neutral unless the "
+                        "accumulated scientific evidence itself makes one subject more useful; never use eligibility for "
+                        "a possible future blind-validation campaign as a reason to prefer an unexposed exploration "
+                        "subject. Return one JSON object only."
                     ),
                 },
                 {"role": "user", "content": json.dumps(payload, sort_keys=True, default=str)},
