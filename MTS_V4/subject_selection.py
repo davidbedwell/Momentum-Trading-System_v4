@@ -149,6 +149,11 @@ class SolAdaptiveSubjectSelector:
             "operation": "SELECT_NEXT_RESEARCH_SUBJECT",
             "mission": mission,
             "eligible_candidate_subject_ids": eligible_candidates,
+            # Compatibility field retained for existing callers/tests. It means
+            # prior MTS/model exposure for blind-validation purposes; the richer
+            # subject_history_by_subject structure disambiguates whether durable
+            # completed research actually exists.
+            "previously_researched_subject_ids": list(previously_seen),
             "prior_exposure_subject_ids": list(previously_seen),
             "subject_history_by_subject": subject_history,
             "cross_subject_scientific_memory": memory_context,
@@ -157,7 +162,11 @@ class SolAdaptiveSubjectSelector:
                 "objective_eligibility_enforced_by_code": True,
                 "allowed_selection_modes": allowed_modes,
                 "mechanically_executable_validation_hypothesis_ids": validatable_ids,
+                # Compatibility names retained while the richer history model
+                # makes the actual distinction explicit.
+                "blind_validation_requires_unseen_subject": True,
                 "blind_validation_requires_no_prior_mts_exposure": True,
+                "exploration_may_revisit_previously_researched_subject": True,
                 "exploration_may_revisit_prior_subjects": True,
                 "scientific_guideline": (
                     "Choose the subject that is most scientifically useful next given accumulated knowledge and the "
@@ -221,7 +230,9 @@ class SolAdaptiveSubjectSelector:
             )
         if mode == "VALIDATION_FIRST":
             if subject_id in set(previously_seen):
-                raise ValueError("VALIDATION_FIRST requires a subject with no prior MTS exposure")
+                raise ValueError(
+                    "VALIDATION_FIRST requires a subject unseen by prior MTS research/exposure"
+                )
             if not isinstance(hypothesis_id, str) or not hypothesis_id.strip():
                 raise ValueError("VALIDATION_FIRST selection requires nonblank hypothesis_id")
             if (
