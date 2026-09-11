@@ -8,6 +8,7 @@ from .batch_orchestrator import BatchResearchDirectorProvider, BatchResearchLoop
 from .cache import TemporaryResearchCache
 from .concept_library import ResearchConceptLibrary, seed_market_concepts
 from .cross_evidence import cross_evidence_analysis_method, cross_evidence_method_spec
+from .cross_subject_batch_orchestrator import CrossSubjectBatchResearchLoopOrchestrator
 from .cross_subject_memory import CrossSubjectScientificMemory
 from .cross_subject_orchestrator import CrossSubjectResearchLoopOrchestrator
 from .discovery_methods import discovery_analysis_methods, discovery_method_catalog
@@ -157,28 +158,38 @@ def build_batch_runtime(
     mission: str = DEFAULT_MISSION,
     nexus_path: str | Path | None = None,
     concept_library: ResearchConceptLibrary | None = None,
+    scientific_memory: CrossSubjectScientificMemory | None = None,
 ) -> BatchV4Runtime:
     """Assemble the program-level batched RD runtime.
 
     The batched path reuses the exact same Intake/cache boundary, method catalog,
-    objective validator, Analysis Engine, and Nexus implementation as the legacy
-    one-request loop. The only new layer is the deterministic compiler/orchestrator
-    between AI-authored scientific specifications and low-level AnalysisRequests.
+    objective validator, Analysis Engine, Nexus implementation, and optional
+    cross-subject scientific memory as the legacy loop. The only new layer is the
+    deterministic compiler/orchestrator between AI-authored scientific
+    specifications and low-level AnalysisRequests.
     """
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(
         nexus_path=nexus_path,
         concept_library=concept_library,
     )
-    orchestrator = BatchResearchLoopOrchestrator(
-        mission=mission,
-        rd=rd,
-        validator=validator,
-        analysis=analysis,
-        nexus=nexus,
-        cache=cache,
-        available_methods=catalog.capability_payloads(),
-        research_concepts=concepts.payloads(),
+    orchestrator_type = (
+        CrossSubjectBatchResearchLoopOrchestrator
+        if scientific_memory is not None
+        else BatchResearchLoopOrchestrator
     )
+    orchestrator_kwargs = {
+        "mission": mission,
+        "rd": rd,
+        "validator": validator,
+        "analysis": analysis,
+        "nexus": nexus,
+        "cache": cache,
+        "available_methods": catalog.capability_payloads(),
+        "research_concepts": concepts.payloads(),
+    }
+    if scientific_memory is not None:
+        orchestrator_kwargs["scientific_memory"] = scientific_memory
+    orchestrator = orchestrator_type(**orchestrator_kwargs)
     return BatchV4Runtime(
         mission=mission,
         cache=cache,
