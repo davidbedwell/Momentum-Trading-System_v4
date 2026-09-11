@@ -141,15 +141,25 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "role with the exact runtime binding. A prior analysis input may omit dataset_name only when you intend its "
             "sole reusable derived dataset; if several reusable datasets are scientifically possible, name the intended "
             "dataset. Deterministic code may resolve only semantics-preserving mechanics and may never invent or "
-            "substitute science. Independent branches should be planned together when scientifically useful. Return "
-            "exactly one batch decision JSON object and no prose."
+            "substitute science. Independent branches should be planned together when scientifically useful. "
+            "The central scientific purpose during EXPLORATION is prospective predictive discovery: seek falsifiable "
+            "relationships between information observable at T and subsequent direction, magnitude, timing, continuation "
+            "or reversal, and path quality at T+1 onward. Historical look-ahead is legitimate during EXPLORATION when "
+            "scientifically useful for discovery; do not manufacture positive claims and reject unsupported candidates. "
+            "VALIDATION is different: preserve the no-look-ahead boundary at prediction time. When cross-subject scientific "
+            "memory is present, treat it as prior scientific experience rather than a mandatory agenda. Test, challenge, "
+            "reformulate, condition, defer, or ignore it as scientifically appropriate. Do not inherit a prior threshold, "
+            "lookback, horizon, method, target, or representation merely for consistency. A negative result for one "
+            "formulation does not prove that the subject lacks predictive structure. Historical rp_id values appearing only "
+            "in cross-subject memory are provenance, not active local parent Research Packages. Distinguish exhaustion of "
+            "one RP from exhaustion of useful work on the subject. Return exactly one batch decision JSON object and no prose."
         )
         schema = {
             "continue_research": "boolean",
             "research_packages": [
                 {
                     "rp_id": "nonblank stable string",
-                    "parent_rp_id": "different prior/local rp_id or null",
+                    "parent_rp_id": "different active local/same-batch rp_id or null",
                     "objective": "scientific objective",
                     "decision_boundary": (
                         "string or null describing what unknown result must return to RD before contingent science"
@@ -160,7 +170,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                             "rp_id": "same as containing rp_id",
                             "question_id": "stable scientific question identifier",
                             "parent_question_id": "different prior question_id or null",
-                            "parent_rp_id": "different parent RP or null",
+                            "parent_rp_id": "same lineage parent as containing RP or null",
                             "subject_id": "active subject_id",
                             "question": "scientific question",
                             "method_id": "exact available method_id selected by RD",
@@ -181,7 +191,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             ],
             "rp_closures": [
                 {
-                    "rp_id": "exact open RP judged scientifically complete",
+                    "rp_id": "exact previously open local RP judged scientifically complete",
                     "close_reason": "nonblank scientific reason this RP is complete",
                     "final_assessment": "integrated scientific assessment or null",
                 }
@@ -196,7 +206,25 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                     "metadata": "open-ended scientific object",
                 }
             ],
-            "research_state": "open-ended cumulative AI-authored scientific state",
+            "research_state": {
+                "other_state": "arbitrary cumulative AI-authored scientific state",
+                "predictive_hypothesis_updates": [
+                    {
+                        "rp_id": "exact active local RP",
+                        "action": "CREATE_TENTATIVE, LOCK_VALIDATION_TRIAL, or RECORD_VALIDATION_OUTCOME",
+                        "hypothesis_id": "stable string",
+                        "statement": "CREATE_TENTATIVE only: frozen predictive proposition",
+                        "success_definition": "CREATE_TENTATIVE only: predeclared objective success condition",
+                        "minimum_required_trials": "CREATE_TENTATIVE only: positive integer selected before blind testing",
+                        "source_result_ids": "CREATE_TENTATIVE only: supporting result IDs already completed in that RP",
+                        "trial_id": "LOCK_VALIDATION_TRIAL/RECORD_VALIDATION_OUTCOME only",
+                        "prediction_result_id": "LOCK_VALIDATION_TRIAL only: exact completed no-lookahead VALIDATION result ID",
+                        "prediction_statement": "LOCK_VALIDATION_TRIAL only: exact prediction frozen before outcome exposure",
+                        "outcome_result_id": "RECORD_VALIDATION_OUTCOME only: exact completed outcome result ID",
+                        "success": "RECORD_VALIDATION_OUTCOME only: boolean judged against frozen success_definition",
+                    }
+                ],
+            },
             "batch_interpretation": (
                 "substantive integrated interpretation of the completed batch on INTERPRET_BATCH_RESULTS; otherwise null allowed"
             ),
@@ -214,11 +242,20 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "Choosing whether datasets should be aligned, the scientific alignment key/mode, selected columns, transformations, horizons, thresholds, and outcomes remains your responsibility.",
             "Internal names are not scientific authority. Use input semantic roles in alignment[].input_name and selections[].input_name; the compiler resolves them.",
             "On INTERPRET_BATCH_RESULTS, interpret the completed batch as a scientific whole before issuing follow-up work. Follow-up may include multiple RPs and multiple analyses again.",
-            "Use rp_closures to close every RP you judge scientifically exhausted. Closing an RP is not the same as closing the subject; in the same decision you may close exhausted RPs and open or continue other RPs.",
+            "Use rp_closures to close every previously open RP you judge scientifically exhausted. Do not close an RP in the same decision that schedules new analyses inside that RP; execute and interpret those analyses first.",
+            "Closing an RP is not the same as closing the subject. In one interpretation you may close exhausted RPs and open or continue other RPs.",
             "Do not keep an RP artificially open merely because subject-level research continues, and do not close the subject merely because one RP is exhausted.",
+            "A parent_rp_id must name an actual local RP for this subject, either already durable in context.research_packages or authored as another RP in this same batch. Historical RP identifiers from cross-subject memory are not local parents.",
+            "For a continuing existing RP, preserve its durable parent_rp_id exactly. Analyses inside an RP must use the same parent_rp_id lineage as the containing RP.",
             "Promote only findings you judge significant. The compiler/executor never decides scientific significance.",
             "A failure in one batch branch does not imply the other scientific branches failed; interpret each returned record on its evidence.",
-            "During EXPLORATION actively seek predictive structure at T -> T+1 onward without manufacturing positive findings. During VALIDATION preserve all governing no-look-ahead restrictions.",
+            "During EXPLORATION actively seek predictive structure at T -> T+1 onward without manufacturing positive findings. Historical look-ahead is a discovery capability, not a validation permission.",
+            "During VALIDATION preserve the prediction-time no-look-ahead boundary and never generalize that restriction backward into EXPLORATION.",
+            "Cross-subject memory is scientific context only. Do not assume generalization and do not let prior subjects delimit the discovery space.",
+            "When exploration produces a relationship you judge potentially predictive, use research_state.predictive_hypothesis_updates action=CREATE_TENTATIVE with an exact rp_id, frozen proposition, objective success_definition, positive minimum_required_trials chosen before blind testing, and supporting completed source_result_ids.",
+            "Predictive hypothesis definitions are frozen once created. A materially revised proposition requires a new hypothesis_id.",
+            "For blind validation, lock predictions with action=LOCK_VALIDATION_TRIAL only from a completed VALIDATION result that contains no future information. Lock the prediction before any outcome/future information is exposed.",
+            "Record a validation outcome with action=RECORD_VALIDATION_OUTCOME only after the trial is already locked. The deterministic persistence layer calculates cumulative counts/rates/status under the existing human-approved verification rule; you retain scientific authority over hypothesis, prediction, trial design, success definition, and success judgment.",
         ]
         user = {
             "operation": operation,
@@ -267,8 +304,8 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                                 "decode_defect": defect,
                                 "instruction": (
                                     "Return one complete corrected batch decision JSON object. Correct only the "
-                                    "objective representation/phase defect. Preserve or revise your scientific plan "
-                                    "as you judge appropriate. Deterministic code will not invent scientific content."
+                                    "objective representation/phase/identity defect. Preserve or revise your scientific "
+                                    "plan as you judge appropriate. Deterministic code will not invent scientific content."
                                 ),
                             },
                             sort_keys=True,
@@ -289,9 +326,34 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         raise ValueError("batch decision representation repair budget exhausted: " + str(defect))
 
     def _batch_phase_defect(self, decision: BatchResearchDecision) -> str | None:
-        if self._required_subject_id is None and self._required_research_phase is None:
-            return None
+        batch_packages = {package.rp_id: package for package in decision.research_packages}
         for package in decision.research_packages:
+            if package.parent_rp_id == package.rp_id:
+                return f"Research Package {package.rp_id} cannot be its own parent"
+            if package.parent_rp_id is not None and package.parent_rp_id not in batch_packages:
+                parent = self._research_package_store.load(package.parent_rp_id)
+                if parent is None:
+                    return (
+                        f"Research Package {package.rp_id} parent_rp_id is not an active local RP: "
+                        f"{package.parent_rp_id}. Historical/cross-subject RP identifiers are provenance only."
+                    )
+                if self._required_subject_id is not None and parent.subject_id != self._required_subject_id:
+                    return (
+                        f"Research Package {package.rp_id} parent belongs to another subject: "
+                        f"{parent.subject_id}"
+                    )
+            existing = self._research_package_store.load(package.rp_id)
+            if existing is not None:
+                if existing.status != "OPEN":
+                    return f"Research Package is already CLOSED and cannot receive new analyses: {package.rp_id}"
+                if existing.parent_rp_id != package.parent_rp_id:
+                    return (
+                        f"Research Package {package.rp_id} parent_rp_id changed from durable lineage "
+                        f"{existing.parent_rp_id!r} to {package.parent_rp_id!r}"
+                    )
+                if self._required_subject_id is not None and existing.subject_id != self._required_subject_id:
+                    return f"Research Package {package.rp_id} belongs to another subject: {existing.subject_id}"
+
             for analysis in package.analyses:
                 if self._required_subject_id is not None and analysis.subject_id != self._required_subject_id:
                     return (
@@ -306,6 +368,46 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                         f"analysis {analysis.analysis_id} research_phase violates active subject phase contract: "
                         f"required {self._required_research_phase.value}, received {analysis.research_phase.value}"
                     )
+                if analysis.parent_rp_id != package.parent_rp_id:
+                    return (
+                        f"analysis {analysis.analysis_id} parent_rp_id must match containing RP lineage: "
+                        f"expected {package.parent_rp_id!r}, received {analysis.parent_rp_id!r}"
+                    )
+
+        for closure in decision.rp_closures:
+            if closure.rp_id in batch_packages:
+                return (
+                    f"RP {closure.rp_id} cannot be closed in the same decision that schedules new analyses "
+                    "inside it; interpret those analyses first"
+                )
+            package = self._research_package_store.load(closure.rp_id)
+            if package is None:
+                return f"rp_closures references an unknown local RP: {closure.rp_id}"
+            if package.status != "OPEN":
+                return f"rp_closures references an RP that is already closed: {closure.rp_id}"
+            if self._required_subject_id is not None and package.subject_id != self._required_subject_id:
+                return f"rp_closures references an RP for another subject: {closure.rp_id}"
+
+        raw_updates = decision.research_state.get("predictive_hypothesis_updates", [])
+        if raw_updates not in (None, []):
+            if not isinstance(raw_updates, list):
+                return "research_state.predictive_hypothesis_updates must be a list"
+            for update in raw_updates:
+                if not isinstance(update, Mapping):
+                    return "each predictive_hypothesis_updates entry must be an object"
+                rp_id = update.get("rp_id")
+                if not isinstance(rp_id, str) or not rp_id.strip():
+                    return "each predictive_hypothesis_updates entry requires a nonblank rp_id"
+                package = self._research_package_store.load(rp_id)
+                if package is None:
+                    return (
+                        f"predictive hypothesis update references RP {rp_id!r} that is not yet durable. "
+                        "Establish the RP through an executed batch first, then author the update in a later decision."
+                    )
+                if package.status != "OPEN":
+                    return f"predictive hypothesis update references closed RP: {rp_id}"
+                if self._required_subject_id is not None and package.subject_id != self._required_subject_id:
+                    return f"predictive hypothesis update references another subject's RP: {rp_id}"
         return None
 
     @classmethod
