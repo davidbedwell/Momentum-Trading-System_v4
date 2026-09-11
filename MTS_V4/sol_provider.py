@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import time
 import urllib.error
 import urllib.request
 from typing import Mapping, Sequence
@@ -16,6 +17,10 @@ class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirect
     rejects the non-default temperature used by that provider, so the appellate
     transport omits temperature and lets the model use its supported default.
     """
+
+    _TRANSIENT_HTTP_CODES = frozenset({408, 429, 500, 502, 503, 504})
+    _MAX_TRANSIENT_RETRIES = 3
+    _TRANSIENT_RETRY_DELAYS_SECONDS = (1.0, 2.0, 4.0)
 
     def _chat_completion(self, messages: Sequence[Mapping[str, str]]) -> str:
         body = json.dumps(
@@ -34,22 +39,42 @@ class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirect
             headers=headers,
             method="POST",
         )
-        try:
-            with urllib.request.urlopen(request, timeout=self._timeout_seconds) as response:
-                document = json.loads(response.read().decode("utf-8"))
-        except urllib.error.HTTPError as exc:
+
+        document = None
+        for attempt in range(self._MAX_TRANSIENT_RETRIES + 1):
             try:
-                response_body = exc.read().decode("utf-8", errors="replace")
-            except Exception:
-                response_body = ""
-            detail = f"; response_body={response_body}" if response_body else ""
+                with urllib.request.urlopen(request, timeout=self._timeout_seconds) as response:
+                    document = json.loads(response.read().decode("utf-8"))
+                break
+            except urllib.error.HTTPError as exc:
+                try:
+                    response_body = exc.read().decode("utf-8", errors="replace")
+                except Exception:
+                    response_body = ""
+                detail = f"; response_body={response_body}" if response_body else ""
+                retryable = exc.code in self._TRANSIENT_HTTP_CODES
+                if retryable and attempt < self._MAX_TRANSIENT_RETRIES:
+                    time.sleep(self._TRANSIENT_RETRY_DELAYS_SECONDS[attempt])
+                    continue
+                raise ResearchDirectorTransportError(
+                    f"AI Research Director transport failed: HTTPError: {exc}{detail}"
+                ) from exc
+            except (urllib.error.URLError, TimeoutError) as exc:
+                if attempt < self._MAX_TRANSIENT_RETRIES:
+                    time.sleep(self._TRANSIENT_RETRY_DELAYS_SECONDS[attempt])
+                    continue
+                raise ResearchDirectorTransportError(
+                    f"AI Research Director transport failed: {type(exc).__name__}: {exc}"
+                ) from exc
+            except json.JSONDecodeError as exc:
+                raise ResearchDirectorTransportError(
+                    f"AI Research Director transport failed: {type(exc).__name__}: {exc}"
+                ) from exc
+
+        if document is None:
             raise ResearchDirectorTransportError(
-                f"AI Research Director transport failed: HTTPError: {exc}{detail}"
-            ) from exc
-        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
-            raise ResearchDirectorTransportError(
-                f"AI Research Director transport failed: {type(exc).__name__}: {exc}"
-            ) from exc
+                "AI Research Director transport failed without a response document"
+            )
 
         try:
             message = document["choices"][0]["message"]
