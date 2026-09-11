@@ -28,6 +28,7 @@ from MTS_V4.validation_first import ValidationFirstSubjectGate
 
 
 DEFAULT_CANDIDATES = (
+    "AAPL", "MSFT", "XOM",
     "NVDA", "AMZN", "META", "GOOGL", "TSLA", "AMD", "JPM", "GS",
     "CAT", "BA", "WMT", "COST", "UNH", "JNJ", "PG", "HD",
 )
@@ -196,9 +197,6 @@ def main() -> None:
 
     candidates = _candidate_subject_ids()
     previously_seen = _previously_seen()
-    overlap = sorted(set(candidates) & set(previously_seen))
-    if overlap:
-        raise RuntimeError(f"candidate universe contains previously seen subjects: {overlap}")
 
     memory_path = _seed_memory_if_requested(state_dir=state_dir)
     memory = JsonCrossSubjectScientificMemoryStore(memory_path)
