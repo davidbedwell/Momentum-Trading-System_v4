@@ -7,6 +7,8 @@ from .analysis import ExactMethodAnalysisExecutor
 from .cache import TemporaryResearchCache
 from .concept_library import ResearchConceptLibrary, seed_market_concepts
 from .cross_evidence import cross_evidence_analysis_method, cross_evidence_method_spec
+from .cross_subject_memory import CrossSubjectScientificMemory
+from .cross_subject_orchestrator import CrossSubjectResearchLoopOrchestrator
 from .execution_interface import TransparentInputBindingValidator
 from .group_aggregation import group_aggregation_analysis_method, group_aggregation_method_spec
 from .interfaces import ResearchDirectorProvider
@@ -51,6 +53,7 @@ def build_runtime(
     nexus_path: str | Path | None = None,
     concept_library: ResearchConceptLibrary | None = None,
     max_contract_repairs: int = 3,
+    scientific_memory: CrossSubjectScientificMemory | None = None,
 ) -> V4Runtime:
     """Assemble the v4 research runtime without external credentials or data.
 
@@ -60,6 +63,11 @@ def build_runtime(
     Human market concepts are supplied as non-authoritative idea seeds. RD may
     test, reject, reformulate, combine, or extend them; deterministic runtime
     components never treat concept presence as scientific evidence.
+
+    When compact cross-subject scientific memory is supplied, the same runtime
+    components are used but RD context is augmented through
+    CrossSubjectResearchLoopOrchestrator. Subject-local Nexus behavior and the
+    raw-data retention boundary remain unchanged.
     """
     cache = TemporaryResearchCache()
     nexus: ResearchNexus
@@ -81,17 +89,26 @@ def build_runtime(
     analysis.register(scientific_toolkit_analysis_method())
     analysis.register(group_aggregation_analysis_method())
 
-    orchestrator = ResearchLoopOrchestrator(
-        mission=mission,
-        rd=rd,
-        validator=validator,
-        analysis=analysis,
-        nexus=nexus,
-        cache=cache,
-        available_methods=catalog.capability_payloads(),
-        research_concepts=concepts.payloads(),
-        max_contract_repairs=max_contract_repairs,
+    orchestrator_type = (
+        CrossSubjectResearchLoopOrchestrator
+        if scientific_memory is not None
+        else ResearchLoopOrchestrator
     )
+    orchestrator_kwargs = {
+        "mission": mission,
+        "rd": rd,
+        "validator": validator,
+        "analysis": analysis,
+        "nexus": nexus,
+        "cache": cache,
+        "available_methods": catalog.capability_payloads(),
+        "research_concepts": concepts.payloads(),
+        "max_contract_repairs": max_contract_repairs,
+    }
+    if scientific_memory is not None:
+        orchestrator_kwargs["scientific_memory"] = scientific_memory
+    orchestrator = orchestrator_type(**orchestrator_kwargs)
+
     return V4Runtime(
         mission=mission,
         cache=cache,
