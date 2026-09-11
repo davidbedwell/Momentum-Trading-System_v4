@@ -1,3 +1,4 @@
+from MTS_V4.bootstrap import build_runtime
 from MTS_V4.discovery_methods import (
     ARITHMETIC_METHOD_ID,
     DETERMINISTIC_FAMILY_METHOD_ID,
@@ -30,6 +31,13 @@ def test_discovery_catalog_exposes_measurement_families_and_arithmetic_without_r
     family_ids = {item["family_id"] for item in deterministic.metadata["active_families"]}
     assert "PRICE_CANDLE" in family_ids
     assert "VOLATILITY" in family_ids
+
+
+def test_runtime_registers_expanded_discovery_capabilities():
+    runtime = build_runtime(rd=object())  # type: ignore[arg-type]
+
+    assert runtime.catalog.get(DETERMINISTIC_FAMILY_METHOD_ID).method_id == DETERMINISTIC_FAMILY_METHOD_ID
+    assert runtime.catalog.get(ARITHMETIC_METHOD_ID).method_id == ARITHMETIC_METHOD_ID
 
 
 def test_deterministic_family_measurements_returns_reusable_row_level_dataset():
