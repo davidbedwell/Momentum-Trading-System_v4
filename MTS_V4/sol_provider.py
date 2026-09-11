@@ -123,7 +123,7 @@ class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirect
             attempt_started = time.monotonic()
             try:
                 with urllib.request.urlopen(request, timeout=self._timeout_seconds) as response:
-                    response_headers = response.headers
+                    response_headers = getattr(response, "headers", None)
                     document = json.loads(response.read().decode("utf-8"))
                     status = getattr(response, "status", 200)
                 self._write_telemetry(
