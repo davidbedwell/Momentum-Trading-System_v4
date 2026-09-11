@@ -153,8 +153,6 @@ class ScientificSpecificationCompiler:
                         f"evidence {reference.evidence_id} belongs to {descriptor.subject_id}, not {specification.subject_id}"
                     )
                 evidence_ids.append(reference.evidence_id)
-                # Existing Analysis executors bind acquired evidence under its exact evidence_id.
-                # Parameters that refer to the semantic role therefore compile to that exact key.
                 role_bindings[reference.role] = reference.evidence_id
                 continue
 
@@ -162,7 +160,7 @@ class ScientificSpecificationCompiler:
             source_result = context.results_by_analysis_id.get(reference.analysis_id)
             if source_result is None:
                 raise BatchCompilationError(
-                    f"dependency {reference.analysis_id!r} has not produced a result; batch dependency order is invalid"
+                    f"dependency {reference.analysis_id!r} has not produced a result"
                 )
             if source_result.subject_id != specification.subject_id:
                 raise BatchCompilationError(
@@ -212,27 +210,35 @@ class ScientificSpecificationCompiler:
 
 def topological_analysis_order(
     specifications: Sequence[ScientificAnalysisSpecification],
+    *,
+    available_analysis_ids: Sequence[str] = (),
 ) -> tuple[ScientificAnalysisSpecification, ...]:
-    """Order the exact AI-authored dependency graph without adding scientific edges."""
+    """Order exact AI-authored dependencies, allowing prior completed batch results."""
     by_id = {item.analysis_id: item for item in specifications}
     if len(by_id) != len(specifications):
         raise BatchCompilationError("analysis_id values must be unique across one batch")
+    prior_ids = set(available_analysis_ids)
+    reused = sorted(set(by_id).intersection(prior_ids))
+    if reused:
+        raise BatchCompilationError(
+            f"new batch reuses already completed analysis_id values: {tuple(reused)}"
+        )
 
     dependencies: dict[str, set[str]] = {}
     for item in specifications:
-        deps = {
+        all_deps = {
             ref.analysis_id
             for ref in item.inputs
             if ref.analysis_id is not None
         }
-        unknown = sorted(dep for dep in deps if dep not in by_id)
+        unknown = sorted(dep for dep in all_deps if dep not in by_id and dep not in prior_ids)
         if unknown:
             raise BatchCompilationError(
-                f"analysis {item.analysis_id!r} references dependencies outside the current batch: {tuple(unknown)}"
+                f"analysis {item.analysis_id!r} references unknown logical dependencies: {tuple(unknown)}"
             )
-        if item.analysis_id in deps:
+        if item.analysis_id in all_deps:
             raise BatchCompilationError(f"analysis {item.analysis_id!r} cannot depend on itself")
-        dependencies[item.analysis_id] = set(deps)
+        dependencies[item.analysis_id] = {dep for dep in all_deps if dep in by_id}
 
     ordered: list[ScientificAnalysisSpecification] = []
     remaining = dict(dependencies)
