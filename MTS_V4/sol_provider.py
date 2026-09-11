@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -19,8 +20,8 @@ class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirect
     """
 
     _TRANSIENT_HTTP_CODES = frozenset({408, 429, 500, 502, 503, 504})
-    _MAX_TRANSIENT_RETRIES = 3
-    _TRANSIENT_RETRY_DELAYS_SECONDS = (1.0, 2.0, 4.0)
+    _MAX_TRANSIENT_RETRIES = 6
+    _TRANSIENT_RETRY_DELAYS_SECONDS = (2.0, 4.0, 8.0, 16.0, 32.0, 60.0)
 
     def _chat_completion(self, messages: Sequence[Mapping[str, str]]) -> str:
         body = json.dumps(
@@ -54,14 +55,28 @@ class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirect
                 detail = f"; response_body={response_body}" if response_body else ""
                 retryable = exc.code in self._TRANSIENT_HTTP_CODES
                 if retryable and attempt < self._MAX_TRANSIENT_RETRIES:
-                    time.sleep(self._TRANSIENT_RETRY_DELAYS_SECONDS[attempt])
+                    delay = self._TRANSIENT_RETRY_DELAYS_SECONDS[attempt]
+                    print(
+                        f"Sol transport transient HTTP {exc.code}; retry "
+                        f"{attempt + 1}/{self._MAX_TRANSIENT_RETRIES} in {delay:g}s",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                    time.sleep(delay)
                     continue
                 raise ResearchDirectorTransportError(
                     f"AI Research Director transport failed: HTTPError: {exc}{detail}"
                 ) from exc
             except (urllib.error.URLError, TimeoutError) as exc:
                 if attempt < self._MAX_TRANSIENT_RETRIES:
-                    time.sleep(self._TRANSIENT_RETRY_DELAYS_SECONDS[attempt])
+                    delay = self._TRANSIENT_RETRY_DELAYS_SECONDS[attempt]
+                    print(
+                        f"Sol transport transient {type(exc).__name__}; retry "
+                        f"{attempt + 1}/{self._MAX_TRANSIENT_RETRIES} in {delay:g}s",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                    time.sleep(delay)
                     continue
                 raise ResearchDirectorTransportError(
                     f"AI Research Director transport failed: {type(exc).__name__}: {exc}"
