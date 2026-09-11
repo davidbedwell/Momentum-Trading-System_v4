@@ -68,6 +68,7 @@ required = [
     "numpy",
     "scipy",
     "yfinance",
+    "pyarrow",
     "pandas",
     "pytest",
     "jsonschema",
