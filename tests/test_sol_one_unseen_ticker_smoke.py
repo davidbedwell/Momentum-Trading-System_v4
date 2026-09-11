@@ -18,9 +18,10 @@ SPEC.loader.exec_module(MODULE)
 def test_aapl_seed_preserves_subject_specific_scope() -> None:
     context = MODULE._aapl_scientific_context()
     hypothesis = context["important_tentative_hypothesis"]
+    scope = hypothesis["subject_scope"]
     assert hypothesis["hypothesis_id"] == MODULE.AAPL_HYPOTHESIS_ID
-    assert "AAPL only" in hypothesis["subject_scope"]
-    assert "separately authored cross-subject hypothesis" in hypothesis["subject_scope"]
+    assert "AAPL only" in scope
+    assert "explicitly authored and frozen before validation on another subject" in scope
 
 
 def test_first_unseen_exploration_role_is_allowed() -> None:
