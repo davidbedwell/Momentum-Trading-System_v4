@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 
+from MTS_V4.batch_contracts import BatchExecutionReport
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
@@ -91,6 +92,7 @@ def main(argv: list[str] | None = None) -> int:
 
     decision_path = state_dir / "batch_decisions.jsonl"
     report_path = state_dir / "batch_reports.jsonl"
+    latest_report: BatchExecutionReport | None = None
 
     def accepted(request):
         recorder.record_accepted_request(
@@ -100,6 +102,8 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     def on_report(report, decisions, analyses):
+        nonlocal latest_report
+        latest_report = report
         recorder.record_report(report)
         _append_jsonl(
             report_path,
@@ -116,6 +120,10 @@ def main(argv: list[str] | None = None) -> int:
             campaign_id=campaign_id,
             subject=subject,
             decision=decision,
+        )
+        recorder.record_predictive_hypothesis_updates(
+            decision,
+            current_report=latest_report,
         )
         recorder.record_closures(decision)
         _append_jsonl(
