@@ -42,6 +42,98 @@ class ExactMethodAnalysisExecutor:
             raise ValueError(f"duplicate analysis method: {method.method_id}")
         self._methods[method.method_id] = method
 
+    @staticmethod
+    def _parent_row_position_identity(payload: object, column: str) -> str | None:
+        """Return the mechanically proven parent ROW_POSITION identity for a column.
+
+        Hidden observation lineage is deterministic execution provenance. This
+        method does not infer scientific meaning from a column name or values.
+        It recognizes identity only when every available row explicitly proves
+        that the selected column equals the recorded parent input-row anchor.
+        """
+        if not isinstance(payload, (list, tuple)) or not payload:
+            return None
+
+        parent_input: str | None = None
+        for row in payload:
+            if not isinstance(row, Mapping) or column not in row:
+                return None
+            lineage = row.get("__observation_lineage")
+            if not isinstance(lineage, Mapping):
+                return None
+            current_parent = str(lineage.get("input_name", "")).strip()
+            if not current_parent:
+                return None
+            if row.get(column) != lineage.get("input_row_anchor"):
+                return None
+            if parent_input is None:
+                parent_input = current_parent
+            elif parent_input != current_parent:
+                return None
+        return parent_input
+
+    @classmethod
+    def _validate_alignment_identity_spaces(
+        cls,
+        request: AnalysisRequest,
+        evidence_payloads: Mapping[str, object],
+    ) -> None:
+        """Reject only mechanically provable identity-space mismatches.
+
+        RD remains the scientific authority for choosing joins. Analysis merely
+        refuses to assume that a proven parent-row-position identity is equal to
+        a different, unproven coordinate space. The objective defect is returned
+        to RD through the normal execution-error path for scientific repair.
+        """
+        if request.method_id != "analysis.dataset.compose":
+            return
+        alignment = request.parameters.get("alignment")
+        if not isinstance(alignment, (list, tuple)):
+            return
+
+        normalized: list[tuple[str, str, str | None, str | None]] = []
+        for spec in alignment:
+            if not isinstance(spec, Mapping):
+                continue
+            input_name = str(spec.get("input_name", "")).strip()
+            key = spec.get("key")
+            if not input_name or not isinstance(key, Mapping):
+                continue
+            mode = str(key.get("mode", "")).upper()
+            column = None
+            parent = None
+            if mode == "COLUMN":
+                column = str(key.get("column", "")).strip()
+                if column and input_name in evidence_payloads:
+                    parent = cls._parent_row_position_identity(
+                        evidence_payloads[input_name], column
+                    )
+            normalized.append((input_name, mode, column, parent))
+
+        for input_name, mode, column, parent in normalized:
+            if mode != "COLUMN" or parent is None:
+                continue
+            for other_name, other_mode, other_column, other_parent in normalized:
+                if other_name == input_name:
+                    continue
+                if other_mode == "ROW_POSITION" and other_name == parent:
+                    continue
+                if other_mode == "COLUMN" and other_parent == parent:
+                    continue
+
+                other_key = (
+                    "ROW_POSITION"
+                    if other_mode == "ROW_POSITION"
+                    else f"COLUMN {other_column!r}"
+                )
+                raise ValueError(
+                    "alignment identity-space defect: "
+                    f"input {input_name!r} COLUMN {column!r} is mechanically "
+                    f"parent-row-position identity for {parent!r}, but input "
+                    f"{other_name!r} {other_key} is not mechanically proven to use "
+                    "that same identity space"
+                )
+
     def execute(
         self,
         request: AnalysisRequest,
@@ -56,6 +148,7 @@ class ExactMethodAnalysisExecutor:
 
         result_id = f"analysis-result:{uuid4().hex}"
         try:
+            self._validate_alignment_identity_spaces(request, evidence_payloads)
             outputs = registered.implementation(evidence_payloads, request.parameters)
         except Exception as exc:
             return AnalysisResult(
