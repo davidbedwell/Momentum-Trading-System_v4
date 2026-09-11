@@ -9,6 +9,7 @@ from .concept_library import ResearchConceptLibrary, seed_market_concepts
 from .cross_evidence import cross_evidence_analysis_method, cross_evidence_method_spec
 from .cross_subject_memory import CrossSubjectScientificMemory
 from .cross_subject_orchestrator import CrossSubjectResearchLoopOrchestrator
+from .discovery_methods import discovery_analysis_methods, discovery_method_catalog
 from .execution_interface import TransparentInputBindingValidator
 from .group_aggregation import group_aggregation_analysis_method, group_aggregation_method_spec
 from .interfaces import ResearchDirectorProvider
@@ -77,6 +78,8 @@ def build_runtime(
         nexus = JsonResearchNexus(nexus_path)
 
     catalog = standard_method_catalog()
+    for spec in discovery_method_catalog().all():
+        catalog.register(spec)
     catalog.register(cross_evidence_method_spec())
     catalog.register(scientific_toolkit_method_spec())
     catalog.register(group_aggregation_method_spec())
@@ -84,6 +87,8 @@ def build_runtime(
     validator = TransparentInputBindingValidator(catalog)
     analysis = ExactMethodAnalysisExecutor()
     for method in standard_analysis_methods():
+        analysis.register(method)
+    for method in discovery_analysis_methods():
         analysis.register(method)
     analysis.register(cross_evidence_analysis_method())
     analysis.register(scientific_toolkit_analysis_method())
