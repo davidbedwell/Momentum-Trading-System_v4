@@ -25,6 +25,21 @@ python3 --version
 git --version
 gh --version | head -n 1
 
+python3 - <<'PYCHECK'
+import sys
+
+if sys.version_info < (3, 11):
+    raise SystemExit(
+        f"Python 3.11+ is required; found "
+        f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+    )
+
+print(
+    f"Python version check: PASS "
+    f"({sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro})"
+)
+PYCHECK
+
 echo
 echo "=== PYTHON VIRTUAL ENVIRONMENT ==="
 
@@ -88,10 +103,15 @@ echo "=== GITHUB AUTH STATUS ==="
 
 if gh auth status >/dev/null 2>&1; then
     echo "GitHub authentication: PASS"
+
+    git config --global credential."https://github.com".helper "!gh auth git-credential"
+    git config --global credential."https://gist.github.com".helper "!gh auth git-credential"
+
+    echo "GitHub HTTPS credential helper: configured"
 else
     echo "GitHub authentication: NOT CONFIGURED"
     echo "Run: gh auth login --web"
-    echo "Then: gh auth setup-git"
+    echo "Then rerun this bootstrap script."
 fi
 
 echo
