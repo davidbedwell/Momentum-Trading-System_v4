@@ -131,16 +131,18 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "on an unknown result, stop that branch at an explicit decision boundary instead of guessing the future. "
             "You own questions, hypotheses, evidence choice, variables, representations, transformations, methods, "
             "scientifically meaningful parameters, horizons, thresholds, interactions, regimes, interpretation, "
-            "significance, findings, RP boundaries, and continuation. Deterministic code is a compiler/executor only. "
-            "It resolves generated request/result identities, exact output paths, and internal input aliases. Do not "
-            "author result_id, output_path, request_id, or executor input aliases. Refer to acquired evidence by exact "
-            "evidence_id and prior work inside the current batch by logical analysis_id. Each input has a semantic role. "
-            "Inside method parameters, use that role wherever an executor contract asks for input_name; the compiler "
-            "will replace the role with the exact runtime binding. A prior analysis input may omit dataset_name only "
-            "when you intend its sole reusable derived dataset; if several reusable datasets are scientifically possible, "
-            "name the intended dataset. Deterministic code may resolve only semantics-preserving mechanics and may never "
-            "invent or substitute science. Independent branches should be planned together when scientifically useful. "
-            "Return exactly one batch decision JSON object and no prose."
+            "significance, findings, RP boundaries, RP closure, and subject continuation. Deterministic code is a "
+            "compiler/executor only. It resolves generated request/result identities, exact output paths, and internal "
+            "input aliases. Do not author result_id, output_path, request_id, or executor input aliases for new work. "
+            "Refer to acquired evidence by exact evidence_id and prior work by stable logical analysis_id. A logical "
+            "analysis_id may refer to an earlier analysis in the current batch or to a completed analysis advertised "
+            "in campaign_analysis_result_catalog from an earlier batch. Each input has a semantic role. Inside method "
+            "parameters, use that role wherever an executor contract asks for input_name; the compiler replaces the "
+            "role with the exact runtime binding. A prior analysis input may omit dataset_name only when you intend its "
+            "sole reusable derived dataset; if several reusable datasets are scientifically possible, name the intended "
+            "dataset. Deterministic code may resolve only semantics-preserving mechanics and may never invent or "
+            "substitute science. Independent branches should be planned together when scientifically useful. Return "
+            "exactly one batch decision JSON object and no prose."
         )
         schema = {
             "continue_research": "boolean",
@@ -154,7 +156,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                     ),
                     "analyses": [
                         {
-                            "analysis_id": "stable logical identifier unique within this batch",
+                            "analysis_id": "stable logical identifier unique across the campaign",
                             "rp_id": "same as containing rp_id",
                             "question_id": "stable scientific question identifier",
                             "parent_question_id": "different prior question_id or null",
@@ -166,7 +168,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                                 {
                                     "role": "semantic role used by method parameters when input_name is needed",
                                     "evidence_id": "exact acquired evidence_id or null",
-                                    "analysis_id": "logical prior analysis_id or null",
+                                    "analysis_id": "logical prior/current analysis_id or null",
                                     "dataset_name": "named reusable derived dataset or null",
                                 }
                             ],
@@ -175,6 +177,13 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                             "rationale": "scientific rationale",
                         }
                     ],
+                }
+            ],
+            "rp_closures": [
+                {
+                    "rp_id": "exact open RP judged scientifically complete",
+                    "close_reason": "nonblank scientific reason this RP is complete",
+                    "final_assessment": "integrated scientific assessment or null",
                 }
             ],
             "promote_findings": [
@@ -191,17 +200,22 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "batch_interpretation": (
                 "substantive integrated interpretation of the completed batch on INTERPRET_BATCH_RESULTS; otherwise null allowed"
             ),
-            "close_reason": "nonblank scientific reason when continue_research=false, otherwise null",
+            "close_reason": "nonblank subject-level scientific reason when continue_research=false, otherwise null",
         }
         instructions = [
             "Do not serialize low-level request_id, result_id, output_path, or executor alias plumbing for new analyses.",
             "Create several Research Packages in the same batch when materially distinct scientific propositions are worth testing now.",
             "Within each RP, include every analysis whose justification is already available now; do not force one scalar test per RD turn.",
             "Use a prior logical analysis_id only for an actual dependency. Independent analyses should not be artificially chained.",
+            "A follow-up batch may reference a completed prior analysis by its stable logical analysis_id from campaign_analysis_result_catalog; never copy its generated result_id/output_path into a new scientific specification.",
+            "Never reuse an analysis_id for a new execution. A new analysis attempt requires a new logical analysis_id even when it addresses the same question.",
             "Do not author contingent follow-up analyses whose scientific justification depends on an unknown result. Describe that stopping point in decision_boundary and wait for the consolidated batch report.",
             "Select exact methods and scientifically meaningful parameters yourself from context.available_analysis_methods.",
             "Choosing whether datasets should be aligned, the scientific alignment key/mode, selected columns, transformations, horizons, thresholds, and outcomes remains your responsibility.",
             "Internal names are not scientific authority. Use input semantic roles in alignment[].input_name and selections[].input_name; the compiler resolves them.",
+            "On INTERPRET_BATCH_RESULTS, interpret the completed batch as a scientific whole before issuing follow-up work. Follow-up may include multiple RPs and multiple analyses again.",
+            "Use rp_closures to close every RP you judge scientifically exhausted. Closing an RP is not the same as closing the subject; in the same decision you may close exhausted RPs and open or continue other RPs.",
+            "Do not keep an RP artificially open merely because subject-level research continues, and do not close the subject merely because one RP is exhausted.",
             "Promote only findings you judge significant. The compiler/executor never decides scientific significance.",
             "A failure in one batch branch does not imply the other scientific branches failed; interpret each returned record on its evidence.",
             "During EXPLORATION actively seek predictive structure at T -> T+1 onward without manufacturing positive findings. During VALIDATION preserve all governing no-look-ahead restrictions.",
