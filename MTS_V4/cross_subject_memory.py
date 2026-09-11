@@ -60,17 +60,47 @@ class InMemoryCrossSubjectScientificMemory(CrossSubjectScientificMemory):
     _records: dict[str, ScientificMemoryRecord] = field(default_factory=dict)
     _frontier: ResearchFrontierState | None = None
 
-    def publish(self, record: ScientificMemoryRecord) -> None:
+    @staticmethod
+    def _validate_record(record: ScientificMemoryRecord) -> None:
         if not record.record_id.strip():
             raise ValueError("record_id cannot be blank")
         if not record.subject_id.strip():
             raise ValueError("subject_id cannot be blank")
         if not record.summary.strip():
             raise ValueError("summary cannot be blank")
-        existing = self._records.get(record.record_id)
-        if existing is not None and existing != record:
-            raise ValueError(f"scientific memory record_id already exists with different content: {record.record_id}")
-        self._records[record.record_id] = record
+
+    def publish(self, record: ScientificMemoryRecord) -> None:
+        self.publish_batch((record,))
+
+    def publish_batch(self, records: Sequence[ScientificMemoryRecord]) -> None:
+        """Validate a complete RD-authored batch before mutating scientific memory.
+
+        Exact duplicate records are idempotent. Reusing a record_id with different
+        content, either within the proposed batch or against durable memory, is an
+        objective identity conflict and rejects the whole batch before any record
+        is changed. No deterministic code chooses between conflicting scientific
+        statements.
+        """
+        proposed: dict[str, ScientificMemoryRecord] = {}
+        for record in records:
+            self._validate_record(record)
+            duplicate = proposed.get(record.record_id)
+            if duplicate is not None and duplicate != record:
+                raise ValueError(
+                    "scientific memory batch contains record_id with different content: "
+                    f"{record.record_id}"
+                )
+            proposed[record.record_id] = record
+
+        for record_id, record in proposed.items():
+            existing = self._records.get(record_id)
+            if existing is not None and existing != record:
+                raise ValueError(
+                    "scientific memory record_id already exists with different content: "
+                    f"{record_id}"
+                )
+
+        self._records.update(proposed)
 
     def set_frontier(self, frontier: ResearchFrontierState) -> None:
         if frontier.version < 1:
