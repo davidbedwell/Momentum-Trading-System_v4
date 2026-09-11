@@ -92,10 +92,17 @@ if failed:
 PY
 
 echo
-echo "=== VERIFY MTS LIVE SOURCE ==="
+echo "=== VERIFY MTS RUNTIME IMPORTS ==="
 
 python - <<'PY'
+from Core.deterministic_computation import execute_computations
+from MTS_V4.discovery_methods import discovery_method_catalog
 from MTS_V4.live_sources import YFinanceDailyOhlcvSource
+
+assert callable(execute_computations)
+assert discovery_method_catalog().all()
+print("Core.deterministic_computation: PASS")
+print("MTS_V4.discovery_methods: PASS")
 print("YFinanceDailyOhlcvSource: PASS")
 PY
 
