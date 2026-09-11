@@ -25,6 +25,18 @@ AI Research Director
 → findings, closures, revised hypotheses, follow-up Research Packages, or another batch
 → repeat as scientifically necessary.
 
+## Unbounded Scientific Breadth and Batch Symmetry
+
+At each Research Director decision point, Sol may create or continue as many Research Packages as it judges scientifically relevant to the research objective. It should include all scientifically justified lines of inquiry that can be specified from the evidence currently available. Deterministic code must not impose a scientific limit, ranking, quota, preferred number, or favored ordering of Research Packages.
+
+All Research Packages and Analysis Specifications authorized by one Sol decision are delivered to Analysis as one batch. The batch boundary is scientific: it contains all presently justified work that does not require an unknown intermediate scientific result before its justification can be established.
+
+Similarly, Sol shall receive all Analysis results for all Research Packages sent in that batch together in one consolidated return after all mechanically executable work in the batch has completed. Deterministic code must not selectively return, rank, suppress, prioritize, or withhold completed Analysis results based on scientific merit.
+
+A genuine scientific dependency may create a decision boundary. Sol should not pre-author contingent follow-up science whose justification depends on an unknown result. Once the consolidated batch is returned, Sol may interpret the results across all RPs, close or continue any RP, create new RPs, promote findings, or authorize another complete batch.
+
+There is no architectural target for the number of Research Packages or Analysis Specifications in a batch. Zero, one, or many may be scientifically appropriate. The number is a Sol scientific judgment constrained only by available evidence, executable capability, genuine scientific dependencies, and objective execution safety—not by a deterministic quota or preferred batch size.
+
 ## Scientific Authority
 
 The AI Research Director owns:
@@ -38,6 +50,8 @@ The AI Research Director owns:
 - which evidence or prior derived scientific object should be used;
 - whether two objects should be aligned or compared scientifically;
 - interpretation, significance, uncertainty, contradiction, novelty, and relevance;
+- how many Research Packages are scientifically relevant at a decision point;
+- how many Analysis Specifications are scientifically justified within each RP;
 - whether a Research Package is complete;
 - whether the subject warrants additional Research Packages;
 - where a genuine scientific decision boundary exists;
@@ -81,7 +95,7 @@ Evidence references remain explicit because choosing evidence is scientific. The
 
 ## Batch Research Packages
 
-A batch may contain multiple RPs. Each RP contains:
+A batch may contain zero, one, or many RPs according to Sol's scientific judgment. Each RP contains:
 
 - `rp_id`;
 - optional `parent_rp_id`;
@@ -89,13 +103,13 @@ A batch may contain multiple RPs. Each RP contains:
 - one or more Analysis Specifications;
 - an optional AI-authored decision boundary explaining what should be returned before additional contingent science is attempted.
 
-An RP is a scientific unit, not an execution unit. Several RPs may execute in the same batch.
+An RP is a scientific unit, not an execution unit. Several RPs may execute in the same batch. Deterministic code may validate representation and execution safety but may not impose a scientific maximum RP count, preferred RP count, ranking, quota, or preferred ordering.
 
 ## Batch Completion and Return
 
 The runtime executes all currently authorized and mechanically executable Analysis Specifications in the batch. Independent branches continue even if another branch fails.
 
-The consolidated return to the AI Research Director includes, for every Analysis Specification:
+The consolidated return to the AI Research Director includes, for every Analysis Specification in every RP in the batch:
 
 - logical `analysis_id`;
 - `rp_id`;
@@ -106,17 +120,18 @@ The consolidated return to the AI Research Director includes, for every Analysis
 - future-information metadata;
 - any compiler-generated internal binding map needed for audit but not for scientific reasoning.
 
-The AI Research Director receives the batch only after all executable work in the authorized batch has completed.
+The AI Research Director receives one consolidated batch only after all executable work in the authorized batch has completed. The deterministic layer may not scientifically rank, selectively return, suppress, or prioritize completed results. Branch-local objective failures are included alongside successful results so Sol can interpret the batch as a whole.
 
 ## Follow-up Cycle
 
-After reviewing a batch, the AI Research Director may:
+After reviewing the complete batch, the AI Research Director may:
 
 - promote findings;
 - create or update tentative predictive hypotheses under existing governance;
 - close one or more RPs;
-- create new child or sibling RPs;
-- issue multiple follow-up Analysis Specifications as another batch;
+- continue any number of existing RPs;
+- create any number of new child or sibling RPs it judges scientifically relevant;
+- issue multiple follow-up Analysis Specifications across those RPs as another single batch;
 - re-test an existing scientific proposition using a new AI-chosen method or parameterization;
 - defer a contingent branch;
 - close the subject when further work is scientifically low-value, redundant, unsupported, or better deferred.
