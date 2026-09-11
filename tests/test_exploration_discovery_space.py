@@ -31,11 +31,12 @@ def test_primary_sol_distinguishes_rp_closure_from_subject_closure():
 def test_subject_selection_does_not_bind_within_subject_parameter_space():
     source = inspect.getsource(SolAdaptiveSubjectSelector.choose_next)
 
-    assert "implicit queue that narrows later" in source
-    assert "does not bind its Research Director" in source
+    assert "implicit" in source and "queue that narrows later EXPLORATION" in source
+    assert "does not bind its Research" in source and "Director to any inherited lookback" in source
     assert "lookback, forward horizon, threshold" in source
-    assert "different scientifically" in source
-    assert "Prior hypotheses and frontier entries are context, not a mandatory" in source
+    assert "entirely different scientifically" in source
+    assert "Prior hypotheses and frontier entries are context, not" in source
+    assert "a mandatory agenda" in source
 
 
 def test_exploration_priority_is_not_ranked_by_blind_validation_eligibility():
@@ -44,7 +45,8 @@ def test_exploration_priority_is_not_ranked_by_blind_validation_eligibility():
     assert "exploration_exposure_priority" in source
     assert "SCIENTIFICALLY_NEUTRAL" in source
     assert "validation_eligibility_must_not_rank_exploration_subjects" in source
-    assert "unexposed status confers no inherent EXPLORATION priority" in source
+    assert "unexposed status confers no inherent EXPLORATION" in source
+    assert "priority" in source
     assert "ignore retrospective_blind_validation_eligible" in source
     assert "future blind-validation campaign" in source
 
