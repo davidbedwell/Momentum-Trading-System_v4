@@ -58,6 +58,11 @@ def test_campaign_recorder_preserves_rps_question_lineage_interpretation_and_jou
         decision_sequence=1,
         analyses_executed=0,
     )
+    recorder.record_accepted_request(
+        campaign_id="campaign:aapl",
+        subject=subject,
+        request=first_request,
+    )
 
     # The orchestrator writes the same RD decision again after deterministic
     # Analysis execution and before asking RD to interpret it. This must not
@@ -93,6 +98,11 @@ def test_campaign_recorder_preserves_rps_question_lineage_interpretation_and_jou
         decision_sequence=2,
         analyses_executed=1,
     )
+    recorder.record_accepted_request(
+        campaign_id="campaign:aapl",
+        subject=subject,
+        request=followup_request,
+    )
 
     rp1 = packages.load("RP-0001")
     assert rp1 is not None
@@ -124,6 +134,11 @@ def test_campaign_recorder_preserves_rps_question_lineage_interpretation_and_jou
         decision=branch,
         decision_sequence=3,
         analyses_executed=2,
+    )
+    recorder.record_accepted_request(
+        campaign_id="campaign:aapl",
+        subject=subject,
+        request=child_request,
     )
 
     rp1_after_branch = packages.load("RP-0001")
@@ -191,6 +206,11 @@ def test_later_rp_does_not_overwrite_closed_prior_rp(tmp_path):
         decision_sequence=1,
         analyses_executed=0,
     )
+    recorder.record_accepted_request(
+        campaign_id="campaign:aapl",
+        subject=subject,
+        request=first_request,
+    )
     recorder.record_decision(
         campaign_id="campaign:aapl",
         subject=subject,
@@ -220,6 +240,11 @@ def test_later_rp_does_not_overwrite_closed_prior_rp(tmp_path):
         ),
         decision_sequence=3,
         analyses_executed=0,
+    )
+    recorder.record_accepted_request(
+        campaign_id="campaign:aapl",
+        subject=subject,
+        request=second_request,
     )
 
     assert packages.load("RP-0001") == before
