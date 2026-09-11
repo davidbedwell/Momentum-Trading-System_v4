@@ -5,6 +5,7 @@ from typing import Any, Mapping
 
 from .batch_contracts import (
     BatchResearchDecision,
+    ResearchPackageClosure,
     ResearchPackagePlan,
     ScientificAnalysisSpecification,
     ScientificInputReference,
@@ -34,6 +35,11 @@ class BatchResearchDecisionCodec:
             raise BatchResearchDecisionDecodeError("research_packages must be a list")
         packages = tuple(BatchResearchDecisionCodec._decode_package(item) for item in packages_raw)
 
+        closures_raw = raw.get("rp_closures", [])
+        if not isinstance(closures_raw, list):
+            raise BatchResearchDecisionDecodeError("rp_closures must be a list")
+        closures = tuple(BatchResearchDecisionCodec._decode_closure(item) for item in closures_raw)
+
         findings_raw = raw.get("promote_findings", [])
         if not isinstance(findings_raw, list):
             raise BatchResearchDecisionDecodeError("promote_findings must be a list")
@@ -54,14 +60,19 @@ class BatchResearchDecisionCodec:
             raise BatchResearchDecisionDecodeError(
                 "continuing batched research requires at least one AI-authored Research Package"
             )
-        if not continue_research and not close_reason:
+        if not continue_research and (not isinstance(close_reason, str) or not close_reason.strip()):
             raise BatchResearchDecisionDecodeError(
                 "closing batched research requires a nonblank close_reason"
             )
 
         rp_ids = [package.rp_id for package in packages]
         if len(rp_ids) != len(set(rp_ids)):
-            raise BatchResearchDecisionDecodeError("research_packages rp_id values must be unique within a batch")
+            raise BatchResearchDecisionDecodeError(
+                "research_packages rp_id values must be unique within a batch"
+            )
+        closure_ids = [closure.rp_id for closure in closures]
+        if len(closure_ids) != len(set(closure_ids)):
+            raise BatchResearchDecisionDecodeError("rp_closures rp_id values must be unique")
         analysis_ids = [analysis.analysis_id for package in packages for analysis in package.analyses]
         if len(analysis_ids) != len(set(analysis_ids)):
             raise BatchResearchDecisionDecodeError("analysis_id values must be unique across a batch")
@@ -69,6 +80,7 @@ class BatchResearchDecisionCodec:
         return BatchResearchDecision(
             continue_research=continue_research,
             research_packages=packages,
+            rp_closures=closures,
             promote_findings=findings,
             research_state=dict(research_state),
             close_reason=close_reason,
@@ -102,6 +114,25 @@ class BatchResearchDecisionCodec:
             analyses=analyses,
             parent_rp_id=parent_rp_id,
             decision_boundary=decision_boundary,
+        )
+
+    @staticmethod
+    def _decode_closure(raw: Any) -> ResearchPackageClosure:
+        if not isinstance(raw, Mapping):
+            raise BatchResearchDecisionDecodeError("each rp_closures entry must be an object")
+        rp_id = BatchResearchDecisionCodec._nonblank(raw.get("rp_id"), "rp_closures.rp_id")
+        close_reason = BatchResearchDecisionCodec._nonblank(
+            raw.get("close_reason"), "rp_closures.close_reason"
+        )
+        final_assessment = raw.get("final_assessment")
+        if final_assessment is not None and not isinstance(final_assessment, str):
+            raise BatchResearchDecisionDecodeError(
+                "rp_closures.final_assessment must be string or null"
+            )
+        return ResearchPackageClosure(
+            rp_id=rp_id,
+            close_reason=close_reason,
+            final_assessment=final_assessment,
         )
 
     @staticmethod
