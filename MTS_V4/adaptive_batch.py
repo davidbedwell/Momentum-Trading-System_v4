@@ -70,8 +70,8 @@ class BatchLedger:
     def __post_init__(self) -> None:
         if not self.batch_id.strip():
             raise ValueError("batch_id cannot be blank")
-        if self.batch_limit != 3:
-            raise ValueError("approved autonomous batch_limit is exactly 3")
+        if self.batch_limit < 1:
+            raise ValueError("batch_limit must be positive")
         if len(self.subjects) > self.batch_limit:
             raise ValueError("batch exceeds approved autonomous subject limit")
         ids = [item.subject_id for item in self.subjects]
@@ -122,14 +122,24 @@ class SubjectEligibilityEnvelope:
 
 @dataclass(slots=True)
 class ThreeSubjectBatchController:
-    """Mechanical governance boundary. It does not select scientific subjects."""
+    """Mechanical governance boundary. It does not select scientific subjects.
+
+    The historical class name is retained for compatibility. The autonomous review
+    boundary defaults to three subjects, but may be explicitly raised by a
+    human-authorized runner through batch_limit.
+    """
 
     batch_id: str
     eligibility: SubjectEligibilityEnvelope = field(default_factory=SubjectEligibilityEnvelope)
+    batch_limit: int = 3
     _selections: list[SubjectSelection] = field(default_factory=list)
     _ledger_rows: list[SubjectRunLedger] = field(default_factory=list)
 
     BATCH_LIMIT = 3
+
+    def __post_init__(self) -> None:
+        if self.batch_limit < 1:
+            raise ValueError("batch_limit must be positive")
 
     def validate_selection(
         self,
@@ -139,8 +149,8 @@ class ThreeSubjectBatchController:
         previously_seen: Sequence[str],
         available_sources: Sequence[str] = (),
     ) -> tuple[str, ...]:
-        if len(self._selections) >= self.BATCH_LIMIT:
-            return ("three-subject autonomous batch limit reached; human review required",)
+        if len(self._selections) >= self.batch_limit:
+            return (f"{self.batch_limit}-subject autonomous batch limit reached; human review required",)
         defects = list(
             self.eligibility.objective_defects(
                 subject_id=subject_id,
@@ -156,8 +166,8 @@ class ThreeSubjectBatchController:
         return tuple(defects)
 
     def accept_selection(self, *, subject_id: str, rationale: str) -> SubjectSelection:
-        if len(self._selections) >= self.BATCH_LIMIT:
-            raise RuntimeError("three-subject autonomous batch limit reached; human review required")
+        if len(self._selections) >= self.batch_limit:
+            raise RuntimeError(f"{self.batch_limit}-subject autonomous batch limit reached; human review required")
         selection = SubjectSelection(
             subject_id=subject_id,
             rationale=rationale,
@@ -175,8 +185,12 @@ class ThreeSubjectBatchController:
         self._ledger_rows.append(row)
 
     def ledger(self) -> BatchLedger:
-        return BatchLedger(batch_id=self.batch_id, subjects=tuple(self._ledger_rows))
+        return BatchLedger(
+            batch_id=self.batch_id,
+            subjects=tuple(self._ledger_rows),
+            batch_limit=self.batch_limit,
+        )
 
     @property
     def requires_review(self) -> bool:
-        return len(self._selections) >= self.BATCH_LIMIT
+        return len(self._selections) >= self.batch_limit
