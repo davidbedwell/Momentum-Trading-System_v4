@@ -44,7 +44,7 @@ def _rewrite_input_roles(value: Any, role_bindings: Mapping[str, str]) -> Any:
     if isinstance(value, list):
         return [_rewrite_input_roles(item, role_bindings) for item in value]
     if isinstance(value, tuple):
-        return tuple(_rewrite_input_roles(item, role_bindings) for item in value]
+        return tuple(_rewrite_input_roles(item, role_bindings) for item in value)
     return value
 
 
@@ -116,6 +116,11 @@ class ScientificSpecificationCompiler:
             raise BatchCompilationError("rp_id cannot be blank")
         if not specification.question_id.strip():
             raise BatchCompilationError("question_id cannot be blank")
+        if specification.analysis_id in context.results_by_analysis_id:
+            raise BatchCompilationError(
+                f"logical analysis_id has already completed and cannot be reused for a new execution: "
+                f"{specification.analysis_id}"
+            )
 
         roles = [reference.role for reference in specification.inputs]
         if any(not role.strip() for role in roles):
