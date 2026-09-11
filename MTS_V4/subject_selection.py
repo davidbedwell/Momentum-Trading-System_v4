@@ -36,6 +36,10 @@ class SolAdaptiveSubjectSelector:
     returned identity/rationale/phase representation. It never ranks or chooses
     a ticker, hypothesis, or scientific role itself.
 
+    Previously researched subjects remain eligible for EXPLORATION. Prior MTS
+    exposure blocks only retrospective blind VALIDATION_FIRST, where unseen
+    status is part of the objective protocol integrity requirement.
+
     ``validatable_hypothesis_ids`` is an objective execution-capability envelope.
     When supplied, Sol may choose VALIDATION_FIRST only for one of those exact
     already-frozen hypotheses. An empty set means no blind-validation protocol is
@@ -82,6 +86,7 @@ class SolAdaptiveSubjectSelector:
                 subject_id=subject_id,
                 previously_seen=previously_seen,
                 available_sources=available_sources_by_subject.get(subject_id, ()),
+                require_unseen=False,
             )
             if not defects:
                 eligible_candidates.append(subject_id)
@@ -100,24 +105,26 @@ class SolAdaptiveSubjectSelector:
             "operation": "SELECT_NEXT_RESEARCH_SUBJECT",
             "mission": mission,
             "eligible_candidate_subject_ids": eligible_candidates,
-            "previously_seen_subject_ids": list(previously_seen),
+            "previously_researched_subject_ids": list(previously_seen),
             "cross_subject_scientific_memory": memory_context,
             "human_governance": {
                 "selection_authority": "AI_RD",
                 "objective_eligibility_enforced_by_code": True,
                 "allowed_selection_modes": allowed_modes,
                 "mechanically_executable_validation_hypothesis_ids": validatable_ids,
+                "blind_validation_requires_unseen_subject": True,
+                "exploration_may_revisit_previously_researched_subject": True,
                 "scientific_guideline": (
-                    "Choose the previously unseen subject that is most scientifically useful next given accumulated "
-                    "knowledge. Across selections, seek enough variation to discriminate whether relationships "
-                    "generalize, reverse, weaken, or depend on subject characteristics. Avoid redundant selections "
-                    "whose similarity contributes little new discrimination. Prior hypotheses are context, not a "
-                    "mandatory agenda; replication/discrimination, independent exploration, or both are permitted. "
-                    "If a prior frozen hypothesis is scientifically suitable for a blind test on the selected ticker "
-                    "and its exact hypothesis_id appears in mechanically_executable_validation_hypothesis_ids, you "
-                    "may choose VALIDATION_FIRST and identify that exact hypothesis_id. The blind trial must be "
-                    "completed and scored before unrestricted exploratory analysis begins on that same ticker. After "
-                    "scoring, the same ticker may proceed to full EXPLORATION and still counts once in the batch."
+                    "Choose the subject that is most scientifically useful next given accumulated knowledge. "
+                    "Previously researched subjects remain eligible for EXPLORATION when revisiting them is useful; "
+                    "a prior failure or absence of findings is not an exploration exclusion. Across selections, seek "
+                    "enough variation to discriminate whether relationships generalize, reverse, weaken, or depend on "
+                    "subject characteristics, but revisit a prior subject when the Research Frontier makes that the "
+                    "better scientific choice. Prior hypotheses are context, not a mandatory agenda. If a prior frozen "
+                    "hypothesis is scientifically suitable for a retrospective blind test, VALIDATION_FIRST may be "
+                    "chosen only on a subject absent from previously_researched_subject_ids and only when its exact "
+                    "hypothesis_id appears in mechanically_executable_validation_hypothesis_ids. The blind trial must "
+                    "be completed and scored before unrestricted exploration begins on that same ticker."
                 ),
             },
             "required_schema": {
@@ -164,6 +171,8 @@ class SolAdaptiveSubjectSelector:
                 "RD selected a subject role that is not mechanically executable in the current runner"
             )
         if mode == "VALIDATION_FIRST":
+            if subject_id in set(previously_seen):
+                raise ValueError("VALIDATION_FIRST requires a subject unseen by prior MTS research")
             if not isinstance(hypothesis_id, str) or not hypothesis_id.strip():
                 raise ValueError("VALIDATION_FIRST selection requires nonblank hypothesis_id")
             if (
