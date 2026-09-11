@@ -62,6 +62,10 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     state_dir.mkdir(parents=True, exist_ok=False)
+    os.environ.setdefault(
+        "MTS_SOL_TELEMETRY_PATH",
+        str(state_dir / "sol_transport_telemetry.jsonl"),
+    )
     subject = SubjectMetadata(subject_id=f"equity:{ticker}", ticker=ticker)
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
@@ -142,6 +146,7 @@ def main(argv: list[str] | None = None) -> int:
         "findings_promoted": outcome.findings_promoted,
         "closed": outcome.closed,
         "close_reason": outcome.close_reason,
+        "sol_transport_telemetry": str(state_dir / "sol_transport_telemetry.jsonl"),
     }
     (state_dir / "run_summary.json").write_text(
         json.dumps(summary, sort_keys=True, indent=2) + "\n",
@@ -155,6 +160,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"ANALYSES={outcome.analyses_executed}", flush=True)
     print(f"CLOSED={outcome.closed}", flush=True)
     print(f"CLOSE_REASON={outcome.close_reason}", flush=True)
+    print(f"SOL_TELEMETRY={state_dir / 'sol_transport_telemetry.jsonl'}", flush=True)
     return 0
 
 
