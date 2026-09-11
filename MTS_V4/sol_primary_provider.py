@@ -66,7 +66,16 @@ class SolPrimaryResearchDirector(SolResearchPackageAwareResearchDirector):
             "EXPLORATION inside an ordinary decision. A new predictive hypothesis may be scientifically authored "
             "during exploration, but its research package must already exist durably before "
             "predictive_hypothesis_updates are emitted. Establish a new RP through an accepted Analysis request "
-            "first, then emit the hypothesis update in a later decision."
+            "first, then emit the hypothesis update in a later decision. Before ending EXPLORATION on a subject, "
+            "distinguish exhaustion of the current Research Package from exhaustion of scientifically useful work on "
+            "the subject. Closing one RP is not evidence that the ticker is adequately explored. Review the accumulated "
+            "results, unresolved issues, Research Frontier, available evidence, and currently exposed Analysis capabilities. "
+            "If the current RP is exhausted but a materially distinct scientifically promising proposition remains worth "
+            "testing now, continue research by opening a new RP with a fresh question rather than stopping the subject. "
+            "This is an AI scientific judgment, not a requirement to manufacture more analyses: stop when further work is "
+            "low-value, redundant, unsupported by available evidence/capability, or scientifically better deferred. When "
+            "new cross-subject knowledge exposes a serious limitation in an earlier formulation, treat previously analyzed "
+            "tickers as eligible for renewed exploration; prior negative or narrow work does not make them closed subjects."
         )
         return [{"role": "system", "content": system}, messages[1]]
 
