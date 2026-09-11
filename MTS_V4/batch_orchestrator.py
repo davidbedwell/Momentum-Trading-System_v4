@@ -26,6 +26,24 @@ class BatchResearchLoopError(RuntimeError):
     pass
 
 
+@dataclass(frozen=True, slots=True)
+class HumanSafetyBudget:
+    """Optional human-owned operational ceiling; never a scientific batch quota.
+
+    When supplied, the ceiling is checked atomically before a Sol-authored batch
+    begins execution. If the complete batch would cross the authorized ceiling,
+    none of that batch executes and human authorization is required. The runtime
+    never truncates, ranks, or partially executes a scientific batch to satisfy
+    this control.
+    """
+
+    max_analysis_executions: int
+
+    def __post_init__(self) -> None:
+        if self.max_analysis_executions <= 0:
+            raise ValueError("human safety max_analysis_executions must be positive")
+
+
 class BatchResearchDirectorProvider(Protocol):
     def begin_batch_research(
         self,
@@ -65,6 +83,9 @@ class BatchResearchLoopOutcome:
     close_reason: str | None
     final_decision: BatchResearchDecision
     last_report: BatchExecutionReport | None = None
+    human_authorization_required: bool = False
+    pending_batch_analysis_count: int | None = None
+    human_safety_limit: int | None = None
 
 
 class BatchResearchLoopOrchestrator:
@@ -74,6 +95,10 @@ class BatchResearchLoopOrchestrator:
     resolves symbolic identities and executor bindings; it does not add analyses
     or scientific dependencies. Independent branches continue after branch-local
     objective defects so the RD receives one consolidated report.
+
+    There is no deterministic scientific batch-size limit. An optional explicitly
+    human-authored operational safety budget may stop the run before an entire
+    batch begins, but it may never truncate or selectively execute that batch.
     """
 
     def __init__(
@@ -104,14 +129,11 @@ class BatchResearchLoopOrchestrator:
         *,
         subject: SubjectMetadata,
         evidence: Sequence[EvidenceDescriptor],
-        max_analyses: int,
+        human_safety_budget: HumanSafetyBudget | None = None,
         decision_callback: BatchDecisionCallback | None = None,
         report_callback: BatchReportCallback | None = None,
         accepted_request_callback: AcceptedRequestCallback | None = None,
     ) -> BatchResearchLoopOutcome:
-        if max_analyses <= 0:
-            raise ValueError("max_analyses must be positive")
-
         self._nexus.upsert_subject(subject)
         evidence_map = {item.evidence_id: item for item in evidence}
         if len(evidence_map) != len(evidence):
@@ -143,6 +165,25 @@ class BatchResearchLoopOrchestrator:
 
         while decision.continue_research:
             specifications = self._flatten_and_validate_decision(decision, subject)
+
+            if (
+                human_safety_budget is not None
+                and analyses + len(specifications) > human_safety_budget.max_analysis_executions
+            ):
+                return BatchResearchLoopOutcome(
+                    decisions=decisions,
+                    batches_executed=batches,
+                    analyses_executed=analyses,
+                    findings_promoted=promoted,
+                    closed=False,
+                    close_reason="HUMAN_SAFETY_AUTHORIZATION_REQUIRED",
+                    final_decision=decision,
+                    last_report=last_report,
+                    human_authorization_required=True,
+                    pending_batch_analysis_count=len(specifications),
+                    human_safety_limit=human_safety_budget.max_analysis_executions,
+                )
+
             try:
                 ordered = topological_analysis_order(specifications)
             except BatchCompilationError as exc:
@@ -171,18 +212,6 @@ class BatchResearchLoopOrchestrator:
                 self._notify_decision(decision_callback, decision, decisions, analyses)
                 continue
 
-            if analyses >= max_analyses:
-                return BatchResearchLoopOutcome(
-                    decisions=decisions,
-                    batches_executed=batches,
-                    analyses_executed=analyses,
-                    findings_promoted=promoted,
-                    closed=False,
-                    close_reason="ANALYSIS_BUDGET_EXHAUSTED",
-                    final_decision=decision,
-                    last_report=last_report,
-                )
-
             records: list[BatchAnalysisRecord] = []
             failed_analysis_ids: set[str] = set()
             current_batch_results: dict[str, AnalysisResult] = {}
@@ -207,18 +236,6 @@ class BatchResearchLoopOrchestrator:
                                 "upstream batch dependency did not complete successfully: "
                                 + ", ".join(failed_dependencies)
                             ),
-                        )
-                    )
-                    continue
-
-                if analyses >= max_analyses:
-                    failed_analysis_ids.add(specification.analysis_id)
-                    records.append(
-                        BatchAnalysisRecord(
-                            analysis_id=specification.analysis_id,
-                            rp_id=specification.rp_id,
-                            status="NOT_EXECUTED_BUDGET_EXHAUSTED",
-                            objective_defect="analysis budget exhausted before this authorized branch could execute",
                         )
                     )
                     continue
