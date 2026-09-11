@@ -68,7 +68,7 @@ def test_batch_hard_stops_after_three_subjects():
         controller.record_run(SubjectRunLedger(subject_id=symbol, selection_rationale="scientific variation", decisions=1, analyses_executed=1, findings_promoted=0))
     assert controller.requires_review is True
     assert controller.ledger().requires_review is True
-    assert controller.validate_selection(subject_id="MSFT", rationale="next", previously_seen=()) == ("three-subject autonomous batch limit reached; human review required",)
+    assert controller.validate_selection(subject_id="MSFT", rationale="next", previously_seen=()) == ("3-subject autonomous batch limit reached; human review required",)
     with pytest.raises(RuntimeError):
         controller.accept_selection(subject_id="MSFT", rationale="next")
 
