@@ -188,6 +188,9 @@ def _validatable_hypothesis_ids_from_environment() -> frozenset[str]:
 def main() -> None:
     timeout_seconds = int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600"))
     max_analyses = int(os.getenv("MTS_ADAPTIVE_BATCH_MAX_ANALYSES_PER_SUBJECT", "100"))
+    batch_limit = int(os.getenv("MTS_ADAPTIVE_BATCH_SUBJECT_LIMIT", "3"))
+    if batch_limit < 1:
+        raise RuntimeError("MTS_ADAPTIVE_BATCH_SUBJECT_LIMIT must be positive")
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     batch_id = os.getenv("MTS_ADAPTIVE_BATCH_ID", f"mts-v4-sol-batch-{stamp}").strip()
     state_dir = Path(
@@ -196,6 +199,10 @@ def main() -> None:
     state_dir.mkdir(parents=True, exist_ok=True)
 
     candidates = _candidate_subject_ids()
+    if len(candidates) < batch_limit:
+        raise RuntimeError(
+            f"adaptive batch subject limit {batch_limit} exceeds candidate count {len(candidates)}"
+        )
     previously_seen = _previously_seen()
 
     memory_path = _seed_memory_if_requested(state_dir=state_dir)
@@ -220,6 +227,7 @@ def main() -> None:
     controller = ThreeSubjectBatchController(
         batch_id=batch_id,
         eligibility=eligibility,
+        batch_limit=batch_limit,
     )
     memory_author = SolSubjectScientificMemoryAuthor(
         rd=coordination_rd,
@@ -353,12 +361,15 @@ def main() -> None:
         previously_seen=previously_seen,
     )
     ledger = controller.ledger()
-    if not ledger.requires_review or len(ledger.subjects) != 3:
-        raise RuntimeError("adaptive batch returned without reaching the approved three-subject review boundary")
+    if not ledger.requires_review or len(ledger.subjects) != batch_limit:
+        raise RuntimeError(
+            f"adaptive batch returned without reaching the approved {batch_limit}-subject review boundary"
+        )
 
     batch_artifact = {
         "batch_id": batch_id,
         "requires_human_review": True,
+        "approved_subject_limit": batch_limit,
         "previously_seen_subject_ids": list(previously_seen),
         "candidate_subject_ids": list(candidates),
         "selections": [
@@ -391,7 +402,8 @@ def main() -> None:
     print(f"BATCH_ID={batch_id}", flush=True)
     print(f"SOL_MODEL={_required_env('MTS_SOL_MODEL')}", flush=True)
     print(f"SUBJECTS={','.join(item.subject_id for item in result.selections)}", flush=True)
-    print("SUBJECT_COUNT=3", flush=True)
+    print(f"SUBJECT_COUNT={len(result.selections)}", flush=True)
+    print(f"APPROVED_SUBJECT_LIMIT={batch_limit}", flush=True)
     print("HUMAN_REVIEW_REQUIRED=True", flush=True)
     print(f"BATCH_REVIEW={artifact_path}", flush=True)
 
