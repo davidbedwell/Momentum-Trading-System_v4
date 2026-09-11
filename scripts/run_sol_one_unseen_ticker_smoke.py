@@ -11,7 +11,7 @@ from MTS_V4.adaptive_batch import SubjectEligibilityEnvelope, SubjectRunLedger
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_runtime
 from MTS_V4.campaign import CheckpointedCampaignRunner
 from MTS_V4.checkpoint import JsonCampaignCheckpointStore
-from MTS_V4.contracts import SubjectMetadata
+from MTS_V4.contracts import ResearchPhase, SubjectMetadata
 from MTS_V4.cross_subject_memory_store import JsonCrossSubjectScientificMemoryStore
 from MTS_V4.decision_journal import JsonResearchDecisionJournal
 from MTS_V4.intake import IntakeEngine
@@ -32,7 +32,7 @@ AAPL_SUCCESS_DEFINITION = "SUCCESS iff close(T+5) > close(T); otherwise FAILURE.
 
 DEFAULT_CANDIDATES = (
     "MSFT", "NVDA", "AMZN", "META", "GOOGL", "TSLA", "AMD", "JPM",
-    "GS", "XOM", "CAT", "BA", "WMT", "COST", "UNH",
+    "GS", "CAT", "BA", "WMT", "COST", "UNH",
 )
 
 
@@ -54,6 +54,8 @@ def _candidate_subject_ids() -> tuple[str, ...]:
         raise RuntimeError("candidate universe is empty")
     if "AAPL" in tickers:
         raise RuntimeError("AAPL is prior scientific memory and cannot be an unseen smoke candidate")
+    if "XOM" in tickers:
+        raise RuntimeError("XOM has prior MTS exposure and cannot be an unseen smoke candidate")
     return tuple(f"equity:{ticker}" for ticker in tickers)
 
 
@@ -132,13 +134,21 @@ def _aapl_scientific_context() -> Mapping[str, object]:
     }
 
 
-def _sol_rd(*, package_store: JsonResearchPackageStore, timeout_seconds: int) -> SolPrimaryResearchDirector:
+def _sol_rd(
+    *,
+    package_store: JsonResearchPackageStore,
+    timeout_seconds: int,
+    required_subject_id: str | None = None,
+    required_research_phase: ResearchPhase | None = None,
+) -> SolPrimaryResearchDirector:
     return SolPrimaryResearchDirector(
         research_package_store=package_store,
         base_url=_required_env("MTS_SOL_BASE_URL"),
         model=_required_env("MTS_SOL_MODEL"),
         api_key=_required_env("MTS_SOL_API_KEY"),
         timeout_seconds=timeout_seconds,
+        required_subject_id=required_subject_id,
+        required_research_phase=required_research_phase,
     )
 
 
@@ -225,12 +235,12 @@ def main() -> None:
 
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
     memory = JsonCrossSubjectScientificMemoryStore(state_dir / "cross_subject_memory.json")
-    rd = _sol_rd(package_store=package_store, timeout_seconds=timeout_seconds)
+    coordination_rd = _sol_rd(package_store=package_store, timeout_seconds=timeout_seconds)
 
-    _seed_aapl_memory_if_needed(rd=rd, memory=memory)
+    _seed_aapl_memory_if_needed(rd=coordination_rd, memory=memory)
     candidates = _candidate_subject_ids()
     selection = _select_subject(
-        rd=rd,
+        rd=coordination_rd,
         memory=memory,
         candidate_subject_ids=candidates,
     )
@@ -253,8 +263,14 @@ def main() -> None:
         subject_id=selection.subject_id,
         ticker=_ticker(selection.subject_id),
     )
+    exploration_rd = _sol_rd(
+        package_store=package_store,
+        timeout_seconds=timeout_seconds,
+        required_subject_id=selection.subject_id,
+        required_research_phase=ResearchPhase.EXPLORATION,
+    )
     runtime = build_runtime(
-        rd=rd,
+        rd=exploration_rd,
         mission=DEFAULT_MISSION,
         nexus_path=state_dir / "research_nexus.json",
         max_contract_repairs=3,
@@ -301,7 +317,7 @@ def main() -> None:
         "evidence": [item.durable_metadata() for item in evidence],
     }
     digest = SolSubjectScientificMemoryAuthor(
-        rd=rd,
+        rd=coordination_rd,
         scientific_memory=memory,
     ).author_and_persist(
         mission=DEFAULT_MISSION,
