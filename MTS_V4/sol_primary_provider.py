@@ -45,14 +45,19 @@ class SolPrimaryResearchDirector(SolResearchPackageAwareResearchDirector):
             "scientific experience, not as a mandatory agenda. You retain scientific authority to test, challenge, "
             "reformulate, condition, defer, or ignore prior-subject records. Use the Research Frontier when useful "
             "to accumulate knowledge across subjects, but do not assume that a relationship observed on one subject "
-            "generalizes. Generalization itself must remain falsifiable. If the current subject was selected first "
-            "for blind validation of a prior hypothesis, preserve the no-look-ahead validation boundary and complete "
-            "the validation trial before unrestricted exploratory use of that subject. When subject_phase_contract "
-            "is present, it is the already-accepted objective phase contract for this run. Do not switch the subject "
-            "from EXPLORATION to VALIDATION or from VALIDATION to EXPLORATION inside an ordinary decision. A new "
-            "predictive hypothesis may be scientifically authored during exploration, but its research package must "
-            "already exist durably before predictive_hypothesis_updates are emitted. Establish a new RP through an "
-            "accepted Analysis request first, then emit the hypothesis update in a later decision."
+            "generalizes. Generalization itself must remain falsifiable. Historical rp_id values appearing only in "
+            "cross-subject scientific memory are provenance references, not active local Research Packages. Set "
+            "next_request.parent_rp_id only when that exact parent RP already exists in the active campaign's "
+            "research_package_context/package store for the current subject; otherwise parent_rp_id must be null. "
+            "Do not copy a historical seed-memory rp_id into parent_rp_id merely to express conceptual continuity. "
+            "If the current subject was selected first for blind validation of a prior hypothesis, preserve the "
+            "no-look-ahead validation boundary and complete the validation trial before unrestricted exploratory use "
+            "of that subject. When subject_phase_contract is present, it is the already-accepted objective phase "
+            "contract for this run. Do not switch the subject from EXPLORATION to VALIDATION or from VALIDATION to "
+            "EXPLORATION inside an ordinary decision. A new predictive hypothesis may be scientifically authored "
+            "during exploration, but its research package must already exist durably before "
+            "predictive_hypothesis_updates are emitted. Establish a new RP through an accepted Analysis request "
+            "first, then emit the hypothesis update in a later decision."
         )
         return [{"role": "system", "content": system}, messages[1]]
 
@@ -104,6 +109,23 @@ class SolPrimaryResearchDirector(SolResearchPackageAwareResearchDirector):
                     "Deterministic code will not change the phase; RD must return a scientifically valid "
                     "decision within the accepted phase."
                 )
+
+            if request.parent_rp_id is not None:
+                parent = self._research_package_store.load(request.parent_rp_id)
+                if parent is None:
+                    return (
+                        "next_request.parent_rp_id references a Research Package that is not present in the active "
+                        f"campaign package store: {request.parent_rp_id}. Historical rp_id values supplied through "
+                        "cross-subject scientific memory are provenance/context only and are not local parent objects. "
+                        "Return parent_rp_id=null unless the exact parent RP already exists durably in this active "
+                        "campaign. Deterministic code will not invent, materialize, or silently rewrite RP lineage."
+                    )
+                if parent.subject_id != request.subject_id:
+                    return (
+                        "next_request.parent_rp_id references an active RP for a different subject: "
+                        f"parent={request.parent_rp_id} parent_subject={parent.subject_id} "
+                        f"request_subject={request.subject_id}. Parent/child RP lineage must remain within one subject."
+                    )
 
         raw_updates = decision.research_state.get("predictive_hypothesis_updates", [])
         if raw_updates not in (None, []):
