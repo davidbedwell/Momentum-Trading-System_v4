@@ -104,13 +104,14 @@ class SubjectEligibilityEnvelope:
         subject_id: str,
         previously_seen: Sequence[str],
         available_sources: Sequence[str] = (),
+        require_unseen: bool = False,
     ) -> tuple[str, ...]:
         defects: list[str] = []
         if not subject_id.strip():
             defects.append("subject_id is blank")
             return tuple(defects)
-        if subject_id in set(previously_seen):
-            defects.append(f"subject has already been researched in this adaptive program: {subject_id}")
+        if require_unseen and subject_id in set(previously_seen):
+            defects.append(f"subject has already been researched and is ineligible for blind validation: {subject_id}")
         if self.approved_subject_ids is not None and subject_id not in self.approved_subject_ids:
             defects.append(f"subject is outside the human-approved research universe: {subject_id}")
         missing = self.required_available_sources - set(available_sources)
@@ -143,10 +144,13 @@ class ThreeSubjectBatchController:
         defects = list(
             self.eligibility.objective_defects(
                 subject_id=subject_id,
-                previously_seen=tuple(previously_seen) + tuple(item.subject_id for item in self._selections),
+                previously_seen=previously_seen,
                 available_sources=available_sources,
+                require_unseen=False,
             )
         )
+        if any(item.subject_id == subject_id for item in self._selections):
+            defects.append(f"subject is already selected in the current batch: {subject_id}")
         if not rationale.strip():
             defects.append("RD selection rationale is blank")
         return tuple(defects)
