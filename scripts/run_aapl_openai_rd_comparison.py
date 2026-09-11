@@ -39,7 +39,15 @@ DEFAULT_EVIDENCE_AS_OF = "2026-09-10"
 
 
 class MeteredOpenAIResearchDirector(SolResearchPackageAwareResearchDirector):
-    """OpenAI RD transport that journals provider-reported token usage for this experiment."""
+    """OpenAI RD transport with usage metering and objective lineage repair.
+
+    The comparison harness adds one experiment-local representation guard that
+    production currently lacks: every promoted Finding must cite only result and
+    evidence identities already present in the supplied Nexus context. The guard
+    does not choose or rewrite science. It returns the exact identity defect to
+    the same AI provider through the existing research-package representation
+    repair loop, allowing that provider to author the corrected decision.
+    """
 
     def __init__(
         self,
@@ -52,6 +60,72 @@ class MeteredOpenAIResearchDirector(SolResearchPackageAwareResearchDirector):
         self._usage_path = usage_path
         self._reasoning_effort = reasoning_effort
         self._call_sequence = 0
+
+    @staticmethod
+    def _known_ids_from_context(
+        nexus_context: Mapping[str, object],
+        *,
+        collection_names: Sequence[str],
+        id_field: str,
+    ) -> set[str]:
+        known: set[str] = set()
+        for collection_name in collection_names:
+            collection = nexus_context.get(collection_name, ())
+            if not isinstance(collection, Sequence) or isinstance(collection, (str, bytes)):
+                continue
+            for item in collection:
+                if not isinstance(item, Mapping):
+                    continue
+                value = item.get(id_field)
+                if isinstance(value, str) and value:
+                    known.add(value)
+        return known
+
+    def _decision_representation_defect(
+        self,
+        operation: str,
+        decision,
+        payload: Mapping[str, object],
+    ) -> str | None:
+        defect = super()._decision_representation_defect(operation, decision, payload)
+        if defect is not None:
+            return defect
+
+        nexus_context = payload.get("nexus_context")
+        if not isinstance(nexus_context, Mapping):
+            return None
+
+        known_result_ids = self._known_ids_from_context(
+            nexus_context,
+            collection_names=(
+                "campaign_analysis_result_catalog",
+                "historical_analysis_result_metadata",
+            ),
+            id_field="result_id",
+        )
+        known_evidence_ids = self._known_ids_from_context(
+            nexus_context,
+            collection_names=("evidence_metadata",),
+            id_field="evidence_id",
+        )
+
+        for finding_index, finding in enumerate(decision.promote_findings):
+            for result_id in finding.supporting_result_ids:
+                if result_id not in known_result_ids:
+                    return (
+                        f"promote_findings[{finding_index}].supporting_result_ids contains "
+                        f"unknown result_id: {result_id}; use only exact result_id values "
+                        "present in nexus_context campaign/historical Analysis result metadata"
+                    )
+            for evidence_id in finding.evidence_ids:
+                if evidence_id not in known_evidence_ids:
+                    return (
+                        f"promote_findings[{finding_index}].evidence_ids contains unknown "
+                        f"evidence_id: {evidence_id}; use only exact evidence_id values "
+                        "present in nexus_context.evidence_metadata"
+                    )
+
+        return None
 
     def _chat_completion(self, messages: Sequence[Mapping[str, str]]) -> str:
         self._call_sequence += 1
