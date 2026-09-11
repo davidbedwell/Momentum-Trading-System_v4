@@ -9,17 +9,32 @@ from .cross_subject_memory import CrossSubjectScientificMemory
 from .openai_compatible_provider import OpenAICompatibleResearchDirector
 
 
+_ALLOWED_MODES = {"EXPLORATION", "VALIDATION_FIRST"}
+
+
 @dataclass(frozen=True, slots=True)
 class RDSubjectSelectionDecision:
     subject_id: str
     rationale: str
+    mode: str = "EXPLORATION"
+    hypothesis_id: str | None = None
+
+    def __post_init__(self) -> None:
+        if self.mode not in _ALLOWED_MODES:
+            raise ValueError(f"unsupported subject selection mode: {self.mode}")
+        if self.mode == "VALIDATION_FIRST":
+            if not isinstance(self.hypothesis_id, str) or not self.hypothesis_id.strip():
+                raise ValueError("VALIDATION_FIRST selection requires nonblank hypothesis_id")
+        elif self.hypothesis_id is not None:
+            raise ValueError("EXPLORATION selection must not bind a validation hypothesis_id")
 
 
 class SolAdaptiveSubjectSelector:
     """Ask the approved AI RD to choose the next subject scientifically.
 
     Deterministic code supplies the human eligibility envelope and validates the
-    returned identity/rationale. It never ranks or chooses a ticker itself.
+    returned identity/rationale/phase representation. It never ranks or chooses
+    a ticker, hypothesis, or scientific role itself.
     """
 
     def __init__(
@@ -79,12 +94,18 @@ class SolAdaptiveSubjectSelector:
                     "knowledge. Across selections, seek enough variation to discriminate whether relationships "
                     "generalize, reverse, weaken, or depend on subject characteristics. Avoid redundant selections "
                     "whose similarity contributes little new discrimination. Prior hypotheses are context, not a "
-                    "mandatory agenda; replication/discrimination, independent exploration, or both are permitted."
+                    "mandatory agenda; replication/discrimination, independent exploration, or both are permitted. "
+                    "If a prior frozen hypothesis is scientifically suitable for a blind test on the selected ticker, "
+                    "you may choose VALIDATION_FIRST and identify that exact hypothesis_id. The blind trial must be "
+                    "completed and scored before unrestricted exploratory analysis begins on that same ticker. After "
+                    "scoring, the same ticker may proceed to full EXPLORATION and still counts once in the batch."
                 ),
             },
             "required_schema": {
                 "subject_id": "exact string from eligible_candidate_subject_ids",
                 "rationale": "nonblank scientific reason this subject is useful next given current knowledge",
+                "mode": "EXPLORATION or VALIDATION_FIRST",
+                "hypothesis_id": "null for EXPLORATION; exact durable prior hypothesis_id for VALIDATION_FIRST",
             },
         }
         raw = self._rd._chat_completion(
@@ -92,9 +113,11 @@ class SolAdaptiveSubjectSelector:
                 {
                     "role": "system",
                     "content": (
-                        "You are the MTS scientific Research Director. Select the next research subject. "
-                        "Scientific subject selection is your authority. Deterministic code only enforces the supplied "
-                        "objective eligibility envelope. Return one JSON object only."
+                        "You are the MTS scientific Research Director. Select the next research subject and whether "
+                        "its scientifically useful first role is unrestricted EXPLORATION or blind VALIDATION_FIRST "
+                        "of an existing frozen hypothesis. Scientific subject/role selection is your authority. "
+                        "Deterministic code only enforces the supplied objective eligibility and phase-order rules. "
+                        "Return one JSON object only."
                     ),
                 },
                 {"role": "user", "content": json.dumps(payload, sort_keys=True, default=str)},
@@ -106,8 +129,22 @@ class SolAdaptiveSubjectSelector:
             raise ValueError(f"subject selection response is not valid JSON: {exc}") from exc
         subject_id = decoded.get("subject_id")
         rationale = decoded.get("rationale")
+        mode = decoded.get("mode", "EXPLORATION")
+        hypothesis_id = decoded.get("hypothesis_id")
         if not isinstance(subject_id, str) or subject_id not in eligible_candidates:
             raise ValueError("RD selected a subject outside the supplied objectively eligible candidate set")
         if not isinstance(rationale, str) or not rationale.strip():
             raise ValueError("RD subject-selection rationale must be nonblank")
-        return RDSubjectSelectionDecision(subject_id=subject_id, rationale=rationale.strip())
+        if not isinstance(mode, str) or mode not in _ALLOWED_MODES:
+            raise ValueError("RD subject-selection mode must be EXPLORATION or VALIDATION_FIRST")
+        if mode == "VALIDATION_FIRST":
+            if not isinstance(hypothesis_id, str) or not hypothesis_id.strip():
+                raise ValueError("VALIDATION_FIRST selection requires nonblank hypothesis_id")
+        else:
+            hypothesis_id = None
+        return RDSubjectSelectionDecision(
+            subject_id=subject_id,
+            rationale=rationale.strip(),
+            mode=mode,
+            hypothesis_id=hypothesis_id.strip() if isinstance(hypothesis_id, str) else None,
+        )
