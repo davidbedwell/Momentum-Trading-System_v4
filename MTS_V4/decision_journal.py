@@ -4,7 +4,7 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 from .contracts import ResearchDecision
 
@@ -15,6 +15,30 @@ class ResearchDecisionJournalError(RuntimeError):
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+_FORBIDDEN_DURABLE_KEYS = frozenset({"payload", "rows", "cache_key", "derived_datasets"})
+
+
+def _durable_projection(value: Any) -> Any:
+    """Remove temporary/raw data keys from an RD decision journal projection.
+
+    The live ResearchDecision remains unchanged for execution. This projection is
+    only for the append-only durable audit journal, whose contract forbids raw or
+    cache-local evidence while preserving AI-authored scientific structure,
+    lineage, parameters, and interpretation.
+    """
+    if isinstance(value, Mapping):
+        return {
+            str(key): _durable_projection(item)
+            for key, item in value.items()
+            if str(key) not in _FORBIDDEN_DURABLE_KEYS
+        }
+    if isinstance(value, tuple):
+        return [_durable_projection(item) for item in value]
+    if isinstance(value, list):
+        return [_durable_projection(item) for item in value]
+    return value
 
 
 class JsonResearchDecisionJournal:
@@ -43,16 +67,17 @@ class JsonResearchDecisionJournal:
         existing = self._read_sequences(campaign_id)
         if decision_sequence in existing:
             return
+        decision_projection = _durable_projection(asdict(decision))
         record = {
             "format": self.FORMAT,
             "recorded_at_utc": _utc_now(),
             "campaign_id": campaign_id,
             "decision_sequence": decision_sequence,
             "analyses_executed": analyses_executed,
-            "decision": asdict(decision),
+            "decision": decision_projection,
         }
         serialized = json.dumps(record, sort_keys=True, default=str, separators=(",", ":"))
-        forbidden = ('"payload"', '"rows"', '"cache_key"')
+        forbidden = ('"payload"', '"rows"', '"cache_key"', '"derived_datasets"')
         if any(token in serialized for token in forbidden):
             raise ResearchDecisionJournalError(
                 "RD decision journal attempted to persist raw/cache evidence data"
