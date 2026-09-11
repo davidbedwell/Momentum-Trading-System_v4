@@ -41,6 +41,22 @@ def _durable_projection(value: Any) -> Any:
     return value
 
 
+def _forbidden_durable_key_paths(value: Any, *, path: str = "decision") -> tuple[str, ...]:
+    """Return exact forbidden mapping-key paths, never matching ordinary text values."""
+    found: list[str] = []
+    if isinstance(value, Mapping):
+        for key, item in value.items():
+            key_text = str(key)
+            child_path = f"{path}.{key_text}"
+            if key_text in _FORBIDDEN_DURABLE_KEYS:
+                found.append(child_path)
+            found.extend(_forbidden_durable_key_paths(item, path=child_path))
+    elif isinstance(value, (tuple, list)):
+        for index, item in enumerate(value):
+            found.extend(_forbidden_durable_key_paths(item, path=f"{path}[{index}]"))
+    return tuple(found)
+
+
 class JsonResearchDecisionJournal:
     """Append-only campaign audit record of unique AI RD decisions.
 
@@ -68,6 +84,12 @@ class JsonResearchDecisionJournal:
         if decision_sequence in existing:
             return
         decision_projection = _durable_projection(asdict(decision))
+        forbidden_paths = _forbidden_durable_key_paths(decision_projection)
+        if forbidden_paths:
+            raise ResearchDecisionJournalError(
+                "RD decision journal attempted to persist raw/cache evidence data at: "
+                + ", ".join(forbidden_paths)
+            )
         record = {
             "format": self.FORMAT,
             "recorded_at_utc": _utc_now(),
@@ -77,11 +99,6 @@ class JsonResearchDecisionJournal:
             "decision": decision_projection,
         }
         serialized = json.dumps(record, sort_keys=True, default=str, separators=(",", ":"))
-        forbidden = ('"payload"', '"rows"', '"cache_key"', '"derived_datasets"')
-        if any(token in serialized for token in forbidden):
-            raise ResearchDecisionJournalError(
-                "RD decision journal attempted to persist raw/cache evidence data"
-            )
         self._path.parent.mkdir(parents=True, exist_ok=True)
         with self._path.open("a", encoding="utf-8") as handle:
             handle.write(serialized + "\n")
