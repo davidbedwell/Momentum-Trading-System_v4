@@ -70,6 +70,28 @@ class _FakeBatchRD:
         )
 
 
+class _TwoBatchRD:
+    def __init__(self, first_decision, second_decision):
+        self.first_decision = first_decision
+        self.second_decision = second_decision
+        self.interpret_calls = 0
+        self.reports = []
+
+    def begin_batch_research(self, **kwargs):
+        return self.first_decision
+
+    def interpret_batch_results(self, *, report, **kwargs):
+        self.interpret_calls += 1
+        self.reports.append(report)
+        if self.interpret_calls == 1:
+            return self.second_decision
+        return BatchResearchDecision(
+            continue_research=False,
+            close_reason="FOLLOW_UP_COMPLETE",
+            batch_interpretation="Reviewed the follow-up batch.",
+        )
+
+
 class BatchedRDExecutionTests(unittest.TestCase):
     def setUp(self):
         self.subject = SubjectMetadata(subject_id="equity:AMD", ticker="AMD")
@@ -108,6 +130,18 @@ class BatchedRDExecutionTests(unittest.TestCase):
             research_phase=ResearchPhase.EXPLORATION,
             rationale="AI-authored rationale",
         )
+
+    def _runtime_parts(self):
+        analysis = _FakeBatchAnalysis()
+        catalog = MethodCatalog(
+            [
+                MethodSpec("derive", ("NORMALIZED_DATASET",)),
+                MethodSpec("test", ("NORMALIZED_DATASET",)),
+            ]
+        )
+        cache = TemporaryResearchCache()
+        cache.put(self.evidence.cache_key, [{"x": 1.0}, {"x": 2.0}])
+        return analysis, catalog, cache
 
     def test_compiler_resolves_logical_dependency_without_ai_result_id_or_output_path(self):
         prior = AnalysisResult(
@@ -159,6 +193,31 @@ class BatchedRDExecutionTests(unittest.TestCase):
             runtime_alias,
         )
         self.assertTrue(compiled.mechanical_repairs)
+
+    def test_compiler_rejects_reusing_completed_logical_analysis_id(self):
+        prior = AnalysisResult(
+            result_id="result:old",
+            request_id="request:old",
+            subject_id=self.subject.subject_id,
+            method_id="derive",
+            outputs={},
+            evidence_ids=(self.evidence.evidence_id,),
+            execution_metadata={"execution_status": "SUCCESS"},
+        )
+        spec = self._spec(
+            "analysis:a",
+            "rp:1",
+            "test",
+            [ScientificInputReference(role="raw", evidence_id=self.evidence.evidence_id)],
+        )
+        with self.assertRaisesRegex(Exception, "already completed"):
+            ScientificSpecificationCompiler().compile(
+                spec,
+                context=BatchCompilerContext(
+                    evidence={self.evidence.evidence_id: self.evidence},
+                    results_by_analysis_id={"analysis:a": prior},
+                ),
+            )
 
     def test_topological_order_preserves_ai_dependencies_without_inventing_edges(self):
         first = self._spec(
@@ -221,15 +280,7 @@ class BatchedRDExecutionTests(unittest.TestCase):
             ),
         )
         rd = _FakeBatchRD(decision)
-        analysis = _FakeBatchAnalysis()
-        catalog = MethodCatalog(
-            [
-                MethodSpec("derive", ("NORMALIZED_DATASET",)),
-                MethodSpec("test", ("NORMALIZED_DATASET",)),
-            ]
-        )
-        cache = TemporaryResearchCache()
-        cache.put(self.evidence.cache_key, [{"x": 1.0}, {"x": 2.0}])
+        analysis, catalog, cache = self._runtime_parts()
         orchestrator = BatchResearchLoopOrchestrator(
             mission="test mission",
             rd=rd,
@@ -254,6 +305,127 @@ class BatchedRDExecutionTests(unittest.TestCase):
         self.assertEqual(rd.report_sizes, [3])
         self.assertTrue(outcome.closed)
         self.assertEqual(outcome.close_reason, "BATCH_REVIEW_COMPLETE")
+
+    def test_follow_up_batch_can_reference_prior_logical_analysis_id(self):
+        a = self._spec(
+            "a",
+            "rp:trend",
+            "derive",
+            [ScientificInputReference(role="raw", evidence_id=self.evidence.evidence_id)],
+        )
+        first = BatchResearchDecision(
+            continue_research=True,
+            research_packages=(
+                ResearchPackagePlan(
+                    rp_id="rp:trend",
+                    objective="Create the scientifically selected predictor.",
+                    analyses=(a,),
+                    decision_boundary="Review predictor before follow-up.",
+                ),
+            ),
+        )
+        b = self._spec(
+            "b",
+            "rp:trend",
+            "test",
+            [ScientificInputReference(role="predictor", analysis_id="a")],
+        )
+        second = BatchResearchDecision(
+            continue_research=True,
+            research_packages=(
+                ResearchPackagePlan(
+                    rp_id="rp:trend",
+                    objective="Follow up the completed predictor result.",
+                    analyses=(b,),
+                ),
+            ),
+        )
+        rd = _TwoBatchRD(first, second)
+        analysis, catalog, cache = self._runtime_parts()
+        orchestrator = BatchResearchLoopOrchestrator(
+            mission="test mission",
+            rd=rd,
+            validator=ObjectiveContractValidator(catalog),
+            analysis=analysis,
+            nexus=InMemoryResearchNexus(),
+            cache=cache,
+            available_methods=catalog.capability_payloads(),
+        )
+
+        outcome = orchestrator.run(
+            subject=self.subject,
+            evidence=(self.evidence,),
+            max_analyses=10,
+        )
+
+        self.assertEqual(outcome.decisions, 3)
+        self.assertEqual(outcome.batches_executed, 2)
+        self.assertEqual(outcome.analyses_executed, 2)
+        self.assertEqual(rd.interpret_calls, 2)
+        self.assertEqual(len(analysis.requests), 2)
+        follow_up = analysis.requests[1]
+        self.assertEqual(len(follow_up.analysis_inputs), 1)
+        self.assertEqual(follow_up.analysis_inputs[0].result_id, "result:1")
+        self.assertEqual(
+            follow_up.analysis_inputs[0].output_path,
+            ("derived_datasets", "derived"),
+        )
+        self.assertEqual(outcome.close_reason, "FOLLOW_UP_COMPLETE")
+
+    def test_failed_branch_does_not_stop_independent_batch_branch(self):
+        broken = self._spec(
+            "broken",
+            "rp:broken",
+            "test",
+            [ScientificInputReference(role="missing", evidence_id="ev:missing")],
+        )
+        healthy = self._spec(
+            "healthy",
+            "rp:healthy",
+            "test",
+            [ScientificInputReference(role="raw", evidence_id=self.evidence.evidence_id)],
+        )
+        decision = BatchResearchDecision(
+            continue_research=True,
+            research_packages=(
+                ResearchPackagePlan(
+                    rp_id="rp:broken",
+                    objective="Intentionally unavailable branch.",
+                    analyses=(broken,),
+                ),
+                ResearchPackagePlan(
+                    rp_id="rp:healthy",
+                    objective="Independent executable branch.",
+                    analyses=(healthy,),
+                ),
+            ),
+        )
+        rd = _FakeBatchRD(decision)
+        analysis, catalog, cache = self._runtime_parts()
+        orchestrator = BatchResearchLoopOrchestrator(
+            mission="test mission",
+            rd=rd,
+            validator=ObjectiveContractValidator(catalog),
+            analysis=analysis,
+            nexus=InMemoryResearchNexus(),
+            cache=cache,
+            available_methods=catalog.capability_payloads(),
+        )
+
+        outcome = orchestrator.run(
+            subject=self.subject,
+            evidence=(self.evidence,),
+            max_analyses=10,
+        )
+
+        self.assertEqual(outcome.analyses_executed, 1)
+        self.assertEqual(len(analysis.requests), 1)
+        self.assertEqual(rd.interpret_calls, 1)
+        report = outcome.last_report
+        self.assertIsNotNone(report)
+        statuses = {record.analysis_id: record.status for record in report.records}
+        self.assertEqual(statuses["healthy"], "SUCCESS")
+        self.assertEqual(statuses["broken"], "AMBIGUOUS_SCIENTIFIC_REPAIR_REQUIRED")
 
 
 if __name__ == "__main__":
