@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import asdict
-from typing import Iterable
 
 from .batch_contracts import BatchExecutionReport, BatchResearchDecision, ResearchPackagePlan
 from .contracts import AnalysisRequest, SubjectMetadata
@@ -32,12 +31,33 @@ class BatchCampaignResearchRecorder:
         subject: SubjectMetadata,
         decision: BatchResearchDecision,
     ) -> None:
-        for plan in decision.research_packages:
-            self._record_package_plan(
-                campaign_id=campaign_id,
-                subject=subject,
-                plan=plan,
-            )
+        """Persist RP plans in parent-safe order without changing scientific lineage."""
+        pending = {plan.rp_id: plan for plan in decision.research_packages}
+        if len(pending) != len(decision.research_packages):
+            raise BatchResearchRecordingError("duplicate rp_id in batch plan")
+        known = set(self._packages.list_ids())
+        while pending:
+            ready = [
+                plan
+                for plan in pending.values()
+                if plan.parent_rp_id is None or plan.parent_rp_id in known
+            ]
+            if not ready:
+                unresolved = {
+                    rp_id: plan.parent_rp_id
+                    for rp_id, plan in pending.items()
+                }
+                raise BatchResearchRecordingError(
+                    f"Research Package parent lineage cannot be resolved: {unresolved}"
+                )
+            for plan in ready:
+                self._record_package_plan(
+                    campaign_id=campaign_id,
+                    subject=subject,
+                    plan=plan,
+                )
+                known.add(plan.rp_id)
+                pending.pop(plan.rp_id)
 
     def _record_package_plan(
         self,
@@ -76,21 +96,25 @@ class BatchCampaignResearchRecorder:
                 )
 
         existing_question_ids = {item.question_id for item in package.questions}
+        grouped = {}
+        for analysis in plan.analyses:
+            prior = grouped.get(analysis.question_id)
+            if prior is not None and (
+                prior.question != analysis.question
+                or prior.rationale != analysis.rationale
+                or prior.parent_question_id != analysis.parent_question_id
+                or prior.research_phase is not analysis.research_phase
+            ):
+                raise BatchResearchRecordingError(
+                    f"question_id has conflicting scientific definitions in {plan.rp_id}: "
+                    f"{analysis.question_id}"
+                )
+            grouped[analysis.question_id] = analysis
         pending = {
-            analysis.question_id: analysis
-            for analysis in plan.analyses
-            if analysis.question_id not in existing_question_ids
+            question_id: analysis
+            for question_id, analysis in grouped.items()
+            if question_id not in existing_question_ids
         }
-        if len(pending) != len(
-            {
-                analysis.question_id
-                for analysis in plan.analyses
-                if analysis.question_id not in existing_question_ids
-            }
-        ):
-            raise BatchResearchRecordingError(
-                f"duplicate question_id definitions in Research Package plan: {plan.rp_id}"
-            )
 
         evolved = package
         while pending:
