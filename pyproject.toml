@@ -24,7 +24,7 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["MTS_V4*"]
+include = ["MTS_V4*", "Core*"]
 
 [tool.pytest.ini_options]
 testpaths = ["Tests"]
