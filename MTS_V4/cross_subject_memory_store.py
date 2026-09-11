@@ -4,7 +4,7 @@ import json
 import os
 import tempfile
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 from .cross_subject_memory import (
     InMemoryCrossSubjectScientificMemory,
@@ -22,7 +22,10 @@ class JsonCrossSubjectScientificMemoryStore(InMemoryCrossSubjectScientificMemory
         self._load()
 
     def publish(self, record: ScientificMemoryRecord) -> None:
-        super().publish(record)
+        self.publish_batch((record,))
+
+    def publish_batch(self, records: Sequence[ScientificMemoryRecord]) -> None:
+        super().publish_batch(records)
         self._persist()
 
     def set_frontier(self, frontier: ResearchFrontierState) -> None:
@@ -36,23 +39,26 @@ class JsonCrossSubjectScientificMemoryStore(InMemoryCrossSubjectScientificMemory
         raw_records = document.get("records", [])
         if not isinstance(raw_records, list):
             raise ValueError("cross-subject memory records must be an array")
+        loaded_records: list[ScientificMemoryRecord] = []
         for item in raw_records:
             if not isinstance(item, Mapping):
                 raise ValueError("cross-subject memory record must be an object")
-            record = ScientificMemoryRecord(
-                record_id=str(item["record_id"]),
-                subject_id=str(item["subject_id"]),
-                kind=str(item["kind"]),
-                summary=str(item["summary"]),
-                rp_id=item.get("rp_id") if isinstance(item.get("rp_id"), str) else None,
-                finding_id=item.get("finding_id") if isinstance(item.get("finding_id"), str) else None,
-                hypothesis_id=item.get("hypothesis_id") if isinstance(item.get("hypothesis_id"), str) else None,
-                result_ids=tuple(str(value) for value in item.get("result_ids", ())),
-                evidence_ids=tuple(str(value) for value in item.get("evidence_ids", ())),
-                status=item.get("status") if isinstance(item.get("status"), str) else None,
-                metadata=dict(item.get("metadata", {})) if isinstance(item.get("metadata"), Mapping) else {},
+            loaded_records.append(
+                ScientificMemoryRecord(
+                    record_id=str(item["record_id"]),
+                    subject_id=str(item["subject_id"]),
+                    kind=str(item["kind"]),
+                    summary=str(item["summary"]),
+                    rp_id=item.get("rp_id") if isinstance(item.get("rp_id"), str) else None,
+                    finding_id=item.get("finding_id") if isinstance(item.get("finding_id"), str) else None,
+                    hypothesis_id=item.get("hypothesis_id") if isinstance(item.get("hypothesis_id"), str) else None,
+                    result_ids=tuple(str(value) for value in item.get("result_ids", ())),
+                    evidence_ids=tuple(str(value) for value in item.get("evidence_ids", ())),
+                    status=item.get("status") if isinstance(item.get("status"), str) else None,
+                    metadata=dict(item.get("metadata", {})) if isinstance(item.get("metadata"), Mapping) else {},
+                )
             )
-            super().publish(record)
+        super().publish_batch(loaded_records)
 
         raw_frontier = document.get("frontier")
         if isinstance(raw_frontier, Mapping):
