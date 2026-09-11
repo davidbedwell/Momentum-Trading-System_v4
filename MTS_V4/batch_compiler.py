@@ -44,7 +44,7 @@ def _rewrite_input_roles(value: Any, role_bindings: Mapping[str, str]) -> Any:
     if isinstance(value, list):
         return [_rewrite_input_roles(item, role_bindings) for item in value]
     if isinstance(value, tuple):
-        return tuple(_rewrite_input_roles(item, role_bindings) for item in value)
+        return tuple(_rewrite_input_roles(item, role_bindings) for item in value]
     return value
 
 
@@ -211,18 +211,24 @@ class ScientificSpecificationCompiler:
 def topological_analysis_order(
     specifications: Sequence[ScientificAnalysisSpecification],
     *,
-    available_analysis_ids: Sequence[str] = (),
+    available_analysis_ids: Sequence[str] | None = None,
 ) -> tuple[ScientificAnalysisSpecification, ...]:
-    """Order exact AI-authored dependencies, allowing prior completed batch results."""
+    """Order exact AI-authored dependencies without inventing scientific edges.
+
+    Dependencies outside the current batch are treated as prior-batch logical
+    references and are resolved later by the compiler. When an explicit prior
+    inventory is supplied, unknown external references are rejected immediately.
+    """
     by_id = {item.analysis_id: item for item in specifications}
     if len(by_id) != len(specifications):
         raise BatchCompilationError("analysis_id values must be unique across one batch")
-    prior_ids = set(available_analysis_ids)
-    reused = sorted(set(by_id).intersection(prior_ids))
-    if reused:
-        raise BatchCompilationError(
-            f"new batch reuses already completed analysis_id values: {tuple(reused)}"
-        )
+    prior_ids = set(available_analysis_ids or ())
+    if available_analysis_ids is not None:
+        reused = sorted(set(by_id).intersection(prior_ids))
+        if reused:
+            raise BatchCompilationError(
+                f"new batch reuses already completed analysis_id values: {tuple(reused)}"
+            )
 
     dependencies: dict[str, set[str]] = {}
     for item in specifications:
@@ -231,11 +237,12 @@ def topological_analysis_order(
             for ref in item.inputs
             if ref.analysis_id is not None
         }
-        unknown = sorted(dep for dep in all_deps if dep not in by_id and dep not in prior_ids)
-        if unknown:
-            raise BatchCompilationError(
-                f"analysis {item.analysis_id!r} references unknown logical dependencies: {tuple(unknown)}"
-            )
+        if available_analysis_ids is not None:
+            unknown = sorted(dep for dep in all_deps if dep not in by_id and dep not in prior_ids)
+            if unknown:
+                raise BatchCompilationError(
+                    f"analysis {item.analysis_id!r} references unknown logical dependencies: {tuple(unknown)}"
+                )
         if item.analysis_id in all_deps:
             raise BatchCompilationError(f"analysis {item.analysis_id!r} cannot depend on itself")
         dependencies[item.analysis_id] = {dep for dep in all_deps if dep in by_id}
