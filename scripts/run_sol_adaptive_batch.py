@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import shutil
@@ -185,7 +186,18 @@ def _validatable_hypothesis_ids_from_environment() -> frozenset[str]:
     )
 
 
-def main() -> None:
+def _parser() -> argparse.ArgumentParser:
+    return argparse.ArgumentParser(
+        description=(
+            "Run the legacy single-request Sol adaptive batch path. Configuration remains environment-driven. "
+            "This parser exists so --help is non-executing and unknown CLI arguments are rejected instead of "
+            "silently starting a live paid campaign."
+        )
+    )
+
+
+def main(argv: Sequence[str] | None = None) -> None:
+    _parser().parse_args(argv)
     timeout_seconds = int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600"))
     max_analyses = int(os.getenv("MTS_ADAPTIVE_BATCH_MAX_ANALYSES_PER_SUBJECT", "100"))
     batch_limit = int(os.getenv("MTS_ADAPTIVE_BATCH_SUBJECT_LIMIT", "3"))
