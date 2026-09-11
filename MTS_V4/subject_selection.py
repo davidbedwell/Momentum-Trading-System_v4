@@ -35,6 +35,12 @@ class SolAdaptiveSubjectSelector:
     Deterministic code supplies the human eligibility envelope and validates the
     returned identity/rationale/phase representation. It never ranks or chooses
     a ticker, hypothesis, or scientific role itself.
+
+    ``validatable_hypothesis_ids`` is an objective execution-capability envelope.
+    When supplied, Sol may choose VALIDATION_FIRST only for one of those exact
+    already-frozen hypotheses. An empty set means no blind-validation protocol is
+    mechanically executable in the current runner, so only EXPLORATION is a valid
+    role. ``None`` preserves the legacy unrestricted selection contract.
     """
 
     def __init__(
@@ -43,10 +49,12 @@ class SolAdaptiveSubjectSelector:
         rd: OpenAICompatibleResearchDirector,
         scientific_memory: CrossSubjectScientificMemory,
         eligibility: SubjectEligibilityEnvelope,
+        validatable_hypothesis_ids: frozenset[str] | None = None,
     ) -> None:
         self._rd = rd
         self._scientific_memory = scientific_memory
         self._eligibility = eligibility
+        self._validatable_hypothesis_ids = validatable_hypothesis_ids
 
     def choose_next(
         self,
@@ -80,6 +88,14 @@ class SolAdaptiveSubjectSelector:
         if not eligible_candidates:
             raise ValueError("no objectively eligible candidate subjects remain")
 
+        validation_capability_constrained = self._validatable_hypothesis_ids is not None
+        validatable_ids = sorted(self._validatable_hypothesis_ids or ())
+        allowed_modes = (
+            ["EXPLORATION"]
+            if validation_capability_constrained and not validatable_ids
+            else ["EXPLORATION", "VALIDATION_FIRST"]
+        )
+
         payload = {
             "operation": "SELECT_NEXT_RESEARCH_SUBJECT",
             "mission": mission,
@@ -89,14 +105,17 @@ class SolAdaptiveSubjectSelector:
             "human_governance": {
                 "selection_authority": "AI_RD",
                 "objective_eligibility_enforced_by_code": True,
+                "allowed_selection_modes": allowed_modes,
+                "mechanically_executable_validation_hypothesis_ids": validatable_ids,
                 "scientific_guideline": (
                     "Choose the previously unseen subject that is most scientifically useful next given accumulated "
                     "knowledge. Across selections, seek enough variation to discriminate whether relationships "
                     "generalize, reverse, weaken, or depend on subject characteristics. Avoid redundant selections "
                     "whose similarity contributes little new discrimination. Prior hypotheses are context, not a "
                     "mandatory agenda; replication/discrimination, independent exploration, or both are permitted. "
-                    "If a prior frozen hypothesis is scientifically suitable for a blind test on the selected ticker, "
-                    "you may choose VALIDATION_FIRST and identify that exact hypothesis_id. The blind trial must be "
+                    "If a prior frozen hypothesis is scientifically suitable for a blind test on the selected ticker "
+                    "and its exact hypothesis_id appears in mechanically_executable_validation_hypothesis_ids, you "
+                    "may choose VALIDATION_FIRST and identify that exact hypothesis_id. The blind trial must be "
                     "completed and scored before unrestricted exploratory analysis begins on that same ticker. After "
                     "scoring, the same ticker may proceed to full EXPLORATION and still counts once in the batch."
                 ),
@@ -104,8 +123,11 @@ class SolAdaptiveSubjectSelector:
             "required_schema": {
                 "subject_id": "exact string from eligible_candidate_subject_ids",
                 "rationale": "nonblank scientific reason this subject is useful next given current knowledge",
-                "mode": "EXPLORATION or VALIDATION_FIRST",
-                "hypothesis_id": "null for EXPLORATION; exact durable prior hypothesis_id for VALIDATION_FIRST",
+                "mode": "one exact string from human_governance.allowed_selection_modes",
+                "hypothesis_id": (
+                    "null for EXPLORATION; for VALIDATION_FIRST, exact string from "
+                    "human_governance.mechanically_executable_validation_hypothesis_ids"
+                ),
             },
         }
         raw = self._rd._chat_completion(
@@ -137,9 +159,20 @@ class SolAdaptiveSubjectSelector:
             raise ValueError("RD subject-selection rationale must be nonblank")
         if not isinstance(mode, str) or mode not in _ALLOWED_MODES:
             raise ValueError("RD subject-selection mode must be EXPLORATION or VALIDATION_FIRST")
+        if mode not in allowed_modes:
+            raise ValueError(
+                "RD selected a subject role that is not mechanically executable in the current runner"
+            )
         if mode == "VALIDATION_FIRST":
             if not isinstance(hypothesis_id, str) or not hypothesis_id.strip():
                 raise ValueError("VALIDATION_FIRST selection requires nonblank hypothesis_id")
+            if (
+                validation_capability_constrained
+                and hypothesis_id not in self._validatable_hypothesis_ids
+            ):
+                raise ValueError(
+                    "RD selected VALIDATION_FIRST with a hypothesis that is not mechanically executable"
+                )
         else:
             hypothesis_id = None
         return RDSubjectSelectionDecision(
