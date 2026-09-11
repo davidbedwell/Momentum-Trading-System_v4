@@ -325,7 +325,7 @@ def compose_aligned_dataset(evidence_payloads: Mapping[str, object], parameters:
     ]
 
     normalized_selections: list[tuple[str, str, str]] = []
-    output_names: set[str] = {"alignment_key"}
+    output_names: set[str] = set()
     for spec in selections:
         if not isinstance(spec, Mapping):
             raise ValueError("each selections entry must be a mapping")
@@ -337,13 +337,21 @@ def compose_aligned_dataset(evidence_payloads: Mapping[str, object], parameters:
         if not column or not output_name:
             raise ValueError("each selection requires nonblank column and output_name")
         if output_name in output_names:
-            raise ValueError(f"selection output_name is duplicated or reserved: {output_name!r}")
+            raise ValueError(f"selection output_name is duplicated: {output_name!r}")
         output_names.add(output_name)
         normalized_selections.append((input_name, column, output_name))
 
+    alignment_key_column = "alignment_key"
+    if alignment_key_column in output_names:
+        alignment_key_column = "__mts_alignment_key"
+        suffix = 2
+        while alignment_key_column in output_names:
+            alignment_key_column = f"__mts_alignment_key_{suffix}"
+            suffix += 1
+
     composed_rows: list[Mapping[str, Any]] = []
     for logical_key in ordered_common_keys:
-        row_out: dict[str, Any] = {"alignment_key": logical_key}
+        row_out: dict[str, Any] = {alignment_key_column: logical_key}
         for input_name, column, output_name in normalized_selections:
             source_row = keyed_rows[input_name][logical_key]
             if column not in source_row:
@@ -355,6 +363,7 @@ def compose_aligned_dataset(evidence_payloads: Mapping[str, object], parameters:
     return {
         "join_type": join_type,
         "alignment": alignment_metadata,
+        "alignment_key_column": alignment_key_column,
         "selections": [
             {"input_name": input_name, "column": column, "output_name": output_name}
             for input_name, column, output_name in normalized_selections
@@ -407,7 +416,7 @@ def standard_method_catalog() -> MethodCatalog:
             "Mechanically align RD-selected columns from two or more supplied raw and/or derived row datasets by an explicit RD-selected observation key and return a temporary reusable composed dataset. No variables, keys, aliases, or scientific meaning are inferred.",
             (
                 ParameterContract("alignment", True, (list, tuple), minimum_length=2, meaning="RD-authored input alignment specifications: each entry is {input_name, key:{mode:'ROW_POSITION'}} or {input_name, key:{mode:'COLUMN', column:'field'}}"),
-                ParameterContract("selections", True, (list, tuple), minimum_length=1, meaning="RD-authored output columns: each entry is {input_name, column, output_name}; output_name is the exact column name in the composed dataset"),
+                ParameterContract("selections", True, (list, tuple), minimum_length=1, meaning="RD-authored output columns: each entry is {input_name, column, output_name}; output_name is the exact scientific column name in the composed dataset; Analysis chooses a collision-safe internal alignment-key field mechanically"),
                 ParameterContract("join_type", True, (str,), allowed_values=("INNER",), meaning="RD-selected alignment join; currently available capability is exact INNER intersection only"),
             ),
             1,
@@ -415,11 +424,12 @@ def standard_method_catalog() -> MethodCatalog:
                 "scientific_selection": "none",
                 "reusable_derived_dataset": True,
                 "derived_dataset_name": "composed_dataset",
+                "internal_alignment_key_name_is_mechanical": True,
                 "alignment_key_modes": {
                     "ROW_POSITION": "logical key is the zero-based row position of that supplied dataset; useful when a derived dataset's explicit index refers to source row position",
                     "COLUMN": "logical key is the exact value in the RD-selected column",
                 },
-                "execution_semantics": "Only rows whose explicit logical keys exist in every aligned input are retained for INNER. Output row order preserves the first RD-authored alignment input order. Analysis does not infer time matching, nearest-neighbor matching, lagging, filling, interpolation, column choice, aliases, or scientific ordering.",
+                "execution_semantics": "Only rows whose explicit logical keys exist in every aligned input are retained for INNER. Output row order preserves the first RD-authored alignment input order. Analysis does not infer time matching, nearest-neighbor matching, lagging, filling, interpolation, column choice, aliases, or scientific ordering. If an RD-selected output column is named alignment_key, Analysis moves its own internal alignment key to a collision-safe private field rather than rejecting the scientific output name.",
             },
         ),
         MethodSpec("analysis.performance.binary_classification", ("NORMALIZED_DATASET",), "Measure binary classification performance for RD-selected predicted/actual fields and positive label.", (ParameterContract("predicted_column", True, (str,), meaning="RD-selected prediction field"), ParameterContract("actual_column", True, (str,), meaning="RD-selected outcome field"), ParameterContract("positive_value", True, (str, int, float, bool), meaning="RD-selected positive label")), 1),
