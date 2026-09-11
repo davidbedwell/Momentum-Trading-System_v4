@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from .analysis import ExactMethodAnalysisExecutor
+from .batch_orchestrator import BatchResearchDirectorProvider, BatchResearchLoopOrchestrator
 from .cache import TemporaryResearchCache
 from .concept_library import ResearchConceptLibrary, seed_market_concepts
 from .cross_evidence import cross_evidence_analysis_method, cross_evidence_method_spec
@@ -47,29 +48,32 @@ class V4Runtime:
     orchestrator: ResearchLoopOrchestrator
 
 
-def build_runtime(
+@dataclass(frozen=True, slots=True)
+class BatchV4Runtime:
+    """Batched scientific-program runtime using the same governed Analysis Engine."""
+
+    mission: str
+    cache: TemporaryResearchCache
+    nexus: ResearchNexus
+    catalog: MethodCatalog
+    concepts: ResearchConceptLibrary
+    validator: TransparentInputBindingValidator
+    analysis: ExactMethodAnalysisExecutor
+    orchestrator: BatchResearchLoopOrchestrator
+
+
+def _build_execution_components(
     *,
-    rd: ResearchDirectorProvider,
-    mission: str = DEFAULT_MISSION,
-    nexus_path: str | Path | None = None,
-    concept_library: ResearchConceptLibrary | None = None,
-    max_contract_repairs: int = 3,
-    scientific_memory: CrossSubjectScientificMemory | None = None,
-) -> V4Runtime:
-    """Assemble the v4 research runtime without external credentials or data.
-
-    Provider creation is intentionally outside this function. The caller may use
-    a fake AI for proofs or an approved live provider at integration time.
-
-    Human market concepts are supplied as non-authoritative idea seeds. RD may
-    test, reject, reformulate, combine, or extend them; deterministic runtime
-    components never treat concept presence as scientific evidence.
-
-    When compact cross-subject scientific memory is supplied, the same runtime
-    components are used but RD context is augmented through
-    CrossSubjectResearchLoopOrchestrator. Subject-local Nexus behavior and the
-    raw-data retention boundary remain unchanged.
-    """
+    nexus_path: str | Path | None,
+    concept_library: ResearchConceptLibrary | None,
+) -> tuple[
+    TemporaryResearchCache,
+    ResearchNexus,
+    MethodCatalog,
+    ResearchConceptLibrary,
+    TransparentInputBindingValidator,
+    ExactMethodAnalysisExecutor,
+]:
     cache = TemporaryResearchCache()
     nexus: ResearchNexus
     if nexus_path is None:
@@ -93,6 +97,27 @@ def build_runtime(
     analysis.register(cross_evidence_analysis_method())
     analysis.register(scientific_toolkit_analysis_method())
     analysis.register(group_aggregation_analysis_method())
+    return cache, nexus, catalog, concepts, validator, analysis
+
+
+def build_runtime(
+    *,
+    rd: ResearchDirectorProvider,
+    mission: str = DEFAULT_MISSION,
+    nexus_path: str | Path | None = None,
+    concept_library: ResearchConceptLibrary | None = None,
+    max_contract_repairs: int = 3,
+    scientific_memory: CrossSubjectScientificMemory | None = None,
+) -> V4Runtime:
+    """Assemble the existing single-request v4 research runtime.
+
+    This compatibility path remains available while the batched RD execution path
+    is tested and proven. Scientific authority boundaries are unchanged.
+    """
+    cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(
+        nexus_path=nexus_path,
+        concept_library=concept_library,
+    )
 
     orchestrator_type = (
         CrossSubjectResearchLoopOrchestrator
@@ -115,6 +140,46 @@ def build_runtime(
     orchestrator = orchestrator_type(**orchestrator_kwargs)
 
     return V4Runtime(
+        mission=mission,
+        cache=cache,
+        nexus=nexus,
+        catalog=catalog,
+        concepts=concepts,
+        validator=validator,
+        analysis=analysis,
+        orchestrator=orchestrator,
+    )
+
+
+def build_batch_runtime(
+    *,
+    rd: BatchResearchDirectorProvider,
+    mission: str = DEFAULT_MISSION,
+    nexus_path: str | Path | None = None,
+    concept_library: ResearchConceptLibrary | None = None,
+) -> BatchV4Runtime:
+    """Assemble the program-level batched RD runtime.
+
+    The batched path reuses the exact same Intake/cache boundary, method catalog,
+    objective validator, Analysis Engine, and Nexus implementation as the legacy
+    one-request loop. The only new layer is the deterministic compiler/orchestrator
+    between AI-authored scientific specifications and low-level AnalysisRequests.
+    """
+    cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(
+        nexus_path=nexus_path,
+        concept_library=concept_library,
+    )
+    orchestrator = BatchResearchLoopOrchestrator(
+        mission=mission,
+        rd=rd,
+        validator=validator,
+        analysis=analysis,
+        nexus=nexus,
+        cache=cache,
+        available_methods=catalog.capability_payloads(),
+        research_concepts=concepts.payloads(),
+    )
+    return BatchV4Runtime(
         mission=mission,
         cache=cache,
         nexus=nexus,
