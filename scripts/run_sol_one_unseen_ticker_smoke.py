@@ -224,6 +224,49 @@ def _require_scientifically_applicable_first_role(selection: RDSubjectSelectionD
     )
 
 
+def _subject_research_provenance(
+    *,
+    package_store: JsonResearchPackageStore,
+    subject_id: str,
+) -> tuple[Mapping[str, object], ...]:
+    """Expose compact durable RP lineage without making scientific selections."""
+    packages: list[Mapping[str, object]] = []
+    for rp_id in package_store.list_ids():
+        package = package_store.load(rp_id)
+        if package is None or package.subject_id != subject_id:
+            continue
+        packages.append(
+            {
+                "rp_id": package.rp_id,
+                "parent_rp_id": package.parent_rp_id,
+                "status": package.status,
+                "close_reason": package.close_reason,
+                "final_assessment": package.final_assessment,
+                "findings": [dict(item) for item in package.findings],
+                "predictive_hypotheses": [
+                    {
+                        "hypothesis_id": item.hypothesis_id,
+                        "statement": item.statement,
+                        "status": item.status,
+                        "source_result_ids": list(item.source_result_ids),
+                    }
+                    for item in package.predictive_hypotheses
+                ],
+                "analysis_results": [
+                    {
+                        "request_id": item.request_id,
+                        "result_id": item.result_id,
+                        "execution_status": item.execution_status,
+                        "research_phase": item.research_phase,
+                    }
+                    for item in package.analyses
+                    if item.result_id is not None
+                ],
+            }
+        )
+    return tuple(packages)
+
+
 def main() -> None:
     timeout_seconds = int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600"))
     max_analyses = int(os.getenv("MTS_SOL_SMOKE_MAX_ANALYSES", "100"))
@@ -299,6 +342,10 @@ def main() -> None:
         max_analyses=max_analyses,
     )
 
+    durable_packages = _subject_research_provenance(
+        package_store=package_store,
+        subject_id=selection.subject_id,
+    )
     scientific_context = {
         "selection": {
             "subject_id": selection.subject_id,
@@ -314,6 +361,13 @@ def main() -> None:
             "close_reason": outcome.close_reason,
             "final_research_state": outcome.final_decision.research_state,
         },
+        "durable_research_packages": durable_packages,
+        "provenance_instruction": (
+            "When a memory record summarizes a supplied Research Package, Finding, predictive "
+            "hypothesis, or Analysis result, preserve its exact supplied rp_id, finding_id, "
+            "hypothesis_id, and/or result_ids. Do not omit known durable provenance and do not "
+            "invent identifiers."
+        ),
         "evidence": [item.durable_metadata() for item in evidence],
     }
     digest = SolSubjectScientificMemoryAuthor(
@@ -331,6 +385,7 @@ def main() -> None:
         decisions=outcome.decisions,
         analyses_executed=outcome.analyses_executed,
         findings_promoted=outcome.findings_promoted,
+        research_packages=len(durable_packages),
         validation_trials=0,
         close_reason=outcome.close_reason,
         zero_finding_diagnosis=(
@@ -358,6 +413,7 @@ def main() -> None:
     print(f"OUTCOME_FINDINGS_PROMOTED={outcome.findings_promoted}", flush=True)
     print(f"OUTCOME_CLOSED={outcome.closed}", flush=True)
     print(f"OUTCOME_CLOSE_REASON={outcome.close_reason}", flush=True)
+    print(f"RESEARCH_PACKAGES={len(durable_packages)}", flush=True)
     print(f"DIGEST_RECORDS={len(digest.records)}", flush=True)
     print(f"FRONTIER_VERSION={digest.frontier.version if digest.frontier else None}", flush=True)
 
