@@ -52,6 +52,7 @@ class SolSubjectScientificMemoryAuthor:
                 "Include scientifically meaningful negative results, contradictions, unresolved issues, data/resource limitations, or methodological lessons when useful.",
                 "Prior memory is context, not a mandatory agenda. Update the Research Frontier to reflect what is scientifically worth discriminating next.",
                 "Every memory record must identify its source subject and retain supplied RP/finding/hypothesis/result/evidence provenance when known.",
+                "Each record_id must be stable and unique. If you repeat a record_id in this response, every field must be exactly identical; never reuse an existing record_id for changed scientific content.",
             ],
             "required_schema": {
                 "records": [
@@ -109,21 +110,21 @@ class SolSubjectScientificMemoryAuthor:
             summary = item.get("summary")
             if not all(isinstance(value, str) and value.strip() for value in (record_id, kind, summary)):
                 raise ValueError(f"records[{index}] requires nonblank record_id, kind, summary")
-            record = ScientificMemoryRecord(
-                record_id=record_id.strip(),
-                subject_id=subject_id,
-                kind=kind.strip(),
-                summary=summary.strip(),
-                rp_id=item.get("rp_id") if isinstance(item.get("rp_id"), str) else None,
-                finding_id=item.get("finding_id") if isinstance(item.get("finding_id"), str) else None,
-                hypothesis_id=item.get("hypothesis_id") if isinstance(item.get("hypothesis_id"), str) else None,
-                result_ids=tuple(str(value) for value in item.get("result_ids", ()) if str(value)),
-                evidence_ids=tuple(str(value) for value in item.get("evidence_ids", ()) if str(value)),
-                status=item.get("status") if isinstance(item.get("status"), str) else None,
-                metadata=dict(item.get("metadata", {})) if isinstance(item.get("metadata"), Mapping) else {},
+            records.append(
+                ScientificMemoryRecord(
+                    record_id=record_id.strip(),
+                    subject_id=subject_id,
+                    kind=kind.strip(),
+                    summary=summary.strip(),
+                    rp_id=item.get("rp_id") if isinstance(item.get("rp_id"), str) else None,
+                    finding_id=item.get("finding_id") if isinstance(item.get("finding_id"), str) else None,
+                    hypothesis_id=item.get("hypothesis_id") if isinstance(item.get("hypothesis_id"), str) else None,
+                    result_ids=tuple(str(value) for value in item.get("result_ids", ()) if str(value)),
+                    evidence_ids=tuple(str(value) for value in item.get("evidence_ids", ()) if str(value)),
+                    status=item.get("status") if isinstance(item.get("status"), str) else None,
+                    metadata=dict(item.get("metadata", {})) if isinstance(item.get("metadata"), Mapping) else {},
+                )
             )
-            self._scientific_memory.publish(record)
-            records.append(record)
 
         raw_frontier = decoded.get("frontier")
         frontier: ResearchFrontierState | None = None
@@ -142,6 +143,9 @@ class SolSubjectScientificMemoryAuthor:
                 missing_resources=tuple(str(v) for v in raw_frontier.get("missing_resources", ()) if str(v)),
                 source_record_ids=tuple(str(v) for v in raw_frontier.get("source_record_ids", ()) if str(v)),
             )
+
+        self._scientific_memory.publish_batch(records)
+        if frontier is not None:
             self._scientific_memory.set_frontier(frontier)
 
         return SubjectScientificDigest(subject_id=subject_id, records=tuple(records), frontier=frontier)
