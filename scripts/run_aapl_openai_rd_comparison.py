@@ -5,7 +5,7 @@ import json
 import os
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from datetime import date as date_type, datetime, timezone
 from pathlib import Path
 from typing import Mapping, Sequence
 
@@ -15,7 +15,15 @@ from MTS_V4.campaign import CheckpointedCampaignRunner
 from MTS_V4.checkpoint import JsonCampaignCheckpointStore
 from MTS_V4.decision_journal import JsonResearchDecisionJournal
 from MTS_V4.intake import IntakeEngine
-from MTS_V4.live_sources import standard_live_market_source
+from MTS_V4.live_sources import (
+    CompositeEvidenceSource,
+    FinraWeeklyOffExchangeSource,
+    UnusualWhalesDarkPoolPriceLevelsSource,
+    UnusualWhalesFlowAlertsSource,
+    UnusualWhalesFlowByExpirySource,
+    UnusualWhalesGreekExposureByExpirySource,
+    YFinanceDailyOhlcvSource,
+)
 from MTS_V4.openai_compatible_provider import ResearchDirectorTransportError
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.research_recording import CampaignResearchRecorder
@@ -27,6 +35,7 @@ MODELS = (
     ("terra", "gpt-5.6-terra"),
     ("sol", "gpt-5.6-sol"),
 )
+DEFAULT_EVIDENCE_AS_OF = "2026-09-10"
 
 
 class MeteredOpenAIResearchDirector(SolResearchPackageAwareResearchDirector):
@@ -116,6 +125,24 @@ def _required_env(name: str) -> str:
     if not value:
         raise RuntimeError(f"required environment variable is not set: {name}")
     return value
+
+
+def _comparison_live_market_source(as_of_date: date_type) -> CompositeEvidenceSource:
+    """Acquire one controlled AAPL evidence snapshot for both model arms.
+
+    The Unusual Whales dark-pool price-level endpoint rejects future market dates.
+    Pinning its end date prevents a UTC-midnight rollover from requesting the next
+    calendar date while the U.S. market/source still considers the prior session current.
+    All acquired evidence is staged once and deep-copied to both model runtimes.
+    """
+    return CompositeEvidenceSource(
+        YFinanceDailyOhlcvSource(),
+        UnusualWhalesDarkPoolPriceLevelsSource(end_date=as_of_date),
+        UnusualWhalesFlowAlertsSource(),
+        UnusualWhalesGreekExposureByExpirySource(),
+        UnusualWhalesFlowByExpirySource(),
+        FinraWeeklyOffExchangeSource(),
+    )
 
 
 def _copy_staged_evidence(source_cache: TemporaryResearchCache, destination_cache: TemporaryResearchCache) -> None:
@@ -237,6 +264,8 @@ def main() -> None:
     max_analyses = int(os.getenv("MTS_E2E_MAX_ANALYSES", "500"))
     timeout_seconds = int(os.getenv("MTS_RD_TIMEOUT_SECONDS", "600"))
     reasoning_effort = os.getenv("MTS_OPENAI_REASONING_EFFORT", "medium").strip() or "medium"
+    evidence_as_of_text = os.getenv("MTS_COMPARISON_EVIDENCE_AS_OF", DEFAULT_EVIDENCE_AS_OF).strip()
+    evidence_as_of = date_type.fromisoformat(evidence_as_of_text)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     root_dir = Path(f"/home/ubuntu/mts-v4-aapl-terra-sol-comparison-{stamp}")
     root_dir.mkdir(parents=True, exist_ok=False)
@@ -246,11 +275,12 @@ def main() -> None:
     evidence = tuple(
         IntakeEngine(staged_cache).ingest(
             subject=subject,
-            source=standard_live_market_source(),
+            source=_comparison_live_market_source(evidence_as_of),
         )
     )
 
     print(f"COMPARISON_ROOT={root_dir}", flush=True)
+    print(f"EVIDENCE_AS_OF={evidence_as_of.isoformat()}", flush=True)
     print(f"EVIDENCE_COUNT={len(evidence)}", flush=True)
     for item in evidence:
         print(
