@@ -12,6 +12,7 @@ dependencies = [
   "scipy>=1.14",
   "yfinance",
   "pyarrow",
+  "cryptography>=43",
 ]
 
 [project.optional-dependencies]
