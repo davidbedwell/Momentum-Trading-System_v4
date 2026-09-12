@@ -116,7 +116,6 @@ def compile_execution_plan(protocol: ProspectiveValidationProtocol) -> Prospecti
         ("SMA20_t", protocol.authoritative_daily_close_series),
         ("immediately preceding 19 Nasdaq sessions", protocol.authoritative_daily_close_series),
         ("next nine Nasdaq sessions", protocol.matching_rule),
-        ("tenth subsequent Nasdaq session", protocol.outcome_evaluable_rule),
         ("fifth XNAS session after u", protocol.outcome_evaluable_rule),
         ("greater than or equal to zero", protocol.candidate_condition),
         ("less than zero", protocol.comparison_condition),
