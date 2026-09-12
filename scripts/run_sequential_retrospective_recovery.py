@@ -24,20 +24,25 @@ from MTS_V4.sol_spend_guard import (
     SolSpendAuthorizationRequired,
     SolSpendAuthorizationSnapshot,
 )
-from MTS_V4.subject_scientific_context import load_subject_scientific_context
+from MTS_V4.subject_scientific_context import (
+    SubjectContextSolBatchResearchDirector,
+    load_subject_scientific_context,
+)
 
 
 SEQUENCE = ("AAPL", "MSFT", "XOM")
 
-SEQUENTIAL_RETROSPECTIVE_MISSION = DEFAULT_MISSION + (
-    " This is retrospective recovery of a previously exposed subject under the corrected batched Research Director "
-    "lifecycle. Historical subject work is discovery context only and is never blind validation. The AI Research "
-    "Director also receives compact prior-subject scientific findings and the canonical RD-authored cross-subject "
-    "scientific memory/frontier. Use those contexts as nonbinding scientific memory: actively consider transferability, "
-    "contradictions, conditional structure, and falsifiable generalization pathways when scientifically useful, but do "
-    "not assume that any prior relationship generalizes. Deterministic code does not choose subjects, variables, methods, "
-    "thresholds, normalizations, horizons, hypotheses, or generalizations. The AI Research Director retains authority to "
-    "test, challenge, reformulate, condition, defer, ignore, or reject prior cross-subject ideas."
+SUBJECT_MISSION = DEFAULT_MISSION + (
+    " The AI Research Director receives canonical cross-subject scientific memory/frontier and compact durable "
+    "prior-subject scientific findings as nonbinding context. Actively consider transferability, contradictions, "
+    "conditional structure, and falsifiable generalization pathways when scientifically useful, but do not assume "
+    "that any prior relationship generalizes. Deterministic code does not choose variables, methods, thresholds, "
+    "normalizations, horizons, hypotheses, or generalizations."
+)
+
+RETROSPECTIVE_SUFFIX = (
+    " This subject also has preserved prior exposed work. Treat that historical subject record as discovery context "
+    "only and never as blind validation."
 )
 
 
@@ -94,14 +99,15 @@ def _parse_historical_overrides(values: Sequence[str]) -> dict[str, Path]:
             )
         if ticker in overrides:
             raise ValueError(f"duplicate historical subject override for {ticker}")
-        overrides[ticker] = Path(path).expanduser().resolve()
+        resolved = Path(path).expanduser().resolve()
+        load_retrospective_subject_context(resolved)
+        overrides[ticker] = resolved
     return overrides
 
 
 def _discover_historical_subject_candidates(root: Path, ticker: str) -> tuple[Path, ...]:
     candidates: set[Path] = set()
-    patterns = (f"mts-v4-*/subjects/{ticker}", f"mts-v4-*/{ticker}")
-    for pattern in patterns:
+    for pattern in (f"mts-v4-*/subjects/{ticker}", f"mts-v4-*/{ticker}"):
         for path in root.glob(pattern):
             if not path.is_dir():
                 continue
@@ -117,19 +123,15 @@ def _resolve_historical_subject_dir(
     root: Path,
     ticker: str,
     overrides: Mapping[str, Path],
-) -> Path:
+) -> Path | None:
     explicit = overrides.get(ticker)
     if explicit is not None:
-        load_retrospective_subject_context(explicit)
         return explicit
     candidates = _discover_historical_subject_candidates(root, ticker)
     if len(candidates) == 1:
         return candidates[0]
     if not candidates:
-        raise RuntimeError(
-            f"no usable preserved historical subject directory found for {ticker}; "
-            f"supply --historical-subject-dir {ticker}=/absolute/path"
-        )
+        return None
     rendered = "\n  ".join(str(path) for path in candidates)
     raise RuntimeError(
         f"multiple preserved historical subject directories found for {ticker}; deterministic code will not choose "
@@ -151,32 +153,34 @@ def _run_subject(
     *,
     root: Path,
     ticker: str,
-    historical_dir: Path,
+    historical_dir: Path | None,
     state_dir: Path,
     spend_limit_usd: float,
     dry_run: bool,
 ) -> Mapping[str, object]:
     subject_id = f"equity:{ticker}"
-    retrospective_context = load_retrospective_subject_context(historical_dir)
+    subject = SubjectMetadata(subject_id=subject_id, ticker=ticker)
     scientific_context = load_subject_scientific_context(root, active_subject_id=subject_id)
-    retrospective_context["prior_subject_scientific_context"] = scientific_context.prior_subject_science
-    retrospective_context["cross_subject_memory_provenance"] = {
-        "source_path": str(scientific_context.memory_selection.source_path),
-        "superseded_paths": [str(path) for path in scientific_context.memory_selection.superseded_paths],
-        "frontier_version": (
-            scientific_context.memory_selection.store.frontier().version
-            if scientific_context.memory_selection.store.frontier() is not None
-            else 0
-        ),
-        "record_count": len(scientific_context.memory_selection.store.records()),
-    }
+    frontier = scientific_context.memory_selection.store.frontier()
     prior_package_count = _prior_package_count(scientific_context.prior_subject_science)
+    mode = "RETROSPECTIVE_RECOVERY" if historical_dir is not None else "FRESH_FULL_SUBJECT"
+
+    retrospective_context: dict[str, object] | None = None
+    if historical_dir is not None:
+        retrospective_context = load_retrospective_subject_context(historical_dir)
+        retrospective_context["prior_subject_scientific_context"] = scientific_context.prior_subject_science
+        retrospective_context["cross_subject_memory_provenance"] = {
+            "source_path": str(scientific_context.memory_selection.source_path),
+            "superseded_paths": [str(path) for path in scientific_context.memory_selection.superseded_paths],
+            "frontier_version": frontier.version if frontier is not None else 0,
+            "record_count": len(scientific_context.memory_selection.store.records()),
+        }
 
     if dry_run:
-        frontier = scientific_context.memory_selection.store.frontier()
         return {
             "ticker": ticker,
-            "historical_subject_dir": str(historical_dir),
+            "mode": mode,
+            "historical_subject_dir": str(historical_dir) if historical_dir is not None else None,
             "state_dir": str(state_dir),
             "canonical_memory_source": str(scientific_context.memory_selection.source_path),
             "canonical_memory_records": len(scientific_context.memory_selection.store.records()),
@@ -190,32 +194,67 @@ def _run_subject(
     telemetry_path = state_dir / "sol_transport_telemetry.jsonl"
     os.environ["MTS_SOL_TELEMETRY_PATH"] = str(telemetry_path)
 
-    subject = SubjectMetadata(subject_id=subject_id, ticker=ticker)
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
-    rd = SolRetrospectiveRecoveryResearchDirector(
-        research_package_store=package_store,
-        retrospective_context=retrospective_context,
-        base_url=_required_env("MTS_SOL_BASE_URL"),
-        model=_required_env("MTS_SOL_MODEL"),
-        api_key=_required_env("MTS_SOL_API_KEY"),
-        timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")),
-        required_subject_id=subject.subject_id,
-        required_research_phase=ResearchPhase.EXPLORATION,
-        sol_spend_limit_usd=spend_limit_usd,
-        human_spend_authorization_callback=_interactive_spend_authorization,
-    )
+
+    common_kwargs = {
+        "research_package_store": package_store,
+        "base_url": _required_env("MTS_SOL_BASE_URL"),
+        "model": _required_env("MTS_SOL_MODEL"),
+        "api_key": _required_env("MTS_SOL_API_KEY"),
+        "timeout_seconds": int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")),
+        "required_subject_id": subject.subject_id,
+        "required_research_phase": ResearchPhase.EXPLORATION,
+        "sol_spend_limit_usd": spend_limit_usd,
+        "human_spend_authorization_callback": _interactive_spend_authorization,
+    }
+
+    if retrospective_context is None:
+        rd = SubjectContextSolBatchResearchDirector(
+            prior_subject_scientific_context=scientific_context.prior_subject_science,
+            **common_kwargs,
+        )
+        mission = SUBJECT_MISSION
+    else:
+        rd = SolRetrospectiveRecoveryResearchDirector(
+            retrospective_context=retrospective_context,
+            **common_kwargs,
+        )
+        mission = SUBJECT_MISSION + RETROSPECTIVE_SUFFIX
+        (state_dir / "retrospective_context.json").write_text(
+            json.dumps(retrospective_context, indent=2, sort_keys=True, default=str) + "\n",
+            encoding="utf-8",
+        )
+
     runtime = build_batch_runtime(
         rd=rd,
-        mission=SEQUENTIAL_RETROSPECTIVE_MISSION,
+        mission=mission,
         nexus_path=state_dir / "research_nexus.json",
         scientific_memory=scientific_context.memory_selection.store,
     )
-    evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=standard_live_market_source())
+    evidence = IntakeEngine(runtime.cache).ingest(
+        subject=subject,
+        source=standard_live_market_source(),
+    )
     campaign_id = state_dir.name
 
-    (state_dir / "retrospective_context.json").write_text(
-        json.dumps(retrospective_context, indent=2, sort_keys=True, default=str) + "\n",
+    (state_dir / "subject_scientific_context.json").write_text(
+        json.dumps(
+            {
+                "active_subject_id": subject.subject_id,
+                "mode": mode,
+                "canonical_memory_source": str(scientific_context.memory_selection.source_path),
+                "canonical_memory_superseded_paths": [
+                    str(path) for path in scientific_context.memory_selection.superseded_paths
+                ],
+                "canonical_memory_frontier_version": frontier.version if frontier is not None else 0,
+                "canonical_memory_record_count": len(scientific_context.memory_selection.store.records()),
+                "prior_subject_scientific_context": scientific_context.prior_subject_science,
+            },
+            indent=2,
+            sort_keys=True,
+            default=str,
+        ) + "\n",
         encoding="utf-8",
     )
 
@@ -264,9 +303,13 @@ def _run_subject(
         )
     except SolSpendAuthorizationRequired as exc:
         artifact = state_dir / "sol_spend_authorization_required.json"
-        artifact.write_text(json.dumps(asdict(exc.snapshot), sort_keys=True, indent=2) + "\n", encoding="utf-8")
+        artifact.write_text(
+            json.dumps(asdict(exc.snapshot), sort_keys=True, indent=2) + "\n",
+            encoding="utf-8",
+        )
         return {
             "ticker": ticker,
+            "mode": mode,
             "state_dir": str(state_dir),
             "closed": False,
             "authorization_required": True,
@@ -274,12 +317,12 @@ def _run_subject(
         }
 
     spend = rd.sol_spend_snapshot()
-    frontier = scientific_context.memory_selection.store.frontier()
     summary = {
         "campaign_id": campaign_id,
         "subject_id": subject.subject_id,
-        "historical_subject_dir": str(historical_dir),
-        "historical_exposure_status": "EXPOSED",
+        "mode": mode,
+        "historical_subject_dir": str(historical_dir) if historical_dir is not None else None,
+        "historical_exposure_status": "EXPOSED" if historical_dir is not None else "NONE_AVAILABLE",
         "research_phase": "EXPLORATION",
         "blind_validation_claim_allowed": False,
         "cross_subject_context_automatic": True,
@@ -306,8 +349,9 @@ def _run_subject(
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Run AAPL, then MSFT, then XOM retrospective recovery sequentially. The next subject starts only after "
-            "the prior subject closes. Permanent subject-level cross-subject scientific context is loaded for each run."
+            "Run AAPL, then MSFT, then XOM sequentially. Use preserved history when exactly one usable stopped-run "
+            "history exists; otherwise run a fresh full subject. Every subject automatically receives canonical "
+            "cross-subject memory/frontier and prior durable subject science."
         )
     )
     parser.add_argument("--root", default="/home/ubuntu")
@@ -349,7 +393,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     frontier = initial_context.memory_selection.store.frontier()
     print(f"CANONICAL_MEMORY_FRONTIER_VERSION={frontier.version if frontier is not None else 0}", flush=True)
     for ticker in SEQUENCE:
-        print(f"HISTORICAL_{ticker}_DIR={historical_dirs[ticker]}", flush=True)
+        historical = historical_dirs[ticker]
+        mode = "RETROSPECTIVE_RECOVERY" if historical is not None else "FRESH_FULL_SUBJECT"
+        print(f"{ticker}_MODE={mode}", flush=True)
+        print(f"HISTORICAL_{ticker}_DIR={historical if historical is not None else 'NONE'}", flush=True)
 
     for ordinal, ticker in enumerate(SEQUENCE, start=1):
         state_dir = root / f"mts-v4-sequential-rerun-{ordinal:02d}-{ticker.lower()}-{stamp}"
@@ -363,6 +410,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         results.append(result)
         print(f"{ticker}_STATE_DIR={result['state_dir']}", flush=True)
+        print(f"{ticker}_MODE={result['mode']}", flush=True)
         print(
             f"{ticker}_PRIOR_SUBJECT_SCIENTIFIC_PACKAGES="
             f"{result.get('prior_subject_scientific_packages', result.get('prior_subject_scientific_packages_exposed', 0))}",
@@ -377,24 +425,24 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 2
         if result.get("closed") is not True:
             print(f"SEQUENCE_STOPPED_AFTER={ticker}", flush=True)
-            print("REASON=PRIOR_SUBJECT_DID_NOT_CLOSE", flush=True)
             return 3
 
-    summary = {
-        "sequence": list(SEQUENCE),
-        "dry_run": args.dry_run,
-        "cross_subject_context_automatic": True,
-        "canonical_memory_source_at_start": str(initial_context.memory_selection.source_path),
-        "subjects": results,
-    }
     summary_path = root / f"MTS_V4_SEQUENTIAL_RERUN_SUMMARY_{stamp}.json"
-    summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")
-    print(f"SEQUENCE_SUMMARY={summary_path}", flush=True)
-    if args.dry_run:
-        print("DRY_RUN=True", flush=True)
-        print("SOL_CALLS=0", flush=True)
-    else:
-        print("SEQUENCE_COMPLETE=True", flush=True)
+    summary_path.write_text(
+        json.dumps(
+            {
+                "sequence": SEQUENCE,
+                "dry_run": args.dry_run,
+                "results": results,
+            },
+            indent=2,
+            sort_keys=True,
+            default=str,
+        ) + "\n",
+        encoding="utf-8",
+    )
+    print(f"SEQUENCE_COMPLETE={not args.dry_run}", flush=True)
+    print(f"SUMMARY={summary_path}", flush=True)
     return 0
 
 
