@@ -129,6 +129,72 @@ class LineageAwareExactMethodAnalysisExecutor(ExactMethodAnalysisExecutor):
             return cls._attach_row_preserving_measurement_lineage(outputs, evidence_payloads)
         if request.method_id == "analysis.dataset.compose":
             return cls._attach_compose_key_lineage(request, outputs, evidence_payloads)
+
+        # Methods whose emitted ``index`` is exactly the source payload row
+        # position may inherit a deeper canonical row-position identity, but only
+        # when every source row mechanically proves that row-position mapping.
+        # This prevents runtime aliases from obscuring an already-proven identity
+        # while refusing to infer equivalence for filtered/reordered payloads.
+        indexed_dataset_names = {
+            "analysis.transform.percent_change": "percent_change",
+            "analysis.rolling.statistics": "rolling_statistic",
+            "analysis.events.threshold": "threshold_events",
+            "analysis.path.forward_measurement": "forward_path_observations",
+        }
+        dataset_name = indexed_dataset_names.get(request.method_id)
+        if dataset_name is not None:
+            return cls._inherit_indexed_row_identity(
+                outputs,
+                evidence_payloads,
+                dataset_name=dataset_name,
+            )
+        return outputs
+
+    @classmethod
+    def _inherit_indexed_row_identity(
+        cls,
+        outputs: dict[str, Any],
+        evidence_payloads: Mapping[str, object],
+        *,
+        dataset_name: str,
+    ) -> dict[str, Any]:
+        if len(evidence_payloads) != 1:
+            return outputs
+        source_payload = next(iter(evidence_payloads.values()))
+        canonical_identity = cls._row_position_parent_identity(source_payload)
+        if canonical_identity is None:
+            return outputs
+
+        derived = outputs.get("derived_datasets")
+        if not isinstance(derived, Mapping):
+            return outputs
+        rows = derived.get(dataset_name)
+        if not isinstance(rows, (list, tuple)):
+            return outputs
+
+        enriched_rows: list[Mapping[str, Any]] = []
+        for raw_row in rows:
+            if not isinstance(raw_row, Mapping) or "index" not in raw_row:
+                return outputs
+            lineage = raw_row.get("__observation_lineage")
+            if not isinstance(lineage, Mapping):
+                return outputs
+            if raw_row.get("index") != lineage.get("input_row_anchor"):
+                return outputs
+            row = dict(raw_row)
+            row["__observation_lineage"] = {
+                **dict(lineage),
+                "input_name": canonical_identity,
+                "semantics": (
+                    "MECHANICALLY_INHERITED_CANONICAL_ROW_IDENTITY_NOT_SCIENTIFIC_INTERPRETATION"
+                ),
+            }
+            enriched_rows.append(row)
+
+        derived_copy = dict(derived)
+        derived_copy[dataset_name] = enriched_rows
+        outputs["derived_datasets"] = derived_copy
+        cls._mark_catalog_lineage(outputs, dataset_name)
         return outputs
 
     @classmethod
