@@ -33,9 +33,20 @@ def test_load_retrospective_subject_context_marks_history_exposed(tmp_path: Path
 
     context = load_retrospective_subject_context(subject)
 
-    assert context["policy"]["historical_exposure_status"] == "EXPOSED"
-    assert context["policy"]["research_phase"] == "EXPLORATION"
-    assert context["policy"]["blind_validation_claim_allowed"] is False
+    policy = context["policy"]
+    assert policy["historical_exposure_status"] == "EXPOSED"
+    assert policy["research_phase"] == "EXPLORATION"
+    assert policy["blind_validation_claim_allowed"] is False
+    assert "only when the AI Research Director explicitly authors" in policy[
+        "analysis_execution_authority"
+    ]
+    assert "Deterministic code must not infer, require, schedule, or manufacture re-analysis" in policy[
+        "analysis_execution_authority"
+    ]
+    assert policy["batch_execution_rule"].startswith(
+        "If and only if the AI Research Director authors additional Analysis Specifications"
+    )
+
     preserved = context["preserved_state"]
     assert len(preserved["rd_decisions"]) == 1
     assert "research_nexus" in preserved
@@ -50,15 +61,32 @@ def test_load_retrospective_subject_context_rejects_empty_directory(tmp_path: Pa
         load_retrospective_subject_context(subject)
 
 
-def test_recovery_system_message_preserves_batch_and_no_blind_rules() -> None:
+def test_recovery_system_message_preserves_sol_only_analysis_authority() -> None:
     messages = SolRetrospectiveRecoveryResearchDirector._batch_messages(
         operation="BEGIN_BATCH_RESEARCH",
         mission="test mission",
         payload={"retrospective_recovery_context": {"policy": {}}},
     )
     system = messages[0]["content"]
+
     assert "RETROSPECTIVE RECOVERY" in system
     assert "MUST NEVER be described or counted as blind validation" in system
-    assert "author all analyses that are justified now in the same batch" in system
+    assert "Retrospective recovery does NOT itself require additional Analysis" in system
+    assert "Deterministic code must not infer, require, schedule, or manufacture re-analysis" in system
+    assert "Only if YOU, the AI Research Director" in system
+    assert "author all analyses justified now in the same batch" in system
     assert "receive the consolidated batch report" in system
+    assert "without unnecessary re-analysis" in system
     assert "genuinely unexposed evidence" in system
+
+
+def test_recovery_system_message_allows_zero_analysis_resolution() -> None:
+    messages = SolRetrospectiveRecoveryResearchDirector._batch_messages(
+        operation="BEGIN_BATCH_RESEARCH",
+        mission="test mission",
+        payload={"retrospective_recovery_context": {"policy": {}}},
+    )
+    system = messages[0]["content"]
+
+    assert "preserved record and presently available evidence are already sufficient" in system
+    assert "freeze the tentative predictive hypothesis or close the subject" in system
