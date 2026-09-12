@@ -12,7 +12,7 @@ from .contracts import (
     FindingRetraction,
     SubjectMetadata,
 )
-from .nexus import NexusError
+from .nexus import NexusError, repair_finding_evidence_lineage
 
 
 class JsonResearchNexus:
@@ -78,6 +78,10 @@ class JsonResearchNexus:
     def publish_finding(self, finding: Finding) -> None:
         if finding.subject_id not in self._subjects:
             raise NexusError(f"Cannot publish finding for unknown subject: {finding.subject_id}")
+        finding = repair_finding_evidence_lineage(
+            finding,
+            self.get_analysis_result_metadata,
+        )
         cited_evidence = set(finding.evidence_ids)
         for evidence_id in finding.evidence_ids:
             evidence = self._evidence_metadata.get(evidence_id)
