@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from tempfile import TemporaryDirectory
+import unittest
 
 from MTS_V4.contracts import EvidenceDescriptor
 from MTS_V4.cross_subject_generalization import (
@@ -73,72 +75,75 @@ def test_generalization_prompt_preserves_sol_scientific_authority() -> None:
     assert "Deterministic code does not choose which subjects to compare" in system
 
 
-def test_historical_context_unwraps_canonical_research_package_and_preserves_lineage(
-    tmp_path: Path,
-) -> None:
-    package_path = tmp_path / "mts-v4-test" / "research_packages" / "rp-test.json"
-    package_path.parent.mkdir(parents=True)
-    package_path.write_text(
-        json.dumps(
-            {
-                "format": JsonResearchPackageStore.FORMAT,
-                "research_package": {
-                    "rp_id": "rp-test",
-                    "campaign_id": "campaign-test",
-                    "subject_id": "equity:AMD",
-                    "parent_rp_id": "rp-parent",
-                    "status": "CLOSED",
-                    "objective": "test objective",
-                    "originating_question": "Does it transfer?",
-                    "originating_rationale": "Prior evidence warranted testing.",
-                    "hypotheses": ["ordinary hypothesis"],
-                    "predictive_hypotheses": [{"hypothesis_id": "ph-1"}],
-                    "findings": [{"finding_id": "finding-1"}],
-                    "unresolved_issues": ["issue-1"],
-                    "analyses": [{"analysis_id": "analysis-1", "result_id": "result-1"}],
-                    "close_reason": "question exhausted",
-                    "final_assessment": "closed assessment",
-                },
-            }
-        ),
-        encoding="utf-8",
-    )
+class CrossSubjectCorpusScannerRegressionTests(unittest.TestCase):
+    def test_historical_context_unwraps_canonical_research_package_and_preserves_lineage(self) -> None:
+        with TemporaryDirectory() as directory:
+            tmp_path = Path(directory)
+            package_path = tmp_path / "mts-v4-test" / "research_packages" / "rp-test.json"
+            package_path.parent.mkdir(parents=True)
+            package_path.write_text(
+                json.dumps(
+                    {
+                        "format": JsonResearchPackageStore.FORMAT,
+                        "research_package": {
+                            "rp_id": "rp-test",
+                            "campaign_id": "campaign-test",
+                            "subject_id": "equity:AMD",
+                            "parent_rp_id": "rp-parent",
+                            "status": "CLOSED",
+                            "objective": "test objective",
+                            "originating_question": "Does it transfer?",
+                            "originating_rationale": "Prior evidence warranted testing.",
+                            "hypotheses": ["ordinary hypothesis"],
+                            "predictive_hypotheses": [{"hypothesis_id": "ph-1"}],
+                            "findings": [{"finding_id": "finding-1"}],
+                            "unresolved_issues": ["issue-1"],
+                            "analyses": [{"analysis_id": "analysis-1", "result_id": "result-1"}],
+                            "close_reason": "question exhausted",
+                            "final_assessment": "closed assessment",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
 
-    context = _historical_subject_context(tmp_path, ("AMD",))
-    packages = context["subjects"][0]["research_packages"]
+            context = _historical_subject_context(tmp_path, ("AMD",))
+            packages = context["subjects"][0]["research_packages"]
 
-    assert len(packages) == 1
-    package = packages[0]
-    assert package["source_path"] == str(package_path)
-    assert package["source_format"] == JsonResearchPackageStore.FORMAT
-    assert package["subject_id"] == "equity:AMD"
-    assert package["campaign_id"] == "campaign-test"
-    assert package["hypotheses"] == ["ordinary hypothesis"]
-    assert package["predictive_hypotheses"] == [{"hypothesis_id": "ph-1"}]
-    assert package["findings"] == [{"finding_id": "finding-1"}]
-    assert package["unresolved_issues"] == ["issue-1"]
-    assert package["analysis_lineage"] == [{"analysis_id": "analysis-1", "result_id": "result-1"}]
-    assert package["close_reason"] == "question exhausted"
-    assert package["final_assessment"] == "closed assessment"
+            self.assertEqual(len(packages), 1)
+            package = packages[0]
+            self.assertEqual(package["source_path"], str(package_path))
+            self.assertEqual(package["source_format"], JsonResearchPackageStore.FORMAT)
+            self.assertEqual(package["subject_id"], "equity:AMD")
+            self.assertEqual(package["campaign_id"], "campaign-test")
+            self.assertEqual(package["hypotheses"], ["ordinary hypothesis"])
+            self.assertEqual(package["predictive_hypotheses"], [{"hypothesis_id": "ph-1"}])
+            self.assertEqual(package["findings"], [{"finding_id": "finding-1"}])
+            self.assertEqual(package["unresolved_issues"], ["issue-1"])
+            self.assertEqual(
+                package["analysis_lineage"],
+                [{"analysis_id": "analysis-1", "result_id": "result-1"}],
+            )
+            self.assertEqual(package["close_reason"], "question exhausted")
+            self.assertEqual(package["final_assessment"], "closed assessment")
 
+    def test_prior_memory_documents_deduplicate_exact_copies_but_preserve_distinct_records(self) -> None:
+        with TemporaryDirectory() as directory:
+            tmp_path = Path(directory)
+            duplicate = {"version": 1, "finding": "same scientific memory"}
+            distinct = {"version": 2, "finding": "newer distinct scientific memory"}
+            paths = (
+                tmp_path / "mts-v4-a" / "cross_subject_memory.json",
+                tmp_path / "mts-v4-b" / "nested" / "cross_subject_memory.json",
+                tmp_path / "mts-v4-c" / "cross_subject_memory.json",
+            )
+            for path, document in zip(paths, (duplicate, duplicate, distinct), strict=True):
+                path.parent.mkdir(parents=True)
+                path.write_text(json.dumps(document), encoding="utf-8")
 
-def test_prior_memory_documents_deduplicate_exact_copies_but_preserve_distinct_records(
-    tmp_path: Path,
-) -> None:
-    duplicate = {"version": 1, "finding": "same scientific memory"}
-    distinct = {"version": 2, "finding": "newer distinct scientific memory"}
-    paths = (
-        tmp_path / "mts-v4-a" / "cross_subject_memory.json",
-        tmp_path / "mts-v4-b" / "nested" / "cross_subject_memory.json",
-        tmp_path / "mts-v4-c" / "cross_subject_memory.json",
-    )
-    for path, document in zip(paths, (duplicate, duplicate, distinct), strict=True):
-        path.parent.mkdir(parents=True)
-        path.write_text(json.dumps(document), encoding="utf-8")
+            documents = _prior_memory_documents(tmp_path)
 
-    documents = _prior_memory_documents(tmp_path)
-
-    assert len(documents) == 2
-    assert [item["document"] for item in documents] == [duplicate, distinct]
-    assert documents[0]["source_path"] == str(paths[0])
-    assert documents[1]["source_path"] == str(paths[2])
+            self.assertEqual(len(documents), 2)
+            self.assertEqual([item["document"] for item in documents], [duplicate, distinct])
+            self.assertEqual(documents[0]["source_path"], str(paths[0]))
+            self.assertEqual(documents[1]["source_path"], str(paths[2]))
