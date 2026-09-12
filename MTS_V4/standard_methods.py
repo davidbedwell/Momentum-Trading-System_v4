@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 import statistics
+from datetime import datetime
 from typing import Any, Mapping
 
 from .analysis import RegisteredAnalysisMethod
@@ -26,8 +27,18 @@ def _payload_rows(payload: object, input_name: str) -> tuple[Mapping[str, Any], 
 
 
 def _numeric(value: Any) -> float | None:
-    if isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(float(value)):
-        return float(value)
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        number = float(value)
+        return number if math.isfinite(number) else None
+    if isinstance(value, str):
+        text = value.strip()
+        if not text:
+            return None
+        try:
+            number = float(text.replace(",", ""))
+        except ValueError:
+            return None
+        return number if math.isfinite(number) else None
     return None
 
 
@@ -199,6 +210,110 @@ def threshold_event_indices(evidence_payloads: Mapping[str, object], parameters:
     return {"column": column, "operator": op, "threshold": threshold, "event_count": len(events), "events": events, **derived, "interpretation_boundary": "EVENT_SELECTION_EXACTLY_AS_RD_PARAMETERIZED"}
 
 
+def exact_value_filter(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
+    if len(evidence_payloads) != 1:
+        raise ValueError("analysis.dataset.filter_exact requires exactly one supplied dataset")
+    input_name = next(iter(evidence_payloads))
+    rows = _payload_rows(evidence_payloads[input_name], input_name)
+    conditions = parameters["conditions"]
+    if not isinstance(conditions, (list, tuple)) or not conditions:
+        raise ValueError("conditions must contain at least one RD-authored exact-match condition")
+    normalized: list[tuple[str, Any]] = []
+    for spec in conditions:
+        if not isinstance(spec, Mapping):
+            raise ValueError("each exact-match condition must be a mapping")
+        column = str(spec.get("column", "")).strip()
+        if not column or "value" not in spec:
+            raise ValueError("each exact-match condition requires nonblank column and explicit value")
+        normalized.append((column, spec["value"]))
+
+    filtered: list[Mapping[str, Any]] = []
+    for row_index, row in enumerate(rows):
+        if all(column in row and row[column] == value for column, value in normalized):
+            copied = dict(row)
+            copied["__observation_lineage"] = {
+                "input_name": input_name,
+                "input_row_start": row_index,
+                "input_row_end": row_index,
+                "input_row_anchor": row_index,
+                "semantics": "MECHANICAL_INPUT_ROW_LINEAGE_NOT_SCIENTIFIC_INTERPRETATION",
+            }
+            filtered.append(copied)
+    return {
+        "conditions": [{"column": column, "value": value} for column, value in normalized],
+        "input_row_count": len(rows),
+        "matched_row_count": len(filtered),
+        **_derived_dataset("filtered_dataset", filtered),
+        "interpretation_boundary": "EXACT_RD_AUTHORED_FILTER_ONLY_NO_CATEGORY_SELECTION_OR_INFERENCE",
+    }
+
+
+def datetime_component(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
+    if len(evidence_payloads) != 1:
+        raise ValueError("analysis.transform.datetime_component requires exactly one supplied dataset")
+    input_name = next(iter(evidence_payloads))
+    rows = _payload_rows(evidence_payloads[input_name], input_name)
+    column = str(parameters["column"])
+    output_name = str(parameters["output_name"]).strip()
+    component = str(parameters["component"]).upper()
+    if not output_name:
+        raise ValueError("output_name cannot be blank")
+    allowed = {"DATE", "YEAR", "MONTH", "DAY", "HOUR", "WEEKDAY"}
+    if component not in allowed:
+        raise ValueError(f"unsupported datetime component: {component!r}")
+
+    transformed: list[Mapping[str, Any]] = []
+    excluded_unparseable = 0
+    for row_index, row in enumerate(rows):
+        copied = dict(row)
+        raw = row.get(column)
+        parsed = None
+        if isinstance(raw, datetime):
+            parsed = raw
+        elif isinstance(raw, str) and raw.strip():
+            text = raw.strip()
+            if text.endswith("Z"):
+                text = text[:-1] + "+00:00"
+            try:
+                parsed = datetime.fromisoformat(text)
+            except ValueError:
+                parsed = None
+        if parsed is None:
+            value = None
+            excluded_unparseable += 1
+        elif component == "DATE":
+            value = parsed.date().isoformat()
+        elif component == "YEAR":
+            value = parsed.year
+        elif component == "MONTH":
+            value = parsed.month
+        elif component == "DAY":
+            value = parsed.day
+        elif component == "HOUR":
+            value = parsed.hour
+        else:
+            value = parsed.weekday()
+        copied[output_name] = value
+        copied["__observation_lineage"] = {
+            "input_name": input_name,
+            "input_row_start": row_index,
+            "input_row_end": row_index,
+            "input_row_anchor": row_index,
+            "semantics": "MECHANICAL_INPUT_ROW_LINEAGE_NOT_SCIENTIFIC_INTERPRETATION",
+        }
+        transformed.append(copied)
+    return {
+        "column": column,
+        "output_name": output_name,
+        "component": component,
+        "input_row_count": len(rows),
+        "excluded_unparseable": excluded_unparseable,
+        **_derived_dataset("datetime_component", transformed),
+        "temporal_semantics": "PARSES_REPRESENTED_ISO8601_VALUE_WITHOUT_TIMEZONE_CONVERSION",
+        "interpretation_boundary": "RD_SELECTS_TIME_FIELD_AND_COMPONENT_ANALYSIS_ONLY_TRANSFORMS",
+    }
+
+
 def forward_path_measurement(evidence_payloads: Mapping[str, object], parameters: Mapping[str, Any]) -> Mapping[str, Any]:
     rows = _rows(evidence_payloads)
     price_column = str(parameters["price_column"])
@@ -296,6 +411,35 @@ def compose_aligned_dataset(evidence_payloads: Mapping[str, object], parameters:
             for row_index, row in enumerate(rows):
                 current[row_index] = row
             alignment_metadata.append({"input_name": input_name, "key": {"mode": "ROW_POSITION"}})
+        elif mode == "PARENT_ROW_POSITION":
+            parent_input_name: str | None = None
+            for row in rows:
+                lineage = row.get("__observation_lineage")
+                if not isinstance(lineage, Mapping):
+                    raise ValueError(
+                        f"PARENT_ROW_POSITION alignment requires explicit observation lineage in input {input_name!r}"
+                    )
+                parent = str(lineage.get("input_name", "")).strip()
+                anchor = lineage.get("input_row_anchor")
+                if not parent or not isinstance(anchor, int):
+                    raise ValueError(
+                        f"PARENT_ROW_POSITION lineage is incomplete in input {input_name!r}"
+                    )
+                if parent_input_name is None:
+                    parent_input_name = parent
+                elif parent_input_name != parent:
+                    raise ValueError(
+                        f"PARENT_ROW_POSITION input {input_name!r} contains multiple parent identity spaces"
+                    )
+                if anchor in current:
+                    raise ValueError(
+                        f"parent row position {anchor!r} is duplicated in input {input_name!r}"
+                    )
+                current[anchor] = row
+            alignment_metadata.append({
+                "input_name": input_name,
+                "key": {"mode": "PARENT_ROW_POSITION", "parent_input_name": parent_input_name},
+            })
         elif mode == "COLUMN":
             column = str(key.get("column", "")).strip()
             if not column:
@@ -404,18 +548,38 @@ def classification_metrics(evidence_payloads: Mapping[str, object], parameters: 
 
 def standard_method_catalog() -> MethodCatalog:
     return MethodCatalog([
-        MethodSpec("analysis.descriptive.statistics", ("NORMALIZED_DATASET",), "Compute descriptive summaries for RD-selected columns.", (ParameterContract("columns", True, (list, tuple), minimum_length=1, meaning="RD-selected numeric columns"),), 1),
+        MethodSpec("analysis.descriptive.statistics", ("NORMALIZED_DATASET",), "Compute descriptive summaries for RD-selected columns, including mechanically parseable finite numeric strings.", (ParameterContract("columns", True, (list, tuple), minimum_length=1, meaning="RD-selected numeric columns"),), 1),
         MethodSpec("analysis.relationship.correlation", ("NORMALIZED_DATASET",), "Measure pairwise Pearson or Spearman association without causal interpretation.", (ParameterContract("columns", True, (list, tuple), exact_length=2, meaning="two RD-selected numeric columns"), ParameterContract("correlation_type", True, (str,), allowed_values=("pearson", "spearman"), meaning="statistic selected by RD")), 2),
         MethodSpec("analysis.transform.percent_change", ("NORMALIZED_DATASET",), "Compute backward-looking percent change for an RD-selected field and lag.", (ParameterContract("column", True, (str,), meaning="RD-selected numeric field"), ParameterContract("lag", True, (int,), minimum_value=1, meaning="RD-selected backward row lag")), 2, metadata={"temporal_semantics": "present/prior rows only", "reusable_derived_dataset": True}),
         MethodSpec("analysis.rolling.statistics", ("NORMALIZED_DATASET",), "Compute a rolling statistic using an RD-selected field, window, and statistic.", (ParameterContract("column", True, (str,), meaning="RD-selected numeric field"), ParameterContract("window", True, (int,), minimum_value=1, meaning="RD-selected window"), ParameterContract("statistic", True, (str,), allowed_values=("mean", "median", "stddev_sample", "minimum", "maximum"), meaning="RD-selected statistic")), 1, metadata={"reusable_derived_dataset": True}),
         MethodSpec("analysis.events.threshold", ("NORMALIZED_DATASET",), "Identify rows satisfying an RD-authored numeric threshold condition.", (ParameterContract("column", True, (str,), meaning="RD-selected field"), ParameterContract("operator", True, (str,), allowed_values=("GT", "GE", "LT", "LE"), meaning="RD-selected comparison"), ParameterContract("threshold", True, (int, float), meaning="RD-selected threshold")), 1, metadata={"reusable_derived_dataset": True}),
+        MethodSpec(
+            "analysis.dataset.filter_exact",
+            ("NORMALIZED_DATASET",),
+            "Return only rows matching every exact RD-authored categorical or scalar condition while preserving row content and mechanical parent-row lineage.",
+            (ParameterContract("conditions", True, (list, tuple), minimum_length=1, meaning="RD-authored exact conditions {column, value}; no category or value is inferred by Analysis"),),
+            1,
+            metadata={"reusable_derived_dataset": True, "derived_dataset_name": "filtered_dataset", "scientific_selection": "AI_RESEARCH_DIRECTOR_ONLY"},
+        ),
+        MethodSpec(
+            "analysis.transform.datetime_component",
+            ("NORMALIZED_DATASET",),
+            "Parse an RD-selected ISO-8601 date/time field and materialize an exact RD-selected calendar component without timezone conversion or calendar inference.",
+            (
+                ParameterContract("column", True, (str,), meaning="RD-selected source date/time field"),
+                ParameterContract("output_name", True, (str,), meaning="RD-authored output field name"),
+                ParameterContract("component", True, (str,), allowed_values=("DATE", "YEAR", "MONTH", "DAY", "HOUR", "WEEKDAY"), meaning="exact mechanical calendar component selected by RD"),
+            ),
+            1,
+            metadata={"reusable_derived_dataset": True, "derived_dataset_name": "datetime_component", "scientific_selection": "AI_RESEARCH_DIRECTOR_ONLY", "timezone_conversion": False},
+        ),
         MethodSpec("analysis.path.forward_measurement", ("NORMALIZED_DATASET",), "Exploration-only look-ahead path measurement over an RD-selected horizon and direction, returning exact aggregate statistics plus a campaign-local reusable derived observation dataset.", (ParameterContract("price_column", True, (str,), meaning="RD-selected price field"), ParameterContract("horizon", True, (int,), minimum_value=1, meaning="RD-selected forward rows"), ParameterContract("direction", True, (str,), allowed_values=("LONG", "SHORT"), meaning="RD-selected directional frame")), 2, True, False, True, {"scientific_selection": "none", "output_shape": "bounded RD transport plus temporary reusable derived dataset", "reusable_derived_dataset": True}),
         MethodSpec(
             "analysis.dataset.compose",
             ("NORMALIZED_DATASET",),
             "Mechanically align RD-selected columns from two or more supplied raw and/or derived row datasets by an explicit RD-selected observation key and return a temporary reusable composed dataset. No variables, keys, aliases, or scientific meaning are inferred.",
             (
-                ParameterContract("alignment", True, (list, tuple), minimum_length=2, meaning="RD-authored input alignment specifications: each entry is {input_name, key:{mode:'ROW_POSITION'}} or {input_name, key:{mode:'COLUMN', column:'field'}}"),
+                ParameterContract("alignment", True, (list, tuple), minimum_length=2, meaning="RD-authored input alignment specifications: key.mode is ROW_POSITION, PARENT_ROW_POSITION for mechanically proven lineage anchors, or COLUMN with an exact field"),
                 ParameterContract("selections", True, (list, tuple), minimum_length=1, meaning="RD-authored output columns: each entry is {input_name, column, output_name}; output_name is the exact scientific column name in the composed dataset; Analysis chooses a collision-safe internal alignment-key field mechanically"),
                 ParameterContract("join_type", True, (str,), allowed_values=("INNER",), meaning="RD-selected alignment join; currently available capability is exact INNER intersection only"),
             ),
@@ -426,10 +590,11 @@ def standard_method_catalog() -> MethodCatalog:
                 "derived_dataset_name": "composed_dataset",
                 "internal_alignment_key_name_is_mechanical": True,
                 "alignment_key_modes": {
-                    "ROW_POSITION": "logical key is the zero-based row position of that supplied dataset; useful when a derived dataset's explicit index refers to source row position",
+                    "ROW_POSITION": "logical key is the zero-based row position of that supplied dataset",
+                    "PARENT_ROW_POSITION": "logical key is the explicit input_row_anchor carried by deterministic __observation_lineage; Analysis rejects missing, mixed-parent, or duplicate lineage anchors",
                     "COLUMN": "logical key is the exact value in the RD-selected column",
                 },
-                "execution_semantics": "Only rows whose explicit logical keys exist in every aligned input are retained for INNER. Output row order preserves the first RD-authored alignment input order. Analysis does not infer time matching, nearest-neighbor matching, lagging, filling, interpolation, column choice, aliases, or scientific ordering. If an RD-selected output column is named alignment_key, Analysis moves its own internal alignment key to a collision-safe private field rather than rejecting the scientific output name.",
+                "execution_semantics": "Only rows whose explicit logical keys exist in every aligned input are retained for INNER. Output row order preserves the first RD-authored alignment input order. PARENT_ROW_POSITION exposes an already proven lineage identity and does not infer equality with scientific columns. Analysis does not infer time matching, nearest-neighbor matching, lagging, filling, interpolation, column choice, aliases, or scientific ordering. If an RD-selected output column is named alignment_key, Analysis moves its own internal alignment key to a collision-safe private field rather than rejecting the scientific output name.",
             },
         ),
         MethodSpec("analysis.performance.binary_classification", ("NORMALIZED_DATASET",), "Measure binary classification performance for RD-selected predicted/actual fields and positive label.", (ParameterContract("predicted_column", True, (str,), meaning="RD-selected prediction field"), ParameterContract("actual_column", True, (str,), meaning="RD-selected outcome field"), ParameterContract("positive_value", True, (str, int, float, bool), meaning="RD-selected positive label")), 1),
@@ -443,6 +608,8 @@ def standard_analysis_methods() -> tuple[RegisteredAnalysisMethod, ...]:
         ("analysis.transform.percent_change", percent_change_series),
         ("analysis.rolling.statistics", rolling_statistics),
         ("analysis.events.threshold", threshold_event_indices),
+        ("analysis.dataset.filter_exact", exact_value_filter),
+        ("analysis.transform.datetime_component", datetime_component),
         ("analysis.path.forward_measurement", forward_path_measurement),
         ("analysis.dataset.compose", compose_aligned_dataset),
         ("analysis.performance.binary_classification", classification_metrics),
