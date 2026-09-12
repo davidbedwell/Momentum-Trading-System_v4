@@ -12,7 +12,6 @@ from MTS_V4.batch_contracts import BatchExecutionReport
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
-from MTS_V4.cross_subject_memory_store import JsonCrossSubjectScientificMemoryStore
 from MTS_V4.intake import IntakeEngine
 from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
@@ -23,16 +22,9 @@ from MTS_V4.retrospective_recovery import (
 from MTS_V4.sol_spend_guard import (
     DEFAULT_AUTHORIZED_SOL_SPEND_USD,
     SolSpendAuthorizationRequired,
+    SolSpendAuthorizationSnapshot,
 )
-from scripts.run_sol_cross_subject_generalization import (
-    _discover_tickers,
-    _historical_subject_context,
-)
-from scripts.run_sol_retrospective_recovery import (
-    _append_jsonl,
-    _interactive_spend_authorization,
-    _required_env,
-)
+from MTS_V4.subject_scientific_context import load_subject_scientific_context
 
 
 SEQUENCE = ("AAPL", "MSFT", "XOM")
@@ -47,6 +39,47 @@ SEQUENTIAL_RETROSPECTIVE_MISSION = DEFAULT_MISSION + (
     "thresholds, normalizations, horizons, hypotheses, or generalizations. The AI Research Director retains authority to "
     "test, challenge, reformulate, condition, defer, ignore, or reject prior cross-subject ideas."
 )
+
+
+def _required_env(name: str) -> str:
+    value = os.getenv(name, "").strip()
+    if not value:
+        raise RuntimeError(f"required environment variable is not set: {name}")
+    return value
+
+
+def _append_jsonl(path: Path, payload: object) -> None:
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(payload, sort_keys=True, default=str, separators=(",", ":")) + "\n")
+
+
+def _format_money(value: float | None) -> str:
+    return "unknown" if value is None else f"${value:.2f}"
+
+
+def _interactive_spend_authorization(snapshot: SolSpendAuthorizationSnapshot) -> float | None:
+    print("\nHUMAN SOL SPEND AUTHORIZATION REQUIRED", flush=True)
+    print(f"AUTHORIZED={_format_money(snapshot.authorized_spend_usd)}", flush=True)
+    print(f"ACTUAL_SPEND={_format_money(snapshot.actual_spend_usd)}", flush=True)
+    print(f"SOL_CALLS_COMPLETED={snapshot.completed_sol_calls}", flush=True)
+    print(f"ESTIMATED_PERCENT_COMPLETE={snapshot.estimated_percent_complete}", flush=True)
+    print(f"ESTIMATED_REMAINING_BATCHES={snapshot.estimated_remaining_batches}", flush=True)
+    print(f"ESTIMATED_REMAINING_SOL_CALLS={snapshot.estimated_remaining_sol_calls}", flush=True)
+    try:
+        raw = input("Enter a new total Sol spend ceiling in USD, or press Enter to stop: ").strip()
+    except EOFError:
+        return None
+    if not raw:
+        return None
+    try:
+        value = float(raw)
+    except ValueError:
+        print("Authorization was not numeric; stopping.", flush=True)
+        return None
+    if value <= snapshot.authorized_spend_usd:
+        print("New authorization must exceed the current ceiling; stopping.", flush=True)
+        return None
+    return value
 
 
 def _parse_historical_overrides(values: Sequence[str]) -> dict[str, Path]:
@@ -66,12 +99,8 @@ def _parse_historical_overrides(values: Sequence[str]) -> dict[str, Path]:
 
 
 def _discover_historical_subject_candidates(root: Path, ticker: str) -> tuple[Path, ...]:
-    """Discover usable preserved subject directories without ranking competing histories."""
     candidates: set[Path] = set()
-    patterns = (
-        f"mts-v4-*/subjects/{ticker}",
-        f"mts-v4-*/{ticker}",
-    )
+    patterns = (f"mts-v4-*/subjects/{ticker}", f"mts-v4-*/{ticker}")
     for pattern in patterns:
         for path in root.glob(pattern):
             if not path.is_dir():
@@ -93,7 +122,6 @@ def _resolve_historical_subject_dir(
     if explicit is not None:
         load_retrospective_subject_context(explicit)
         return explicit
-
     candidates = _discover_historical_subject_candidates(root, ticker)
     if len(candidates) == 1:
         return candidates[0]
@@ -109,56 +137,14 @@ def _resolve_historical_subject_dir(
     )
 
 
-def _compact_prior_subject_science(root: Path, *, active_ticker: str) -> Mapping[str, object]:
-    """Expose prior durable scientific conclusions without raw rows or reusable Analysis payloads."""
-    tickers = tuple(ticker for ticker in _discover_tickers(root) if ticker != active_ticker)
-    historical = _historical_subject_context(root, tickers)
-    subjects: list[Mapping[str, object]] = []
-    for subject in historical.get("subjects", []):
-        if not isinstance(subject, Mapping):
-            continue
-        packages_out: list[Mapping[str, object]] = []
-        for package in subject.get("research_packages", []):
-            if not isinstance(package, Mapping):
-                continue
-            packages_out.append(
-                {
-                    "source_path": package.get("source_path"),
-                    "subject_id": package.get("subject_id"),
-                    "ticker": package.get("ticker"),
-                    "rp_id": package.get("rp_id"),
-                    "campaign_id": package.get("campaign_id"),
-                    "parent_rp_id": package.get("parent_rp_id"),
-                    "status": package.get("status"),
-                    "originating_question": package.get("originating_question"),
-                    "originating_rationale": package.get("originating_rationale"),
-                    "hypotheses": package.get("hypotheses", []),
-                    "predictive_hypotheses": package.get("predictive_hypotheses", []),
-                    "findings": package.get("findings", []),
-                    "unresolved_issues": package.get("unresolved_issues", []),
-                    "close_reason": package.get("close_reason"),
-                    "final_assessment": package.get("final_assessment"),
-                }
-            )
-        if packages_out:
-            subjects.append(
-                {
-                    "subject_id": subject.get("subject_id"),
-                    "ticker": subject.get("ticker"),
-                    "research_packages": packages_out,
-                }
-            )
-    return {
-        "policy": {
-            "authority": "EXACT_DURABLE_PRIOR_SUBJECT_SCIENCE",
-            "raw_rows_present": False,
-            "reusable_analysis_payloads_present": False,
-            "deterministic_scientific_ranking": False,
-            "mandatory_research_agenda": False,
-            "rd_may_test_challenge_reformulate_condition_defer_or_ignore": True,
-        },
-        "subjects": subjects,
-    }
+def _prior_package_count(context: object) -> int:
+    if not isinstance(context, Mapping):
+        return 0
+    return sum(
+        len(subject.get("research_packages", []))
+        for subject in context.get("subjects", [])
+        if isinstance(subject, Mapping)
+    )
 
 
 def _run_subject(
@@ -168,41 +154,33 @@ def _run_subject(
     historical_dir: Path,
     state_dir: Path,
     spend_limit_usd: float,
-    memory_selection,
     dry_run: bool,
 ) -> Mapping[str, object]:
+    subject_id = f"equity:{ticker}"
     retrospective_context = load_retrospective_subject_context(historical_dir)
-    prior_subject_science = _compact_prior_subject_science(root, active_ticker=ticker)
-    retrospective_context["prior_subject_scientific_context"] = prior_subject_science
+    scientific_context = load_subject_scientific_context(root, active_subject_id=subject_id)
+    retrospective_context["prior_subject_scientific_context"] = scientific_context.prior_subject_science
     retrospective_context["cross_subject_memory_provenance"] = {
-        "source_path": str(memory_selection.source_path),
-        "superseded_paths": [str(path) for path in memory_selection.superseded_paths],
+        "source_path": str(scientific_context.memory_selection.source_path),
+        "superseded_paths": [str(path) for path in scientific_context.memory_selection.superseded_paths],
         "frontier_version": (
-            memory_selection.store.frontier().version
-            if memory_selection.store.frontier() is not None
+            scientific_context.memory_selection.store.frontier().version
+            if scientific_context.memory_selection.store.frontier() is not None
             else 0
         ),
-        "record_count": len(memory_selection.store.records()),
+        "record_count": len(scientific_context.memory_selection.store.records()),
     }
-
-    prior_package_count = sum(
-        len(subject.get("research_packages", []))
-        for subject in prior_subject_science.get("subjects", [])
-        if isinstance(subject, Mapping)
-    )
+    prior_package_count = _prior_package_count(scientific_context.prior_subject_science)
 
     if dry_run:
+        frontier = scientific_context.memory_selection.store.frontier()
         return {
             "ticker": ticker,
             "historical_subject_dir": str(historical_dir),
             "state_dir": str(state_dir),
-            "canonical_memory_source": str(memory_selection.source_path),
-            "canonical_memory_records": len(memory_selection.store.records()),
-            "canonical_memory_frontier_version": (
-                memory_selection.store.frontier().version
-                if memory_selection.store.frontier() is not None
-                else 0
-            ),
+            "canonical_memory_source": str(scientific_context.memory_selection.source_path),
+            "canonical_memory_records": len(scientific_context.memory_selection.store.records()),
+            "canonical_memory_frontier_version": frontier.version if frontier is not None else 0,
             "prior_subject_scientific_packages": prior_package_count,
             "closed": None,
             "dry_run": True,
@@ -212,7 +190,7 @@ def _run_subject(
     telemetry_path = state_dir / "sol_transport_telemetry.jsonl"
     os.environ["MTS_SOL_TELEMETRY_PATH"] = str(telemetry_path)
 
-    subject = SubjectMetadata(subject_id=f"equity:{ticker}", ticker=ticker)
+    subject = SubjectMetadata(subject_id=subject_id, ticker=ticker)
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
     rd = SolRetrospectiveRecoveryResearchDirector(
@@ -231,12 +209,9 @@ def _run_subject(
         rd=rd,
         mission=SEQUENTIAL_RETROSPECTIVE_MISSION,
         nexus_path=state_dir / "research_nexus.json",
-        scientific_memory=memory_selection.store,
+        scientific_memory=scientific_context.memory_selection.store,
     )
-    evidence = IntakeEngine(runtime.cache).ingest(
-        subject=subject,
-        source=standard_live_market_source(),
-    )
+    evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=standard_live_market_source())
     campaign_id = state_dir.name
 
     (state_dir / "retrospective_context.json").write_text(
@@ -249,11 +224,7 @@ def _run_subject(
     latest_report: BatchExecutionReport | None = None
 
     def accepted(request):
-        recorder.record_accepted_request(
-            campaign_id=campaign_id,
-            subject=subject,
-            request=request,
-        )
+        recorder.record_accepted_request(campaign_id=campaign_id, subject=subject, request=request)
 
     def on_report(report, decisions, analyses):
         nonlocal latest_report
@@ -270,15 +241,8 @@ def _run_subject(
         )
 
     def on_decision(decision, decisions, analyses):
-        recorder.record_plan(
-            campaign_id=campaign_id,
-            subject=subject,
-            decision=decision,
-        )
-        recorder.record_predictive_hypothesis_updates(
-            decision,
-            current_report=latest_report,
-        )
+        recorder.record_plan(campaign_id=campaign_id, subject=subject, decision=decision)
+        recorder.record_predictive_hypothesis_updates(decision, current_report=latest_report)
         recorder.record_closures(decision)
         _append_jsonl(
             decision_path,
@@ -300,10 +264,7 @@ def _run_subject(
         )
     except SolSpendAuthorizationRequired as exc:
         artifact = state_dir / "sol_spend_authorization_required.json"
-        artifact.write_text(
-            json.dumps(asdict(exc.snapshot), sort_keys=True, indent=2) + "\n",
-            encoding="utf-8",
-        )
+        artifact.write_text(json.dumps(asdict(exc.snapshot), sort_keys=True, indent=2) + "\n", encoding="utf-8")
         return {
             "ticker": ticker,
             "state_dir": str(state_dir),
@@ -313,6 +274,7 @@ def _run_subject(
         }
 
     spend = rd.sol_spend_snapshot()
+    frontier = scientific_context.memory_selection.store.frontier()
     summary = {
         "campaign_id": campaign_id,
         "subject_id": subject.subject_id,
@@ -320,13 +282,10 @@ def _run_subject(
         "historical_exposure_status": "EXPOSED",
         "research_phase": "EXPLORATION",
         "blind_validation_claim_allowed": False,
-        "canonical_cross_subject_memory_source": str(memory_selection.source_path),
-        "canonical_cross_subject_memory_record_count": len(memory_selection.store.records()),
-        "canonical_cross_subject_frontier_version": (
-            memory_selection.store.frontier().version
-            if memory_selection.store.frontier() is not None
-            else 0
-        ),
+        "cross_subject_context_automatic": True,
+        "canonical_cross_subject_memory_source": str(scientific_context.memory_selection.source_path),
+        "canonical_cross_subject_memory_record_count": len(scientific_context.memory_selection.store.records()),
+        "canonical_cross_subject_frontier_version": frontier.version if frontier is not None else 0,
         "prior_subject_scientific_packages_exposed": prior_package_count,
         "decisions": outcome.decisions,
         "batches_executed": outcome.batches_executed,
@@ -348,8 +307,7 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "Run AAPL, then MSFT, then XOM retrospective recovery sequentially. The next subject starts only after "
-            "the prior subject closes. Canonical cross-subject memory/frontier and prior durable subject science are "
-            "exposed to Sol as nonbinding discovery context."
+            "the prior subject closes. Permanent subject-level cross-subject scientific context is loaded for each run."
         )
     )
     parser.add_argument("--root", default="/home/ubuntu")
@@ -381,17 +339,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         for ticker in SEQUENCE
     }
 
-    memory_selection = JsonCrossSubjectScientificMemoryStore.discover_current(root)
-    if memory_selection is None:
-        raise RuntimeError("no canonical cross-subject scientific memory snapshot is available")
-
+    initial_context = load_subject_scientific_context(root, active_subject_id="equity:AAPL")
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     results: list[Mapping[str, object]] = []
 
     print("SEQUENCE=" + ",".join(SEQUENCE), flush=True)
-    print(f"CANONICAL_MEMORY_SOURCE={memory_selection.source_path}", flush=True)
-    print(f"CANONICAL_MEMORY_RECORDS={len(memory_selection.store.records())}", flush=True)
-    frontier = memory_selection.store.frontier()
+    print(f"CANONICAL_MEMORY_SOURCE={initial_context.memory_selection.source_path}", flush=True)
+    print(f"CANONICAL_MEMORY_RECORDS={len(initial_context.memory_selection.store.records())}", flush=True)
+    frontier = initial_context.memory_selection.store.frontier()
     print(f"CANONICAL_MEMORY_FRONTIER_VERSION={frontier.version if frontier is not None else 0}", flush=True)
     for ticker in SEQUENCE:
         print(f"HISTORICAL_{ticker}_DIR={historical_dirs[ticker]}", flush=True)
@@ -404,47 +359,42 @@ def main(argv: Sequence[str] | None = None) -> int:
             historical_dir=historical_dirs[ticker],
             state_dir=state_dir,
             spend_limit_usd=args.sol_spend_limit_usd,
-            memory_selection=memory_selection,
             dry_run=args.dry_run,
         )
         results.append(result)
-        print(f"{ticker}_STATE_DIR={state_dir}", flush=True)
-        print(f"{ticker}_PRIOR_SUBJECT_SCIENTIFIC_PACKAGES={result.get('prior_subject_scientific_packages') or result.get('prior_subject_scientific_packages_exposed', 0)}", flush=True)
+        print(f"{ticker}_STATE_DIR={result['state_dir']}", flush=True)
+        print(
+            f"{ticker}_PRIOR_SUBJECT_SCIENTIFIC_PACKAGES="
+            f"{result.get('prior_subject_scientific_packages', result.get('prior_subject_scientific_packages_exposed', 0))}",
+            flush=True,
+        )
         if args.dry_run:
             continue
         print(f"{ticker}_CLOSED={result.get('closed')}", flush=True)
         if result.get("authorization_required"):
-            print(f"{ticker}_HUMAN_SOL_SPEND_AUTHORIZATION_REQUIRED=True", flush=True)
+            print(f"{ticker}_AUTHORIZATION_REQUIRED=True", flush=True)
             print(f"{ticker}_AUTHORIZATION_ARTIFACT={result.get('authorization_artifact')}", flush=True)
-            print("SEQUENCE_HALTED=True", flush=True)
             return 2
         if result.get("closed") is not True:
-            print(
-                f"SEQUENCE_HALTED=True: {ticker} did not close, so the next subject will not start.",
-                flush=True,
-            )
+            print(f"SEQUENCE_STOPPED_AFTER={ticker}", flush=True)
+            print("REASON=PRIOR_SUBJECT_DID_NOT_CLOSE", flush=True)
             return 3
 
-    manifest = root / f"MTS_V4_AAPL_MSFT_XOM_SEQUENTIAL_RERUN_{stamp}.json"
-    manifest.write_text(
-        json.dumps(
-            {
-                "sequence": SEQUENCE,
-                "dry_run": args.dry_run,
-                "canonical_memory_source": str(memory_selection.source_path),
-                "canonical_memory_superseded_paths": [
-                    str(path) for path in memory_selection.superseded_paths
-                ],
-                "results": results,
-            },
-            indent=2,
-            sort_keys=True,
-            default=str,
-        ) + "\n",
-        encoding="utf-8",
-    )
-    print(f"SEQUENCE_COMPLETE={not args.dry_run}", flush=True)
-    print(f"MANIFEST={manifest}", flush=True)
+    summary = {
+        "sequence": list(SEQUENCE),
+        "dry_run": args.dry_run,
+        "cross_subject_context_automatic": True,
+        "canonical_memory_source_at_start": str(initial_context.memory_selection.source_path),
+        "subjects": results,
+    }
+    summary_path = root / f"MTS_V4_SEQUENTIAL_RERUN_SUMMARY_{stamp}.json"
+    summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")
+    print(f"SEQUENCE_SUMMARY={summary_path}", flush=True)
+    if args.dry_run:
+        print("DRY_RUN=True", flush=True)
+        print("SOL_CALLS=0", flush=True)
+    else:
+        print("SEQUENCE_COMPLETE=True", flush=True)
     return 0
 
 
