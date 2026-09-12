@@ -50,6 +50,13 @@ class UnboundedBatchPolicyTests(unittest.TestCase):
             "rp_closures": [],
             "promote_findings": [],
             "research_state": {},
+            "research_progress": {
+                "estimated_percent_complete": 25,
+                "estimated_remaining_batches": 3,
+                "estimated_remaining_sol_calls": 3,
+                "estimate_confidence": "medium",
+                "estimate_rationale": "Several independent scientific lines remain unresolved.",
+            },
             "batch_interpretation": None,
             "close_reason": None,
         }
@@ -90,6 +97,25 @@ class UnboundedBatchPolicyTests(unittest.TestCase):
             [record["rp_id"] for record in records],
             [f"rp:{index}" for index in range(count)],
         )
+
+    def test_sol_prompt_has_no_preferred_rp_count_and_requires_progress_estimate(self):
+        messages = SolBatchResearchDirector._batch_messages(
+            operation="BEGIN_BATCH_RESEARCH",
+            mission="test mission",
+            payload={},
+        )
+        system = messages[0]["content"]
+        user = json.loads(messages[1]["content"])
+        instructions = "\n".join(user["instructions"])
+        schema = user["required_batch_decision_schema"]
+
+        self.assertIn("as many Research Packages as you judge scientifically relevant", system)
+        self.assertIn("Zero, one, or many Research Packages", system)
+        self.assertNotIn("Create several Research Packages", system)
+        self.assertIn("do not target any preferred RP count", instructions)
+        self.assertIn("research_progress", schema)
+        self.assertIn("estimated_percent_complete", schema["research_progress"])
+        self.assertIn("estimated_remaining_sol_calls", schema["research_progress"])
 
 
 if __name__ == "__main__":
