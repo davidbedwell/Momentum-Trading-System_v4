@@ -11,6 +11,8 @@ from MTS_V4.cross_subject_generalization import (
     SolCrossSubjectGeneralizationResearchDirector,
     generalization_evidence_view,
 )
+from MTS_V4.cross_subject_memory import ResearchFrontierState, ScientificMemoryRecord
+from MTS_V4.cross_subject_memory_store import JsonCrossSubjectScientificMemoryStore
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from scripts.run_sol_cross_subject_generalization import (
     _historical_subject_context,
@@ -127,23 +129,47 @@ class CrossSubjectCorpusScannerRegressionTests(unittest.TestCase):
             self.assertEqual(package["close_reason"], "question exhausted")
             self.assertEqual(package["final_assessment"], "closed assessment")
 
-    def test_prior_memory_documents_deduplicate_exact_copies_but_preserve_distinct_records(self) -> None:
+    def test_prior_memory_documents_uses_unique_current_accumulated_snapshot(self) -> None:
         with TemporaryDirectory() as directory:
             tmp_path = Path(directory)
-            duplicate = {"version": 1, "finding": "same scientific memory"}
-            distinct = {"version": 2, "finding": "newer distinct scientific memory"}
-            paths = (
-                tmp_path / "mts-v4-a" / "cross_subject_memory.json",
-                tmp_path / "mts-v4-b" / "nested" / "cross_subject_memory.json",
-                tmp_path / "mts-v4-c" / "cross_subject_memory.json",
+            older_path = tmp_path / "mts-v4-a" / "cross_subject_memory.json"
+            newer_path = tmp_path / "mts-v4-b" / "nested" / "cross_subject_memory.json"
+
+            shared = ScientificMemoryRecord(
+                record_id="xsm:shared:v1",
+                subject_id="equity:AAPL",
+                kind="TEST",
+                summary="shared scientific memory",
             )
-            for path, document in zip(paths, (duplicate, duplicate, distinct), strict=True):
-                path.parent.mkdir(parents=True)
-                path.write_text(json.dumps(document), encoding="utf-8")
+            added = ScientificMemoryRecord(
+                record_id="xsm:added:v1",
+                subject_id="equity:MSFT",
+                kind="TEST",
+                summary="newer accumulated scientific memory",
+            )
+
+            older = JsonCrossSubjectScientificMemoryStore(older_path)
+            older.publish(shared)
+            newer = JsonCrossSubjectScientificMemoryStore(newer_path)
+            newer.publish_batch((shared, added))
+            newer.set_frontier(
+                ResearchFrontierState(
+                    version=2,
+                    summary="current accumulated frontier",
+                    source_record_ids=(shared.record_id, added.record_id),
+                )
+            )
 
             documents = _prior_memory_documents(tmp_path)
 
-            self.assertEqual(len(documents), 2)
-            self.assertEqual([item["document"] for item in documents], [duplicate, distinct])
-            self.assertEqual(documents[0]["source_path"], str(paths[0]))
-            self.assertEqual(documents[1]["source_path"], str(paths[2]))
+            self.assertEqual(len(documents), 1)
+            self.assertEqual(documents[0]["source_path"], str(newer_path))
+            self.assertEqual(documents[0]["superseded_source_paths"], [str(older_path)])
+            self.assertEqual(
+                {item["record_id"] for item in documents[0]["document"]["records"]},
+                {shared.record_id, added.record_id},
+            )
+
+
+if __name__ == "__main__":
+    unittest.main()
