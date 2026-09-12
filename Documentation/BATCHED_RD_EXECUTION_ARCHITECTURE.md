@@ -37,6 +37,16 @@ A genuine scientific dependency may create a decision boundary. Sol should not p
 
 There is no architectural target for the number of Research Packages or Analysis Specifications in a batch. Zero, one, or many may be scientifically appropriate. The number is a Sol scientific judgment constrained only by available evidence, executable capability, genuine scientific dependencies, and objective execution safety—not by a deterministic quota or preferred batch size.
 
+## Human Operational Safety Boundary
+
+A human may explicitly impose an operational safety ceiling for a run. This is separate from scientific authority and is disabled unless a human supplies it.
+
+A human safety ceiling may not be used as a hidden or default scientific batch-size limit. If execution of the entire Sol-authored batch would exceed the human-authorized ceiling, the runtime must stop before any Analysis Specification in that pending batch executes and report that human authorization is required. The runtime may not partially execute the batch, rank Analysis Specifications, select which RPs fit under the ceiling, or mark the remainder as scientifically unnecessary.
+
+The pending Sol-authored batch remains the scientific unit. Human authorization may increase or remove the operational ceiling and permit that complete batch to execute. This control exists for cost/operational governance only; it does not express a scientific preference about how many RPs or analyses Sol should author.
+
+Provider-enforced transport constraints such as actual context-window, output-size, or rate-limit boundaries are also mechanical constraints rather than scientific judgments. Any transport adaptation must preserve complete scientific representation and must not rank or suppress results based on deterministic estimates of importance.
+
 ## Scientific Authority
 
 The AI Research Director owns:
