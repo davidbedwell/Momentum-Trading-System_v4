@@ -3,13 +3,15 @@ from __future__ import annotations
 from dataclasses import dataclass
 import json
 from pathlib import Path
-from typing import Mapping
+from typing import Any, Mapping, Sequence
 
+from .contracts import EvidenceDescriptor, SubjectMetadata
 from .cross_subject_memory_store import (
     CrossSubjectMemorySnapshotSelection,
     JsonCrossSubjectScientificMemoryStore,
 )
 from .research_package_store import JsonResearchPackageStore
+from .sol_batch_provider import SolBatchResearchDirector
 
 
 @dataclass(frozen=True, slots=True)
@@ -25,6 +27,36 @@ class SubjectScientificContextBundle:
     active_subject_id: str
     memory_selection: CrossSubjectMemorySnapshotSelection
     prior_subject_science: Mapping[str, object]
+
+
+class SubjectContextSolBatchResearchDirector(SolBatchResearchDirector):
+    """Sol batch RD with permanent prior-subject scientific context injection."""
+
+    def __init__(
+        self,
+        *args,
+        prior_subject_scientific_context: Mapping[str, object],
+        **kwargs,
+    ) -> None:
+        super().__init__(*args, **kwargs)
+        self._prior_subject_scientific_context = dict(prior_subject_scientific_context)
+
+    def _batch_common_payload(
+        self,
+        *,
+        subject: SubjectMetadata,
+        evidence: Sequence[EvidenceDescriptor],
+        available_methods: Sequence[Mapping[str, Any]],
+        nexus_context: Mapping[str, object],
+    ) -> dict[str, object]:
+        payload = super()._batch_common_payload(
+            subject=subject,
+            evidence=evidence,
+            available_methods=available_methods,
+            nexus_context=nexus_context,
+        )
+        payload["prior_subject_scientific_context"] = self._prior_subject_scientific_context
+        return payload
 
 
 def _subject_id_from_package(document: Mapping[str, object]) -> str | None:
