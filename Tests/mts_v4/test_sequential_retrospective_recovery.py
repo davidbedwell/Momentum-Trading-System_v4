@@ -24,6 +24,12 @@ class SequentialRetrospectiveRecoveryTests(unittest.TestCase):
     def test_sequence_is_aapl_then_msft_then_xom(self) -> None:
         self.assertEqual(SEQUENCE, ("AAPL", "MSFT", "XOM"))
 
+    def test_missing_historical_subject_resolves_to_fresh_subject_mode(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.assertEqual(_discover_historical_subject_candidates(root, "AAPL"), ())
+            self.assertIsNone(_resolve_historical_subject_dir(root, "AAPL", {}))
+
     def test_historical_candidate_discovery_does_not_rank_multiple_histories(self) -> None:
         with TemporaryDirectory() as directory:
             root = Path(directory)
