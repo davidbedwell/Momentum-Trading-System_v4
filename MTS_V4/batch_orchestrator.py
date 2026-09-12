@@ -26,24 +26,6 @@ class BatchResearchLoopError(RuntimeError):
     pass
 
 
-@dataclass(frozen=True, slots=True)
-class HumanSafetyBudget:
-    """Optional human-owned operational ceiling; never a scientific batch quota.
-
-    When supplied, the ceiling is checked atomically before a Sol-authored batch
-    begins execution. If the complete batch would cross the authorized ceiling,
-    none of that batch executes and human authorization is required. The runtime
-    never truncates, ranks, or partially executes a scientific batch to satisfy
-    this control.
-    """
-
-    max_analysis_executions: int
-
-    def __post_init__(self) -> None:
-        if self.max_analysis_executions <= 0:
-            raise ValueError("human safety max_analysis_executions must be positive")
-
-
 class BatchResearchDirectorProvider(Protocol):
     def begin_batch_research(
         self,
@@ -83,9 +65,6 @@ class BatchResearchLoopOutcome:
     close_reason: str | None
     final_decision: BatchResearchDecision
     last_report: BatchExecutionReport | None = None
-    human_authorization_required: bool = False
-    pending_batch_analysis_count: int | None = None
-    human_safety_limit: int | None = None
 
 
 class BatchResearchLoopOrchestrator:
@@ -96,9 +75,9 @@ class BatchResearchLoopOrchestrator:
     or scientific dependencies. Independent branches continue after branch-local
     objective defects so the RD receives one consolidated report.
 
-    There is no deterministic scientific batch-size limit. An optional explicitly
-    human-authored operational safety budget may stop the run before an entire
-    batch begins, but it may never truncate or selectively execute that batch.
+    There is no deterministic scientific batch-size or analysis-count limit. Human
+    Sol spending authorization is enforced at the premium-model transport boundary,
+    where it cannot truncate, rank, or selectively execute a scientific batch.
     """
 
     def __init__(
@@ -129,7 +108,6 @@ class BatchResearchLoopOrchestrator:
         *,
         subject: SubjectMetadata,
         evidence: Sequence[EvidenceDescriptor],
-        human_safety_budget: HumanSafetyBudget | None = None,
         decision_callback: BatchDecisionCallback | None = None,
         report_callback: BatchReportCallback | None = None,
         accepted_request_callback: AcceptedRequestCallback | None = None,
@@ -165,25 +143,6 @@ class BatchResearchLoopOrchestrator:
 
         while decision.continue_research:
             specifications = self._flatten_and_validate_decision(decision, subject)
-
-            if (
-                human_safety_budget is not None
-                and analyses + len(specifications) > human_safety_budget.max_analysis_executions
-            ):
-                return BatchResearchLoopOutcome(
-                    decisions=decisions,
-                    batches_executed=batches,
-                    analyses_executed=analyses,
-                    findings_promoted=promoted,
-                    closed=False,
-                    close_reason="HUMAN_SAFETY_AUTHORIZATION_REQUIRED",
-                    final_decision=decision,
-                    last_report=last_report,
-                    human_authorization_required=True,
-                    pending_batch_analysis_count=len(specifications),
-                    human_safety_limit=human_safety_budget.max_analysis_executions,
-                )
-
             try:
                 ordered = topological_analysis_order(specifications)
             except BatchCompilationError as exc:
