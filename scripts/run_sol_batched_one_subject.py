@@ -97,6 +97,14 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--root", default="/home/ubuntu")
     parser.add_argument("--state-dir", default=None)
     parser.add_argument(
+        "--revisit",
+        action="store_true",
+        help=(
+            "explicitly revisit a previously researched ticker and expose its compact durable "
+            "same-subject science to Sol as nonbinding historical context"
+        ),
+    )
+    parser.add_argument(
         "--sol-spend-limit-usd",
         type=float,
         default=DEFAULT_AUTHORIZED_SOL_SPEND_USD,
@@ -124,12 +132,22 @@ def main(argv: list[str] | None = None) -> int:
 
     root = Path(args.root).expanduser().resolve()
     subject = SubjectMetadata(subject_id=f"equity:{ticker}", ticker=ticker)
-    scientific_context = load_subject_scientific_context(root, active_subject_id=subject.subject_id)
+    scientific_context = load_subject_scientific_context(
+        root,
+        active_subject_id=subject.subject_id,
+        include_same_subject_prior_science=args.revisit,
+    )
     prior_package_count = sum(
         len(item.get("research_packages", []))
         for item in scientific_context.prior_subject_science.get("subjects", [])
         if isinstance(item, dict)
     )
+    same_subject_package_count = len(
+        scientific_context.same_subject_prior_science.get("research_packages", [])
+    ) if scientific_context.same_subject_prior_science is not None else 0
+    same_subject_nexus_finding_count = len(
+        scientific_context.same_subject_prior_science.get("nexus_only_findings", [])
+    ) if scientific_context.same_subject_prior_science is not None else 0
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     state_dir = Path(args.state_dir or f"/home/ubuntu/mts-v4-sol-batched-{ticker.lower()}-{stamp}")
@@ -143,6 +161,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"CANONICAL_MEMORY_RECORDS={len(scientific_context.memory_selection.store.records())}")
         print(f"CANONICAL_MEMORY_FRONTIER_VERSION={frontier.version if frontier is not None else 0}")
         print(f"PRIOR_SUBJECT_SCIENTIFIC_PACKAGES={prior_package_count}")
+        print(f"REVISIT_MODE={args.revisit}")
+        print(f"SAME_SUBJECT_SCIENTIFIC_PACKAGES={same_subject_package_count}")
+        print(f"SAME_SUBJECT_NEXUS_ONLY_FINDINGS={same_subject_nexus_finding_count}")
         print("CROSS_SUBJECT_CONTEXT_AUTOMATIC=True")
         print("SOL_CALLS=0")
         return 0
@@ -157,6 +178,7 @@ def main(argv: list[str] | None = None) -> int:
     rd = SubjectContextSolBatchResearchDirector(
         research_package_store=package_store,
         prior_subject_scientific_context=scientific_context.prior_subject_science,
+        same_subject_prior_scientific_context=scientific_context.same_subject_prior_science,
         base_url=_required_env("MTS_SOL_BASE_URL"),
         model=_required_env("MTS_SOL_MODEL"),
         api_key=_required_env("MTS_SOL_API_KEY"),
@@ -189,6 +211,8 @@ def main(argv: list[str] | None = None) -> int:
                 "canonical_memory_frontier_version": frontier.version if frontier is not None else 0,
                 "canonical_memory_record_count": len(scientific_context.memory_selection.store.records()),
                 "prior_subject_scientific_context": scientific_context.prior_subject_science,
+                "revisit_mode": args.revisit,
+                "same_subject_prior_science": scientific_context.same_subject_prior_science,
             },
             sort_keys=True,
             indent=2,
@@ -271,6 +295,9 @@ def main(argv: list[str] | None = None) -> int:
         "canonical_cross_subject_memory_record_count": len(scientific_context.memory_selection.store.records()),
         "canonical_cross_subject_frontier_version": frontier.version if frontier is not None else 0,
         "prior_subject_scientific_packages_exposed": prior_package_count,
+        "revisit_mode": args.revisit,
+        "same_subject_scientific_packages_exposed": same_subject_package_count,
+        "same_subject_nexus_only_findings_exposed": same_subject_nexus_finding_count,
         "decisions": outcome.decisions,
         "batches_executed": outcome.batches_executed,
         "analyses_executed": outcome.analyses_executed,
@@ -289,6 +316,9 @@ def main(argv: list[str] | None = None) -> int:
     print(f"SUBJECT={subject.subject_id}", flush=True)
     print("CROSS_SUBJECT_CONTEXT_AUTOMATIC=True", flush=True)
     print(f"PRIOR_SUBJECT_SCIENTIFIC_PACKAGES={prior_package_count}", flush=True)
+    print(f"REVISIT_MODE={args.revisit}", flush=True)
+    print(f"SAME_SUBJECT_SCIENTIFIC_PACKAGES={same_subject_package_count}", flush=True)
+    print(f"SAME_SUBJECT_NEXUS_ONLY_FINDINGS={same_subject_nexus_finding_count}", flush=True)
     print(f"DECISIONS={outcome.decisions}", flush=True)
     print(f"BATCHES={outcome.batches_executed}", flush=True)
     print(f"ANALYSES={outcome.analyses_executed}", flush=True)
