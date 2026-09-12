@@ -10,13 +10,13 @@ from MTS_V4.sol_spend_guard import (
 
 
 class SolSpendGuardTests(unittest.TestCase):
-    def test_usage_cost_uses_sol_token_rates(self):
+    def test_usage_cost_uses_sol_long_context_rates_when_prompt_exceeds_threshold(self):
         usage = {
             "prompt_tokens": 1_000_000,
             "completion_tokens": 1_000_000,
             "prompt_tokens_details": {"cached_tokens": 0},
         }
-        self.assertAlmostEqual(SolSpendGuard.estimate_usage_cost_usd(usage), 36.0, places=6)
+        self.assertAlmostEqual(SolSpendGuard.estimate_usage_cost_usd(usage), 38.0, places=6)
 
     def test_cached_input_is_discounted(self):
         usage = {
