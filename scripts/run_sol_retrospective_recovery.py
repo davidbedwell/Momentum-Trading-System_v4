@@ -23,6 +23,7 @@ from MTS_V4.sol_spend_guard import (
     SolSpendAuthorizationRequired,
     SolSpendAuthorizationSnapshot,
 )
+from MTS_V4.subject_scientific_context import load_subject_scientific_context
 
 
 RETROSPECTIVE_MISSION = DEFAULT_MISSION + (
@@ -30,7 +31,11 @@ RETROSPECTIVE_MISSION = DEFAULT_MISSION + (
     "All preserved historical subject work is exposed exploratory evidence. Reassess it under the corrected batched "
     "Research Director model, run additional EXPLORATION analyses when scientifically warranted, and continue until "
     "the subject is scientifically resolved enough to close or to freeze a tentative predictive hypothesis. Exposed "
-    "history must never be counted as blind validation."
+    "history must never be counted as blind validation. The AI Research Director also receives the canonical RD-authored "
+    "cross-subject scientific memory/frontier and compact durable scientific outputs from other subjects. Use those as "
+    "nonbinding scientific context: actively consider transferability, contradictions, conditional structure, and "
+    "falsifiable generalization pathways when useful, but do not assume any prior relationship generalizes. Deterministic "
+    "code does not choose variables, methods, thresholds, normalizations, horizons, hypotheses, or generalizations."
 )
 
 
@@ -95,11 +100,22 @@ def _interactive_spend_authorization(snapshot: SolSpendAuthorizationSnapshot) ->
     return value
 
 
+def _prior_package_count(context: object) -> int:
+    if not isinstance(context, dict):
+        return 0
+    return sum(
+        len(subject.get("research_packages", []))
+        for subject in context.get("subjects", [])
+        if isinstance(subject, dict)
+    )
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "Recover one previously exposed MTS v4 subject under the corrected batched Sol/Analysis lifecycle. "
-            "Historical work is context only; all new work remains EXPLORATION until a hypothesis is frozen."
+            "Historical work is context only; all new work remains EXPLORATION until a hypothesis is frozen. "
+            "Canonical cross-subject scientific memory/frontier and prior durable subject science are exposed to Sol."
         )
     )
     parser.add_argument("--ticker", required=True, help="equity ticker, e.g. AMZN")
@@ -107,6 +123,11 @@ def _parser() -> argparse.ArgumentParser:
         "--historical-subject-dir",
         required=True,
         help="preserved subject directory containing old decisions/Nexus/RP state",
+    )
+    parser.add_argument(
+        "--root",
+        default="/home/ubuntu",
+        help="root containing durable MTS v4 scientific artifacts and canonical cross-subject memory",
     )
     parser.add_argument("--state-dir", default=None)
     parser.add_argument(
@@ -118,7 +139,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="validate historical context and CLI shape without Intake, Analysis, or Sol calls",
+        help="validate historical and cross-subject context without Intake, Analysis, or Sol calls",
     )
     return parser
 
@@ -131,8 +152,25 @@ def main(argv: list[str] | None = None) -> int:
     if args.sol_spend_limit_usd <= 0:
         raise RuntimeError("--sol-spend-limit-usd must be positive")
 
+    root = Path(args.root).expanduser().resolve()
     historical_dir = Path(args.historical_subject_dir).expanduser().resolve()
+    subject_id = f"equity:{ticker}"
     retrospective_context = load_retrospective_subject_context(historical_dir)
+    scientific_context = load_subject_scientific_context(root, active_subject_id=subject_id)
+    retrospective_context["prior_subject_scientific_context"] = scientific_context.prior_subject_science
+    retrospective_context["cross_subject_memory_provenance"] = {
+        "source_path": str(scientific_context.memory_selection.source_path),
+        "superseded_paths": [
+            str(path) for path in scientific_context.memory_selection.superseded_paths
+        ],
+        "frontier_version": (
+            scientific_context.memory_selection.store.frontier().version
+            if scientific_context.memory_selection.store.frontier() is not None
+            else 0
+        ),
+        "record_count": len(scientific_context.memory_selection.store.records()),
+    }
+    prior_package_count = _prior_package_count(scientific_context.prior_subject_science)
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     state_dir = Path(
@@ -142,6 +180,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.dry_run:
         preserved = retrospective_context.get("preserved_state", {})
+        frontier = scientific_context.memory_selection.store.frontier()
         print("DRY_RUN=True")
         print(f"TICKER={ticker}")
         print(f"HISTORICAL_SUBJECT_DIR={historical_dir}")
@@ -151,18 +190,20 @@ def main(argv: list[str] | None = None) -> int:
             print("PRESERVED_KEYS=" + ",".join(sorted(preserved)))
             print(f"PRIOR_DECISIONS={len(preserved.get('rd_decisions', []))}")
             print(f"PRIOR_RPS={len(preserved.get('research_packages', {}))}")
+        print(f"CANONICAL_MEMORY_SOURCE={scientific_context.memory_selection.source_path}")
+        print(f"CANONICAL_MEMORY_RECORDS={len(scientific_context.memory_selection.store.records())}")
+        print(f"CANONICAL_MEMORY_FRONTIER_VERSION={frontier.version if frontier is not None else 0}")
+        print(f"PRIOR_SUBJECT_SCIENTIFIC_PACKAGES={prior_package_count}")
         print("RESEARCH_PHASE=EXPLORATION")
         print("HISTORICAL_EXPOSURE_STATUS=EXPOSED")
         print("BLIND_VALIDATION_CLAIM_ALLOWED=False")
+        print("CROSS_SUBJECT_CONTEXT_AUTOMATIC=True")
         return 0
 
     state_dir.mkdir(parents=True, exist_ok=False)
-    os.environ.setdefault(
-        "MTS_SOL_TELEMETRY_PATH",
-        str(state_dir / "sol_transport_telemetry.jsonl"),
-    )
+    os.environ["MTS_SOL_TELEMETRY_PATH"] = str(state_dir / "sol_transport_telemetry.jsonl")
 
-    subject = SubjectMetadata(subject_id=f"equity:{ticker}", ticker=ticker)
+    subject = SubjectMetadata(subject_id=subject_id, ticker=ticker)
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
     rd = SolRetrospectiveRecoveryResearchDirector(
@@ -181,6 +222,7 @@ def main(argv: list[str] | None = None) -> int:
         rd=rd,
         mission=RETROSPECTIVE_MISSION,
         nexus_path=state_dir / "research_nexus.json",
+        scientific_memory=scientific_context.memory_selection.store,
     )
     evidence = IntakeEngine(runtime.cache).ingest(
         subject=subject,
@@ -259,6 +301,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     spend = rd.sol_spend_snapshot()
+    frontier = scientific_context.memory_selection.store.frontier()
     summary = {
         "campaign_id": campaign_id,
         "subject_id": subject.subject_id,
@@ -266,6 +309,11 @@ def main(argv: list[str] | None = None) -> int:
         "historical_exposure_status": "EXPOSED",
         "research_phase": "EXPLORATION",
         "blind_validation_claim_allowed": False,
+        "cross_subject_context_automatic": True,
+        "canonical_cross_subject_memory_source": str(scientific_context.memory_selection.source_path),
+        "canonical_cross_subject_memory_record_count": len(scientific_context.memory_selection.store.records()),
+        "canonical_cross_subject_frontier_version": frontier.version if frontier is not None else 0,
+        "prior_subject_scientific_packages_exposed": prior_package_count,
         "decisions": outcome.decisions,
         "batches_executed": outcome.batches_executed,
         "analyses_executed": outcome.analyses_executed,
@@ -286,6 +334,9 @@ def main(argv: list[str] | None = None) -> int:
     print("RECOVERY_MODE=RETROSPECTIVE_EXPLORATION", flush=True)
     print("HISTORICAL_EXPOSURE_STATUS=EXPOSED", flush=True)
     print("BLIND_VALIDATION_CLAIM_ALLOWED=False", flush=True)
+    print("CROSS_SUBJECT_CONTEXT_AUTOMATIC=True", flush=True)
+    print(f"CANONICAL_MEMORY_SOURCE={scientific_context.memory_selection.source_path}", flush=True)
+    print(f"PRIOR_SUBJECT_SCIENTIFIC_PACKAGES={prior_package_count}", flush=True)
     print(f"DECISIONS={outcome.decisions}", flush=True)
     print(f"BATCHES={outcome.batches_executed}", flush=True)
     print(f"ANALYSES={outcome.analyses_executed}", flush=True)
