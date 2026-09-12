@@ -23,6 +23,7 @@ from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.retrospective_recovery import SolRetrospectiveRecoveryResearchDirector
 from MTS_V4.sol_spend_guard import SolSpendAuthorizationRequired
+from MTS_V4.subject_scientific_context import load_recorded_cross_subject_memory
 
 
 RETROSPECTIVE_MISSION = (
@@ -126,6 +127,7 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("continuation summary already exists; refusing to rerun a completed continuation")
 
     retrospective_context = json.loads(context_path.read_text(encoding="utf-8"))
+    scientific_memory = load_recorded_cross_subject_memory(retrospective_context)
     initial_decision = _decode_decision(resume_decision_path)
     if not initial_decision.continue_research:
         raise RuntimeError("resume decision already closed the subject; there is nothing to continue")
@@ -182,6 +184,8 @@ def main(argv: list[str] | None = None) -> int:
     print("RESUMED_ANALYSIS_IDS=" + ",".join(requested_analysis_ids), flush=True)
     print(f"PRIOR_SOL_SPEND_USD={prior_spend:.6f}", flush=True)
     print(f"REMAINING_SOL_AUTHORIZATION_USD={remaining:.6f}", flush=True)
+    print(f"CANONICAL_MEMORY_SOURCE={scientific_memory.path}", flush=True)
+    print("CROSS_SUBJECT_CONTEXT_PRESERVED=True", flush=True)
     print("PRIOR_ANALYSIS_REEXECUTION_ALLOWED=False", flush=True)
 
     if args.dry_run:
@@ -208,6 +212,7 @@ def main(argv: list[str] | None = None) -> int:
         rd=rd,
         mission=RETROSPECTIVE_MISSION,
         nexus_path=nexus_path,
+        scientific_memory=scientific_memory,
     )
 
     evidence = IntakeEngine(runtime.cache).ingest(
@@ -311,6 +316,8 @@ def main(argv: list[str] | None = None) -> int:
         "subject_id": subject_id,
         "historical_exposure_status": "EXPOSED",
         "blind_validation_claim_allowed": False,
+        "cross_subject_context_preserved": True,
+        "canonical_cross_subject_memory_source": str(scientific_memory.path),
         "recovered_results": len(reconstructed.results_by_analysis_id),
         "prior_analysis_reexecution_allowed": False,
         "continuation_batches_executed": continuation_batches,
@@ -335,6 +342,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"TOTAL_ANALYSES={outcome.analyses_executed}", flush=True)
     print(f"CLOSED={outcome.closed}", flush=True)
     print(f"CLOSE_REASON={outcome.close_reason}", flush=True)
+    print("CROSS_SUBJECT_CONTEXT_PRESERVED=True", flush=True)
     print(f"CONTINUATION_SOL_SPEND_USD={continuation_spend:.6f}", flush=True)
     print(f"TOTAL_SUBJECT_SOL_SPEND_USD={prior_spend + continuation_spend:.6f}", flush=True)
     print(f"SUMMARY={summary_path}", flush=True)
