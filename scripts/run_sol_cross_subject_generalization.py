@@ -129,26 +129,39 @@ def _discover_tickers(root: Path) -> tuple[str, ...]:
     return tuple(sorted(ticker for ticker in tickers if ticker))
 
 
-def _compact_package(package: Mapping[str, object], source_path: Path) -> Mapping[str, object] | None:
+def _compact_package(
+    package: Mapping[str, object],
+    source_path: Path,
+    *,
+    source_format: object = None,
+) -> Mapping[str, object] | None:
     subject_id = package.get("subject_id")
     ticker = _ticker_from_subject_id(subject_id)
     if ticker is None:
         return None
+    hypotheses = package.get("hypotheses", [])
     findings = package.get("findings", [])
-    hypotheses = package.get("predictive_hypotheses", [])
+    predictive_hypotheses = package.get("predictive_hypotheses", [])
+    unresolved_issues = package.get("unresolved_issues", [])
     analyses = package.get("analyses", [])
     return {
         "source_path": str(source_path),
+        "source_format": source_format,
         "subject_id": subject_id,
         "ticker": ticker,
         "rp_id": package.get("rp_id"),
+        "campaign_id": package.get("campaign_id"),
         "parent_rp_id": package.get("parent_rp_id"),
         "status": package.get("status"),
         "objective": package.get("objective"),
+        "originating_question": package.get("originating_question"),
+        "originating_rationale": package.get("originating_rationale"),
         "close_reason": package.get("close_reason"),
         "final_assessment": package.get("final_assessment"),
+        "hypotheses": hypotheses if isinstance(hypotheses, list) else [],
         "findings": findings if isinstance(findings, list) else [],
-        "predictive_hypotheses": hypotheses if isinstance(hypotheses, list) else [],
+        "predictive_hypotheses": predictive_hypotheses if isinstance(predictive_hypotheses, list) else [],
+        "unresolved_issues": unresolved_issues if isinstance(unresolved_issues, list) else [],
         "analysis_lineage": analyses if isinstance(analyses, list) else [],
     }
 
@@ -164,7 +177,20 @@ def _historical_subject_context(root: Path, tickers: Sequence[str]) -> Mapping[s
             continue
         if not isinstance(raw, Mapping):
             continue
-        compact = _compact_package(raw, package_path)
+
+        source_format = raw.get("format")
+        package: Mapping[str, object] = raw
+        if source_format == JsonResearchPackageStore.FORMAT:
+            wrapped = raw.get("research_package")
+            if not isinstance(wrapped, Mapping):
+                continue
+            package = wrapped
+
+        compact = _compact_package(
+            package,
+            package_path,
+            source_format=source_format,
+        )
         if compact is None:
             continue
         ticker = str(compact["ticker"])
@@ -246,6 +272,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"TICKER_COUNT={len(tickers)}")
         print("TICKERS=" + ",".join(tickers))
         print(f"PRIOR_MEMORY_DOCUMENTS={len(memory_documents)}")
+        for index, memory_document in enumerate(memory_documents, start=1):
+            print(f"PRIOR_MEMORY_DOCUMENT_{index}_SOURCE={memory_document['source_path']}")
         subjects = historical_context.get("subjects", [])
         package_count = sum(
             len(item.get("research_packages", []))
