@@ -66,7 +66,7 @@ def _find_rows(document: object) -> list[Mapping[str, object]]:
         rows = document.get("rows")
         if isinstance(rows, list):
             return [item for item in rows if isinstance(item, Mapping)]
-        for key in ("data", "table", "historicalNocp", "historicalNOCP"):
+        for key in ("data", "table", "historicalNocp", "historicalNOCP", "nocp", "nocpTable"):
             child = document.get(key)
             if child is not None:
                 found = _find_rows(child)
@@ -93,7 +93,9 @@ def fetch_historical_nocp(
 
     The endpoint is the JSON service backing Nasdaq's Historical NOCP page. The
     parser deliberately accepts several envelope shapes but requires an explicit
-    date field and an explicit NOCP/close field in each usable row.
+    date field and an explicit NOCP/close field in each usable row. Nasdaq's live
+    historical-NOCP payload currently uses data.nocp.nocpTable rows with
+    ``date`` and ``price`` fields.
     """
 
     symbol = ticker.strip().upper()
@@ -124,6 +126,7 @@ def fetch_historical_nocp(
                 lowered[key]
                 for key in (
                     "nocp",
+                    "price",
                     "officialclose",
                     "officialclosingprice",
                     "close",
