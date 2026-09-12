@@ -14,15 +14,22 @@ RETROSPECTIVE_RECOVERY_POLICY = {
     "blind_validation_claim_allowed": False,
     "historical_results_may_support_discovery": True,
     "historical_results_may_not_count_as_blind_validation": True,
+    "analysis_execution_authority": (
+        "Additional Analysis may execute only when the AI Research Director explicitly authors one or more "
+        "Analysis Specifications after reviewing the preserved subject record and presently available evidence. "
+        "Deterministic code must not infer, require, schedule, or manufacture re-analysis merely because a subject "
+        "is in retrospective recovery."
+    ),
     "scientific_authority": (
-        "AI Research Director retains authority to continue exploration, open or close Research Packages, "
-        "author as many presently justified Analysis Specifications as warranted, freeze a tentative predictive "
-        "hypothesis when evidence is sufficient, or conclude that further work is not scientifically useful."
+        "AI Research Director retains authority to decide whether any additional Analysis is needed at all, continue "
+        "exploration, open or close Research Packages, author as many presently justified Analysis Specifications as "
+        "warranted, freeze a tentative predictive hypothesis when evidence is sufficient, or conclude that further "
+        "work is not scientifically useful."
     ),
     "batch_execution_rule": (
-        "At each decision point, send every analysis whose scientific justification is already available as one "
-        "batch. Receive and interpret the consolidated batch report before authoring work that genuinely depends "
-        "on unknown results from that batch."
+        "If and only if the AI Research Director authors additional Analysis Specifications, send every analysis whose "
+        "scientific justification is already available as one batch. Receive and interpret the consolidated batch "
+        "report before authoring work that genuinely depends on unknown results from that batch."
     ),
 }
 
@@ -93,8 +100,10 @@ class SolRetrospectiveRecoveryResearchDirector(SolBatchResearchDirector):
 
     The prior record is injected as scientific context at every decision boundary.
     New work still uses the ordinary batched Analysis compiler/executor and a fresh
-    active Research Package store. This preserves the corrected batch authority model
-    while preventing old exposed work from being mislabeled as blind validation.
+    active Research Package store. Analysis executes only when Sol explicitly authors
+    Analysis Specifications; retrospective recovery itself never deterministically
+    triggers re-analysis. This preserves the corrected batch authority model while
+    preventing old exposed work from being mislabeled as blind validation.
     """
 
     def __init__(
@@ -140,12 +149,15 @@ class SolRetrospectiveRecoveryResearchDirector(SolBatchResearchDirector):
             " This is a RETROSPECTIVE RECOVERY exploration campaign. The preserved historical subject record in "
             "retrospective_recovery_context was already exposed to prior Research Director logic and therefore may "
             "be used as discovery context but MUST NEVER be described or counted as blind validation. Re-evaluate the "
-            "subject under the current corrected scientific-authority model. Do not merely classify the old work. If "
-            "additional analysis is scientifically warranted, author all analyses that are justified now in the same "
-            "batch, receive the consolidated batch report, and continue iteratively. If preserved evidence is already "
-            "sufficient, you may freeze a tentative predictive hypothesis without unnecessary re-analysis. If a hypothesis "
-            "is frozen, its later validation must use genuinely unexposed evidence. Historical RP identifiers in the "
-            "retrospective context are provenance only; do not use them as active parent_rp_id values unless they also "
-            "exist independently in the current active research_packages context."
+            "subject under the current corrected scientific-authority model. First determine whether the preserved "
+            "record and presently available evidence are already sufficient to resolve the subject or freeze a tentative "
+            "predictive hypothesis. Retrospective recovery does NOT itself require additional Analysis. Deterministic code "
+            "must not infer, require, schedule, or manufacture re-analysis. Only if YOU, the AI Research Director, judge "
+            "additional Analysis scientifically necessary should you author Analysis Specifications. If you do, author all "
+            "analyses justified now in the same batch, receive the consolidated batch report, and continue iteratively. If "
+            "preserved evidence is already sufficient, freeze the tentative predictive hypothesis or close the subject "
+            "without unnecessary re-analysis. If a hypothesis is frozen, its later validation must use genuinely unexposed "
+            "evidence. Historical RP identifiers in the retrospective context are provenance only; do not use them as "
+            "active parent_rp_id values unless they also exist independently in the current active research_packages context."
         )
         return [{"role": "system", "content": system}, *messages[1:]]
