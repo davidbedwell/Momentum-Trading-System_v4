@@ -13,6 +13,12 @@ from typing import Any, Mapping, Sequence
 
 from .openai_compatible_provider import ResearchDirectorTransportError
 from .research_package_provider import ResearchPackageAwareResearchDirector
+from .sol_spend_guard import (
+    HumanSpendAuthorizationCallback,
+    SolResearchProgressEstimate,
+    SolSpendAuthorizationSnapshot,
+    SolSpendGuard,
+)
 
 
 class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirector):
@@ -30,6 +36,34 @@ class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirect
     _TRANSIENT_HTTP_CODES = frozenset({408, 429, 500, 502, 503, 504})
     _MAX_TRANSIENT_RETRIES = 6
     _TRANSIENT_RETRY_DELAYS_SECONDS = (2.0, 4.0, 8.0, 16.0, 32.0, 60.0)
+
+    def configure_sol_spend_guard(
+        self,
+        *,
+        authorized_spend_usd: float,
+        authorization_callback: HumanSpendAuthorizationCallback | None = None,
+    ) -> None:
+        """Attach a human-owned Sol dollar budget to this RD instance.
+
+        This controls premium-model spend only. It never limits Research Packages,
+        Analysis Specifications, or scientific breadth.
+        """
+
+        self._sol_spend_guard = SolSpendGuard(
+            authorized_spend_usd=authorized_spend_usd,
+            authorization_callback=authorization_callback,
+        )
+
+    def update_sol_research_progress(self, progress: SolResearchProgressEstimate) -> None:
+        guard = getattr(self, "_sol_spend_guard", None)
+        if isinstance(guard, SolSpendGuard):
+            guard.update_research_progress(progress)
+
+    def sol_spend_snapshot(self) -> SolSpendAuthorizationSnapshot | None:
+        guard = getattr(self, "_sol_spend_guard", None)
+        if isinstance(guard, SolSpendGuard):
+            return guard.snapshot()
+        return None
 
     @staticmethod
     def _operation(messages: Sequence[Mapping[str, str]]) -> str | None:
@@ -96,6 +130,10 @@ class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirect
         return base + jitter
 
     def _chat_completion(self, messages: Sequence[Mapping[str, str]]) -> str:
+        spend_guard = getattr(self, "_sol_spend_guard", None)
+        if isinstance(spend_guard, SolSpendGuard):
+            spend_guard.ensure_authorized_before_next_call()
+
         body = json.dumps(
             {
                 "model": self._model,
@@ -226,6 +264,14 @@ class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirect
                 )
 
         usage = document.get("usage") if isinstance(document, Mapping) else None
+        estimated_call_cost_usd = None
+        spend_snapshot = None
+        if isinstance(spend_guard, SolSpendGuard):
+            estimated_call_cost_usd = spend_guard.record_provider_usage(
+                dict(usage) if isinstance(usage, Mapping) else None
+            )
+            spend_snapshot = spend_guard.snapshot()
+
         self._write_telemetry(
             {
                 "event": "SOL_CALL_COMPLETE",
@@ -236,6 +282,13 @@ class SolResearchPackageAwareResearchDirector(ResearchPackageAwareResearchDirect
                 "transient_failures": transient_failures,
                 "request_id": self._header(response_headers, "x-request-id"),
                 "usage": dict(usage) if isinstance(usage, Mapping) else None,
+                "estimated_call_cost_usd": estimated_call_cost_usd,
+                "estimated_cumulative_sol_spend_usd": (
+                    spend_snapshot.actual_spend_usd if spend_snapshot is not None else None
+                ),
+                "human_authorized_sol_spend_usd": (
+                    spend_snapshot.authorized_spend_usd if spend_snapshot is not None else None
+                ),
                 "response_id": document.get("id") if isinstance(document, Mapping) else None,
             }
         )
