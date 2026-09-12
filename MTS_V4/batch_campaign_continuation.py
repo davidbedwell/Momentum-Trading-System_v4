@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Mapping, Sequence
+from typing import Callable, Mapping, Sequence
 
 from .batch_compiler import BatchCompilationError, BatchCompilerContext, topological_analysis_order
 from .batch_contracts import BatchAnalysisRecord, BatchExecutionReport, BatchResearchDecision
@@ -14,6 +14,9 @@ from .batch_orchestrator import (
     BatchResearchLoopOutcome,
 )
 from .contracts import AnalysisResult, EvidenceDescriptor, SubjectMetadata
+
+
+AnalysisCheckpointCallback = Callable[[BatchAnalysisRecord, int, int], None]
 
 
 @dataclass(frozen=True, slots=True)
@@ -45,6 +48,8 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
         decision_callback: BatchDecisionCallback | None = None,
         report_callback: BatchReportCallback | None = None,
         accepted_request_callback: AcceptedRequestCallback | None = None,
+        checkpointed_records_by_analysis_id: Mapping[str, BatchAnalysisRecord] | None = None,
+        analysis_checkpoint_callback: AnalysisCheckpointCallback | None = None,
     ) -> BatchResearchLoopOutcome:
         if baseline.decisions < 1:
             raise BatchResearchLoopError("continuation baseline must include at least one prior decision")
@@ -80,6 +85,8 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
                     f"recovered result {analysis_id} belongs to {result.subject_id}, not {subject.subject_id}"
                 )
 
+        recovered_checkpoints = dict(checkpointed_records_by_analysis_id or {})
+
         decisions = baseline.decisions
         batches = baseline.batches_executed
         analyses = baseline.analyses_executed
@@ -89,6 +96,19 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
 
         while decision.continue_research:
             specifications = self._flatten_and_validate_decision(decision, subject)
+            specification_by_id = {
+                specification.analysis_id: specification
+                for specification in specifications
+            }
+            unexpected_checkpoint_ids = sorted(
+                set(recovered_checkpoints) - set(specification_by_id)
+            )
+            if unexpected_checkpoint_ids:
+                raise BatchResearchLoopError(
+                    "checkpointed analysis_id(s) are not members of the accepted continuation decision: "
+                    + ", ".join(unexpected_checkpoint_ids)
+                )
+
             prior_analysis_ids = set(results_by_analysis_id)
             duplicate_ids = sorted(
                 specification.analysis_id
@@ -134,6 +154,67 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
             current_batch_results: dict[str, AnalysisResult] = {}
 
             for specification in ordered:
+                checkpoint = recovered_checkpoints.get(specification.analysis_id)
+                if checkpoint is not None:
+                    if checkpoint.analysis_id != specification.analysis_id:
+                        raise BatchResearchLoopError(
+                            f"checkpoint analysis identity mismatch: {checkpoint.analysis_id} "
+                            f"!= {specification.analysis_id}"
+                        )
+                    if checkpoint.rp_id != specification.rp_id:
+                        raise BatchResearchLoopError(
+                            f"checkpoint RP mismatch for {specification.analysis_id}: "
+                            f"{checkpoint.rp_id} != {specification.rp_id}"
+                        )
+                    if checkpoint.compiled_request is not None:
+                        request = checkpoint.compiled_request
+                        if request.subject_id != subject.subject_id:
+                            raise BatchResearchLoopError(
+                                f"checkpoint request subject mismatch for {specification.analysis_id}"
+                            )
+                        if request.rp_id != specification.rp_id:
+                            raise BatchResearchLoopError(
+                                f"checkpoint request RP mismatch for {specification.analysis_id}"
+                            )
+                        if request.question_id != specification.question_id:
+                            raise BatchResearchLoopError(
+                                f"checkpoint request question mismatch for {specification.analysis_id}"
+                            )
+                        if request.method_id != specification.method_id:
+                            raise BatchResearchLoopError(
+                                f"checkpoint request method mismatch for {specification.analysis_id}"
+                            )
+                    if checkpoint.result is not None:
+                        result = checkpoint.result
+                        if result.subject_id != subject.subject_id:
+                            raise BatchResearchLoopError(
+                                f"checkpoint result subject mismatch for {specification.analysis_id}"
+                            )
+                        if result.method_id != specification.method_id:
+                            raise BatchResearchLoopError(
+                                f"checkpoint result method mismatch for {specification.analysis_id}"
+                            )
+                        if (
+                            checkpoint.compiled_request is not None
+                            and result.request_id != checkpoint.compiled_request.request_id
+                        ):
+                            raise BatchResearchLoopError(
+                                f"checkpoint result/request mismatch for {specification.analysis_id}"
+                            )
+                        analyses += 1
+                        current_batch_results[specification.analysis_id] = result
+                        results_by_analysis_id[specification.analysis_id] = result
+                        self._nexus.register_analysis_result_metadata(result.durable_metadata())
+                    elif checkpoint.status == "SUCCESS":
+                        raise BatchResearchLoopError(
+                            f"checkpoint marks SUCCESS without a result: {specification.analysis_id}"
+                        )
+
+                    if checkpoint.status != "SUCCESS":
+                        failed_analysis_ids.add(specification.analysis_id)
+                    records.append(checkpoint)
+                    continue
+
                 dependency_ids = {
                     ref.analysis_id
                     for ref in specification.inputs
@@ -144,17 +225,18 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
                 )
                 if failed_dependencies:
                     failed_analysis_ids.add(specification.analysis_id)
-                    records.append(
-                        BatchAnalysisRecord(
-                            analysis_id=specification.analysis_id,
-                            rp_id=specification.rp_id,
-                            status="BLOCKED_DEPENDENCY",
-                            objective_defect=(
-                                "upstream batch dependency did not complete successfully: "
-                                + ", ".join(failed_dependencies)
-                            ),
-                        )
+                    record = BatchAnalysisRecord(
+                        analysis_id=specification.analysis_id,
+                        rp_id=specification.rp_id,
+                        status="BLOCKED_DEPENDENCY",
+                        objective_defect=(
+                            "upstream batch dependency did not complete successfully: "
+                            + ", ".join(failed_dependencies)
+                        ),
                     )
+                    records.append(record)
+                    if analysis_checkpoint_callback is not None:
+                        analysis_checkpoint_callback(record, decisions, analyses)
                     continue
 
                 compiler_results = dict(results_by_analysis_id)
@@ -169,14 +251,15 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
                     )
                 except BatchCompilationError as exc:
                     failed_analysis_ids.add(specification.analysis_id)
-                    records.append(
-                        BatchAnalysisRecord(
-                            analysis_id=specification.analysis_id,
-                            rp_id=specification.rp_id,
-                            status="AMBIGUOUS_SCIENTIFIC_REPAIR_REQUIRED",
-                            objective_defect=str(exc),
-                        )
+                    record = BatchAnalysisRecord(
+                        analysis_id=specification.analysis_id,
+                        rp_id=specification.rp_id,
+                        status="AMBIGUOUS_SCIENTIFIC_REPAIR_REQUIRED",
+                        objective_defect=str(exc),
                     )
+                    records.append(record)
+                    if analysis_checkpoint_callback is not None:
+                        analysis_checkpoint_callback(record, decisions, analyses)
                     continue
 
                 request = compiled.request
@@ -187,17 +270,18 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
                 )
                 if defects:
                     failed_analysis_ids.add(specification.analysis_id)
-                    records.append(
-                        BatchAnalysisRecord(
-                            analysis_id=specification.analysis_id,
-                            rp_id=specification.rp_id,
-                            status="OBJECTIVE_CONTRACT_DEFECT",
-                            compiled_request=request,
-                            objective_defect="; ".join(defect.message for defect in defects),
-                            binding_map=compiled.binding_map,
-                            mechanical_repairs=compiled.mechanical_repairs,
-                        )
+                    record = BatchAnalysisRecord(
+                        analysis_id=specification.analysis_id,
+                        rp_id=specification.rp_id,
+                        status="OBJECTIVE_CONTRACT_DEFECT",
+                        compiled_request=request,
+                        objective_defect="; ".join(defect.message for defect in defects),
+                        binding_map=compiled.binding_map,
+                        mechanical_repairs=compiled.mechanical_repairs,
                     )
+                    records.append(record)
+                    if analysis_checkpoint_callback is not None:
+                        analysis_checkpoint_callback(record, decisions, analyses)
                     continue
 
                 if accepted_request_callback is not None:
@@ -222,28 +306,41 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
                     result=result,
                     result_index=result_index,
                 )
+
+                status = str(result.execution_metadata.get("execution_status", "UNKNOWN"))
+                record = BatchAnalysisRecord(
+                    analysis_id=specification.analysis_id,
+                    rp_id=specification.rp_id,
+                    status=status,
+                    compiled_request=request,
+                    result=result,
+                    binding_map=compiled.binding_map,
+                    mechanical_repairs=compiled.mechanical_repairs,
+                )
+
+                # Persist the terminal record before relying on later batch-level
+                # durability. A recovered checkpoint is validated against the
+                # unchanged Sol-authored specification before it can suppress
+                # execution on restart.
+                if analysis_checkpoint_callback is not None:
+                    analysis_checkpoint_callback(record, decisions, analyses)
+
                 self._nexus.register_analysis_result_metadata(result.durable_metadata())
                 current_batch_results[specification.analysis_id] = result
                 results_by_analysis_id[specification.analysis_id] = result
 
-                status = str(result.execution_metadata.get("execution_status", "UNKNOWN"))
                 if status != "SUCCESS":
                     failed_analysis_ids.add(specification.analysis_id)
-                records.append(
-                    BatchAnalysisRecord(
-                        analysis_id=specification.analysis_id,
-                        rp_id=specification.rp_id,
-                        status=status,
-                        compiled_request=request,
-                        result=result,
-                        binding_map=compiled.binding_map,
-                        mechanical_repairs=compiled.mechanical_repairs,
-                    )
-                )
+                records.append(record)
 
             batches += 1
             last_report = BatchExecutionReport(records=tuple(records))
             self._notify_report(report_callback, last_report, decisions, analyses)
+
+            # Checkpoints supplied by the caller belong only to the accepted
+            # decision that was pending at restart. Any later decision in this
+            # same live process begins with no recovered partial batch.
+            recovered_checkpoints = {}
 
             decision = self._rd.interpret_batch_results(
                 mission=self._mission,

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import asdict
+from datetime import datetime, timezone
 import json
+from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from .batch_contracts import BatchExecutionReport, BatchResearchDecision
@@ -333,12 +335,31 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         content = self._chat_completion(messages)
         defect: str | None = None
         try:
-            decision = BatchResearchDecisionCodec.decode(content)
+            decision = self._decode_batch_decision_with_terminal_brace_repair(
+                content=content,
+                operation=operation,
+                repair_attempt=0,
+            )
             defect = self._batch_decision_defect(decision)
             if defect is None:
                 return self._accept_batch_decision(decision)
         except BatchResearchDecisionDecodeError as exc:
             defect = str(exc)
+            diagnostic_path = self._preserve_batch_representation_defect(
+                operation=operation,
+                repair_attempt=0,
+                defect=defect,
+                content=content,
+            )
+            self._write_telemetry(
+                {
+                    "event": "BATCH_DECISION_REPRESENTATION_PRESERVED",
+                    "operation": operation,
+                    "repair_attempt": 0,
+                    "decode_defect": defect,
+                    "diagnostic_path": diagnostic_path,
+                }
+            )
 
         assistant_content = content
         for repair_index in range(self._MAX_BATCH_REPRESENTATION_REPAIRS):
@@ -375,9 +396,28 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             )
             assistant_content = repaired
             try:
-                decision = BatchResearchDecisionCodec.decode(repaired)
+                decision = self._decode_batch_decision_with_terminal_brace_repair(
+                    content=repaired,
+                    operation=operation,
+                    repair_attempt=repair_index + 1,
+                )
             except BatchResearchDecisionDecodeError as exc:
                 defect = str(exc)
+                diagnostic_path = self._preserve_batch_representation_defect(
+                    operation=operation,
+                    repair_attempt=repair_index + 1,
+                    defect=defect,
+                    content=repaired,
+                )
+                self._write_telemetry(
+                    {
+                        "event": "BATCH_DECISION_REPRESENTATION_PRESERVED",
+                        "operation": operation,
+                        "repair_attempt": repair_index + 1,
+                        "decode_defect": defect,
+                        "diagnostic_path": diagnostic_path,
+                    }
+                )
                 continue
             defect = self._batch_decision_defect(decision)
             if defect is None:
@@ -391,6 +431,85 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             }
         )
         raise ValueError("batch decision representation repair budget exhausted: " + str(defect))
+
+    @classmethod
+    def _preserve_batch_representation_defect(
+        cls,
+        *,
+        operation: str,
+        repair_attempt: int,
+        defect: str | None,
+        content: str,
+    ) -> str | None:
+        telemetry_path = cls._telemetry_path()
+        if telemetry_path is None:
+            return None
+
+        diagnostic_path = telemetry_path.parent / "sol_representation_defects.jsonl"
+        diagnostic_path.parent.mkdir(parents=True, exist_ok=True)
+
+        record = {
+            "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+            "operation": operation,
+            "repair_attempt": repair_attempt,
+            "decode_defect": defect,
+            "raw_assistant_response": content,
+        }
+        with diagnostic_path.open("a", encoding="utf-8") as handle:
+            handle.write(
+                json.dumps(
+                    record,
+                    sort_keys=True,
+                    default=str,
+                    separators=(",", ":"),
+                )
+                + "\n"
+            )
+        return str(diagnostic_path)
+
+    def _decode_batch_decision_with_terminal_brace_repair(
+        self,
+        *,
+        content: str,
+        operation: str,
+        repair_attempt: int,
+    ) -> BatchResearchDecision:
+        """Decode one Sol batch decision with one objectively bounded repair.
+
+        The normal codec remains authoritative. If and only if normal decoding
+        fails and removing exactly one terminal closing brace makes the entire
+        response pass the same BatchResearchDecisionCodec, accept that corrected
+        representation. No other trimming, object selection, or scientific
+        alteration is permitted.
+        """
+        try:
+            return BatchResearchDecisionCodec.decode(content)
+        except BatchResearchDecisionDecodeError as original_exc:
+            stripped = content.strip()
+
+            if not stripped.endswith("}"):
+                raise original_exc
+
+            candidate = stripped[:-1].rstrip()
+            if not candidate:
+                raise original_exc
+
+            try:
+                decision = BatchResearchDecisionCodec.decode(candidate)
+            except BatchResearchDecisionDecodeError:
+                raise original_exc
+
+            self._write_telemetry(
+                {
+                    "event": "BATCH_DECISION_SINGLE_TERMINAL_BRACE_REPAIRED",
+                    "operation": operation,
+                    "repair_attempt": repair_attempt,
+                    "original_decode_defect": str(original_exc),
+                    "mechanical_edit": "REMOVE_EXACTLY_ONE_TERMINAL_CLOSING_BRACE",
+                    "scientific_content_modified": False,
+                }
+            )
+            return decision
 
     def _accept_batch_decision(self, decision: BatchResearchDecision) -> BatchResearchDecision:
         assert decision.research_progress is not None

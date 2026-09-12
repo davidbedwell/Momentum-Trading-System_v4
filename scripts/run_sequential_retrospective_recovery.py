@@ -243,6 +243,7 @@ def _run_subject(
             {
                 "active_subject_id": subject.subject_id,
                 "mode": mode,
+                "mission": mission,
                 "canonical_memory_source": str(scientific_context.memory_selection.source_path),
                 "canonical_memory_superseded_paths": [
                     str(path) for path in scientific_context.memory_selection.superseded_paths
