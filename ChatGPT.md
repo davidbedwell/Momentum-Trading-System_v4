@@ -269,182 +269,438 @@ Use Git history, architecture documents, tests, and current source as the implem
 
 ---
 
-# Current Shift Handoff — 2026-09-11
+# Current Shift Handoff — 2026-09-12
 
 ## Session Summary
 
-The session moved MTS v4 from the completed six-subject Sol adaptive campaign into a discovery-space architecture audit and an approved remediation branch.
+This session completed the 20-year OHLCV history-depth repair, verified it end-to-end, and then identified the next scientific-continuation defect before any new Sol campaign was launched.
 
-Completed six-subject campaign: `mts-v4-sol-six-20260911_174430`. Subjects were JPM, TSLA, BA, META, AMZN, and GOOGL. The campaign artifacts were preserved off-Thunder on the user's Mac and SHA256-verified against Thunder copies before later work. The campaign was scientifically signal-poor but architecturally informative: roughly 50 Analysis executions represented only about six substantive relationship propositions, with repeated use of short-horizon univariate/marginal Spearman workflows. Sol itself learned that raw marginal screens were low-yield and authored a broader frontier involving normalized shocks, interactions, abnormal activity, regimes, relative moves, non-overlapping event studies, and richer outcomes.
+The accidental OHLCV boundary was literal source configuration: `YFinanceDailyOhlcvSource.period` was `"2y"`. It has now been changed to `"20y"` and committed/pushed.
 
-Audit conclusion approved by the human: the discovery-space problem is real. The problem is not merely the old exact 5-day/-5% bounceback formulation. The executable Analysis vocabulary and subject lifecycle make narrow propositions cheap to exhaust and richer science comparatively difficult. RP closure can also effectively become subject closure without an explicit AI-owned distinction between exhaustion of one Research Package and adequate exploration of the ticker. A separate concern was identified that the legitimate unseen-ticker rule for retrospective blind validation could be interpreted as a priority for unexposed tickers during ordinary EXPLORATION. The human approved correcting all of these issues without deterministic scientific menus, rankings, fixed horizons, indicators, or hypotheses.
+Current branch:
 
-## Current Branch and Tested Baseline
+- `mts-v4-cross-subject-generalization-20260912`
 
-Known-good pre-audit integrated branch/commit:
+Current authoritative implementation commit before this handoff update:
 
-- branch: `mts-v4-sol-adaptive-batch-runner-20260911`
-- commit: `83278f306e91e6b0faffa6999352d5d36d4b078a`
-- prior full gate on that integrated content: 316/316 default tests passed.
+- `dd52dcb` — `Expand OHLCV history to twenty years`
 
-Current remediation branch:
+Thunder working tree was clean after that commit/push.
 
-- `mts-v4-discovery-space-expansion-20260911`
-- created from `83278f306e91e6b0faffa6999352d5d36d4b078a`
-- current known branch commit before this handoff update: `ae01bfe4be0d7adea5324ce7e402233c15ba49eb`
+## 20-Year OHLCV Repair — COMPLETE
 
-Thunder live checkout is `/home/ubuntu/Momentum-Trading-System_v4` and was switched to the remediation branch. The user ran the focused new tests: 9 passed. The default suite: 316 passed. The combined explicit gate `python -m pytest -q Tests tests` reported **440 passed**. Note that `pyproject.toml` currently has `testpaths = ["Tests"]`, so plain `python -m pytest -q` does not collect lowercase `tests/`; use the combined command when gating this branch unless test configuration is deliberately changed.
+Changed:
 
-## Discovery-Space Changes Implemented
+`MTS_V4/live_sources.py`
 
-The remediation branch adds/changes:
+from:
 
-1. `MTS_V4/sol_primary_provider.py`
-   - reinforces that prior memory/frontier informs but does not delimit EXPLORATION;
-   - tells Sol to distinguish exhaustion of the current RP from adequate exploration of the subject;
-   - closing one RP is not evidence the ticker is adequately explored;
-   - if a materially different scientifically worthwhile proposition remains, Sol should continue by opening another RP;
-   - this is not a mandate to manufacture analyses.
-
-2. `MTS_V4/subject_selection.py`
-   - separates prior exposure, durable completed scientific memory, and retrospective blind-validation eligibility;
-   - explicitly makes exposure status scientifically neutral for EXPLORATION;
-   - retrospective blind-validation eligibility must not rank exploration subjects;
-   - revisiting completed or incomplete prior subjects is allowed when accumulated knowledge makes that scientifically preferable;
-   - no inherited lookback/horizon/threshold/method/hypothesis becomes a within-subject contract.
-
-3. `MTS_V4/discovery_methods.py` (new)
-   - exposes existing governed deterministic computation families as an RD-selectable Analysis capability rather than a deterministic scientific ranking;
-   - adds a neutral reusable arithmetic transform for AI-authored add/subtract/multiply/divide derived features, intended to make normalized and interaction representations executable without deterministic choice of variables or meaning.
-
-4. `MTS_V4/bootstrap.py`
-   - registers the discovery method catalog and Analysis implementations into the live runtime.
-
-5. Tests
-   - `tests/test_discovery_capability_expansion.py`
-   - expanded `tests/test_exploration_discovery_space.py`
-   - initial failures were brittle `inspect.getsource()` exact-string assertions, not behavior defects; assertions were repaired to verify the same semantics without dependence on physical string splitting.
-
-Do not replace these AI-authority-preserving changes with deterministic diversification requirements such as mandatory 2/5/10/20-day horizons, required indicators, fixed interaction menus, or deterministic scientific ranking. The human explicitly approved broadening capability and progression while preserving Sol's scientific authority.
-
-## Critical Stop Point / Unresolved Packaging Defect
-
-After the 440-test gate, the human authorized a one-subject experiment restricted to previously researched Sol subjects to see whether the broadened architecture actually changes Sol's research behavior.
-
-The attempted experiment did **not start**. It failed immediately during import:
-
-`ModuleNotFoundError: No module named 'Core'`
-
-Trace path:
-
-- `scripts/run_sol_adaptive_batch.py`
-- imports `MTS_V4.bootstrap`
-- imports new `MTS_V4.discovery_methods`
-- `discovery_methods.py` imports `from Core.deterministic_computation import execute_computations`
-- production script environment cannot resolve `Core`.
-
-This was hidden by pytest because repository test configuration adds the repository root to Python's test path. The project packaging configuration currently discovers only `MTS_V4*`:
-
-```toml
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["MTS_V4*"]
+```python
+@dataclass(frozen=True, slots=True)
+class YFinanceDailyOhlcvSource:
+    period: str = "2y"
 ```
 
-Therefore the next implementation task is to repair the actual packaging/bootstrap contract so the production runtime can import the existing `Core` deterministic-computation package without a `PYTHONPATH=.` shell workaround. The user said “do it,” but immediately afterward ended the session and requested this handoff. **No packaging fix has yet been committed.** Do not claim otherwise.
+to:
 
-Recommended next-session sequence:
+```python
+@dataclass(frozen=True, slots=True)
+class YFinanceDailyOhlcvSource:
+    period: str = "20y"
+```
 
-1. Read this entire `ChatGPT.md` first.
-2. Inspect the `Core` package structure and packaging implications before editing. The likely fix is to include the required `Core` package(s) in setuptools discovery, but verify package boundaries and avoid unintentionally packaging stale/unwanted code.
-3. Add a regression test that exercises the production-style import/entry path without relying on pytest's repository-root `pythonpath`, so this defect cannot recur silently.
-4. Reinstall editable environment as needed and run `python -m pytest -q Tests tests`; require the full combined gate to pass.
-5. Run a production import/preflight of `scripts/run_sol_adaptive_batch.py` before consuming Sol API calls.
-6. Only then retry the one-subject revisit experiment.
+This was intentionally a narrow source-depth repair. It did not change Sol prompts, scientific priorities, Analysis selection, hypothesis selection, cross-subject logic, or alternative-data history limits.
 
-Do not use `PYTHONPATH=.` as the permanent solution.
+UW remains provider/recent-history limited, including existing 730-day settings where applicable. FINRA/options continue using their own available/provider coverage. Do not truncate master OHLCV to the shortest alternative-data history.
 
-## Planned One-Subject Revisit Experiment
+### Verification
 
-Purpose: test whether the architecture repair broadens actual autonomous research, not whether a profitable signal is found.
+Direct yfinance AAPL acquisition:
 
-Candidate set should contain only already researched Sol subjects, e.g.:
+- requested period: `20y`
+- rows: `5031`
+- coverage start: `2006-09-12`
+- coverage end: `2026-09-11`
+- `20Y_PROVIDER_ACQUISITION: PASS`
 
-`MSFT,NVDA,XOM,JPM,TSLA,BA,META,AMZN,GOOGL`
+Actual MTS `YFinanceDailyOhlcvSource.acquire()` verification:
 
-Prior exposure list should preserve:
+- `SOURCE_IDENTITY: YFINANCE_DAILY`
+- `EVIDENCE_TYPE: OHLCV`
+- `ROW_COUNT: 5031`
+- `COVERAGE_START: 2006-09-12`
+- `COVERAGE_END: 2026-09-11`
+- provenance included `provider=yfinance`, `period=20y`, `interval=1d`
+- `MTS_20Y_INTAKE_ACQUISITION: PASS`
 
-`AAPL,MSFT,XOM,NVDA,AMD,JPM,TSLA,BA,META,AMZN,GOOGL`
+Regression test added:
 
-Use the completed six-subject campaign's `cross_subject_memory.json` as seed memory. Subject limit 1. Max analyses per subject 100. Sol chooses which prior ticker deserves re-examination and owns the science. Do not tell it which horizon, indicator, interaction, or hypothesis to pursue.
+`Tests/mts_v4/test_yfinance_20y_default.py`
 
-Evaluate the resulting decision journal/state, not merely the terminal summary. Strong evidence of improvement would include materially different representations, normalization, interactions, regimes, different horizons where scientifically warranted, richer use of deterministic measurement families, or multiple RPs when distinct propositions remain worthwhile. A quick return to `one variable → 5-day future → several correlations → close` would indicate the discovery architecture remains inadequate.
+It asserts:
 
-The failed attempted run created names based on timestamp `20260911_200813`:
+```python
+YFinanceDailyOhlcvSource().period == "20y"
+```
 
-- state target: `/home/ubuntu/mts-v4-sol-revisit-20260911_200813`
-- log: `/home/ubuntu/MTS_V4_SOL_REVISIT_20260911_200813.txt`
+Targeted regression: `1 passed`.
 
-It failed before scientific execution, so it contains no valid campaign result and must not be interpreted as research evidence.
+Full gate used in this session: `370 passed`.
 
-## Scientific Memory / Exposure Status
+Do not revert the 20-year OHLCV repair merely to align with shorter UW/FINRA/options history. Source-dependent history is the intended scientific boundary: OHLCV-derived questions may use long OHLCV history, while mixed-source questions naturally use the overlap needed for those sources.
 
-Preserved clean Sol-only seed from earlier work:
+## Scientific Consequence of the History Repair
 
-- `/home/ubuntu/MTS_V4_SOL_ONLY_SEED_MSFT_NVDA_XOM_20260911.json`
-- SHA256 `dd17bfded31e36edc764d09ff064fefaa502bebd5d348a9fc09e1501fa8fe77a`
-- contains MSFT, NVDA, XOM only; no AAPL/Qwen scientific seed.
+The existing 11-ticker corpus was largely researched using approximately two years of OHLCV. Do not discard that work and do not silently reinterpret it as 20-year evidence.
 
-Completed six-subject campaign:
+Treat prior results as:
 
-- batch: `mts-v4-sol-six-20260911_174430`
-- state: `/home/ubuntu/mts-v4-sol-six-20260911_174430`
-- log: `/home/ubuntu/MTS_V4_SOL_SIX_20260911_174430.txt`
-- state tarball: `/home/ubuntu/MTS_V4_SOL_SIX_20260911_174430_STATE.tar.gz`
-- completed artifacts copied to Mac and hash-verified.
+> recent-period exploratory relationships discovered within approximately a two-year research window
 
-Exposure distinctions remain important:
+The intended next scientific phase is to revisit those 11 tickers using the newly available long OHLCV history while preserving the prior work as historical scientific context.
 
-- AAPL: prior exposure, substantive prior campaign Qwen; do not treat Qwen findings as trusted Sol scientific seed; not retrospectively blind/unseen.
-- MSFT: completed Sol campaign/durable memory.
-- NVDA: completed Sol campaign/durable memory; tentative subject-specific severe-loss rebound candidate remains unvalidated.
-- XOM: completed Sol campaign/durable memory.
-- AMD: prior exposure/incomplete Sol campaign due infrastructure/HTTP failure; no durable scientific conclusion.
-- JPM, TSLA, BA, META, AMZN, GOOGL: completed in the six-subject Sol campaign and now exposed; durable campaign memory exists.
+Sol must remain free to determine whether old relationships:
 
-Retrospective blind-validation unseen-subject eligibility is distinct from exploration priority. During EXPLORATION, prior exposure versus unexposed status must not be deterministically ranked. Sol may revisit old subjects when scientifically preferable.
+- persist over longer history;
+- disappear;
+- reverse;
+- are temporally/regime dependent;
+- require conditioning;
+- should be reformulated;
+- should be rejected;
+- or whether different questions deserve investigation.
 
-## Infrastructure State Relevant to Continuation
+Deterministic code must not choose which old findings to retest or prioritize.
 
-Thunder instance ID 0 / UUID `n5u2mzxc`, RTX A6000, 6 vCPU, 48 GB RAM, 100 GB disk. Connect with `tnr connect 0`; do not use raw SSH.
+## Critical New Stop Point — Same-Subject Revisit Context Gap
 
-Live repo: `/home/ubuntu/Momentum-Trading-System_v4`
-Virtual environment: `/home/ubuntu/Momentum-Trading-System_v4/.venv`
-Use `python -m pytest`.
+Do **not** immediately launch the 11-ticker 20-year revisit.
 
-`.env` is the authoritative runtime secrets/config file and must not be printed or committed. It contains required UW/FINRA/Sol variables. The retired `.mts_rd_ai_env*` backups were moved out of the repo to `/home/ubuntu/mts-private-env-backups`, with restricted permissions. Do not delete them without explicit cleanup review.
+At session end, the current scientific-context code was audited and a specific revisit-context gap was identified.
 
-GitHub auth works via `gh`; explicit credential helper configuration was required on the old Ubuntu `gh` version. Do not ask the user to type GitHub username/password into Thunder.
+Relevant files:
 
-Dependency/bootstrap repairs already integrated before this discovery branch include `yfinance`, `pandas`, `jsonschema`, and runtime `pyarrow`; prior integrated full gate reached 316/316.
+- `MTS_V4/subject_scientific_context.py`
+- `MTS_V4/cross_subject_context.py`
+- `scripts/run_sol_batched_one_subject.py`
 
-## Snapshot / Closeout Status
+Current `load_prior_subject_science()` intentionally excludes the active ticker's packages:
 
-The human explicitly deferred the golden Thunder snapshot until closeout, then chose to end this session while the packaging defect remains unresolved. **No golden snapshot was created in this session.** Do not create one automatically next session; first finish and validate the discovery-space production path and revisit experiment unless the human changes priorities.
+```python
+if subject_id == active_subject_id:
+    continue
+```
 
-Campaign artifacts and private env backups were intentionally preserved. Do not delete scientific/audit material merely because copies exist elsewhere without an explicit cleanup decision.
+That is correct for cross-subject context.
 
-## Decision Ledger
+Likewise, `build_cross_subject_context()` intentionally excludes the active subject from canonical cross-subject scientific memory. Its documentation explicitly says existing subject-local Nexus/RP context remains separate.
 
-Human-approved/frozen decisions this session:
+That is also correct during continuation of an existing campaign.
 
-- Discovery space remains too narrow after nine analyzed tickers; breadth of actual propositions matters more than nominal analysis/ticker count.
-- Audit Analysis/tool affordances and Sol behavior rather than assuming Sol alone is at fault.
-- Broaden executable Analysis capability without deterministic scientific menus or rankings.
-- Make RP exhaustion distinct from subject exhaustion while leaving the decision to continue/stop with Sol.
-- Retrospective blind-validation unseen-ticker requirements must not become an EXPLORATION priority signal.
-- Sol must be allowed to revisit previously analyzed tickers as its scientific knowledge broadens.
-- Test the repair by forcing the candidate universe to previously seen Sol tickers, while letting Sol choose which ticker and what science to perform.
-- If the revisit exhausts quickly in another narrow workflow, treat that as evidence the discovery-space problem remains unresolved; if horizons/representations/propositions broaden materially, begin allowing systematic re-analysis of prior tickers.
-- Do not use a `PYTHONPATH=.` workaround as the permanent production fix for the newly exposed `Core` import defect.
-- Golden snapshot deferred; no snapshot at this stopping point.
+However, `scripts/run_sol_batched_one_subject.py` starts a new state directory and new Nexus for a fresh subject run. Therefore, if AAPL were simply rerun as a fresh 20-year subject, Sol would receive:
+
+- newly reacquired 20-year AAPL evidence;
+- durable scientific packages from other subjects;
+- canonical cross-subject memory with active AAPL excluded;
+
+but it may **not** receive AAPL's own old approximately two-year findings/packages.
+
+That is wrong for the intended 20-year revisit.
+
+## Required Revisit Semantics
+
+For a designated 20-year revisit, Sol must receive all of the following simultaneously.
+
+### 1. Same-subject prior science
+
+For AAPL, expose AAPL's prior durable scientific learning as nonbinding historical scientific context, including where available:
+
+- originating questions;
+- originating rationales;
+- hypotheses;
+- predictive hypotheses;
+- findings;
+- unresolved issues;
+- close reasons;
+- final assessments;
+- provenance/status.
+
+Do **not** expose as reusable revisit state:
+
+- old raw market rows;
+- old reusable Analysis payloads;
+- deterministic scientific ranking;
+- a mandatory retest agenda.
+
+The old approximately two-year findings remain prior exploratory evidence. Sol may test, challenge, reformulate, condition, defer, ignore, or reject them.
+
+### 2. Cross-subject prior science
+
+Continue providing the existing compact durable scientific outputs from all **other** subjects.
+
+Do not change existing cross-subject exclusion semantics merely to solve this revisit problem.
+
+### 3. Canonical cross-subject memory/frontier
+
+Continue providing the canonical transferable scientific memory/frontier with the active subject excluded from the specifically cross-subject portion.
+
+### 4. Current reacquired evidence
+
+Reacquire current evidence normally:
+
+- approximately 20-year OHLCV where available;
+- UW/FINRA/options at whatever history their sources actually provide.
+
+Do not resurrect the old two-year raw execution state simply to expose its scientific conclusions.
+
+Conceptually the Sol revisit payload should contain four distinct scientific/evidence channels:
+
+```text
+same_subject_prior_science
+    active ticker's old durable scientific learning
+
+prior_subject_scientific_context
+    durable science from other tickers
+
+cross_subject_scientific_memory
+    transferable memory/frontier, active ticker excluded
+
+current evidence
+    newly reacquired 20-year OHLCV + provider-limited alternative data
+```
+
+The old same-subject science is context, not a deterministic instruction to reproduce or validate any specific proposition.
+
+## Immediate Next Engineering Question
+
+Before launching Sol, answer this exact question against current HEAD/code:
+
+> What is the smallest governed change that lets a designated 20-year revisit campaign expose the active ticker's prior durable approximately two-year scientific learning to Sol, while preserving existing cross-subject context, reacquiring fresh 20-year OHLCV, avoiding old raw/Analysis state, and leaving all scientific selection and interpretation to Sol?
+
+Likely direction, subject to current-code audit:
+
+- add a compact same-subject prior-science loader analogous to the current compact prior-subject package loader;
+- expose it to Sol under a clearly separate payload field such as `same_subject_prior_science`;
+- activate it only for an explicit revisit mode/path instead of silently changing ordinary fresh-subject semantics;
+- preserve provenance and status;
+- exclude raw rows and reusable Analysis payloads;
+- do not rank/select findings;
+- do not create a deterministic retest list;
+- keep current cross-subject behavior unchanged.
+
+Do not launch Sol until this same-subject revisit-context issue is resolved and tested.
+
+## Important Corpus Completeness Caveat
+
+The locally preserved 11-ticker package corpus contains 44 unique research-package JSON documents:
+
+- AAPL: 4
+- AMD: 14
+- AMZN: 3
+- BA: 3
+- GOOGL: 3
+- JPM: 2
+- META: 3
+- MSFT: 4
+- NVDA: 1
+- TSLA: 3
+- XOM: 4
+
+Total: 44.
+
+However, package-only extraction may not include every promoted Nexus finding. XOM is a known example: a promoted finding existed in Nexus even though its research package showed zero findings.
+
+Therefore, before declaring `same_subject_prior_science` complete, audit whether research packages alone are sufficient or whether durable Nexus/canonical records for the active ticker must also be included. Avoid silent duplication and do not deterministically rank duplicate scientific records.
+
+## Existing Tentative Predictive Propositions
+
+The existing corpus includes tentative recent-period propositions involving:
+
+- AAPL normalized-slope H20 exhaustion;
+- AAPL relative-volume H20 recovery;
+- AMD SMA20/H10;
+- BA ATR14/H20;
+- GOOGL relative-volume H3/H5;
+- JPM normalized-slope H20 exhaustion;
+- MSFT ATR14/H20 normalized favorable behavior;
+- NVDA ATR20-normalized one-day downshock/T+5;
+- META range-position20/H20 mean reversion;
+- TSLA wide Bollinger-band/H20 positive return.
+
+All remain tentative/exploratory and unvalidated. Because the original master OHLCV boundary was approximately two years, these must be understood as recent-period exploratory propositions until revisited over deeper evidence.
+
+Do not encode them into deterministic retest logic.
+
+## Cross-Ticker Scientific Families — Context, Not Rules
+
+Recurring structures have appeared around:
+
+- extension/exhaustion;
+- participation/relative volume;
+- volatility.
+
+Evidence is heterogeneous and sometimes contradictory.
+
+Examples:
+
+- AAPL/JPM extension measures suggested H20 exhaustion;
+- META range-position suggested related mean-reversion behavior;
+- XOM initially appeared similar but failed exact chronological stability, with strong earlier-period behavior disappearing later;
+- AMD normalized slope showed continuation rather than exhaustion and was concentrated in the later portion of its short history.
+
+Therefore do not hard-code `extension -> reversal`.
+
+Likewise do not hard-code `high relative volume -> bullish` or `high volatility -> bullish`.
+
+Sol must determine whether these structures are ticker-specific, regime-specific, conditional, transferable, coincidental, or unsupported.
+
+## Alternative-Data Resource Patch Already Completed
+
+Current branch already contains these resource-gap commits:
+
+- `ffe5611` — Expand neutral Analysis representation resources
+- `293ef44` — Preserve categorical group identity and numeric strings
+- `f11e00d` — Expand governed liquidity measurements
+- `991a335` — Test XOM resource gap repairs
+
+Those repairs added capabilities including:
+
+- numeric-string coercion at the Analysis boundary;
+- categorical group-key preservation;
+- exact categorical filtering;
+- datetime components;
+- parent-row-position composition;
+- richer neutral liquidity measurements;
+- Corwin-Schultz spread **estimate**, not an actual quote-spread measurement.
+
+Several older alternative-data packages were closed because the previous Analysis apparatus could not represent the evidence. Those may now be legitimate scientific reopen candidates, but Sol must decide whether they deserve attention.
+
+Still unresolved scientifically/data-wise:
+
+- FINRA prediction-time/publication availability and no-look-ahead treatment;
+- repeated historical options snapshots / validated historical alert sequence;
+- no actual historical quoted/effective spread or order-book depth.
+
+## Sequential Learning Requirement
+
+The intended future learning loop remains:
+
+```text
+Ticker 1
+→ durable learning
+→ Ticker 2 sees prior durable learning
+→ durable learning
+→ Ticker 3 sees 1+2
+→ ...
+```
+
+Most of the first 11 tickers did not receive this complete cumulative sequence because much of the corpus predates the final cross-subject architecture.
+
+AAPL → MSFT → XOM approximated the intended sequential approach more closely.
+
+After the 11-ticker deep-history revisit is correctly supported, the planned next 10 new tickers should receive true cumulative sequential learning.
+
+Do not launch those next 10 yet.
+
+Do not launch the dedicated multi-ticker generalization campaign yet.
+
+## Local + Transferable Science Requirement
+
+The human explicitly requires **both**:
+
+1. ticker-local scientific discovery;
+2. transferable/cross-subject scientific discovery.
+
+Do not sacrifice local market-state research in favor of generalized market-state research.
+
+Sol may use prior cross-subject knowledge to challenge or condition local findings, but local subject discovery remains independently important.
+
+## Cross-Subject Context Architecture Already Present
+
+Current fresh-subject architecture provides:
+
+- canonical cross-subject scientific memory/frontier;
+- compact durable prior-subject packages;
+- no raw prior-subject rows;
+- no reusable prior Analysis payloads;
+- no deterministic scientific ranking/agenda.
+
+`SubjectContextSolBatchResearchDirector` injects prior-subject scientific context into the Sol batch payload.
+
+`load_prior_subject_science()` deduplicates exact package content and excludes the active subject.
+
+These exclusion semantics should remain intact for cross-subject context. The revisit repair should add a **separate same-subject context channel**, not redefine cross-subject context to include the active ticker.
+
+## Operational State
+
+Thunder repository:
+
+`/home/ubuntu/Momentum-Trading-System_v4`
+
+Thunder instance ID:
+
+`0`
+
+Mac transfer command:
+
+```bash
+tnr scp 0:/home/ubuntu/<filename> ~/Downloads/
+```
+
+For timestamp wildcards, escape the wildcard when needed.
+
+Mac canonical repository:
+
+`/Users/davidbedwell/Documents/Momentum-Trading-System_v4`
+
+Use the repository venv:
+
+```bash
+.venv/bin/python -m pytest ...
+```
+
+Do not use `/usr/bin/python` for pytest.
+
+Large diagnostics should be saved to timestamped `.txt` on Thunder and accompanied by an explicit Mac transfer command.
+
+Do not give the human copyable shell commands containing placeholders or `...`.
+
+Do not ask the human to paste secrets.
+
+Sol runtime variables remain:
+
+- `MTS_SOL_BASE_URL`
+- `MTS_SOL_MODEL`
+- `MTS_SOL_API_KEY`
+
+## Decision Ledger — 2026-09-12
+
+Approved/frozen during this session:
+
+- Correct the accidental yfinance OHLCV default from approximately two years to approximately twenty years.
+- Keep UW/FINRA/options history independently provider-limited rather than truncating OHLCV to their depth.
+- Preserve existing approximately two-year findings as prior exploratory scientific evidence rather than discarding or overwriting them.
+- Revisit existing tickers with deeper OHLCV before proceeding to the next new-ticker sequence.
+- Sol, not deterministic code, decides what old findings to challenge, retest, reformulate, condition, ignore, or reject.
+- Preserve both ticker-local discovery and transferable/cross-subject discovery.
+- Do not launch the 11-ticker revisit until same-subject prior scientific learning is available to Sol in the new deep-history campaign.
+- Same-subject prior science must be exposed separately from cross-subject context; do not contaminate cross-subject semantics merely to solve revisit continuity.
+- Old raw rows and reusable Analysis payloads must not be carried forward as the mechanism for scientific continuity.
+- Do not launch the next 10 new tickers or the dedicated multi-ticker generalization campaign yet.
+
+## Immediate Next Session Action
+
+1. Read this entire `ChatGPT.md` before changing code.
+2. Verify current branch/HEAD and clean status; implementation baseline should include `dd52dcb` plus this handoff-only update.
+3. Inspect the current same-subject durable sources: research packages, Nexus records, and canonical memory records, including the known XOM package/Nexus discrepancy.
+4. Determine the smallest explicit revisit-mode implementation that exposes active-ticker durable prior science without old raw/Analysis state.
+5. Add focused tests proving:
+   - ordinary fresh-subject behavior is unchanged;
+   - cross-subject context still excludes the active subject;
+   - explicit revisit mode exposes active-subject durable prior science;
+   - same-subject revisit context contains no raw rows/reusable Analysis payloads and no deterministic ranking/agenda;
+   - 20-year OHLCV is reacquired normally.
+6. Run the full gate before any Sol API spend.
+7. Only after those tests pass should a first 20-year revisit campaign be launched.
+
+Do not treat the history-depth repair itself as incomplete. That repair is finished, tested, committed, and pushed. The unresolved issue is specifically **scientific continuity for the active ticker during a new deep-history revisit campaign**.
