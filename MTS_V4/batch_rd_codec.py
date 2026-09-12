@@ -11,6 +11,7 @@ from .batch_contracts import (
     ScientificInputReference,
 )
 from .contracts import Finding, ResearchPhase
+from .sol_spend_guard import SolResearchProgressEstimate
 
 
 class BatchResearchDecisionDecodeError(ValueError):
@@ -56,6 +57,11 @@ class BatchResearchDecisionCodec:
         if batch_interpretation is not None and not isinstance(batch_interpretation, str):
             raise BatchResearchDecisionDecodeError("batch_interpretation must be string or null")
 
+        progress_raw = raw.get("research_progress")
+        research_progress = None
+        if progress_raw is not None:
+            research_progress = BatchResearchDecisionCodec._decode_research_progress(progress_raw)
+
         if continue_research and not packages:
             raise BatchResearchDecisionDecodeError(
                 "continuing batched research requires at least one AI-authored Research Package"
@@ -85,7 +91,37 @@ class BatchResearchDecisionCodec:
             research_state=dict(research_state),
             close_reason=close_reason,
             batch_interpretation=batch_interpretation,
+            research_progress=research_progress,
         )
+
+    @staticmethod
+    def _decode_research_progress(raw: Any) -> SolResearchProgressEstimate:
+        if not isinstance(raw, Mapping):
+            raise BatchResearchDecisionDecodeError("research_progress must be an object")
+        try:
+            percent = float(raw.get("estimated_percent_complete"))
+            remaining_batches = int(raw.get("estimated_remaining_batches"))
+            remaining_calls = int(raw.get("estimated_remaining_sol_calls"))
+        except (TypeError, ValueError) as exc:
+            raise BatchResearchDecisionDecodeError(
+                "research_progress percent/batch/call estimates must be numeric"
+            ) from exc
+        confidence = BatchResearchDecisionCodec._nonblank(
+            raw.get("estimate_confidence"), "research_progress.estimate_confidence"
+        )
+        rationale = BatchResearchDecisionCodec._nonblank(
+            raw.get("estimate_rationale"), "research_progress.estimate_rationale"
+        )
+        try:
+            return SolResearchProgressEstimate(
+                estimated_percent_complete=percent,
+                estimated_remaining_batches=remaining_batches,
+                estimated_remaining_sol_calls=remaining_calls,
+                estimate_confidence=confidence,
+                estimate_rationale=rationale,
+            )
+        except ValueError as exc:
+            raise BatchResearchDecisionDecodeError(str(exc)) from exc
 
     @staticmethod
     def _decode_package(raw: Any) -> ResearchPackagePlan:
