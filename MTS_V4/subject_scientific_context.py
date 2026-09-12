@@ -150,3 +150,29 @@ def load_subject_scientific_context(
             active_subject_id=active_subject_id,
         ),
     )
+
+
+def load_recorded_cross_subject_memory(
+    retrospective_context: object,
+) -> JsonCrossSubjectScientificMemoryStore:
+    """Reload the exact memory snapshot recorded when a subject campaign started.
+
+    Resume/continuation must preserve scientific context across process boundaries.
+    If provenance is absent or the recorded snapshot is unavailable, fail closed
+    instead of silently substituting a different current memory state.
+    """
+    if not isinstance(retrospective_context, Mapping):
+        raise RuntimeError("retrospective context is not an object")
+    provenance = retrospective_context.get("cross_subject_memory_provenance")
+    if not isinstance(provenance, Mapping):
+        raise RuntimeError(
+            "retrospective campaign lacks canonical cross-subject memory provenance; "
+            "refusing to resume with changed scientific context"
+        )
+    source_path = provenance.get("source_path")
+    if not isinstance(source_path, str) or not source_path.strip():
+        raise RuntimeError("retrospective campaign cross-subject memory provenance lacks source_path")
+    path = Path(source_path).expanduser().resolve()
+    if not path.is_file():
+        raise RuntimeError(f"recorded canonical cross-subject memory snapshot is missing: {path}")
+    return JsonCrossSubjectScientificMemoryStore(path)
