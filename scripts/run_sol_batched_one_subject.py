@@ -8,7 +8,6 @@ import os
 from pathlib import Path
 
 from MTS_V4.batch_contracts import BatchExecutionReport
-from MTS_V4.batch_orchestrator import HumanSafetyBudget
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
@@ -16,6 +15,11 @@ from MTS_V4.intake import IntakeEngine
 from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.sol_batch_provider import SolBatchResearchDirector
+from MTS_V4.sol_spend_guard import (
+    DEFAULT_AUTHORIZED_SOL_SPEND_USD,
+    SolSpendAuthorizationRequired,
+    SolSpendAuthorizationSnapshot,
+)
 
 
 def _required_env(name: str) -> str:
@@ -30,6 +34,55 @@ def _append_jsonl(path: Path, payload) -> None:
         handle.write(json.dumps(payload, sort_keys=True, default=str, separators=(",", ":")) + "\n")
 
 
+def _format_money(value: float | None) -> str:
+    return "unknown" if value is None else f"${value:.2f}"
+
+
+def _interactive_spend_authorization(snapshot: SolSpendAuthorizationSnapshot) -> float | None:
+    print("\nHUMAN SOL SPEND AUTHORIZATION REQUIRED", flush=True)
+    print(f"AUTHORIZED={_format_money(snapshot.authorized_spend_usd)}", flush=True)
+    print(f"ACTUAL_SPEND={_format_money(snapshot.actual_spend_usd)}", flush=True)
+    print(f"SOL_CALLS_COMPLETED={snapshot.completed_sol_calls}", flush=True)
+    print(f"ESTIMATED_PERCENT_COMPLETE={snapshot.estimated_percent_complete}", flush=True)
+    print(f"ESTIMATED_REMAINING_BATCHES={snapshot.estimated_remaining_batches}", flush=True)
+    print(f"ESTIMATED_REMAINING_SOL_CALLS={snapshot.estimated_remaining_sol_calls}", flush=True)
+    print(
+        "ESTIMATED_ADDITIONAL_SPEND="
+        f"{_format_money(snapshot.estimated_additional_spend_low_usd)}-"
+        f"{_format_money(snapshot.estimated_additional_spend_high_usd)}",
+        flush=True,
+    )
+    print(
+        "ESTIMATED_TOTAL_SPEND="
+        f"{_format_money(snapshot.estimated_total_spend_low_usd)}-"
+        f"{_format_money(snapshot.estimated_total_spend_high_usd)}",
+        flush=True,
+    )
+    print(f"ESTIMATE_CONFIDENCE={snapshot.estimate_confidence}", flush=True)
+    print(f"ESTIMATE_RATIONALE={snapshot.estimate_rationale}", flush=True)
+    print(
+        f"RECOMMENDED_NEW_CEILING={_format_money(snapshot.recommended_authorized_ceiling_usd)}",
+        flush=True,
+    )
+    try:
+        raw = input(
+            "Enter a new total Sol spend ceiling in USD to authorize more, or press Enter to stop: "
+        ).strip()
+    except EOFError:
+        return None
+    if not raw:
+        return None
+    try:
+        value = float(raw)
+    except ValueError:
+        print("Authorization was not numeric; stopping before another Sol call.", flush=True)
+        return None
+    if value <= snapshot.authorized_spend_usd:
+        print("New authorization must exceed the current ceiling; stopping.", flush=True)
+        return None
+    return value
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -41,13 +94,13 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--ticker", required=True, help="equity ticker, e.g. AMD")
     parser.add_argument("--state-dir", default=None)
     parser.add_argument(
-        "--human-safety-max-analyses",
-        type=int,
-        default=None,
+        "--sol-spend-limit-usd",
+        type=float,
+        default=DEFAULT_AUTHORIZED_SOL_SPEND_USD,
         help=(
-            "optional explicit human operational ceiling for total Analysis executions in this run; "
-            "if a complete Sol-authored batch would exceed it, none of that batch executes and human "
-            "authorization is required. This is not a scientific batch-size limit."
+            "initial human authorization for Sol API spend for this subject; default is $20. "
+            "When Sol's own remaining-work estimate projects more spend, the runner stops before "
+            "the next Sol call and requests human authorization for a higher dollar ceiling."
         ),
     )
     parser.add_argument(
@@ -63,15 +116,15 @@ def main(argv: list[str] | None = None) -> int:
     ticker = args.ticker.strip().upper()
     if not ticker:
         raise RuntimeError("ticker cannot be blank")
-    if args.human_safety_max_analyses is not None and args.human_safety_max_analyses <= 0:
-        raise RuntimeError("--human-safety-max-analyses must be positive when supplied")
+    if args.sol_spend_limit_usd <= 0:
+        raise RuntimeError("--sol-spend-limit-usd must be positive")
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     state_dir = Path(args.state_dir or f"/home/ubuntu/mts-v4-sol-batched-{ticker.lower()}-{stamp}")
     if args.dry_run:
         print(
-            f"DRY_RUN=True TICKER={ticker} HUMAN_SAFETY_MAX_ANALYSES="
-            f"{args.human_safety_max_analyses} STATE_DIR={state_dir}"
+            f"DRY_RUN=True TICKER={ticker} SOL_SPEND_LIMIT_USD={args.sol_spend_limit_usd:.2f} "
+            f"STATE_DIR={state_dir}"
         )
         return 0
 
@@ -91,6 +144,8 @@ def main(argv: list[str] | None = None) -> int:
         timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")),
         required_subject_id=subject.subject_id,
         required_research_phase=ResearchPhase.EXPLORATION,
+        sol_spend_limit_usd=args.sol_spend_limit_usd,
+        human_spend_authorization_callback=_interactive_spend_authorization,
     )
     runtime = build_batch_runtime(
         rd=rd,
@@ -149,20 +204,26 @@ def main(argv: list[str] | None = None) -> int:
             },
         )
 
-    human_safety_budget = (
-        HumanSafetyBudget(max_analysis_executions=args.human_safety_max_analyses)
-        if args.human_safety_max_analyses is not None
-        else None
-    )
-    outcome = runtime.orchestrator.run(
-        subject=subject,
-        evidence=evidence,
-        human_safety_budget=human_safety_budget,
-        decision_callback=on_decision,
-        report_callback=on_report,
-        accepted_request_callback=accepted,
-    )
+    try:
+        outcome = runtime.orchestrator.run(
+            subject=subject,
+            evidence=evidence,
+            decision_callback=on_decision,
+            report_callback=on_report,
+            accepted_request_callback=accepted,
+        )
+    except SolSpendAuthorizationRequired as exc:
+        artifact = state_dir / "sol_spend_authorization_required.json"
+        artifact.write_text(
+            json.dumps(asdict(exc.snapshot), sort_keys=True, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        print(f"STATE_DIR={state_dir}", flush=True)
+        print("HUMAN_SOL_SPEND_AUTHORIZATION_REQUIRED=True", flush=True)
+        print(f"AUTHORIZATION_ARTIFACT={artifact}", flush=True)
+        return 2
 
+    spend = rd.sol_spend_snapshot()
     summary = {
         "campaign_id": campaign_id,
         "subject_id": subject.subject_id,
@@ -172,9 +233,7 @@ def main(argv: list[str] | None = None) -> int:
         "findings_promoted": outcome.findings_promoted,
         "closed": outcome.closed,
         "close_reason": outcome.close_reason,
-        "human_authorization_required": outcome.human_authorization_required,
-        "pending_batch_analysis_count": outcome.pending_batch_analysis_count,
-        "human_safety_limit": outcome.human_safety_limit,
+        "sol_spend": asdict(spend) if spend is not None else None,
         "sol_transport_telemetry": str(state_dir / "sol_transport_telemetry.jsonl"),
     }
     (state_dir / "run_summary.json").write_text(
@@ -189,8 +248,9 @@ def main(argv: list[str] | None = None) -> int:
     print(f"ANALYSES={outcome.analyses_executed}", flush=True)
     print(f"CLOSED={outcome.closed}", flush=True)
     print(f"CLOSE_REASON={outcome.close_reason}", flush=True)
-    print(f"HUMAN_AUTHORIZATION_REQUIRED={outcome.human_authorization_required}", flush=True)
-    print(f"PENDING_BATCH_ANALYSES={outcome.pending_batch_analysis_count}", flush=True)
+    if spend is not None:
+        print(f"SOL_SPEND_USD={spend.actual_spend_usd:.4f}", flush=True)
+        print(f"SOL_AUTHORIZED_USD={spend.authorized_spend_usd:.2f}", flush=True)
     print(f"SOL_TELEMETRY={state_dir / 'sol_transport_telemetry.jsonl'}", flush=True)
     return 0
 
