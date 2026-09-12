@@ -15,6 +15,7 @@ from .discovery_methods import discovery_analysis_methods, discovery_method_cata
 from .execution_interface import TransparentInputBindingValidator
 from .group_aggregation import group_aggregation_analysis_method, group_aggregation_method_spec
 from .interfaces import ResearchDirectorProvider
+from .lineage_analysis import LineageAwareExactMethodAnalysisExecutor
 from .method_catalog import MethodCatalog
 from .nexus import InMemoryResearchNexus, ResearchNexus
 from .nexus_json import JsonResearchNexus
@@ -90,7 +91,7 @@ def _build_execution_components(
     catalog.register(group_aggregation_method_spec())
     concepts = concept_library or seed_market_concepts()
     validator = TransparentInputBindingValidator(catalog)
-    analysis = ExactMethodAnalysisExecutor()
+    analysis = LineageAwareExactMethodAnalysisExecutor()
     for method in standard_analysis_methods():
         analysis.register(method)
     for method in discovery_analysis_methods():
