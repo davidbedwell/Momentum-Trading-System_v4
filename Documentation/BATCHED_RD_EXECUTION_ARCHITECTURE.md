@@ -15,8 +15,8 @@ The runtime executes the complete authorized batch before returning to the AI Re
 The high-level loop is:
 
 AI Research Director
-→ one or more AI-authored Research Packages
-→ one or more AI-authored Analysis Specifications per RP
+→ zero, one, or many AI-authored Research Packages
+→ zero, one, or many AI-authored Analysis Specifications per RP as scientifically warranted
 → deterministic scientific-specification compiler
 → exact low-level AnalysisRequests
 → Analysis Engine execution
@@ -37,15 +37,41 @@ A genuine scientific dependency may create a decision boundary. Sol should not p
 
 There is no architectural target for the number of Research Packages or Analysis Specifications in a batch. Zero, one, or many may be scientifically appropriate. The number is a Sol scientific judgment constrained only by available evidence, executable capability, genuine scientific dependencies, and objective execution safety—not by a deterministic quota or preferred batch size.
 
-## Human Operational Safety Boundary
+## Human Sol Spend Authorization
 
-A human may explicitly impose an operational safety ceiling for a run. This is separate from scientific authority and is disabled unless a human supplies it.
+The normal human operational control is a dollar ceiling on premium Sol API spending, not an Analysis-count ceiling. The default initial authorization is **$20 per subject/run** unless the human explicitly supplies a different amount.
 
-A human safety ceiling may not be used as a hidden or default scientific batch-size limit. If execution of the entire Sol-authored batch would exceed the human-authorized ceiling, the runtime must stop before any Analysis Specification in that pending batch executes and report that human authorization is required. The runtime may not partially execute the batch, rank Analysis Specifications, select which RPs fit under the ceiling, or mark the remainder as scientifically unnecessary.
+Analysis execution count is not used as a funding proxy. A large deterministic batch may be inexpensive while a small number of premium-model calls may be expensive. Therefore no deterministic `max_analyses`, RP quota, preferred batch size, or partial-batch truncation is permitted as a cost-control mechanism.
 
-The pending Sol-authored batch remains the scientific unit. Human authorization may increase or remove the operational ceiling and permit that complete batch to execute. This control exists for cost/operational governance only; it does not express a scientific preference about how many RPs or analyses Sol should author.
+After every valid Sol batch decision, Sol must provide an independent scientific progress estimate containing:
 
-Provider-enforced transport constraints such as actual context-window, output-size, or rate-limit boundaries are also mechanical constraints rather than scientific judgments. Any transport adaptation must preserve complete scientific representation and must not rank or suppress results based on deterministic estimates of importance.
+- `estimated_percent_complete` from 0 through 100;
+- `estimated_remaining_batches`;
+- `estimated_remaining_sol_calls`;
+- `estimate_confidence`;
+- `estimate_rationale` explaining what scientific work remains.
+
+Sol must make this estimate independently of the authorized dollar amount. The funding ceiling is operational context only and must not cause Sol to reduce, rank, suppress, defer, or reshape scientifically justified work merely to fit the budget.
+
+The deterministic spend guard combines Sol's scientific progress estimate with provider-reported token usage and configured Sol token prices. It produces a projected remaining-spend range using both observed average Sol-call cost and Sol's estimated percentage complete / remaining-call count. The estimate is explicitly approximate because future prompt and output token counts cannot be known exactly in advance.
+
+When the projected need exceeds the current human authorization, MTS stops **before the next Sol API call** and presents the human with:
+
+- actual Sol spend to date;
+- the current authorized ceiling;
+- Sol's estimated percentage complete;
+- estimated remaining Analysis batches;
+- estimated remaining Sol calls;
+- estimated additional-spend range;
+- estimated total-spend range;
+- Sol's confidence and rationale;
+- a recommended higher dollar ceiling.
+
+Only a human may increase the authorization. Increasing the ceiling changes funding authority only; it does not change the scientific plan, RP count, Analysis count, method, parameter, horizon, priority, or significance judgment.
+
+If the human declines additional spending, the next Sol call does not occur. Completed scientific work and telemetry remain durable. A future continuation mechanism must resume from durable state rather than reconstructing scientific judgment deterministically.
+
+Provider-enforced transport constraints such as actual context-window, output-size, or rate-limit boundaries are mechanical constraints rather than scientific judgments. Any transport adaptation must preserve complete scientific representation and must not rank or suppress results based on deterministic estimates of importance.
 
 ## Scientific Authority
 
@@ -66,7 +92,8 @@ The AI Research Director owns:
 - whether the subject warrants additional Research Packages;
 - where a genuine scientific decision boundary exists;
 - whether to promote findings or predictive hypotheses;
-- whether to continue, pivot, defer, or close research.
+- whether to continue, pivot, defer, or close research;
+- scientific estimates of percentage complete and work remaining.
 
 ## Deterministic Compiler Authority
 
@@ -85,7 +112,8 @@ The compiler owns mechanics that have no scientific alternative once the AI has 
 - safe internal representation of symbolic dependencies;
 - objective type/shape/identity/lineage checks;
 - semantics-preserving missing-value exclusion when the selected Analysis method already defines that behavior;
-- retrying or repairing purely mechanical representation defects when exactly one semantics-preserving repair exists.
+- retrying or repairing purely mechanical representation defects when exactly one semantics-preserving repair exists;
+- metering provider-reported token usage and calculating operational spend from configured prices.
 
 The compiler may not choose between multiple scientifically meaningful alternatives. If more than one scientific interpretation or execution meaning exists, the affected branch must be returned to the AI Research Director as an ambiguity.
 
@@ -162,7 +190,7 @@ If a branch cannot execute because several scientifically meaningful repairs are
 
 Premium AI reasoning should be spent on science, not private runtime bookkeeping. The AI should not be repeatedly called merely to copy generated IDs, reproduce output paths, invent safe aliases, or repair reserved internal names.
 
-This architecture is intended to reduce the near one-AI-call-per-Analysis pattern while improving the AI Research Director's ability to reason across multiple hypotheses and Research Packages simultaneously.
+This architecture is intended to reduce the near one-AI-call-per-Analysis pattern while improving the AI Research Director's ability to reason across multiple hypotheses and Research Packages simultaneously. Cost safety is enforced in dollars at the premium-model boundary, while Analysis breadth remains a scientific decision.
 
 ## Compatibility
 
