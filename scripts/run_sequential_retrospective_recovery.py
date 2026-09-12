@@ -318,6 +318,7 @@ def _run_subject(
 
     spend = rd.sol_spend_snapshot()
     summary = {
+        "state_dir": str(state_dir),
         "campaign_id": campaign_id,
         "subject_id": subject.subject_id,
         "mode": mode,
@@ -368,6 +369,12 @@ def _parser() -> argparse.ArgumentParser:
         help="initial Sol spend authorization per subject",
     )
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--start-at",
+        choices=SEQUENCE,
+        default=SEQUENCE[0],
+        help="resume the ordered sequence at AAPL, MSFT, or XOM without rerunning earlier completed subjects",
+    )
     return parser
 
 
@@ -386,19 +393,21 @@ def main(argv: Sequence[str] | None = None) -> int:
     initial_context = load_subject_scientific_context(root, active_subject_id="equity:AAPL")
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     results: list[Mapping[str, object]] = []
+    start_index = SEQUENCE.index(args.start_at)
+    run_sequence = SEQUENCE[start_index:]
 
-    print("SEQUENCE=" + ",".join(SEQUENCE), flush=True)
+    print("SEQUENCE=" + ",".join(run_sequence), flush=True)
     print(f"CANONICAL_MEMORY_SOURCE={initial_context.memory_selection.source_path}", flush=True)
     print(f"CANONICAL_MEMORY_RECORDS={len(initial_context.memory_selection.store.records())}", flush=True)
     frontier = initial_context.memory_selection.store.frontier()
     print(f"CANONICAL_MEMORY_FRONTIER_VERSION={frontier.version if frontier is not None else 0}", flush=True)
-    for ticker in SEQUENCE:
+    for ticker in run_sequence:
         historical = historical_dirs[ticker]
         mode = "RETROSPECTIVE_RECOVERY" if historical is not None else "FRESH_FULL_SUBJECT"
         print(f"{ticker}_MODE={mode}", flush=True)
         print(f"HISTORICAL_{ticker}_DIR={historical if historical is not None else 'NONE'}", flush=True)
 
-    for ordinal, ticker in enumerate(SEQUENCE, start=1):
+    for ordinal, ticker in enumerate(run_sequence, start=start_index + 1):
         state_dir = root / f"mts-v4-sequential-rerun-{ordinal:02d}-{ticker.lower()}-{stamp}"
         result = _run_subject(
             root=root,
@@ -431,7 +440,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     summary_path.write_text(
         json.dumps(
             {
-                "sequence": SEQUENCE,
+                "sequence": run_sequence,
+                "start_at": args.start_at,
                 "dry_run": args.dry_run,
                 "results": results,
             },
