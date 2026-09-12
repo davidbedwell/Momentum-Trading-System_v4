@@ -310,9 +310,13 @@ def main(argv: list[str] | None = None) -> int:
         scientific_context_path.read_text(encoding="utf-8")
     )
 
-    if scientific_context.get("mode") != "FRESH_FULL_SUBJECT":
+    revisit_mode = (
+        scientific_context.get("mode") == "REVISIT"
+        or scientific_context.get("revisit_mode") is True
+    )
+    if scientific_context.get("mode") != "FRESH_FULL_SUBJECT" and not revisit_mode:
         raise RuntimeError(
-            "resume_fresh_subject may only resume FRESH_FULL_SUBJECT state"
+            "resume_fresh_subject may only resume FRESH_FULL_SUBJECT or explicit REVISIT state"
         )
 
     subject_id = scientific_context.get("active_subject_id")
@@ -341,7 +345,20 @@ def main(argv: list[str] | None = None) -> int:
             "subject_scientific_context lacks exact prior-subject science"
         )
 
-    mission = scientific_context.get("mission", SUBJECT_MISSION)
+    same_subject_prior_context = scientific_context.get(
+        "same_subject_prior_science"
+    )
+    if revisit_mode and not isinstance(same_subject_prior_context, Mapping):
+        raise RuntimeError(
+            "revisit subject_scientific_context lacks exact same-subject prior science"
+        )
+    if not revisit_mode:
+        same_subject_prior_context = None
+
+    mission = scientific_context.get(
+        "mission",
+        DEFAULT_MISSION if revisit_mode else SUBJECT_MISSION,
+    )
     if not isinstance(mission, str) or not mission.strip():
         raise RuntimeError("subject mission is invalid")
 
@@ -667,6 +684,7 @@ def main(argv: list[str] | None = None) -> int:
 
         rd = SubjectContextSolBatchResearchDirector(
             prior_subject_scientific_context=prior_subject_context,
+            same_subject_prior_scientific_context=same_subject_prior_context,
             research_package_store=recovered_store,
             base_url=_required_env("MTS_SOL_BASE_URL"),
             model=_required_env("MTS_SOL_MODEL"),
@@ -967,6 +985,9 @@ def main(argv: list[str] | None = None) -> int:
     rd = SubjectContextSolBatchResearchDirector(
         prior_subject_scientific_context=(
             prior_subject_context
+        ),
+        same_subject_prior_scientific_context=(
+            same_subject_prior_context
         ),
         research_package_store=recovered_store,
         base_url=_required_env("MTS_SOL_BASE_URL"),

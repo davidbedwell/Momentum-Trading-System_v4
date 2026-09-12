@@ -71,7 +71,7 @@ def _interactive_spend_authorization(snapshot: SolSpendAuthorizationSnapshot) ->
         raw = input(
             "Enter a new total Sol spend ceiling in USD to authorize more, or press Enter to stop: "
         ).strip()
-    except EOFError:
+    except (EOFError, OSError):
         return None
     if not raw:
         return None
@@ -204,6 +204,8 @@ def main(argv: list[str] | None = None) -> int:
         json.dumps(
             {
                 "active_subject_id": subject.subject_id,
+                "mode": "REVISIT" if args.revisit else "FRESH_FULL_SUBJECT",
+                "mission": DEFAULT_MISSION,
                 "canonical_memory_source": str(scientific_context.memory_selection.source_path),
                 "canonical_memory_superseded_paths": [
                     str(path) for path in scientific_context.memory_selection.superseded_paths

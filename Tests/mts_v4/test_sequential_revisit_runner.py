@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 from scripts.run_sol_sequential_revisits import (
     DEFAULT_PER_SUBJECT_SOL_SPEND_USD,
@@ -9,6 +10,7 @@ from scripts.run_sol_sequential_revisits import (
     _parser,
     _subject_command,
 )
+from scripts.run_sol_batched_one_subject import _interactive_spend_authorization
 
 
 class SequentialRevisitRunnerTests(unittest.TestCase):
@@ -50,6 +52,25 @@ class SequentialRevisitRunnerTests(unittest.TestCase):
         )
         self.assertIn("--revisit", command)
         self.assertIn("--dry-run", command)
+
+    def test_background_authorization_prompt_stops_cleanly_when_stdin_is_closed(self) -> None:
+        class Snapshot:
+            authorized_spend_usd = 15.0
+            actual_spend_usd = 14.78
+            completed_sol_calls = 22
+            estimated_percent_complete = 93.0
+            estimated_remaining_batches = 2
+            estimated_remaining_sol_calls = 2
+            estimated_additional_spend_low_usd = 1.11
+            estimated_additional_spend_high_usd = 1.34
+            estimated_total_spend_low_usd = 15.90
+            estimated_total_spend_high_usd = 16.13
+            estimate_confidence = "medium-high"
+            estimate_rationale = "remaining work"
+            recommended_authorized_ceiling_usd = 20.0
+
+        with patch("builtins.input", side_effect=OSError(9, "Bad file descriptor")):
+            self.assertIsNone(_interactive_spend_authorization(Snapshot()))
 
 
 if __name__ == "__main__":
