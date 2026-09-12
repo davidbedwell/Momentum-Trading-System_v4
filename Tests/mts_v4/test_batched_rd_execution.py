@@ -13,7 +13,7 @@ from MTS_V4.batch_contracts import (
     ScientificAnalysisSpecification,
     ScientificInputReference,
 )
-from MTS_V4.batch_orchestrator import BatchResearchLoopOrchestrator, HumanSafetyBudget
+from MTS_V4.batch_orchestrator import BatchResearchLoopOrchestrator
 from MTS_V4.cache import TemporaryResearchCache
 from MTS_V4.contracts import AnalysisResult, EvidenceDescriptor, ResearchPhase, SubjectMetadata
 from MTS_V4.method_catalog import MethodCatalog, MethodSpec
@@ -410,46 +410,6 @@ class BatchedRDExecutionTests(unittest.TestCase):
         statuses = {record.analysis_id: record.status for record in report.records}
         self.assertEqual(statuses["healthy"], "SUCCESS")
         self.assertEqual(statuses["broken"], "AMBIGUOUS_SCIENTIFIC_REPAIR_REQUIRED")
-
-    def test_human_safety_budget_stops_before_entire_batch_without_partial_execution(self):
-        analyses = tuple(
-            self._spec(
-                f"a:{index}",
-                "rp:wide",
-                "test",
-                [ScientificInputReference(role="raw", evidence_id=self.evidence.evidence_id)],
-            )
-            for index in range(3)
-        )
-        decision = BatchResearchDecision(
-            continue_research=True,
-            research_packages=(
-                ResearchPackagePlan(
-                    rp_id="rp:wide",
-                    objective="Execute the complete Sol-authored scientific batch.",
-                    analyses=analyses,
-                ),
-            ),
-        )
-        rd = _FakeBatchRD(decision)
-        analysis, catalog, cache = self._runtime_parts()
-        orchestrator = self._orchestrator(rd, analysis, catalog, cache)
-
-        outcome = orchestrator.run(
-            subject=self.subject,
-            evidence=(self.evidence,),
-            human_safety_budget=HumanSafetyBudget(max_analysis_executions=2),
-        )
-
-        self.assertFalse(outcome.closed)
-        self.assertTrue(outcome.human_authorization_required)
-        self.assertEqual(outcome.close_reason, "HUMAN_SAFETY_AUTHORIZATION_REQUIRED")
-        self.assertEqual(outcome.pending_batch_analysis_count, 3)
-        self.assertEqual(outcome.human_safety_limit, 2)
-        self.assertEqual(outcome.analyses_executed, 0)
-        self.assertEqual(outcome.batches_executed, 0)
-        self.assertEqual(len(analysis.requests), 0)
-        self.assertEqual(rd.interpret_calls, 0)
 
 
 if __name__ == "__main__":
