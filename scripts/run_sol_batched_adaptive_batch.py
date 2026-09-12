@@ -12,7 +12,6 @@ from typing import Mapping, Sequence
 from MTS_V4.adaptive_batch import SubjectEligibilityEnvelope, SubjectRunLedger, ThreeSubjectBatchController
 from MTS_V4.adaptive_program import CompletedSubjectRun, SolAdaptiveThreeSubjectProgram
 from MTS_V4.batch_contracts import BatchExecutionReport
-from MTS_V4.batch_orchestrator import HumanSafetyBudget
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.batch_synthesis import SolBatchScientificSynthesizer
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
@@ -23,6 +22,11 @@ from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.sol_batch_provider import SolBatchResearchDirector
 from MTS_V4.sol_primary_provider import SolPrimaryResearchDirector
+from MTS_V4.sol_spend_guard import (
+    DEFAULT_AUTHORIZED_SOL_SPEND_USD,
+    SolSpendAuthorizationRequired,
+    SolSpendAuthorizationSnapshot,
+)
 from MTS_V4.subject_memory_digest import SolSubjectScientificMemoryAuthor
 from MTS_V4.subject_selection import RDSubjectSelectionDecision, SolAdaptiveSubjectSelector
 from MTS_V4.validation_first import ValidationFirstSubjectGate
@@ -42,13 +46,63 @@ def _required_env(name: str) -> str:
     return value
 
 
-def _optional_positive_int_env(name: str) -> int | None:
+def _positive_float_env(name: str, default: float) -> float:
     raw = os.getenv(name, "").strip()
+    value = default if not raw else float(raw)
+    if value <= 0:
+        raise RuntimeError(f"{name} must be positive")
+    return value
+
+
+def _format_money(value: float | None) -> str:
+    return "unknown" if value is None else f"${value:.2f}"
+
+
+def _interactive_spend_authorization(
+    subject_id: str,
+    snapshot: SolSpendAuthorizationSnapshot,
+) -> float | None:
+    print(f"\nHUMAN SOL SPEND AUTHORIZATION REQUIRED SUBJECT={subject_id}", flush=True)
+    print(f"AUTHORIZED={_format_money(snapshot.authorized_spend_usd)}", flush=True)
+    print(f"ACTUAL_SPEND={_format_money(snapshot.actual_spend_usd)}", flush=True)
+    print(f"SOL_CALLS_COMPLETED={snapshot.completed_sol_calls}", flush=True)
+    print(f"ESTIMATED_PERCENT_COMPLETE={snapshot.estimated_percent_complete}", flush=True)
+    print(f"ESTIMATED_REMAINING_BATCHES={snapshot.estimated_remaining_batches}", flush=True)
+    print(f"ESTIMATED_REMAINING_SOL_CALLS={snapshot.estimated_remaining_sol_calls}", flush=True)
+    print(
+        "ESTIMATED_ADDITIONAL_SPEND="
+        f"{_format_money(snapshot.estimated_additional_spend_low_usd)}-"
+        f"{_format_money(snapshot.estimated_additional_spend_high_usd)}",
+        flush=True,
+    )
+    print(
+        "ESTIMATED_TOTAL_SPEND="
+        f"{_format_money(snapshot.estimated_total_spend_low_usd)}-"
+        f"{_format_money(snapshot.estimated_total_spend_high_usd)}",
+        flush=True,
+    )
+    print(f"ESTIMATE_CONFIDENCE={snapshot.estimate_confidence}", flush=True)
+    print(f"ESTIMATE_RATIONALE={snapshot.estimate_rationale}", flush=True)
+    print(
+        f"RECOMMENDED_NEW_CEILING={_format_money(snapshot.recommended_authorized_ceiling_usd)}",
+        flush=True,
+    )
+    try:
+        raw = input(
+            "Enter a new total Sol spend ceiling in USD for this subject, or press Enter to stop: "
+        ).strip()
+    except EOFError:
+        return None
     if not raw:
         return None
-    value = int(raw)
-    if value <= 0:
-        raise RuntimeError(f"{name} must be positive when supplied")
+    try:
+        value = float(raw)
+    except ValueError:
+        print("Authorization was not numeric; stopping before another Sol call.", flush=True)
+        return None
+    if value <= snapshot.authorized_spend_usd:
+        print("New authorization must exceed the current ceiling; stopping.", flush=True)
+        return None
     return value
 
 
@@ -170,8 +224,8 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "Run the adaptive MTS v4 subject program with batched Sol research inside each subject. "
-            "Subject selection/memory synthesis remain coordination calls; subject research uses unbounded "
-            "scientific multi-RP, multi-analysis Sol batches unless an explicit human safety ceiling is supplied."
+            "Subject selection/memory synthesis remain coordination calls; each subject gets an initial "
+            "$20 Sol-spend authorization by default while scientific RP/Analysis breadth remains unbounded."
         )
     )
     parser.add_argument(
@@ -185,15 +239,18 @@ def _parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     timeout_seconds = int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600"))
-    legacy_limit = os.getenv("MTS_ADAPTIVE_BATCH_MAX_ANALYSES_PER_SUBJECT", "").strip()
-    if legacy_limit:
-        raise RuntimeError(
-            "MTS_ADAPTIVE_BATCH_MAX_ANALYSES_PER_SUBJECT is no longer a scientific execution limit. "
-            "If you intentionally want a human-owned operational ceiling, use "
-            "MTS_HUMAN_SAFETY_MAX_ANALYSES_PER_SUBJECT instead."
-        )
-    human_safety_max_analyses = _optional_positive_int_env(
-        "MTS_HUMAN_SAFETY_MAX_ANALYSES_PER_SUBJECT"
+    for legacy_name in (
+        "MTS_ADAPTIVE_BATCH_MAX_ANALYSES_PER_SUBJECT",
+        "MTS_HUMAN_SAFETY_MAX_ANALYSES_PER_SUBJECT",
+    ):
+        if os.getenv(legacy_name, "").strip():
+            raise RuntimeError(
+                f"{legacy_name} is retired. Analysis count is not a funding or scientific limit. "
+                "Use MTS_SOL_SPEND_LIMIT_USD_PER_SUBJECT to change the human Sol dollar authorization."
+            )
+    sol_spend_limit_usd = _positive_float_env(
+        "MTS_SOL_SPEND_LIMIT_USD_PER_SUBJECT",
+        DEFAULT_AUTHORIZED_SOL_SPEND_USD,
     )
     batch_limit = int(os.getenv("MTS_ADAPTIVE_BATCH_SUBJECT_LIMIT", "3"))
     if batch_limit < 1:
@@ -210,7 +267,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.dry_run:
         print(
             f"DRY_RUN=True BATCH_ID={batch_id} SUBJECT_LIMIT={batch_limit} "
-            f"HUMAN_SAFETY_MAX_ANALYSES_PER_SUBJECT={human_safety_max_analyses} "
+            f"SOL_SPEND_LIMIT_USD_PER_SUBJECT={sol_spend_limit_usd:.2f} "
             f"CANDIDATES={len(candidates)} STATE_DIR={state_dir}"
         )
         return 0
@@ -267,6 +324,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         subject_dir.mkdir(parents=True, exist_ok=False)
         package_store = JsonResearchPackageStore(subject_dir / "research_packages")
         recorder = BatchCampaignResearchRecorder(package_store=package_store)
+
+        def authorize_more(snapshot: SolSpendAuthorizationSnapshot) -> float | None:
+            return _interactive_spend_authorization(subject_id, snapshot)
+
         rd = SolBatchResearchDirector(
             research_package_store=package_store,
             base_url=base_url,
@@ -275,6 +336,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             timeout_seconds=timeout_seconds,
             required_subject_id=subject_id,
             required_research_phase=ResearchPhase.EXPLORATION,
+            sol_spend_limit_usd=sol_spend_limit_usd,
+            human_spend_authorization_callback=authorize_more,
         )
         runtime = build_batch_runtime(
             rd=rd,
@@ -333,19 +396,27 @@ def main(argv: Sequence[str] | None = None) -> int:
                 },
             )
 
-        human_safety_budget = (
-            HumanSafetyBudget(max_analysis_executions=human_safety_max_analyses)
-            if human_safety_max_analyses is not None
-            else None
-        )
-        outcome = runtime.orchestrator.run(
-            subject=subject,
-            evidence=evidence,
-            human_safety_budget=human_safety_budget,
-            decision_callback=on_decision,
-            report_callback=on_report,
-            accepted_request_callback=accepted,
-        )
+        try:
+            outcome = runtime.orchestrator.run(
+                subject=subject,
+                evidence=evidence,
+                decision_callback=on_decision,
+                report_callback=on_report,
+                accepted_request_callback=accepted,
+            )
+        except SolSpendAuthorizationRequired as exc:
+            artifact = subject_dir / "sol_spend_authorization_required.json"
+            artifact.write_text(
+                json.dumps(asdict(exc.snapshot), sort_keys=True, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            raise RuntimeError(
+                "Human Sol-spend authorization required before another premium-model call: "
+                f"subject={subject_id} actual_spend={exc.snapshot.actual_spend_usd:.4f} "
+                f"authorized={exc.snapshot.authorized_spend_usd:.2f} artifact={artifact}"
+            ) from exc
+
+        spend = rd.sol_spend_snapshot()
         durable_packages = _subject_research_provenance(
             package_store=package_store,
             subject_id=subject_id,
@@ -365,10 +436,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "findings_promoted": outcome.findings_promoted,
                 "closed": outcome.closed,
                 "close_reason": outcome.close_reason,
-                "human_authorization_required": outcome.human_authorization_required,
-                "pending_batch_analysis_count": outcome.pending_batch_analysis_count,
-                "human_safety_limit": outcome.human_safety_limit,
                 "final_research_state": outcome.final_decision.research_state,
+                "final_research_progress": (
+                    asdict(outcome.final_decision.research_progress)
+                    if outcome.final_decision.research_progress is not None
+                    else None
+                ),
+                "sol_spend": asdict(spend) if spend is not None else None,
             },
             "durable_research_packages": durable_packages,
             "provenance_instruction": (
@@ -400,12 +474,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             json.dumps(asdict(ledger), sort_keys=True, indent=2, default=str) + "\n",
             encoding="utf-8",
         )
-        if outcome.human_authorization_required:
-            raise RuntimeError(
-                "Human safety authorization required before executing the complete pending Sol-authored batch: "
-                f"subject={subject_id} pending_analyses={outcome.pending_batch_analysis_count} "
-                f"authorized_total={outcome.human_safety_limit}. No part of the pending batch was executed."
-            )
         return CompletedSubjectRun(ledger=ledger, scientific_context=scientific_context)
 
     program = SolAdaptiveThreeSubjectProgram(
@@ -432,7 +500,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "execution_architecture": "BATCHED_SOL_MULTI_RP_MULTI_ANALYSIS",
         "requires_human_review": True,
         "approved_subject_limit": batch_limit,
-        "human_safety_max_analyses_per_subject": human_safety_max_analyses,
+        "initial_sol_spend_authorization_usd_per_subject": sol_spend_limit_usd,
         "previously_seen_subject_ids": list(previously_seen),
         "candidate_subject_ids": list(candidates),
         "selections": [
@@ -467,7 +535,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(f"SUBJECTS={','.join(item.subject_id for item in result.selections)}", flush=True)
     print(f"SUBJECT_COUNT={len(result.selections)}", flush=True)
     print(f"APPROVED_SUBJECT_LIMIT={batch_limit}", flush=True)
-    print(f"HUMAN_SAFETY_MAX_ANALYSES_PER_SUBJECT={human_safety_max_analyses}", flush=True)
+    print(f"INITIAL_SOL_SPEND_AUTHORIZATION_USD_PER_SUBJECT={sol_spend_limit_usd:.2f}", flush=True)
     print("HUMAN_REVIEW_REQUIRED=True", flush=True)
     print(f"SOL_TELEMETRY={state_dir / 'sol_transport_telemetry.jsonl'}", flush=True)
     print(f"BATCH_REVIEW={artifact_path}", flush=True)
