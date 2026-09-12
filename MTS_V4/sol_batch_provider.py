@@ -341,7 +341,15 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             defect = str(exc)
 
         assistant_content = content
-        for _ in range(self._MAX_BATCH_REPRESENTATION_REPAIRS):
+        for repair_index in range(self._MAX_BATCH_REPRESENTATION_REPAIRS):
+            self._write_telemetry(
+                {
+                    "event": "BATCH_DECISION_REPRESENTATION_DEFECT",
+                    "operation": operation,
+                    "repair_attempt": repair_index + 1,
+                    "decode_defect": defect,
+                }
+            )
             repaired = self._chat_completion(
                 messages
                 + [
@@ -374,6 +382,14 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             defect = self._batch_decision_defect(decision)
             if defect is None:
                 return self._accept_batch_decision(decision)
+        self._write_telemetry(
+            {
+                "event": "BATCH_DECISION_REPRESENTATION_REPAIR_EXHAUSTED",
+                "operation": operation,
+                "repair_attempts": self._MAX_BATCH_REPRESENTATION_REPAIRS,
+                "decode_defect": defect,
+            }
+        )
         raise ValueError("batch decision representation repair budget exhausted: " + str(defect))
 
     def _accept_batch_decision(self, decision: BatchResearchDecision) -> BatchResearchDecision:
