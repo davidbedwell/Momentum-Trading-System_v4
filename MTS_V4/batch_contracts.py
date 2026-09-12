@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from typing import Any, Mapping
 
 from .contracts import AnalysisRequest, AnalysisResult, Finding, ResearchPhase
+from .sol_spend_guard import SolResearchProgressEstimate
 
 
 @dataclass(frozen=True, slots=True)
@@ -77,6 +78,7 @@ class BatchResearchDecision:
     research_state: Mapping[str, Any] = field(default_factory=dict)
     close_reason: str | None = None
     batch_interpretation: str | None = None
+    research_progress: SolResearchProgressEstimate | None = None
 
 
 @dataclass(frozen=True, slots=True)
