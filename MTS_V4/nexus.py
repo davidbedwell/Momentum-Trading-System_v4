@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
-from typing import Mapping, Protocol
+from typing import Callable, Mapping, Protocol
 
 from .contracts import (
     AnalysisResultMetadata,
@@ -15,6 +15,36 @@ from .contracts import (
 
 class NexusError(RuntimeError):
     pass
+
+
+def repair_finding_evidence_lineage(
+    finding: Finding,
+    get_result_metadata: Callable[[str], AnalysisResultMetadata | None],
+) -> Finding:
+    """Complete mechanically implied evidence lineage for an AI-authored finding.
+
+    A supporting Analysis result already has durable evidence lineage. When the RD
+    cites that result but omits one or more of those evidence IDs from the finding
+    envelope, there is exactly one semantics-preserving representation repair:
+    append the missing inherited evidence IDs. This does not add or remove any
+    supporting result, change the scientific statement, or infer scientific
+    relevance. Unknown results and subject mismatches are deliberately left for
+    normal Nexus validation to reject.
+    """
+
+    evidence_ids = list(finding.evidence_ids)
+    changed = False
+    for result_id in finding.supporting_result_ids:
+        result = get_result_metadata(result_id)
+        if result is None or result.subject_id != finding.subject_id:
+            continue
+        for evidence_id in result.evidence_ids:
+            if evidence_id not in evidence_ids:
+                evidence_ids.append(evidence_id)
+                changed = True
+    if not changed:
+        return finding
+    return replace(finding, evidence_ids=tuple(evidence_ids))
 
 
 class ResearchNexus(Protocol):
@@ -99,6 +129,10 @@ class InMemoryResearchNexus:
             raise NexusError(
                 f"Cannot publish finding for unknown subject: {finding.subject_id}"
             )
+        finding = repair_finding_evidence_lineage(
+            finding,
+            self.get_analysis_result_metadata,
+        )
         cited_evidence = set(finding.evidence_ids)
         for evidence_id in finding.evidence_ids:
             evidence = self._evidence_metadata.get(evidence_id)
