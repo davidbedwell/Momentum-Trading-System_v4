@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from MTS_V4.batch_contracts import BatchExecutionReport, BatchResearchDecision
+from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import EvidenceDescriptor, ResearchPhase, SubjectMetadata
 from MTS_V4.intake import IntakeEngine
@@ -218,6 +219,8 @@ def main(argv: list[str] | None = None) -> int:
 
     subject = SubjectMetadata(subject_id=f"equity:{ticker}", ticker=ticker)
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
+    recorder = BatchCampaignResearchRecorder(package_store=package_store)
+    campaign_id = f"mts-v4-sol-planning-probe-{ticker.lower()}-{stamp}"
     rd = SolBatchResearchDirector(
         research_package_store=package_store,
         base_url=_required_env("MTS_SOL_BASE_URL"),
@@ -315,9 +318,17 @@ def main(argv: list[str] | None = None) -> int:
         with path.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(row, sort_keys=True, default=str, separators=(",", ":")) + "\n")
 
+    def accepted(request) -> None:
+        recorder.record_accepted_request(
+            campaign_id=campaign_id,
+            subject=subject,
+            request=request,
+        )
+
     def on_report(report: BatchExecutionReport, decisions: int, analyses: int) -> None:
         nonlocal latest_report
         latest_report = report
+        recorder.record_report(report)
         _append_jsonl(
             report_path,
             {
@@ -329,6 +340,16 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     def on_decision(current: BatchResearchDecision, decisions: int, analyses: int) -> None:
+        recorder.record_plan(
+            campaign_id=campaign_id,
+            subject=subject,
+            decision=current,
+        )
+        recorder.record_predictive_hypothesis_updates(
+            current,
+            current_report=latest_report,
+        )
+        recorder.record_closures(current)
         _append_jsonl(
             decision_path,
             {
@@ -347,6 +368,7 @@ def main(argv: list[str] | None = None) -> int:
             evidence=evidence,
             decision_callback=on_decision,
             report_callback=on_report,
+            accepted_request_callback=accepted,
         )
     except SolSpendAuthorizationRequired as exc:
         artifact = state_dir / "sol_spend_authorization_required.json"
@@ -361,6 +383,7 @@ def main(argv: list[str] | None = None) -> int:
 
     final_spend = rd.sol_spend_snapshot()
     summary = {
+        "campaign_id": campaign_id,
         "subject_id": subject.subject_id,
         "planning_probe_reused_as_initial_decision": True,
         "initial_sol_calls_before_analysis": 1,
