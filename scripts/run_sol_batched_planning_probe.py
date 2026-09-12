@@ -78,6 +78,55 @@ def _interactive_spend_authorization(snapshot: SolSpendAuthorizationSnapshot) ->
     return value
 
 
+def _print_human_plan(decision: BatchResearchDecision) -> None:
+    """Print the scientific plan in a human-readable form before execution approval."""
+    print("\n================ SOL SCIENTIFIC PLAN ================", flush=True)
+    if not decision.research_packages:
+        print("No Research Packages were proposed.", flush=True)
+    for rp_index, package in enumerate(decision.research_packages, start=1):
+        print(f"\nRP {rp_index}: {package.rp_id}", flush=True)
+        print(f"OBJECTIVE: {package.objective}", flush=True)
+        if package.parent_rp_id:
+            print(f"PARENT_RP: {package.parent_rp_id}", flush=True)
+        if package.decision_boundary:
+            print(f"DECISION_BOUNDARY: {package.decision_boundary}", flush=True)
+        for analysis_index, analysis in enumerate(package.analyses, start=1):
+            print(f"  Analysis {analysis_index}: {analysis.analysis_id}", flush=True)
+            print(f"    QUESTION: {analysis.question}", flush=True)
+            print(f"    METHOD: {analysis.method_id}", flush=True)
+            if analysis.rationale:
+                print(f"    RATIONALE: {analysis.rationale}", flush=True)
+            if analysis.inputs:
+                rendered_inputs = []
+                for item in analysis.inputs:
+                    if item.evidence_id is not None:
+                        rendered_inputs.append(f"{item.role}=evidence:{item.evidence_id}")
+                    else:
+                        source = f"analysis:{item.analysis_id}"
+                        if item.dataset_name:
+                            source += f"/{item.dataset_name}"
+                        rendered_inputs.append(f"{item.role}={source}")
+                print(f"    INPUTS: {', '.join(rendered_inputs)}", flush=True)
+            print(
+                "    PARAMETERS: " + json.dumps(analysis.parameters, sort_keys=True, default=str),
+                flush=True,
+            )
+            if analysis.parent_question_id:
+                print(f"    PARENT_QUESTION: {analysis.parent_question_id}", flush=True)
+            if analysis.parent_rp_id:
+                print(f"    PARENT_RP: {analysis.parent_rp_id}", flush=True)
+
+    if decision.research_progress is not None:
+        progress = decision.research_progress
+        print("\nRESEARCH PROGRESS ESTIMATE", flush=True)
+        print(f"  Percent complete: {progress.estimated_percent_complete}", flush=True)
+        print(f"  Remaining batches: {progress.estimated_remaining_batches}", flush=True)
+        print(f"  Remaining Sol calls: {progress.estimated_remaining_sol_calls}", flush=True)
+        print(f"  Confidence: {progress.estimate_confidence}", flush=True)
+        print(f"  Rationale: {progress.estimate_rationale}", flush=True)
+    print("\n=====================================================", flush=True)
+
+
 class _SeededPlanningDirector:
     """Return one already-authored Sol decision, then delegate all interpretation to Sol.
 
@@ -232,32 +281,15 @@ def main(argv: list[str] | None = None) -> int:
     print("ANALYSIS_EXECUTIONS=0", flush=True)
     print(f"RESEARCH_PACKAGES={rp_count}", flush=True)
     print(f"ANALYSIS_SPECIFICATIONS={analysis_count}", flush=True)
-    if decision.research_progress is not None:
-        print(
-            f"ESTIMATED_PERCENT_COMPLETE={decision.research_progress.estimated_percent_complete}",
-            flush=True,
-        )
-        print(
-            f"ESTIMATED_REMAINING_BATCHES={decision.research_progress.estimated_remaining_batches}",
-            flush=True,
-        )
-        print(
-            f"ESTIMATED_REMAINING_SOL_CALLS={decision.research_progress.estimated_remaining_sol_calls}",
-            flush=True,
-        )
     if spend is not None:
         print(f"SOL_SPEND_USD={spend.actual_spend_usd:.4f}", flush=True)
-    print(f"PLAN={output_path}", flush=True)
-    print("--- SOL PLAN JSON ---", flush=True)
-    print(json.dumps(payload, sort_keys=True, indent=2, default=str), flush=True)
+    print(f"PLAN_JSON={output_path}", flush=True)
+
+    # Approval must be informed: print a readable plan immediately before the prompt.
+    _print_human_plan(decision)
 
     if not args.execute:
         print("PLAN_EXECUTED=False", flush=True)
-        print(
-            "Re-run with --execute only when you want this same process to execute the exact plan immediately; "
-            "a later process cannot reuse the in-memory Intake cache yet.",
-            flush=True,
-        )
         return 0
 
     if not decision.continue_research:
