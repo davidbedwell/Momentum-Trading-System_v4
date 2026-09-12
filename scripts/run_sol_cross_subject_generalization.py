@@ -17,6 +17,7 @@ from MTS_V4.cross_subject_generalization import (
     SolCrossSubjectGeneralizationResearchDirector,
     generalization_evidence_view,
 )
+from MTS_V4.cross_subject_memory_store import JsonCrossSubjectScientificMemoryStore
 from MTS_V4.intake import IntakeEngine
 from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
@@ -108,12 +109,9 @@ def _discover_tickers(root: Path) -> tuple[str, ...]:
     if configured:
         tickers.update(item.strip().upper() for item in configured.split(",") if item.strip())
 
-    # Subject directories are the strongest cheap signal that a ticker actually ran.
     for nexus_path in root.glob("mts-v4-*/subjects/*/research_nexus.json"):
         tickers.add(nexus_path.parent.name.upper())
 
-    # Also inspect every durable v4 Nexus recursively. This catches one-subject,
-    # recovered, revisit, and future runner layouts without hard-coding names.
     discovered_subject_ids: set[str] = set()
     for nexus_path in root.glob("mts-v4-*/**/research_nexus.json"):
         try:
@@ -186,11 +184,7 @@ def _historical_subject_context(root: Path, tickers: Sequence[str]) -> Mapping[s
                 continue
             package = wrapped
 
-        compact = _compact_package(
-            package,
-            package_path,
-            source_format=source_format,
-        )
+        compact = _compact_package(package, package_path, source_format=source_format)
         if compact is None:
             continue
         ticker = str(compact["ticker"])
@@ -221,21 +215,17 @@ def _historical_subject_context(root: Path, tickers: Sequence[str]) -> Mapping[s
 
 
 def _prior_memory_documents(root: Path) -> tuple[Mapping[str, object], ...]:
-    documents: list[Mapping[str, object]] = []
-    seen: set[str] = set()
-    for path in sorted(root.glob("mts-v4-*/**/cross_subject_memory.json")):
-        try:
-            raw = json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            continue
-        if not isinstance(raw, Mapping):
-            continue
-        fingerprint = json.dumps(raw, sort_keys=True, default=str)
-        if fingerprint in seen:
-            continue
-        seen.add(fingerprint)
-        documents.append({"source_path": str(path), "document": raw})
-    return tuple(documents)
+    selection = JsonCrossSubjectScientificMemoryStore.discover_current(root)
+    if selection is None:
+        return ()
+    raw = json.loads(selection.source_path.read_text(encoding="utf-8"))
+    return (
+        {
+            "source_path": str(selection.source_path),
+            "superseded_source_paths": [str(path) for path in selection.superseded_paths],
+            "document": raw,
+        },
+    )
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -274,6 +264,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"PRIOR_MEMORY_DOCUMENTS={len(memory_documents)}")
         for index, memory_document in enumerate(memory_documents, start=1):
             print(f"PRIOR_MEMORY_DOCUMENT_{index}_SOURCE={memory_document['source_path']}")
+            superseded = memory_document.get("superseded_source_paths", [])
+            print(f"PRIOR_MEMORY_DOCUMENT_{index}_SUPERSEDED_COUNT={len(superseded)}")
         subjects = historical_context.get("subjects", [])
         package_count = sum(
             len(item.get("research_packages", []))
