@@ -8,9 +8,12 @@ import unittest
 from MTS_V4.cross_subject_memory import ResearchFrontierState, ScientificMemoryRecord
 from MTS_V4.cross_subject_memory_store import JsonCrossSubjectScientificMemoryStore
 from MTS_V4.research_package_store import JsonResearchPackageStore
+from MTS_V4.subject_scientific_context import (
+    load_prior_subject_science,
+    load_subject_scientific_context,
+)
 from scripts.run_sequential_retrospective_recovery import (
     SEQUENCE,
-    _compact_prior_subject_science,
     _discover_historical_subject_candidates,
     _parse_historical_overrides,
     _resolve_historical_subject_dir,
@@ -53,7 +56,7 @@ class SequentialRetrospectiveRecoveryTests(unittest.TestCase):
             overrides = _parse_historical_overrides((f"AAPL={paths[1]}",))
             self.assertEqual(_resolve_historical_subject_dir(root, "AAPL", overrides), paths[1])
 
-    def test_prior_subject_science_exposes_findings_without_analysis_payloads(self) -> None:
+    def test_permanent_prior_subject_science_exposes_findings_without_analysis_payloads(self) -> None:
         with TemporaryDirectory() as directory:
             root = Path(directory)
             package_path = root / "mts-v4-completed" / "research_packages" / "RP-AMD-1.json"
@@ -82,7 +85,7 @@ class SequentialRetrospectiveRecoveryTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            context = _compact_prior_subject_science(root, active_ticker="MSFT")
+            context = load_prior_subject_science(root, active_subject_id="equity:MSFT")
             packages = context["subjects"][0]["research_packages"]
             self.assertEqual(len(packages), 1)
             package = packages[0]
@@ -93,6 +96,29 @@ class SequentialRetrospectiveRecoveryTests(unittest.TestCase):
             self.assertNotIn("analyses", package)
             self.assertFalse(context["policy"]["deterministic_scientific_ranking"])
             self.assertTrue(context["policy"]["rd_may_test_challenge_reformulate_condition_defer_or_ignore"])
+
+    def test_permanent_context_excludes_active_subject_packages(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            for ticker in ("AMD", "MSFT"):
+                package_path = root / f"mts-v4-{ticker.lower()}" / "research_packages" / f"RP-{ticker}-1.json"
+                package_path.parent.mkdir(parents=True)
+                package_path.write_text(
+                    json.dumps(
+                        {
+                            "format": JsonResearchPackageStore.FORMAT,
+                            "research_package": {
+                                "rp_id": f"RP-{ticker}-1",
+                                "subject_id": f"equity:{ticker}",
+                                "findings": [{"finding_id": f"f-{ticker}"}],
+                            },
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+
+            context = load_prior_subject_science(root, active_subject_id="equity:MSFT")
+            self.assertEqual([item["subject_id"] for item in context["subjects"]], ["equity:AMD"])
 
     def test_canonical_memory_store_preserves_generalization_frontier(self) -> None:
         with TemporaryDirectory() as directory:
@@ -117,12 +143,10 @@ class SequentialRetrospectiveRecoveryTests(unittest.TestCase):
                 )
             )
 
-            selection = JsonCrossSubjectScientificMemoryStore.discover_current(root)
-            self.assertIsNotNone(selection)
-            assert selection is not None
-            self.assertEqual(selection.store.frontier().version, 6)
+            bundle = load_subject_scientific_context(root, active_subject_id="equity:AAPL")
+            self.assertEqual(bundle.memory_selection.store.frontier().version, 6)
             self.assertEqual(
-                selection.store.frontier().candidate_generalizations,
+                bundle.memory_selection.store.frontier().candidate_generalizations,
                 ("test conditional transfer",),
             )
 
