@@ -25,6 +25,33 @@ def test_find_rows_and_parse_historical_nocp(monkeypatch):
     assert result == {"2026-09-11": "123.45", "2026-09-10": "120.00"}
 
 
+def test_parse_live_nasdaq_nocp_table_price_schema(monkeypatch):
+    payload = {
+        "data": {
+            "title": "Results: From 9/12/2025 to 9/11/2026",
+            "headers": {
+                "date": "Trade Date",
+                "price": "Nasdaq Closing Price",
+            },
+            "nocp": {
+                "nocpTable": [
+                    {"date": "09/11/2026", "price": "$516.13"},
+                    {"date": "09/10/2026", "price": "$503.6"},
+                ]
+            },
+        },
+        "message": None,
+        "status": {"rCode": 200},
+    }
+    monkeypatch.setattr(
+        adapter,
+        "_request",
+        lambda url, timeout=30.0: json.dumps(payload).encode(),
+    )
+    result = adapter.fetch_historical_nocp("AMD")
+    assert result == {"2026-09-11": "516.13", "2026-09-10": "503.6"}
+
+
 def test_official_calendar_removes_closed_but_keeps_early_close(monkeypatch):
     html = b"""
     <table>
