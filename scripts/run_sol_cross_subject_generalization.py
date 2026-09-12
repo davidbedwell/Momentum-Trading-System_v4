@@ -6,7 +6,6 @@ from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
-import re
 from typing import Mapping, Sequence
 
 from MTS_V4.batch_contracts import BatchExecutionReport
@@ -28,6 +27,9 @@ from MTS_V4.sol_spend_guard import (
 )
 
 
+# Known earlier v4 subjects that may live outside the currently discoverable
+# state-directory layout. Discovery below adds every additional subject actually
+# present in durable Nexus/package artifacts, so this tuple is a floor, not a cap.
 DEFAULT_PREVIOUSLY_ANALYZED_TICKERS = (
     "AAPL", "MSFT", "XOM", "AMD", "AMZN", "BA", "GOOGL", "JPM", "META", "NVDA", "TSLA"
 )
@@ -69,7 +71,11 @@ def _interactive_spend_authorization(snapshot: SolSpendAuthorizationSnapshot) ->
         return None
     if not raw:
         return None
-    value = float(raw)
+    try:
+        value = float(raw)
+    except ValueError:
+        print("Authorization was not numeric; stopping.", flush=True)
+        return None
     if value <= snapshot.authorized_spend_usd:
         print("New authorization must exceed the current ceiling; stopping.", flush=True)
         return None
@@ -83,6 +89,18 @@ def _ticker_from_subject_id(subject_id: object) -> str | None:
     return ticker or None
 
 
+def _collect_subject_ids(value: object, output: set[str]) -> None:
+    if isinstance(value, Mapping):
+        subject_id = value.get("subject_id")
+        if isinstance(subject_id, str) and subject_id.startswith("equity:"):
+            output.add(subject_id)
+        for child in value.values():
+            _collect_subject_ids(child, output)
+    elif isinstance(value, list):
+        for child in value:
+            _collect_subject_ids(child, output)
+
+
 def _discover_tickers(root: Path) -> tuple[str, ...]:
     tickers = set(DEFAULT_PREVIOUSLY_ANALYZED_TICKERS)
 
@@ -90,17 +108,23 @@ def _discover_tickers(root: Path) -> tuple[str, ...]:
     if configured:
         tickers.update(item.strip().upper() for item in configured.split(",") if item.strip())
 
+    # Subject directories are the strongest cheap signal that a ticker actually ran.
     for nexus_path in root.glob("mts-v4-*/subjects/*/research_nexus.json"):
         tickers.add(nexus_path.parent.name.upper())
 
-    recovery_pattern = re.compile(r"^mts-v4-retrospective-recovery-([a-z0-9.\-]+)-\d{8}_\d{6}$")
-    recovered_pattern = re.compile(r"^mts-v4-([a-z0-9.\-]+)-recovered-\d{8}_\d{6}$")
-    for path in root.iterdir() if root.is_dir() else ():
-        if not path.is_dir() or not (path / "research_nexus.json").is_file():
+    # Also inspect every durable v4 Nexus recursively. This catches one-subject,
+    # recovered, revisit, and future runner layouts without hard-coding names.
+    discovered_subject_ids: set[str] = set()
+    for nexus_path in root.glob("mts-v4-*/**/research_nexus.json"):
+        try:
+            raw = json.loads(nexus_path.read_text(encoding="utf-8"))
+        except Exception:
             continue
-        match = recovery_pattern.match(path.name) or recovered_pattern.match(path.name)
-        if match:
-            tickers.add(match.group(1).upper())
+        _collect_subject_ids(raw, discovered_subject_ids)
+    for subject_id in discovered_subject_ids:
+        ticker = _ticker_from_subject_id(subject_id)
+        if ticker:
+            tickers.add(ticker)
 
     return tuple(sorted(ticker for ticker in tickers if ticker))
 
@@ -112,6 +136,7 @@ def _compact_package(package: Mapping[str, object], source_path: Path) -> Mappin
         return None
     findings = package.get("findings", [])
     hypotheses = package.get("predictive_hypotheses", [])
+    analyses = package.get("analyses", [])
     return {
         "source_path": str(source_path),
         "subject_id": subject_id,
@@ -124,6 +149,7 @@ def _compact_package(package: Mapping[str, object], source_path: Path) -> Mappin
         "final_assessment": package.get("final_assessment"),
         "findings": findings if isinstance(findings, list) else [],
         "predictive_hypotheses": hypotheses if isinstance(hypotheses, list) else [],
+        "analysis_lineage": analyses if isinstance(analyses, list) else [],
     }
 
 
@@ -171,7 +197,7 @@ def _historical_subject_context(root: Path, tickers: Sequence[str]) -> Mapping[s
 def _prior_memory_documents(root: Path) -> tuple[Mapping[str, object], ...]:
     documents: list[Mapping[str, object]] = []
     seen: set[str] = set()
-    for path in sorted(root.glob("mts-v4-*/cross_subject_memory.json")):
+    for path in sorted(root.glob("mts-v4-*/**/cross_subject_memory.json")):
         try:
             raw = json.loads(path.read_text(encoding="utf-8"))
         except Exception:
@@ -221,7 +247,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         print("TICKERS=" + ",".join(tickers))
         print(f"PRIOR_MEMORY_DOCUMENTS={len(memory_documents)}")
         subjects = historical_context.get("subjects", [])
-        package_count = sum(len(item.get("research_packages", [])) for item in subjects if isinstance(item, Mapping))
+        package_count = sum(
+            len(item.get("research_packages", []))
+            for item in subjects
+            if isinstance(item, Mapping)
+        )
         print(f"HISTORICAL_RESEARCH_PACKAGES={package_count}")
         print(f"STATE_DIR={state_dir}")
         print("RAW_DATA_POLICY=REACQUIRE_TO_TEMPORARY_CACHE_ONLY")
@@ -291,29 +321,46 @@ def main(argv: Sequence[str] | None = None) -> int:
     campaign_id = f"mts-v4-cross-subject-generalization-{stamp}"
 
     def accepted(request):
-        recorder.record_accepted_request(campaign_id=campaign_id, subject=program_subject, request=request)
+        recorder.record_accepted_request(
+            campaign_id=campaign_id,
+            subject=program_subject,
+            request=request,
+        )
 
     def on_report(report, decisions, analyses):
         nonlocal latest_report
         latest_report = report
         recorder.record_report(report)
-        _append_jsonl(report_path, {
-            "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
-            "decisions": decisions,
-            "analyses_executed": analyses,
-            "report": asdict(report),
-        })
+        _append_jsonl(
+            report_path,
+            {
+                "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                "decisions": decisions,
+                "analyses_executed": analyses,
+                "report": asdict(report),
+            },
+        )
 
     def on_decision(decision, decisions, analyses):
-        recorder.record_plan(campaign_id=campaign_id, subject=program_subject, decision=decision)
-        recorder.record_predictive_hypothesis_updates(decision, current_report=latest_report)
+        recorder.record_plan(
+            campaign_id=campaign_id,
+            subject=program_subject,
+            decision=decision,
+        )
+        recorder.record_predictive_hypothesis_updates(
+            decision,
+            current_report=latest_report,
+        )
         recorder.record_closures(decision)
-        _append_jsonl(decision_path, {
-            "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
-            "decision_sequence": decisions,
-            "analyses_executed": analyses,
-            "decision": asdict(decision),
-        })
+        _append_jsonl(
+            decision_path,
+            {
+                "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                "decision_sequence": decisions,
+                "analyses_executed": analyses,
+                "decision": asdict(decision),
+            },
+        )
 
     try:
         outcome = runtime.orchestrator.run(
@@ -325,7 +372,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     except SolSpendAuthorizationRequired as exc:
         artifact = state_dir / "sol_spend_authorization_required.json"
-        artifact.write_text(json.dumps(asdict(exc.snapshot), indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        artifact.write_text(
+            json.dumps(asdict(exc.snapshot), indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
         print(f"STATE_DIR={state_dir}", flush=True)
         print("HUMAN_SOL_SPEND_AUTHORIZATION_REQUIRED=True", flush=True)
         print(f"AUTHORIZATION_ARTIFACT={artifact}", flush=True)
