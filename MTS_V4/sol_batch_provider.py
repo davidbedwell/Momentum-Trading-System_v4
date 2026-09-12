@@ -8,12 +8,29 @@ from .batch_contracts import BatchExecutionReport, BatchResearchDecision
 from .batch_rd_codec import BatchResearchDecisionCodec, BatchResearchDecisionDecodeError
 from .contracts import EvidenceDescriptor, SubjectMetadata
 from .sol_primary_provider import SolPrimaryResearchDirector
+from .sol_spend_guard import (
+    DEFAULT_AUTHORIZED_SOL_SPEND_USD,
+    HumanSpendAuthorizationCallback,
+)
 
 
 class SolBatchResearchDirector(SolPrimaryResearchDirector):
-    """Program-level Sol RD that authors multiple RPs and Analysis Specifications per turn."""
+    """Program-level Sol RD for unbounded scientific batches with human spend control."""
 
     _MAX_BATCH_REPRESENTATION_REPAIRS = 2
+
+    def __init__(
+        self,
+        *args,
+        sol_spend_limit_usd: float = DEFAULT_AUTHORIZED_SOL_SPEND_USD,
+        human_spend_authorization_callback: HumanSpendAuthorizationCallback | None = None,
+        **kwargs,
+    ) -> None:
+        super().__init__(*args, **kwargs)
+        self.configure_sol_spend_guard(
+            authorized_spend_usd=sol_spend_limit_usd,
+            authorization_callback=human_spend_authorization_callback,
+        )
 
     def begin_batch_research(
         self,
@@ -103,6 +120,16 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         payload["research_packages"] = self._research_package_store.context_for_subject(
             subject.subject_id
         )
+        spend_snapshot = self.sol_spend_snapshot()
+        if spend_snapshot is not None:
+            payload["human_sol_spend_context"] = {
+                "authorized_spend_usd": spend_snapshot.authorized_spend_usd,
+                "actual_spend_usd": spend_snapshot.actual_spend_usd,
+                "authority": (
+                    "Operational information only. Do not alter scientific breadth to fit this dollar amount. "
+                    "Estimate scientific work remaining independently; deterministic/human controls decide funding."
+                ),
+            }
         if self._required_research_phase is not None:
             payload["subject_phase_contract"] = {
                 "subject_id": self._required_subject_id,
@@ -125,34 +152,39 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         system = (
             "You are the AI Research Director for Momentum Trading System v4 and the scientific reasoning "
             "authority. Think and act at the research-program level, not as a one-call-at-a-time executor. "
-            "You may author multiple coherent Research Packages in one decision and multiple Analysis "
-            "Specifications inside each package. Author every scientifically justified analysis that can be "
-            "specified now without seeing an unknown future result. When later scientific work genuinely depends "
-            "on an unknown result, stop that branch at an explicit decision boundary instead of guessing the future. "
-            "You own questions, hypotheses, evidence choice, variables, representations, transformations, methods, "
-            "scientifically meaningful parameters, horizons, thresholds, interactions, regimes, interpretation, "
-            "significance, findings, RP boundaries, RP closure, and subject continuation. Deterministic code is a "
-            "compiler/executor only. It resolves generated request/result identities, exact output paths, and internal "
-            "input aliases. Do not author result_id, output_path, request_id, or executor input aliases for new work. "
-            "Refer to acquired evidence by exact evidence_id and prior work by stable logical analysis_id. A logical "
-            "analysis_id may refer to an earlier analysis in the current batch or to a completed analysis advertised "
-            "in campaign_analysis_result_catalog from an earlier batch. Each input has a semantic role. Inside method "
-            "parameters, use that role wherever an executor contract asks for input_name; the compiler replaces the "
-            "role with the exact runtime binding. A prior analysis input may omit dataset_name only when you intend its "
-            "sole reusable derived dataset; if several reusable datasets are scientifically possible, name the intended "
-            "dataset. Deterministic code may resolve only semantics-preserving mechanics and may never invent or "
-            "substitute science. Independent branches should be planned together when scientifically useful. "
-            "The central scientific purpose during EXPLORATION is prospective predictive discovery: seek falsifiable "
-            "relationships between information observable at T and subsequent direction, magnitude, timing, continuation "
-            "or reversal, and path quality at T+1 onward. Historical look-ahead is legitimate during EXPLORATION when "
-            "scientifically useful for discovery; do not manufacture positive claims and reject unsupported candidates. "
-            "VALIDATION is different: preserve the no-look-ahead boundary at prediction time. When cross-subject scientific "
-            "memory is present, treat it as prior scientific experience rather than a mandatory agenda. Test, challenge, "
+            "At each decision point, create or continue as many Research Packages as you judge scientifically "
+            "relevant to the research objective and include all scientifically justified lines of inquiry that can "
+            "be specified from the evidence currently available. Zero, one, or many Research Packages may be "
+            "scientifically appropriate; never target a preferred count. Within each RP, author every scientifically "
+            "justified Analysis Specification that can be specified now without seeing an unknown future result. "
+            "When later scientific work genuinely depends on an unknown result, stop that branch at an explicit "
+            "decision boundary instead of guessing the future. You own questions, hypotheses, evidence choice, "
+            "variables, representations, transformations, methods, scientifically meaningful parameters, horizons, "
+            "thresholds, interactions, regimes, interpretation, significance, findings, RP boundaries, RP closure, "
+            "and subject continuation. Deterministic code is a compiler/executor only. It resolves generated "
+            "request/result identities, exact output paths, and internal input aliases. Do not author result_id, "
+            "output_path, request_id, or executor input aliases for new work. Refer to acquired evidence by exact "
+            "evidence_id and prior work by stable logical analysis_id. A logical analysis_id may refer to an earlier "
+            "analysis in the current batch or to a completed analysis advertised in campaign_analysis_result_catalog "
+            "from an earlier batch. Each input has a semantic role. Inside method parameters, use that role wherever "
+            "an executor contract asks for input_name; the compiler replaces the role with the exact runtime binding. "
+            "A prior analysis input may omit dataset_name only when you intend its sole reusable derived dataset; if "
+            "several reusable datasets are scientifically possible, name the intended dataset. Deterministic code may "
+            "resolve only semantics-preserving mechanics and may never invent or substitute science. The central "
+            "scientific purpose during EXPLORATION is prospective predictive discovery: seek falsifiable relationships "
+            "between information observable at T and subsequent direction, magnitude, timing, continuation or reversal, "
+            "and path quality at T+1 onward. Historical look-ahead is legitimate during EXPLORATION when scientifically "
+            "useful for discovery; do not manufacture positive claims and reject unsupported candidates. VALIDATION is "
+            "different: preserve the no-look-ahead boundary at prediction time. When cross-subject scientific memory is "
+            "present, treat it as prior scientific experience rather than a mandatory agenda. Test, challenge, "
             "reformulate, condition, defer, or ignore it as scientifically appropriate. Do not inherit a prior threshold, "
             "lookback, horizon, method, target, or representation merely for consistency. A negative result for one "
-            "formulation does not prove that the subject lacks predictive structure. Historical rp_id values appearing only "
-            "in cross-subject memory are provenance, not active local parent Research Packages. Distinguish exhaustion of "
-            "one RP from exhaustion of useful work on the subject. Return exactly one batch decision JSON object and no prose."
+            "formulation does not prove that the subject lacks predictive structure. Historical rp_id values appearing "
+            "only in cross-subject memory are provenance, not active local parent Research Packages. Distinguish "
+            "exhaustion of one RP from exhaustion of useful work on the subject. At every decision, independently estimate "
+            "scientific progress and remaining work. The funding ceiling is operational context only: never reduce, rank, "
+            "suppress, or reshape scientifically justified work to fit it. Return exactly one batch decision JSON object "
+            "and no prose."
         )
         schema = {
             "continue_research": "boolean",
@@ -225,6 +257,21 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                     }
                 ],
             },
+            "research_progress": {
+                "estimated_percent_complete": "number from 0 through 100 based on your scientific assessment",
+                "estimated_remaining_batches": (
+                    "nonnegative integer; when continuing, include the Analysis batch authorized by this decision "
+                    "plus any additional batches you currently expect"
+                ),
+                "estimated_remaining_sol_calls": (
+                    "nonnegative integer number of future Sol decisions you currently expect after this decision, "
+                    "including interpretation of the batch authorized here when continuing"
+                ),
+                "estimate_confidence": "nonblank confidence statement such as low, medium, or high",
+                "estimate_rationale": (
+                    "brief scientific explanation of what remains unresolved and why that amount of work is expected"
+                ),
+            },
             "batch_interpretation": (
                 "substantive integrated interpretation of the completed batch on INTERPRET_BATCH_RESULTS; otherwise null allowed"
             ),
@@ -232,7 +279,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         }
         instructions = [
             "Do not serialize low-level request_id, result_id, output_path, or executor alias plumbing for new analyses.",
-            "Create several Research Packages in the same batch when materially distinct scientific propositions are worth testing now.",
+            "Create or continue as many Research Packages as are scientifically relevant now; include all currently justified lines of inquiry and do not target any preferred RP count.",
             "Within each RP, include every analysis whose justification is already available now; do not force one scalar test per RD turn.",
             "Use a prior logical analysis_id only for an actual dependency. Independent analyses should not be artificially chained.",
             "A follow-up batch may reference a completed prior analysis by its stable logical analysis_id from campaign_analysis_result_catalog; never copy its generated result_id/output_path into a new scientific specification.",
@@ -241,7 +288,10 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "Select exact methods and scientifically meaningful parameters yourself from context.available_analysis_methods.",
             "Choosing whether datasets should be aligned, the scientific alignment key/mode, selected columns, transformations, horizons, thresholds, and outcomes remains your responsibility.",
             "Internal names are not scientific authority. Use input semantic roles in alignment[].input_name and selections[].input_name; the compiler resolves them.",
-            "On INTERPRET_BATCH_RESULTS, interpret the completed batch as a scientific whole before issuing follow-up work. Follow-up may include multiple RPs and multiple analyses again.",
+            "On INTERPRET_BATCH_RESULTS, interpret the completed batch as a scientific whole before issuing follow-up work. Follow-up may contain zero, one, or many RPs and Analysis Specifications as scientifically warranted.",
+            "Provide research_progress on every decision. Estimate scientific completion and remaining work independently of the human funding ceiling; never trim science to make the estimate fit the authorized dollars.",
+            "When continue_research=true, estimated_remaining_batches and estimated_remaining_sol_calls must each be at least 1 because the current authorized Analysis batch and its later Sol interpretation remain ahead.",
+            "When continue_research=false, estimated_remaining_batches and estimated_remaining_sol_calls must both be 0.",
             "Use rp_closures to close every previously open RP you judge scientifically exhausted. Do not close an RP in the same decision that schedules new analyses inside that RP; execute and interpret those analyses first.",
             "Closing an RP is not the same as closing the subject. In one interpretation you may close exhausted RPs and open or continue other RPs.",
             "Do not keep an RP artificially open merely because subject-level research continues, and do not close the subject merely because one RP is exhausted.",
@@ -284,9 +334,9 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         defect: str | None = None
         try:
             decision = BatchResearchDecisionCodec.decode(content)
-            defect = self._batch_phase_defect(decision)
+            defect = self._batch_decision_defect(decision)
             if defect is None:
-                return decision
+                return self._accept_batch_decision(decision)
         except BatchResearchDecisionDecodeError as exc:
             defect = str(exc)
 
@@ -304,8 +354,9 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                                 "decode_defect": defect,
                                 "instruction": (
                                     "Return one complete corrected batch decision JSON object. Correct only the "
-                                    "objective representation/phase/identity defect. Preserve or revise your scientific "
-                                    "plan as you judge appropriate. Deterministic code will not invent scientific content."
+                                    "objective representation/phase/identity/progress-estimate defect. Preserve or "
+                                    "revise your scientific plan as you judge appropriate. Deterministic code will "
+                                    "not invent scientific content or alter your research breadth."
                                 ),
                             },
                             sort_keys=True,
@@ -320,10 +371,40 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             except BatchResearchDecisionDecodeError as exc:
                 defect = str(exc)
                 continue
-            defect = self._batch_phase_defect(decision)
+            defect = self._batch_decision_defect(decision)
             if defect is None:
-                return decision
+                return self._accept_batch_decision(decision)
         raise ValueError("batch decision representation repair budget exhausted: " + str(defect))
+
+    def _accept_batch_decision(self, decision: BatchResearchDecision) -> BatchResearchDecision:
+        assert decision.research_progress is not None
+        self.update_sol_research_progress(decision.research_progress)
+        return decision
+
+    def _batch_decision_defect(self, decision: BatchResearchDecision) -> str | None:
+        defect = self._batch_phase_defect(decision)
+        if defect is not None:
+            return defect
+        progress = decision.research_progress
+        if progress is None:
+            return "research_progress is required on every batched Sol decision"
+        if decision.continue_research:
+            if progress.estimated_remaining_batches < 1:
+                return (
+                    "continuing research requires research_progress.estimated_remaining_batches >= 1; "
+                    "the Analysis batch authorized by this decision still remains"
+                )
+            if progress.estimated_remaining_sol_calls < 1:
+                return (
+                    "continuing research requires research_progress.estimated_remaining_sol_calls >= 1; "
+                    "at least the later interpretation of this authorized batch remains"
+                )
+        else:
+            if progress.estimated_remaining_batches != 0:
+                return "closed research requires research_progress.estimated_remaining_batches=0"
+            if progress.estimated_remaining_sol_calls != 0:
+                return "closed research requires research_progress.estimated_remaining_sol_calls=0"
+        return None
 
     def _batch_phase_defect(self, decision: BatchResearchDecision) -> str | None:
         batch_packages = {package.rp_id: package for package in decision.research_packages}
