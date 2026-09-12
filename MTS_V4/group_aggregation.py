@@ -12,8 +12,18 @@ METHOD_ID = "analysis.dataset.group_aggregate"
 
 
 def _numeric(value: Any) -> float | None:
-    if isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(float(value)):
-        return float(value)
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        number = float(value)
+        return number if math.isfinite(number) else None
+    if isinstance(value, str):
+        text = value.strip()
+        if not text:
+            return None
+        try:
+            number = float(text.replace(",", ""))
+        except ValueError:
+            return None
+        return number if math.isfinite(number) else None
     return None
 
 
@@ -66,6 +76,7 @@ def group_aggregate(
 
     grouped: dict[tuple[object, ...], list[Mapping[str, Any]]] = {}
     group_order: list[tuple[object, ...]] = []
+    distinct_group_values: dict[str, list[object]] = {column: [] for column in group_columns}
     for row in rows:
         missing = [column for column in group_columns if column not in row]
         if missing:
@@ -75,6 +86,9 @@ def group_aggregate(
             grouped[key] = []
             group_order.append(key)
         grouped[key].append(row)
+        for column, value in zip(group_columns, key):
+            if value not in distinct_group_values[column]:
+                distinct_group_values[column].append(value)
 
     output_rows: list[Mapping[str, Any]] = []
     excluded_non_numeric: dict[str, int] = {output_name: 0 for _, _, output_name in normalized}
@@ -114,6 +128,7 @@ def group_aggregate(
     ]
     return {
         "group_by": list(group_columns),
+        "group_key_values": distinct_group_values,
         "aggregations": [
             {"column": column, "statistic": statistic, "output_name": output_name}
             for column, statistic, output_name in normalized
@@ -143,8 +158,10 @@ def group_aggregation_method_spec() -> MethodSpec:
         ("NORMALIZED_DATASET",),
         (
             "Mechanically group one supplied raw or derived row dataset by exact RD-selected column values "
-            "and compute RD-selected numeric aggregations. Returns a temporary reusable grouped dataset. "
-            "Analysis does not infer grouping keys, time buckets, columns, statistics, aliases, or scientific meaning."
+            "and compute RD-selected numeric aggregations. Mechanically parseable finite numeric strings are "
+            "accepted as numbers, exact categorical grouping identities are returned to RD, and a temporary "
+            "reusable grouped dataset is produced. Analysis does not infer grouping keys, time buckets, columns, "
+            "statistics, aliases, or scientific meaning."
         ),
         (
             ParameterContract(
@@ -173,8 +190,11 @@ def group_aggregation_method_spec() -> MethodSpec:
             "aggregation_statistics": ["sum", "mean", "median", "minimum", "maximum"],
             "execution_semantics": (
                 "Groups use exact tuples of the RD-selected group_by column values and preserve first-occurrence "
-                "group order. Numeric aggregations exclude non-numeric values and return null when a group has no "
-                "numeric values for the selected aggregation column. No calendar resampling or time-bucket inference occurs."
+                "group order. Exact distinct values for every selected grouping column are transported in "
+                "group_key_values so category identity is not lost. Numeric aggregations accept finite numeric "
+                "values or mechanically parseable finite numeric strings, exclude other values, and return null "
+                "when a group has no numeric values for the selected aggregation column. No calendar resampling "
+                "or time-bucket inference occurs."
             ),
         },
     )
