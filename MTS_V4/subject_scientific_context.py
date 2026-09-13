@@ -56,16 +56,27 @@ class SubjectContextSolBatchResearchDirector(SolBatchResearchDirector):
         evidence: Sequence[EvidenceDescriptor],
         available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
+        continuation: bool = False,
     ) -> dict[str, object]:
         payload = super()._batch_common_payload(
             subject=subject,
             evidence=evidence,
             available_methods=available_methods,
             nexus_context=nexus_context,
+            continuation=continuation,
         )
-        payload["prior_subject_scientific_context"] = self._prior_subject_scientific_context
-        if self._same_subject_prior_scientific_context is not None:
-            payload["same_subject_prior_science"] = self._same_subject_prior_scientific_context
+        if continuation:
+            payload["prior_science_transport"] = {
+                "full_prior_subject_science_sent_on_begin": True,
+                "full_same_subject_revisit_science_sent_on_begin": (
+                    self._same_subject_prior_scientific_context is not None
+                ),
+                "later_scientific_continuity_is_ai_authored": True,
+            }
+        else:
+            payload["prior_subject_scientific_context"] = self._prior_subject_scientific_context
+            if self._same_subject_prior_scientific_context is not None:
+                payload["same_subject_prior_science"] = self._same_subject_prior_scientific_context
         return payload
 
 

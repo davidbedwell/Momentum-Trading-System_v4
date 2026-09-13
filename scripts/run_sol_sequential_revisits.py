@@ -22,7 +22,7 @@ SEQUENCE = (
     "TSLA",
     "XOM",
 )
-DEFAULT_PER_SUBJECT_SOL_SPEND_USD = 15.0
+DEFAULT_PER_SUBJECT_SOL_SPEND_USD = 5.0
 
 
 def _parser() -> argparse.ArgumentParser:

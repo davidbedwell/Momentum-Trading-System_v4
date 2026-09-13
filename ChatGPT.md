@@ -704,3 +704,26 @@ Approved/frozen during this session:
 7. Only after those tests pass should a first 20-year revisit campaign be launched.
 
 Do not treat the history-depth repair itself as incomplete. That repair is finished, tested, committed, and pushed. The unresolved issue is specifically **scientific continuity for the active ticker during a new deep-history revisit campaign**.
+
+## Economic-Efficiency Repair — 2026-09-12
+
+The first AAPL deep-history revisit was stopped at the human authorization boundary after 22 Sol calls and $14.78406 of Sol spend. The archived audit showed 2,964,685 prompt tokens, 146,266 completion tokens, no HTTP/provider retries, and 383 Analysis records. Sol was performing the scientifically intended autonomous exploration; the dominant defect was the economic interface around that work, not inappropriate scientific breadth.
+
+The human approved the following repair while preserving Sol as the scientific authority:
+
+- Analysis precomputes a versioned, neutral standard OHLCV substrate before the first Sol call. It contains the complete governed measurement inventory, the 11 recurring predictor representations observed in the audited AAPL preliminary program, all standard H1/H3/H5/H10/H20 path outcomes, descriptive measurements, full/chronological-half unranked Pearson and Spearman measurements, and calendar outcome summaries. It creates no hypothesis or finding, ranks nothing, and does not prevent Sol from opening new RPs or requesting any other relationship.
+- The first Sol call receives full prior-subject, same-subject revisit, cross-subject, method, and substrate context.
+- Every continuing Sol decision must author a cumulative `research_state.scientific_continuation_state`. Later calls transport that AI-authored state, the newest batch report, exact chainability catalog, and compact RP summaries instead of replaying full prior science, prior plan bodies, and open-package execution journals.
+- Deterministic code transports but never writes or summarizes the scientific continuation state.
+- Group-aggregate scalar/category results remain visible to Sol even though reusable row datasets remain behind the raw-row transport boundary.
+- The eleven-ticker sequential revisit runner now defaults to a $5.00 human authorization ceiling per ticker. The ceiling remains an operational stop, not a scientific truncation instruction to Sol.
+
+Offline AAPL-scale verification found:
+
+- prior-decision transport was 78.3% smaller when the old AI-authored `other_state` was used as a proxy for the new cumulative continuation state;
+- 165,908 bytes of full prior/same-subject context are removed from every continuation call after being supplied on the begin call;
+- the AAPL-scale neutral substrate covered 5,031 rows, 196 governed measurement columns, 11 precomputed predictor directions, 35 forward outcomes, and 385 unranked relationship records;
+- the RD-visible substrate was 308,728 JSON bytes (approximately 77,182 tokens at a conservative four-bytes-per-token estimate), while its 42.7 MB reusable panel remained campaign-local and was not transported to Sol;
+- the full test gate passed with 429 tests.
+
+These are measured transport and coverage improvements, not a claim that Sol will finish every ticker for $5. A paid replay is still required to measure actual call-count adaptation. Do not resume or launch a paid sequence without an explicit human instruction after this repair is pushed and preflighted.

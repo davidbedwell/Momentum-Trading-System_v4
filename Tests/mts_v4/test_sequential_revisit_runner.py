@@ -20,10 +20,10 @@ class SequentialRevisitRunnerTests(unittest.TestCase):
             ("AAPL", "AMD", "AMZN", "BA", "GOOGL", "JPM", "META", "MSFT", "NVDA", "TSLA", "XOM"),
         )
 
-    def test_default_spend_ceiling_is_fifteen_dollars_per_subject(self) -> None:
+    def test_default_spend_ceiling_is_five_dollars_per_subject(self) -> None:
         args = _parser().parse_args([])
-        self.assertEqual(DEFAULT_PER_SUBJECT_SOL_SPEND_USD, 15.0)
-        self.assertEqual(args.per_subject_sol_spend_limit_usd, 15.0)
+        self.assertEqual(DEFAULT_PER_SUBJECT_SOL_SPEND_USD, 5.0)
+        self.assertEqual(args.per_subject_sol_spend_limit_usd, 5.0)
 
     def test_every_subject_command_uses_explicit_revisit_mode_and_subject_ceiling(self) -> None:
         command = _subject_command(

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import math
 import statistics
 from typing import Any, Mapping
@@ -136,6 +137,15 @@ def group_aggregate(
         "input_row_count": len(rows),
         "group_count": len(output_rows),
         "excluded_non_numeric": excluded_non_numeric,
+        "group_summaries": {
+            json.dumps(
+                {column: value for column, value in zip(group_columns, key)},
+                sort_keys=True,
+                default=str,
+                separators=(",", ":"),
+            ): dict(row)
+            for key, row in zip(group_order, output_rows)
+        },
         "derived_dataset_catalog": {
             "grouped_dataset": {
                 "row_count": len(output_rows),
@@ -188,6 +198,7 @@ def group_aggregation_method_spec() -> MethodSpec:
             "reusable_derived_dataset": True,
             "derived_dataset_name": "grouped_dataset",
             "aggregation_statistics": ["sum", "mean", "median", "minimum", "maximum"],
+            "rd_visible_group_summaries": True,
             "execution_semantics": (
                 "Groups use exact tuples of the RD-selected group_by column values and preserve first-occurrence "
                 "group order. Exact distinct values for every selected grouping column are transported in "

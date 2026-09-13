@@ -13,6 +13,7 @@ from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
 from MTS_V4.intake import IntakeEngine
 from MTS_V4.live_sources import standard_live_market_source
+from MTS_V4.neutral_analysis_substrate import build_for_subject as build_neutral_substrate
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.sol_spend_guard import (
     DEFAULT_AUTHORIZED_SOL_SPEND_USD,
@@ -199,6 +200,12 @@ def main(argv: list[str] | None = None) -> int:
         source=standard_live_market_source(),
     )
     campaign_id = f"mts-v4-sol-batched-{ticker.lower()}-{stamp}"
+    precomputed_results = build_neutral_substrate(
+        subject=subject,
+        evidence=evidence,
+        cache=runtime.cache,
+        analysis=runtime.analysis,
+    )
 
     (state_dir / "subject_scientific_context.json").write_text(
         json.dumps(
@@ -276,6 +283,7 @@ def main(argv: list[str] | None = None) -> int:
             decision_callback=on_decision,
             report_callback=on_report,
             accepted_request_callback=accepted,
+            precomputed_results=precomputed_results,
         )
     except SolSpendAuthorizationRequired as exc:
         artifact = state_dir / "sol_spend_authorization_required.json"
@@ -303,6 +311,7 @@ def main(argv: list[str] | None = None) -> int:
         "decisions": outcome.decisions,
         "batches_executed": outcome.batches_executed,
         "analyses_executed": outcome.analyses_executed,
+        "neutral_analysis_substrate_count": len(precomputed_results),
         "findings_promoted": outcome.findings_promoted,
         "closed": outcome.closed,
         "close_reason": outcome.close_reason,
@@ -324,6 +333,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"DECISIONS={outcome.decisions}", flush=True)
     print(f"BATCHES={outcome.batches_executed}", flush=True)
     print(f"ANALYSES={outcome.analyses_executed}", flush=True)
+    print(f"NEUTRAL_ANALYSIS_SUBSTRATE_COUNT={len(precomputed_results)}", flush=True)
     print(f"CLOSED={outcome.closed}", flush=True)
     print(f"CLOSE_REASON={outcome.close_reason}", flush=True)
     if spend is not None:
