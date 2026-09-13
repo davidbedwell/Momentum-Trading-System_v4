@@ -13,12 +13,16 @@ from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
 from MTS_V4.intake import IntakeEngine
 from MTS_V4.live_sources import standard_live_market_source
+from MTS_V4.neutral_analysis_substrate import build_for_subject as build_neutral_substrate
 from MTS_V4.research_package_store import JsonResearchPackageStore
-from MTS_V4.sol_batch_provider import SolBatchResearchDirector
 from MTS_V4.sol_spend_guard import (
     DEFAULT_AUTHORIZED_SOL_SPEND_USD,
     SolSpendAuthorizationRequired,
     SolSpendAuthorizationSnapshot,
+)
+from MTS_V4.subject_scientific_context import (
+    SubjectContextSolBatchResearchDirector,
+    load_subject_scientific_context,
 )
 
 
@@ -68,7 +72,7 @@ def _interactive_spend_authorization(snapshot: SolSpendAuthorizationSnapshot) ->
         raw = input(
             "Enter a new total Sol spend ceiling in USD to authorize more, or press Enter to stop: "
         ).strip()
-    except EOFError:
+    except (EOFError, OSError):
         return None
     if not raw:
         return None
@@ -86,13 +90,21 @@ def _interactive_spend_authorization(snapshot: SolSpendAuthorizationSnapshot) ->
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Run one live MTS v4 subject through the batched Sol Research Director path. "
-            "Sol may author as many scientifically relevant RPs and Analysis Specifications as warranted; "
-            "the runtime returns only after each authorized batch completes."
+            "Run one live MTS v4 subject through the batched Sol Research Director path with permanent "
+            "cross-subject scientific memory/frontier and prior durable subject science."
         )
     )
     parser.add_argument("--ticker", required=True, help="equity ticker, e.g. AMD")
+    parser.add_argument("--root", default="/home/ubuntu")
     parser.add_argument("--state-dir", default=None)
+    parser.add_argument(
+        "--revisit",
+        action="store_true",
+        help=(
+            "explicitly revisit a previously researched ticker and expose its compact durable "
+            "same-subject science to Sol as nonbinding historical context"
+        ),
+    )
     parser.add_argument(
         "--sol-spend-limit-usd",
         type=float,
@@ -106,7 +118,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="validate CLI/configuration shape without Intake or Sol API calls",
+        help="validate CLI/configuration and scientific context without Intake or Sol API calls",
     )
     return parser
 
@@ -119,13 +131,42 @@ def main(argv: list[str] | None = None) -> int:
     if args.sol_spend_limit_usd <= 0:
         raise RuntimeError("--sol-spend-limit-usd must be positive")
 
+    root = Path(args.root).expanduser().resolve()
+    subject = SubjectMetadata(subject_id=f"equity:{ticker}", ticker=ticker)
+    scientific_context = load_subject_scientific_context(
+        root,
+        active_subject_id=subject.subject_id,
+        include_same_subject_prior_science=args.revisit,
+    )
+    prior_package_count = sum(
+        len(item.get("research_packages", []))
+        for item in scientific_context.prior_subject_science.get("subjects", [])
+        if isinstance(item, dict)
+    )
+    same_subject_package_count = len(
+        scientific_context.same_subject_prior_science.get("research_packages", [])
+    ) if scientific_context.same_subject_prior_science is not None else 0
+    same_subject_nexus_finding_count = len(
+        scientific_context.same_subject_prior_science.get("nexus_only_findings", [])
+    ) if scientific_context.same_subject_prior_science is not None else 0
+
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     state_dir = Path(args.state_dir or f"/home/ubuntu/mts-v4-sol-batched-{ticker.lower()}-{stamp}")
+    frontier = scientific_context.memory_selection.store.frontier()
     if args.dry_run:
-        print(
-            f"DRY_RUN=True TICKER={ticker} SOL_SPEND_LIMIT_USD={args.sol_spend_limit_usd:.2f} "
-            f"STATE_DIR={state_dir}"
-        )
+        print(f"DRY_RUN=True")
+        print(f"TICKER={ticker}")
+        print(f"STATE_DIR={state_dir}")
+        print(f"SOL_SPEND_LIMIT_USD={args.sol_spend_limit_usd:.2f}")
+        print(f"CANONICAL_MEMORY_SOURCE={scientific_context.memory_selection.source_path}")
+        print(f"CANONICAL_MEMORY_RECORDS={len(scientific_context.memory_selection.store.records())}")
+        print(f"CANONICAL_MEMORY_FRONTIER_VERSION={frontier.version if frontier is not None else 0}")
+        print(f"PRIOR_SUBJECT_SCIENTIFIC_PACKAGES={prior_package_count}")
+        print(f"REVISIT_MODE={args.revisit}")
+        print(f"SAME_SUBJECT_SCIENTIFIC_PACKAGES={same_subject_package_count}")
+        print(f"SAME_SUBJECT_NEXUS_ONLY_FINDINGS={same_subject_nexus_finding_count}")
+        print("CROSS_SUBJECT_CONTEXT_AUTOMATIC=True")
+        print("SOL_CALLS=0")
         return 0
 
     state_dir.mkdir(parents=True, exist_ok=False)
@@ -133,11 +174,12 @@ def main(argv: list[str] | None = None) -> int:
         "MTS_SOL_TELEMETRY_PATH",
         str(state_dir / "sol_transport_telemetry.jsonl"),
     )
-    subject = SubjectMetadata(subject_id=f"equity:{ticker}", ticker=ticker)
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
-    rd = SolBatchResearchDirector(
+    rd = SubjectContextSolBatchResearchDirector(
         research_package_store=package_store,
+        prior_subject_scientific_context=scientific_context.prior_subject_science,
+        same_subject_prior_scientific_context=scientific_context.same_subject_prior_science,
         base_url=_required_env("MTS_SOL_BASE_URL"),
         model=_required_env("MTS_SOL_MODEL"),
         api_key=_required_env("MTS_SOL_API_KEY"),
@@ -151,12 +193,42 @@ def main(argv: list[str] | None = None) -> int:
         rd=rd,
         mission=DEFAULT_MISSION,
         nexus_path=state_dir / "research_nexus.json",
+        scientific_memory=scientific_context.memory_selection.store,
     )
     evidence = IntakeEngine(runtime.cache).ingest(
         subject=subject,
         source=standard_live_market_source(),
     )
     campaign_id = f"mts-v4-sol-batched-{ticker.lower()}-{stamp}"
+    precomputed_results = build_neutral_substrate(
+        subject=subject,
+        evidence=evidence,
+        cache=runtime.cache,
+        analysis=runtime.analysis,
+    )
+
+    (state_dir / "subject_scientific_context.json").write_text(
+        json.dumps(
+            {
+                "active_subject_id": subject.subject_id,
+                "mode": "REVISIT" if args.revisit else "FRESH_FULL_SUBJECT",
+                "mission": DEFAULT_MISSION,
+                "canonical_memory_source": str(scientific_context.memory_selection.source_path),
+                "canonical_memory_superseded_paths": [
+                    str(path) for path in scientific_context.memory_selection.superseded_paths
+                ],
+                "canonical_memory_frontier_version": frontier.version if frontier is not None else 0,
+                "canonical_memory_record_count": len(scientific_context.memory_selection.store.records()),
+                "prior_subject_scientific_context": scientific_context.prior_subject_science,
+                "revisit_mode": args.revisit,
+                "same_subject_prior_science": scientific_context.same_subject_prior_science,
+            },
+            sort_keys=True,
+            indent=2,
+            default=str,
+        ) + "\n",
+        encoding="utf-8",
+    )
 
     decision_path = state_dir / "batch_decisions.jsonl"
     report_path = state_dir / "batch_reports.jsonl"
@@ -211,6 +283,7 @@ def main(argv: list[str] | None = None) -> int:
             decision_callback=on_decision,
             report_callback=on_report,
             accepted_request_callback=accepted,
+            precomputed_results=precomputed_results,
         )
     except SolSpendAuthorizationRequired as exc:
         artifact = state_dir / "sol_spend_authorization_required.json"
@@ -227,9 +300,18 @@ def main(argv: list[str] | None = None) -> int:
     summary = {
         "campaign_id": campaign_id,
         "subject_id": subject.subject_id,
+        "cross_subject_context_automatic": True,
+        "canonical_cross_subject_memory_source": str(scientific_context.memory_selection.source_path),
+        "canonical_cross_subject_memory_record_count": len(scientific_context.memory_selection.store.records()),
+        "canonical_cross_subject_frontier_version": frontier.version if frontier is not None else 0,
+        "prior_subject_scientific_packages_exposed": prior_package_count,
+        "revisit_mode": args.revisit,
+        "same_subject_scientific_packages_exposed": same_subject_package_count,
+        "same_subject_nexus_only_findings_exposed": same_subject_nexus_finding_count,
         "decisions": outcome.decisions,
         "batches_executed": outcome.batches_executed,
         "analyses_executed": outcome.analyses_executed,
+        "neutral_analysis_substrate_count": len(precomputed_results),
         "findings_promoted": outcome.findings_promoted,
         "closed": outcome.closed,
         "close_reason": outcome.close_reason,
@@ -243,9 +325,15 @@ def main(argv: list[str] | None = None) -> int:
     print(f"STATE_DIR={state_dir}", flush=True)
     print(f"CAMPAIGN_ID={campaign_id}", flush=True)
     print(f"SUBJECT={subject.subject_id}", flush=True)
+    print("CROSS_SUBJECT_CONTEXT_AUTOMATIC=True", flush=True)
+    print(f"PRIOR_SUBJECT_SCIENTIFIC_PACKAGES={prior_package_count}", flush=True)
+    print(f"REVISIT_MODE={args.revisit}", flush=True)
+    print(f"SAME_SUBJECT_SCIENTIFIC_PACKAGES={same_subject_package_count}", flush=True)
+    print(f"SAME_SUBJECT_NEXUS_ONLY_FINDINGS={same_subject_nexus_finding_count}", flush=True)
     print(f"DECISIONS={outcome.decisions}", flush=True)
     print(f"BATCHES={outcome.batches_executed}", flush=True)
     print(f"ANALYSES={outcome.analyses_executed}", flush=True)
+    print(f"NEUTRAL_ANALYSIS_SUBSTRATE_COUNT={len(precomputed_results)}", flush=True)
     print(f"CLOSED={outcome.closed}", flush=True)
     print(f"CLOSE_REASON={outcome.close_reason}", flush=True)
     if spend is not None:

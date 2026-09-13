@@ -74,7 +74,7 @@ class CompositeEvidenceSource:
 
 @dataclass(frozen=True, slots=True)
 class YFinanceDailyOhlcvSource:
-    period: str = "2y"
+    period: str = "20y"
 
     def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
         try:

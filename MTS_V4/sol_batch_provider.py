@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import asdict
+from datetime import datetime, timezone
 import json
+from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from .batch_contracts import BatchExecutionReport, BatchResearchDecision
@@ -46,6 +48,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             evidence=evidence,
             available_methods=available_methods,
             nexus_context=nexus_context,
+            continuation=False,
         )
         return self._request_batch_decision(
             operation="BEGIN_BATCH_RESEARCH",
@@ -69,8 +72,9 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             evidence=evidence,
             available_methods=available_methods,
             nexus_context=nexus_context,
+            continuation=True,
         )
-        payload["prior_batch_decision"] = self._json_safe(asdict(prior_decision))
+        payload["prior_batch_decision"] = self._compact_prior_batch_decision(prior_decision)
         payload["batch_execution_report"] = self._report_payload(report)
         return self._request_batch_decision(
             operation="INTERPRET_BATCH_RESULTS",
@@ -94,8 +98,9 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             evidence=evidence,
             available_methods=available_methods,
             nexus_context=nexus_context,
+            continuation=True,
         )
-        payload["prior_batch_decision"] = self._json_safe(asdict(prior_decision))
+        payload["prior_batch_decision"] = self._compact_prior_batch_decision(prior_decision)
         payload["objective_batch_defects"] = self._json_safe(defects)
         return self._request_batch_decision(
             operation="REPAIR_BATCH_PLAN",
@@ -110,15 +115,28 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         evidence: Sequence[EvidenceDescriptor],
         available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
+        continuation: bool = False,
     ) -> dict[str, object]:
+        current_nexus_context = dict(nexus_context)
+        if continuation:
+            current_nexus_context.pop("neutral_analysis_substrate", None)
+            current_nexus_context.pop("cross_subject_scientific_memory", None)
+            current_nexus_context["continuation_transport_policy"] = {
+                "full_neutral_substrate_and_cross_subject_memory_sent_on_begin": True,
+                "scientific_continuity_source": "prior_batch_decision.scientific_continuation_state",
+                "newest_batch_report_is_delta_only": True,
+                "deterministic_scientific_selection_or_summarization": False,
+            }
         payload = self._common_payload(
             subject=subject,
             evidence=evidence,
             available_methods=available_methods,
-            nexus_context=nexus_context,
+            nexus_context=current_nexus_context,
         )
-        payload["research_packages"] = self._research_package_store.context_for_subject(
-            subject.subject_id
+        payload["research_packages"] = (
+            self._research_package_store.compact_context_for_subject(subject.subject_id)
+            if continuation
+            else self._research_package_store.context_for_subject(subject.subject_id)
         )
         spend_snapshot = self.sol_spend_snapshot()
         if spend_snapshot is not None:
@@ -140,6 +158,48 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                 ),
             }
         return payload
+
+    @classmethod
+    def _compact_prior_batch_decision(
+        cls, decision: BatchResearchDecision
+    ) -> Mapping[str, object]:
+        """Carry Sol-authored science forward without replaying the prior plan body."""
+        continuation = decision.research_state.get("scientific_continuation_state")
+        if not isinstance(continuation, Mapping) or not continuation:
+            # Backward-compatible recovery for campaigns created before the
+            # continuation-state contract existed. New decisions are prompted
+            # to author the compact state themselves.
+            return cls._json_safe(asdict(decision))
+        return cls._json_safe(
+            {
+                "continue_research": decision.continue_research,
+                "active_research_packages": [
+                    {
+                        "rp_id": package.rp_id,
+                        "parent_rp_id": package.parent_rp_id,
+                        "objective": package.objective,
+                        "decision_boundary": package.decision_boundary,
+                        "analysis_ids_in_newest_batch": [
+                            analysis.analysis_id for analysis in package.analyses
+                        ],
+                    }
+                    for package in decision.research_packages
+                ],
+                "scientific_continuation_state": dict(continuation),
+                "batch_interpretation": decision.batch_interpretation,
+                "research_progress": (
+                    asdict(decision.research_progress)
+                    if decision.research_progress is not None
+                    else None
+                ),
+                "transport_policy": {
+                    "authored_by_ai_research_director": True,
+                    "prior_analysis_specification_bodies_replayed": False,
+                    "newest_compiled_results_supplied_separately": True,
+                    "deterministic_scientific_summarization": False,
+                },
+            }
+        )
 
     @classmethod
     def _batch_messages(
@@ -240,6 +300,12 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             ],
             "research_state": {
                 "other_state": "arbitrary cumulative AI-authored scientific state",
+                "scientific_continuation_state": (
+                    "required cumulative AI-authored compact scientific working memory: retain every active "
+                    "hypothesis, relevant result interpretation, unresolved question, rejected/closed direction, "
+                    "and next decision dependency needed on later calls; deterministic code transports but does "
+                    "not author, rank, or summarize this object"
+                ),
                 "predictive_hypothesis_updates": [
                     {
                         "rp_id": "exact active local RP",
@@ -290,6 +356,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "Internal names are not scientific authority. Use input semantic roles in alignment[].input_name and selections[].input_name; the compiler resolves them.",
             "On INTERPRET_BATCH_RESULTS, interpret the completed batch as a scientific whole before issuing follow-up work. Follow-up may contain zero, one, or many RPs and Analysis Specifications as scientifically warranted.",
             "Provide research_progress on every decision. Estimate scientific completion and remaining work independently of the human funding ceiling; never trim science to make the estimate fit the authorized dollars.",
+            "Provide a cumulative research_state.scientific_continuation_state on every decision. Later calls use your state instead of replaying full prior-science, open-package journals, and prior Analysis plans; include all scientific context you judge necessary for continuity.",
             "When continue_research=true, estimated_remaining_batches and estimated_remaining_sol_calls must each be at least 1 because the current authorized Analysis batch and its later Sol interpretation remain ahead.",
             "When continue_research=false, estimated_remaining_batches and estimated_remaining_sol_calls must both be 0.",
             "Use rp_closures to close every previously open RP you judge scientifically exhausted. Do not close an RP in the same decision that schedules new analyses inside that RP; execute and interpret those analyses first.",
@@ -333,12 +400,31 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         content = self._chat_completion(messages)
         defect: str | None = None
         try:
-            decision = BatchResearchDecisionCodec.decode(content)
+            decision = self._decode_batch_decision_with_terminal_brace_repair(
+                content=content,
+                operation=operation,
+                repair_attempt=0,
+            )
             defect = self._batch_decision_defect(decision)
             if defect is None:
                 return self._accept_batch_decision(decision)
         except BatchResearchDecisionDecodeError as exc:
             defect = str(exc)
+            diagnostic_path = self._preserve_batch_representation_defect(
+                operation=operation,
+                repair_attempt=0,
+                defect=defect,
+                content=content,
+            )
+            self._write_telemetry(
+                {
+                    "event": "BATCH_DECISION_REPRESENTATION_PRESERVED",
+                    "operation": operation,
+                    "repair_attempt": 0,
+                    "decode_defect": defect,
+                    "diagnostic_path": diagnostic_path,
+                }
+            )
 
         assistant_content = content
         for repair_index in range(self._MAX_BATCH_REPRESENTATION_REPAIRS):
@@ -375,9 +461,28 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             )
             assistant_content = repaired
             try:
-                decision = BatchResearchDecisionCodec.decode(repaired)
+                decision = self._decode_batch_decision_with_terminal_brace_repair(
+                    content=repaired,
+                    operation=operation,
+                    repair_attempt=repair_index + 1,
+                )
             except BatchResearchDecisionDecodeError as exc:
                 defect = str(exc)
+                diagnostic_path = self._preserve_batch_representation_defect(
+                    operation=operation,
+                    repair_attempt=repair_index + 1,
+                    defect=defect,
+                    content=repaired,
+                )
+                self._write_telemetry(
+                    {
+                        "event": "BATCH_DECISION_REPRESENTATION_PRESERVED",
+                        "operation": operation,
+                        "repair_attempt": repair_index + 1,
+                        "decode_defect": defect,
+                        "diagnostic_path": diagnostic_path,
+                    }
+                )
                 continue
             defect = self._batch_decision_defect(decision)
             if defect is None:
@@ -392,6 +497,85 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         )
         raise ValueError("batch decision representation repair budget exhausted: " + str(defect))
 
+    @classmethod
+    def _preserve_batch_representation_defect(
+        cls,
+        *,
+        operation: str,
+        repair_attempt: int,
+        defect: str | None,
+        content: str,
+    ) -> str | None:
+        telemetry_path = cls._telemetry_path()
+        if telemetry_path is None:
+            return None
+
+        diagnostic_path = telemetry_path.parent / "sol_representation_defects.jsonl"
+        diagnostic_path.parent.mkdir(parents=True, exist_ok=True)
+
+        record = {
+            "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+            "operation": operation,
+            "repair_attempt": repair_attempt,
+            "decode_defect": defect,
+            "raw_assistant_response": content,
+        }
+        with diagnostic_path.open("a", encoding="utf-8") as handle:
+            handle.write(
+                json.dumps(
+                    record,
+                    sort_keys=True,
+                    default=str,
+                    separators=(",", ":"),
+                )
+                + "\n"
+            )
+        return str(diagnostic_path)
+
+    def _decode_batch_decision_with_terminal_brace_repair(
+        self,
+        *,
+        content: str,
+        operation: str,
+        repair_attempt: int,
+    ) -> BatchResearchDecision:
+        """Decode one Sol batch decision with one objectively bounded repair.
+
+        The normal codec remains authoritative. If and only if normal decoding
+        fails and removing exactly one terminal closing brace makes the entire
+        response pass the same BatchResearchDecisionCodec, accept that corrected
+        representation. No other trimming, object selection, or scientific
+        alteration is permitted.
+        """
+        try:
+            return BatchResearchDecisionCodec.decode(content)
+        except BatchResearchDecisionDecodeError as original_exc:
+            stripped = content.strip()
+
+            if not stripped.endswith("}"):
+                raise original_exc
+
+            candidate = stripped[:-1].rstrip()
+            if not candidate:
+                raise original_exc
+
+            try:
+                decision = BatchResearchDecisionCodec.decode(candidate)
+            except BatchResearchDecisionDecodeError:
+                raise original_exc
+
+            self._write_telemetry(
+                {
+                    "event": "BATCH_DECISION_SINGLE_TERMINAL_BRACE_REPAIRED",
+                    "operation": operation,
+                    "repair_attempt": repair_attempt,
+                    "original_decode_defect": str(original_exc),
+                    "mechanical_edit": "REMOVE_EXACTLY_ONE_TERMINAL_CLOSING_BRACE",
+                    "scientific_content_modified": False,
+                }
+            )
+            return decision
+
     def _accept_batch_decision(self, decision: BatchResearchDecision) -> BatchResearchDecision:
         assert decision.research_progress is not None
         self.update_sol_research_progress(decision.research_progress)
@@ -405,6 +589,12 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         if progress is None:
             return "research_progress is required on every batched Sol decision"
         if decision.continue_research:
+            continuation = decision.research_state.get("scientific_continuation_state")
+            if not isinstance(continuation, Mapping) or not continuation:
+                return (
+                    "continuing research requires nonempty "
+                    "research_state.scientific_continuation_state authored by the AI Research Director"
+                )
             if progress.estimated_remaining_batches < 1:
                 return (
                     "continuing research requires research_progress.estimated_remaining_batches >= 1; "

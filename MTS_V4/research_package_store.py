@@ -150,6 +150,54 @@ class JsonResearchPackageStore:
             },
         }
 
+    def compact_context_for_subject(self, subject_id: str) -> Mapping[str, object]:
+        """Return exact AI-authored RP summaries without replaying execution history.
+
+        This is a transport representation only. It preserves every package's
+        identity, scientific framing, hypotheses, findings, unresolved issues,
+        predictive state, and closure assessment. It omits question/analysis
+        journals already represented by the current Sol decision, newest report,
+        and exact campaign result catalog.
+        """
+        packages: list[Mapping[str, object]] = []
+        for rp_id in self.list_ids():
+            package = self.load(rp_id)
+            if package is None or package.subject_id != subject_id:
+                continue
+            packages.append(
+                {
+                    "rp_id": package.rp_id,
+                    "subject_id": package.subject_id,
+                    "campaign_id": package.campaign_id,
+                    "parent_rp_id": package.parent_rp_id,
+                    "originating_question": package.originating_question,
+                    "originating_rationale": package.originating_rationale,
+                    "hypotheses": list(package.hypotheses),
+                    "predictive_hypotheses": [asdict(item) for item in package.predictive_hypotheses],
+                    "findings": list(package.findings),
+                    "unresolved_issues": list(package.unresolved_issues),
+                    "status": package.status,
+                    "close_reason": package.close_reason,
+                    "final_assessment": package.final_assessment,
+                    "version": package.version,
+                    "question_count": len(package.questions),
+                    "analysis_count": len(package.analyses),
+                    "successful_analysis_count": sum(
+                        item.execution_status == "SUCCESS" for item in package.analyses
+                    ),
+                }
+            )
+        return {
+            "research_package_summaries": packages,
+            "transport_policy": {
+                "ai_authored_scientific_content_preserved": True,
+                "question_and_analysis_journals_replayed": False,
+                "exact_chainability_supplied_by_campaign_analysis_result_catalog": True,
+                "deterministic_scientific_ranking_or_selection": False,
+                "raw_reproducible_data_present": False,
+            },
+        }
+
     @classmethod
     def _contains_forbidden_raw_cache_structure(cls, value: object) -> bool:
         """Detect actual raw/cache persistence structures, not scientific vocabulary.

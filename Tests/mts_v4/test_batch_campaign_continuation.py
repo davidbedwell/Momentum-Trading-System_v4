@@ -7,6 +7,7 @@ from MTS_V4.batch_campaign_continuation import (
     RecoveredBatchCampaignContinuation,
 )
 from MTS_V4.batch_contracts import (
+    BatchAnalysisRecord,
     BatchResearchDecision,
     ResearchPackagePlan,
     ScientificAnalysisSpecification,
@@ -145,6 +146,99 @@ def test_continuation_executes_only_new_analysis_and_never_calls_begin():
     assert outcome.closed is True
 
 
+
+
+def test_continuation_reuses_checkpoint_after_interruption_without_reexecution():
+    subject, evidence, analysis, rd, loop, prior = _fixture()
+    checkpoints = {}
+
+    def checkpoint_then_interrupt(record, decisions, analyses):
+        checkpoints[record.analysis_id] = record
+        raise RuntimeError("simulated interruption after durable analysis checkpoint")
+
+    with pytest.raises(RuntimeError, match="simulated interruption"):
+        loop.continue_from_decision(
+            subject=subject,
+            evidence=(evidence,),
+            initial_decision=_decision(subject, evidence),
+            prior_results_by_analysis_id={"analysis:old": prior},
+            baseline=ContinuationBaseline(
+                decisions=3,
+                batches_executed=2,
+                analyses_executed=24,
+            ),
+            analysis_checkpoint_callback=checkpoint_then_interrupt,
+        )
+
+    assert len(analysis.requests) == 1
+    assert set(checkpoints) == {"analysis:new"}
+    assert checkpoints["analysis:new"].result is not None
+
+    (
+        subject2,
+        evidence2,
+        analysis2,
+        rd2,
+        loop2,
+        prior2,
+    ) = _fixture()
+
+    outcome = loop2.continue_from_decision(
+        subject=subject2,
+        evidence=(evidence2,),
+        initial_decision=_decision(subject2, evidence2),
+        prior_results_by_analysis_id={"analysis:old": prior2},
+        baseline=ContinuationBaseline(
+            decisions=3,
+            batches_executed=2,
+            analyses_executed=24,
+        ),
+        checkpointed_records_by_analysis_id=checkpoints,
+    )
+
+    assert analysis2.requests == []
+    assert rd2.begin_calls == 0
+    assert rd2.interpret_calls == 1
+    assert outcome.analyses_executed == 25
+    assert outcome.batches_executed == 3
+    assert outcome.decisions == 4
+    assert outcome.closed is True
+
+
+def test_continuation_rejects_checkpoint_not_in_accepted_decision():
+    subject, evidence, analysis, rd, loop, prior = _fixture()
+
+    foreign_record = BatchAnalysisRecord(
+        analysis_id="analysis:not-authorized",
+        rp_id="RP-TSLA-CONTINUE",
+        status="OBJECTIVE_CONTRACT_DEFECT",
+        objective_defect="fixture",
+    )
+
+    with pytest.raises(
+        BatchResearchLoopError,
+        match="not members of the accepted continuation decision",
+    ):
+        loop.continue_from_decision(
+            subject=subject,
+            evidence=(evidence,),
+            initial_decision=_decision(subject, evidence),
+            prior_results_by_analysis_id={"analysis:old": prior},
+            baseline=ContinuationBaseline(
+                decisions=3,
+                batches_executed=2,
+                analyses_executed=24,
+            ),
+            checkpointed_records_by_analysis_id={
+                foreign_record.analysis_id: foreign_record
+            },
+        )
+
+    assert analysis.requests == []
+    assert rd.begin_calls == 0
+    assert rd.interpret_calls == 0
+
+
 def test_continuation_rejects_reexecution_of_recovered_analysis_identity():
     subject, evidence, analysis, rd, loop, prior = _fixture()
     with pytest.raises(BatchResearchLoopError, match="re-execute prior analysis_id"):
@@ -163,3 +257,82 @@ def test_continuation_rejects_reexecution_of_recovered_analysis_identity():
     assert analysis.requests == []
     assert rd.begin_calls == 0
     assert rd.interpret_calls == 0
+
+def test_checkpoint_loader_selects_current_decision_and_rejects_wrong_fingerprint(tmp_path):
+    import json
+    from dataclasses import asdict
+
+    from scripts.resume_fresh_subject import _load_analysis_checkpoints
+
+    subject, evidence, analysis, rd, loop, prior = _fixture()
+    captured = {}
+
+    def capture_then_interrupt(record, decisions, analyses):
+        captured[record.analysis_id] = record
+        raise RuntimeError("capture")
+
+    with pytest.raises(RuntimeError, match="capture"):
+        loop.continue_from_decision(
+            subject=subject,
+            evidence=(evidence,),
+            initial_decision=_decision(subject, evidence),
+            prior_results_by_analysis_id={"analysis:old": prior},
+            baseline=ContinuationBaseline(
+                decisions=3,
+                batches_executed=2,
+                analyses_executed=24,
+            ),
+            analysis_checkpoint_callback=capture_then_interrupt,
+        )
+
+    record = captured["analysis:new"]
+    path = tmp_path / "continuation_analysis_checkpoints.jsonl"
+
+    rows = [
+        {
+            "decision_sequence": 2,
+            "decision_fingerprint": "older-fingerprint",
+            "record": asdict(record),
+        },
+        {
+            "decision_sequence": 3,
+            "decision_fingerprint": "current-fingerprint",
+            "record": asdict(record),
+        },
+    ]
+    path.write_text(
+        "".join(json.dumps(row, default=str) + "\n" for row in rows),
+        encoding="utf-8",
+    )
+
+    loaded = _load_analysis_checkpoints(
+        path,
+        decision_fingerprint="current-fingerprint",
+        decision_sequence=3,
+        accepted_analysis_ids={"analysis:new"},
+    )
+
+    assert set(loaded) == {"analysis:new"}
+
+    bad_rows = [
+        {
+            "decision_sequence": 3,
+            "decision_fingerprint": "wrong-fingerprint",
+            "record": asdict(record),
+        }
+    ]
+    path.write_text(
+        "".join(json.dumps(row, default=str) + "\n" for row in bad_rows),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        RuntimeError,
+        match="decision fingerprint mismatch",
+    ):
+        _load_analysis_checkpoints(
+            path,
+            decision_fingerprint="current-fingerprint",
+            decision_sequence=3,
+            accepted_analysis_ids={"analysis:new"},
+        )

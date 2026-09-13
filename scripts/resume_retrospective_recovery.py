@@ -12,6 +12,7 @@ from MTS_V4.batch_campaign_reconstruction import reconstruct_batched_campaign
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import build_batch_runtime
 from MTS_V4.contracts import ResearchPhase
+from MTS_V4.cross_subject_memory_store import JsonCrossSubjectScientificMemoryStore
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.retrospective_recovery import SolRetrospectiveRecoveryResearchDirector
 from MTS_V4.retrospective_resume import interpret_reconstructed_retrospective_boundary
@@ -56,6 +57,23 @@ def _prior_sol_spend(path: Path) -> float:
     return max(cumulative)
 
 
+def _scientific_memory_from_context(retrospective_context: object) -> JsonCrossSubjectScientificMemoryStore:
+    if not isinstance(retrospective_context, dict):
+        raise RuntimeError("retrospective context is not an object")
+    provenance = retrospective_context.get("cross_subject_memory_provenance")
+    if not isinstance(provenance, dict):
+        raise RuntimeError(
+            "retrospective campaign lacks canonical cross-subject memory provenance; refusing to resume with changed scientific context"
+        )
+    source_path = provenance.get("source_path")
+    if not isinstance(source_path, str) or not source_path.strip():
+        raise RuntimeError("retrospective campaign cross-subject memory provenance lacks source_path")
+    path = Path(source_path).expanduser().resolve()
+    if not path.is_file():
+        raise RuntimeError(f"recorded canonical cross-subject memory snapshot is missing: {path}")
+    return JsonCrossSubjectScientificMemoryStore(path)
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -87,6 +105,7 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError(f"recovered Research Package store does not exist: {package_store_dir}")
 
     retrospective_context = json.loads(context_path.read_text(encoding="utf-8"))
+    scientific_memory = _scientific_memory_from_context(retrospective_context)
     campaign_id = state_dir.name
     subject_ids = []
     document = json.loads(nexus_path.read_text(encoding="utf-8"))
@@ -134,6 +153,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"LATEST_REPORT_RECORDS={len(reconstructed.latest_report.records)}", flush=True)
     print(f"PRIOR_SOL_SPEND_USD={prior_spend:.6f}", flush=True)
     print(f"REMAINING_SOL_AUTHORIZATION_USD={remaining:.6f}", flush=True)
+    print(f"CANONICAL_MEMORY_SOURCE={scientific_memory.path}", flush=True)
+    print("CROSS_SUBJECT_CONTEXT_PRESERVED=True", flush=True)
     print("ANALYSIS_EXECUTIONS_BEFORE_INTERPRETATION=0", flush=True)
 
     if args.dry_run:
@@ -158,7 +179,12 @@ def main(argv: list[str] | None = None) -> int:
         required_research_phase=ResearchPhase.EXPLORATION,
         sol_spend_limit_usd=remaining,
     )
-    runtime = build_batch_runtime(rd=rd, mission=RETROSPECTIVE_MISSION, nexus_path=nexus_path)
+    runtime = build_batch_runtime(
+        rd=rd,
+        mission=RETROSPECTIVE_MISSION,
+        nexus_path=nexus_path,
+        scientific_memory=scientific_memory,
+    )
 
     decision = interpret_reconstructed_retrospective_boundary(
         rd=rd,
@@ -200,6 +226,7 @@ def main(argv: list[str] | None = None) -> int:
     resume_spend = 0.0 if spend is None else spend.actual_spend_usd
     print("RESUME_INTERPRETATION_ACCEPTED=True", flush=True)
     print("ANALYSIS_EXECUTIONS_BEFORE_INTERPRETATION=0", flush=True)
+    print("CROSS_SUBJECT_CONTEXT_PRESERVED=True", flush=True)
     print(f"RESUME_SOL_SPEND_USD={resume_spend:.6f}", flush=True)
     print(f"TOTAL_SUBJECT_SOL_SPEND_USD={prior_spend + resume_spend:.6f}", flush=True)
     print(f"CONTINUE_RESEARCH={decision.continue_research}", flush=True)

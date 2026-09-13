@@ -111,6 +111,7 @@ class BatchResearchLoopOrchestrator:
         decision_callback: BatchDecisionCallback | None = None,
         report_callback: BatchReportCallback | None = None,
         accepted_request_callback: AcceptedRequestCallback | None = None,
+        precomputed_results: Mapping[str, AnalysisResult] | None = None,
     ) -> BatchResearchLoopOutcome:
         self._nexus.upsert_subject(subject)
         evidence_map = {item.evidence_id: item for item in evidence}
@@ -128,6 +129,19 @@ class BatchResearchLoopOrchestrator:
         analyses = 0
         promoted = 0
         results_by_analysis_id: dict[str, AnalysisResult] = {}
+        for analysis_id, result in (precomputed_results or {}).items():
+            if not analysis_id.strip():
+                raise BatchResearchLoopError("precomputed logical analysis_id cannot be blank")
+            if result.subject_id != subject.subject_id:
+                raise BatchResearchLoopError(
+                    f"precomputed analysis {analysis_id} belongs to {result.subject_id}"
+                )
+            if result.execution_metadata.get("execution_status") != "SUCCESS":
+                raise BatchResearchLoopError(
+                    f"precomputed analysis {analysis_id} did not complete successfully"
+                )
+            results_by_analysis_id[analysis_id] = result
+            self._nexus.register_analysis_result_metadata(result.durable_metadata())
 
         decision = self._rd.begin_batch_research(
             mission=self._mission,
@@ -438,6 +452,23 @@ class BatchResearchLoopOrchestrator:
         subject_id: str,
         results_by_analysis_id: Mapping[str, AnalysisResult],
     ) -> Mapping[str, object]:
+        substrate = []
+        for analysis_id, result in results_by_analysis_id.items():
+            policy = result.outputs.get("policy")
+            if not isinstance(policy, Mapping) or not policy.get(
+                "human_authorized_neutral_infrastructure"
+            ):
+                continue
+            outputs = dict(result.outputs)
+            outputs.pop("derived_datasets", None)
+            substrate.append(
+                {
+                    "analysis_id": analysis_id,
+                    "result_id": result.result_id,
+                    "method_id": result.method_id,
+                    "outputs": outputs,
+                }
+            )
         return {
             "subject": self._nexus.get_subject(subject_id),
             "evidence_metadata": self._nexus.evidence_metadata_for_subject(subject_id),
@@ -459,5 +490,13 @@ class BatchResearchLoopOrchestrator:
                     "Audit visibility. New batch Analysis Specifications should reference logical analysis_id, "
                     "not generated result_id/output_path plumbing."
                 ),
+            },
+            "neutral_analysis_substrate": substrate,
+            "neutral_analysis_substrate_policy": {
+                "authority": "HUMAN_AUTHORIZED_OBJECTIVE_ANALYSIS_INFRASTRUCTURE",
+                "scientific_selection_or_ranking": False,
+                "findings_or_hypotheses_created": False,
+                "ai_rd_retains_interpretation_and_research_direction_authority": True,
+                "row_payloads_present": False,
             },
         }
