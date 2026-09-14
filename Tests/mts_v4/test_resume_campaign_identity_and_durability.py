@@ -1,0 +1,102 @@
+from __future__ import annotations
+
+import importlib.util
+import json
+from pathlib import Path
+
+import pytest
+
+from MTS_V4.research_package import ResearchPackage
+from MTS_V4.research_package_store import JsonResearchPackageStore
+
+
+def _resume_module():
+    path = Path("scripts/resume_fresh_subject.py")
+    spec = importlib.util.spec_from_file_location("mts_v4_resume_fresh_subject_test", path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_resume_recovers_original_campaign_identity_from_durable_packages(tmp_path):
+    module = _resume_module()
+    store = JsonResearchPackageStore(tmp_path)
+    store.create(
+        ResearchPackage(
+            rp_id="RP-ONE",
+            subject_id="equity:NVDA",
+            campaign_id="mts-v4-sol-batched-nvda-original",
+            originating_question="q",
+            originating_rationale="r",
+        )
+    )
+    store.create(
+        ResearchPackage(
+            rp_id="RP-TWO",
+            subject_id="equity:NVDA",
+            campaign_id="mts-v4-sol-batched-nvda-original",
+            originating_question="q2",
+            originating_rationale="r2",
+        )
+    )
+
+    assert module._recover_campaign_id(
+        tmp_path,
+        subject_id="equity:NVDA",
+    ) == "mts-v4-sol-batched-nvda-original"
+
+
+def test_resume_rejects_mixed_durable_campaign_identity(tmp_path):
+    module = _resume_module()
+    store = JsonResearchPackageStore(tmp_path)
+    for index, campaign_id in enumerate(("campaign-a", "campaign-b"), start=1):
+        store.create(
+            ResearchPackage(
+                rp_id=f"RP-{index}",
+                subject_id="equity:NVDA",
+                campaign_id=campaign_id,
+                originating_question="q",
+                originating_rationale="r",
+            )
+        )
+
+    with pytest.raises(RuntimeError, match="multiple campaign identities"):
+        module._recover_campaign_id(
+            tmp_path,
+            subject_id="equity:NVDA",
+        )
+
+
+def test_resume_spend_sums_calls_across_separate_resume_invocations(tmp_path):
+    module = _resume_module()
+    telemetry = tmp_path / "resume_sol_transport_telemetry.jsonl"
+    rows = [
+        {
+            "event": "SOL_CALL_COMPLETE",
+            "estimated_call_cost_usd": 0.423176,
+            "estimated_cumulative_sol_spend_usd": 0.423176,
+        },
+        {
+            "event": "SOL_CALL_COMPLETE",
+            "estimated_call_cost_usd": 0.400000,
+            "estimated_cumulative_sol_spend_usd": 0.400000,
+        },
+    ]
+    telemetry.write_text(
+        "\n".join(json.dumps(row) for row in rows) + "\n",
+        encoding="utf-8",
+    )
+
+    assert module._telemetry_spend(telemetry) == pytest.approx(0.823176)
+
+
+def test_resume_persists_paid_sol_decision_before_package_recording():
+    text = Path("scripts/resume_fresh_subject.py").read_text(encoding="utf-8")
+
+    interpret = text.index("decision = rd.interpret_batch_results(")
+    pending_write = text.index("pending_resume_decision_path.write_text(", interpret)
+    record_plan = text.index("recorder.record_plan(", pending_write)
+
+    assert interpret < pending_write < record_plan
+    assert "campaign_id = state_dir.name" not in text
