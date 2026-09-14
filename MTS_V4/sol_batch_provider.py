@@ -173,6 +173,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         return cls._json_safe(
             {
                 "continue_research": decision.continue_research,
+                "waiting_for_future_cohorts": decision.waiting_for_future_cohorts,
                 "active_research_packages": [
                     {
                         "rp_id": package.rp_id,
@@ -248,6 +249,11 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         )
         schema = {
             "continue_research": "boolean",
+            "waiting_for_future_cohorts": (
+                "boolean; true only when research remains scientifically active but no Analysis Specification is "
+                "executable from currently available evidence because the next admissible work requires genuinely "
+                "future observations/cohorts/outcome maturity"
+            ),
             "research_packages": [
                 {
                     "rp_id": "nonblank stable string",
@@ -326,12 +332,12 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "research_progress": {
                 "estimated_percent_complete": "number from 0 through 100 based on your scientific assessment",
                 "estimated_remaining_batches": (
-                    "nonnegative integer; when continuing, include the Analysis batch authorized by this decision "
-                    "plus any additional batches you currently expect"
+                    "nonnegative integer; for executable continuation include the batch authorized now; for future-cohort "
+                    "waiting estimate the future batches expected after the required observations mature"
                 ),
                 "estimated_remaining_sol_calls": (
-                    "nonnegative integer number of future Sol decisions you currently expect after this decision, "
-                    "including interpretation of the batch authorized here when continuing"
+                    "nonnegative integer number of future Sol decisions scientifically expected; waiting decisions may "
+                    "estimate calls that occur only after future-cohort eligibility becomes executable"
                 ),
                 "estimate_confidence": "nonblank confidence statement such as low, medium, or high",
                 "estimate_rationale": (
@@ -354,10 +360,14 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "Select exact methods and scientifically meaningful parameters yourself from context.available_analysis_methods.",
             "Choosing whether datasets should be aligned, the scientific alignment key/mode, selected columns, transformations, horizons, thresholds, and outcomes remains your responsibility.",
             "Internal names are not scientific authority. Use input semantic roles in alignment[].input_name and selections[].input_name; the compiler resolves them.",
-            "On INTERPRET_BATCH_RESULTS, interpret the completed batch as a scientific whole before issuing follow-up work. Follow-up may contain zero, one, or many RPs and Analysis Specifications as scientifically warranted.",
+            "On INTERPRET_BATCH_RESULTS, interpret the completed batch as a scientific whole before issuing follow-up work.",
+            "If scientifically justified work is executable now, set continue_research=true, waiting_for_future_cohorts=false, and provide one or more Research Packages, each with at least one executable Analysis Specification.",
+            "If research remains scientifically active but no Analysis Specification is executable from currently available evidence because the next admissible step requires genuinely future observations, a future cohort, or outcome maturity, set continue_research=true, waiting_for_future_cohorts=true, research_packages=[], close_reason=null, and preserve the frozen hypothesis plus exact future dependencies in research_state.scientific_continuation_state. Do not invent placeholder analyses merely to keep the subject open.",
+            "If subject-level research is scientifically complete or rejected, set continue_research=false, waiting_for_future_cohorts=false, research_packages=[], and provide a nonblank close_reason.",
+            "WAITING_FOR_FUTURE_COHORTS is not closure and must not revise a frozen hypothesis, threshold, horizon, success definition, or future dependency merely to create executable work.",
             "Provide research_progress on every decision. Estimate scientific completion and remaining work independently of the human funding ceiling; never trim science to make the estimate fit the authorized dollars.",
-            "Provide a cumulative research_state.scientific_continuation_state on every decision. Later calls use your state instead of replaying full prior-science, open-package journals, and prior Analysis plans; include all scientific context you judge necessary for continuity.",
-            "When continue_research=true, estimated_remaining_batches and estimated_remaining_sol_calls must each be at least 1 because the current authorized Analysis batch and its later Sol interpretation remain ahead.",
+            "Provide a cumulative research_state.scientific_continuation_state on every continuing or waiting decision. Later calls use your state instead of replaying full prior-science, open-package journals, and prior Analysis plans; include all scientific context you judge necessary for continuity.",
+            "When continue_research=true, estimated_remaining_batches and estimated_remaining_sol_calls must each be at least 1. For WAITING_FOR_FUTURE_COHORTS these estimates refer to future work after the objective waiting dependency resolves, not to an Analysis batch authorized now.",
             "When continue_research=false, estimated_remaining_batches and estimated_remaining_sol_calls must both be 0.",
             "Use rp_closures to close every previously open RP you judge scientifically exhausted. Do not close an RP in the same decision that schedules new analyses inside that RP; execute and interpret those analyses first.",
             "Closing an RP is not the same as closing the subject. In one interpretation you may close exhausted RPs and open or continue other RPs.",
@@ -451,7 +461,9 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                                     "Return one complete corrected batch decision JSON object. Correct only the "
                                     "objective representation/phase/identity/progress-estimate defect. Preserve or "
                                     "revise your scientific plan as you judge appropriate. Deterministic code will "
-                                    "not invent scientific content or alter your research breadth."
+                                    "not invent scientific content or alter your research breadth. If research remains "
+                                    "scientifically active but no work is executable until genuinely future evidence "
+                                    "exists, use waiting_for_future_cohorts=true rather than an empty Research Package."
                                 ),
                             },
                             sort_keys=True,
@@ -599,12 +611,20 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             if progress.estimated_remaining_batches < 1:
                 return (
                     "continuing research requires research_progress.estimated_remaining_batches >= 1; "
-                    "the Analysis batch authorized by this decision still remains"
+                    + (
+                        "future work remains after the WAITING_FOR_FUTURE_COHORTS dependency resolves"
+                        if decision.waiting_for_future_cohorts
+                        else "the Analysis batch authorized by this decision still remains"
+                    )
                 )
             if progress.estimated_remaining_sol_calls < 1:
                 return (
                     "continuing research requires research_progress.estimated_remaining_sol_calls >= 1; "
-                    "at least the later interpretation of this authorized batch remains"
+                    + (
+                        "future Sol interpretation remains after the WAITING_FOR_FUTURE_COHORTS dependency resolves"
+                        if decision.waiting_for_future_cohorts
+                        else "at least the later interpretation of this authorized batch remains"
+                    )
                 )
         else:
             if progress.estimated_remaining_batches != 0:
@@ -628,7 +648,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                 if self._required_subject_id is not None and parent.subject_id != self._required_subject_id:
                     return (
                         f"Research Package {package.rp_id} parent belongs to another subject: "
-                        f"{parent.subject_id}"
+                        f"{package.parent_rp_id}."
                     )
             existing = self._research_package_store.load(package.rp_id)
             if existing is not None:
