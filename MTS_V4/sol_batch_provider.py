@@ -364,6 +364,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "Do not keep an RP artificially open merely because subject-level research continues, and do not close the subject merely because one RP is exhausted.",
             "A parent_rp_id must name an actual local RP for this subject, either already durable in context.research_packages or authored as another RP in this same batch. Historical RP identifiers from cross-subject memory are not local parents.",
             "For a continuing existing RP, preserve its durable parent_rp_id exactly. Analyses inside an RP must use the same parent_rp_id lineage as the containing RP.",
+            "A parent_question_id may name only a question in the same RP, either already durable there or authored in that RP in the same decision. Express derivation from another RP with the containing RP's parent_rp_id; the new RP's root question must then use parent_question_id=null. Never point a question directly into another RP.",
             "Promote only findings you judge significant. The compiler/executor never decides scientific significance.",
             "A failure in one batch branch does not imply the other scientific branches failed; interpret each returned record on its evidence.",
             "During EXPLORATION actively seek predictive structure at T -> T+1 onward without manufacturing positive findings. Historical look-ahead is a discovery capability, not a validation permission.",
