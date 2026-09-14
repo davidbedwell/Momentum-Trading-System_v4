@@ -72,7 +72,6 @@ class BatchResearchDecision:
     """AI-authored program-level decision containing zero or more Research Packages."""
 
     continue_research: bool
-    waiting_for_future_cohorts: bool = False
     research_packages: tuple[ResearchPackagePlan, ...] = ()
     rp_closures: tuple[ResearchPackageClosure, ...] = ()
     promote_findings: tuple[Finding, ...] = ()
@@ -80,6 +79,7 @@ class BatchResearchDecision:
     close_reason: str | None = None
     batch_interpretation: str | None = None
     research_progress: SolResearchProgressEstimate | None = None
+    waiting_for_future_cohorts: bool = False
 
 
 @dataclass(frozen=True, slots=True)
