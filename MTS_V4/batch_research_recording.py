@@ -32,6 +32,106 @@ class BatchCampaignResearchRecorder:
     def __init__(self, *, package_store: JsonResearchPackageStore) -> None:
         self._packages = package_store
 
+    def validate_plan(
+        self,
+        *,
+        campaign_id: str,
+        subject: SubjectMetadata,
+        decision: BatchResearchDecision,
+    ) -> None:
+        """Validate the complete plan without mutating durable package state."""
+        plans = {plan.rp_id: plan for plan in decision.research_packages}
+        if len(plans) != len(decision.research_packages):
+            raise BatchResearchRecordingError("duplicate rp_id in batch plan")
+
+        known_rp_ids = set(self._packages.list_ids())
+        unresolved_rps = dict(plans)
+        ordered_plans = []
+        while unresolved_rps:
+            ready = [
+                plan
+                for plan in unresolved_rps.values()
+                if plan.parent_rp_id is None
+                or plan.parent_rp_id in known_rp_ids
+                or plan.parent_rp_id in plans
+            ]
+            if not ready:
+                unresolved = {
+                    rp_id: plan.parent_rp_id
+                    for rp_id, plan in unresolved_rps.items()
+                }
+                raise BatchResearchRecordingError(
+                    f"Research Package parent lineage cannot be resolved: {unresolved}"
+                )
+            for plan in ready:
+                ordered_plans.append(plan)
+                known_rp_ids.add(plan.rp_id)
+                unresolved_rps.pop(plan.rp_id)
+
+        for plan in ordered_plans:
+            package = self._packages.load(plan.rp_id)
+            if package is not None:
+                if package.subject_id != subject.subject_id:
+                    raise BatchResearchRecordingError(
+                        f"Research Package belongs to another subject: {plan.rp_id}"
+                    )
+                if package.campaign_id != campaign_id:
+                    raise BatchResearchRecordingError(
+                        f"Research Package belongs to another campaign: {plan.rp_id}"
+                    )
+                if package.status != "OPEN":
+                    raise BatchResearchRecordingError(
+                        f"closed Research Package cannot receive new analyses: {plan.rp_id}"
+                    )
+                if package.parent_rp_id != plan.parent_rp_id:
+                    raise BatchResearchRecordingError(
+                        f"Research Package parent changed: {plan.rp_id}"
+                    )
+                existing_question_ids = {
+                    item.question_id for item in package.questions
+                }
+            else:
+                existing_question_ids = set()
+
+            grouped: dict[str, Any] = {}
+            for analysis in plan.analyses:
+                prior = grouped.get(analysis.question_id)
+                if prior is not None and (
+                    prior.question != analysis.question
+                    or prior.rationale != analysis.rationale
+                    or prior.parent_question_id != analysis.parent_question_id
+                    or prior.research_phase is not analysis.research_phase
+                ):
+                    raise BatchResearchRecordingError(
+                        f"question_id has conflicting scientific definitions in {plan.rp_id}: "
+                        f"{analysis.question_id}"
+                    )
+                grouped[analysis.question_id] = analysis
+
+            pending = {
+                question_id: analysis
+                for question_id, analysis in grouped.items()
+                if question_id not in existing_question_ids
+            }
+            while pending:
+                ready = [
+                    item
+                    for item in pending.values()
+                    if item.parent_question_id is None
+                    or item.parent_question_id in existing_question_ids
+                ]
+                if not ready:
+                    unresolved = {
+                        question_id: item.parent_question_id
+                        for question_id, item in pending.items()
+                    }
+                    raise BatchResearchRecordingError(
+                        f"question lineage cannot be resolved in {plan.rp_id}: {unresolved}"
+                    )
+                for analysis in ready:
+                    existing_question_ids.add(analysis.question_id)
+                    pending.pop(analysis.question_id)
+
     def record_plan(
         self,
         *,
@@ -40,6 +140,11 @@ class BatchCampaignResearchRecorder:
         decision: BatchResearchDecision,
     ) -> None:
         """Persist RP plans in parent-safe order without changing scientific lineage."""
+        self.validate_plan(
+            campaign_id=campaign_id,
+            subject=subject,
+            decision=decision,
+        )
         pending = {plan.rp_id: plan for plan in decision.research_packages}
         if len(pending) != len(decision.research_packages):
             raise BatchResearchRecordingError("duplicate rp_id in batch plan")
