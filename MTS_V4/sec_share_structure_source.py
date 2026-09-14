@@ -31,7 +31,6 @@ def _get_json(url: str) -> object:
         url,
         headers={
             "User-Agent": _user_agent(),
-            "Accept-Encoding": "gzip, deflate",
             "Accept": "application/json",
         },
     )
