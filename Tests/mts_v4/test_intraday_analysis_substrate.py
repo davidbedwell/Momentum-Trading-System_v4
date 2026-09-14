@@ -57,5 +57,5 @@ def test_forward_returns_are_explicitly_exploration_outcomes_not_prediction_feat
     rows = [_bar("2026-09-11", f"09:{30 + 5*i:02d}", "REGULAR", 10.0 + i, 100) for i in range(5)]
     result = intraday_participation_substrate({"intraday": rows}, {})
     first = result["derived_datasets"]["intraday_measurement_panel"][0]
-    assert first["forward_return_5m"] == 0.1
+    assert abs(first["forward_return_5m"] - 0.1) < 1e-12
     assert result["policy"]["forward_outcomes_are_exploration_only_not_prediction_features"] is True
