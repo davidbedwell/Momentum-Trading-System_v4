@@ -14,7 +14,9 @@ def test_production_sol_runner_wires_research_lead_intake_and_sec_precompute():
     assert sec_precompute < sol_run
 
 
-def test_standard_research_lead_source_includes_sec_and_intraday_inputs():
+def test_standard_research_lead_source_includes_sec_and_intraday_inputs(monkeypatch):
+    monkeypatch.setenv("UNUSUAL_WHALES_API_KEY", "test-placeholder")
+
     from MTS_V4.research_lead_sources import standard_research_lead_market_source
     from MTS_V4.participation_sources import YFinanceIntradaySource
     from MTS_V4.sec_share_structure_source import SecEdgarShareStructureSource
