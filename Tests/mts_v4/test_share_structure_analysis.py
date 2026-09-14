@@ -48,3 +48,39 @@ def test_same_day_conflicting_share_facts_are_not_silently_selected():
     panel = sec_share_structure_context({"daily": daily, "sec": sec}, {})["derived_datasets"]["sec_share_structure_panel"]
     assert panel[0]["shares_outstanding_known_at_t"] is None
     assert panel[0]["shares_outstanding_ambiguous"] is True
+
+
+def test_share_structure_explicitly_exposes_missing_historical_tradable_float_boundary():
+    daily = [{"date": "2026-03-10", "close": 10.0, "volume": 100_000}]
+    sec = [
+        {
+            "fact_kind": "SHARES_OUTSTANDING",
+            "known_at": "2026-03-01",
+            "period_end": "2026-02-25",
+            "unit": "shares",
+            "value": 10_000_000,
+        },
+        {
+            "fact_kind": "PUBLIC_FLOAT_REPORTED",
+            "known_at": "2026-03-01",
+            "period_end": "2026-02-25",
+            "unit": "USD",
+            "value": 50_000_000,
+        },
+    ]
+
+    result = sec_share_structure_context({"daily": daily, "sec": sec}, {})
+    capabilities = result["evidence_capabilities"]
+    boundary = result["ai_research_director_data_boundary"]
+
+    assert capabilities["historical_shares_outstanding"]["available"] is True
+    assert capabilities["historical_shares_outstanding"]["temporal_semantics"] == "KNOWN_AT_ALIGNED"
+    assert capabilities["historical_tradable_float_shares"]["available"] is False
+    assert capabilities["sec_entity_public_float"]["meaning"] == (
+        "REPORTED_PUBLIC_FLOAT_VALUE_IN_ORIGINAL_SEC_UNIT_NOT_TRADABLE_FLOAT_SHARE_COUNT"
+    )
+    assert boundary["may_identify_historical_tradable_float_as_missing_variable"] is True
+    assert boundary["may_request_historical_tradable_float_as_next_data_requirement"] is True
+    assert boundary["must_not_claim_historical_tradable_float_relationship_tested_without_float_share_evidence"] is True
+    assert boundary["must_not_back_project_current_float"] is True
+    assert boundary["scientific_priority_assigned"] is False
