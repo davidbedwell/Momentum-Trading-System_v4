@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Iterable, Mapping, Sequence
+from zoneinfo import ZoneInfo
 
 from .contracts import SubjectMetadata
 from .intake import IntakePayload
@@ -32,6 +33,18 @@ CATALYST_SCHEMA = (
     "surprise_pct",
 )
 
+INTRADAY_SCHEMA = (
+    "timestamp",
+    "date",
+    "market_time",
+    "session",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+)
+
 
 def _schema(rows: Sequence[Mapping[str, object]], fallback: Sequence[str]) -> tuple[str, ...]:
     if not rows:
@@ -56,7 +69,7 @@ def _scalar(value: object) -> object:
     if value is None:
         return None
     try:
-        if value != value:  # NaN without importing a dataframe library here.
+        if value != value:
             return None
     except Exception:
         pass
@@ -77,9 +90,7 @@ def _iso_time(value: object) -> str | None:
         except (OverflowError, OSError, ValueError):
             return None
     text = str(value).strip()
-    if not text:
-        return None
-    return text
+    return text or None
 
 
 @dataclass(frozen=True, slots=True)
@@ -115,7 +126,7 @@ class YFinanceMarketStructureSource:
                         "short_percent_of_float": _scalar(info.get("shortPercentOfFloat")),
                     }
                 )
-        except Exception as exc:  # provider/network incompleteness should not kill the campaign
+        except Exception as exc:
             acquisition_error = f"{type(exc).__name__}: {exc}"
 
         yield IntakePayload(
@@ -145,11 +156,7 @@ class YFinanceMarketStructureSource:
 
 @dataclass(frozen=True, slots=True)
 class YFinanceCatalystEventsSource:
-    """Acquire provider-available earnings events and recent ticker news.
-
-    This is event evidence, not deterministic catalyst attribution. The Research
-    Director decides whether an event is scientifically relevant to a price move.
-    """
+    """Acquire provider-available earnings events and recent ticker news."""
 
     earnings_limit: int = 100
 
@@ -198,15 +205,9 @@ class YFinanceCatalystEventsSource:
                     or item.get("providerPublishTime")
                 )
                 provider = content.get("provider")
-                if isinstance(provider, Mapping):
-                    publisher = provider.get("displayName")
-                else:
-                    publisher = item.get("publisher")
+                publisher = provider.get("displayName") if isinstance(provider, Mapping) else item.get("publisher")
                 canonical = content.get("canonicalUrl")
-                if isinstance(canonical, Mapping):
-                    source_url = canonical.get("url")
-                else:
-                    source_url = item.get("link")
+                source_url = canonical.get("url") if isinstance(canonical, Mapping) else item.get("link")
                 rows.append(
                     {
                         "event_time": event_time,
@@ -251,3 +252,106 @@ class YFinanceCatalystEventsSource:
                 "test, reject, combine, or ignore candidate catalyst relationships."
             ),
         )
+
+
+@dataclass(frozen=True, slots=True)
+class YFinanceIntradaySource:
+    """Acquire recent 5-minute bars including pre/post-market observations.
+
+    Intraday provider history is intentionally separate from the 20-year daily
+    series. It supports neutral measurement of premarket structure, opening
+    ranges, VWAP, and volume trajectory without implying those ideas work.
+    """
+
+    period: str = "60d"
+    interval: str = "5m"
+    prepost: bool = True
+
+    def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
+        try:
+            import yfinance as yf
+        except ImportError as exc:
+            raise RuntimeError("yfinance is required for YFinanceIntradaySource") from exc
+
+        frame = yf.download(
+            subject.ticker,
+            period=self.period,
+            interval=self.interval,
+            auto_adjust=False,
+            prepost=self.prepost,
+            progress=False,
+            threads=False,
+        )
+        rows: list[dict[str, object]] = []
+        acquisition_error: str | None = None
+        try:
+            if not frame.empty:
+                if getattr(frame.columns, "nlevels", 1) > 1:
+                    frame.columns = [str(item[0]).lower() for item in frame.columns]
+                else:
+                    frame.columns = [str(item).lower() for item in frame.columns]
+                eastern = ZoneInfo("America/New_York")
+                for stamp, record in frame.iterrows():
+                    dt = stamp.to_pydatetime() if hasattr(stamp, "to_pydatetime") else stamp
+                    if dt.tzinfo is None:
+                        dt = dt.replace(tzinfo=timezone.utc)
+                    local = dt.astimezone(eastern)
+                    hhmm = local.hour * 60 + local.minute
+                    session = (
+                        "PREMARKET" if 240 <= hhmm < 570 else
+                        "REGULAR" if 570 <= hhmm < 960 else
+                        "AFTER_HOURS"
+                    )
+                    rows.append(
+                        {
+                            "timestamp": dt.astimezone(timezone.utc).isoformat(),
+                            "date": local.date().isoformat(),
+                            "market_time": local.strftime("%H:%M"),
+                            "session": session,
+                            "open": _scalar(record.get("open")),
+                            "high": _scalar(record.get("high")),
+                            "low": _scalar(record.get("low")),
+                            "close": _scalar(record.get("close")),
+                            "volume": _scalar(record.get("volume")),
+                        }
+                    )
+        except Exception as exc:
+            acquisition_error = f"{type(exc).__name__}: {exc}"
+
+        start, end = _coverage(rows, "timestamp")
+        yield IntakePayload(
+            payload=rows,
+            evidence_type="INTRADAY_OHLCV",
+            artifact_type="NORMALIZED_DATASET",
+            source_identity="YFINANCE_INTRADAY_5M",
+            coverage_start=start,
+            coverage_end=end,
+            row_count=len(rows),
+            schema=_schema(rows, INTRADAY_SCHEMA),
+            provenance={
+                "provider": "yfinance",
+                "period": self.period,
+                "interval": self.interval,
+                "prepost": self.prepost,
+                "market_timezone": "America/New_York",
+                "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
+                "acquisition_error": acquisition_error,
+            },
+            neutral_semantics=(
+                "Recent provider-available five-minute OHLCV including extended hours. Session labels are mechanical "
+                "clock classifications only. Premarket highs, opening ranges, VWAP, and related measurements are not "
+                "signals or evidence of predictiveness until interpreted and tested by the AI Research Director."
+            ),
+        )
+
+
+def standard_market_source_with_research_leads():
+    """Existing live evidence plus neutral participation/catalyst/intraday inputs."""
+    from .live_sources import CompositeEvidenceSource, standard_live_market_source
+
+    return CompositeEvidenceSource(
+        standard_live_market_source(),
+        YFinanceMarketStructureSource(),
+        YFinanceCatalystEventsSource(),
+        YFinanceIntradaySource(),
+    )
