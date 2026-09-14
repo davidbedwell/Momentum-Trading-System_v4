@@ -43,6 +43,7 @@ def _summary(ticker: str, category: str) -> dict[str, object]:
     ]
     accessions = {str(row.get("accession")) for row in rows if row.get("accession")}
     forms = sorted({str(row.get("form")) for row in rows if row.get("form")})
+    ciks = sorted({str(row.get("cik")) for row in rows if row.get("cik")})
     return {
         "ticker": ticker,
         "test_category": category,
@@ -56,6 +57,8 @@ def _summary(ticker: str, category: str) -> dict[str, object]:
         "distinct_accessions": len(accessions),
         "forms": forms,
         "cik": payload.provenance.get("cik"),
+        "issuer_ciks": ciks,
+        "issuer_lineage": payload.provenance.get("issuer_lineage"),
         "company_name": payload.provenance.get("company_name"),
     }
 
