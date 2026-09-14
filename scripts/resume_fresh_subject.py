@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -183,6 +183,28 @@ def _direct_evidence_ids(decision) -> set[str]:
     }
 
 
+def _replace_direct_evidence_ids(decision, replacements: Mapping[str, str]):
+    packages = []
+    for package in decision.research_packages:
+        analyses = []
+        for analysis in package.analyses:
+            inputs = tuple(
+                replace(
+                    reference,
+                    evidence_id=replacements.get(
+                        reference.evidence_id,
+                        reference.evidence_id,
+                    ),
+                )
+                if reference.evidence_id is not None
+                else reference
+                for reference in analysis.inputs
+            )
+            analyses.append(replace(analysis, inputs=inputs))
+        packages.append(replace(package, analyses=tuple(analyses)))
+    return replace(decision, research_packages=tuple(packages))
+
+
 def _decision_fingerprint(decision) -> str:
     payload = json.dumps(
         asdict(decision),
@@ -304,6 +326,18 @@ def _parser() -> argparse.ArgumentParser:
         default=20.0,
     )
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--authorize-evidence-refresh",
+        action="append",
+        default=[],
+        metavar="EVIDENCE_ID",
+        help=(
+            "Explicitly authorize replacement of one missing direct evidence ID "
+            "with the unique freshly acquired descriptor having the same subject, "
+            "evidence type, artifact type, source identity, and schema. The original "
+            "decision and a complete old/new audit are preserved."
+        ),
+    )
     parser.add_argument(
         "--interpret-only",
         action="store_true",
@@ -1108,12 +1142,121 @@ def main(argv: list[str] | None = None) -> int:
         required_direct_evidence_ids
         - fresh_evidence_ids
     )
-    if missing_direct_evidence_ids:
+    authorized_refresh_ids = set(args.authorize_evidence_refresh)
+    unexpected_authorizations = sorted(
+        authorized_refresh_ids - set(missing_direct_evidence_ids)
+    )
+    if unexpected_authorizations:
         raise RuntimeError(
-            "cannot execute accepted Sol continuation without "
-            "substituting evidence. Fresh Intake did not reproduce "
-            "required evidence_id(s): "
-            + ", ".join(missing_direct_evidence_ids)
+            "evidence refresh authorization does not name a currently missing "
+            "direct evidence ID: " + ", ".join(unexpected_authorizations)
+        )
+
+    if missing_direct_evidence_ids:
+        unauthorized = sorted(
+            set(missing_direct_evidence_ids) - authorized_refresh_ids
+        )
+        if unauthorized:
+            raise RuntimeError(
+                "cannot execute accepted Sol continuation without "
+                "substituting evidence. Fresh Intake did not reproduce "
+                "required evidence_id(s): " + ", ".join(unauthorized)
+            )
+        if checkpoint_ids:
+            raise RuntimeError(
+                "evidence refresh is forbidden after continuation Analysis "
+                "checkpoints exist"
+            )
+
+        durable_evidence = {
+            item.evidence_id: item
+            for item in recovered_evidence_descriptors(
+                nexus=runtime.nexus,
+                subject_id=subject_id,
+            )
+        }
+        replacements: dict[str, str] = {}
+        audit_rows = []
+        for old_id in missing_direct_evidence_ids:
+            old = durable_evidence.get(old_id)
+            if old is None:
+                raise RuntimeError(
+                    f"missing durable descriptor for authorized evidence refresh: {old_id}"
+                )
+            candidates = [
+                item
+                for item in evidence
+                if item.subject_id == old.subject_id
+                and item.evidence_type == old.evidence_type
+                and item.artifact_type == old.artifact_type
+                and item.source_identity == old.source_identity
+                and tuple(item.schema) == tuple(old.schema)
+            ]
+            if len(candidates) != 1:
+                raise RuntimeError(
+                    "authorized evidence refresh requires exactly one same-source "
+                    f"candidate for {old_id}; found {len(candidates)}"
+                )
+            new = candidates[0]
+            replacements[old_id] = new.evidence_id
+            audit_rows.append(
+                {
+                    "old_descriptor": asdict(old),
+                    "new_descriptor": asdict(new),
+                    "authorization": "EXPLICIT_HUMAN_SAME_SOURCE_REFRESH",
+                    "scientific_content_modified_by_code": False,
+                }
+            )
+
+        original_decision_path = (
+            state_dir / "resume_interpretation_decision.pre_evidence_refresh.json"
+        )
+        if original_decision_path.exists():
+            raise RuntimeError(
+                f"evidence refresh backup already exists: {original_decision_path}"
+            )
+        original_decision_path.write_text(
+            resume_decision_path.read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+        decision = _replace_direct_evidence_ids(decision, replacements)
+        refreshed_payload = asdict(decision)
+        temporary_decision_path = resume_decision_path.with_suffix(".json.tmp")
+        temporary_decision_path.write_text(
+            json.dumps(
+                refreshed_payload,
+                indent=2,
+                sort_keys=True,
+                default=str,
+            ) + "\n",
+            encoding="utf-8",
+        )
+        temporary_decision_path.replace(resume_decision_path)
+
+        refresh_audit_path = state_dir / "authorized_evidence_refresh.json"
+        refresh_audit_path.write_text(
+            json.dumps(
+                {
+                    "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                    "authorization_scope": sorted(authorized_refresh_ids),
+                    "replacements": audit_rows,
+                    "original_decision": str(original_decision_path),
+                    "refreshed_decision": str(resume_decision_path),
+                },
+                indent=2,
+                sort_keys=True,
+                default=str,
+            ) + "\n",
+            encoding="utf-8",
+        )
+        decision_fingerprint = _decision_fingerprint(decision)
+        current_decision_fingerprint = decision_fingerprint
+        print("EVIDENCE_REFRESH_AUTHORIZED=True", flush=True)
+        print(f"EVIDENCE_REFRESH_AUDIT={refresh_audit_path}", flush=True)
+        print(
+            "REFRESHED_CONTINUATION_DECISION_FINGERPRINT="
+            f"{decision_fingerprint}",
+            flush=True,
         )
 
     recorder = BatchCampaignResearchRecorder(
