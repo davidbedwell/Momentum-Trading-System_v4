@@ -97,18 +97,24 @@ def _telemetry_spend(path: Path) -> float:
     if not path.is_file():
         return 0.0
 
-    values: list[float] = []
+    call_costs: list[float] = []
+    cumulative_values: list[float] = []
     for line in path.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         row = json.loads(line)
         if row.get("event") != "SOL_CALL_COMPLETE":
             continue
-        value = row.get("estimated_cumulative_sol_spend_usd")
-        if value is not None:
-            values.append(float(value))
+        call_cost = row.get("estimated_call_cost_usd")
+        if call_cost is not None:
+            call_costs.append(float(call_cost))
+        cumulative = row.get("estimated_cumulative_sol_spend_usd")
+        if cumulative is not None:
+            cumulative_values.append(float(cumulative))
 
-    return max(values) if values else 0.0
+    if call_costs:
+        return sum(call_costs)
+    return max(cumulative_values) if cumulative_values else 0.0
 
 
 def _decode_decision(path: Path):
@@ -116,6 +122,45 @@ def _decode_decision(path: Path):
     return BatchResearchDecisionCodec.decode(
         json.dumps(raw, sort_keys=True, default=str)
     )
+
+
+def _recover_campaign_id(
+    package_store_dir: Path,
+    *,
+    subject_id: str,
+) -> str:
+    store = JsonResearchPackageStore(package_store_dir)
+    package_ids = store.list_ids()
+    if not package_ids:
+        raise RuntimeError(
+            "cannot recover campaign identity from an empty Research Package store"
+        )
+
+    campaign_ids: set[str] = set()
+    for rp_id in package_ids:
+        package = store.load(rp_id)
+        if package is None:
+            raise RuntimeError(
+                f"Research Package disappeared while recovering campaign identity: {rp_id}"
+            )
+        if package.subject_id != subject_id:
+            raise RuntimeError(
+                "Research Package subject mismatch while recovering campaign identity: "
+                f"{rp_id} belongs to {package.subject_id}, expected {subject_id}"
+            )
+        campaign_id = package.campaign_id.strip()
+        if not campaign_id:
+            raise RuntimeError(
+                f"Research Package has blank campaign_id: {rp_id}"
+            )
+        campaign_ids.add(campaign_id)
+
+    if len(campaign_ids) != 1:
+        raise RuntimeError(
+            "Research Package store contains multiple campaign identities: "
+            + ", ".join(sorted(campaign_ids))
+        )
+    return next(iter(campaign_ids))
 
 
 def _direct_evidence_ids(decision) -> set[str]:
@@ -280,6 +325,9 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     resume_decision_path = state_dir / "resume_interpretation_decision.json"
+    pending_resume_decision_path = (
+        state_dir / "resume_interpretation_decision.pending.json"
+    )
     resume_decision_log = state_dir / "resumed_batch_decisions.jsonl"
     continuation_decision_log = (
         state_dir / "continuation_batch_decisions.jsonl"
@@ -363,7 +411,10 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("subject mission is invalid")
 
     scientific_memory = JsonCrossSubjectScientificMemoryStore(memory_path)
-    campaign_id = state_dir.name
+    campaign_id = _recover_campaign_id(
+        package_store_dir,
+        subject_id=subject_id,
+    )
 
     nexus_document = json.loads(
         nexus_path.read_text(encoding="utf-8")
@@ -383,12 +434,6 @@ def main(argv: list[str] | None = None) -> int:
             f"context={subject_id} nexus={nexus_subject_ids}"
         )
 
-    # The durable Nexus may legitimately contain results produced by
-    # continuation batches after the original fresh-subject history broke.
-    # Preserve the strict reconstruction invariant by verifying the original
-    # decision/report history against a temporary Nexus view containing only
-    # result metadata represented by those original reports. The durable Nexus
-    # itself is never modified.
     original_report_result_ids: set[str] = set()
 
     for line_number, line in enumerate(
@@ -660,6 +705,11 @@ def main(argv: list[str] | None = None) -> int:
         else:
             print("RESUME_DECISION_PRESENT=False", flush=True)
 
+        print(
+            "PENDING_RESUME_DECISION_PRESENT="
+            f"{pending_resume_decision_path.is_file()}",
+            flush=True,
+        )
         print("DRY_RUN=True", flush=True)
         print("SOL_CALLS=0", flush=True)
         print("INTAKE_CALLS=0", flush=True)
@@ -747,15 +797,37 @@ def main(argv: list[str] | None = None) -> int:
         )
         nexus_context["recovery_context"] = recovery_context
 
-        decision = rd.interpret_batch_results(
-            mission=mission,
-            subject=reconstructed.subject,
-            prior_decision=reconstructed.latest_decision,
-            report=reconstructed.latest_report,
-            evidence=evidence,
-            available_methods=runtime.catalog.capability_payloads(),
-            nexus_context=nexus_context,
-        )
+        if pending_resume_decision_path.is_file():
+            decision = _decode_decision(pending_resume_decision_path)
+            print(
+                "PENDING_RESUME_DECISION_REUSED=True",
+                flush=True,
+            )
+            print("RESUME_INTERPRETATION_SOL_CALLS=0", flush=True)
+        else:
+            decision = rd.interpret_batch_results(
+                mission=mission,
+                subject=reconstructed.subject,
+                prior_decision=reconstructed.latest_decision,
+                report=reconstructed.latest_report,
+                evidence=evidence,
+                available_methods=runtime.catalog.capability_payloads(),
+                nexus_context=nexus_context,
+            )
+            pending_resume_decision_path.write_text(
+                json.dumps(
+                    asdict(decision),
+                    indent=2,
+                    sort_keys=True,
+                    default=str,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            print(
+                f"PENDING_DECISION_SAVED={pending_resume_decision_path}",
+                flush=True,
+            )
 
         recorder = BatchCampaignResearchRecorder(
             package_store=recovered_store
@@ -812,6 +884,8 @@ def main(argv: list[str] | None = None) -> int:
             + "\n",
             encoding="utf-8",
         )
+        if pending_resume_decision_path.is_file():
+            pending_resume_decision_path.unlink()
 
         _append_jsonl(
             resume_decision_log,
@@ -1036,10 +1110,6 @@ def main(argv: list[str] | None = None) -> int:
         package_store=recovered_store
     )
 
-    # Checkpointed requests may already be durable. Re-recording an
-    # identical request is intentionally idempotent and closes the
-    # crash window between checkpoint persistence and later batch-level
-    # recording.
     for checkpoint in (
         checkpointed_records_by_analysis_id.values()
     ):
