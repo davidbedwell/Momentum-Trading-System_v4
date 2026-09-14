@@ -23,6 +23,8 @@ from .neutral_analysis_substrate import analysis_method as substrate_analysis_me
 from .neutral_analysis_substrate import method_spec as substrate_method_spec
 from .orchestrator import ResearchLoopOrchestrator
 from .scientific_toolkit import scientific_toolkit_analysis_method, scientific_toolkit_method_spec
+from .share_structure_analysis import analysis_method as share_structure_analysis_method
+from .share_structure_analysis import method_spec as share_structure_method_spec
 from .standard_methods import standard_analysis_methods, standard_method_catalog
 
 
@@ -92,6 +94,7 @@ def _build_execution_components(
     catalog.register(scientific_toolkit_method_spec())
     catalog.register(group_aggregation_method_spec())
     catalog.register(substrate_method_spec())
+    catalog.register(share_structure_method_spec())
     concepts = concept_library or seed_market_concepts()
     validator = TransparentInputBindingValidator(catalog)
     analysis = LineageAwareExactMethodAnalysisExecutor()
@@ -103,6 +106,7 @@ def _build_execution_components(
     analysis.register(scientific_toolkit_analysis_method())
     analysis.register(group_aggregation_analysis_method())
     analysis.register(substrate_analysis_method())
+    analysis.register(share_structure_analysis_method())
     return cache, nexus, catalog, concepts, validator, analysis
 
 
