@@ -30,6 +30,9 @@ class BatchResearchDecisionCodec:
         continue_research = raw.get("continue_research")
         if not isinstance(continue_research, bool):
             raise BatchResearchDecisionDecodeError("continue_research must be boolean")
+        waiting_for_future_cohorts = raw.get("waiting_for_future_cohorts", False)
+        if not isinstance(waiting_for_future_cohorts, bool):
+            raise BatchResearchDecisionDecodeError("waiting_for_future_cohorts must be boolean")
 
         packages_raw = raw.get("research_packages", [])
         if not isinstance(packages_raw, list):
@@ -62,9 +65,21 @@ class BatchResearchDecisionCodec:
         if progress_raw is not None:
             research_progress = BatchResearchDecisionCodec._decode_research_progress(progress_raw)
 
-        if continue_research and not packages:
+        if waiting_for_future_cohorts and not continue_research:
             raise BatchResearchDecisionDecodeError(
-                "continuing batched research requires at least one AI-authored Research Package"
+                "WAITING_FOR_FUTURE_COHORTS requires continue_research=true"
+            )
+        if waiting_for_future_cohorts and packages:
+            raise BatchResearchDecisionDecodeError(
+                "WAITING_FOR_FUTURE_COHORTS cannot contain executable Research Packages"
+            )
+        if waiting_for_future_cohorts and close_reason is not None:
+            raise BatchResearchDecisionDecodeError(
+                "WAITING_FOR_FUTURE_COHORTS cannot contain close_reason"
+            )
+        if continue_research and not waiting_for_future_cohorts and not packages:
+            raise BatchResearchDecisionDecodeError(
+                "continuing executable batched research requires at least one AI-authored Research Package"
             )
         if not continue_research and (not isinstance(close_reason, str) or not close_reason.strip()):
             raise BatchResearchDecisionDecodeError(
@@ -85,6 +100,7 @@ class BatchResearchDecisionCodec:
 
         return BatchResearchDecision(
             continue_research=continue_research,
+            waiting_for_future_cohorts=waiting_for_future_cohorts,
             research_packages=packages,
             rp_closures=closures,
             promote_findings=findings,
