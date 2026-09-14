@@ -499,6 +499,37 @@ class OpenAICompatibleResearchDirector:
                 )
         return content
 
+    @staticmethod
+    def _row_payload_aliases_derived_dataset(
+        value: object,
+        rows: object,
+    ) -> bool:
+        """Identify a duplicate campaign-local row view mechanically.
+
+        Some Analysis methods expose a convenient top-level row list as well as
+        the canonical derived dataset. The canonical copy can carry mechanical
+        ``__observation_lineage`` while the convenience view does not. Those are
+        the same row payload for transport purposes and must not be sent twice.
+        This comparison does not rank, summarize, or interpret scientific data.
+        """
+        if not isinstance(value, (list, tuple)) or not isinstance(rows, (list, tuple)):
+            return False
+        if len(value) != len(rows):
+            return False
+        for exposed_row, derived_row in zip(value, rows):
+            if isinstance(exposed_row, Mapping) and isinstance(derived_row, Mapping):
+                derived_without_lineage = {
+                    str(key): child
+                    for key, child in derived_row.items()
+                    if str(key) != "__observation_lineage"
+                }
+                if dict(exposed_row) != dict(derived_row) and dict(exposed_row) != derived_without_lineage:
+                    return False
+                continue
+            if exposed_row != derived_row:
+                return False
+        return True
+
     @classmethod
     def _analysis_result_payload(cls, result: AnalysisResult) -> Mapping[str, object]:
         """Return the RD-visible result while withholding campaign-local row payloads."""
@@ -542,7 +573,7 @@ class OpenAICompatibleResearchDirector:
                 for key, value in tuple(outputs.items()):
                     if key in protected_keys:
                         continue
-                    if isinstance(value, (list, tuple)) and value == rows:
+                    if cls._row_payload_aliases_derived_dataset(value, rows):
                         outputs.pop(key, None)
                         withheld_aliases[str(key)] = {
                             "dataset_name": str(dataset_name),
@@ -557,8 +588,9 @@ class OpenAICompatibleResearchDirector:
             if withheld_aliases:
                 outputs["withheld_row_output_aliases"] = {
                     "meaning": (
-                        "These output keys were exact aliases of campaign-local derived row datasets; "
-                        "use the listed output_path through analysis_inputs if scientifically needed."
+                        "These output keys duplicated campaign-local derived row datasets, either exactly "
+                        "or with only mechanical observation lineage added to the canonical copy; use the "
+                        "listed output_path through analysis_inputs if scientifically needed."
                     ),
                     "aliases": withheld_aliases,
                 }
