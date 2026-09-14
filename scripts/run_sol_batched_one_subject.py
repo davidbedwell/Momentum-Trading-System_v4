@@ -12,10 +12,9 @@ from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
 from MTS_V4.intake import IntakeEngine
-from MTS_V4.neutral_analysis_substrate import build_for_subject as build_neutral_substrate
+from MTS_V4.pre_sol_substrates import build_for_subject as build_pre_sol_substrates
 from MTS_V4.research_lead_sources import standard_research_lead_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
-from MTS_V4.share_structure_analysis import build_for_subject as build_sec_share_structure
 from MTS_V4.sol_spend_guard import (
     DEFAULT_AUTHORIZED_SOL_SPEND_USD,
     SolSpendAuthorizationRequired,
@@ -201,13 +200,7 @@ def main(argv: list[str] | None = None) -> int:
         source=standard_research_lead_market_source(),
     )
     campaign_id = f"mts-v4-sol-batched-{ticker.lower()}-{stamp}"
-    precomputed_results = dict(build_neutral_substrate(
-        subject=subject,
-        evidence=evidence,
-        cache=runtime.cache,
-        analysis=runtime.analysis,
-    ))
-    precomputed_results.update(build_sec_share_structure(
+    precomputed_results = dict(build_pre_sol_substrates(
         subject=subject,
         evidence=evidence,
         cache=runtime.cache,
@@ -318,7 +311,8 @@ def main(argv: list[str] | None = None) -> int:
         "decisions": outcome.decisions,
         "batches_executed": outcome.batches_executed,
         "analyses_executed": outcome.analyses_executed,
-        "neutral_analysis_substrate_count": len(precomputed_results),
+        "pre_sol_analysis_substrate_count": len(precomputed_results),
+        "pre_sol_analysis_substrate_ids": sorted(precomputed_results),
         "findings_promoted": outcome.findings_promoted,
         "closed": outcome.closed,
         "close_reason": outcome.close_reason,
@@ -340,7 +334,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"DECISIONS={outcome.decisions}", flush=True)
     print(f"BATCHES={outcome.batches_executed}", flush=True)
     print(f"ANALYSES={outcome.analyses_executed}", flush=True)
-    print(f"NEUTRAL_ANALYSIS_SUBSTRATE_COUNT={len(precomputed_results)}", flush=True)
+    print(f"PRE_SOL_ANALYSIS_SUBSTRATE_COUNT={len(precomputed_results)}", flush=True)
+    print(f"PRE_SOL_ANALYSIS_SUBSTRATE_IDS={','.join(sorted(precomputed_results))}", flush=True)
     print(f"CLOSED={outcome.closed}", flush=True)
     print(f"CLOSE_REASON={outcome.close_reason}", flush=True)
     if spend is not None:
