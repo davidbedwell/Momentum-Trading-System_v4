@@ -134,14 +134,23 @@ def arithmetic_transform(
     evidence_payloads: Mapping[str, object],
     parameters: Mapping[str, Any],
 ) -> Mapping[str, Any]:
-    """Create one reusable RD-authored arithmetic feature without choosing science."""
+    """Create one reusable RD-authored arithmetic feature without choosing science.
+
+    The transform preserves the mechanically corresponding source row so later
+    RD-authored analyses can use the new feature together with existing columns
+    without paying for a separate recomposition step. Analysis still chooses no
+    operand, representation, threshold, horizon, or interpretation.
+    """
     rows = _single_rows(evidence_payloads)
+    input_name = next(iter(evidence_payloads))
     operation = str(parameters["operation"]).upper()
     output_name = str(parameters["output_name"]).strip()
     if not output_name:
         raise ValueError("output_name cannot be blank")
     if output_name == "index":
         raise ValueError("output_name 'index' is reserved")
+    if any(output_name in row for row in rows):
+        raise ValueError(f"output_name already exists in source dataset: {output_name}")
 
     operations = {
         "ADD": lambda left, right: left + right,
@@ -168,7 +177,18 @@ def arithmetic_transform(
         if not math.isfinite(value):
             excluded_non_numeric += 1
             continue
-        output_rows.append({"index": index, output_name: value})
+
+        copied = dict(row)
+        copied["index"] = index
+        copied[output_name] = value
+        copied["__observation_lineage"] = {
+            "input_name": input_name,
+            "input_row_start": index,
+            "input_row_end": index,
+            "input_row_anchor": index,
+            "semantics": "MECHANICAL_INPUT_ROW_LINEAGE_NOT_SCIENTIFIC_INTERPRETATION",
+        }
+        output_rows.append(copied)
 
     return {
         "operation": operation,
@@ -221,8 +241,9 @@ def discovery_method_catalog() -> MethodCatalog:
                 ("NORMALIZED_DATASET",),
                 (
                     "Create one reusable row-level arithmetic feature from exact RD-selected column and/or "
-                    "literal operands. Useful for scientifically authored ratios, spreads, differences, "
-                    "scaling, and interaction terms without Analysis choosing the representation."
+                    "literal operands while preserving the corresponding source-row columns. Useful for "
+                    "scientifically authored ratios, spreads, differences, scaling, and interaction terms "
+                    "without Analysis choosing the representation."
                 ),
                 (
                     ParameterContract(
@@ -257,6 +278,7 @@ def discovery_method_catalog() -> MethodCatalog:
                     "derived_dataset_name": "arithmetic_feature",
                     "scientific_selection": "AI_RESEARCH_DIRECTOR_ONLY",
                     "deterministic_ranking": False,
+                    "source_columns_preserved": True,
                 },
             ),
         ]
