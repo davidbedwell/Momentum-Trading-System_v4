@@ -1,17 +1,18 @@
 from pathlib import Path
 
 
-def test_production_sol_runner_wires_research_lead_intake_and_sec_precompute():
+def test_production_sol_runner_wires_research_lead_intake_and_combined_pre_sol_substrates():
     text = Path("scripts/run_sol_batched_one_subject.py").read_text(encoding="utf-8")
 
     assert "standard_research_lead_market_source" in text
-    assert "build_sec_share_structure" in text
+    assert "build_pre_sol_substrates" in text
     assert "source=standard_research_lead_market_source()" in text
-    assert "precomputed_results.update(build_sec_share_structure(" in text
+    assert "precomputed_results = dict(build_pre_sol_substrates(" in text
 
-    sec_precompute = text.index("precomputed_results.update(build_sec_share_structure(")
+    precompute = text.index("precomputed_results = dict(build_pre_sol_substrates(")
     sol_run = text.index("outcome = runtime.orchestrator.run(")
-    assert sec_precompute < sol_run
+    assert precompute < sol_run
+    assert "precomputed_results=precomputed_results" in text
 
 
 def test_standard_research_lead_source_includes_sec_and_intraday_inputs(monkeypatch):
