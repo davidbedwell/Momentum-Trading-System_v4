@@ -12,9 +12,10 @@ from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
 from MTS_V4.intake import IntakeEngine
-from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.neutral_analysis_substrate import build_for_subject as build_neutral_substrate
+from MTS_V4.research_lead_sources import standard_research_lead_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
+from MTS_V4.share_structure_analysis import build_for_subject as build_sec_share_structure
 from MTS_V4.sol_spend_guard import (
     DEFAULT_AUTHORIZED_SOL_SPEND_USD,
     SolSpendAuthorizationRequired,
@@ -197,15 +198,21 @@ def main(argv: list[str] | None = None) -> int:
     )
     evidence = IntakeEngine(runtime.cache).ingest(
         subject=subject,
-        source=standard_live_market_source(),
+        source=standard_research_lead_market_source(),
     )
     campaign_id = f"mts-v4-sol-batched-{ticker.lower()}-{stamp}"
-    precomputed_results = build_neutral_substrate(
+    precomputed_results = dict(build_neutral_substrate(
         subject=subject,
         evidence=evidence,
         cache=runtime.cache,
         analysis=runtime.analysis,
-    )
+    ))
+    precomputed_results.update(build_sec_share_structure(
+        subject=subject,
+        evidence=evidence,
+        cache=runtime.cache,
+        analysis=runtime.analysis,
+    ))
 
     (state_dir / "subject_scientific_context.json").write_text(
         json.dumps(
