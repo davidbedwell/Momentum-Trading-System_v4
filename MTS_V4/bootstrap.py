@@ -15,6 +15,8 @@ from .discovery_methods import discovery_analysis_methods, discovery_method_cata
 from .execution_interface import TransparentInputBindingValidator
 from .group_aggregation import group_aggregation_analysis_method, group_aggregation_method_spec
 from .interfaces import ResearchDirectorProvider
+from .intraday_analysis_substrate import analysis_method as intraday_substrate_analysis_method
+from .intraday_analysis_substrate import method_spec as intraday_substrate_method_spec
 from .lineage_analysis import LineageAwareExactMethodAnalysisExecutor
 from .method_catalog import MethodCatalog
 from .nexus import InMemoryResearchNexus, ResearchNexus
@@ -95,6 +97,7 @@ def _build_execution_components(
     catalog.register(group_aggregation_method_spec())
     catalog.register(substrate_method_spec())
     catalog.register(share_structure_method_spec())
+    catalog.register(intraday_substrate_method_spec())
     concepts = concept_library or seed_market_concepts()
     validator = TransparentInputBindingValidator(catalog)
     analysis = LineageAwareExactMethodAnalysisExecutor()
@@ -107,6 +110,7 @@ def _build_execution_components(
     analysis.register(group_aggregation_analysis_method())
     analysis.register(substrate_analysis_method())
     analysis.register(share_structure_analysis_method())
+    analysis.register(intraday_substrate_analysis_method())
     return cache, nexus, catalog, concepts, validator, analysis
 
 
