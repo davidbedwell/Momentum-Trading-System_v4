@@ -11,6 +11,7 @@ from .contracts import (
     FindingRetraction,
     SubjectMetadata,
 )
+from .derived_market_store import DerivedMarketStore, InMemoryDerivedMarketStore
 
 
 class NexusError(RuntimeError):
@@ -21,16 +22,7 @@ def repair_finding_evidence_lineage(
     finding: Finding,
     get_result_metadata: Callable[[str], AnalysisResultMetadata | None],
 ) -> Finding:
-    """Complete mechanically implied evidence lineage for an AI-authored finding.
-
-    A supporting Analysis result already has durable evidence lineage. When the RD
-    cites that result but omits one or more of those evidence IDs from the finding
-    envelope, there is exactly one semantics-preserving representation repair:
-    append the missing inherited evidence IDs. This does not add or remove any
-    supporting result, change the scientific statement, or infer scientific
-    relevance. Unknown results and subject mismatches are deliberately left for
-    normal Nexus validation to reject.
-    """
+    """Complete mechanically implied evidence lineage for an AI-authored finding."""
 
     evidence_ids = list(finding.evidence_ids)
     changed = False
@@ -48,6 +40,9 @@ def repair_finding_evidence_lineage(
 
 
 class ResearchNexus(Protocol):
+    @property
+    def derived_market_store(self) -> DerivedMarketStore: ...
+
     def upsert_subject(self, metadata: SubjectMetadata) -> None: ...
     def upsert_evidence_metadata(self, metadata: EvidenceMetadata) -> None: ...
     def register_analysis_result_metadata(self, metadata: AnalysisResultMetadata) -> None: ...
@@ -74,11 +69,10 @@ class ResearchNexus(Protocol):
 class InMemoryResearchNexus:
     """Reference durable-memory implementation for v4 tests.
 
-    The Nexus stores immutable identity/lineage metadata, never raw datasets or
-    reusable result payloads. Reusing an existing evidence or result identity
-    with different meaningful metadata is rejected so later acquisitions cannot
-    silently rewrite the provenance of older findings. Acquisition-clock-only
-    differences are accepted without replacing the first durable record.
+    Raw/reacquirable source datasets remain outside Nexus. The human-approved
+    derived-market extension is exposed as a separate Nexus-owned store so
+    point-in-time derived market state can persist without turning findings and
+    lineage metadata into a bulk row warehouse.
     """
 
     _subjects: dict[str, SubjectMetadata] = field(default_factory=dict)
@@ -86,6 +80,11 @@ class InMemoryResearchNexus:
     _analysis_result_metadata: dict[str, AnalysisResultMetadata] = field(default_factory=dict)
     _findings: dict[str, Finding] = field(default_factory=dict)
     _finding_retractions: dict[str, FindingRetraction] = field(default_factory=dict)
+    _derived_market_store: DerivedMarketStore = field(default_factory=InMemoryDerivedMarketStore)
+
+    @property
+    def derived_market_store(self) -> DerivedMarketStore:
+        return self._derived_market_store
 
     def upsert_subject(self, metadata: SubjectMetadata) -> None:
         if not metadata.subject_id:
