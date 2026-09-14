@@ -8,6 +8,8 @@ from .batch_orchestrator import BatchResearchDirectorProvider, BatchResearchLoop
 from .cache import TemporaryResearchCache
 from .concept_library import ResearchConceptLibrary, seed_market_concepts
 from .cross_evidence import cross_evidence_analysis_method, cross_evidence_method_spec
+from .cross_sectional_analysis import analysis_method as cross_sectional_analysis_method
+from .cross_sectional_analysis import method_spec as cross_sectional_method_spec
 from .cross_subject_batch_orchestrator import CrossSubjectBatchResearchLoopOrchestrator
 from .cross_subject_memory import CrossSubjectScientificMemory
 from .cross_subject_orchestrator import CrossSubjectResearchLoopOrchestrator
@@ -24,6 +26,8 @@ from .nexus_json import JsonResearchNexus
 from .neutral_analysis_substrate import analysis_method as substrate_analysis_method
 from .neutral_analysis_substrate import method_spec as substrate_method_spec
 from .orchestrator import ResearchLoopOrchestrator
+from .participation_analysis import analysis_method as participation_analysis_method
+from .participation_analysis import method_spec as participation_method_spec
 from .scientific_toolkit import scientific_toolkit_analysis_method, scientific_toolkit_method_spec
 from .share_structure_analysis import analysis_method as share_structure_analysis_method
 from .share_structure_analysis import method_spec as share_structure_method_spec
@@ -98,6 +102,8 @@ def _build_execution_components(
     catalog.register(substrate_method_spec())
     catalog.register(share_structure_method_spec())
     catalog.register(intraday_substrate_method_spec())
+    catalog.register(participation_method_spec())
+    catalog.register(cross_sectional_method_spec())
     concepts = concept_library or seed_market_concepts()
     validator = TransparentInputBindingValidator(catalog)
     analysis = LineageAwareExactMethodAnalysisExecutor()
@@ -111,6 +117,8 @@ def _build_execution_components(
     analysis.register(substrate_analysis_method())
     analysis.register(share_structure_analysis_method())
     analysis.register(intraday_substrate_analysis_method())
+    analysis.register(participation_analysis_method())
+    analysis.register(cross_sectional_analysis_method())
     return cache, nexus, catalog, concepts, validator, analysis
 
 
@@ -126,7 +134,10 @@ def build_runtime(
     """Assemble the existing single-request v4 research runtime.
 
     This compatibility path remains available while the batched RD execution path
-    is tested and proven. Scientific authority boundaries are unchanged.
+    is tested and proven. Scientific authority boundaries are unchanged. The
+    active SubjectMetadata may represent either one security or an explicit
+    universe/cohort research scope whose materialized evidence contains multiple
+    security rows under the same durable scope lineage ID.
     """
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(
         nexus_path=nexus_path,
@@ -175,11 +186,11 @@ def build_batch_runtime(
 ) -> BatchV4Runtime:
     """Assemble the program-level batched RD runtime.
 
-    The batched path reuses the exact same Intake/cache boundary, method catalog,
+    The batched path reuses the same Intake/cache boundary, method catalog,
     objective validator, Analysis Engine, Nexus implementation, and optional
-    cross-subject scientific memory as the legacy loop. The only new layer is the
-    deterministic compiler/orchestrator between AI-authored scientific
-    specifications and low-level AnalysisRequests.
+    cross-subject scientific memory. A multi-security universe/cohort may be the
+    active research scope by using a durable scope SubjectMetadata plus a
+    Nexus-derived market panel materialized into campaign evidence.
     """
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(
         nexus_path=nexus_path,
