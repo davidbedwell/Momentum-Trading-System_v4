@@ -6,7 +6,12 @@ import unittest
 from MTS_V4.bootstrap import build_runtime
 from MTS_V4.contracts import AnalysisRequest, EvidenceDescriptor, Finding, ResearchDecision, ResearchPhase, SubjectMetadata
 from MTS_V4.intake import IntakeEngine, IntakePayload
-from MTS_V4.standard_methods import forward_path_measurement, percent_change_series, standard_method_catalog
+from MTS_V4.standard_methods import (
+    forward_path_measurement,
+    percent_change_series,
+    relationship_correlation,
+    standard_method_catalog,
+)
 from MTS_V4.validation import ObjectiveContractValidator
 
 
@@ -86,6 +91,36 @@ class V4StandardMethodsTests(unittest.TestCase):
         spec = standard_method_catalog().get("analysis.relationship.correlation")
         columns = next(item for item in spec.parameters if item.name == "columns")
         self.assertEqual(columns.exact_length, 2)
+
+    def test_correlation_contract_discloses_and_executes_pairwise_numeric_filtering(self):
+        spec = standard_method_catalog().get("analysis.relationship.correlation")
+        columns = next(item for item in spec.parameters if item.name == "columns")
+        self.assertIn("pairwise-invalid", columns.meaning)
+        self.assertEqual(
+            spec.metadata["numeric_observation_policy"],
+            "PAIRWISE_COMPLETE_FINITE_NO_IMPUTATION",
+        )
+
+        result = relationship_correlation(
+            {
+                "ev:1": [
+                    {"predictor": "1.0", "outcome": 2.0},
+                    {"predictor": 2.0, "outcome": "4.0"},
+                    {"predictor": None, "outcome": 6.0},
+                    {"predictor": 4.0, "outcome": "not-numeric"},
+                    {"predictor": float("inf"), "outcome": 10.0},
+                ]
+            },
+            {
+                "columns": ["predictor", "outcome"],
+                "correlation_type": "spearman",
+            },
+        )
+
+        self.assertEqual(result["n"], 2)
+        self.assertEqual(result["correlation"], 1.0)
+        self.assertEqual(result["left"], "predictor")
+        self.assertEqual(result["right"], "outcome")
 
     def test_percent_change_requires_rd_selected_column_and_lag(self):
         spec = standard_method_catalog().get("analysis.transform.percent_change")
