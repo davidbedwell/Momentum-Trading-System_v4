@@ -1,13 +1,16 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from datetime import date
 import math
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 from .analysis import RegisteredAnalysisMethod
-from .method_catalog import MethodSpec, ParameterContract
+from .contracts import AnalysisRequest, AnalysisResult, EvidenceDescriptor, ResearchPhase, SubjectMetadata
+from .method_catalog import MethodSpec
 
 METHOD_ID = "analysis.measurements.sec_share_structure"
+LOGICAL_ANALYSIS_ID = "analysis:sec-share-structure-substrate:v1"
 
 
 def _finite(value: object) -> float | None:
@@ -127,3 +130,55 @@ def method_spec() -> MethodSpec:
 
 def analysis_method() -> RegisteredAnalysisMethod:
     return RegisteredAnalysisMethod(METHOD_ID, sec_share_structure_context)
+
+
+def build_for_subject(
+    *,
+    subject: SubjectMetadata,
+    evidence: Sequence[EvidenceDescriptor],
+    cache,
+    analysis,
+) -> Mapping[str, AnalysisResult]:
+    ohlcv = [
+        item for item in evidence
+        if item.evidence_type == "OHLCV"
+        and {"date", "close", "volume"}.issubset(item.schema)
+    ]
+    sec = [
+        item for item in evidence
+        if item.evidence_type == "POINT_IN_TIME_SHARE_STRUCTURE"
+        and {"fact_kind", "known_at", "period_end", "value", "unit"}.issubset(item.schema)
+    ]
+    if len(ohlcv) != 1 or len(sec) != 1:
+        return {}
+
+    descriptors = (ohlcv[0], sec[0])
+    request = AnalysisRequest(
+        request_id=f"sec-share-structure:{subject.subject_id}:v1",
+        subject_id=subject.subject_id,
+        question="Human-authorized neutral point-in-time SEC share-structure reconciliation.",
+        method_id=METHOD_ID,
+        evidence_ids=tuple(item.evidence_id for item in descriptors),
+        parameters={},
+        research_phase=ResearchPhase.EXPLORATION,
+        rationale="Precompute objective known-at share-structure measurements before AI scientific interpretation.",
+    )
+    result = analysis.execute(
+        request,
+        {item.evidence_id: cache.get(item.cache_key) for item in descriptors},
+    )
+    if result.execution_metadata.get("execution_status") != "SUCCESS":
+        raise RuntimeError(f"SEC share-structure substrate failed: {result.outputs.get('execution_error')}")
+    result = replace(
+        result,
+        execution_metadata={
+            **result.execution_metadata,
+            "future_information": {
+                "contains_future_information": False,
+                "direct_method_allows_future_information": False,
+                "inherited_from_result_ids": [],
+                "policy": "POINT_IN_TIME_KNOWN_AT_ONLY",
+            },
+        },
+    )
+    return {LOGICAL_ANALYSIS_ID: result}
