@@ -12,25 +12,35 @@ from .contracts import (
     FindingRetraction,
     SubjectMetadata,
 )
+from .derived_market_store import DerivedMarketStore, ParquetDerivedMarketStore
 from .nexus import NexusError, repair_finding_evidence_lineage
 
 
 class JsonResearchNexus:
-    """Small durable v4 Nexus reference implementation.
+    """Durable v4 Nexus reference implementation.
 
-    The on-disk document contains ticker/subject metadata, immutable evidence and
-    Analysis-result lineage metadata, and significant RD findings. It contains no
-    raw evidence payload, temporary cache key, or reusable Analysis result payload.
+    The small JSON document stores subjects, immutable evidence/result lineage,
+    and significant RD findings. The human-approved derived market substrate is
+    owned by the same Nexus but stored beside the JSON document in a dedicated
+    Parquet-backed directory. Raw/reacquirable market source payloads remain out
+    of Nexus and continue to live only in temporary research/update cache.
     """
 
     def __init__(self, path: str | Path) -> None:
         self._path = Path(path)
+        self._derived_market_store = ParquetDerivedMarketStore(
+            self._path.parent / f"{self._path.stem}.derived_market"
+        )
         self._subjects: dict[str, SubjectMetadata] = {}
         self._evidence_metadata: dict[str, EvidenceMetadata] = {}
         self._analysis_result_metadata: dict[str, AnalysisResultMetadata] = {}
         self._findings: dict[str, Finding] = {}
         self._finding_retractions: dict[str, FindingRetraction] = {}
         self._load()
+
+    @property
+    def derived_market_store(self) -> DerivedMarketStore:
+        return self._derived_market_store
 
     def upsert_subject(self, metadata: SubjectMetadata) -> None:
         if not metadata.subject_id:
@@ -49,9 +59,6 @@ class JsonResearchNexus:
                 raise NexusError(
                     f"evidence_id already exists with different metadata: {metadata.evidence_id}"
                 )
-            # Preserve the first durable record byte-for-byte. A later fetch may
-            # have a new acquisition timestamp, but old findings must continue
-            # to reference the metadata that existed when they were published.
             return
         self._evidence_metadata[metadata.evidence_id] = metadata
         self._flush()
@@ -218,6 +225,11 @@ class JsonResearchNexus:
         self._path.parent.mkdir(parents=True, exist_ok=True)
         document = {
             "format": "MTS_V4_RESEARCH_NEXUS_V1",
+            "derived_market_store": {
+                "format": "MTS_V4_DERIVED_MARKET_STORE_V1",
+                "relative_path": f"{self._path.stem}.derived_market",
+                "contains_raw_reacquirable_market_data": False,
+            },
             "subjects": [asdict(self._subjects[key]) for key in sorted(self._subjects)],
             "evidence_metadata": [
                 asdict(self._evidence_metadata[key]) for key in sorted(self._evidence_metadata)
