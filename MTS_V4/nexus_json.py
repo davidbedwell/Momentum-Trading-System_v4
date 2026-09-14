@@ -21,16 +21,23 @@ class JsonResearchNexus:
 
     The small JSON document stores subjects, immutable evidence/result lineage,
     and significant RD findings. The human-approved derived market substrate is
-    owned by the same Nexus but stored beside the JSON document in a dedicated
-    Parquet-backed directory. Raw/reacquirable market source payloads remain out
-    of Nexus and continue to live only in temporary research/update cache.
+    owned by the same Nexus but stored in a dedicated Parquet-backed directory.
+    That directory may be shared by many campaign-local Nexus JSON documents so
+    the derived market substrate is reusable across sequential research runs.
+    Raw/reacquirable market source payloads remain outside Nexus.
     """
 
-    def __init__(self, path: str | Path) -> None:
+    def __init__(
+        self,
+        path: str | Path,
+        *,
+        derived_market_root: str | Path | None = None,
+    ) -> None:
         self._path = Path(path)
-        self._derived_market_store = ParquetDerivedMarketStore(
+        self._derived_market_root = Path(derived_market_root) if derived_market_root is not None else (
             self._path.parent / f"{self._path.stem}.derived_market"
         )
+        self._derived_market_store = ParquetDerivedMarketStore(self._derived_market_root)
         self._subjects: dict[str, SubjectMetadata] = {}
         self._evidence_metadata: dict[str, EvidenceMetadata] = {}
         self._analysis_result_metadata: dict[str, AnalysisResultMetadata] = {}
@@ -41,6 +48,10 @@ class JsonResearchNexus:
     @property
     def derived_market_store(self) -> DerivedMarketStore:
         return self._derived_market_store
+
+    @property
+    def derived_market_root(self) -> Path:
+        return self._derived_market_root
 
     def upsert_subject(self, metadata: SubjectMetadata) -> None:
         if not metadata.subject_id:
@@ -223,11 +234,16 @@ class JsonResearchNexus:
 
     def _flush(self) -> None:
         self._path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            relative_store = str(self._derived_market_root.relative_to(self._path.parent))
+        except ValueError:
+            relative_store = None
         document = {
             "format": "MTS_V4_RESEARCH_NEXUS_V1",
             "derived_market_store": {
                 "format": "MTS_V4_DERIVED_MARKET_STORE_V1",
-                "relative_path": f"{self._path.stem}.derived_market",
+                "relative_path": relative_store,
+                "path": str(self._derived_market_root),
                 "contains_raw_reacquirable_market_data": False,
             },
             "subjects": [asdict(self._subjects[key]) for key in sorted(self._subjects)],
