@@ -53,6 +53,18 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
     ) -> BatchResearchLoopOutcome:
         if baseline.decisions < 1:
             raise BatchResearchLoopError("continuation baseline must include at least one prior decision")
+        if initial_decision.waiting_for_future_cohorts:
+            return BatchResearchLoopOutcome(
+                decisions=baseline.decisions,
+                batches_executed=baseline.batches_executed,
+                analyses_executed=baseline.analyses_executed,
+                findings_promoted=baseline.findings_promoted,
+                closed=False,
+                close_reason=None,
+                final_decision=initial_decision,
+                waiting_for_future_cohorts=True,
+                last_report=None,
+            )
         if not initial_decision.continue_research:
             return BatchResearchLoopOutcome(
                 decisions=baseline.decisions,
@@ -94,7 +106,7 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
         decision = initial_decision
         last_report: BatchExecutionReport | None = None
 
-        while decision.continue_research:
+        while decision.continue_research and not decision.waiting_for_future_cohorts:
             specifications = self._flatten_and_validate_decision(decision, subject)
             specification_by_id = {
                 specification.analysis_id: specification
@@ -355,13 +367,15 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
             promoted += self._publish_promotions(decision)
             self._notify_decision(decision_callback, decision, decisions, analyses)
 
+        waiting = decision.waiting_for_future_cohorts
         return BatchResearchLoopOutcome(
             decisions=decisions,
             batches_executed=batches,
             analyses_executed=analyses,
             findings_promoted=promoted,
-            closed=True,
-            close_reason=decision.close_reason,
+            closed=not waiting,
+            close_reason=None if waiting else decision.close_reason,
             final_decision=decision,
+            waiting_for_future_cohorts=waiting,
             last_report=last_report,
         )
