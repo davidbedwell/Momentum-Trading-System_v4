@@ -38,6 +38,15 @@ def _append_jsonl(path: Path, payload) -> None:
         handle.write(json.dumps(payload, sort_keys=True, default=str, separators=(",", ":")) + "\n")
 
 
+def _write_json_atomic(path: Path, payload) -> None:
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n",
+        encoding="utf-8",
+    )
+    temporary.replace(path)
+
+
 def _format_money(value: float | None) -> str:
     return "unknown" if value is None else f"${value:.2f}"
 
@@ -232,6 +241,7 @@ def main(argv: list[str] | None = None) -> int:
 
     decision_path = state_dir / "batch_decisions.jsonl"
     report_path = state_dir / "batch_reports.jsonl"
+    pending_decision_path = state_dir / "pending_batch_decision.json"
     latest_report: BatchExecutionReport | None = None
 
     def accepted(request):
@@ -256,6 +266,15 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     def on_decision(decision, decisions, analyses):
+        _write_json_atomic(
+            pending_decision_path,
+            {
+                "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                "decision_sequence": decisions,
+                "analyses_executed": analyses,
+                "decision": asdict(decision),
+            },
+        )
         recorder.record_plan(
             campaign_id=campaign_id,
             subject=subject,
@@ -275,6 +294,8 @@ def main(argv: list[str] | None = None) -> int:
                 "decision": asdict(decision),
             },
         )
+
+        pending_decision_path.unlink()
 
     try:
         outcome = runtime.orchestrator.run(
