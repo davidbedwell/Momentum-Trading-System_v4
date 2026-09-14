@@ -648,7 +648,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                 if self._required_subject_id is not None and parent.subject_id != self._required_subject_id:
                     return (
                         f"Research Package {package.rp_id} parent belongs to another subject: "
-                        f"{package.parent_rp_id}."
+                        f"{parent.subject_id}"
                     )
             existing = self._research_package_store.load(package.rp_id)
             if existing is not None:
