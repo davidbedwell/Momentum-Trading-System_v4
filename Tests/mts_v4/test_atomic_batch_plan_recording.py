@@ -74,7 +74,7 @@ def test_invalid_cross_package_question_lineage_is_atomic(tmp_path):
             decision=decision,
         )
 
-    assert store.list_ids() == ()
+    assert list(store.list_ids()) == []
 
 
 def test_fresh_runner_persists_decision_before_recording():
