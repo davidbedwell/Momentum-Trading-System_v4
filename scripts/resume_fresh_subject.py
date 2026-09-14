@@ -31,7 +31,7 @@ from MTS_V4.cross_subject_context import build_cross_subject_context
 from MTS_V4.cross_subject_memory import CrossSubjectScientificMemory
 from MTS_V4.cross_subject_memory_store import JsonCrossSubjectScientificMemoryStore
 from MTS_V4.intake import IntakeEngine
-from MTS_V4.research_lead_sources import standard_research_lead_market_source
+from MTS_V4.live_sources import standard_live_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.sol_spend_guard import SolSpendAuthorizationRequired
 from MTS_V4.subject_scientific_context import SubjectContextSolBatchResearchDirector
@@ -1010,7 +1010,7 @@ def main(argv: list[str] | None = None) -> int:
 
     evidence = IntakeEngine(runtime.cache).ingest(
         subject=reconstructed.subject,
-        source=standard_research_lead_market_source(),
+        source=standard_live_market_source(),
     )
 
     fresh_evidence_ids = {
@@ -1298,3 +1298,102 @@ def main(argv: list[str] | None = None) -> int:
             scientific_memory.path
         ),
         "exact_prior_subject_context_restored": True,
+        "prior_analysis_reexecution_allowed": False,
+        "recovered_results": len(
+            reconstructed.results_by_analysis_id
+        ),
+        "accepted_resume_decision_fingerprint": (
+            decision_fingerprint
+        ),
+        "accepted_resume_analysis_specifications": len(
+            requested_analysis_ids
+        ),
+        "continuation_checkpoint_records": len(
+            written_checkpoint_records
+        ),
+        "continuation_batches_executed": (
+            continuation_batches
+        ),
+        "continuation_analyses_executed": (
+            continuation_analyses
+        ),
+        "total_decisions": outcome.decisions,
+        "total_batches_executed": (
+            outcome.batches_executed
+        ),
+        "total_analyses_executed": (
+            outcome.analyses_executed
+        ),
+        "closed": outcome.closed,
+        "close_reason": outcome.close_reason,
+        "prior_sol_spend_usd": prior_total_spend,
+        "new_continuation_sol_spend_usd": (
+            new_continuation_sol_spend
+        ),
+        "total_subject_sol_spend_usd": (
+            total_subject_sol_spend
+        ),
+        "final_decision": asdict(
+            outcome.final_decision
+        ),
+    }
+
+    summary_path.write_text(
+        json.dumps(
+            summary,
+            indent=2,
+            sort_keys=True,
+            default=str,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    print(
+        f"CONTINUATION_BATCHES={continuation_batches}",
+        flush=True,
+    )
+    print(
+        f"CONTINUATION_ANALYSES={continuation_analyses}",
+        flush=True,
+    )
+    print(
+        f"TOTAL_ANALYSES={outcome.analyses_executed}",
+        flush=True,
+    )
+    print(
+        f"CLOSED={outcome.closed}",
+        flush=True,
+    )
+    print(
+        f"CLOSE_REASON={outcome.close_reason}",
+        flush=True,
+    )
+    print(
+        "CROSS_SUBJECT_CONTEXT_PRESERVED=True",
+        flush=True,
+    )
+    print(
+        "NEW_CONTINUATION_SOL_SPEND_USD="
+        f"{new_continuation_sol_spend:.6f}",
+        flush=True,
+    )
+    print(
+        "TOTAL_SUBJECT_SOL_SPEND_USD="
+        f"{total_subject_sol_spend:.6f}",
+        flush=True,
+    )
+    print(
+        f"CHECKPOINT_FILE={analysis_checkpoint_path}",
+        flush=True,
+    )
+    print(
+        f"SUMMARY={summary_path}",
+        flush=True,
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
