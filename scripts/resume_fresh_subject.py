@@ -93,6 +93,16 @@ def _append_jsonl(path: Path, row: Mapping[str, object]) -> None:
         )
 
 
+def _jsonl_record_count(path: Path) -> int:
+    if not path.is_file():
+        return 0
+    return sum(
+        1
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    )
+
+
 def _telemetry_spend(path: Path) -> float:
     if not path.is_file():
         return 0.0
@@ -1378,7 +1388,10 @@ def main(argv: list[str] | None = None) -> int:
         "accepted_resume_analysis_specifications": len(
             requested_analysis_ids
         ),
-        "continuation_checkpoint_records": len(
+        "continuation_checkpoint_records": _jsonl_record_count(
+            analysis_checkpoint_path
+        ),
+        "active_decision_checkpoint_records": len(
             written_checkpoint_records
         ),
         "continuation_batches_executed": (
