@@ -77,6 +77,7 @@ class BatchV4Runtime:
 def _build_execution_components(
     *,
     nexus_path: str | Path | None,
+    derived_market_root: str | Path | None,
     concept_library: ResearchConceptLibrary | None,
 ) -> tuple[
     TemporaryResearchCache,
@@ -91,7 +92,10 @@ def _build_execution_components(
     if nexus_path is None:
         nexus = InMemoryResearchNexus()
     else:
-        nexus = JsonResearchNexus(nexus_path)
+        nexus = JsonResearchNexus(
+            nexus_path,
+            derived_market_root=derived_market_root,
+        )
 
     catalog = standard_method_catalog()
     for spec in discovery_method_catalog().all():
@@ -127,20 +131,21 @@ def build_runtime(
     rd: ResearchDirectorProvider,
     mission: str = DEFAULT_MISSION,
     nexus_path: str | Path | None = None,
+    derived_market_root: str | Path | None = None,
     concept_library: ResearchConceptLibrary | None = None,
     max_contract_repairs: int = 3,
     scientific_memory: CrossSubjectScientificMemory | None = None,
 ) -> V4Runtime:
     """Assemble the existing single-request v4 research runtime.
 
-    This compatibility path remains available while the batched RD execution path
-    is tested and proven. Scientific authority boundaries are unchanged. The
-    active SubjectMetadata may represent either one security or an explicit
-    universe/cohort research scope whose materialized evidence contains multiple
-    security rows under the same durable scope lineage ID.
+    Existing single-security campaigns remain backward compatible. A durable
+    universe/cohort scope may also be represented by SubjectMetadata and consume
+    a Nexus-derived market panel. ``derived_market_root`` permits many campaign
+    Nexus documents to share one persistent derived market substrate.
     """
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(
         nexus_path=nexus_path,
+        derived_market_root=derived_market_root,
         concept_library=concept_library,
     )
 
@@ -181,6 +186,7 @@ def build_batch_runtime(
     rd: BatchResearchDirectorProvider,
     mission: str = DEFAULT_MISSION,
     nexus_path: str | Path | None = None,
+    derived_market_root: str | Path | None = None,
     concept_library: ResearchConceptLibrary | None = None,
     scientific_memory: CrossSubjectScientificMemory | None = None,
 ) -> BatchV4Runtime:
@@ -188,12 +194,12 @@ def build_batch_runtime(
 
     The batched path reuses the same Intake/cache boundary, method catalog,
     objective validator, Analysis Engine, Nexus implementation, and optional
-    cross-subject scientific memory. A multi-security universe/cohort may be the
-    active research scope by using a durable scope SubjectMetadata plus a
-    Nexus-derived market panel materialized into campaign evidence.
+    cross-subject scientific memory. ``derived_market_root`` may point every
+    campaign at one persistent Nexus-derived market store.
     """
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(
         nexus_path=nexus_path,
+        derived_market_root=derived_market_root,
         concept_library=concept_library,
     )
     orchestrator_type = (
