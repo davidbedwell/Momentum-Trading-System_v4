@@ -31,7 +31,7 @@ from MTS_V4.cross_subject_context import build_cross_subject_context
 from MTS_V4.cross_subject_memory import CrossSubjectScientificMemory
 from MTS_V4.cross_subject_memory_store import JsonCrossSubjectScientificMemoryStore
 from MTS_V4.intake import IntakeEngine
-from MTS_V4.live_sources import standard_live_market_source
+from MTS_V4.research_lead_sources import standard_research_lead_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.sol_spend_guard import SolSpendAuthorizationRequired
 from MTS_V4.subject_scientific_context import SubjectContextSolBatchResearchDirector
@@ -1128,7 +1128,7 @@ def main(argv: list[str] | None = None) -> int:
 
     evidence = IntakeEngine(runtime.cache).ingest(
         subject=reconstructed.subject,
-        source=standard_live_market_source(),
+        source=standard_research_lead_market_source(),
     )
 
     fresh_evidence_ids = {
