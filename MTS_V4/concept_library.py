@@ -51,6 +51,22 @@ class ResearchConceptLibrary:
         return tuple(item.payload() for item in self.all())
 
 
+def _add_external_research_leads(library: ResearchConceptLibrary) -> None:
+    from .research_leads import seed_external_research_leads
+
+    for lead in seed_external_research_leads():
+        library.add(
+            ResearchConcept(
+                concept_id=lead.lead_id,
+                name=lead.name,
+                description=lead.claimed_relationship,
+                source_class=lead.source_class,
+                questions=lead.questions,
+                metadata=lead.concept_metadata(),
+            )
+        )
+
+
 def seed_market_concepts() -> ResearchConceptLibrary:
     """Human idea seeds, deliberately broad and explicitly non-authoritative."""
     seed = "HUMAN_DESCRIPTION_NOT_ESTABLISHED_FACT"
@@ -217,4 +233,6 @@ def seed_market_concepts() -> ResearchConceptLibrary:
             ),
         ),
     )
-    return ResearchConceptLibrary(concepts)
+    library = ResearchConceptLibrary(concepts)
+    _add_external_research_leads(library)
+    return library
