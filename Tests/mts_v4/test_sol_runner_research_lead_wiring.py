@@ -16,6 +16,8 @@ def test_production_sol_runner_wires_research_lead_intake_and_sec_precompute():
 
 def test_standard_research_lead_source_includes_sec_and_intraday_inputs(monkeypatch):
     monkeypatch.setenv("UNUSUAL_WHALES_API_KEY", "test-placeholder")
+    monkeypatch.setenv("FINRA_API_CLIENT_ID", "test-placeholder")
+    monkeypatch.setenv("FINRA_API_CLIENT_SECRET", "test-placeholder")
 
     from MTS_V4.research_lead_sources import standard_research_lead_market_source
     from MTS_V4.participation_sources import YFinanceIntradaySource
