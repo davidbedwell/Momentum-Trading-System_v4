@@ -6,6 +6,13 @@ from pathlib import Path
 
 import pytest
 
+from MTS_V4.batch_contracts import (
+    BatchResearchDecision,
+    ResearchPackagePlan,
+    ScientificAnalysisSpecification,
+    ScientificInputReference,
+)
+from MTS_V4.contracts import ResearchPhase
 from MTS_V4.research_package import ResearchPackage
 from MTS_V4.research_package_store import JsonResearchPackageStore
 
@@ -109,6 +116,62 @@ def test_resume_spend_sums_calls_across_separate_resume_invocations(tmp_path):
     )
 
     assert module._telemetry_spend(telemetry) == pytest.approx(0.823176)
+
+
+def test_resume_replaces_only_authorized_direct_evidence_references():
+    module = _resume_module()
+    decision = BatchResearchDecision(
+        continue_research=True,
+        research_packages=(
+            ResearchPackagePlan(
+                rp_id="RP-XOM",
+                objective="fixture",
+                analyses=(
+                    ScientificAnalysisSpecification(
+                        analysis_id="analysis:xom",
+                        rp_id="RP-XOM",
+                        question_id="question:xom",
+                        subject_id="equity:XOM",
+                        question="fixture",
+                        method_id="analysis.dataset.compose",
+                        inputs=(
+                            ScientificInputReference(
+                                role="events",
+                                evidence_id="evidence:old",
+                            ),
+                            ScientificInputReference(
+                                role="prior",
+                                analysis_id="analysis:prior",
+                            ),
+                        ),
+                        parameters={},
+                        research_phase=ResearchPhase.EXPLORATION,
+                    ),
+                ),
+            ),
+        ),
+    )
+
+    refreshed = module._replace_direct_evidence_ids(
+        decision,
+        {"evidence:old": "evidence:new"},
+    )
+
+    inputs = refreshed.research_packages[0].analyses[0].inputs
+    assert inputs[0].evidence_id == "evidence:new"
+    assert inputs[0].analysis_id is None
+    assert inputs[1] == decision.research_packages[0].analyses[0].inputs[1]
+    assert decision.research_packages[0].analyses[0].inputs[0].evidence_id == "evidence:old"
+
+
+def test_resume_evidence_refresh_is_explicit_and_audited():
+    text = Path("scripts/resume_fresh_subject.py").read_text(encoding="utf-8")
+
+    assert "--authorize-evidence-refresh" in text
+    assert "EXPLICIT_HUMAN_SAME_SOURCE_REFRESH" in text
+    assert "resume_interpretation_decision.pre_evidence_refresh.json" in text
+    assert "authorized_evidence_refresh.json" in text
+    assert "evidence refresh is forbidden after continuation Analysis" in text
 
 
 def test_resume_persists_paid_sol_decision_before_package_recording():
