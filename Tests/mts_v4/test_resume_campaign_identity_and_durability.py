@@ -68,6 +68,26 @@ def test_resume_rejects_mixed_durable_campaign_identity(tmp_path):
         )
 
 
+def test_resume_counts_all_durable_checkpoint_records(tmp_path):
+    module = _resume_module()
+    checkpoints = tmp_path / "continuation_analysis_checkpoints.jsonl"
+    checkpoints.write_text(
+        "\n".join(
+            (
+                json.dumps({"decision_sequence": 6, "record": {"analysis_id": "a:1"}}),
+                "",
+                json.dumps({"decision_sequence": 6, "record": {"analysis_id": "a:2"}}),
+                json.dumps({"decision_sequence": 7, "record": {"analysis_id": "a:3"}}),
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    assert module._jsonl_record_count(checkpoints) == 3
+    assert module._jsonl_record_count(tmp_path / "missing.jsonl") == 0
+
+
 def test_resume_spend_sums_calls_across_separate_resume_invocations(tmp_path):
     module = _resume_module()
     telemetry = tmp_path / "resume_sol_transport_telemetry.jsonl"
