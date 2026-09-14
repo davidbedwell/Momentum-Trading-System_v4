@@ -94,6 +94,29 @@ def sec_share_structure_context(
         "historical_float_boundary": (
             "SEC EntityPublicFloat is preserved in its reported unit. This method does not relabel monetary public float as float shares."
         ),
+        "evidence_capabilities": {
+            "historical_shares_outstanding": {
+                "available": True,
+                "source": "SEC_POINT_IN_TIME_DISCLOSURES",
+                "temporal_semantics": "KNOWN_AT_ALIGNED",
+            },
+            "historical_tradable_float_shares": {
+                "available": False,
+                "reason": "CURRENT_FREE_SEC_SOURCE_DOES_NOT_PROVIDE_HISTORICAL_TRADABLE_FLOAT_SHARE_COUNTS",
+            },
+            "sec_entity_public_float": {
+                "available": bool(public_float_rows),
+                "meaning": "REPORTED_PUBLIC_FLOAT_VALUE_IN_ORIGINAL_SEC_UNIT_NOT_TRADABLE_FLOAT_SHARE_COUNT",
+            },
+        },
+        "ai_research_director_data_boundary": {
+            "may_identify_historical_tradable_float_as_missing_variable": True,
+            "may_request_historical_tradable_float_as_next_data_requirement": True,
+            "must_not_claim_historical_tradable_float_relationship_tested_without_float_share_evidence": True,
+            "must_not_back_project_current_float": True,
+            "scientific_priority_assigned": False,
+            "scientific_interpretation": "AI_RESEARCH_DIRECTOR_ONLY",
+        },
         "derived_dataset_catalog": {
             "sec_share_structure_panel": {
                 "row_count": len(panel),
