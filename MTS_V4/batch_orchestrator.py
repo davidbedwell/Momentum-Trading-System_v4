@@ -64,6 +64,7 @@ class BatchResearchLoopOutcome:
     closed: bool
     close_reason: str | None
     final_decision: BatchResearchDecision
+    waiting_for_future_cohorts: bool = False
     last_report: BatchExecutionReport | None = None
 
 
@@ -155,7 +156,7 @@ class BatchResearchLoopOrchestrator:
         self._notify_decision(decision_callback, decision, decisions, analyses)
         last_report: BatchExecutionReport | None = None
 
-        while decision.continue_research:
+        while decision.continue_research and not decision.waiting_for_future_cohorts:
             specifications = self._flatten_and_validate_decision(decision, subject)
             try:
                 ordered = topological_analysis_order(specifications)
@@ -314,14 +315,16 @@ class BatchResearchLoopOrchestrator:
             promoted += self._publish_promotions(decision)
             self._notify_decision(decision_callback, decision, decisions, analyses)
 
+        waiting = decision.waiting_for_future_cohorts
         return BatchResearchLoopOutcome(
             decisions=decisions,
             batches_executed=batches,
             analyses_executed=analyses,
             findings_promoted=promoted,
-            closed=True,
-            close_reason=decision.close_reason,
+            closed=not waiting,
+            close_reason=None if waiting else decision.close_reason,
             final_decision=decision,
+            waiting_for_future_cohorts=waiting,
             last_report=last_report,
         )
 
