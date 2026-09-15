@@ -94,22 +94,17 @@ def _answers(config, store):
     first = build_control_readiness_report(config, dummy, store)
     return {
         control_id: HiddenControlAnswer(
-            **{
-                **dummy[control_id].__dict__ if hasattr(dummy[control_id], "__dict__") else {
-                    "control_id": dummy[control_id].control_id,
-                    "formulation": dummy[control_id].formulation,
-                    "expected_direction": dummy[control_id].expected_direction,
-                    "expected_horizons": dummy[control_id].expected_horizons,
-                    "robustness_conditions": dummy[control_id].robustness_conditions,
-                    "independent_benchmark_artifact_sha256": dummy[control_id].independent_benchmark_artifact_sha256,
-                    "assessor": dummy[control_id].assessor,
-                },
-                "dataset_fingerprint_sha256": first["controls"][control_id]["dataset_fingerprint_sha256"],
-            }
+            control_id=answer.control_id,
+            formulation=answer.formulation,
+            expected_direction=answer.expected_direction,
+            expected_horizons=answer.expected_horizons,
+            robustness_conditions=answer.robustness_conditions,
+            independent_benchmark_artifact_sha256=answer.independent_benchmark_artifact_sha256,
+            dataset_fingerprint_sha256=first["controls"][control_id]["dataset_fingerprint_sha256"],
+            assessor=answer.assessor,
         )
-        for control_id in dummy
+        for control_id, answer in dummy.items()
     }
-
 
 def test_readiness_requires_exact_dataset_bound_hidden_answers():
     store = _store()
