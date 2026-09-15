@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import replace
 from typing import Any, Mapping, Sequence
 
+from .batch_contracts import BatchResearchDecision
 from .contracts import EvidenceDescriptor, SubjectMetadata
+from .generalization_state import JsonGeneralizationStateLedger, apply_rd_generalization_updates
 from .sol_batch_provider import SolBatchResearchDirector
 
 
@@ -60,6 +63,7 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
         historical_subject_context: Mapping[str, object],
         prior_cross_subject_memory_documents: Sequence[Mapping[str, object]] = (),
         generalization_state_context: Mapping[str, object] | None = None,
+        generalization_state_path: str | None = None,
         **kwargs,
     ) -> None:
         super().__init__(*args, **kwargs)
@@ -67,7 +71,24 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
         self._prior_cross_subject_memory_documents = tuple(
             dict(document) for document in prior_cross_subject_memory_documents
         )
-        self._generalization_state_context = dict(generalization_state_context or {})
+        configured_path = generalization_state_path or os.getenv("MTS_GENERALIZATION_STATE_PATH", "").strip()
+        self._generalization_ledger = JsonGeneralizationStateLedger(configured_path) if configured_path else None
+        if generalization_state_context is not None:
+            self._generalization_state_context = dict(generalization_state_context)
+        elif self._generalization_ledger is not None:
+            self._generalization_state_context = dict(self._generalization_ledger.context())
+        else:
+            self._generalization_state_context = {}
+
+    def _accept_batch_decision(self, decision: BatchResearchDecision) -> BatchResearchDecision:
+        accepted = super()._accept_batch_decision(decision)
+        if self._generalization_ledger is not None:
+            apply_rd_generalization_updates(
+                research_state=accepted.research_state,
+                ledger=self._generalization_ledger,
+            )
+            self._generalization_state_context = dict(self._generalization_ledger.context())
+        return accepted
 
     def _batch_common_payload(
         self,
@@ -89,6 +110,7 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
             "historical_subjects": self._historical_subject_context,
             "prior_cross_subject_memory_documents": self._prior_cross_subject_memory_documents,
             "durable_generalization_state": self._generalization_state_context,
+            "generalization_state_persistence_enabled": self._generalization_ledger is not None,
             "evidence_origin_contract": (
                 "Every advertised evidence descriptor belongs operationally to the synthetic program subject so "
                 "it can participate in one Analysis request. Its exact original ticker/subject is preserved in "
