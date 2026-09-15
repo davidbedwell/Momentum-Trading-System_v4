@@ -3,6 +3,10 @@ from __future__ import annotations
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import date, timedelta
+import gzip
+import hashlib
+import json
+from pathlib import Path
 from typing import Any, Mapping, Protocol, Sequence
 import time
 
@@ -43,6 +47,89 @@ class CrossSectionValidationResult:
     tradable_start_adjustments: tuple[Mapping[str, Any], ...]
 
 
+class TemporaryMarketAcquisitionCache:
+    """Restart-safe raw acquisition checkpoints, removed after successful publication."""
+
+    FORMAT = "MTS_V4_TEMPORARY_MARKET_ACQUISITION_CACHE_V1"
+
+    def __init__(self, root: str | Path) -> None:
+        self.root = Path(root)
+        self.root.mkdir(parents=True, exist_ok=True)
+
+    @staticmethod
+    def _key(*, source_identity: str, ticker: str, start_date: str, end_date: str) -> str:
+        payload = f"{source_identity}|{ticker}|{start_date}|{end_date}".encode("utf-8")
+        return hashlib.sha256(payload).hexdigest()
+
+    def _path(self, *, source_identity: str, ticker: str, start_date: str, end_date: str) -> Path:
+        return self.root / f"{self._key(source_identity=source_identity, ticker=ticker, start_date=start_date, end_date=end_date)}.json.gz"
+
+    def load(self, *, source_identity: str, ticker: str, start_date: str, end_date: str) -> tuple[Mapping[str, Any], ...] | None:
+        path = self._path(source_identity=source_identity, ticker=ticker, start_date=start_date, end_date=end_date)
+        if not path.exists():
+            return None
+        try:
+            with gzip.open(path, "rt", encoding="utf-8") as handle:
+                document = json.load(handle)
+        except (OSError, json.JSONDecodeError):
+            return None
+        expected = {
+            "format": self.FORMAT,
+            "source_identity": source_identity,
+            "ticker": ticker,
+            "start_date": start_date,
+            "end_date": end_date,
+        }
+        if any(document.get(key) != value for key, value in expected.items()):
+            return None
+        rows = document.get("rows")
+        if not isinstance(rows, list) or not rows or not all(isinstance(row, Mapping) for row in rows):
+            return None
+        canonical = json.dumps(rows, sort_keys=True, separators=(",", ":"), allow_nan=False)
+        if document.get("rows_sha256") != hashlib.sha256(canonical.encode("utf-8")).hexdigest():
+            return None
+        if document.get("row_count") != len(rows):
+            return None
+        return tuple(dict(row) for row in rows)
+
+    def store(self, *, source_identity: str, ticker: str, start_date: str, end_date: str, rows: Sequence[Mapping[str, Any]]) -> None:
+        normalized = [dict(row) for row in rows]
+        canonical = json.dumps(normalized, sort_keys=True, separators=(",", ":"), allow_nan=False)
+        document = {
+            "format": self.FORMAT,
+            "source_identity": source_identity,
+            "ticker": ticker,
+            "start_date": start_date,
+            "end_date": end_date,
+            "row_count": len(normalized),
+            "first_observed_date": min(str(row.get("date", ""))[:10] for row in normalized),
+            "last_observed_date": max(str(row.get("date", ""))[:10] for row in normalized),
+            "rows_sha256": hashlib.sha256(canonical.encode("utf-8")).hexdigest(),
+            "rows": normalized,
+        }
+        path = self._path(source_identity=source_identity, ticker=ticker, start_date=start_date, end_date=end_date)
+        temporary = path.with_suffix(path.suffix + ".tmp")
+        with gzip.open(temporary, "wt", encoding="utf-8") as handle:
+            json.dump(document, handle, sort_keys=True, separators=(",", ":"), allow_nan=False)
+        temporary.replace(path)
+
+    def write_audit(self, document: Mapping[str, Any]) -> Path:
+        path = self.root / "cross_section_audit.json"
+        temporary = path.with_suffix(".json.tmp")
+        temporary.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        temporary.replace(path)
+        return path
+
+    def clear_after_success(self) -> None:
+        for path in self.root.iterdir():
+            if path.is_file() and (path.name.endswith(".json.gz") or path.name == "cross_section_audit.json"):
+                path.unlink()
+        try:
+            self.root.rmdir()
+        except OSError:
+            pass
+
+
 def _next_calendar_day(value: str) -> str:
     return (date.fromisoformat(value) + timedelta(days=1)).isoformat()
 
@@ -71,18 +158,36 @@ def _ensure_definitions(store: DerivedMarketStore, universe: UniverseDefinition)
     return predictor_set, outcome_set
 
 
-def _attach_membership_and_identity(*, membership: IntervalMembership, source: DailyMarketSource, start_date: str, end_date: str, shares_source: PointInTimeSharesSource | None, download_workers: int = 6, download_attempts: int = 4) -> list[dict[str, Any]]:
+def _attach_membership_and_identity(*, membership: IntervalMembership, source: DailyMarketSource, start_date: str, end_date: str, shares_source: PointInTimeSharesSource | None, download_workers: int = 6, download_attempts: int = 4, acquisition_cache: TemporaryMarketAcquisitionCache | None = None) -> list[dict[str, Any]]:
     if download_workers < 1:
         raise DerivedMarketStoreError("download_workers must be >= 1")
     if download_attempts < 1:
         raise DerivedMarketStoreError("download_attempts must be >= 1")
 
     def fetch_nonempty(ticker: str) -> Sequence[Mapping[str, Any]]:
+        if acquisition_cache is not None:
+            cached = acquisition_cache.load(
+                source_identity=source.source_identity,
+                ticker=ticker,
+                start_date=start_date,
+                end_date=end_date,
+            )
+            if cached:
+                print(f"MARKET_ACQUISITION_CACHE_HIT TICKER={ticker} ROWS={len(cached)}", flush=True)
+                return cached
         last_error: Exception | None = None
         for attempt in range(1, download_attempts + 1):
             try:
                 result = source.fetch(ticker=ticker, start_date=start_date, end_date=end_date)
                 if result:
+                    if acquisition_cache is not None:
+                        acquisition_cache.store(
+                            source_identity=source.source_identity,
+                            ticker=ticker,
+                            start_date=start_date,
+                            end_date=end_date,
+                            rows=result,
+                        )
                     return result
                 last_error = DerivedMarketStoreError(f"market source returned zero rows for {ticker}")
             except Exception as exc:
@@ -150,7 +255,7 @@ def _attach_membership_and_identity(*, membership: IntervalMembership, source: D
         identities.add(identity)
     return rows
 
-def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, Any]], membership: IntervalMembership, start_date: str, end_date: str) -> CrossSectionValidationResult:
+def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, Any]], membership: IntervalMembership, start_date: str, end_date: str, acquisition_cache: TemporaryMarketAcquisitionCache | None = None) -> CrossSectionValidationResult:
     """Fail closed when an observed market date is missing an eligible member.
 
     This catches partial ticker/vendor failures. A future exchange-calendar adapter
@@ -169,6 +274,8 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
     observed_dates = tuple(sorted(observed))
     tradable_starts: dict[MembershipInterval, str] = {}
     adjustments: list[Mapping[str, Any]] = []
+    error_examples: list[Mapping[str, Any]] = []
+    error_count = 0
     for interval in membership.active_between(start_date, end_date):
         key = (interval.security_id, interval.ticker)
         interval_dates = sorted(
@@ -177,11 +284,16 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
             if interval.contains(effective)
         )
         if not interval_dates:
-            raise DerivedMarketStoreError(
-                "eligible membership interval has no observed regular-market rows: "
-                f"security_id={interval.security_id} ticker={interval.ticker} "
-                f"membership_start={interval.start_date}"
-            )
+            error_count += 1
+            if len(error_examples) < 200:
+                error_examples.append({
+                    "type": "NO_ELIGIBLE_HISTORY",
+                    "security_id": interval.security_id,
+                    "ticker": interval.ticker,
+                    "membership_start": interval.start_date,
+                    "membership_end": interval.end_date,
+                })
+            continue
         first_observed = interval_dates[0]
         tradable_starts[interval] = first_observed
         leading_observed_sessions = [
@@ -192,13 +304,16 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
         ]
         calibration_only = "CALIBRATION_ONLY" in interval.source_identity.upper()
         if len(leading_observed_sessions) > 1 and not calibration_only:
-            raise DerivedMarketStoreError(
-                "eligible security is absent for more than one observed market session before its first "
-                "regular-market row: "
-                f"security_id={interval.security_id} ticker={interval.ticker} "
-                f"membership_start={interval.start_date} first_observed={first_observed} "
-                f"missing_sessions={leading_observed_sessions[:20]}"
-            )
+            error_count += 1
+            if len(error_examples) < 200:
+                error_examples.append({
+                    "type": "LEADING_HISTORY_GAP_EXCEEDS_AUTHORIZED_BOUNDARY",
+                    "security_id": interval.security_id,
+                    "ticker": interval.ticker,
+                    "membership_start": interval.start_date,
+                    "first_observed": first_observed,
+                    "missing_sessions": leading_observed_sessions,
+                })
         if leading_observed_sessions:
             reason = (
                 "CALIBRATION_CURRENT_TICKER_HISTORY_BEGINS_AFTER_SOURCE_MEMBERSHIP"
@@ -225,21 +340,45 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
         expected = {
             item.security_id
             for item in membership.members_on(effective)
-            if tradable_starts[item] <= effective
+            if item in tradable_starts and tradable_starts[item] <= effective
         }
         if securities != expected:
             missing = sorted(expected - securities)
             unexpected = sorted(securities - expected)
-            raise DerivedMarketStoreError(
-                f"incomplete point-in-time cross-section on {effective}: missing={missing[:20]} unexpected={unexpected[:20]} expected_n={len(expected)} observed_n={len(securities)}"
-            )
-    return CrossSectionValidationResult(
+            error_count += 1
+            if len(error_examples) < 200:
+                error_examples.append({
+                    "type": "INCOMPLETE_OBSERVED_CROSS_SECTION",
+                    "effective_date": effective,
+                    "missing": missing[:20],
+                    "unexpected": unexpected[:20],
+                    "expected_n": len(expected),
+                    "observed_n": len(securities),
+                })
+    result = CrossSectionValidationResult(
         observed_counts={effective: len(securities) for effective, securities in observed.items()},
         tradable_start_adjustments=tuple(adjustments),
     )
+    audit = {
+        "format": "MTS_V4_CROSS_SECTION_PREFLIGHT_AUDIT_V1",
+        "start_date": start_date,
+        "end_date": end_date,
+        "observed_session_count": len(observed),
+        "tradable_start_adjustments": list(adjustments),
+        "error_count": error_count,
+        "error_examples": error_examples,
+        "passed": error_count == 0,
+    }
+    audit_path = acquisition_cache.write_audit(audit) if acquisition_cache is not None else None
+    if error_count:
+        location = f" audit={audit_path}" if audit_path is not None else ""
+        raise DerivedMarketStoreError(
+            f"cross-section preflight found {error_count} defects; examples={error_examples[:20]}{location}"
+        )
+    return result
 
 
-def maintain_standard_market_store(*, store: DerivedMarketStore, universe: UniverseDefinition, membership: IntervalMembership, source: DailyMarketSource, through_date: str, initial_start_date: str | None = None, shares_source: PointInTimeSharesSource | None = None, update_id_prefix: str = "market-update", publish_outcomes: bool = True, download_workers: int = 6, download_attempts: int = 4) -> DerivedMarketMaintenanceResult:
+def maintain_standard_market_store(*, store: DerivedMarketStore, universe: UniverseDefinition, membership: IntervalMembership, source: DailyMarketSource, through_date: str, initial_start_date: str | None = None, shares_source: PointInTimeSharesSource | None = None, update_id_prefix: str = "market-update", publish_outcomes: bool = True, download_workers: int = 6, download_attempts: int = 4, acquisition_cache_root: str | Path | None = None) -> DerivedMarketMaintenanceResult:
     """Incrementally extend standard predictors and matured outcomes without raw persistence."""
     date.fromisoformat(through_date)
     predictor_set, outcome_set = _ensure_definitions(store, universe)
@@ -256,10 +395,11 @@ def maintain_standard_market_store(*, store: DerivedMarketStore, universe: Unive
 
     plan = plan_incremental_update(store=store, universe_id=universe.universe_id, feature_set_id=predictor_set.feature_set_id, feature_set_version=predictor_set.version, first_new_effective_date=first_new, last_new_effective_date=through_date)
     acquisition_start = acquisition_start_for_plan(plan)
-    raw_rows = _attach_membership_and_identity(membership=membership, source=source, start_date=acquisition_start, end_date=through_date, shares_source=shares_source, download_workers=download_workers, download_attempts=download_attempts)
+    acquisition_cache = TemporaryMarketAcquisitionCache(acquisition_cache_root) if acquisition_cache_root is not None else None
+    raw_rows = _attach_membership_and_identity(membership=membership, source=source, start_date=acquisition_start, end_date=through_date, shares_source=shares_source, download_workers=download_workers, download_attempts=download_attempts, acquisition_cache=acquisition_cache)
     if not raw_rows:
         raise DerivedMarketStoreError("market source returned no rows for a required incremental update; high-water mark not advanced")
-    cross_section_validation = _validate_complete_observed_cross_sections(rows=raw_rows, membership=membership, start_date=first_new, end_date=through_date)
+    cross_section_validation = _validate_complete_observed_cross_sections(rows=raw_rows, membership=membership, start_date=first_new, end_date=through_date, acquisition_cache=acquisition_cache)
 
     all_predictors = build_predictor_rows(raw_rows)
     predictor_rows = [row for row in all_predictors if first_new <= str(row["effective_date"]) <= through_date]
@@ -311,7 +451,7 @@ def maintain_standard_market_store(*, store: DerivedMarketStore, universe: Unive
                 },
             )
 
-    return DerivedMarketMaintenanceResult(
+    result = DerivedMarketMaintenanceResult(
         universe_id=universe.universe_id,
         predictor_update_id=predictor_record.update_id if predictor_record else None,
         predictor_first_date=predictor_record.first_effective_date if predictor_record else None,
@@ -325,6 +465,9 @@ def maintain_standard_market_store(*, store: DerivedMarketStore, universe: Unive
         acquisition_start=acquisition_start,
         acquisition_end=through_date,
     )
+    if acquisition_cache is not None:
+        acquisition_cache.clear_after_success()
+    return result
 
 
 class YFinanceDailyMarketSource:

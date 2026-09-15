@@ -1,10 +1,11 @@
 from datetime import date, timedelta
+import json
 
 import pytest
 
 from MTS_V4.derived_market_store import InMemoryDerivedMarketStore, UniverseDefinition
 from MTS_V4.derived_market_store import DerivedMarketStoreError
-from MTS_V4.derived_market_updater import _validate_complete_observed_cross_sections, maintain_standard_market_store
+from MTS_V4.derived_market_updater import TemporaryMarketAcquisitionCache, _attach_membership_and_identity, _validate_complete_observed_cross_sections, maintain_standard_market_store
 from MTS_V4.universe_membership import IntervalMembership, MembershipInterval
 
 
@@ -103,7 +104,7 @@ def test_cross_section_rejects_more_than_one_leading_observed_session():
         _row("SEC-LATE", "LATE", "2020-01-03"),
     )
 
-    with pytest.raises(DerivedMarketStoreError, match="more than one observed market session"):
+    with pytest.raises(DerivedMarketStoreError, match="cross-section preflight found 1 defects"):
         _validate_complete_observed_cross_sections(
             rows=rows,
             membership=membership,
@@ -159,10 +160,84 @@ def test_cross_section_still_rejects_missing_session_after_regular_trading_begin
         _row("SEC-GAP", "GAP", "2020-01-03"),
     )
 
-    with pytest.raises(DerivedMarketStoreError, match="incomplete point-in-time cross-section on 2020-01-02"):
+    with pytest.raises(DerivedMarketStoreError, match="cross-section preflight found 1 defects"):
         _validate_complete_observed_cross_sections(
             rows=rows,
             membership=membership,
             start_date="2020-01-01",
             end_date="2020-01-03",
         )
+
+
+class CountingDailySource:
+    source_identity = "COUNTING"
+
+    def __init__(self):
+        self.calls = 0
+
+    def fetch(self, *, ticker, start_date, end_date):
+        self.calls += 1
+        return ({"date": "2020-01-02", "open": 1.0, "high": 2.0, "low": 0.5, "close": 1.5, "volume": 10.0},)
+
+
+def test_temporary_acquisition_cache_reuses_verified_download(tmp_path):
+    membership = IntervalMembership((
+        MembershipInterval("SEC-1", "AAA", "2020-01-01", None, source_identity="CALIBRATION_ONLY"),
+    ))
+    source = CountingDailySource()
+    cache = TemporaryMarketAcquisitionCache(tmp_path / "cache")
+
+    first = _attach_membership_and_identity(
+        membership=membership,
+        source=source,
+        start_date="2020-01-01",
+        end_date="2020-01-03",
+        shares_source=None,
+        download_workers=1,
+        acquisition_cache=cache,
+    )
+    second = _attach_membership_and_identity(
+        membership=membership,
+        source=source,
+        start_date="2020-01-01",
+        end_date="2020-01-03",
+        shares_source=None,
+        download_workers=1,
+        acquisition_cache=cache,
+    )
+
+    assert first == second
+    assert source.calls == 1
+
+
+def test_preflight_audit_collects_multiple_defects_and_survives_failure(tmp_path):
+    membership = IntervalMembership((
+        MembershipInterval("SEC-PEER", "PEER", "2020-01-01", None, source_identity="fixture"),
+        MembershipInterval("SEC-NONE", "NONE", "2020-01-01", None, source_identity="fixture"),
+        MembershipInterval("SEC-GAP", "GAP", "2020-01-01", None, source_identity="fixture"),
+    ))
+    rows = (
+        _row("SEC-PEER", "PEER", "2020-01-01"),
+        _row("SEC-GAP", "GAP", "2020-01-01"),
+        _row("SEC-PEER", "PEER", "2020-01-02"),
+        _row("SEC-PEER", "PEER", "2020-01-03"),
+        _row("SEC-GAP", "GAP", "2020-01-03"),
+    )
+    cache = TemporaryMarketAcquisitionCache(tmp_path / "cache")
+
+    with pytest.raises(DerivedMarketStoreError, match="cross-section preflight found 2 defects"):
+        _validate_complete_observed_cross_sections(
+            rows=rows,
+            membership=membership,
+            start_date="2020-01-01",
+            end_date="2020-01-03",
+            acquisition_cache=cache,
+        )
+
+    audit = json.loads((cache.root / "cross_section_audit.json").read_text())
+    assert audit["passed"] is False
+    assert audit["error_count"] == 2
+    assert {item["type"] for item in audit["error_examples"]} == {
+        "NO_ELIGIBLE_HISTORY",
+        "INCOMPLETE_OBSERVED_CROSS_SECTION",
+    }
