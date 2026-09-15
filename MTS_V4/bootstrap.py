@@ -24,6 +24,8 @@ from .interfaces import ResearchDirectorProvider
 from .intraday_analysis_substrate import analysis_method as intraday_substrate_analysis_method
 from .intraday_analysis_substrate import method_spec as intraday_substrate_method_spec
 from .method_catalog import MethodCatalog
+from .multiple_testing import analysis_method as multiple_testing_analysis_method
+from .multiple_testing import method_spec as multiple_testing_method_spec
 from .nexus import InMemoryResearchNexus, ResearchNexus
 from .nexus_json import JsonResearchNexus
 from .neutral_analysis_substrate import analysis_method as substrate_analysis_method
@@ -92,6 +94,7 @@ def _build_execution_components(*, nexus_path: str | Path | None, derived_market
         cross_sectional_method_spec(),
         cross_sectional_statistics_spec(),
         null_method_spec(),
+        multiple_testing_method_spec(),
     ):
         catalog.register(spec)
     concepts = concept_library or seed_market_concepts()
@@ -112,6 +115,7 @@ def _build_execution_components(*, nexus_path: str | Path | None, derived_market
         cross_sectional_analysis_method(),
         cross_sectional_statistics_method(),
         null_analysis_method(),
+        multiple_testing_analysis_method(),
     ):
         analysis.register(method)
     return cache, nexus, catalog, concepts, validator, analysis
@@ -120,17 +124,7 @@ def _build_execution_components(*, nexus_path: str | Path | None, derived_market
 def build_runtime(*, rd: ResearchDirectorProvider, mission: str = DEFAULT_MISSION, nexus_path: str | Path | None = None, derived_market_root: str | Path | None = None, concept_library: ResearchConceptLibrary | None = None, max_contract_repairs: int = 3, scientific_memory: CrossSubjectScientificMemory | None = None) -> V4Runtime:
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(nexus_path=nexus_path, derived_market_root=derived_market_root, concept_library=concept_library)
     orchestrator_type = CrossSubjectResearchLoopOrchestrator if scientific_memory is not None else ResearchLoopOrchestrator
-    kwargs = {
-        "mission": mission,
-        "rd": rd,
-        "validator": validator,
-        "analysis": analysis,
-        "nexus": nexus,
-        "cache": cache,
-        "available_methods": catalog.capability_payloads(),
-        "research_concepts": concepts.payloads(),
-        "max_contract_repairs": max_contract_repairs,
-    }
+    kwargs = {"mission": mission, "rd": rd, "validator": validator, "analysis": analysis, "nexus": nexus, "cache": cache, "available_methods": catalog.capability_payloads(), "research_concepts": concepts.payloads(), "max_contract_repairs": max_contract_repairs}
     if scientific_memory is not None:
         kwargs["scientific_memory"] = scientific_memory
     orchestrator = orchestrator_type(**kwargs)
@@ -140,16 +134,7 @@ def build_runtime(*, rd: ResearchDirectorProvider, mission: str = DEFAULT_MISSIO
 def build_batch_runtime(*, rd: BatchResearchDirectorProvider, mission: str = DEFAULT_MISSION, nexus_path: str | Path | None = None, derived_market_root: str | Path | None = None, concept_library: ResearchConceptLibrary | None = None, scientific_memory: CrossSubjectScientificMemory | None = None) -> BatchV4Runtime:
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(nexus_path=nexus_path, derived_market_root=derived_market_root, concept_library=concept_library)
     orchestrator_type = CrossSubjectBatchResearchLoopOrchestrator if scientific_memory is not None else BatchResearchLoopOrchestrator
-    kwargs = {
-        "mission": mission,
-        "rd": rd,
-        "validator": validator,
-        "analysis": analysis,
-        "nexus": nexus,
-        "cache": cache,
-        "available_methods": catalog.capability_payloads(),
-        "research_concepts": concepts.payloads(),
-    }
+    kwargs = {"mission": mission, "rd": rd, "validator": validator, "analysis": analysis, "nexus": nexus, "cache": cache, "available_methods": catalog.capability_payloads(), "research_concepts": concepts.payloads()}
     if scientific_memory is not None:
         kwargs["scientific_memory"] = scientific_memory
     orchestrator = orchestrator_type(**kwargs)
