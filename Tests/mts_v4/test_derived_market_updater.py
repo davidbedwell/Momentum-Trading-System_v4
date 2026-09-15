@@ -112,6 +112,40 @@ def test_cross_section_rejects_more_than_one_leading_observed_session():
         )
 
 
+def test_calibration_cross_section_audits_longer_current_ticker_history_gap():
+    membership = IntervalMembership((
+        MembershipInterval("SEC-PEER", "PEER", "2020-01-01", None, source_identity="CALIBRATION_ONLY"),
+        MembershipInterval("SEC-HWM", "HWM", "2020-01-01", None, source_identity="CALIBRATION_ONLY"),
+    ))
+    rows = (
+        _row("SEC-PEER", "PEER", "2020-01-01"),
+        _row("SEC-PEER", "PEER", "2020-01-02"),
+        _row("SEC-PEER", "PEER", "2020-01-03"),
+        _row("SEC-HWM", "HWM", "2020-01-03"),
+    )
+
+    result = _validate_complete_observed_cross_sections(
+        rows=rows,
+        membership=membership,
+        start_date="2020-01-01",
+        end_date="2020-01-03",
+    )
+
+    assert result.observed_counts == {
+        "2020-01-01": 1,
+        "2020-01-02": 1,
+        "2020-01-03": 2,
+    }
+    assert result.tradable_start_adjustments[0]["security_id"] == "SEC-HWM"
+    assert result.tradable_start_adjustments[0]["excluded_leading_observed_sessions"] == (
+        "2020-01-01",
+        "2020-01-02",
+    )
+    assert result.tradable_start_adjustments[0]["reason"] == (
+        "CALIBRATION_CURRENT_TICKER_HISTORY_BEGINS_AFTER_SOURCE_MEMBERSHIP"
+    )
+
+
 def test_cross_section_still_rejects_missing_session_after_regular_trading_begins():
     membership = IntervalMembership((
         MembershipInterval("SEC-PEER", "PEER", "2020-01-01", None, source_identity="fixture"),

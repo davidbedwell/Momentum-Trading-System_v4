@@ -190,7 +190,8 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
             if max(start_date, interval.start_date) <= effective < first_observed
             and (interval.end_date is None or effective <= interval.end_date)
         ]
-        if len(leading_observed_sessions) > 1:
+        calibration_only = "CALIBRATION_ONLY" in interval.source_identity.upper()
+        if len(leading_observed_sessions) > 1 and not calibration_only:
             raise DerivedMarketStoreError(
                 "eligible security is absent for more than one observed market session before its first "
                 "regular-market row: "
@@ -199,20 +200,25 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
                 f"missing_sessions={leading_observed_sessions[:20]}"
             )
         if leading_observed_sessions:
+            reason = (
+                "CALIBRATION_CURRENT_TICKER_HISTORY_BEGINS_AFTER_SOURCE_MEMBERSHIP"
+                if calibration_only and len(leading_observed_sessions) > 1
+                else "SOURCE_MEMBERSHIP_PRECEDES_FIRST_REGULAR_MARKET_OBSERVATION"
+            )
             adjustment = {
                 "security_id": interval.security_id,
                 "ticker": interval.ticker,
                 "source_membership_start": interval.start_date,
                 "first_regular_market_observation": first_observed,
                 "excluded_leading_observed_sessions": tuple(leading_observed_sessions),
-                "reason": "SOURCE_MEMBERSHIP_PRECEDES_FIRST_REGULAR_MARKET_OBSERVATION",
+                "reason": reason,
             }
             adjustments.append(adjustment)
             print(
                 "MARKET_TRADABLE_START_ADJUSTED "
                 f"TICKER={interval.ticker} SOURCE_MEMBERSHIP_START={interval.start_date} "
                 f"FIRST_REGULAR_OBSERVATION={first_observed} "
-                f"EXCLUDED_SESSIONS={','.join(leading_observed_sessions)}",
+                f"EXCLUDED_SESSIONS={','.join(leading_observed_sessions)} REASON={reason}",
                 flush=True,
             )
     for effective, securities in sorted(observed.items()):
