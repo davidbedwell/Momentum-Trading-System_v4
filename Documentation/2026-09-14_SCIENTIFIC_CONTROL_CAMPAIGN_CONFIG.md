@@ -52,9 +52,9 @@ Each value describes only the evidence/query surface available to that control:
   },
   "deterministic_negative_control": {
     "universe_id": "<point-in-time-universe-id>",
-    "feature_set_id": "mts_market_predictors",
+    "feature_set_id": "mts_acceptance_negative_control",
     "feature_set_version": "v1",
-    "feature_columns": ["return_20__v1"],
+    "feature_columns": ["deterministic_null__v1"],
     "outcome_feature_set_id": "mts_historical_outcomes",
     "outcome_feature_set_version": "v1",
     "outcome_feature_columns": ["forward_return_5__v1", "forward_return_20__v1"]
@@ -62,7 +62,7 @@ Each value describes only the evidence/query surface available to that control:
 }
 ```
 
-For the negative control, the supplied market panel gives identity/date and historical outcomes; Sol is instructed only to investigate the neutral control measurement and can request the registered `analysis.controls.deterministic_null` method. The market return column is not the null predictor and must not be represented as such.
+Before the control campaign, build/update the isolated negative-control feature set with `scripts/build_negative_control_feature_set.py`. It copies only `security_id`, `effective_date`, and eligibility from an existing derived-market row surface and computes a deterministic SHA-256 identity/date hash. No price, return, volume, volatility, event, sector, breadth, or other market measurement is copied into the negative-control predictor set. This prevents a genuine market feature from contaminating the negative control.
 
 The PEAD entry intentionally remains a placeholder until the historical earnings source passes timestamp/coverage audit. Do not substitute current/revised earnings data or fabricate historical event timing merely to make the control runnable.
 
