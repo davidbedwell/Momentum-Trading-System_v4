@@ -17,7 +17,7 @@ def _payload():
     }
 
 
-def test_rd_is_told_tentative_blind_validation_lock_and_point_six_rule():
+def test_rd_is_told_three_stage_path_executable_hypothesis_rule():
     messages = ResearchPackageAwareResearchDirector._decision_messages(
         operation="INTERPRET_ANALYSIS_RESULT",
         mission=DEFAULT_MISSION,
@@ -32,8 +32,15 @@ def test_rd_is_told_tentative_blind_validation_lock_and_point_six_rule():
     assert "research_phase=VALIDATION" in instructions
     assert "without look-ahead knowledge" in instructions
     assert "before any future outcome is exposed" in instructions
-    assert "success_rate >= 0.60" in instructions
-    assert "NOT_VERIFIED" in instructions
+    assert "trading-hypothesis candidacy" in instructions
+    assert "positive estimated net expectancy" in instructions
+    assert "never credit favorable movement after a stop" in instructions
+    assert "success_rate >= 0.60 rule is superseded" in instructions
+    assert "net expectancy >= 0.15R" in instructions
+    assert "gross expectancy >= 2C" in instructions
+    assert "binary trial ledger does not yet represent" in instructions
+    assert "distinguish eligibility from ranking and capital selection" in instructions
+    assert "including candidates not selected for capital" in instructions
     assert "minimum_required_trials" in instructions
 
     updates_schema = user["required_decision_schema"]["research_state"][

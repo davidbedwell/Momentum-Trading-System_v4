@@ -211,7 +211,7 @@ The purpose of the validation restrictions is not to suppress predictive reasoni
 
 Do not confuse exploratory discovery, retrospective historical verification, and genuine live prospective prediction. The unseen-ticker restriction applies to retrospective historical blind verification, not to current or future-facing prediction/trading.
 
-No fixed threshold, horizon, normalization, indicator, method family, or trading rule should be privileged unless explicitly approved or scientifically justified by the AI Research Director from evidence. Human-approved governance thresholds, such as an explicitly approved predictive-verification success-rate floor, are permitted as objective validation rules and do not substitute for AI scientific judgment about the hypothesis itself.
+No fixed threshold, horizon, normalization, indicator, method family, or trading rule should be privileged unless explicitly approved or scientifically justified by the AI Research Director from evidence. Trading-hypothesis candidacy, scientific validation, and candidacy for trading promotion are distinct. Their human-approved requirements are governed by `GOVERNANCE_AMENDMENT_2026-09-15_TRADING_HYPOTHESIS_LIFECYCLE.md`, which supersedes the former fixed cumulative `success_rate >= 0.60` verification rule. The prior greater-than-60-percent success at at-least-1.5-ATR combination remains a strong reference example, not an exclusive discovery, validation, or promotion threshold.
 
 ## 14. Human Utility and Risk
 
@@ -220,6 +220,12 @@ MTS should seek opportunities that are practically useful to a human trader, not
 Reward must be considered in relation to risk, adverse path, and time.
 
 Adverse movement is defined relative to the hypothesized opportunity direction. What level of adverse movement is acceptable is a human utility/risk question, not a universal market fact.
+
+Trading expectancy must be calculated from the chronological outcome of a frozen, human-executable policy. Favorable movement occurring after the policy would have stopped, invalidated, expired, or otherwise exited must not be credited. A scientifically supported relationship may remain durable knowledge without satisfying the separate economic requirements for trading promotion.
+
+The approved trading-promotion rejection floor requires positive conservative net expectancy, point-estimate net expectancy of at least `0.15R`, and point-estimate gross expectancy of at least twice upper-bound all-in costs. Meeting that floor authorizes prospective paper testing only and must not become the Research Director's research objective.
+
+The future Stock Screener Engine must record every eligible current candidate and rank eligibility separately from capital selection. The future Trading Engine may select only the best portfolio-compatible candidates under governed capital and risk constraints. Outcomes for selected and unselected eligible candidates must remain separately measurable so portfolio selection does not bias evaluation of the underlying hypothesis.
 
 Do not hard-code universal numerical utility thresholds without explicit approval.
 
@@ -262,6 +268,8 @@ Prefer tests that establish:
 ## 17. Continuation Discipline
 
 Future ChatGPT sessions working on v4 must read this file before making architectural or implementation changes.
+
+Future work affecting predictive hypotheses, blind validation, prospective paper testing, screening, or trading promotion must also read `GOVERNANCE_AMENDMENT_2026-09-15_TRADING_HYPOTHESIS_LIFECYCLE.md`.
 
 The permanent sections above are governing authority. The Current Shift Handoff below is operational continuation state and may be replaced at session closeout without changing governance.
 

@@ -42,6 +42,12 @@ real-money execution eligibility, if separately authorized
 Live Paper Validation must not be used as a shortcut around prior scientific,
 Decision, learning, or validation work.
 
+Admission of a hypothesis into prospective paper testing is governed by
+`GOVERNANCE_AMENDMENT_2026-09-15_TRADING_HYPOTHESIS_LIFECYCLE.md`. In
+particular, trading-hypothesis candidacy, scientific validation, and candidacy
+for trading promotion are separate stages; a binary historical success rate or
+scientific-validation verdict alone does not authorize this stage.
+
 ---
 
 ## 3. Initial Paper Bank
@@ -141,6 +147,13 @@ Trades must not be manually cherry-picked after their outcomes are known.
 
 No forward information may influence candidate selection, entry, sizing, hold,
 add, reduce, or exit decisions.
+
+The Stock Screener Engine must preserve every contemporaneously eligible
+candidate, including candidates not selected for simulated capital. The Trading
+Engine may rank, size, reject, or defer eligible candidates under governed
+portfolio constraints, but nonselection must not remove the candidate from
+prospective hypothesis scorekeeping. This separates signal validity from
+capital scarcity and portfolio construction.
 
 ---
 

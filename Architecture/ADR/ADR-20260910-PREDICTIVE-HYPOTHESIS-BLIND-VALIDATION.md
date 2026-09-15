@@ -1,7 +1,14 @@
 # ADR — Predictive Hypothesis Blind Validation Lifecycle
 
 Date: 2026-09-10
-Status: Approved; lifecycle bookkeeping and historical blind-data boundary implemented
+Status: Partially superseded on 2026-09-15
+
+The fixed cumulative `success_rate >= 0.60` classification in this ADR is
+superseded by
+`GOVERNANCE_AMENDMENT_2026-09-15_TRADING_HYPOTHESIS_LIFECYCLE.md`. The frozen
+hypothesis, prediction-lock, outcome-ordering, historical sequestration, and
+unseen-subject requirements remain in force. Historical records created under
+the former classifier remain historical evidence and must not be rewritten.
 
 ## Decision
 
