@@ -21,6 +21,8 @@ from MTS_V4.research_scope import universe_scope
 from MTS_V4.sol_spend_guard import DEFAULT_AUTHORIZED_SOL_SPEND_USD, SolSpendAuthorizationRequired, SolSpendAuthorizationSnapshot
 from MTS_V4.subject_scientific_context import load_subject_scientific_context
 from MTS_V4.universe_scientific_partition import ScientificCohort, load_frozen_partition, write_campaign_exposure_ledger
+from MTS_V4.universe_market_structure_substrate import build_for_universe, required_feature_columns
+from MTS_V4.universe_membership import load_membership_csv
 
 
 def _required_env(name: str) -> str:
@@ -80,6 +82,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--control-campaign-report", default=None, help="required passing five-control report for paid open-ended universe discovery")
     parser.add_argument("--root", default="/home/ubuntu")
     parser.add_argument("--derived-market-root", default=None)
+    parser.add_argument("--membership-csv", default=None, help="membership evidence used only for ticker and current sector labels in neutral Stage 2A context")
     parser.add_argument("--state-dir", default=None)
     parser.add_argument("--sol-spend-limit-usd", type=float, default=DEFAULT_AUTHORIZED_SOL_SPEND_USD)
     parser.add_argument("--no-interactive-spend-extension", action="store_true")
@@ -137,6 +140,13 @@ def main(argv: list[str] | None = None) -> int:
     primary_set = store.get_feature_set(primary_query.feature_set_id, primary_query.feature_set_version)
     if primary_set is None:
         raise RuntimeError(f"unknown primary feature set: {primary_query.feature_set_key}")
+    supplied_primary_columns = set(primary_query.feature_columns or primary_set.feature_columns)
+    missing_stage2a = sorted(set(required_feature_columns()).difference(supplied_primary_columns))
+    if missing_stage2a:
+        raise RuntimeError(
+            "primary query must supply the comprehensive neutral Stage 2A predictor schema; "
+            f"missing={missing_stage2a}"
+        )
     if outcome_query and store.get_feature_set(outcome_query.feature_set_id, outcome_query.feature_set_version) is None:
         raise RuntimeError(f"unknown outcome feature set: {outcome_query.feature_set_key}")
 
@@ -183,6 +193,39 @@ def main(argv: list[str] | None = None) -> int:
     if outcome_query is not None:
         evidence_list.append(derived_market_evidence_descriptor(store=runtime.nexus.derived_market_store, cache=runtime.cache, subject=subject, query=outcome_query, allow_future_outcomes=True))
     evidence = tuple(evidence_list)
+    security_attributes = {}
+    if args.membership_csv:
+        for interval in load_membership_csv(args.membership_csv).intervals():
+            security_attributes[interval.security_id] = {
+                "ticker": interval.ticker,
+                "sector_id": interval.sector_id,
+                "industry_id": interval.industry_id,
+            }
+    print("STAGE2A_PHASE=COMPUTE_NEUTRAL_MARKET_STRUCTURE", flush=True)
+    precomputed_results = build_for_universe(
+        subject=subject,
+        evidence=evidence,
+        cache=runtime.cache,
+        analysis=runtime.analysis,
+        as_of_date=args.end_date,
+        security_attributes=security_attributes,
+    )
+    stage2a_result = next(iter(precomputed_results.values()))
+    stage2a_outputs = dict(stage2a_result.outputs)
+    stage2a_outputs.pop("derived_datasets", None)
+    _write_json_atomic(
+        state_dir / "neutral_universe_market_structure_stage2a.json",
+        {
+            "result_id": stage2a_result.result_id,
+            "request_id": stage2a_result.request_id,
+            "method_id": stage2a_result.method_id,
+            "limitations": list(stage2a_result.limitations),
+            "execution_metadata": dict(stage2a_result.execution_metadata),
+            "outputs": stage2a_outputs,
+            "sol_calls_before_stage2a": 0,
+        },
+    )
+    print("STAGE2A_STATUS=PASS", flush=True)
     campaign_id = f"mts-v4-sol-batched-universe-{universe_id.lower()}-{stamp}"
     if outcome_query is not None:
         context_security_ids = tuple(sorted({str(row["security_id"]) for row in store.query(primary_query)}))
@@ -233,7 +276,7 @@ def main(argv: list[str] | None = None) -> int:
         pending_path.unlink(missing_ok=True)
 
     try:
-        outcome = runtime.orchestrator.run(subject=subject, evidence=evidence, decision_callback=on_decision, report_callback=on_report, accepted_request_callback=accepted, precomputed_results={})
+        outcome = runtime.orchestrator.run(subject=subject, evidence=evidence, decision_callback=on_decision, report_callback=on_report, accepted_request_callback=accepted, precomputed_results=precomputed_results)
     except SolSpendAuthorizationRequired as exc:
         artifact = state_dir / "sol_spend_authorization_required.json"
         artifact.write_text(json.dumps(asdict(exc.snapshot), indent=2, sort_keys=True) + "\n", encoding="utf-8")

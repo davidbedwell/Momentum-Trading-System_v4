@@ -37,6 +37,8 @@ from .scientific_toolkit import scientific_toolkit_analysis_method, scientific_t
 from .share_structure_analysis import analysis_method as share_structure_analysis_method
 from .share_structure_analysis import method_spec as share_structure_method_spec
 from .standard_methods import standard_analysis_methods, standard_method_catalog
+from .universe_market_structure_substrate import analysis_method as universe_substrate_analysis_method
+from .universe_market_structure_substrate import method_spec as universe_substrate_method_spec
 
 
 DEFAULT_MISSION = (
@@ -95,6 +97,7 @@ def _build_execution_components(*, nexus_path: str | Path | None, derived_market
         cross_sectional_statistics_spec(),
         null_method_spec(),
         multiple_testing_method_spec(),
+        universe_substrate_method_spec(),
     ):
         catalog.register(spec)
     concepts = concept_library or seed_market_concepts()
@@ -116,6 +119,7 @@ def _build_execution_components(*, nexus_path: str | Path | None, derived_market
         cross_sectional_statistics_method(),
         null_analysis_method(),
         multiple_testing_analysis_method(),
+        universe_substrate_analysis_method(),
     ):
         analysis.register(method)
     return cache, nexus, catalog, concepts, validator, analysis

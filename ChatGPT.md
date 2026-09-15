@@ -750,3 +750,21 @@ Campaign transfer to the local Nexus is compact. Transfer scientific metadata/fi
 Authoritative detail:
 
 `Documentation/2026-09-15_MTS_V4_UNIVERSE_SCIENTIFIC_PARTITION.md`
+
+## Full-Universe Neutral Market Representation — 2026-09-15
+
+Before any Sol/Qwen universe interpretation or predictive discovery, Analysis must build a deterministic, predictor-time-only representation of the complete authorized universe as of an explicit observation boundary. For the current daily derived store, the supported boundary is date `D` at completed `DAILY_CLOSE`; the system must not claim arbitrary intraday `T` state from daily evidence.
+
+The neutral representation must give RD compact, reproducible context for current cross-sections and multi-session market structure, including returns, trend position and slope, momentum, participation/breadth, volatility, relative volume, dispersion, drawdown/range position, sector grouping when labels are available, rank persistence, feature dependence, coverage, and known capability gaps. Large reproducible panels remain server-side or campaign-local and are not transported to Sol or the local Nexus.
+
+This preprocessing:
+
+- may consume the full-universe predictor stream;
+- must not consume the historical outcome stream;
+- creates no hypothesis, finding, scientific ranking, trading signal, or prediction;
+- must preserve the current-universe/survivorship and non-PIT classification limitations of calibration evidence;
+- may use the frozen membership CSV to restore ticker and current sector labels, but may not describe those labels as authoritative historical PIT classifications;
+- leaves all interpretation, hypothesis creation, research direction, and scientific significance judgments to AI RD; and
+- must report zero Sol calls when run as the standalone Stage 2A preprocessing command.
+
+Predictive universe discovery is a separate later stage. It may receive full-universe predictor context, but historical outcomes remain restricted to the frozen `DISCOVERY` cohort under the universe scientific-partition rules above. Reserved verification outcomes remain hidden until an explicitly governed blind-verification path is authorized.
