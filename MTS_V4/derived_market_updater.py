@@ -8,7 +8,7 @@ import time
 
 from .derived_feature_factory import FORWARD_HORIZONS, build_matured_outcome_rows, build_predictor_rows, standard_outcome_feature_set, standard_predictor_feature_set
 from .derived_market_store import DerivedMarketStore, DerivedMarketStoreError, UniverseDefinition, acquisition_start_for_plan, plan_incremental_update
-from .universe_membership import IntervalMembership
+from .universe_membership import IntervalMembership, MembershipInterval
 
 
 class DailyMarketSource(Protocol):
@@ -35,6 +35,12 @@ class DerivedMarketMaintenanceResult:
     source_rows: int
     acquisition_start: str
     acquisition_end: str
+
+
+@dataclass(frozen=True, slots=True)
+class CrossSectionValidationResult:
+    observed_counts: Mapping[str, int]
+    tradable_start_adjustments: tuple[Mapping[str, Any], ...]
 
 
 def _next_calendar_day(value: str) -> str:
@@ -144,7 +150,7 @@ def _attach_membership_and_identity(*, membership: IntervalMembership, source: D
         identities.add(identity)
     return rows
 
-def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, Any]], membership: IntervalMembership, start_date: str, end_date: str) -> Mapping[str, int]:
+def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, Any]], membership: IntervalMembership, start_date: str, end_date: str) -> CrossSectionValidationResult:
     """Fail closed when an observed market date is missing an eligible member.
 
     This catches partial ticker/vendor failures. A future exchange-calendar adapter
@@ -152,19 +158,79 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
     authoritative calendar we do not fabricate sessions from weekdays.
     """
     observed: dict[str, set[str]] = {}
+    observed_by_interval: dict[tuple[str, str], set[str]] = {}
     for row in rows:
         effective = str(row.get("date") or row.get("effective_date") or "")[:10]
         if start_date <= effective <= end_date:
-            observed.setdefault(effective, set()).add(str(row["security_id"]))
+            security_id = str(row["security_id"])
+            ticker = str(row.get("ticker") or "")
+            observed.setdefault(effective, set()).add(security_id)
+            observed_by_interval.setdefault((security_id, ticker), set()).add(effective)
+    observed_dates = tuple(sorted(observed))
+    tradable_starts: dict[MembershipInterval, str] = {}
+    adjustments: list[Mapping[str, Any]] = []
+    for interval in membership.active_between(start_date, end_date):
+        key = (interval.security_id, interval.ticker)
+        interval_dates = sorted(
+            effective
+            for effective in observed_by_interval.get(key, ())
+            if interval.contains(effective)
+        )
+        if not interval_dates:
+            raise DerivedMarketStoreError(
+                "eligible membership interval has no observed regular-market rows: "
+                f"security_id={interval.security_id} ticker={interval.ticker} "
+                f"membership_start={interval.start_date}"
+            )
+        first_observed = interval_dates[0]
+        tradable_starts[interval] = first_observed
+        leading_observed_sessions = [
+            effective
+            for effective in observed_dates
+            if max(start_date, interval.start_date) <= effective < first_observed
+            and (interval.end_date is None or effective <= interval.end_date)
+        ]
+        if len(leading_observed_sessions) > 1:
+            raise DerivedMarketStoreError(
+                "eligible security is absent for more than one observed market session before its first "
+                "regular-market row: "
+                f"security_id={interval.security_id} ticker={interval.ticker} "
+                f"membership_start={interval.start_date} first_observed={first_observed} "
+                f"missing_sessions={leading_observed_sessions[:20]}"
+            )
+        if leading_observed_sessions:
+            adjustment = {
+                "security_id": interval.security_id,
+                "ticker": interval.ticker,
+                "source_membership_start": interval.start_date,
+                "first_regular_market_observation": first_observed,
+                "excluded_leading_observed_sessions": tuple(leading_observed_sessions),
+                "reason": "SOURCE_MEMBERSHIP_PRECEDES_FIRST_REGULAR_MARKET_OBSERVATION",
+            }
+            adjustments.append(adjustment)
+            print(
+                "MARKET_TRADABLE_START_ADJUSTED "
+                f"TICKER={interval.ticker} SOURCE_MEMBERSHIP_START={interval.start_date} "
+                f"FIRST_REGULAR_OBSERVATION={first_observed} "
+                f"EXCLUDED_SESSIONS={','.join(leading_observed_sessions)}",
+                flush=True,
+            )
     for effective, securities in sorted(observed.items()):
-        expected = {item.security_id for item in membership.members_on(effective)}
+        expected = {
+            item.security_id
+            for item in membership.members_on(effective)
+            if tradable_starts[item] <= effective
+        }
         if securities != expected:
             missing = sorted(expected - securities)
             unexpected = sorted(securities - expected)
             raise DerivedMarketStoreError(
                 f"incomplete point-in-time cross-section on {effective}: missing={missing[:20]} unexpected={unexpected[:20]} expected_n={len(expected)} observed_n={len(securities)}"
             )
-    return {effective: len(securities) for effective, securities in observed.items()}
+    return CrossSectionValidationResult(
+        observed_counts={effective: len(securities) for effective, securities in observed.items()},
+        tradable_start_adjustments=tuple(adjustments),
+    )
 
 
 def maintain_standard_market_store(*, store: DerivedMarketStore, universe: UniverseDefinition, membership: IntervalMembership, source: DailyMarketSource, through_date: str, initial_start_date: str | None = None, shares_source: PointInTimeSharesSource | None = None, update_id_prefix: str = "market-update", publish_outcomes: bool = True, download_workers: int = 6, download_attempts: int = 4) -> DerivedMarketMaintenanceResult:
@@ -187,7 +253,7 @@ def maintain_standard_market_store(*, store: DerivedMarketStore, universe: Unive
     raw_rows = _attach_membership_and_identity(membership=membership, source=source, start_date=acquisition_start, end_date=through_date, shares_source=shares_source, download_workers=download_workers, download_attempts=download_attempts)
     if not raw_rows:
         raise DerivedMarketStoreError("market source returned no rows for a required incremental update; high-water mark not advanced")
-    cross_section_counts = _validate_complete_observed_cross_sections(rows=raw_rows, membership=membership, start_date=first_new, end_date=through_date)
+    cross_section_validation = _validate_complete_observed_cross_sections(rows=raw_rows, membership=membership, start_date=first_new, end_date=through_date)
 
     all_predictors = build_predictor_rows(raw_rows)
     predictor_rows = [row for row in all_predictors if first_new <= str(row["effective_date"]) <= through_date]
@@ -205,7 +271,8 @@ def maintain_standard_market_store(*, store: DerivedMarketStore, universe: Unive
                 "shares_source": shares_source.source_identity if shares_source is not None else None,
                 "acquisition_start": acquisition_start,
                 "acquisition_end": through_date,
-                "observed_cross_section_counts": dict(cross_section_counts),
+                "observed_cross_section_counts": dict(cross_section_validation.observed_counts),
+                "tradable_start_adjustments": list(cross_section_validation.tradable_start_adjustments),
                 "partial_cross_sections_allowed": False,
                 "raw_rows_persisted": False,
             },
