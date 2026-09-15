@@ -45,6 +45,7 @@ class DerivedMarketMaintenanceResult:
 class CrossSectionValidationResult:
     observed_counts: Mapping[str, int]
     tradable_start_adjustments: tuple[Mapping[str, Any], ...]
+    isolated_calibration_gap_exclusions: tuple[Mapping[str, Any], ...] = ()
 
 
 class TemporaryMarketAcquisitionCache:
@@ -274,6 +275,7 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
     observed_dates = tuple(sorted(observed))
     tradable_starts: dict[MembershipInterval, str] = {}
     adjustments: list[Mapping[str, Any]] = []
+    isolated_gap_exclusions: list[Mapping[str, Any]] = []
     error_examples: list[Mapping[str, Any]] = []
     error_count = 0
     for interval in membership.active_between(start_date, end_date):
@@ -336,15 +338,58 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
                 f"EXCLUDED_SESSIONS={','.join(leading_observed_sessions)} REASON={reason}",
                 flush=True,
             )
+    interval_by_security = {
+        interval.security_id: interval
+        for interval in membership.active_between(start_date, end_date)
+    }
+    observed_date_index = {effective: index for index, effective in enumerate(observed_dates)}
     for effective, securities in sorted(observed.items()):
         expected = {
             item.security_id
             for item in membership.members_on(effective)
             if item in tradable_starts and tradable_starts[item] <= effective
         }
+        missing = sorted(expected - securities)
+        unexpected = sorted(securities - expected)
         if securities != expected:
-            missing = sorted(expected - securities)
-            unexpected = sorted(securities - expected)
+            permitted_missing: list[str] = []
+            date_index = observed_date_index[effective]
+            if 0 < date_index < len(observed_dates) - 1:
+                previous_session = observed_dates[date_index - 1]
+                next_session = observed_dates[date_index + 1]
+                for security_id in missing:
+                    interval = interval_by_security.get(security_id)
+                    interval_observations = observed_by_interval.get(
+                        (security_id, interval.ticker if interval is not None else ""), set()
+                    )
+                    calibration_only = (
+                        interval is not None
+                        and "CALIBRATION_ONLY" in interval.source_identity.upper()
+                    )
+                    if (
+                        calibration_only
+                        and previous_session in interval_observations
+                        and next_session in interval_observations
+                    ):
+                        permitted_missing.append(security_id)
+                        exclusion = {
+                            "security_id": security_id,
+                            "ticker": interval.ticker,
+                            "effective_date": effective,
+                            "previous_observed_session": previous_session,
+                            "next_observed_session": next_session,
+                            "reason": "CALIBRATION_ISOLATED_PROVIDER_OR_LISTING_TRANSITION_GAP",
+                        }
+                        isolated_gap_exclusions.append(exclusion)
+                        print(
+                            "MARKET_CALIBRATION_ISOLATED_GAP_EXCLUDED "
+                            f"TICKER={interval.ticker} EFFECTIVE_DATE={effective} "
+                            f"PREVIOUS_OBSERVATION={previous_session} "
+                            f"NEXT_OBSERVATION={next_session} REASON={exclusion['reason']}",
+                            flush=True,
+                        )
+            missing = sorted(set(missing) - set(permitted_missing))
+        if missing or unexpected:
             error_count += 1
             if len(error_examples) < 200:
                 error_examples.append({
@@ -358,6 +403,7 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
     result = CrossSectionValidationResult(
         observed_counts={effective: len(securities) for effective, securities in observed.items()},
         tradable_start_adjustments=tuple(adjustments),
+        isolated_calibration_gap_exclusions=tuple(isolated_gap_exclusions),
     )
     audit = {
         "format": "MTS_V4_CROSS_SECTION_PREFLIGHT_AUDIT_V1",
@@ -365,6 +411,7 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
         "end_date": end_date,
         "observed_session_count": len(observed),
         "tradable_start_adjustments": list(adjustments),
+        "isolated_calibration_gap_exclusions": list(isolated_gap_exclusions),
         "error_count": error_count,
         "error_examples": error_examples,
         "passed": error_count == 0,
@@ -419,7 +466,8 @@ def maintain_standard_market_store(*, store: DerivedMarketStore, universe: Unive
                 "acquisition_end": through_date,
                 "observed_cross_section_counts": dict(cross_section_validation.observed_counts),
                 "tradable_start_adjustments": list(cross_section_validation.tradable_start_adjustments),
-                "partial_cross_sections_allowed": False,
+                "isolated_calibration_gap_exclusions": list(cross_section_validation.isolated_calibration_gap_exclusions),
+                "partial_cross_sections_allowed": bool(cross_section_validation.isolated_calibration_gap_exclusions),
                 "raw_rows_persisted": False,
             },
         )

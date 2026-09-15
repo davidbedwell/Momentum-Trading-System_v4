@@ -169,6 +169,64 @@ def test_cross_section_still_rejects_missing_session_after_regular_trading_begin
         )
 
 
+def test_calibration_cross_section_audits_one_isolated_internal_provider_gap(tmp_path):
+    membership = IntervalMembership((
+        MembershipInterval("SEC-PEER", "PEER", "2020-01-01", None, source_identity="CALIBRATION_ONLY"),
+        MembershipInterval("SEC-GAP", "GAP", "2020-01-01", None, source_identity="CALIBRATION_ONLY"),
+    ))
+    rows = (
+        _row("SEC-PEER", "PEER", "2020-01-01"),
+        _row("SEC-GAP", "GAP", "2020-01-01"),
+        _row("SEC-PEER", "PEER", "2020-01-02"),
+        _row("SEC-PEER", "PEER", "2020-01-03"),
+        _row("SEC-GAP", "GAP", "2020-01-03"),
+    )
+    cache = TemporaryMarketAcquisitionCache(tmp_path / "cache")
+
+    result = _validate_complete_observed_cross_sections(
+        rows=rows,
+        membership=membership,
+        start_date="2020-01-01",
+        end_date="2020-01-03",
+        acquisition_cache=cache,
+    )
+
+    assert result.isolated_calibration_gap_exclusions == ({
+        "security_id": "SEC-GAP",
+        "ticker": "GAP",
+        "effective_date": "2020-01-02",
+        "previous_observed_session": "2020-01-01",
+        "next_observed_session": "2020-01-03",
+        "reason": "CALIBRATION_ISOLATED_PROVIDER_OR_LISTING_TRANSITION_GAP",
+    },)
+    audit = json.loads((cache.root / "cross_section_audit.json").read_text())
+    assert audit["passed"] is True
+    assert audit["error_count"] == 0
+    assert len(audit["isolated_calibration_gap_exclusions"]) == 1
+
+
+def test_authoritative_cross_section_rejects_isolated_internal_provider_gap():
+    membership = IntervalMembership((
+        MembershipInterval("SEC-PEER", "PEER", "2020-01-01", None, source_identity="AUTHORITATIVE_PIT"),
+        MembershipInterval("SEC-GAP", "GAP", "2020-01-01", None, source_identity="AUTHORITATIVE_PIT"),
+    ))
+    rows = (
+        _row("SEC-PEER", "PEER", "2020-01-01"),
+        _row("SEC-GAP", "GAP", "2020-01-01"),
+        _row("SEC-PEER", "PEER", "2020-01-02"),
+        _row("SEC-PEER", "PEER", "2020-01-03"),
+        _row("SEC-GAP", "GAP", "2020-01-03"),
+    )
+
+    with pytest.raises(DerivedMarketStoreError, match="cross-section preflight found 1 defects"):
+        _validate_complete_observed_cross_sections(
+            rows=rows,
+            membership=membership,
+            start_date="2020-01-01",
+            end_date="2020-01-03",
+        )
+
+
 class CountingDailySource:
     source_identity = "COUNTING"
 
