@@ -11,6 +11,7 @@ from MTS_V4.batch_contracts import BatchExecutionReport
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
+from MTS_V4.control_readiness import require_calibration_pass
 from MTS_V4.intake import IntakeEngine
 from MTS_V4.pre_sol_substrates import build_for_subject as build_pre_sol_substrates
 from MTS_V4.research_lead_sources import standard_research_lead_market_source
@@ -125,6 +126,11 @@ def _parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--control-campaign-report",
+        default=None,
+        help="required complete CALIBRATION_PASS report before any new paid single-subject discovery",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="validate CLI/configuration and scientific context without Intake or Sol API calls",
@@ -139,6 +145,12 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("ticker cannot be blank")
     if args.sol_spend_limit_usd <= 0:
         raise RuntimeError("--sol-spend-limit-usd must be positive")
+    if not args.dry_run:
+        if not args.control_campaign_report:
+            raise RuntimeError(
+                "new paid single-subject discovery is gated until --control-campaign-report records CALIBRATION_PASS"
+            )
+        require_calibration_pass(args.control_campaign_report)
 
     root = Path(args.root).expanduser().resolve()
     subject = SubjectMetadata(subject_id=f"equity:{ticker}", ticker=ticker)
