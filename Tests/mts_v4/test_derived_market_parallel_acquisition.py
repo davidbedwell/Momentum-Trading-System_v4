@@ -55,3 +55,50 @@ def test_market_acquisition_uses_bounded_parallelism_and_restores_order():
 
     assert source.maximum_active == 3
     assert [row["security_id"] for row in rows] == [f"SEC-{number}" for number in range(6)]
+
+
+class EmptyThenSuccessfulSource:
+    source_identity = "TEST_RETRY"
+
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def fetch(self, *, ticker: str, start_date: str, end_date: str):
+        self.calls += 1
+        if self.calls == 1:
+            return ()
+        return ({
+            "date": "2020-01-02",
+            "open": 1.0,
+            "high": 1.0,
+            "low": 1.0,
+            "close": 1.0,
+            "volume": 1.0,
+        },)
+
+
+def test_market_acquisition_retries_empty_transient_response(monkeypatch):
+    monkeypatch.setattr("MTS_V4.derived_market_updater.time.sleep", lambda _seconds: None)
+    membership = IntervalMembership((
+        MembershipInterval(
+            security_id="SEC-1",
+            ticker="AXP",
+            start_date="2020-01-01",
+            source_identity="TEST",
+        ),
+    ))
+    source = EmptyThenSuccessfulSource()
+
+    rows = _attach_membership_and_identity(
+        membership=membership,
+        source=source,
+        start_date="2020-01-01",
+        end_date="2020-01-03",
+        shares_source=None,
+        download_workers=1,
+        download_attempts=2,
+    )
+
+    assert source.calls == 2
+    assert len(rows) == 1
+    assert rows[0]["ticker"] == "AXP"
