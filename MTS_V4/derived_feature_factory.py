@@ -35,6 +35,10 @@ def standard_predictor_feature_set() -> DerivedFeatureSetDefinition:
     features: list[DerivedFeatureDefinition] = []
     for window in RETURN_WINDOWS:
         features.append(_feature(f"return_{window}", f"Close-to-close trailing {window}-session return", window))
+    features.extend((
+        _feature("return_252_skip_20", "Close-to-close return from 252 sessions ago through 20 sessions ago; excludes the most recent 20 sessions for a canonical medium-term momentum control", 252),
+        _feature("return_252_skip_20_percentile", "Point-in-time universe percentile of 252-to-20-session skipped-month return", 252, dependencies=("OHLCV", "POINT_IN_TIME_UNIVERSE")),
+    ))
     for window in SMA_WINDOWS:
         features.extend((
             _feature(f"sma_{window}", f"Simple moving average of close over {window} sessions", window),
@@ -194,6 +198,11 @@ def build_predictor_rows(raw_rows: Sequence[Mapping[str, Any]]) -> tuple[Mapping
             close = closes[i]
             for window in RETURN_WINDOWS:
                 row[f"return_{window}__v1"] = _ratio(close, closes[i - window] if i >= window else None, subtract_one=True)
+            row["return_252_skip_20__v1"] = _ratio(
+                closes[i - 20] if i >= 252 else None,
+                closes[i - 252] if i >= 252 else None,
+                subtract_one=True,
+            )
             for window in SMA_WINDOWS:
                 sma = _mean(closes[i - window + 1:i + 1]) if i + 1 >= window else None
                 sma_cache[window].append(sma)
@@ -249,6 +258,7 @@ def build_predictor_rows(raw_rows: Sequence[Mapping[str, Any]]) -> tuple[Mapping
         by_date[row["effective_date"]].append(row)
     for date_rows in by_date.values():
         _percentile_assign(date_rows, "return_252__v1", "return_252_percentile__v1")
+        _percentile_assign(date_rows, "return_252_skip_20__v1", "return_252_skip_20_percentile__v1")
         _percentile_assign(date_rows, "return_126__v1", "return_126_percentile__v1")
         _percentile_assign(date_rows, "relative_volume_20__v1", "relative_volume_20_percentile__v1")
         _percentile_assign(date_rows, "natr_20__v1", "natr_20_percentile__v1")

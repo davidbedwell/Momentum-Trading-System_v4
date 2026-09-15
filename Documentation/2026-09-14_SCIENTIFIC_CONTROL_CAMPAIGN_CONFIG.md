@@ -18,7 +18,7 @@ Each value describes only the evidence/query surface available to that control:
     "universe_id": "<point-in-time-universe-id>",
     "feature_set_id": "mts_market_predictors",
     "feature_set_version": "v1",
-    "feature_columns": ["return_126__v1", "return_252__v1", "return_126_percentile__v1", "return_252_percentile__v1"],
+    "feature_columns": ["return_126__v1", "return_252__v1", "return_252_skip_20__v1", "return_126_percentile__v1", "return_252_percentile__v1", "return_252_skip_20_percentile__v1"],
     "outcome_feature_set_id": "mts_historical_outcomes",
     "outcome_feature_set_version": "v1",
     "outcome_feature_columns": ["forward_return_20__v1", "forward_return_63__v1"]
@@ -69,3 +69,38 @@ The PEAD entry intentionally remains a placeholder until the historical earnings
 The runner requires an explicit per-control Sol spend ceiling and disables interactive spend extension inside each child run. A technical/spend failure stops the campaign by default rather than silently spending through the remaining controls. Every Sol universe run preserves `sol_replay_envelopes.jsonl` so successful control decisions become exact Qwen replay cases.
 
 After execution, `scientific_control_campaign_report.json` automatically assembles the five run states, Analysis counts, findings, closure state, Sol spend and replay-capture paths. PASS/PARTIAL/FAIL grades are supplied only after the run by independent human/ChatGPT review under the previously agreed rubric; deterministic code never grades scientific adequacy from keywords or Finding count.
+
+
+## Mandatory zero-Sol readiness gate
+
+Before any paid control execution, run `scripts/preflight_scientific_controls.py`. Every control configuration must additionally supply human-authorized mechanical adequacy floors:
+
+- `minimum_eligible_dates`;
+- `minimum_eligible_securities`;
+- `minimum_complete_rows_per_column`.
+
+No default thresholds are invented by deterministic code. Placeholder values, unknown feature sets, unavailable columns, duplicate security/date identities, inadequate coverage, or a non-point-in-time universe cause `NOT_READY`.
+
+The preflight also requires a separate RD-hidden answer-key JSON containing exactly the five control IDs. Each control answer contains:
+
+- `formulation`;
+- `expected_direction`;
+- `expected_horizons`;
+- `robustness_conditions`;
+- `independent_benchmark_artifact_sha256`;
+- `dataset_fingerprint_sha256`;
+- `assessor`.
+
+The answer key is never included in Research Director context. The dataset fingerprint binds the independently established answer to the exact queried predictor/outcome surface. The benchmark artifact hash binds it to the independent calculation used to establish that the expected control is demonstrably present in the supplied data.
+
+Example preflight:
+
+```bash
+.venv/bin/python scripts/preflight_scientific_controls.py \
+  --control-config-json /path/to/control_config.json \
+  --hidden-answer-key-json /path/to/hidden_answer_key.json \
+  --derived-market-root /path/to/derived_market_store \
+  --output-json /path/to/control_readiness_report.json
+```
+
+The paid control runner now requires `--control-readiness-report`. Direct paid open-ended universe discovery requires a complete independently assessed `CALIBRATION_PASS` report through `--control-campaign-report`. Dry runs remain zero-cost and are not blocked.

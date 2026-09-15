@@ -8,6 +8,7 @@ import subprocess
 import sys
 
 from MTS_V4.acceptance_controls import BLINDED_CONTROLS
+from MTS_V4.control_readiness import require_ready_report
 from MTS_V4.scientific_control_campaign import (
     ControlAssessment,
     ControlGrade,
@@ -51,6 +52,7 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Run all five blinded MTS scientific calibration controls through Sol and assemble one governed report.")
     parser.add_argument("--control-config-json", required=True, help="Per-control evidence/query configuration. Expected answers are deliberately not part of this file.")
     parser.add_argument("--campaign-root", required=True)
+    parser.add_argument("--control-readiness-report", required=True, help="Passing zero-SOL preflight report bound to this exact configuration.")
     parser.add_argument("--root", default="/home/ubuntu")
     parser.add_argument("--derived-market-root", default=None)
     parser.add_argument("--per-control-sol-spend-limit-usd", type=float, required=True)
@@ -62,6 +64,7 @@ def main(argv=None) -> int:
         raise RuntimeError("--per-control-sol-spend-limit-usd must be positive")
 
     config = _load_object(args.control_config_json)
+    require_ready_report(args.control_readiness_report, config)
     expected = {control.control_id for control in BLINDED_CONTROLS}
     missing = expected - set(config)
     if missing:
@@ -88,6 +91,8 @@ def main(argv=None) -> int:
             "--sol-spend-limit-usd", str(args.per_control_sol_spend_limit_usd),
             "--no-interactive-spend-extension",
             "--research-objective", control.research_prompt,
+            "--calibration-control-id", control.control_id,
+            "--control-readiness-report", args.control_readiness_report,
         ]
         if args.derived_market_root:
             command.extend(("--derived-market-root", args.derived_market_root))

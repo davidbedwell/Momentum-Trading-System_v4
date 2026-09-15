@@ -7,10 +7,12 @@ import json
 import os
 from pathlib import Path
 
+from MTS_V4.acceptance_controls import BLINDED_CONTROLS
 from MTS_V4.batch_contracts import BatchExecutionReport
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase
+from MTS_V4.control_readiness import require_calibration_pass, require_ready_control
 from MTS_V4.derived_market_evidence import derived_market_evidence_descriptor
 from MTS_V4.derived_market_store import DerivedMarketQuery, ParquetDerivedMarketStore
 from MTS_V4.qwen_shadow_gate import ReplayCapturingSubjectContextSolBatchResearchDirector
@@ -70,7 +72,10 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--outcome-feature-set-version", default=None)
     parser.add_argument("--outcome-feature-column", action="append", default=[])
     parser.add_argument("--allow-historical-outcomes", action="store_true", help="explicitly authorize future-information outcome evidence for EXPLORATION only")
-    parser.add_argument("--research-objective", default=None, help="optional blinded scientific objective appended to the governing MTS mission")
+    parser.add_argument("--research-objective", default=None, help="optional scientific objective appended to the governing MTS mission")
+    parser.add_argument("--calibration-control-id", default=None, help="exact blinded control ID; requires a passing zero-SOL readiness report")
+    parser.add_argument("--control-readiness-report", default=None)
+    parser.add_argument("--control-campaign-report", default=None, help="required passing five-control report for paid open-ended universe discovery")
     parser.add_argument("--root", default="/home/ubuntu")
     parser.add_argument("--derived-market-root", default=None)
     parser.add_argument("--state-dir", default=None)
@@ -89,6 +94,19 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("outcome feature-set id and version must be supplied together")
     if args.outcome_feature_set_id and not args.allow_historical_outcomes:
         raise RuntimeError("outcome feature set requires --allow-historical-outcomes")
+    control_ids = {item.control_id for item in BLINDED_CONTROLS}
+    if args.calibration_control_id:
+        if args.calibration_control_id not in control_ids:
+            raise RuntimeError(f"unknown calibration control: {args.calibration_control_id}")
+        if not args.control_readiness_report:
+            raise RuntimeError("calibration control requires --control-readiness-report")
+        require_ready_control(args.control_readiness_report, args.calibration_control_id)
+    elif not args.dry_run:
+        if not args.control_campaign_report:
+            raise RuntimeError(
+                "paid open-ended universe discovery is gated until --control-campaign-report records CALIBRATION_PASS"
+            )
+        require_calibration_pass(args.control_campaign_report)
 
     root = Path(args.root).expanduser().resolve()
     derived_root = Path(args.derived_market_root or (root / "mts-v4-nexus-derived-market")).expanduser().resolve()
@@ -151,7 +169,10 @@ def main(argv: list[str] | None = None) -> int:
     campaign_id = f"mts-v4-sol-batched-universe-{universe_id.lower()}-{stamp}"
     context_payload = {
         "active_scope_id": subject.subject_id, "scope_type": "UNIVERSE", "mission": mission,
-        "blinded_research_objective": args.research_objective,
+        "research_objective": args.research_objective,
+        "calibration_control_id": args.calibration_control_id,
+        "control_readiness_report": args.control_readiness_report,
+        "control_campaign_report": args.control_campaign_report,
         "universe_definition": asdict(universe), "primary_query": asdict(primary_query),
         "outcome_query": asdict(outcome_query) if outcome_query else None,
         "historical_outcomes_explicitly_authorized": bool(outcome_query),
