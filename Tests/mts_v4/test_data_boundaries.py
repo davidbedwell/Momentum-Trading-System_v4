@@ -50,63 +50,35 @@ class V4DataBoundaryTests(unittest.TestCase):
             nexus.upsert_subject(SubjectMetadata(subject_id="AAPL", ticker="AAPL"))
             nexus.upsert_evidence_metadata(
                 EvidenceMetadata(
-                    evidence_id="ev:1",
-                    subject_id="AAPL",
-                    evidence_type="OHLCV",
-                    artifact_type="NORMALIZED_DATASET",
-                    source_identity="fixture-source",
-                    coverage_start="2026-01-01",
-                    coverage_end="2026-01-01",
-                    row_count=1,
-                    schema=("date", "close", "volume"),
-                    provenance={"vendor": "fixture"},
-                    neutral_semantics="Observed price and aggregate volume only.",
-                    content_identity="sha256:fixture",
+                    evidence_id="ev:1", subject_id="AAPL", evidence_type="OHLCV",
+                    artifact_type="NORMALIZED_DATASET", source_identity="fixture-source",
+                    coverage_start="2026-01-01", coverage_end="2026-01-01", row_count=1,
+                    schema=("date", "close", "volume"), provenance={"vendor": "fixture"},
+                    neutral_semantics="Observed price and aggregate volume only.", content_identity="sha256:fixture",
                 )
             )
             nexus.register_analysis_result_metadata(
                 AnalysisResultMetadata(
-                    result_id="r:1",
-                    request_id="req:1",
-                    subject_id="AAPL",
-                    method_id="analysis.fixture",
-                    evidence_ids=("ev:1",),
-                    future_information={"contains_future_information": False},
+                    result_id="r:1", request_id="req:1", subject_id="AAPL", method_id="analysis.fixture",
+                    evidence_ids=("ev:1",), future_information={"contains_future_information": False},
                     execution_metadata={"execution_status": "SUCCESS"},
                 )
             )
             nexus.publish_finding(
                 Finding(
-                    finding_id="f:1",
-                    subject_id="AAPL",
-                    statement="Significant result",
-                    supporting_result_ids=("r:1",),
-                    evidence_ids=("ev:1",),
-                    metadata={
-                        "significance": "RD promoted",
-                        "status": "SUPPORTED",
-                        "novel_labels": ["regime-alpha", "path-shape-unknown-to-code"],
-                        "nested_science": {"hypothesis_family": "RD_DEFINED"},
-                    },
+                    finding_id="f:1", subject_id="AAPL", statement="Significant result",
+                    supporting_result_ids=("r:1",), evidence_ids=("ev:1",),
+                    metadata={"significance": "RD promoted", "status": "SUPPORTED", "novel_labels": ["regime-alpha", "path-shape-unknown-to-code"], "nested_science": {"hypothesis_family": "RD_DEFINED"}},
                 )
             )
             document = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual(document["format"], "MTS_V4_RESEARCH_NEXUS_V1")
-            self.assertEqual(
-                set(document),
-                {
-                    "format",
-                    "subjects",
-                    "evidence_metadata",
-                    "analysis_result_metadata",
-                    "findings",
-                    "finding_retractions",
-                    "derived_market_store",
-                },
-            )
+            self.assertEqual(set(document), {"format", "subjects", "evidence_metadata", "analysis_result_metadata", "findings", "finding_retractions", "derived_market_store"})
             self.assertEqual(document["finding_retractions"], [])
             self.assertEqual(document["analysis_result_metadata"][0]["result_id"], "r:1")
-            self.assertIn("root", document["derived_market_store"])
+            self.assertIn("path", document["derived_market_store"])
+            self.assertIn("relative_path", document["derived_market_store"])
+            self.assertFalse(document["derived_market_store"]["contains_raw_reacquirable_market_data"])
             serialized = path.read_text(encoding="utf-8")
             self.assertNotIn('"payload"', serialized)
             self.assertNotIn('"rows"', serialized)
@@ -124,27 +96,16 @@ class V4DataBoundaryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "nexus.json"
             path.write_text(
-                json.dumps(
-                    {
-                        "format": "MTS_V4_RESEARCH_NEXUS_V1",
-                        "subjects": [{"subject_id": "AAPL", "ticker": "AAPL", "asset_class": "EQUITY", "attributes": {}}],
-                        "evidence_metadata": [],
-                        "findings": [
-                            {
-                                "finding_id": "legacy:f1",
-                                "subject_id": "AAPL",
-                                "statement": "Legacy early-v4 finding",
-                                "significance": "important",
-                                "status": "EXPLORATORY",
-                                "supporting_result_ids": [],
-                                "evidence_ids": [],
-                                "applicability": {"regime": "unknown"},
-                                "limitations": ["legacy"],
-                                "relationships": ["candidate"],
-                            }
-                        ],
-                    }
-                ),
+                json.dumps({
+                    "format": "MTS_V4_RESEARCH_NEXUS_V1",
+                    "subjects": [{"subject_id": "AAPL", "ticker": "AAPL", "asset_class": "EQUITY", "attributes": {}}],
+                    "evidence_metadata": [],
+                    "findings": [{
+                        "finding_id": "legacy:f1", "subject_id": "AAPL", "statement": "Legacy early-v4 finding",
+                        "significance": "important", "status": "EXPLORATORY", "supporting_result_ids": [],
+                        "evidence_ids": [], "applicability": {"regime": "unknown"}, "limitations": ["legacy"], "relationships": ["candidate"],
+                    }],
+                }),
                 encoding="utf-8",
             )
             nexus = JsonResearchNexus(path)
