@@ -14,6 +14,7 @@ ROOT_FILES = {
     "batch_reports.jsonl",
     "universe_scientific_context.json",
     "run_summary.json",
+    "scientific_exposure_ledger.json",
     "sol_spend_authorization_required.json",
 }
 
