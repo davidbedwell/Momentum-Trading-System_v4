@@ -123,14 +123,15 @@ def test_current_membership_is_disclosed_but_not_a_readiness_blocker():
     store = _store(historical_point_in_time_membership=True)
     config = _config()
     for item in config.values():
-        item["historical_membership_classification"] = "CURRENT_MEMBERS_SURVIVORSHIP_BIASED"
+        item["historical_membership_classification"] = "CURRENT_MEMBER_CONDITIONED"
     answers = _answers(config, store)
     report = build_control_readiness_report(config, answers, store)
     assert report["status"] == "READY_FOR_BLINDED_CALIBRATION"
     for control in report["controls"].values():
         membership = control["universe_membership"]
-        assert membership["classification"] == "CURRENT_MEMBERS_SURVIVORSHIP_BIASED"
-        assert "SURVIVORSHIP_BIASED" in membership["limitation"]
+        assert membership["classification"] == "CURRENT_MEMBER_CONDITIONED"
+        assert "FORMER_CONSTITUENTS_ARE_ABSENT" in membership["limitation"]
+        assert "AUTHORITATIVE_HISTORICAL_INDEX_RECONSTRUCTION" in membership["limitation"]
 
 
 def test_readiness_rejects_placeholder_and_dataset_change(tmp_path):

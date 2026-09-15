@@ -79,11 +79,11 @@ Before any paid control execution, run `scripts/preflight_scientific_controls.py
 - `minimum_eligible_securities`;
 - `minimum_complete_rows_per_column`.
 
-Every control must also declare `historical_membership_classification` as either `AUTHORITATIVE_HISTORICAL_POINT_IN_TIME` or `CURRENT_MEMBERS_SURVIVORSHIP_BIASED`. This records provenance and limitations; it is not a readiness preference.
+Every control must also declare `historical_membership_classification` as either `AUTHORITATIVE_HISTORICAL_POINT_IN_TIME` or `CURRENT_MEMBER_CONDITIONED`. This records provenance and scope; it is not a readiness preference.
 
 No default thresholds are invented by deterministic code. Placeholder values, an unidentified membership source, an absent or invalid membership classification, unknown feature sets, unavailable columns, duplicate security/date identities, or inadequate coverage cause `NOT_READY`.
 
-Historical point-in-time index membership is not a prerequisite for this control campaign. A current-member universe may be used when its membership semantics and survivorship limitation are recorded. Results from such evidence must not be described as an authoritative reconstruction of the historical index or generalized to securities absent from that survivor-based population. This membership limitation does not relax prediction-time integrity for features, earnings, outcomes, or any other information used at historical time `T`.
+Historical point-in-time index membership is not a prerequisite for this control campaign. A current-member universe may be used when its membership semantics and scope are recorded. Former constituents are absent, so results describe the histories of the current-member population; they must not be described as an authoritative reconstruction of the historical index or generalized to securities outside that population. This scope boundary does not make the present-day research objective invalid and does not relax prediction-time integrity for features, earnings, outcomes, or any other information used at historical time `T`.
 
 The preflight also requires a separate RD-hidden answer-key JSON containing exactly the five control IDs. Each control answer contains:
 

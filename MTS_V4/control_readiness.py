@@ -159,7 +159,7 @@ def build_control_readiness_report(
         membership_classification = str(item["historical_membership_classification"])
         allowed_membership_classifications = {
             "AUTHORITATIVE_HISTORICAL_POINT_IN_TIME",
-            "CURRENT_MEMBERS_SURVIVORSHIP_BIASED",
+            "CURRENT_MEMBER_CONDITIONED",
         }
         if membership_classification not in allowed_membership_classifications:
             failures.append(
@@ -225,7 +225,7 @@ def build_control_readiness_report(
                 "limitation": (
                     None
                     if membership_classification == "AUTHORITATIVE_HISTORICAL_POINT_IN_TIME"
-                    else "CURRENT_MEMBERSHIP_HISTORY_MAY_BE_SURVIVORSHIP_BIASED_AND_MUST_NOT_BE_DESCRIBED_AS_AN_AUTHORITATIVE_HISTORICAL_INDEX_RECONSTRUCTION"
+                    else "FORMER_CONSTITUENTS_ARE_ABSENT; RESULTS_DESCRIBE_THE_HISTORIES_OF_THE_CURRENT_MEMBER_POPULATION_AND_ARE_NOT_AN_AUTHORITATIVE_HISTORICAL_INDEX_RECONSTRUCTION"
                 ),
             },
             "predictor_surface": predictor,
