@@ -33,6 +33,8 @@ def test_predictor_factory_populates_complete_versioned_schema_and_cross_section
     for row in last:
         assert set(feature_set.feature_columns).issubset(row)
         assert row["return_252__v1"] is not None
+        assert row["return_252_skip_20__v1"] is not None
+        assert row["return_252_skip_20_percentile__v1"] is not None
         assert row["sma_200__v1"] is not None
         assert row["relative_volume_20__v1"] is not None
         assert row["breadth_above_sma_200__v1"] == 1.0
@@ -44,3 +46,12 @@ def test_outcomes_are_separate_and_unmatured_tail_is_null():
     assert rows[0]["forward_return_63__v1"] is not None
     assert rows[-1]["forward_return_1__v1"] is None
     assert rows[-1]["forward_return_63__v1"] is None
+
+
+def test_skipped_month_momentum_excludes_most_recent_twenty_sessions():
+    raw = _rows("AAA", 1.0)
+    rows = build_predictor_rows(raw)
+    row = rows[252]
+    expected = raw[232]["close"] / raw[0]["close"] - 1.0
+    assert row["return_252_skip_20__v1"] == expected
+    assert rows[251]["return_252_skip_20__v1"] is None
