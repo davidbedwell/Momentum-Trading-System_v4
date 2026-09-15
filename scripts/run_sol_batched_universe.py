@@ -28,7 +28,7 @@ def _required_env(name: str) -> str:
 
 def _append_jsonl(path: Path, payload) -> None:
     with path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(payload, sort_keys=True, default=str, separators=(",", ",")) + "\n")
+        handle.write(json.dumps(payload, sort_keys=True, default=str, separators=(",", ":")) + "\n")
 
 
 def _write_json_atomic(path: Path, payload) -> None:
@@ -68,11 +68,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--outcome-feature-set-id", default=None, help="optional separate historical outcome feature set")
     parser.add_argument("--outcome-feature-set-version", default=None)
     parser.add_argument("--outcome-feature-column", action="append", default=[])
-    parser.add_argument(
-        "--allow-historical-outcomes",
-        action="store_true",
-        help="explicitly authorize future-information outcome evidence for EXPLORATION only",
-    )
+    parser.add_argument("--allow-historical-outcomes", action="store_true", help="explicitly authorize future-information outcome evidence for EXPLORATION only")
     parser.add_argument("--root", default="/home/ubuntu")
     parser.add_argument("--derived-market-root", default=None)
     parser.add_argument("--state-dir", default=None)
@@ -94,26 +90,10 @@ def main(argv: list[str] | None = None) -> int:
     root = Path(args.root).expanduser().resolve()
     derived_root = Path(args.derived_market_root or (root / "mts-v4-nexus-derived-market")).expanduser().resolve()
     subject = universe_scope(universe_id).to_subject_metadata(display_ticker=universe_id.upper())
-    primary_query = DerivedMarketQuery(
-        universe_id=universe_id,
-        feature_set_id=args.feature_set_id.strip(),
-        feature_set_version=args.feature_set_version.strip(),
-        start_date=args.start_date,
-        end_date=args.end_date,
-        security_ids=tuple(args.security_id),
-        feature_columns=tuple(args.feature_column),
-    )
+    primary_query = DerivedMarketQuery(universe_id=universe_id, feature_set_id=args.feature_set_id.strip(), feature_set_version=args.feature_set_version.strip(), start_date=args.start_date, end_date=args.end_date, security_ids=tuple(args.security_id), feature_columns=tuple(args.feature_column))
     outcome_query = None
     if args.outcome_feature_set_id:
-        outcome_query = DerivedMarketQuery(
-            universe_id=universe_id,
-            feature_set_id=args.outcome_feature_set_id.strip(),
-            feature_set_version=args.outcome_feature_set_version.strip(),
-            start_date=args.start_date,
-            end_date=args.end_date,
-            security_ids=tuple(args.security_id),
-            feature_columns=tuple(args.outcome_feature_column),
-        )
+        outcome_query = DerivedMarketQuery(universe_id=universe_id, feature_set_id=args.outcome_feature_set_id.strip(), feature_set_version=args.outcome_feature_set_version.strip(), start_date=args.start_date, end_date=args.end_date, security_ids=tuple(args.security_id), feature_columns=tuple(args.outcome_feature_column))
 
     store = ParquetDerivedMarketStore(derived_root)
     universe = store.get_universe(universe_id)
@@ -150,45 +130,20 @@ def main(argv: list[str] | None = None) -> int:
         research_package_store=package_store,
         prior_subject_scientific_context=scientific_context.prior_subject_science,
         same_subject_prior_scientific_context=scientific_context.same_subject_prior_science,
-        base_url=_required_env("MTS_SOL_BASE_URL"),
-        model=_required_env("MTS_SOL_MODEL"),
-        api_key=_required_env("MTS_SOL_API_KEY"),
-        timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")),
-        required_subject_id=subject.subject_id,
-        required_research_phase=ResearchPhase.EXPLORATION,
-        sol_spend_limit_usd=args.sol_spend_limit_usd,
+        base_url=_required_env("MTS_SOL_BASE_URL"), model=_required_env("MTS_SOL_MODEL"), api_key=_required_env("MTS_SOL_API_KEY"),
+        timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")), required_subject_id=subject.subject_id,
+        required_research_phase=ResearchPhase.EXPLORATION, sol_spend_limit_usd=args.sol_spend_limit_usd,
         human_spend_authorization_callback=_interactive_spend_authorization,
     )
-    runtime = build_batch_runtime(
-        rd=rd,
-        mission=DEFAULT_MISSION,
-        nexus_path=state_dir / "research_nexus.json",
-        derived_market_root=derived_root,
-        scientific_memory=scientific_context.memory_selection.store,
-    )
-    evidence_list = [derived_market_evidence_descriptor(
-        store=runtime.nexus.derived_market_store,
-        cache=runtime.cache,
-        subject=subject,
-        query=primary_query,
-        allow_future_outcomes=False,
-    )]
+    runtime = build_batch_runtime(rd=rd, mission=DEFAULT_MISSION, nexus_path=state_dir / "research_nexus.json", derived_market_root=derived_root, scientific_memory=scientific_context.memory_selection.store)
+    evidence_list = [derived_market_evidence_descriptor(store=runtime.nexus.derived_market_store, cache=runtime.cache, subject=subject, query=primary_query, allow_future_outcomes=False)]
     if outcome_query is not None:
-        evidence_list.append(derived_market_evidence_descriptor(
-            store=runtime.nexus.derived_market_store,
-            cache=runtime.cache,
-            subject=subject,
-            query=outcome_query,
-            allow_future_outcomes=True,
-        ))
+        evidence_list.append(derived_market_evidence_descriptor(store=runtime.nexus.derived_market_store, cache=runtime.cache, subject=subject, query=outcome_query, allow_future_outcomes=True))
     evidence = tuple(evidence_list)
     campaign_id = f"mts-v4-sol-batched-universe-{universe_id.lower()}-{stamp}"
     context_payload = {
-        "active_scope_id": subject.subject_id,
-        "scope_type": "UNIVERSE",
-        "mission": DEFAULT_MISSION,
-        "universe_definition": asdict(universe),
-        "primary_query": asdict(primary_query),
+        "active_scope_id": subject.subject_id, "scope_type": "UNIVERSE", "mission": DEFAULT_MISSION,
+        "universe_definition": asdict(universe), "primary_query": asdict(primary_query),
         "outcome_query": asdict(outcome_query) if outcome_query else None,
         "historical_outcomes_explicitly_authorized": bool(outcome_query),
         "canonical_memory_source": str(scientific_context.memory_selection.source_path),
@@ -219,14 +174,7 @@ def main(argv: list[str] | None = None) -> int:
         pending_path.unlink(missing_ok=True)
 
     try:
-        outcome = runtime.orchestrator.run(
-            subject=subject,
-            evidence=evidence,
-            decision_callback=on_decision,
-            report_callback=on_report,
-            accepted_request_callback=accepted,
-            precomputed_results={},
-        )
+        outcome = runtime.orchestrator.run(subject=subject, evidence=evidence, decision_callback=on_decision, report_callback=on_report, accepted_request_callback=accepted, precomputed_results={})
     except SolSpendAuthorizationRequired as exc:
         artifact = state_dir / "sol_spend_authorization_required.json"
         artifact.write_text(json.dumps(asdict(exc.snapshot), indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -236,17 +184,11 @@ def main(argv: list[str] | None = None) -> int:
 
     spend = rd.sol_spend_snapshot()
     summary = {
-        "campaign_id": campaign_id,
-        "scope_id": subject.subject_id,
-        "universe_id": universe_id,
-        "primary_query": asdict(primary_query),
-        "outcome_query": asdict(outcome_query) if outcome_query else None,
-        "decisions": outcome.decisions,
-        "batches_executed": outcome.batches_executed,
-        "analyses_executed": outcome.analyses_executed,
-        "findings_promoted": outcome.findings_promoted,
-        "closed": outcome.closed,
-        "close_reason": outcome.close_reason,
+        "campaign_id": campaign_id, "scope_id": subject.subject_id, "universe_id": universe_id,
+        "primary_query": asdict(primary_query), "outcome_query": asdict(outcome_query) if outcome_query else None,
+        "decisions": outcome.decisions, "batches_executed": outcome.batches_executed,
+        "analyses_executed": outcome.analyses_executed, "findings_promoted": outcome.findings_promoted,
+        "closed": outcome.closed, "close_reason": outcome.close_reason,
         "analysis_cache": runtime.analysis.cache_stats() if hasattr(runtime.analysis, "cache_stats") else None,
         "sol_spend": asdict(spend) if spend else None,
     }
