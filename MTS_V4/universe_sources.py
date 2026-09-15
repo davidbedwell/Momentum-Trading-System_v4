@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
+import io
 from typing import Iterable, Mapping, Sequence
+import urllib.request
 
 from .contracts import SubjectMetadata
 from .intake import IntakePayload
@@ -85,7 +87,18 @@ class CurrentSp500CalibrationUniverseSource:
             import pandas as pd
         except ImportError as exc:
             raise UniverseSourceError("pandas with HTML-table support is required") from exc
-        tables = pd.read_html(CURRENT_SP500_URL)
+        request = urllib.request.Request(
+            CURRENT_SP500_URL,
+            headers={"User-Agent": "Momentum-Trading-System-v4/1.0 universe-calibration"},
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=60.0) as response:
+                source_html = response.read().decode("utf-8")
+        except Exception as exc:
+            raise UniverseSourceError(
+                f"current S&P constituent acquisition failed: {type(exc).__name__}: {exc}"
+            ) from exc
+        tables = pd.read_html(io.StringIO(source_html))
         required = {"Symbol", "GICS Sector", "GICS Sub-Industry", "Date added", "CIK"}
         candidates = [
             table
