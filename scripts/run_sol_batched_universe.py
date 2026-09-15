@@ -20,6 +20,7 @@ from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.research_scope import universe_scope
 from MTS_V4.sol_spend_guard import DEFAULT_AUTHORIZED_SOL_SPEND_USD, SolSpendAuthorizationRequired, SolSpendAuthorizationSnapshot
 from MTS_V4.subject_scientific_context import load_subject_scientific_context
+from MTS_V4.universe_scientific_partition import ScientificCohort, load_frozen_partition
 
 
 def _required_env(name: str) -> str:
@@ -72,6 +73,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--outcome-feature-set-version", default=None)
     parser.add_argument("--outcome-feature-column", action="append", default=[])
     parser.add_argument("--allow-historical-outcomes", action="store_true", help="explicitly authorize future-information outcome evidence for EXPLORATION only")
+    parser.add_argument("--scientific-partition-manifest", default=None, help="required frozen partition when historical outcomes are supplied; this discovery runner exposes DISCOVERY outcomes only")
     parser.add_argument("--research-objective", default=None, help="optional scientific objective appended to the governing MTS mission")
     parser.add_argument("--calibration-control-id", default=None, help="exact blinded control ID; requires a passing zero-SOL readiness report")
     parser.add_argument("--control-readiness-report", default=None)
@@ -94,6 +96,8 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("outcome feature-set id and version must be supplied together")
     if args.outcome_feature_set_id and not args.allow_historical_outcomes:
         raise RuntimeError("outcome feature set requires --allow-historical-outcomes")
+    if args.outcome_feature_set_id and not args.scientific_partition_manifest:
+        raise RuntimeError("historical outcome access requires --scientific-partition-manifest")
     control_ids = {item.control_id for item in BLINDED_CONTROLS}
     if args.calibration_control_id:
         if args.calibration_control_id not in control_ids:
@@ -111,10 +115,20 @@ def main(argv: list[str] | None = None) -> int:
     root = Path(args.root).expanduser().resolve()
     derived_root = Path(args.derived_market_root or (root / "mts-v4-nexus-derived-market")).expanduser().resolve()
     subject = universe_scope(universe_id).to_subject_metadata(display_ticker=universe_id.upper())
+    partition = None
+    if args.scientific_partition_manifest:
+        partition = load_frozen_partition(Path(args.scientific_partition_manifest).expanduser().resolve())
+        if partition.universe_id != universe_id:
+            raise RuntimeError("scientific partition universe does not match --universe-id")
+        if args.security_id and not set(args.security_id).issubset(set(partition.all_security_ids)):
+            raise RuntimeError("--security-id contains an identity outside the frozen scientific partition")
     primary_query = DerivedMarketQuery(universe_id=universe_id, feature_set_id=args.feature_set_id.strip(), feature_set_version=args.feature_set_version.strip(), start_date=args.start_date, end_date=args.end_date, security_ids=tuple(args.security_id), feature_columns=tuple(args.feature_column))
     outcome_query = None
     if args.outcome_feature_set_id:
-        outcome_query = DerivedMarketQuery(universe_id=universe_id, feature_set_id=args.outcome_feature_set_id.strip(), feature_set_version=args.outcome_feature_set_version.strip(), start_date=args.start_date, end_date=args.end_date, security_ids=tuple(args.security_id), feature_columns=tuple(args.outcome_feature_column))
+        # This exploration runner can consume only the frozen discovery cohort.
+        # Reserved cohorts require a separate locked-hypothesis blind-verification path.
+        discovery_ids = partition.members(ScientificCohort.DISCOVERY)
+        outcome_query = DerivedMarketQuery(universe_id=universe_id, feature_set_id=args.outcome_feature_set_id.strip(), feature_set_version=args.outcome_feature_set_version.strip(), start_date=args.start_date, end_date=args.end_date, security_ids=discovery_ids, feature_columns=tuple(args.outcome_feature_column))
 
     store = ParquetDerivedMarketStore(derived_root)
     universe = store.get_universe(universe_id)
@@ -143,6 +157,9 @@ def main(argv: list[str] | None = None) -> int:
             print(f"OUTCOME_FEATURE_SET={outcome_query.feature_set_key}")
             print(f"OUTCOME_ROWS={len(store.query(outcome_query))}")
             print("HISTORICAL_OUTCOMES_EXPLICITLY_AUTHORIZED=True")
+            print(f"SCIENTIFIC_PARTITION_ID={partition.partition_id}")
+            print(f"OUTCOME_COHORT={ScientificCohort.DISCOVERY.value}")
+            print(f"RESERVED_VERIFICATION_SECURITIES={len(partition.members(ScientificCohort.VERIFICATION_A)) + len(partition.members(ScientificCohort.VERIFICATION_B))}")
         print(f"BLINDED_RESEARCH_OBJECTIVE_PRESENT={bool(args.research_objective and args.research_objective.strip())}")
         print("SOL_CALLS=0")
         return 0
@@ -176,6 +193,9 @@ def main(argv: list[str] | None = None) -> int:
         "universe_definition": asdict(universe), "primary_query": asdict(primary_query),
         "outcome_query": asdict(outcome_query) if outcome_query else None,
         "historical_outcomes_explicitly_authorized": bool(outcome_query),
+        "scientific_partition": (partition.to_mapping() if partition else None),
+        "outcome_exposure_cohort": (ScientificCohort.DISCOVERY.value if outcome_query else None),
+        "verification_cohorts_exposed": False,
         "canonical_memory_source": str(scientific_context.memory_selection.source_path),
         "canonical_memory_frontier_version": frontier.version if frontier is not None else 0,
     }
