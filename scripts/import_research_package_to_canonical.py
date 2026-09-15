@@ -13,7 +13,14 @@ import json
 import sys
 from pathlib import Path
 
-from Core.research_nexus import (
+# Executing a script by pathname puts scripts/ rather than the repository root
+# on sys.path. Resolve the repo root from this file so the documented standalone
+# invocation works without requiring callers to set PYTHONPATH.
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from Core.research_nexus import (  # noqa: E402
     Producer,
     Provenance,
     ResearchNexusConfig,
@@ -66,8 +73,6 @@ def main() -> int:
 
     package_id = _first_string(doc, "research_package_id", "package_id", "id")
     if package_id is None:
-        # Filename is accepted only when it has the governed RP prefix; this is
-        # identity recovery, not scientific inference.
         if source.stem.startswith("RP-"):
             package_id = source.stem
         else:
@@ -77,8 +82,6 @@ def main() -> int:
 
     ticker = _first_string(doc, "ticker", "symbol", "subject")
     digest = _sha256(payload)
-    # Stable migration identity makes repeated imports idempotent while keeping
-    # the original package identifier available as an index/tag value.
     artifact_id = f"legacy-research-package:{package_id}"
 
     root.mkdir(parents=True, exist_ok=True)
