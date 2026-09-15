@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import date, timedelta
 from typing import Any, Mapping, Protocol, Sequence
+import time
 
 from .derived_feature_factory import FORWARD_HORIZONS, build_matured_outcome_rows, build_predictor_rows, standard_outcome_feature_set, standard_predictor_feature_set
 from .derived_market_store import DerivedMarketStore, DerivedMarketStoreError, UniverseDefinition, acquisition_start_for_plan, plan_incremental_update
@@ -64,18 +65,39 @@ def _ensure_definitions(store: DerivedMarketStore, universe: UniverseDefinition)
     return predictor_set, outcome_set
 
 
-def _attach_membership_and_identity(*, membership: IntervalMembership, source: DailyMarketSource, start_date: str, end_date: str, shares_source: PointInTimeSharesSource | None, download_workers: int = 6) -> list[dict[str, Any]]:
+def _attach_membership_and_identity(*, membership: IntervalMembership, source: DailyMarketSource, start_date: str, end_date: str, shares_source: PointInTimeSharesSource | None, download_workers: int = 6, download_attempts: int = 4) -> list[dict[str, Any]]:
     if download_workers < 1:
         raise DerivedMarketStoreError("download_workers must be >= 1")
+    if download_attempts < 1:
+        raise DerivedMarketStoreError("download_attempts must be >= 1")
+
+    def fetch_nonempty(ticker: str) -> Sequence[Mapping[str, Any]]:
+        last_error: Exception | None = None
+        for attempt in range(1, download_attempts + 1):
+            try:
+                result = source.fetch(ticker=ticker, start_date=start_date, end_date=end_date)
+                if result:
+                    return result
+                last_error = DerivedMarketStoreError(f"market source returned zero rows for {ticker}")
+            except Exception as exc:
+                last_error = exc
+            if attempt < download_attempts:
+                delay = min(2 ** (attempt - 1), 8)
+                print(
+                    f"MARKET_ACQUISITION_RETRY TICKER={ticker} ATTEMPT={attempt + 1}/{download_attempts} DELAY_SECONDS={delay} ERROR={type(last_error).__name__}",
+                    flush=True,
+                )
+                time.sleep(delay)
+        raise DerivedMarketStoreError(
+            f"market acquisition failed after {download_attempts} attempts for {ticker}: {type(last_error).__name__}: {last_error}"
+        ) from last_error
     intervals = membership.active_between(start_date, end_date)
     acquired: dict[int, Sequence[Mapping[str, Any]]] = {}
     with ThreadPoolExecutor(max_workers=download_workers, thread_name_prefix="mts-market-download") as executor:
         futures = {
             executor.submit(
-                source.fetch,
-                ticker=interval.ticker,
-                start_date=start_date,
-                end_date=end_date,
+                fetch_nonempty,
+                interval.ticker,
             ): (index, interval.ticker)
             for index, interval in enumerate(intervals)
         }
@@ -145,7 +167,7 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
     return {effective: len(securities) for effective, securities in observed.items()}
 
 
-def maintain_standard_market_store(*, store: DerivedMarketStore, universe: UniverseDefinition, membership: IntervalMembership, source: DailyMarketSource, through_date: str, initial_start_date: str | None = None, shares_source: PointInTimeSharesSource | None = None, update_id_prefix: str = "market-update", publish_outcomes: bool = True, download_workers: int = 6) -> DerivedMarketMaintenanceResult:
+def maintain_standard_market_store(*, store: DerivedMarketStore, universe: UniverseDefinition, membership: IntervalMembership, source: DailyMarketSource, through_date: str, initial_start_date: str | None = None, shares_source: PointInTimeSharesSource | None = None, update_id_prefix: str = "market-update", publish_outcomes: bool = True, download_workers: int = 6, download_attempts: int = 4) -> DerivedMarketMaintenanceResult:
     """Incrementally extend standard predictors and matured outcomes without raw persistence."""
     date.fromisoformat(through_date)
     predictor_set, outcome_set = _ensure_definitions(store, universe)
@@ -162,7 +184,7 @@ def maintain_standard_market_store(*, store: DerivedMarketStore, universe: Unive
 
     plan = plan_incremental_update(store=store, universe_id=universe.universe_id, feature_set_id=predictor_set.feature_set_id, feature_set_version=predictor_set.version, first_new_effective_date=first_new, last_new_effective_date=through_date)
     acquisition_start = acquisition_start_for_plan(plan)
-    raw_rows = _attach_membership_and_identity(membership=membership, source=source, start_date=acquisition_start, end_date=through_date, shares_source=shares_source, download_workers=download_workers)
+    raw_rows = _attach_membership_and_identity(membership=membership, source=source, start_date=acquisition_start, end_date=through_date, shares_source=shares_source, download_workers=download_workers, download_attempts=download_attempts)
     if not raw_rows:
         raise DerivedMarketStoreError("market source returned no rows for a required incremental update; high-water mark not advanced")
     cross_section_counts = _validate_complete_observed_cross_sections(rows=raw_rows, membership=membership, start_date=first_new, end_date=through_date)
