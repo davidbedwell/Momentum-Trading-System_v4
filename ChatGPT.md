@@ -768,3 +768,5 @@ This preprocessing:
 - must report zero Sol calls when run as the standalone Stage 2A preprocessing command.
 
 Predictive universe discovery is a separate later stage. It may receive full-universe predictor context, but historical outcomes remain restricted to the frozen `DISCOVERY` cohort under the universe scientific-partition rules above. Reserved verification outcomes remain hidden until an explicitly governed blind-verification path is authorized.
+
+The authoritative Stage 2A Analysis artifact and the AI transport view are distinct. The full artifact must remain unchanged for audit and reproducibility. The AI transport may use a documented schema-plus-array encoding to eliminate repeated field names and may apply the same predeclared descriptive field set uniformly to every multi-window measurement. It may not select features, sectors, horizons, correlation pairs, or persistence records based on their values. Full distributions and reusable datasets remain available in the authoritative Analysis artifact but are not automatically inserted into the paid AI prompt.

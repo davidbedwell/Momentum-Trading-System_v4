@@ -1,8 +1,13 @@
 from __future__ import annotations
 
+import json
 import pytest
 
-from MTS_V4.universe_market_structure_substrate import method_spec, universe_market_structure
+from MTS_V4.universe_market_structure_substrate import (
+    compact_for_ai_transport,
+    method_spec,
+    universe_market_structure,
+)
 
 
 def _rows() -> tuple[dict[str, object], ...]:
@@ -100,3 +105,26 @@ def test_catalog_contract_is_predictor_only_neutral_infrastructure() -> None:
     assert spec.allows_future_information is False
     assert spec.metadata["scientific_selection"] == "none"
     assert spec.metadata["human_authorized_infrastructure"] is True
+
+
+def test_ai_transport_compacts_without_selecting_features_or_correlations() -> None:
+    outputs = universe_market_structure(
+        {"predictors": _rows()}, {"as_of_date": "2026-01-09", "as_of_time": "DAILY_CLOSE"}
+    )
+    compact = compact_for_ai_transport(outputs)
+
+    assert "derived_datasets" not in compact
+    assert "derived_dataset_catalog" not in compact
+    assert len(compact["current_market_structure"]["feature_correlations"]["rows"]) == len(
+        outputs["current_market_structure"]["feature_correlations"]
+    )
+    assert len(compact["historical_daily_structure_correlations"]["rows"]) == len(
+        outputs["historical_daily_structure_correlations"]
+    )
+    assert set(compact["multi_horizon_context"]) == set(outputs["multi_horizon_context"])
+    assert compact["transport_encoding"][
+        "all_features_sectors_horizons_and_correlation_pairs_retained"
+    ] is True
+    assert len(json.dumps(compact, separators=(",", ":"))) < len(
+        json.dumps(outputs, separators=(",", ":"))
+    )

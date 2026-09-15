@@ -20,6 +20,8 @@ from .contracts import AnalysisRequest, AnalysisResult, EvidenceDescriptor, Subj
 from .interfaces import AnalysisExecutor
 from .nexus import ResearchNexus
 from .validation import ObjectiveContractValidator
+from .universe_market_structure_substrate import METHOD_ID as UNIVERSE_SUBSTRATE_METHOD_ID
+from .universe_market_structure_substrate import compact_for_ai_transport
 
 
 class BatchResearchLoopError(RuntimeError):
@@ -464,6 +466,8 @@ class BatchResearchLoopOrchestrator:
                 continue
             outputs = dict(result.outputs)
             outputs.pop("derived_datasets", None)
+            if result.method_id == UNIVERSE_SUBSTRATE_METHOD_ID:
+                outputs = dict(compact_for_ai_transport(outputs))
             substrate.append(
                 {
                     "analysis_id": analysis_id,

@@ -36,6 +36,14 @@ PERSISTENCE_COLUMNS = (
     "return_252_skip_20_percentile__v1", "relative_volume_20_percentile__v1",
 )
 WINDOWS = (5, 20, 63, 126, 252)
+SUMMARY_FIELDS = (
+    "n", "missing", "mean", "standard_deviation", "p10", "p25", "median",
+    "p75", "p90", "minimum", "maximum",
+)
+WINDOW_TRANSPORT_FIELDS = (
+    "n", "mean", "standard_deviation", "p10", "median", "p90",
+    "start_value", "end_value", "change",
+)
 
 
 def required_feature_columns() -> tuple[str, ...]:
@@ -126,6 +134,118 @@ def _ordered_window_summary(rows: Sequence[Mapping[str, object]], column: str) -
         "change": (values[-1] - values[0]) if len(values) > 1 else None,
     })
     return summary
+
+
+def _pack_named_measurements(
+    measurements: Mapping[str, object], fields: Sequence[str]
+) -> Mapping[str, object]:
+    return {
+        "schema": ["measurement", *fields],
+        "rows": [
+            [name, *(value.get(field) for field in fields)]
+            for name, value in measurements.items()
+            if isinstance(value, Mapping)
+        ],
+    }
+
+
+def _pack_correlations(records: object) -> Mapping[str, object]:
+    usable = records if isinstance(records, (list, tuple)) else ()
+    return {
+        "schema": ["left", "right", "n", "pearson"],
+        "rows": [
+            [item.get("left"), item.get("right"), item.get("n"), item.get("pearson")]
+            for item in usable if isinstance(item, Mapping)
+        ],
+    }
+
+
+def compact_for_ai_transport(outputs: Mapping[str, object]) -> Mapping[str, object]:
+    """Encode complete neutral context compactly without selecting scientific results.
+
+    The full Analysis output remains authoritative and unchanged. This view keeps
+    every feature, sector, horizon, correlation pair, and persistence record while
+    eliminating repeated JSON field names. Multi-window distributions use one
+    human-authorized descriptive schema uniformly for every measurement.
+    """
+    compact = {
+        key: value for key, value in outputs.items()
+        if key not in {
+            "derived_datasets", "derived_dataset_catalog", "current_market_structure",
+            "multi_horizon_context", "rank_persistence",
+            "historical_daily_structure_correlations",
+        }
+    }
+    current = outputs.get("current_market_structure", {})
+    if not isinstance(current, Mapping):
+        current = {}
+    sectors = current.get("sector_measurements", {})
+    if not isinstance(sectors, Mapping):
+        sectors = {}
+    compact["current_market_structure"] = {
+        "effective_date": current.get("effective_date"),
+        "security_count": current.get("security_count"),
+        "breadth": current.get("breadth", {}),
+        "participation": current.get("participation", {}),
+        "cross_sectional_measurements": _pack_named_measurements(
+            current.get("cross_sectional_measurements", {}), SUMMARY_FIELDS
+        ),
+        "sector_measurements": {
+            str(sector): {
+                "security_count": value.get("security_count"),
+                "measurements": _pack_named_measurements(
+                    value.get("measurements", {}), SUMMARY_FIELDS
+                ),
+            }
+            for sector, value in sectors.items() if isinstance(value, Mapping)
+        },
+        "feature_correlations": _pack_correlations(current.get("feature_correlations", ())),
+    }
+    windows = outputs.get("multi_horizon_context", {})
+    if not isinstance(windows, Mapping):
+        windows = {}
+    compact["multi_horizon_context"] = {
+        str(window): {
+            "observed_sessions": value.get("observed_sessions"),
+            "start_date": value.get("start_date"),
+            "end_date": value.get("end_date"),
+            "measurements": _pack_named_measurements(
+                value.get("measurements", {}), WINDOW_TRANSPORT_FIELDS
+            ),
+        }
+        for window, value in windows.items() if isinstance(value, Mapping)
+    }
+    persistence = outputs.get("rank_persistence", ())
+    compact["rank_persistence"] = {
+        "schema": [
+            "column", "lag_sessions", "prior_date", "current_date",
+            "matched_securities", "pearson_rank_persistence",
+        ],
+        "rows": [
+            [
+                item.get("column"), item.get("lag_sessions"), item.get("prior_date"),
+                item.get("current_date"), item.get("matched_securities"),
+                item.get("pearson_rank_persistence"),
+            ]
+            for item in persistence if isinstance(item, Mapping)
+        ] if isinstance(persistence, (list, tuple)) else [],
+    }
+    compact["historical_daily_structure_correlations"] = _pack_correlations(
+        outputs.get("historical_daily_structure_correlations", ())
+    )
+    compact["transport_encoding"] = {
+        "format": "MTS_V4_NEUTRAL_UNIVERSE_AI_TRANSPORT_V1",
+        "scientific_selection_or_ranking": False,
+        "all_features_sectors_horizons_and_correlation_pairs_retained": True,
+        "full_analysis_output_unchanged": True,
+        "large_reproducible_datasets_excluded": True,
+        "derived_dataset_catalog_supplied_separately_by_campaign_result_catalog": True,
+        "multi_window_fields_retained_uniformly": list(WINDOW_TRANSPORT_FIELDS),
+        "multi_window_fields_available_only_in_full_analysis": [
+            "missing", "p25", "p75", "minimum", "maximum",
+        ],
+    }
+    return compact
 
 
 def universe_market_structure(
