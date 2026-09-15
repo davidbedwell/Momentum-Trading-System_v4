@@ -244,3 +244,19 @@ def require_calibration_pass(path: str | Path) -> Mapping[str, Any]:
     if not report.get("all_five_controls_present") or not report.get("all_runs_completed") or not report.get("all_controls_assessed"):
         raise ControlReadinessError("calibration report is incomplete")
     return report
+
+
+def require_ready_control(path: str | Path, control_id: str) -> Mapping[str, Any]:
+    report = json.loads(Path(path).read_text(encoding="utf-8"))
+    controls = report.get("controls") if isinstance(report, Mapping) else None
+    item = controls.get(control_id) if isinstance(controls, Mapping) else None
+    if (
+        report.get("status") != "READY_FOR_BLINDED_CALIBRATION"
+        or not isinstance(item, Mapping)
+        or item.get("hidden_answer_key_bound") is not True
+        or report.get("sol_calls") != 0
+    ):
+        raise ControlReadinessError(
+            f"control {control_id} lacks a passing dataset-bound zero-SOL readiness report"
+        )
+    return report
