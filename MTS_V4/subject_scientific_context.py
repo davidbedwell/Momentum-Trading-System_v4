@@ -81,8 +81,9 @@ class SubjectContextSolBatchResearchDirector(SolBatchResearchDirector):
             payload["prior_subject_scientific_context"] = self._prior_subject_scientific_context
             if self._same_subject_prior_scientific_context is not None:
                 payload["same_subject_prior_science"] = self._same_subject_prior_scientific_context
-            if self._revisit_change_context is not None:
-                payload["revisit_change_context"] = self._revisit_change_context
+            revisit_change_context = getattr(self, "_revisit_change_context", None)
+            if revisit_change_context is not None:
+                payload["revisit_change_context"] = revisit_change_context
         return payload
 
 
