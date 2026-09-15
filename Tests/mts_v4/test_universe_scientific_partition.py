@@ -10,6 +10,7 @@ from MTS_V4.universe_scientific_partition import (
     create_frozen_partition,
     load_frozen_partition,
     write_frozen_partition,
+    write_campaign_exposure_ledger,
 )
 
 
@@ -91,3 +92,25 @@ def test_partition_detects_manifest_tampering(tmp_path):
     target.write_text(json.dumps(payload), encoding="utf-8")
     with pytest.raises(UniverseScientificPartitionError, match="identity"):
         load_frozen_partition(target)
+
+
+def test_exposure_ledger_distinguishes_context_from_outcome_and_preserves_reserves(tmp_path):
+    partition = create_frozen_partition(
+        universe_id="sp500",
+        security_ids=[f"SEC-{number}" for number in range(10)],
+        cohort_sizes=_sizes(),
+        salt="x",
+    )
+    target = tmp_path / "exposure.json"
+    write_campaign_exposure_ledger(
+        target,
+        partition=partition,
+        campaign_id="campaign-1",
+        context_security_ids=partition.all_security_ids,
+        outcome_security_ids=partition.members(ScientificCohort.DISCOVERY),
+    )
+    payload = json.loads(target.read_text(encoding="utf-8"))
+    assert set(payload["exposures"]["CONTEXT_ONLY"]) == set(partition.all_security_ids)
+    assert set(payload["exposures"]["DISCOVERY_OUTCOME_EXPOSED"]) == set(partition.members(ScientificCohort.DISCOVERY))
+    assert payload["exposures"]["BLIND_VERIFICATION_EXPOSED"] == []
+    assert set(payload["reserved_unexposed"]["VERIFICATION_A"]) == set(partition.members(ScientificCohort.VERIFICATION_A))
