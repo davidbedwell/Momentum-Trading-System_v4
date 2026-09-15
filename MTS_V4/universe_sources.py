@@ -21,13 +21,18 @@ def _ticker_for_yfinance(value: object) -> str:
     return str(value).strip().upper().replace(".", "-")
 
 
-def _security_id_from_cik(value: object) -> str:
-    raw = str(value).strip()
+def _security_id_from_cik_and_ticker(cik: object, ticker: object) -> str:
+    """Frozen calibration security identity, distinct across issuer share classes."""
+    raw = str(cik).strip()
     if raw.endswith(".0"):
         raw = raw[:-2]
     if not raw.isdigit():
-        raise UniverseSourceError(f"invalid CIK: {value!r}")
-    return f"SEC_CIK_{int(raw):010d}"
+        raise UniverseSourceError(f"invalid CIK: {cik!r}")
+    normalized_ticker = _ticker_for_yfinance(ticker)
+    if not normalized_ticker:
+        raise UniverseSourceError("ticker cannot be blank")
+    safe_ticker = "".join(character if character.isalnum() else "_" for character in normalized_ticker)
+    return f"CAL_SEC_CIK_{int(raw):010d}_{safe_ticker}"
 
 
 def normalize_current_sp500_rows(
@@ -45,7 +50,9 @@ def normalize_current_sp500_rows(
         else:
             start = max(date.fromisoformat(raw_added[:10]).isoformat(), acquisition_floor)
         rows.append({
-            "security_id": _security_id_from_cik(record.get("CIK", "")),
+            "security_id": _security_id_from_cik_and_ticker(
+                record.get("CIK", ""), record.get("Symbol", "")
+            ),
             "ticker": _ticker_for_yfinance(record.get("Symbol", "")),
             "start_date": start,
             "end_date": None,
@@ -57,7 +64,7 @@ def normalize_current_sp500_rows(
     security_ids = [str(item["security_id"]) for item in rows]
     tickers = [str(item["ticker"]) for item in rows]
     if len(security_ids) != len(set(security_ids)):
-        raise UniverseSourceError("current constituent evidence contains duplicate CIK identities")
+        raise UniverseSourceError("current constituent evidence contains duplicate calibration security identities")
     if len(tickers) != len(set(tickers)):
         raise UniverseSourceError("current constituent evidence contains duplicate normalized tickers")
     if not 490 <= len(rows) <= 510:
@@ -71,8 +78,9 @@ class CurrentSp500CalibrationUniverseSource:
 
     This source is intentionally not represented as authoritative point-in-time
     history. Former members are absent, so historical research remains
-    survivorship-biased even though current members retain their reported entry
-    dates and stable CIK identities.
+    survivorship-biased. CIK identifies the issuer, so the frozen calibration
+    security identity combines CIK and ticker to keep separate share classes
+    distinct; it is not an authoritative permanent security master.
     """
 
     as_of_date: str
@@ -136,7 +144,8 @@ class CurrentSp500CalibrationUniverseSource:
                 "authorized_use": "ENGINEERING_AND_AI_CALIBRATION_ONLY",
             },
             neutral_semantics=(
-                "Dated current S&P 500 constituents with source-reported entry dates, stable CIK identity, "
+                "Dated current S&P 500 constituents with source-reported entry dates and frozen "
+                "CIK-plus-share-class calibration identity, "
                 "and current sector attributes. Former constituents are absent. This evidence can exercise "
                 "universe plumbing and AI calibration but cannot establish authoritative historical PIT results."
             ),
