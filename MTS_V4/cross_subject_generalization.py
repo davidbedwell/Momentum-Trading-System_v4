@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from dataclasses import replace
 from typing import Any, Mapping, Sequence
 
@@ -15,15 +16,7 @@ def generalization_evidence_view(
     *,
     program_subject_id: str = GENERALIZATION_SUBJECT_ID,
 ) -> tuple[EvidenceDescriptor, ...]:
-    """Expose multi-subject evidence to one program-level Analysis campaign.
-
-    Raw payloads remain in the ordinary temporary cache under their original cache
-    keys.  Only the campaign-local descriptor is projected onto the synthetic
-    program subject so the existing compiler/executor can accept an RD-authored
-    analysis spanning multiple tickers.  The exact original subject is retained in
-    provenance and is never inferred from scientific content.
-    """
-
+    """Expose multi-subject evidence to one program-level Analysis campaign."""
     projected: list[EvidenceDescriptor] = []
     seen_ids: dict[str, str] = {}
     for item in evidence:
@@ -59,20 +52,14 @@ def generalization_evidence_view(
 
 
 class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
-    """Program-level Sol RD for explicit falsifiable cross-subject science.
-
-    This is not a deterministic replication scheduler.  Sol receives the complete
-    available corpus and decides whether any transfer test, pooled relationship,
-    heterogeneity analysis, conditional generalization, contradiction study, or
-    other cross-subject work is scientifically justified.  Zero Analysis
-    Specifications remains a valid scientific decision.
-    """
+    """Program-level Sol RD for explicit falsifiable cross-subject science."""
 
     def __init__(
         self,
         *args,
         historical_subject_context: Mapping[str, object],
         prior_cross_subject_memory_documents: Sequence[Mapping[str, object]] = (),
+        generalization_state_context: Mapping[str, object] | None = None,
         **kwargs,
     ) -> None:
         super().__init__(*args, **kwargs)
@@ -80,6 +67,7 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
         self._prior_cross_subject_memory_documents = tuple(
             dict(document) for document in prior_cross_subject_memory_documents
         )
+        self._generalization_state_context = dict(generalization_state_context or {})
 
     def _batch_common_payload(
         self,
@@ -88,16 +76,19 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
         evidence: Sequence[EvidenceDescriptor],
         available_methods: Sequence[Mapping[str, Any]],
         nexus_context: Mapping[str, object],
+        continuation: bool = False,
     ) -> dict[str, object]:
         payload = super()._batch_common_payload(
             subject=subject,
             evidence=evidence,
             available_methods=available_methods,
             nexus_context=nexus_context,
+            continuation=continuation,
         )
         payload["cross_subject_generalization_context"] = {
             "historical_subjects": self._historical_subject_context,
             "prior_cross_subject_memory_documents": self._prior_cross_subject_memory_documents,
+            "durable_generalization_state": self._generalization_state_context,
             "evidence_origin_contract": (
                 "Every advertised evidence descriptor belongs operationally to the synthetic program subject so "
                 "it can participate in one Analysis request. Its exact original ticker/subject is preserved in "
@@ -133,7 +124,40 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
             "experiment is scientifically useful, author the Analysis Specifications yourself using the exact advertised "
             "evidence IDs and available methods. If only a transfer test on one ticker is warranted, you may author that "
             "instead. If no cross-subject proposition is currently justified, close with zero analyses and explain why. "
-            "Deterministic code does not choose which subjects to compare, how to normalize them, which variables or "
-            "methods to use, or whether a generalization is supported."
+            "Durable generalization status is also yours to author explicitly. Deterministic code may validate an allowed "
+            "state transition but never infer one from findings or statistical results."
         )
-        return [{"role": "system", "content": system}, *messages[1:]]
+        user = json.loads(messages[1]["content"])
+        research_state = user["required_batch_decision_schema"]["research_state"]
+        research_state["generalization_updates"] = [
+            {
+                "action": "CREATE_SUBJECT_TENTATIVE or TRANSITION",
+                "generalization_id": "stable nonblank identifier",
+                "proposition": "CREATE_SUBJECT_TENTATIVE only: falsifiable proposition",
+                "source_subject_ids": "CREATE_SUBJECT_TENTATIVE only: one or more exact subject IDs",
+                "source_hypothesis_ids": "optional source hypothesis IDs",
+                "source_finding_ids": "optional source finding IDs",
+                "to_status": (
+                    "TRANSITION only: CROSS_SUBJECT_CANDIDATE, CROSS_SUBJECT_VALIDATING, "
+                    "CROSS_SUBJECT_VERIFIED, or CROSS_SUBJECT_NOT_VERIFIED"
+                ),
+                "rationale": "nonblank RD-authored scientific rationale",
+                "evidence_subject_ids": "TRANSITION only: exact subjects contributing to this transition",
+                "supporting_result_ids": "optional exact supporting result IDs",
+                "contradictory_result_ids": "optional exact contradictory result IDs",
+                "validation_criteria": "required when entering CROSS_SUBJECT_VALIDATING; frozen before validation",
+                "validation_trial_ids": "required for terminal disposition after CROSS_SUBJECT_VALIDATING",
+            }
+        ]
+        user["instructions"].extend(
+            [
+                "Generalization state is explicit and append-only: SUBJECT_TENTATIVE -> CROSS_SUBJECT_CANDIDATE -> CROSS_SUBJECT_VALIDATING -> CROSS_SUBJECT_VERIFIED or CROSS_SUBJECT_NOT_VERIFIED.",
+                "Do not promote a cross-subject state merely because deterministic code can represent it. Author a generalization_update only when your scientific judgment supports that exact transition.",
+                "Entering CROSS_SUBJECT_CANDIDATE requires provenance from at least two subjects. Entering CROSS_SUBJECT_VALIDATING requires you to freeze validation_criteria before the validation trials. A terminal validation disposition must cite the validation_trial_ids.",
+                "A materially revised proposition requires a new generalization_id rather than rewriting prior state.",
+            ]
+        )
+        return [
+            {"role": "system", "content": system},
+            {"role": "user", "content": json.dumps(user, sort_keys=True, default=str, separators=(",", ":"))},
+        ]
