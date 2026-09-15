@@ -10,6 +10,7 @@ from MTS_V4.market_reading_calibration import (
     ASSESSMENT_FORMAT,
     calibration_messages,
     load_calibration_transport,
+    load_market_reading_assessment,
     write_calibration_assessment,
 )
 
@@ -81,6 +82,7 @@ def test_assessment_is_immutable_and_records_non_scientific_boundary(tmp_path: P
     assert result["verification_cohort_outcomes_accessed"] is False
     assert result["hypotheses_created"] is False
     assert result["findings_promoted"] is False
+    assert load_market_reading_assessment(output)["assessment"] == "Bounded assessment."
     with pytest.raises(RuntimeError, match="refusing to replace"):
         write_calibration_assessment(
             output=output,

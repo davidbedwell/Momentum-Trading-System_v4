@@ -278,6 +278,10 @@ class JsonResearchPackageStore:
                         **item,
                         "source_result_ids": tuple(item.get("source_result_ids", ())),
                         "trials": trials,
+                        "executable_policy": dict(item.get("executable_policy", {})),
+                        "exploratory_candidacy_assessment": dict(item.get("exploratory_candidacy_assessment", {})),
+                        "scientific_validation_assessment": dict(item.get("scientific_validation_assessment", {})),
+                        "trading_promotion_assessment": dict(item.get("trading_promotion_assessment", {})),
                     }
                 )
             )

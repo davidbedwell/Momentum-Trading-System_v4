@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict
+import math
 from typing import Any, Mapping
 
 from .batch_contracts import BatchExecutionReport, BatchResearchDecision, ResearchPackagePlan
@@ -367,6 +368,8 @@ class BatchCampaignResearchRecorder:
             action = raw.get("action")
             if action == "CREATE_TENTATIVE":
                 package = self._create_tentative_predictive_hypothesis(package, raw)
+            elif action == "CREATE_TRADING_CANDIDATE_V2":
+                package = self._create_trading_candidate_v2(package, raw)
             elif action == "LOCK_VALIDATION_TRIAL":
                 package = self._lock_predictive_validation_trial(
                     package,
@@ -388,6 +391,111 @@ class BatchCampaignResearchRecorder:
 
         for rp_id in changed:
             self._packages.save(packages[rp_id])
+
+    @staticmethod
+    def _require_mapping(update: Mapping[str, Any], key: str) -> Mapping[str, Any]:
+        value = update.get(key)
+        if not isinstance(value, Mapping):
+            raise BatchResearchRecordingError(f"predictive hypothesis update requires object {key}")
+        return value
+
+    def _create_trading_candidate_v2(
+        self,
+        package: ResearchPackage,
+        update: Mapping[str, Any],
+    ) -> ResearchPackage:
+        hypothesis_id = self._require_nonblank(update, "hypothesis_id")
+        statement = self._require_nonblank(update, "statement")
+        success_definition = self._require_nonblank(update, "success_definition")
+        policy = self._require_mapping(update, "executable_policy")
+        assessment = self._require_mapping(update, "exploratory_candidacy_assessment")
+        required_policy = {
+            "entry", "direction", "instrument", "prediction_point", "favorable_exit",
+            "adverse_risk_unit", "stop_or_invalidation", "maximum_horizon", "gap_fill_treatment",
+            "position_management", "all_in_cost_assumption", "applicable_population_or_regime",
+        }
+        missing_policy = sorted(key for key in required_policy if not policy.get(key))
+        if missing_policy:
+            raise BatchResearchRecordingError(
+                f"CREATE_TRADING_CANDIDATE_V2 executable_policy missing {missing_policy}"
+            )
+        source_result_ids = update.get("source_result_ids")
+        if not isinstance(source_result_ids, list) or not source_result_ids:
+            raise BatchResearchRecordingError(
+                "CREATE_TRADING_CANDIDATE_V2 requires nonempty source_result_ids list"
+            )
+        source_analyses = []
+        for result_id in source_result_ids:
+            if not isinstance(result_id, str) or not result_id.strip():
+                raise BatchResearchRecordingError("source_result_ids must be nonblank strings")
+            matches = [item for item in package.analyses if item.result_id == result_id]
+            if len(matches) != 1:
+                raise BatchResearchRecordingError(
+                    f"trading candidate source_result_id is not unique in RP: {result_id}"
+                )
+            source_analyses.append(matches[0])
+        minimum_required_trials = update.get("minimum_required_trials")
+        if (
+            not isinstance(minimum_required_trials, int)
+            or isinstance(minimum_required_trials, bool)
+            or minimum_required_trials <= 0
+        ):
+            raise BatchResearchRecordingError(
+                "CREATE_TRADING_CANDIDATE_V2 requires positive integer minimum_required_trials"
+            )
+        units = assessment.get("expectancy_units")
+        if not isinstance(units, str) or not units.strip():
+            raise BatchResearchRecordingError(
+                "CREATE_TRADING_CANDIDATE_V2 requires nonblank expectancy_units"
+            )
+        try:
+            gross = float(assessment["mean_realized_gross_expectancy"])
+            costs = float(assessment["mean_estimated_all_in_cost"])
+            net = float(assessment["mean_realized_net_expectancy"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise BatchResearchRecordingError(
+                "CREATE_TRADING_CANDIDATE_V2 requires numeric gross, cost, and net expectancy"
+            ) from exc
+        if not all(math.isfinite(item) for item in (gross, costs, net)):
+            raise BatchResearchRecordingError("exploratory expectancy values must be finite")
+        if costs < 0:
+            raise BatchResearchRecordingError("estimated all-in cost cannot be negative")
+        if net <= 0:
+            raise BatchResearchRecordingError(
+                "trading-hypothesis candidacy requires positive exploratory net expectancy"
+            )
+        tolerance = max(1e-12, abs(gross) * 1e-9, abs(costs) * 1e-9)
+        if abs((gross - costs) - net) > tolerance:
+            raise BatchResearchRecordingError(
+                "exploratory net expectancy must equal gross expectancy minus costs"
+            )
+        if assessment.get("chronological_policy_applied") is not True:
+            raise BatchResearchRecordingError(
+                "trading candidacy requires chronological policy application"
+            )
+        if assessment.get("post_exit_movement_credited") is not False:
+            raise BatchResearchRecordingError(
+                "trading candidacy prohibits credit after policy exit"
+            )
+        if any(item.hypothesis_id == hypothesis_id for item in package.predictive_hypotheses):
+            raise BatchResearchRecordingError(
+                f"predictive hypothesis identity already exists; material revisions require a new id: {hypothesis_id}"
+            )
+        return package.append_predictive_hypothesis(PredictiveHypothesisRecord(
+            hypothesis_id=hypothesis_id,
+            statement=statement,
+            success_definition=success_definition,
+            minimum_required_trials=minimum_required_trials,
+            source_result_ids=tuple(source_result_ids),
+            discovered_with_lookahead=any(
+                bool(item.future_information.get("contains_future_information"))
+                for item in source_analyses
+            ),
+            status="CANDIDATE_EXPLORATORY",
+            lifecycle_version="TRADING_HYPOTHESIS_LIFECYCLE_V2",
+            executable_policy=dict(policy),
+            exploratory_candidacy_assessment=dict(assessment),
+        ))
 
     def _create_tentative_predictive_hypothesis(
         self,
@@ -506,6 +614,10 @@ class BatchCampaignResearchRecorder:
             raise BatchResearchRecordingError(
                 f"validation trial references unknown predictive hypothesis: {hypothesis_id}"
             )
+        if hypothesis.lifecycle_version != "LEGACY_BINARY_V1":
+            raise BatchResearchRecordingError(
+                "LOCK_VALIDATION_TRIAL is a legacy binary-ledger action and cannot validate a V2 trading candidate"
+            )
         trial = PredictiveValidationTrialRecord(
             trial_id=trial_id,
             prediction_result_id=prediction_result_id,
@@ -582,6 +694,10 @@ class BatchCampaignResearchRecorder:
         if hypothesis is None:
             raise BatchResearchRecordingError(
                 f"validation outcome references unknown predictive hypothesis: {hypothesis_id}"
+            )
+        if hypothesis.lifecycle_version != "LEGACY_BINARY_V1":
+            raise BatchResearchRecordingError(
+                "RECORD_VALIDATION_OUTCOME is a legacy binary-ledger action and cannot validate a V2 trading candidate"
             )
         trial = next((item for item in hypothesis.trials if item.trial_id == trial_id), None)
         if trial is None:

@@ -40,6 +40,20 @@ def load_calibration_transport(path: Path) -> dict[str, Any]:
     return document
 
 
+def load_market_reading_assessment(path: Path) -> dict[str, Any]:
+    document = json.loads(path.read_text(encoding="utf-8"))
+    if document.get("format") != ASSESSMENT_FORMAT:
+        raise RuntimeError("unsupported market-reading calibration assessment format")
+    recorded_hash = document.get("artifact_sha256")
+    if not isinstance(recorded_hash, str) or recorded_hash != _canonical_sha256(document):
+        raise RuntimeError("market-reading calibration assessment hash does not match its content")
+    if document.get("historical_outcomes_consumed") is not False:
+        raise RuntimeError("market-reading calibration assessment consumed historical outcomes")
+    if document.get("hypotheses_created") is not False or document.get("findings_promoted") is not False:
+        raise RuntimeError("market-reading calibration assessment crossed its scientific boundary")
+    return document
+
+
 def calibration_messages(document: Mapping[str, Any]) -> list[Mapping[str, str]]:
     contract = {
         "operation": "MARKET_READING_CALIBRATION",

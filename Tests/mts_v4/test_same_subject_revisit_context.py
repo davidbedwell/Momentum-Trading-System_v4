@@ -94,6 +94,30 @@ def _write_nexus(path: Path) -> None:
 
 
 class SameSubjectRevisitContextTests(unittest.TestCase):
+    def test_change_context_is_injected_only_on_begin(self) -> None:
+        with TemporaryDirectory() as directory:
+            director = SubjectContextSolBatchResearchDirector(
+                research_package_store=JsonResearchPackageStore(Path(directory) / "packages"),
+                prior_subject_scientific_context={"subjects": []},
+                same_subject_prior_scientific_context={"subject_id": "equity:AAPL"},
+                revisit_change_context={"human_scientific_question": "Do the changes matter?"},
+                base_url="https://example.invalid",
+                model="test",
+                api_key="test",
+            )
+            subject = SubjectMetadata(subject_id="equity:AAPL", ticker="AAPL")
+            begin = director._batch_common_payload(
+                subject=subject, evidence=(), available_methods=(), nexus_context={}, continuation=False,
+            )
+            continuation = director._batch_common_payload(
+                subject=subject, evidence=(), available_methods=(), nexus_context={}, continuation=True,
+            )
+            self.assertEqual(
+                begin["revisit_change_context"]["human_scientific_question"],
+                "Do the changes matter?",
+            )
+            self.assertNotIn("revisit_change_context", continuation)
+
     def test_loader_unions_package_science_with_nexus_only_active_findings(self) -> None:
         with TemporaryDirectory() as directory:
             root = Path(directory)

@@ -39,6 +39,7 @@ class SubjectContextSolBatchResearchDirector(SolBatchResearchDirector):
         *args,
         prior_subject_scientific_context: Mapping[str, object],
         same_subject_prior_scientific_context: Mapping[str, object] | None = None,
+        revisit_change_context: Mapping[str, object] | None = None,
         **kwargs,
     ) -> None:
         super().__init__(*args, **kwargs)
@@ -47,6 +48,9 @@ class SubjectContextSolBatchResearchDirector(SolBatchResearchDirector):
             dict(same_subject_prior_scientific_context)
             if same_subject_prior_scientific_context is not None
             else None
+        )
+        self._revisit_change_context = (
+            dict(revisit_change_context) if revisit_change_context is not None else None
         )
 
     def _batch_common_payload(
@@ -77,6 +81,8 @@ class SubjectContextSolBatchResearchDirector(SolBatchResearchDirector):
             payload["prior_subject_scientific_context"] = self._prior_subject_scientific_context
             if self._same_subject_prior_scientific_context is not None:
                 payload["same_subject_prior_science"] = self._same_subject_prior_scientific_context
+            if self._revisit_change_context is not None:
+                payload["revisit_change_context"] = self._revisit_change_context
         return payload
 
 

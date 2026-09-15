@@ -11,8 +11,11 @@ from MTS_V4.batch_contracts import BatchExecutionReport
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase, SubjectMetadata
+from MTS_V4.context_enriched_revisit import build_context_enriched_revisit_evidence
 from MTS_V4.control_readiness import require_calibration_pass
 from MTS_V4.intake import IntakeEngine
+from MTS_V4.derived_market_store import ParquetDerivedMarketStore
+from MTS_V4.market_reading_calibration import load_market_reading_assessment
 from MTS_V4.pre_sol_substrates import build_for_subject as build_pre_sol_substrates
 from MTS_V4.research_lead_sources import standard_research_lead_market_source
 from MTS_V4.research_package_store import JsonResearchPackageStore
@@ -25,6 +28,55 @@ from MTS_V4.subject_scientific_context import (
     SubjectContextSolBatchResearchDirector,
     load_subject_scientific_context,
 )
+from MTS_V4.universe_membership import load_membership_csv
+from MTS_V4.universe_scientific_partition import ScientificCohort, load_frozen_partition
+
+
+CONTEXT_ENRICHED_REVISIT_QUESTION = (
+    "Since your prior analysis of this ticker, the available evidence and governing evaluation "
+    "standards have changed. You now have time-aligned market, current-sector, breadth, volatility, "
+    "participation, dispersion, and cross-sectional context that was not available during the prior "
+    "analysis. Trading-hypothesis candidacy, scientific validation, and trading-promotion eligibility "
+    "are now governed separately using executable policy, chronological path, adverse risk, costs, and "
+    "expectancy. Do any of these changes affect your previous analyses, recommendations, findings, "
+    "hypotheses, unresolved questions, or conclusions for this ticker?"
+)
+
+CONTEXT_ENRICHED_CANDIDACY_CHANGE = {
+    "observation_vs_candidate": (
+        "A predictive relationship may remain a scientific observation or supporting finding without "
+        "being designated a candidate trading hypothesis."
+    ),
+    "candidate_requirement": (
+        "Trading-hypothesis candidacy requires exploratory evidence supporting a specific, "
+        "non-duplicative, falsifiable relationship between information observable at T and subsequent "
+        "market behavior, plus a proposed human-executable policy with positive estimated net expectancy "
+        "after estimated all-in costs."
+    ),
+    "executable_policy_scope": (
+        "The proposed policy must specify observable entry, direction and instrument, prediction point, "
+        "favorable outcome, adverse-risk unit, stop or invalidation, favorable exit, maximum horizon, "
+        "gap/fill treatment, position management, costs, and applicable population or regime. Outcomes "
+        "must be applied chronologically and no movement after policy exit may be credited."
+    ),
+    "no_universal_candidate_threshold": (
+        "No universal success-rate, ATR-movement, or payoff threshold governs candidacy. The former "
+        "greater-than-60-percent success at at-least-1.5-ATR standard is not the candidate definition."
+    ),
+    "later_scientific_validation": (
+        "Scientific validation is separate and uses untouched evidence, a frozen policy, an appropriate "
+        "predeclared uncertainty assessment, and a lower bound for path-executable net expectancy above zero."
+    ),
+    "later_trading_promotion": (
+        "Only after scientific validation does candidacy for prospective paper testing require conservative "
+        "net expectancy greater than zero, point-estimate net expectancy at least 0.15R, and point-estimate "
+        "gross expectancy at least twice upper-bound all-in costs. These are rejection floors, not research targets."
+    ),
+    "identity": (
+        "A material revision to a prior frozen proposition or policy requires a new hypothesis identity; "
+        "historical records remain unchanged."
+    ),
+}
 
 
 def _required_env(name: str) -> str:
@@ -115,6 +167,23 @@ def _parser() -> argparse.ArgumentParser:
             "same-subject science to Sol as nonbinding historical context"
         ),
     )
+    parser.add_argument("--context-enriched-revisit", action="store_true")
+    parser.add_argument("--derived-market-root", default=None)
+    parser.add_argument("--universe-id", default=None)
+    parser.add_argument("--membership-csv", default=None)
+    parser.add_argument("--predictor-feature-set-id", default="mts_market_predictors")
+    parser.add_argument("--predictor-feature-set-version", default="v1")
+    parser.add_argument("--outcome-feature-set-id", default="mts_historical_outcomes")
+    parser.add_argument("--outcome-feature-set-version", default="v1")
+    parser.add_argument("--market-reading-calibration", default=None)
+    parser.add_argument(
+        "--scientific-partition-manifest",
+        default=None,
+        help=(
+            "required for a context-enriched revisit; the ticker must belong to the frozen "
+            "DISCOVERY cohort before historical outcomes are exposed"
+        ),
+    )
     parser.add_argument(
         "--sol-spend-limit-usd",
         type=float,
@@ -145,6 +214,19 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("ticker cannot be blank")
     if args.sol_spend_limit_usd <= 0:
         raise RuntimeError("--sol-spend-limit-usd must be positive")
+    if args.context_enriched_revisit and not args.revisit:
+        raise RuntimeError("--context-enriched-revisit requires --revisit")
+    if args.context_enriched_revisit:
+        required_context = {
+            "--derived-market-root": args.derived_market_root,
+            "--universe-id": args.universe_id,
+            "--membership-csv": args.membership_csv,
+            "--market-reading-calibration": args.market_reading_calibration,
+            "--scientific-partition-manifest": args.scientific_partition_manifest,
+        }
+        missing = [name for name, value in required_context.items() if not value]
+        if missing:
+            raise RuntimeError(f"context-enriched revisit missing required options: {missing}")
     if not args.dry_run:
         if not args.control_campaign_report:
             raise RuntimeError(
@@ -170,6 +252,76 @@ def main(argv: list[str] | None = None) -> int:
     same_subject_nexus_finding_count = len(
         scientific_context.same_subject_prior_science.get("nexus_only_findings", [])
     ) if scientific_context.same_subject_prior_science is not None else 0
+    market_reading = None
+    scientific_partition = None
+    context_security_id = None
+    context_sector_id = None
+    context_security_sector_ids = None
+    context_store = None
+    if args.context_enriched_revisit:
+        market_reading = load_market_reading_assessment(
+            Path(args.market_reading_calibration).expanduser().resolve()
+        )
+        scientific_partition = load_frozen_partition(
+            Path(args.scientific_partition_manifest).expanduser().resolve()
+        )
+        if scientific_partition.universe_id != args.universe_id:
+            raise RuntimeError("scientific partition universe does not match --universe-id")
+        membership = load_membership_csv(Path(args.membership_csv).expanduser().resolve())
+        ticker_matches = [
+            item for item in membership.intervals() if item.ticker.upper() == ticker
+        ]
+        security_ids = {item.security_id for item in ticker_matches}
+        if len(security_ids) != 1:
+            raise RuntimeError(f"expected exactly one calibration security identity for {ticker}")
+        context_security_id = next(iter(security_ids))
+        if context_security_id not in scientific_partition.members(ScientificCohort.DISCOVERY):
+            raise RuntimeError(
+                "context-enriched exploratory outcome access is restricted to DISCOVERY: "
+                f"{context_security_id}"
+            )
+        context_sector_id = next(
+            (str(item.sector_id) for item in ticker_matches if item.sector_id),
+            "UNCLASSIFIED",
+        )
+        context_security_sector_ids = {
+            item.security_id: str(item.sector_id or "UNCLASSIFIED")
+            for item in membership.intervals()
+        }
+        context_store = ParquetDerivedMarketStore(
+            Path(args.derived_market_root).expanduser().resolve()
+        )
+        if context_store.get_universe(args.universe_id) is None:
+            raise RuntimeError(f"derived market store does not contain universe: {args.universe_id}")
+        for feature_id, version in (
+            (args.predictor_feature_set_id, args.predictor_feature_set_version),
+            (args.outcome_feature_set_id, args.outcome_feature_set_version),
+        ):
+            if context_store.get_feature_set(feature_id, version) is None:
+                raise RuntimeError(f"derived market store does not contain feature set: {feature_id}:{version}")
+    revisit_change_context = None
+    if args.context_enriched_revisit:
+        revisit_change_context = {
+            "human_scientific_question": CONTEXT_ENRICHED_REVISIT_QUESTION,
+            "new_evidence": (
+                "Time-aligned ticker, full-current-member-universe, and current-sector predictor context "
+                "at each historical daily T; historical ticker outcomes remain explicitly exploratory."
+            ),
+            "governance_change": (
+                "Trading-hypothesis candidacy, scientific validation, and trading-promotion eligibility "
+                "are distinct and use executable chronological policy, adverse risk, costs, and expectancy."
+            ),
+            "candidate_characterization_change": CONTEXT_ENRICHED_CANDIDACY_CHANGE,
+            "scientific_authority": (
+                "Sol determines whether the changes affect any prior analysis, recommendation, finding, "
+                "hypothesis, unresolved question, or conclusion. Deterministic code imposes no retest list."
+            ),
+            "current_market_reading": {
+                "effective_scope": "CURRENT_APPLICABILITY_CONTEXT_ONLY_NOT_HISTORICAL_EVIDENCE",
+                "source_sha256": market_reading["artifact_sha256"],
+                "assessment": market_reading["assessment"],
+            },
+        }
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     state_dir = Path(args.state_dir or f"/home/ubuntu/mts-v4-sol-batched-{ticker.lower()}-{stamp}")
@@ -186,6 +338,13 @@ def main(argv: list[str] | None = None) -> int:
         print(f"REVISIT_MODE={args.revisit}")
         print(f"SAME_SUBJECT_SCIENTIFIC_PACKAGES={same_subject_package_count}")
         print(f"SAME_SUBJECT_NEXUS_ONLY_FINDINGS={same_subject_nexus_finding_count}")
+        print(f"CONTEXT_ENRICHED_REVISIT={args.context_enriched_revisit}")
+        if args.context_enriched_revisit:
+            print(f"REVISIT_QUESTION={CONTEXT_ENRICHED_REVISIT_QUESTION}")
+            print(f"MARKET_READING_CALIBRATION_SHA256={market_reading['artifact_sha256']}")
+            print(f"SCIENTIFIC_PARTITION_ID={scientific_partition.partition_id}")
+            print(f"REQUIRED_OUTCOME_COHORT={ScientificCohort.DISCOVERY.value}")
+            print(f"SECURITY_ID={context_security_id}")
         print("CROSS_SUBJECT_CONTEXT_AUTOMATIC=True")
         print("SOL_CALLS=0")
         return 0
@@ -201,6 +360,7 @@ def main(argv: list[str] | None = None) -> int:
         research_package_store=package_store,
         prior_subject_scientific_context=scientific_context.prior_subject_science,
         same_subject_prior_scientific_context=scientific_context.same_subject_prior_science,
+        revisit_change_context=revisit_change_context,
         base_url=_required_env("MTS_SOL_BASE_URL"),
         model=_required_env("MTS_SOL_MODEL"),
         api_key=_required_env("MTS_SOL_API_KEY"),
@@ -220,6 +380,21 @@ def main(argv: list[str] | None = None) -> int:
         subject=subject,
         source=standard_research_lead_market_source(),
     )
+    if args.context_enriched_revisit:
+        contextual_evidence = build_context_enriched_revisit_evidence(
+            store=context_store,
+            cache=runtime.cache,
+            subject=subject,
+            universe_id=args.universe_id,
+            security_id=context_security_id,
+            sector_id=context_sector_id,
+            security_sector_ids=context_security_sector_ids,
+            predictor_feature_set_id=args.predictor_feature_set_id,
+            predictor_feature_set_version=args.predictor_feature_set_version,
+            outcome_feature_set_id=args.outcome_feature_set_id,
+            outcome_feature_set_version=args.outcome_feature_set_version,
+        )
+        evidence = tuple(evidence) + contextual_evidence
     campaign_id = f"mts-v4-sol-batched-{ticker.lower()}-{stamp}"
     precomputed_results = dict(build_pre_sol_substrates(
         subject=subject,
@@ -243,6 +418,13 @@ def main(argv: list[str] | None = None) -> int:
                 "prior_subject_scientific_context": scientific_context.prior_subject_science,
                 "revisit_mode": args.revisit,
                 "same_subject_prior_science": scientific_context.same_subject_prior_science,
+                "revisit_change_context": revisit_change_context,
+                "scientific_partition_id": (
+                    scientific_partition.partition_id if scientific_partition is not None else None
+                ),
+                "historical_outcome_cohort": (
+                    ScientificCohort.DISCOVERY.value if scientific_partition is not None else None
+                ),
             },
             sort_keys=True,
             indent=2,

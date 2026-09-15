@@ -117,6 +117,22 @@ class UnboundedBatchPolicyTests(unittest.TestCase):
         self.assertIn("estimated_percent_complete", schema["research_progress"])
         self.assertIn("estimated_remaining_sol_calls", schema["research_progress"])
 
+    def test_sol_prompt_uses_amended_candidate_definition(self):
+        messages = SolBatchResearchDirector._batch_messages(
+            operation="BEGIN_BATCH_RESEARCH", mission="test mission", payload={},
+        )
+        user = json.loads(messages[1]["content"])
+        instructions = "\n".join(user["instructions"])
+        update = user["required_batch_decision_schema"]["research_state"][
+            "predictive_hypothesis_updates"
+        ][0]
+        self.assertIn("CREATE_TRADING_CANDIDATE_V2", update["action"])
+        self.assertIn("expectancy_units", update["exploratory_candidacy_assessment"])
+        self.assertIn("no universal candidacy success-rate", instructions)
+        self.assertIn("former greater-than-60-percent/1.5-ATR", instructions)
+        self.assertIn("positive estimated net expectancy", instructions)
+        self.assertIn("legacy binary-ledger actions", instructions)
+
 
 if __name__ == "__main__":
     unittest.main()

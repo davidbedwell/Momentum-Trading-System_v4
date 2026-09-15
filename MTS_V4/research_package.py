@@ -17,6 +17,11 @@ PREDICTIVE_VERIFICATION_SUCCESS_THRESHOLD = 0.60
 PREDICTIVE_STATUS_TENTATIVE = "TENTATIVE"
 PREDICTIVE_STATUS_VERIFIED = "VERIFIED"
 PREDICTIVE_STATUS_NOT_VERIFIED = "NOT_VERIFIED"
+PREDICTIVE_STATUS_CANDIDATE_EXPLORATORY = "CANDIDATE_EXPLORATORY"
+PREDICTIVE_STATUS_SCIENTIFICALLY_VALIDATED = "SCIENTIFICALLY_VALIDATED"
+PREDICTIVE_STATUS_SCIENTIFICALLY_REJECTED = "SCIENTIFICALLY_REJECTED"
+PREDICTIVE_STATUS_TRADING_PROMOTION_ELIGIBLE = "TRADING_PROMOTION_ELIGIBLE"
+PREDICTIVE_STATUS_TRADING_PROMOTION_INELIGIBLE = "TRADING_PROMOTION_INELIGIBLE"
 
 
 @dataclass(frozen=True, slots=True)
@@ -68,6 +73,11 @@ class PredictiveHypothesisRecord:
     success_rate: float | None = None
     created_at: str = field(default_factory=_utc_now)
     updated_at: str = field(default_factory=_utc_now)
+    lifecycle_version: str = "LEGACY_BINARY_V1"
+    executable_policy: Mapping[str, Any] = field(default_factory=dict)
+    exploratory_candidacy_assessment: Mapping[str, Any] = field(default_factory=dict)
+    scientific_validation_assessment: Mapping[str, Any] = field(default_factory=dict)
+    trading_promotion_assessment: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if not self.hypothesis_id.strip():
@@ -86,6 +96,11 @@ class PredictiveHypothesisRecord:
             PREDICTIVE_STATUS_TENTATIVE,
             PREDICTIVE_STATUS_VERIFIED,
             PREDICTIVE_STATUS_NOT_VERIFIED,
+            PREDICTIVE_STATUS_CANDIDATE_EXPLORATORY,
+            PREDICTIVE_STATUS_SCIENTIFICALLY_VALIDATED,
+            PREDICTIVE_STATUS_SCIENTIFICALLY_REJECTED,
+            PREDICTIVE_STATUS_TRADING_PROMOTION_ELIGIBLE,
+            PREDICTIVE_STATUS_TRADING_PROMOTION_INELIGIBLE,
         }:
             raise ResearchPackageError(f"invalid predictive hypothesis status: {self.status}")
 
