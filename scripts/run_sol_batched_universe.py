@@ -13,10 +13,11 @@ from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase
 from MTS_V4.derived_market_evidence import derived_market_evidence_descriptor
 from MTS_V4.derived_market_store import DerivedMarketQuery, ParquetDerivedMarketStore
+from MTS_V4.qwen_shadow_gate import ReplayCapturingSubjectContextSolBatchResearchDirector
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.research_scope import universe_scope
 from MTS_V4.sol_spend_guard import DEFAULT_AUTHORIZED_SOL_SPEND_USD, SolSpendAuthorizationRequired, SolSpendAuthorizationSnapshot
-from MTS_V4.subject_scientific_context import SubjectContextSolBatchResearchDirector, load_subject_scientific_context
+from MTS_V4.subject_scientific_context import load_subject_scientific_context
 
 
 def _required_env(name: str) -> str:
@@ -69,10 +70,12 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--outcome-feature-set-version", default=None)
     parser.add_argument("--outcome-feature-column", action="append", default=[])
     parser.add_argument("--allow-historical-outcomes", action="store_true", help="explicitly authorize future-information outcome evidence for EXPLORATION only")
+    parser.add_argument("--research-objective", default=None, help="optional blinded scientific objective appended to the governing MTS mission")
     parser.add_argument("--root", default="/home/ubuntu")
     parser.add_argument("--derived-market-root", default=None)
     parser.add_argument("--state-dir", default=None)
     parser.add_argument("--sol-spend-limit-usd", type=float, default=DEFAULT_AUTHORIZED_SOL_SPEND_USD)
+    parser.add_argument("--no-interactive-spend-extension", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     return parser
 
@@ -109,6 +112,9 @@ def main(argv: list[str] | None = None) -> int:
     frontier = scientific_context.memory_selection.store.frontier()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     state_dir = Path(args.state_dir or f"/home/ubuntu/mts-v4-sol-batched-universe-{universe_id.lower()}-{stamp}")
+    mission = DEFAULT_MISSION
+    if args.research_objective and args.research_objective.strip():
+        mission += " Blinded calibration objective: " + args.research_objective.strip()
 
     if args.dry_run:
         print("DRY_RUN=True")
@@ -119,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"OUTCOME_FEATURE_SET={outcome_query.feature_set_key}")
             print(f"OUTCOME_ROWS={len(store.query(outcome_query))}")
             print("HISTORICAL_OUTCOMES_EXPLICITLY_AUTHORIZED=True")
+        print(f"BLINDED_RESEARCH_OBJECTIVE_PRESENT={bool(args.research_objective and args.research_objective.strip())}")
         print("SOL_CALLS=0")
         return 0
 
@@ -126,23 +133,25 @@ def main(argv: list[str] | None = None) -> int:
     os.environ.setdefault("MTS_SOL_TELEMETRY_PATH", str(state_dir / "sol_transport_telemetry.jsonl"))
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
-    rd = SubjectContextSolBatchResearchDirector(
+    rd = ReplayCapturingSubjectContextSolBatchResearchDirector(
         research_package_store=package_store,
         prior_subject_scientific_context=scientific_context.prior_subject_science,
         same_subject_prior_scientific_context=scientific_context.same_subject_prior_science,
+        replay_capture_path=state_dir / "sol_replay_envelopes.jsonl",
         base_url=_required_env("MTS_SOL_BASE_URL"), model=_required_env("MTS_SOL_MODEL"), api_key=_required_env("MTS_SOL_API_KEY"),
         timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")), required_subject_id=subject.subject_id,
         required_research_phase=ResearchPhase.EXPLORATION, sol_spend_limit_usd=args.sol_spend_limit_usd,
-        human_spend_authorization_callback=_interactive_spend_authorization,
+        human_spend_authorization_callback=(None if args.no_interactive_spend_extension else _interactive_spend_authorization),
     )
-    runtime = build_batch_runtime(rd=rd, mission=DEFAULT_MISSION, nexus_path=state_dir / "research_nexus.json", derived_market_root=derived_root, scientific_memory=scientific_context.memory_selection.store)
+    runtime = build_batch_runtime(rd=rd, mission=mission, nexus_path=state_dir / "research_nexus.json", derived_market_root=derived_root, scientific_memory=scientific_context.memory_selection.store)
     evidence_list = [derived_market_evidence_descriptor(store=runtime.nexus.derived_market_store, cache=runtime.cache, subject=subject, query=primary_query, allow_future_outcomes=False)]
     if outcome_query is not None:
         evidence_list.append(derived_market_evidence_descriptor(store=runtime.nexus.derived_market_store, cache=runtime.cache, subject=subject, query=outcome_query, allow_future_outcomes=True))
     evidence = tuple(evidence_list)
     campaign_id = f"mts-v4-sol-batched-universe-{universe_id.lower()}-{stamp}"
     context_payload = {
-        "active_scope_id": subject.subject_id, "scope_type": "UNIVERSE", "mission": DEFAULT_MISSION,
+        "active_scope_id": subject.subject_id, "scope_type": "UNIVERSE", "mission": mission,
+        "blinded_research_objective": args.research_objective,
         "universe_definition": asdict(universe), "primary_query": asdict(primary_query),
         "outcome_query": asdict(outcome_query) if outcome_query else None,
         "historical_outcomes_explicitly_authorized": bool(outcome_query),
@@ -185,12 +194,14 @@ def main(argv: list[str] | None = None) -> int:
     spend = rd.sol_spend_snapshot()
     summary = {
         "campaign_id": campaign_id, "scope_id": subject.subject_id, "universe_id": universe_id,
+        "blinded_research_objective": args.research_objective,
         "primary_query": asdict(primary_query), "outcome_query": asdict(outcome_query) if outcome_query else None,
         "decisions": outcome.decisions, "batches_executed": outcome.batches_executed,
         "analyses_executed": outcome.analyses_executed, "findings_promoted": outcome.findings_promoted,
         "closed": outcome.closed, "close_reason": outcome.close_reason,
         "analysis_cache": runtime.analysis.cache_stats() if hasattr(runtime.analysis, "cache_stats") else None,
         "sol_spend": asdict(spend) if spend else None,
+        "qwen_replay_capture": str(state_dir / "sol_replay_envelopes.jsonl"),
     }
     (state_dir / "run_summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"STATE_DIR={state_dir}", flush=True)
