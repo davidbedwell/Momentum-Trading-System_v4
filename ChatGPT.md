@@ -145,6 +145,12 @@ Analysis may expose a governed method catalog and objective execution contracts.
 
 Analysis returns governed results with sufficient metadata and lineage for RD interpretation and durable promotion when appropriate.
 
+### Bounded market-reading calibration
+
+A neutral, predictor-only Analysis representation may be shown to an approved AI in a separately labeled market-reading calibration before an autonomous scientific campaign. This is permitted only to assess whether the AI can coherently describe the represented market structure, breadth, participation, trend, momentum, volatility, dispersion, sector structure, cross-sectional organization, contradictions, and uncertainty.
+
+Such a calibration must be explicitly bounded to a fixed number of AI calls and a human-authorized spend ceiling. It may not consume historical outcomes or reserved-cohort outcomes; create or test predictive or trading hypotheses; recommend trades; claim predictive accuracy or scientific validation; promote findings to Nexus; or satisfy, weaken, or bypass any scientific-campaign readiness gate. Its output is a non-scientific capability assessment. Scientific discovery remains governed by the normal Research Director, Analysis, control, partition, validation, and promotion contracts.
+
 ## 10. Research Nexus
 
 The Research Nexus is durable research memory, not a reproducible-data warehouse.
