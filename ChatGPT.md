@@ -727,3 +727,18 @@ Offline AAPL-scale verification found:
 - the full test gate passed with 429 tests.
 
 These are measured transport and coverage improvements, not a claim that Sol will finish every ticker for $5. A paid replay is still required to measure actual call-count adaptation. Do not resume or launch a paid sequence without an explicit human instruction after this repair is pushed and preflighted.
+
+
+## Universe Scientific Partition and Compact Transfer — 2026-09-15
+
+The human approved a strict separation between complete derived-store coverage and scientific outcome exposure.
+
+The server derived market store may contain the complete universe. Before historical universe outcomes reach Sol/Qwen, stable security identities must be assigned to an immutable exact-size `DISCOVERY`, `VERIFICATION_A`, and `VERIFICATION_B` partition. Cohort sizes are explicit human governance inputs; deterministic code has no default scientific split. Full-universe predictor-time context may support ranks, breadth, and other contemporaneous measurements without itself consuming a security's future outcomes.
+
+The universe discovery runner may expose historical outcomes only for the frozen `DISCOVERY` cohort. Reserved verification cohorts remain inaccessible until a separate locked-hypothesis blind-verification path is implemented and tested. Outcome participation must not be hidden by administrative labeling.
+
+Campaign transfer to the local Nexus is compact. Transfer scientific metadata/findings, Research Packages, compact Analysis reports/decisions, lineage/context, exposure records, and run/spend summaries. Do not transfer the server's derived-market Parquet corpus, raw/reacquirable data, Analysis cache datasets, or bulky AI transport/replay files.
+
+Authoritative detail:
+
+`Documentation/2026-09-15_MTS_V4_UNIVERSE_SCIENTIFIC_PARTITION.md`
