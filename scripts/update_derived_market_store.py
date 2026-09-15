@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import asdict
 from datetime import date
+import fcntl
 import json
 from pathlib import Path
 
@@ -12,9 +13,7 @@ from MTS_V4.universe_membership import load_membership_csv
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Incrementally extend the Nexus-derived market store from explicit point-in-time membership and reacquirable daily market data."
-    )
+    parser = argparse.ArgumentParser(description="Incrementally extend the Nexus-derived market store from explicit point-in-time membership and reacquirable daily market data.")
     parser.add_argument("--derived-market-root", required=True)
     parser.add_argument("--universe-id", required=True)
     parser.add_argument("--universe-description", required=True)
@@ -31,32 +30,37 @@ def _parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     membership = load_membership_csv(args.membership_csv, source_identity=args.membership_source)
-    universe = UniverseDefinition(
-        universe_id=args.universe_id,
-        description=args.universe_description,
-        membership_source=args.membership_source,
-        point_in_time_membership_required=True,
-    )
-    store = ParquetDerivedMarketStore(Path(args.derived_market_root))
+    universe = UniverseDefinition(args.universe_id, args.universe_description, args.membership_source, True)
+    root = Path(args.derived_market_root)
+    store = ParquetDerivedMarketStore(root)
     if args.dry_run:
-        existing = store.get_universe(args.universe_id)
         print("DRY_RUN=True")
         print(f"UNIVERSE_ID={args.universe_id}")
         print(f"MEMBERSHIP_INTERVALS={len(membership.intervals())}")
-        print(f"EXISTING_UNIVERSE={existing is not None}")
+        print(f"EXISTING_UNIVERSE={store.get_universe(args.universe_id) is not None}")
         print("MARKET_DOWNLOADS=0")
         print("SOL_CALLS=0")
         return 0
-    result = maintain_standard_market_store(
-        store=store,
-        universe=universe,
-        membership=membership,
-        source=YFinanceDailyMarketSource(),
-        through_date=args.through_date,
-        initial_start_date=args.initial_start_date,
-        update_id_prefix=args.update_id_prefix,
-        publish_outcomes=not args.no_outcomes,
-    )
+
+    # Maintenance is a single writer transaction at the process level. Readers
+    # continue seeing the prior manifest until append_update atomically advances it.
+    lock_path = root / ".maintenance.lock"
+    with lock_path.open("a+") as lock_handle:
+        try:
+            fcntl.flock(lock_handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise RuntimeError(f"another derived-market maintenance writer already holds {lock_path}") from exc
+        result = maintain_standard_market_store(
+            store=store,
+            universe=universe,
+            membership=membership,
+            source=YFinanceDailyMarketSource(),
+            through_date=args.through_date,
+            initial_start_date=args.initial_start_date,
+            update_id_prefix=args.update_id_prefix,
+            publish_outcomes=not args.no_outcomes,
+        )
+        fcntl.flock(lock_handle.fileno(), fcntl.LOCK_UN)
     print(json.dumps(asdict(result), indent=2, sort_keys=True))
     print("SOL_CALLS=0")
     return 0
