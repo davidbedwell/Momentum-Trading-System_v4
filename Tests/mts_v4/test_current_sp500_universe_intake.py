@@ -24,10 +24,23 @@ def test_universe_intake_normalizes_stable_identity_ticker_and_effective_start()
         acquisition_floor="2005-09-14",
         source_identity="TEST",
     )
-    first = next(row for row in rows if row["security_id"] == "SEC_CIK_0000000001")
+    first = next(row for row in rows if row["security_id"] == "CAL_SEC_CIK_0000000001_BRK_B")
     assert first["ticker"] == "BRK-B"
     assert first["start_date"] == "2005-09-14"
     assert first["source_identity"] == "TEST"
+
+
+def test_universe_intake_keeps_share_classes_with_same_issuer_cik_distinct():
+    records = _records()
+    records[1]["CIK"] = records[0]["CIK"]
+    records[1]["Symbol"] = "BRK.A"
+    rows = normalize_current_sp500_rows(
+        records,
+        acquisition_floor="2005-09-14",
+        source_identity="TEST",
+    )
+    identities = {row["security_id"] for row in rows if str(row["security_id"]).startswith("CAL_SEC_CIK_0000000001")}
+    assert identities == {"CAL_SEC_CIK_0000000001_BRK_A", "CAL_SEC_CIK_0000000001_BRK_B"}
 
 
 def test_universe_intake_rejects_implausible_constituent_count():
