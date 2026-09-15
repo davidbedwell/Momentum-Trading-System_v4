@@ -21,6 +21,13 @@ class ScientificCohort(str, Enum):
     VERIFICATION_B = "VERIFICATION_B"
 
 
+class ScientificExposure(str, Enum):
+    CONTEXT_ONLY = "CONTEXT_ONLY"
+    DISCOVERY_OUTCOME_EXPOSED = "DISCOVERY_OUTCOME_EXPOSED"
+    BLIND_VERIFICATION_EXPOSED = "BLIND_VERIFICATION_EXPOSED"
+    SUBJECT_RESEARCHED = "SUBJECT_RESEARCHED"
+
+
 @dataclass(frozen=True, slots=True)
 class UniverseScientificPartition:
     universe_id: str
@@ -151,4 +158,46 @@ def write_frozen_partition(path: str | Path, partition: UniverseScientificPartit
         json.dumps(partition.to_mapping(), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
+    temporary.replace(target)
+
+
+def write_campaign_exposure_ledger(
+    path: str | Path,
+    *,
+    partition: UniverseScientificPartition,
+    campaign_id: str,
+    context_security_ids: Sequence[str],
+    outcome_security_ids: Sequence[str],
+) -> None:
+    """Record member exposure without equating market context with outcome use."""
+
+    context = tuple(sorted(set(context_security_ids)))
+    outcomes = tuple(sorted(set(outcome_security_ids)))
+    universe = set(partition.all_security_ids)
+    if not set(context).issubset(universe) or not set(outcomes).issubset(universe):
+        raise UniverseScientificPartitionError("exposure ledger contains identity outside partition")
+    discovery = set(partition.members(ScientificCohort.DISCOVERY))
+    if not set(outcomes).issubset(discovery):
+        raise UniverseScientificPartitionError("discovery runner cannot expose reserved-cohort outcomes")
+    payload = {
+        "format": "MTS_V4_UNIVERSE_SCIENTIFIC_EXPOSURE_V1",
+        "campaign_id": campaign_id,
+        "universe_id": partition.universe_id,
+        "partition_id": partition.partition_id,
+        "exposures": {
+            ScientificExposure.CONTEXT_ONLY.value: list(context),
+            ScientificExposure.DISCOVERY_OUTCOME_EXPOSED.value: list(outcomes),
+            ScientificExposure.BLIND_VERIFICATION_EXPOSED.value: [],
+            ScientificExposure.SUBJECT_RESEARCHED.value: [],
+        },
+        "reserved_unexposed": {
+            ScientificCohort.VERIFICATION_A.value: list(partition.members(ScientificCohort.VERIFICATION_A)),
+            ScientificCohort.VERIFICATION_B.value: list(partition.members(ScientificCohort.VERIFICATION_B)),
+        },
+    }
+    target = Path(path)
+    if target.exists():
+        raise UniverseScientificPartitionError("refusing to replace campaign exposure ledger")
+    temporary = target.with_suffix(target.suffix + ".tmp")
+    temporary.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     temporary.replace(target)
