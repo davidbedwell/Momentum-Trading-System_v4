@@ -43,7 +43,7 @@ class V4DataBoundaryTests(unittest.TestCase):
         self.assertFalse(hasattr(durable, "cache_key"))
         self.assertEqual(durable.content_identity, descriptor.content_identity)
 
-    def test_json_nexus_persists_lineage_metadata_and_findings_not_raw_dataset(self):
+    def test_json_nexus_persists_lineage_and_derived_store_pointer_not_raw_dataset(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "nexus.json"
             nexus = JsonResearchNexus(path)
@@ -101,10 +101,12 @@ class V4DataBoundaryTests(unittest.TestCase):
                     "analysis_result_metadata",
                     "findings",
                     "finding_retractions",
+                    "derived_market_store",
                 },
             )
             self.assertEqual(document["finding_retractions"], [])
             self.assertEqual(document["analysis_result_metadata"][0]["result_id"], "r:1")
+            self.assertIn("root", document["derived_market_store"])
             serialized = path.read_text(encoding="utf-8")
             self.assertNotIn('"payload"', serialized)
             self.assertNotIn('"rows"', serialized)
@@ -112,10 +114,7 @@ class V4DataBoundaryTests(unittest.TestCase):
 
             reopened = JsonResearchNexus(path)
             self.assertEqual(reopened.get_subject("AAPL").ticker, "AAPL")
-            self.assertEqual(
-                reopened.get_evidence_metadata("ev:1").source_identity,
-                "fixture-source",
-            )
+            self.assertEqual(reopened.get_evidence_metadata("ev:1").source_identity, "fixture-source")
             self.assertEqual(reopened.get_analysis_result_metadata("r:1").method_id, "analysis.fixture")
             finding = reopened.get_finding("f:1")
             self.assertEqual(finding.statement, "Significant result")
