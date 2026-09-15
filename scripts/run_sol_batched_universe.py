@@ -20,7 +20,7 @@ from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.research_scope import universe_scope
 from MTS_V4.sol_spend_guard import DEFAULT_AUTHORIZED_SOL_SPEND_USD, SolSpendAuthorizationRequired, SolSpendAuthorizationSnapshot
 from MTS_V4.subject_scientific_context import load_subject_scientific_context
-from MTS_V4.universe_scientific_partition import ScientificCohort, load_frozen_partition
+from MTS_V4.universe_scientific_partition import ScientificCohort, load_frozen_partition, write_campaign_exposure_ledger
 
 
 def _required_env(name: str) -> str:
@@ -184,6 +184,15 @@ def main(argv: list[str] | None = None) -> int:
         evidence_list.append(derived_market_evidence_descriptor(store=runtime.nexus.derived_market_store, cache=runtime.cache, subject=subject, query=outcome_query, allow_future_outcomes=True))
     evidence = tuple(evidence_list)
     campaign_id = f"mts-v4-sol-batched-universe-{universe_id.lower()}-{stamp}"
+    if outcome_query is not None:
+        context_security_ids = tuple(sorted({str(row["security_id"]) for row in store.query(primary_query)}))
+        write_campaign_exposure_ledger(
+            state_dir / "scientific_exposure_ledger.json",
+            partition=partition,
+            campaign_id=campaign_id,
+            context_security_ids=context_security_ids,
+            outcome_security_ids=outcome_query.security_ids,
+        )
     context_payload = {
         "active_scope_id": subject.subject_id, "scope_type": "UNIVERSE", "mission": mission,
         "research_objective": args.research_objective,
