@@ -68,9 +68,7 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
     ) -> None:
         super().__init__(*args, **kwargs)
         self._historical_subject_context = dict(historical_subject_context)
-        self._prior_cross_subject_memory_documents = tuple(
-            dict(document) for document in prior_cross_subject_memory_documents
-        )
+        self._prior_cross_subject_memory_documents = tuple(dict(document) for document in prior_cross_subject_memory_documents)
         configured_path = generalization_state_path or os.getenv("MTS_GENERALIZATION_STATE_PATH", "").strip()
         self._generalization_ledger = JsonGeneralizationStateLedger(configured_path) if configured_path else None
         if generalization_state_context is not None:
@@ -83,10 +81,7 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
     def _accept_batch_decision(self, decision: BatchResearchDecision) -> BatchResearchDecision:
         accepted = super()._accept_batch_decision(decision)
         if self._generalization_ledger is not None:
-            apply_rd_generalization_updates(
-                research_state=accepted.research_state,
-                ledger=self._generalization_ledger,
-            )
+            apply_rd_generalization_updates(research_state=accepted.research_state, ledger=self._generalization_ledger)
             self._generalization_state_context = dict(self._generalization_ledger.context())
         return accepted
 
@@ -128,11 +123,7 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
         mission: str,
         payload: Mapping[str, object],
     ) -> list[Mapping[str, str]]:
-        messages = super()._batch_messages(
-            operation=operation,
-            mission=mission,
-            payload=payload,
-        )
+        messages = super()._batch_messages(operation=operation, mission=mission, payload=payload)
         system = messages[0]["content"] + (
             " This is an explicit CROSS-SUBJECT GENERALIZATION research campaign. The active subject is a synthetic "
             "program-level subject, not a ticker. Advertised evidence may originate from many previously analyzed "
@@ -146,8 +137,10 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
             "experiment is scientifically useful, author the Analysis Specifications yourself using the exact advertised "
             "evidence IDs and available methods. If only a transfer test on one ticker is warranted, you may author that "
             "instead. If no cross-subject proposition is currently justified, close with zero analyses and explain why. "
-            "Durable generalization status is also yours to author explicitly. Deterministic code may validate an allowed "
-            "state transition but never infer one from findings or statistical results."
+            "Deterministic code does not choose which subjects to compare, how to normalize them, which variables or "
+            "methods to use, or whether a generalization is supported. Durable generalization status is also yours to "
+            "author explicitly. Deterministic code may validate an allowed state transition but never infer one from "
+            "findings or statistical results."
         )
         user = json.loads(messages[1]["content"])
         research_state = user["required_batch_decision_schema"]["research_state"]
@@ -159,10 +152,7 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
                 "source_subject_ids": "CREATE_SUBJECT_TENTATIVE only: one or more exact subject IDs",
                 "source_hypothesis_ids": "optional source hypothesis IDs",
                 "source_finding_ids": "optional source finding IDs",
-                "to_status": (
-                    "TRANSITION only: CROSS_SUBJECT_CANDIDATE, CROSS_SUBJECT_VALIDATING, "
-                    "CROSS_SUBJECT_VERIFIED, or CROSS_SUBJECT_NOT_VERIFIED"
-                ),
+                "to_status": "TRANSITION only: CROSS_SUBJECT_CANDIDATE, CROSS_SUBJECT_VALIDATING, CROSS_SUBJECT_VERIFIED, or CROSS_SUBJECT_NOT_VERIFIED",
                 "rationale": "nonblank RD-authored scientific rationale",
                 "evidence_subject_ids": "TRANSITION only: exact subjects contributing to this transition",
                 "supporting_result_ids": "optional exact supporting result IDs",
@@ -174,6 +164,7 @@ class SolCrossSubjectGeneralizationResearchDirector(SolBatchResearchDirector):
         user["instructions"].extend(
             [
                 "Generalization state is explicit and append-only: SUBJECT_TENTATIVE -> CROSS_SUBJECT_CANDIDATE -> CROSS_SUBJECT_VALIDATING -> CROSS_SUBJECT_VERIFIED or CROSS_SUBJECT_NOT_VERIFIED.",
+                "generalization_updates is a decision-local delta, not cumulative state. Do not repeat an update already present in durable_generalization_state.",
                 "Do not promote a cross-subject state merely because deterministic code can represent it. Author a generalization_update only when your scientific judgment supports that exact transition.",
                 "Entering CROSS_SUBJECT_CANDIDATE requires provenance from at least two subjects. Entering CROSS_SUBJECT_VALIDATING requires you to freeze validation_criteria before the validation trials. A terminal validation disposition must cite the validation_trial_ids.",
                 "A materially revised proposition requires a new generalization_id rather than rewriting prior state.",
