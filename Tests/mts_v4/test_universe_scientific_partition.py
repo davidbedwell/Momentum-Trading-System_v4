@@ -8,6 +8,7 @@ from MTS_V4.universe_scientific_partition import (
     ScientificCohort,
     UniverseScientificPartitionError,
     create_frozen_partition,
+    create_stratified_frozen_partition,
     load_frozen_partition,
     write_frozen_partition,
     write_campaign_exposure_ledger,
@@ -114,3 +115,48 @@ def test_exposure_ledger_distinguishes_context_from_outcome_and_preserves_reserv
     assert set(payload["exposures"]["DISCOVERY_OUTCOME_EXPOSED"]) == set(partition.members(ScientificCohort.DISCOVERY))
     assert payload["exposures"]["BLIND_VERIFICATION_EXPOSED"] == []
     assert set(payload["reserved_unexposed"]["VERIFICATION_A"]) == set(partition.members(ScientificCohort.VERIFICATION_A))
+
+
+def test_stratified_partition_is_exact_reproducible_and_balanced() -> None:
+    ids = [f"SEC-{number:02d}" for number in range(30)]
+    strata = {
+        security_id: (f"SECTOR-{index % 2}", f"SIZE-{index % 3}")
+        for index, security_id in enumerate(ids)
+    }
+    sizes = {
+        ScientificCohort.DISCOVERY: 18,
+        ScientificCohort.VERIFICATION_A: 6,
+        ScientificCohort.VERIFICATION_B: 6,
+    }
+    first, audit = create_stratified_frozen_partition(
+        universe_id="sp500", security_ids=ids, cohort_sizes=sizes, strata=strata, salt="x"
+    )
+    second, _ = create_stratified_frozen_partition(
+        universe_id="sp500", security_ids=list(reversed(ids)), cohort_sizes=sizes,
+        strata=strata, salt="x"
+    )
+    assert first == second
+    assert len(first.members(ScientificCohort.DISCOVERY)) == 18
+    assert len(first.members(ScientificCohort.VERIFICATION_A)) == 6
+    assert len(first.members(ScientificCohort.VERIFICATION_B)) == 6
+    assert set(first.all_security_ids) == set(ids)
+    assert audit["scientific_selection_or_ranking"] is False
+    for item in audit["strata"]:
+        assert item["cohort_counts"] == {
+            "DISCOVERY": 3, "VERIFICATION_A": 1, "VERIFICATION_B": 1
+        }
+
+
+def test_stratified_partition_requires_complete_attributes() -> None:
+    with pytest.raises(UniverseScientificPartitionError, match="exactly cover"):
+        create_stratified_frozen_partition(
+            universe_id="sp500",
+            security_ids=["A", "B"],
+            cohort_sizes={
+                ScientificCohort.DISCOVERY: 1,
+                ScientificCohort.VERIFICATION_A: 1,
+                ScientificCohort.VERIFICATION_B: 0,
+            },
+            strata={"A": ("TECH", "UPPER")},
+            salt="x",
+        )

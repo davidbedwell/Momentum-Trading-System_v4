@@ -10,6 +10,8 @@ Contemporaneous predictor-time market context may use the complete universe for 
 
 Before historical universe outcomes are supplied to an AI Research Director, stable security identities must be assigned once to exact-size cohorts using a frozen deterministic partition. Cohort sizes are explicit human governance inputs. Deterministic code has no default allocation and does not rank securities scientifically.
 
+For the current 503-security calibration universe, the human approved a `303 / 100 / 100` allocation. Assignment must be stratified jointly by current GICS sector and relative current-market-cap tercile, then salted-randomized within each stratum. The partition must publish a balance audit before any outcome exposure. Current market capitalization is acquired through Intake and used only as a governance-balancing attribute; it is not historical PIT evidence, is not supplied to RD as a scientific predictor, and must not support a historical size claim.
+
 The initial roles are:
 
 - `DISCOVERY`: historical outcomes may be used during EXPLORATION;

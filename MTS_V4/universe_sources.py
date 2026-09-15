@@ -1,8 +1,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timezone
+import hashlib
 import io
+import json
+from pathlib import Path
+import time
 from typing import Iterable, Mapping, Sequence
 import urllib.request
 
@@ -15,6 +20,14 @@ CURRENT_SP500_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
 
 class UniverseSourceError(RuntimeError):
     pass
+
+
+def _positive_float(value: object) -> float | None:
+    try:
+        number = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return None
+    return number if number > 0 else None
 
 
 def _ticker_for_yfinance(value: object) -> str:
@@ -148,5 +161,129 @@ class CurrentSp500CalibrationUniverseSource:
                 "CIK-plus-share-class calibration identity, "
                 "and current sector attributes. Former constituents are absent. This evidence can exercise "
                 "universe plumbing and AI calibration but cannot establish authoritative historical PIT results."
+            ),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class CurrentUniverseMarketCapSource:
+    """Acquire current market caps for governance-only stratification through Intake."""
+
+    members: tuple[Mapping[str, object], ...]
+    as_of_date: str
+    download_workers: int = 6
+    download_attempts: int = 4
+    acquisition_cache_root: str | Path | None = None
+
+    def acquire(self, subject: SubjectMetadata) -> Iterable[IntakePayload]:
+        if subject.attributes.get("research_scope_type") != "UNIVERSE":
+            raise UniverseSourceError("current market-cap source requires a UNIVERSE research scope")
+        date.fromisoformat(self.as_of_date)
+        if self.download_workers < 1 or self.download_attempts < 1:
+            raise UniverseSourceError("download workers and attempts must be positive")
+        try:
+            import yfinance as yf
+        except ImportError as exc:
+            raise UniverseSourceError("yfinance is required for current market-cap acquisition") from exc
+
+        acquired_at = datetime.now(timezone.utc).isoformat()
+        cache_root = (
+            Path(self.acquisition_cache_root).expanduser().resolve()
+            if self.acquisition_cache_root is not None else None
+        )
+        if cache_root is not None:
+            cache_root.mkdir(parents=True, exist_ok=True)
+
+        def fetch(member: Mapping[str, object]) -> Mapping[str, object]:
+            ticker = str(member["ticker"]).strip().upper()
+            security_id = str(member["security_id"])
+            cache_path = None
+            if cache_root is not None:
+                digest = hashlib.sha256(
+                    f"{security_id}|{ticker}|{self.as_of_date}".encode("utf-8")
+                ).hexdigest()
+                cache_path = cache_root / f"{digest}.json"
+                if cache_path.exists():
+                    cached = json.loads(cache_path.read_text(encoding="utf-8"))
+                    if (
+                        cached.get("security_id") == security_id
+                        and cached.get("ticker") == ticker
+                        and cached.get("as_of_date") == self.as_of_date
+                        and _positive_float(cached.get("market_cap")) is not None
+                    ):
+                        print(f"MARKET_CAP_ACQUISITION_CACHE_HIT TICKER={ticker}", flush=True)
+                        return cached
+            last_error: Exception | None = None
+            for attempt in range(1, self.download_attempts + 1):
+                try:
+                    instrument = yf.Ticker(ticker)
+                    fast = instrument.fast_info
+                    market_cap = _positive_float(getattr(fast, "market_cap", None))
+                    if market_cap is None:
+                        try:
+                            market_cap = _positive_float(fast.get("marketCap"))
+                        except Exception:
+                            market_cap = None
+                    if market_cap is None:
+                        market_cap = _positive_float((instrument.get_info() or {}).get("marketCap"))
+                    if market_cap is None:
+                        raise UniverseSourceError(f"provider returned no positive market cap for {ticker}")
+                    row = {
+                        "security_id": security_id,
+                        "ticker": ticker,
+                        "as_of_date": self.as_of_date,
+                        "market_cap": market_cap,
+                    }
+                    if cache_path is not None:
+                        temporary = cache_path.with_suffix(".json.tmp")
+                        temporary.write_text(
+                            json.dumps(row, sort_keys=True) + "\n", encoding="utf-8"
+                        )
+                        temporary.replace(cache_path)
+                    return row
+                except Exception as exc:
+                    last_error = exc
+                    if attempt < self.download_attempts:
+                        time.sleep(float(2 ** (attempt - 1)))
+            raise UniverseSourceError(
+                f"current market-cap acquisition failed for {ticker} after "
+                f"{self.download_attempts} attempts: {type(last_error).__name__}: {last_error}"
+            )
+
+        rows: list[Mapping[str, object]] = []
+        with ThreadPoolExecutor(max_workers=self.download_workers) as pool:
+            futures = {pool.submit(fetch, member): str(member["ticker"]) for member in self.members}
+            completed = 0
+            for future in as_completed(futures):
+                rows.append(future.result())
+                completed += 1
+                print(
+                    f"MARKET_CAP_ACQUISITION_COMPLETED={completed}/{len(self.members)} "
+                    f"TICKER={futures[future]}",
+                    flush=True,
+                )
+        rows.sort(key=lambda row: str(row["security_id"]))
+        if len(rows) != len(self.members):
+            raise UniverseSourceError("market-cap acquisition did not cover every supplied member")
+        yield IntakePayload(
+            payload=tuple(rows),
+            evidence_type="CURRENT_MARKET_CAP_GOVERNANCE_SNAPSHOT",
+            artifact_type="NORMALIZED_DATASET",
+            source_identity=f"YFINANCE_CURRENT_MARKET_CAP_AS_OF_{self.as_of_date}",
+            coverage_start=self.as_of_date,
+            coverage_end=self.as_of_date,
+            row_count=len(rows),
+            schema=("security_id", "ticker", "as_of_date", "market_cap"),
+            provenance={
+                "provider": "yfinance",
+                "as_of_date": self.as_of_date,
+                "acquired_at_utc": acquired_at,
+                "authorized_use": "GOVERNANCE_STRATIFICATION_ONLY",
+                "historical_point_in_time": False,
+                "scientific_predictor": False,
+            },
+            neutral_semantics=(
+                "Current provider-reported market capitalization used only to balance frozen scientific "
+                "cohorts. It is not historical PIT evidence and is not supplied as a predictive feature."
             ),
         )

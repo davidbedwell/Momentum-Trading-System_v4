@@ -1,8 +1,16 @@
 from __future__ import annotations
 
+import sys
+from types import SimpleNamespace
+
 import pytest
 
-from MTS_V4.universe_sources import UniverseSourceError, normalize_current_sp500_rows
+from MTS_V4.research_scope import universe_scope
+from MTS_V4.universe_sources import (
+    CurrentUniverseMarketCapSource,
+    UniverseSourceError,
+    normalize_current_sp500_rows,
+)
 
 
 def _records(count: int = 500):
@@ -50,3 +58,38 @@ def test_universe_intake_rejects_implausible_constituent_count():
             acquisition_floor="2005-09-14",
             source_identity="TEST",
         )
+
+
+def test_current_market_caps_are_acquired_as_governance_only_evidence_and_checkpointed(
+    monkeypatch, tmp_path
+):
+    class _Ticker:
+        def __init__(self, ticker):
+            self.fast_info = SimpleNamespace(market_cap={"AAA": 100.0, "BBB": 200.0}[ticker])
+
+    monkeypatch.setitem(sys.modules, "yfinance", SimpleNamespace(Ticker=_Ticker))
+    subject = universe_scope("u").to_subject_metadata(display_ticker="U")
+    source = CurrentUniverseMarketCapSource(
+        members=(
+            {"security_id": "SEC_A", "ticker": "AAA"},
+            {"security_id": "SEC_B", "ticker": "BBB"},
+        ),
+        as_of_date="2026-09-15",
+        download_workers=2,
+        download_attempts=1,
+        acquisition_cache_root=tmp_path / "market-cap-cache",
+    )
+    payload = tuple(source.acquire(subject))[0]
+    assert payload.row_count == 2
+    assert payload.provenance["authorized_use"] == "GOVERNANCE_STRATIFICATION_ONLY"
+    assert payload.provenance["historical_point_in_time"] is False
+    assert payload.provenance["scientific_predictor"] is False
+    assert len(tuple((tmp_path / "market-cap-cache").glob("*.json"))) == 2
+
+    monkeypatch.setitem(
+        sys.modules,
+        "yfinance",
+        SimpleNamespace(Ticker=lambda ticker: (_ for _ in ()).throw(AssertionError(ticker))),
+    )
+    cached_payload = tuple(source.acquire(subject))[0]
+    assert cached_payload.payload == payload.payload
