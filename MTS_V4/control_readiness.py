@@ -143,6 +143,7 @@ def build_control_readiness_report(
             "universe_id", "feature_set_id", "feature_set_version", "feature_columns",
             "outcome_feature_set_id", "outcome_feature_set_version", "outcome_feature_columns",
             "minimum_eligible_dates", "minimum_eligible_securities", "minimum_complete_rows_per_column",
+            "historical_membership_classification",
         )
         missing = [key for key in required if key not in item or _placeholder(item[key])]
         if missing:
@@ -153,8 +154,18 @@ def build_control_readiness_report(
         if universe is None:
             failures.append(f"{control_id}: unknown universe {universe_id}")
             continue
-        if not universe.point_in_time_membership_required or _placeholder(universe.membership_source):
-            failures.append(f"{control_id}: universe lacks authoritative point-in-time membership")
+        if _placeholder(universe.membership_source):
+            failures.append(f"{control_id}: universe membership source is not identified")
+        membership_classification = str(item["historical_membership_classification"])
+        allowed_membership_classifications = {
+            "AUTHORITATIVE_HISTORICAL_POINT_IN_TIME",
+            "CURRENT_MEMBERS_SURVIVORSHIP_BIASED",
+        }
+        if membership_classification not in allowed_membership_classifications:
+            failures.append(
+                f"{control_id}: historical_membership_classification must be one of "
+                f"{sorted(allowed_membership_classifications)}"
+            )
         predictor_columns = tuple(str(value) for value in item["feature_columns"])
         outcome_columns = tuple(str(value) for value in item["outcome_feature_columns"])
         predictor_set = store.get_feature_set(str(item["feature_set_id"]), str(item["feature_set_version"]))
@@ -207,6 +218,16 @@ def build_control_readiness_report(
         if answer is None or answer.dataset_fingerprint_sha256 != dataset_fingerprint:
             failures.append(f"{control_id}: hidden answer key is not bound to this exact dataset")
         controls[control_id] = {
+            "universe_membership": {
+                "source": universe.membership_source,
+                "classification": membership_classification,
+                "point_in_time_membership_required_by_store_definition": universe.point_in_time_membership_required,
+                "limitation": (
+                    None
+                    if membership_classification == "AUTHORITATIVE_HISTORICAL_POINT_IN_TIME"
+                    else "CURRENT_MEMBERSHIP_HISTORY_MAY_BE_SURVIVORSHIP_BIASED_AND_MUST_NOT_BE_DESCRIBED_AS_AN_AUTHORITATIVE_HISTORICAL_INDEX_RECONSTRUCTION"
+                ),
+            },
             "predictor_surface": predictor,
             "outcome_surface": outcome,
             "dataset_fingerprint_sha256": dataset_fingerprint,

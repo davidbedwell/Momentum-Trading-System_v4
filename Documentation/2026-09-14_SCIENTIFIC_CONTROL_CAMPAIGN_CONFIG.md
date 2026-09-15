@@ -15,7 +15,7 @@ Each value describes only the evidence/query surface available to that control:
 ```json
 {
   "cross_sectional_medium_term_momentum": {
-    "universe_id": "<point-in-time-universe-id>",
+    "universe_id": "<authorized-universe-id>",
     "feature_set_id": "mts_market_predictors",
     "feature_set_version": "v1",
     "feature_columns": ["return_126__v1", "return_252__v1", "return_252_skip_20__v1", "return_126_percentile__v1", "return_252_percentile__v1", "return_252_skip_20_percentile__v1"],
@@ -24,7 +24,7 @@ Each value describes only the evidence/query surface available to that control:
     "outcome_feature_columns": ["forward_return_20__v1", "forward_return_63__v1"]
   },
   "medium_term_trend_persistence": {
-    "universe_id": "<point-in-time-universe-id>",
+    "universe_id": "<authorized-universe-id>",
     "feature_set_id": "mts_market_predictors",
     "feature_set_version": "v1",
     "feature_columns": ["close_to_sma_20__v1", "close_to_sma_50__v1", "close_to_sma_200__v1", "sma20_slope_5__v1", "return_63__v1", "return_126__v1"],
@@ -33,7 +33,7 @@ Each value describes only the evidence/query surface available to that control:
     "outcome_feature_columns": ["forward_return_20__v1", "forward_return_63__v1"]
   },
   "short_horizon_reversal": {
-    "universe_id": "<point-in-time-universe-id>",
+    "universe_id": "<authorized-universe-id>",
     "feature_set_id": "mts_market_predictors",
     "feature_set_version": "v1",
     "feature_columns": ["return_1__v1", "return_3__v1", "return_5__v1", "return_10__v1"],
@@ -42,7 +42,7 @@ Each value describes only the evidence/query surface available to that control:
     "outcome_feature_columns": ["forward_return_1__v1", "forward_return_3__v1", "forward_return_5__v1", "forward_return_10__v1"]
   },
   "post_earnings_behavior": {
-    "universe_id": "<point-in-time-universe-id>",
+    "universe_id": "<authorized-universe-id>",
     "feature_set_id": "<validated-point-in-time-earnings-feature-set>",
     "feature_set_version": "<version>",
     "feature_columns": ["<event-time/surprise/eligible-event columns>"],
@@ -51,7 +51,7 @@ Each value describes only the evidence/query surface available to that control:
     "outcome_feature_columns": ["forward_return_5__v1", "forward_return_20__v1", "forward_return_63__v1"]
   },
   "deterministic_negative_control": {
-    "universe_id": "<point-in-time-universe-id>",
+    "universe_id": "<authorized-universe-id>",
     "feature_set_id": "mts_acceptance_negative_control",
     "feature_set_version": "v1",
     "feature_columns": ["deterministic_null__v1"],
@@ -79,7 +79,11 @@ Before any paid control execution, run `scripts/preflight_scientific_controls.py
 - `minimum_eligible_securities`;
 - `minimum_complete_rows_per_column`.
 
-No default thresholds are invented by deterministic code. Placeholder values, unknown feature sets, unavailable columns, duplicate security/date identities, inadequate coverage, or a non-point-in-time universe cause `NOT_READY`.
+Every control must also declare `historical_membership_classification` as either `AUTHORITATIVE_HISTORICAL_POINT_IN_TIME` or `CURRENT_MEMBERS_SURVIVORSHIP_BIASED`. This records provenance and limitations; it is not a readiness preference.
+
+No default thresholds are invented by deterministic code. Placeholder values, an unidentified membership source, an absent or invalid membership classification, unknown feature sets, unavailable columns, duplicate security/date identities, or inadequate coverage cause `NOT_READY`.
+
+Historical point-in-time index membership is not a prerequisite for this control campaign. A current-member universe may be used when its membership semantics and survivorship limitation are recorded. Results from such evidence must not be described as an authoritative reconstruction of the historical index or generalized to securities absent from that survivor-based population. This membership limitation does not relax prediction-time integrity for features, earnings, outcomes, or any other information used at historical time `T`.
 
 The preflight also requires a separate RD-hidden answer-key JSON containing exactly the five control IDs. Each control answer contains:
 

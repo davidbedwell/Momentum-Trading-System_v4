@@ -21,14 +21,14 @@ from scripts.run_sol_batched_one_subject import main as one_subject_main
 from scripts.run_sol_batched_universe import main as universe_main
 
 
-def _store():
+def _store(*, historical_point_in_time_membership=True):
     store = InMemoryDerivedMarketStore()
     store.register_universe(
         UniverseDefinition(
             universe_id="pit",
             description="point in time test universe",
             membership_source="authoritative:test:v1",
-            point_in_time_membership_required=True,
+            point_in_time_membership_required=historical_point_in_time_membership,
         )
     )
     predictors = DerivedFeatureSetDefinition(
@@ -74,6 +74,7 @@ def _config():
         "minimum_eligible_dates": 2,
         "minimum_eligible_securities": 2,
         "minimum_complete_rows_per_column": 4,
+        "historical_membership_classification": "AUTHORITATIVE_HISTORICAL_POINT_IN_TIME",
     }
     return {control.control_id: dict(item) for control in BLINDED_CONTROLS}
 
@@ -116,6 +117,20 @@ def test_readiness_requires_exact_dataset_bound_hidden_answers():
     assert report["failures"] == []
     assert report["sol_calls"] == 0
     assert report["config_sha256"] == canonical_json_sha256(config)
+
+
+def test_current_membership_is_disclosed_but_not_a_readiness_blocker():
+    store = _store(historical_point_in_time_membership=True)
+    config = _config()
+    for item in config.values():
+        item["historical_membership_classification"] = "CURRENT_MEMBERS_SURVIVORSHIP_BIASED"
+    answers = _answers(config, store)
+    report = build_control_readiness_report(config, answers, store)
+    assert report["status"] == "READY_FOR_BLINDED_CALIBRATION"
+    for control in report["controls"].values():
+        membership = control["universe_membership"]
+        assert membership["classification"] == "CURRENT_MEMBERS_SURVIVORSHIP_BIASED"
+        assert "SURVIVORSHIP_BIASED" in membership["limitation"]
 
 
 def test_readiness_rejects_placeholder_and_dataset_change(tmp_path):
