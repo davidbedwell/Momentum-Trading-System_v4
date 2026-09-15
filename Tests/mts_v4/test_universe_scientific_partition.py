@@ -10,6 +10,7 @@ from MTS_V4.universe_scientific_partition import (
     create_frozen_partition,
     create_stratified_frozen_partition,
     load_frozen_partition,
+    repair_partition_prior_exposure,
     write_frozen_partition,
     write_campaign_exposure_ledger,
 )
@@ -159,4 +160,69 @@ def test_stratified_partition_requires_complete_attributes() -> None:
             },
             strata={"A": ("TECH", "UPPER")},
             salt="x",
+        )
+
+
+def test_prior_exposure_repair_swaps_reserved_members_with_exact_stratum_matches() -> None:
+    ids = [f"SEC-{number:02d}" for number in range(30)]
+    strata = {
+        security_id: (f"SECTOR-{index % 2}", f"SIZE-{index % 3}")
+        for index, security_id in enumerate(ids)
+    }
+    partition, _ = create_stratified_frozen_partition(
+        universe_id="sp500",
+        security_ids=ids,
+        cohort_sizes={
+            ScientificCohort.DISCOVERY: 18,
+            ScientificCohort.VERIFICATION_A: 6,
+            ScientificCohort.VERIFICATION_B: 6,
+        },
+        strata=strata,
+        salt="initial",
+    )
+    exposed = (
+        partition.members(ScientificCohort.DISCOVERY)[0],
+        partition.members(ScientificCohort.VERIFICATION_A)[0],
+        partition.members(ScientificCohort.VERIFICATION_B)[0],
+    )
+    repaired, audit = repair_partition_prior_exposure(
+        partition=partition,
+        strata=strata,
+        prior_exposed_security_ids=exposed,
+        salt="repair",
+    )
+    assert set(exposed).issubset(set(repaired.members(ScientificCohort.DISCOVERY)))
+    assert [len(repaired.members(cohort)) for cohort in ScientificCohort] == [18, 6, 6]
+    assert audit["swap_count"] == 2
+    for swap in audit["swaps"]:
+        assert strata[swap["prior_exposed_security_id_moved_to_discovery"]] == tuple(
+            swap["exact_stratum"]
+        )
+        assert strata[swap["unexposed_discovery_security_id_moved_to_reserved"]] == tuple(
+            swap["exact_stratum"]
+        )
+
+
+def test_prior_exposure_repair_fails_without_an_exact_unexposed_match() -> None:
+    partition = create_frozen_partition(
+        universe_id="sp500",
+        security_ids=["A", "B", "C"],
+        cohort_sizes={
+            ScientificCohort.DISCOVERY: 1,
+            ScientificCohort.VERIFICATION_A: 1,
+            ScientificCohort.VERIFICATION_B: 1,
+        },
+        salt="initial",
+    )
+    reserved = partition.members(ScientificCohort.VERIFICATION_A)[0]
+    strata = {
+        security_id: ("ONLY" if security_id == reserved else "OTHER",)
+        for security_id in partition.all_security_ids
+    }
+    with pytest.raises(UniverseScientificPartitionError, match="no unexposed discovery replacement"):
+        repair_partition_prior_exposure(
+            partition=partition,
+            strata=strata,
+            prior_exposed_security_ids=[reserved],
+            salt="repair",
         )

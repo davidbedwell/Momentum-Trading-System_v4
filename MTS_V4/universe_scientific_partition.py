@@ -244,6 +244,100 @@ def create_stratified_frozen_partition(
     return partition, audit
 
 
+def repair_partition_prior_exposure(
+    *,
+    partition: UniverseScientificPartition,
+    strata: Mapping[str, Sequence[str]],
+    prior_exposed_security_ids: Sequence[str],
+    salt: str,
+) -> tuple[UniverseScientificPartition, Mapping[str, object]]:
+    """Move every prior-exposed member into discovery by exact in-stratum swaps."""
+    universe = set(partition.all_security_ids)
+    exposed = {str(item).strip() for item in prior_exposed_security_ids if str(item).strip()}
+    if not salt:
+        raise UniverseScientificPartitionError("repair salt is required")
+    if not exposed or not exposed.issubset(universe):
+        raise UniverseScientificPartitionError(
+            "prior-exposure identities must be nonempty and contained in the partition"
+        )
+    if set(strata) != universe:
+        raise UniverseScientificPartitionError("repair strata must exactly cover the partition")
+    normalized_strata = {
+        security_id: tuple(str(value).strip() for value in strata[security_id])
+        for security_id in universe
+    }
+    if any(not label or any(not value for value in label) for label in normalized_strata.values()):
+        raise UniverseScientificPartitionError("repair strata cannot contain blank values")
+
+    cohorts = {
+        cohort.value: set(partition.members(cohort)) for cohort in ScientificCohort
+    }
+    discovery = cohorts[ScientificCohort.DISCOVERY.value]
+    swaps: list[Mapping[str, object]] = []
+    for reserved_cohort in (ScientificCohort.VERIFICATION_A, ScientificCohort.VERIFICATION_B):
+        contaminated = sorted(cohorts[reserved_cohort.value] & exposed)
+        for contaminated_id in contaminated:
+            label = normalized_strata[contaminated_id]
+            candidates = [
+                security_id for security_id in discovery - exposed
+                if normalized_strata[security_id] == label
+            ]
+            if not candidates:
+                raise UniverseScientificPartitionError(
+                    "no unexposed discovery replacement exists in the same stratum for "
+                    f"{contaminated_id}: {label}"
+                )
+            replacement = min(
+                candidates,
+                key=lambda security_id: (
+                    hashlib.sha256(
+                        f"{salt}|{partition.partition_id}|{contaminated_id}|{security_id}".encode(
+                            "utf-8"
+                        )
+                    ).hexdigest(),
+                    security_id,
+                ),
+            )
+            cohorts[reserved_cohort.value].remove(contaminated_id)
+            cohorts[reserved_cohort.value].add(replacement)
+            discovery.remove(replacement)
+            discovery.add(contaminated_id)
+            swaps.append({
+                "reserved_cohort": reserved_cohort.value,
+                "prior_exposed_security_id_moved_to_discovery": contaminated_id,
+                "unexposed_discovery_security_id_moved_to_reserved": replacement,
+                "exact_stratum": list(label),
+            })
+
+    if not exposed.issubset(discovery):
+        raise UniverseScientificPartitionError("repair failed to move every exposed identity to discovery")
+    frozen_cohorts = {name: tuple(sorted(values)) for name, values in cohorts.items()}
+    identity_payload = {
+        "format": PARTITION_FORMAT,
+        "universe_id": partition.universe_id,
+        "salt_identity": hashlib.sha256(salt.encode("utf-8")).hexdigest(),
+        "cohorts": {key: list(value) for key, value in frozen_cohorts.items()},
+    }
+    repaired = UniverseScientificPartition(
+        universe_id=partition.universe_id,
+        partition_id=hashlib.sha256(
+            json.dumps(identity_payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest(),
+        salt_identity=identity_payload["salt_identity"],
+        cohorts=frozen_cohorts,
+    )
+    return repaired, {
+        "method": "EXACT_SAME_SECTOR_AND_CURRENT_MARKET_CAP_TERCILE_SWAP_V1",
+        "superseded_partition_id": partition.partition_id,
+        "prior_exposed_security_count": len(exposed),
+        "swap_count": len(swaps),
+        "all_prior_exposed_members_in_discovery": True,
+        "cohort_sizes_unchanged": True,
+        "joint_stratum_counts_unchanged": True,
+        "swaps": swaps,
+    }
+
+
 def load_frozen_partition(path: str | Path) -> UniverseScientificPartition:
     source = Path(path)
     raw = json.loads(source.read_text(encoding="utf-8"))

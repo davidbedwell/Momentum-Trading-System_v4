@@ -12,6 +12,8 @@ Before historical universe outcomes are supplied to an AI Research Director, sta
 
 For the current 503-security calibration universe, the human approved a `303 / 100 / 100` allocation. Assignment must be stratified jointly by current GICS sector and relative current-market-cap tercile, then salted-randomized within each stratum. The partition must publish a balance audit before any outcome exposure. Current market capitalization is acquired through Intake and used only as a governance-balancing attribute; it is not historical PIT evidence, is not supplied to RD as a scientific predictor, and must not support a historical size claim.
 
+Any security previously exposed to Sol as a researched subject is ineligible for either verification cohort. If prior exposure is discovered before universe outcomes are supplied to Sol, supersede rather than overwrite the partition: exchange each contaminated reserved member with an unexposed `DISCOVERY` member from the exact same current-sector/current-market-cap stratum, retain exact cohort and stratum counts, assign a new partition identity, and preserve an immutable swap audit. If no exact in-kind replacement exists, fail closed for human review.
+
 The initial roles are:
 
 - `DISCOVERY`: historical outcomes may be used during EXPLORATION;
