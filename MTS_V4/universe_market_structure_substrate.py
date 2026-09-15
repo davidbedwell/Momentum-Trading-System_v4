@@ -137,27 +137,51 @@ def _ordered_window_summary(rows: Sequence[Mapping[str, object]], column: str) -
 
 
 def _pack_named_measurements(
-    measurements: Mapping[str, object], fields: Sequence[str]
+    measurements: Mapping[str, object], fields: Sequence[str],
+    name_dictionary: Sequence[str] | None = None,
 ) -> Mapping[str, object]:
+    names = tuple(name_dictionary) if name_dictionary is not None else tuple(measurements)
+    indexes = {name: index for index, name in enumerate(names)}
     return {
-        "schema": ["measurement", *fields],
+        "schema": ["measurement_index" if name_dictionary is not None else "measurement", *fields],
         "rows": [
-            [name, *(value.get(field) for field in fields)]
+            [indexes[name] if name_dictionary is not None else name, *(value.get(field) for field in fields)]
             for name, value in measurements.items()
-            if isinstance(value, Mapping)
+            if isinstance(value, Mapping) and name in indexes
         ],
     }
 
 
 def _pack_correlations(records: object) -> Mapping[str, object]:
     usable = records if isinstance(records, (list, tuple)) else ()
+    names: list[object] = []
+    for item in usable:
+        if not isinstance(item, Mapping):
+            continue
+        for name in (item.get("left"), item.get("right")):
+            if name not in names:
+                names.append(name)
+    indexes = {name: index for index, name in enumerate(names)}
     return {
-        "schema": ["left", "right", "n", "pearson"],
+        "feature_dictionary": names,
+        "schema": ["left_feature_index", "right_feature_index", "n", "pearson"],
         "rows": [
-            [item.get("left"), item.get("right"), item.get("n"), item.get("pearson")]
+            [indexes[item.get("left")], indexes[item.get("right")], item.get("n"), item.get("pearson")]
             for item in usable if isinstance(item, Mapping)
         ],
     }
+
+
+def _transport_precision(value: object) -> object:
+    if isinstance(value, bool) or value is None or isinstance(value, (str, int)):
+        return value
+    if isinstance(value, float):
+        return float(f"{value:.8g}") if math.isfinite(value) else value
+    if isinstance(value, Mapping):
+        return {str(key): _transport_precision(child) for key, child in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_transport_precision(child) for child in value]
+    return value
 
 
 def compact_for_ai_transport(outputs: Mapping[str, object]) -> Mapping[str, object]:
@@ -182,19 +206,25 @@ def compact_for_ai_transport(outputs: Mapping[str, object]) -> Mapping[str, obje
     sectors = current.get("sector_measurements", {})
     if not isinstance(sectors, Mapping):
         sectors = {}
+    feature_inventory = outputs.get("feature_inventory", {})
+    feature_dictionary = (
+        tuple(feature_inventory.get("available", ()))
+        if isinstance(feature_inventory, Mapping) else ()
+    )
     compact["current_market_structure"] = {
         "effective_date": current.get("effective_date"),
         "security_count": current.get("security_count"),
         "breadth": current.get("breadth", {}),
         "participation": current.get("participation", {}),
+        "measurement_dictionary": list(feature_dictionary),
         "cross_sectional_measurements": _pack_named_measurements(
-            current.get("cross_sectional_measurements", {}), SUMMARY_FIELDS
+            current.get("cross_sectional_measurements", {}), SUMMARY_FIELDS, feature_dictionary
         ),
         "sector_measurements": {
             str(sector): {
                 "security_count": value.get("security_count"),
                 "measurements": _pack_named_measurements(
-                    value.get("measurements", {}), SUMMARY_FIELDS
+                    value.get("measurements", {}), SUMMARY_FIELDS, feature_dictionary
                 ),
             }
             for sector, value in sectors.items() if isinstance(value, Mapping)
@@ -204,26 +234,41 @@ def compact_for_ai_transport(outputs: Mapping[str, object]) -> Mapping[str, obje
     windows = outputs.get("multi_horizon_context", {})
     if not isinstance(windows, Mapping):
         windows = {}
+    window_measurement_dictionary: list[str] = []
+    for value in windows.values():
+        if not isinstance(value, Mapping) or not isinstance(value.get("measurements"), Mapping):
+            continue
+        for name in value["measurements"]:
+            if str(name) not in window_measurement_dictionary:
+                window_measurement_dictionary.append(str(name))
+    compact["multi_horizon_measurement_dictionary"] = window_measurement_dictionary
     compact["multi_horizon_context"] = {
         str(window): {
             "observed_sessions": value.get("observed_sessions"),
             "start_date": value.get("start_date"),
             "end_date": value.get("end_date"),
             "measurements": _pack_named_measurements(
-                value.get("measurements", {}), WINDOW_TRANSPORT_FIELDS
+                value.get("measurements", {}), WINDOW_TRANSPORT_FIELDS,
+                window_measurement_dictionary,
             ),
         }
         for window, value in windows.items() if isinstance(value, Mapping)
     }
     persistence = outputs.get("rank_persistence", ())
+    persistence_columns: list[object] = []
+    if isinstance(persistence, (list, tuple)):
+        for item in persistence:
+            if isinstance(item, Mapping) and item.get("column") not in persistence_columns:
+                persistence_columns.append(item.get("column"))
     compact["rank_persistence"] = {
+        "feature_dictionary": persistence_columns,
         "schema": [
-            "column", "lag_sessions", "prior_date", "current_date",
+            "feature_index", "lag_sessions", "prior_date", "current_date",
             "matched_securities", "pearson_rank_persistence",
         ],
         "rows": [
             [
-                item.get("column"), item.get("lag_sessions"), item.get("prior_date"),
+                persistence_columns.index(item.get("column")), item.get("lag_sessions"), item.get("prior_date"),
                 item.get("current_date"), item.get("matched_securities"),
                 item.get("pearson_rank_persistence"),
             ]
@@ -234,7 +279,7 @@ def compact_for_ai_transport(outputs: Mapping[str, object]) -> Mapping[str, obje
         outputs.get("historical_daily_structure_correlations", ())
     )
     compact["transport_encoding"] = {
-        "format": "MTS_V4_NEUTRAL_UNIVERSE_AI_TRANSPORT_V1",
+        "format": "MTS_V4_NEUTRAL_UNIVERSE_AI_TRANSPORT_V2",
         "scientific_selection_or_ranking": False,
         "all_features_sectors_horizons_and_correlation_pairs_retained": True,
         "full_analysis_output_unchanged": True,
@@ -244,8 +289,11 @@ def compact_for_ai_transport(outputs: Mapping[str, object]) -> Mapping[str, obje
         "multi_window_fields_available_only_in_full_analysis": [
             "missing", "p25", "p75", "minimum", "maximum",
         ],
+        "floating_point_significant_digits": 8,
+        "transport_values_authoritative_for_threshold_or_validation_decisions": False,
+        "threshold_and_validation_source": "FULL_PRECISION_AUTHORITATIVE_ANALYSIS_OUTPUT",
     }
-    return compact
+    return _transport_precision(compact)  # type: ignore[return-value]
 
 
 def universe_market_structure(

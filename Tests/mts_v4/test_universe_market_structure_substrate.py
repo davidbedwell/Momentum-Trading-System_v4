@@ -122,9 +122,28 @@ def test_ai_transport_compacts_without_selecting_features_or_correlations() -> N
         outputs["historical_daily_structure_correlations"]
     )
     assert set(compact["multi_horizon_context"]) == set(outputs["multi_horizon_context"])
+    assert set(compact["current_market_structure"]["measurement_dictionary"]) == set(
+        outputs["current_market_structure"]["cross_sectional_measurements"]
+    )
+    assert set(compact["multi_horizon_measurement_dictionary"]) == set(
+        outputs["multi_horizon_context"]["5"]["measurements"]
+    )
+    correlations = compact["current_market_structure"]["feature_correlations"]
+    assert correlations["schema"][:2] == ["left_feature_index", "right_feature_index"]
+    first_pair = correlations["rows"][0]
+    assert correlations["feature_dictionary"][first_pair[0]] == outputs[
+        "current_market_structure"
+    ]["feature_correlations"][0]["left"]
+    assert correlations["feature_dictionary"][first_pair[1]] == outputs[
+        "current_market_structure"
+    ]["feature_correlations"][0]["right"]
     assert compact["transport_encoding"][
         "all_features_sectors_horizons_and_correlation_pairs_retained"
     ] is True
+    assert compact["transport_encoding"]["format"] == "MTS_V4_NEUTRAL_UNIVERSE_AI_TRANSPORT_V2"
+    assert compact["transport_encoding"][
+        "transport_values_authoritative_for_threshold_or_validation_decisions"
+    ] is False
     assert len(json.dumps(compact, separators=(",", ":"))) < len(
         json.dumps(outputs, separators=(",", ":"))
     )

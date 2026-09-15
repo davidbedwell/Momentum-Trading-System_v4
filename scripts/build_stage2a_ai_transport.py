@@ -33,7 +33,7 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("refusing to transport Stage 2A evidence without an explicit no-outcomes record")
     transport = compact_for_ai_transport(source_outputs)
     payload = {
-        "format": "MTS_V4_NEUTRAL_UNIVERSE_AI_TRANSPORT_ARTIFACT_V1",
+        "format": "MTS_V4_NEUTRAL_UNIVERSE_AI_TRANSPORT_ARTIFACT_V2",
         "source_artifact": str(source),
         "source_artifact_sha256": document.get("artifact_sha256"),
         "analysis_result_id": analysis.get("result_id"),
