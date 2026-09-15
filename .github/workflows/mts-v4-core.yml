@@ -9,6 +9,7 @@ on:
     paths:
       - 'MTS_V4/**'
       - 'Tests/mts_v4/**'
+      - 'scripts/**'
       - 'Engines/Intake/adapters/**'
       - 'Tests/intake_engine/**'
       - 'pyproject.toml'
@@ -26,8 +27,8 @@ jobs:
           python-version: '3.11'
       - name: Install project and test dependencies
         run: python -m pip install --disable-pip-version-check -q '.[dev]' pandas
-      - name: Compile v4 package
-        run: python -m compileall -q MTS_V4
+      - name: Compile v4 package and runners
+        run: python -m compileall -q MTS_V4 scripts
       - name: Run v4 unittest compatibility gate
         run: python -m unittest discover -s Tests/mts_v4 -p 'test_*.py' -v
       - name: Run complete v4 pytest gate
