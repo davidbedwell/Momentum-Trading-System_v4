@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import date, timedelta
 from typing import Any, Mapping, Protocol, Sequence
@@ -63,10 +64,41 @@ def _ensure_definitions(store: DerivedMarketStore, universe: UniverseDefinition)
     return predictor_set, outcome_set
 
 
-def _attach_membership_and_identity(*, membership: IntervalMembership, source: DailyMarketSource, start_date: str, end_date: str, shares_source: PointInTimeSharesSource | None) -> list[dict[str, Any]]:
+def _attach_membership_and_identity(*, membership: IntervalMembership, source: DailyMarketSource, start_date: str, end_date: str, shares_source: PointInTimeSharesSource | None, download_workers: int = 6) -> list[dict[str, Any]]:
+    if download_workers < 1:
+        raise DerivedMarketStoreError("download_workers must be >= 1")
+    intervals = membership.active_between(start_date, end_date)
+    acquired: dict[int, Sequence[Mapping[str, Any]]] = {}
+    with ThreadPoolExecutor(max_workers=download_workers, thread_name_prefix="mts-market-download") as executor:
+        futures = {
+            executor.submit(
+                source.fetch,
+                ticker=interval.ticker,
+                start_date=start_date,
+                end_date=end_date,
+            ): (index, interval.ticker)
+            for index, interval in enumerate(intervals)
+        }
+        completed = 0
+        try:
+            for future in as_completed(futures):
+                index, ticker = futures[future]
+                acquired[index] = future.result()
+                completed += 1
+                print(
+                    f"MARKET_ACQUISITION_COMPLETED={completed}/{len(intervals)} TICKER={ticker}",
+                    flush=True,
+                )
+        except Exception:
+            for pending in futures:
+                pending.cancel()
+            raise
+
+    # Restore deterministic membership order before identity attachment,
+    # validation, feature construction, and publication.
     rows: list[dict[str, Any]] = []
-    for interval in membership.active_between(start_date, end_date):
-        for raw in source.fetch(ticker=interval.ticker, start_date=start_date, end_date=end_date):
+    for index, interval in enumerate(intervals):
+        for raw in acquired[index]:
             effective = str(raw.get("date", ""))[:10]
             if not effective or not interval.contains(effective):
                 continue
@@ -89,7 +121,6 @@ def _attach_membership_and_identity(*, membership: IntervalMembership, source: D
             raise DerivedMarketStoreError(f"duplicate source security/date during maintenance: {identity}")
         identities.add(identity)
     return rows
-
 
 def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, Any]], membership: IntervalMembership, start_date: str, end_date: str) -> Mapping[str, int]:
     """Fail closed when an observed market date is missing an eligible member.
@@ -114,7 +145,7 @@ def _validate_complete_observed_cross_sections(*, rows: Sequence[Mapping[str, An
     return {effective: len(securities) for effective, securities in observed.items()}
 
 
-def maintain_standard_market_store(*, store: DerivedMarketStore, universe: UniverseDefinition, membership: IntervalMembership, source: DailyMarketSource, through_date: str, initial_start_date: str | None = None, shares_source: PointInTimeSharesSource | None = None, update_id_prefix: str = "market-update", publish_outcomes: bool = True) -> DerivedMarketMaintenanceResult:
+def maintain_standard_market_store(*, store: DerivedMarketStore, universe: UniverseDefinition, membership: IntervalMembership, source: DailyMarketSource, through_date: str, initial_start_date: str | None = None, shares_source: PointInTimeSharesSource | None = None, update_id_prefix: str = "market-update", publish_outcomes: bool = True, download_workers: int = 6) -> DerivedMarketMaintenanceResult:
     """Incrementally extend standard predictors and matured outcomes without raw persistence."""
     date.fromisoformat(through_date)
     predictor_set, outcome_set = _ensure_definitions(store, universe)
@@ -131,7 +162,7 @@ def maintain_standard_market_store(*, store: DerivedMarketStore, universe: Unive
 
     plan = plan_incremental_update(store=store, universe_id=universe.universe_id, feature_set_id=predictor_set.feature_set_id, feature_set_version=predictor_set.version, first_new_effective_date=first_new, last_new_effective_date=through_date)
     acquisition_start = acquisition_start_for_plan(plan)
-    raw_rows = _attach_membership_and_identity(membership=membership, source=source, start_date=acquisition_start, end_date=through_date, shares_source=shares_source)
+    raw_rows = _attach_membership_and_identity(membership=membership, source=source, start_date=acquisition_start, end_date=through_date, shares_source=shares_source, download_workers=download_workers)
     if not raw_rows:
         raise DerivedMarketStoreError("market source returned no rows for a required incremental update; high-water mark not advanced")
     cross_section_counts = _validate_complete_observed_cross_sections(rows=raw_rows, membership=membership, start_date=first_new, end_date=through_date)
