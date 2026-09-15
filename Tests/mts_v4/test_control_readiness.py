@@ -17,6 +17,7 @@ from MTS_V4.derived_market_store import (
     InMemoryDerivedMarketStore,
     UniverseDefinition,
 )
+from scripts.run_sol_batched_one_subject import main as one_subject_main
 from scripts.run_sol_batched_universe import main as universe_main
 
 
@@ -155,3 +156,8 @@ def test_calibration_pass_gate_requires_complete_pass(tmp_path):
     }), encoding="utf-8")
     with pytest.raises(ControlReadinessError):
         require_calibration_pass(path)
+
+
+def test_new_paid_single_subject_runner_is_gated_before_intake_or_sol():
+    with pytest.raises(RuntimeError, match="gated"):
+        one_subject_main(["--ticker", "NEW"])
