@@ -6,10 +6,13 @@ from pathlib import Path
 from .analysis import ExactMethodAnalysisExecutor
 from .batch_orchestrator import BatchResearchDirectorProvider, BatchResearchLoopOrchestrator
 from .cache import TemporaryResearchCache
+from .cached_analysis import CachedLineageAwareAnalysisExecutor
 from .concept_library import ResearchConceptLibrary, seed_market_concepts
 from .cross_evidence import cross_evidence_analysis_method, cross_evidence_method_spec
 from .cross_sectional_analysis import analysis_method as cross_sectional_analysis_method
 from .cross_sectional_analysis import method_spec as cross_sectional_method_spec
+from .cross_sectional_statistics import analysis_method as cross_sectional_statistics_method
+from .cross_sectional_statistics import method_spec as cross_sectional_statistics_spec
 from .cross_subject_batch_orchestrator import CrossSubjectBatchResearchLoopOrchestrator
 from .cross_subject_memory import CrossSubjectScientificMemory
 from .cross_subject_orchestrator import CrossSubjectResearchLoopOrchestrator
@@ -19,7 +22,6 @@ from .group_aggregation import group_aggregation_analysis_method, group_aggregat
 from .interfaces import ResearchDirectorProvider
 from .intraday_analysis_substrate import analysis_method as intraday_substrate_analysis_method
 from .intraday_analysis_substrate import method_spec as intraday_substrate_method_spec
-from .lineage_analysis import LineageAwareExactMethodAnalysisExecutor
 from .method_catalog import MethodCatalog
 from .nexus import InMemoryResearchNexus, ResearchNexus
 from .nexus_json import JsonResearchNexus
@@ -92,10 +94,7 @@ def _build_execution_components(
     if nexus_path is None:
         nexus = InMemoryResearchNexus()
     else:
-        nexus = JsonResearchNexus(
-            nexus_path,
-            derived_market_root=derived_market_root,
-        )
+        nexus = JsonResearchNexus(nexus_path, derived_market_root=derived_market_root)
 
     catalog = standard_method_catalog()
     for spec in discovery_method_catalog().all():
@@ -108,9 +107,10 @@ def _build_execution_components(
     catalog.register(intraday_substrate_method_spec())
     catalog.register(participation_method_spec())
     catalog.register(cross_sectional_method_spec())
+    catalog.register(cross_sectional_statistics_spec())
     concepts = concept_library or seed_market_concepts()
     validator = TransparentInputBindingValidator(catalog)
-    analysis = LineageAwareExactMethodAnalysisExecutor()
+    analysis = CachedLineageAwareAnalysisExecutor()
     for method in standard_analysis_methods():
         analysis.register(method)
     for method in discovery_analysis_methods():
@@ -123,6 +123,7 @@ def _build_execution_components(
     analysis.register(intraday_substrate_analysis_method())
     analysis.register(participation_analysis_method())
     analysis.register(cross_sectional_analysis_method())
+    analysis.register(cross_sectional_statistics_method())
     return cache, nexus, catalog, concepts, validator, analysis
 
 
@@ -136,24 +137,13 @@ def build_runtime(
     max_contract_repairs: int = 3,
     scientific_memory: CrossSubjectScientificMemory | None = None,
 ) -> V4Runtime:
-    """Assemble the existing single-request v4 research runtime.
-
-    Existing single-security campaigns remain backward compatible. A durable
-    universe/cohort scope may also be represented by SubjectMetadata and consume
-    a Nexus-derived market panel. ``derived_market_root`` permits many campaign
-    Nexus documents to share one persistent derived market substrate.
-    """
+    """Assemble the single-request v4 research runtime for subject or explicit broader scope."""
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(
         nexus_path=nexus_path,
         derived_market_root=derived_market_root,
         concept_library=concept_library,
     )
-
-    orchestrator_type = (
-        CrossSubjectResearchLoopOrchestrator
-        if scientific_memory is not None
-        else ResearchLoopOrchestrator
-    )
+    orchestrator_type = CrossSubjectResearchLoopOrchestrator if scientific_memory is not None else ResearchLoopOrchestrator
     orchestrator_kwargs = {
         "mission": mission,
         "rd": rd,
@@ -168,17 +158,7 @@ def build_runtime(
     if scientific_memory is not None:
         orchestrator_kwargs["scientific_memory"] = scientific_memory
     orchestrator = orchestrator_type(**orchestrator_kwargs)
-
-    return V4Runtime(
-        mission=mission,
-        cache=cache,
-        nexus=nexus,
-        catalog=catalog,
-        concepts=concepts,
-        validator=validator,
-        analysis=analysis,
-        orchestrator=orchestrator,
-    )
+    return V4Runtime(mission, cache, nexus, catalog, concepts, validator, analysis, orchestrator)
 
 
 def build_batch_runtime(
@@ -190,23 +170,13 @@ def build_batch_runtime(
     concept_library: ResearchConceptLibrary | None = None,
     scientific_memory: CrossSubjectScientificMemory | None = None,
 ) -> BatchV4Runtime:
-    """Assemble the program-level batched RD runtime.
-
-    The batched path reuses the same Intake/cache boundary, method catalog,
-    objective validator, Analysis Engine, Nexus implementation, and optional
-    cross-subject scientific memory. ``derived_market_root`` may point every
-    campaign at one persistent Nexus-derived market store.
-    """
+    """Assemble the program-level batched RD runtime with campaign-local exact-result caching."""
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(
         nexus_path=nexus_path,
         derived_market_root=derived_market_root,
         concept_library=concept_library,
     )
-    orchestrator_type = (
-        CrossSubjectBatchResearchLoopOrchestrator
-        if scientific_memory is not None
-        else BatchResearchLoopOrchestrator
-    )
+    orchestrator_type = CrossSubjectBatchResearchLoopOrchestrator if scientific_memory is not None else BatchResearchLoopOrchestrator
     orchestrator_kwargs = {
         "mission": mission,
         "rd": rd,
@@ -220,13 +190,4 @@ def build_batch_runtime(
     if scientific_memory is not None:
         orchestrator_kwargs["scientific_memory"] = scientific_memory
     orchestrator = orchestrator_type(**orchestrator_kwargs)
-    return BatchV4Runtime(
-        mission=mission,
-        cache=cache,
-        nexus=nexus,
-        catalog=catalog,
-        concepts=concepts,
-        validator=validator,
-        analysis=analysis,
-        orchestrator=orchestrator,
-    )
+    return BatchV4Runtime(mission, cache, nexus, catalog, concepts, validator, analysis, orchestrator)
