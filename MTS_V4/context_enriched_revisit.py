@@ -75,6 +75,8 @@ def build_context_enriched_revisit_evidence(
     predictor_feature_set_version: str,
     outcome_feature_set_id: str,
     outcome_feature_set_version: str,
+    earnings_feature_set_id: str,
+    earnings_feature_set_version: str,
 ) -> tuple[EvidenceDescriptor, ...]:
     """Expose ticker rows and uniformly calculated time-aligned market context.
 
@@ -84,7 +86,8 @@ def build_context_enriched_revisit_evidence(
     """
     feature_set = store.get_feature_set(predictor_feature_set_id, predictor_feature_set_version)
     outcome_set = store.get_feature_set(outcome_feature_set_id, outcome_feature_set_version)
-    if feature_set is None or outcome_set is None:
+    earnings_set = store.get_feature_set(earnings_feature_set_id, earnings_feature_set_version)
+    if feature_set is None or outcome_set is None or earnings_set is None:
         raise RuntimeError("context-enriched revisit feature sets are unavailable")
     predictor_columns = tuple(feature_set.feature_columns)
     outcome_columns = tuple(outcome_set.feature_columns)
@@ -93,6 +96,9 @@ def build_context_enriched_revisit_evidence(
     )
     outcome_state = store.state(
         universe_id, outcome_feature_set_id, outcome_feature_set_version
+    )
+    earnings_state = store.state(
+        universe_id, earnings_feature_set_id, earnings_feature_set_version
     )
     full_rows = store.query(DerivedMarketQuery(
         universe_id=universe_id,
@@ -143,6 +149,13 @@ def build_context_enriched_revisit_evidence(
         security_ids=(security_id,),
         feature_columns=outcome_columns,
     ))
+    earnings_rows = store.query(DerivedMarketQuery(
+        universe_id=universe_id,
+        feature_set_id=earnings_feature_set_id,
+        feature_set_version=earnings_feature_set_version,
+        security_ids=(security_id,),
+        feature_columns=tuple(earnings_set.feature_columns),
+    ))
     common = {
         "universe_id": universe_id,
         "security_id": security_id,
@@ -189,6 +202,26 @@ def build_context_enriched_revisit_evidence(
             neutral_semantics=(
                 "Historical ticker outcome measurements for exploratory predictive discovery. These columns "
                 "contain future information and may not be used as prediction-time evidence in validation."
+            ),
+        ),
+        _descriptor(
+            cache=cache,
+            subject=subject,
+            evidence_type="HISTORICAL_EARNINGS_EVENT_CONTEXT",
+            rows=earnings_rows,
+            provenance={
+                **common,
+                "feature_set_id": earnings_feature_set_id,
+                "feature_set_version": earnings_feature_set_version,
+                "source_high_water_mark": earnings_state.high_water_mark,
+                "provider_timing_quality_explicit": True,
+                "unknown_timing_conservatively_delayed": True,
+                "provider_estimates_are_not_independently_reconstructed_vintages": True,
+            },
+            neutral_semantics=(
+                "Historical reported EPS, provider-associated consensus estimate, surprise percentage, "
+                "event count, and timing-quality indicator aligned without look-ahead. Unknown event timing "
+                "is conservatively delayed to the next observed session close and marked timing_known=0."
             ),
         ),
     )

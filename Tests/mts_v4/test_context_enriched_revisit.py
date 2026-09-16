@@ -27,6 +27,12 @@ def _store() -> InMemoryDerivedMarketStore:
         ),
     ))
     store.register_feature_set(DerivedFeatureSetDefinition(
+        feature_set_id="earnings", version="v1", description="earnings",
+        features=(DerivedFeatureDefinition(
+            "surprise", "v1", "surprise", classification="PREDICTOR",
+        ),),
+    ))
+    store.register_feature_set(DerivedFeatureSetDefinition(
         feature_set_id="outcomes", version="v1", description="outcomes",
         features=(DerivedFeatureDefinition(
             "forward", "v1", "forward", classification="OUTCOME",
@@ -56,6 +62,13 @@ def _store() -> InMemoryDerivedMarketStore:
         universe_id="current", feature_set_id="outcomes", feature_set_version="v1",
         update_id="o", rows=outcomes,
     )
+    store.append_update(
+        universe_id="current", feature_set_id="earnings", feature_set_version="v1",
+        update_id="e", rows=({
+            "security_id": "AAPL", "effective_date": "2026-01-05", "eligible": True,
+            "surprise__v1": 4.2,
+        },),
+    )
     return store
 
 
@@ -68,8 +81,9 @@ def test_builds_uniform_time_aligned_subject_market_and_sector_context() -> None
         security_sector_ids={"AAPL": "TECH", "MSFT": "TECH", "XOM": "ENERGY"},
         predictor_feature_set_id="predictors", predictor_feature_set_version="v1",
         outcome_feature_set_id="outcomes", outcome_feature_set_version="v1",
+        earnings_feature_set_id="earnings", earnings_feature_set_version="v1",
     )
-    context, outcomes = evidence
+    context, outcomes, earnings = evidence
     rows = cache.get(context.cache_key)
     assert len(rows) == 2
     assert rows[0]["subject__momentum__v1"] == 1.0
@@ -81,3 +95,5 @@ def test_builds_uniform_time_aligned_subject_market_and_sector_context() -> None
     assert outcomes.provenance["contains_future_outcomes"] is True
     assert outcomes.provenance["source_high_water_mark"] == "2026-01-05"
     assert {row["security_id"] for row in cache.get(outcomes.cache_key)} == {"AAPL"}
+    assert cache.get(earnings.cache_key)[0]["surprise__v1"] == 4.2
+    assert earnings.provenance["unknown_timing_conservatively_delayed"] is True

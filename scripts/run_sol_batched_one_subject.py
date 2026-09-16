@@ -35,7 +35,8 @@ from MTS_V4.universe_scientific_partition import ScientificCohort, load_frozen_p
 CONTEXT_ENRICHED_REVISIT_QUESTION = (
     "Since your prior analysis of this ticker, the available evidence and governing evaluation "
     "standards have changed. You now have time-aligned market, current-sector, breadth, volatility, "
-    "participation, dispersion, and cross-sectional context that was not available during the prior "
+    "participation, dispersion, cross-sectional context, and time-aligned earnings-event evidence that "
+    "were not available during the prior "
     "analysis. Trading-hypothesis candidacy, scientific validation, and trading-promotion eligibility "
     "are now governed separately using executable policy, chronological path, adverse risk, costs, and "
     "expectancy. Do any of these changes affect your previous analyses, recommendations, findings, "
@@ -175,6 +176,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--predictor-feature-set-version", default="v1")
     parser.add_argument("--outcome-feature-set-id", default="mts_historical_outcomes")
     parser.add_argument("--outcome-feature-set-version", default="v1")
+    parser.add_argument("--earnings-feature-set-id", default="mts_earnings_event_context")
+    parser.add_argument("--earnings-feature-set-version", default="v1")
     parser.add_argument("--market-reading-calibration", default=None)
     parser.add_argument(
         "--scientific-partition-manifest",
@@ -296,6 +299,7 @@ def main(argv: list[str] | None = None) -> int:
         for feature_id, version in (
             (args.predictor_feature_set_id, args.predictor_feature_set_version),
             (args.outcome_feature_set_id, args.outcome_feature_set_version),
+            (args.earnings_feature_set_id, args.earnings_feature_set_version),
         ):
             if context_store.get_feature_set(feature_id, version) is None:
                 raise RuntimeError(f"derived market store does not contain feature set: {feature_id}:{version}")
@@ -305,7 +309,9 @@ def main(argv: list[str] | None = None) -> int:
             "human_scientific_question": CONTEXT_ENRICHED_REVISIT_QUESTION,
             "new_evidence": (
                 "Time-aligned ticker, full-current-member-universe, and current-sector predictor context "
-                "at each historical daily T; historical ticker outcomes remain explicitly exploratory."
+                "at each historical daily T; historical ticker outcomes remain explicitly exploratory; "
+                "earnings events include reported EPS, associated consensus, surprise, and explicit "
+                "provider-timing quality with unknown timing conservatively delayed."
             ),
             "governance_change": (
                 "Trading-hypothesis candidacy, scientific validation, and trading-promotion eligibility "
@@ -393,6 +399,8 @@ def main(argv: list[str] | None = None) -> int:
             predictor_feature_set_version=args.predictor_feature_set_version,
             outcome_feature_set_id=args.outcome_feature_set_id,
             outcome_feature_set_version=args.outcome_feature_set_version,
+            earnings_feature_set_id=args.earnings_feature_set_id,
+            earnings_feature_set_version=args.earnings_feature_set_version,
         )
         evidence = tuple(evidence) + contextual_evidence
     campaign_id = f"mts-v4-sol-batched-{ticker.lower()}-{stamp}"
