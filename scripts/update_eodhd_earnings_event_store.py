@@ -108,13 +108,15 @@ def _market_closes(root: Path, universe_id: str) -> dict[str, tuple[datetime, ..
     if not stream:
         raise RuntimeError(f"predictor stream is absent: {key}")
     files = [str(root / item["file_name"]) for item in stream["updates"]]
-    table = ds.dataset(files, format="parquet").to_table(columns=["security_id", "effective_date", "eligible"])
-    closes: dict[str, list[datetime]] = {}
-    for row in table.to_pylist():
-        if row["eligible"]:
-            day = date.fromisoformat(row["effective_date"])
-            closes.setdefault(row["security_id"], []).append(datetime(day.year, day.month, day.day, 16, tzinfo=NY))
-    return {security_id: tuple(sorted(set(values))) for security_id, values in closes.items()}
+    table = ds.dataset(files, format="parquet").to_table(columns=["security_id", "effective_date"])
+    rows = table.to_pylist()
+    security_ids = {row["security_id"] for row in rows}
+    session_dates = sorted({date.fromisoformat(row["effective_date"]) for row in rows})
+    global_closes = tuple(
+        datetime(day.year, day.month, day.day, 16, tzinfo=NY)
+        for day in session_dates
+    )
+    return {security_id: global_closes for security_id in security_ids}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -190,6 +192,20 @@ def main(argv: list[str] | None = None) -> int:
     derived_rows = build_earnings_event_rows(all_rows, market_close_times_by_security=closes)
     if not derived_rows:
         raise RuntimeError("no earnings event rows align to observed predictor sessions")
+    aligned_source_records = int(sum(row["earnings_event_count__v1"] for row in derived_rows))
+    collision_rows = [row for row in derived_rows if row["earnings_event_count__v1"] > 1.0]
+    audit["alignment"] = {
+        "calendar_first_session": min(close.date().isoformat() for values in closes.values() for close in values),
+        "calendar_last_session": max(close.date().isoformat() for values in closes.values() for close in values),
+        "aligned_source_records": aligned_source_records,
+        "excluded_before_or_after_available_calendar": len(all_rows) - aligned_source_records,
+        "published_session_rows": len(derived_rows),
+        "multi_record_session_rows": len(collision_rows),
+        "source_records_in_multi_record_sessions": int(sum(row["earnings_event_count__v1"] for row in collision_rows)),
+        "multi_record_policy": "PRESERVE_COUNT_NULL_CONFLICTING_VALUES_AND_REQUIRE_ALL_TIMING_KNOWN",
+    }
+    audit_path.write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n")
+    print("EARNINGS_ALIGNMENT=" + json.dumps(audit["alignment"], sort_keys=True))
     update_id = args.update_id or f"eodhd-earnings-{min(row['effective_date'] for row in derived_rows)}-{max(row['effective_date'] for row in derived_rows)}"
     store = ParquetDerivedMarketStore(root)
     lock_path = root / ".maintenance.lock"

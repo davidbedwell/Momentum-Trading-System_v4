@@ -11,6 +11,7 @@ from .derived_market_store import DerivedFeatureDefinition, DerivedFeatureSetDef
 EARNINGS_FEATURE_SET_ID = "mts_earnings_event_context"
 EARNINGS_FEATURE_SET_VERSION = "v1"
 NY = ZoneInfo("America/New_York")
+MAX_ALIGNMENT_GAP_DAYS = 7
 
 
 def earnings_event_feature_set() -> DerivedFeatureSetDefinition:
@@ -53,11 +54,17 @@ def _parse_event_time(value: object) -> datetime:
 def _effective_close_for_event(
     event: Mapping[str, Any], closes: Sequence[datetime]
 ) -> datetime | None:
+    if not closes:
+        return None
     if event.get("event_time") not in (None, ""):
         event_time = _parse_event_time(event.get("event_time"))
+        if (closes[0].date() - event_time.date()).days > MAX_ALIGNMENT_GAP_DAYS:
+            return None
         return next((close for close in closes if close > event_time), None)
 
     report_date = date.fromisoformat(str(event.get("report_date", "")).strip())
+    if (closes[0].date() - report_date).days > MAX_ALIGNMENT_GAP_DAYS:
+        return None
     availability = str(event.get("availability_class", "")).strip().upper().replace("_", "")
     if availability in {"BEFOREMARKET", "BMO"}:
         return next((close for close in closes if close.date() >= report_date), None)
@@ -78,14 +85,15 @@ def build_earnings_event_rows(
 
     Callers provide actual session-close timestamps; this function does not infer
     holidays or fabricate a trading calendar. Multiple records mapping to the same
-    security/session are rejected rather than silently combined.
+    security/session are represented as one explicitly ambiguous row: the event
+    count is preserved, conflicting measurements are null, and timing is known
+    only when every contributing record has known timing.
     """
     close_index = {
         security_id: tuple(sorted(close.astimezone(NY) for close in closes))
         for security_id, closes in market_close_times_by_security.items()
     }
-    output = []
-    identities: set[tuple[str, str]] = set()
+    grouped: dict[tuple[str, str], list[Mapping[str, Any]]] = {}
     for event in events:
         if str(event.get("event_type", "")).upper() != "EARNINGS":
             continue
@@ -97,21 +105,28 @@ def build_earnings_event_rows(
             continue
         effective_date = effective_close.date().isoformat()
         identity = (security_id, effective_date)
-        if identity in identities:
-            raise ValueError(f"multiple earnings records map to one security/effective session: {identity}")
-        identities.add(identity)
+        grouped.setdefault(identity, []).append(event)
+
+    def agreed_finite(records: Sequence[Mapping[str, Any]], field: str) -> float | None:
+        values = {_finite(record.get(field)) for record in records}
+        return next(iter(values)) if len(values) == 1 else None
+
+    output = []
+    for (security_id, effective_date), records in grouped.items():
+        timing_known = all(
+            record.get("event_time") not in (None, "")
+            or str(record.get("availability_class", "")).strip().upper().replace("_", "")
+            in {"BEFOREMARKET", "BMO", "AFTERMARKET", "AMC"}
+            for record in records
+        )
         output.append({
             "security_id": security_id,
             "effective_date": effective_date,
-            "eligible": bool(event.get("eligible", True)),
-            "earnings_surprise_pct__v1": _finite(event.get("surprise_pct")),
-            "earnings_reported_eps__v1": _finite(event.get("reported_eps")),
-            "earnings_estimate_eps__v1": _finite(event.get("eps_estimate")),
-            "earnings_event_count__v1": 1.0,
-            "earnings_timing_known__v1": 1.0 if (
-                event.get("event_time") not in (None, "")
-                or str(event.get("availability_class", "")).strip().upper().replace("_", "")
-                in {"BEFOREMARKET", "BMO", "AFTERMARKET", "AMC"}
-            ) else 0.0,
+            "eligible": all(bool(record.get("eligible", True)) for record in records),
+            "earnings_surprise_pct__v1": agreed_finite(records, "surprise_pct"),
+            "earnings_reported_eps__v1": agreed_finite(records, "reported_eps"),
+            "earnings_estimate_eps__v1": agreed_finite(records, "eps_estimate"),
+            "earnings_event_count__v1": float(len(records)),
+            "earnings_timing_known__v1": 1.0 if timing_known else 0.0,
         })
     return tuple(sorted(output, key=lambda row: (row["effective_date"], row["security_id"])))
