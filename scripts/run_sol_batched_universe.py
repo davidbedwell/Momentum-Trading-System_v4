@@ -140,13 +140,14 @@ def main(argv: list[str] | None = None) -> int:
     primary_set = store.get_feature_set(primary_query.feature_set_id, primary_query.feature_set_version)
     if primary_set is None:
         raise RuntimeError(f"unknown primary feature set: {primary_query.feature_set_key}")
-    supplied_primary_columns = set(primary_query.feature_columns or primary_set.feature_columns)
-    missing_stage2a = sorted(set(required_feature_columns()).difference(supplied_primary_columns))
-    if missing_stage2a:
-        raise RuntimeError(
-            "primary query must supply the comprehensive neutral Stage 2A predictor schema; "
-            f"missing={missing_stage2a}"
-        )
+    if not args.calibration_control_id:
+        supplied_primary_columns = set(primary_query.feature_columns or primary_set.feature_columns)
+        missing_stage2a = sorted(set(required_feature_columns()).difference(supplied_primary_columns))
+        if missing_stage2a:
+            raise RuntimeError(
+                "primary query must supply the comprehensive neutral Stage 2A predictor schema; "
+                f"missing={missing_stage2a}"
+            )
     if outcome_query and store.get_feature_set(outcome_query.feature_set_id, outcome_query.feature_set_version) is None:
         raise RuntimeError(f"unknown outcome feature set: {outcome_query.feature_set_key}")
 

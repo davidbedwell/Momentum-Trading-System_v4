@@ -55,6 +55,11 @@ def main(argv=None) -> int:
     parser.add_argument("--control-readiness-report", required=True, help="Passing zero-SOL preflight report bound to this exact configuration.")
     parser.add_argument("--root", default="/home/ubuntu")
     parser.add_argument("--derived-market-root", default=None)
+    parser.add_argument(
+        "--scientific-partition-manifest",
+        required=True,
+        help="Frozen partition forwarded to every historical-outcome control run.",
+    )
     parser.add_argument("--per-control-sol-spend-limit-usd", type=float, required=True)
     parser.add_argument("--assessment-json", default=None, help="Optional independent post-run PASS/PARTIAL/FAIL assessments; never sent to Sol.")
     parser.add_argument("--continue-after-failure", action="store_true")
@@ -96,6 +101,7 @@ def main(argv=None) -> int:
         ]
         if args.derived_market_root:
             command.extend(("--derived-market-root", args.derived_market_root))
+        command.extend(("--scientific-partition-manifest", args.scientific_partition_manifest))
         for optional in ("start_date", "end_date"):
             if item.get(optional):
                 command.extend(("--" + optional.replace("_", "-"), str(item[optional])))
@@ -136,14 +142,21 @@ def main(argv=None) -> int:
     report = assemble_control_report(runs, _assessment_records(args.assessment_json))
     report_path = campaign_root / "scientific_control_campaign_report.json"
     report_path.write_text(json.dumps(asdict(report), indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")
+    dry_run_validated = bool(
+        args.dry_run
+        and len(runs) == len(BLINDED_CONTROLS)
+        and all(run.exit_code == 0 for run in runs)
+    )
     print(f"CAMPAIGN_ROOT={campaign_root}")
     print(f"CONTROLS_ATTEMPTED={len(runs)}")
     print(f"ALL_FIVE_CONTROLS_PRESENT={report.all_five_controls_present}")
     print(f"ALL_RUNS_COMPLETED={report.all_runs_completed}")
     print(f"ALL_CONTROLS_ASSESSED={report.all_controls_assessed}")
     print(f"OVERALL_STATUS={report.overall_status}")
+    if args.dry_run:
+        print(f"DRY_RUN_VALIDATED={dry_run_validated}")
     print(f"REPORT={report_path}")
-    return 0 if report.all_runs_completed else 2
+    return 0 if report.all_runs_completed or dry_run_validated else 2
 
 
 if __name__ == "__main__":
