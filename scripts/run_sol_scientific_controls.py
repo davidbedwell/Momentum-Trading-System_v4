@@ -63,6 +63,11 @@ def main(argv=None) -> int:
     parser.add_argument("--per-control-sol-spend-limit-usd", type=float, required=True)
     parser.add_argument("--assessment-json", default=None, help="Optional independent post-run PASS/PARTIAL/FAIL assessments; never sent to Sol.")
     parser.add_argument("--continue-after-failure", action="store_true")
+    parser.add_argument(
+        "--resume-incomplete-campaign",
+        action="store_true",
+        help="Reuse completed control summaries in an existing campaign root and continue only missing controls.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
     if args.per_control_sol_spend_limit_usd <= 0:
@@ -75,7 +80,11 @@ def main(argv=None) -> int:
     if missing:
         raise RuntimeError(f"control config missing required controls: {sorted(missing)}")
     campaign_root = Path(args.campaign_root)
-    if campaign_root.exists() and any(campaign_root.iterdir()):
+    if (
+        campaign_root.exists()
+        and any(campaign_root.iterdir())
+        and not args.resume_incomplete_campaign
+    ):
         raise RuntimeError("campaign-root must be new or empty")
     campaign_root.mkdir(parents=True, exist_ok=True)
     runs = []
@@ -85,6 +94,28 @@ def main(argv=None) -> int:
         if not isinstance(item, dict):
             raise RuntimeError(f"config for {control.control_id} must be an object")
         state_dir = campaign_root / control.control_id
+        summary_path = state_dir / "run_summary.json"
+        if args.resume_incomplete_campaign and summary_path.is_file():
+            summary = _load_object(summary_path)
+            spend = summary.get("sol_spend") if isinstance(summary.get("sol_spend"), dict) else {}
+            runs.append(
+                ControlRunRecord(
+                    control_id=control.control_id,
+                    state_dir=str(state_dir),
+                    exit_code=0,
+                    analyses_executed=(int(summary["analyses_executed"]) if "analyses_executed" in summary else None),
+                    findings_promoted=(int(summary["findings_promoted"]) if "findings_promoted" in summary else None),
+                    closed=(bool(summary["closed"]) if "closed" in summary else None),
+                    sol_spend_usd=(float(spend["actual_spend_usd"]) if "actual_spend_usd" in spend else None),
+                    replay_capture_path=(str(summary["qwen_replay_capture"]) if summary.get("qwen_replay_capture") else None),
+                )
+            )
+            print(f"CONTROL_RESUMED_FROM_SUMMARY={control.control_id}", flush=True)
+            continue
+        if args.resume_incomplete_campaign and state_dir.exists() and any(state_dir.iterdir()):
+            raise RuntimeError(
+                f"control state is incomplete and must be durably resumed first: {control.control_id}"
+            )
         command = [
             sys.executable,
             str(Path(__file__).with_name("run_sol_batched_universe.py")),
@@ -121,7 +152,6 @@ def main(argv=None) -> int:
             "COMMAND=" + " ".join(command) + "\n\nSTDOUT\n" + completed.stdout + "\nSTDERR\n" + completed.stderr,
             encoding="utf-8",
         )
-        summary_path = state_dir / "run_summary.json"
         summary = _load_object(summary_path) if summary_path.exists() else {}
         spend = summary.get("sol_spend") if isinstance(summary.get("sol_spend"), dict) else {}
         runs.append(
