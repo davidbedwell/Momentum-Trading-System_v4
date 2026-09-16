@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import date, datetime
 import math
 from typing import Any, Mapping, Sequence
 from zoneinfo import ZoneInfo
@@ -15,17 +15,21 @@ NY = ZoneInfo("America/New_York")
 
 def earnings_event_feature_set() -> DerivedFeatureSetDefinition:
     features = (
-        DerivedFeatureDefinition("earnings_surprise_pct", "v1", "Reported EPS surprise percentage from the event record", ("POINT_IN_TIME_EARNINGS",), 0, "KNOWN_AFTER_EVENT_TIMESTAMP", "PREDICTOR"),
-        DerivedFeatureDefinition("earnings_reported_eps", "v1", "Reported EPS from the event record", ("POINT_IN_TIME_EARNINGS",), 0, "KNOWN_AFTER_EVENT_TIMESTAMP", "CONTEXT"),
-        DerivedFeatureDefinition("earnings_estimate_eps", "v1", "EPS estimate associated with the event record", ("POINT_IN_TIME_EARNINGS",), 0, "KNOWN_AFTER_EVENT_TIMESTAMP", "CONTEXT"),
-        DerivedFeatureDefinition("earnings_event_count", "v1", "Number of earnings event records mapped to this security/effective session", ("POINT_IN_TIME_EARNINGS",), 0, "KNOWN_AFTER_EVENT_TIMESTAMP", "CONTEXT"),
+        DerivedFeatureDefinition("earnings_surprise_pct", "v1", "Reported EPS surprise percentage from the event record", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "PREDICTOR"),
+        DerivedFeatureDefinition("earnings_reported_eps", "v1", "Reported EPS from the event record", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
+        DerivedFeatureDefinition("earnings_estimate_eps", "v1", "EPS estimate associated with the event record", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
+        DerivedFeatureDefinition("earnings_event_count", "v1", "Number of earnings event records mapped to this security/effective session", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
     )
     return DerivedFeatureSetDefinition(
         EARNINGS_FEATURE_SET_ID,
         EARNINGS_FEATURE_SET_VERSION,
-        "Point-in-time earnings event measurements aligned to the first market close after the event became known.",
+        "Earnings event measurements aligned to the first market close at which the provider-declared event timing was observable.",
         features,
-        attributes={"event_alignment": "FIRST_MARKET_CLOSE_AFTER_EVENT_TIME", "future_information": False},
+        attributes={
+            "event_alignment": "EXACT_TIMESTAMP_OR_PROVIDER_BEFORE_AFTER_MARKET_CLASS",
+            "unknown_timing_policy": "EXCLUDE_NOT_GUESS",
+            "future_information": False,
+        },
     )
 
 
@@ -43,6 +47,24 @@ def _parse_event_time(value: object) -> datetime:
     if parsed.tzinfo is None:
         raise ValueError("earnings event_time must include timezone; naive event timing is not point-in-time safe")
     return parsed.astimezone(NY)
+
+
+def _effective_close_for_event(
+    event: Mapping[str, Any], closes: Sequence[datetime]
+) -> datetime | None:
+    if event.get("event_time") not in (None, ""):
+        event_time = _parse_event_time(event.get("event_time"))
+        return next((close for close in closes if close > event_time), None)
+
+    report_date = date.fromisoformat(str(event.get("report_date", "")).strip())
+    availability = str(event.get("availability_class", "")).strip().upper().replace("_", "")
+    if availability in {"BEFOREMARKET", "BMO"}:
+        return next((close for close in closes if close.date() >= report_date), None)
+    if availability in {"AFTERMARKET", "AMC"}:
+        return next((close for close in closes if close.date() > report_date), None)
+    raise ValueError(
+        "earnings record without exact event_time requires BeforeMarket or AfterMarket availability_class"
+    )
 
 
 def build_earnings_event_rows(
@@ -68,8 +90,7 @@ def build_earnings_event_rows(
         security_id = str(event.get("security_id", "")).strip()
         if not security_id or security_id not in close_index:
             continue
-        event_time = _parse_event_time(event.get("event_time"))
-        effective_close = next((close for close in close_index[security_id] if close > event_time), None)
+        effective_close = _effective_close_for_event(event, close_index[security_id])
         if effective_close is None:
             continue
         effective_date = effective_close.date().isoformat()
