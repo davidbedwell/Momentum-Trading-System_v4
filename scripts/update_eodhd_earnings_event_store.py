@@ -47,7 +47,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--publish", action="store_true")
     parser.add_argument("--update-id", default=None)
     parser.add_argument("--minimum-security-coverage", type=float, default=0.95)
-    parser.add_argument("--minimum-known-timing-rate", type=float, default=0.98)
+    parser.add_argument("--minimum-known-timing-rate", type=float, default=0.0, help="Optional descriptive-quality floor; unknown timing is conservatively aligned and marked rather than discarded.")
     return parser
 
 
@@ -171,7 +171,7 @@ def main(argv: list[str] | None = None) -> int:
         "thresholds": {"minimum_security_coverage": args.minimum_security_coverage, "minimum_known_timing_rate": args.minimum_known_timing_rate},
         "checks": {"security_coverage": coverage_pass, "known_timing_rate": timing_pass},
         "passed": coverage_pass and timing_pass,
-        "unknown_timing_policy": "EXCLUDED_FROM_DERIVED_PREDICTORS_NOT_GUESSED",
+        "unknown_timing_policy": "CONSERVATIVE_NEXT_OBSERVED_SESSION_CLOSE_WITH_QUALITY_INDICATOR",
         "token_persisted": False,
         "sol_calls": 0,
     }
@@ -187,7 +187,7 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("refusing earnings publication because coverage audit failed")
 
     closes = _market_closes(root, args.universe_id)
-    derived_rows = build_earnings_event_rows(known_rows, market_close_times_by_security=closes)
+    derived_rows = build_earnings_event_rows(all_rows, market_close_times_by_security=closes)
     if not derived_rows:
         raise RuntimeError("no earnings event rows align to observed predictor sessions")
     update_id = args.update_id or f"eodhd-earnings-{min(row['effective_date'] for row in derived_rows)}-{max(row['effective_date'] for row in derived_rows)}"
@@ -208,7 +208,9 @@ def main(argv: list[str] | None = None) -> int:
             source_lineage={
                 "provider": "EODHD", "endpoint": "/api/calendar/earnings",
                 "audit": str(audit_path), "reported_records": len(all_rows),
-                "published_records": len(derived_rows), "unknown_timing_records_excluded": len(all_rows) - len(known_rows),
+                "published_records": len(derived_rows),
+                "unknown_timing_records_conservatively_aligned": len(all_rows) - len(known_rows),
+                "unknown_timing_records_excluded": 0,
                 "token_persisted": False,
             },
         )

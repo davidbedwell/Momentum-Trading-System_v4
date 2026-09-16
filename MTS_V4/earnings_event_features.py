@@ -19,6 +19,7 @@ def earnings_event_feature_set() -> DerivedFeatureSetDefinition:
         DerivedFeatureDefinition("earnings_reported_eps", "v1", "Reported EPS from the event record", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
         DerivedFeatureDefinition("earnings_estimate_eps", "v1", "EPS estimate associated with the event record", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
         DerivedFeatureDefinition("earnings_event_count", "v1", "Number of earnings event records mapped to this security/effective session", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
+        DerivedFeatureDefinition("earnings_timing_known", "v1", "One when provider timing is BeforeMarket/AfterMarket or an exact timestamp; zero when conservatively delayed to the next observed session close", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
     )
     return DerivedFeatureSetDefinition(
         EARNINGS_FEATURE_SET_ID,
@@ -27,7 +28,7 @@ def earnings_event_feature_set() -> DerivedFeatureSetDefinition:
         features,
         attributes={
             "event_alignment": "EXACT_TIMESTAMP_OR_PROVIDER_BEFORE_AFTER_MARKET_CLASS",
-            "unknown_timing_policy": "EXCLUDE_NOT_GUESS",
+            "unknown_timing_policy": "CONSERVATIVE_NEXT_OBSERVED_SESSION_CLOSE",
             "future_information": False,
         },
     )
@@ -62,9 +63,10 @@ def _effective_close_for_event(
         return next((close for close in closes if close.date() >= report_date), None)
     if availability in {"AFTERMARKET", "AMC"}:
         return next((close for close in closes if close.date() > report_date), None)
-    raise ValueError(
-        "earnings record without exact event_time requires BeforeMarket or AfterMarket availability_class"
-    )
+    # Unknown categorical timing is not guessed. The following observed
+    # session's close is conservative whether the release occurred before,
+    # during, or after the report-date session.
+    return next((close for close in closes if close.date() > report_date), None)
 
 
 def build_earnings_event_rows(
@@ -106,5 +108,10 @@ def build_earnings_event_rows(
             "earnings_reported_eps__v1": _finite(event.get("reported_eps")),
             "earnings_estimate_eps__v1": _finite(event.get("eps_estimate")),
             "earnings_event_count__v1": 1.0,
+            "earnings_timing_known__v1": 1.0 if (
+                event.get("event_time") not in (None, "")
+                or str(event.get("availability_class", "")).strip().upper().replace("_", "")
+                in {"BEFOREMARKET", "BMO", "AFTERMARKET", "AMC"}
+            ) else 0.0,
         })
     return tuple(sorted(output, key=lambda row: (row["effective_date"], row["security_id"])))

@@ -37,8 +37,9 @@ def test_provider_after_market_class_aligns_to_next_session_close():
     assert rows[0]["effective_date"] == "2025-01-03"
 
 
-def test_unknown_provider_timing_is_rejected_not_guessed():
+def test_unknown_provider_timing_is_conservatively_delayed_to_next_session_close():
     events = ({"security_id": "A", "event_type": "EARNINGS", "report_date": "2025-01-02", "availability_class": "Unknown"},)
     closes = {"A": (datetime(2025, 1, 3, 16, 0, tzinfo=NY),)}
-    with pytest.raises(ValueError, match="BeforeMarket or AfterMarket"):
-        build_earnings_event_rows(events, market_close_times_by_security=closes)
+    rows = build_earnings_event_rows(events, market_close_times_by_security=closes)
+    assert rows[0]["effective_date"] == "2025-01-03"
+    assert rows[0]["earnings_timing_known__v1"] == 0.0
