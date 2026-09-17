@@ -441,17 +441,42 @@ def compose_aligned_dataset(evidence_payloads: Mapping[str, object], parameters:
                 "key": {"mode": "PARENT_ROW_POSITION", "parent_input_name": parent_input_name},
             })
         elif mode == "COLUMN":
-            column = str(key.get("column", "")).strip()
-            if not column:
-                raise ValueError(f"COLUMN alignment for {input_name!r} requires key.column")
+            raw_columns = key.get("columns")
+            legacy_column = str(key.get("column", "")).strip()
+            if raw_columns is not None and legacy_column:
+                raise ValueError(
+                    f"COLUMN alignment for {input_name!r} must use either key.column or key.columns, not both"
+                )
+            if raw_columns is None:
+                columns = (legacy_column,) if legacy_column else ()
+            elif isinstance(raw_columns, (list, tuple)):
+                columns = tuple(str(value).strip() for value in raw_columns)
+            else:
+                raise ValueError(f"COLUMN alignment key.columns for {input_name!r} must be a list or tuple")
+            if not columns or any(not column for column in columns):
+                raise ValueError(
+                    f"COLUMN alignment for {input_name!r} requires nonblank key.column or key.columns"
+                )
+            if len(set(columns)) != len(columns):
+                raise ValueError(f"COLUMN alignment columns are duplicated for {input_name!r}")
             for row in rows:
-                if column not in row:
-                    raise ValueError(f"alignment column {column!r} is missing from input {input_name!r}")
-                logical_key = row[column]
+                missing = [column for column in columns if column not in row]
+                if missing:
+                    raise ValueError(
+                        f"alignment column {missing[0]!r} is missing from input {input_name!r}"
+                    )
+                logical_key = (
+                    row[columns[0]]
+                    if len(columns) == 1
+                    else tuple(row[column] for column in columns)
+                )
                 if logical_key in current:
                     raise ValueError(f"alignment key {logical_key!r} is duplicated in input {input_name!r}")
                 current[logical_key] = row
-            alignment_metadata.append({"input_name": input_name, "key": {"mode": "COLUMN", "column": column}})
+            normalized_key = {"mode": "COLUMN", "columns": list(columns)}
+            if len(columns) == 1:
+                normalized_key["column"] = columns[0]
+            alignment_metadata.append({"input_name": input_name, "key": normalized_key})
         else:
             raise ValueError(f"unsupported alignment key mode for {input_name!r}: {mode!r}")
         keyed_rows[input_name] = current
@@ -495,7 +520,14 @@ def compose_aligned_dataset(evidence_payloads: Mapping[str, object], parameters:
 
     composed_rows: list[Mapping[str, Any]] = []
     for logical_key in ordered_common_keys:
-        row_out: dict[str, Any] = {alignment_key_column: logical_key}
+        exposed_key: object = logical_key
+        first_key = alignment_metadata[0].get("key", {})
+        first_columns = first_key.get("columns") if isinstance(first_key, Mapping) else None
+        if isinstance(first_columns, list) and len(first_columns) > 1:
+            exposed_key = {
+                column: value for column, value in zip(first_columns, logical_key)
+            }
+        row_out: dict[str, Any] = {alignment_key_column: exposed_key}
         for input_name, column, output_name in normalized_selections:
             source_row = keyed_rows[input_name][logical_key]
             if column not in source_row:
@@ -576,10 +608,10 @@ def standard_method_catalog() -> MethodCatalog:
         MethodSpec("analysis.path.forward_measurement", ("NORMALIZED_DATASET",), "Exploration-only look-ahead path measurement over an RD-selected horizon and direction, returning exact aggregate statistics plus a campaign-local reusable derived observation dataset.", (ParameterContract("price_column", True, (str,), meaning="RD-selected price field"), ParameterContract("horizon", True, (int,), minimum_value=1, meaning="RD-selected forward rows"), ParameterContract("direction", True, (str,), allowed_values=("LONG", "SHORT"), meaning="RD-selected directional frame")), 2, True, False, True, {"scientific_selection": "none", "output_shape": "bounded RD transport plus temporary reusable derived dataset", "reusable_derived_dataset": True}),
         MethodSpec(
             "analysis.dataset.compose",
-            ("NORMALIZED_DATASET",),
+            ("TABULAR", "NORMALIZED_DATASET"),
             "Mechanically align RD-selected columns from two or more supplied raw and/or derived row datasets by an explicit RD-selected observation key and return a temporary reusable composed dataset. No variables, keys, aliases, or scientific meaning are inferred.",
             (
-                ParameterContract("alignment", True, (list, tuple), minimum_length=2, meaning="RD-authored input alignment specifications: key.mode is ROW_POSITION, PARENT_ROW_POSITION for mechanically proven lineage anchors, or COLUMN with an exact field"),
+                ParameterContract("alignment", True, (list, tuple), minimum_length=2, meaning="RD-authored input alignment specifications: key.mode is ROW_POSITION, PARENT_ROW_POSITION for mechanically proven lineage anchors, or COLUMN with exact key.column (one field) or key.columns (an ordered composite key)"),
                 ParameterContract("selections", True, (list, tuple), minimum_length=1, meaning="RD-authored output columns: each entry is {input_name, column, output_name}; output_name is the exact scientific column name in the composed dataset; Analysis chooses a collision-safe internal alignment-key field mechanically"),
                 ParameterContract("join_type", True, (str,), allowed_values=("INNER",), meaning="RD-selected alignment join; currently available capability is exact INNER intersection only"),
             ),
@@ -592,7 +624,7 @@ def standard_method_catalog() -> MethodCatalog:
                 "alignment_key_modes": {
                     "ROW_POSITION": "logical key is the zero-based row position of that supplied dataset",
                     "PARENT_ROW_POSITION": "logical key is the explicit input_row_anchor carried by deterministic __observation_lineage; Analysis rejects missing, mixed-parent, or duplicate lineage anchors",
-                    "COLUMN": "logical key is the exact value in the RD-selected column",
+                    "COLUMN": "logical key is the exact value tuple in RD-selected key.columns, or the one-value tuple from legacy key.column; every key must be unique within each input",
                 },
                 "execution_semantics": "Only rows whose explicit logical keys exist in every aligned input are retained for INNER. Output row order preserves the first RD-authored alignment input order. PARENT_ROW_POSITION exposes an already proven lineage identity and does not infer equality with scientific columns. Analysis does not infer time matching, nearest-neighbor matching, lagging, filling, interpolation, column choice, aliases, or scientific ordering. If an RD-selected output column is named alignment_key, Analysis moves its own internal alignment key to a collision-safe private field rather than rejecting the scientific output name.",
             },

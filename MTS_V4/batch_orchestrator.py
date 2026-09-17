@@ -280,6 +280,7 @@ class BatchResearchLoopOrchestrator:
                     request=request,
                     result=result,
                     result_index=result_index,
+                    evidence_map=evidence_map,
                 )
                 self._nexus.register_analysis_result_metadata(result.durable_metadata())
                 current_batch_results[specification.analysis_id] = result
@@ -360,6 +361,7 @@ class BatchResearchLoopOrchestrator:
         request: AnalysisRequest,
         result: AnalysisResult,
         result_index: Mapping[str, AnalysisResult],
+        evidence_map: Mapping[str, EvidenceDescriptor],
     ) -> AnalysisResult:
         if result.request_id != request.request_id:
             raise BatchResearchLoopError("Analysis result request lineage mismatch")
@@ -391,13 +393,21 @@ class BatchResearchLoopOrchestrator:
             (item for item in self._available_methods if item.get("method_id") == request.method_id),
             {},
         )
-        direct_future = capability.get("allows_future_information") is True
+        direct_future_evidence_ids = [
+            evidence_id
+            for evidence_id in request.evidence_ids
+            if bool(evidence_map[evidence_id].provenance.get("contains_future_outcomes"))
+        ]
+        method_permits_future = capability.get("allows_future_information") is True
         execution_metadata = dict(result.execution_metadata)
         if input_lineage:
             execution_metadata["analysis_input_lineage"] = input_lineage
         execution_metadata["future_information"] = {
-            "contains_future_information": bool(direct_future or inherited_future),
-            "direct_method_allows_future_information": direct_future,
+            "contains_future_information": bool(
+                method_permits_future or direct_future_evidence_ids or inherited_future
+            ),
+            "direct_evidence_ids_with_future_information": direct_future_evidence_ids,
+            "method_contract_allows_future_information": method_permits_future,
             "inherited_from_result_ids": inherited_future,
             "policy": "MECHANICAL_TEMPORAL_LINEAGE_ONLY_RD_DECIDES_SCIENTIFIC_USE",
         }

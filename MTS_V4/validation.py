@@ -67,6 +67,26 @@ class ObjectiveContractValidator:
                 )
             )
 
+        if request.research_phase is ResearchPhase.VALIDATION:
+            future_evidence = [
+                item.evidence_id
+                for item in evidence.values()
+                if item.evidence_id in request.evidence_ids
+                and bool(item.provenance.get("contains_future_outcomes"))
+            ]
+            if future_evidence:
+                defects.append(
+                    ContractDefect(
+                        code="TEMPORAL_CONTRACT_VIOLATION",
+                        message=(
+                            "VALIDATION prediction-time Analysis cannot consume evidence marked as "
+                            f"containing future outcomes: {tuple(future_evidence)}"
+                        ),
+                        field="evidence_ids",
+                        method_id=spec.method_id,
+                    )
+                )
+
         resolved: list[EvidenceDescriptor] = []
         for evidence_id in request.evidence_ids:
             item = evidence.get(evidence_id)

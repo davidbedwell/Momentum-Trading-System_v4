@@ -233,12 +233,20 @@ class ResearchLoopOrchestrator:
                 ),
                 {},
             )
-            direct_future = method_capability.get("allows_future_information") is True
+            direct_future_evidence_ids = [
+                evidence_id
+                for evidence_id in request.evidence_ids
+                if bool(evidence_map[evidence_id].provenance.get("contains_future_outcomes"))
+            ]
+            method_permits_future = method_capability.get("allows_future_information") is True
             future_information = {
                 "contains_future_information": bool(
-                    direct_future or inherited_future_result_ids
+                    method_permits_future
+                    or direct_future_evidence_ids
+                    or inherited_future_result_ids
                 ),
-                "direct_method_allows_future_information": direct_future,
+                "direct_evidence_ids_with_future_information": direct_future_evidence_ids,
+                "method_contract_allows_future_information": method_permits_future,
                 "inherited_from_result_ids": inherited_future_result_ids,
                 "policy": (
                     "MECHANICAL_TEMPORAL_LINEAGE_ONLY_RD_DECIDES_SCIENTIFIC_USE; "

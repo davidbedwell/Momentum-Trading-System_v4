@@ -317,6 +317,7 @@ class RecoveredBatchCampaignContinuation(BatchResearchLoopOrchestrator):
                     request=request,
                     result=result,
                     result_index=result_index,
+                    evidence_map=evidence_map,
                 )
 
                 status = str(result.execution_metadata.get("execution_status", "UNKNOWN"))

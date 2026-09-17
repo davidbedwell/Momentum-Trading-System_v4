@@ -7,7 +7,7 @@ from MTS_V4.cache import TemporaryResearchCache
 from MTS_V4.contracts import AnalysisRequest, AnalysisResultInput, EvidenceDescriptor, ResearchDecision, ResearchPhase, SubjectMetadata
 from MTS_V4.nexus import InMemoryResearchNexus
 from MTS_V4.orchestrator import ResearchLoopOrchestrator
-from MTS_V4.standard_methods import standard_analysis_methods, standard_method_catalog
+from MTS_V4.standard_methods import compose_aligned_dataset, standard_analysis_methods, standard_method_catalog
 from MTS_V4.validation import ObjectiveContractValidator
 
 
@@ -175,6 +175,7 @@ class DatasetCompositionTests(unittest.TestCase):
         parameter_names = [item["name"] for item in payload["parameters"]]
         self.assertEqual(parameter_names, ["alignment", "selections", "join_type"])
         self.assertEqual(payload["parameters"][2]["allowed_values"], ["INNER"])
+        self.assertEqual(payload["artifact_types"], ["TABULAR", "NORMALIZED_DATASET"])
         self.assertEqual(payload["metadata"]["scientific_selection"], "none")
         self.assertFalse("volume" in payload["description"].lower())
         self.assertFalse("terminal_directional_return" in payload["description"].lower())
@@ -215,6 +216,71 @@ class DatasetCompositionTests(unittest.TestCase):
             result.outputs["interpretation_boundary"],
             "OBJECTIVE_EXECUTION_ERROR_RD_DECIDES_NEXT_STEP",
         )
+
+    def test_composite_column_identity_joins_security_date_panels_without_collapsing_security(self):
+        result = compose_aligned_dataset(
+            {
+                "predictors": [
+                    {"security_id": "A", "effective_date": "2026-01-02", "score": 0.9},
+                    {"security_id": "B", "effective_date": "2026-01-02", "score": 0.1},
+                    {"security_id": "A", "effective_date": "2026-01-05", "score": 0.8},
+                ],
+                "outcomes": [
+                    {"security_id": "B", "effective_date": "2026-01-02", "forward": -0.02},
+                    {"security_id": "A", "effective_date": "2026-01-02", "forward": 0.03},
+                    {"security_id": "A", "effective_date": "2026-01-05", "forward": 0.01},
+                ],
+            },
+            {
+                "alignment": [
+                    {"input_name": "predictors", "key": {"mode": "COLUMN", "columns": ["security_id", "effective_date"]}},
+                    {"input_name": "outcomes", "key": {"mode": "COLUMN", "columns": ["security_id", "effective_date"]}},
+                ],
+                "selections": [
+                    {"input_name": "predictors", "column": "security_id", "output_name": "security_id"},
+                    {"input_name": "predictors", "column": "effective_date", "output_name": "effective_date"},
+                    {"input_name": "predictors", "column": "score", "output_name": "score"},
+                    {"input_name": "outcomes", "column": "forward", "output_name": "forward"},
+                ],
+                "join_type": "INNER",
+            },
+        )
+
+        rows = result["derived_datasets"]["composed_dataset"]
+        self.assertEqual(
+            [(row["security_id"], row["effective_date"], row["score"], row["forward"]) for row in rows],
+            [
+                ("A", "2026-01-02", 0.9, 0.03),
+                ("B", "2026-01-02", 0.1, -0.02),
+                ("A", "2026-01-05", 0.8, 0.01),
+            ],
+        )
+        self.assertEqual(
+            rows[0]["alignment_key"],
+            {"security_id": "A", "effective_date": "2026-01-02"},
+        )
+
+    def test_composite_column_identity_rejects_duplicate_observations(self):
+        with self.assertRaisesRegex(ValueError, "duplicated"):
+            compose_aligned_dataset(
+                {
+                    "left": [
+                        {"security_id": "A", "effective_date": "2026-01-02", "x": 1},
+                        {"security_id": "A", "effective_date": "2026-01-02", "x": 2},
+                    ],
+                    "right": [
+                        {"security_id": "A", "effective_date": "2026-01-02", "y": 3},
+                    ],
+                },
+                {
+                    "alignment": [
+                        {"input_name": "left", "key": {"mode": "COLUMN", "columns": ["security_id", "effective_date"]}},
+                        {"input_name": "right", "key": {"mode": "COLUMN", "columns": ["security_id", "effective_date"]}},
+                    ],
+                    "selections": [{"input_name": "left", "column": "x", "output_name": "x"}],
+                    "join_type": "INNER",
+                },
+            )
 
 
 if __name__ == "__main__":

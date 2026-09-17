@@ -14,6 +14,8 @@ from .cross_sectional_analysis import analysis_method as cross_sectional_analysi
 from .cross_sectional_analysis import method_spec as cross_sectional_method_spec
 from .cross_sectional_statistics import analysis_method as cross_sectional_statistics_method
 from .cross_sectional_statistics import method_spec as cross_sectional_statistics_spec
+from .cross_sectional_association import analysis_method as cross_sectional_association_method
+from .cross_sectional_association import method_spec as cross_sectional_association_spec
 from .cross_subject_batch_orchestrator import CrossSubjectBatchResearchLoopOrchestrator
 from .cross_subject_memory import CrossSubjectScientificMemory
 from .cross_subject_orchestrator import CrossSubjectResearchLoopOrchestrator
@@ -95,6 +97,7 @@ def _build_execution_components(*, nexus_path: str | Path | None, derived_market
         participation_method_spec(),
         cross_sectional_method_spec(),
         cross_sectional_statistics_spec(),
+        cross_sectional_association_spec(),
         null_method_spec(),
         multiple_testing_method_spec(),
         universe_substrate_method_spec(),
@@ -117,6 +120,7 @@ def _build_execution_components(*, nexus_path: str | Path | None, derived_market
         participation_analysis_method(),
         cross_sectional_analysis_method(),
         cross_sectional_statistics_method(),
+        cross_sectional_association_method(),
         null_analysis_method(),
         multiple_testing_analysis_method(),
         universe_substrate_analysis_method(),

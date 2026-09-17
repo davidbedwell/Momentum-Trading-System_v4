@@ -207,5 +207,7 @@ def test_universe_scope_materializes_multi_security_evidence_without_ai_row_payl
     assert descriptor.subject_id == "universe:sp500_pit"
     assert descriptor.row_count == 2
     assert descriptor.evidence_type == "DERIVED_MARKET_PANEL"
+    assert descriptor.artifact_type == "NORMALIZED_DATASET"
+    assert descriptor.provenance["row_identity"]["fields"] == ["security_id", "effective_date"]
     assert len(cache.get(descriptor.cache_key)) == 2
     assert "ret_252__v1" in descriptor.schema

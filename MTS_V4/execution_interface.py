@@ -43,7 +43,7 @@ class TransparentExecutionResearchDirector(ResearchPackageAwareResearchDirector)
             [
                 "Literal Analysis input namespace: each request.evidence_ids value becomes an available input key equal to that exact evidence_id string. Each request.analysis_inputs item becomes an available input key equal to its exact input_name. No other input aliases exist.",
                 "For analysis.dataset.compose, every alignment[].input_name must exactly equal an available input key, and every selections[].input_name must exactly name one of the alignment inputs. Acquired evidence therefore uses the full evidence_id as input_name; labels such as 'ohlcv' or 'options_flow' are invalid unless they are actual analysis_inputs input_name values.",
-                "analysis.dataset.compose COLUMN alignment requires a unique key value within each aligned input and performs no aggregation of duplicate keys. If duplicate keys require aggregation, select an available method or scientific approach yourself; deterministic code will not choose one for you.",
+                "analysis.dataset.compose COLUMN alignment accepts key.column for one field or key.columns for an ordered composite key. The exact key tuple must be unique within each aligned input and composition performs no aggregation of duplicates. Multi-security daily panels normally require every field needed to identify one observation; deterministic code exposes identity metadata but does not choose a scientific alignment for you.",
             ]
         )
 

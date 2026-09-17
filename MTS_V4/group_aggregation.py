@@ -10,6 +10,7 @@ from .method_catalog import MethodSpec, ParameterContract
 
 
 METHOD_ID = "analysis.dataset.group_aggregate"
+RD_TRANSPORT_GROUP_LIMIT = 200
 
 
 def _numeric(value: Any) -> float | None:
@@ -127,9 +128,20 @@ def group_aggregate(
     schema = list(output_rows[0].keys()) if output_rows else list(group_columns) + [
         output_name for _, _, output_name in normalized
     ]
+    transport_all_groups = len(output_rows) <= RD_TRANSPORT_GROUP_LIMIT
     return {
         "group_by": list(group_columns),
-        "group_key_values": distinct_group_values,
+        "group_key_values": (
+            distinct_group_values
+            if transport_all_groups
+            else {
+                column: {
+                    "distinct_count": len(values),
+                    "values_withheld_from_rd_transport": True,
+                }
+                for column, values in distinct_group_values.items()
+            }
+        ),
         "aggregations": [
             {"column": column, "statistic": statistic, "output_name": output_name}
             for column, statistic, output_name in normalized
@@ -137,15 +149,23 @@ def group_aggregate(
         "input_row_count": len(rows),
         "group_count": len(output_rows),
         "excluded_non_numeric": excluded_non_numeric,
-        "group_summaries": {
-            json.dumps(
-                {column: value for column, value in zip(group_columns, key)},
-                sort_keys=True,
-                default=str,
-                separators=(",", ":"),
-            ): dict(row)
-            for key, row in zip(group_order, output_rows)
-        },
+        "group_summaries": (
+            {
+                json.dumps(
+                    {column: value for column, value in zip(group_columns, key)},
+                    sort_keys=True,
+                    default=str,
+                    separators=(",", ":"),
+                ): dict(row)
+                for key, row in zip(group_order, output_rows)
+            }
+            if transport_all_groups
+            else {
+                "transport_withheld": True,
+                "group_count": len(output_rows),
+                "reason": "row-level grouped results remain available through derived_dataset_catalog",
+            }
+        ),
         "derived_dataset_catalog": {
             "grouped_dataset": {
                 "row_count": len(output_rows),
@@ -156,6 +176,7 @@ def group_aggregate(
         },
         "derived_datasets": {"grouped_dataset": output_rows},
         "output_order": "PRESERVES_FIRST_OCCURRENCE_OF_RD_SELECTED_GROUP_KEYS",
+        "rd_transport_group_limit": RD_TRANSPORT_GROUP_LIMIT,
         "interpretation_boundary": (
             "MECHANICAL_GROUPING_AND_AGGREGATION_ONLY_RD_SELECTS_KEYS_COLUMNS_STATISTICS_AND_MEANING"
         ),
