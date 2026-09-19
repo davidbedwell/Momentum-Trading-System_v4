@@ -18,6 +18,8 @@ A profitable price move is not necessarily a useful trading opportunity. Human u
 
 The system must support rigorous evaluation and practical use of known predictive knowledge as well as open-ended scientific discovery, without hard-coding scientific conclusions merely because they are known, conventional, or novel.
 
+MTS is not a deterministic strategy tester. Deterministic machinery may execute, validate, reproduce, route, store, and enforce objective contracts, but it must not reduce the scientific mission to testing a fixed catalog of human-specified strategies or replace AI-directed scientific reasoning and exploration.
+
 ## 2. Human Authority and AI Engineering Latitude
 
 The human establishes:
@@ -38,7 +40,9 @@ ChatGPT does not need separate approval for ordinary implementation choices that
 
 AI is the scientific reasoning authority in MTS v4.
 
-The AI Research Director may use Qwen, Sol, or another explicitly approved AI reasoning provider. The AI Research Director owns scientific judgment, including:
+The AI Research Director is a governed scientific role, not necessarily a single model. It may use Qwen, Terra, Sol, Jev, or another explicitly approved AI reasoning provider or combination of providers, provided that the resulting system preserves AI scientific authority and the governance boundaries in this document.
+
+The AI Research Director owns scientific judgment, including:
 
 - research-question formation;
 - hypothesis formation and revision;
@@ -51,6 +55,10 @@ The AI Research Director may use Qwen, Sol, or another explicitly approved AI re
 - deciding whether further scientific work is required.
 
 Known predictive strategies, theories, and externally supplied research may inform the AI Research Director's scientific judgment and may be investigated directly without first being independently rediscovered by MTS. The AI Research Director remains responsible for deciding how such prior knowledge should be tested, qualified, combined, generalized, rejected, or used, subject to applicable governance and validation requirements. The origin of a hypothesis as known or novel must not itself determine its scientific priority or disposition.
+
+Different AI providers may perform different scientific roles according to demonstrated capability, reliability, cost, latency, and uncertainty. Provider assignment is an implementation and empirical-performance question rather than a permanent scientific hierarchy. A lower-cost provider may perform routine scientific reasoning when it demonstrates adequate reliability, while a stronger provider may be used for difficult, ambiguous, consequential, contradictory, or otherwise escalation-worthy scientific work.
+
+No provider may become an unreviewable scientific bottleneck merely because it is cheaper. Uncertainty, repeated contract failure, material disagreement, scientifically consequential novelty, or evidence conflict must be capable of escalating to a stronger approved reasoning provider. Conversely, expensive providers should not be invoked merely by habit when a less costly approved provider has demonstrated reliable performance for the task.
 
 Deterministic code may not overrule valid scientific judgment merely because deterministic logic considers another scientific choice better.
 
@@ -88,11 +96,15 @@ Deterministic code must not:
 - determine scientific relevance, convergence, adequacy, novelty, plausibility, or importance;
 - redirect scientifically valid research because deterministic logic prefers another direction.
 
+Deterministic orchestration may route work among approved AI providers using objective operational criteria and governed escalation rules, but it may not encode scientific conclusions or use a deterministic proxy score to decide scientific merit.
+
 ## 5. Core v4 Research Flow
 
 The intended high-level flow is:
 
-**External source → Intake Engine → temporary research cache → AI Research Director → Analysis Engine → governed result/finding → Research Nexus → AI Research Director → next scientific action**
+**External source / prior predictive knowledge → Intake and governed context → temporary research cache → AI Research Director → Analysis Engine → governed result/finding → AI Research Director → Research Nexus / next scientific action**
+
+The AI Research Director may internally distribute work among approved AI providers. Routine generative reasoning, bounded AI judgments, frontier scientific reasoning, and mathematical execution may therefore be performed by different components while remaining one governed scientific process.
 
 Known predictive knowledge, strategies, and theories may enter the research process as governed scientific context or candidate hypotheses without being treated as validated findings until MTS has evaluated them under the applicable standards.
 
@@ -138,6 +150,56 @@ It reasons backward from the MTS mission, available evidence, prior MTS knowledg
 
 The AI Research Director may use credible prior predictive knowledge where useful rather than spending research resources merely rediscovering it. It must also remain alert to evidence that known relationships fail, reverse, depend on previously unidentified conditions, interact with other evidence streams, or reveal novel predictive structure. Prior knowledge is context, not a scientific preference: evidence and scientific judgment determine what deserves continued investigation.
 
+### 8.1 AI Provider Roles and Cost Discipline
+
+MTS should seek the lowest-cost approved AI capability that has demonstrated sufficient reliability for a given scientific workload, with escalation based on empirical failure, uncertainty, disagreement, or scientific difficulty rather than fixed call percentages.
+
+The intended provider roles are provisional and must be validated empirically:
+
+- **Qwen** is the initial candidate for high-volume routine generative scientific reasoning, including ordinary RP formation and continuation, translation of known predictive knowledge into testable questions, interpretation of ordinary Analysis results, hypothesis refinement, follow-up design, and Nexus-context reasoning.
+- **Terra** is the principal candidate comparator to Qwen for those same routine generative scientific workloads. MTS must not assume either Qwen or Terra is superior before controlled MTS-specific evaluation.
+- **Sol** is the stronger escalation provider for difficult scientific reasoning, consequential ambiguity, unresolved contract/semantic failures, conflicting evidence, important novel findings, difficult synthesis, adversarial scientific review, and other work for which routine providers have not demonstrated sufficient reliability.
+- **Jev**, if approved and integrated, may be used for bounded AI judgments such as evidence classification, relevance assessment, support/weakening/contradiction judgments, confidence estimation, or other constrained semantic decisions. Jev must not become a deterministic scientific gate or silently prevent evidence from reaching generative RD reasoning merely because a bounded judgment scores it as unimportant.
+- **Analysis Engine** performs mathematical and statistical execution requested by AI scientific reasoning. Numerical work that can be performed exactly and reproducibly by Analysis should not be repeatedly delegated to expensive generative models merely for convenience.
+
+These roles are not permanent model entitlements. They may change when controlled evidence demonstrates a better capability/cost allocation, provided the scientific authority model remains intact.
+
+### 8.2 Qwen Optimization Before Comparative Judgment
+
+Before MTS decides whether Qwen should remain the routine generative provider or be displaced by Terra, Qwen must be brought to a fair best-achievable configuration within the approved architecture and governance.
+
+Qwen optimization may include provider/runtime correctness, prompt and context packaging, appropriate thinking-mode configuration, recommended generation parameters, schema/contract presentation, batch structure, repair behavior, semantic continuation handling, and other non-governance implementation improvements. Qwen must not be intentionally handicapped to make another provider appear superior, and governance must not be weakened merely to make Qwen pass.
+
+Known Qwen failures should be repaired at their actual semantic, packaging, runtime, or contract boundary rather than hidden by deterministic scientific cognition. The goal is to measure the best Qwen that can operate legitimately inside MTS, not merely the easiest Qwen configuration to make tests green.
+
+### 8.3 Qwen-versus-Terra Controlled Evaluation
+
+After Qwen reaches a stable best-achievable configuration, Qwen and Terra should be compared on the same frozen MTS-specific workload and evidence wherever practicable.
+
+The comparison should evaluate at least:
+
+- scientific validity and quality of questions and hypotheses;
+- preservation of known and novel research opportunities;
+- correct interpretation of Analysis evidence;
+- RP lineage and continuation semantics;
+- contract/schema compliance and repair burden;
+- false rejection or premature abandonment of worthwhile research;
+- unnecessary or low-information Analysis work;
+- ability to identify boundary conditions, contradictions, and useful follow-ups;
+- escalation frequency;
+- latency and operational reliability;
+- total end-to-end cost, including model/API cost, GPU/runtime cost, retries, repair calls, and downstream Analysis work generated by each provider.
+
+Generic public benchmarks may inform expectations but may not decide the MTS provider choice. MTS-specific controlled evidence is authoritative for provider assignment.
+
+The preferred routine provider should be the one that delivers the best scientifically adequate end-to-end MTS performance for its total cost and operational burden. If neither provider is sufficiently reliable, routine work must escalate rather than lowering scientific standards.
+
+### 8.4 Batching and Escalation
+
+AI scientific autonomy does not require one model call per scientific micro-decision. Where scientifically appropriate, the Research Director should formulate and evaluate coherent batches of related questions, Analysis requests, results, or RPs so that context and reasoning are reused efficiently.
+
+Escalation should preserve the scientific record. A stronger provider should receive the relevant evidence, prior AI reasoning outputs, bounded judgments where applicable, Analysis results, Nexus context, contract failures, and unresolved questions necessary to make an informed scientific decision without needless reconstruction.
+
 The AI Research Director may revise its own requests when objective execution feedback identifies a contract defect.
 
 ## 9. Analysis Engine
@@ -145,6 +207,8 @@ The AI Research Director may revise its own requests when objective execution fe
 Analysis executes scientific and mathematical operations requested by the AI Research Director.
 
 Analysis may expose a governed method catalog and objective execution contracts. It should not become a second scientific authority that substitutes deterministic method preference for RD judgment.
+
+Analysis should support scientifically coherent batching where doing so preserves the requested scientific meaning and reduces unnecessary AI round trips. Analysis may calculate exact statistics, transformations, comparisons, matrices, and other reproducible outputs in bulk when requested by RD; this does not transfer scientific authority to Analysis.
 
 Analysis returns governed results with sufficient metadata and lineage for RD interpretation and durable promotion when appropriate.
 
