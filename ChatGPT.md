@@ -22,17 +22,9 @@ MTS is not a deterministic strategy tester. Deterministic machinery may execute,
 
 ## 2. Human Authority and AI Engineering Latitude
 
-The human establishes:
+The human establishes the mission and purpose of MTS; governance and authority boundaries; non-negotiable scientific and safety constraints; approved external resources, credentials, and operational limits; and final approval for changes that alter those governing principles.
 
-- the mission and purpose of MTS;
-- governance and authority boundaries;
-- non-negotiable scientific and safety constraints;
-- approved external resources, credentials, and operational limits;
-- final approval for changes that alter those governing principles.
-
-Within those boundaries, ChatGPT has broad engineering latitude during the creation of v4.
-
-ChatGPT may design, reorganize, refactor, replace, simplify, or create modules, interfaces, abstractions, tests, orchestration, validation mechanisms, and internal architecture as necessary to bring the approved vision and governance to life through code.
+Within those boundaries, ChatGPT has broad engineering latitude during the creation of v4. ChatGPT may design, reorganize, refactor, replace, simplify, or create modules, interfaces, abstractions, tests, orchestration, validation mechanisms, and internal architecture as necessary to bring the approved vision and governance to life through code.
 
 ChatGPT does not need separate approval for ordinary implementation choices that remain within this document's authority boundaries. It must not silently change the mission, scientific authority model, Nexus retention boundary, or other non-negotiable governance rules in order to make implementation easier.
 
@@ -110,15 +102,27 @@ This effort must be time-efficient and bounded. Address the highest-leverage cau
 
 Qwen must not be intentionally handicapped, and governance or scientific standards must not be weakened merely to make Qwen pass. Failures should be repaired at their actual semantic, packaging, runtime, or contract boundary rather than hidden by deterministic scientific cognition.
 
-### 8.3 Qwen-versus-Terra Controlled Evaluation
+### 8.3 Frozen-Sol Sequential Provider Evaluation
 
-After Qwen reaches a stable practically achievable configuration, Qwen and Terra should be compared on the same frozen MTS-specific workload and evidence wherever practicable.
+Provider evaluation must begin by establishing the independent Sol control **before** Qwen or Terra performs the comparison campaign on the selected ticker. The purpose is to prevent the lower-cost provider's research path, summaries, classifications, omissions, or framing from influencing the scientific reference against which it will be evaluated.
 
-The comparison should evaluate scientific validity and hypothesis quality; preservation of known and novel opportunities; evidence interpretation; RP lineage and continuation semantics; contract compliance and repair burden; false rejection or premature abandonment; unnecessary Analysis work; boundary-condition and contradiction detection; useful follow-ups; escalation frequency; latency; operational reliability; and total end-to-end cost including model/API, GPU/runtime, retries, repair calls, engineering burden, and downstream computation.
+For a selected benchmark ticker and frozen research state, MTS shall first run a **standalone Sol control campaign**. Sol receives the same governed starting evidence, PIT state, prior predictive knowledge available under the benchmark, Nexus starting state, Analysis capabilities, resource constraints, and research objective that will later be supplied to the candidate hybrid provider. Sol must not receive Qwen, Terra, Jev, or candidate-hybrid conclusions or research trajectories from that benchmark. Sol performs the ticker research independently.
 
-Generic public benchmarks may inform expectations but may not decide MTS provider choice. MTS-specific controlled evidence is authoritative.
+When the standalone Sol campaign is complete, its research record shall be **frozen before the candidate-provider campaign begins**. The frozen control should preserve Sol's RPs/hypotheses, Analysis requests, governed Analysis outputs, interpretations, continuations, closures, findings, unresolved questions, Nexus-relevant conclusions, material negative results, and resource/cost record. The frozen control must not be retrospectively changed because of discoveries made by Qwen, Terra, Jev, or later reconciliation. Any later Sol insight belongs to the reconciliation record, not to the original control.
 
-Because Qwen may have near-zero marginal inference cost, modest Terra superiority alone is not sufficient to replace a scientifically adequate Qwen. Terra should earn displacement by demonstrating a material end-to-end MTS advantage after metered cost is included. Workload-specific routing is permitted when justified by evidence. Scientific standards must not be lowered if neither provider is sufficiently reliable.
+After the Sol control is frozen, the benchmark proceeds sequentially:
+
+1. **Qwen hybrid arm.** Qwen, in its best practically achievable approved configuration, performs the routine RD role against the same frozen starting state and evidence. Analysis and governed escalation may operate as defined by MTS, but the Qwen arm may not inspect the frozen Sol control during its research.
+2. **Comparison and Sol reconciliation.** After the Qwen record is frozen, Sol compares the complete Qwen-hybrid record against the already-frozen standalone Sol control. The reconciliation must identify shared findings, Qwen-only findings, Sol-only findings, contradictory findings, materially different conditioning/boundary conclusions, differences in useful Analysis work, missed opportunities, false leads, and total cost/resource differences. Sol must evaluate whether any variance is scientifically or economically meaningful and, where appropriate, identify discriminating follow-up tests rather than merely choosing a preferred narrative.
+3. **Stop if Qwen is adequate.** If Qwen preserves the scientifically and economically material capability of the standalone Sol control at materially lower total cost, Terra need not be tested merely for completeness. Qwen may remain the routine provider subject to continued audit and escalation safeguards.
+4. **Terra only if meaningful deficiency remains.** If the Qwen comparison shows meaningful scientific or economic loss, Terra receives the **same original frozen starting state and evidence**, not Qwen's resulting state and not Sol's frozen conclusions. Terra performs the same benchmark ticker independently in the candidate routine-provider role. Terra may not inspect either prior arm while conducting its research.
+5. **Terra comparison against the same Sol control.** Once Terra's record is frozen, Sol compares Terra against the original frozen standalone Sol control and, where useful, against the frozen Qwen arm. The original Sol control remains unchanged. The purpose is to determine whether Terra materially recovers capability Qwen lost and whether that recovery justifies Terra's metered cost.
+
+The frozen Sol control is a **reference scientific trajectory, not infallible ground truth**. Qwen or Terra may identify valid findings Sol missed. Reconciliation must therefore evaluate variance symmetrically rather than automatically treating disagreement with Sol as candidate-provider error. Where arms disagree materially, underlying governed evidence and discriminating Analysis should determine the scientific disposition.
+
+The benchmark should evaluate scientific validity and hypothesis quality; preservation of known and novel opportunities; evidence interpretation; RP lineage and continuation semantics; contract compliance and repair burden; false rejection or premature abandonment; unnecessary Analysis work; boundary-condition and contradiction detection; useful follow-ups; escalation frequency; latency; operational reliability; material trading implications; and total end-to-end cost including model/API, GPU/runtime, retries, repair calls, engineering burden, and downstream computation.
+
+Generic public benchmarks may inform expectations but may not decide MTS provider choice. MTS-specific controlled evidence is authoritative. Because Qwen may have near-zero marginal inference cost, modest superiority by a metered provider is not sufficient to replace a scientifically adequate Qwen. A metered provider must demonstrate a material end-to-end MTS advantage after cost is included. Workload-specific routing is permitted when justified by evidence. Scientific standards must not be lowered if no routine provider is sufficiently reliable.
 
 ### 8.4 Batching and Escalation
 
