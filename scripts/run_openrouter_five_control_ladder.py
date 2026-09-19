@@ -1,0 +1,488 @@
+from __future__ import annotations
+
+from dataclasses import asdict
+from datetime import datetime, timezone
+import argparse
+import json
+import os
+from pathlib import Path
+import tarfile
+import urllib.error
+import urllib.request
+
+from MTS_V4.openrouter_scientific_ladder import (
+    EXPECTED_CONTROLS,
+    MODEL_LADDER,
+    LadderPolicyError,
+    candidate_by_model,
+    canonical_sha256,
+    file_sha256,
+    ladder_policy_document,
+    usage_cost_usd,
+    validate_independent_assessment,
+    validate_live_catalog_entry,
+)
+from MTS_V4.qwen_compact_batch_intent import (
+    compact_intent_json_schema,
+    compile_compact_batch_intent,
+    decision_json,
+    decode_compact_batch_intent,
+)
+from scripts.run_qwen_compact_scientific_sentinel import (
+    _action_reconciliation_schema,
+    _apply_action_reconciliation,
+    _repair_messages,
+)
+from scripts.run_qwen_shadow_replay import _objective_contract_valid
+
+
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
+
+def _append_jsonl(path: Path, item: object) -> None:
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(item, sort_keys=True, default=str, separators=(",", ":")) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
+def _headers(api_key: str) -> dict[str, str]:
+    return {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://github.com/davidbedwell/Momentum-Trading-System_v4",
+        "X-Title": "MTS V4 Blinded Scientific Control Ladder",
+    }
+
+
+def _request_json(
+    url: str,
+    *,
+    api_key: str,
+    timeout: int,
+    body: object | None = None,
+) -> dict[str, object]:
+    payload = None
+    method = "GET"
+    if body is not None:
+        payload = json.dumps(body, separators=(",", ":")).encode("utf-8")
+        method = "POST"
+    request = urllib.request.Request(
+        url, data=payload, headers=_headers(api_key), method=method
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            result = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"OpenRouter HTTP {exc.code}: {detail}") from exc
+    if not isinstance(result, dict):
+        raise RuntimeError("OpenRouter returned a non-object JSON response")
+    return result
+
+
+def _catalog(api_key: str, timeout: int) -> dict[str, dict[str, object]]:
+    document = _request_json(
+        f"{OPENROUTER_BASE_URL}/models", api_key=api_key, timeout=timeout
+    )
+    rows = document.get("data")
+    if not isinstance(rows, list):
+        raise RuntimeError("OpenRouter model catalog is missing data")
+    return {
+        str(item["id"]): item
+        for item in rows
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+
+
+def _completion(
+    *,
+    api_key: str,
+    model: str,
+    messages: list[dict[str, object]],
+    schema_name: str,
+    schema: dict[str, object],
+    timeout: int,
+    max_output_tokens: int,
+    reasoning_effort: str,
+) -> tuple[str, dict[str, object]]:
+    document = _request_json(
+        f"{OPENROUTER_BASE_URL}/chat/completions",
+        api_key=api_key,
+        timeout=timeout,
+        body={
+            "model": model,
+            "messages": messages,
+            "max_tokens": max_output_tokens,
+            "reasoning": {"effort": reasoning_effort},
+            "response_format": {
+                "type": "json_schema",
+                "json_schema": {"name": schema_name, "strict": True, "schema": schema},
+            },
+            "usage": {"include": True},
+        },
+    )
+    try:
+        message = document["choices"][0]["message"]  # type: ignore[index]
+    except (KeyError, IndexError, TypeError) as exc:
+        raise RuntimeError("OpenRouter response lacks choices[0].message") from exc
+    if not isinstance(message, dict):
+        raise RuntimeError("OpenRouter response message is invalid")
+    content = message.get("content")
+    if not isinstance(content, str) or not content.strip():
+        raise RuntimeError("OpenRouter returned no structured scientific intent")
+    usage = document.get("usage")
+    if not isinstance(usage, dict):
+        raise RuntimeError("OpenRouter response omitted usage")
+    telemetry = {
+        "response_id": document.get("id"),
+        "requested_model": model,
+        "resolved_model": document.get("model"),
+        "provider": document.get("provider"),
+        "usage": usage,
+    }
+    return content, telemetry
+
+
+def _load_prompt_corpus(archive: Path) -> tuple[list[dict[str, object]], str]:
+    if not archive.is_file():
+        raise RuntimeError(f"five-control review archive does not exist: {archive}")
+    candidates: list[tuple[str, bytes]] = []
+    with tarfile.open(archive, "r:gz") as bundle:
+        for member in bundle.getmembers():
+            if member.isfile() and member.name.endswith("/qwen_compact_prompts.jsonl"):
+                extracted = bundle.extractfile(member)
+                if extracted is not None:
+                    candidates.append((member.name, extracted.read()))
+    complete = []
+    for name, payload in candidates:
+        rows = [json.loads(line) for line in payload.decode("utf-8").splitlines() if line.strip()]
+        if len(rows) == 5 and {row.get("control_id") for row in rows} == EXPECTED_CONTROLS:
+            complete.append((name, payload, rows))
+    if len(complete) != 1:
+        raise RuntimeError(
+            f"archive must contain exactly one complete five-control prompt corpus; found {len(complete)}"
+        )
+    name, payload, rows = complete[0]
+    for row in rows:
+        messages = row.get("messages")
+        if not isinstance(messages, list):
+            raise RuntimeError(f"prompt messages missing: {row.get('control_id')}")
+        expected = row.get("compacted_prompt_sha256")
+        if expected != canonical_sha256(messages):
+            raise RuntimeError(f"prompt hash mismatch: {row.get('control_id')}")
+    corpus_sha = canonical_sha256(
+        [{"path": name, "payload_sha256": __import__("hashlib").sha256(payload).hexdigest()}]
+    )
+    return sorted(rows, key=lambda row: str(row["control_id"])), corpus_sha
+
+
+def _load_json(path: Path) -> dict[str, object]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise RuntimeError(f"JSON document must be an object: {path}")
+    return value
+
+
+def _write_json(path: Path, value: object) -> None:
+    path.write_text(json.dumps(value, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")
+
+
+def _is_action_shape_defect(message: str) -> bool:
+    return any(
+        marker in message
+        for marker in (
+            "EXECUTE requires",
+            "WAIT requires",
+            "CLOSE requires",
+            "continuing intent requires",
+        )
+    )
+
+
+def _action_reconciliation_messages(
+    messages: list[dict[str, object]], raw_response: str, defect: str
+) -> list[dict[str, object]]:
+    return list(messages) + [
+        {"role": "assistant", "content": raw_response},
+        {
+            "role": "user",
+            "content": json.dumps(
+                {
+                    "operation": "RECONCILE_OPENROUTER_COMPACT_ACTION",
+                    "objective_defect": defect,
+                    "instruction": (
+                        "Exercise scientific judgment and reconcile only the terminal action of "
+                        "your preceding intent. Choose EXECUTE to retain and run its research "
+                        "lines, WAIT to continue without analyses now, or CLOSE to discard its "
+                        "research lines and end inquiry. Return internally consistent remaining-"
+                        "work estimates and the required continuation summary or close reason."
+                    ),
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            ),
+        },
+    ]
+
+
+def _initialize(root: Path, archive: Path, corpus_sha: str) -> dict[str, object]:
+    root.mkdir(parents=True, exist_ok=False)
+    manifest = {
+        "format": "MTS_V4_OPENROUTER_FIVE_CONTROL_LADDER_V1",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "baseline_commit": "efe4016a8b34bf325acef48e60f0d305476c9280",
+        "prompt_archive": str(archive),
+        "prompt_archive_sha256": file_sha256(archive),
+        "prompt_corpus_sha256": corpus_sha,
+        "policy": ladder_policy_document(),
+        "completed_assessments": [],
+        "status": "READY",
+        "selected_model": None,
+        "sol_calls": 0,
+    }
+    _write_json(root / "ladder_manifest.json", manifest)
+    return manifest
+
+
+def _current_index(manifest: dict[str, object]) -> int:
+    completed = manifest.get("completed_assessments")
+    if not isinstance(completed, list):
+        raise RuntimeError("ladder manifest assessments are invalid")
+    return len(completed)
+
+
+def _apply_assessment(
+    root: Path, manifest: dict[str, object], assessment_path: Path
+) -> dict[str, object]:
+    index = _current_index(manifest)
+    if index >= len(MODEL_LADDER):
+        raise RuntimeError("the governed ladder has no remaining candidate")
+    candidate = MODEL_LADDER[index]
+    candidate_root = root / f"{index + 1:02d}_{candidate.model.replace('/', '__')}"
+    review_path = candidate_root / "decisions_for_independent_review.jsonl"
+    if not review_path.is_file():
+        raise RuntimeError("candidate review artifact is not available")
+    normalized = validate_independent_assessment(
+        _load_json(assessment_path),
+        expected_model=candidate.model,
+        expected_review_sha256=file_sha256(review_path),
+    )
+    destination = candidate_root / "independent_assessment.json"
+    _write_json(destination, {**_load_json(assessment_path), "normalized": normalized})
+    completed = manifest["completed_assessments"]
+    assert isinstance(completed, list)
+    completed.append(normalized)
+    if normalized["all_five_pass"]:
+        manifest["status"] = "SUCCESS_ALL_FIVE_PASS"
+        manifest["selected_model"] = candidate.model
+    elif len(completed) == len(MODEL_LADDER):
+        manifest["status"] = "NO_CANDIDATE_PASSED_ALL_FIVE"
+    else:
+        manifest["status"] = "READY"
+    _write_json(root / "ladder_manifest.json", manifest)
+    return normalized
+
+
+def _run_candidate(
+    *,
+    root: Path,
+    index: int,
+    prompts: list[dict[str, object]],
+    api_key: str,
+    catalog_entry: dict[str, object],
+    timeout: int,
+    max_output_tokens: int,
+    max_calls: int,
+    max_spend_usd: float,
+    max_repairs: int,
+) -> dict[str, object]:
+    candidate = MODEL_LADDER[index]
+    candidate_root = root / f"{index + 1:02d}_{candidate.model.replace('/', '__')}"
+    candidate_root.mkdir(parents=False, exist_ok=False)
+    observation_path = candidate_root / "observations.jsonl"
+    review_path = candidate_root / "decisions_for_independent_review.jsonl"
+    telemetry_path = candidate_root / "openrouter_telemetry.jsonl"
+    for path in (observation_path, review_path, telemetry_path):
+        path.touch(exist_ok=False)
+    calls = 0
+    spend = 0.0
+    observations = []
+    for number, row in enumerate(prompts, start=1):
+        control = str(row["control_id"])
+        print(f"OPENROUTER_CONTROL={number}/5 MODEL={candidate.model} CONTROL={control}", flush=True)
+        messages = row["messages"]
+        assert isinstance(messages, list)
+        raw = intent = decision = None
+        decoded = compiled = contract = False
+        repairs = 0
+        failure = None
+        try:
+            while True:
+                if calls >= max_calls:
+                    raise RuntimeError(f"generation-call limit reached: {calls}/{max_calls}")
+                schema = compact_intent_json_schema()
+                schema_name = "mts_v4_openrouter_compact_batch_intent"
+                action_repair = raw is not None and _is_action_shape_defect(failure or "")
+                request_messages = messages
+                if raw is not None:
+                    request_messages = (
+                        _action_reconciliation_messages(messages, raw, failure or "action defect")
+                        if action_repair
+                        else _repair_messages(
+                            messages,
+                            raw_response=raw,
+                            defect=failure or "representation defect",
+                        )
+                    )
+                if action_repair:
+                    schema = _action_reconciliation_schema()
+                    schema_name = "mts_v4_openrouter_action_reconciliation"
+                response, telemetry = _completion(
+                    api_key=api_key,
+                    model=candidate.model,
+                    messages=request_messages,
+                    schema_name=schema_name,
+                    schema=schema,
+                    timeout=timeout,
+                    max_output_tokens=max_output_tokens,
+                    reasoning_effort=candidate.reasoning_effort,
+                )
+                calls += 1
+                call_cost = usage_cost_usd(telemetry["usage"], candidate)  # type: ignore[arg-type]
+                spend += call_cost
+                _append_jsonl(telemetry_path, {"control_id": control, "cost_usd": call_cost, **telemetry})
+                if spend > max_spend_usd:
+                    raise RuntimeError(
+                        f"candidate spend authorization exceeded: ${spend:.6f} > ${max_spend_usd:.6f}"
+                    )
+                raw = response if raw is None or schema_name.endswith("batch_intent") else _apply_action_reconciliation(raw, response)
+                try:
+                    intent = decode_compact_batch_intent(raw)
+                    decoded = True
+                    decision = compile_compact_batch_intent(
+                        intent, messages=messages, case_id=str(row["case_id"])
+                    )
+                    compiled = True
+                    contract = _objective_contract_valid(decision, messages)
+                    if not contract:
+                        raise LadderPolicyError("compiled decision violates the active objective contract")
+                    failure = None
+                    break
+                except Exception as exc:
+                    failure = f"{type(exc).__name__}: {exc}"
+                    if repairs >= max_repairs:
+                        raise
+                    repairs += 1
+        except Exception as exc:
+            failure = f"{type(exc).__name__}: {exc}"
+        observation = {
+            "case_id": row["case_id"],
+            "control_id": control,
+            "intent_decoded": decoded,
+            "decision_compiled": compiled,
+            "objective_contract_valid": contract,
+            "representation_repairs": repairs,
+            "failure": failure,
+        }
+        observations.append(observation)
+        _append_jsonl(observation_path, observation)
+        _append_jsonl(
+            review_path,
+            {
+                **observation,
+                "model": candidate.model,
+                "raw_response": raw,
+                "compact_intent": asdict(intent) if intent is not None else None,
+                "compiled_batch_decision": json.loads(decision_json(decision)) if decision is not None else None,
+            },
+        )
+    mechanically_ready = all(row["objective_contract_valid"] for row in observations)
+    report = {
+        "format": "MTS_V4_OPENROUTER_FIVE_CONTROL_CANDIDATE_REPORT_V1",
+        "model": candidate.model,
+        "catalog_entry": catalog_entry,
+        "controls": 5,
+        "mechanically_ready": mechanically_ready,
+        "scientific_status": "AWAITING_INDEPENDENT_ASSESSMENT" if mechanically_ready else "MECHANICAL_FAILURE",
+        "generation_calls": calls,
+        "spend_usd": spend,
+        "review_artifact_sha256": file_sha256(review_path),
+        "sol_calls": 0,
+    }
+    _write_json(candidate_root / "candidate_report.json", report)
+    return report
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description="Run the cheapest-to-most-expensive blinded five-control OpenRouter ladder.")
+    parser.add_argument("--review-archive", required=True)
+    parser.add_argument("--ladder-root", required=True)
+    parser.add_argument("--assessment-json")
+    parser.add_argument("--preflight-only", action="store_true")
+    parser.add_argument("--timeout-seconds", type=int, default=1800)
+    parser.add_argument("--max-output-tokens", type=int, default=8_000)
+    parser.add_argument("--max-generation-calls", type=int, default=15)
+    parser.add_argument("--max-representation-repairs", type=int, default=2)
+    parser.add_argument("--max-candidate-spend-usd", type=float, required=True)
+    args = parser.parse_args(argv)
+    api_key = os.getenv("MTS_OPENROUTER_API_KEY") or os.getenv("OPENROUTER_API_KEY")
+    if not api_key:
+        raise RuntimeError("MTS_OPENROUTER_API_KEY or OPENROUTER_API_KEY is required")
+    if args.max_candidate_spend_usd <= 0:
+        raise RuntimeError("positive candidate spend authorization is required")
+    archive = Path(args.review_archive).expanduser().resolve()
+    root = Path(args.ladder_root).expanduser().resolve()
+    prompts, corpus_sha = _load_prompt_corpus(archive)
+    manifest_path = root / "ladder_manifest.json"
+    manifest = _load_json(manifest_path) if manifest_path.exists() else _initialize(root, archive, corpus_sha)
+    if manifest.get("prompt_archive_sha256") != file_sha256(archive):
+        raise RuntimeError("review archive drifted from initialized ladder")
+    catalog = _catalog(api_key, min(args.timeout_seconds, 60))
+    snapshots = []
+    for candidate in MODEL_LADDER:
+        if candidate.model not in catalog:
+            raise RuntimeError(f"OpenRouter model is unavailable: {candidate.model}")
+        snapshots.append(validate_live_catalog_entry(candidate, catalog[candidate.model]))
+    _write_json(root / "openrouter_catalog_snapshot.json", snapshots)
+    if args.preflight_only:
+        print("OPENROUTER_LADDER_PREFLIGHT=PASS")
+        print("MODEL_GENERATION_CALLS=0")
+        print("SOL_CALLS=0")
+        print(f"LADDER_ROOT={root}")
+        return 0
+    if args.assessment_json:
+        result = _apply_assessment(root, manifest, Path(args.assessment_json).expanduser().resolve())
+        if result["all_five_pass"]:
+            print(f"LADDER_STATUS=SUCCESS MODEL={result['model']} ALL_FIVE_PASS=True")
+            return 0
+    manifest = _load_json(manifest_path)
+    if manifest.get("status") == "NO_CANDIDATE_PASSED_ALL_FIVE":
+        print("LADDER_STATUS=NO_CANDIDATE_PASSED_ALL_FIVE")
+        return 2
+    index = _current_index(manifest)
+    report = _run_candidate(
+        root=root,
+        index=index,
+        prompts=prompts,
+        api_key=api_key,
+        catalog_entry=snapshots[index],
+        timeout=args.timeout_seconds,
+        max_output_tokens=args.max_output_tokens,
+        max_calls=args.max_generation_calls,
+        max_spend_usd=args.max_candidate_spend_usd,
+        max_repairs=args.max_representation_repairs,
+    )
+    manifest["status"] = report["scientific_status"]
+    _write_json(manifest_path, manifest)
+    print(f"MODEL={report['model']}")
+    print(f"MECHANICALLY_READY={report['mechanically_ready']}")
+    print(f"SPEND_USD={report['spend_usd']:.6f}")
+    print(f"SCIENTIFIC_STATUS={report['scientific_status']}")
+    print("SOL_CALLS=0")
+    print(f"LADDER_ROOT={root}")
+    return 3 if report["mechanically_ready"] else 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
