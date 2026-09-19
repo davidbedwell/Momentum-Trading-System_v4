@@ -799,6 +799,15 @@ def main(argv=None) -> int:
                 max_repairs=args.max_representation_repairs,
             )
             total_spend += float(report["spend_usd"])
+            if not report["mechanically_ready"]:
+                manifest["status"] = "MECHANICAL_FAILURE"
+                manifest["failed_model"] = candidate.model
+                manifest["total_spend_usd"] = total_spend
+                _write_json(manifest_path, manifest)
+                print(f"LADDER_STATUS=MECHANICAL_FAILURE MODEL={candidate.model}")
+                print(f"TOTAL_SPEND_USD={total_spend:.6f}")
+                print(f"SOL_JUDGE_CALLS={manifest.get('sol_judge_calls', 0)}")
+                return 2
             remaining = args.max_total_spend_usd - total_spend
             if remaining <= 0:
                 raise RuntimeError("no authorization remains for independent adjudication")
