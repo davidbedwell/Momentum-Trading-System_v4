@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import datetime, timezone
 import json
 import os
@@ -12,14 +12,20 @@ from MTS_V4.batch_campaign_continuation import ContinuationBaseline
 from MTS_V4.batch_campaign_reconstruction import reconstruct_batched_campaign
 from MTS_V4.batch_rd_codec import BatchResearchDecisionCodec
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
+from MTS_V4.batch_report_persistence import compact_batch_report
 from MTS_V4.bootstrap import build_batch_runtime
 from MTS_V4.control_readiness import require_ready_control
+from MTS_V4.contracts import AnalysisResult
 from MTS_V4.derived_market_evidence import derived_market_evidence_descriptor
 from MTS_V4.derived_market_store import DerivedMarketQuery, ParquetDerivedMarketStore
+from MTS_V4.formulation_completeness import FormulationCompletenessContract
+from MTS_V4.jsonl_io import append_jsonl
 from MTS_V4.qwen_shadow_gate import ReplayCapturingSubjectContextSolBatchResearchDirector
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.sol_spend_guard import SolSpendAuthorizationRequired
 from MTS_V4.subject_scientific_context import load_subject_scientific_context
+from MTS_V4.nexus_json import JsonResearchNexus
+from MTS_V4.universe_market_structure_substrate import LOGICAL_ANALYSIS_ID
 from MTS_V4.universe_scientific_partition import ScientificCohort, load_frozen_partition
 
 from resume_fresh_subject import (
@@ -40,8 +46,7 @@ def _required_env(name: str) -> str:
 
 
 def _append_jsonl(path: Path, payload) -> None:
-    with path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(payload, sort_keys=True, default=str, separators=(",", ":")) + "\n")
+    append_jsonl(path, payload)
 
 
 def _decode_decision(path: Path):
@@ -61,6 +66,36 @@ def _query(raw: dict[str, object]) -> DerivedMarketQuery:
         feature_columns=tuple(str(value) for value in raw.get("feature_columns", ())),
         include_ineligible=bool(raw.get("include_ineligible", False)),
     )
+
+
+def _load_neutral_stage2a_result(
+    *, path: Path, nexus_path: Path, subject_id: str
+) -> dict[str, AnalysisResult]:
+    if not path.is_file():
+        raise RuntimeError(f"neutral Stage 2A result is missing: {path}")
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    result_id = str(raw.get("result_id", "")).strip()
+    if not result_id:
+        raise RuntimeError("neutral Stage 2A result_id is missing")
+    nexus = JsonResearchNexus(nexus_path)
+    metadata = nexus.get_analysis_result_metadata(result_id)
+    if metadata is None:
+        raise RuntimeError(
+            f"neutral Stage 2A result is not registered in the Nexus: {result_id}"
+        )
+    result = AnalysisResult(
+        result_id=result_id,
+        request_id=str(raw["request_id"]),
+        subject_id=subject_id,
+        method_id=str(raw["method_id"]),
+        outputs=dict(raw.get("outputs", {})),
+        evidence_ids=tuple(metadata.evidence_ids),
+        limitations=tuple(str(value) for value in raw.get("limitations", ())),
+        execution_metadata=dict(raw.get("execution_metadata", {})),
+    )
+    if result.durable_metadata() != metadata:
+        raise RuntimeError("neutral Stage 2A artifact does not match durable Nexus metadata")
+    return {LOGICAL_ANALYSIS_ID: result}
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -85,11 +120,18 @@ def main(argv: list[str] | None = None) -> int:
 
     context_path = state_dir / "universe_scientific_context.json"
     decisions_path = state_dir / "batch_decisions.jsonl"
-    reports_path = state_dir / "batch_reports.jsonl"
+    compressed_reports_path = state_dir / "batch_reports.jsonl.gz"
+    legacy_reports_path = state_dir / "batch_reports.jsonl"
+    reports_path = (
+        compressed_reports_path
+        if compressed_reports_path.is_file()
+        else legacy_reports_path
+    )
     nexus_path = state_dir / "research_nexus.json"
     package_dir = state_dir / "research_packages"
     original_telemetry = state_dir / "sol_transport_telemetry.jsonl"
     resume_telemetry = state_dir / "resume_sol_transport_telemetry.jsonl"
+    neutral_stage2a_path = state_dir / "neutral_universe_market_structure_stage2a.json"
     for required in (context_path, decisions_path, reports_path, nexus_path, original_telemetry):
         if not required.is_file():
             raise RuntimeError(f"required universe resume artifact is missing: {required}")
@@ -119,6 +161,23 @@ def main(argv: list[str] | None = None) -> int:
 
     subject_id = str(context["active_scope_id"])
     campaign_id = _recover_campaign_id(package_dir, subject_id=subject_id)
+    recorded_formulation_contract = context.get("formulation_completeness_contract")
+    formulation_contract = (
+        FormulationCompletenessContract.from_mapping(recorded_formulation_contract)
+        if isinstance(recorded_formulation_contract, dict)
+        else FormulationCompletenessContract.from_columns(
+            subject_id=subject_id,
+            predictor_columns=primary_query.feature_columns,
+            outcome_columns=outcome_query.feature_columns,
+        )
+    )
+    if formulation_contract is not None and formulation_contract.subject_id != subject_id:
+        raise RuntimeError("recorded formulation-completeness subject changed")
+    precomputed_results = _load_neutral_stage2a_result(
+        path=neutral_stage2a_path,
+        nexus_path=nexus_path,
+        subject_id=subject_id,
+    )
     with tempfile.TemporaryDirectory(prefix="mts-v4-universe-resume-verify-") as temporary:
         reconstructed = reconstruct_batched_campaign(
             decisions_jsonl=decisions_path,
@@ -127,6 +186,7 @@ def main(argv: list[str] | None = None) -> int:
             package_store_dir=Path(temporary) / "research_packages",
             campaign_id=campaign_id,
             subject_id=subject_id,
+            precomputed_results_by_analysis_id=precomputed_results,
         )
 
     prior_spend = _telemetry_spend(original_telemetry) + _telemetry_spend(resume_telemetry)
@@ -174,6 +234,7 @@ def main(argv: list[str] | None = None) -> int:
         required_research_phase=reconstructed.latest_decision.research_packages[0].analyses[0].research_phase,
         sol_spend_limit_usd=remaining,
         human_spend_authorization_callback=None,
+        formulation_completeness_contract=formulation_contract,
     )
     mission = str(context["mission"])
     runtime = build_batch_runtime(
@@ -194,10 +255,36 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
 
+    scientific_fields = (
+        "subject_id", "evidence_type", "artifact_type", "source_identity",
+        "coverage_start", "coverage_end", "row_count", "schema",
+        "neutral_semantics", "content_identity",
+    )
+    frozen_evidence = []
+    for live in evidence:
+        frozen = runtime.nexus.get_evidence_metadata(live.evidence_id)
+        if frozen is None:
+            raise RuntimeError(
+                f"live evidence is absent from the frozen Nexus: {live.evidence_id}"
+            )
+        mismatches = [
+            field for field in scientific_fields
+            if getattr(live, field) != getattr(frozen, field)
+        ]
+        if mismatches:
+            raise RuntimeError(
+                f"live/frozen evidence mismatch for {live.evidence_id}: {mismatches}"
+            )
+        frozen_evidence.append(
+            replace(live, provenance=dict(frozen.provenance))
+        )
+    evidence = tuple(frozen_evidence)
+
     decision_path = state_dir / "universe_resume_decision.json"
     pending_path = state_dir / "universe_resume_decision.pending.json"
     decision_log = state_dir / "resumed_batch_decisions.jsonl"
-    report_log = state_dir / "resumed_batch_reports.jsonl"
+    report_log = state_dir / "resumed_batch_reports.jsonl.gz"
+    report_summary_log = state_dir / "resumed_batch_report_summaries.jsonl"
     checkpoint_path = state_dir / "resume_analysis_checkpoints.jsonl"
     summary_path = state_dir / "run_summary.json"
     recorder = BatchCampaignResearchRecorder(package_store=recovered_store)
@@ -277,6 +364,13 @@ def main(argv: list[str] | None = None) -> int:
             "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
             "decision_sequence": decisions, "analyses_executed": analyses,
             "report": asdict(report),
+        })
+        _append_jsonl(report_summary_log, {
+            "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+            "decision_sequence": decisions,
+            "analyses_executed": analyses,
+            "report": compact_batch_report(report),
+            "assessment_summary_only": True,
         })
         active["report"] = report
 

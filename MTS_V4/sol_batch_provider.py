@@ -9,6 +9,7 @@ from typing import Any, Mapping, Sequence
 from .batch_contracts import BatchExecutionReport, BatchResearchDecision
 from .batch_rd_codec import BatchResearchDecisionCodec, BatchResearchDecisionDecodeError
 from .contracts import EvidenceDescriptor, SubjectMetadata
+from .formulation_completeness import FormulationCompletenessContract
 from .sol_primary_provider import SolPrimaryResearchDirector
 from .sol_spend_guard import (
     DEFAULT_AUTHORIZED_SOL_SPEND_USD,
@@ -26,9 +27,11 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         *args,
         sol_spend_limit_usd: float = DEFAULT_AUTHORIZED_SOL_SPEND_USD,
         human_spend_authorization_callback: HumanSpendAuthorizationCallback | None = None,
+        formulation_completeness_contract: FormulationCompletenessContract | None = None,
         **kwargs,
     ) -> None:
         super().__init__(*args, **kwargs)
+        self._formulation_completeness_contract = formulation_completeness_contract
         self.configure_sol_spend_guard(
             authorized_spend_usd=sol_spend_limit_usd,
             authorization_callback=human_spend_authorization_callback,
@@ -157,6 +160,10 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                     "active subject must use this phase; deterministic code will not choose scientific work."
                 ),
             }
+        if self._formulation_completeness_contract is not None:
+            payload["formulation_completeness_contract"] = (
+                self._formulation_completeness_contract.to_mapping()
+            )
         return payload
 
     @classmethod
@@ -381,6 +388,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "If scientifically justified work is executable now, set continue_research=true, waiting_for_future_cohorts=false, and provide one or more Research Packages, each with at least one executable Analysis Specification.",
             "If research remains scientifically active but no Analysis Specification is executable from currently available evidence because the next admissible step requires genuinely future observations, a future cohort, or outcome maturity, set continue_research=true, waiting_for_future_cohorts=true, research_packages=[], close_reason=null, and preserve the frozen hypothesis plus exact future dependencies in research_state.scientific_continuation_state. Do not invent placeholder analyses merely to keep the subject open.",
             "If subject-level research is scientifically complete or rejected, set continue_research=false, waiting_for_future_cohorts=false, research_packages=[], and provide a nonblank close_reason.",
+            "When context.formulation_completeness_contract is present, subject closure is mechanically blocked until every listed signed predictor/outcome pair has a successful zero-boundary cohort-effect analysis. This is minimum formulation coverage, not a claim that an effect exists. Schedule any missing comparisons, interpret them skeptically with the other evidence, and retain authority over significance, robustness, finding promotion, and candidacy.",
             "WAITING_FOR_FUTURE_COHORTS is not closure and must not revise a frozen hypothesis, threshold, horizon, success definition, or future dependency merely to create executable work.",
             "Provide research_progress on every decision. Estimate scientific completion and remaining work independently of the human funding ceiling; never trim science to make the estimate fit the authorized dollars.",
             "Provide a cumulative research_state.scientific_continuation_state on every continuing or waiting decision. Later calls use your state instead of replaying full prior-science, open-package journals, and prior Analysis plans; include all scientific context you judge necessary for continuity.",
@@ -655,7 +663,21 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                 return "closed research requires research_progress.estimated_remaining_batches=0"
             if progress.estimated_remaining_sol_calls != 0:
                 return "closed research requires research_progress.estimated_remaining_sol_calls=0"
+            defect = self._formulation_completeness_defect()
+            if defect is not None:
+                return defect
         return None
+
+    def _formulation_completeness_defect(self) -> str | None:
+        contract = self._formulation_completeness_contract
+        if contract is None:
+            return None
+        analyses = []
+        for rp_id in self._research_package_store.list_ids():
+            package = self._research_package_store.load(rp_id)
+            if package is not None and package.subject_id == contract.subject_id:
+                analyses.extend(package.analyses)
+        return contract.closure_defect(analyses)
 
     def _batch_phase_defect(self, decision: BatchResearchDecision) -> str | None:
         batch_packages = {package.rp_id: package for package in decision.research_packages}

@@ -4,18 +4,18 @@ import argparse
 import json
 from pathlib import Path
 
+from MTS_V4.jsonl_io import iter_jsonl
+
 
 PRIMARY_OPERATIONS = {"BEGIN_BATCH_RESEARCH", "INTERPRET_BATCH_RESULTS", "REPAIR_BATCH_PLAN"}
 
 
 def _read_jsonl(path: Path):
-    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
-        if not line.strip():
-            continue
-        try:
-            yield line_number, json.loads(line)
-        except json.JSONDecodeError as exc:
-            raise RuntimeError(f"invalid JSONL at {path}:{line_number}: {exc}") from exc
+    try:
+        for line_number, value in enumerate(iter_jsonl(path), start=1):
+            yield line_number, value
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise RuntimeError(f"invalid JSONL at {path}: {exc}") from exc
 
 
 def _parser():
@@ -36,11 +36,23 @@ def main(argv=None):
     for raw_dir in args.campaign_state_dir:
         state_dir = Path(raw_dir)
         decision_path = state_dir / "batch_decisions.jsonl"
-        report_path = state_dir / "batch_reports.jsonl"
+        report_candidates = (
+            state_dir / "batch_report_summaries.jsonl",
+            state_dir / "batch_reports.jsonl.gz",
+            state_dir / "batch_reports.jsonl",
+        )
+        report_path = next((path for path in report_candidates if path.is_file()), None)
         replay_path = state_dir / "sol_replay_envelopes.jsonl"
         if not decision_path.exists():
             raise RuntimeError(f"missing Sol decision trace: {decision_path}")
-        reports = {int(item.get("decisions", -1)): item for _, item in _read_jsonl(report_path)} if report_path.exists() else {}
+        reports = (
+            {
+                int(item.get("decisions", item.get("decision_sequence", -1))): item
+                for _, item in _read_jsonl(report_path)
+            }
+            if report_path is not None
+            else {}
+        )
         envelopes = []
         if replay_path.exists():
             envelopes = [item for _, item in _read_jsonl(replay_path) if item.get("operation") in PRIMARY_OPERATIONS]

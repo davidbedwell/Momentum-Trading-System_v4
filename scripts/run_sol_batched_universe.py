@@ -9,12 +9,15 @@ from pathlib import Path
 
 from MTS_V4.acceptance_controls import BLINDED_CONTROLS
 from MTS_V4.batch_contracts import BatchExecutionReport
+from MTS_V4.batch_report_persistence import compact_batch_report
 from MTS_V4.batch_research_recording import BatchCampaignResearchRecorder
 from MTS_V4.bootstrap import DEFAULT_MISSION, build_batch_runtime
 from MTS_V4.contracts import ResearchPhase
 from MTS_V4.control_readiness import require_calibration_pass, require_ready_control
 from MTS_V4.derived_market_evidence import derived_market_evidence_descriptor
 from MTS_V4.derived_market_store import DerivedMarketQuery, ParquetDerivedMarketStore
+from MTS_V4.formulation_completeness import FormulationCompletenessContract
+from MTS_V4.jsonl_io import append_jsonl
 from MTS_V4.qwen_shadow_gate import ReplayCapturingSubjectContextSolBatchResearchDirector
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.research_scope import universe_scope
@@ -33,8 +36,7 @@ def _required_env(name: str) -> str:
 
 
 def _append_jsonl(path: Path, payload) -> None:
-    with path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(payload, sort_keys=True, default=str, separators=(",", ":")) + "\n")
+    append_jsonl(path, payload)
 
 
 def _write_json_atomic(path: Path, payload) -> None:
@@ -148,7 +150,12 @@ def main(argv: list[str] | None = None) -> int:
                 "primary query must supply the comprehensive neutral Stage 2A predictor schema; "
                 f"missing={missing_stage2a}"
             )
-    if outcome_query and store.get_feature_set(outcome_query.feature_set_id, outcome_query.feature_set_version) is None:
+    outcome_set = (
+        store.get_feature_set(outcome_query.feature_set_id, outcome_query.feature_set_version)
+        if outcome_query is not None
+        else None
+    )
+    if outcome_query and outcome_set is None:
         raise RuntimeError(f"unknown outcome feature set: {outcome_query.feature_set_key}")
 
     scientific_context = load_subject_scientific_context(root, active_subject_id=subject.subject_id, include_same_subject_prior_science=True)
@@ -179,6 +186,17 @@ def main(argv: list[str] | None = None) -> int:
     os.environ.setdefault("MTS_SOL_TELEMETRY_PATH", str(state_dir / "sol_transport_telemetry.jsonl"))
     package_store = JsonResearchPackageStore(state_dir / "research_packages")
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
+    formulation_contract = (
+        FormulationCompletenessContract.from_columns(
+            subject_id=subject.subject_id,
+            predictor_columns=primary_query.feature_columns or primary_set.feature_columns,
+            outcome_columns=(
+                outcome_query.feature_columns or outcome_set.feature_columns
+                if outcome_query is not None and outcome_set is not None
+                else ()
+            ),
+        )
+    )
     rd = ReplayCapturingSubjectContextSolBatchResearchDirector(
         research_package_store=package_store,
         prior_subject_scientific_context=scientific_context.prior_subject_science,
@@ -188,6 +206,7 @@ def main(argv: list[str] | None = None) -> int:
         timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")), required_subject_id=subject.subject_id,
         required_research_phase=ResearchPhase.EXPLORATION, sol_spend_limit_usd=args.sol_spend_limit_usd,
         human_spend_authorization_callback=(None if args.no_interactive_spend_extension else _interactive_spend_authorization),
+        formulation_completeness_contract=formulation_contract,
     )
     runtime = build_batch_runtime(rd=rd, mission=mission, nexus_path=state_dir / "research_nexus.json", derived_market_root=derived_root, scientific_memory=scientific_context.memory_selection.store)
     evidence_list = [derived_market_evidence_descriptor(store=runtime.nexus.derived_market_store, cache=runtime.cache, subject=subject, query=primary_query, allow_future_outcomes=False)]
@@ -249,24 +268,42 @@ def main(argv: list[str] | None = None) -> int:
         "scientific_partition": (partition.to_mapping() if partition else None),
         "outcome_exposure_cohort": (ScientificCohort.DISCOVERY.value if outcome_query else None),
         "verification_cohorts_exposed": False,
+        "formulation_completeness_contract": (
+            formulation_contract.to_mapping() if formulation_contract is not None else None
+        ),
         "canonical_memory_source": str(scientific_context.memory_selection.source_path),
         "canonical_memory_frontier_version": frontier.version if frontier is not None else 0,
     }
     (state_dir / "universe_scientific_context.json").write_text(json.dumps(context_payload, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")
 
     decision_path = state_dir / "batch_decisions.jsonl"
-    report_path = state_dir / "batch_reports.jsonl"
+    report_path = state_dir / "batch_reports.jsonl.gz"
+    report_summary_path = state_dir / "batch_report_summaries.jsonl"
     pending_path = state_dir / "pending_batch_decision.json"
     latest_report: BatchExecutionReport | None = None
+    reports_completed = 0
 
     def accepted(request):
         recorder.record_accepted_request(campaign_id=campaign_id, subject=subject, request=request)
 
     def on_report(report, decisions, analyses):
-        nonlocal latest_report
+        nonlocal latest_report, reports_completed
         latest_report = report
+        reports_completed += 1
         recorder.record_report(report)
         _append_jsonl(report_path, {"recorded_at_utc": datetime.now(timezone.utc).isoformat(), "decisions": decisions, "analyses_executed": analyses, "report": asdict(report)})
+        _append_jsonl(report_summary_path, {
+            "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+            "decisions": decisions,
+            "analyses_executed": analyses,
+            "report": compact_batch_report(report),
+            "assessment_summary_only": True,
+        })
+        print(
+            f"CONTROL_BATCH_COMPLETE DECISIONS={decisions} "
+            f"BATCHES={reports_completed} ANALYSES={analyses}",
+            flush=True,
+        )
 
     def on_decision(decision, decisions, analyses):
         _write_json_atomic(pending_path, {"recorded_at_utc": datetime.now(timezone.utc).isoformat(), "decision_sequence": decisions, "analyses_executed": analyses, "decision": asdict(decision)})
@@ -275,6 +312,14 @@ def main(argv: list[str] | None = None) -> int:
         recorder.record_closures(decision)
         _append_jsonl(decision_path, {"recorded_at_utc": datetime.now(timezone.utc).isoformat(), "decision_sequence": decisions, "analyses_executed": analyses, "decision": asdict(decision)})
         pending_path.unlink(missing_ok=True)
+        progress = decision.research_progress
+        print(
+            f"CONTROL_PROGRESS DECISIONS={decisions} ANALYSES={analyses} "
+            f"PERCENT={progress.estimated_percent_complete if progress else 'UNKNOWN'} "
+            f"REMAINING_BATCHES={progress.estimated_remaining_batches if progress else 'UNKNOWN'} "
+            f"CLOSED={not decision.continue_research}",
+            flush=True,
+        )
 
     try:
         outcome = runtime.orchestrator.run(subject=subject, evidence=evidence, decision_callback=on_decision, report_callback=on_report, accepted_request_callback=accepted, precomputed_results=precomputed_results)

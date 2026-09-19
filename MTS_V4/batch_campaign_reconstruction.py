@@ -11,6 +11,7 @@ from .batch_research_recording import BatchCampaignResearchRecorder
 from .contracts import AnalysisRequest, AnalysisResult, AnalysisResultInput, ResearchPhase, SubjectMetadata
 from .nexus_json import JsonResearchNexus
 from .research_package_store import JsonResearchPackageStore
+from .jsonl_io import iter_jsonl
 
 
 class BatchCampaignReconstructionError(RuntimeError):
@@ -139,16 +140,11 @@ def decode_batch_execution_report(raw: Mapping[str, Any]) -> BatchExecutionRepor
 
 def _load_jsonl(path: str | Path) -> list[Mapping[str, Any]]:
     result: list[Mapping[str, Any]] = []
-    for line_number, line in enumerate(Path(path).read_text(encoding="utf-8").splitlines(), start=1):
-        if not line.strip():
-            continue
-        try:
-            value = json.loads(line)
-        except json.JSONDecodeError as exc:
-            raise BatchCampaignReconstructionError(
-                f"invalid JSONL at {path}:{line_number}: {exc}"
-            ) from exc
-        result.append(_require_mapping(value, f"{path}:{line_number}"))
+    try:
+        for line_number, value in enumerate(iter_jsonl(path), start=1):
+            result.append(_require_mapping(value, f"{path}:{line_number}"))
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise BatchCampaignReconstructionError(f"invalid JSONL at {path}: {exc}") from exc
     return result
 
 
@@ -177,6 +173,7 @@ def reconstruct_batched_campaign(
     package_store_dir: str | Path,
     campaign_id: str,
     subject_id: str,
+    precomputed_results_by_analysis_id: Mapping[str, AnalysisResult] | None = None,
 ) -> ReconstructedBatchCampaign:
     if not campaign_id.strip():
         raise BatchCampaignReconstructionError("campaign_id cannot be blank")
@@ -205,6 +202,21 @@ def reconstruct_batched_campaign(
     decisions: list[BatchResearchDecision] = []
     reports: list[BatchExecutionReport] = []
     results_by_analysis_id: dict[str, AnalysisResult] = {}
+    for analysis_id, result in (precomputed_results_by_analysis_id or {}).items():
+        if not analysis_id.strip():
+            raise BatchCampaignReconstructionError(
+                "precomputed logical analysis_id cannot be blank"
+            )
+        if result.subject_id != subject.subject_id:
+            raise BatchCampaignReconstructionError(
+                f"precomputed analysis {analysis_id} belongs to {result.subject_id}"
+            )
+        durable = nexus.get_analysis_result_metadata(result.result_id)
+        if durable != result.durable_metadata():
+            raise BatchCampaignReconstructionError(
+                f"precomputed analysis does not match durable Nexus metadata: {analysis_id}"
+            )
+        results_by_analysis_id[analysis_id] = result
     prior_report: BatchExecutionReport | None = None
     prior_analyses_executed = 0
     promoted_ids: list[str] = []
