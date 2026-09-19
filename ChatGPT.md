@@ -152,12 +152,12 @@ The AI Research Director may use credible prior predictive knowledge where usefu
 
 ### 8.1 AI Provider Roles and Cost Discipline
 
-MTS should seek the lowest-cost approved AI capability that has demonstrated sufficient reliability for a given scientific workload, with escalation based on empirical failure, uncertainty, disagreement, or scientific difficulty rather than fixed call percentages.
+MTS should seek the lowest-total-cost approved AI capability that has demonstrated sufficient reliability for a given scientific workload, with escalation based on empirical failure, uncertainty, disagreement, or scientific difficulty rather than fixed call percentages. Total cost includes API charges, GPU/runtime expense, retries, repair work, engineering burden, and unnecessary downstream computation.
 
 The intended provider roles are provisional and must be validated empirically:
 
-- **Qwen** is the initial candidate for high-volume routine generative scientific reasoning, including ordinary RP formation and continuation, translation of known predictive knowledge into testable questions, interpretation of ordinary Analysis results, hypothesis refinement, follow-up design, and Nexus-context reasoning.
-- **Terra** is the principal candidate comparator to Qwen for those same routine generative scientific workloads. MTS must not assume either Qwen or Terra is superior before controlled MTS-specific evaluation.
+- **Qwen** is the initial candidate for high-volume routine generative scientific reasoning, including ordinary RP formation and continuation, translation of known predictive knowledge into testable questions, interpretation of ordinary Analysis results, hypothesis refinement, follow-up design, and Nexus-context reasoning. Because locally/self-hosted Qwen inference can have negligible marginal per-call model cost once runtime is available, MTS should make a serious but time-efficient effort to obtain reliable Qwen performance before replacing it with a metered routine provider.
+- **Terra** is the principal candidate comparator to Qwen for those same routine generative scientific workloads. Terra should displace or materially reduce Qwen's routine role only when controlled MTS-specific evidence shows that its improvement in scientific quality, reliability, operational simplicity, or downstream efficiency is substantial enough to justify its greater marginal inference cost.
 - **Sol** is the stronger escalation provider for difficult scientific reasoning, consequential ambiguity, unresolved contract/semantic failures, conflicting evidence, important novel findings, difficult synthesis, adversarial scientific review, and other work for which routine providers have not demonstrated sufficient reliability.
 - **Jev**, if approved and integrated, may be used for bounded AI judgments such as evidence classification, relevance assessment, support/weakening/contradiction judgments, confidence estimation, or other constrained semantic decisions. Jev must not become a deterministic scientific gate or silently prevent evidence from reaching generative RD reasoning merely because a bounded judgment scores it as unimportant.
 - **Analysis Engine** performs mathematical and statistical execution requested by AI scientific reasoning. Numerical work that can be performed exactly and reproducibly by Analysis should not be repeatedly delegated to expensive generative models merely for convenience.
@@ -168,13 +168,15 @@ These roles are not permanent model entitlements. They may change when controlle
 
 Before MTS decides whether Qwen should remain the routine generative provider or be displaced by Terra, Qwen must be brought to a fair best-achievable configuration within the approved architecture and governance.
 
-Qwen optimization may include provider/runtime correctness, prompt and context packaging, appropriate thinking-mode configuration, recommended generation parameters, schema/contract presentation, batch structure, repair behavior, semantic continuation handling, and other non-governance implementation improvements. Qwen must not be intentionally handicapped to make another provider appear superior, and governance must not be weakened merely to make Qwen pass.
+This effort must be **time-efficient and bounded**. The goal is not to spend prolonged engineering effort making Qwen imitate a stronger model. MTS should first address the highest-leverage known causes of Qwen failure: provider/runtime correctness, prompt and context packaging, appropriate thinking-mode configuration, recommended generation parameters, schema/contract presentation, batch structure, repair behavior, and semantic continuation handling. Once Qwen reliably performs the representative routine workload, optimization should stop and controlled comparison should begin. If a small number of focused repair iterations do not materially improve a persistent failure mode, that failure should be recorded as part of Qwen's measured operational burden rather than triggering open-ended repair work.
 
-Known Qwen failures should be repaired at their actual semantic, packaging, runtime, or contract boundary rather than hidden by deterministic scientific cognition. The goal is to measure the best Qwen that can operate legitimately inside MTS, not merely the easiest Qwen configuration to make tests green.
+Qwen must not be intentionally handicapped to make another provider appear superior, and governance must not be weakened merely to make Qwen pass. Known Qwen failures should be repaired at their actual semantic, packaging, runtime, or contract boundary rather than hidden by deterministic scientific cognition.
+
+The goal is therefore the best **practically achievable** Qwen for MTS: sufficiently optimized to provide a fair comparison, but not subsidized by disproportionate engineering effort that would erase its cost advantage.
 
 ### 8.3 Qwen-versus-Terra Controlled Evaluation
 
-After Qwen reaches a stable best-achievable configuration, Qwen and Terra should be compared on the same frozen MTS-specific workload and evidence wherever practicable.
+After Qwen reaches a stable practically achievable configuration, Qwen and Terra should be compared on the same frozen MTS-specific workload and evidence wherever practicable.
 
 The comparison should evaluate at least:
 
@@ -188,11 +190,11 @@ The comparison should evaluate at least:
 - ability to identify boundary conditions, contradictions, and useful follow-ups;
 - escalation frequency;
 - latency and operational reliability;
-- total end-to-end cost, including model/API cost, GPU/runtime cost, retries, repair calls, and downstream Analysis work generated by each provider.
+- total end-to-end cost, including model/API cost, GPU/runtime cost, retries, repair calls, engineering burden, and downstream Analysis work generated by each provider.
 
 Generic public benchmarks may inform expectations but may not decide the MTS provider choice. MTS-specific controlled evidence is authoritative for provider assignment.
 
-The preferred routine provider should be the one that delivers the best scientifically adequate end-to-end MTS performance for its total cost and operational burden. If neither provider is sufficiently reliable, routine work must escalate rather than lowering scientific standards.
+Because Qwen may have near-zero marginal inference cost in the intended self-hosted environment, modest Terra superiority alone is not sufficient reason to replace a scientifically adequate Qwen. Terra should earn routine-provider displacement by demonstrating a **material end-to-end MTS advantage** after its metered cost is included. If Qwen is scientifically adequate but Terra is materially better only for particular workload classes, MTS may route those classes to Terra while retaining Qwen elsewhere. If neither provider is sufficiently reliable, routine work must escalate rather than lowering scientific standards.
 
 ### 8.4 Batching and Escalation
 
