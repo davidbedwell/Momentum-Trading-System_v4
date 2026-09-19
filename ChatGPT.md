@@ -6,11 +6,17 @@ MTS v4 is a clean reconstruction. It is not a continuation of the prior RD-B ser
 
 ## 1. Governing Purpose
 
-The purpose of MTS is to discover reproducible market conditions that can identify subsequent price movements with sufficient magnitude, directionality, timing, and path quality to be practically exploitable as trades.
+The purpose of MTS is to identify, scientifically evaluate, validate, retain, and exploit reproducible market conditions, predictive strategies, and theories that can identify subsequent price movements with sufficient magnitude, directionality, timing, and path quality to be practically exploitable as trades.
+
+Candidate predictive knowledge may originate from established market knowledge, published or otherwise externally supplied research and trading theory, prior MTS knowledge, or novel AI-directed discovery. Novelty is not required for a relationship, strategy, or theory to be valuable to MTS.
+
+MTS should deliberately begin from and make efficient use of known effective or credibly supported predictive strategies and theories rather than requiring the AI Research Director to rediscover established market knowledge from raw evidence. Such prior knowledge is a legitimate source of research questions, hypotheses, candidate strategies, conditioning variables, mechanisms, and interactions. Prior knowledge does not become accepted MTS truth merely because it is established, published, conventional, or externally supplied: MTS must evaluate it under the same applicable scientific, temporal, evidentiary, and validation standards used for internally generated hypotheses.
+
+This prior-knowledge orientation is intentional. MTS should preferentially investigate credible known predictive structure when doing so is scientifically and economically useful, while preserving substantial freedom for the AI Research Director to explore unexplained evidence, interactions, residual structure, boundary conditions, and genuinely novel predictive relationships. The preference for known effective or credibly supported strategies is a research-efficiency prior, not a prohibition on novelty and not a deterministic rule that may overrule valid AI scientific judgment.
 
 A profitable price move is not necessarily a useful trading opportunity. Human utility depends on reward in relation to risk, path, adverse movement, and time.
 
-The system must support scientific discovery without hard-coding the scientific conclusions it is intended to discover.
+The system must support rigorous evaluation and practical use of known predictive knowledge as well as open-ended scientific discovery, without hard-coding scientific conclusions merely because they are known or conventional.
 
 ## 2. Human Authority and AI Engineering Latitude
 
@@ -43,6 +49,8 @@ The AI Research Director may use Qwen, Sol, or another explicitly approved AI re
 - deciding whether evidence supports, weakens, rejects, generalizes, qualifies, or leaves a hypothesis unresolved;
 - determining when a finding is scientifically significant enough for durable research memory;
 - deciding whether further scientific work is required.
+
+Known predictive strategies, theories, and externally supplied research may inform the AI Research Director's scientific judgment and may be investigated directly without first being independently rediscovered by MTS. The AI Research Director remains responsible for deciding how such prior knowledge should be tested, qualified, combined, generalized, rejected, or used, subject to applicable governance and validation requirements.
 
 Deterministic code may not overrule valid scientific judgment merely because deterministic logic considers another scientific choice better.
 
@@ -86,6 +94,8 @@ The intended high-level flow is:
 
 **External source → Intake Engine → temporary research cache → AI Research Director → Analysis Engine → governed result/finding → Research Nexus → AI Research Director → next scientific action**
 
+Known predictive knowledge, strategies, and theories may enter the research process as governed scientific context or candidate hypotheses without being treated as validated findings until MTS has evaluated them under the applicable standards.
+
 The exact software decomposition may evolve, but the authority boundaries may not be violated without explicit human approval.
 
 ## 6. Intake Engine
@@ -117,7 +127,7 @@ If the source data is needed again, Intake should reacquire or reconstruct it ac
 
 The AI Research Director is the first scientific actor after evidence preparation.
 
-It reasons backward from the MTS mission and available evidence to determine:
+It reasons backward from the MTS mission, available evidence, prior MTS knowledge, and relevant known predictive strategies or theories to determine:
 
 - what scientific question should be asked;
 - what evidence is relevant;
@@ -125,6 +135,8 @@ It reasons backward from the MTS mission and available evidence to determine:
 - what parameters are scientifically appropriate;
 - what the result means;
 - what should be investigated next.
+
+The AI Research Director should exploit credible prior predictive knowledge where useful rather than spending research resources merely rediscovering it. It should also remain alert to evidence that known relationships fail, reverse, depend on previously unidentified conditions, interact with other evidence streams, or reveal novel predictive structure. Known knowledge supplies a starting prior; evidence remains authoritative.
 
 The AI Research Director may revise its own requests when objective execution feedback identifies a contract defect.
 
@@ -153,6 +165,8 @@ Its primary contents are:
 Nexus shall not be used as the durable repository for raw or otherwise reproducible market datasets.
 
 Nexus should preserve what MTS learned, not warehouse the data from which it learned it.
+
+Known external strategies or theories should be distinguishable from findings empirically established by MTS so that prior knowledge is not silently promoted into validated MTS knowledge without evidence.
 
 Not every Analysis result belongs in Nexus. The AI Research Director determines scientific significance. Deterministic code may validate the promoted record's schema, lineage, integrity, and provenance but may not decide scientific importance.
 
@@ -188,59 +202,6 @@ The old v2 tree remains useful as a forensic reference and comparison control.
 
 During exploratory learning, look-ahead may be used where explicitly appropriate to discover candidate zones, relationships, or hypotheses.
 
-After hypotheses or generalizations are formed, forward, holdout, or otherwise out-of-sample testing should be used to evaluate predictive validity.
+Exploration includes both the scientific evaluation and refinement of known predictive strategies or theories and the search for previously unidentified predictive relationships. MTS should not consume research resources recreating established knowledge merely to claim internal discovery. Where credible prior predictive knowledge exists, the AI Research Director may begin from that knowledge and investigate whether it survives, how it should be conditioned, where it fails, how it interacts with other evidence, and whether it is practically exploitable in the MTS context.
 
-Do not confuse exploratory discovery with prospective validation.
-
-No fixed threshold, horizon, normalization, indicator, method family, or trading rule should be privileged unless explicitly approved or scientifically justified by the AI Research Director from evidence.
-
-## 14. Human Utility and Risk
-
-MTS should seek opportunities that are practically useful to a human trader, not merely statistically nonzero.
-
-Reward must be considered in relation to risk, adverse path, and time.
-
-Adverse movement is defined relative to the hypothesized opportunity direction. What level of adverse movement is acceptable is a human utility/risk question, not a universal market fact.
-
-Do not hard-code universal numerical utility thresholds without explicit approval.
-
-## 15. External Systems and Credentials
-
-During the v4 reconstruction, avoid requiring human interaction with local machines, Thunder, paid data vendors, API keys, or other credentials until the architecture and local/GitHub codebase are ready for end-to-end testing.
-
-Where practical, defer credential-dependent work to the final integration stage.
-
-When v4 reaches that stage, provide the human with a concise activation procedure covering only what is necessary, such as:
-
-- pulling the completed v4 branch/repository;
-- creating or activating the local environment;
-- entering required credentials or environment variables;
-- connecting to Thunder or another approved compute resource;
-- running smoke tests and production proofs.
-
-Do not embed secrets or credentials in source control.
-
-## 16. Testing and Evidence
-
-Tests should prove authority boundaries and behavior, not merely encode obsolete implementation assumptions.
-
-Prefer tests that establish:
-
-- AI scientific authority is preserved;
-- deterministic validation remains objective;
-- invalid execution contracts fail with precise feedback;
-- valid scientific requests are not rejected because of deterministic scientific preference;
-- lineage and temporal integrity are preserved;
-- temporary data does not become unintended durable Nexus storage;
-- significant findings can be durably reconstructed and related;
-- the complete RD → Analysis → RD research loop can operate autonomously once infrastructure and credentials are available.
-
-## 17. Continuation Discipline
-
-Future ChatGPT sessions working on v4 must read this file before making architectural or implementation changes.
-
-This file intentionally contains no historical shift log. v4 starts with a clean development history.
-
-Use Git history, architecture documents, tests, and current source as the implementation record. Add separate architecture or handoff documents when they materially improve continuation, but do not turn this root authority file into a chronological work diary.
-
-If a future implementation appears to conflict with this document, stop and determine whether the implementation is wrong or the governance needs explicit human revision. Do not silently reinterpret the authority model.
+The preference for beginning with credible known predictive structure must not collapse exploration into a fixed library of conventional strategies. The AI Research Director retains authority to pursue anomalies, unexplained residuals, cross-evidence interactions, contradictory observations, and novel hypotheses whenever scientifically justified.
