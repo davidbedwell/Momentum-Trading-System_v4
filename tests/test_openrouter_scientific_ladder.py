@@ -3,6 +3,7 @@ from __future__ import annotations
 import pytest
 
 from MTS_V4.openrouter_scientific_ladder import (
+    INDEPENDENT_JUDGE,
     MODEL_LADDER,
     LadderPolicyError,
     next_model,
@@ -94,3 +95,8 @@ def test_usage_cost_uses_governed_ceiling_when_direct_cost_absent() -> None:
         10_000 * candidate.maximum_prompt_usd_per_token
         + 1_000 * candidate.maximum_completion_usd_per_token
     )
+
+
+def test_independent_judge_is_not_a_candidate() -> None:
+    assert INDEPENDENT_JUDGE.model == "openai/gpt-5.6-sol"
+    assert INDEPENDENT_JUDGE.model not in {item.model for item in MODEL_LADDER}
