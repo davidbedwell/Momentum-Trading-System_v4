@@ -47,8 +47,8 @@ MODEL_LADDER = (
     OpenRouterCandidate(
         model="openai/gpt-5.6-terra",
         label="GPT-5.6 Terra",
-        maximum_prompt_usd_per_token=0.00000100,
-        maximum_completion_usd_per_token=0.00000600,
+        maximum_prompt_usd_per_token=0.00000200,
+        maximum_completion_usd_per_token=0.00000900,
     ),
     OpenRouterCandidate(
         model="anthropic/claude-sonnet-5",
