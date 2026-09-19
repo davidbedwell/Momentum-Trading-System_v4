@@ -249,10 +249,19 @@ def _completion(
             "messages": messages,
             "max_tokens": max_output_tokens,
             "reasoning": {"effort": reasoning_effort},
-            "response_format": {
-                "type": "json_schema",
-                "json_schema": {"name": schema_name, "strict": True, "schema": schema},
-            },
+            "response_format": (
+                {"type": "json_object"}
+                if model == "openai/gpt-5.6-terra"
+                and schema_name.startswith("mts_v4_openrouter_")
+                else {
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": schema_name,
+                        "strict": True,
+                        "schema": schema,
+                    },
+                }
+            ),
             "usage": {"include": True},
         },
     )
@@ -728,6 +737,11 @@ def main(argv=None) -> int:
     parser.add_argument("--ladder-root", required=True)
     parser.add_argument("--assessment-json")
     parser.add_argument("--automated-ladder", action="store_true")
+    parser.add_argument(
+        "--only-model",
+        choices=[candidate.model for candidate in MODEL_LADDER],
+        help="Run only one governed candidate while preserving the same five controls and Sol adjudication.",
+    )
     parser.add_argument("--preflight-only", action="store_true")
     parser.add_argument("--timeout-seconds", type=int, default=1800)
     parser.add_argument("--max-output-tokens", type=int, default=8_000)
@@ -782,7 +796,13 @@ def main(argv=None) -> int:
         completed = manifest.get("completed_assessments")
         if not isinstance(completed, list) or completed:
             raise RuntimeError("automated ladder requires a fresh preflight-only campaign root")
-        for index, candidate in enumerate(MODEL_LADDER):
+        selected_indices = [
+            index
+            for index, candidate in enumerate(MODEL_LADDER)
+            if args.only_model is None or candidate.model == args.only_model
+        ]
+        for index in selected_indices:
+            candidate = MODEL_LADDER[index]
             remaining = args.max_total_spend_usd - total_spend
             if remaining <= 0:
                 raise RuntimeError("total campaign spend authorization exhausted")
