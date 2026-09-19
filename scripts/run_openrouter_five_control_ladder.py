@@ -771,8 +771,8 @@ def main(argv=None) -> int:
     manifest["maximum_total_spend_usd"] = args.max_total_spend_usd
     manifest["automated_ladder"] = args.automated_ladder
     _write_json(manifest_path, manifest)
+    print("OPENROUTER_LADDER_PREFLIGHT=PASS", flush=True)
     if args.preflight_only:
-        print("OPENROUTER_LADDER_PREFLIGHT=PASS")
         print("MODEL_GENERATION_CALLS=0")
         print("SOL_JUDGE_CALLS=0")
         print(f"LADDER_ROOT={root}")
