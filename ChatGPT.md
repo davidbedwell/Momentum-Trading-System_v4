@@ -8,15 +8,15 @@ MTS v4 is a clean reconstruction. It is not a continuation of the prior RD-B ser
 
 The purpose of MTS is to identify, scientifically evaluate, validate, retain, and exploit reproducible market conditions, predictive strategies, and theories that can identify subsequent price movements with sufficient magnitude, directionality, timing, and path quality to be practically exploitable as trades.
 
-Candidate predictive knowledge may originate from established market knowledge, published or otherwise externally supplied research and trading theory, prior MTS knowledge, or novel AI-directed discovery. Novelty is not required for a relationship, strategy, or theory to be valuable to MTS.
+Candidate predictive knowledge may originate from established market knowledge, published or otherwise externally supplied research and trading theory, prior MTS knowledge, or novel AI-directed discovery. Novelty is not required for a relationship, strategy, or theory to be valuable to MTS, and prior recognition or conventional acceptance does not make one inherently more valuable than a novel candidate.
 
-MTS should deliberately begin from and make efficient use of known effective or credibly supported predictive strategies and theories rather than requiring the AI Research Director to rediscover established market knowledge from raw evidence. Such prior knowledge is a legitimate source of research questions, hypotheses, candidate strategies, conditioning variables, mechanisms, and interactions. Prior knowledge does not become accepted MTS truth merely because it is established, published, conventional, or externally supplied: MTS must evaluate it under the same applicable scientific, temporal, evidentiary, and validation standards used for internally generated hypotheses.
+MTS may make efficient use of known effective or credibly supported predictive strategies and theories rather than requiring the AI Research Director to rediscover established market knowledge from raw evidence. Such prior knowledge is a legitimate source of research questions, hypotheses, candidate strategies, conditioning variables, mechanisms, and interactions. Prior knowledge does not become accepted MTS truth merely because it is established, published, conventional, or externally supplied: MTS must evaluate it under the same applicable scientific, temporal, evidentiary, and validation standards used for internally generated hypotheses.
 
-This prior-knowledge orientation is intentional. MTS should preferentially investigate credible known predictive structure when doing so is scientifically and economically useful, while preserving substantial freedom for the AI Research Director to explore unexplained evidence, interactions, residual structure, boundary conditions, and genuinely novel predictive relationships. The preference for known effective or credibly supported strategies is a research-efficiency prior, not a prohibition on novelty and not a deterministic rule that may overrule valid AI scientific judgment.
+MTS must not systematically bias scientific attention toward either known or novel predictive relationships merely because of their origin. The AI Research Director should allocate research attention according to scientific promise, evidence, uncertainty, practical trading relevance, information value, and available resources. Known knowledge may prevent unnecessary rediscovery, while unexplained evidence, interactions, residual structure, boundary conditions, and novel hypotheses remain fully legitimate research directions.
 
 A profitable price move is not necessarily a useful trading opportunity. Human utility depends on reward in relation to risk, path, adverse movement, and time.
 
-The system must support rigorous evaluation and practical use of known predictive knowledge as well as open-ended scientific discovery, without hard-coding scientific conclusions merely because they are known or conventional.
+The system must support rigorous evaluation and practical use of known predictive knowledge as well as open-ended scientific discovery, without hard-coding scientific conclusions merely because they are known, conventional, or novel.
 
 ## 2. Human Authority and AI Engineering Latitude
 
@@ -50,7 +50,7 @@ The AI Research Director may use Qwen, Sol, or another explicitly approved AI re
 - determining when a finding is scientifically significant enough for durable research memory;
 - deciding whether further scientific work is required.
 
-Known predictive strategies, theories, and externally supplied research may inform the AI Research Director's scientific judgment and may be investigated directly without first being independently rediscovered by MTS. The AI Research Director remains responsible for deciding how such prior knowledge should be tested, qualified, combined, generalized, rejected, or used, subject to applicable governance and validation requirements.
+Known predictive strategies, theories, and externally supplied research may inform the AI Research Director's scientific judgment and may be investigated directly without first being independently rediscovered by MTS. The AI Research Director remains responsible for deciding how such prior knowledge should be tested, qualified, combined, generalized, rejected, or used, subject to applicable governance and validation requirements. The origin of a hypothesis as known or novel must not itself determine its scientific priority or disposition.
 
 Deterministic code may not overrule valid scientific judgment merely because deterministic logic considers another scientific choice better.
 
@@ -136,7 +136,7 @@ It reasons backward from the MTS mission, available evidence, prior MTS knowledg
 - what the result means;
 - what should be investigated next.
 
-The AI Research Director should exploit credible prior predictive knowledge where useful rather than spending research resources merely rediscovering it. It should also remain alert to evidence that known relationships fail, reverse, depend on previously unidentified conditions, interact with other evidence streams, or reveal novel predictive structure. Known knowledge supplies a starting prior; evidence remains authoritative.
+The AI Research Director may use credible prior predictive knowledge where useful rather than spending research resources merely rediscovering it. It must also remain alert to evidence that known relationships fail, reverse, depend on previously unidentified conditions, interact with other evidence streams, or reveal novel predictive structure. Prior knowledge is context, not a scientific preference: evidence and scientific judgment determine what deserves continued investigation.
 
 The AI Research Director may revise its own requests when objective execution feedback identifies a contract defect.
 
@@ -202,6 +202,6 @@ The old v2 tree remains useful as a forensic reference and comparison control.
 
 During exploratory learning, look-ahead may be used where explicitly appropriate to discover candidate zones, relationships, or hypotheses.
 
-Exploration includes both the scientific evaluation and refinement of known predictive strategies or theories and the search for previously unidentified predictive relationships. MTS should not consume research resources recreating established knowledge merely to claim internal discovery. Where credible prior predictive knowledge exists, the AI Research Director may begin from that knowledge and investigate whether it survives, how it should be conditioned, where it fails, how it interacts with other evidence, and whether it is practically exploitable in the MTS context.
+Exploration includes both the scientific evaluation and refinement of known predictive strategies or theories and the search for previously unidentified predictive relationships. MTS need not consume research resources recreating established knowledge merely to claim internal discovery. Where credible prior predictive knowledge exists, the AI Research Director may begin from that knowledge and investigate whether it survives, how it should be conditioned, where it fails, how it interacts with other evidence, and whether it is practically exploitable in the MTS context.
 
-The preference for beginning with credible known predictive structure must not collapse exploration into a fixed library of conventional strategies. The AI Research Director retains authority to pursue anomalies, unexplained residuals, cross-evidence interactions, contradictory observations, and novel hypotheses whenever scientifically justified.
+Neither known nor novel predictive structure receives an inherent scientific preference because of its origin. The AI Research Director retains authority to pursue established strategies, anomalies, unexplained residuals, cross-evidence interactions, contradictory observations, and novel hypotheses according to their scientific and practical merit.
