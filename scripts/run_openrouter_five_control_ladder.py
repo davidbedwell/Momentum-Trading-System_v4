@@ -28,15 +28,147 @@ from MTS_V4.qwen_compact_batch_intent import (
     decision_json,
     decode_compact_batch_intent,
 )
-from scripts.run_qwen_compact_scientific_sentinel import (
-    _action_reconciliation_schema,
-    _apply_action_reconciliation,
-    _repair_messages,
-)
-from scripts.run_qwen_shadow_replay import _objective_contract_valid
-
-
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
+
+def _objective_contract_valid(decision, messages) -> bool:
+    try:
+        user = json.loads(messages[-1]["content"])
+        context = user["context"]
+        active_subject = context["subject"]["subject_id"]
+        methods = {
+            item["method_id"]
+            for item in context.get("available_analysis_methods", [])
+            if isinstance(item, dict) and "method_id" in item
+        }
+        evidence_ids = {
+            item["evidence_id"]
+            for item in context.get("evidence", [])
+            if isinstance(item, dict) and "evidence_id" in item
+        }
+    except Exception:
+        return False
+    current_analysis_ids = {
+        analysis.analysis_id
+        for package in decision.research_packages
+        for analysis in package.analyses
+    }
+    for package in decision.research_packages:
+        for analysis in package.analyses:
+            if analysis.subject_id != active_subject or analysis.method_id not in methods:
+                return False
+            for item in analysis.inputs:
+                if item.evidence_id is not None and item.evidence_id not in evidence_ids:
+                    return False
+                if item.analysis_id is not None and item.analysis_id not in current_analysis_ids:
+                    continue
+    return True
+
+
+def _action_reconciliation_schema() -> dict[str, object]:
+    return {
+        "type": "object",
+        "properties": {
+            "action": {"type": "string", "enum": ["EXECUTE", "WAIT", "CLOSE"]},
+            "continuation_summary": {"type": ["string", "null"]},
+            "close_reason": {"type": ["string", "null"]},
+            "estimated_remaining_batches": {"type": "integer", "minimum": 0},
+            "estimated_remaining_model_calls": {"type": "integer", "minimum": 0},
+            "decision_rationale": {"type": "string", "minLength": 1},
+        },
+        "required": [
+            "action",
+            "continuation_summary",
+            "close_reason",
+            "estimated_remaining_batches",
+            "estimated_remaining_model_calls",
+            "decision_rationale",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _apply_action_reconciliation(raw_response: str, reconciliation: str) -> str:
+    intent = json.loads(raw_response)
+    choice = json.loads(reconciliation)
+    if not isinstance(intent, dict) or not isinstance(choice, dict):
+        raise LadderPolicyError("action reconciliation requires JSON objects")
+    action = str(choice.get("action", "")).strip().upper()
+    continuation = choice.get("continuation_summary")
+    close_reason = choice.get("close_reason")
+    remaining_batches = choice.get("estimated_remaining_batches")
+    remaining_calls = choice.get("estimated_remaining_model_calls")
+    if action == "EXECUTE":
+        if not intent.get("research_lines"):
+            raise LadderPolicyError("EXECUTE reconciliation lacks research lines")
+        if not isinstance(continuation, str) or not continuation.strip():
+            raise LadderPolicyError("EXECUTE reconciliation lacks continuation summary")
+        if not isinstance(remaining_batches, int) or remaining_batches < 1:
+            raise LadderPolicyError("EXECUTE reconciliation lacks remaining batch")
+        if not isinstance(remaining_calls, int) or remaining_calls < 1:
+            raise LadderPolicyError("EXECUTE reconciliation lacks remaining model call")
+        intent["continuation_summary"] = continuation.strip()
+        intent["close_reason"] = None
+    elif action == "WAIT":
+        if not isinstance(continuation, str) or not continuation.strip():
+            raise LadderPolicyError("WAIT reconciliation lacks continuation summary")
+        if not isinstance(remaining_batches, int) or remaining_batches < 1:
+            raise LadderPolicyError("WAIT reconciliation lacks remaining batch")
+        if not isinstance(remaining_calls, int) or remaining_calls < 1:
+            raise LadderPolicyError("WAIT reconciliation lacks remaining model call")
+        intent["research_lines"] = []
+        intent["continuation_summary"] = continuation.strip()
+        intent["close_reason"] = None
+    elif action == "CLOSE":
+        if not isinstance(close_reason, str) or not close_reason.strip():
+            raise LadderPolicyError("CLOSE reconciliation lacks close reason")
+        if remaining_batches != 0 or remaining_calls != 0:
+            raise LadderPolicyError("CLOSE reconciliation has nonzero remaining work")
+        intent["research_lines"] = []
+        intent["continuation_summary"] = None
+        intent["close_reason"] = close_reason.strip()
+    else:
+        raise LadderPolicyError("action reconciliation is invalid")
+    progress = intent.get("progress")
+    if not isinstance(progress, dict):
+        raise LadderPolicyError("compact intent progress must be an object")
+    intent["action"] = action
+    progress["estimated_remaining_batches"] = remaining_batches
+    progress["estimated_remaining_model_calls"] = remaining_calls
+    return json.dumps(intent, sort_keys=True, separators=(",", ":"))
+
+
+def _repair_messages(messages, *, raw_response: str, defect: str):
+    instruction = ""
+    if "observed unavailable from executable result transport" in defect:
+        instruction = (
+            " Remove all work depending on the unavailable dataset. Do not rename or repoint it. "
+            "Choose CLOSE or genuinely different work using confirmed executable inputs."
+        )
+    elif "already completed in the newest batch" in defect:
+        instruction = (
+            " Remove attempts to rerun completed work. Interpret its supplied result and choose "
+            "CLOSE or scientifically distinct work."
+        )
+    return list(messages) + [
+        {"role": "assistant", "content": raw_response},
+        {
+            "role": "user",
+            "content": json.dumps(
+                {
+                    "operation": "REPAIR_OPENROUTER_COMPACT_BATCH_INTENT",
+                    "objective_defect": defect,
+                    "instruction": (
+                        "Return one complete corrected compact batched scientific intent. Correct "
+                        "the exact defect without weakening scientific requirements. Deterministic "
+                        "code will not invent scientific content." + instruction
+                    ),
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            ),
+        },
+    ]
 
 
 def _append_jsonl(path: Path, item: object) -> None:
