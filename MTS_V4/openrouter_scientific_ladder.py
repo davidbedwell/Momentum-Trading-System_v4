@@ -58,6 +58,14 @@ MODEL_LADDER = (
     ),
 )
 
+INDEPENDENT_JUDGE = OpenRouterCandidate(
+    model="openai/gpt-5.6-sol",
+    label="GPT-5.6 Sol independent adjudicator",
+    maximum_prompt_usd_per_token=0.00000400,
+    maximum_completion_usd_per_token=0.00001500,
+    reasoning_effort="high",
+)
+
 
 class LadderPolicyError(RuntimeError):
     pass
@@ -92,6 +100,13 @@ def ladder_policy_document() -> dict[str, object]:
         "candidate_self_grading_allowed": False,
         "deterministic_semantic_grading_allowed": False,
         "sol_fallback_allowed": False,
+        "automated_independent_adjudication": {
+            "allowed": True,
+            "model": INDEPENDENT_JUDGE.model,
+            "candidate_outputs_are_untrusted_evidence": True,
+            "hidden_benchmark_exposed_to_candidates": False,
+            "manual_final_review_required_before_production_authorization": True,
+        },
         "models": [asdict(candidate) for candidate in MODEL_LADDER],
         "controls": sorted(EXPECTED_CONTROLS),
     }
