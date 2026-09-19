@@ -800,14 +800,35 @@ def main(argv=None) -> int:
             )
             total_spend += float(report["spend_usd"])
             if not report["mechanically_ready"]:
-                manifest["status"] = "MECHANICAL_FAILURE"
+                mechanical_failure = {
+                    "format": "MTS_V4_OPENROUTER_MECHANICAL_FAILURE_V1",
+                    "model": candidate.model,
+                    "mechanically_ready": False,
+                    "scientific_assessment_performed": False,
+                    "all_five_pass": False,
+                    "grades": [],
+                    "candidate_report_sha256": file_sha256(
+                        root
+                        / f"{index + 1:02d}_{candidate.model.replace('/', '__')}"
+                        / "candidate_report.json"
+                    ),
+                }
+                completed.append(mechanical_failure)
+                manifest["completed_assessments"] = completed
+                manifest["status"] = "READY_FOR_NEXT_CANDIDATE"
                 manifest["failed_model"] = candidate.model
                 manifest["total_spend_usd"] = total_spend
                 _write_json(manifest_path, manifest)
-                print(f"LADDER_STATUS=MECHANICAL_FAILURE MODEL={candidate.model}")
-                print(f"TOTAL_SPEND_USD={total_spend:.6f}")
-                print(f"SOL_JUDGE_CALLS={manifest.get('sol_judge_calls', 0)}")
-                return 2
+                print(
+                    f"CANDIDATE_STATUS=MECHANICAL_FAILURE MODEL={candidate.model}",
+                    flush=True,
+                )
+                print(
+                    f"ADVANCING_TO_NEXT_CANDIDATE=True "
+                    f"CUMULATIVE_SPEND_USD={total_spend:.6f}",
+                    flush=True,
+                )
+                continue
             remaining = args.max_total_spend_usd - total_spend
             if remaining <= 0:
                 raise RuntimeError("no authorization remains for independent adjudication")
