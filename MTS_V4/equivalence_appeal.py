@@ -15,7 +15,7 @@ from .virgin_equivalence import (
 )
 
 
-APPEAL_SYSTEM = """You are the appellate Research Director for a controlled MTS experiment. You receive the COMPLETE frozen starting package, COMPLETE Gemini Research Director work product, and ALL available hybrid Analysis results. Independently audit the work. Identify omitted research lines, unsupported promotions, missed findings, direction/horizon errors, robustness problems, and trading-conclusion errors. You may challenge, reject, reinterpret, or request bounded corrective Analysis, but you may not restart an unrestricted Direct-Sol research campaign. Return strict JSON with keys: material_findings, omissions, rejected_promotions, corrections, unresolved, trading_conclusion, corrective_analysis_requests, appeal_complete."""
+APPEAL_SYSTEM = """You are the appellate Research Director for a controlled MTS experiment. You receive the COMPLETE frozen starting package, COMPLETE lower-cost Research Director work product, and ALL available hybrid Analysis results. Independently audit the work. Identify omitted research lines, unsupported promotions, missed findings, direction/horizon errors, robustness problems, and trading-conclusion errors. This V1 appeal is exactly one appellate model call and cannot execute a second corrective Analysis round. Therefore do not request new Analysis; record any work that would still be needed under unresolved instead. You may challenge, reject, reinterpret, or correct the supplied work, but you may not restart an unrestricted direct research campaign. Return strict JSON with keys: material_findings, omissions, rejected_promotions, corrections, unresolved, trading_conclusion, corrective_analysis_requests, appeal_complete."""
 
 
 def collect_complete_hybrid_record(gemini_root: Path) -> tuple[list[Mapping[str, object]], list[Mapping[str, object]]]:
@@ -68,10 +68,16 @@ def run_bounded_sol_appeal(*, start: Mapping[str, object], gemini_root: Path, hy
     ])
     try:
         result = json.loads(raw)
-    except json.JSONDecodeError as exc:
-        raise EquivalenceProtocolError("Sol appeal did not return valid JSON") from exc
+    except json.JSONDecodeError:
+        left, right = raw.find("{"), raw.rfind("}")
+        if left < 0 or right <= left:
+            raise EquivalenceProtocolError("Sol appeal did not return a JSON object")
+        result = json.loads(raw[left:right + 1])
     if not isinstance(result, Mapping) or result.get("appeal_complete") is not True:
         raise EquivalenceProtocolError("Sol appeal did not close cleanly")
+    corrective = result.get("corrective_analysis_requests")
+    if corrective not in (None, []):
+        raise EquivalenceProtocolError("V1 Sol appeal requested corrective Analysis that cannot execute inside the frozen one-call appeal")
     write_frozen_json(hybrid_root / "SOL_APPEAL.json", dict(result))
     return result
 
@@ -102,7 +108,7 @@ def freeze_hybrid_manifest(*, ticker: str, start: Mapping[str, object], gemini_r
         usage=[dict(gemini_usage), dict(sol_usage)],
         complete=True,
         terminal_state=terminal_state,
-        scientific_record={"gemini": gemini_record, "sol_appeal": appeal},
+        scientific_record={"trace": gemini_record, "final_assessment": appeal},
     )
     write_frozen_json(hybrid_root / "ARM_MANIFEST.json", manifest)
     return manifest
