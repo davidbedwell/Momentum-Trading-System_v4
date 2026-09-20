@@ -78,7 +78,7 @@ def prepare_identical_start(*, root: Path, ticker: str, experiment_root: Path) -
         "mission": DEFAULT_MISSION,
         "subject": _jsonable(subject),
         "evidence": _jsonable(evidence),
-        "available_analysis_methods": sorted(runtime.analysis.available_methods()),
+        "available_analysis_methods": [dict(item) for item in runtime.catalog.capability_payloads()],
         "starting_state": {
             "cross_subject_memory_source": str(context.memory_selection.source_path),
             "cross_subject_memory_sha256": canonical_sha256(context.prior_subject_science),
@@ -107,7 +107,7 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
         "mission": DEFAULT_MISSION,
         "subject": _jsonable(subject),
         "evidence": _jsonable(evidence),
-        "available_analysis_methods": sorted(runtime.analysis.available_methods()),
+        "available_analysis_methods": [dict(item) for item in runtime.catalog.capability_payloads()],
         "starting_state": {
             "cross_subject_memory_source": str(context.memory_selection.source_path),
             "cross_subject_memory_sha256": canonical_sha256(context.prior_subject_science),
