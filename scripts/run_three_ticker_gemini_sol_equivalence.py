@@ -133,11 +133,39 @@ def main() -> int:
             else:
                 child.unlink()
 
+    final_path = exp / "FINAL_QUALIFICATION.json"
+    if final_path.is_file():
+        final = load_json(final_path)
+        print(f"FINAL qualified={final['qualified']} saving={float(final['cost_saving_fraction']):.1%} direct=${float(final['direct_cost_usd']):.2f} hybrid=${float(final['hybrid_cost_usd']):.2f}", flush=True)
+        return 0 if final.get("qualified") else 3
+
     comparisons = []
     direct_total = 0.0
     hybrid_total = 0.0
 
     for ticker in tickers:
+        comparison_path = exp / ticker / "COMPARISON.json"
+        direct_manifest_path = exp / ticker / "DIRECT_SOL" / "ARM_MANIFEST.json"
+        hybrid_manifest_path = exp / ticker / "GEMINI_SOL_HYBRID" / "ARM_MANIFEST.json"
+        if comparison_path.is_file():
+            if not direct_manifest_path.is_file() or not hybrid_manifest_path.is_file():
+                raise EquivalenceProtocolError(f"{ticker} comparison exists without both arm manifests")
+            comparison = load_json(comparison_path)
+            direct = load_json(direct_manifest_path)
+            hybrid = load_json(hybrid_manifest_path)
+            hybrid_usage = hybrid.get("usage", [])
+            if not isinstance(hybrid_usage, list) or len(hybrid_usage) < 2:
+                raise EquivalenceProtocolError(f"{ticker} hybrid manifest lacks Gemini+appeal usage")
+            dc = direct_cost(direct)
+            hc = usage_cost(hybrid_usage[0]) + usage_cost(hybrid_usage[1])
+            comparisons.append(comparison)
+            direct_total += dc
+            hybrid_total += hc
+            status = "PASS" if comparison.get("materially_equivalent") and not comparison.get("material_direct_sol_finding_missed") and not comparison.get("disqualifying_false_hybrid_promotion") else "FAIL"
+            print(f"{ticker} {status} direct=${dc:.2f} hybrid=${hc:.2f} (recovered)", flush=True)
+            if status == "FAIL":
+                return 2
+            continue
         print(f"START {ticker}", flush=True)
         start_path = exp / ticker / "START.json"
         if start_path.exists():
