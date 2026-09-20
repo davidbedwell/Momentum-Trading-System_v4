@@ -32,6 +32,51 @@ def direct_cost(manifest) -> float:
     return sum(usage_cost(x) for x in manifest.get("usage", []))
 
 
+def recover_openrouter_usage(path: Path) -> dict[str, object]:
+    spend = 0.0
+    calls = 0
+    model = None
+    if path.is_file():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if row.get("event") != "OPENROUTER_RD_CALL_COMPLETE":
+                continue
+            calls += 1
+            model = row.get("model") or model
+            value = row.get("actual_call_cost_usd")
+            if isinstance(value, (int, float)):
+                spend += float(value)
+    if calls < 1:
+        raise EquivalenceProtocolError(f"OpenRouter telemetry has no completed calls: {path}")
+    return {"model": model, "completed_calls": calls, "actual_spend_usd": spend, "recovered_from_telemetry": True}
+
+
+def recover_sol_usage(path: Path) -> dict[str, object]:
+    spend = 0.0
+    calls = 0
+    if path.is_file():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if row.get("event") != "SOL_CALL_COMPLETE":
+                continue
+            calls += 1
+            value = row.get("estimated_call_cost_usd")
+            if isinstance(value, (int, float)):
+                spend += float(value)
+    if calls < 1:
+        raise EquivalenceProtocolError(f"Sol telemetry has no completed calls: {path}")
+    return {"completed_sol_calls": calls, "actual_spend_usd": spend, "recovered_from_telemetry": True}
+
 def main() -> int:
     p = argparse.ArgumentParser(description="Run frozen UBER/IBM/RL Direct-Sol vs Gemini+Sol experiment sequentially.")
     p.add_argument("--scientific-root", default="/home/ubuntu")
