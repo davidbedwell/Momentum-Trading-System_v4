@@ -19,7 +19,7 @@ def main() -> int:
     p.add_argument("--exposure-ledger", action="append", required=True)
     p.add_argument("--research-root", action="append", required=True)
     args = p.parse_args()
-    required_env = ["MTS_SOL_BASE_URL", "MTS_SOL_MODEL", "MTS_SOL_API_KEY", "OPENROUTER_API_KEY"]
+    required_env = ["MTS_SOL_BASE_URL", "MTS_SOL_MODEL", "MTS_SOL_API_KEY", "MTS_OPENROUTER_API_KEY"]
     missing_env = [name for name in required_env if not os.getenv(name, "").strip()]
     if missing_env:
         raise EquivalenceProtocolError(f"missing environment variables: {missing_env}")
