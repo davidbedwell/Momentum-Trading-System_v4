@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import asdict
+from dataclasses import asdict, replace
 import hashlib
 import json
 import os
@@ -26,6 +26,39 @@ from .virgin_equivalence import (
     verify_identical_start,
     write_frozen_json,
 )
+
+
+
+def _equivalence_scientific_context(*, root: Path, experiment_root: Path, active_subject_id: str):
+    context = load_subject_scientific_context(
+        root,
+        active_subject_id=active_subject_id,
+        include_same_subject_prior_science=False,
+    )
+    prior = dict(context.prior_subject_science)
+    subjects = prior.get("subjects", [])
+    filtered_subjects = []
+    experiment_prefix = str(experiment_root.resolve()) + os.sep
+    if isinstance(subjects, list):
+        for subject_entry in subjects:
+            if not isinstance(subject_entry, Mapping):
+                continue
+            packages = subject_entry.get("research_packages", [])
+            kept = []
+            if isinstance(packages, list):
+                for package in packages:
+                    if not isinstance(package, Mapping):
+                        continue
+                    source_path = str(package.get("source_path", ""))
+                    if source_path.startswith(experiment_prefix):
+                        continue
+                    kept.append(dict(package))
+            if kept:
+                entry = dict(subject_entry)
+                entry["research_packages"] = kept
+                filtered_subjects.append(entry)
+    prior["subjects"] = filtered_subjects
+    return replace(context, prior_subject_science=prior)
 
 
 def equivalence_market_source() -> CompositeEvidenceSource:
@@ -138,7 +171,7 @@ def _jsonable(value: object) -> object:
 
 def prepare_identical_start(*, root: Path, ticker: str, experiment_root: Path) -> dict[str, object]:
     subject = SubjectMetadata(subject_id=f"equity:{ticker.upper()}", ticker=ticker.upper())
-    context = load_subject_scientific_context(root, active_subject_id=subject.subject_id, include_same_subject_prior_science=False)
+    context = _equivalence_scientific_context(root=root, experiment_root=experiment_root, active_subject_id=subject.subject_id)
     runtime = build_batch_runtime(rd=None, mission=DEFAULT_MISSION, nexus_path=experiment_root / "_prepare_nexus.json", scientific_memory=context.memory_selection.store)
     evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=equivalence_market_source())
     evidence_payloads = {descriptor.cache_key: _jsonable(runtime.cache.get(descriptor.cache_key)) for descriptor in evidence}
@@ -166,7 +199,7 @@ def prepare_identical_start(*, root: Path, ticker: str, experiment_root: Path) -
 def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, object], rd_factory: Callable):
     arm_root.mkdir(parents=True, exist_ok=False)
     subject = SubjectMetadata(subject_id=f"equity:{ticker.upper()}", ticker=ticker.upper())
-    context = load_subject_scientific_context(root, active_subject_id=subject.subject_id, include_same_subject_prior_science=False)
+    context = _equivalence_scientific_context(root=root, experiment_root=arm_root.parent.parent, active_subject_id=subject.subject_id)
     package_store = JsonResearchPackageStore(arm_root / "research_packages")
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
     rd = rd_factory(package_store, context, subject)
