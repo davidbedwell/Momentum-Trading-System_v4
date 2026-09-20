@@ -7,13 +7,13 @@ from MTS_V4.known_predictive_theories import KNOWN_PREDICTIVE_THEORY_IDS
 from MTS_V4.sol_batch_provider import SolBatchResearchDirector
 
 
-def _tested(theory_id: str):
+def _tested(theory_id: str, *, status: str = "TESTED_UNSUPPORTED"):
     return {
         "theory_id": theory_id,
-        "status": "TESTED_UNSUPPORTED",
+        "status": status,
         "scientific_formulation": "RD-selected formulation",
         "evidence_refs": [f"result:{theory_id}"],
-        "interpretation": "No support under the tested formulation.",
+        "interpretation": "Disposition is governed by the existing MTS success/candidacy schema.",
     }
 
 
@@ -28,13 +28,31 @@ class KnownTheoryCoverageTests(unittest.TestCase):
         self.assertIn("blocked", defect)
         self.assertIn(KNOWN_PREDICTIVE_THEORY_IDS[1], defect)
 
-    def test_all_theories_may_be_tested_without_any_required_positive_result(self) -> None:
+    def test_all_theories_may_be_unsupported_without_any_required_positive_result(self) -> None:
         decision = SimpleNamespace(research_state={
             "campaign_learning_audit_state": {
                 "known_theory_coverage": [_tested(theory_id) for theory_id in KNOWN_PREDICTIVE_THEORY_IDS]
             }
         })
         self.assertIsNone(SolBatchResearchDirector._known_theory_coverage_defect(decision))
+
+    def test_supported_is_a_valid_terminal_test_disposition(self) -> None:
+        coverage = [_tested(theory_id) for theory_id in KNOWN_PREDICTIVE_THEORY_IDS]
+        coverage[0] = _tested(KNOWN_PREDICTIVE_THEORY_IDS[0], status="TESTED_SUPPORTED")
+        decision = SimpleNamespace(research_state={
+            "campaign_learning_audit_state": {"known_theory_coverage": coverage}
+        })
+        self.assertIsNone(SolBatchResearchDirector._known_theory_coverage_defect(decision))
+
+    def test_mixed_is_not_a_terminal_disposition(self) -> None:
+        coverage = [_tested(theory_id) for theory_id in KNOWN_PREDICTIVE_THEORY_IDS]
+        coverage[0] = _tested(KNOWN_PREDICTIVE_THEORY_IDS[0], status="TESTED_MIXED")
+        decision = SimpleNamespace(research_state={
+            "campaign_learning_audit_state": {"known_theory_coverage": coverage}
+        })
+        defect = SolBatchResearchDirector._known_theory_coverage_defect(decision)
+        self.assertIsNotNone(defect)
+        self.assertIn("terminal coverage status", defect)
 
     def test_objective_unavailability_requires_reason_but_not_fake_test(self) -> None:
         coverage = [_tested(theory_id) for theory_id in KNOWN_PREDICTIVE_THEORY_IDS]
