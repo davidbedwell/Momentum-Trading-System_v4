@@ -22,7 +22,8 @@ SEQUENCE = (
     "TSLA",
     "XOM",
 )
-DEFAULT_PER_SUBJECT_SOL_SPEND_USD = 5.0
+DEFAULT_PER_SUBJECT_SOL_SPEND_USD = 7.0
+EXPECTED_COST_EFFICIENCY_RANGE_USD = (5.0, 6.0)
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -126,6 +127,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "start_at": args.start_at,
         "dry_run": args.dry_run,
         "per_subject_sol_spend_limit_usd": args.per_subject_sol_spend_limit_usd,
+        "expected_cost_efficiency_range_usd": list(EXPECTED_COST_EFFICIENCY_RANGE_USD),
+        "spend_ceiling_is_scientific_target": False,
         "maximum_authorized_campaign_spend_usd": (
             args.per_subject_sol_spend_limit_usd * len(run_sequence)
         ),
@@ -137,6 +140,8 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     print("SEQUENCE=" + ",".join(run_sequence), flush=True)
     print(f"PER_SUBJECT_SOL_SPEND_LIMIT_USD={args.per_subject_sol_spend_limit_usd:.2f}", flush=True)
+    print("EXPECTED_COST_EFFICIENCY_RANGE_USD=5.00-6.00", flush=True)
+    print("SPEND_CEILING_IS_SCIENTIFIC_TARGET=False", flush=True)
     print(
         "MAXIMUM_AUTHORIZED_CAMPAIGN_SPEND_USD="
         f"{args.per_subject_sol_spend_limit_usd * len(run_sequence):.2f}",
