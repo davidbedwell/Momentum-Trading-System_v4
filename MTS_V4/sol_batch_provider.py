@@ -319,6 +319,12 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                     "and next decision dependency needed on later calls; deterministic code transports but does "
                     "not author, rank, or summarize this object"
                 ),
+                "campaign_learning_audit_state": {
+                    "known_structure_applications": "cumulative list of Sol-authored applications of prior/established predictive structures; each item should include application_id, structure_name, provenance, source_reference, status, evidence_refs",
+                    "known_structure_opportunity_summary": "when exact evidence supports it: observation_months, raw_unique_opportunities, executable_nonoverlapping_unique_opportunities, positive_net_ev_candidate_unique_opportunities; use null rather than estimate or invent",
+                    "novel_strategy_discoveries": "cumulative list with novelty_id, statement, why_distinct_from_known_structure, status, evidence_refs",
+                    "cross_subject_generalizations": "cumulative list with generalization_id, statement, supporting_subject_ids, contradicting_subject_ids, status, evidence_refs",
+                },
                 "predictive_hypothesis_updates": [
                     {
                         "rp_id": "exact active local RP",
@@ -409,7 +415,8 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "Never credit favorable movement after the executable policy would have stopped, invalidated, expired, or otherwise exited. A material revision to a frozen proposition or policy requires a new hypothesis_id.",
             "During VALIDATION preserve the prediction-time no-look-ahead boundary and never generalize that restriction backward into EXPLORATION.",
             "Cross-subject memory is scientific context only. Do not assume generalization and do not let prior subjects delimit the discovery space.",
-            "Keep trading-hypothesis candidacy, scientific validation, and candidacy for trading promotion distinct. A scientific observation is not automatically a candidate trading hypothesis, and scientific validation is not automatically trading promotion.",
+"Maintain research_state.campaign_learning_audit_state cumulatively as an audit annotation, not as a scientific constraint. Record when you deliberately apply a prior/established predictive structure, when evidence supports exact opportunity-frequency counts, when you judge a strategy genuinely novel, and when evidence supports or contradicts cross-subject generalization. Do not invent counts; use null when exact evidence is unavailable. Novelty/generalization annotations are your scientific claims and must cite stable RP/result/evidence references. This audit state must never narrow discovery or force reuse of prior structures.",
+                        "Keep trading-hypothesis candidacy, scientific validation, and candidacy for trading promotion distinct. A scientific observation is not automatically a candidate trading hypothesis, and scientific validation is not automatically trading promotion.",
             "Historical look-ahead is allowed for candidate discovery but never credit favorable movement after a stop, invalidation, expiry, or other policy exit. A relationship without positive exploratory policy expectancy may remain a scientific observation or supporting finding, but not a candidate trading hypothesis.",
             "For blind validation, lock predictions with action=LOCK_VALIDATION_TRIAL only from a completed VALIDATION result that contains no future information. Lock the prediction before any outcome/future information is exposed.",
             "Record a validation outcome with action=RECORD_VALIDATION_OUTCOME only after the trial is already locked. The former fixed cumulative success_rate >= 0.60 rule is superseded and must not be treated as the exclusive validation or promotion criterion; greater-than-60-percent success at at-least-1.5-ATR is a strong reference payoff example only. You retain scientific authority over validation of the frozen relationship using untouched evidence.",
