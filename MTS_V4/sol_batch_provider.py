@@ -10,6 +10,11 @@ from .batch_contracts import BatchExecutionReport, BatchResearchDecision
 from .batch_rd_codec import BatchResearchDecisionCodec, BatchResearchDecisionDecodeError
 from .contracts import EvidenceDescriptor, SubjectMetadata
 from .formulation_completeness import FormulationCompletenessContract
+from .known_predictive_theories import (
+    KNOWN_PREDICTIVE_THEORY_IDS,
+    compact_known_predictive_theory_index,
+    known_predictive_theory_context,
+)
 from .sol_primary_provider import SolPrimaryResearchDirector
 from .sol_spend_guard import (
     DEFAULT_AUTHORIZED_SOL_SPEND_USD,
@@ -135,6 +140,11 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             evidence=evidence,
             available_methods=available_methods,
             nexus_context=current_nexus_context,
+        )
+        payload["known_predictive_theory_context"] = (
+            compact_known_predictive_theory_index()
+            if continuation
+            else known_predictive_theory_context()
         )
         payload["research_packages"] = (
             self._research_package_store.compact_context_for_subject(subject.subject_id)
@@ -321,6 +331,11 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                     "not author, rank, or summarize this object"
                 ),
                 "campaign_learning_audit_state": {
+                    "known_theory_coverage": (
+                        "cumulative list with one entry per human-required known theory: theory_id, status "
+                        "(TESTED_SUPPORTED, TESTED_UNSUPPORTED, TESTED_MIXED, or OBJECTIVELY_NOT_TESTABLE), "
+                        "scientific_formulation, evidence_refs, interpretation, and untestable_reason when applicable"
+                    ),
                     "known_structure_applications": "cumulative list of Sol-authored applications of prior/established predictive structures; each item should include application_id, structure_name, provenance, source_reference, status, evidence_refs",
                     "known_structure_opportunity_summary": "when exact evidence supports it: observation_months, raw_unique_opportunities, executable_nonoverlapping_unique_opportunities, positive_net_ev_candidate_unique_opportunities; use null rather than estimate or invent",
                     "novel_strategy_discoveries": "cumulative list with novelty_id, statement, why_distinct_from_known_structure, status, evidence_refs",
@@ -416,7 +431,8 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "Never credit favorable movement after the executable policy would have stopped, invalidated, expired, or otherwise exited. A material revision to a frozen proposition or policy requires a new hypothesis_id.",
             "During VALIDATION preserve the prediction-time no-look-ahead boundary and never generalize that restriction backward into EXPLORATION.",
             "Cross-subject memory is scientific context only. Do not assume generalization and do not let prior subjects delimit the discovery space.",
-"Maintain research_state.campaign_learning_audit_state cumulatively as an audit annotation, not as a scientific constraint. Record when you deliberately apply a prior/established predictive structure, when evidence supports exact opportunity-frequency counts, when you judge a strategy genuinely novel, and when evidence supports or contradicts cross-subject generalization. Do not invent counts; use null when exact evidence is unavailable. Novelty/generalization annotations are your scientific claims and must cite stable RP/result/evidence references. This audit state must never narrow discovery or force reuse of prior structures.",
+"Human governance requires coverage of every theory_id in context.known_predictive_theory_context before subject closure. Test each scientifically when the available evidence can represent it; if and only if required evidence is objectively unavailable, record OBJECTIVELY_NOT_TESTABLE with the exact missing evidence. Required coverage does not confer evidentiary weight, prescribe direction, method, threshold, horizon, or outcome, and does not limit novel discovery. ",
+            ""Maintain research_state.campaign_learning_audit_state cumulatively as an audit annotation, not as a scientific constraint. Record when you deliberately apply a prior/established predictive structure, when evidence supports exact opportunity-frequency counts, when you judge a strategy genuinely novel, and when evidence supports or contradicts cross-subject generalization. Do not invent counts; use null when exact evidence is unavailable. Novelty/generalization annotations are your scientific claims and must cite stable RP/result/evidence references. This audit state must never narrow discovery or force reuse of prior structures.",
                         "Keep trading-hypothesis candidacy, scientific validation, and candidacy for trading promotion distinct. A scientific observation is not automatically a candidate trading hypothesis, and scientific validation is not automatically trading promotion.",
             "Historical look-ahead is allowed for candidate discovery but never credit favorable movement after a stop, invalidation, expiry, or other policy exit. A relationship without positive exploratory policy expectancy may remain a scientific observation or supporting finding, but not a candidate trading hypothesis.",
             "For blind validation, lock predictions with action=LOCK_VALIDATION_TRIAL only from a completed VALIDATION result that contains no future information. Lock the prediction before any outcome/future information is exposed.",
@@ -674,6 +690,60 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             defect = self._formulation_completeness_defect()
             if defect is not None:
                 return defect
+            defect = self._known_theory_coverage_defect(decision)
+            if defect is not None:
+                return defect
+        return None
+
+    @staticmethod
+    def _known_theory_coverage_defect(decision: BatchResearchDecision) -> str | None:
+        audit = decision.research_state.get("campaign_learning_audit_state")
+        if not isinstance(audit, Mapping):
+            return "subject closure requires research_state.campaign_learning_audit_state with known_theory_coverage"
+        coverage = audit.get("known_theory_coverage")
+        if not isinstance(coverage, list):
+            return "subject closure requires campaign_learning_audit_state.known_theory_coverage list"
+        by_id = {}
+        allowed = {
+            "TESTED_SUPPORTED",
+            "TESTED_UNSUPPORTED",
+            "TESTED_MIXED",
+            "OBJECTIVELY_NOT_TESTABLE",
+        }
+        for item in coverage:
+            if not isinstance(item, Mapping):
+                return "each known_theory_coverage entry must be an object"
+            theory_id = item.get("theory_id")
+            if not isinstance(theory_id, str) or not theory_id.strip():
+                return "each known_theory_coverage entry requires nonblank theory_id"
+            if theory_id in by_id:
+                return f"known_theory_coverage contains duplicate theory_id: {theory_id}"
+            by_id[theory_id] = item
+        unknown = sorted(set(by_id) - set(KNOWN_PREDICTIVE_THEORY_IDS))
+        if unknown:
+            return f"known_theory_coverage contains unknown theory_ids: {unknown}"
+        missing = [theory_id for theory_id in KNOWN_PREDICTIVE_THEORY_IDS if theory_id not in by_id]
+        if missing:
+            return f"subject closure blocked until human-required known theories are covered: {missing}"
+        for theory_id in KNOWN_PREDICTIVE_THEORY_IDS:
+            item = by_id[theory_id]
+            status = item.get("status")
+            if status not in allowed:
+                return f"known theory {theory_id} requires a terminal coverage status from {sorted(allowed)}"
+            if status == "OBJECTIVELY_NOT_TESTABLE":
+                reason = item.get("untestable_reason")
+                if not isinstance(reason, str) or not reason.strip():
+                    return f"known theory {theory_id} marked OBJECTIVELY_NOT_TESTABLE requires untestable_reason"
+            else:
+                refs = item.get("evidence_refs")
+                if not isinstance(refs, list) or not any(isinstance(v, str) and v.strip() for v in refs):
+                    return f"tested known theory {theory_id} requires nonempty evidence_refs"
+                formulation = item.get("scientific_formulation")
+                interpretation = item.get("interpretation")
+                if not isinstance(formulation, str) or not formulation.strip():
+                    return f"tested known theory {theory_id} requires scientific_formulation"
+                if not isinstance(interpretation, str) or not interpretation.strip():
+                    return f"tested known theory {theory_id} requires interpretation"
         return None
 
     def _formulation_completeness_defect(self) -> str | None:
