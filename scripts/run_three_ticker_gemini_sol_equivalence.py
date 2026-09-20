@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import shutil
 
-from MTS_V4.equivalence_appeal import create_blinded_packet, freeze_hybrid_manifest, run_bounded_sol_appeal
+from MTS_V4.equivalence_appeal import create_blinded_packet, freeze_hybrid_manifest, recover_bounded_sol_appeal, run_bounded_sol_appeal
 from MTS_V4.equivalence_execution import freeze_existing_direct_sol_arm, prepare_identical_start, run_direct_sol_arm, run_gemini_rd_arm
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.sol_provider import SolResearchPackageAwareResearchDirector
