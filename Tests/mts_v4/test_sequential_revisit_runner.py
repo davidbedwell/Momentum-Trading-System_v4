@@ -10,6 +10,7 @@ from scripts.run_sol_sequential_revisits import (
     SEQUENCE,
     _parser,
     _subject_command,
+    _run_learning_audit,
 )
 from scripts.run_sol_batched_one_subject import _interactive_spend_authorization
 
@@ -61,6 +62,21 @@ class SequentialRevisitRunnerTests(unittest.TestCase):
         self.assertIn("--revisit", command)
         self.assertIn("--dry-run", command)
         self.assertNotIn("--control-campaign-report", command)
+
+
+    def test_learning_audit_runs_without_paid_model_calls(self) -> None:
+        with patch("scripts.run_sol_sequential_revisits.subprocess.run") as run:
+            run.return_value.returncode = 0
+            run.return_value.stdout = ""
+            run.return_value.stderr = ""
+            result = _run_learning_audit(
+                python="python",
+                campaign_dir=Path("/home/ubuntu/campaign"),
+            )
+        command = run.call_args.args[0]
+        self.assertIn("audit_11_ticker_learning.py", command[1])
+        self.assertEqual(command[-2:], ["--campaign-dir", "/home/ubuntu/campaign"])
+        self.assertEqual(result["return_code"], 0)
 
     def test_background_authorization_prompt_stops_cleanly_when_stdin_is_closed(self) -> None:
         class Snapshot:
