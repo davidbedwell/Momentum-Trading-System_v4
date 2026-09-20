@@ -149,6 +149,10 @@ def _load_scientific_record(root: Path) -> dict[str, object]:
         if not path.is_file():
             raise EquivalenceProtocolError(f"arm scientific record missing {path}")
         record[name.removesuffix(".json")] = json.loads(path.read_text(encoding="utf-8"))
+    packages = []
+    for path in sorted((root / "research_packages").glob("*.json")):
+        packages.append(json.loads(path.read_text(encoding="utf-8")))
+    record["research_packages"] = packages
     return record
 
 
