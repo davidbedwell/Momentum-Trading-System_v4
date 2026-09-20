@@ -178,11 +178,20 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
         recorder.record_report(report)
         reports.append(_jsonable(report))
 
+    last_report = None
+
     def on_decision(decision, decision_count, analysis_count):
+        nonlocal last_report
         recorder.record_plan(campaign_id=campaign_id, subject=subject, decision=decision)
-        recorder.record_predictive_hypothesis_updates(decision)
+        recorder.record_predictive_hypothesis_updates(decision, current_report=last_report)
         recorder.record_closures(decision)
         decisions.append(_jsonable(decision))
+
+    def on_report(report, decision_count, analysis_count):
+        nonlocal last_report
+        recorder.record_report(report)
+        last_report = report
+        reports.append(_jsonable(report))
 
     outcome = runtime.orchestrator.run(subject=subject, evidence=evidence, decision_callback=on_decision, report_callback=on_report, accepted_request_callback=accepted, precomputed_results=precomputed)
     analyses.extend(_jsonable(precomputed))
