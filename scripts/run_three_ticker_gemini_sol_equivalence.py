@@ -200,6 +200,23 @@ def main() -> int:
             gemini_usage = recover_openrouter_usage(gemini_root / "openrouter_telemetry.jsonl")
             write_frozen_json(gemini_usage_path, gemini_usage)
         else:
+            # An interrupted pre-spend Gemini launch can leave arm-local setup
+            # artifacts behind even though no provider call occurred. Because a
+            # completed Direct-Sol arm gives the subject paid telemetry, the
+            # subject-level cleanup above must not remove these files. Clean
+            # only this Gemini arm when there is unequivocally no Gemini spend
+            # and no completed Gemini artifact, then start it fresh.
+            if gemini_root.exists():
+                telemetry = gemini_root / "openrouter_telemetry.jsonl"
+                completed = any(
+                    (gemini_root / name).is_file()
+                    for name in ("GEMINI_USAGE.json", "decisions.json", "reports.json", "outcome.json")
+                )
+                if telemetry.is_file() and telemetry.stat().st_size > 0:
+                    raise EquivalenceProtocolError("partial paid Gemini arm detected; refusing to delete or rerun paid work")
+                if completed:
+                    raise EquivalenceProtocolError("Gemini arm has scientific artifacts without recoverable paid telemetry; refusing cleanup")
+                shutil.rmtree(gemini_root)
             gemini_root, gemini_usage, _ = run_gemini_rd_arm(root=scientific_root, ticker=ticker, experiment_root=exp, start=start, model=args.gemini_model, max_calls=args.gemini_max_calls, max_spend_usd=args.gemini_cap)
 
         hybrid_root = exp / ticker / "GEMINI_SOL_HYBRID"
