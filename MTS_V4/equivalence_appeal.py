@@ -15,6 +15,40 @@ from .virgin_equivalence import (
 )
 
 
+
+def _parse_json_object(raw: str, *, label: str) -> Mapping[str, object]:
+    try:
+        result = json.loads(raw)
+    except json.JSONDecodeError:
+        left, right = raw.find("{"), raw.rfind("}")
+        if left < 0 or right <= left:
+            raise EquivalenceProtocolError(f"{label} did not return a JSON object")
+        result = json.loads(raw[left:right + 1])
+    if not isinstance(result, Mapping):
+        raise EquivalenceProtocolError(f"{label} did not return a JSON object")
+    return result
+
+
+def recover_bounded_sol_appeal(hybrid_root: Path) -> Mapping[str, object]:
+    appeal_path = hybrid_root / "SOL_APPEAL.json"
+    if appeal_path.is_file():
+        value = json.loads(appeal_path.read_text(encoding="utf-8"))
+        if not isinstance(value, Mapping):
+            raise EquivalenceProtocolError("frozen Sol appeal is malformed")
+        return value
+    raw_path = hybrid_root / "SOL_APPEAL_RAW.txt"
+    if not raw_path.is_file():
+        raise EquivalenceProtocolError("paid Sol appeal has no recoverable raw response")
+    result = _parse_json_object(raw_path.read_text(encoding="utf-8"), label="Sol appeal")
+    if result.get("appeal_complete") is not True:
+        raise EquivalenceProtocolError("Sol appeal did not close cleanly")
+    frozen_result = dict(result)
+    corrective = frozen_result.get("corrective_analysis_requests")
+    frozen_result["bounded_one_call_corrective_work_requested"] = corrective not in (None, [])
+    write_frozen_json(appeal_path, frozen_result)
+    return frozen_result
+
+
 APPEAL_SYSTEM = """You are the appellate Research Director for a controlled MTS experiment. You receive the COMPLETE frozen starting package, COMPLETE lower-cost Research Director work product, and ALL available hybrid Analysis results. Independently audit the work. Identify omitted research lines, unsupported promotions, missed findings, direction/horizon errors, robustness problems, and trading-conclusion errors. This V1 appeal is exactly one appellate model call and cannot execute a second corrective Analysis round. Therefore do not request new Analysis; record any work that would still be needed under unresolved instead. You may challenge, reject, reinterpret, or correct the supplied work, but you may not restart an unrestricted direct research campaign. Return strict JSON with keys: material_findings, omissions, rejected_promotions, corrections, unresolved, trading_conclusion, corrective_analysis_requests, appeal_complete."""
 
 
@@ -67,14 +101,8 @@ def run_bounded_sol_appeal(*, start: Mapping[str, object], gemini_root: Path, hy
         {"role": "user", "content": json.dumps(context, sort_keys=True, separators=(",", ":"), default=str)},
     ])
     (hybrid_root / "SOL_APPEAL_RAW.txt").write_text(raw + "\n", encoding="utf-8")
-    try:
-        result = json.loads(raw)
-    except json.JSONDecodeError:
-        left, right = raw.find("{"), raw.rfind("}")
-        if left < 0 or right <= left:
-            raise EquivalenceProtocolError("Sol appeal did not return a JSON object")
-        result = json.loads(raw[left:right + 1])
-    if not isinstance(result, Mapping) or result.get("appeal_complete") is not True:
+    result = _parse_json_object(raw, label="Sol appeal")
+    if result.get("appeal_complete") is not True:
         raise EquivalenceProtocolError("Sol appeal did not close cleanly")
     corrective = result.get("corrective_analysis_requests")
     frozen_result = dict(result)
