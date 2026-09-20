@@ -59,9 +59,23 @@ def main() -> int:
             raise EquivalenceProtocolError("experiment already has paid-arm artifacts; refusing accidental rerun")
         identity_path.unlink()
     for ticker in tickers:
-        start_path = exp / ticker / "START.json"
-        if start_path.exists() and not (exp / ticker / "DIRECT_SOL").exists() and not (exp / ticker / "GEMINI_RD").exists():
-            start_path.unlink()
+        subject_root = exp / ticker
+        if subject_root.exists():
+            paid = (
+                (subject_root / "DIRECT_SOL" / "ARM_MANIFEST.json").exists()
+                or (subject_root / "GEMINI_RD" / "GEMINI_USAGE.json").exists()
+                or (subject_root / "GEMINI_SOL_HYBRID" / "SOL_APPEAL.json").exists()
+            )
+            if paid:
+                raise EquivalenceProtocolError(
+                    f"{ticker} already has paid experiment artifacts; refusing accidental rerun"
+                )
+            for child in sorted(subject_root.iterdir(), reverse=True):
+                if child.is_dir():
+                    import shutil
+                    shutil.rmtree(child)
+                else:
+                    child.unlink()
 
     salt = os.urandom(32).hex()
     write_frozen_json(identity_path, {"salt": salt, "selection_sha256": canonical_sha256(selection)})
@@ -72,7 +86,11 @@ def main() -> int:
 
     for ticker in tickers:
         print(f"START {ticker}", flush=True)
-        start = prepare_identical_start(root=scientific_root, ticker=ticker, experiment_root=exp)
+        start_path = exp / ticker / "START.json"
+        if start_path.exists():
+            start = load_json(start_path)
+        else:
+            start = prepare_identical_start(root=scientific_root, ticker=ticker, experiment_root=exp)
         direct = run_direct_sol_arm(root=scientific_root, ticker=ticker, experiment_root=exp, start=start, sol_spend_usd=args.direct_sol_cap)
         gemini_root, gemini_usage, _ = run_gemini_rd_arm(root=scientific_root, ticker=ticker, experiment_root=exp, start=start, model=args.gemini_model, max_calls=args.gemini_max_calls, max_spend_usd=args.gemini_cap)
 
