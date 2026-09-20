@@ -40,6 +40,11 @@ def _parser() -> argparse.ArgumentParser:
         default=DEFAULT_PER_SUBJECT_SOL_SPEND_USD,
     )
     parser.add_argument(
+        "--control-campaign-report",
+        default=None,
+        help="completed CALIBRATION_PASS report forwarded to every paid subject run",
+    )
+    parser.add_argument(
         "--start-at",
         choices=SEQUENCE,
         default=SEQUENCE[0],
@@ -57,6 +62,7 @@ def _subject_command(
     root: Path,
     state_dir: Path,
     spend_limit_usd: float,
+    control_campaign_report: Path | None,
     dry_run: bool,
 ) -> list[str]:
     command = [
@@ -72,6 +78,8 @@ def _subject_command(
         "--sol-spend-limit-usd",
         str(spend_limit_usd),
     ]
+    if control_campaign_report is not None:
+        command.extend(["--control-campaign-report", str(control_campaign_report)])
     if dry_run:
         command.append("--dry-run")
     return command
@@ -90,8 +98,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     if args.per_subject_sol_spend_limit_usd <= 0:
         raise RuntimeError("--per-subject-sol-spend-limit-usd must be positive")
+    if not args.dry_run and not args.control_campaign_report:
+        raise RuntimeError("paid sequential revisits require --control-campaign-report")
 
     root = Path(args.root).expanduser().resolve()
+    control_campaign_report = (
+        Path(args.control_campaign_report).expanduser().resolve()
+        if args.control_campaign_report
+        else None
+    )
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     campaign_dir = Path(
         args.campaign_dir or root / f"mts-v4-20y-sequential-revisit-{stamp}"
@@ -114,6 +129,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "maximum_authorized_campaign_spend_usd": (
             args.per_subject_sol_spend_limit_usd * len(run_sequence)
         ),
+        "control_campaign_report": str(control_campaign_report) if control_campaign_report else None,
         "status": "RUNNING",
         "results": results,
     }
@@ -139,6 +155,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             root=root,
             state_dir=state_dir,
             spend_limit_usd=args.per_subject_sol_spend_limit_usd,
+            control_campaign_report=control_campaign_report,
             dry_run=args.dry_run,
         )
         completed = subprocess.run(command, check=False)
