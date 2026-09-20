@@ -224,7 +224,8 @@ def run_direct_sol_arm(*, root: Path, ticker: str, experiment_root: Path, start:
     usage = [asdict(snapshot)] if snapshot is not None else []
     artifacts = [_artifact(p) for p in sorted(arm_root.rglob("*.json"))]
     if telemetry.exists(): artifacts.append(_artifact(telemetry))
-    manifest = freeze_arm_manifest(subject_id=ticker.upper(), arm="DIRECT_SOL", starting_sha256=str(start["sha256"]), artifacts=artifacts, usage=usage, complete=bool(outcome.closed))
+    complete = bool(outcome.closed or outcome.waiting_for_future_cohorts)
+    manifest = freeze_arm_manifest(subject_id=ticker.upper(), arm="DIRECT_SOL", starting_sha256=str(start["sha256"]), artifacts=artifacts, usage=usage, complete=complete)
     write_frozen_json(arm_root / "ARM_MANIFEST.json", manifest)
     return manifest
 
