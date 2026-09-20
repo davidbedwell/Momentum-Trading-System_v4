@@ -101,8 +101,16 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
     rd = rd_factory(package_store, context, subject)
     runtime = build_batch_runtime(rd=rd, mission=DEFAULT_MISSION, nexus_path=arm_root / "research_nexus.json", scientific_memory=context.memory_selection.store)
-    evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=equivalence_market_source())
-    precomputed = dict(build_pre_sol_substrates(subject=subject, evidence=evidence, cache=runtime.cache, analysis=runtime.analysis))
+
+    frozen = start.get("package")
+    if not isinstance(frozen, Mapping):
+        raise EquivalenceProtocolError("frozen starting package is malformed")
+    evidence = tuple(frozen.get("evidence") or ())
+    precomputed_raw = frozen.get("starting_state")
+    if not isinstance(precomputed_raw, Mapping):
+        raise EquivalenceProtocolError("frozen starting state is malformed")
+    precomputed = dict(precomputed_raw.get("precomputed_analysis_results") or {})
+
     live = freeze_starting_package(ticker.upper(), {
         "mission": DEFAULT_MISSION,
         "subject": _jsonable(subject),
