@@ -152,7 +152,7 @@ def run_gemini_rd_arm(*, root: Path, ticker: str, experiment_root: Path, start: 
     os.environ["MTS_OPENROUTER_RD_TELEMETRY_PATH"] = str(telemetry)
     try:
         def factory(store, context, subject):
-            return SubjectContextOpenRouterBatchResearchDirector(research_package_store=store, prior_subject_scientific_context=context.prior_subject_science, same_subject_prior_scientific_context=None, revisit_change_context=None, base_url=os.getenv("MTS_OPENROUTER_BASE_URL", "https://openrouter.ai/api"), model=model, api_key=_required_env("OPENROUTER_API_KEY"), timeout_seconds=int(os.getenv("MTS_OPENROUTER_TIMEOUT_SECONDS", "600")), required_subject_id=subject.subject_id, required_research_phase=ResearchPhase.EXPLORATION, sol_spend_limit_usd=max_spend_usd, human_spend_authorization_callback=None, max_model_calls=max_calls, max_model_spend_usd=max_spend_usd)
+            return SubjectContextOpenRouterBatchResearchDirector(research_package_store=store, prior_subject_scientific_context=context.prior_subject_science, same_subject_prior_scientific_context=None, revisit_change_context=None, base_url=os.getenv("MTS_OPENROUTER_BASE_URL", "https://openrouter.ai/api"), model=model, api_key=_required_env("MTS_OPENROUTER_API_KEY"), timeout_seconds=int(os.getenv("MTS_OPENROUTER_TIMEOUT_SECONDS", "600")), required_subject_id=subject.subject_id, required_research_phase=ResearchPhase.EXPLORATION, sol_spend_limit_usd=max_spend_usd, human_spend_authorization_callback=None, max_model_calls=max_calls, max_model_spend_usd=max_spend_usd)
         rd, outcome = _run_arm(root=root, ticker=ticker, arm_root=arm_root, start=start, rd_factory=factory)
     finally:
         if old is None: os.environ.pop("MTS_OPENROUTER_RD_TELEMETRY_PATH", None)
