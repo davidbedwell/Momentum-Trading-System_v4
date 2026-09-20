@@ -219,6 +219,64 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
     return rd, outcome
 
 
+
+def _sol_usage_from_telemetry(path: Path) -> dict[str, object]:
+    total = 0.0
+    calls = 0
+    if path.is_file():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if row.get("event") != "SOL_CALL_COMPLETE":
+                continue
+            calls += 1
+            value = row.get("estimated_call_cost_usd")
+            if isinstance(value, (int, float)):
+                total += float(value)
+    if calls < 1:
+        raise EquivalenceProtocolError(f"paid Sol telemetry is missing completed calls: {path}")
+    return {"actual_spend_usd": total, "completed_sol_calls": calls, "recovered_from_telemetry": True}
+
+
+def freeze_existing_direct_sol_arm(*, ticker: str, experiment_root: Path, start: Mapping[str, object]) -> Mapping[str, object]:
+    arm_root = experiment_root / ticker.upper() / "DIRECT_SOL"
+    manifest_path = arm_root / "ARM_MANIFEST.json"
+    if manifest_path.is_file():
+        return json.loads(manifest_path.read_text(encoding="utf-8"))
+    record = _load_scientific_record(arm_root)
+    raw_outcome = record.get("outcome", {})
+    outcome = raw_outcome.get("outcome", {}) if isinstance(raw_outcome, Mapping) else {}
+    if not isinstance(outcome, Mapping):
+        raise EquivalenceProtocolError("existing Direct Sol outcome is malformed")
+    closed = bool(outcome.get("closed"))
+    waiting = bool(outcome.get("waiting_for_future_cohorts"))
+    if not (closed or waiting):
+        raise EquivalenceProtocolError(
+            "existing Direct Sol arm contains paid work but is not at a governed terminal state; refusing paid rerun"
+        )
+    telemetry = arm_root / "sol_transport_telemetry.jsonl"
+    usage = [_sol_usage_from_telemetry(telemetry)]
+    artifacts = [_artifact(p) for p in sorted(arm_root.rglob("*.json")) if p.name != "ARM_MANIFEST.json"]
+    if telemetry.exists():
+        artifacts.append(_artifact(telemetry))
+    manifest = freeze_arm_manifest(
+        subject_id=ticker.upper(),
+        arm="DIRECT_SOL",
+        starting_sha256=str(start["sha256"]),
+        artifacts=artifacts,
+        usage=usage,
+        complete=True,
+        terminal_state="WAITING_FOR_FUTURE_COHORTS" if waiting else "CLOSED",
+        scientific_record=record,
+    )
+    write_frozen_json(manifest_path, manifest)
+    return manifest
+
+
 def run_direct_sol_arm(*, root: Path, ticker: str, experiment_root: Path, start: Mapping[str, object], sol_spend_usd: float):
     arm_root = experiment_root / ticker.upper() / "DIRECT_SOL"
     telemetry = arm_root / "sol_transport_telemetry.jsonl"
