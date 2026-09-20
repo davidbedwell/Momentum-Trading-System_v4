@@ -120,11 +120,6 @@ class SubjectContextOpenRouterBatchResearchDirector(SubjectContextSolBatchResear
         if not isinstance(direct_cost, (int, float)) or float(direct_cost) < 0:
             raise ResearchDirectorTransportError("OpenRouter RD response omitted actual usage.cost")
         call_cost = float(direct_cost)
-        if self._openrouter_spend + call_cost > self._openrouter_max_spend:
-            raise OpenRouterBudgetExceeded(
-                "OpenRouter RD call completed beyond authorized spend ceiling; "
-                "artifact must be retained but no further model call is authorized"
-            )
         self._openrouter_calls += 1
         self._openrouter_spend += call_cost
         self._write_telemetry(
