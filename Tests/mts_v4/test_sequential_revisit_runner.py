@@ -25,19 +25,24 @@ class SequentialRevisitRunnerTests(unittest.TestCase):
         self.assertEqual(DEFAULT_PER_SUBJECT_SOL_SPEND_USD, 5.0)
         self.assertEqual(args.per_subject_sol_spend_limit_usd, 5.0)
 
-    def test_every_subject_command_uses_explicit_revisit_mode_and_subject_ceiling(self) -> None:
+    def test_every_subject_command_uses_explicit_revisit_mode_ceiling_and_calibration_gate(self) -> None:
         command = _subject_command(
             python="python",
             runner=Path("runner.py"),
             ticker="AAPL",
             root=Path("/home/ubuntu"),
             state_dir=Path("/home/ubuntu/campaign/01-aapl"),
-            spend_limit_usd=15.0,
+            spend_limit_usd=5.0,
+            control_campaign_report=Path("/home/ubuntu/calibration.json"),
             dry_run=False,
         )
         self.assertIn("--revisit", command)
         self.assertEqual(command[command.index("--ticker") + 1], "AAPL")
-        self.assertEqual(command[command.index("--sol-spend-limit-usd") + 1], "15.0")
+        self.assertEqual(command[command.index("--sol-spend-limit-usd") + 1], "5.0")
+        self.assertEqual(
+            command[command.index("--control-campaign-report") + 1],
+            "/home/ubuntu/calibration.json",
+        )
         self.assertNotIn("--dry-run", command)
 
     def test_dry_run_is_forwarded_without_changing_revisit_semantics(self) -> None:
@@ -47,11 +52,13 @@ class SequentialRevisitRunnerTests(unittest.TestCase):
             ticker="XOM",
             root=Path("/home/ubuntu"),
             state_dir=Path("/home/ubuntu/campaign/11-xom"),
-            spend_limit_usd=15.0,
+            spend_limit_usd=5.0,
+            control_campaign_report=None,
             dry_run=True,
         )
         self.assertIn("--revisit", command)
         self.assertIn("--dry-run", command)
+        self.assertNotIn("--control-campaign-report", command)
 
     def test_background_authorization_prompt_stops_cleanly_when_stdin_is_closed(self) -> None:
         class Snapshot:
