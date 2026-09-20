@@ -11,9 +11,11 @@ from .batch_research_recording import BatchCampaignResearchRecorder
 from .bootstrap import DEFAULT_MISSION, build_batch_runtime
 from .contracts import ResearchPhase, SubjectMetadata
 from .intake import IntakeEngine
+from .live_sources import CompositeEvidenceSource, FinraWeeklyOffExchangeSource, YFinanceDailyOhlcvSource
 from .openrouter_batch_provider import SubjectContextOpenRouterBatchResearchDirector
 from .pre_sol_substrates import build_for_subject as build_pre_sol_substrates
-from .research_lead_sources import standard_research_lead_market_source
+from .participation_sources import YFinanceCatalystEventsSource, YFinanceIntradaySource, YFinanceMarketStructureSource
+from .sec_share_structure_source import SecEdgarShareStructureSource
 from .research_package_store import JsonResearchPackageStore
 from .subject_scientific_context import SubjectContextSolBatchResearchDirector, load_subject_scientific_context
 from .virgin_equivalence import (
@@ -24,6 +26,22 @@ from .virgin_equivalence import (
     verify_identical_start,
     write_frozen_json,
 )
+
+
+def equivalence_market_source() -> CompositeEvidenceSource:
+    """Frozen experiment evidence source: standard research inputs minus Unusual Whales.
+
+    Unusual Whales was explicitly excluded from this experiment after the subscription
+    expired. FINRA remains available symmetrically to both arms.
+    """
+    return CompositeEvidenceSource(
+        YFinanceDailyOhlcvSource(),
+        FinraWeeklyOffExchangeSource(),
+        YFinanceMarketStructureSource(),
+        YFinanceCatalystEventsSource(),
+        YFinanceIntradaySource(),
+        SecEdgarShareStructureSource(),
+    )
 
 
 def _required_env(name: str) -> str:
@@ -54,7 +72,7 @@ def prepare_identical_start(*, root: Path, ticker: str, experiment_root: Path) -
     subject = SubjectMetadata(subject_id=f"equity:{ticker.upper()}", ticker=ticker.upper())
     context = load_subject_scientific_context(root, active_subject_id=subject.subject_id, include_same_subject_prior_science=False)
     runtime = build_batch_runtime(rd=None, mission=DEFAULT_MISSION, nexus_path=experiment_root / "_prepare_nexus.json", scientific_memory=context.memory_selection.store)
-    evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=standard_research_lead_market_source())
+    evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=equivalence_market_source())
     precomputed = dict(build_pre_sol_substrates(subject=subject, evidence=evidence, cache=runtime.cache, analysis=runtime.analysis))
     package = freeze_starting_package(ticker.upper(), {
         "mission": DEFAULT_MISSION,
@@ -83,7 +101,7 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
     recorder = BatchCampaignResearchRecorder(package_store=package_store)
     rd = rd_factory(package_store, context, subject)
     runtime = build_batch_runtime(rd=rd, mission=DEFAULT_MISSION, nexus_path=arm_root / "research_nexus.json", scientific_memory=context.memory_selection.store)
-    evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=standard_research_lead_market_source())
+    evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=equivalence_market_source())
     precomputed = dict(build_pre_sol_substrates(subject=subject, evidence=evidence, cache=runtime.cache, analysis=runtime.analysis))
     live = freeze_starting_package(ticker.upper(), {
         "mission": DEFAULT_MISSION,
