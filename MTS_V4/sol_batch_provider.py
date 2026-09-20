@@ -194,6 +194,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                     for package in decision.research_packages
                 ],
                 "scientific_continuation_state": dict(continuation),
+                "campaign_learning_audit_state": cls._json_safe(decision.research_state.get("campaign_learning_audit_state", {})),
                 "batch_interpretation": decision.batch_interpretation,
                 "research_progress": (
                     asdict(decision.research_progress)
