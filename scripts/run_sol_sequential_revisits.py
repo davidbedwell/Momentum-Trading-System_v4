@@ -86,6 +86,27 @@ def _subject_command(
     return command
 
 
+def _run_learning_audit(*, python: str, campaign_dir: Path) -> Mapping[str, object]:
+    audit_script = Path(__file__).with_name("audit_11_ticker_learning.py").resolve()
+    completed = subprocess.run(
+        [python, str(audit_script), "--campaign-dir", str(campaign_dir)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    txt_path = campaign_dir / "MTS_V4_11_TICKER_LEARNING_AUDIT.txt"
+    json_path = campaign_dir / "MTS_V4_11_TICKER_LEARNING_AUDIT.json"
+    if completed.stdout:
+        print(completed.stdout.rstrip(), flush=True)
+    if completed.stderr:
+        print(completed.stderr.rstrip(), file=sys.stderr, flush=True)
+    return {
+        "return_code": completed.returncode,
+        "txt_path": str(txt_path) if txt_path.exists() else None,
+        "json_path": str(json_path) if json_path.exists() else None,
+    }
+
+
 def _write_manifest(path: Path, payload: Mapping[str, object]) -> None:
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(
@@ -177,6 +198,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             manifest["status"] = "STOPPED"
             manifest["stopped_at"] = ticker
             manifest["stop_return_code"] = completed.returncode
+            audit = _run_learning_audit(python=sys.executable, campaign_dir=campaign_dir)
+            manifest["learning_audit"] = audit
             _write_manifest(manifest_path, manifest)
             print(f"SEQUENCE_STOPPED_AT={ticker}", flush=True)
             return completed.returncode
@@ -184,6 +207,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"SUBJECT_COMPLETE={ticker}", flush=True)
 
     manifest["status"] = "DRY_RUN_COMPLETE" if args.dry_run else "COMPLETE"
+    _write_manifest(manifest_path, manifest)
+    audit = _run_learning_audit(python=sys.executable, campaign_dir=campaign_dir)
+    manifest["learning_audit"] = audit
     _write_manifest(manifest_path, manifest)
     print(f"SEQUENCE_COMPLETE={not args.dry_run}", flush=True)
     return 0
