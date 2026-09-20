@@ -304,7 +304,7 @@ def freeze_existing_direct_sol_arm(*, ticker: str, experiment_root: Path, start:
         usage=usage,
         complete=True,
         terminal_state="WAITING_FOR_FUTURE_COHORTS" if waiting else "CLOSED",
-        scientific_record=record,
+        scientific_record={"trace": record, "final_assessment": record.get("outcome", {}).get("outcome", {}).get("final_decision")},
     )
     write_frozen_json(manifest_path, manifest)
     return manifest
@@ -336,7 +336,7 @@ def run_direct_sol_arm(*, root: Path, ticker: str, experiment_root: Path, start:
         usage=usage,
         complete=complete,
         terminal_state=terminal_state,
-        scientific_record=_load_scientific_record(arm_root),
+        scientific_record={"trace": _load_scientific_record(arm_root), "final_assessment": _load_scientific_record(arm_root).get("outcome", {}).get("outcome", {}).get("final_decision")},
     )
     write_frozen_json(arm_root / "ARM_MANIFEST.json", manifest)
     return manifest
