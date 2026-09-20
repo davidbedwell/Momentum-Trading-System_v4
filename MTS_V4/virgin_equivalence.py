@@ -104,7 +104,9 @@ def verify_identical_start(start_a: Mapping[str, object], start_b: Mapping[str, 
 
 def freeze_arm_manifest(
     *, subject_id: str, arm: str, starting_sha256: str, artifacts: Sequence[Mapping[str, object]],
-    usage: Sequence[Mapping[str, object]], complete: bool
+    usage: Sequence[Mapping[str, object]], complete: bool,
+    terminal_state: str = "CLOSED",
+    scientific_record: Mapping[str, object] | None = None,
 ) -> dict[str, object]:
     if arm not in {"DIRECT_SOL", "GEMINI_SOL_HYBRID"}:
         raise EquivalenceProtocolError("invalid experiment arm")
@@ -114,14 +116,18 @@ def freeze_arm_manifest(
         raise EquivalenceProtocolError("complete arm must contain scientific artifacts")
     if not usage:
         raise EquivalenceProtocolError("complete arm must contain usage telemetry")
+    if terminal_state not in {"CLOSED", "WAITING_FOR_FUTURE_COHORTS"}:
+        raise EquivalenceProtocolError(f"invalid complete-arm terminal state: {terminal_state}")
     manifest = {
-        "format": "MTS_V4_EQUIVALENCE_ARM_MANIFEST_V1",
+        "format": "MTS_V4_EQUIVALENCE_ARM_MANIFEST_V2",
         "subject_id": subject_id,
         "arm": arm,
         "starting_package_sha256": starting_sha256,
         "artifacts": list(artifacts),
         "usage": list(usage),
         "complete": True,
+        "terminal_state": terminal_state,
+        "scientific_record": dict(scientific_record or {}),
     }
     manifest["freeze_sha256"] = canonical_sha256(manifest)
     return manifest
@@ -165,7 +171,18 @@ def blinded_pair(arm_a: Mapping[str, object], arm_b: Mapping[str, object], *, sa
         key=lambda arm: hashlib.sha256(f"{salt}:{arm['freeze_sha256']}".encode()).hexdigest(),
     )
     def strip_identity(arm: Mapping[str, object]) -> dict[str, object]:
-        return {k: v for k, v in arm.items() if k not in {"arm", "usage"}}
+        # The comparator receives scientific content and terminal semantics, but
+        # never provider identity, usage/cost, filesystem paths, or artifact names
+        # that can reveal which arm produced the record.
+        return {
+            "format": arm.get("format"),
+            "subject_id": arm.get("subject_id"),
+            "starting_package_sha256": arm.get("starting_package_sha256"),
+            "complete": arm.get("complete"),
+            "terminal_state": arm.get("terminal_state"),
+            "scientific_record": arm.get("scientific_record", {}),
+            "freeze_sha256": arm.get("freeze_sha256"),
+        }
     return {
         "format": "MTS_V4_BLINDED_EQUIVALENCE_PAIR_V1",
         "subject_id": arm_a["subject_id"],
