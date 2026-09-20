@@ -6,6 +6,7 @@ from .batch_orchestrator import BatchResearchLoopOrchestrator
 from .contracts import AnalysisResult
 from .cross_subject_context import build_cross_subject_context
 from .cross_subject_memory import CrossSubjectScientificMemory
+from .sol_context_compaction import compact_neutral_substrate_for_ai_transport
 
 
 class CrossSubjectBatchResearchLoopOrchestrator(BatchResearchLoopOrchestrator):
@@ -25,4 +26,4 @@ class CrossSubjectBatchResearchLoopOrchestrator(BatchResearchLoopOrchestrator):
             self._scientific_memory,
             active_subject_id=subject_id,
         )
-        return context
+        return compact_neutral_substrate_for_ai_transport(context)
