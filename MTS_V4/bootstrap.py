@@ -32,6 +32,8 @@ from .nexus import InMemoryResearchNexus, ResearchNexus
 from .nexus_json import JsonResearchNexus
 from .neutral_analysis_substrate import analysis_method as substrate_analysis_method
 from .neutral_analysis_substrate import method_spec as substrate_method_spec
+from .neutral_pre_sol_context import analysis_methods as neutral_context_analysis_methods
+from .neutral_pre_sol_context import method_specs as neutral_context_method_specs
 from .orchestrator import ResearchLoopOrchestrator
 from .participation_analysis import analysis_method as participation_analysis_method
 from .participation_analysis import method_spec as participation_method_spec
@@ -41,7 +43,6 @@ from .share_structure_analysis import method_spec as share_structure_method_spec
 from .standard_methods import standard_analysis_methods, standard_method_catalog
 from .universe_market_structure_substrate import analysis_method as universe_substrate_analysis_method
 from .universe_market_structure_substrate import method_spec as universe_substrate_method_spec
-
 
 DEFAULT_MISSION = (
     "Discover reproducible relationships between market information observable at time T and "
@@ -56,7 +57,6 @@ DEFAULT_MISSION = (
     "prediction point."
 )
 
-
 @dataclass(frozen=True, slots=True)
 class V4Runtime:
     mission: str
@@ -67,7 +67,6 @@ class V4Runtime:
     validator: TransparentInputBindingValidator
     analysis: ExactMethodAnalysisExecutor
     orchestrator: ResearchLoopOrchestrator
-
 
 @dataclass(frozen=True, slots=True)
 class BatchV4Runtime:
@@ -80,70 +79,32 @@ class BatchV4Runtime:
     analysis: ExactMethodAnalysisExecutor
     orchestrator: BatchResearchLoopOrchestrator
 
-
 def _build_execution_components(*, nexus_path: str | Path | None, derived_market_root: str | Path | None, concept_library: ResearchConceptLibrary | None) -> tuple[TemporaryResearchCache, ResearchNexus, MethodCatalog, ResearchConceptLibrary, TransparentInputBindingValidator, ExactMethodAnalysisExecutor]:
     cache = TemporaryResearchCache()
     nexus: ResearchNexus = InMemoryResearchNexus() if nexus_path is None else JsonResearchNexus(nexus_path, derived_market_root=derived_market_root)
     catalog = standard_method_catalog()
-    for spec in discovery_method_catalog().all():
-        catalog.register(spec)
-    for spec in (
-        cross_evidence_method_spec(),
-        scientific_toolkit_method_spec(),
-        group_aggregation_method_spec(),
-        substrate_method_spec(),
-        share_structure_method_spec(),
-        intraday_substrate_method_spec(),
-        participation_method_spec(),
-        cross_sectional_method_spec(),
-        cross_sectional_statistics_spec(),
-        cross_sectional_association_spec(),
-        null_method_spec(),
-        multiple_testing_method_spec(),
-        universe_substrate_method_spec(),
-    ):
-        catalog.register(spec)
+    for spec in discovery_method_catalog().all(): catalog.register(spec)
+    for spec in (cross_evidence_method_spec(), scientific_toolkit_method_spec(), group_aggregation_method_spec(), substrate_method_spec(), share_structure_method_spec(), intraday_substrate_method_spec(), participation_method_spec(), cross_sectional_method_spec(), cross_sectional_statistics_spec(), cross_sectional_association_spec(), null_method_spec(), multiple_testing_method_spec(), universe_substrate_method_spec(), *neutral_context_method_specs()): catalog.register(spec)
     concepts = concept_library or seed_market_concepts()
     validator = TransparentInputBindingValidator(catalog)
     analysis = CachedLineageAwareAnalysisExecutor()
-    for method in standard_analysis_methods():
-        analysis.register(method)
-    for method in discovery_analysis_methods():
-        analysis.register(method)
-    for method in (
-        cross_evidence_analysis_method(),
-        scientific_toolkit_analysis_method(),
-        group_aggregation_analysis_method(),
-        substrate_analysis_method(),
-        share_structure_analysis_method(),
-        intraday_substrate_analysis_method(),
-        participation_analysis_method(),
-        cross_sectional_analysis_method(),
-        cross_sectional_statistics_method(),
-        cross_sectional_association_method(),
-        null_analysis_method(),
-        multiple_testing_analysis_method(),
-        universe_substrate_analysis_method(),
-    ):
-        analysis.register(method)
+    for method in standard_analysis_methods(): analysis.register(method)
+    for method in discovery_analysis_methods(): analysis.register(method)
+    for method in (cross_evidence_analysis_method(), scientific_toolkit_analysis_method(), group_aggregation_analysis_method(), substrate_analysis_method(), share_structure_analysis_method(), intraday_substrate_analysis_method(), participation_analysis_method(), cross_sectional_analysis_method(), cross_sectional_statistics_method(), cross_sectional_association_method(), null_analysis_method(), multiple_testing_analysis_method(), universe_substrate_analysis_method(), *neutral_context_analysis_methods()): analysis.register(method)
     return cache, nexus, catalog, concepts, validator, analysis
-
 
 def build_runtime(*, rd: ResearchDirectorProvider, mission: str = DEFAULT_MISSION, nexus_path: str | Path | None = None, derived_market_root: str | Path | None = None, concept_library: ResearchConceptLibrary | None = None, max_contract_repairs: int = 3, scientific_memory: CrossSubjectScientificMemory | None = None) -> V4Runtime:
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(nexus_path=nexus_path, derived_market_root=derived_market_root, concept_library=concept_library)
     orchestrator_type = CrossSubjectResearchLoopOrchestrator if scientific_memory is not None else ResearchLoopOrchestrator
     kwargs = {"mission": mission, "rd": rd, "validator": validator, "analysis": analysis, "nexus": nexus, "cache": cache, "available_methods": catalog.capability_payloads(), "research_concepts": concepts.payloads(), "max_contract_repairs": max_contract_repairs}
-    if scientific_memory is not None:
-        kwargs["scientific_memory"] = scientific_memory
+    if scientific_memory is not None: kwargs["scientific_memory"] = scientific_memory
     orchestrator = orchestrator_type(**kwargs)
     return V4Runtime(mission, cache, nexus, catalog, concepts, validator, analysis, orchestrator)
-
 
 def build_batch_runtime(*, rd: BatchResearchDirectorProvider, mission: str = DEFAULT_MISSION, nexus_path: str | Path | None = None, derived_market_root: str | Path | None = None, concept_library: ResearchConceptLibrary | None = None, scientific_memory: CrossSubjectScientificMemory | None = None) -> BatchV4Runtime:
     cache, nexus, catalog, concepts, validator, analysis = _build_execution_components(nexus_path=nexus_path, derived_market_root=derived_market_root, concept_library=concept_library)
     orchestrator_type = CrossSubjectBatchResearchLoopOrchestrator if scientific_memory is not None else BatchResearchLoopOrchestrator
     kwargs = {"mission": mission, "rd": rd, "validator": validator, "analysis": analysis, "nexus": nexus, "cache": cache, "available_methods": catalog.capability_payloads(), "research_concepts": concepts.payloads()}
-    if scientific_memory is not None:
-        kwargs["scientific_memory"] = scientific_memory
+    if scientific_memory is not None: kwargs["scientific_memory"] = scientific_memory
     orchestrator = orchestrator_type(**kwargs)
     return BatchV4Runtime(mission, cache, nexus, catalog, concepts, validator, analysis, orchestrator)
