@@ -12,7 +12,7 @@ from MTS_V4.equivalence_appeal import create_blinded_packet, freeze_hybrid_manif
 from MTS_V4.equivalence_execution import freeze_existing_direct_sol_arm, prepare_identical_start, run_direct_sol_arm, run_gemini_rd_arm
 from MTS_V4.research_package_store import JsonResearchPackageStore
 from MTS_V4.sol_provider import SolResearchPackageAwareResearchDirector
-from MTS_V4.virgin_equivalence import EquivalenceProtocolError, canonical_sha256, qualify_experiment, write_frozen_json
+from MTS_V4.virgin_equivalence import EquivalenceProtocolError, canonical_sha256, qualify_experiment, verify_identical_start, write_frozen_json
 
 
 def load_json(path: Path):
@@ -170,8 +170,10 @@ def main() -> int:
         start_path = exp / ticker / "START.json"
         if start_path.exists():
             start = load_json(start_path)
+            verify_identical_start(start, start)
         else:
             start = prepare_identical_start(root=scientific_root, ticker=ticker, experiment_root=exp)
+            verify_identical_start(start, start)
         direct_manifest_path = exp / ticker / "DIRECT_SOL" / "ARM_MANIFEST.json"
         if direct_manifest_path.is_file():
             direct = load_json(direct_manifest_path)
