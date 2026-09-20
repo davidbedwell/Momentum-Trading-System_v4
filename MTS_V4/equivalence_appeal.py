@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Mapping
 
-from .sol_provider import OpenAICompatibleResearchDirector
+from .openai_compatible_provider import OpenAICompatibleResearchDirector
 from .virgin_equivalence import (
     EquivalenceProtocolError,
     blinded_pair,
