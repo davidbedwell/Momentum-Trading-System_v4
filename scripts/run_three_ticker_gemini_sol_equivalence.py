@@ -2,13 +2,16 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
 import json
 import os
 from pathlib import Path
+import shutil
 
 from MTS_V4.equivalence_appeal import create_blinded_packet, freeze_hybrid_manifest, run_bounded_sol_appeal
-from MTS_V4.equivalence_execution import prepare_identical_start, run_direct_sol_arm, run_gemini_rd_arm
-from MTS_V4.openai_compatible_provider import OpenAICompatibleResearchDirector
+from MTS_V4.equivalence_execution import freeze_existing_direct_sol_arm, prepare_identical_start, run_direct_sol_arm, run_gemini_rd_arm
+from MTS_V4.research_package_store import JsonResearchPackageStore
+from MTS_V4.sol_provider import SolResearchPackageAwareResearchDirector
 from MTS_V4.virgin_equivalence import EquivalenceProtocolError, canonical_sha256, qualify_experiment, write_frozen_json
 
 
@@ -33,11 +36,12 @@ def main() -> int:
     p = argparse.ArgumentParser(description="Run frozen UBER/IBM/RL Direct-Sol vs Gemini+Sol experiment sequentially.")
     p.add_argument("--scientific-root", default="/home/ubuntu")
     p.add_argument("--experiment-root", default="/home/ubuntu/mts-v4-gemini-sol-equivalence-20260920")
-    p.add_argument("--gemini-model", default=os.getenv("MTS_GEMINI_EQUIVALENCE_MODEL", "google/gemini-2.5-pro"))
+    p.add_argument("--gemini-model", default=os.getenv("MTS_GEMINI_EQUIVALENCE_MODEL", "google/gemini-3.7-flash"))
     p.add_argument("--direct-sol-cap", type=float, default=15.0)
     p.add_argument("--gemini-cap", type=float, default=5.0)
     p.add_argument("--gemini-max-calls", type=int, default=30)
     p.add_argument("--appeal-sol-cap", type=float, default=5.0)
+    p.add_argument("--adjudicator-sol-cap", type=float, default=3.0)
     args = p.parse_args()
 
     scientific_root = Path(args.scientific_root).resolve()
@@ -50,35 +54,39 @@ def main() -> int:
     if tickers != ["UBER", "IBM", "RL"]:
         raise EquivalenceProtocolError(f"unexpected frozen ticker order: {tickers}")
 
-    # A previous attempt may have failed before any arm/model call. Preserve the
-    # frozen subject selection but allow that clean pre-spend attempt to resume.
+    def has_paid_trace(subject_root: Path) -> bool:
+        telemetry = [
+            subject_root / "DIRECT_SOL" / "sol_transport_telemetry.jsonl",
+            subject_root / "GEMINI_RD" / "openrouter_telemetry.jsonl",
+            subject_root / "GEMINI_SOL_HYBRID" / "sol_appeal_telemetry.jsonl",
+            subject_root / "BLIND_ADJUDICATOR" / "sol_transport_telemetry.jsonl",
+        ]
+        return any(path.is_file() and path.stat().st_size > 0 for path in telemetry)
+
     identity_path = exp / "BLIND_IDENTITY_SECRET.json"
+    any_paid_trace = any(has_paid_trace(exp / ticker) for ticker in tickers)
     if identity_path.exists():
-        paid_artifacts = list(exp.glob("*/DIRECT_SOL/ARM_MANIFEST.json")) + list(exp.glob("*/GEMINI_RD/GEMINI_USAGE.json"))
-        if paid_artifacts:
-            raise EquivalenceProtocolError("experiment already has paid-arm artifacts; refusing accidental rerun")
-        identity_path.unlink()
+        identity = load_json(identity_path)
+        salt = str(identity["salt"])
+    else:
+        if any_paid_trace:
+            raise EquivalenceProtocolError("paid experiment traces exist but blind identity commitment is missing")
+        salt = os.urandom(32).hex()
+        write_frozen_json(identity_path, {"salt": salt, "selection_sha256": canonical_sha256(selection)})
+
+    # Clean only unequivocally pre-spend debris. Never delete a directory that
+    # contains provider telemetry or a completed paid artifact.
     for ticker in tickers:
         subject_root = exp / ticker
-        if subject_root.exists():
-            paid = (
-                (subject_root / "DIRECT_SOL" / "ARM_MANIFEST.json").exists()
-                or (subject_root / "GEMINI_RD" / "GEMINI_USAGE.json").exists()
-                or (subject_root / "GEMINI_SOL_HYBRID" / "SOL_APPEAL.json").exists()
-            )
-            if paid:
-                raise EquivalenceProtocolError(
-                    f"{ticker} already has paid experiment artifacts; refusing accidental rerun"
-                )
-            for child in sorted(subject_root.iterdir(), reverse=True):
-                if child.is_dir():
-                    import shutil
-                    shutil.rmtree(child)
-                else:
-                    child.unlink()
-
-    salt = os.urandom(32).hex()
-    write_frozen_json(identity_path, {"salt": salt, "selection_sha256": canonical_sha256(selection)})
+        if not subject_root.exists() or has_paid_trace(subject_root):
+            continue
+        if any((subject_root / p).exists() for p in ("COMPARISON.json", "BLIND_VERDICT.json")):
+            continue
+        for child in list(subject_root.iterdir()):
+            if child.is_dir():
+                shutil.rmtree(child)
+            else:
+                child.unlink()
 
     comparisons = []
     direct_total = 0.0
@@ -91,23 +99,107 @@ def main() -> int:
             start = load_json(start_path)
         else:
             start = prepare_identical_start(root=scientific_root, ticker=ticker, experiment_root=exp)
-        direct = run_direct_sol_arm(root=scientific_root, ticker=ticker, experiment_root=exp, start=start, sol_spend_usd=args.direct_sol_cap)
-        gemini_root, gemini_usage, _ = run_gemini_rd_arm(root=scientific_root, ticker=ticker, experiment_root=exp, start=start, model=args.gemini_model, max_calls=args.gemini_max_calls, max_spend_usd=args.gemini_cap)
+        direct_manifest_path = exp / ticker / "DIRECT_SOL" / "ARM_MANIFEST.json"
+        if direct_manifest_path.is_file():
+            direct = load_json(direct_manifest_path)
+        elif (exp / ticker / "DIRECT_SOL").exists():
+            direct = freeze_existing_direct_sol_arm(ticker=ticker, experiment_root=exp, start=start)
+        else:
+            direct = run_direct_sol_arm(root=scientific_root, ticker=ticker, experiment_root=exp, start=start, sol_spend_usd=args.direct_sol_cap)
+
+        gemini_root = exp / ticker / "GEMINI_RD"
+        gemini_usage_path = gemini_root / "GEMINI_USAGE.json"
+        if gemini_usage_path.is_file():
+            gemini_usage = load_json(gemini_usage_path)
+            for required in ("decisions.json", "reports.json", "outcome.json"):
+                if not (gemini_root / required).is_file():
+                    raise EquivalenceProtocolError(f"completed Gemini usage exists but scientific artifact is missing: {required}")
+        elif (gemini_root / "openrouter_telemetry.jsonl").is_file() and (gemini_root / "openrouter_telemetry.jsonl").stat().st_size > 0:
+            raise EquivalenceProtocolError("partial paid Gemini arm detected; refusing to delete or rerun paid work")
+        else:
+            gemini_root, gemini_usage, _ = run_gemini_rd_arm(root=scientific_root, ticker=ticker, experiment_root=exp, start=start, model=args.gemini_model, max_calls=args.gemini_max_calls, max_spend_usd=args.gemini_cap)
 
         hybrid_root = exp / ticker / "GEMINI_SOL_HYBRID"
-        hybrid_root.mkdir(parents=True, exist_ok=False)
-        appeal_provider = OpenAICompatibleResearchDirector(base_url=os.environ["MTS_SOL_BASE_URL"], model=os.environ["MTS_SOL_MODEL"], api_key=os.environ["MTS_SOL_API_KEY"], timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")))
-        run_bounded_sol_appeal(start=start, gemini_root=gemini_root, hybrid_root=hybrid_root, sol_provider=appeal_provider, max_sol_calls=1, max_sol_spend_usd=args.appeal_sol_cap)
-        appeal_usage = {"authorized_cap_usd": args.appeal_sol_cap, "qualification_cost_usd": args.appeal_sol_cap, "calls": 1}
-        hybrid = freeze_hybrid_manifest(ticker=ticker, start=start, gemini_root=gemini_root, hybrid_root=hybrid_root, gemini_usage=gemini_usage, sol_usage=appeal_usage)
-        create_blinded_packet(direct_manifest=direct, hybrid_manifest=hybrid, output=exp / ticker / "BLINDED_PAIR.json", salt=salt)
+        hybrid_manifest_path = hybrid_root / "ARM_MANIFEST.json"
+        if hybrid_manifest_path.is_file():
+            hybrid = load_json(hybrid_manifest_path)
+        else:
+            hybrid_root.mkdir(parents=True, exist_ok=True)
+            appeal_usage_path = hybrid_root / "SOL_APPEAL_USAGE.json"
+            appeal_path = hybrid_root / "SOL_APPEAL.json"
+            if appeal_path.is_file() and appeal_usage_path.is_file():
+                appeal_usage = load_json(appeal_usage_path)
+            else:
+                appeal_telemetry = hybrid_root / "sol_appeal_telemetry.jsonl"
+                if appeal_telemetry.is_file() and appeal_telemetry.stat().st_size > 0:
+                    raise EquivalenceProtocolError("partial paid Sol appeal detected; refusing paid rerun")
+                appeal_provider = SolResearchPackageAwareResearchDirector(
+                    research_package_store=JsonResearchPackageStore(hybrid_root / "_appeal_transport_packages"),
+                    base_url=os.environ["MTS_SOL_BASE_URL"],
+                    model=os.environ["MTS_SOL_MODEL"],
+                    api_key=os.environ["MTS_SOL_API_KEY"],
+                    timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")),
+                )
+                appeal_provider.configure_sol_spend_guard(authorized_spend_usd=args.appeal_sol_cap, authorization_callback=None)
+                prior_telemetry = os.environ.get("MTS_SOL_TELEMETRY_PATH")
+                os.environ["MTS_SOL_TELEMETRY_PATH"] = str(appeal_telemetry)
+                try:
+                    run_bounded_sol_appeal(start=start, gemini_root=gemini_root, hybrid_root=hybrid_root, sol_provider=appeal_provider, max_sol_calls=1, max_sol_spend_usd=args.appeal_sol_cap)
+                finally:
+                    if prior_telemetry is None:
+                        os.environ.pop("MTS_SOL_TELEMETRY_PATH", None)
+                    else:
+                        os.environ["MTS_SOL_TELEMETRY_PATH"] = prior_telemetry
+                snapshot = appeal_provider.sol_spend_snapshot()
+                if snapshot is None or snapshot.completed_sol_calls != 1:
+                    raise EquivalenceProtocolError("bounded Sol appeal lacks exactly one accounted Sol call")
+                appeal_usage = asdict(snapshot)
+                write_frozen_json(appeal_usage_path, appeal_usage)
+            hybrid = freeze_hybrid_manifest(ticker=ticker, start=start, gemini_root=gemini_root, hybrid_root=hybrid_root, gemini_usage=gemini_usage, sol_usage=appeal_usage)
 
-        adjudicator = OpenAICompatibleResearchDirector(base_url=os.environ["MTS_SOL_BASE_URL"], model=os.environ["MTS_SOL_MODEL"], api_key=os.environ["MTS_SOL_API_KEY"], timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")))
-        blind = load_json(exp / ticker / "BLINDED_PAIR.json")
+        blind_path = exp / ticker / "BLINDED_PAIR.json"
+        if blind_path.is_file():
+            blind = load_json(blind_path)
+        else:
+            blind = create_blinded_packet(direct_manifest=direct, hybrid_manifest=hybrid, output=blind_path, salt=salt)
+
+        adjudication_root = exp / ticker / "BLIND_ADJUDICATOR"
+        adjudication_root.mkdir(parents=True, exist_ok=True)
+        adjudicator = SolResearchPackageAwareResearchDirector(
+            research_package_store=JsonResearchPackageStore(adjudication_root / "_transport_packages"),
+            base_url=os.environ["MTS_SOL_BASE_URL"],
+            model=os.environ["MTS_SOL_MODEL"],
+            api_key=os.environ["MTS_SOL_API_KEY"],
+            timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")),
+        )
+        adjudicator.configure_sol_spend_guard(authorized_spend_usd=args.adjudicator_sol_cap, authorization_callback=None)
         prompt = {"task": "Blindly compare ARM_X and ARM_Y. Evaluate missed research lines, false promotions, findings, direction, horizon, robustness, and trading conclusion. A material finding present in one arm but absent in the other must be explicitly identified. Do not infer model identity. Return strict JSON with materially_equivalent, material_finding_present_in_X_missing_Y, material_finding_present_in_Y_missing_X, disqualifying_false_promotion_X, disqualifying_false_promotion_Y, dimensions, rationale.", "packet": blind}
-        raw = adjudicator._chat_completion([{"role":"system","content":"You are a blinded scientific adjudicator. Return JSON only."},{"role":"user","content":json.dumps(prompt,sort_keys=True,separators=(",",":"))}])
-        verdict = json.loads(raw)
-        write_frozen_json(exp / ticker / "BLIND_VERDICT.json", verdict)
+        verdict_path = exp / ticker / "BLIND_VERDICT.json"
+        if verdict_path.is_file():
+            verdict = load_json(verdict_path)
+        else:
+            adjudicator_telemetry = adjudication_root / "sol_transport_telemetry.jsonl"
+            prior_telemetry = os.environ.get("MTS_SOL_TELEMETRY_PATH")
+            os.environ["MTS_SOL_TELEMETRY_PATH"] = str(adjudicator_telemetry)
+            try:
+                raw = adjudicator._chat_completion([{"role":"system","content":"You are a blinded scientific adjudicator. Return JSON only."},{"role":"user","content":json.dumps(prompt,sort_keys=True,separators=(",",":"))}])
+            finally:
+                if prior_telemetry is None:
+                    os.environ.pop("MTS_SOL_TELEMETRY_PATH", None)
+                else:
+                    os.environ["MTS_SOL_TELEMETRY_PATH"] = prior_telemetry
+            try:
+                verdict = json.loads(raw)
+            except json.JSONDecodeError:
+                left, right = raw.find("{"), raw.rfind("}")
+                if left < 0 or right <= left:
+                    raise EquivalenceProtocolError("blinded adjudicator did not return a JSON object")
+                verdict = json.loads(raw[left:right + 1])
+            snapshot = adjudicator.sol_spend_snapshot()
+            if snapshot is None or snapshot.completed_sol_calls != 1:
+                raise EquivalenceProtocolError("blinded adjudication lacks exactly one accounted Sol call")
+            write_frozen_json(adjudication_root / "USAGE.json", asdict(snapshot))
+            write_frozen_json(verdict_path, verdict)
         direct_is_x = blind["ARM_X"].get("freeze_sha256") == direct.get("freeze_sha256")
         missed = bool(verdict.get("material_finding_present_in_X_missing_Y")) if direct_is_x else bool(verdict.get("material_finding_present_in_Y_missing_X"))
         false_hybrid = bool(verdict.get("disqualifying_false_promotion_Y")) if direct_is_x else bool(verdict.get("disqualifying_false_promotion_X"))
@@ -115,7 +207,7 @@ def main() -> int:
         write_frozen_json(exp / ticker / "COMPARISON.json", comparison)
         comparisons.append(comparison)
         dc = direct_cost(direct)
-        hc = usage_cost(gemini_usage) + args.appeal_sol_cap
+        hc = usage_cost(gemini_usage) + usage_cost(appeal_usage)
         direct_total += dc
         hybrid_total += hc
         status = "PASS" if comparison["materially_equivalent"] and not missed and not false_hybrid else "FAIL"
