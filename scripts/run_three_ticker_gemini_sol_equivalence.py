@@ -266,37 +266,50 @@ def main() -> int:
             verdict = load_json(verdict_path)
         else:
             adjudicator_telemetry = adjudication_root / "sol_transport_telemetry.jsonl"
-            if adjudicator_telemetry.is_file() and adjudicator_telemetry.stat().st_size > 0:
-                raise EquivalenceProtocolError("partial paid blinded adjudication detected; refusing paid rerun")
-            adjudicator = SolResearchPackageAwareResearchDirector(
-                research_package_store=JsonResearchPackageStore(adjudication_root / "_transport_packages"),
-                base_url=os.environ["MTS_SOL_BASE_URL"],
-                model=os.environ["MTS_SOL_MODEL"],
-                api_key=os.environ["MTS_SOL_API_KEY"],
-                timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")),
-            )
-            adjudicator.configure_sol_spend_guard(authorized_spend_usd=args.adjudicator_sol_cap, authorization_callback=None)
-            prior_telemetry = os.environ.get("MTS_SOL_TELEMETRY_PATH")
-            os.environ["MTS_SOL_TELEMETRY_PATH"] = str(adjudicator_telemetry)
-            try:
-                raw = adjudicator._chat_completion([{"role":"system","content":"You are a blinded scientific adjudicator. Return JSON only."},{"role":"user","content":json.dumps(prompt,sort_keys=True,separators=(",",":"))}])
-            finally:
-                if prior_telemetry is None:
-                    os.environ.pop("MTS_SOL_TELEMETRY_PATH", None)
-                else:
-                    os.environ["MTS_SOL_TELEMETRY_PATH"] = prior_telemetry
-            try:
-                verdict = json.loads(raw)
-            except json.JSONDecodeError:
-                left, right = raw.find("{"), raw.rfind("}")
-                if left < 0 or right <= left:
-                    raise EquivalenceProtocolError("blinded adjudicator did not return a JSON object")
-                verdict = json.loads(raw[left:right + 1])
-            snapshot = adjudicator.sol_spend_snapshot()
-            if snapshot is None or snapshot.completed_sol_calls != 1:
-                raise EquivalenceProtocolError("blinded adjudication lacks exactly one accounted Sol call")
-            write_frozen_json(adjudication_root / "USAGE.json", asdict(snapshot))
-            write_frozen_json(verdict_path, verdict)
+            raw_path = adjudication_root / "RAW_RESPONSE.txt"
+            if adjudicator_telemetry.is_file() and adjudicator_telemetry.stat().st_size > 0 and raw_path.is_file():
+                raw = raw_path.read_text(encoding="utf-8")
+                try:
+                    verdict = json.loads(raw)
+                except json.JSONDecodeError:
+                    left, right = raw.find("{"), raw.rfind("}")
+                    if left < 0 or right <= left:
+                        raise EquivalenceProtocolError("paid blinded adjudication has no recoverable JSON object")
+                    verdict = json.loads(raw[left:right + 1])
+                write_frozen_json(verdict_path, verdict)
+            elif adjudicator_telemetry.is_file() and adjudicator_telemetry.stat().st_size > 0:
+                raise EquivalenceProtocolError("partial paid blinded adjudication detected without recoverable raw response")
+            else:
+                adjudicator = SolResearchPackageAwareResearchDirector(
+                    research_package_store=JsonResearchPackageStore(adjudication_root / "_transport_packages"),
+                    base_url=os.environ["MTS_SOL_BASE_URL"],
+                    model=os.environ["MTS_SOL_MODEL"],
+                    api_key=os.environ["MTS_SOL_API_KEY"],
+                    timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")),
+                )
+                adjudicator.configure_sol_spend_guard(authorized_spend_usd=args.adjudicator_sol_cap, authorization_callback=None)
+                prior_telemetry = os.environ.get("MTS_SOL_TELEMETRY_PATH")
+                os.environ["MTS_SOL_TELEMETRY_PATH"] = str(adjudicator_telemetry)
+                try:
+                    raw = adjudicator._chat_completion([{"role":"system","content":"You are a blinded scientific adjudicator. Return JSON only."},{"role":"user","content":json.dumps(prompt,sort_keys=True,separators=(",",":"))}])
+                    raw_path.write_text(raw + "\n", encoding="utf-8")
+                finally:
+                    if prior_telemetry is None:
+                        os.environ.pop("MTS_SOL_TELEMETRY_PATH", None)
+                    else:
+                        os.environ["MTS_SOL_TELEMETRY_PATH"] = prior_telemetry
+                try:
+                    verdict = json.loads(raw)
+                except json.JSONDecodeError:
+                    left, right = raw.find("{"), raw.rfind("}")
+                    if left < 0 or right <= left:
+                        raise EquivalenceProtocolError("blinded adjudicator did not return a JSON object")
+                    verdict = json.loads(raw[left:right + 1])
+                snapshot = adjudicator.sol_spend_snapshot()
+                if snapshot is None or snapshot.completed_sol_calls != 1:
+                    raise EquivalenceProtocolError("blinded adjudication lacks exactly one accounted Sol call")
+                write_frozen_json(adjudication_root / "USAGE.json", asdict(snapshot))
+                write_frozen_json(verdict_path, verdict)
         direct_is_x = blind["ARM_X"].get("freeze_sha256") == direct.get("freeze_sha256")
         missed = bool(verdict.get("material_finding_present_in_X_missing_Y")) if direct_is_x else bool(verdict.get("material_finding_present_in_Y_missing_X"))
         false_hybrid = bool(verdict.get("disqualifying_false_promotion_Y")) if direct_is_x else bool(verdict.get("disqualifying_false_promotion_X"))
