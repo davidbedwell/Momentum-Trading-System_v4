@@ -30,11 +30,21 @@ def collect_complete_hybrid_record(gemini_root: Path) -> tuple[list[Mapping[str,
         if name == "reports.json":
             raw_reports = value.get("reports")
             if isinstance(raw_reports, list):
-                for index, report in enumerate(raw_reports):
-                    if isinstance(report, Mapping):
-                        result = report.get("result")
+                for report_index, report in enumerate(raw_reports):
+                    if not isinstance(report, Mapping):
+                        continue
+                    records = report.get("records")
+                    if not isinstance(records, list):
+                        continue
+                    for record_index, record in enumerate(records):
+                        if not isinstance(record, Mapping):
+                            continue
+                        result = record.get("result")
                         if isinstance(result, Mapping):
-                            analyses.append({"analysis_id": str(result.get("result_id") or f"report:{index}"), "result": dict(result)})
+                            analyses.append({
+                                "analysis_id": str(record.get("analysis_id") or result.get("result_id") or f"report:{report_index}:{record_index}"),
+                                "result": dict(result),
+                            })
         if name == "outcome.json":
             raw = value.get("precomputed_results")
             if isinstance(raw, Mapping):
@@ -71,7 +81,29 @@ def freeze_hybrid_manifest(*, ticker: str, start: Mapping[str, object], gemini_r
     for root in (gemini_root, hybrid_root):
         for path in sorted(root.rglob("*.json")):
             artifacts.append({"path": str(path), "sha256": canonical_sha256(json.loads(path.read_text(encoding="utf-8")))})
-    manifest = freeze_arm_manifest(subject_id=ticker.upper(), arm="GEMINI_SOL_HYBRID", starting_sha256=str(start["sha256"]), artifacts=artifacts, usage=[dict(gemini_usage), dict(sol_usage)], complete=True)
+    gemini_record = {}
+    for name in ("decisions.json", "reports.json", "outcome.json"):
+        path = gemini_root / name
+        if not path.is_file():
+            raise EquivalenceProtocolError(f"hybrid scientific record missing {path}")
+        gemini_record[name.removesuffix(".json")] = json.loads(path.read_text(encoding="utf-8"))
+    appeal_path = hybrid_root / "SOL_APPEAL.json"
+    if not appeal_path.is_file():
+        raise EquivalenceProtocolError("hybrid scientific record missing Sol appeal")
+    appeal = json.loads(appeal_path.read_text(encoding="utf-8"))
+    outcome = gemini_record.get("outcome", {}).get("outcome", {})
+    waiting = bool(outcome.get("waiting_for_future_cohorts")) if isinstance(outcome, Mapping) else False
+    terminal_state = "WAITING_FOR_FUTURE_COHORTS" if waiting else "CLOSED"
+    manifest = freeze_arm_manifest(
+        subject_id=ticker.upper(),
+        arm="GEMINI_SOL_HYBRID",
+        starting_sha256=str(start["sha256"]),
+        artifacts=artifacts,
+        usage=[dict(gemini_usage), dict(sol_usage)],
+        complete=True,
+        terminal_state=terminal_state,
+        scientific_record={"gemini": gemini_record, "sol_appeal": appeal},
+    )
     write_frozen_json(hybrid_root / "ARM_MANIFEST.json", manifest)
     return manifest
 
