@@ -45,7 +45,7 @@ def equivalence_market_source() -> CompositeEvidenceSource:
 
 
 
-def _restore_evidence_and_precomputed(*, start: Mapping[str, object], runtime) -> tuple[tuple[EvidenceDescriptor, ...], dict[str, AnalysisResult]]:
+def _restore_evidence_and_precomputed(*, start: Mapping[str, object], runtime) -> tuple[tuple[EvidenceDescriptor, ...], dict[str, AnalysisResult], Mapping[str, object]]:
     frozen = start.get("package")
     if not isinstance(frozen, Mapping):
         raise EquivalenceProtocolError("frozen starting package is malformed")
@@ -99,7 +99,7 @@ def _restore_evidence_and_precomputed(*, start: Mapping[str, object], runtime) -
             limitations=tuple(str(v) for v in item.get("limitations", [])),
             execution_metadata=dict(item.get("execution_metadata", {})),
         )
-    return tuple(evidence), precomputed
+    return tuple(evidence), precomputed, state
 
 def _required_env(name: str) -> str:
     value = os.getenv(name, "").strip()
@@ -161,7 +161,7 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
     rd = rd_factory(package_store, context, subject)
     runtime = build_batch_runtime(rd=rd, mission=DEFAULT_MISSION, nexus_path=arm_root / "research_nexus.json", scientific_memory=context.memory_selection.store)
 
-    evidence, precomputed = _restore_evidence_and_precomputed(start=start, runtime=runtime)
+    evidence, precomputed, frozen_state = _restore_evidence_and_precomputed(start=start, runtime=runtime)
 
     live = freeze_starting_package(ticker.upper(), {
         "mission": DEFAULT_MISSION,
@@ -172,7 +172,7 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
             "cross_subject_memory_source": str(context.memory_selection.source_path),
             "cross_subject_memory_sha256": canonical_sha256(context.prior_subject_science),
             "same_subject_prior_science": None,
-            "frozen_evidence_payloads": dict(state.get("frozen_evidence_payloads", {})),
+            "frozen_evidence_payloads": dict(frozen_state.get("frozen_evidence_payloads", {})),
             "precomputed_analysis_results": _jsonable(precomputed),
         },
     })
@@ -184,10 +184,6 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
 
     def accepted(request):
         recorder.record_accepted_request(campaign_id=campaign_id, subject=subject, request=request)
-
-    def on_report(report, decision_count, analysis_count):
-        recorder.record_report(report)
-        reports.append(_jsonable(report))
 
     last_report = None
 
