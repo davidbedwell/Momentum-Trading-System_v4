@@ -188,7 +188,15 @@ def main() -> int:
                 if not (gemini_root / required).is_file():
                     raise EquivalenceProtocolError(f"completed Gemini usage exists but scientific artifact is missing: {required}")
         elif (gemini_root / "openrouter_telemetry.jsonl").is_file() and (gemini_root / "openrouter_telemetry.jsonl").stat().st_size > 0:
-            raise EquivalenceProtocolError("partial paid Gemini arm detected; refusing to delete or rerun paid work")
+            required_paths = [gemini_root / name for name in ("decisions.json", "reports.json", "outcome.json")]
+            if not all(path.is_file() for path in required_paths):
+                raise EquivalenceProtocolError("partial paid Gemini arm detected; refusing to delete or rerun paid work")
+            outcome_doc = load_json(gemini_root / "outcome.json")
+            outcome_state = outcome_doc.get("outcome", {})
+            if not isinstance(outcome_state, dict) or not (outcome_state.get("closed") or outcome_state.get("waiting_for_future_cohorts")):
+                raise EquivalenceProtocolError("paid Gemini arm is not at a governed terminal state; refusing paid rerun")
+            gemini_usage = recover_openrouter_usage(gemini_root / "openrouter_telemetry.jsonl")
+            write_frozen_json(gemini_usage_path, gemini_usage)
         else:
             gemini_root, gemini_usage, _ = run_gemini_rd_arm(root=scientific_root, ticker=ticker, experiment_root=exp, start=start, model=args.gemini_model, max_calls=args.gemini_max_calls, max_spend_usd=args.gemini_cap)
 
