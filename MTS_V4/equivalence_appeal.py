@@ -27,6 +27,14 @@ def collect_complete_hybrid_record(gemini_root: Path) -> tuple[list[Mapping[str,
             raise EquivalenceProtocolError(f"hybrid record missing {path}")
         value = json.loads(path.read_text(encoding="utf-8"))
         work.append({"artifact": name, "content": value})
+        if name == "reports.json":
+            raw_reports = value.get("reports")
+            if isinstance(raw_reports, list):
+                for index, report in enumerate(raw_reports):
+                    if isinstance(report, Mapping):
+                        result = report.get("result")
+                        if isinstance(result, Mapping):
+                            analyses.append({"analysis_id": str(result.get("result_id") or f"report:{index}"), "result": dict(result)})
         if name == "outcome.json":
             raw = value.get("precomputed_results")
             if isinstance(raw, Mapping):
