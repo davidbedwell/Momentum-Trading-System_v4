@@ -93,6 +93,10 @@ def freeze_hybrid_manifest(*, ticker: str, start: Mapping[str, object], gemini_r
         if not path.is_file():
             raise EquivalenceProtocolError(f"hybrid scientific record missing {path}")
         gemini_record[name.removesuffix(".json")] = json.loads(path.read_text(encoding="utf-8"))
+    gemini_record["research_packages"] = [
+        json.loads(path.read_text(encoding="utf-8"))
+        for path in sorted((gemini_root / "research_packages").glob("*.json"))
+    ]
     appeal_path = hybrid_root / "SOL_APPEAL.json"
     if not appeal_path.is_file():
         raise EquivalenceProtocolError("hybrid scientific record missing Sol appeal")
