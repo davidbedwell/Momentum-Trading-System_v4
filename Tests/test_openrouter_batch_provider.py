@@ -94,3 +94,29 @@ def test_openrouter_transport_fails_closed_without_actual_cost(monkeypatch):
         provider._chat_completion([
             {"role": "user", "content": '{"operation":"BEGIN_BATCH_RESEARCH"}'}
         ])
+
+
+def test_openrouter_completed_call_is_retained_when_it_crosses_spend_ceiling(monkeypatch, tmp_path):
+    provider = _provider()
+    provider._openrouter_spend = 0.95
+    monkeypatch.setenv("MTS_OPENROUTER_RD_TELEMETRY_PATH", str(tmp_path / "telemetry.jsonl"))
+    monkeypatch.setattr(
+        "urllib.request.urlopen",
+        lambda *args, **kwargs: _Response({
+            "id": "r2",
+            "model": "google/gemini-3.7-flash",
+            "provider": "test-provider",
+            "choices": [{"message": {"content": '{"continue_research":false}'}}],
+            "usage": {"prompt_tokens": 100, "completion_tokens": 20, "cost": 0.10},
+        }),
+    )
+    result = provider._chat_completion([
+        {"role": "user", "content": '{"operation":"INTERPRET_BATCH_RESULTS"}'}
+    ])
+    assert result == '{"continue_research":false}'
+    assert provider.openrouter_usage()["actual_spend_usd"] == pytest.approx(1.05)
+    assert provider.openrouter_usage()["completed_calls"] == 1
+    with pytest.raises(OpenRouterBudgetExceeded, match="spend budget"):
+        provider._chat_completion([
+            {"role": "user", "content": '{"operation":"INTERPRET_BATCH_RESULTS"}'}
+        ])
