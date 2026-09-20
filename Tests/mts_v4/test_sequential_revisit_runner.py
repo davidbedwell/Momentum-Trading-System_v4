@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 from scripts.run_sol_sequential_revisits import (
     DEFAULT_PER_SUBJECT_SOL_SPEND_USD,
+    EXPECTED_COST_EFFICIENCY_RANGE_USD,
     SEQUENCE,
     _parser,
     _subject_command,
@@ -20,10 +21,11 @@ class SequentialRevisitRunnerTests(unittest.TestCase):
             ("AAPL", "AMD", "AMZN", "BA", "GOOGL", "JPM", "META", "MSFT", "NVDA", "TSLA", "XOM"),
         )
 
-    def test_default_spend_ceiling_is_five_dollars_per_subject(self) -> None:
+    def test_default_spend_ceiling_is_seven_dollars_per_subject(self) -> None:
         args = _parser().parse_args([])
-        self.assertEqual(DEFAULT_PER_SUBJECT_SOL_SPEND_USD, 5.0)
-        self.assertEqual(args.per_subject_sol_spend_limit_usd, 5.0)
+        self.assertEqual(DEFAULT_PER_SUBJECT_SOL_SPEND_USD, 7.0)
+        self.assertEqual(EXPECTED_COST_EFFICIENCY_RANGE_USD, (5.0, 6.0))
+        self.assertEqual(args.per_subject_sol_spend_limit_usd, 7.0)
 
     def test_every_subject_command_uses_explicit_revisit_mode_ceiling_and_calibration_gate(self) -> None:
         command = _subject_command(
@@ -32,13 +34,13 @@ class SequentialRevisitRunnerTests(unittest.TestCase):
             ticker="AAPL",
             root=Path("/home/ubuntu"),
             state_dir=Path("/home/ubuntu/campaign/01-aapl"),
-            spend_limit_usd=5.0,
+            spend_limit_usd=7.0,
             control_campaign_report=Path("/home/ubuntu/calibration.json"),
             dry_run=False,
         )
         self.assertIn("--revisit", command)
         self.assertEqual(command[command.index("--ticker") + 1], "AAPL")
-        self.assertEqual(command[command.index("--sol-spend-limit-usd") + 1], "5.0")
+        self.assertEqual(command[command.index("--sol-spend-limit-usd") + 1], "7.0")
         self.assertEqual(
             command[command.index("--control-campaign-report") + 1],
             "/home/ubuntu/calibration.json",
