@@ -74,6 +74,7 @@ def _telemetry(state_dir: Path) -> Mapping[str, Any]:
 
 def _subject_summary(ticker: str, state_dir: Path) -> Mapping[str, Any]:
     audit=_audit_state(_last_decision(state_dir))
+    coverage=list(audit.get("known_theory_coverage", [])) if isinstance(audit.get("known_theory_coverage"), list) else []
     known=list(audit.get("known_structure_applications", [])) if isinstance(audit.get("known_structure_applications"), list) else []
     novel=list(audit.get("novel_strategy_discoveries", [])) if isinstance(audit.get("novel_strategy_discoveries"), list) else []
     general=list(audit.get("cross_subject_generalizations", [])) if isinstance(audit.get("cross_subject_generalizations"), list) else []
@@ -97,6 +98,7 @@ def _subject_summary(ticker: str, state_dir: Path) -> Mapping[str, Any]:
         "ticker":ticker,
         "state_dir":str(state_dir),
         "telemetry":_telemetry(state_dir),
+        "known_theory_coverage":coverage,
         "known_structure_applications":known,
         "known_structure_opportunity_summary":dict(freq),
         "known_structure_opportunity_rates":rates,
@@ -124,6 +126,13 @@ def build_audit(campaign_dir: Path) -> Mapping[str, Any]:
         "prompt_tokens":sum(s["telemetry"]["prompt_tokens"] for s in subjects),
         "completion_tokens":sum(s["telemetry"]["completion_tokens"] for s in subjects),
         "summed_known_call_cost_usd":sum(s["telemetry"]["summed_known_call_cost_usd"] for s in subjects),
+        "known_theory_coverage_records":sum(len(s["known_theory_coverage"]) for s in subjects),
+        "known_theory_status_counts":dict(Counter(
+            str(item.get("status"))
+            for s in subjects
+            for item in s["known_theory_coverage"]
+            if isinstance(item, Mapping)
+        )),
         "known_structure_applications":sum(len(s["known_structure_applications"]) for s in subjects),
         "novel_strategy_claims":sum(len(s["novel_strategy_discoveries"]) for s in subjects),
         "generalization_claims":sum(len(s["cross_subject_generalizations"]) for s in subjects),
@@ -161,6 +170,8 @@ def _render_text(report: Mapping[str, Any]) -> str:
         f"PROMPT_TOKENS={a['prompt_tokens']}",
         f"COMPLETION_TOKENS={a['completion_tokens']}",
         f"SUMMED_KNOWN_CALL_COST_USD={a['summed_known_call_cost_usd']:.6f}",
+        f"KNOWN_THEORY_COVERAGE_RECORDS={a['known_theory_coverage_records']}",
+        "KNOWN_THEORY_STATUS_COUNTS="+json.dumps(a["known_theory_status_counts"],sort_keys=True),
         f"KNOWN_STRUCTURE_APPLICATIONS={a['known_structure_applications']}",
         f"NOVEL_STRATEGY_CLAIMS={a['novel_strategy_claims']}",
         f"GENERALIZATION_CLAIMS={a['generalization_claims']}",
@@ -174,9 +185,12 @@ def _render_text(report: Mapping[str, Any]) -> str:
                   f"SOL_CALLS={s['telemetry']['sol_calls']}",
                   f"PROMPT_TOKENS={s['telemetry']['prompt_tokens']}",
                   f"COMPLETION_TOKENS={s['telemetry']['completion_tokens']}",
+                  f"KNOWN_THEORY_COVERAGE={len(s['known_theory_coverage'])}",
                   f"KNOWN_APPLICATIONS={len(s['known_structure_applications'])}",
                   f"NOVEL_CLAIMS={len(s['novel_strategy_discoveries'])}",
                   f"GENERALIZATION_CLAIMS={len(s['cross_subject_generalizations'])}"]
+        for item in s["known_theory_coverage"]:
+            lines.append("THEORY_COVERAGE="+json.dumps(item,sort_keys=True,default=str))
         for k,v in s["known_structure_opportunity_rates"].items():
             lines.append(f"{k.upper()}={v:.6f}" if v is not None else f"{k.upper()}=UNKNOWN")
         for item in s["novel_strategy_discoveries"]:
