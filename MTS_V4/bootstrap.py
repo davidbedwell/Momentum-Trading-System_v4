@@ -37,6 +37,8 @@ from .neutral_pre_sol_context import method_specs as neutral_context_method_spec
 from .orchestrator import ResearchLoopOrchestrator
 from .participation_analysis import analysis_method as participation_analysis_method
 from .participation_analysis import method_spec as participation_method_spec
+from .rolling_analysis_transform import analysis_method as rolling_analysis_method
+from .rolling_analysis_transform import method_spec as rolling_method_spec
 from .scientific_toolkit import scientific_toolkit_analysis_method, scientific_toolkit_method_spec
 from .share_structure_analysis import analysis_method as share_structure_analysis_method
 from .share_structure_analysis import method_spec as share_structure_method_spec
@@ -84,13 +86,13 @@ def _build_execution_components(*, nexus_path: str | Path | None, derived_market
     nexus: ResearchNexus = InMemoryResearchNexus() if nexus_path is None else JsonResearchNexus(nexus_path, derived_market_root=derived_market_root)
     catalog = standard_method_catalog()
     for spec in discovery_method_catalog().all(): catalog.register(spec)
-    for spec in (cross_evidence_method_spec(), scientific_toolkit_method_spec(), group_aggregation_method_spec(), substrate_method_spec(), share_structure_method_spec(), intraday_substrate_method_spec(), participation_method_spec(), cross_sectional_method_spec(), cross_sectional_statistics_spec(), cross_sectional_association_spec(), null_method_spec(), multiple_testing_method_spec(), universe_substrate_method_spec(), *neutral_context_method_specs()): catalog.register(spec)
+    for spec in (cross_evidence_method_spec(), scientific_toolkit_method_spec(), group_aggregation_method_spec(), substrate_method_spec(), share_structure_method_spec(), intraday_substrate_method_spec(), participation_method_spec(), rolling_method_spec(), cross_sectional_method_spec(), cross_sectional_statistics_spec(), cross_sectional_association_spec(), null_method_spec(), multiple_testing_method_spec(), universe_substrate_method_spec(), *neutral_context_method_specs()): catalog.register(spec)
     concepts = concept_library or seed_market_concepts()
     validator = TransparentInputBindingValidator(catalog)
     analysis = CachedLineageAwareAnalysisExecutor()
     for method in standard_analysis_methods(): analysis.register(method)
     for method in discovery_analysis_methods(): analysis.register(method)
-    for method in (cross_evidence_analysis_method(), scientific_toolkit_analysis_method(), group_aggregation_analysis_method(), substrate_analysis_method(), share_structure_analysis_method(), intraday_substrate_analysis_method(), participation_analysis_method(), cross_sectional_analysis_method(), cross_sectional_statistics_method(), cross_sectional_association_method(), null_analysis_method(), multiple_testing_analysis_method(), universe_substrate_analysis_method(), *neutral_context_analysis_methods()): analysis.register(method)
+    for method in (cross_evidence_analysis_method(), scientific_toolkit_analysis_method(), group_aggregation_analysis_method(), substrate_analysis_method(), share_structure_analysis_method(), intraday_substrate_analysis_method(), participation_analysis_method(), rolling_analysis_method(), cross_sectional_analysis_method(), cross_sectional_statistics_method(), cross_sectional_association_method(), null_analysis_method(), multiple_testing_analysis_method(), universe_substrate_analysis_method(), *neutral_context_analysis_methods()): analysis.register(method)
     return cache, nexus, catalog, concepts, validator, analysis
 
 def build_runtime(*, rd: ResearchDirectorProvider, mission: str = DEFAULT_MISSION, nexus_path: str | Path | None = None, derived_market_root: str | Path | None = None, concept_library: ResearchConceptLibrary | None = None, max_contract_repairs: int = 3, scientific_memory: CrossSubjectScientificMemory | None = None) -> V4Runtime:
