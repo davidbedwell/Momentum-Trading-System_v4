@@ -9,7 +9,7 @@ from typing import Callable, Mapping, Sequence
 
 from .batch_research_recording import BatchCampaignResearchRecorder
 from .bootstrap import DEFAULT_MISSION, build_batch_runtime
-from .contracts import ResearchPhase, SubjectMetadata
+from .contracts import AnalysisResult, EvidenceDescriptor, ResearchPhase, SubjectMetadata
 from .intake import IntakeEngine
 from .live_sources import CompositeEvidenceSource, FinraWeeklyOffExchangeSource, YFinanceDailyOhlcvSource
 from .openrouter_batch_provider import SubjectContextOpenRouterBatchResearchDirector
@@ -43,6 +43,55 @@ def equivalence_market_source() -> CompositeEvidenceSource:
         SecEdgarShareStructureSource(),
     )
 
+
+
+def _restore_evidence_and_precomputed(*, start: Mapping[str, object], runtime) -> tuple[tuple[EvidenceDescriptor, ...], dict[str, AnalysisResult]]:
+    frozen = start.get("package")
+    if not isinstance(frozen, Mapping):
+        raise EquivalenceProtocolError("frozen starting package is malformed")
+    raw_evidence = frozen.get("evidence")
+    if not isinstance(raw_evidence, list):
+        raise EquivalenceProtocolError("frozen evidence is malformed")
+    evidence: list[EvidenceDescriptor] = []
+    for item in raw_evidence:
+        if not isinstance(item, Mapping):
+            raise EquivalenceProtocolError("frozen evidence descriptor is malformed")
+        evidence.append(EvidenceDescriptor(
+            evidence_id=str(item["evidence_id"]),
+            subject_id=str(item["subject_id"]),
+            evidence_type=str(item["evidence_type"]),
+            artifact_type=str(item["artifact_type"]),
+            source_identity=str(item["source_identity"]),
+            coverage_start=item.get("coverage_start") if item.get("coverage_start") is None else str(item.get("coverage_start")),
+            coverage_end=item.get("coverage_end") if item.get("coverage_end") is None else str(item.get("coverage_end")),
+            row_count=int(item["row_count"]) if item.get("row_count") is not None else None,
+            schema=tuple(str(v) for v in item.get("schema", [])),
+            cache_key=str(item["cache_key"]),
+            provenance=dict(item.get("provenance", {})),
+            neutral_semantics=str(item.get("neutral_semantics", "")),
+            content_identity=item.get("content_identity") if item.get("content_identity") is None else str(item.get("content_identity")),
+        ))
+    state = frozen.get("starting_state")
+    if not isinstance(state, Mapping):
+        raise EquivalenceProtocolError("frozen starting state is malformed")
+    raw_precomputed = state.get("precomputed_analysis_results")
+    if not isinstance(raw_precomputed, Mapping):
+        raise EquivalenceProtocolError("frozen precomputed analysis is malformed")
+    precomputed: dict[str, AnalysisResult] = {}
+    for key, item in raw_precomputed.items():
+        if not isinstance(item, Mapping):
+            raise EquivalenceProtocolError("frozen analysis result is malformed")
+        precomputed[str(key)] = AnalysisResult(
+            result_id=str(item["result_id"]),
+            request_id=str(item["request_id"]),
+            subject_id=str(item["subject_id"]),
+            method_id=str(item["method_id"]),
+            outputs=dict(item.get("outputs", {})),
+            evidence_ids=tuple(str(v) for v in item.get("evidence_ids", [])),
+            limitations=tuple(str(v) for v in item.get("limitations", [])),
+            execution_metadata=dict(item.get("execution_metadata", {})),
+        )
+    return tuple(evidence), precomputed
 
 def _required_env(name: str) -> str:
     value = os.getenv(name, "").strip()
@@ -102,14 +151,7 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
     rd = rd_factory(package_store, context, subject)
     runtime = build_batch_runtime(rd=rd, mission=DEFAULT_MISSION, nexus_path=arm_root / "research_nexus.json", scientific_memory=context.memory_selection.store)
 
-    frozen = start.get("package")
-    if not isinstance(frozen, Mapping):
-        raise EquivalenceProtocolError("frozen starting package is malformed")
-    evidence = tuple(frozen.get("evidence") or ())
-    precomputed_raw = frozen.get("starting_state")
-    if not isinstance(precomputed_raw, Mapping):
-        raise EquivalenceProtocolError("frozen starting state is malformed")
-    precomputed = dict(precomputed_raw.get("precomputed_analysis_results") or {})
+    evidence, precomputed = _restore_evidence_and_precomputed(start=start, runtime=runtime)
 
     live = freeze_starting_package(ticker.upper(), {
         "mission": DEFAULT_MISSION,
