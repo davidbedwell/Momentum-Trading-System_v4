@@ -66,6 +66,7 @@ def run_bounded_sol_appeal(*, start: Mapping[str, object], gemini_root: Path, hy
         {"role": "system", "content": APPEAL_SYSTEM},
         {"role": "user", "content": json.dumps(context, sort_keys=True, separators=(",", ":"), default=str)},
     ])
+    (hybrid_root / "SOL_APPEAL_RAW.txt").write_text(raw + "\n", encoding="utf-8")
     try:
         result = json.loads(raw)
     except json.JSONDecodeError:
@@ -76,10 +77,10 @@ def run_bounded_sol_appeal(*, start: Mapping[str, object], gemini_root: Path, hy
     if not isinstance(result, Mapping) or result.get("appeal_complete") is not True:
         raise EquivalenceProtocolError("Sol appeal did not close cleanly")
     corrective = result.get("corrective_analysis_requests")
-    if corrective not in (None, []):
-        raise EquivalenceProtocolError("V1 Sol appeal requested corrective Analysis that cannot execute inside the frozen one-call appeal")
-    write_frozen_json(hybrid_root / "SOL_APPEAL.json", dict(result))
-    return result
+    frozen_result = dict(result)
+    frozen_result["bounded_one_call_corrective_work_requested"] = corrective not in (None, [])
+    write_frozen_json(hybrid_root / "SOL_APPEAL.json", frozen_result)
+    return frozen_result
 
 
 def freeze_hybrid_manifest(*, ticker: str, start: Mapping[str, object], gemini_root: Path, hybrid_root: Path, gemini_usage: Mapping[str, object], sol_usage: Mapping[str, object]) -> Mapping[str, object]:
