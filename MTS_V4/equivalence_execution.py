@@ -74,6 +74,14 @@ def _restore_evidence_and_precomputed(*, start: Mapping[str, object], runtime) -
     state = frozen.get("starting_state")
     if not isinstance(state, Mapping):
         raise EquivalenceProtocolError("frozen starting state is malformed")
+    raw_payloads = state.get("frozen_evidence_payloads")
+    if not isinstance(raw_payloads, Mapping):
+        raise EquivalenceProtocolError("frozen evidence payloads are malformed")
+    for descriptor in evidence:
+        if descriptor.cache_key not in raw_payloads:
+            raise EquivalenceProtocolError(f"missing frozen evidence payload for {descriptor.cache_key}")
+        runtime.cache.put(descriptor.cache_key, raw_payloads[descriptor.cache_key])
+
     raw_precomputed = state.get("precomputed_analysis_results")
     if not isinstance(raw_precomputed, Mapping):
         raise EquivalenceProtocolError("frozen precomputed analysis is malformed")
@@ -122,6 +130,7 @@ def prepare_identical_start(*, root: Path, ticker: str, experiment_root: Path) -
     context = load_subject_scientific_context(root, active_subject_id=subject.subject_id, include_same_subject_prior_science=False)
     runtime = build_batch_runtime(rd=None, mission=DEFAULT_MISSION, nexus_path=experiment_root / "_prepare_nexus.json", scientific_memory=context.memory_selection.store)
     evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=equivalence_market_source())
+    evidence_payloads = {descriptor.cache_key: _jsonable(runtime.cache.get(descriptor.cache_key)) for descriptor in evidence}
     precomputed = dict(build_pre_sol_substrates(subject=subject, evidence=evidence, cache=runtime.cache, analysis=runtime.analysis))
     package = freeze_starting_package(ticker.upper(), {
         "mission": DEFAULT_MISSION,
@@ -132,6 +141,7 @@ def prepare_identical_start(*, root: Path, ticker: str, experiment_root: Path) -
             "cross_subject_memory_source": str(context.memory_selection.source_path),
             "cross_subject_memory_sha256": canonical_sha256(context.prior_subject_science),
             "same_subject_prior_science": None,
+            "frozen_evidence_payloads": evidence_payloads,
             "precomputed_analysis_results": _jsonable(precomputed),
         },
     })
@@ -162,6 +172,7 @@ def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, obj
             "cross_subject_memory_source": str(context.memory_selection.source_path),
             "cross_subject_memory_sha256": canonical_sha256(context.prior_subject_science),
             "same_subject_prior_science": None,
+            "frozen_evidence_payloads": dict(state.get("frozen_evidence_payloads", {})),
             "precomputed_analysis_results": _jsonable(precomputed),
         },
     })
