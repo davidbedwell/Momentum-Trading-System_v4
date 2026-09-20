@@ -219,9 +219,15 @@ def main() -> int:
                 if int(appeal_usage.get("completed_sol_calls", 0)) != 1:
                     raise EquivalenceProtocolError("bounded Sol appeal recovery found other than one completed call")
                 write_frozen_json(appeal_usage_path, appeal_usage)
+            elif appeal_telemetry.is_file() and appeal_telemetry.stat().st_size > 0 and (hybrid_root / "SOL_APPEAL_RAW.txt").is_file():
+                recover_bounded_sol_appeal(hybrid_root)
+                appeal_usage = recover_sol_usage(appeal_telemetry)
+                if int(appeal_usage.get("completed_sol_calls", 0)) != 1:
+                    raise EquivalenceProtocolError("recovered Sol appeal has other than one completed call")
+                write_frozen_json(appeal_usage_path, appeal_usage)
             else:
                 if appeal_telemetry.is_file() and appeal_telemetry.stat().st_size > 0:
-                    raise EquivalenceProtocolError("partial paid Sol appeal detected; refusing paid rerun")
+                    raise EquivalenceProtocolError("partial paid Sol appeal detected without recoverable raw response")
                 appeal_provider = SolResearchPackageAwareResearchDirector(
                     research_package_store=JsonResearchPackageStore(hybrid_root / "_appeal_transport_packages"),
                     base_url=os.environ["MTS_SOL_BASE_URL"],
