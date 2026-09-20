@@ -5,6 +5,7 @@ import json
 import pytest
 
 from MTS_V4.equivalence_appeal import collect_complete_hybrid_record, create_blinded_packet
+from MTS_V4.equivalence_execution import freeze_existing_direct_sol_arm
 from MTS_V4.virgin_equivalence import freeze_arm_manifest
 
 
@@ -67,3 +68,32 @@ def test_invalid_complete_arm_terminal_state_fails_closed():
             complete=True,
             terminal_state="PARTIAL",
         )
+
+
+def test_completed_paid_direct_arm_can_be_recovered_without_rerun(tmp_path):
+    exp = tmp_path / "experiment"
+    arm = exp / "UBER" / "DIRECT_SOL"
+    arm.mkdir(parents=True)
+    (arm / "decisions.json").write_text(json.dumps({"decisions": [{"continue_research": True}]}))
+    (arm / "reports.json").write_text(json.dumps({"reports": [{"records": []}]}))
+    (arm / "outcome.json").write_text(json.dumps({
+        "outcome": {
+            "closed": False,
+            "waiting_for_future_cohorts": True,
+            "final_decision": {"waiting_for_future_cohorts": True},
+        },
+        "precomputed_results": {},
+    }))
+    (arm / "sol_transport_telemetry.jsonl").write_text(
+        json.dumps({"event": "SOL_CALL_COMPLETE", "estimated_call_cost_usd": 0.75}) + "\n"
+        + json.dumps({"event": "SOL_CALL_COMPLETE", "estimated_call_cost_usd": 0.25}) + "\n"
+    )
+    manifest = freeze_existing_direct_sol_arm(
+        ticker="UBER",
+        experiment_root=exp,
+        start={"sha256": "start-hash"},
+    )
+    assert manifest["terminal_state"] == "WAITING_FOR_FUTURE_COHORTS"
+    assert manifest["usage"][0]["actual_spend_usd"] == pytest.approx(1.0)
+    assert (arm / "ARM_MANIFEST.json").is_file()
+    assert manifest["scientific_record"]["final_assessment"]["waiting_for_future_cohorts"] is True
