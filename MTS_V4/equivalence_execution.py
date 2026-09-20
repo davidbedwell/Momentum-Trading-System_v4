@@ -108,6 +108,17 @@ def _required_env(name: str) -> str:
     return value
 
 
+
+def _load_scientific_record(root: Path) -> dict[str, object]:
+    record: dict[str, object] = {}
+    for name in ("decisions.json", "reports.json", "outcome.json"):
+        path = root / name
+        if not path.is_file():
+            raise EquivalenceProtocolError(f"arm scientific record missing {path}")
+        record[name.removesuffix(".json")] = json.loads(path.read_text(encoding="utf-8"))
+    return record
+
+
 def _artifact(path: Path) -> dict[str, object]:
     payload = path.read_bytes()
     return {"path": str(path), "sha256": hashlib.sha256(payload).hexdigest(), "bytes": len(payload)}
@@ -225,7 +236,17 @@ def run_direct_sol_arm(*, root: Path, ticker: str, experiment_root: Path, start:
     artifacts = [_artifact(p) for p in sorted(arm_root.rglob("*.json"))]
     if telemetry.exists(): artifacts.append(_artifact(telemetry))
     complete = bool(outcome.closed or outcome.waiting_for_future_cohorts)
-    manifest = freeze_arm_manifest(subject_id=ticker.upper(), arm="DIRECT_SOL", starting_sha256=str(start["sha256"]), artifacts=artifacts, usage=usage, complete=complete)
+    terminal_state = "WAITING_FOR_FUTURE_COHORTS" if outcome.waiting_for_future_cohorts else "CLOSED"
+    manifest = freeze_arm_manifest(
+        subject_id=ticker.upper(),
+        arm="DIRECT_SOL",
+        starting_sha256=str(start["sha256"]),
+        artifacts=artifacts,
+        usage=usage,
+        complete=complete,
+        terminal_state=terminal_state,
+        scientific_record=_load_scientific_record(arm_root),
+    )
     write_frozen_json(arm_root / "ARM_MANIFEST.json", manifest)
     return manifest
 
