@@ -20,6 +20,7 @@ class ElevenTickerLearningAuditTests(unittest.TestCase):
             decision={
                 "research_state":{
                     "campaign_learning_audit_state":{
+                        "known_theory_coverage":[{"theory_id":"T1","status":"TESTED_UNSUPPORTED"}],
                         "known_structure_applications":[{"application_id":"k1","structure_name":"prior structure"}],
                         "known_structure_opportunity_summary":{
                             "observation_months":10,
@@ -38,6 +39,8 @@ class ElevenTickerLearningAuditTests(unittest.TestCase):
             report=build_audit(root)
             self.assertEqual(report["aggregate"]["subjects_present"],1)
             self.assertEqual(report["aggregate"]["sol_calls"],1)
+            self.assertEqual(report["aggregate"]["known_theory_coverage_records"],1)
+            self.assertEqual(report["aggregate"]["known_theory_status_counts"],{"TESTED_UNSUPPORTED":1})
             self.assertEqual(report["aggregate"]["mean_raw_unique_per_month"],3.0)
             self.assertEqual(report["aggregate"]["mean_executable_nonoverlapping_per_month"],2.0)
             self.assertEqual(report["aggregate"]["mean_positive_net_ev_candidate_per_month"],1.0)
