@@ -333,7 +333,7 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
                 "campaign_learning_audit_state": {
                     "known_theory_coverage": (
                         "cumulative list with one entry per human-required known theory: theory_id, status "
-                        "(TESTED_SUPPORTED, TESTED_UNSUPPORTED, TESTED_MIXED, or OBJECTIVELY_NOT_TESTABLE), "
+                        "(TESTED_SUPPORTED, TESTED_UNSUPPORTED, or OBJECTIVELY_NOT_TESTABLE), "
                         "scientific_formulation, evidence_refs, interpretation, and untestable_reason when applicable"
                     ),
                     "known_structure_applications": "cumulative list of Sol-authored applications of prior/established predictive structures; each item should include application_id, structure_name, provenance, source_reference, status, evidence_refs",
@@ -431,8 +431,8 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
             "Never credit favorable movement after the executable policy would have stopped, invalidated, expired, or otherwise exited. A material revision to a frozen proposition or policy requires a new hypothesis_id.",
             "During VALIDATION preserve the prediction-time no-look-ahead boundary and never generalize that restriction backward into EXPLORATION.",
             "Cross-subject memory is scientific context only. Do not assume generalization and do not let prior subjects delimit the discovery space.",
-"Human governance requires coverage of every theory_id in context.known_predictive_theory_context before subject closure. Test each scientifically when the available evidence can represent it; if and only if required evidence is objectively unavailable, record OBJECTIVELY_NOT_TESTABLE with the exact missing evidence. Required coverage does not confer evidentiary weight, prescribe direction, method, threshold, horizon, or outcome, and does not limit novel discovery. ",
-            ""Maintain research_state.campaign_learning_audit_state cumulatively as an audit annotation, not as a scientific constraint. Record when you deliberately apply a prior/established predictive structure, when evidence supports exact opportunity-frequency counts, when you judge a strategy genuinely novel, and when evidence supports or contradicts cross-subject generalization. Do not invent counts; use null when exact evidence is unavailable. Novelty/generalization annotations are your scientific claims and must cite stable RP/result/evidence references. This audit state must never narrow discovery or force reuse of prior structures.",
+            "Human governance requires coverage of every theory_id in context.known_predictive_theory_context before subject closure. Test each scientifically when the available evidence can represent it; if and only if required evidence is objectively unavailable, record OBJECTIVELY_NOT_TESTABLE with the exact missing evidence. Required coverage does not confer evidentiary weight, prescribe direction, method, threshold, horizon, or outcome, and does not limit novel discovery. ",
+            "Maintain research_state.campaign_learning_audit_state cumulatively as an audit annotation, not as a scientific constraint. Record when you deliberately apply a prior/established predictive structure, when evidence supports exact opportunity-frequency counts, when you judge a strategy genuinely novel, and when evidence supports or contradicts cross-subject generalization. Do not invent counts; use null when exact evidence is unavailable. Novelty/generalization annotations are your scientific claims and must cite stable RP/result/evidence references. This audit state must never narrow discovery or force reuse of prior structures.",
                         "Keep trading-hypothesis candidacy, scientific validation, and candidacy for trading promotion distinct. A scientific observation is not automatically a candidate trading hypothesis, and scientific validation is not automatically trading promotion.",
             "Historical look-ahead is allowed for candidate discovery but never credit favorable movement after a stop, invalidation, expiry, or other policy exit. A relationship without positive exploratory policy expectancy may remain a scientific observation or supporting finding, but not a candidate trading hypothesis.",
             "For blind validation, lock predictions with action=LOCK_VALIDATION_TRIAL only from a completed VALIDATION result that contains no future information. Lock the prediction before any outcome/future information is exposed.",
@@ -707,7 +707,6 @@ class SolBatchResearchDirector(SolPrimaryResearchDirector):
         allowed = {
             "TESTED_SUPPORTED",
             "TESTED_UNSUPPORTED",
-            "TESTED_MIXED",
             "OBJECTIVELY_NOT_TESTABLE",
         }
         for item in coverage:
