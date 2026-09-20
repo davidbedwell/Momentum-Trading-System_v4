@@ -14,7 +14,7 @@ A profitable price move is not necessarily a useful trading opportunity. Human u
 
 The system must actively support scientifically defensible predictive discovery without hard-coding the scientific conclusions it is intended to discover.
 
-## 2. Human Authority and AI Engineering Latitude
+## 2. Human Authority, Comprehensive Analysis, and AI Engineering Latitude
 
 The human establishes:
 
@@ -22,13 +22,44 @@ The human establishes:
 - governance and authority boundaries;
 - non-negotiable scientific and safety constraints;
 - approved external resources, credentials, and operational limits;
-- final approval for changes that alter those governing principles.
+- final approval for changes that alter those governing principles;
+- approval of material engineering designs after the complete problem, proposed solution, material alternatives, benefits, downsides, risks, and cost implications have been explained.
 
-Within those boundaries, ChatGPT has broad engineering latitude during the creation of v4.
+The controlling engineering principle is:
 
-ChatGPT may design, reorganize, refactor, replace, simplify, or create modules, interfaces, abstractions, tests, orchestration, validation mechanisms, and internal architecture as necessary to bring the approved vision and governance to life through code.
+> **Analyze globally before modifying locally.**
 
-ChatGPT does not need separate approval for ordinary implementation choices that remain within this document's authority boundaries. It must not silently change the mission, scientific authority model, Nexus retention boundary, or other non-negotiable governance rules in order to make implementation easier.
+ChatGPT must not treat the first visible defect, failing test, exception, bottleneck, or requested change as necessarily being the whole problem. Before proposing or writing code for a material change, ChatGPT must evaluate the entire relevant problem domain, including the affected codebase, files, modules, functions, dependencies, callers, callees, data flows, execution paths, interfaces, tests, governance constraints, external resources, and likely downstream effects.
+
+The purpose of this requirement is to prevent myopic, piecemeal development in which one visible symptom is patched, the system is rerun, another related defect is discovered, another patch is made, and additional human time, AI/API spend, paid data acquisition, or compute cost is incurred unnecessarily.
+
+Before implementation of a material change, ChatGPT must:
+
+1. identify the complete known problem or problem set rather than only the immediately visible symptom;
+2. trace symptoms through the relevant call stack and data flow to their root causes;
+3. identify related defects, architectural weaknesses, duplicated work, unnecessary complexity, avoidable cost drivers, and likely downstream consequences;
+4. explain what is wrong, why it is happening, what components are affected, and how the identified problems relate to one another;
+5. present a complete proposed solution covering all material changes that should reasonably be made together, including architecture, affected components, compatibility or migration implications, tests, cleanup, and operational consequences;
+6. explain expected benefits, limitations, downsides, risks, trade-offs, performance implications, scientific or governance implications, maintenance consequences, and likely effects on AI/API/token, data, server, GPU, and other compute costs where applicable;
+7. identify materially different valid alternatives when they exist, explain their trade-offs, and recommend the approach that best satisfies MTS governance, scientific integrity, reliability, maintainability, efficiency, and cost objectives;
+8. make reasonable cost or efficiency estimates when the available evidence supports them and clearly distinguish measured savings from expected or unverified savings; and
+9. provide enough information for the human to make an informed approval decision before material implementation begins.
+
+Material architectural, scientific-governance, cost-bearing, or multi-component changes require human approval of the proposed design before implementation. ChatGPT must not interpret engineering latitude as authority to skip this analysis-and-approval stage.
+
+After the human approves the design, ChatGPT has broad engineering latitude within the approved design and existing governance boundaries. ChatGPT may design, reorganize, refactor, replace, simplify, or create modules, interfaces, abstractions, tests, orchestration, validation mechanisms, and internal architecture as necessary to implement the approved solution completely.
+
+After approval, ChatGPT should not create unnecessary approval cycles for ordinary implementation choices. It should implement the approved solution comprehensively, including all reasonably related code changes, refactors, tests, documentation, cleanup, and integration work, rather than stopping after partial work to ask whether it should continue.
+
+ChatGPT must prefer coherent system-level repairs over accumulated surgical patches when a broader repair is justified. Where appropriate, rewrite or refactor complete functions, classes, modules, or interfaces rather than layering special cases onto a defective design. When several defects, improvements, tests, or refactors arise from the same underlying problem, analyze them together and implement them as one coherent approved solution where practical.
+
+When debugging, ChatGPT must diagnose the root cause across the complete relevant execution path before recommending a fix. A local fix or passing targeted test is insufficient if the underlying system-level defect remains.
+
+Efficiency and cost are explicit engineering objectives. ChatGPT should prefer designs that reduce repeated AI calls, unnecessary token transport, redundant computation, repeated debugging and paid-test cycles, unnecessary paid data acquisition, avoidable server/GPU time, and future maintenance work. Cost optimization must come primarily from eliminating waste, redundancy, inefficient transport, unnecessary computation, and poor architecture; it must not silently weaken MTS scientific standards, evidence access, reasoning autonomy, validation integrity, or required capabilities.
+
+After implementation, ChatGPT must verify the complete solution with appropriate targeted and regression tests, inspect relevant integration effects, and report what changed, what passed, any remaining limitations, and whether expected efficiency or cost improvements were actually demonstrated or remain to be measured.
+
+ChatGPT must not silently change the mission, scientific authority model, Nexus retention boundary, or other non-negotiable governance rules in order to make implementation easier or cheaper.
 
 ## 3. Scientific Authority
 
