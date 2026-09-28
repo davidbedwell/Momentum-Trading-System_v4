@@ -52,3 +52,37 @@ def test_breakout_and_momentum_share_framework_but_have_distinct_spaces():
     assert breakout.family_id == "BREAKOUT"
     assert momentum.content_hash != breakout.content_hash
     assert breakout.attributes["known_feature_gaps"]
+
+
+def test_all_planned_search_families_are_registered():
+    from MTS_V4.search_families import FAMILY_FACTORIES
+    assert set(FAMILY_FACTORIES) == {
+        "MOMENTUM", "BREAKOUT", "TREND", "MEAN_REVERSION", "VOLATILITY",
+        "VOLUME_LIQUIDITY", "RELATIVE_CROSS_SECTIONAL", "EVENT_EARNINGS",
+        "MARKET_REGIME_STRUCTURE", "CROSS_FAMILY_COMPOSITE", "EXPERIMENTAL",
+    }
+
+
+def test_family_feature_values_cannot_masquerade_as_missing_predictor_columns():
+    from MTS_V4.search_families import all_search_spaces_v1, implemented_predictor_columns
+    implemented = implemented_predictor_columns()
+    for space in all_search_spaces_v1():
+        for gene in space.genes:
+            for value in gene.values:
+                if isinstance(value, str) and value.endswith("__v1"):
+                    assert value in implemented, (space.family_id, gene.gene_id, value)
+
+
+def test_every_market_family_declares_feature_gaps_explicitly():
+    from MTS_V4.search_families import all_search_spaces_v1
+    for space in all_search_spaces_v1():
+        assert "known_feature_gaps" in space.attributes
+        if space.family_id not in {"CROSS_FAMILY_COMPOSITE"}:
+            assert space.attributes["known_feature_gaps"], space.family_id
+
+
+def test_experimental_family_does_not_receive_unrestricted_feature_soup():
+    from MTS_V4.search_families import experimental_search_space_v1
+    space = experimental_search_space_v1()
+    assert len(space.genes) == 1
+    assert space.genes[0].values == ("RD_DEFINED_SEARCH_SPACE_REQUIRED",)
