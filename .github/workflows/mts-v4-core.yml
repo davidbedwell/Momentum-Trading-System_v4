@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - 'mts-v4-*'
   pull_request:
     paths:
       - 'MTS_V4/**'
