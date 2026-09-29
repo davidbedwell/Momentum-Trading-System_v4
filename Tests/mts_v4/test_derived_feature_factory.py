@@ -55,3 +55,31 @@ def test_skipped_month_momentum_excludes_most_recent_twenty_sessions():
     expected = raw[232]["close"] / raw[0]["close"] - 1.0
     assert row["return_252_skip_20__v1"] == expected
     assert rows[251]["return_252_skip_20__v1"] is None
+
+
+def test_expanded_search_features_are_present_and_point_in_time():
+    raw = _rows("AAA", 1.0)
+    rows = build_predictor_rows(raw)
+    row = rows[300]
+    expected_prior_high20 = max(item["high"] for item in raw[280:300])
+    assert row["prior_high_break_distance_20__v1"] == raw[300]["close"] / expected_prior_high20 - 1.0
+    assert row["sma50_slope_10__v1"] is not None
+    assert row["sma200_slope_20__v1"] is not None
+    assert row["trend_above_sma200_duration__v1"] > 0
+    assert row["pullback_from_high_20__v1"] is not None
+    assert row["range_width_ratio_20_63__v1"] is not None
+    assert row["price_zscore_20__v1"] is not None
+    assert row["signed_return_streak__v1"] > 0
+    assert row["volatility_ratio_20_63__v1"] is not None
+    assert row["dollar_volume__v1"] == raw[300]["close"] * raw[300]["volume"]
+    assert row["dollar_volume_relative_20__v1"] is not None
+    assert row["amihud_illiquidity_20__v1"] is not None
+
+
+def test_prior_high_break_feature_excludes_current_session_high():
+    raw = _rows("AAA", 1.0)
+    raw[300]["high"] = raw[300]["close"] * 10.0
+    rows = build_predictor_rows(raw)
+    row = rows[300]
+    expected = raw[300]["close"] / max(item["high"] for item in raw[280:300]) - 1.0
+    assert row["prior_high_break_distance_20__v1"] == expected
