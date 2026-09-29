@@ -108,6 +108,8 @@ class EvaluationCache:
 class SearchLedgerEntry:
     sequence: int
     candidate_id: str
+    family_id: str
+    genome: Mapping[str, Any]
     proposal_source: str
     parent_ids: tuple[str, ...]
     cache_hit: bool
@@ -119,7 +121,7 @@ class SearchLedger:
         self._entries: list[SearchLedgerEntry] = []
 
     def append(self, *, candidate: Candidate, cache_hit: bool, metrics: Mapping[str, Any]) -> SearchLedgerEntry:
-        entry = SearchLedgerEntry(len(self._entries), candidate.candidate_id, candidate.proposal_source, candidate.parent_ids, cache_hit, dict(metrics))
+        entry = SearchLedgerEntry(len(self._entries), candidate.candidate_id, candidate.family_id, dict(candidate.genome), candidate.proposal_source, candidate.parent_ids, cache_hit, dict(metrics))
         self._entries.append(entry)
         return entry
 
