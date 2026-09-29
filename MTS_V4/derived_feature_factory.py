@@ -184,6 +184,7 @@ def build_predictor_rows(raw_rows: Sequence[Mapping[str, Any]]) -> tuple[Mapping
         volumes = [_finite(row.get("volume")) for row in ordered]
         shares = [_finite(row.get("shares_outstanding")) for row in ordered]
         turnovers = [_ratio(volumes[i], shares[i]) for i in range(len(ordered))]
+        dollar_volumes = [None if closes[i] is None or volumes[i] is None else closes[i] * volumes[i] for i in range(len(ordered))]
         true_ranges: list[float | None] = []
         log_returns: list[float | None] = []
         for i in range(len(ordered)):
@@ -317,7 +318,6 @@ def build_predictor_rows(raw_rows: Sequence[Mapping[str, Any]]) -> tuple[Mapping
                 sample = log_returns[i - window + 1:i + 1] if i >= window else []
                 row[f"realized_vol_{window}__v1"] = statistics.stdev(sample) * math.sqrt(252.0) if len(sample) == window and all(value is not None for value in sample) and window > 1 else None
             row["volatility_ratio_20_63__v1"] = _ratio(row["realized_vol_20__v1"], row["realized_vol_63__v1"])
-            dollar_volumes = [None if closes[j] is None or volumes[j] is None else closes[j] * volumes[j] for j in range(len(ordered))]
             row["dollar_volume__v1"] = dollar_volumes[i]
             prior_dv = _mean(dollar_volumes[i-20:i]) if i >= 20 else None
             row["dollar_volume_relative_20__v1"] = _ratio(dollar_volumes[i], prior_dv)
