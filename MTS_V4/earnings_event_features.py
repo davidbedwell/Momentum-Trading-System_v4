@@ -21,6 +21,8 @@ def earnings_event_feature_set() -> DerivedFeatureSetDefinition:
         DerivedFeatureDefinition("earnings_estimate_eps", "v1", "EPS estimate associated with the event record", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
         DerivedFeatureDefinition("earnings_event_count", "v1", "Number of earnings event records mapped to this security/effective session", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
         DerivedFeatureDefinition("earnings_timing_known", "v1", "One when provider timing is BeforeMarket/AfterMarket or an exact timestamp; zero when conservatively delayed to the next observed session close", ("POINT_IN_TIME_EARNINGS_CALENDAR",), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
+        DerivedFeatureDefinition("days_since_earnings", "v1", "Observed trading-session count since the most recent aligned earnings event", ("POINT_IN_TIME_EARNINGS_CALENDAR", "MARKET_SESSIONS"), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "PREDICTOR"),
+        DerivedFeatureDefinition("earnings_event_session", "v1", "One on the aligned observable earnings-event session and zero on later carried-forward event-clock rows", ("POINT_IN_TIME_EARNINGS_CALENDAR", "MARKET_SESSIONS"), 0, "KNOWN_BY_ALIGNED_EVENT_SESSION", "CONTEXT"),
     )
     return DerivedFeatureSetDefinition(
         EARNINGS_FEATURE_SET_ID,
@@ -130,3 +132,62 @@ def build_earnings_event_rows(
             "earnings_timing_known__v1": 1.0 if timing_known else 0.0,
         })
     return tuple(sorted(output, key=lambda row: (row["effective_date"], row["security_id"])))
+
+
+
+def build_earnings_event_clock_rows(
+    event_rows: Sequence[Mapping[str, Any]],
+    *,
+    market_session_dates_by_security: Mapping[str, Sequence[str]],
+) -> tuple[Mapping[str, Any], ...]:
+    """Carry only already-observable earnings context forward on actual supplied sessions.
+
+    No future event date is consulted when constructing a row. The clock resets
+    on the aligned effective session produced by build_earnings_event_rows.
+    """
+    events_by_security: dict[str, dict[str, Mapping[str, Any]]] = {}
+    for row in event_rows:
+        events_by_security.setdefault(str(row["security_id"]), {})[str(row["effective_date"])] = row
+    output: list[dict[str, Any]] = []
+    for security_id, sessions in market_session_dates_by_security.items():
+        last: Mapping[str, Any] | None = None
+        age: int | None = None
+        by_date = events_by_security.get(security_id, {})
+        for effective_date in sorted(str(x) for x in sessions):
+            if effective_date in by_date:
+                last = by_date[effective_date]
+                age = 0
+            elif last is not None and age is not None:
+                age += 1
+            if last is None:
+                continue
+            output.append({
+                "security_id": security_id,
+                "effective_date": effective_date,
+                "eligible": bool(last.get("eligible", True)),
+                "earnings_surprise_pct__v1": last.get("earnings_surprise_pct__v1"),
+                "earnings_reported_eps__v1": last.get("earnings_reported_eps__v1"),
+                "earnings_estimate_eps__v1": last.get("earnings_estimate_eps__v1"),
+                "earnings_event_count__v1": last.get("earnings_event_count__v1"),
+                "earnings_timing_known__v1": last.get("earnings_timing_known__v1"),
+                "days_since_earnings__v1": float(age),
+                "earnings_event_session__v1": 1.0 if age == 0 else 0.0,
+            })
+    return tuple(sorted(output, key=lambda row: (row["effective_date"], row["security_id"])))
+
+
+def join_earnings_context_to_market_panel(
+    market_rows: Sequence[Mapping[str, Any]],
+    earnings_clock_rows: Sequence[Mapping[str, Any]],
+) -> tuple[Mapping[str, Any], ...]:
+    """Left join PIT-safe earnings context by exact security/effective-date identity."""
+    index = {(str(r["security_id"]), str(r["effective_date"])): r for r in earnings_clock_rows}
+    earnings_columns = earnings_event_feature_set().feature_columns
+    output = []
+    for market in market_rows:
+        row = dict(market)
+        context = index.get((str(market["security_id"]), str(market["effective_date"])))
+        for column in earnings_columns:
+            row[column] = None if context is None else context.get(column)
+        output.append(row)
+    return tuple(output)
