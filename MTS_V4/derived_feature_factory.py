@@ -9,7 +9,7 @@ from .derived_market_store import DerivedFeatureDefinition, DerivedFeatureSetDef
 
 
 PREDICTOR_FEATURE_SET_ID = "mts_market_predictors"
-PREDICTOR_FEATURE_SET_VERSION = "v1"
+PREDICTOR_FEATURE_SET_VERSION = "v2"
 OUTCOME_FEATURE_SET_ID = "mts_historical_outcomes"
 OUTCOME_FEATURE_SET_VERSION = "v1"
 
