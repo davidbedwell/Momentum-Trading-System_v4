@@ -86,3 +86,43 @@ def test_experimental_family_does_not_receive_unrestricted_feature_soup():
     space = experimental_search_space_v1()
     assert len(space.genes) == 1
     assert space.genes[0].values == ("RD_DEFINED_SEARCH_SPACE_REQUIRED",)
+
+
+def test_evolutionary_search_is_reproducible_and_budget_bounded():
+    from MTS_V4.computational_search import EvolutionaryConfig, EvolutionarySearchOptimizer
+    opt = EvolutionarySearchOptimizer(EvolutionaryConfig(population_size=8, elite_count=2, tournament_size=2, fitness_metric="net_expectancy"))
+    req = SearchRunRequest("ga1", opt.optimizer_id, momentum_search_space_v1(), "evidence:1", "DISCOVERY", 30, 123)
+    a = opt.run(req, _adapter(), EvaluationCache())
+    b = opt.run(req, _adapter(), EvaluationCache())
+    assert a.proposed_count == 30
+    assert b.proposed_count == 30
+    assert [x.candidate_id for x in a.ledger] == [x.candidate_id for x in b.ledger]
+    assert a.analysis_evaluation_count <= 30
+
+
+def test_evolutionary_search_requires_predeclared_numeric_fitness():
+    from MTS_V4.computational_search import EvolutionaryConfig, EvolutionarySearchOptimizer
+    opt = EvolutionarySearchOptimizer(EvolutionaryConfig(population_size=4, elite_count=1, tournament_size=2, fitness_metric="scientific_significance"))
+    req = SearchRunRequest("ga2", opt.optimizer_id, momentum_search_space_v1(), "evidence:1", "DISCOVERY", 8, 3)
+    with pytest.raises(SearchGovernanceError):
+        opt.run(req, _adapter())
+
+
+def test_null_search_requires_explicit_null_evidence_namespace():
+    from MTS_V4.computational_search import NullControlEvaluator
+    with pytest.raises(SearchGovernanceError):
+        NullControlEvaluator(_adapter(), null_evidence_identity="evidence:ordinary")
+
+
+def test_null_search_preserves_same_budget_and_search_space():
+    from MTS_V4.computational_search import RandomSearchOptimizer, run_null_search_control
+    opt = RandomSearchOptimizer()
+    req = SearchRunRequest("real", opt.optimizer_id, momentum_search_space_v1(), "evidence:real", "DISCOVERY", 12, 99)
+
+    def eval_any(candidate: Candidate, evidence_identity: str) -> Evaluation:
+        return Evaluation(candidate.candidate_id, evidence_identity, "null-test-v1", {"net_expectancy": 0.0})
+    adapter = CallableAnalysisAdapter(analysis_contract_version="null-test-v1", evaluate_callable=eval_any)
+    control = run_null_search_control(control_id="perm-001", optimizer=opt, request=req, evaluator=adapter, null_evidence_identity="null:perm-001")
+    assert control.search_result.proposed_count == req.budget_evaluations
+    assert control.search_result.search_space_hash == req.search_space.content_hash
+    assert control.search_result.run_id.endswith(":null:perm-001")
