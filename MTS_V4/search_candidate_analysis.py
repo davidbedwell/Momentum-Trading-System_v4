@@ -67,19 +67,27 @@ def _compile_signal(rows: Sequence[Mapping[str, Any]], candidate: Mapping[str, A
             signal[i] = ok
         elif family == "BREAKOUT":
             f = g["range_feature"]
-            ok = _feature_predicate(row, f, "ABOVE", float(g["range_threshold"]))
+            rt = qthreshold(f, float(g["range_threshold_quantile"]))
+            ok = rt is not None and _feature_predicate(row, f, "ABOVE", rt)
             pf = g["participation_feature"]
             if ok and pf != "NONE":
-                ok = _feature_predicate(row, pf, "ABOVE", float(g["participation_threshold"]))
+                pt = qthreshold(pf, float(g["participation_threshold_quantile"]))
+                ok = pt is not None and _feature_predicate(row, pf, "ABOVE", pt)
             vf = g["volatility_feature"]
             if ok and vf != "NONE":
-                ok = _finite(row.get(vf)) is not None
+                vq = float(g["volatility_threshold_quantile"])
+                vt = qthreshold(vf, vq if g["volatility_state"]=="HIGH" else 1.0-vq)
+                ok = vt is not None and _feature_predicate(row, vf, g["volatility_state"], vt)
             signal[i] = ok
         elif family == "TREND":
-            ok = _feature_predicate(row, g["trend_feature"], g["direction"], float(g["threshold"]))
+            tf=g["trend_feature"]; tq=float(g["threshold_quantile"])
+            tt=qthreshold(tf, tq if g["direction"]=="ABOVE" else 1.0-tq)
+            ok = tt is not None and _feature_predicate(row, tf, g["direction"], tt)
             cf = g["confirmation_feature"]
             if ok and cf != "NONE":
-                ok = _finite(row.get(cf)) is not None
+                cq=float(g["confirmation_threshold_quantile"])
+                ct=qthreshold(cf, cq if g["confirmation_direction"]=="ABOVE" else 1.0-cq)
+                ok = ct is not None and _feature_predicate(row, cf, g["confirmation_direction"], ct)
             signal[i] = ok
         elif family == "MEAN_REVERSION":
             f = g["displacement_feature"]; tail = g["tail"]; sev = float(g["severity"])
@@ -87,7 +95,9 @@ def _compile_signal(rows: Sequence[Mapping[str, Any]], candidate: Mapping[str, A
             ok = t is not None and _feature_predicate(row, f, tail, t)
             cf = g["context_feature"]
             if ok and cf != "NONE":
-                ok = _finite(row.get(cf)) is not None
+                cq=float(g["context_threshold_quantile"])
+                ct=qthreshold(cf, cq if g["context_state"]=="HIGH" else 1.0-cq)
+                ok = ct is not None and _feature_predicate(row, cf, g["context_state"], ct)
             signal[i] = ok
         elif family == "VOLATILITY":
             f = g["volatility_feature"]; state = g["state"]; q = float(g["threshold_quantile"])
@@ -98,16 +108,36 @@ def _compile_signal(rows: Sequence[Mapping[str, Any]], candidate: Mapping[str, A
                 ok = _finite(row.get(pf)) is not None
             signal[i] = ok
         elif family == "VOLUME_LIQUIDITY":
-            signal[i] = _feature_predicate(row, g["participation_feature"], g["state"], float(g["threshold"]))
+            pf=g["participation_feature"]; q=float(g["threshold_quantile"])
+            pt=qthreshold(pf, q if g["state"]=="HIGH" else 1.0-q)
+            ok=pt is not None and _feature_predicate(row,pf,g["state"],pt)
+            price=g["price_feature"]
+            if ok and price!="NONE":
+                pq=float(g["price_threshold_quantile"])
+                pth=qthreshold(price,pq if g["price_direction"]=="ABOVE" else 1.0-pq)
+                ok=pth is not None and _feature_predicate(row,price,g["price_direction"],pth)
+            signal[i]=ok
         elif family == "RELATIVE_CROSS_SECTIONAL":
-            signal[i] = _feature_predicate(row, g["relative_feature"], g["tail"], float(g["threshold"]))
+            rf=g["relative_feature"]; q=float(g["threshold_quantile"])
+            rt=qthreshold(rf,q if g["tail"]=="LEADER" else 1.0-q)
+            ok=rt is not None and _feature_predicate(row,rf,g["tail"],rt)
+            mf=g["market_context"]
+            if ok and mf!="NONE":
+                ok=_feature_predicate(row,mf,g["market_context_state"],float(g["market_context_threshold"]))
+            signal[i]=ok
         elif family == "EVENT_EARNINGS":
             f=g["reaction_feature"]
             signal[i] = _feature_predicate(row, f, g["reaction_direction"], float(g["reaction_threshold"]))
         elif family == "MARKET_REGIME_STRUCTURE":
             f=g["breadth_feature"]; state=g["breadth_state"]; t=float(g["breadth_threshold"])
             v=_finite(row.get(f))
-            signal[i] = False if v is None else (v < t if state=="LOW" else v > t if state=="HIGH" else abs(v-t) <= 0.10)
+            ok = False if v is None else (v < t if state=="LOW" else v > t if state=="HIGH" else abs(v-t) <= 0.10)
+            sf=g["security_context"]
+            if ok and sf!="NONE":
+                sq=float(g["security_context_threshold_quantile"])
+                st=qthreshold(sf,sq if g["security_context_direction"]=="ABOVE" else 1.0-sq)
+                ok=st is not None and _feature_predicate(row,sf,g["security_context_direction"],st)
+            signal[i]=ok
         else:
             raise SearchGovernanceError(f"family not executable in one-subject v1 runner: {family}")
     return signal
@@ -139,7 +169,8 @@ def search_candidate_forward_return(evidence_payloads: Mapping[str, object], par
     sd = statistics.stdev(realized) if n > 1 else None
     se = None if sd is None else sd / math.sqrt(n)
     hit = None if not realized else sum(v > 0 for v in realized) / n
-    search_fitness = None if mean is None else mean - (0.5 * se if se is not None else 0.0)
+    fitness_valid = mean is not None
+    search_fitness = -1.0e12 if mean is None else mean - (0.5 * se if se is not None else 0.0)
     return {
         "candidate_id": candidate["candidate_id"],
         "family_id": candidate["family_id"],
@@ -150,6 +181,7 @@ def search_candidate_forward_return(evidence_payloads: Mapping[str, object], par
         "standard_error": se,
         "positive_fraction": hit,
         "search_fitness": search_fitness,
+        "fitness_valid": fitness_valid,
         "interpretation_boundary": "SEARCH_GUIDANCE_ONLY_NOT_SCIENTIFIC_VALIDATION_OR_TRADING_PROMOTION",
     }
 
