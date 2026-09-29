@@ -36,10 +36,12 @@ def momentum_search_space_v1() -> SearchSpace:
 def breakout_search_space_v1() -> SearchSpace:
     return _space("BREAKOUT", (
         Gene("range_feature", ("range_position_20__v1","range_position_50__v1","range_position_252__v1","prior_high_break_distance_20__v1","prior_high_break_distance_50__v1","range_width_ratio_20_63__v1","compression_duration__v1","failed_breakout_20__v1","breakout_reentry_20__v1")),
-        Gene("range_threshold", (0.80,0.90,0.95,0.98)),
+        Gene("range_threshold_quantile", (0.70,0.80,0.90,0.95)),
         Gene("participation_feature", ("NONE","relative_volume_20__v1","relative_volume_20_percentile__v1")),
-        Gene("participation_threshold", (1.0,1.25,1.5,2.0)),
+        Gene("participation_threshold_quantile", (0.50,0.70,0.80,0.90)),
         Gene("volatility_feature", ("NONE","natr_20__v1","natr_20_percentile__v1","realized_vol_20__v1")),
+        Gene("volatility_state", ("LOW","HIGH")),
+        Gene("volatility_threshold_quantile", (0.20,0.30,0.70,0.80)),
         Gene("forward_horizon", (5,10,20,63)),
     ), gaps=(), max_predicates=3)
 
@@ -48,8 +50,10 @@ def trend_search_space_v1() -> SearchSpace:
     return _space("TREND", (
         Gene("trend_feature", ("close_to_sma_20__v1","close_to_sma_50__v1","close_to_sma_200__v1","sma20_slope_5__v1","sma50_slope_10__v1","sma200_slope_20__v1","trend_above_sma200_duration__v1","pullback_from_high_20__v1","adx_14__v1")),
         Gene("direction", ("ABOVE","BELOW")),
-        Gene("threshold", (-0.10,-0.05,0.0,0.05,0.10)),
+        Gene("threshold_quantile", (0.10,0.20,0.30,0.50,0.70,0.80,0.90)),
         Gene("confirmation_feature", ("NONE","return_63__v1","return_126__v1","range_position_50__v1")),
+        Gene("confirmation_direction", ("ABOVE","BELOW")),
+        Gene("confirmation_threshold_quantile", (0.20,0.50,0.80)),
         Gene("forward_horizon", (5,10,20,63)),
     ), gaps=(), max_predicates=3)
 
@@ -60,6 +64,8 @@ def mean_reversion_search_space_v1() -> SearchSpace:
         Gene("tail", ("LOW","HIGH")),
         Gene("severity", (0.05,0.10,0.20,0.30)),
         Gene("context_feature", ("NONE","realized_vol_20__v1","natr_20_percentile__v1","breadth_positive_20__v1")),
+        Gene("context_state", ("LOW","HIGH")),
+        Gene("context_threshold_quantile", (0.20,0.50,0.80)),
         Gene("forward_horizon", (1,3,5,10,20)),
     ), gaps=("distance_from_vwap_requires_intraday_or_vwap_source",), max_predicates=3)
 
@@ -78,8 +84,10 @@ def volume_liquidity_search_space_v1() -> SearchSpace:
     return _space("VOLUME_LIQUIDITY", (
         Gene("participation_feature", ("relative_volume_20__v1","relative_volume_20_percentile__v1","turnover__v1","turnover_relative_20__v1","dollar_volume__v1","dollar_volume_relative_20__v1","amihud_illiquidity_20__v1","high_low_spread_proxy__v1","volume_slope_20__v1","up_down_volume_balance_20__v1")),
         Gene("state", ("LOW","HIGH")),
-        Gene("threshold", (0.5,0.75,1.0,1.25,1.5,2.0)),
+        Gene("threshold_quantile", (0.10,0.20,0.50,0.80,0.90)),
         Gene("price_feature", ("NONE","return_5__v1","return_20__v1","intraday_return__v1","close_location__v1")),
+        Gene("price_direction", ("ABOVE","BELOW")),
+        Gene("price_threshold_quantile", (0.20,0.50,0.80)),
         Gene("forward_horizon", (1,3,5,10,20)),
     ), gaps=(), max_predicates=3)
 
@@ -88,8 +96,10 @@ def relative_strength_search_space_v1() -> SearchSpace:
     return _space("RELATIVE_CROSS_SECTIONAL", (
         Gene("relative_feature", ("return_126_percentile__v1","return_252_percentile__v1","return_252_skip_20_percentile__v1","sector_return_252_percentile__v1","relative_strength_change_20__v1","sector_vs_universe_return_63__v1")),
         Gene("tail", ("LEADER","LAGGARD")),
-        Gene("threshold", (0.10,0.20,0.30,0.70,0.80,0.90)),
+        Gene("threshold_quantile", (0.10,0.20,0.30,0.70,0.80,0.90)),
         Gene("market_context", ("NONE","breadth_above_sma_200__v1","breadth_positive_20__v1")),
+        Gene("market_context_state", ("LOW","HIGH")),
+        Gene("market_context_threshold", (0.30,0.50,0.70)),
         Gene("forward_horizon", (5,10,20,63)),
     ), gaps=("leadership_rotation_rate_available_in_analysis_rank_persistence_not_row_feature",), max_predicates=3)
 
@@ -113,6 +123,8 @@ def market_regime_search_space_v1() -> SearchSpace:
         Gene("breadth_state", ("LOW","MID","HIGH")),
         Gene("breadth_threshold", (0.20,0.30,0.40,0.50,0.60,0.70,0.80)),
         Gene("security_context", ("NONE","return_20__v1","close_to_sma_200__v1","natr_20_percentile__v1")),
+        Gene("security_context_direction", ("ABOVE","BELOW")),
+        Gene("security_context_threshold_quantile", (0.20,0.50,0.80)),
         Gene("forward_horizon", (5,10,20,63)),
     ), gaps=("correlation_regime_available_in_analysis_not_row_feature",), max_predicates=3)
 
