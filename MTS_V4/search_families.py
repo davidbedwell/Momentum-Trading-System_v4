@@ -4,6 +4,7 @@ from typing import Callable
 
 from .computational_search import Gene, SearchSpace
 from .derived_feature_factory import standard_predictor_feature_set
+from .earnings_event_features import earnings_event_feature_set
 
 
 def _space(family_id: str, genes: tuple[Gene, ...], *, gaps: tuple[str, ...] = (), max_predicates: int = 4) -> SearchSpace:
@@ -34,53 +35,53 @@ def momentum_search_space_v1() -> SearchSpace:
 
 def breakout_search_space_v1() -> SearchSpace:
     return _space("BREAKOUT", (
-        Gene("range_feature", ("range_position_20__v1","range_position_50__v1","range_position_252__v1")),
+        Gene("range_feature", ("range_position_20__v1","range_position_50__v1","range_position_252__v1","prior_high_break_distance_20__v1","prior_high_break_distance_50__v1","range_width_ratio_20_63__v1")),
         Gene("range_threshold", (0.80,0.90,0.95,0.98)),
         Gene("participation_feature", ("NONE","relative_volume_20__v1","relative_volume_20_percentile__v1")),
         Gene("participation_threshold", (1.0,1.25,1.5,2.0)),
         Gene("volatility_feature", ("NONE","natr_20__v1","natr_20_percentile__v1","realized_vol_20__v1")),
         Gene("forward_horizon", (5,10,20,63)),
-    ), gaps=("prior_high_break_distance","compression_duration","failed_breakout_state","breakout_reentry_state"), max_predicates=3)
+    ), gaps=("compression_duration","failed_breakout_state","breakout_reentry_state"), max_predicates=3)
 
 
 def trend_search_space_v1() -> SearchSpace:
     return _space("TREND", (
-        Gene("trend_feature", ("close_to_sma_20__v1","close_to_sma_50__v1","close_to_sma_200__v1","sma20_slope_5__v1")),
+        Gene("trend_feature", ("close_to_sma_20__v1","close_to_sma_50__v1","close_to_sma_200__v1","sma20_slope_5__v1","sma50_slope_10__v1","sma200_slope_20__v1","trend_above_sma200_duration__v1","pullback_from_high_20__v1")),
         Gene("direction", ("ABOVE","BELOW")),
         Gene("threshold", (-0.10,-0.05,0.0,0.05,0.10)),
         Gene("confirmation_feature", ("NONE","return_63__v1","return_126__v1","range_position_50__v1")),
         Gene("forward_horizon", (5,10,20,63)),
-    ), gaps=("sma50_slope","sma200_slope","trend_duration","adx_trend_strength","pullback_depth_in_trend"), max_predicates=3)
+    ), gaps=("adx_trend_strength",), max_predicates=3)
 
 
 def mean_reversion_search_space_v1() -> SearchSpace:
     return _space("MEAN_REVERSION", (
-        Gene("displacement_feature", ("rsi_14__v1","close_to_sma_20__v1","close_to_sma_50__v1","return_5__v1","return_10__v1","return_20__v1","drawdown_252__v1","range_position_20__v1")),
+        Gene("displacement_feature", ("rsi_14__v1","close_to_sma_20__v1","close_to_sma_50__v1","return_5__v1","return_10__v1","return_20__v1","drawdown_252__v1","range_position_20__v1","price_zscore_20__v1","signed_return_streak__v1")),
         Gene("tail", ("LOW","HIGH")),
         Gene("severity", (0.05,0.10,0.20,0.30)),
         Gene("context_feature", ("NONE","realized_vol_20__v1","natr_20_percentile__v1","breadth_positive_20__v1")),
         Gene("forward_horizon", (1,3,5,10,20)),
-    ), gaps=("zscore_price_displacement","distance_from_vwap","streak_length","exhaustion_state"), max_predicates=3)
+    ), gaps=("distance_from_vwap","exhaustion_state"), max_predicates=3)
 
 
 def volatility_search_space_v1() -> SearchSpace:
     return _space("VOLATILITY", (
-        Gene("volatility_feature", ("natr_14__v1","natr_20__v1","natr_20_percentile__v1","realized_vol_20__v1","realized_vol_63__v1","candle_range_fraction__v1")),
+        Gene("volatility_feature", ("natr_14__v1","natr_20__v1","natr_20_percentile__v1","realized_vol_20__v1","realized_vol_63__v1","candle_range_fraction__v1","volatility_ratio_20_63__v1","range_width_ratio_20_63__v1")),
         Gene("state", ("LOW","HIGH")),
         Gene("threshold_quantile", (0.10,0.20,0.30,0.70,0.80,0.90)),
         Gene("price_context", ("NONE","return_20__v1","range_position_20__v1","close_to_sma_50__v1")),
         Gene("forward_horizon", (3,5,10,20,63)),
-    ), gaps=("volatility_ratio_20_63","volatility_contraction_duration","volatility_expansion_transition","realized_volatility_percentile"), max_predicates=3)
+    ), gaps=("volatility_contraction_duration","volatility_expansion_transition","realized_volatility_percentile"), max_predicates=3)
 
 
 def volume_liquidity_search_space_v1() -> SearchSpace:
     return _space("VOLUME_LIQUIDITY", (
-        Gene("participation_feature", ("relative_volume_20__v1","relative_volume_20_percentile__v1","turnover__v1","turnover_relative_20__v1")),
+        Gene("participation_feature", ("relative_volume_20__v1","relative_volume_20_percentile__v1","turnover__v1","turnover_relative_20__v1","dollar_volume__v1","dollar_volume_relative_20__v1","amihud_illiquidity_20__v1")),
         Gene("state", ("LOW","HIGH")),
         Gene("threshold", (0.5,0.75,1.0,1.25,1.5,2.0)),
         Gene("price_feature", ("NONE","return_5__v1","return_20__v1","intraday_return__v1","close_location__v1")),
         Gene("forward_horizon", (1,3,5,10,20)),
-    ), gaps=("dollar_volume","spread_proxy","amihud_illiquidity","volume_trend","up_down_volume_balance"), max_predicates=3)
+    ), gaps=("spread_proxy","volume_trend","up_down_volume_balance"), max_predicates=3)
 
 
 def relative_strength_search_space_v1() -> SearchSpace:
@@ -90,7 +91,7 @@ def relative_strength_search_space_v1() -> SearchSpace:
         Gene("threshold", (0.10,0.20,0.30,0.70,0.80,0.90)),
         Gene("market_context", ("NONE","breadth_above_sma_200__v1","breadth_positive_20__v1")),
         Gene("forward_horizon", (5,10,20,63)),
-    ), gaps=("sector_vs_market_relative_return","relative_strength_change","leadership_persistence","leadership_rotation_rate"), max_predicates=3)
+    ), gaps=("sector_vs_market_relative_return","relative_strength_change","leadership_rotation_rate"), max_predicates=3)
 
 
 def event_earnings_search_space_v1() -> SearchSpace:
@@ -98,12 +99,12 @@ def event_earnings_search_space_v1() -> SearchSpace:
     # reactions currently available in the standard predictor panel until the
     # event evidence is joined through a governed Analysis contract.
     return _space("EVENT_EARNINGS", (
-        Gene("reaction_feature", ("gap_return__v1","intraday_return__v1","relative_volume_20__v1","close_location__v1")),
+        Gene("reaction_feature", ("gap_return__v1","intraday_return__v1","relative_volume_20__v1","close_location__v1","earnings_surprise_pct__v1")),
         Gene("reaction_direction", ("POSITIVE","NEGATIVE")),
         Gene("reaction_threshold", (0.01,0.02,0.03,0.05,0.10)),
         Gene("momentum_context", ("NONE","return_63__v1","return_126_percentile__v1","return_252_skip_20_percentile__v1")),
         Gene("forward_horizon", (1,3,5,10,20,63)),
-    ), gaps=("earnings_event_join","earnings_surprise","earnings_gap_from_event","post_earnings_drift_clock","days_since_earnings"), max_predicates=3)
+    ), gaps=("earnings_event_join_to_market_panel","post_earnings_drift_clock","days_since_earnings"), max_predicates=3)
 
 
 def market_regime_search_space_v1() -> SearchSpace:
@@ -113,7 +114,7 @@ def market_regime_search_space_v1() -> SearchSpace:
         Gene("breadth_threshold", (0.20,0.30,0.40,0.50,0.60,0.70,0.80)),
         Gene("security_context", ("NONE","return_20__v1","close_to_sma_200__v1","natr_20_percentile__v1")),
         Gene("forward_horizon", (5,10,20,63)),
-    ), gaps=("cross_sectional_dispersion","advance_decline_breadth","new_high_low_breadth","sector_participation","market_volatility_regime","correlation_regime"), max_predicates=3)
+    ), gaps=("advance_decline_breadth","new_high_low_breadth","market_volatility_regime"), max_predicates=3)
 
 
 def cross_family_search_space_v1() -> SearchSpace:
@@ -157,7 +158,7 @@ def all_search_spaces_v1() -> tuple[SearchSpace, ...]:
 
 
 def implemented_predictor_columns() -> frozenset[str]:
-    return frozenset(standard_predictor_feature_set().feature_columns)
+    return frozenset((*standard_predictor_feature_set().feature_columns, *earnings_event_feature_set().feature_columns))
 
 
 def referenced_predictor_columns(space: SearchSpace) -> frozenset[str]:
