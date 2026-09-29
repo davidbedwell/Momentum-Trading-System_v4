@@ -46,6 +46,20 @@ def standard_predictor_feature_set() -> DerivedFeatureSetDefinition:
         ))
     features.extend((
         _feature("sma20_slope_5", "Five-session fractional change in SMA20", 25),
+        _feature("sma50_slope_10", "Ten-session fractional change in SMA50", 60),
+        _feature("sma200_slope_20", "Twenty-session fractional change in SMA200", 220),
+        _feature("trend_above_sma200_duration", "Consecutive sessions close has remained above SMA200; negative count when below", 200),
+        _feature("pullback_from_high_20", "Close divided by prior 20-session high minus one", 21),
+        _feature("prior_high_break_distance_20", "Close divided by prior 20-session high minus one; excludes current session from high", 21),
+        _feature("prior_high_break_distance_50", "Close divided by prior 50-session high minus one; excludes current session from high", 51),
+        _feature("range_width_20", "Prior/current 20-session high-low width divided by close", 20),
+        _feature("range_width_ratio_20_63", "20-session range width divided by 63-session range width", 63),
+        _feature("price_zscore_20", "Close z-score relative to trailing 20-session close distribution", 20),
+        _feature("signed_return_streak", "Signed consecutive-session close-to-close return streak", 1),
+        _feature("volatility_ratio_20_63", "Realized volatility 20 divided by realized volatility 63", 64),
+        _feature("dollar_volume", "Close multiplied by volume", 0),
+        _feature("dollar_volume_relative_20", "Current dollar volume divided by prior-20-session mean dollar volume", 21),
+        _feature("amihud_illiquidity_20", "Mean absolute daily return divided by dollar volume over 20 sessions", 21),
         _feature("atr_14", "Wilder-style simple-window true-range average over 14 sessions", 15),
         _feature("atr_20", "Simple-window true-range average over 20 sessions", 21),
         _feature("natr_14", "ATR14 divided by close", 15),
@@ -211,6 +225,64 @@ def build_predictor_rows(raw_rows: Sequence[Mapping[str, Any]]) -> tuple[Mapping
             current_sma20 = sma_cache[20][i]
             prior_sma20 = sma_cache[20][i - 5] if i >= 5 else None
             row["sma20_slope_5__v1"] = _ratio(current_sma20, prior_sma20, subtract_one=True)
+            row["sma50_slope_10__v1"] = _ratio(sma_cache[50][i], sma_cache[50][i - 10] if i >= 10 else None, subtract_one=True)
+            row["sma200_slope_20__v1"] = _ratio(sma_cache[200][i], sma_cache[200][i - 20] if i >= 20 else None, subtract_one=True)
+            relation = row["close_to_sma_200__v1"]
+            if relation is None:
+                row["trend_above_sma200_duration__v1"] = None
+            else:
+                sign = 1 if relation > 0 else -1 if relation < 0 else 0
+                duration = 0
+                j = i
+                while j >= 0:
+                    sma_j = sma_cache[200][j]
+                    rel_j = _ratio(closes[j], sma_j, subtract_one=True)
+                    sign_j = None if rel_j is None else (1 if rel_j > 0 else -1 if rel_j < 0 else 0)
+                    if sign_j != sign:
+                        break
+                    duration += 1
+                    j -= 1
+                row["trend_above_sma200_duration__v1"] = float(sign * duration)
+            prior_high20 = max((v for v in highs[max(0, i - 20):i] if v is not None), default=None) if i >= 20 else None
+            prior_high50 = max((v for v in highs[max(0, i - 50):i] if v is not None), default=None) if i >= 50 else None
+            row["pullback_from_high_20__v1"] = _ratio(close, prior_high20, subtract_one=True)
+            row["prior_high_break_distance_20__v1"] = row["pullback_from_high_20__v1"]
+            row["prior_high_break_distance_50__v1"] = _ratio(close, prior_high50, subtract_one=True)
+            def range_width(window: int) -> float | None:
+                if i + 1 < window or close in (None, 0):
+                    return None
+                hs, ls = highs[i-window+1:i+1], lows[i-window+1:i+1]
+                if any(v is None for v in (*hs, *ls)):
+                    return None
+                return (max(hs) - min(ls)) / close
+            width20, width63 = range_width(20), range_width(63)
+            row["range_width_20__v1"] = width20
+            row["range_width_ratio_20_63__v1"] = _ratio(width20, width63)
+            if i + 1 >= 20 and close is not None:
+                sample_close = closes[i-19:i+1]
+                if all(v is not None for v in sample_close):
+                    mean_close = statistics.fmean(sample_close)
+                    sd_close = statistics.stdev(sample_close)
+                    row["price_zscore_20__v1"] = None if sd_close == 0 else (close - mean_close) / sd_close
+                else:
+                    row["price_zscore_20__v1"] = None
+            else:
+                row["price_zscore_20__v1"] = None
+            streak = 0
+            j = i
+            while j > 0 and closes[j] is not None and closes[j-1] is not None:
+                delta = closes[j] - closes[j-1]
+                current_sign = 1 if delta > 0 else -1 if delta < 0 else 0
+                if current_sign == 0:
+                    break
+                if streak == 0:
+                    streak = current_sign
+                elif (streak > 0) != (current_sign > 0):
+                    break
+                else:
+                    streak += current_sign
+                j -= 1
+            row["signed_return_streak__v1"] = float(streak)
             atr14 = _mean(true_ranges[i - 13:i + 1]) if i >= 13 else None
             atr20 = _mean(true_ranges[i - 19:i + 1]) if i >= 19 else None
             row["atr_14__v1"] = atr14
@@ -244,6 +316,20 @@ def build_predictor_rows(raw_rows: Sequence[Mapping[str, Any]]) -> tuple[Mapping
             for window in REALIZED_VOL_WINDOWS:
                 sample = log_returns[i - window + 1:i + 1] if i >= window else []
                 row[f"realized_vol_{window}__v1"] = statistics.stdev(sample) * math.sqrt(252.0) if len(sample) == window and all(value is not None for value in sample) and window > 1 else None
+            row["volatility_ratio_20_63__v1"] = _ratio(row["realized_vol_20__v1"], row["realized_vol_63__v1"])
+            dollar_volumes = [None if closes[j] is None or volumes[j] is None else closes[j] * volumes[j] for j in range(len(ordered))]
+            row["dollar_volume__v1"] = dollar_volumes[i]
+            prior_dv = _mean(dollar_volumes[i-20:i]) if i >= 20 else None
+            row["dollar_volume_relative_20__v1"] = _ratio(dollar_volumes[i], prior_dv)
+            if i >= 20:
+                illiq = []
+                for j in range(i-19, i+1):
+                    dv = dollar_volumes[j]
+                    ret = _ratio(closes[j], closes[j-1] if j else None, subtract_one=True)
+                    illiq.append(None if dv in (None, 0) or ret is None else abs(ret) / dv)
+                row["amihud_illiquidity_20__v1"] = _mean(illiq)
+            else:
+                row["amihud_illiquidity_20__v1"] = None
             for window in RANGE_WINDOWS:
                 if i + 1 < window:
                     row[f"range_position_{window}__v1"] = None
