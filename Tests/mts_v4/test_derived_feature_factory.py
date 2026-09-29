@@ -83,3 +83,23 @@ def test_prior_high_break_feature_excludes_current_session_high():
     row = rows[300]
     expected = raw[300]["close"] / max(item["high"] for item in raw[280:300]) - 1.0
     assert row["prior_high_break_distance_20__v1"] == expected
+
+
+def test_remaining_ohlcv_search_vocabulary_is_populated():
+    raw = _rows("AAA", 1.0) + _rows("BBB", 1.2)
+    rows = build_predictor_rows(raw)
+    latest = [r for r in rows if r["effective_date"] == max(x["effective_date"] for x in rows)]
+    required = (
+        "adx_14__v1","compression_duration__v1","volatility_contraction_duration__v1",
+        "volatility_expansion_transition__v1","high_low_spread_proxy__v1",
+        "volume_slope_20__v1","up_down_volume_balance_20__v1","exhaustion_score__v1",
+        "relative_strength_change_20__v1","sector_vs_universe_return_63__v1",
+        "advance_decline_breadth__v1","new_high_low_breadth_252__v1",
+        "realized_vol_20_percentile__v1",
+    )
+    for row in latest:
+        for column in required:
+            assert column in row
+        assert row["adx_14__v1"] is not None
+        assert row["high_low_spread_proxy__v1"] is not None
+        assert row["relative_strength_change_20__v1"] is not None
