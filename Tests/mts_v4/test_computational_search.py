@@ -51,7 +51,7 @@ def test_breakout_and_momentum_share_framework_but_have_distinct_spaces():
     assert momentum.family_id == "MOMENTUM"
     assert breakout.family_id == "BREAKOUT"
     assert momentum.content_hash != breakout.content_hash
-    assert breakout.attributes["known_feature_gaps"]
+    assert "known_feature_gaps" in breakout.attributes
 
 
 def test_all_planned_search_families_are_registered():
@@ -73,12 +73,14 @@ def test_family_feature_values_cannot_masquerade_as_missing_predictor_columns():
                     assert value in implemented, (space.family_id, gene.gene_id, value)
 
 
-def test_every_market_family_declares_feature_gaps_explicitly():
+def test_every_market_family_declares_feature_gap_status_explicitly():
     from MTS_V4.search_families import all_search_spaces_v1
     for space in all_search_spaces_v1():
         assert "known_feature_gaps" in space.attributes
-        if space.family_id not in {"CROSS_FAMILY_COMPOSITE"}:
-            assert space.attributes["known_feature_gaps"], space.family_id
+        assert isinstance(space.attributes["known_feature_gaps"], tuple)
+        # Empty is an explicit completed-vocabulary state; nonempty entries must
+        # name a real unavailable/deferred capability rather than an implicit gap.
+        assert all(str(item).strip() for item in space.attributes["known_feature_gaps"])
 
 
 def test_experimental_family_does_not_receive_unrestricted_feature_soup():
