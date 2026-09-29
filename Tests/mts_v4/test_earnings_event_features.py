@@ -3,7 +3,7 @@ from zoneinfo import ZoneInfo
 
 import pytest
 
-from MTS_V4.earnings_event_features import build_earnings_event_rows
+from MTS_V4.earnings_event_features import build_earnings_event_rows, build_earnings_event_clock_rows, join_earnings_context_to_market_panel
 
 NY = ZoneInfo("America/New_York")
 
@@ -64,3 +64,22 @@ def test_same_session_conflicts_preserve_count_and_null_conflicting_values():
     assert rows[0]["earnings_estimate_eps__v1"] is None
     assert rows[0]["earnings_surprise_pct__v1"] is None
     assert rows[0]["earnings_timing_known__v1"] == 0.0
+
+
+def test_earnings_clock_carries_only_after_observable_event_session():
+    event_rows = ({"security_id":"A","effective_date":"2025-01-03","eligible":True,"earnings_surprise_pct__v1":5.0,"earnings_reported_eps__v1":1.1,"earnings_estimate_eps__v1":1.0,"earnings_event_count__v1":1.0,"earnings_timing_known__v1":1.0},)
+    clock = build_earnings_event_clock_rows(event_rows, market_session_dates_by_security={"A":("2025-01-02","2025-01-03","2025-01-06")})
+    assert [r["effective_date"] for r in clock] == ["2025-01-03","2025-01-06"]
+    assert clock[0]["days_since_earnings__v1"] == 0.0
+    assert clock[0]["earnings_event_session__v1"] == 1.0
+    assert clock[1]["days_since_earnings__v1"] == 1.0
+    assert clock[1]["earnings_event_session__v1"] == 0.0
+
+
+def test_earnings_market_join_is_exact_security_date_and_left_preserving():
+    market=({"security_id":"A","effective_date":"2025-01-02","return_1__v1":0.1},{"security_id":"A","effective_date":"2025-01-03","return_1__v1":0.2})
+    event=({"security_id":"A","effective_date":"2025-01-03","earnings_surprise_pct__v1":5.0,"earnings_reported_eps__v1":1.1,"earnings_estimate_eps__v1":1.0,"earnings_event_count__v1":1.0,"earnings_timing_known__v1":1.0,"days_since_earnings__v1":0.0,"earnings_event_session__v1":1.0},)
+    joined=join_earnings_context_to_market_panel(market,event)
+    assert len(joined)==2
+    assert joined[0]["earnings_surprise_pct__v1"] is None
+    assert joined[1]["earnings_surprise_pct__v1"] == 5.0
