@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - main
-      - mts-v4-integrity-repairs-20260907
-      - mts-v4-gemini-sol-virgin-equivalence-20260920
+      - 'mts-v4-*'
   pull_request:
     paths:
       - 'MTS_V4/**'
