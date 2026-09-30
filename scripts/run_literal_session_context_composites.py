@@ -17,11 +17,15 @@ def st(v):
             "positive_fraction":sum(x>0 for x in v)/len(v) if v else None}
 
 def load_candidate(row):
-    d=json.loads(Path(row["source_report"]).read_text())
+    trade=json.loads(Path(row["source_report"]).read_text())
+    search_path=trade.get("source_search_report")
+    if not search_path:
+        raise RuntimeError("trade-path report missing source_search_report: "+row["source_report"])
+    search=json.loads(Path(search_path).read_text())
     for o in row["optimizers"]:
-        for c in d["results"][row["family"]][o]:
+        for c in trade["results"][row["family"]][o]:
             if c.get("candidate_id")==row["candidate_id"]:
-                return d,c
+                return trade,search,c
     raise RuntimeError("candidate not found: "+str(row["candidate_id"]))
 
 def latest_prior_session_distance(context_dates, trigger_date, session_pos):
@@ -46,12 +50,12 @@ def main():
     by=defaultdict(list)
     meta={}
     for r in m["retained_candidates"]:
-        report,c=load_candidate(r)
+        report,search,c=load_candidate(r)
         paths=sorted(c.get("paths",[]),key=lambda x:str(x["signal_date"]))
         x=dict(r);x["_paths"]=paths;x["_dates"]=sorted(str(p["signal_date"]) for p in paths)
         x["_base"]=st([float(p["fixed_horizon_return"]) for p in paths])
         by[r["ticker"]].append(x)
-        meta[r["ticker"]]=report
+        meta[r["ticker"]]=search
 
     results=[]
     session_counts={}
