@@ -30,11 +30,13 @@ def process(t):
  if p.exists():
   try:
    with gzip.open(p,"rt") as f:r=json.load(f)
-   if r.get("format")=="MTS_V4_TRAJECTORY_PARTIAL_RECOVERY_TARGET_V1":return t,True,r
+   if r.get("format")=="MTS_V4_TRAJECTORY_PARTIAL_RECOVERY_TARGET_V1" and r.get("rows"):return t,True,r
   except:pass
  m=G["meta"][t];sr=json.loads(Path(m["report"]).read_text());store=ParquetDerivedMarketStore(G["cfg"]["root"])
  pred=list(store.query(DerivedMarketQuery(universe_id=sr["universe_id"],feature_set_id="mts_market_predictors",feature_set_version=sr["predictor_feature_set_version"],security_ids=(sr["security_id"],))));pred.sort(key=lambda x:str(x["effective_date"]))
- pd=[str(x["effective_date"])[:10] for x in pred];bars=list(YFinanceDailyMarketSource().fetch(ticker=t,start_date=pd[0],end_date=pd[-1]));bars.sort(key=lambda x:str(x["date"]));bd={str(x["date"])[:10]:i for i,x in enumerate(bars)};rows=[]
+ pd=[str(x["effective_date"])[:10] for x in pred];bars=list(YFinanceDailyMarketSource().fetch(ticker=t,start_date=pd[0],end_date=pd[-1]));bars.sort(key=lambda x:str(x["date"]))
+ if not bars: raise RuntimeError(f"{t}: market-data fetch returned zero bars; refusing to cache empty checkpoint")
+ bd={str(x["date"])[:10]:i for i,x in enumerate(bars)};rows=[]
  for fam in FAMS:
   for cand in uniq(sr,fam):
    h=int(cand["genome"]["forward_horizon"])
@@ -100,6 +102,8 @@ def main():
   fs={ex.submit(process,t):t for t in sorted(meta)}
   for n,f in enumerate(as_completed(fs),1):
    t,reused,r=f.result();rows.extend(r["rows"]);print(f"[{n}/67] {'RESUMED' if reused else 'COMPLETE'}={t}",flush=True)
+ expected=set(meta); observed={r["ticker"] for r in rows}
+ if observed!=expected: raise RuntimeError(f"incomplete ticker coverage: missing={sorted(expected-observed)} extra={sorted(observed-expected)}")
  table=[]
  for dep in DEPTHS:
   for frac in REC:
