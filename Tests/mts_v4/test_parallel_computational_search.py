@@ -1,6 +1,6 @@
 from concurrent.futures import ProcessPoolExecutor
 
-from scripts.run_one_ticker_computational_search import _run_family
+from scripts.run_one_ticker_computational_search import EXECUTABLE_FAMILIES, _parser, _run_family
 
 
 def _evidence():
@@ -68,3 +68,18 @@ def test_worker_process_matches_direct_execution():
     with ProcessPoolExecutor(max_workers=1) as pool:
         actual=_scientific_payload(pool.submit(_run_family,**_kwargs()).result(timeout=30))
     assert actual == expected
+
+
+def test_family_selector_is_fail_closed_and_repeatable():
+    parser=_parser()
+    args=parser.parse_args([
+        "--ticker","AAPL",
+        "--derived-market-root","/tmp/store",
+        "--universe-id","u",
+        "--membership-csv","m.csv",
+        "--scientific-partition-manifest","p.json",
+        "--family","VOLATILITY",
+        "--output","o.json",
+    ])
+    assert args.family == ["VOLATILITY"]
+    assert "VOLATILITY" in EXECUTABLE_FAMILIES
