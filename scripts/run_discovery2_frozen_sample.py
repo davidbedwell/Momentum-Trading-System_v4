@@ -30,7 +30,7 @@ def allocate(strata,count):
 def main():
  p=argparse.ArgumentParser()
  p.add_argument("--derived-market-root",required=True);p.add_argument("--universe-id",required=True)
- p.add_argument("--membership-csv",required=True);p.add_argument("--market-cap-csv",required=True)
+ p.add_argument("--membership-csv",required=True);p.add_argument("--market-cap-csv",required=True);p.add_argument("--sector-csv",required=True)
  p.add_argument("--scientific-partition-manifest",required=True);p.add_argument("--output-dir",required=True)
  p.add_argument("--count",type=int,default=50);p.add_argument("--budget-per-family",type=int,default=500)
  p.add_argument("--seed",type=int,default=20260930);p.add_argument("--workers",type=int,default=8);a=p.parse_args()
@@ -48,7 +48,7 @@ def main():
  for sid in part.members(ScientificCohort.DISCOVERY):
   x=byid.get(sid)
   if not x or x.ticker.upper() in ORIGINAL: continue
-  sector=str(x.sector_id or "UNCLASSIFIED")
+  sector=sectors.get(sid,"")\n  if not sector: raise RuntimeError(f"sector missing for Discovery security {sid}")
   score=hashlib.sha256(f"{SEED}|{part.partition_id}|{sector}|{size[sid]}|{sid}".encode()).hexdigest()
   strata[(sector,size[sid])].append((score,x.ticker.upper(),sid))
  for v in strata.values(): v.sort()
@@ -63,7 +63,7 @@ def main():
   "selection_method":"proportional sector x relative-current-market-cap-tercile stratification within frozen Discovery cohort; deterministic SHA256 selection within strata; original 11 excluded",
   "selection_seed":SEED,"partition_id":part.partition_id,"universe_id":a.universe_id,"count":len(chosen),
   "size_definition":"terciles of current market cap within the 503-member current-S&P-500 calibration universe; NOT genuine small/mid/large-cap classifications",
-  "market_cap_csv":str(Path(a.market_cap_csv).resolve()),"original_11":sorted(ORIGINAL),
+  "market_cap_csv":str(Path(a.market_cap_csv).resolve()),"sector_csv":str(Path(a.sector_csv).resolve()),"original_11":sorted(ORIGINAL),
   "stratum_allocation":[{"sector":k[0],"size_band":k[1],"eligible":len(strata[k]),"selected":alloc[k]} for k in sorted(strata)],
   "tickers":[{"ticker":t,"security_id":sid,"sector":k[0],"size_band":k[1],"current_market_cap":caps[sid],"selection_hash":score} for k,score,t,sid in chosen],
   "search_contract":{"families":8,"budget_per_family_per_optimizer":a.budget_per_family,"seed":a.seed,"workers":a.workers},
