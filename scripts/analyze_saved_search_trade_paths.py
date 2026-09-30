@@ -40,6 +40,10 @@ def main(argv=None):
         feature_set_version=search["predictor_feature_set_version"],security_ids=(security_id,),
     )))
     predictors.sort(key=lambda r:str(r["effective_date"]))
+    outcomes=list(store.query(DerivedMarketQuery(
+        universe_id=universe_id,feature_set_id="mts_historical_outcomes",
+        feature_set_version=search["outcome_feature_set_version"],security_ids=(security_id,),
+    )))
     if not predictors:
         raise SystemExit("TRADE_PATH_FAIL=NO_PREDICTORS")
     ticker=search["ticker"]
@@ -55,7 +59,17 @@ def main(argv=None):
             for candidate in family[optimizer]["top_candidates"][:args.top_n]:
                 horizon=int(candidate["genome"]["forward_horizon"])
                 signals=_compile_signal(predictors,candidate)
-                accepted=_accepted_signal_indices(signals,horizon)
+                outcome_column=f"forward_return_{horizon}__v1"
+                eligible_dates={
+                    str(r["effective_date"])
+                    for r in outcomes
+                    if r.get(outcome_column) is not None
+                }
+                eligible_signals=[
+                    bool(active) and str(row["effective_date"]) in eligible_dates
+                    for row,active in zip(predictors,signals)
+                ]
+                accepted=_accepted_signal_indices(eligible_signals,horizon)
                 paths=[]; excluded=[]
                 for pi in accepted:
                     signal_date=str(predictors[pi]["effective_date"])
@@ -101,6 +115,7 @@ def main(argv=None):
             "transaction_costs":"NOT_APPLIED",
         },
         "scientific_boundary":"DISCOVERY_POST_SEARCH_ANALYSIS_ONLY_NOT_VALIDATION_NOT_PROMOTION",
+        "outcome_eligibility_policy":"ONLY_SIGNAL_DATES_WITH_NON_NULL_FROZEN_FORWARD_OUTCOME_FOR_THE_CANDIDATE_HORIZON_ARE_ELIGIBLE_BEFORE_NONOVERLAP_SELECTION",
         "search_result_mutated":False,"results":results,
     }
     target=Path(args.output);target.parent.mkdir(parents=True,exist_ok=True)
