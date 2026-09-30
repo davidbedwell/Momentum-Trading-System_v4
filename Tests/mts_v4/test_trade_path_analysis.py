@@ -38,12 +38,13 @@ def test_stop_touch_fills_at_stop_and_reports_r():
 def test_gap_through_stop_fills_at_worse_open():
     bars=[
         {"date":"d0","open":100,"high":101,"low":99,"close":100},
-        {"date":"d1","open":90,"high":92,"low":88,"close":91},
-        {"date":"d2","open":91,"high":95,"low":90,"close":94},
+        {"date":"d1","open":100,"high":102,"low":99,"close":101},
+        {"date":"d2","open":90,"high":95,"low":89,"close":94},
     ]
     p=simulate_long_path(bars=bars,signal_index=0,horizon_sessions=2,stop_fractions=(0.05,))
     s=p.stop_results["0.050000"]
     assert s["stopped"] is True
+    assert s["fill_date"]=="d2"
     assert s["fill_price"]==90
     assert s["r_multiple"]==pytest.approx(-2)
 
