@@ -11,8 +11,12 @@ def main():
  p.add_argument("--seed",default="MTS-A1-20260930");a=p.parse_args()
  ph=hashlib.sha256(Path(a.protocol).read_bytes()).hexdigest()
  d=json.loads(Path(a.partition).read_text());pool=None
- for k,v in d.items():
-  if k.lower().replace("_","") in ("verificationa","verificationatickers") and isinstance(v,list):pool=v;break
+ cohorts=d.get("cohorts")
+ if isinstance(cohorts,dict) and isinstance(cohorts.get("VERIFICATION_A"),list):
+  pool=cohorts["VERIFICATION_A"]
+ if pool is None:
+  for k,v in d.items():
+   if k.lower().replace("_","") in ("verificationa","verificationatickers") and isinstance(v,list):pool=v;break
  if pool is None: raise RuntimeError("Verification A list not found")
  def tk(x): return x if isinstance(x,str) else x.get("ticker") or x.get("symbol")
  names={tk(x) for x in pool};names.discard(None)
