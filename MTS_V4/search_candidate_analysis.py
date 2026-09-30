@@ -109,11 +109,15 @@ def _compile_signal(rows: Sequence[Mapping[str, Any]], candidate: Mapping[str, A
             signal[i] = ok
         elif family == "VOLATILITY":
             f = g["volatility_feature"]; state = g["state"]; q = float(g["threshold_quantile"])
-            t = qthreshold(f, q)
+            t = qthreshold(f, q if state == "HIGH" else 1.0 - q)
             ok = t is not None and _feature_predicate(row, f, state, t)
             pf = g["price_context"]
             if ok and pf != "NONE":
-                ok = _finite(row.get(pf)) is not None
+                # v1 grammar has no separate price-context direction/threshold
+                # genes. Give the declared context actual filtering semantics:
+                # require the selected context to be at/above its median.
+                pt = qthreshold(pf, 0.50)
+                ok = pt is not None and _feature_predicate(row, pf, "ABOVE", pt)
             signal[i] = ok
         elif family == "VOLUME_LIQUIDITY":
             pf=g["participation_feature"]; q=float(g["threshold_quantile"])
