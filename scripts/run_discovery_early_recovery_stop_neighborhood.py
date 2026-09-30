@@ -93,7 +93,24 @@ def main():
        "stopped_would_terminal_win":sum(z["would_terminal_win_without_stop"] for z in st)/len(st) if st else None,
        "ticker_breadth":len({r["ticker"] for r in rows for x in r["cells"] if x["depth"]==dep and x["timing"]==timing and x["recovery_fraction"]==frac and x.get("entry") is not None}),
        "family_breadth":len({r["family"] for r in rows for x in r["cells"] if x["depth"]==dep and x["timing"]==timing and x["recovery_fraction"]==frac and x.get("entry") is not None})})
- out={"format":"MTS_V4_DISCOVERY_EARLY_RECOVERY_STOP_SUMMARY_V1","ticker_count":67,"trade_rows":len(rows),"table":table,"search_run":False,"refit":False,"rule_selection":False,"verification_a_accessed":False,"verification_b_accessed":False,"sol_calls":0}
+ # Exact family breakdown of the same frozen cells; no new paths, thresholds, or selection.
+ family_table=[]
+ for fam in sorted({r["family"] for r in rows}):
+  fr=[r for r in rows if r["family"]==fam]
+  for dep in DEPTHS:
+   for timing in TIMES:
+    for frac in RECS:
+     c=[x for r in fr for x in r["cells"] if x["depth"]==dep and x["timing"]==timing and x["recovery_fraction"]==frac and x.get("entry") is not None]
+     for stop in STOPS:
+      zz=[next(z for z in x["stops"] if z["stop"]==stop) for x in c];st=[z for z in zz if z["stopped"]]
+      family_table.append({"family":fam,"depth":dep,"timing":timing,"recovery_fraction":frac,"stop":stop,"entries":len(c),
+       "win_rate":sum(z["win"] for z in zz)/len(zz) if zz else None,"mean_return":statistics.fmean(z["realized_return"] for z in zz) if zz else None,
+       "stop_rate":len(st)/len(zz) if zz else None,"stopped_further_2":sum(z["further_2"] for z in st)/len(st) if st else None,
+       "stopped_recover_entry":sum(z["recover_entry"] for z in st)/len(st) if st else None,"stopped_would_terminal_win":sum(z["would_terminal_win_without_stop"] for z in st)/len(st) if st else None,
+       "ticker_breadth":len({r["ticker"] for r in fr for x in r["cells"] if x["depth"]==dep and x["timing"]==timing and x["recovery_fraction"]==frac and x.get("entry") is not None})})
+ out={"format":"MTS_V4_DISCOVERY_EARLY_RECOVERY_STOP_SUMMARY_V2","ticker_count":67,"trade_rows":len(rows),"table":table,"family_table":family_table,
+      "composite_note":"Composite structures require their exact frozen executable membership mapping; not inferred from family labels in this runner.",
+      "search_run":False,"refit":False,"rule_selection":False,"verification_a_accessed":False,"verification_b_accessed":False,"sol_calls":0}
  Path(q.output).write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
  print("REPORT="+q.output);print(f"TRADES={len(rows)} CELLS={len(table)}")
  # Keep terminal compact: print the user's central 3/3.5/4/5% × day4 ×25% recovery neighborhood for all stops.
@@ -101,6 +118,10 @@ def main():
  for z in table:
   if z["timing"]==4 and z["recovery_fraction"]==.25:
    print(f"AE={z['depth']:.1%} STOP={'NONE' if z['stop'] is None else f'{z["stop"]:.0%}'} n={z['entries']} win={(z['win_rate'] or 0):.3f} meanRet={(z['mean_return'] or 0):+.4f} stopRate={(z['stop_rate'] or 0):.3f} further2={(z['stopped_further_2'] or 0):.3f} recoverEntry={(z['stopped_recover_entry'] or 0):.3f} terminalWin={(z['stopped_would_terminal_win'] or 0):.3f}")
- print("DETAIL=FULL_256_CELL_JSON")
+ print("DAY4_REC25_STOP2_BY_FAMILY")
+ for z in family_table:
+  if z["timing"]==4 and z["recovery_fraction"]==.25 and z["stop"]==.02:
+   print(f"{z['family']}: AE={z['depth']:.1%} n={z['entries']} win={(z['win_rate'] or 0):.3f} meanRet={(z['mean_return'] or 0):+.4f} stopRate={(z['stop_rate'] or 0):.3f} further2={(z['stopped_further_2'] or 0):.3f} recoverEntry={(z['stopped_recover_entry'] or 0):.3f} terminalWin={(z['stopped_would_terminal_win'] or 0):.3f}")
+ print("DETAIL=FULL_AGGREGATE_AND_8_FAMILY_JSON")
  print("SEARCH_RUN=False REFIT=False RULE_SELECTION=False VERIFICATION_A_ACCESSED=False VERIFICATION_B_ACCESSED=False SOL_CALLS=0")
 if __name__=="__main__":main()
