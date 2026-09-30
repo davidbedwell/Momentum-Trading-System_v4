@@ -6,7 +6,7 @@ from pathlib import Path
 from MTS_V4.derived_market_updater import YFinanceDailyMarketSource
 DEPTHS=(.03,.035,.04,.05);TIMES=(3,4,5,None);RECS=(.25,.50);STOPS=(.01,.02,.03,None);G={}
 def med(x):return statistics.median(x) if x else None
-def init(cfg):G.update(cfg=cfg)
+def init(cfg):G.update(cfg)
 def cp(t):return Path(G["outdir"])/f"{t}.json.gz"
 def process(t):
  p=cp(t)
