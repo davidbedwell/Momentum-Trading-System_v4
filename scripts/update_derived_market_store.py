@@ -25,6 +25,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--download-workers", type=int, default=6)
     parser.add_argument("--download-attempts", type=int, default=4)
     parser.add_argument("--acquisition-cache-root", default=None)
+    parser.add_argument("--ephemeral-acquisition", action="store_true", help="Keep reacquired raw OHLCV in memory only; do not write a temporary acquisition cache to disk.")
     parser.add_argument("--no-outcomes", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     return parser
@@ -40,6 +41,8 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("--download-workers must be >= 1")
     if args.download_attempts < 1:
         raise RuntimeError("--download-attempts must be >= 1")
+    if args.ephemeral_acquisition and args.acquisition_cache_root is not None:
+        raise RuntimeError("--ephemeral-acquisition cannot be combined with --acquisition-cache-root")
     if args.dry_run:
         print("DRY_RUN=True")
         print(f"UNIVERSE_ID={args.universe_id}")
@@ -70,7 +73,7 @@ def main(argv: list[str] | None = None) -> int:
             publish_outcomes=not args.no_outcomes,
             download_workers=args.download_workers,
             download_attempts=args.download_attempts,
-            acquisition_cache_root=(args.acquisition_cache_root or root / ".temporary-acquisition-cache"),
+            acquisition_cache_root=(None if args.ephemeral_acquisition else (args.acquisition_cache_root or root / ".temporary-acquisition-cache")),
         )
         fcntl.flock(lock_handle.fileno(), fcntl.LOCK_UN)
     print(json.dumps(asdict(result), indent=2, sort_keys=True))
