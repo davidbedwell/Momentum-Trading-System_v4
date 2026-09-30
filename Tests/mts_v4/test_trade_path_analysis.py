@@ -1,3 +1,4 @@
+from scripts.analyze_saved_search_trade_paths import _accepted_signal_indices, _eligible_signals
 import pytest
 
 from MTS_V4.trade_path_analysis import simulate_long_path, summarize_paths
@@ -55,3 +56,22 @@ def test_summary_exposes_gross_but_not_fabricated_net_ev():
     stop=s["stop_scenarios"]["0.050000"]
     assert stop["gross_ev_r"]==pytest.approx(2.0)
     assert stop["net_ev_r"].startswith("UNAVAILABLE")
+
+
+def test_trade_path_signal_selection_respects_frozen_outcome_eligibility_before_cooldown():
+    predictors=[
+        {"effective_date":"d0"},
+        {"effective_date":"d1"},
+        {"effective_date":"d2"},
+        {"effective_date":"d3"},
+        {"effective_date":"d4"},
+        {"effective_date":"d5"},
+    ]
+    signals=[True,True,False,False,False,True]
+    outcomes=[
+        {"effective_date":"d1","forward_return_5__v1":0.10},
+        {"effective_date":"d5","forward_return_5__v1":0.20},
+    ]
+    eligible=_eligible_signals(predictors,signals,outcomes,"forward_return_5__v1")
+    assert eligible == [False,True,False,False,False,True]
+    assert _accepted_signal_indices(eligible,5) == [1]
