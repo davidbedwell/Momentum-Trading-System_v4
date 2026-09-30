@@ -40,6 +40,10 @@ def main():
  byid={x.security_id:x for x in intervals}
  if len(byid)!=len(intervals): raise RuntimeError("requires one current membership interval per security")
  caps=read_caps(a.market_cap_csv)
+ with open(a.sector_csv,newline="",encoding="utf-8") as f: sector_rows=list(csv.DictReader(f))
+ sectors={str(r["security_id"]).strip():str(r["sector"]).strip() for r in sector_rows}
+ if len(sectors)!=len(sector_rows) or any(not v or v.upper()=="UNCLASSIFIED" for v in sectors.values()):
+  raise RuntimeError("sector CSV must contain unique security_id rows and classified sectors; UNCLASSIFIED is forbidden")
  missing=set(byid)-set(caps)
  if missing: raise RuntimeError(f"market caps missing {len(missing)} current members")
  ordered=sorted(byid,key=lambda sid:(caps[sid],sid)); size={}
@@ -48,7 +52,8 @@ def main():
  for sid in part.members(ScientificCohort.DISCOVERY):
   x=byid.get(sid)
   if not x or x.ticker.upper() in ORIGINAL: continue
-  sector=sectors.get(sid,"")\n  if not sector: raise RuntimeError(f"sector missing for Discovery security {sid}")
+  sector=sectors.get(sid,"")
+  if not sector: raise RuntimeError(f"sector missing for Discovery security {sid}")
   score=hashlib.sha256(f"{SEED}|{part.partition_id}|{sector}|{size[sid]}|{sid}".encode()).hexdigest()
   strata[(sector,size[sid])].append((score,x.ticker.upper(),sid))
  for v in strata.values(): v.sort()
