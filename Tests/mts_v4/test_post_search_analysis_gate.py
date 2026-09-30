@@ -47,3 +47,19 @@ def test_volatility_low_state_uses_lower_tail():
     signal=_compile_signal(predictors,candidate)
     assert signal[0] is True
     assert signal[-1] is False
+
+
+def test_nonoverlap_gate_is_invariant_to_predictor_storage_order():
+    predictors=[]; outcomes=[]
+    for i in range(12):
+        date=f"d{i:02d}"
+        predictors.append({"security_id":"S1","effective_date":date,"return_20__v1":float(i)})
+        outcomes.append({"security_id":"S1","effective_date":date,"forward_return_5__v1":0.10})
+    candidate={"candidate_id":"c","family_id":"MOMENTUM","genome":{
+        "momentum_feature":"return_20__v1","direction":"ABOVE","threshold_quantile":0.0,
+        "context_feature":"NONE","context_threshold":0.5,"forward_horizon":5,
+    }}
+    chronological=_evaluate(candidate,predictors,outcomes)
+    shuffled=_evaluate(candidate,list(reversed(predictors)),outcomes)
+    assert shuffled["raw_signal_day_statistics"] == chronological["raw_signal_day_statistics"]
+    assert shuffled["non_overlapping_opportunity_statistics"] == chronological["non_overlapping_opportunity_statistics"]
