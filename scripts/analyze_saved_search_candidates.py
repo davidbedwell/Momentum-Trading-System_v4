@@ -34,6 +34,7 @@ def _stats(values):
 
 
 def _evaluate(candidate, predictors, outcomes):
+    predictors=sorted(predictors,key=lambda row:(str(row["effective_date"]),str(row["security_id"])))
     horizon=int(candidate["genome"]["forward_horizon"])
     outcome_column=f"forward_return_{horizon}__v1"
     out_index={(str(r["security_id"]),str(r["effective_date"])):r for r in outcomes}
