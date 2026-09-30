@@ -35,6 +35,12 @@ def _parser() -> argparse.ArgumentParser:
     p.add_argument("--budget-per-family", type=int, default=500)
     p.add_argument("--seed", type=int, default=20260928)
     p.add_argument("--workers", type=int, default=min(8, os.cpu_count() or 1))
+    p.add_argument(
+        "--family",
+        action="append",
+        choices=EXECUTABLE_FAMILIES,
+        help="Restrict execution to one or more existing executable families; repeat flag for multiple families.",
+    )
     p.add_argument("--output", required=True)
     return p
 
@@ -152,12 +158,16 @@ def main(argv=None) -> int:
         raise RuntimeError("ticker predictor/outcome rows are missing")
 
     evidence_identity=f"{partition.partition_id}|{security_id}|predictors:{args.predictor_feature_set_version}|outcomes:{args.outcome_feature_set_version}"
+    selected_families=tuple(args.family) if args.family else EXECUTABLE_FAMILIES
+    if len(set(selected_families)) != len(selected_families):
+        raise RuntimeError("--family values must be unique")
     identity={
         "ticker":ticker,"security_id":security_id,"universe_id":args.universe_id,
         "partition_id":partition.partition_id,"evidence_identity":evidence_identity,
         "predictor_feature_set_version":args.predictor_feature_set_version,
         "outcome_feature_set_version":args.outcome_feature_set_version,
         "budget_per_family_per_optimizer":args.budget_per_family,"seed":args.seed,
+        "selected_families":list(selected_families),
     }
     target=Path(args.output)
     target.parent.mkdir(parents=True,exist_ok=True)
@@ -168,9 +178,9 @@ def main(argv=None) -> int:
         if prior.get("identity") != identity:
             raise RuntimeError(f"checkpoint identity mismatch: {checkpoint}")
         families=dict(prior.get("families",{}))
-        print(f"CHECKPOINT_RESUME={checkpoint} COMPLETED_FAMILIES={len(families)}/{len(EXECUTABLE_FAMILIES)}", flush=True)
+        print(f"CHECKPOINT_RESUME={checkpoint} COMPLETED_FAMILIES={len(families)}/{len(selected_families)}", flush=True)
 
-    pending=[f for f in EXECUTABLE_FAMILIES if f not in families]
+    pending=[f for f in selected_families if f not in families]
     workers=min(args.workers,max(1,len(pending)))
     print(f"SEARCH_START TICKER={ticker} PENDING_FAMILIES={len(pending)} WORKERS={workers} BUDGET_PER_FAMILY_PER_OPTIMIZER={args.budget_per_family}", flush=True)
     started=time.monotonic()
@@ -183,7 +193,7 @@ def main(argv=None) -> int:
             )
             families[fid]=result
             _write_checkpoint(checkpoint,identity,families)
-            print(f"CHECKPOINT_SAVED FAMILY={fid} COMPLETED_FAMILIES={len(families)}/{len(EXECUTABLE_FAMILIES)}",flush=True)
+            print(f"CHECKPOINT_SAVED FAMILY={fid} COMPLETED_FAMILIES={len(families)}/{len(selected_families)}",flush=True)
     else:
         with ProcessPoolExecutor(max_workers=workers) as pool:
             future_map={
@@ -197,9 +207,9 @@ def main(argv=None) -> int:
                 fid,result=future.result()
                 families[fid]=result
                 _write_checkpoint(checkpoint,identity,families)
-                print(f"CHECKPOINT_SAVED FAMILY={fid} COMPLETED_FAMILIES={len(families)}/{len(EXECUTABLE_FAMILIES)} ELAPSED_SEC={time.monotonic()-started:.1f}",flush=True)
+                print(f"CHECKPOINT_SAVED FAMILY={fid} COMPLETED_FAMILIES={len(families)}/{len(selected_families)} ELAPSED_SEC={time.monotonic()-started:.1f}",flush=True)
 
-    ordered_families={fid:families[fid] for fid in EXECUTABLE_FAMILIES}
+    ordered_families={fid:families[fid] for fid in selected_families}
     report={
         "format":"MTS_V4_ONE_SUBJECT_COMPUTATIONAL_SEARCH_V1",
         "ticker":ticker,
@@ -212,6 +222,7 @@ def main(argv=None) -> int:
         "budget_per_family_per_optimizer":args.budget_per_family,
         "seed":args.seed,
         "workers":workers,
+        "selected_families":list(selected_families),
         "earnings_policy":{
             "EVENT_EARNINGS_ALPHA_SEARCH":"DEFERRED_FOR_FIRST_TEST",
             "POST_EARNINGS_RISK_FILTER":"AVAILABLE_FOR_LATER_CONTROL",
