@@ -18,9 +18,13 @@ def main():
   for k,v in d.items():
    if k.lower().replace("_","") in ("verificationa","verificationatickers") and isinstance(v,list):pool=v;break
  if pool is None: raise RuntimeError("Verification A list not found")
- def tk(x): return x if isinstance(x,str) else x.get("ticker") or x.get("symbol")
- names={tk(x) for x in pool};names.discard(None)
- if len(names)!=100:raise RuntimeError(f"expected 100 names, got {len(names)}")
+ def sid(x): return x if isinstance(x,str) else x.get("security_id") or x.get("id")
+ def tk_from_sid(s): return s.rsplit("_",1)[-1]
+ security_ids={sid(x) for x in pool};security_ids.discard(None)
+ if len(security_ids)!=100:raise RuntimeError(f"expected 100 names, got {len(security_ids)}")
+ sid_by_ticker={tk_from_sid(s):s for s in security_ids}
+ names=set(sid_by_ticker)
+ if len(names)!=100:raise RuntimeError("ticker extraction collision in Verification A")
  with open(a.sectors,newline="") as f: sm={r["ticker"]:r.get("sector") or r.get("sector_id") for r in csv.DictReader(f)}
  with open(a.market_caps,newline="") as f: rr=list(csv.DictReader(f))
  cm={}
@@ -29,7 +33,7 @@ def main():
   if t in names and v not in ("",None):cm[t]=float(v)
  miss=sorted(t for t in names if not sm.get(t) or t not in cm)
  if miss:raise RuntimeError("missing metadata: "+",".join(miss))
- rows=[{"ticker":t,"sector":sm[t],"market_cap":cm[t]} for t in sorted(names)]
+ rows=[{"ticker":t,"security_id":sid_by_ticker[t],"sector":sm[t],"market_cap":cm[t]} for t in sorted(names)]
  vals=sorted((r["market_cap"],r["ticker"]) for r in rows);rank={t:i for i,(_,t) in enumerate(vals)}
  for r in rows:
   i=rank[r["ticker"]];r["size_band"]=("LOWER" if i<100/3 else ("MIDDLE" if i<200/3 else "UPPER"))+"_CURRENT_SP500_CAP_TERCILE"
