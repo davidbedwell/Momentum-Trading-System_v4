@@ -50,10 +50,18 @@ def _compile_signal(rows: Sequence[Mapping[str, Any]], candidate: Mapping[str, A
     g = candidate["genome"]
     signal = [False] * len(rows)
 
+    # Thresholds depend only on the feature column and requested quantile, not
+    # on the current row. Cache them per candidate so we preserve identical
+    # quantile semantics without re-sorting the full history once per row.
+    quantile_cache: dict[tuple[str, float], float | None] = {}
+
     def qthreshold(feature: str, q: float) -> float | None:
-        vals = [_finite(r.get(feature)) for r in rows]
-        clean = [v for v in vals if v is not None]
-        return None if not clean else _quantile(clean, q)
+        key = (feature, float(q))
+        if key not in quantile_cache:
+            vals = [_finite(r.get(feature)) for r in rows]
+            clean = [v for v in vals if v is not None]
+            quantile_cache[key] = None if not clean else _quantile(clean, q)
+        return quantile_cache[key]
 
     for i, row in enumerate(rows):
         if family == "MOMENTUM":
