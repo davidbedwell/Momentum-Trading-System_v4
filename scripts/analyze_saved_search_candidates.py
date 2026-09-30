@@ -82,10 +82,11 @@ def main(argv=None):
     store=ParquetDerivedMarketStore(args.derived_market_root)
     security_id=report["security_id"]
     universe_id=report["universe_id"]
-    predictors=store.query(DerivedMarketQuery(
+    predictors=list(store.query(DerivedMarketQuery(
         universe_id=universe_id,feature_set_id="mts_market_predictors",
         feature_set_version=report["predictor_feature_set_version"],security_ids=(security_id,),
-    ))
+    )))
+    predictors.sort(key=lambda row: (str(row["effective_date"]), str(row["security_id"])))
     outcomes=store.query(DerivedMarketQuery(
         universe_id=universe_id,feature_set_id="mts_historical_outcomes",
         feature_set_version=report["outcome_feature_set_version"],security_ids=(security_id,),
