@@ -36,7 +36,16 @@ def main(argv=None) -> int:
     partition=load_frozen_partition(args.scientific_partition_manifest)
     if partition.universe_id != args.universe_id:
         raise SystemExit(f"PREFLIGHT_FAIL=UNIVERSE_MISMATCH PARTITION={partition.universe_id} REQUESTED={args.universe_id}")
-    cohort=partition.cohort_for(security_id)
+    matching_cohorts = tuple(
+        cohort for cohort in ScientificCohort
+        if security_id in partition.members(cohort)
+    )
+    if len(matching_cohorts) != 1:
+        raise SystemExit(
+            f"PREFLIGHT_FAIL=PARTITION_MEMBERSHIP_INVALID SECURITY_ID={security_id} "
+            f"COHORTS={[cohort.value for cohort in matching_cohorts]}"
+        )
+    cohort = matching_cohorts[0]
     if cohort != ScientificCohort.DISCOVERY:
         raise SystemExit(f"PREFLIGHT_FAIL=ADAPTIVE_SEARCH_PROHIBITED COHORT={cohort.value}")
 
