@@ -30,6 +30,18 @@ def _accepted_signal_indices(signals,horizon):
     return accepted
 
 
+def _eligible_signals(predictors, signals, outcomes, outcome_column):
+    eligible_dates={
+        str(r["effective_date"])
+        for r in outcomes
+        if r.get(outcome_column) is not None
+    }
+    return [
+        bool(active) and str(row["effective_date"]) in eligible_dates
+        for row,active in zip(predictors,signals)
+    ]
+
+
 def main(argv=None):
     args=_parser().parse_args(argv)
     search=json.loads(Path(args.search_report).read_text())
@@ -60,15 +72,9 @@ def main(argv=None):
                 horizon=int(candidate["genome"]["forward_horizon"])
                 signals=_compile_signal(predictors,candidate)
                 outcome_column=f"forward_return_{horizon}__v1"
-                eligible_dates={
-                    str(r["effective_date"])
-                    for r in outcomes
-                    if r.get(outcome_column) is not None
-                }
-                eligible_signals=[
-                    bool(active) and str(row["effective_date"]) in eligible_dates
-                    for row,active in zip(predictors,signals)
-                ]
+                eligible_signals=_eligible_signals(
+                    predictors,signals,outcomes,outcome_column
+                )
                 accepted=_accepted_signal_indices(eligible_signals,horizon)
                 paths=[]; excluded=[]
                 for pi in accepted:
