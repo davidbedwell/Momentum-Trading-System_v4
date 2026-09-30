@@ -23,10 +23,11 @@ def main():
     for row in td[t]["rows"]:
      c=next((x for x in row["cells"] if x["depth"]==dep and x["recovery_fraction"]==frac),None)
      if c and c["eligible"]:
-      elig.append(c)
-      if c.get("entry") is not None:conf.append(c)
-   ew=sum(c["original_terminal_return"]>0 for c in elig);el=len(elig)-ew
-   cw=sum(c["original_terminal_return"]>0 for c in conf);cl=len(conf)-cw
+      item={"cell":c,"original_terminal_return":row["original_terminal_return"]}
+      elig.append(item)
+      if c.get("entry") is not None:conf.append(item)
+   ew=sum(x["original_terminal_return"]>0 for x in elig);el=len(elig)-ew
+   cw=sum(x["original_terminal_return"]>0 for x in conf);cl=len(conf)-cw
    cells.append({"depth":dep,"recovery_fraction":frac,"eligible":len(elig),"confirmed":len(conf),
     "original_winners_filtered":ew-cw,"original_losers_filtered":el-cl})
  out={"format":"MTS_V4_TRAJECTORY_AUDIT_V1","common_tickers":len(common),"missing_recovery":missing_r,"missing_trajectory":missing_t,
