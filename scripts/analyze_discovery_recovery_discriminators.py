@@ -38,7 +38,7 @@ def compare(rows,feature_key="reclaim_features"):
    sa,sb=gs.get(a,{}),gs.get(b,{})
    iqs=[x for x in ((sa.get("p75")-sa.get("p25")) if sa.get("p75") is not None else None,(sb.get("p75")-sb.get("p25")) if sb.get("p75") is not None else None) if x and x>0]
    den=statistics.fmean(iqs) if iqs else None;md=(sa.get("median")-sb.get("median")) if sa.get("median") is not None and sb.get("median") is not None else None
-   z=auc(av,bv);cs[a+"__VS__"+b]={"median_diff":md,"median_diff_over_pooled_iqr":md/den if den else None,"auc":z,"auc_separation":abs(z-.5)*2 if z is not None else None}
+   z=auc(av,bv);cs[a+"__VS__"+b]={"median_diff":md,"median_diff_over_pooled_iqr":(md/den if (md is not None and den) else None),"auc":z,"auc_separation":abs(z-.5)*2 if z is not None else None}
   out["continuous"][k]={"groups":gs,"comparisons":cs}
  for k in BOOL:
   gs={}
