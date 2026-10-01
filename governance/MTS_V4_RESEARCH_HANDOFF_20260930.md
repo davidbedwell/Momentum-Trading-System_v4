@@ -175,3 +175,76 @@ The next useful research question is therefore not simply a tighter price stop. 
 3. If the composite question is resumed, first recover exact frozen composite executable membership and run only the already-frozen stop neighborhood against those structures.
 4. Decide prospectively whether the next scientific step is an untouched-data test of a specifically frozen path/recovery hypothesis. Do not choose a rule from the 128-cell Discovery table and call it validated.
 5. Keep Verification A remainder and Verification B sealed until the exact hypothesis and pass/fail criteria are frozen.
+
+
+## Prospective next Discovery hypothesis — structural support, moving averages, and compression
+**Status: hypothesis only. Added after completion of the September 30 experiments. This section does not alter, reinterpret, or select from the frozen results above.**
+
+The final stop-neighborhood work suggests that a fixed percentage decline after early recovery is a poor failure discriminator. A more plausible next question is whether eventual winners and losers interact differently with **pre-existing price structure** during adverse excursion and recovery.
+
+### A. Moving-average support/reclaim
+Before observing results, freeze a small, explicit comparison set rather than searching arbitrary periods. Candidate set discussed:
+- SMA 10, 20, 30, 40, 50, 75, 100, 150, 200
+- EMA 20 and EMA 50 as limited prespecified comparisons
+
+For each average, classify its causal slope at the relevant decision point as positive, approximately flat, or negative using a definition frozen before execution. Measure:
+- whether the AE touches/crosses the average;
+- penetration below it in percent and ATR units;
+- whether price reclaims it within 1, 2, 3, or 5 sessions;
+- subsequent MAE and MFE;
+- terminal winner/loser outcome;
+- winner-versus-loser differences in touch, hold, sweep/reclaim, and sustained-break behavior.
+
+Do not search for an arbitrary “best SMA.” The purpose is to determine whether a stable structural relationship exists.
+
+### B. Prior-high / prior-low structural hypothesis
+Reconstruct only structure that was observable before the signal/decision point. Candidate measurements:
+- prior 5-, 10-, 20-, and 50-session highs/lows;
+- most recent causally confirmed swing high and swing low;
+- distance to and penetration through the prior low, in percent and ATR;
+- touch versus sweep-and-reclaim versus sustained break;
+- sessions spent below the prior low;
+- time to reclaim;
+- higher/equal/lower subsequent low;
+- corresponding behavior around prior highs during recovery.
+
+Primary descriptive comparison:
+- eventual winners: does AE tend to test or modestly sweep an existing low/structural boundary and reclaim it promptly?
+- eventual losers: do they tend to penetrate farther, remain below the boundary longer, fail to reclaim, or establish another lower low?
+
+This directly tests whether the tight-stop failure occurred because a fixed 1–3% threshold confuses a normal structural retest/liquidity sweep with genuine breakdown.
+
+### C. Triangle / compression hypothesis
+Test the previously discussed “triangle” concept objectively rather than visually. Using only causal swing points available before the decision:
+- estimate a lower boundary from prior swing lows;
+- estimate an upper boundary from prior swing highs;
+- measure slopes and convergence/divergence;
+- classify geometry prospectively as converging/compression, ascending, descending, approximately parallel/range, or expanding, with numerical tolerances frozen before execution.
+
+Then measure whether eventual winners disproportionately follow:
+`AE -> lower-boundary test/sweep -> reclaim -> later upper-boundary break`
+
+and whether eventual losers disproportionately follow:
+`AE -> lower-boundary violation -> failed reclaim -> continued lower-low sequence`.
+
+### D. Confluence
+Measure prespecified confluence rather than inventing it after inspection. Examples include a causal prior swing low lying near a rising SMA/EMA or compression boundary. Distance tolerances must be frozen in ATR and/or percent units before results are viewed.
+
+A possible pattern to test descriptively is:
+`prior structural low + rising moving average nearby -> limited sweep -> prompt reclaim`.
+
+This is an example, not a selected rule.
+
+### Governance for the next experiment
+- Discovery only initially; do not access sealed Verification A remainder or Verification B.
+- Use the corrected 125,002-trade / 67-ticker Discovery population.
+- Freeze all swing definitions, MA periods, slope definitions, boundary-fitting rules, tolerances, reclaim windows, and comparison metrics before execution.
+- Preserve winner and loser denominators and ticker/family breadth.
+- Report the full prespecified grid; do not output only a “best” level.
+- No Search/GA, refit, Sol selection, or post-hoc threshold optimization.
+- Treat this as descriptive hypothesis measurement first.
+- If a specific structural rule is later nominated, freeze it with pass/fail criteria before untouched-data testing.
+- The unresolved exact frozen-composite stop slice remains separate and should not be conflated with this new structural experiment.
+
+### Rationale
+The current Discovery evidence suggests that **trajectory may matter more than absolute volatility**. Eventual winners had shallower and much earlier median bottoms than losers, yet many winners still experienced a substantial secondary decline after early recovery. A causal structural test may distinguish a normal retest from genuine thesis failure more effectively than a fixed percentage stop.
