@@ -1,0 +1,717 @@
+{
+  "a1": [
+    {
+      "market_cap": 111350510760.08304,
+      "sector": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001751008_APP",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "APP"
+    },
+    {
+      "market_cap": 56304474518.88034,
+      "sector": "Energy",
+      "security_id": "CAL_SEC_CIK_0001701605_BKR",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "BKR"
+    },
+    {
+      "market_cap": 228416563669.63153,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0000831001_C",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "C"
+    },
+    {
+      "market_cap": 360173652426.7817,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000018230_CAT",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CAT"
+    },
+    {
+      "market_cap": 92080949918.3595,
+      "sector": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001868275_CEG",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CEG"
+    },
+    {
+      "market_cap": 20512369124.135895,
+      "sector": "Basic Materials",
+      "security_id": "CAL_SEC_CIK_0001324404_CF",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CF"
+    },
+    {
+      "market_cap": 69354036123.0,
+      "sector": "Consumer Defensive",
+      "security_id": "CAL_SEC_CIK_0000021665_CL",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CL"
+    },
+    {
+      "market_cap": 11901937897.694641,
+      "sector": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000906345_CPT",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CPT"
+    },
+    {
+      "market_cap": 184434560900.0935,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000315189_DE",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "DE"
+    },
+    {
+      "market_cap": 20995451222.70158,
+      "sector": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000827052_EIX",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "EIX"
+    },
+    {
+      "market_cap": 33227409251.87683,
+      "sector": "Energy",
+      "security_id": "CAL_SEC_CIK_0000033213_EQT",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "EQT"
+    },
+    {
+      "market_cap": 9899278949.206459,
+      "sector": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000034903_FRT",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "FRT"
+    },
+    {
+      "market_cap": 47626251172.63037,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0000049071_HUM",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "HUM"
+    },
+    {
+      "market_cap": 1013116315708.0417,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0000059478_LLY",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "LLY"
+    },
+    {
+      "market_cap": 23973206176.225433,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0002058873_Q",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "Q"
+    },
+    {
+      "market_cap": 32461038731.25,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0000720005_RJF",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "RJF"
+    },
+    {
+      "market_cap": 13000381045.101517,
+      "sector": "Consumer Defensive",
+      "security_id": "CAL_SEC_CIK_0000091419_SJM",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "SJM"
+    },
+    {
+      "market_cap": 22926895828.464935,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0002005951_SW",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "SW"
+    },
+    {
+      "market_cap": 213763187312.7419,
+      "sector": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0000732712_VZ",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "VZ"
+    },
+    {
+      "market_cap": 47048254983.21533,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0001512673_XYZ",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "XYZ"
+    }
+  ],
+  "algorithm": "MTS_V4_A1_METADATA_ONLY_BALANCED_SHA256_V1",
+  "format": "MTS_V4_VERIFICATION_A1_FROZEN_SELECTION_V1",
+  "outcomes_accessed": false,
+  "partition_source": "/home/ubuntu/MTS_V4_SP500_SCIENTIFIC_PARTITION_303_100_100_PRIOR_SOL_REPAIRED_20260915.json",
+  "predictors_accessed": false,
+  "prices_accessed": false,
+  "protocol_sha256": "d70d6cf94a76aeccb1c53a11048ca3c46fee1cd59cf3de1cc61073993af15fa1",
+  "search_run": false,
+  "seed": "MTS-A1-20260930",
+  "sol_calls": 0,
+  "verification_a_remaining": [
+    {
+      "market_cap": 175097733735.3029,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000006281_ADI",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "ADI"
+    },
+    {
+      "market_cap": 41742519777.794785,
+      "sector": "Consumer Defensive",
+      "security_id": "CAL_SEC_CIK_0000007084_ADM",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "ADM"
+    },
+    {
+      "market_cap": 47338500000.0,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000769397_ADSK",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "ADSK"
+    },
+    {
+      "market_cap": 14112022253.853882,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0001267238_AIZ",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "AIZ"
+    },
+    {
+      "market_cap": 334239445724.52563,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000006951_AMAT",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "AMAT"
+    },
+    {
+      "market_cap": 82805763258.47388,
+      "sector": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001053507_AMT",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "AMT"
+    },
+    {
+      "market_cap": 64703507053.134155,
+      "sector": "Basic Materials",
+      "security_id": "CAL_SEC_CIK_0000002969_APD",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "APD"
+    },
+    {
+      "market_cap": 416208385885.8262,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0000070858_BAC",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "BAC"
+    },
+    {
+      "market_cap": 50642153357.24487,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0000010795_BDX",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "BDX"
+    },
+    {
+      "market_cap": 128726512763.27515,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0001075531_BKNG",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "BKNG"
+    },
+    {
+      "market_cap": 163953895026.32288,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0002012383_BLK",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "BLK"
+    },
+    {
+      "market_cap": 22495855424.37475,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0000079282_BRO",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "BRO"
+    },
+    {
+      "market_cap": 131889534146.37488,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0000896159_CB",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CB"
+    },
+    {
+      "market_cap": 30282942857.05748,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0000815097_CCL",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CCL"
+    },
+    {
+      "market_cap": 47410842259.082794,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000936395_CIEN",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CIEN"
+    },
+    {
+      "market_cap": 248293965461.22208,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0001535527_CRWD",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CRWD"
+    },
+    {
+      "market_cap": 79613732939.72942,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000723254_CTAS",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CTAS"
+    },
+    {
+      "market_cap": 48162409262.00527,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0001690820_CVNA",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CVNA"
+    },
+    {
+      "market_cap": 120849907434.63452,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0000064803_CVS",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "CVS"
+    },
+    {
+      "market_cap": 51879880435.318756,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000027904_DAL",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "DAL"
+    },
+    {
+      "market_cap": 85905193981.87589,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0001792789_DASH",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "DASH"
+    },
+    {
+      "market_cap": 27271049990.89966,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0001022079_DGX",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "DGX"
+    },
+    {
+      "market_cap": 66508943374.36757,
+      "sector": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001297996_DLR",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "DLR"
+    },
+    {
+      "market_cap": 27134682927.53122,
+      "sector": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000936340_DTE",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "DTE"
+    },
+    {
+      "market_cap": 12179419610.595703,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0000927066_DVA",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "DVA"
+    },
+    {
+      "market_cap": 38920764546.880806,
+      "sector": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001047862_ED",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "ED"
+    },
+    {
+      "market_cap": 21814602814.612846,
+      "sector": "Energy",
+      "security_id": "CAL_SEC_CIK_0000895126_EXE",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "EXE"
+    },
+    {
+      "market_cap": 56697854906.83577,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000815556_FAST",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "FAST"
+    },
+    {
+      "market_cap": 77213030539.32034,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0001467858_GM",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "GM"
+    },
+    {
+      "market_cap": 53800072203.33569,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0001121788_GRMN",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "GRMN"
+    },
+    {
+      "market_cap": 91757667315.70435,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0000860730_HCA",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "HCA"
+    },
+    {
+      "market_cap": 50235420601.25427,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0002089271_HONA",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "HONA"
+    },
+    {
+      "market_cap": 40235880240.19519,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0000874716_IDXX",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "IDXX"
+    },
+    {
+      "market_cap": 16427741354.669678,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000832101_IEX",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "IEX"
+    },
+    {
+      "market_cap": 16324825606.152191,
+      "sector": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001687229_INVH",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "INVH"
+    },
+    {
+      "market_cap": 83767983819.43222,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000833444_JCI",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "JCI"
+    },
+    {
+      "market_cap": 32817237589.600677,
+      "sector": "Consumer Defensive",
+      "security_id": "CAL_SEC_CIK_0000055785_KMB",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "KMB"
+    },
+    {
+      "market_cap": 22325551114.040833,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0000060086_L",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "L"
+    },
+    {
+      "market_cap": 12517530962.626648,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001069202_LII",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "LII"
+    },
+    {
+      "market_cap": 17110196733.118126,
+      "sector": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000352541_LNT",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "LNT"
+    },
+    {
+      "market_cap": 338945313160.0342,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000707549_LRCX",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "LRCX"
+    },
+    {
+      "market_cap": 13582269636.808548,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000062996_MAS",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "MAS"
+    },
+    {
+      "market_cap": 119919177187.5,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0001613103_MDT",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "MDT"
+    },
+    {
+      "market_cap": 62416544545.66867,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0001099219_MET",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "MET"
+    },
+    {
+      "market_cap": 116564819397.53674,
+      "sector": "Consumer Defensive",
+      "security_id": "CAL_SEC_CIK_0000764180_MO",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "MO"
+    },
+    {
+      "market_cap": 199242809959.4712,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0001835632_MRVL",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "MRVL"
+    },
+    {
+      "market_cap": 26656638582.773804,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0001037646_MTD",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "MTD"
+    },
+    {
+      "market_cap": 6557202318.263617,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0001513761_NCLH",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "NCLH"
+    },
+    {
+      "market_cap": 49877552780.00992,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0001120193_NDAQ",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "NDAQ"
+    },
+    {
+      "market_cap": 130858045707.9809,
+      "sector": "Basic Materials",
+      "security_id": "CAL_SEC_CIK_0001164727_NEM",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "NEM"
+    },
+    {
+      "market_cap": 16675228727.480469,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0000906163_NVR",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "NVR"
+    },
+    {
+      "market_cap": 18118583316.27127,
+      "sector": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001564708_NWS",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "NWS"
+    },
+    {
+      "market_cap": 37523255709.28482,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000878927_ODFL",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "ODFL"
+    },
+    {
+      "market_cap": 26075849721.5,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001781335_OTIS",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "OTIS"
+    },
+    {
+      "market_cap": 42112491042.26619,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000723531_PAYX",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "PAYX"
+    },
+    {
+      "market_cap": 116593908825.0,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000076334_PH",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "PH"
+    },
+    {
+      "market_cap": 414671765441.958,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0001321655_PLTR",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "PLTR"
+    },
+    {
+      "market_cap": 302542455595.59216,
+      "sector": "Consumer Defensive",
+      "security_id": "CAL_SEC_CIK_0001413329_PM",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "PM"
+    },
+    {
+      "market_cap": 9656879049.733994,
+      "sector": "Healthcare",
+      "security_id": "CAL_SEC_CIK_0001145197_PODD",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "PODD"
+    },
+    {
+      "market_cap": 41161949157.71484,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0001137774_PRU",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "PRU"
+    },
+    {
+      "market_cap": 105712608353.36353,
+      "sector": "Energy",
+      "security_id": "CAL_SEC_CIK_0001534701_PSX",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "PSX"
+    },
+    {
+      "market_cap": 14404206147.75,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000857005_PTC",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "PTC"
+    },
+    {
+      "market_cap": 30712255830.736084,
+      "sector": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001713445_RDDT",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "RDDT"
+    },
+    {
+      "market_cap": 25285267998.068253,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0001281761_RF",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "RF"
+    },
+    {
+      "market_cap": 37972001805.01721,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000882835_ROP",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "ROP"
+    },
+    {
+      "market_cap": 19388360996.54077,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000091440_SNA",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "SNA"
+    },
+    {
+      "market_cap": 50855539095.76721,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0000093751_STT",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "STT"
+    },
+    {
+      "market_cap": 13542550380.0,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000004127_SWKS",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "SWKS"
+    },
+    {
+      "market_cap": 7322046034.261837,
+      "sector": "Consumer Defensive",
+      "security_id": "CAL_SEC_CIK_0000024545_TAP",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "TAP"
+    },
+    {
+      "market_cap": 52038019591.72821,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000097210_TER",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "TER"
+    },
+    {
+      "market_cap": 13900613419.727783,
+      "sector": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001973266_TKO",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "TKO"
+    },
+    {
+      "market_cap": 23350759532.279022,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0001116132_TPR",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "TPR"
+    },
+    {
+      "market_cap": 18487169187.196747,
+      "sector": "Consumer Defensive",
+      "security_id": "CAL_SEC_CIK_0000100493_TSN",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "TSN"
+    },
+    {
+      "market_cap": 47502448738.63907,
+      "sector": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001692819_VST",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "VST"
+    },
+    {
+      "market_cap": 45426528300.72955,
+      "sector": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000740260_VTR",
+      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "VTR"
+    },
+    {
+      "market_cap": 148528444209.4458,
+      "sector": "Technology",
+      "security_id": "CAL_SEC_CIK_0000106040_WDC",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "WDC"
+    },
+    {
+      "market_cap": 271313224117.32544,
+      "sector": "Financial Services",
+      "security_id": "CAL_SEC_CIK_0000072971_WFC",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "WFC"
+    },
+    {
+      "market_cap": 87615482659.8302,
+      "sector": "Energy",
+      "security_id": "CAL_SEC_CIK_0000107263_WMB",
+      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "WMB"
+    },
+    {
+      "market_cap": 8928865994.334587,
+      "sector": "Consumer Cyclical",
+      "security_id": "CAL_SEC_CIK_0001174922_WYNN",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "WYNN"
+    },
+    {
+      "market_cap": 25099832290.0,
+      "sector": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001524472_XYL",
+      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
+      "ticker": "XYL"
+    }
+  ],
+  "verification_b_accessed": false
+}
