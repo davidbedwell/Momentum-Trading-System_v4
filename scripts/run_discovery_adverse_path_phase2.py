@@ -117,7 +117,16 @@ def structure_for(r):
     fail=True
     if fn is None:fn=j
    if touch and cl>ref and rn is None:reclaim=True;rn=j
-  out[name]={"slope":sc,"touch":touch,"sweep":sweep,"failure":fail,"reclaim":reclaim,"touch_session":tn,"sweep_session":sn,"failure_session":fn,"reclaim_session":rn,"max_pen_atr":pen}
+
+  # Persist causal reference lineage needed by the frozen final-compliance audit.
+  sustained=None; run=0; upper=None; subsequent_low=None
+  for j,x in enumerate(path,1):
+   cl=float(x["close"]); lo=float(x["low"]); hi=float(x["high"])
+   run=run+1 if cl<ref else 0
+   if run>=3 and sustained is None:sustained=j
+   if cl>ref and upper is None:upper=j
+   if tn is not None and j>tn and lo<ref and subsequent_low is None:subsequent_low=j
+  out[name]={"reference_value":ref,"slope":sc,"touch":touch,"sweep":sweep,"failure":fail,"reclaim":reclaim,"touch_session":tn,"sweep_session":sn,"failure_session":fn,"reclaim_session":rn,"reclaim_time":(rn-tn if rn is not None and tn is not None else None),"sustained_break_session":sustained,"upper_boundary_break_session":upper,"subsequent_low_session":subsequent_low,"max_pen_atr":pen}
  return out
 _ROWS=None
 def _init_rows(rows):
