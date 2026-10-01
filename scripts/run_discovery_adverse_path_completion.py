@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import run_discovery_adverse_path_phase2 as p2
 SPLIT='2021-09-13'; PCT=(.02,.03,.04,.05,.06,.08,.10,.12,.15); TIMES=(2,4,5,10,15,20)
-def mean(v): return statistics.fmean(v) if v else None
+def mean(v): return statistics.fmean(v) if len(v) else None
 def q(v,x): return float(np.percentile(v,x)) if v else None
 def econ(v):
  if not v:return {'n':0}
