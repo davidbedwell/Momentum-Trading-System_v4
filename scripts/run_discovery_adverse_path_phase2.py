@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse,gzip,json,math,statistics
+import argparse,gzip,json,math,statistics,multiprocessing as mp
 from collections import Counter,defaultdict
 from datetime import date,timedelta
 from pathlib import Path
 import numpy as np
+from scipy.spatial import cKDTree
 from MTS_V4.derived_market_updater import YFinanceDailyMarketSource
 MAS=(10,20,30,40,50,75,100,150,200); EMAS=(20,50); PRIOR=(5,10,20,50)
 HPTS=(2,4,5,10); FAV=(.01,.02,.03,.05,.08,.10); ATR_EVT=(.5,1,1.5,2,3)
@@ -96,18 +97,32 @@ def structure_for(r):
   if sh:refs.append(("SWING_HIGH",sh[-1][1],None))
  out={}
  for name,ref,sc in refs:
-  touch=sweep=fail=reclaim=False;pen=0.;rn=None;br=0
+  touch=sweep=fail=reclaim=False;pen=0.;rn=None;br=0;tn=sn=fn=None
   for j,x in enumerate(path,1):
    lo=float(x["low"]);hi=float(x["high"]);cl=float(x["close"])
-   if lo<=ref<=hi:touch=True
+   if lo<=ref<=hi:
+    touch=True
+    if tn is None:tn=j
    if lo<ref:
     pen=max(pen,(ref-lo)/at)
-    if (ref-lo)<=.5*at and (cl>ref or (j<len(path) and float(path[j]["close"])>ref)):sweep=True
+    if (ref-lo)<=.5*at:
+     if cl>ref:
+      sweep=True
+      if sn is None:sn=j
+     elif j<len(path) and float(path[j]["close"])>ref:
+      sweep=True
+      if sn is None:sn=j+1
    br=br+1 if cl<ref else 0
-   if pen>.5 or br>=3:fail=True
+   if pen>.5 or br>=3:
+    fail=True
+    if fn is None:fn=j
    if touch and cl>ref and rn is None:reclaim=True;rn=j
-  out[name]={"slope":sc,"touch":touch,"sweep":sweep,"failure":fail,"reclaim":reclaim,"reclaim_session":rn,"max_pen_atr":pen}
+  out[name]={"slope":sc,"touch":touch,"sweep":sweep,"failure":fail,"reclaim":reclaim,"touch_session":tn,"sweep_session":sn,"failure_session":fn,"reclaim_session":rn,"max_pen_atr":pen}
  return out
+_ROWS=None
+def _init_rows(rows):
+ global _ROWS;_ROWS=rows
+def _structure_idx(i):return structure_for(_ROWS[i])
 def recovery_stats(r):
  trough=r["ep"];lowi=0;marks={.25:None,.5:None,.75:None,1.:None};recs=[]
  for j,x in enumerate(r["path"],1):
@@ -118,9 +133,11 @@ def recovery_stats(r):
    if marks[k] is None and f>=k:marks[k]=j
  return {"recs":recs,"first25":marks[.25],"first50":marks[.5],"first75":marks[.75],"first100":marks[1.],"causal_low_session":lowi}
 def states(r,s,rc):
- out=[];mn=r["ep"];af=any(v["failure"] for v in s.values());aw=any(v["sweep"] for v in s.values())
+ out=[];mn=r["ep"]
  for j,x in enumerate(r["path"]):
-  lo=float(x["low"]);cl=float(x["close"]);prev=r["ep"] if j==0 else float(r["path"][j-1]["close"]);new=lo<mn;mn=min(mn,lo)
+  sess=j+1;lo=float(x["low"]);cl=float(x["close"]);prev=r["ep"] if j==0 else float(r["path"][j-1]["close"]);new=lo<mn;mn=min(mn,lo)
+  af=any(v.get("failure_session") is not None and v["failure_session"]<=sess for v in s.values())
+  aw=any(v.get("sweep_session") is not None and v["sweep_session"]<=sess for v in s.values())
   if af:z="STRUCTURAL_FAILURE"
   elif aw:z="STRUCTURAL_SWEEP"
   elif cl>=r["ep"]:z="RECLAIMED"
@@ -134,7 +151,7 @@ def states(r,s,rc):
   out.append(z)
  return out
 def event_race(r,s,rc):
- first={"RECOVERY_25":rc["first25"],"RECLAIM":rc["first100"],"STRUCTURAL_SWEEP":1 if any(v["sweep"] for v in s.values()) else None,"STRUCTURAL_FAILURE":1 if any(v["failure"] for v in s.values()) else None,"TERMINAL":len(r["path"])}
+ first={"RECOVERY_25":rc["first25"],"RECLAIM":rc["first100"],"STRUCTURAL_SWEEP":min([v["sweep_session"] for v in s.values() if v.get("sweep_session") is not None],default=None),"STRUCTURAL_FAILURE":min([v["failure_session"] for v in s.values() if v.get("failure_session") is not None],default=None),"TERMINAL":len(r["path"])}
  for j,x in enumerate(r["path"],1):
   hi=float(x["high"]);lo=float(x["low"])
   for z in FAV:
@@ -147,6 +164,16 @@ def event_race(r,s,rc):
  ev=[(t,k) for k,t in first.items() if t is not None]
  mt=min(t for t,k in ev);cand=[k for t,k in ev if t==mt];cand.sort(key=lambda k:(0 if k.startswith("ADV") or k=="STRUCTURAL_FAILURE" else 1,k))
  return {"event":cand[0],"session":mt}
+def causal_after_low(r,n):
+ mn=r["ep"];low_session=0
+ for j,x in enumerate(r["path"],1):
+  lo=float(x["low"])
+  if lo<mn:mn=lo;low_session=j
+  if low_session>0 and j-low_session>=n:return j
+ return None
+def prompt_reclaim_session(s):
+ vals=[v["reclaim_session"] for v in s.values() if v.get("reclaim_session") is not None and v["reclaim_session"]<=5]
+ return min(vals,default=None)
 def entry_policy(r,session):
  if session is None or session<1 or session>=len(r["path"]):return None
  px=float(r["path"][session-1]["close"]);tail=r["path"][session:]
@@ -155,7 +182,13 @@ def main():
  ap=argparse.ArgumentParser();ap.add_argument("--trajectory-dir",required=True);ap.add_argument("--output",required=True);a=ap.parse_args()
  rows=load_rows(a.trajectory_dir)
  out={"format":"MTS_V4_DISCOVERY_ADVERSE_PATH_PHASE2_V1","trade_count":len(rows),"ticker_count":67,"verification_a_accessed":False,"verification_b_accessed":False,"search_run":False,"refit":False,"rule_selection":False}
- structs=[structure_for(r) for r in rows];recs=[recovery_stats(r) for r in rows];sts=[states(r,s,rc) for r,s,rc in zip(rows,structs,recs)]
+ workers=min(6,mp.cpu_count())
+ print(f"PHASE2_WORKERS={workers}",flush=True)
+ ctx=mp.get_context("fork")
+ with ctx.Pool(processes=workers,initializer=_init_rows,initargs=(rows,)) as pool:
+  structs=pool.map(_structure_idx,range(len(rows)),chunksize=256)
+ print("STRUCTURES_COMPLETE",flush=True)
+ recs=[recovery_stats(r) for r in rows];sts=[states(r,s,rc) for r,s,rc in zip(rows,structs,recs)]
  dims=defaultdict(list)
  for i,r in enumerate(rows):
   d=-r["mae"];t=r["mi"]+1;atn=d*r["ep"]/r["atr"] if r["atr"] else None;rf=max(recs[i]["recs"][:min(4,len(recs[i]["recs"]))]) if recs[i]["recs"] else 0
@@ -198,7 +231,7 @@ def main():
  for i,r in enumerate(rows):
   e=event_race(r,structs[i],recs[i]);races[e["event"]].append((i,e["session"]))
  out["event_race"]={k:{"n":len(v),"share":len(v)/len(rows),"median_session":q([x[1] for x in v],50),"win_rate":mean([rows[x[0]]["winner"] for x in v])} for k,v in races.items()}
- pols={"REC25":lambda i:recs[i]["first25"],"REC50":lambda i:recs[i]["first50"],"REC75":lambda i:recs[i]["first75"],"REC100":lambda i:recs[i]["first100"],"LOW+1":lambda i:recs[i]["causal_low_session"]+1,"LOW+2":lambda i:recs[i]["causal_low_session"]+2,"LOW+3":lambda i:recs[i]["causal_low_session"]+3,"LOW+4":lambda i:recs[i]["causal_low_session"]+4,"LOW+5":lambda i:recs[i]["causal_low_session"]+5}
+ pols={"REC25":lambda i:recs[i]["first25"],"REC50":lambda i:recs[i]["first50"],"REC75":lambda i:recs[i]["first75"],"REC100":lambda i:recs[i]["first100"],"PROMPT_RECLAIM":lambda i:prompt_reclaim_session(structs[i]),"LOW+1":lambda i:causal_after_low(rows[i],1),"LOW+2":lambda i:causal_after_low(rows[i],2),"LOW+3":lambda i:causal_after_low(rows[i],3),"LOW+4":lambda i:causal_after_low(rows[i],4),"LOW+5":lambda i:causal_after_low(rows[i],5)}
  ef={}
  for name,fn in pols.items():
   vals=[];ma=[];mf=[];pd=[]
@@ -222,25 +255,33 @@ def main():
   iv[k]={"mutual_information":float(mutual_info(x,ys)),"entropy_reduction_bits":hy-cond,"n":len(ys)}
  out["information_value"]=iv
  matches={}
+ split_date="2021-09-13"
  for h in HPTS:
   X=[];meta=[]
   for i,r in enumerate(rows):
    if len(r["path"])<h or not r["atr"]:continue
-   p=r["path"][:h];scale=r["atr"]/r["ep"];cl=np.array([float(x["close"])/r["ep"]-1 for x in p]);lo=np.array([float(x["low"])/r["ep"]-1 for x in p])
-   X.append([cl[-1]/scale,lo.min()/scale,np.sum(np.diff(np.r_[0,cl])>0),recs[i]["recs"][h-1]]);meta.append((i,r["family"],r["ticker"],r["winner"]))
-  X=np.asarray(X,float);mu=X.mean(0);sd=X.std(0);sd[sd==0]=1;Z=(X-mu)/sd;pairs=[];used=set()
-  by=defaultdict(list)
-  for j,m in enumerate(meta):by[(m[1],m[3])].append(j)
-  for a1,(i1,f1,t1,w1) in enumerate(meta):
-   cand=[j for j in by[(f1,not w1)] if meta[j][2]!=t1]
-   if not cand:continue
-   j=min(cand,key=lambda z:float(np.linalg.norm(Z[a1]-Z[z])));key=tuple(sorted((a1,j)))
-   if key in used:continue
-   used.add(key);pairs.append(float(np.linalg.norm(Z[a1]-Z[j])))
-  matches[str(h)]={"pairs":len(pairs),"median_distance":q(pairs,50),"p90_distance":q(pairs,90)}
+   pth=r["path"][:h];scale=r["atr"]/r["ep"];cl=np.array([float(x["close"])/r["ep"]-1 for x in pth]);lo=np.array([float(x["low"])/r["ep"]-1 for x in pth])
+   X.append([cl[-1]/scale,lo.min()/scale,np.sum(np.diff(np.r_[0,cl])>0),recs[i]["recs"][h-1]]);meta.append((i,r["family"],r["ticker"],r["winner"],r["signal_date"],r["year"]))
+  X=np.asarray(X,float);dev=np.array([m[4]<=split_date for m in meta],bool);mu=X[dev].mean(0);sd=X[dev].std(0);sd[sd==0]=1;Z=(X-mu)/sd
+  groups=defaultdict(list)
+  for j,m in enumerate(meta):groups[(m[1],m[3],m[2])].append(j)
+  pairs=[];pair_tickers=set();pair_years=set()
+  families=sorted({m[1] for m in meta},key=str)
+  for fam in families:
+   tickers=sorted({m[2] for m in meta if m[1]==fam})
+   for outcome in (False,True):
+    for ticker in tickers:
+     src=groups.get((fam,outcome,ticker),[])
+     if not src:continue
+     tgt=[j for (f,w,t),js in groups.items() if f==fam and w==(not outcome) and t!=ticker for j in js]
+     if not tgt:continue
+     tree=cKDTree(Z[tgt]);dist,loc=tree.query(Z[src],k=1)
+     for a,d,zloc in zip(src,np.atleast_1d(dist),np.atleast_1d(loc)):
+      b=tgt[int(zloc)];pairs.append(float(d));pair_tickers.update((meta[a][2],meta[b][2]));pair_years.update((meta[a][5],meta[b][5]))
+  matches[str(h)]={"directed_pairs":len(pairs),"median_distance":q(pairs,50),"p90_distance":q(pairs,90),"unique_tickers":len(pair_tickers),"year_breadth":len(pair_years),"standardization":"development_split_only","split_date":split_date}
  out["matched_trajectory"]=matches
  out["three_action_framing"]={"ENTER_MAINTAIN":"shallow/early-recovering path without causal structural failure","WAIT_REDUCE":"unresolved path with repeated lower lows or weak recovery absent frozen failure","ABANDON_EXIT":"persistent causal structural failure; no rule nominated"}
- out["unavailable_or_deferred"]={"broad_market_regime":"no pre-existing causal market-regime artifact supplied; omitted rather than invented","compression_geometry":"deferred to dedicated structural runner; not silently approximated","prompt_structural_reclaim_entry":"deferred pending reference-specific causal lineage","controlled_retest_entry":"deferred pending reference-specific causal lineage","change_point_mean_shift":"deferred; Page-Hinkley executed","change_point_vol_ratio":"deferred; Page-Hinkley executed"}
+ out["unavailable_or_deferred"]={"broad_market_regime":"no pre-existing causal market-regime artifact supplied; omitted rather than invented","compression_geometry":"deferred to dedicated structural runner; not silently approximated","prompt_structural_reclaim_entry":"implemented causally from first observed reclaim within 5 completed sessions","controlled_retest_entry":"deferred pending reference-specific causal lineage","change_point_mean_shift":"deferred; Page-Hinkley executed","change_point_vol_ratio":"deferred; Page-Hinkley executed"}
  out["limitations"]=["Discovery only; no optimized result is validation.","Current-S&P calibration universe is survivorship-biased.","Repeated/overlapping trades are dependent; raw N is not effective independent sample size.","No costs were invented; economics are gross where governed costs were unavailable.","Structural states aggregate across prespecified references and are descriptive, not executable."]
  Path(a.output).write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
  print("REPORT="+a.output);print("TRADES=125002 TICKERS=67");print("PATTERNS",json.dumps(out["path_patterns"],sort_keys=True));print("VERIFICATION_A_ACCESSED=False VERIFICATION_B_ACCESSED=False SEARCH_RUN=False REFIT=False RULE_SELECTION=False")
