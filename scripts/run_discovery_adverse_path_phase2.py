@@ -276,8 +276,8 @@ def main():
      tgt=[j for (f,w,t),js in groups.items() if f==fam and w==(not outcome) and t!=ticker for j in js]
      if not tgt:continue
      tree=cKDTree(Z[tgt]);dist,loc=tree.query(Z[src],k=1)
-     for a,d,zloc in zip(src,np.atleast_1d(dist),np.atleast_1d(loc)):
-      b=tgt[int(zloc)];pairs.append(float(d));pair_tickers.update((meta[a][2],meta[b][2]));pair_years.update((meta[a][5],meta[b][5]))
+     for src_idx,d,zloc in zip(src,np.atleast_1d(dist),np.atleast_1d(loc)):
+      b=tgt[int(zloc)];pairs.append(float(d));pair_tickers.update((meta[src_idx][2],meta[b][2]));pair_years.update((meta[src_idx][5],meta[b][5]))
   matches[str(h)]={"directed_pairs":len(pairs),"median_distance":q(pairs,50),"p90_distance":q(pairs,90),"unique_tickers":len(pair_tickers),"year_breadth":len(pair_years),"standardization":"development_split_only","split_date":split_date}
  out["matched_trajectory"]=matches
  out["three_action_framing"]={"ENTER_MAINTAIN":"shallow/early-recovering path without causal structural failure","WAIT_REDUCE":"unresolved path with repeated lower lows or weak recovery absent frozen failure","ABANDON_EXIT":"persistent causal structural failure; no rule nominated"}
