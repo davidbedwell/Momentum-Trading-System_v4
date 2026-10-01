@@ -307,7 +307,7 @@ Report the first subsequent observable dimension on which matched paths material
 
 Perform clustering without terminal winner/loser labels. Represent paths through sessions {2,4,5,10,20} using causally available normalized path summaries from sections J-K. Missing later horizons caused by earlier frozen terminal exit remain missing and must not be outcome-imputed.
 
-Use development data only to fit preprocessing and clusters. Prespecified candidate cluster counts k={2,3,4,5,6,8,10}. Select k on development using silhouette score only, with deterministic seed/tie-break to smaller k. After clusters are frozen, reveal outcome distributions and replay cluster assignment unchanged on Discovery holdout.
+Use development data only to fit preprocessing and clusters. Prespecified candidate cluster counts k={2,3,4,5,6,8,10}. Select k on development using silhouette score only, with deterministic seed/tie-break to smaller k. To bound computation without outcome-dependent sampling, compute silhouette on a deterministic evenly spaced sample of at most 3,000 development observations after chronological ordering; fit each candidate k on the complete eligible development matrix and evaluate the frozen sample against those centroids. After clusters are frozen, reveal outcome distributions and replay cluster assignment unchanged on Discovery holdout.
 
 Clustering is an unsupervised descriptive check, not validation and not a trading rule.
 
