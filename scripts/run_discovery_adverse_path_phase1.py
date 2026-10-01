@@ -12,6 +12,7 @@ from datetime import date,timedelta
 from pathlib import Path
 import numpy as np
 from scipy.cluster.vq import kmeans2
+from scipy.spatial.distance import cdist
 from MTS_V4.derived_market_updater import YFinanceDailyMarketSource
 
 PCT_STOPS=np.arange(.01,.1501,.005)
@@ -180,20 +181,29 @@ def main():
   return np.array([cl[-1]/scale,lo.min()/scale,cl.min()/scale,cl.max()/scale,r["path_features"]["path_efficiency"] or 0.])
  dv=[(r,vec(r)) for r in dev];dv=[x for x in dv if x[1] is not None]
  X=np.vstack([x[1] for x in dv]);mu=X.mean(0);sd=X.std(0);sd[sd==0]=1;Z=(X-mu)/sd
+ # Deterministic, outcome-blind silhouette sample frozen by protocol.
+ order=np.argsort(np.array([x[0]["signal_date"]+"|"+x[0]["ticker"]+"|"+x[0]["genome"] for x in dv]))
+ ns=min(3000,len(order));sample_ix=order[np.linspace(0,len(order)-1,ns,dtype=int)];SZ=Z[sample_ix]
+ D=cdist(SZ,SZ)
  best=None
  for k in (2,3,4,5,6,8,10):
   cen,lab=kmeans2(Z,k,minit="points",seed=20261001,iter=30)
-  # deterministic compactness proxy; selection uses only geometry, never outcome labels.
-  within=float(np.mean([np.linalg.norm(Z[i]-cen[lab[i]]) for i in range(len(Z))]))
-  if best is None or within<best[0]:best=(within,k,cen,lab)
+  slab=np.argmin(cdist(SZ,cen),axis=1);sil=[]
+  for i in range(ns):
+   same=np.where(slab==slab[i])[0];same=same[same!=i]
+   if not len(same):sil.append(0.);continue
+   aa=float(D[i,same].mean());bb=min(float(D[i,np.where(slab==cc)[0]].mean()) for cc in range(k) if cc!=slab[i] and np.any(slab==cc))
+   sil.append((bb-aa)/max(aa,bb) if max(aa,bb)>0 else 0.)
+  score=float(np.mean(sil))
+  if best is None or score>best[0] or (score==best[0] and k<best[1]):best=(score,k,cen,lab)
  if best:
-  _,k,cen,lab=best;devc=[]
+  score,k,cen,lab=best;devc=[]
   for c in range(k):
    ix=np.where(lab==c)[0];devc.append({"cluster":c,"n":len(ix),"winner_rate_revealed_after_fit":mean([dv[i][0]["winner"] for i in ix])})
   hv=[(r,vec(r)) for r in hold];hv=[x for x in hv if x[1] is not None];hc=Counter();hw=Counter()
   for r,v in hv:
    z=(v-mu)/sd;c=int(np.argmin(np.linalg.norm(cen-z,axis=1)));hc[c]+=1;hw[c]+=int(r["winner"])
-  out["label_blind_clustering"]={"horizon":5,"k":k,"selection_metric":"minimum mean within-cluster distance; outcome labels hidden","development":devc,"holdout":[{"cluster":c,"n":hc[c],"winner_rate":hw[c]/hc[c] if hc[c] else None} for c in range(k)]}
+  out["label_blind_clustering"]={"horizon":5,"k":k,"selection_metric":"maximum deterministic-sample silhouette; outcome labels hidden","silhouette":score,"development":devc,"holdout":[{"cluster":c,"n":hc[c],"winner_rate":hw[c]/hc[c] if hc[c] else None} for c in range(k)]}
  out["limitations"]=["Phase-1 executable covers distribution, percent/ATR stop economics, sigma normalization, time conditioning, path derivatives, chronological split, development-only genome/stop ceiling, and label-blind clustering.","Structural geometry, state transitions, change-point, matching, information-value, competing-risk, and entry-frontier modules are protocol-frozen but intentionally require the phase-2 runner; they are not silently approximated here.","Current-S&P calibration universe remains survivorship-biased; overlapping/repeated trades are not independent.","No optimized Discovery result is validation."]
  Path(a.output).write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
  print("REPORT="+a.output);print(f"TRADES={len(rows)} TICKERS=67 SPLIT={splitdate}")
