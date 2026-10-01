@@ -252,6 +252,125 @@ The report must contain:
 13. failure modes / what could mislead us
 14. candidate observations, explicitly separated from any future nominated executable hypothesis
 
+## J. Volatility-standardized excursion and regime analysis
+
+In addition to raw-percent and ATR normalization, calculate rolling close-to-close realized volatility using trailing 10, 20, 50, and 100 completed sessions, annualization not required for z-style normalization. No current-session/future return may enter the estimate.
+
+Express adverse excursion in sigma units using the corresponding causal rolling volatility. Report winner/loser cumulative survival at {0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,5.0} sigma for every prespecified window.
+
+Report raw-percent, ATR20, and sigma-normalized results side by side. Also condition on causal volatility regime using the current 20-session realized volatility percentile within that ticker's trailing 252 completed sessions: low <=25th percentile, normal >25th-<75th, high >=75th. Missing-history cases remain explicit and are not imputed.
+
+## K. Trajectory derivatives and path shape
+
+For each causal post-entry path, in raw-percent, ATR20-normalized, and sigma-normalized coordinates, calculate:
+- one-session velocity and 2-session/4-session rolling velocity
+- acceleration as change in velocity
+- maximum decline velocity and maximum recovery velocity
+- decline/recovery speed ratio
+- count of new lower lows
+- count of failed rebounds
+- successive-low depth changes
+- sessions between successive lows
+- rebound amplitude after each low
+- path efficiency = absolute net displacement / cumulative absolute session-to-session displacement
+- sign-change count and normalized choppiness
+
+A failed rebound is prespecified as a recovery of >=25% of the then-observed adverse excursion followed, before reclaiming the original entry/reference, by a new lower low. Report full distributions by terminal outcome; no derivative threshold may be selected adaptively in this run.
+
+## L. Causal state-transition analysis
+
+At each completed session assign a descriptive state using only information then available:
+DECLINING, NEW_LOW, RECOVERING_LT25, RECOVERING_25_50, RECOVERING_GE50, RECLAIMED, STRUCTURAL_SWEEP, STRUCTURAL_FAILURE, or STALLED.
+
+When multiple labels apply, use this fixed precedence: STRUCTURAL_FAILURE > STRUCTURAL_SWEEP > RECLAIMED > NEW_LOW > RECOVERING_GE50 > RECOVERING_25_50 > RECOVERING_LT25 > DECLINING > STALLED.
+
+STALLED means absolute one-session change <=0.10 ATR20 and no higher-precedence state applies. DECLINING means negative one-session return and no higher-precedence state applies.
+
+Build one-step and two-step empirical transition matrices separately for eventual winners and losers, with N, ticker breadth, year breadth, and uncertainty. Also report prespecified sequences P1-P4 from section F in state form. This is descriptive; do not assume a Markov data-generating process.
+
+## M. Change-point detection
+
+Apply causal change-point diagnostics to the post-entry return path without using terminal outcome labels during detection. Use fixed methods:
+- Page-Hinkley on normalized returns
+- two-window mean shift comparing preceding 5 vs preceding 20 completed observations when history permits
+- two-window realized-volatility ratio, 5-session / 20-session
+
+Freeze Page-Hinkley parameters before implementation from standard deterministic defaults documented in code; they may not be tuned against outcomes. Report detection timing relative to AE low, recovery, structural failure, and terminal outcome. Any method whose implementation requires an outcome-tuned parameter is omitted and reported as unavailable rather than tuned.
+
+## N. Matched-trajectory divergence analysis
+
+Construct causal feature vectors at sessions 2, 4, 5, and 10 using only prespecified variables from this protocol. Standardize continuous variables using development-split statistics only. Match opposite-outcome trades within the same family, requiring different tickers, by nearest-neighbor distance. Genome identity may be included as a feature but is not required for a match.
+
+Report the first subsequent observable dimension on which matched paths materially diverge, using only the already-prespecified bins/definitions in this protocol. Do not invent a new cutoff from matched outcomes. Report match distance, N pairs, unique tickers, years, and balance diagnostics.
+
+## O. Label-blind trajectory clustering
+
+Perform clustering without terminal winner/loser labels. Represent paths through sessions {2,4,5,10,20} using causally available normalized path summaries from sections J-K. Missing later horizons caused by earlier frozen terminal exit remain missing and must not be outcome-imputed.
+
+Use development data only to fit preprocessing and clusters. Prespecified candidate cluster counts k={2,3,4,5,6,8,10}. Select k on development using silhouette score only, with deterministic seed/tie-break to smaller k. After clusters are frozen, reveal outcome distributions and replay cluster assignment unchanged on Discovery holdout.
+
+Clustering is an unsupervised descriptive check, not validation and not a trading rule.
+
+## P. Information-value analysis
+
+For every already-prespecified causal observation/state in this protocol, measure association with eventual frozen outcome using:
+- mutual information with deterministic discretization defined by existing protocol bins
+- conditional entropy reduction
+- univariate AUC only where the variable is ordered/continuous
+
+Estimate all preprocessing/discretization from prespecified rules or development data only. Rank variables for description, but do not convert the ranking into a candidate rule in this run. Report N, effective breadth, and Discovery-holdout stability.
+
+## Q. Competing-risk / event-race analysis
+
+From each executable entry, measure which prespecified event occurs first:
+- favorable excursion +{1,2,3,5,8,10}%
+- adverse excursion -{1,2,3,5,8,10}%
+- favorable excursion +{0.5,1,1.5,2,3} ATR20
+- adverse excursion -{0.5,1,1.5,2,3} ATR20
+- >=25% recovery after causal AE
+- entry/reference reclaim
+- structural sweep
+- structural failure
+- original frozen terminal exit
+
+Ties use conservative ordering: adverse/failure event before favorable event when intraday ordering is unknowable. Report cumulative incidence/event-race tables and time-to-event distributions. Do not infer intraday path ordering unavailable from the source bars.
+
+## R. Entry timing / opportunity-cost frontier
+
+Evaluate entry at prespecified causal milestones rather than selecting an optimized entry:
+- original executable entry
+- after 25%, 50%, 75%, and 100% recovery from causal AE
+- first prompt structural reclaim
+- first controlled retest after >=25% recovery, where controlled retest means no structural failure under section E
+- sessions 1,2,3,4,5 after causal AE low when the trade remains eligible
+
+For each entry policy report participation rate, missed favorable trades, entry-price improvement/deterioration, subsequent MAE/MFE, terminal P/L under the original frozen terminal exit, expectancy, profit factor, drawdown, and opportunity cost versus original entry. No entry policy is selected in this run.
+
+## S. Three-action decision framing
+
+All candidate observations in the report must be assessed, descriptively, against three possible future actions rather than stop-only framing:
+- ENTER / MAINTAIN NORMAL EXPOSURE
+- WAIT / REDUCE EXPOSURE
+- ABANDON / EXIT
+
+This section does not assign an action rule. It reports whether evidence appears more relevant to entry timing, position sizing/exposure, or thesis invalidation, and states what untouched evidence would be required before such an action could be promoted.
+
+## Additional required outputs
+
+Append to the required report:
+15. sigma-normalized MAE and volatility-regime tables
+16. trajectory derivative/path-shape analysis
+17. state-transition matrices
+18. change-point diagnostics
+19. matched-trajectory divergence results
+20. label-blind clustering plus unchanged Discovery-holdout replay
+21. information-value analysis
+22. competing-risk/event-race analysis
+23. entry opportunity-cost frontier
+24. ENTER/WAIT/ABANDON evidence framing
+
+These additions are frozen before execution and inherit all integrity, causality, reporting, falsification, and stop-condition requirements above.
+
 ## Stop condition
 
 This protocol ends after reporting the prespecified Discovery analyses and Discovery-only holdout replay. Do not open remaining Verification A or Verification B. Do not promote an optimized cell as validated. Any proposed executable trading hypothesis must be separately specified and frozen before untouched validation.
