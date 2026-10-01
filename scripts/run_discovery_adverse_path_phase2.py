@@ -5,7 +5,6 @@ from collections import Counter,defaultdict
 from datetime import date,timedelta
 from pathlib import Path
 import numpy as np
-from sklearn.metrics import mutual_info_score
 from MTS_V4.derived_market_updater import YFinanceDailyMarketSource
 MAS=(10,20,30,40,50,75,100,150,200); EMAS=(20,50); PRIOR=(5,10,20,50)
 HPTS=(2,4,5,10); FAV=(.01,.02,.03,.05,.08,.10); ATR_EVT=(.5,1,1.5,2,3)
@@ -45,6 +44,12 @@ def page_hinkley(xs,delta=.005,lamb=5.0,alpha=.999):
   m=alpha*m+(1-alpha)*x;c+=x-m-delta;mn=min(mn,c)
   if c-mn>lamb:return i
  return None
+def mutual_info(x,y):
+ from collections import Counter
+ n=len(x); cx=Counter(x); cy=Counter(y); cxy=Counter(zip(x,y)); z=0.
+ for (a,b),c in cxy.items():
+  p=c/n; z+=p*math.log(p/((cx[a]/n)*(cy[b]/n)))
+ return z
 def entropy(y):
  if not y:return 0.
  p=sum(y)/len(y)
@@ -214,7 +219,7 @@ def main():
   lab={x:j for j,x in enumerate(sorted(set(v),key=str))};x=[lab[z] for z in v];groups=defaultdict(list)
   for a1,y in zip(x,ys):groups[a1].append(y)
   cond=sum(len(g)/len(ys)*entropy(g) for g in groups.values())
-  iv[k]={"mutual_information":float(mutual_info_score(x,ys)),"entropy_reduction_bits":hy-cond,"n":len(ys)}
+  iv[k]={"mutual_information":float(mutual_info(x,ys)),"entropy_reduction_bits":hy-cond,"n":len(ys)}
  out["information_value"]=iv
  matches={}
  for h in HPTS:
