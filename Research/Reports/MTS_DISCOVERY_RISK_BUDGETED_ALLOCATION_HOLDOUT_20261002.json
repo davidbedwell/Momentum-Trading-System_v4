@@ -1,0 +1,198 @@
+{
+  "baseline": {
+    "avg_gross_exposure": 0.8558672854214547,
+    "cagr_equivalent": 0.22382013700573866,
+    "daily_cvar05": -0.021189202985036865,
+    "daily_p05": -0.013784528232370573,
+    "daily_volatility": 0.00963868713337162,
+    "max_drawdown": -0.1596832042551598,
+    "max_drawdown_start": "2022-03-29",
+    "max_drawdown_trough": "2022-06-16",
+    "min_cash_fraction": 0.007994755513754007,
+    "peak_gross_exposure": 0.992005244486246,
+    "return_to_drawdown": 10.927316409459719,
+    "terminal_wealth": 2.7449088981725156
+  },
+  "holdout_replayed_once": true,
+  "holdout_score_sources": {
+    "family": 8538,
+    "genome": 28963
+  },
+  "nominee_manifest_sha256": "60a3860d73d1bade688b7738c25597383482e487cc52361feddaeede9d970c04",
+  "population": {
+    "holdout": 37501,
+    "tickers": 67
+  },
+  "protocol_sha256": "2d02328ab2f4cfb5baac17715ce00dc8fc8fe90e4669b62035ea7337e0544c9e",
+  "results": [
+    {
+      "binding_day_fraction": 0.3179282868525896,
+      "exposure_matched_equal": {
+        "base_trade_fraction": 0.0009591765213012696,
+        "metrics": {
+          "avg_gross_exposure": 0.8891904256338438,
+          "cagr_equivalent": 0.22925113743707715,
+          "daily_cvar05": -0.021491712132396687,
+          "daily_p05": -0.014095151003124695,
+          "daily_volatility": 0.009805121221573468,
+          "max_drawdown": -0.1579188900581635,
+          "max_drawdown_start": "2022-03-29",
+          "max_drawdown_trough": "2022-06-16",
+          "min_cash_fraction": 0.006157717351748652,
+          "peak_gross_exposure": 0.9938422826482514,
+          "return_to_drawdown": 11.438463007949458,
+          "terminal_wealth": 2.806349382186741
+        }
+      },
+      "gates": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "gross_ceiling": 0.9804155104588794,
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.250875799168707,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.7193436960276338,
+          "groups": 1158,
+          "max_positive_share": 0.025125391497773923,
+          "positive": 833
+        },
+        "ticker": {
+          "fraction": 0.9253731343283582,
+          "groups": 67,
+          "max_positive_share": 0.04974496143392441,
+          "positive": 62
+        },
+        "year": {
+          "fraction": 1.0,
+          "groups": 6,
+          "max_positive_share": 0.3865220639638436,
+          "positive": 6
+        }
+      },
+      "mean_delta_scheduled": 0.007986368719258678,
+      "name": "budget_top50_c1.50_gross_p90",
+      "pass": true,
+      "portfolio": {
+        "avg_gross_exposure": 0.8892383404263455,
+        "cagr_equivalent": 0.22978014029417193,
+        "daily_cvar05": -0.021386092465812585,
+        "daily_p05": -0.013997517892438128,
+        "daily_volatility": 0.009741265865131505,
+        "max_drawdown": -0.15441040382331406,
+        "max_drawdown_start": "2022-03-29",
+        "max_drawdown_trough": "2022-06-16",
+        "min_cash_fraction": 0.022185008178987397,
+        "peak_gross_exposure": 0.9778149918210126,
+        "return_to_drawdown": 11.737500904029107,
+        "terminal_wealth": 2.8123922544676483
+      },
+      "redistribution_cap": 1.5,
+      "ticker_cluster_ci95": [
+        0.0064421792882877445,
+        0.00974220197704126
+      ],
+      "top_fraction": 0.5,
+      "wealth_vs_equal_rel": 0.02458491658505002,
+      "wealth_vs_exposure_matched_rel": 0.0021532858022825785
+    },
+    {
+      "binding_day_fraction": 0.2446215139442231,
+      "exposure_matched_equal": {
+        "base_trade_fraction": 0.0008963103732299804,
+        "metrics": {
+          "avg_gross_exposure": 0.870752087029065,
+          "cagr_equivalent": 0.22628660189479333,
+          "daily_cvar05": -0.021348092803860064,
+          "daily_p05": -0.014038242937837741,
+          "daily_volatility": 0.009718532803898861,
+          "max_drawdown": -0.1588908125812024,
+          "max_drawdown_start": "2022-03-29",
+          "max_drawdown_trough": "2022-06-16",
+          "min_cash_fraction": 0.007414251988311076,
+          "peak_gross_exposure": 0.9925857480116889,
+          "return_to_drawdown": 11.156573265149474,
+          "terminal_wealth": 2.7726769917213185
+        }
+      },
+      "gates": {
+        "cluster_ci_positive": true,
+        "family60": false,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "gross_ceiling": 0.9804155104588794,
+      "groups": {
+        "family": {
+          "fraction": 0.5,
+          "groups": 8,
+          "max_positive_share": 0.30840717179765686,
+          "positive": 4
+        },
+        "genome": {
+          "fraction": 0.5138169257340242,
+          "groups": 1158,
+          "max_positive_share": 0.03414548081405083,
+          "positive": 595
+        },
+        "ticker": {
+          "fraction": 0.8955223880597015,
+          "groups": 67,
+          "max_positive_share": 0.057792907751768006,
+          "positive": 60
+        },
+        "year": {
+          "fraction": 1.0,
+          "groups": 6,
+          "max_positive_share": 0.39741428275899215,
+          "positive": 6
+        }
+      },
+      "mean_delta_scheduled": 0.004176352593439461,
+      "name": "budget_top25_c1.50_gross_p90",
+      "pass": false,
+      "portfolio": {
+        "avg_gross_exposure": 0.8706840616579069,
+        "cagr_equivalent": 0.2304043774805773,
+        "daily_cvar05": -0.021080611679977632,
+        "daily_p05": -0.013662372655996857,
+        "daily_volatility": 0.009610605573493245,
+        "max_drawdown": -0.15526321958231748,
+        "max_drawdown_start": "2022-03-29",
+        "max_drawdown_trough": "2022-06-16",
+        "min_cash_fraction": 0.026371385886098452,
+        "peak_gross_exposure": 0.9736286141139016,
+        "return_to_drawdown": 11.719043251816226,
+        "terminal_wealth": 2.8195363857014186
+      },
+      "redistribution_cap": 1.5,
+      "ticker_cluster_ci95": [
+        0.0033273782960296524,
+        0.005159982452583617
+      ],
+      "top_fraction": 0.25,
+      "wealth_vs_equal_rel": 0.0271876008630334,
+      "wealth_vs_exposure_matched_rel": 0.016900415778690947
+    }
+  ],
+  "stage": "RISK_BUDGETED_ALLOCATION_DISCOVERY_HOLDOUT_ONCE",
+  "verification_a_accessed": false,
+  "verification_b_accessed": false
+}
