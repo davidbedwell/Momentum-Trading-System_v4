@@ -58,3 +58,6 @@ If David elects to continue using Verification A, prospectively freeze an outcom
 
 ## Required future control
 Every validation protocol must specify and enforce an explicit maximum evidence budget (cohort + tranche count) before any outcome access. Runner must abort if requested targets exceed the frozen tranche manifest. “Remaining available” may never be interpreted as authorization to consume the entire remainder.
+
+## Post-incident A2 disposition
+David approved a prospectively frozen 20-name A2 tranche from the machine-accessed/researcher-blinded 80. A2 used the first 20 records of the pre-existing frozen 80-target manifest, an outcome-blind selection rule. The other 60 remained sequestered. A2 completed with frozen conclusion `VERIFICATION_A2_FAILED`; Verification B remained sealed. See `Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.md`.

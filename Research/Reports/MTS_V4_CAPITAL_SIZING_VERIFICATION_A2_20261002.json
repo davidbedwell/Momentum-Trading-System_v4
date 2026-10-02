@@ -1,0 +1,90 @@
+{
+  "candidate": "ev_over_risk_p10_loss_floor0.5_cap2.0",
+  "conclusion": "VERIFICATION_A2_FAILED",
+  "criteria": {
+    "cvar05_no_worse": false,
+    "max_drawdown_no_worse": false,
+    "ticker_majority_positive": false,
+    "wealth_gt_equal": true,
+    "wealth_gt_exposure_matched": true
+  },
+  "exposure_matched_baseline": {
+    "base_trade_fraction": 0.005600819218521117,
+    "metrics": {
+      "avg_gross_exposure": 0.9686918385601786,
+      "cagr_equivalent": 0.13748151747199389,
+      "daily_cvar05": -0.032821058436738194,
+      "daily_p05": -0.019821404370653113,
+      "daily_volatility": 0.013754382694826385,
+      "max_drawdown": -0.5302409734482025,
+      "max_drawdown_start": "2007-12-26",
+      "max_drawdown_trough": "2009-03-09",
+      "min_cash_fraction": 0.0050936590728665465,
+      "peak_gross_exposure": 0.9949063409271335,
+      "return_to_drawdown": 26.318652144761156,
+      "terminal_wealth": 14.95522773308278
+    }
+  },
+  "format": "MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_V1",
+  "frozen_calibration": {
+    "base_trade_fraction": 0.001321003963011889,
+    "cap": 2.0,
+    "floor": 0.5,
+    "min_history": 100,
+    "scale": 3.2434248679805613
+  },
+  "input_sha256": "507c5a018605b518596036c3c4231d2ab9f8b761ba60c50fb5a1711407501fa6",
+  "policies": [
+    {
+      "metrics": {
+        "avg_gross_exposure": 0.9656880656129764,
+        "cagr_equivalent": 0.14031643228587476,
+        "daily_cvar05": -0.03281438164867624,
+        "daily_p05": -0.01983946135594498,
+        "daily_volatility": 0.013745491899688302,
+        "max_drawdown": -0.5304794203150065,
+        "max_drawdown_start": "2007-12-26",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0040793344760935955,
+        "peak_gross_exposure": 0.9959206655239065,
+        "return_to_drawdown": 27.819632808708363,
+        "terminal_wealth": 15.757742685739949
+      },
+      "name": "equal_weight"
+    },
+    {
+      "metrics": {
+        "avg_gross_exposure": 0.9686918693510417,
+        "cagr_equivalent": 0.14132447395324244,
+        "daily_cvar05": -0.032917347355325186,
+        "daily_p05": -0.01999035249138316,
+        "daily_volatility": 0.013789134466807445,
+        "max_drawdown": -0.5319367233682273,
+        "max_drawdown_start": "2007-12-26",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0040789536031447205,
+        "peak_gross_exposure": 0.9959210463968554,
+        "return_to_drawdown": 28.29821686715718,
+        "terminal_wealth": 16.052860757479092
+      },
+      "name": "ev_over_risk_p10_loss_floor0.5_cap2.0"
+    }
+  ],
+  "protocol_sha256": "b1076bd5084e953c1e91fc35b87a7b4612a0fcd925029b9fd488c4399db26270",
+  "retune": false,
+  "score_sources": {
+    "family": 105606,
+    "genome": 564583,
+    "global": 1562,
+    "unavailable": 946
+  },
+  "search_run": false,
+  "ticker_breadth": {
+    "fraction": 0.1,
+    "positive": 2,
+    "usable": 20
+  },
+  "verification_a_target_count": 20,
+  "verification_a_trades": 672697,
+  "verification_b_accessed": false
+}
