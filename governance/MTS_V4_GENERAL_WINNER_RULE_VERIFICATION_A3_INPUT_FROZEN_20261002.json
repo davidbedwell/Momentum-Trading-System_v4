@@ -1,14 +1,7 @@
 {
+  "format": "MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_INPUT_V1",
   "candidate_count": 1289,
   "candidate_population_rule": "All unique candidate IDs actually present in the corrected 125,002-trade Discovery capital-study population; definitions recovered unchanged from the 67 frozen Discovery source reports. No Verification outcomes used.",
-  "candidate_rule": {
-    "base_trade_fraction": 0.001321003963011889,
-    "cap": 1.5,
-    "development_fitted_scale": 3.154602090106647,
-    "floor": 0.75,
-    "history_fallback": "exact genome >=100 completed observations; else family >=100; else global >=100; else neutral 1.0x",
-    "score": "causal historical expectancy / p10 downside"
-  },
   "candidates": [
     {
       "candidate_id": "candidate:002b3044d62e46a4e34aac2dac38e9355c238ee82f8ce7ad43f8259725dbb8d0",
@@ -16585,14 +16578,8 @@
       }
     }
   ],
-  "discovery_cache_sha256": "643f56eccacd734eb95496fe88bd0082087800d49533096d7b70b18887a6979a",
-  "excluded_previously_opened_a1_count": 20,
-  "format": "MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_FROZEN_INPUT_V1",
-  "selection_rule": "Positions 21-40 of the pre-existing frozen 80-target Verification-A manifest, preserving original order; A2 consumed positions 1-20; no outcome-derived selection.",
-  "sequestered_researcher_blinded_count": 60,
-  "sequestered_researcher_blinded_count_after_a3": 40,
-  "source_report_count": 67,
-  "verification_a_target_count": 20,
+  "selection_rule": "exact next five records at indices 20-24 of pre-existing frozen 80-target manifest; no outcome-derived selection",
+  "verification_a_target_count": 5,
   "verification_a_targets": [
     {
       "market_cap": 85905193981.87589,
@@ -16628,112 +16615,8 @@
       "security_id": "CAL_SEC_CIK_0000927066_DVA",
       "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
       "ticker": "DVA"
-    },
-    {
-      "market_cap": 38920764546.880806,
-      "sector": "Utilities",
-      "security_id": "CAL_SEC_CIK_0001047862_ED",
-      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "ED"
-    },
-    {
-      "market_cap": 21814602814.612846,
-      "sector": "Energy",
-      "security_id": "CAL_SEC_CIK_0000895126_EXE",
-      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "EXE"
-    },
-    {
-      "market_cap": 56697854906.83577,
-      "sector": "Industrials",
-      "security_id": "CAL_SEC_CIK_0000815556_FAST",
-      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "FAST"
-    },
-    {
-      "market_cap": 77213030539.32034,
-      "sector": "Consumer Cyclical",
-      "security_id": "CAL_SEC_CIK_0001467858_GM",
-      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "GM"
-    },
-    {
-      "market_cap": 53800072203.33569,
-      "sector": "Technology",
-      "security_id": "CAL_SEC_CIK_0001121788_GRMN",
-      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "GRMN"
-    },
-    {
-      "market_cap": 91757667315.70435,
-      "sector": "Healthcare",
-      "security_id": "CAL_SEC_CIK_0000860730_HCA",
-      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "HCA"
-    },
-    {
-      "market_cap": 50235420601.25427,
-      "sector": "Industrials",
-      "security_id": "CAL_SEC_CIK_0002089271_HONA",
-      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "HONA"
-    },
-    {
-      "market_cap": 40235880240.19519,
-      "sector": "Healthcare",
-      "security_id": "CAL_SEC_CIK_0000874716_IDXX",
-      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "IDXX"
-    },
-    {
-      "market_cap": 16427741354.669678,
-      "sector": "Industrials",
-      "security_id": "CAL_SEC_CIK_0000832101_IEX",
-      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "IEX"
-    },
-    {
-      "market_cap": 16324825606.152191,
-      "sector": "Real Estate",
-      "security_id": "CAL_SEC_CIK_0001687229_INVH",
-      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "INVH"
-    },
-    {
-      "market_cap": 83767983819.43222,
-      "sector": "Industrials",
-      "security_id": "CAL_SEC_CIK_0000833444_JCI",
-      "size_band": "UPPER_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "JCI"
-    },
-    {
-      "market_cap": 32817237589.600677,
-      "sector": "Consumer Defensive",
-      "security_id": "CAL_SEC_CIK_0000055785_KMB",
-      "size_band": "MIDDLE_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "KMB"
-    },
-    {
-      "market_cap": 22325551114.040833,
-      "sector": "Financial Services",
-      "security_id": "CAL_SEC_CIK_0000060086_L",
-      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "L"
-    },
-    {
-      "market_cap": 12517530962.626648,
-      "sector": "Industrials",
-      "security_id": "CAL_SEC_CIK_0001069202_LII",
-      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "LII"
-    },
-    {
-      "market_cap": 17110196733.118126,
-      "sector": "Utilities",
-      "security_id": "CAL_SEC_CIK_0000352541_LNT",
-      "size_band": "LOWER_CURRENT_SP500_CAP_TERCILE",
-      "ticker": "LNT"
     }
   ],
+  "sequestered_researcher_blinded_count": 55,
   "verification_b_accessed": false
 }
