@@ -1,0 +1,88 @@
+{
+  "cache_manifest": {
+    "cache_file_sha256": "643f56eccacd734eb95496fe88bd0082087800d49533096d7b70b18887a6979a",
+    "format": "MTS_V4_DISCOVERY_RESEARCH_CACHE_V1",
+    "source": {
+      "checkpoint_count": 67,
+      "checkpoint_set_sha256": "1887d3f9602c03aec37c2140ae5533ca4e3a148f3724ac44bda9598bd161f34a"
+    },
+    "split_date": "2021-09-13",
+    "ticker_count": 67,
+    "trade_count": 125002,
+    "uncompressed_payload_sha256": "dd004a98d3505e060a9a3cf0bcc948e90693a21de70e3da19921c04606b0dfc3"
+  },
+  "causal_history_policy": "Original Development causal histories retained; 2020 removed only from evaluated portfolio, so non-2020 policy scores are unchanged.",
+  "code_sha256": "fe54c55d02b21c790fb9b9e958bda7f453514eb63370aed6c0e7b4b81c27889b",
+  "exclusion": {
+    "basis": "signal_date",
+    "calendar_year": 2020,
+    "original_development_trades": 87501,
+    "removed_trades": 10056,
+    "retained_trades": 77445
+  },
+  "frozen_policy": {
+    "calibration": {
+      "cap": 2.0,
+      "floor": 0.5,
+      "mean_multiplier": 1.0,
+      "missing_policy": "neutral_1.0",
+      "mode": "ev_over_risk",
+      "risk_stat": "p10_loss",
+      "score_scale": 3.2434248679805613
+    },
+    "name": "ev_over_risk_p10_loss_floor0.5_cap2.0"
+  },
+  "holdout_accessed_for_this_analysis": false,
+  "nominee_manifest_sha256": "d1326653a4ea716d5135559ae63eaadff1acfff65dc6dc04564285f74543df5a",
+  "policies": [
+    {
+      "mean_multiplier": 1.0,
+      "name": "equal_weight",
+      "nonlevered": {
+        "avg_gross_exposure": 0.8497438663816599,
+        "cagr_equivalent": 0.16794389200298587,
+        "daily_cvar05": -0.02976374034762182,
+        "daily_p05": -0.016425640317612285,
+        "daily_volatility": 0.012274956311969417,
+        "max_drawdown": -0.4587728832502962,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0035182100351489926,
+        "peak_gross_exposure": 0.996481789964851,
+        "return_to_drawdown": 24.912467578133825,
+        "terminal_wealth": 12.429164579699979
+      }
+    },
+    {
+      "mean_multiplier": 0.9759016120834988,
+      "name": "ev_over_risk_p10_loss_floor0.5_cap2.0",
+      "nonlevered": {
+        "avg_gross_exposure": 0.8777238893553273,
+        "cagr_equivalent": 0.17476271312247582,
+        "daily_cvar05": -0.028436299534658628,
+        "daily_p05": -0.016239285211289856,
+        "daily_volatility": 0.01187741633468236,
+        "max_drawdown": -0.42131735503042167,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.000200734674303552,
+        "peak_gross_exposure": 0.9997992653256965,
+        "return_to_drawdown": 30.05087525454328,
+        "terminal_wealth": 13.660955278593324
+      }
+    }
+  ],
+  "protocol_sha256": "2ab3db3be38f60cda739ae5fead65587074273f2ac3390eeedc786065391512f",
+  "purpose": "Falsification/sensitivity only; no search, retuning, or nomination",
+  "stage": "DEVELOPMENT_2020_EXCLUSION_FROZEN_SENSITIVITY",
+  "verification_a_accessed": false,
+  "verification_b_accessed": false,
+  "versus_baseline": {
+    "cagr_delta": 0.006818821119489948,
+    "cvar05_delta": 0.0013274408129631925,
+    "max_drawdown_delta": 0.03745552821987452,
+    "return_to_drawdown_delta": 5.138407676409454,
+    "terminal_wealth_delta": 1.2317906988933451,
+    "terminal_wealth_ratio": 1.099104866702399
+  }
+}
