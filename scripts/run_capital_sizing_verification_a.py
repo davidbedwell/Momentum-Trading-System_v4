@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse,gzip,pickle,json,hashlib,heapq,os
+import argparse,gzip,pickle,json,hashlib,heapq,os,math
 from pathlib import Path
 from collections import defaultdict,Counter
 from concurrent.futures import ProcessPoolExecutor,as_completed
@@ -50,29 +50,38 @@ def seed_rows(cache):
  with gzip.open(cache,'rb') as f:z=pickle.load(f)
  return [(r['ticker'],r['family'],r['genome'],r['signal_date'],r['path'][-1]['date'],float(r['ret']),float(r['mae']),False,None) for r in z['rows']]
 def causal_weights(seed,vr):
- # tuple ticker,family,genome,signal,exit,ret,mae,isval,validation_index
- allr=seed+vr; order=sorted(range(len(allr)),key=lambda i:allr[i][3]);gh=defaultdict(list);fh=defaultdict(list);glob=[];pending=[];w=np.ones(len(vr));src=Counter();k=0
- bydate=defaultdict(list)
- for i in order:bydate[allr[i][3]].append(i)
+ class Hist:
+  __slots__=('lo','hi','sum','n')
+  def __init__(self):self.lo=[];self.hi=[];self.sum=0.;self.n=0
+  def add(self,x):
+   self.n+=1;self.sum+=x
+   if not self.lo or x<=-self.lo[0]:heapq.heappush(self.lo,-x)
+   else:heapq.heappush(self.hi,x)
+   target=math.floor((self.n-1)*.10)+1
+   while len(self.lo)>target:heapq.heappush(self.hi,-heapq.heappop(self.lo))
+   while len(self.lo)<target and self.hi:heapq.heappush(self.lo,-heapq.heappop(self.hi))
+  def score(self):
+   ev=self.sum/self.n;k=(self.n-1)*.10;frac=k-math.floor(k);x0=-self.lo[0];x1=self.hi[0] if self.hi else x0
+   q10=x0+frac*(x1-x0);return ev,max(1e-12,-q10)
+ allr=seed+vr;bydate=defaultdict(list)
+ for i,r in enumerate(allr):bydate[r[3]].append(i)
+ gh=defaultdict(Hist);fh=defaultdict(Hist);glob=Hist();pending=[];w=np.ones(len(vr));src=Counter()
  for d in sorted(bydate):
   while pending and pending[0][0] < d:
-   _,i=heapq.heappop(pending);r=allr[i];x=(r[5],r[6]);gh[r[2]].append(x);fh[r[1]].append(x);glob.append(x)
+   _,i=heapq.heappop(pending);r=allr[i];gh[r[2]].add(r[5]);fh[r[1]].add(r[5]);glob.add(r[5])
   cache={}
   for i in bydate[d]:
    r=allr[i]
-   if len(gh[r[2]])>=MINN:key=('genome',r[2]);h=gh[r[2]]
-   elif len(fh[r[1]])>=MINN:key=('family',r[1]);h=fh[r[1]]
-   elif len(glob)>=MINN:key=('global','global');h=glob
+   if gh[r[2]].n>=MINN:key=('genome',r[2]);h=gh[r[2]]
+   elif fh[r[1]].n>=MINN:key=('family',r[1]);h=fh[r[1]]
+   elif glob.n>=MINN:key=('global','global');h=glob
    else:key=('unavailable','unavailable');h=None
-   if key not in cache:
-    if h is None:cache[key]=None
-    else:
-     a=np.asarray([x[0] for x in h]);ev=float(a.mean());risk=max(1e-12,-float(np.quantile(a,.10)));cache[key]=(ev,risk)
+   if key not in cache:cache[key]=None if h is None else h.score()
    if r[7]:
-    vi=r[8];src[key[0]]+=1;q=cache[key]
-    w[vi]=1.0 if q is None else float(np.clip(max(q[0],0)/q[1]*SCALE,FLOOR,CAP))
+    vi=r[8];src[key[0]]+=1;q=cache[key];w[vi]=1.0 if q is None else float(np.clip(max(q[0],0)/q[1]*SCALE,FLOOR,CAP))
   for i in bydate[d]:heapq.heappush(pending,(allr[i][4],i))
  return w,src
+
 def compact_events(trades,bars_by):
  dates=sorted({d for b in bars_by.values() for d,_ in b});dm={d:i for i,d in enumerate(dates)};n=len(trades);ec=np.zeros(len(dates),np.int32);xc=np.zeros(len(dates),np.int32);uc=np.zeros(len(dates),np.int64);lens=np.empty(n,np.int32)
  for i,r in enumerate(trades):
