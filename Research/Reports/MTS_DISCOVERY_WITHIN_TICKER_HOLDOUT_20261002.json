@@ -1,0 +1,86 @@
+{
+  "baseline": {
+    "avg_gross_exposure": 0.8558672854214547,
+    "cagr_equivalent": 0.22382013700573888,
+    "daily_cvar05": -0.02118920298503709,
+    "daily_p05": -0.013784528232370497,
+    "daily_volatility": 0.009638687133371675,
+    "max_drawdown": -0.15968320425515847,
+    "max_drawdown_start": "2022-03-29",
+    "max_drawdown_trough": "2022-06-16",
+    "min_cash_fraction": 0.007994755513753995,
+    "peak_gross_exposure": 0.9920052444862459,
+    "return_to_drawdown": 10.92731640945983,
+    "terminal_wealth": 2.744908898172519
+  },
+  "candidate": "within_ticker_top50_c1.10",
+  "candidate_portfolio": {
+    "avg_gross_exposure": 0.8596480331480364,
+    "cagr_equivalent": 0.2242466252950277,
+    "daily_cvar05": -0.021228235725762358,
+    "daily_p05": -0.013819429378076741,
+    "daily_volatility": 0.009657568803224041,
+    "max_drawdown": -0.1594496944371605,
+    "max_drawdown_start": "2022-03-29",
+    "max_drawdown_trough": "2022-06-16",
+    "min_cash_fraction": 0.00791431458295718,
+    "peak_gross_exposure": 0.9920856854170428,
+    "return_to_drawdown": 10.973332002566993,
+    "terminal_wealth": 2.7496944347668215
+  },
+  "freeze_sha256": "7fdbe9ac1ea1df1e239913277b8a99bfda19a83545981eaee91bb3956a1f7dad",
+  "gate": {
+    "cluster_ci_positive": true,
+    "family60": false,
+    "genome_conc15": true,
+    "mean_positive": true,
+    "not_both_tail_worse": true,
+    "ticker60": true,
+    "ticker_conc15": true,
+    "wealth_gt_equal": true,
+    "year60": true
+  },
+  "groups": {
+    "family": {
+      "fraction": 0.5,
+      "groups": 8,
+      "max_positive_share": 0.3838496932562269,
+      "positive": 4
+    },
+    "genome": {
+      "fraction": 0.5716753022452504,
+      "groups": 1158,
+      "max_positive_share": 0.038303908858009925,
+      "positive": 662
+    },
+    "ticker": {
+      "fraction": 0.9104477611940298,
+      "groups": 67,
+      "max_positive_share": 0.04139329338444497,
+      "positive": 61
+    },
+    "year": {
+      "fraction": 1.0,
+      "groups": 6,
+      "max_positive_share": 0.3475693766084698,
+      "positive": 6
+    }
+  },
+  "holdout_note": "Existing Discovery Holdout reused after prior hypotheses; nominee frozen before this architecture replay.",
+  "mean_delta": 0.00048471581414391687,
+  "population": {
+    "end": "2026-09-09",
+    "holdout_trades": 37501,
+    "start": "2021-09-13",
+    "tickers": 67
+  },
+  "replicated": false,
+  "stage": "WITHIN_TICKER_RANKING_DISCOVERY_HOLDOUT",
+  "ticker_cluster_ci95": [
+    0.00039386778564516926,
+    0.0005740977145639332
+  ],
+  "verification_a_accessed": false,
+  "verification_b_accessed": false,
+  "wealth_vs_equal_rel": 0.001743422740728695
+}
