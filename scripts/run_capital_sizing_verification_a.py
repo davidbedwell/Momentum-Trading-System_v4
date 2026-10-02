@@ -97,7 +97,7 @@ def main():
  for x in ('protocol','input','discovery-cache','derived-root','checkpoint-dir','output'):a.add_argument('--'+x,required=True)
  a.add_argument('--workers',type=int,default=6);q=a.parse_args()
  if sha(q.protocol)!=EXPECTED_PROTOCOL or sha(q.input)!=EXPECTED_INPUT:raise RuntimeError('frozen input/protocol hash mismatch')
- inp=json.load(open(q.input));cands=inp['candidates'];targets=inp['verification_a_targets'];cfg={'root':q.derived_root,'checkpoint':q.checkpoint_dir}
+ inp=json.load(open(q.input));cands=[dict(c,family_id=c['family']) for c in inp['candidates']];targets=inp['verification_a_targets'];cfg={'root':q.derived_root,'checkpoint':q.checkpoint_dir}
  global G;G={'cfg':cfg,'cands':cands}; Path(q.checkpoint_dir).mkdir(parents=True,exist_ok=True)
  with ProcessPoolExecutor(max_workers=min(q.workers,6),initializer=init,initargs=(cfg,cands)) as ex:
   fs={ex.submit(process_target,t):t['ticker'] for t in targets};done=0
