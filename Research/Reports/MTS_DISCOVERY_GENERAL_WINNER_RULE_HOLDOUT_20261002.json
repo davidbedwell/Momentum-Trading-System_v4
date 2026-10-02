@@ -1,0 +1,160 @@
+{
+  "baseline": {
+    "avg_gross_exposure": 0.8558672854214547,
+    "cagr_equivalent": 0.22382013700573888,
+    "daily_cvar05": -0.02118920298503709,
+    "daily_p05": -0.013784528232370497,
+    "daily_volatility": 0.009638687133371675,
+    "max_drawdown": -0.15968320425515847,
+    "max_drawdown_start": "2022-03-29",
+    "max_drawdown_trough": "2022-06-16",
+    "min_cash_fraction": 0.007994755513753995,
+    "peak_gross_exposure": 0.9920052444862459,
+    "return_to_drawdown": 10.92731640945983,
+    "terminal_wealth": 2.744908898172519
+  },
+  "holdout_replayed_once": true,
+  "holdout_score_sources": {
+    "family": 8538,
+    "genome": 28963
+  },
+  "nominee_manifest_sha256": "292fe2ffd4f9671d9da01d432e21ff820a8d115fa950003311e3a1d8fffc8d1d",
+  "population": {
+    "holdout": 37501,
+    "tickers": 67
+  },
+  "protocol_sha256": "4f90d999af7527101e0784b57e279e7439fa1e842bb22a86fc3636f75fa53e35",
+  "results": [
+    {
+      "cap": 1.5,
+      "development_fitted_scale": 3.154602090106647,
+      "floor": 0.75,
+      "gates": {
+        "max_positive_genome_share": true,
+        "max_positive_ticker_share": true,
+        "not_both_max_drawdown_and_cvar05_worse": true,
+        "positive_family_fraction_min": true,
+        "positive_mean_sizing_contribution": true,
+        "positive_ticker_fraction_min": true,
+        "positive_year_fraction_min": true,
+        "terminal_wealth_gt_equal": true,
+        "ticker_cluster_ci95_lower_gt_zero": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.875,
+          "groups": 8,
+          "max_positive_share": 0.2285560763285863,
+          "positive": 7
+        },
+        "genome": {
+          "fraction": 0.8212435233160622,
+          "groups": 1158,
+          "max_positive_share": 0.02207388685317954,
+          "positive": 951
+        },
+        "ticker": {
+          "fraction": 0.9701492537313433,
+          "groups": 67,
+          "max_positive_share": 0.04395987930808139,
+          "positive": 65
+        },
+        "year": {
+          "fraction": 1.0,
+          "groups": 6,
+          "max_positive_share": 0.3543459524038883,
+          "positive": 6
+        }
+      },
+      "id": "CONTROL_EV_P10_BROAD",
+      "mean_sizing_contribution": 0.012880480514721793,
+      "pass": true,
+      "portfolio": {
+        "avg_gross_exposure": 0.9135205430237001,
+        "cagr_equivalent": 0.2317473872323026,
+        "daily_cvar05": -0.021836040868236466,
+        "daily_p05": -0.014157812797762858,
+        "daily_volatility": 0.00993107817618521,
+        "max_drawdown": -0.15558067976171275,
+        "max_drawdown_start": "2022-03-29",
+        "max_drawdown_trough": "2022-06-16",
+        "min_cash_fraction": 0.0017983283033581505,
+        "peak_gross_exposure": 0.9982016716966418,
+        "return_to_drawdown": 11.794239415360604,
+        "terminal_wealth": 2.8349557855141883
+      },
+      "score": "ev_p10",
+      "ticker_cluster_ci95": [
+        0.01074408969575984,
+        0.015257540381880975
+      ]
+    },
+    {
+      "cap": 1.5,
+      "development_fitted_scale": 4.885862440313552,
+      "floor": 0.75,
+      "gates": {
+        "max_positive_genome_share": true,
+        "max_positive_ticker_share": true,
+        "not_both_max_drawdown_and_cvar05_worse": true,
+        "positive_family_fraction_min": true,
+        "positive_mean_sizing_contribution": true,
+        "positive_ticker_fraction_min": true,
+        "positive_year_fraction_min": true,
+        "terminal_wealth_gt_equal": true,
+        "ticker_cluster_ci95_lower_gt_zero": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.875,
+          "groups": 8,
+          "max_positive_share": 0.2276467103972937,
+          "positive": 7
+        },
+        "genome": {
+          "fraction": 0.8177892918825561,
+          "groups": 1158,
+          "max_positive_share": 0.02171187705179266,
+          "positive": 947
+        },
+        "ticker": {
+          "fraction": 0.9402985074626866,
+          "groups": 67,
+          "max_positive_share": 0.04400721578125243,
+          "positive": 63
+        },
+        "year": {
+          "fraction": 1.0,
+          "groups": 6,
+          "max_positive_share": 0.35490740111491426,
+          "positive": 6
+        }
+      },
+      "id": "PROPOSED_EV_P10_X_WINRATE_BROAD",
+      "mean_sizing_contribution": 0.012903478557394293,
+      "pass": true,
+      "portfolio": {
+        "avg_gross_exposure": 0.9137755333721271,
+        "cagr_equivalent": 0.23125808628986388,
+        "daily_cvar05": -0.021839952612261807,
+        "daily_p05": -0.014166949574471654,
+        "daily_volatility": 0.009931028934679769,
+        "max_drawdown": -0.1553992177488629,
+        "max_drawdown_start": "2022-03-29",
+        "max_drawdown_trough": "2022-06-16",
+        "min_cash_fraction": 0.0017982984329861346,
+        "peak_gross_exposure": 0.9982017015670139,
+        "return_to_drawdown": 11.771810988126422,
+        "terminal_wealth": 2.8293302190423146
+      },
+      "score": "ev_p10_x_winrate",
+      "ticker_cluster_ci95": [
+        0.010768857499329128,
+        0.015274391836302246
+      ]
+    }
+  ],
+  "stage": "GENERAL_WINNER_RULE_DISCOVERY_HOLDOUT_ONCE",
+  "verification_a_accessed": false,
+  "verification_b_accessed": false
+}
