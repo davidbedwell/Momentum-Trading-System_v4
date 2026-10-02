@@ -248,3 +248,18 @@ This is an example, not a selected rule.
 
 ### Rationale
 The current Discovery evidence suggests that **trajectory may matter more than absolute volatility**. Eventual winners had shallower and much earlier median bottoms than losers, yet many winners still experienced a substantial secondary decline after early recovery. A causal structural test may distinguish a normal retest from genuine thesis failure more effectively than a fixed percentage stop.
+
+## Execution continuity / credit-efficiency rule — added 2026-10-01
+**Status: mandatory operating rule for authorized MTS workflows. This governs execution behavior; it does not alter scientific thresholds or evidence partitions.**
+
+When David authorizes an end-to-end MTS experiment or workflow, that authorization covers all ordinary downstream execution already implied by the approved protocol: implementation, deterministic tests, process launch, polling, result collection, ordinary debugging, governance-preserving fixes, reruns after implementation failures, downstream approved stages, and final audit/synthesis.
+
+The assistant must keep the active tool-execution turn open while authorized work remains. Progress updates are intermediate updates, not stopping points. Do **not** send a final response that says work will continue afterward: once a final response ends the turn, autonomous tool execution cannot continue until David sends another message.
+
+Do not require David to send `continue`, ask for status, or poll every 20–30 minutes merely to restart already-authorized work. Poll long-running processes within the same active turn. If a process fails for an ordinary engineering reason, diagnose and repair it within frozen governance and relaunch it without seeking redundant approval.
+
+Stop and request David's decision only at a genuine decision boundary: a proposed change to a frozen protocol, scientific/governance ambiguity requiring human judgment, new spending/authorization beyond what was approved, inaccessible required evidence, or another action that materially changes the authorized scope.
+
+For credit efficiency, use deterministic remote computation for numerical grinding and reserve model reasoning for hypothesis formation, interpretation, anomaly recognition, scientific decisions, and audit. Prefer one continuous execution session over repeated `run -> final response -> user restart -> reconstruct context -> run` cycles.
+
+When giving an ETA, state whether the actual experiment is already launched. Never describe queued, merely designed, or not-yet-started work as running. If runtime materially changes, report the revised ETA in an intermediate update while continuing execution.
