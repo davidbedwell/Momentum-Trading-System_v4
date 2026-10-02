@@ -1,0 +1,3545 @@
+{
+  "baseline": {
+    "avg_gross_exposure": 0.8581666736549284,
+    "cagr_equivalent": 0.18544175751072922,
+    "daily_cvar05": -0.03267465615208526,
+    "daily_p05": -0.018736548373439344,
+    "daily_volatility": 0.013423085436765986,
+    "max_drawdown": -0.4573289134657734,
+    "max_drawdown_start": "2007-07-13",
+    "max_drawdown_trough": "2009-03-09",
+    "min_cash_fraction": 0.0035486006717544353,
+    "peak_gross_exposure": 0.9964513993282456,
+    "return_to_drawdown": 32.41115845301656,
+    "terminal_wealth": 15.822559879485082
+  },
+  "candidate_count": 54,
+  "candidates": [
+    {
+      "cap": 1.25,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.20257102550543943,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.7100712105798576,
+          "groups": 983,
+          "max_positive_share": 0.011406015996673522,
+          "positive": 698
+        },
+        "ticker": {
+          "fraction": 0.7142857142857143,
+          "groups": 56,
+          "max_positive_share": 0.08174483517426386,
+          "positive": 40
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2640282379104534,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0011191410652728656,
+      "name": "ev_p10_f0.5_c1.25",
+      "nominee": false,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8849893012553867,
+        "cagr_equivalent": 0.19185938351089526,
+        "daily_cvar05": -0.03161565060433487,
+        "daily_p05": -0.01864606894852001,
+        "daily_volatility": 0.01313638093089017,
+        "max_drawdown": -0.438230957459418,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002961982730730429,
+        "peak_gross_exposure": 0.9970380172692695,
+        "return_to_drawdown": 37.130794714203546,
+        "terminal_wealth": 17.271863718834517
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_p10",
+      "ticker_cluster_ci95": [
+        -0.0006326252025438746,
+        0.0027059632626484495
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.23473947337091375,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6836215666327569,
+          "groups": 983,
+          "max_positive_share": 0.010931889420956584,
+          "positive": 672
+        },
+        "ticker": {
+          "fraction": 0.8035714285714286,
+          "groups": 56,
+          "max_positive_share": 0.06919030133654724,
+          "positive": 45
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2784111492012609,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.003001107391349424,
+      "name": "ev_p10_f0.5_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8901734750488712,
+        "cagr_equivalent": 0.19398475654970526,
+        "daily_cvar05": -0.031461934257638546,
+        "daily_p05": -0.018503205637168472,
+        "daily_volatility": 0.013084902208922828,
+        "max_drawdown": -0.4260782924604891,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0023912650913488855,
+        "peak_gross_exposure": 0.9976087349086511,
+        "return_to_drawdown": 39.37933090457085,
+        "terminal_wealth": 17.778678070056117
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10",
+      "ticker_cluster_ci95": [
+        0.000995591529701875,
+        0.004923201155921762
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.29049194775966436,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6439471007121058,
+          "groups": 983,
+          "max_positive_share": 0.016064673237686924,
+          "positive": 633
+        },
+        "ticker": {
+          "fraction": 0.8392857142857143,
+          "groups": 56,
+          "max_positive_share": 0.049178125800151504,
+          "positive": 47
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.3210737494703217,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.004424720073189704,
+      "name": "ev_p10_f0.5_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8862171242731383,
+        "cagr_equivalent": 0.19523865540398067,
+        "daily_cvar05": -0.031161539002605616,
+        "daily_p05": -0.01824903844329217,
+        "daily_volatility": 0.01297890269401934,
+        "max_drawdown": -0.4119451183351376,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002227890669013728,
+        "peak_gross_exposure": 0.9977721093309863,
+        "return_to_drawdown": 41.472010748653226,
+        "terminal_wealth": 18.08419237545005
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10",
+      "ticker_cluster_ci95": [
+        0.0021786413911441854,
+        0.006714566278802573
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.21723668515618447,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.7222787385554426,
+          "groups": 983,
+          "max_positive_share": 0.013830700921753916,
+          "positive": 710
+        },
+        "ticker": {
+          "fraction": 0.8571428571428571,
+          "groups": 56,
+          "max_positive_share": 0.05946515869527582,
+          "positive": 48
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2757301352373363,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0019496442425177144,
+      "name": "ev_p10_f0.75_c1.25",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.886657295544584,
+        "cagr_equivalent": 0.19138972880701965,
+        "daily_cvar05": -0.032530711392365796,
+        "daily_p05": -0.018703498177095098,
+        "daily_volatility": 0.013438340041211718,
+        "max_drawdown": -0.4492664273562508,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.003023987036994979,
+        "peak_gross_exposure": 0.996976012963005,
+        "return_to_drawdown": 35.973563984735165,
+        "terminal_wealth": 17.16171457069346
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10",
+      "ticker_cluster_ci95": [
+        0.0009016891872723112,
+        0.002952801209220559
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.26275703026623387,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6602238046795524,
+          "groups": 983,
+          "max_positive_share": 0.0126830699959059,
+          "positive": 649
+        },
+        "ticker": {
+          "fraction": 0.875,
+          "groups": 56,
+          "max_positive_share": 0.055004162236774116,
+          "positive": 49
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.3048863267857315,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.002920860082231079,
+      "name": "ev_p10_f0.75_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8912767502172343,
+        "cagr_equivalent": 0.19238194620114601,
+        "daily_cvar05": -0.032517666364060206,
+        "daily_p05": -0.018592441898954114,
+        "daily_volatility": 0.01342599621232223,
+        "max_drawdown": -0.44655126293138436,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0026315308878057074,
+        "peak_gross_exposure": 0.9973684691121942,
+        "return_to_drawdown": 36.715160034238856,
+        "terminal_wealth": 17.395201082017252
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10",
+      "ticker_cluster_ci95": [
+        0.0016983210250130316,
+        0.004181812988453183
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.32293824632702195,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.590030518819939,
+          "groups": 983,
+          "max_positive_share": 0.023313079730535712,
+          "positive": 580
+        },
+        "ticker": {
+          "fraction": 0.8392857142857143,
+          "groups": 56,
+          "max_positive_share": 0.045243063546593035,
+          "positive": 47
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.3492338290430813,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.003198322628741306,
+      "name": "ev_p10_f0.75_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8872634634495132,
+        "cagr_equivalent": 0.19204619387455235,
+        "daily_cvar05": -0.03245564433078861,
+        "daily_p05": -0.01847375930887481,
+        "daily_volatility": 0.0133953923347118,
+        "max_drawdown": -0.4433053258634936,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0026346777901439266,
+        "peak_gross_exposure": 0.9973653222098561,
+        "return_to_drawdown": 36.80501891810052,
+        "terminal_wealth": 17.3158609049006
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10",
+      "ticker_cluster_ci95": [
+        0.0018862785881868741,
+        0.004654720363875087
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.203898459755739,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6866734486266531,
+          "groups": 983,
+          "max_positive_share": 0.01180625698406691,
+          "positive": 675
+        },
+        "ticker": {
+          "fraction": 0.6607142857142857,
+          "groups": 56,
+          "max_positive_share": 0.08190518394463629,
+          "positive": 37
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2522902075969981,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0007218059460065593,
+      "name": "ev_cvar10_f0.5_c1.25",
+      "nominee": false,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8877290381937655,
+        "cagr_equivalent": 0.19130995549324648,
+        "daily_cvar05": -0.031754596042702705,
+        "daily_p05": -0.018693157369670803,
+        "daily_volatility": 0.013196678827824892,
+        "max_drawdown": -0.44404419996606015,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0030218000412627183,
+        "peak_gross_exposure": 0.9969781999587373,
+        "return_to_drawdown": 36.354648436770475,
+        "terminal_wealth": 17.143070780153124
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_cvar10",
+      "ticker_cluster_ci95": [
+        -0.0010720817983563365,
+        0.002329584261628957
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.2306909078848598,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6785350966429298,
+          "groups": 983,
+          "max_positive_share": 0.011465459747268059,
+          "positive": 667
+        },
+        "ticker": {
+          "fraction": 0.7678571428571429,
+          "groups": 56,
+          "max_positive_share": 0.07087125462556405,
+          "positive": 43
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.27036643000689403,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.002562527068756232,
+      "name": "ev_cvar10_f0.5_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8927953473215906,
+        "cagr_equivalent": 0.19242023791170415,
+        "daily_cvar05": -0.031623595544242114,
+        "daily_p05": -0.01864943918451593,
+        "daily_volatility": 0.013141797410125985,
+        "max_drawdown": -0.4372485767256181,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0025121612210309433,
+        "peak_gross_exposure": 0.9974878387789691,
+        "return_to_drawdown": 37.517037545807874,
+        "terminal_wealth": 17.40427126986607
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_cvar10",
+      "ticker_cluster_ci95": [
+        0.0005700773608800094,
+        0.004445131874708103
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.261236768855204,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6317395727365208,
+          "groups": 983,
+          "max_positive_share": 0.018316512827886884,
+          "positive": 621
+        },
+        "ticker": {
+          "fraction": 0.7857142857142857,
+          "groups": 56,
+          "max_positive_share": 0.050324498364810566,
+          "positive": 44
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.3044782790310931,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0033442982985753206,
+      "name": "ev_cvar10_f0.5_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8907750526875062,
+        "cagr_equivalent": 0.1927534163474911,
+        "daily_cvar05": -0.03150371690621474,
+        "daily_p05": -0.018422305795092738,
+        "daily_volatility": 0.013097434915391096,
+        "max_drawdown": -0.43464799923420916,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002319965533372338,
+        "peak_gross_exposure": 0.9976800344666277,
+        "return_to_drawdown": 37.92351295456284,
+        "terminal_wealth": 17.48337902963335
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_cvar10",
+      "ticker_cluster_ci95": [
+        0.001172303042413039,
+        0.005471915975501685
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.21148254099185254,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.7080366225839267,
+          "groups": 983,
+          "max_positive_share": 0.015021896971312879,
+          "positive": 696
+        },
+        "ticker": {
+          "fraction": 0.8214285714285714,
+          "groups": 56,
+          "max_positive_share": 0.06096589870753119,
+          "positive": 46
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2541007881710063,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0017499679645282787,
+      "name": "ev_cvar10_f0.75_c1.25",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8882666692778288,
+        "cagr_equivalent": 0.19054163610294306,
+        "daily_cvar05": -0.032568280391655144,
+        "daily_p05": -0.01871616496664612,
+        "daily_volatility": 0.013448584968770544,
+        "max_drawdown": -0.4546897150467194,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.003164069876201446,
+        "peak_gross_exposure": 0.9968359301237986,
+        "return_to_drawdown": 35.11070752529187,
+        "terminal_wealth": 16.96447759976367
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_cvar10",
+      "ticker_cluster_ci95": [
+        0.0007193956218724499,
+        0.0027323495226757558
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.2541823127782305,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.646998982706002,
+          "groups": 983,
+          "max_positive_share": 0.013346741013078395,
+          "positive": 636
+        },
+        "ticker": {
+          "fraction": 0.875,
+          "groups": 56,
+          "max_positive_share": 0.05631213443427425,
+          "positive": 49
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2969305586825006,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.002713042269899276,
+      "name": "ev_cvar10_f0.75_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8923248005404487,
+        "cagr_equivalent": 0.19185177681709198,
+        "daily_cvar05": -0.03253284123477382,
+        "daily_p05": -0.018687182091101526,
+        "daily_volatility": 0.013430789549015483,
+        "max_drawdown": -0.4502642807081594,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0027963885842211284,
+        "peak_gross_exposure": 0.9972036114157788,
+        "return_to_drawdown": 36.134499510631954,
+        "terminal_wealth": 17.270074430904035
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_cvar10",
+      "ticker_cluster_ci95": [
+        0.0015203102891531892,
+        0.003944864901286152
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.27962776131041855,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.5991861648016277,
+          "groups": 983,
+          "max_positive_share": 0.024369091096376,
+          "positive": 589
+        },
+        "ticker": {
+          "fraction": 0.8392857142857143,
+          "groups": 56,
+          "max_positive_share": 0.04370969795136155,
+          "positive": 47
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.32159628950733643,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0025600807309773383,
+      "name": "ev_cvar10_f0.75_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8896286261420417,
+        "cagr_equivalent": 0.19186736123846648,
+        "daily_cvar05": -0.03248669715910496,
+        "daily_p05": -0.018505902416219383,
+        "daily_volatility": 0.013405952280432919,
+        "max_drawdown": -0.44804339252766756,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002718051892684277,
+        "peak_gross_exposure": 0.9972819481073156,
+        "return_to_drawdown": 36.32179548153538,
+        "terminal_wealth": 17.27374047024322
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_cvar10",
+      "ticker_cluster_ci95": [
+        0.0013098896569135622,
+        0.0038905041031365626
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": false,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.2575500143773718,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6581892166836215,
+          "groups": 983,
+          "max_positive_share": 0.01371065199510406,
+          "positive": 647
+        },
+        "ticker": {
+          "fraction": 0.5892857142857143,
+          "groups": 56,
+          "max_positive_share": 0.08083188658596929,
+          "positive": 33
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.262064167418129,
+          "positive": 14
+        }
+      },
+      "mean_delta": 9.42415204672038e-05,
+      "name": "ev_vol_f0.5_c1.25",
+      "nominee": false,
+      "passing_neighbors": 2,
+      "portfolio": {
+        "avg_gross_exposure": 0.8809048263536502,
+        "cagr_equivalent": 0.1880596654412494,
+        "daily_cvar05": -0.031756709230121284,
+        "daily_p05": -0.01865451174767459,
+        "daily_volatility": 0.013172362780764302,
+        "max_drawdown": -0.44619166969980384,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.003104660096819991,
+        "peak_gross_exposure": 0.99689533990318,
+        "return_to_drawdown": 34.51298994186247,
+        "terminal_wealth": 16.399408608492152
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_vol",
+      "ticker_cluster_ci95": [
+        -0.0017726986586782893,
+        0.0017807121555698626
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.2442567849653405,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.641912512716175,
+          "groups": 983,
+          "max_positive_share": 0.013549767068623614,
+          "positive": 631
+        },
+        "ticker": {
+          "fraction": 0.6428571428571429,
+          "groups": 56,
+          "max_positive_share": 0.05690867295736882,
+          "positive": 36
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.30272588230704084,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0011839407277858779,
+      "name": "ev_vol_f0.5_c1.5",
+      "nominee": false,
+      "passing_neighbors": 2,
+      "portfolio": {
+        "avg_gross_exposure": 0.8799143995884672,
+        "cagr_equivalent": 0.1880215475265521,
+        "daily_cvar05": -0.03157513921014448,
+        "daily_p05": -0.018561161670985107,
+        "daily_volatility": 0.013087400542526613,
+        "max_drawdown": -0.4418328293506949,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0029347761460501733,
+        "peak_gross_exposure": 0.9970652238539499,
+        "return_to_drawdown": 34.834146858185285,
+        "terminal_wealth": 16.390869664369625
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_vol",
+      "ticker_cluster_ci95": [
+        -0.0007924449440067065,
+        0.0030898594115399683
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.24167760550139955,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6195320447609359,
+          "groups": 983,
+          "max_positive_share": 0.02340096670512823,
+          "positive": 609
+        },
+        "ticker": {
+          "fraction": 0.625,
+          "groups": 56,
+          "max_positive_share": 0.053029193325845304,
+          "positive": 35
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.29765185837589564,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0009202586755700806,
+      "name": "ev_vol_f0.5_c2.0",
+      "nominee": false,
+      "passing_neighbors": 2,
+      "portfolio": {
+        "avg_gross_exposure": 0.8792337115833146,
+        "cagr_equivalent": 0.18744682850232164,
+        "daily_cvar05": -0.03149247393675324,
+        "daily_p05": -0.018415855695704402,
+        "daily_volatility": 0.013056044352178863,
+        "max_drawdown": -0.4431766278347373,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0028690271125793483,
+        "peak_gross_exposure": 0.9971309728874207,
+        "return_to_drawdown": 34.439156427288744,
+        "terminal_wealth": 16.262629210918846
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_vol",
+      "ticker_cluster_ci95": [
+        -0.0011151969989869506,
+        0.0029380055906637922
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.22509440724862625,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6846388606307223,
+          "groups": 983,
+          "max_positive_share": 0.012469743374145765,
+          "positive": 673
+        },
+        "ticker": {
+          "fraction": 0.7321428571428571,
+          "groups": 56,
+          "max_positive_share": 0.06368765541482756,
+          "positive": 41
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2728499728930136,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0011075411465834221,
+      "name": "ev_vol_f0.75_c1.25",
+      "nominee": false,
+      "passing_neighbors": 2,
+      "portfolio": {
+        "avg_gross_exposure": 0.8814293689148616,
+        "cagr_equivalent": 0.1883410785089632,
+        "daily_cvar05": -0.032537120074428494,
+        "daily_p05": -0.018699459099152566,
+        "daily_volatility": 0.013411174198527902,
+        "max_drawdown": -0.45553003682082993,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.003362097698046423,
+        "peak_gross_exposure": 0.9966379023019536,
+        "return_to_drawdown": 33.94414659651385,
+        "terminal_wealth": 16.462578348961603
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_vol",
+      "ticker_cluster_ci95": [
+        4.3511984442703256e-05,
+        0.0021574080261362013
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.2397813796681459,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6307222787385555,
+          "groups": 983,
+          "max_positive_share": 0.015859599186902096,
+          "positive": 620
+        },
+        "ticker": {
+          "fraction": 0.7678571428571429,
+          "groups": 56,
+          "max_positive_share": 0.05345359936303126,
+          "positive": 43
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.3171835231205576,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0016020208087726567,
+      "name": "ev_vol_f0.75_c1.5",
+      "nominee": false,
+      "passing_neighbors": 2,
+      "portfolio": {
+        "avg_gross_exposure": 0.8812276395884272,
+        "cagr_equivalent": 0.18835366084640914,
+        "daily_cvar05": -0.03248240013476286,
+        "daily_p05": -0.018648807284167856,
+        "daily_volatility": 0.013376338335570509,
+        "max_drawdown": -0.4523667875641467,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.003246245956015163,
+        "peak_gross_exposure": 0.9967537540439848,
+        "return_to_drawdown": 34.18776201017593,
+        "terminal_wealth": 16.46540807455086
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_vol",
+      "ticker_cluster_ci95": [
+        0.00039863448502083315,
+        0.0028489231370832776
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.22609560312199442,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.5940996948118006,
+          "groups": 983,
+          "max_positive_share": 0.028368116441327845,
+          "positive": 584
+        },
+        "ticker": {
+          "fraction": 0.7321428571428571,
+          "groups": 56,
+          "max_positive_share": 0.05461045788846528,
+          "positive": 41
+        },
+        "year": {
+          "fraction": 0.7058823529411765,
+          "groups": 17,
+          "max_positive_share": 0.3033031246504586,
+          "positive": 12
+        }
+      },
+      "mean_delta": 0.0011428158073403336,
+      "name": "ev_vol_f0.75_c2.0",
+      "nominee": false,
+      "passing_neighbors": 2,
+      "portfolio": {
+        "avg_gross_exposure": 0.8809210919595056,
+        "cagr_equivalent": 0.18801101498503248,
+        "daily_cvar05": -0.0324178072819125,
+        "daily_p05": -0.01845691244682267,
+        "daily_volatility": 0.013355833279244968,
+        "max_drawdown": -0.45222048511876856,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0031829844056589537,
+        "peak_gross_exposure": 0.996817015594341,
+        "return_to_drawdown": 34.02877903693629,
+        "terminal_wealth": 16.388510964082712
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_vol",
+      "ticker_cluster_ci95": [
+        -9.623795409985924e-05,
+        0.0024533175564137645
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.26635116489917915,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6703967446592065,
+          "groups": 983,
+          "max_positive_share": 0.013579538291833199,
+          "positive": 659
+        },
+        "ticker": {
+          "fraction": 0.6607142857142857,
+          "groups": 56,
+          "max_positive_share": 0.08272152036967002,
+          "positive": 37
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2853178537754738,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0005221490911220442,
+      "name": "winrate_payoff_p10_f0.5_c1.25",
+      "nominee": false,
+      "passing_neighbors": 3,
+      "portfolio": {
+        "avg_gross_exposure": 0.8858381814225195,
+        "cagr_equivalent": 0.1918556257609152,
+        "daily_cvar05": -0.032152364797497245,
+        "daily_p05": -0.01870277910000884,
+        "daily_volatility": 0.013328995833543252,
+        "max_drawdown": -0.448405094342737,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002968979192660513,
+        "peak_gross_exposure": 0.9970310208073395,
+        "return_to_drawdown": 36.28634015082766,
+        "terminal_wealth": 17.270979778684524
+      },
+      "pre_neighborhood_pass": false,
+      "score": "winrate_payoff_p10",
+      "ticker_cluster_ci95": [
+        -0.0011039395727866913,
+        0.001951768602454239
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.31377901185156626,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6358087487283826,
+          "groups": 983,
+          "max_positive_share": 0.013593050181127202,
+          "positive": 625
+        },
+        "ticker": {
+          "fraction": 0.7321428571428571,
+          "groups": 56,
+          "max_positive_share": 0.06126924910721844,
+          "positive": 41
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.31911668792502257,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0014259074600074678,
+      "name": "winrate_payoff_p10_f0.5_c1.5",
+      "nominee": false,
+      "passing_neighbors": 3,
+      "portfolio": {
+        "avg_gross_exposure": 0.8885020478875136,
+        "cagr_equivalent": 0.1927600308941666,
+        "daily_cvar05": -0.03201871761827627,
+        "daily_p05": -0.018577970035460755,
+        "daily_volatility": 0.013276760645179245,
+        "max_drawdown": -0.4426090687242692,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002825439118693184,
+        "peak_gross_exposure": 0.9971745608813068,
+        "return_to_drawdown": 37.244950726664484,
+        "terminal_wealth": 17.48495295581026
+      },
+      "pre_neighborhood_pass": false,
+      "score": "winrate_payoff_p10",
+      "ticker_cluster_ci95": [
+        -0.0003026985524018814,
+        0.0030347740787456394
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.33755461786577706,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6154628687690743,
+          "groups": 983,
+          "max_positive_share": 0.02533920591090042,
+          "positive": 605
+        },
+        "ticker": {
+          "fraction": 0.7321428571428571,
+          "groups": 56,
+          "max_positive_share": 0.05549934609338596,
+          "positive": 41
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.328454089500273,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0014821665235598294,
+      "name": "winrate_payoff_p10_f0.5_c2.0",
+      "nominee": false,
+      "passing_neighbors": 3,
+      "portfolio": {
+        "avg_gross_exposure": 0.887804482414681,
+        "cagr_equivalent": 0.19263534031449803,
+        "daily_cvar05": -0.031912691886704155,
+        "daily_p05": -0.018539094748516498,
+        "daily_volatility": 0.013234461504766332,
+        "max_drawdown": -0.43960400755373696,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0027521179390691147,
+        "peak_gross_exposure": 0.9972478820609308,
+        "return_to_drawdown": 37.43210936982562,
+        "terminal_wealth": 17.45530529016513
+      },
+      "pre_neighborhood_pass": false,
+      "score": "winrate_payoff_p10",
+      "ticker_cluster_ci95": [
+        -0.00032015982883095497,
+        0.0032054938814598285
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.24345248133785463,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6856561546286877,
+          "groups": 983,
+          "max_positive_share": 0.011488453834883925,
+          "positive": 674
+        },
+        "ticker": {
+          "fraction": 0.7857142857142857,
+          "groups": 56,
+          "max_positive_share": 0.06675293316261441,
+          "positive": 44
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2869045732696045,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.001451442599345424,
+      "name": "winrate_payoff_p10_f0.75_c1.25",
+      "nominee": true,
+      "passing_neighbors": 3,
+      "portfolio": {
+        "avg_gross_exposure": 0.8838237096759131,
+        "cagr_equivalent": 0.19106581445459203,
+        "daily_cvar05": -0.032555555631701885,
+        "daily_p05": -0.01867267453647089,
+        "daily_volatility": 0.01344207456075432,
+        "max_drawdown": -0.4502494158400061,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.00284833481036751,
+        "peak_gross_exposure": 0.9971516651896325,
+        "return_to_drawdown": 35.72715505723683,
+        "terminal_wealth": 17.086130694146203
+      },
+      "pre_neighborhood_pass": true,
+      "score": "winrate_payoff_p10",
+      "ticker_cluster_ci95": [
+        0.0004617381231447061,
+        0.0024000455013851694
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.3030876827862433,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6408952187182095,
+          "groups": 983,
+          "max_positive_share": 0.016508510509307326,
+          "positive": 630
+        },
+        "ticker": {
+          "fraction": 0.8214285714285714,
+          "groups": 56,
+          "max_positive_share": 0.049158786008647856,
+          "positive": 46
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.32668116027710475,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0021795090754379892,
+      "name": "winrate_payoff_p10_f0.75_c1.5",
+      "nominee": true,
+      "passing_neighbors": 3,
+      "portfolio": {
+        "avg_gross_exposure": 0.8862131569413799,
+        "cagr_equivalent": 0.19170032066728648,
+        "daily_cvar05": -0.032525973065177904,
+        "daily_p05": -0.018541205718384652,
+        "daily_volatility": 0.013424896523365582,
+        "max_drawdown": -0.44700910269277483,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0028359976432566244,
+        "peak_gross_exposure": 0.9971640023567434,
+        "return_to_drawdown": 36.318017202607315,
+        "terminal_wealth": 17.234484281318256
+      },
+      "pre_neighborhood_pass": true,
+      "score": "winrate_payoff_p10",
+      "ticker_cluster_ci95": [
+        0.001050100574102525,
+        0.0033331454955588024
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.3184338199916879,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6144455747711088,
+          "groups": 983,
+          "max_positive_share": 0.02594773024945474,
+          "positive": 604
+        },
+        "ticker": {
+          "fraction": 0.8392857142857143,
+          "groups": 56,
+          "max_positive_share": 0.049612676754424975,
+          "positive": 47
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.33409840403727176,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0020927985341150537,
+      "name": "winrate_payoff_p10_f0.75_c2.0",
+      "nominee": true,
+      "passing_neighbors": 3,
+      "portfolio": {
+        "avg_gross_exposure": 0.8859654342907668,
+        "cagr_equivalent": 0.19146842709455525,
+        "daily_cvar05": -0.03250563041177786,
+        "daily_p05": -0.018521289575417692,
+        "daily_volatility": 0.013414235252685907,
+        "max_drawdown": -0.4459032711734463,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002813052145907672,
+        "peak_gross_exposure": 0.9971869478540922,
+        "return_to_drawdown": 36.28617865324163,
+        "terminal_wealth": 17.18012575986452
+      },
+      "pre_neighborhood_pass": true,
+      "score": "winrate_payoff_p10",
+      "ticker_cluster_ci95": [
+        0.0009481368274687062,
+        0.0033158070614473147
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.21571608613557994,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6948118006103764,
+          "groups": 983,
+          "max_positive_share": 0.013319288661972456,
+          "positive": 683
+        },
+        "ticker": {
+          "fraction": 0.6607142857142857,
+          "groups": 56,
+          "max_positive_share": 0.09038607407917156,
+          "positive": 37
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.25343928808981203,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0007744001954727869,
+      "name": "ev_mae_f0.5_c1.25",
+      "nominee": false,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8854330215911624,
+        "cagr_equivalent": 0.19120696070196952,
+        "daily_cvar05": -0.031663629088444,
+        "daily_p05": -0.01869690066210019,
+        "daily_volatility": 0.01315458922523447,
+        "max_drawdown": -0.44060888209958393,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.00302095639244847,
+        "peak_gross_exposure": 0.9969790436075515,
+        "return_to_drawdown": 36.583529455231435,
+        "terminal_wealth": 17.119028016526723
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_mae",
+      "ticker_cluster_ci95": [
+        -0.0009950067888455125,
+        0.0023551907520362883
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.2634505978704578,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6581892166836215,
+          "groups": 983,
+          "max_positive_share": 0.01649560231067277,
+          "positive": 647
+        },
+        "ticker": {
+          "fraction": 0.75,
+          "groups": 56,
+          "max_positive_share": 0.07829987615638713,
+          "positive": 42
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.26572582073499157,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0022822387501763557,
+      "name": "ev_mae_f0.5_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8907138327902133,
+        "cagr_equivalent": 0.1930344720559345,
+        "daily_cvar05": -0.03157896781137749,
+        "daily_p05": -0.018564805846570692,
+        "daily_volatility": 0.013125029948088379,
+        "max_drawdown": -0.43296732200092236,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0024665801861786484,
+        "peak_gross_exposure": 0.9975334198138213,
+        "return_to_drawdown": 38.225456059224655,
+        "terminal_wealth": 17.55037334222643
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_mae",
+      "ticker_cluster_ci95": [
+        0.0003438188087720279,
+        0.004135255332465436
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.31356605394915227,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6215666327568667,
+          "groups": 983,
+          "max_positive_share": 0.0183800556802487,
+          "positive": 611
+        },
+        "ticker": {
+          "fraction": 0.75,
+          "groups": 56,
+          "max_positive_share": 0.062021464044390705,
+          "positive": 42
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.28708490890945276,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0026378012828655534,
+      "name": "ev_mae_f0.5_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8878928243008158,
+        "cagr_equivalent": 0.19361861973172378,
+        "daily_cvar05": -0.031382223081633284,
+        "daily_p05": -0.01834972718058287,
+        "daily_volatility": 0.01305552872998652,
+        "max_drawdown": -0.429175220279451,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002359991408942579,
+        "peak_gross_exposure": 0.9976400085910574,
+        "return_to_drawdown": 38.88944490845588,
+        "terminal_wealth": 17.690386085132126
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_mae",
+      "ticker_cluster_ci95": [
+        0.0006222574981537705,
+        0.00468755694241469
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.23241160874303718,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.688708036622584,
+          "groups": 983,
+          "max_positive_share": 0.01855404550344787,
+          "positive": 677
+        },
+        "ticker": {
+          "fraction": 0.8214285714285714,
+          "groups": 56,
+          "max_positive_share": 0.07054468612556473,
+          "positive": 46
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2513967928276754,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0016583116396895528,
+      "name": "ev_mae_f0.75_c1.25",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8868988067097731,
+        "cagr_equivalent": 0.19112010606884766,
+        "daily_cvar05": -0.032532936047915434,
+        "daily_p05": -0.018729176009691432,
+        "daily_volatility": 0.013435972957177066,
+        "max_drawdown": -0.45019725566547997,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0031054647860055237,
+        "peak_gross_exposure": 0.9968945352139945,
+        "return_to_drawdown": 35.75938625121677,
+        "terminal_wealth": 17.098777554579684
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_mae",
+      "ticker_cluster_ci95": [
+        0.0006376693101121359,
+        0.0026353203634362937
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.29785190624963936,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6368260427263479,
+          "groups": 983,
+          "max_positive_share": 0.014531115725734579,
+          "positive": 626
+        },
+        "ticker": {
+          "fraction": 0.8035714285714286,
+          "groups": 56,
+          "max_positive_share": 0.05989252440256103,
+          "positive": 45
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.28494496227038946,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.002397896394449167,
+      "name": "ev_mae_f0.75_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8914307556387062,
+        "cagr_equivalent": 0.19260409494886477,
+        "daily_cvar05": -0.03253666096703998,
+        "daily_p05": -0.01863283164992626,
+        "daily_volatility": 0.01343140171535527,
+        "max_drawdown": -0.44783576219922716,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0028323671438998366,
+        "peak_gross_exposure": 0.9971676328561001,
+        "return_to_drawdown": 36.727490000540755,
+        "terminal_wealth": 17.447883478056664
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_mae",
+      "ticker_cluster_ci95": [
+        0.0012274816758205001,
+        0.0036214169961740613
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.3342890917756207,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.5971515768056969,
+          "groups": 983,
+          "max_positive_share": 0.025715591294430136,
+          "positive": 587
+        },
+        "ticker": {
+          "fraction": 0.8035714285714286,
+          "groups": 56,
+          "max_positive_share": 0.04719576616461942,
+          "positive": 45
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.2991313563740617,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0020659539610520246,
+      "name": "ev_mae_f0.75_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8890620790526012,
+        "cagr_equivalent": 0.19261033329468624,
+        "daily_cvar05": -0.032485489166628995,
+        "daily_p05": -0.01853662066412433,
+        "daily_volatility": 0.01340880463142855,
+        "max_drawdown": -0.44563234247050265,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0027616760970907103,
+        "peak_gross_exposure": 0.9972383239029093,
+        "return_to_drawdown": 36.912412964814514,
+        "terminal_wealth": 17.449365055748842
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_mae",
+      "ticker_cluster_ci95": [
+        0.0008652804252366825,
+        0.0033364690535804906
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.1987513899127495,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.7100712105798576,
+          "groups": 983,
+          "max_positive_share": 0.011358335428769578,
+          "positive": 698
+        },
+        "ticker": {
+          "fraction": 0.7142857142857143,
+          "groups": 56,
+          "max_positive_share": 0.08187585852450147,
+          "positive": 40
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2632201746918383,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0011438296966786881,
+      "name": "ev_p10_x_winrate_f0.5_c1.25",
+      "nominee": false,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8839623255753833,
+        "cagr_equivalent": 0.19130135566616646,
+        "daily_cvar05": -0.03160140997716751,
+        "daily_p05": -0.01862731604773078,
+        "daily_volatility": 0.013127547472773308,
+        "max_drawdown": -0.43826868889904236,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.003068508388536762,
+        "peak_gross_exposure": 0.9969314916114632,
+        "return_to_drawdown": 36.82914719213719,
+        "terminal_wealth": 17.141062053167815
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_p10_x_winrate",
+      "ticker_cluster_ci95": [
+        -0.0006096674675362654,
+        0.002739217853147012
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.23035518295416593,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6907426246185148,
+          "groups": 983,
+          "max_positive_share": 0.010709059211405815,
+          "positive": 679
+        },
+        "ticker": {
+          "fraction": 0.8035714285714286,
+          "groups": 56,
+          "max_positive_share": 0.06771142009587527,
+          "positive": 45
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.27818339785121593,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0032372354972808218,
+      "name": "ev_p10_x_winrate_f0.5_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8894481551084978,
+        "cagr_equivalent": 0.19377541029259704,
+        "daily_cvar05": -0.0314279803141186,
+        "daily_p05": -0.018443483250068688,
+        "daily_volatility": 0.01307149362094577,
+        "max_drawdown": -0.42460721937770285,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0024880399676379937,
+        "peak_gross_exposure": 0.997511960032362,
+        "return_to_drawdown": 39.39675082034358,
+        "terminal_wealth": 17.72814481834232
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_x_winrate",
+      "ticker_cluster_ci95": [
+        0.0012128852019536395,
+        0.005187209958086239
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.281601081464851,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6439471007121058,
+          "groups": 983,
+          "max_positive_share": 0.014489604301917236,
+          "positive": 633
+        },
+        "ticker": {
+          "fraction": 0.8392857142857143,
+          "groups": 56,
+          "max_positive_share": 0.05062900415298288,
+          "positive": 47
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.3203407834649699,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.00498345015888381,
+      "name": "ev_p10_x_winrate_f0.5_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8849827452527024,
+        "cagr_equivalent": 0.19543286183154107,
+        "daily_cvar05": -0.031022555689588897,
+        "daily_p05": -0.018171703939359594,
+        "daily_volatility": 0.012921511243909053,
+        "max_drawdown": -0.408185843413585,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002258998534799842,
+        "peak_gross_exposure": 0.9977410014652002,
+        "return_to_drawdown": 41.97095423830166,
+        "terminal_wealth": 18.13194935463414
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_x_winrate",
+      "ticker_cluster_ci95": [
+        0.002655594705124666,
+        0.007379270166386478
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.21365336481419506,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.7243133265513734,
+          "groups": 983,
+          "max_positive_share": 0.012970171571009619,
+          "positive": 712
+        },
+        "ticker": {
+          "fraction": 0.8571428571428571,
+          "groups": 56,
+          "max_positive_share": 0.05757138865442173,
+          "positive": 48
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.27738406111665115,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0019856240984901506,
+      "name": "ev_p10_x_winrate_f0.75_c1.25",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8862845254658983,
+        "cagr_equivalent": 0.19115262282676726,
+        "daily_cvar05": -0.032535812444203005,
+        "daily_p05": -0.018705077109834184,
+        "daily_volatility": 0.013438002955092456,
+        "max_drawdown": -0.44958614773008665,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0031121495176612323,
+        "peak_gross_exposure": 0.9968878504823387,
+        "return_to_drawdown": 35.82485002696179,
+        "terminal_wealth": 17.106356316629842
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_x_winrate",
+      "ticker_cluster_ci95": [
+        0.0009351845805697578,
+        0.003001947110621959
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.2586751839496678,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6581892166836215,
+          "groups": 983,
+          "max_positive_share": 0.012131637379127364,
+          "positive": 647
+        },
+        "ticker": {
+          "fraction": 0.875,
+          "groups": 56,
+          "max_positive_share": 0.056161540745761705,
+          "positive": 49
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.3033834621045121,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.003049370695466215,
+      "name": "ev_p10_x_winrate_f0.75_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8911559721141271,
+        "cagr_equivalent": 0.1923119383707963,
+        "daily_cvar05": -0.03250858891708541,
+        "daily_p05": -0.01860872312225756,
+        "daily_volatility": 0.013421790516123439,
+        "max_drawdown": -0.4457873359756699,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0026285212975794177,
+        "peak_gross_exposure": 0.9973714787024206,
+        "return_to_drawdown": 36.74090405244178,
+        "terminal_wealth": 17.378629738875713
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_x_winrate",
+      "ticker_cluster_ci95": [
+        0.0018162902251851337,
+        0.004340036622298458
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.32894977613984444,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.5839267548321465,
+          "groups": 983,
+          "max_positive_share": 0.021423658471477394,
+          "positive": 574
+        },
+        "ticker": {
+          "fraction": 0.8571428571428571,
+          "groups": 56,
+          "max_positive_share": 0.04545086784505458,
+          "positive": 48
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.354731336437129,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0034930194749574804,
+      "name": "ev_p10_x_winrate_f0.75_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8865362707787955,
+        "cagr_equivalent": 0.19194814306218277,
+        "daily_cvar05": -0.03243751230979618,
+        "daily_p05": -0.0184071584361162,
+        "daily_volatility": 0.013387195908826643,
+        "max_drawdown": -0.44282184970477945,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0026614243315408715,
+        "peak_gross_exposure": 0.9973385756684591,
+        "return_to_drawdown": 36.79302432023924,
+        "terminal_wealth": 17.292755085721275
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_x_winrate",
+      "ticker_cluster_ci95": [
+        0.0021230708100431345,
+        0.005013436614026946
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": false,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.3792820047692741,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.7293997965412004,
+          "groups": 983,
+          "max_positive_share": 0.011574728304303354,
+          "positive": 717
+        },
+        "ticker": {
+          "fraction": 0.5714285714285714,
+          "groups": 56,
+          "max_positive_share": 0.10458942639212734,
+          "positive": 32
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.25544090133351566,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.00021569719655231158,
+      "name": "ev_p10_x_sqrtN_f0.5_c1.25",
+      "nominee": false,
+      "passing_neighbors": 4,
+      "portfolio": {
+        "avg_gross_exposure": 0.8857534408765148,
+        "cagr_equivalent": 0.19461244803657207,
+        "daily_cvar05": -0.03162403515343162,
+        "daily_p05": -0.01852302364503844,
+        "daily_volatility": 0.013144627074834664,
+        "max_drawdown": -0.4406970009077834,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002151356687648161,
+        "peak_gross_exposure": 0.9978486433123518,
+        "return_to_drawdown": 38.41869900927582,
+        "terminal_wealth": 17.931005432166682
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_p10_x_sqrtN",
+      "ticker_cluster_ci95": [
+        -0.0015038749071321722,
+        0.0017336791596595483
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.32663523054430105,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.7355035605289929,
+          "groups": 983,
+          "max_positive_share": 0.01248487811846975,
+          "positive": 723
+        },
+        "ticker": {
+          "fraction": 0.6607142857142857,
+          "groups": 56,
+          "max_positive_share": 0.1007757746082476,
+          "positive": 37
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.23206482926138705,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0018001415249067807,
+      "name": "ev_p10_x_sqrtN_f0.5_c1.5",
+      "nominee": false,
+      "passing_neighbors": 4,
+      "portfolio": {
+        "avg_gross_exposure": 0.8996371712586255,
+        "cagr_equivalent": 0.20000959165339127,
+        "daily_cvar05": -0.03159917763653019,
+        "daily_p05": -0.018579814599402094,
+        "daily_volatility": 0.013157702168049908,
+        "max_drawdown": -0.43307713679303605,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.001853203598555769,
+        "peak_gross_exposure": 0.9981467964014442,
+        "return_to_drawdown": 42.237882420929395,
+        "terminal_wealth": 19.29226118305701
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_p10_x_sqrtN",
+      "ticker_cluster_ci95": [
+        -9.481938940605439e-05,
+        0.0036703257389679137
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.32768260469135596,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.6897253306205493,
+          "groups": 983,
+          "max_positive_share": 0.014139540760984557,
+          "positive": 678
+        },
+        "ticker": {
+          "fraction": 0.7321428571428571,
+          "groups": 56,
+          "max_positive_share": 0.09737566006576084,
+          "positive": 41
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.23807770519605745,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0035952452194788214,
+      "name": "ev_p10_x_sqrtN_f0.5_c2.0",
+      "nominee": true,
+      "passing_neighbors": 4,
+      "portfolio": {
+        "avg_gross_exposure": 0.905382916111387,
+        "cagr_equivalent": 0.20292752723577756,
+        "daily_cvar05": -0.03140546180509134,
+        "daily_p05": -0.018379375548742437,
+        "daily_volatility": 0.013105510492438206,
+        "max_drawdown": -0.4237143326067715,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2008-11-20",
+        "min_cash_fraction": 0.0015783405737400343,
+        "peak_gross_exposure": 0.9984216594262599,
+        "return_to_drawdown": 45.00206498195832,
+        "terminal_wealth": 20.068019929757032
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_x_sqrtN",
+      "ticker_cluster_ci95": [
+        0.0013298014299476997,
+        0.005951040854168696
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.31512550206503204,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.7497456765005086,
+          "groups": 983,
+          "max_positive_share": 0.011895893641214681,
+          "positive": 737
+        },
+        "ticker": {
+          "fraction": 0.6428571428571429,
+          "groups": 56,
+          "max_positive_share": 0.10145203709939266,
+          "positive": 36
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.22323826374541814,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0009922955357845253,
+      "name": "ev_p10_x_sqrtN_f0.75_c1.25",
+      "nominee": true,
+      "passing_neighbors": 4,
+      "portfolio": {
+        "avg_gross_exposure": 0.8851396921633427,
+        "cagr_equivalent": 0.1934930466601532,
+        "daily_cvar05": -0.0325088044714182,
+        "daily_p05": -0.01863530224064227,
+        "daily_volatility": 0.013436607636608327,
+        "max_drawdown": -0.45117348426659576,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0025500826759340183,
+        "peak_gross_exposure": 0.997449917324066,
+        "return_to_drawdown": 36.92637145707321,
+        "terminal_wealth": 17.66019967161029
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_x_sqrtN",
+      "ticker_cluster_ci95": [
+        1.8449872361560894e-05,
+        0.0019604737268787797
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.32025802523388114,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.7070193285859614,
+          "groups": 983,
+          "max_positive_share": 0.013045718750908012,
+          "positive": 695
+        },
+        "ticker": {
+          "fraction": 0.7678571428571429,
+          "groups": 56,
+          "max_positive_share": 0.09847688135936132,
+          "positive": 43
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.21347752513965781,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0021927828973000857,
+      "name": "ev_p10_x_sqrtN_f0.75_c1.5",
+      "nominee": true,
+      "passing_neighbors": 4,
+      "portfolio": {
+        "avg_gross_exposure": 0.899809756598887,
+        "cagr_equivalent": 0.19741328330776686,
+        "daily_cvar05": -0.03255259020036256,
+        "daily_p05": -0.01853122463182552,
+        "daily_volatility": 0.013470225378070008,
+        "max_drawdown": -0.4496026542292705,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002516895734050786,
+        "peak_gross_exposure": 0.9974831042659492,
+        "return_to_drawdown": 39.202961259418615,
+        "terminal_wealth": 18.625755435881874
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_x_sqrtN",
+      "ticker_cluster_ci95": [
+        0.0009705154586598155,
+        0.0035068072645943276
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.3467134410986419,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.6317395727365208,
+          "groups": 983,
+          "max_positive_share": 0.01592070158681924,
+          "positive": 621
+        },
+        "ticker": {
+          "fraction": 0.7678571428571429,
+          "groups": 56,
+          "max_positive_share": 0.0804297070604498,
+          "positive": 43
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.2703779341827412,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0031943711701490985,
+      "name": "ev_p10_x_sqrtN_f0.75_c2.0",
+      "nominee": true,
+      "passing_neighbors": 4,
+      "portfolio": {
+        "avg_gross_exposure": 0.9016069578711025,
+        "cagr_equivalent": 0.1981140018779366,
+        "daily_cvar05": -0.032478838816715046,
+        "daily_p05": -0.01852764796675073,
+        "daily_volatility": 0.013442932223633904,
+        "max_drawdown": -0.4441401103784066,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002574586697974046,
+        "peak_gross_exposure": 0.997425413302026,
+        "return_to_drawdown": 40.08527288521068,
+        "terminal_wealth": 18.80347752378602
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_x_sqrtN",
+      "ticker_cluster_ci95": [
+        0.0018176463448477077,
+        0.004762049842179677
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.22343112964770045,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6846388606307223,
+          "groups": 983,
+          "max_positive_share": 0.011404557267710176,
+          "positive": 673
+        },
+        "ticker": {
+          "fraction": 0.6964285714285714,
+          "groups": 56,
+          "max_positive_share": 0.06285689748731611,
+          "positive": 39
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.1971119705001112,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0006071134831472214,
+      "name": "ev_p10_low_atr_f0.5_c1.25",
+      "nominee": false,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8883685777715332,
+        "cagr_equivalent": 0.19296121872121108,
+        "daily_cvar05": -0.031320514205749155,
+        "daily_p05": -0.018552055920086595,
+        "daily_volatility": 0.013035370448635272,
+        "max_drawdown": -0.42701688573333907,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002754687998384748,
+        "peak_gross_exposure": 0.9972453120016153,
+        "return_to_drawdown": 38.71717856638276,
+        "terminal_wealth": 17.532889015798354
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_p10_low_atr",
+      "ticker_cluster_ci95": [
+        -0.0011437065129627638,
+        0.0021577555435529808
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.2502669404101456,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6734486266531028,
+          "groups": 983,
+          "max_positive_share": 0.011130263725153484,
+          "positive": 662
+        },
+        "ticker": {
+          "fraction": 0.7678571428571429,
+          "groups": 56,
+          "max_positive_share": 0.059455024855420646,
+          "positive": 43
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.19750224532202368,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.002061060386294773,
+      "name": "ev_p10_low_atr_f0.5_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8943295713545711,
+        "cagr_equivalent": 0.1959493845249889,
+        "daily_cvar05": -0.031005576150713025,
+        "daily_p05": -0.018322117920060804,
+        "daily_volatility": 0.012913639625221731,
+        "max_drawdown": -0.4064731164362513,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0029220678225328634,
+        "peak_gross_exposure": 0.9970779321774672,
+        "return_to_drawdown": 42.461709034102064,
+        "terminal_wealth": 18.25954320030079
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_atr",
+      "ticker_cluster_ci95": [
+        0.00012707579546900052,
+        0.0038719044531283684
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.30428182083877514,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.6358087487283826,
+          "groups": 983,
+          "max_positive_share": 0.018361439477554076,
+          "positive": 625
+        },
+        "ticker": {
+          "fraction": 0.75,
+          "groups": 56,
+          "max_positive_share": 0.06829079715907535,
+          "positive": 42
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.19137552056529572,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.002568110630934483,
+      "name": "ev_p10_low_atr_f0.5_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8908691848579787,
+        "cagr_equivalent": 0.19671269120060053,
+        "daily_cvar05": -0.030450723617626074,
+        "daily_p05": -0.017918156775472087,
+        "daily_volatility": 0.01268856433396241,
+        "max_drawdown": -0.3925733794705598,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002957959186817529,
+        "peak_gross_exposure": 0.9970420408131825,
+        "return_to_drawdown": 44.44937710683117,
+        "terminal_wealth": 18.449642186190047
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_atr",
+      "ticker_cluster_ci95": [
+        0.000468116780195435,
+        0.004624217896636032
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.23470189175597692,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6937945066124109,
+          "groups": 983,
+          "max_positive_share": 0.010827367393231308,
+          "positive": 682
+        },
+        "ticker": {
+          "fraction": 0.7678571428571429,
+          "groups": 56,
+          "max_positive_share": 0.06224033015731215,
+          "positive": 43
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.19609165278839322,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0013120726319273144,
+      "name": "ev_p10_low_atr_f0.75_c1.25",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8898744535671279,
+        "cagr_equivalent": 0.19184948165822036,
+        "daily_cvar05": -0.032394524343530816,
+        "daily_p05": -0.018604302954601488,
+        "daily_volatility": 0.013389965401964523,
+        "max_drawdown": -0.4462305375478709,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0029703620372158617,
+        "peak_gross_exposure": 0.9970296379627842,
+        "return_to_drawdown": 36.45993094668867,
+        "terminal_wealth": 17.26953458529914
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_atr",
+      "ticker_cluster_ci95": [
+        0.0003053847182665097,
+        0.002265395107925657
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.2878189387832775,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6347914547304171,
+          "groups": 983,
+          "max_positive_share": 0.01419222700396273,
+          "positive": 624
+        },
+        "ticker": {
+          "fraction": 0.8035714285714286,
+          "groups": 56,
+          "max_positive_share": 0.06095320922010406,
+          "positive": 45
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2163340245078297,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0019981410366560854,
+      "name": "ev_p10_low_atr_f0.75_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8954955795898294,
+        "cagr_equivalent": 0.19262777030986888,
+        "daily_cvar05": -0.0323488935268711,
+        "daily_p05": -0.01852918872577215,
+        "daily_volatility": 0.01336142122297591,
+        "max_drawdown": -0.4403779907963117,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002992429374903653,
+        "peak_gross_exposure": 0.9970075706250964,
+        "return_to_drawdown": 37.36223706595162,
+        "terminal_wealth": 17.453506890759257
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_atr",
+      "ticker_cluster_ci95": [
+        0.0008707217397144616,
+        0.0031303857400062063
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.32327113047970457,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.5798575788402849,
+          "groups": 983,
+          "max_positive_share": 0.024335134817438184,
+          "positive": 570
+        },
+        "ticker": {
+          "fraction": 0.7678571428571429,
+          "groups": 56,
+          "max_positive_share": 0.07806850897075225,
+          "positive": 43
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.16386472735614863,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0015398003179548812,
+      "name": "ev_p10_low_atr_f0.75_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8942398446226901,
+        "cagr_equivalent": 0.19237858527889307,
+        "daily_cvar05": -0.03223152181406491,
+        "daily_p05": -0.0182299447469978,
+        "daily_volatility": 0.013314288049446846,
+        "max_drawdown": -0.43902917170345956,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0033940505343197386,
+        "peak_gross_exposure": 0.9966059494656803,
+        "return_to_drawdown": 37.342405120536846,
+        "terminal_wealth": 17.394405189484317
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_atr",
+      "ticker_cluster_ci95": [
+        0.0002719287914856332,
+        0.002816886070987801
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": false,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.22033631784968066,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6897253306205493,
+          "groups": 983,
+          "max_positive_share": 0.011391929289808535,
+          "positive": 678
+        },
+        "ticker": {
+          "fraction": 0.7142857142857143,
+          "groups": 56,
+          "max_positive_share": 0.06422169794484359,
+          "positive": 40
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2014665706990612,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0006584457300498076,
+      "name": "ev_p10_low_rv_f0.5_c1.25",
+      "nominee": false,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.888110098342622,
+        "cagr_equivalent": 0.19269323839120012,
+        "daily_cvar05": -0.03132861003517513,
+        "daily_p05": -0.018563592295494286,
+        "daily_volatility": 0.013035675226895674,
+        "max_drawdown": -0.4293049982202948,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0026354859667581266,
+        "peak_gross_exposure": 0.9973645140332418,
+        "return_to_drawdown": 38.362157222148376,
+        "terminal_wealth": 17.469065837981077
+      },
+      "pre_neighborhood_pass": false,
+      "score": "ev_p10_low_rv",
+      "ticker_cluster_ci95": [
+        -0.0011196717646080865,
+        0.0022203475780736715
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.24588211259147136,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.676500508646999,
+          "groups": 983,
+          "max_positive_share": 0.011013778213019408,
+          "positive": 665
+        },
+        "ticker": {
+          "fraction": 0.7678571428571429,
+          "groups": 56,
+          "max_positive_share": 0.05915009746806242,
+          "positive": 43
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.2025270771651586,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0021824011451394296,
+      "name": "ev_p10_low_rv_f0.5_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8940020080963805,
+        "cagr_equivalent": 0.19579828148287426,
+        "daily_cvar05": -0.031039784780792726,
+        "daily_p05": -0.01828068847009981,
+        "daily_volatility": 0.012927820206861578,
+        "max_drawdown": -0.4086159419824956,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0028108051989841026,
+        "peak_gross_exposure": 0.997189194801016,
+        "return_to_drawdown": 42.14747476227326,
+        "terminal_wealth": 18.22213010216975
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_rv",
+      "ticker_cluster_ci95": [
+        0.0002449562802992237,
+        0.004011714838768178
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.5,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.2948179289648237,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.6337741607324516,
+          "groups": 983,
+          "max_positive_share": 0.01831527206840902,
+          "positive": 623
+        },
+        "ticker": {
+          "fraction": 0.7857142857142857,
+          "groups": 56,
+          "max_positive_share": 0.06566629559200417,
+          "positive": 44
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.19825959412763525,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0027406411662809966,
+      "name": "ev_p10_low_rv_f0.5_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8907420415133795,
+        "cagr_equivalent": 0.1965529513514097,
+        "daily_cvar05": -0.03049544298531787,
+        "daily_p05": -0.01794140727865422,
+        "daily_volatility": 0.012705760173189945,
+        "max_drawdown": -0.3946029462117363,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.00296039231912991,
+        "peak_gross_exposure": 0.9970396076808702,
+        "return_to_drawdown": 44.11955529962008,
+        "terminal_wealth": 18.40970650678171
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_rv",
+      "ticker_cluster_ci95": [
+        0.0006131301770387446,
+        0.004810737591456853
+      ]
+    },
+    {
+      "cap": 1.25,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.23146870801194597,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.698880976602238,
+          "groups": 983,
+          "max_positive_share": 0.011084034957886915,
+          "positive": 687
+        },
+        "ticker": {
+          "fraction": 0.7857142857142857,
+          "groups": 56,
+          "max_positive_share": 0.06167667619788845,
+          "positive": 44
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.20093390778835213,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0013830917293896985,
+      "name": "ev_p10_low_rv_f0.75_c1.25",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8894057917779429,
+        "cagr_equivalent": 0.19173565962593675,
+        "daily_cvar05": -0.03239047669173787,
+        "daily_p05": -0.01857375171571843,
+        "daily_volatility": 0.013387921005861558,
+        "max_drawdown": -0.4468067477544795,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0029799861706689213,
+        "peak_gross_exposure": 0.997020013829331,
+        "return_to_drawdown": 36.35303714543296,
+        "terminal_wealth": 17.242782297948686
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_rv",
+      "ticker_cluster_ci95": [
+        0.0003772539350388632,
+        0.002346460614035585
+      ]
+    },
+    {
+      "cap": 1.5,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.75,
+          "groups": 8,
+          "max_positive_share": 0.28077772938052,
+          "positive": 6
+        },
+        "genome": {
+          "fraction": 0.6358087487283826,
+          "groups": 983,
+          "max_positive_share": 0.01406362702266401,
+          "positive": 625
+        },
+        "ticker": {
+          "fraction": 0.8035714285714286,
+          "groups": 56,
+          "max_positive_share": 0.059352989781727046,
+          "positive": 45
+        },
+        "year": {
+          "fraction": 0.8235294117647058,
+          "groups": 17,
+          "max_positive_share": 0.22082503424633904,
+          "positive": 14
+        }
+      },
+      "mean_delta": 0.0021095961757634386,
+      "name": "ev_p10_low_rv_f0.75_c1.5",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8947792409439391,
+        "cagr_equivalent": 0.19279302972671197,
+        "daily_cvar05": -0.03234033914775922,
+        "daily_p05": -0.01850056480853827,
+        "daily_volatility": 0.013359241350495614,
+        "max_drawdown": -0.4408372399468826,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0029376991584687496,
+        "peak_gross_exposure": 0.9970623008415314,
+        "return_to_drawdown": 37.41246313608099,
+        "terminal_wealth": 17.492806988524435
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_rv",
+      "ticker_cluster_ci95": [
+        0.0009567742954670953,
+        0.0032695175212068056
+      ]
+    },
+    {
+      "cap": 2.0,
+      "floor": 0.75,
+      "gate": {
+        "cluster_ci_positive": true,
+        "family60": true,
+        "genome_conc15": true,
+        "mean_positive": true,
+        "not_both_tail_worse": true,
+        "ticker60": true,
+        "ticker_conc15": true,
+        "wealth_gt_equal": true,
+        "year60": true
+      },
+      "groups": {
+        "family": {
+          "fraction": 0.625,
+          "groups": 8,
+          "max_positive_share": 0.3111060090827321,
+          "positive": 5
+        },
+        "genome": {
+          "fraction": 0.5808748728382502,
+          "groups": 983,
+          "max_positive_share": 0.024752801012038934,
+          "positive": 571
+        },
+        "ticker": {
+          "fraction": 0.7857142857142857,
+          "groups": 56,
+          "max_positive_share": 0.07307651920912249,
+          "positive": 44
+        },
+        "year": {
+          "fraction": 0.7647058823529411,
+          "groups": 17,
+          "max_positive_share": 0.17412195216648305,
+          "positive": 13
+        }
+      },
+      "mean_delta": 0.0016739280829947834,
+      "name": "ev_p10_low_rv_f0.75_c2.0",
+      "nominee": true,
+      "passing_neighbors": 5,
+      "portfolio": {
+        "avg_gross_exposure": 0.8935811486759998,
+        "cagr_equivalent": 0.19243335651757865,
+        "daily_cvar05": -0.03223810364500337,
+        "daily_p05": -0.018110448862900818,
+        "daily_volatility": 0.013315731966916235,
+        "max_drawdown": -0.4390886333856022,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.0033766796485355456,
+        "peak_gross_exposure": 0.9966233203514644,
+        "return_to_drawdown": 37.36689692574123,
+        "terminal_wealth": 17.40737970498438
+      },
+      "pre_neighborhood_pass": true,
+      "score": "ev_p10_low_rv",
+      "ticker_cluster_ci95": [
+        0.0004229722549151101,
+        0.0029649504032613107
+      ]
+    }
+  ],
+  "holdout_accessed": false,
+  "nominee_count": 37,
+  "population": {
+    "development": 87501,
+    "holdout_reserved": 37501
+  },
+  "protocol_sha256": "4f90d999af7527101e0784b57e279e7439fa1e842bb22a86fc3636f75fa53e35",
+  "score_sources": {
+    "family": 40492,
+    "genome": 45617,
+    "global": 928,
+    "unavailable": 464
+  },
+  "stage": "GENERAL_WINNER_RULE_DISCOVERY_DEVELOPMENT",
+  "verification_a_accessed": false,
+  "verification_b_accessed": false
+}
