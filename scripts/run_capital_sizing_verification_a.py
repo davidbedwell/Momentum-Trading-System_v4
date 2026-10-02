@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse,gzip,pickle,json,hashlib,heapq,os,math
+import argparse,gzip,pickle,json,hashlib,heapq,os,math,multiprocessing as mp
 from pathlib import Path
 from collections import defaultdict,Counter
 from concurrent.futures import ProcessPoolExecutor,as_completed
@@ -108,7 +108,7 @@ def main():
  if sha(q.protocol)!=EXPECTED_PROTOCOL or sha(q.input)!=EXPECTED_INPUT:raise RuntimeError('frozen input/protocol hash mismatch')
  inp=json.load(open(q.input));cands=[dict(c,family_id=c['family']) for c in inp['candidates']];targets=inp['verification_a_targets'];cfg={'root':q.derived_root,'checkpoint':q.checkpoint_dir}
  global G;G={'cfg':cfg,'cands':cands}; Path(q.checkpoint_dir).mkdir(parents=True,exist_ok=True)
- with ProcessPoolExecutor(max_workers=min(q.workers,6),initializer=init,initargs=(cfg,cands)) as ex:
+ with ProcessPoolExecutor(max_workers=min(q.workers,6),mp_context=mp.get_context("spawn"),initializer=init,initargs=(cfg,cands)) as ex:
   fs={ex.submit(process_target,t):t['ticker'] for t in targets};done=0
   for f in as_completed(fs):
    t,reused,n=f.result();done+=1;print(f'[{done}/{len(targets)}] {"RESUMED" if reused else "BUILT"}={t} trades={n}',flush=True)
