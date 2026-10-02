@@ -21,7 +21,12 @@ def prevol(r,n=20):
  if len(a)<10:return math.nan
  c=np.array([x['close'] for x in a],float); rr=np.diff(np.log(c));return float(rr.std(ddof=1)) if len(rr)>1 else math.nan
 def normclip(raw,floor,cap):
- a=np.asarray(raw,float); med=np.nanmedian(a);a=np.where(np.isfinite(a)&(a>0),a,med);w=1/a;w=w/np.mean(w);w=np.clip(w,floor,cap);return w/np.mean(w)
+ a=np.asarray(raw,float);mask=np.isfinite(a)&(a>0);inv=np.zeros(len(a),float);inv[mask]=1/a[mask];lo,hi=0.0,1000.0/max(float(np.nanmedian(inv[mask])),1e-12)
+ for _ in range(80):
+  mid=(lo+hi)/2;w=np.ones(len(a),float);w[mask]=np.clip(inv[mask]*mid,floor,cap)
+  if float(w.mean())>1:hi=mid
+  else:lo=mid
+ w=np.ones(len(a),float);w[mask]=np.clip(inv[mask]*((lo+hi)/2),floor,cap);return w
 def chronological_downside(rows,kind,minn=100):
  # Strictly causal: a trade outcome becomes usable only after that trade has exited.
  order=sorted(range(len(rows)),key=lambda i:(rows[i]['signal_date'],rows[i]['ticker'],i)); vals=defaultdict(list);glob=[];risk=np.full(len(rows),np.nan);pending=[]

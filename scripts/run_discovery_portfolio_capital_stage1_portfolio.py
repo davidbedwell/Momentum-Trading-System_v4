@@ -41,14 +41,14 @@ def causal_downside(rows,kind,minn=100):
    r=rows[i];key=r['genome'] if kind=='genome' else r['family'];heapq.heappush(pending,(r['path'][-1]['date'],i,key,r['ret']))
  return risk
 def calibrate(raw,floor,cap):
- a=np.asarray(raw,float);med=float(np.nanmedian(a));a=np.where(np.isfinite(a)&(a>0),a,med);inv=1/a
- lo,hi=0.0,1000.0/max(float(np.nanmedian(inv)),1e-12)
+ a=np.asarray(raw,float);mask=np.isfinite(a)&(a>0);inv=np.zeros(len(a),float);inv[mask]=1/a[mask]
+ base_med=float(np.nanmedian(inv[mask]));lo,hi=0.0,1000.0/max(base_med,1e-12)
  for _ in range(80):
-  mid=(lo+hi)/2;mu=float(np.clip(inv*mid,floor,cap).mean())
+  mid=(lo+hi)/2;w=np.ones(len(a),float);w[mask]=np.clip(inv[mask]*mid,floor,cap);mu=float(w.mean())
   if mu>1:hi=mid
   else:lo=mid
- scale=(lo+hi)/2;w=np.clip(inv*scale,floor,cap)
- return w,{'risk_fill_median':med,'inverse_scale':scale,'floor':floor,'cap':cap,'mean_multiplier':float(w.mean())}
+ scale=(lo+hi)/2;w=np.ones(len(a),float);w[mask]=np.clip(inv[mask]*scale,floor,cap)
+ return w,{'missing_policy':'neutral_1.0','inverse_scale':scale,'floor':floor,'cap':cap,'mean_multiplier':float(w.mean())}
 def build_policies(rows):
  raw={'inverse_atr_price':np.array([atr_ratio(r) for r in rows]),'inverse_realized_vol20':np.array([prevol(r) for r in rows]),'inverse_genome_downside':causal_downside(rows,'genome'),'inverse_family_downside':causal_downside(rows,'family')}
  names=['equal_weight'];cols=[np.ones(len(rows))];meta=[{'measure':'equal_weight'}];missing={k:int(np.sum(~np.isfinite(v))) for k,v in raw.items()}
