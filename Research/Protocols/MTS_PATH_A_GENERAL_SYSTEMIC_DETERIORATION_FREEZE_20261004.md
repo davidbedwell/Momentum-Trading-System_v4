@@ -45,6 +45,25 @@ Use broad historical stress taxonomy rather than only three answer-key crashes. 
 - ordinary volatility spikes,
 - calm regimes.
 
+### Hard negative-control gate: matched non-crash analogs
+False positives are a first-order failure mode and may be more damaging than accepting a roughly 19% delayed crash declaration.
+
+For every rapid-systemic positive morphology studied, construct outcome-blind candidate analog periods from the same causal feature space: periods showing similar early price shock, volatility dislocation, breadth destruction, and/or funding-credit stress that subsequently did NOT develop into a comparable destructive crash.
+
+Analog selection must be based only on information available through the comparison/decision date. Future recovery or future maximum drawdown may label an already-selected analog for evaluation, but may not be used to choose which historical setup is presented to the detector.
+
+Required reporting for every candidate detector:
+- true rapid-systemic declarations,
+- matched-analog declarations and non-declarations,
+- all-history false declaration episodes,
+- time spent DEFENSIVE from false declarations,
+- severity at declaration,
+- subsequent deterioration after declaration,
+- opportunity cost proxy before portfolio testing,
+- parameter-neighborhood stability on positives AND matched negatives.
+
+A candidate that obtains earlier crash detection by materially increasing declarations on matched non-crash analogs FAILS, regardless of how well it fits 2020.
+
 Primary questions:
 1. Does the mechanism activate for the same economic/market reason across episodes?
 2. Is behavior stable under modest parameter perturbation?
