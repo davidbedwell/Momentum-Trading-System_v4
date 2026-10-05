@@ -1,0 +1,958 @@
+{
+  "format": "MTS_DEFENSIVE_GA_CORE_PORTFOLIO_DEV_V1",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "warning": "Development-only finite-capital diagnostic. Transaction-date drawdown marks are approximate; not a protected validation.",
+  "protected_accessed": false,
+  "test17_accessed": false,
+  "preserved50_accessed": false,
+  "variants": {
+    "D3_EXIT2": {
+      "raw_signals": 145,
+      "portfolios": [
+        {
+          "slots": 1,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 194351.23770939733,
+              "return_pct": 0.9435123770939733,
+              "max_drawdown_transaction_marks": -0.11603387756298966,
+              "trades": 23,
+              "missed_capacity": 41,
+              "mean_slot_utilization": 0.7802197802197802
+            },
+            "2011": {
+              "terminal_wealth": 128220.38770957082,
+              "return_pct": 0.28220387709570827,
+              "max_drawdown_transaction_marks": -0.03380511785670959,
+              "trades": 7,
+              "missed_capacity": 9,
+              "mean_slot_utilization": 0.6111111111111112
+            },
+            "2015_16": {
+              "terminal_wealth": 119571.1081131074,
+              "return_pct": 0.19571108113107405,
+              "max_drawdown_transaction_marks": -0.0004948425760207265,
+              "trades": 3,
+              "missed_capacity": 1,
+              "mean_slot_utilization": 0.625
+            },
+            "2018": {
+              "terminal_wealth": 109890.00271417912,
+              "return_pct": 0.09890002714179125,
+              "max_drawdown_transaction_marks": -0.008911306148839504,
+              "trades": 2,
+              "missed_capacity": 3,
+              "mean_slot_utilization": 0.5
+            },
+            "COVID": {
+              "terminal_wealth": 91746.77959838786,
+              "return_pct": -0.08253220401612138,
+              "max_drawdown_transaction_marks": -0.15769488293546852,
+              "trades": 2,
+              "missed_capacity": 14,
+              "mean_slot_utilization": 0.6875
+            },
+            "2022": {
+              "terminal_wealth": 115626.63582935916,
+              "return_pct": 0.1562663582935917,
+              "max_drawdown_transaction_marks": -0.10148570270884005,
+              "trades": 7,
+              "missed_capacity": 17,
+              "mean_slot_utilization": 0.7428571428571429
+            }
+          },
+          "mean_episode_return": 0.26567691945666955,
+          "compounded_reset_equivalent": 2.473581984401266,
+          "worst_episode_return": -0.08253220401612138,
+          "total_trades": 44,
+          "missed_capacity": 85
+        },
+        {
+          "slots": 3,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 167638.29421824196,
+              "return_pct": 0.6763829421824197,
+              "max_drawdown_transaction_marks": -0.09859612403446016,
+              "trades": 47,
+              "missed_capacity": 10,
+              "mean_slot_utilization": 0.5164835164835164
+            },
+            "2011": {
+              "terminal_wealth": 113885.17695061365,
+              "return_pct": 0.13885176950613642,
+              "max_drawdown_transaction_marks": -0.01159800476672146,
+              "trades": 11,
+              "missed_capacity": 4,
+              "mean_slot_utilization": 0.48148148148148145
+            },
+            "2015_16": {
+              "terminal_wealth": 107642.0324058355,
+              "return_pct": 0.07642032405835497,
+              "max_drawdown_transaction_marks": -0.00016669444907491116,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.25
+            },
+            "2018": {
+              "terminal_wealth": 107539.61026712033,
+              "return_pct": 0.07539610267120334,
+              "max_drawdown_transaction_marks": -0.0033028339709166854,
+              "trades": 4,
+              "missed_capacity": 1,
+              "mean_slot_utilization": 0.38888888888888884
+            },
+            "COVID": {
+              "terminal_wealth": 95608.62702224845,
+              "return_pct": -0.04391372977751551,
+              "max_drawdown_transaction_marks": -0.11352181357511826,
+              "trades": 4,
+              "missed_capacity": 10,
+              "mean_slot_utilization": 0.6666666666666666
+            },
+            "2022": {
+              "terminal_wealth": 85180.91380420157,
+              "return_pct": -0.14819086195798425,
+              "max_drawdown_transaction_marks": -0.3440311158434003,
+              "trades": 16,
+              "missed_capacity": 3,
+              "mean_slot_utilization": 0.5523809523809522
+            }
+          },
+          "mean_episode_return": 0.12915775778043578,
+          "compounded_reset_equivalent": 0.7998244935054972,
+          "worst_episode_return": -0.14819086195798425,
+          "total_trades": 86,
+          "missed_capacity": 28
+        },
+        {
+          "slots": 5,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 149561.33870748355,
+              "return_pct": 0.4956133870748354,
+              "max_drawdown_transaction_marks": -0.07421129798064585,
+              "trades": 52,
+              "missed_capacity": 4,
+              "mean_slot_utilization": 0.38021978021978015
+            },
+            "2011": {
+              "terminal_wealth": 108902.64959072253,
+              "return_pct": 0.08902649590722533,
+              "max_drawdown_transaction_marks": -0.007158358895445693,
+              "trades": 12,
+              "missed_capacity": 1,
+              "mean_slot_utilization": 0.3888888888888889
+            },
+            "2015_16": {
+              "terminal_wealth": 104585.2194435013,
+              "return_pct": 0.04585219443501298,
+              "max_drawdown_transaction_marks": -0.00010001000100012813,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.15000000000000002
+            },
+            "2018": {
+              "terminal_wealth": 106491.52282443155,
+              "return_pct": 0.0649152282443155,
+              "max_drawdown_transaction_marks": -0.0020824694767155316,
+              "trades": 5,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.30000000000000004
+            },
+            "COVID": {
+              "terminal_wealth": 100662.33013598502,
+              "return_pct": 0.006623301359850231,
+              "max_drawdown_transaction_marks": -0.0999930438133676,
+              "trades": 6,
+              "missed_capacity": 5,
+              "mean_slot_utilization": 0.6375
+            },
+            "2022": {
+              "terminal_wealth": 95488.9081386687,
+              "return_pct": -0.045110918613312956,
+              "max_drawdown_transaction_marks": -0.21878111409743495,
+              "trades": 19,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.3714285714285714
+            }
+          },
+          "mean_episode_return": 0.10948661473465442,
+          "compounded_reset_equivalent": 0.7436649840439233,
+          "worst_episode_return": -0.045110918613312956,
+          "total_trades": 98,
+          "missed_capacity": 10
+        },
+        {
+          "slots": 10,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 127904.16914418807,
+              "return_pct": 0.27904169144188073,
+              "max_drawdown_transaction_marks": -0.041721297462529394,
+              "trades": 55,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.20549450549450549
+            },
+            "2011": {
+              "terminal_wealth": 106482.20908521644,
+              "return_pct": 0.0648220908521644,
+              "max_drawdown_transaction_marks": -0.003629002979927076,
+              "trades": 13,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.2222222222222222
+            },
+            "2015_16": {
+              "terminal_wealth": 102292.60972175063,
+              "return_pct": 0.02292609721750627,
+              "max_drawdown_transaction_marks": -5.000250012499041e-05,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.07500000000000001
+            },
+            "2018": {
+              "terminal_wealth": 103245.76141221577,
+              "return_pct": 0.03245761412215775,
+              "max_drawdown_transaction_marks": -0.0010411826740177599,
+              "trades": 5,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.15000000000000002
+            },
+            "COVID": {
+              "terminal_wealth": 108845.7451210972,
+              "return_pct": 0.08845745121097215,
+              "max_drawdown_transaction_marks": -0.050809735184207616,
+              "trades": 11,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.56875
+            },
+            "2022": {
+              "terminal_wealth": 97744.45406933439,
+              "return_pct": -0.022555459306656145,
+              "max_drawdown_transaction_marks": -0.11930176548711224,
+              "trades": 19,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.1857142857142857
+            }
+          },
+          "mean_episode_return": 0.07752491425633752,
+          "compounded_reset_equivalent": 0.5303184893677046,
+          "worst_episode_return": -0.022555459306656145,
+          "total_trades": 107,
+          "missed_capacity": 0
+        }
+      ]
+    },
+    "D5_EXIT2": {
+      "raw_signals": 154,
+      "portfolios": [
+        {
+          "slots": 1,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 202603.95116074948,
+              "return_pct": 1.026039511607495,
+              "max_drawdown_transaction_marks": -0.09416066410747403,
+              "trades": 23,
+              "missed_capacity": 41,
+              "mean_slot_utilization": 0.782608695652174
+            },
+            "2011": {
+              "terminal_wealth": 128220.38770957082,
+              "return_pct": 0.28220387709570827,
+              "max_drawdown_transaction_marks": -0.03380511785670959,
+              "trades": 7,
+              "missed_capacity": 12,
+              "mean_slot_utilization": 0.6111111111111112
+            },
+            "2015_16": {
+              "terminal_wealth": 119571.1081131074,
+              "return_pct": 0.19571108113107405,
+              "max_drawdown_transaction_marks": -0.0004948425760207265,
+              "trades": 3,
+              "missed_capacity": 1,
+              "mean_slot_utilization": 0.625
+            },
+            "2018": {
+              "terminal_wealth": 109890.00271417912,
+              "return_pct": 0.09890002714179125,
+              "max_drawdown_transaction_marks": -0.008911306148839504,
+              "trades": 2,
+              "missed_capacity": 3,
+              "mean_slot_utilization": 0.5
+            },
+            "COVID": {
+              "terminal_wealth": 91746.77959838786,
+              "return_pct": -0.08253220401612138,
+              "max_drawdown_transaction_marks": -0.15769488293546852,
+              "trades": 2,
+              "missed_capacity": 15,
+              "mean_slot_utilization": 0.7058823529411765
+            },
+            "2022": {
+              "terminal_wealth": 115626.63582935916,
+              "return_pct": 0.1562663582935917,
+              "max_drawdown_transaction_marks": -0.10148570270884005,
+              "trades": 7,
+              "missed_capacity": 20,
+              "mean_slot_utilization": 0.7567567567567568
+            }
+          },
+          "mean_episode_return": 0.2794314418755898,
+          "compounded_reset_equivalent": 2.621080282353484,
+          "worst_episode_return": -0.08253220401612138,
+          "total_trades": 44,
+          "missed_capacity": 92
+        },
+        {
+          "slots": 3,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 164480.03720136746,
+              "return_pct": 0.6448003720136746,
+              "max_drawdown_transaction_marks": -0.10093045971070402,
+              "trades": 47,
+              "missed_capacity": 10,
+              "mean_slot_utilization": 0.5181159420289855
+            },
+            "2011": {
+              "terminal_wealth": 113885.17695061365,
+              "return_pct": 0.13885176950613642,
+              "max_drawdown_transaction_marks": -0.01159800476672146,
+              "trades": 11,
+              "missed_capacity": 6,
+              "mean_slot_utilization": 0.48148148148148145
+            },
+            "2015_16": {
+              "terminal_wealth": 107642.0324058355,
+              "return_pct": 0.07642032405835497,
+              "max_drawdown_transaction_marks": -0.00016669444907491116,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.25
+            },
+            "2018": {
+              "terminal_wealth": 107539.61026712033,
+              "return_pct": 0.07539610267120334,
+              "max_drawdown_transaction_marks": -0.0033028339709166854,
+              "trades": 4,
+              "missed_capacity": 1,
+              "mean_slot_utilization": 0.38888888888888884
+            },
+            "COVID": {
+              "terminal_wealth": 89513.20403426205,
+              "return_pct": -0.1048679596573795,
+              "max_drawdown_transaction_marks": -0.1305837008709434,
+              "trades": 4,
+              "missed_capacity": 8,
+              "mean_slot_utilization": 0.6470588235294118
+            },
+            "2022": {
+              "terminal_wealth": 52507.79518939465,
+              "return_pct": -0.47492204810605343,
+              "max_drawdown_transaction_marks": -0.4112369515374086,
+              "trades": 19,
+              "missed_capacity": 3,
+              "mean_slot_utilization": 0.5585585585585585
+            }
+          },
+          "mean_episode_return": 0.0592797600809894,
+          "compounded_reset_equivalent": 0.01915826066931814,
+          "worst_episode_return": -0.47492204810605343,
+          "total_trades": 89,
+          "missed_capacity": 28
+        },
+        {
+          "slots": 5,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 147666.3844973588,
+              "return_pct": 0.47666384497358805,
+              "max_drawdown_transaction_marks": -0.07537907184081982,
+              "trades": 52,
+              "missed_capacity": 4,
+              "mean_slot_utilization": 0.38043478260869557
+            },
+            "2011": {
+              "terminal_wealth": 108902.64959072253,
+              "return_pct": 0.08902649590722533,
+              "max_drawdown_transaction_marks": -0.007158358895445693,
+              "trades": 12,
+              "missed_capacity": 2,
+              "mean_slot_utilization": 0.3888888888888889
+            },
+            "2015_16": {
+              "terminal_wealth": 104585.2194435013,
+              "return_pct": 0.04585219443501298,
+              "max_drawdown_transaction_marks": -0.00010001000100012813,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.15000000000000002
+            },
+            "2018": {
+              "terminal_wealth": 106491.52282443155,
+              "return_pct": 0.0649152282443155,
+              "max_drawdown_transaction_marks": -0.0020824694767155316,
+              "trades": 5,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.30000000000000004
+            },
+            "COVID": {
+              "terminal_wealth": 99321.63549126172,
+              "return_pct": -0.006783645087382717,
+              "max_drawdown_transaction_marks": -0.11115049750544925,
+              "trades": 6,
+              "missed_capacity": 5,
+              "mean_slot_utilization": 0.6352941176470589
+            },
+            "2022": {
+              "terminal_wealth": 73967.85016440121,
+              "return_pct": -0.26032149835598783,
+              "max_drawdown_transaction_marks": -0.2666282359752732,
+              "trades": 22,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.37297297297297294
+            }
+          },
+          "mean_episode_return": 0.06822543668612856,
+          "compounded_reset_equivalent": 0.31580731354972613,
+          "worst_episode_return": -0.26032149835598783,
+          "total_trades": 101,
+          "missed_capacity": 11
+        },
+        {
+          "slots": 10,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 126956.69203912573,
+              "return_pct": 0.2695669203912574,
+              "max_drawdown_transaction_marks": -0.04207997098116312,
+              "trades": 55,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.2054347826086956
+            },
+            "2011": {
+              "terminal_wealth": 106482.20908521644,
+              "return_pct": 0.0648220908521644,
+              "max_drawdown_transaction_marks": -0.003629002979927076,
+              "trades": 13,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.2222222222222222
+            },
+            "2015_16": {
+              "terminal_wealth": 102292.60972175063,
+              "return_pct": 0.02292609721750627,
+              "max_drawdown_transaction_marks": -5.000250012499041e-05,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.07500000000000001
+            },
+            "2018": {
+              "terminal_wealth": 103245.76141221577,
+              "return_pct": 0.03245761412215775,
+              "max_drawdown_transaction_marks": -0.0010411826740177599,
+              "trades": 5,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.15000000000000002
+            },
+            "COVID": {
+              "terminal_wealth": 108175.39779873556,
+              "return_pct": 0.08175397798735551,
+              "max_drawdown_transaction_marks": -0.0563118567091091,
+              "trades": 11,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.5823529411764706
+            },
+            "2022": {
+              "terminal_wealth": 87772.46582270524,
+              "return_pct": -0.12227534177294763,
+              "max_drawdown_transaction_marks": -0.13119958324465308,
+              "trades": 22,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.18648648648648647
+            }
+          },
+          "mean_episode_return": 0.05820855979958228,
+          "compounded_reset_equivalent": 0.3556136735190374,
+          "worst_episode_return": -0.12227534177294763,
+          "total_trades": 110,
+          "missed_capacity": 0
+        }
+      ]
+    },
+    "D3_EXIT3": {
+      "raw_signals": 145,
+      "portfolios": [
+        {
+          "slots": 1,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 194351.23770939733,
+              "return_pct": 0.9435123770939733,
+              "max_drawdown_transaction_marks": -0.11603387756298966,
+              "trades": 23,
+              "missed_capacity": 41,
+              "mean_slot_utilization": 0.7802197802197802
+            },
+            "2011": {
+              "terminal_wealth": 128220.38770957082,
+              "return_pct": 0.28220387709570827,
+              "max_drawdown_transaction_marks": -0.03380511785670959,
+              "trades": 7,
+              "missed_capacity": 9,
+              "mean_slot_utilization": 0.6111111111111112
+            },
+            "2015_16": {
+              "terminal_wealth": 115325.31760435826,
+              "return_pct": 0.15325317604358268,
+              "max_drawdown_transaction_marks": -0.026228348712821203,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.5555555555555556
+            },
+            "2018": {
+              "terminal_wealth": 102971.39317178703,
+              "return_pct": 0.02971393171787029,
+              "max_drawdown_transaction_marks": -0.014997077979998719,
+              "trades": 2,
+              "missed_capacity": 3,
+              "mean_slot_utilization": 0.5714285714285714
+            },
+            "COVID": {
+              "terminal_wealth": 87861.24908080252,
+              "return_pct": -0.12138750919197483,
+              "max_drawdown_transaction_marks": -0.16352828368339478,
+              "trades": 2,
+              "missed_capacity": 14,
+              "mean_slot_utilization": 0.6875
+            },
+            "2022": {
+              "terminal_wealth": 101109.60932823522,
+              "return_pct": 0.011096093282352282,
+              "max_drawdown_transaction_marks": -0.16936829980090917,
+              "trades": 9,
+              "missed_capacity": 17,
+              "mean_slot_utilization": 0.7428571428571429
+            }
+          },
+          "mean_episode_return": 0.21639865767358532,
+          "compounded_reset_equivalent": 1.6289083749483955,
+          "worst_episode_return": -0.12138750919197483,
+          "total_trades": 47,
+          "missed_capacity": 84
+        },
+        {
+          "slots": 3,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 167638.29421824196,
+              "return_pct": 0.6763829421824197,
+              "max_drawdown_transaction_marks": -0.09859612403446016,
+              "trades": 47,
+              "missed_capacity": 10,
+              "mean_slot_utilization": 0.5164835164835164
+            },
+            "2011": {
+              "terminal_wealth": 113885.17695061365,
+              "return_pct": 0.13885176950613642,
+              "max_drawdown_transaction_marks": -0.01159800476672146,
+              "trades": 11,
+              "missed_capacity": 4,
+              "mean_slot_utilization": 0.48148148148148145
+            },
+            "2015_16": {
+              "terminal_wealth": 105108.43920145275,
+              "return_pct": 0.051084392014527635,
+              "max_drawdown_transaction_marks": -0.009063085110096902,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.18518518518518517
+            },
+            "2018": {
+              "terminal_wealth": 105058.37834458561,
+              "return_pct": 0.05058378344585601,
+              "max_drawdown_transaction_marks": -0.005330748271714869,
+              "trades": 4,
+              "missed_capacity": 1,
+              "mean_slot_utilization": 0.38095238095238093
+            },
+            "COVID": {
+              "terminal_wealth": 114211.40840117115,
+              "return_pct": 0.14211408401171144,
+              "max_drawdown_transaction_marks": -0.057661946132342656,
+              "trades": 7,
+              "missed_capacity": 7,
+              "mean_slot_utilization": 0.6666666666666666
+            },
+            "2022": {
+              "terminal_wealth": 82126.14774878821,
+              "return_pct": -0.17873852251211797,
+              "max_drawdown_transaction_marks": -0.3387901854454206,
+              "trades": 17,
+              "missed_capacity": 3,
+              "mean_slot_utilization": 0.4952380952380951
+            }
+          },
+          "mean_episode_return": 0.14671307477475554,
+          "compounded_reset_equivalent": 0.9774233271965491,
+          "worst_episode_return": -0.17873852251211797,
+          "total_trades": 90,
+          "missed_capacity": 25
+        },
+        {
+          "slots": 5,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 149561.33870748355,
+              "return_pct": 0.4956133870748354,
+              "max_drawdown_transaction_marks": -0.07421129798064585,
+              "trades": 52,
+              "missed_capacity": 4,
+              "mean_slot_utilization": 0.38021978021978015
+            },
+            "2011": {
+              "terminal_wealth": 108902.64959072253,
+              "return_pct": 0.08902649590722533,
+              "max_drawdown_transaction_marks": -0.007158358895445693,
+              "trades": 12,
+              "missed_capacity": 1,
+              "mean_slot_utilization": 0.3888888888888889
+            },
+            "2015_16": {
+              "terminal_wealth": 103065.06352087164,
+              "return_pct": 0.03065063520871636,
+              "max_drawdown_transaction_marks": -0.005477989593331123,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.1111111111111111
+            },
+            "2018": {
+              "terminal_wealth": 104744.0642631964,
+              "return_pct": 0.047440642631964014,
+              "max_drawdown_transaction_marks": -0.003299745570556789,
+              "trades": 5,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.31428571428571433
+            },
+            "COVID": {
+              "terminal_wealth": 115740.4545962814,
+              "return_pct": 0.15740454596281395,
+              "max_drawdown_transaction_marks": -0.03546829616918734,
+              "trades": 9,
+              "missed_capacity": 4,
+              "mean_slot_utilization": 0.6
+            },
+            "2022": {
+              "terminal_wealth": 94033.31126706208,
+              "return_pct": -0.05966688732937919,
+              "max_drawdown_transaction_marks": -0.21166663668535135,
+              "trades": 20,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.33714285714285713
+            }
+          },
+          "mean_episode_return": 0.12674480324269596,
+          "compounded_reset_equivalent": 0.9136636166736969,
+          "worst_episode_return": -0.05966688732937919,
+          "total_trades": 102,
+          "missed_capacity": 9
+        },
+        {
+          "slots": 10,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 127904.16914418807,
+              "return_pct": 0.27904169144188073,
+              "max_drawdown_transaction_marks": -0.041721297462529394,
+              "trades": 55,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.20549450549450549
+            },
+            "2011": {
+              "terminal_wealth": 106482.20908521644,
+              "return_pct": 0.0648220908521644,
+              "max_drawdown_transaction_marks": -0.003629002979927076,
+              "trades": 13,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.2222222222222222
+            },
+            "2015_16": {
+              "terminal_wealth": 101532.53176043581,
+              "return_pct": 0.01532531760435818,
+              "max_drawdown_transaction_marks": -0.002754242257467343,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.05555555555555555
+            },
+            "2018": {
+              "terminal_wealth": 102372.03213159821,
+              "return_pct": 0.02372032131598223,
+              "max_drawdown_transaction_marks": -0.001649790287514219,
+              "trades": 5,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.15714285714285717
+            },
+            "COVID": {
+              "terminal_wealth": 114475.50464136609,
+              "return_pct": 0.14475504641366088,
+              "max_drawdown_transaction_marks": -0.018219103657170943,
+              "trades": 13,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.44375
+            },
+            "2022": {
+              "terminal_wealth": 97016.65563353106,
+              "return_pct": -0.02983344366468943,
+              "max_drawdown_transaction_marks": -0.11513912607659904,
+              "trades": 20,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.16857142857142857
+            }
+          },
+          "mean_episode_return": 0.08297183732722617,
+          "compounded_reset_equivalent": 0.5721977106336695,
+          "worst_episode_return": -0.02983344366468943,
+          "total_trades": 110,
+          "missed_capacity": 0
+        }
+      ]
+    },
+    "D5_EXIT3": {
+      "raw_signals": 154,
+      "portfolios": [
+        {
+          "slots": 1,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 202603.95116074948,
+              "return_pct": 1.026039511607495,
+              "max_drawdown_transaction_marks": -0.09416066410747403,
+              "trades": 23,
+              "missed_capacity": 41,
+              "mean_slot_utilization": 0.782608695652174
+            },
+            "2011": {
+              "terminal_wealth": 128220.38770957082,
+              "return_pct": 0.28220387709570827,
+              "max_drawdown_transaction_marks": -0.03380511785670959,
+              "trades": 7,
+              "missed_capacity": 12,
+              "mean_slot_utilization": 0.6111111111111112
+            },
+            "2015_16": {
+              "terminal_wealth": 115325.31760435826,
+              "return_pct": 0.15325317604358268,
+              "max_drawdown_transaction_marks": -0.026228348712821203,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.5555555555555556
+            },
+            "2018": {
+              "terminal_wealth": 102971.39317178703,
+              "return_pct": 0.02971393171787029,
+              "max_drawdown_transaction_marks": -0.014997077979998719,
+              "trades": 2,
+              "missed_capacity": 3,
+              "mean_slot_utilization": 0.5714285714285714
+            },
+            "COVID": {
+              "terminal_wealth": 87861.24908080252,
+              "return_pct": -0.12138750919197483,
+              "max_drawdown_transaction_marks": -0.16352828368339478,
+              "trades": 2,
+              "missed_capacity": 15,
+              "mean_slot_utilization": 0.7058823529411765
+            },
+            "2022": {
+              "terminal_wealth": 101109.60932823522,
+              "return_pct": 0.011096093282352282,
+              "max_drawdown_transaction_marks": -0.16936829980090917,
+              "trades": 9,
+              "missed_capacity": 20,
+              "mean_slot_utilization": 0.7567567567567568
+            }
+          },
+          "mean_episode_return": 0.23015318009250563,
+          "compounded_reset_equivalent": 1.7405393980589832,
+          "worst_episode_return": -0.12138750919197483,
+          "total_trades": 47,
+          "missed_capacity": 91
+        },
+        {
+          "slots": 3,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 164480.03720136746,
+              "return_pct": 0.6448003720136746,
+              "max_drawdown_transaction_marks": -0.10093045971070402,
+              "trades": 47,
+              "missed_capacity": 10,
+              "mean_slot_utilization": 0.5181159420289855
+            },
+            "2011": {
+              "terminal_wealth": 113885.17695061365,
+              "return_pct": 0.13885176950613642,
+              "max_drawdown_transaction_marks": -0.01159800476672146,
+              "trades": 11,
+              "missed_capacity": 6,
+              "mean_slot_utilization": 0.48148148148148145
+            },
+            "2015_16": {
+              "terminal_wealth": 105108.43920145275,
+              "return_pct": 0.051084392014527635,
+              "max_drawdown_transaction_marks": -0.009063085110096902,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.18518518518518517
+            },
+            "2018": {
+              "terminal_wealth": 105058.37834458561,
+              "return_pct": 0.05058378344585601,
+              "max_drawdown_transaction_marks": -0.005330748271714869,
+              "trades": 4,
+              "missed_capacity": 1,
+              "mean_slot_utilization": 0.38095238095238093
+            },
+            "COVID": {
+              "terminal_wealth": 111976.91732663233,
+              "return_pct": 0.1197691732663233,
+              "max_drawdown_transaction_marks": -0.054986937206741526,
+              "trades": 7,
+              "missed_capacity": 7,
+              "mean_slot_utilization": 0.6666666666666666
+            },
+            "2022": {
+              "terminal_wealth": 47646.42231105877,
+              "return_pct": -0.5235357768894122,
+              "max_drawdown_transaction_marks": -0.4260288116440262,
+              "trades": 20,
+              "missed_capacity": 3,
+              "mean_slot_utilization": 0.5045045045045045
+            }
+          },
+          "mean_episode_return": 0.08025895222618429,
+          "compounded_reset_equivalent": 0.10358929626434543,
+          "worst_episode_return": -0.5235357768894122,
+          "total_trades": 93,
+          "missed_capacity": 27
+        },
+        {
+          "slots": 5,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 147666.3844973588,
+              "return_pct": 0.47666384497358805,
+              "max_drawdown_transaction_marks": -0.07537907184081982,
+              "trades": 52,
+              "missed_capacity": 4,
+              "mean_slot_utilization": 0.38043478260869557
+            },
+            "2011": {
+              "terminal_wealth": 108902.64959072253,
+              "return_pct": 0.08902649590722533,
+              "max_drawdown_transaction_marks": -0.007158358895445693,
+              "trades": 12,
+              "missed_capacity": 2,
+              "mean_slot_utilization": 0.3888888888888889
+            },
+            "2015_16": {
+              "terminal_wealth": 103065.06352087164,
+              "return_pct": 0.03065063520871636,
+              "max_drawdown_transaction_marks": -0.005477989593331123,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.1111111111111111
+            },
+            "2018": {
+              "terminal_wealth": 104744.0642631964,
+              "return_pct": 0.047440642631964014,
+              "max_drawdown_transaction_marks": -0.003299745570556789,
+              "trades": 5,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.31428571428571433
+            },
+            "COVID": {
+              "terminal_wealth": 114399.75995155811,
+              "return_pct": 0.1439975995155811,
+              "max_drawdown_transaction_marks": -0.033491871061584466,
+              "trades": 9,
+              "missed_capacity": 4,
+              "mean_slot_utilization": 0.611764705882353
+            },
+            "2022": {
+              "terminal_wealth": 72512.25329279457,
+              "return_pct": -0.2748774670720543,
+              "max_drawdown_transaction_marks": -0.25826325703899655,
+              "trades": 23,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.3405405405405405
+            }
+          },
+          "mean_episode_return": 0.08548362519417009,
+          "compounded_reset_equivalent": 0.4401160761601908,
+          "worst_episode_return": -0.2748774670720543,
+          "total_trades": 105,
+          "missed_capacity": 10
+        },
+        {
+          "slots": 10,
+          "episodes": {
+            "GFC": {
+              "terminal_wealth": 126956.69203912573,
+              "return_pct": 0.2695669203912574,
+              "max_drawdown_transaction_marks": -0.04207997098116312,
+              "trades": 55,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.2054347826086956
+            },
+            "2011": {
+              "terminal_wealth": 106482.20908521644,
+              "return_pct": 0.0648220908521644,
+              "max_drawdown_transaction_marks": -0.003629002979927076,
+              "trades": 13,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.2222222222222222
+            },
+            "2015_16": {
+              "terminal_wealth": 101532.53176043581,
+              "return_pct": 0.01532531760435818,
+              "max_drawdown_transaction_marks": -0.002754242257467343,
+              "trades": 4,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.05555555555555555
+            },
+            "2018": {
+              "terminal_wealth": 102372.03213159821,
+              "return_pct": 0.02372032131598223,
+              "max_drawdown_transaction_marks": -0.001649790287514219,
+              "trades": 5,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.15714285714285717
+            },
+            "COVID": {
+              "terminal_wealth": 113805.15731900444,
+              "return_pct": 0.13805157319004446,
+              "max_drawdown_transaction_marks": -0.016937512795678678,
+              "trades": 13,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.4647058823529412
+            },
+            "2022": {
+              "terminal_wealth": 87044.6673869019,
+              "return_pct": -0.12955332613098103,
+              "max_drawdown_transaction_marks": -0.1266589643854542,
+              "trades": 23,
+              "missed_capacity": 0,
+              "mean_slot_utilization": 0.17027027027027025
+            }
+          },
+          "mean_episode_return": 0.06365548287047094,
+          "compounded_reset_equivalent": 0.39194893802137565,
+          "worst_episode_return": -0.12955332613098103,
+          "total_trades": 113,
+          "missed_capacity": 0
+        }
+      ]
+    }
+  }
+}
