@@ -1,0 +1,82 @@
+{
+  "status": "FROZEN_BEFORE_OUTCOME_SEARCH",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "scientific_question": "Does causal daily competitive capital allocation improve portable compounded wealth and/or drawdown versus fixed-horizon holding when capital is limited?",
+  "architecture": {
+    "decision_frequency": "each trading session",
+    "fixed_holding_horizon": false,
+    "minimum_holding_period": false,
+    "maximum_holding_period": false,
+    "choices": [
+      "retain incumbent",
+      "exit to SAFE",
+      "replace incumbent with materially better eligible challenger"
+    ],
+    "principle": "Each capital slot is awarded to the best causally justified use today; elapsed holding time is not a predictor or exit rule.",
+    "replacement_hurdle": "challenger must exceed incumbent by a frozen evidence margin sufficient for execution friction and estimation uncertainty; no switching merely for a trivial rank change",
+    "safe_asset": "FRED DGS3MO, causal forward-filled only after observation, accrued ACT/365",
+    "regime_rule": "market regime and security position are separate; regime authority is reevaluated daily; no position may carry a prior regime's authority through a fixed clock"
+  },
+  "execution": {
+    "equity_commission": 0.0,
+    "equity_friction": "model spread/slippage and applicable regulatory friction separately; do not invent a broker commission",
+    "shorts": "borrow availability/fee limitation must be reported separately",
+    "options": "excluded from this first equity allocation comparison",
+    "decision_timing": "signals/predictors known by close t may affect execution no earlier than next session open"
+  },
+  "evidence_sequence": {
+    "development": "DEV50 only",
+    "verification": "preserved50, explicitly preserved-not-pristine",
+    "subsequent_test": "TEST17, explicitly consumed/subsequent test and not pristine blind",
+    "protected": [
+      "remaining Discovery",
+      "Verification A",
+      "Verification B"
+    ],
+    "rule": "freeze complete policy and advancement gate before preserved50; no redesign after preserved50 or TEST17 reveal"
+  },
+  "comparison": {
+    "control": "existing fixed-horizon architecture using its already-frozen rules",
+    "challenger": "daily competitive allocator",
+    "required_metrics": [
+      "terminal wealth",
+      "CAGR",
+      "exact daily MTM max drawdown",
+      "risk-adjusted return",
+      "SAFE-relative excess return",
+      "turnover",
+      "modeled execution friction",
+      "capital utilization",
+      "ticker concentration",
+      "year/era breadth",
+      "holding-duration distribution"
+    ],
+    "diagnostics": [
+      "reason for each exit: deterioration vs replacement vs regime transition",
+      "incumbent/challenger score gap at switch",
+      "days actually held as an outcome, never a rule"
+    ]
+  },
+  "development_validation": {
+    "cross_sectional": "deterministic 5-fold DEV50 stock holdout during selection",
+    "temporal": "era/year transport where data support it",
+    "anti_leakage": "no future outcomes, future peaks/troughs, future regime identity, ticker identity, or elapsed holding horizon as predictive features",
+    "selection_unit": "portfolio/date economics, not raw trade count"
+  },
+  "advancement_gate": {
+    "principle": "dynamic allocator must show portable economic improvement, not merely higher turnover or one lucky cohort",
+    "must_pass": [
+      "positive DEV50 out-of-fold aggregate incremental terminal wealth versus fixed-horizon control after modeled friction",
+      "no worse DEV50 out-of-fold exact daily MTM max drawdown by more than 10% relative unless CAGR improvement is at least 20% relative",
+      "positive incremental result in at least 4 of 5 stock folds",
+      "positive incremental result across at least 60% of evaluated years/eras",
+      "no single ticker contributes more than 15% of total positive incremental PnL"
+    ],
+    "preserved50_gate": "same directional thesis must remain positive on preserved50 without parameter change before TEST17 is opened"
+  },
+  "notes": [
+    "Earlier 3/5/10/20-day Defensive experiment is diagnostic only for this question; its universal 20-session boundary selection is treated as evidence that the fixed horizon may be constraining/contaminating the solution.",
+    "Do not use post-trough NORMAL returns to validate a DEFENSIVE position merely because a fixed holding clock remains open.",
+    "Natural holding duration is measured after the fact."
+  ]
+}
