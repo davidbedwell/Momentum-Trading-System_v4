@@ -1,0 +1,19 @@
+{
+  "format":"MTS_DEFENSIVE_GA_MAIN_LOEO_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_LOEO",
+  "parent_protocol":"MTS_DEFENSIVE_GA_MAIN_BROAD_DISCOVERY_FREEZE_20261004.json",
+  "parent_implementation":"MTS_DEFENSIVE_GA_MAIN_IMPLEMENTATION_FREEZE_20261004.json",
+  "purpose":"Test whether broad Defensive-GA chromosomes transport to an entire declining-market episode not used for evolution.",
+  "folds":["GFC","2011","2015_16","2018","COVID","2022"],
+  "rules":[
+    "Same feature language, chromosome representation, execution semantics, costs, fitness weights and GA bounds as main discovery.",
+    "For each fold, the held-out episode is excluded from fitness, hard-gate counts and condition-quantile estimation.",
+    "GA evolves only on the other five consumed episodes.",
+    "The winning training chromosome is then reported unchanged on the held-out episode.",
+    "Held-out episode results cannot alter that fold's chromosome.",
+    "No TEST17, preserved-50, remaining Discovery or Verification A/B access."
+  ],
+  "heldout_success_is_descriptive_not_a_retuning_gate":true,
+  "provenance":"NEW_RESEARCH_POST_RECOVERY"
+}
