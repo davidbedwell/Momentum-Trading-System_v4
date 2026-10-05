@@ -1,0 +1,313 @@
+{
+  "format": "MTS_DEFENSIVE_ANTI_OVERFIT_METHOD_TOURNAMENT_DEV50_V1",
+  "status": "DEV50_ONLY_METRICS_FROZEN_BEFORE_ANSWER_KEY",
+  "stock_fold_map": {
+    "AJG": 0,
+    "AMGN": 1,
+    "BEN": 2,
+    "BLDR": 3,
+    "BNY": 4,
+    "CDW": 0,
+    "CFG": 1,
+    "CI": 2,
+    "CLX": 3,
+    "COIN": 4,
+    "COO": 0,
+    "COST": 1,
+    "CTSH": 2,
+    "DECK": 3,
+    "DHI": 4,
+    "EVRG": 0,
+    "EXC": 1,
+    "FANG": 2,
+    "FIS": 3,
+    "FITB": 4,
+    "GILD": 0,
+    "HWM": 1,
+    "IRM": 2,
+    "ITW": 3,
+    "KDP": 4,
+    "KKR": 0,
+    "MCO": 1,
+    "MPC": 2,
+    "NFLX": 3,
+    "NKE": 4,
+    "NOW": 0,
+    "NUE": 1,
+    "OMC": 2,
+    "PCAR": 3,
+    "PPG": 4,
+    "RL": 0,
+    "ROK": 1,
+    "RSG": 2,
+    "SBAC": 3,
+    "SMCI": 4,
+    "SO": 0,
+    "STLD": 1,
+    "T": 2,
+    "TDG": 3,
+    "TECH": 4,
+    "TPL": 0,
+    "TRGP": 1,
+    "TRV": 2,
+    "WELL": 3,
+    "XEL": 4
+  },
+  "results": {
+    "DEF_PF1": {
+      "events": 502,
+      "pooled_mean": 0.029723206403168497,
+      "pooled_win": 0.7131474103585658,
+      "A_composite": {
+        "mean_daily_selected_composite_return": 0.02518918587360847,
+        "positive_date_fraction": 0.6923076923076923,
+        "date_units": 325
+      },
+      "B_cluster_weighted": {
+        "date_weighted_mean": 0.02518918587360847,
+        "date_weighted_sd": 0.0532979999136811,
+        "positive_date_fraction": 0.6923076923076923
+      },
+      "C_stock_folds": {
+        "fold_means": {
+          "0": 0.02977630484425472,
+          "1": 0.03729731310255005,
+          "2": 0.022154845939100946,
+          "3": 0.017162025701957285,
+          "4": 0.049182706186825145
+        },
+        "mean_fold": 0.031114639154937628,
+        "worst_fold": 0.017162025701957285,
+        "sd_folds": 0.01266318442155505,
+        "positive_folds": 5,
+        "n_folds": 5
+      },
+      "D_episode_holdout": {
+        "episode_means": {
+          "2018": 0.037459560241050835,
+          "GFC": 0.037405713528522525,
+          "2015_16": 0.01591514601201426,
+          "2022": 0.019421578241697043,
+          "2011": 0.024743552719328214,
+          "COVID": 0.08445400220858883
+        },
+        "episode_balanced_mean": 0.03656659215853362,
+        "worst_episode_mean": 0.01591514601201426,
+        "positive_episodes": 6,
+        "n_episodes": 6
+      },
+      "E_hierarchical": {
+        "worst_stock_fold": 0.017162025701957285,
+        "positive_stock_folds": 5,
+        "worst_episode_mean": 0.01591514601201426,
+        "positive_episodes": 6,
+        "date_weighted_mean": 0.02518918587360847,
+        "positive_date_fraction": 0.6923076923076923
+      }
+    },
+    "DEF_PF2": {
+      "events": 120,
+      "pooled_mean": 0.056038730304384006,
+      "pooled_win": 0.7916666666666666,
+      "A_composite": {
+        "mean_daily_selected_composite_return": 0.05451721831945103,
+        "positive_date_fraction": 0.7628865979381443,
+        "date_units": 97
+      },
+      "B_cluster_weighted": {
+        "date_weighted_mean": 0.05451721831945103,
+        "date_weighted_sd": 0.07780823862087838,
+        "positive_date_fraction": 0.7628865979381443
+      },
+      "C_stock_folds": {
+        "fold_means": {
+          "0": 0.09049771731654595,
+          "1": 0.07141467241334733,
+          "2": 0.04806883700432128,
+          "3": 0.041130456606503996,
+          "4": 0.06269011342004177
+        },
+        "mean_fold": 0.06276035935215206,
+        "worst_fold": 0.041130456606503996,
+        "sd_folds": 0.01954454282901037,
+        "positive_folds": 5,
+        "n_folds": 5
+      },
+      "D_episode_holdout": {
+        "episode_means": {
+          "2018": 0.0732907701939014,
+          "GFC": 0.05896770358223461,
+          "2022": 0.06220002263569854,
+          "2015_16": 0.03239813764060777,
+          "2011": 0.024288842673542713,
+          "COVID": 0.11024761205844431
+        },
+        "episode_balanced_mean": 0.060232181464071555,
+        "worst_episode_mean": 0.024288842673542713,
+        "positive_episodes": 6,
+        "n_episodes": 6
+      },
+      "E_hierarchical": {
+        "worst_stock_fold": 0.041130456606503996,
+        "positive_stock_folds": 5,
+        "worst_episode_mean": 0.024288842673542713,
+        "positive_episodes": 6,
+        "date_weighted_mean": 0.05451721831945103,
+        "positive_date_fraction": 0.7628865979381443
+      }
+    },
+    "DEF_PF3": {
+      "events": 106,
+      "pooled_mean": 0.0576149622090502,
+      "pooled_win": 0.7830188679245284,
+      "A_composite": {
+        "mean_daily_selected_composite_return": 0.056287656821602784,
+        "positive_date_fraction": 0.7692307692307693,
+        "date_units": 91
+      },
+      "B_cluster_weighted": {
+        "date_weighted_mean": 0.056287656821602784,
+        "date_weighted_sd": 0.07982817656962818,
+        "positive_date_fraction": 0.7692307692307693
+      },
+      "C_stock_folds": {
+        "fold_means": {
+          "0": 0.09315998283721137,
+          "1": 0.07141467241334733,
+          "2": 0.0487320175020669,
+          "3": 0.036111467533952966,
+          "4": 0.07187270935653313
+        },
+        "mean_fold": 0.06425816992862235,
+        "worst_fold": 0.036111467533952966,
+        "sd_folds": 0.02223628674477197,
+        "positive_folds": 5,
+        "n_folds": 5
+      },
+      "D_episode_holdout": {
+        "episode_means": {
+          "2018": 0.07631026359507015,
+          "GFC": 0.06027809712162593,
+          "2022": 0.06179222732551206,
+          "2015_16": 0.022009529396821048,
+          "2011": 0.02841014611488883,
+          "COVID": 0.11024761205844431
+        },
+        "episode_balanced_mean": 0.05984131260206039,
+        "worst_episode_mean": 0.022009529396821048,
+        "positive_episodes": 6,
+        "n_episodes": 6
+      },
+      "E_hierarchical": {
+        "worst_stock_fold": 0.036111467533952966,
+        "positive_stock_folds": 5,
+        "worst_episode_mean": 0.022009529396821048,
+        "positive_episodes": 6,
+        "date_weighted_mean": 0.056287656821602784,
+        "positive_date_fraction": 0.7692307692307693
+      }
+    },
+    "DEF_PF4": {
+      "events": 99,
+      "pooled_mean": 0.030241898148521684,
+      "pooled_win": 0.7575757575757576,
+      "A_composite": {
+        "mean_daily_selected_composite_return": 0.02812614683950789,
+        "positive_date_fraction": 0.7721518987341772,
+        "date_units": 79
+      },
+      "B_cluster_weighted": {
+        "date_weighted_mean": 0.02812614683950789,
+        "date_weighted_sd": 0.05279592137987685,
+        "positive_date_fraction": 0.7721518987341772
+      },
+      "C_stock_folds": {
+        "fold_means": {
+          "0": 0.04296074819208189,
+          "1": 0.04364093405250269,
+          "2": 0.026800793079619932,
+          "3": 0.016628739390552653,
+          "4": 0.04327480734777852
+        },
+        "mean_fold": 0.03466120441250714,
+        "worst_fold": 0.016628739390552653,
+        "sd_folds": 0.012355848695791823,
+        "positive_folds": 5,
+        "n_folds": 5
+      },
+      "D_episode_holdout": {
+        "episode_means": {
+          "2018": 0.015640473836728085,
+          "GFC": 0.029203487468104833,
+          "2022": 0.031028342888775783,
+          "2015_16": 0.0013449706582289722,
+          "2011": 0.02102745240474914,
+          "COVID": 0.1092080349015693
+        },
+        "episode_balanced_mean": 0.03457546035969269,
+        "worst_episode_mean": 0.0013449706582289722,
+        "positive_episodes": 6,
+        "n_episodes": 6
+      },
+      "E_hierarchical": {
+        "worst_stock_fold": 0.016628739390552653,
+        "positive_stock_folds": 5,
+        "worst_episode_mean": 0.0013449706582289722,
+        "positive_episodes": 6,
+        "date_weighted_mean": 0.02812614683950789,
+        "positive_date_fraction": 0.7721518987341772
+      }
+    },
+    "DEF_PF5": {
+      "events": 113,
+      "pooled_mean": 0.013005275270389829,
+      "pooled_win": 0.6548672566371682,
+      "A_composite": {
+        "mean_daily_selected_composite_return": 0.012052389291903722,
+        "positive_date_fraction": 0.6373626373626373,
+        "date_units": 91
+      },
+      "B_cluster_weighted": {
+        "date_weighted_mean": 0.012052389291903722,
+        "date_weighted_sd": 0.04252415173662462,
+        "positive_date_fraction": 0.6373626373626373
+      },
+      "C_stock_folds": {
+        "fold_means": {
+          "0": 0.02328650777815383,
+          "1": 0.012553960624676827,
+          "2": 0.014019917673273216,
+          "3": 0.0074623486715551,
+          "4": 0.013866924518250381
+        },
+        "mean_fold": 0.014237931853181871,
+        "worst_fold": 0.0074623486715551,
+        "sd_folds": 0.0057185266774924795,
+        "positive_folds": 5,
+        "n_folds": 5
+      },
+      "D_episode_holdout": {
+        "episode_means": {
+          "2018": 0.008054549551358602,
+          "GFC": 0.013224227057407226,
+          "2022": 0.010646646096903235,
+          "2015_16": 0.007034764692660955,
+          "2011": 0.010002511663580052,
+          "COVID": 0.04154355580140272
+        },
+        "episode_balanced_mean": 0.015084375810552131,
+        "worst_episode_mean": 0.007034764692660955,
+        "positive_episodes": 6,
+        "n_episodes": 6
+      },
+      "E_hierarchical": {
+        "worst_stock_fold": 0.0074623486715551,
+        "positive_stock_folds": 5,
+        "worst_episode_mean": 0.007034764692660955,
+        "positive_episodes": 6,
+        "date_weighted_mean": 0.012052389291903722,
+        "positive_date_fraction": 0.6373626373626373
+      }
+    }
+  }
+}
