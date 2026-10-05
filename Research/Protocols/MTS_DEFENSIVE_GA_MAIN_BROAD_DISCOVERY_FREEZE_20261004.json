@@ -1,0 +1,87 @@
+{
+  "format":"MTS_DEFENSIVE_GA_MAIN_BROAD_DISCOVERY_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_GA",
+  "provenance":"NEW_RESEARCH_POST_RECOVERY",
+  "objective":"Discover short-term opportunistic long chromosomes that harvest temporary rallies while the independent market regime remains DEFENSIVE.",
+  "governing_assumption":"The bear market is expected to continue. Defensive trades are temporary opportunities, not declarations of recovery.",
+  "state_invariants":[
+    "GA cannot declare recovery, R-1, NORMAL, or modify A/B/C.",
+    "Profitability of a defensive-origin trade cannot change market state.",
+    "All trades are short-duration by design.",
+    "Renewed deterioration should trigger exit/profit-taking rather than tolerance of prolonged adverse continuation."
+  ],
+  "laboratory":{
+    "stock_data":"Consumed DEV50 trajectories only; only names present in reconstructed cache are eligible.",
+    "research_windows":{
+      "GFC":["2007-10-09","2009-03-09"],
+      "2011":["2011-07-22","2011-10-03"],
+      "2015_16":["2015-08-20","2016-02-11"],
+      "2018":["2018-10-03","2018-12-24"],
+      "COVID":["2020-02-19","2020-03-23"],
+      "2022":["2022-01-03","2022-10-12"]
+    },
+    "TEST17":false,
+    "preserved50":false,
+    "remaining_Discovery":false,
+    "Verification_A":false,
+    "Verification_B":false
+  },
+  "available_causal_evidence_families":[
+    "stock candidate family",
+    "stock source horizon",
+    "stock path returns and adverse excursion observed only through decision time",
+    "short-term price impulse and acceleration",
+    "recent high/low structure and failed rebound behavior",
+    "realized volatility level/change",
+    "volume expansion/contraction",
+    "market drawdown state",
+    "market 5/20-day return and acceleration",
+    "market breadth/negative participation",
+    "market realized volatility",
+    "VIX/VVIX context where causally available",
+    "lagged OFR funding/credit context where causally available"
+  ],
+  "chromosome_permission":[
+    "choose any nonempty subset of admitted causal evidence",
+    "choose signs/directions of features",
+    "choose bounded thresholds from causal rolling distributions or bounded normalized levels",
+    "choose conjunction/disjunction structure",
+    "choose feature interactions",
+    "choose persistence/confirmation",
+    "choose entry delay within short-term bound",
+    "choose exit evidence based on renewed deterioration/opposite-of-recovery direction",
+    "choose maximum holding period within short-term bound",
+    "choose whether to take profit immediately or continue while rebound evidence persists",
+    "choose whether to re-enter later while DEFENSIVE"
+  ],
+  "short_term_bounds":{
+    "maximum_holding_sessions":20,
+    "maximum_entry_delay_sessions":10,
+    "rationale":"Low-hanging-fruit objective; not designed to hold through renewed bear continuation."
+  },
+  "fitness_principles":[
+    "Reward net realized return after realistic costs.",
+    "Reward return per session/capital-time efficiency.",
+    "Reward positive expectancy across multiple declining-market episodes.",
+    "Reward profit factor and win rate only as secondary metrics.",
+    "Penalize maximum adverse excursion heavily.",
+    "Penalize giveback from maximum favorable excursion to exit.",
+    "Penalize remaining in a trade while renewed deterioration evidence strengthens.",
+    "Penalize long holding periods absent incremental reward.",
+    "Penalize episode concentration and poor worst-window expectancy.",
+    "Retain trade count and minimum per-window participation gates.",
+    "Do not reward catching full rally peaks or using future trough/recovery information."
+  ],
+  "anti_overfit":[
+    "No fixed hand-authored pullback/reclaim recipe.",
+    "No fixed hand-authored profit target as a required exit.",
+    "No fixed hand-authored stop as a required exit.",
+    "No known trough or R-1 date as a feature.",
+    "No protected evidence.",
+    "Per-window results mandatory.",
+    "Null result is allowed."
+  ],
+  "comparison_note":"Previously completed Phase-2/2B constrained GA remains preserved as a separate side experiment and is not the governing Defensive GA search.",
+  "scientific_role":"GA is the search engine. Human guidance defines causality, short-term intent, evidence boundaries, and bear-continuation risk asymmetry only."
+}
