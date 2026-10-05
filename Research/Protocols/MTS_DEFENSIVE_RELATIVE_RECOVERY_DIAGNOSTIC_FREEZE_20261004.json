@@ -1,0 +1,11 @@
+{
+ "format":"MTS_DEFENSIVE_RELATIVE_RECOVERY_DIAGNOSTIC_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_DIAGNOSTIC",
+ "provenance":"NEW_RESEARCH_POST_RECOVERY",
+ "question":"Do the strongest frozen Defensive countertrend longs occur when the stock is damaged but begins outperforming a still-weak market?",
+ "frozen_trade_mechanism":"D3_EXIT2",
+ "causal_signal_time_dimensions":["stock_drawdown252","stock_ret5_minus_market_ret5","stock_ret20_minus_market_ret20","market_ret20","market_drawdown252"],
+ "analysis":["quintile tables","2D damaged-stock x relative-strength cells","episode breakdown","winner/loser payoff decomposition"],
+ "rules":["descriptive only","no threshold fitting","no mutation","no protected evidence"]
+}
