@@ -1,0 +1,2493 @@
+{
+  "format": "MTS_DEFENSIVE_NESTED_HIERARCHICAL_GA_DEV50_V1",
+  "status": "DEV50_NESTED_COMPLETE_NO_VERIFICATION_ACCESSED",
+  "population": "DEV50",
+  "stock_fold_map": {
+    "AJG": 0,
+    "AMGN": 1,
+    "BEN": 2,
+    "BLDR": 3,
+    "BNY": 4,
+    "CDW": 0,
+    "CFG": 1,
+    "CI": 2,
+    "CLX": 3,
+    "COIN": 4,
+    "COO": 0,
+    "COST": 1,
+    "CTSH": 2,
+    "DECK": 3,
+    "DHI": 4,
+    "EVRG": 0,
+    "EXC": 1,
+    "FANG": 2,
+    "FIS": 3,
+    "FITB": 4,
+    "GILD": 0,
+    "HWM": 1,
+    "IRM": 2,
+    "ITW": 3,
+    "KDP": 4,
+    "KKR": 0,
+    "MCO": 1,
+    "MPC": 2,
+    "NFLX": 3,
+    "NKE": 4,
+    "NOW": 0,
+    "NUE": 1,
+    "OMC": 2,
+    "PCAR": 3,
+    "PPG": 4,
+    "RL": 0,
+    "ROK": 1,
+    "RSG": 2,
+    "SBAC": 3,
+    "SMCI": 4,
+    "SO": 0,
+    "STLD": 1,
+    "T": 2,
+    "TDG": 3,
+    "TECH": 4,
+    "TPL": 0,
+    "TRGP": 1,
+    "TRV": 2,
+    "WELL": 3,
+    "XEL": 4
+  },
+  "search_budget": {
+    "pop": 220,
+    "elite": 36,
+    "maxgen": 20,
+    "stale": 6
+  },
+  "runs": [
+    {
+      "label": "STOCK_FOLD_0",
+      "train_events": 8697,
+      "heldout_events": 1462,
+      "unique_genomes": 2160,
+      "genome": {
+        "fmask": 18,
+        "hmask": 7,
+        "entry_rules": [
+          82,
+          122
+        ],
+        "entry_k": 1,
+        "entry_delay": 1,
+        "exit_rules": [
+          52,
+          83,
+          127
+        ],
+        "exit_k": 3,
+        "min_hold": 3,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 18,
+        "hmask": 7,
+        "entry_rules": [
+          82,
+          122
+        ],
+        "entry_k": 1,
+        "entry_delay": 1,
+        "exit_rules": [
+          52,
+          83,
+          127
+        ],
+        "exit_k": 3,
+        "min_hold": 3,
+        "max_hold": 20,
+        "families": [
+          "BREAKOUT",
+          "VOLATILITY"
+        ],
+        "horizons": [
+          3,
+          5,
+          10
+        ],
+        "entry_conditions": [
+          {
+            "feature": "market_ret5",
+            "direction": ">=",
+            "quantile": 0.35,
+            "threshold": -0.012275410816073418
+          },
+          {
+            "feature": "breadth_positive20",
+            "direction": ">=",
+            "quantile": 0.35,
+            "threshold": 0.2616822421550751
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_relvol_pct",
+            "direction": ">=",
+            "quantile": 0.35,
+            "threshold": 0.3467741906642914
+          },
+          {
+            "feature": "market_ret5",
+            "direction": "<=",
+            "quantile": 0.35,
+            "threshold": -0.012275410816073418
+          },
+          {
+            "feature": "breadth_positive20",
+            "direction": "<=",
+            "quantile": 0.65,
+            "threshold": 0.5785714387893677
+          }
+        ]
+      },
+      "train": {
+        "score": 1.3462759015387555,
+        "g": {
+          "fmask": 18,
+          "hmask": 7,
+          "entry_rules": [
+            82,
+            122
+          ],
+          "entry_k": 1,
+          "entry_delay": 1,
+          "exit_rules": [
+            52,
+            83,
+            127
+          ],
+          "exit_k": 3,
+          "min_hold": 3,
+          "max_hold": 20
+        },
+        "n": 25,
+        "cluster": {
+          "date_mean": 0.1433020165696682,
+          "date_sd": 0.20137677632052417,
+          "positive_dates": 0.9565217391304348,
+          "episode_mean": 0.1236108508477196,
+          "worst_episode": 0.05805716861896837,
+          "positive_episodes": 3,
+          "dates": 23,
+          "episodes": 3
+        },
+        "sim": {
+          "cagr": 0.12281303784936548,
+          "max_daily_mtm_drawdown": -0.02238368101610566,
+          "compounded_reset_return": 0.46856427394098965,
+          "worst_episode_return": 0.0,
+          "total_trades": 23,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.2374928403703107,
+              "max_daily_mtm_drawdown": -0.02238368101610566,
+              "trades": 14,
+              "missed_capacity": 1
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.022799750385856576,
+              "max_daily_mtm_drawdown": -0.012764981805558184,
+              "trades": 2,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.16027156892420114,
+              "max_daily_mtm_drawdown": -0.012244438312625894,
+              "trades": 7,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 9,
+        "cluster": {
+          "date_mean": 0.05271557188798838,
+          "date_sd": 0.07897262798118808,
+          "positive_dates": 0.6666666666666666,
+          "episode_mean": 0.043955641234029806,
+          "worst_episode": 0.007843275794157889,
+          "positive_episodes": 3,
+          "dates": 9,
+          "episodes": 3
+        },
+        "sim": {
+          "cagr": 0.018973089661521003,
+          "max_daily_mtm_drawdown": -0.020080918716866458,
+          "compounded_reset_return": 0.06433778989296957,
+          "worst_episode_return": 0.0,
+          "total_trades": 8,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.0027342737916731252,
+              "max_daily_mtm_drawdown": -0.020080918716866458,
+              "trades": 2,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.021093875977747034,
+              "max_daily_mtm_drawdown": -0.005062797058825064,
+              "trades": 2,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.039508275880098864,
+              "max_daily_mtm_drawdown": -0.019932310829954947,
+              "trades": 4,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "STOCK_FOLD_1",
+      "train_events": 7997,
+      "heldout_events": 2162,
+      "unique_genomes": 2202,
+      "genome": {
+        "fmask": 32,
+        "hmask": 3,
+        "entry_rules": [
+          61
+        ],
+        "entry_k": 1,
+        "entry_delay": 0,
+        "exit_rules": [
+          168
+        ],
+        "exit_k": 1,
+        "min_hold": 3,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 32,
+        "hmask": 3,
+        "entry_rules": [
+          61
+        ],
+        "entry_k": 1,
+        "entry_delay": 0,
+        "exit_rules": [
+          168
+        ],
+        "exit_k": 1,
+        "min_hold": 3,
+        "max_hold": 20,
+        "families": [
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "stock_drawdown252",
+            "direction": "<=",
+            "quantile": 0.2,
+            "threshold": -0.37370604276657104
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "ofr_funding_lag2",
+            "direction": ">=",
+            "quantile": 0.8,
+            "threshold": 3.1610000133514404
+          }
+        ]
+      },
+      "train": {
+        "score": 1.4362864957849606,
+        "g": {
+          "fmask": 32,
+          "hmask": 3,
+          "entry_rules": [
+            61
+          ],
+          "entry_k": 1,
+          "entry_delay": 0,
+          "exit_rules": [
+            168
+          ],
+          "exit_k": 1,
+          "min_hold": 3,
+          "max_hold": 20
+        },
+        "n": 39,
+        "cluster": {
+          "date_mean": 0.11223023225688562,
+          "date_sd": 0.21289091763604673,
+          "positive_dates": 0.7105263157894737,
+          "episode_mean": 0.20831511457735155,
+          "worst_episode": 0.06624903138029675,
+          "positive_episodes": 3,
+          "dates": 38,
+          "episodes": 3
+        },
+        "sim": {
+          "cagr": 0.09056422854833701,
+          "max_daily_mtm_drawdown": -0.07228428485260752,
+          "compounded_reset_return": 0.33323443542295794,
+          "worst_episode_return": 0.0,
+          "total_trades": 27,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.20734830614695698,
+              "max_daily_mtm_drawdown": -0.041608480211447474,
+              "trades": 20,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.043272264692763684,
+              "max_daily_mtm_drawdown": -0.013922133146240245,
+              "trades": 1,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0584644672532586,
+              "max_daily_mtm_drawdown": -0.07228428485260752,
+              "trades": 6,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 2,
+        "cluster": {
+          "date_mean": 0.023298932960237162,
+          "date_sd": 0.059098146396415474,
+          "positive_dates": 0.5,
+          "episode_mean": 0.023298932960237162,
+          "worst_episode": 0.023298932960237162,
+          "positive_episodes": 1,
+          "dates": 2,
+          "episodes": 1
+        },
+        "sim": {
+          "cagr": 0.0026775795588978024,
+          "max_daily_mtm_drawdown": -0.009446780328631887,
+          "compounded_reset_return": 0.008910355940803916,
+          "worst_episode_return": 0.0,
+          "total_trades": 2,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.008910355940803916,
+              "max_daily_mtm_drawdown": -0.009446780328631887,
+              "trades": 2,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "STOCK_FOLD_2",
+      "train_events": 7610,
+      "heldout_events": 2549,
+      "unique_genomes": 2200,
+      "genome": {
+        "fmask": 155,
+        "hmask": 2,
+        "entry_rules": [
+          1,
+          121
+        ],
+        "entry_k": 2,
+        "entry_delay": 0,
+        "exit_rules": [
+          64,
+          174
+        ],
+        "exit_k": 2,
+        "min_hold": 2,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 155,
+        "hmask": 2,
+        "entry_rules": [
+          1,
+          121
+        ],
+        "entry_k": 2,
+        "entry_delay": 0,
+        "exit_rules": [
+          64,
+          174
+        ],
+        "exit_k": 2,
+        "min_hold": 2,
+        "max_hold": 20,
+        "families": [
+          "MOMENTUM",
+          "BREAKOUT",
+          "MEAN_REVERSION",
+          "VOLATILITY",
+          "MARKET_REGIME_STRUCTURE"
+        ],
+        "horizons": [
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "stock_ret5",
+            "direction": "<=",
+            "quantile": 0.2,
+            "threshold": -0.044676877558231354
+          },
+          {
+            "feature": "breadth_positive20",
+            "direction": "<=",
+            "quantile": 0.2,
+            "threshold": 0.13312692940235138
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_drawdown252",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": -0.2284696102142334
+          },
+          {
+            "feature": "ofr_credit_lag2",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": 0.8480865955352783
+          }
+        ]
+      },
+      "train": {
+        "score": 1.3540287918868732,
+        "g": {
+          "fmask": 155,
+          "hmask": 2,
+          "entry_rules": [
+            1,
+            121
+          ],
+          "entry_k": 2,
+          "entry_delay": 0,
+          "exit_rules": [
+            64,
+            174
+          ],
+          "exit_k": 2,
+          "min_hold": 2,
+          "max_hold": 20
+        },
+        "n": 25,
+        "cluster": {
+          "date_mean": 0.1369610737105639,
+          "date_sd": 0.11787880075894919,
+          "positive_dates": 0.8888888888888888,
+          "episode_mean": 0.14499836981886288,
+          "worst_episode": 0.04211487349716814,
+          "positive_episodes": 5,
+          "dates": 18,
+          "episodes": 5
+        },
+        "sim": {
+          "cagr": 0.1144161132853998,
+          "max_daily_mtm_drawdown": -0.05418490372156948,
+          "compounded_reset_return": 0.4324445711656866,
+          "worst_episode_return": 0.0,
+          "total_trades": 22,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.19506479210756766,
+              "max_daily_mtm_drawdown": -0.02581827327038233,
+              "trades": 9,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.014951363823076047,
+              "max_daily_mtm_drawdown": -0.05418490372156948,
+              "trades": 4,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.04692105192130391,
+              "max_daily_mtm_drawdown": -0.022505953014092528,
+              "trades": 3,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.07598948559849306,
+              "max_daily_mtm_drawdown": -0.009749466703330767,
+              "trades": 2,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.04838109807654667,
+              "max_daily_mtm_drawdown": -0.04871550607409281,
+              "trades": 4,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 9,
+        "cluster": {
+          "date_mean": 0.05161919218787852,
+          "date_sd": 0.08637553557548161,
+          "positive_dates": 0.7777777777777778,
+          "episode_mean": 0.06564997640561765,
+          "worst_episode": 0.02067684307722026,
+          "positive_episodes": 5,
+          "dates": 9,
+          "episodes": 5
+        },
+        "sim": {
+          "cagr": 0.024496858969697,
+          "max_daily_mtm_drawdown": -0.06775079172501486,
+          "compounded_reset_return": 0.08359901603874542,
+          "worst_episode_return": 0.0,
+          "total_trades": 9,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.002910733312879943,
+              "max_daily_mtm_drawdown": -0.06775079172501486,
+              "trades": 4,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.029287317874322705,
+              "max_daily_mtm_drawdown": -0.017898336508155643,
+              "trades": 2,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.021330357651234255,
+              "max_daily_mtm_drawdown": -0.006123203220383289,
+              "trades": 1,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.01444316526541467,
+              "max_daily_mtm_drawdown": -0.004580108414314332,
+              "trades": 1,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.01315464447091208,
+              "max_daily_mtm_drawdown": -0.009350867549448583,
+              "trades": 1,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "STOCK_FOLD_3",
+      "train_events": 8324,
+      "heldout_events": 1835,
+      "unique_genomes": 2340,
+      "genome": {
+        "fmask": 210,
+        "hmask": 5,
+        "entry_rules": [
+          89,
+          124
+        ],
+        "entry_k": 2,
+        "entry_delay": 3,
+        "exit_rules": [
+          14,
+          38,
+          83,
+          97
+        ],
+        "exit_k": 3,
+        "min_hold": 3,
+        "max_hold": 15
+      },
+      "genome_described": {
+        "fmask": 210,
+        "hmask": 5,
+        "entry_rules": [
+          89,
+          124
+        ],
+        "entry_k": 2,
+        "entry_delay": 3,
+        "exit_rules": [
+          14,
+          38,
+          83,
+          97
+        ],
+        "exit_k": 3,
+        "min_hold": 3,
+        "max_hold": 15,
+        "families": [
+          "BREAKOUT",
+          "VOLATILITY",
+          "RELATIVE_CROSS_SECTIONAL",
+          "MARKET_REGIME_STRUCTURE"
+        ],
+        "horizons": [
+          3,
+          10
+        ],
+        "entry_conditions": [
+          {
+            "feature": "market_ret5",
+            "direction": "<=",
+            "quantile": 0.8,
+            "threshold": 0.02809247002005577
+          },
+          {
+            "feature": "breadth_positive20",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": 0.4000000059604645
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_ret20",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": -0.018372787162661552
+          },
+          {
+            "feature": "stock_range20",
+            "direction": ">=",
+            "quantile": 0.8,
+            "threshold": 0.8222225308418274
+          },
+          {
+            "feature": "market_ret5",
+            "direction": "<=",
+            "quantile": 0.35,
+            "threshold": -0.012275410816073418
+          },
+          {
+            "feature": "market_ret20",
+            "direction": "<=",
+            "quantile": 0.65,
+            "threshold": 0.012914763763546944
+          }
+        ]
+      },
+      "train": {
+        "score": 1.6167204079374524,
+        "g": {
+          "fmask": 210,
+          "hmask": 5,
+          "entry_rules": [
+            89,
+            124
+          ],
+          "entry_k": 2,
+          "entry_delay": 3,
+          "exit_rules": [
+            14,
+            38,
+            83,
+            97
+          ],
+          "exit_k": 3,
+          "min_hold": 3,
+          "max_hold": 15
+        },
+        "n": 28,
+        "cluster": {
+          "date_mean": 0.11837821348608565,
+          "date_sd": 0.16890150538121973,
+          "positive_dates": 0.84,
+          "episode_mean": 0.22900741463936558,
+          "worst_episode": 0.05236245830329471,
+          "positive_episodes": 4,
+          "dates": 25,
+          "episodes": 4
+        },
+        "sim": {
+          "cagr": 0.09300771111766304,
+          "max_daily_mtm_drawdown": -0.02366282522921903,
+          "compounded_reset_return": 0.3431701114615484,
+          "worst_episode_return": 0.0,
+          "total_trades": 26,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.1735554521601086,
+              "max_daily_mtm_drawdown": -0.020882785901506606,
+              "trades": 12,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.05131035893560609,
+              "max_daily_mtm_drawdown": -0.007561133838931644,
+              "trades": 5,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0886705130023262,
+              "max_daily_mtm_drawdown": -0.02366282522921903,
+              "trades": 9,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 13,
+        "cluster": {
+          "date_mean": 0.04852598384040604,
+          "date_sd": 0.07983192207477215,
+          "positive_dates": 0.6923076923076923,
+          "episode_mean": 0.03971117332693985,
+          "worst_episode": 0.006164016255041593,
+          "positive_episodes": 4,
+          "dates": 13,
+          "episodes": 4
+        },
+        "sim": {
+          "cagr": 0.02869954966833843,
+          "max_daily_mtm_drawdown": -0.01841538508060958,
+          "compounded_reset_return": 0.09841581193356874,
+          "worst_episode_return": 0.0,
+          "total_trades": 13,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.041566614519416234,
+              "max_daily_mtm_drawdown": -0.01841538508060958,
+              "trades": 6,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0022357622006656808,
+              "max_daily_mtm_drawdown": -0.0034405665327011947,
+              "trades": 1,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.015481940171505837,
+              "max_daily_mtm_drawdown": -0.007401211912259176,
+              "trades": 2,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0361857743542533,
+              "max_daily_mtm_drawdown": -0.013129749335422436,
+              "trades": 4,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "STOCK_FOLD_4",
+      "train_events": 8008,
+      "heldout_events": 2151,
+      "unique_genomes": 2093,
+      "genome": {
+        "fmask": 24,
+        "hmask": 2,
+        "entry_rules": [
+          111
+        ],
+        "entry_k": 1,
+        "entry_delay": 2,
+        "exit_rules": [
+          48,
+          97
+        ],
+        "exit_k": 2,
+        "min_hold": 2,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 24,
+        "hmask": 2,
+        "entry_rules": [
+          111
+        ],
+        "entry_k": 1,
+        "entry_delay": 2,
+        "exit_rules": [
+          48,
+          97
+        ],
+        "exit_k": 2,
+        "min_hold": 2,
+        "max_hold": 20,
+        "families": [
+          "MEAN_REVERSION",
+          "VOLATILITY"
+        ],
+        "horizons": [
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "breadth_above_sma200",
+            "direction": "<=",
+            "quantile": 0.2,
+            "threshold": 0.156521737575531
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_rsi14",
+            "direction": ">=",
+            "quantile": 0.8,
+            "threshold": 63.7461051940918
+          },
+          {
+            "feature": "market_ret20",
+            "direction": "<=",
+            "quantile": 0.65,
+            "threshold": 0.01413985900580883
+          }
+        ]
+      },
+      "train": {
+        "score": 1.042891265490438,
+        "g": {
+          "fmask": 24,
+          "hmask": 2,
+          "entry_rules": [
+            111
+          ],
+          "entry_k": 1,
+          "entry_delay": 2,
+          "exit_rules": [
+            48,
+            97
+          ],
+          "exit_k": 2,
+          "min_hold": 2,
+          "max_hold": 20
+        },
+        "n": 40,
+        "cluster": {
+          "date_mean": 0.1071887828132698,
+          "date_sd": 0.07730768596082903,
+          "positive_dates": 0.896551724137931,
+          "episode_mean": 0.12799669453939191,
+          "worst_episode": 0.0925961080843597,
+          "positive_episodes": 5,
+          "dates": 29,
+          "episodes": 5
+        },
+        "sim": {
+          "cagr": 0.16176863087192972,
+          "max_daily_mtm_drawdown": -0.10578256763739868,
+          "compounded_reset_return": 0.6444922871696643,
+          "worst_episode_return": 0.0,
+          "total_trades": 29,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.24147080169004176,
+              "max_daily_mtm_drawdown": -0.10578256763739868,
+              "trades": 16,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.07271624584557346,
+              "max_daily_mtm_drawdown": -0.038505187697471355,
+              "trades": 4,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.07320302810024182,
+              "max_daily_mtm_drawdown": -0.015121373853848818,
+              "trades": 4,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.11447186985465763,
+              "max_daily_mtm_drawdown": -0.018998362626656218,
+              "trades": 4,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0324272833414585,
+              "max_daily_mtm_drawdown": -0.01377236109030544,
+              "trades": 1,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 10,
+        "cluster": {
+          "date_mean": 0.0641857473492228,
+          "date_sd": 0.08714965000691206,
+          "positive_dates": 0.7777777777777778,
+          "episode_mean": 0.08945202305939078,
+          "worst_episode": 0.03319522061430171,
+          "positive_episodes": 4,
+          "dates": 9,
+          "episodes": 4
+        },
+        "sim": {
+          "cagr": 0.031701188679090775,
+          "max_daily_mtm_drawdown": -0.07447259451454791,
+          "compounded_reset_return": 0.10908447983448721,
+          "worst_episode_return": 0.0,
+          "total_trades": 9,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.002411010453108542,
+              "max_daily_mtm_drawdown": -0.07447259451454791,
+              "trades": 4,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.04293241671734793,
+              "max_daily_mtm_drawdown": -0.02183801687368614,
+              "trades": 2,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.025592421528802145,
+              "max_daily_mtm_drawdown": -0.005309515616067073,
+              "trades": 1,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.03439837618698993,
+              "max_daily_mtm_drawdown": -0.01767924690909317,
+              "trades": 2,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "EPISODE_GFC",
+      "train_events": 6184,
+      "heldout_events": 3975,
+      "unique_genomes": 2292,
+      "genome": {
+        "fmask": 72,
+        "hmask": 3,
+        "entry_rules": [
+          29,
+          101,
+          111
+        ],
+        "entry_k": 3,
+        "entry_delay": 5,
+        "exit_rules": [
+          108
+        ],
+        "exit_k": 1,
+        "min_hold": 2,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 72,
+        "hmask": 3,
+        "entry_rules": [
+          29,
+          101,
+          111
+        ],
+        "entry_k": 3,
+        "entry_delay": 5,
+        "exit_rules": [
+          108
+        ],
+        "exit_k": 1,
+        "min_hold": 2,
+        "max_hold": 20,
+        "families": [
+          "MEAN_REVERSION",
+          "RELATIVE_CROSS_SECTIONAL"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "stock_close_sma20",
+            "direction": "<=",
+            "quantile": 0.8,
+            "threshold": 0.04093967750668526
+          },
+          {
+            "feature": "market_drawdown252",
+            "direction": "<=",
+            "quantile": 0.2,
+            "threshold": -0.22818441689014435
+          },
+          {
+            "feature": "breadth_above_sma200",
+            "direction": "<=",
+            "quantile": 0.2,
+            "threshold": 0.23349057137966156
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "market_drawdown252",
+            "direction": ">=",
+            "quantile": 0.8,
+            "threshold": -0.12443309277296066
+          }
+        ]
+      },
+      "train": {
+        "score": 1.2700289578359103,
+        "g": {
+          "fmask": 72,
+          "hmask": 3,
+          "entry_rules": [
+            29,
+            101,
+            111
+          ],
+          "entry_k": 3,
+          "entry_delay": 5,
+          "exit_rules": [
+            108
+          ],
+          "exit_k": 1,
+          "min_hold": 2,
+          "max_hold": 20
+        },
+        "n": 27,
+        "cluster": {
+          "date_mean": 0.13085834640050775,
+          "date_sd": 0.0736469985883877,
+          "positive_dates": 0.9166666666666666,
+          "episode_mean": 0.13296794134902634,
+          "worst_episode": 0.10120181539228307,
+          "positive_episodes": 4,
+          "dates": 12,
+          "episodes": 4
+        },
+        "sim": {
+          "cagr": 0.16833955052934435,
+          "max_daily_mtm_drawdown": -0.053594308770593346,
+          "compounded_reset_return": 0.6755513308784371,
+          "worst_episode_return": 0.0,
+          "total_trades": 24,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.21444034559844605,
+              "max_daily_mtm_drawdown": -0.053594308770593346,
+              "trades": 8,
+              "missed_capacity": 1
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.07396566947890282,
+              "max_daily_mtm_drawdown": -0.015121373853848707,
+              "trades": 4,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.15747187479139302,
+              "max_daily_mtm_drawdown": -0.03102957436548137,
+              "trades": 5,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.10989195771494065,
+              "max_daily_mtm_drawdown": -0.048335297551424516,
+              "trades": 7,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 35,
+        "cluster": {
+          "date_mean": 0.03016521606913279,
+          "date_sd": 0.17476677126006337,
+          "positive_dates": 0.6666666666666666,
+          "episode_mean": 0.030844237679196723,
+          "worst_episode": 0.030844237679196723,
+          "positive_episodes": 1,
+          "dates": 30,
+          "episodes": 1
+        },
+        "sim": {
+          "cagr": -0.0995818313958664,
+          "max_daily_mtm_drawdown": -0.4101075506888351,
+          "compounded_reset_return": -0.2938928554619983,
+          "worst_episode_return": -0.2938928554619983,
+          "total_trades": 19,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": -0.2938928554619983,
+              "max_daily_mtm_drawdown": -0.4101075506888351,
+              "trades": 19,
+              "missed_capacity": 1
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "EPISODE_2011",
+      "train_events": 9123,
+      "heldout_events": 1036,
+      "unique_genomes": 2588,
+      "genome": {
+        "fmask": 36,
+        "hmask": 3,
+        "entry_rules": [
+          76,
+          105
+        ],
+        "entry_k": 2,
+        "entry_delay": 0,
+        "exit_rules": [
+          22,
+          47,
+          142
+        ],
+        "exit_k": 3,
+        "min_hold": 3,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 36,
+        "hmask": 3,
+        "entry_rules": [
+          76,
+          105
+        ],
+        "entry_k": 2,
+        "entry_delay": 0,
+        "exit_rules": [
+          22,
+          47,
+          142
+        ],
+        "exit_k": 3,
+        "min_hold": 3,
+        "max_hold": 20,
+        "families": [
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "stock_rv_pct",
+            "direction": ">=",
+            "quantile": 0.65,
+            "threshold": 0.6897226750850687
+          },
+          {
+            "feature": "market_drawdown252",
+            "direction": "<=",
+            "quantile": 0.5,
+            "threshold": -0.19952937960624695
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_close_sma20",
+            "direction": ">=",
+            "quantile": 0.35,
+            "threshold": -0.02569320797920227
+          },
+          {
+            "feature": "stock_rsi14",
+            "direction": "<=",
+            "quantile": 0.65,
+            "threshold": 55.50092315673828
+          },
+          {
+            "feature": "vix",
+            "direction": ">=",
+            "quantile": 0.35,
+            "threshold": 23.270000457763672
+          }
+        ]
+      },
+      "train": {
+        "score": 1.659827221291427,
+        "g": {
+          "fmask": 36,
+          "hmask": 3,
+          "entry_rules": [
+            76,
+            105
+          ],
+          "entry_k": 2,
+          "entry_delay": 0,
+          "exit_rules": [
+            22,
+            47,
+            142
+          ],
+          "exit_k": 3,
+          "min_hold": 3,
+          "max_hold": 20
+        },
+        "n": 26,
+        "cluster": {
+          "date_mean": 0.16120008780601186,
+          "date_sd": 0.269604740556912,
+          "positive_dates": 0.7916666666666666,
+          "episode_mean": 0.18958699344402186,
+          "worst_episode": 0.03321751300282044,
+          "positive_episodes": 4,
+          "dates": 24,
+          "episodes": 4
+        },
+        "sim": {
+          "cagr": 0.07343194662525732,
+          "max_daily_mtm_drawdown": -0.06857702345658545,
+          "compounded_reset_return": 0.2650078965459006,
+          "worst_episode_return": 0.0,
+          "total_trades": 17,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.09868841994625877,
+              "max_daily_mtm_drawdown": -0.06857702345658545,
+              "trades": 5,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0367456737051004,
+              "max_daily_mtm_drawdown": -0.006352086107235699,
+              "trades": 1,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.043272264692763684,
+              "max_daily_mtm_drawdown": -0.013922133146240245,
+              "trades": 1,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.06450767200914576,
+              "max_daily_mtm_drawdown": -0.026040628765992446,
+              "trades": 10,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 0,
+        "cluster": {
+          "date_mean": -1,
+          "episode_mean": -1,
+          "worst_episode": -1,
+          "positive_episodes": 0,
+          "dates": 0
+        },
+        "sim": {
+          "cagr": 0.0,
+          "max_daily_mtm_drawdown": 0.0,
+          "compounded_reset_return": 0.0,
+          "worst_episode_return": 0.0,
+          "total_trades": 0,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "EPISODE_2015_16",
+      "train_events": 8528,
+      "heldout_events": 1631,
+      "unique_genomes": 2574,
+      "genome": {
+        "fmask": 195,
+        "hmask": 3,
+        "entry_rules": [
+          140,
+          144,
+          159
+        ],
+        "entry_k": 3,
+        "entry_delay": 3,
+        "exit_rules": [
+          116,
+          145
+        ],
+        "exit_k": 2,
+        "min_hold": 3,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 195,
+        "hmask": 3,
+        "entry_rules": [
+          140,
+          144,
+          159
+        ],
+        "entry_k": 3,
+        "entry_delay": 3,
+        "exit_rules": [
+          116,
+          145
+        ],
+        "exit_k": 2,
+        "min_hold": 3,
+        "max_hold": 20,
+        "families": [
+          "MOMENTUM",
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "MARKET_REGIME_STRUCTURE"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "vix",
+            "direction": ">=",
+            "quantile": 0.2,
+            "threshold": 22.420000076293945
+          },
+          {
+            "feature": "vix",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": 28.15999984741211
+          },
+          {
+            "feature": "vvix",
+            "direction": "<=",
+            "quantile": 0.8,
+            "threshold": 106.05000305175781
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "breadth_above_sma200",
+            "direction": ">=",
+            "quantile": 0.65,
+            "threshold": 0.34741783142089844
+          },
+          {
+            "feature": "vix",
+            "direction": "<=",
+            "quantile": 0.5,
+            "threshold": 28.15999984741211
+          }
+        ]
+      },
+      "train": {
+        "score": 1.185552971505008,
+        "g": {
+          "fmask": 195,
+          "hmask": 3,
+          "entry_rules": [
+            140,
+            144,
+            159
+          ],
+          "entry_k": 3,
+          "entry_delay": 3,
+          "exit_rules": [
+            116,
+            145
+          ],
+          "exit_k": 2,
+          "min_hold": 3,
+          "max_hold": 20
+        },
+        "n": 26,
+        "cluster": {
+          "date_mean": 0.13078185478414153,
+          "date_sd": 0.19603298123052576,
+          "positive_dates": 0.8260869565217391,
+          "episode_mean": 0.1124898830906097,
+          "worst_episode": 0.07850467176089482,
+          "positive_episodes": 4,
+          "dates": 23,
+          "episodes": 4
+        },
+        "sim": {
+          "cagr": 0.12203001848062223,
+          "max_daily_mtm_drawdown": -0.05527815164982408,
+          "compounded_reset_return": 0.46516948498924227,
+          "worst_episode_return": 0.0,
+          "total_trades": 24,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.18650718136117828,
+              "max_daily_mtm_drawdown": -0.05527815164982408,
+              "trades": 14,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.07368546691235278,
+              "max_daily_mtm_drawdown": -0.04981145782770047,
+              "trades": 3,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.015485287343060428,
+              "max_daily_mtm_drawdown": -0.005303630026107564,
+              "trades": 1,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.13257451154260758,
+              "max_daily_mtm_drawdown": -0.009159412232919717,
+              "trades": 6,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 0,
+        "cluster": {
+          "date_mean": -1,
+          "episode_mean": -1,
+          "worst_episode": -1,
+          "positive_episodes": 0,
+          "dates": 0
+        },
+        "sim": {
+          "cagr": 0.0,
+          "max_daily_mtm_drawdown": 0.0,
+          "compounded_reset_return": 0.0,
+          "worst_episode_return": 0.0,
+          "total_trades": 0,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "EPISODE_2018",
+      "train_events": 9581,
+      "heldout_events": 578,
+      "unique_genomes": 2077,
+      "genome": {
+        "fmask": 136,
+        "hmask": 3,
+        "entry_rules": [
+          101,
+          129
+        ],
+        "entry_k": 2,
+        "entry_delay": 0,
+        "exit_rules": [
+          118
+        ],
+        "exit_k": 1,
+        "min_hold": 3,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 136,
+        "hmask": 3,
+        "entry_rules": [
+          101,
+          129
+        ],
+        "entry_k": 2,
+        "entry_delay": 0,
+        "exit_rules": [
+          118
+        ],
+        "exit_k": 1,
+        "min_hold": 3,
+        "max_hold": 20,
+        "families": [
+          "MEAN_REVERSION",
+          "MARKET_REGIME_STRUCTURE"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "market_drawdown252",
+            "direction": "<=",
+            "quantile": 0.2,
+            "threshold": -0.282675176858902
+          },
+          {
+            "feature": "breadth_positive20",
+            "direction": "<=",
+            "quantile": 0.8,
+            "threshold": 0.7509881258010864
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "breadth_above_sma200",
+            "direction": ">=",
+            "quantile": 0.8,
+            "threshold": 0.4444444477558136
+          }
+        ]
+      },
+      "train": {
+        "score": 1.4233400563652308,
+        "g": {
+          "fmask": 136,
+          "hmask": 3,
+          "entry_rules": [
+            101,
+            129
+          ],
+          "entry_k": 2,
+          "entry_delay": 0,
+          "exit_rules": [
+            118
+          ],
+          "exit_k": 1,
+          "min_hold": 3,
+          "max_hold": 20
+        },
+        "n": 32,
+        "cluster": {
+          "date_mean": 0.14396279458839736,
+          "date_sd": 0.19209870365105103,
+          "positive_dates": 0.875,
+          "episode_mean": 0.17008075059900624,
+          "worst_episode": 0.12561665603995661,
+          "positive_episodes": 2,
+          "dates": 24,
+          "episodes": 2
+        },
+        "sim": {
+          "cagr": 0.10280550330493998,
+          "max_daily_mtm_drawdown": -0.1126077708489428,
+          "compounded_reset_return": 0.3835297308577681,
+          "worst_episode_return": 0.0,
+          "total_trades": 19,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.19530310929336125,
+              "max_daily_mtm_drawdown": -0.1126077708489428,
+              "trades": 14,
+              "missed_capacity": 4
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.15747187479139302,
+              "max_daily_mtm_drawdown": -0.03102957436548137,
+              "trades": 5,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 0,
+        "cluster": {
+          "date_mean": -1,
+          "episode_mean": -1,
+          "worst_episode": -1,
+          "positive_episodes": 0,
+          "dates": 0
+        },
+        "sim": {
+          "cagr": 0.0,
+          "max_daily_mtm_drawdown": 0.0,
+          "compounded_reset_return": 0.0,
+          "worst_episode_return": 0.0,
+          "total_trades": 0,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "EPISODE_COVID",
+      "train_events": 9961,
+      "heldout_events": 198,
+      "unique_genomes": 1603,
+      "genome": {
+        "fmask": 20,
+        "hmask": 3,
+        "entry_rules": [
+          160
+        ],
+        "entry_k": 1,
+        "entry_delay": 1,
+        "exit_rules": [
+          104
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 20,
+        "hmask": 3,
+        "entry_rules": [
+          160
+        ],
+        "entry_k": 1,
+        "entry_delay": 1,
+        "exit_rules": [
+          104
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 20,
+        "families": [
+          "TREND",
+          "VOLATILITY"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "ofr_funding_lag2",
+            "direction": ">=",
+            "quantile": 0.2,
+            "threshold": -0.2296607792377472
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "market_drawdown252",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": -0.19479252398014069
+          }
+        ]
+      },
+      "train": {
+        "score": 1.0431118099338914,
+        "g": {
+          "fmask": 20,
+          "hmask": 3,
+          "entry_rules": [
+            160
+          ],
+          "entry_k": 1,
+          "entry_delay": 1,
+          "exit_rules": [
+            104
+          ],
+          "exit_k": 1,
+          "min_hold": 1,
+          "max_hold": 20
+        },
+        "n": 26,
+        "cluster": {
+          "date_mean": 0.12559571141124662,
+          "date_sd": 0.22088990675280737,
+          "positive_dates": 0.8636363636363636,
+          "episode_mean": 0.08296006003897945,
+          "worst_episode": 0.01001993276004029,
+          "positive_episodes": 3,
+          "dates": 22,
+          "episodes": 3
+        },
+        "sim": {
+          "cagr": 0.07248972420493582,
+          "max_daily_mtm_drawdown": -0.04984215895160493,
+          "compounded_reset_return": 0.26132799568849485,
+          "worst_episode_return": 0.0,
+          "total_trades": 24,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.1646779212911833,
+              "max_daily_mtm_drawdown": -0.04164707586685601,
+              "trades": 14,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0072081322658108515,
+              "max_daily_mtm_drawdown": -0.01348636564870187,
+              "trades": 4,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.07523395077858908,
+              "max_daily_mtm_drawdown": -0.04984215895160493,
+              "trades": 6,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 0,
+        "cluster": {
+          "date_mean": -1,
+          "episode_mean": -1,
+          "worst_episode": -1,
+          "positive_episodes": 0,
+          "dates": 0
+        },
+        "sim": {
+          "cagr": 0.0,
+          "max_daily_mtm_drawdown": 0.0,
+          "compounded_reset_return": 0.0,
+          "worst_episode_return": 0.0,
+          "total_trades": 0,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "EPISODE_2022",
+      "train_events": 7418,
+      "heldout_events": 2741,
+      "unique_genomes": 2144,
+      "genome": {
+        "fmask": 128,
+        "hmask": 5,
+        "entry_rules": [
+          80
+        ],
+        "entry_k": 1,
+        "entry_delay": 0,
+        "exit_rules": [
+          66,
+          109,
+          126
+        ],
+        "exit_k": 3,
+        "min_hold": 1,
+        "max_hold": 20
+      },
+      "genome_described": {
+        "fmask": 128,
+        "hmask": 5,
+        "entry_rules": [
+          80
+        ],
+        "entry_k": 1,
+        "entry_delay": 0,
+        "exit_rules": [
+          66,
+          109,
+          126
+        ],
+        "exit_k": 3,
+        "min_hold": 1,
+        "max_hold": 20,
+        "families": [
+          "MARKET_REGIME_STRUCTURE"
+        ],
+        "horizons": [
+          3,
+          10
+        ],
+        "entry_conditions": [
+          {
+            "feature": "market_ret5",
+            "direction": ">=",
+            "quantile": 0.2,
+            "threshold": -0.03236035630106926
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_drawdown252",
+            "direction": ">=",
+            "quantile": 0.65,
+            "threshold": -0.1647523045539856
+          },
+          {
+            "feature": "market_drawdown252",
+            "direction": "<=",
+            "quantile": 0.8,
+            "threshold": -0.13540324568748474
+          },
+          {
+            "feature": "breadth_positive20",
+            "direction": ">=",
+            "quantile": 0.65,
+            "threshold": 0.5714285969734192
+          }
+        ]
+      },
+      "train": {
+        "score": 1.0450495686690748,
+        "g": {
+          "fmask": 128,
+          "hmask": 5,
+          "entry_rules": [
+            80
+          ],
+          "entry_k": 1,
+          "entry_delay": 0,
+          "exit_rules": [
+            66,
+            109,
+            126
+          ],
+          "exit_k": 3,
+          "min_hold": 1,
+          "max_hold": 20
+        },
+        "n": 27,
+        "cluster": {
+          "date_mean": 0.11505174462061014,
+          "date_sd": 0.19713740631409898,
+          "positive_dates": 0.8518518518518519,
+          "episode_mean": 0.09273965438326079,
+          "worst_episode": 0.05129221790833838,
+          "positive_episodes": 5,
+          "dates": 27,
+          "episodes": 5
+        },
+        "sim": {
+          "cagr": 0.10214076646666159,
+          "max_daily_mtm_drawdown": -0.02897561327010345,
+          "compounded_reset_return": 0.38076507105435775,
+          "worst_episode_return": -0.00526470852138794,
+          "total_trades": 27,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.25135716294146193,
+              "max_daily_mtm_drawdown": -0.02897561327010345,
+              "trades": 17,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.04225378711039385,
+              "max_daily_mtm_drawdown": -0.013006454317137761,
+              "trades": 2,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.047760407487782874,
+              "max_daily_mtm_drawdown": -0.010463320928625452,
+              "trades": 4,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.015770315106365063,
+              "max_daily_mtm_drawdown": -0.005396539682830048,
+              "trades": 1,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": -0.00526470852138794,
+              "max_daily_mtm_drawdown": -0.022942450104274315,
+              "trades": 3,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            }
+          }
+        }
+      },
+      "heldout": {
+        "n": 13,
+        "cluster": {
+          "date_mean": 0.06523222528870194,
+          "date_sd": 0.09576685210959157,
+          "positive_dates": 0.8333333333333334,
+          "episode_mean": 0.06794831687177373,
+          "worst_episode": 0.06794831687177373,
+          "positive_episodes": 1,
+          "dates": 12,
+          "episodes": 1
+        },
+        "sim": {
+          "cagr": 0.036013191218957186,
+          "max_daily_mtm_drawdown": -0.03231269824176808,
+          "compounded_reset_return": 0.1245369339284208,
+          "worst_episode_return": 0.0,
+          "total_trades": 11,
+          "episodes": {
+            "GFC": {
+              "sessions": 341,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2011": {
+              "sessions": 94,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2015_16": {
+              "sessions": 169,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2018": {
+              "sessions": 42,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "COVID": {
+              "sessions": 9,
+              "return": 0.0,
+              "max_daily_mtm_drawdown": 0.0,
+              "trades": 0,
+              "missed_capacity": 0
+            },
+            "2022": {
+              "sessions": 181,
+              "return": 0.1245369339284208,
+              "max_daily_mtm_drawdown": -0.03231269824176808,
+              "trades": 11,
+              "missed_capacity": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "preserved50_accessed": false,
+  "test17_accessed": false,
+  "protected_accessed": false
+}
