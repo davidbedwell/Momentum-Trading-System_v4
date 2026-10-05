@@ -1,0 +1,46 @@
+{
+  "format":"MTS_DEFENSIVE_CAPITAL_ALLOCATION_IMPLEMENTATION_FREEZE_V1",
+  "date":"2026-10-05",
+  "status":"FROZEN_BEFORE_DEV50_OUTCOMES",
+  "parent_protocol":"Research/Protocols/MTS_DEFENSIVE_CAPITAL_ALLOCATION_DISCOVERY_FREEZE_20261005.json",
+  "first_pass_actions":["LONG_SECURITY","SHORT_SECURITY","LONG_MARKET","SHORT_MARKET","SAFE"],
+  "safe_proxy":"FRED DGS3MO, 3-Month Treasury constant maturity, forward-filled only after its historical observation date; simple ACT/365 accrual over each matched holding interval",
+  "execution":{
+    "risky_entry":"next session adjusted open after causal signal date",
+    "risky_exit":"adjusted close after 3, 5, 10, or 20 trading sessions",
+    "round_trip_cost_fraction":0.001,
+    "safe":"unallocated capital remains SAFE; opportunity economics are measured as risky net return minus matched SAFE accrual",
+    "short_borrow":"first pass uses no extra hard-to-borrow fee beyond round-trip cost; results must be labeled before any production claim"
+  },
+  "search_space":{
+    "conditions_per_mechanism":[1,2,3],
+    "quantiles":[0.20,0.35,0.65,0.80],
+    "directions":[">=","<="],
+    "security_features":["stock_ret5","stock_ret20","stock_close_sma20","stock_range20","stock_rsi14","stock_relvol_pct","stock_drawdown252","stock_rv_pct","market_ret5","market_ret20","market_drawdown252","breadth_above_sma200","breadth_positive20","market_rv_pct","vix","vvix","ofr_funding_lag2","ofr_credit_lag2"],
+    "market_features":["market_ret5","market_ret20","market_drawdown252","breadth_above_sma200","breadth_positive20","market_rv_pct","vix","vvix","ofr_funding_lag2","ofr_credit_lag2"],
+    "holds":[3,5,10,20],
+    "ticker_identity_predictor":false,
+    "episode_identity_predictor":false
+  },
+  "nested_search":{
+    "stock_folds":5,
+    "episode_folds":6,
+    "actions_searched_independently":true,
+    "population":140,
+    "generations":14,
+    "elite":28,
+    "seed_base":2026100500
+  },
+  "fitness":{
+    "primary":"balanced mean excess return over SAFE at opportunity-date level and episode level",
+    "penalties":["negative worst episode excess","date-level downside","complexity","concentration"],
+    "raw_security_trade_count_not_independent_credit":true,
+    "minimum_training_opportunity_dates":20,
+    "minimum_training_episodes_with_opportunity":3
+  },
+  "reporting":["heldout excess return over SAFE","heldout opportunity dates","heldout securities","heldout episode coverage","date win rate vs SAFE","worst date","mechanism concepts","action recurrence"],
+  "puts":"excluded from first pass; no synthetic option returns",
+  "preserved50_accessed":false,
+  "test17_accessed":false,
+  "protected_accessed":false
+}
