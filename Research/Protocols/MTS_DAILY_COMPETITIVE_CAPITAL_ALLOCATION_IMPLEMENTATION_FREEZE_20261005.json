@@ -1,0 +1,117 @@
+{
+  "status": "FROZEN_BEFORE_CHALLENGER_OUTCOMES",
+  "parent": "Research/Protocols/MTS_DAILY_COMPETITIVE_CAPITAL_ALLOCATION_FREEZE_20261005.json",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "development_universe": "DEV50 only",
+  "portfolio": {
+    "initial_capital": 100000,
+    "slot_ceiling": 5,
+    "equal_slot_capacity": true,
+    "leverage": false,
+    "shorting": "DEFENSIVE only when permitted by regime policy",
+    "safe_residual": true
+  },
+  "decision": {
+    "frequency": "daily",
+    "minimum_hold_sessions": 0,
+    "maximum_hold_sessions": null,
+    "switch_cooldown_sessions": 0,
+    "confirmation_sessions": 1,
+    "elapsed_holding_time_allowed_in_score": false,
+    "incumbent_and_challenger_scored_same_day_same_rule": true,
+    "execution": "next session open after close-t decision",
+    "exit_to_safe": "incumbent fails absolute qualification or regime permission",
+    "replace": "eligible challenger score exceeds incumbent score by replacement margin"
+  },
+  "causal_score_search": {
+    "purpose": "DEV50 nested selection only; no preserved50/Test17",
+    "score_bases": [
+      "CAUSAL_EXPECTED_RETURN",
+      "CAUSAL_POSITIVE_PROBABILITY",
+      "CAUSAL_EV_OVER_DOWNSIDE",
+      "CAUSAL_COMPOSITE"
+    ],
+    "minimum_evidence_n": [
+      100,
+      250,
+      500,
+      750
+    ],
+    "uncertainty_penalty": [
+      "NONE",
+      "SE_1.0",
+      "SE_2.0"
+    ],
+    "minimum_positive_probability": [
+      0.5,
+      0.525,
+      0.55,
+      0.6
+    ],
+    "minimum_excess_ev_bps": [
+      0,
+      25,
+      50,
+      100,
+      200
+    ],
+    "challenger_margin": [
+      0.0,
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "safe_margin_bps_annualized": [
+      0,
+      25,
+      100,
+      200,
+      400
+    ],
+    "max_p10_loss": [
+      0.1,
+      0.125,
+      0.15
+    ],
+    "family_duplication_penalty": [
+      0.0,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "forbidden_genes": [
+      "minimum_hold_sessions",
+      "maximum_hold_sessions",
+      "switch_cooldown_sessions",
+      "future_horizon",
+      "ticker_identity",
+      "episode_identity"
+    ]
+  },
+  "outcome_definition": {
+    "daily_learning_target": "next-session open-to-next-session-open return / contemporaneous SAFE excess, not 3/5/10/20/63-day future return",
+    "reason": "prevent fixed holding horizon from being moved upstream into the score",
+    "historical_candidate_horizon_labels": "may define fixed-horizon CONTROL only; prohibited as challenger quality labels"
+  },
+  "friction": {
+    "broker_equity_commission_bps": 0,
+    "stock_etf_execution_model": "5 bps one-way conservative spread/slippage proxy for first pass; report zero-friction sensitivity separately",
+    "regulatory_fees": "report limitation separately; do not represent as Webull commission",
+    "short_borrow": "report separately; no production claim without borrow treatment",
+    "options": "excluded"
+  },
+  "validation": {
+    "outer_stock_folds": 5,
+    "fold_assignment": "deterministic lexicographic round-robin DEV50",
+    "selection": "train on 4 folds, choose one deterministic Pareto/knee policy without outer-fold outcomes, replay heldout fold once",
+    "temporal_reporting": "calendar-year/era increments",
+    "portfolio_evidence_unit": "date/portfolio economics",
+    "advance_gate": "parent protocol"
+  },
+  "regime": {
+    "authority": "A/B/C->DEFENSIVE->recovery->R1 remains above allocator",
+    "current_DEV50_allocator_test": "allocator mechanics may be developed on consumed DEV50; incomplete Path-A/R1 blocks preserved50 integrated replay",
+    "defensive_activity_limit": "must remain active whenever causal market-state tape says DEFENSIVE; allocator cannot restore NORMAL exposure"
+  }
+}
