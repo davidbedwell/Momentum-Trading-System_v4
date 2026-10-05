@@ -78,5 +78,30 @@
     "Earlier 3/5/10/20-day Defensive experiment is diagnostic only for this question; its universal 20-session boundary selection is treated as evidence that the fixed horizon may be constraining/contaminating the solution.",
     "Do not use post-trough NORMAL returns to validate a DEFENSIVE position merely because a fixed holding clock remains open.",
     "Natural holding duration is measured after the fact."
-  ]
+  ],
+  "regime_governance": {
+    "status": "AUTHORITATIVE_AND_PRESERVED",
+    "state_path": "NORMAL -> A/B/C crash detection -> DEFENSIVE -> recovery evidence -> R1 -> NORMAL",
+    "separation": "Market-state controller determines permitted risk/exposure/action set. Daily allocator chooses among permitted uses of capital only.",
+    "defensive_rule": "When A/B/C declares DEFENSIVE, daily allocation remains constrained by the frozen Defensive mechanisms; attractive security-level signals cannot silently restore NORMAL exposure.",
+    "defensive_controls": [
+      "reduced/limited risky exposure as defined by validated Defensive policy",
+      "higher qualification hurdle versus SAFE",
+      "SAFE/T-bill residual capital",
+      "only regime-permitted long/short/market actions",
+      "daily reassessment and immediate handoff when recovery/R1 state becomes authoritative"
+    ],
+    "prohibitions": [
+      "daily allocator may not infer R1/NORMAL from a profitable security",
+      "security profitability may not override A/B/C DEFENSIVE state",
+      "no fixed holding clock may carry a DEFENSIVE position beyond regime authority"
+    ],
+    "normal_rule": "NORMAL also uses daily competitive allocation rather than a fixed holding clock, subject to NORMAL exposure/risk rules.",
+    "r1_rule": "R1 controls permitted exposure during recovery; daily allocation remains subordinate to R1 limits."
+  },
+  "amendment": {
+    "time": "2026-10-05",
+    "reason": "Explicitly preserve crash-market Defensive activity limits before any outcome run.",
+    "outcomes_seen_before_amendment": false
+  }
 }
