@@ -1,0 +1,12 @@
+{
+ "format":"MTS_DEFENSIVE_DEPTH_WINLOSS_DIAGNOSTIC_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_DIAGNOSTIC",
+ "provenance":"NEW_RESEARCH_POST_RECOVERY",
+ "question":"As contemporaneous bear severity deepens, does the frozen Defensive long trade pool show lower win probability while retaining positive expectancy through payoff asymmetry?",
+ "frozen_upstream":{"trade_mechanism":"D3_EXIT2","allocator":"lower stock realized-volatility percentile first","exposure_candidate":"simplified market_ret20 exposure gate"},
+ "severity_views":["market_drawdown252 development percentiles","market_ret20 development percentiles"],
+ "bins":[0,0.2,0.4,0.6,0.8,1.0],
+ "metrics":["trades","win_rate","mean_net_return","median_net_return","mean_winner","mean_loser","profit_factor"],
+ "rules":["Descriptive diagnostic only; no threshold fitting or mutation.","Use causal signal-time state only.","Report each bear episode and pooled development.","No protected evidence access."]
+}
