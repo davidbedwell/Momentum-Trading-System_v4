@@ -12,15 +12,16 @@ from MTS_V4.search_candidate_analysis import _compile_signal
 RAW=Path('/home/ubuntu/mts-v4-market-store-RECONSTRUCTED-20261004/raw_yfinance')
 PRED='/home/ubuntu/mts-v4-nexus-derived-market-current-sp500-calibration-20260915-RECONSTRUCTED-CLEAN/data/sp500-current-calibration-20260915__a0dd6a1a76bb/mts_market_predictors_v2__3e9bdc71246a/predictor-v2-initial-20260929-predictors-2005-09-14-2026-09-14.parquet'
 OUT=Path('/home/ubuntu/mts-v4-preserved50-search-reconstructed-20261005'); OUT.mkdir(exist_ok=True)
+SIDMAP={str(x).rsplit('_',1)[-1]:str(x) for x in pq.read_table(PRED,columns=['security_id']).column(0).unique().to_pylist()}
 report=json.load(open(ROOT/'Research/Reports/MTS_HELDOUT_50_FOUR_ERA_PORTFOLIO_20261002.json'))
 TICKERS=sorted(report['coverage'].keys())
 def one(t):
     op=OUT/f'{t}_COMPUTATIONAL_SEARCH_RECONSTRUCTED_20261005.json'
     if op.exists(): return t,'RESUMED'
     raw=pq.read_table(RAW/f'{t}.parquet').to_pylist()
-    sid=str(raw[0]['security_id'])
+    sid=SIDMAP[t]
     for r in raw:
-        r['date']=str(r['date'])[:10]; r['ticker']=t; r['eligible']=True
+        r['security_id']=sid; r['date']=str(r['date'])[:10]; r['ticker']=t; r['eligible']=True
     outcomes=list(build_matured_outcome_rows(raw))
     tab=pq.read_table(PRED,filters=[('security_id','=',sid)])
     predictors=tab.to_pylist()
