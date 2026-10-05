@@ -1,0 +1,51 @@
+{
+  "format": "MTS_DEFENSIVE_2018_FALSE_B_AUTOPSY_FREEZE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_RAW_ROW_REEXPOSURE",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "parent_router_report": "Research/Reports/MTS_DEFENSIVE_STOCK_MARKET_ROUTER_LOEO_20261004.json",
+  "objective": "Diagnose why the frozen 2018 LOEO router classified four of five true-OTHER observations as B_EMERGING_LEADERSHIP, without changing the router or fitting a repair.",
+  "scope": {
+    "primary": "the five heldout 2018 router observations, especially the four false-B cases",
+    "comparators": "all frozen true-B observations from the consumed development domain (GFC, COVID, 2022) plus false-B/OTHER observations from other LOEO episodes where available",
+    "protected_excluded": ["preserved50", "TEST17", "remaining Discovery", "Verification A", "Verification B"]
+  },
+  "no_mutation_authority": [
+    "no router threshold changes",
+    "no feature selection for optimization",
+    "no new strategy promotion",
+    "no 2018-specific exception",
+    "no protected evidence access"
+  ],
+  "audit_questions": [
+    "Are 2018 false-B cases strong in absolute terms or merely less weak than the market?",
+    "Is relative leadership persistent across causal trailing windows or concentrated in the frozen 20-day snapshot?",
+    "Do genuine B cases show contemporaneous price/trend repair absent from 2018 false-B cases?",
+    "Do genuine B cases have different market breadth/stress context from 2018 false-B cases?",
+    "Do false-B cases elsewhere resemble 2018, indicating a general confound rather than a 2018 anomaly?",
+    "Does the B label have independent economic content beyond the stock_drawdown252/rel20 variables used to define it?"
+  ],
+  "diagnostic_feature_families": {
+    "absolute_stock_state": ["stock_ret5", "stock_ret20", "stock_close_sma20", "stock_range20", "stock_rsi14", "stock_drawdown252", "stock_rv_pct"],
+    "relative_state": ["rel5", "rel20", "trailing relative-return path where reconstructable causally"],
+    "market_state": ["market_ret5", "market_ret20", "market_drawdown252", "breadth_above_sma200", "breadth_positive20", "vix", "vvix", "ofr_funding_lag2", "ofr_credit_lag2"],
+    "persistence": ["causal trailing snapshots before the router observation; no future observations"]
+  },
+  "outcome_use": "Future trade returns may be reported only after causal morphology groups are described, as an economic-content audit. They may not be used to choose diagnostic thresholds or repair rules.",
+  "required_outputs": [
+    "row-level table for all five 2018 observations with ticker/date, true label, predicted label, and causal diagnostic features",
+    "row-level or summarized comparison against every true-B development observation",
+    "comparison against non-2018 false-B observations",
+    "absolute-versus-relative decomposition of rel20",
+    "persistence comparison using only information available by each observation date",
+    "economic-content check of frozen B versus OTHER after morphology is characterized",
+    "explicit determination: 2018-specific anomaly, general relative-strength confound, label-circularity problem, mixed/other, or unresolved",
+    "no-repair recommendation and separately stated next falsifiable hypothesis if warranted"
+  ],
+  "interpretation_rules": [
+    "A diagnostic distinction is not a router feature merely because it separates 2018.",
+    "Any proposed follow-up hypothesis must be general and tested across the consumed development domain, not fitted to 2018.",
+    "If B is mostly a restatement of its defining variables without independent economic content, downgrade the strategy-bank evidence accordingly.",
+    "If no causal general distinction is found, retain the failure rather than forcing a repair."
+  ]
+}
