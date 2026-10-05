@@ -1,0 +1,242 @@
+{
+  "format": "MTS_DEFENSIVE_EXPOSURE_SIMPLIFIED_V1",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "full": {
+    "score": 0.25565573878904346,
+    "genome": {
+      "base_slots": 1,
+      "rules": [
+        {
+          "feature": "market_ret20",
+          "operator": ">=",
+          "percentile": 0.2,
+          "slots": 0
+        },
+        {
+          "feature": "market_ret20",
+          "operator": ">=",
+          "percentile": 0.35,
+          "slots": 1
+        }
+      ]
+    },
+    "episodes": {
+      "GFC": {
+        "return": 0.4554602454957988,
+        "mdd_tx": -0.09924713103339433,
+        "trades": 21,
+        "missed": 42
+      },
+      "2011": {
+        "return": 0.271113717296128,
+        "mdd_tx": -0.0004992946111421759,
+        "trades": 6,
+        "missed": 10
+      },
+      "2015_16": {
+        "return": 0.19571108113107405,
+        "mdd_tx": -0.0004948425760207265,
+        "trades": 3,
+        "missed": 1
+      },
+      "2018": {
+        "return": 0.09890002714179125,
+        "mdd_tx": -0.008911306148839504,
+        "trades": 2,
+        "missed": 3
+      },
+      "COVID": {
+        "return": 0.21889755315716397,
+        "mdd_tx": -0.00045903797427637727,
+        "trades": 2,
+        "missed": 15
+      },
+      "2022": {
+        "return": 0.17521196853091237,
+        "mdd_tx": -0.10189040301976537,
+        "trades": 7,
+        "missed": 18
+      }
+    },
+    "tested": 3662
+  },
+  "loeo": [
+    {
+      "heldout_episode": "GFC",
+      "train_score": 0.22262721210726538,
+      "genome": {
+        "base_slots": 1,
+        "rules": [
+          {
+            "feature": "market_ret20",
+            "operator": ">=",
+            "percentile": 0.2,
+            "slots": 0
+          },
+          {
+            "feature": "market_ret20",
+            "operator": ">=",
+            "percentile": 0.35,
+            "slots": 1
+          }
+        ]
+      },
+      "heldout": {
+        "return": 0.4554602454957988,
+        "mdd_tx": -0.09924713103339433,
+        "trades": 21,
+        "missed": 42
+      },
+      "heldout_score": 0.8552969254749003,
+      "tested": 3662
+    },
+    {
+      "heldout_episode": "2011",
+      "train_score": 0.257028230961826,
+      "genome": {
+        "base_slots": 0,
+        "rules": [
+          {
+            "feature": "market_ret20",
+            "operator": "<=",
+            "percentile": 0.2,
+            "slots": 3
+          },
+          {
+            "feature": "market_ret20",
+            "operator": ">=",
+            "percentile": 0.35,
+            "slots": 1
+          }
+        ]
+      },
+      "heldout": {
+        "return": 0.20156323296605327,
+        "mdd_tx": -0.0004992946111421759,
+        "trades": 5,
+        "missed": 11
+      },
+      "heldout_score": 0.39687681862653545,
+      "tested": 3662
+    },
+    {
+      "heldout_episode": "2015_16",
+      "train_score": 0.2576272325884251,
+      "genome": {
+        "base_slots": 0,
+        "rules": [
+          {
+            "feature": "market_ret20",
+            "operator": "<=",
+            "percentile": 0.2,
+            "slots": 1
+          },
+          {
+            "feature": "market_ret20",
+            "operator": ">=",
+            "percentile": 0.35,
+            "slots": 1
+          }
+        ]
+      },
+      "heldout": {
+        "return": 0.19571108113107405,
+        "mdd_tx": -0.0004948425760207265,
+        "trades": 3,
+        "missed": 1
+      },
+      "heldout_score": 0.38517474097413773,
+      "tested": 3662
+    },
+    {
+      "heldout_episode": "2018",
+      "train_score": 0.3378519277738941,
+      "genome": {
+        "base_slots": 0,
+        "rules": [
+          {
+            "feature": "market_ret20",
+            "operator": "<=",
+            "percentile": 0.2,
+            "slots": 1
+          },
+          {
+            "feature": "market_ret20",
+            "operator": ">=",
+            "percentile": 0.35,
+            "slots": 1
+          }
+        ]
+      },
+      "heldout": {
+        "return": 0.09890002714179125,
+        "mdd_tx": -0.008911306148839504,
+        "trades": 2,
+        "missed": 3
+      },
+      "heldout_score": 0.18734440120916274,
+      "tested": 3662
+    },
+    {
+      "heldout_episode": "COVID",
+      "train_score": 0.30257389916836647,
+      "genome": {
+        "base_slots": 1,
+        "rules": [
+          {
+            "feature": "market_ret20",
+            "operator": "<=",
+            "percentile": 0.65,
+            "slots": 3
+          },
+          {
+            "feature": "vvix",
+            "operator": ">=",
+            "percentile": 0.35,
+            "slots": 1
+          }
+        ]
+      },
+      "heldout": {
+        "return": -0.08253220401612138,
+        "mdd_tx": -0.15769488293546852,
+        "trades": 2,
+        "missed": 14
+      },
+      "heldout_score": -0.5149762575322198,
+      "tested": 3662
+    },
+    {
+      "heldout_episode": "2022",
+      "train_score": 0.2756286116241836,
+      "genome": {
+        "base_slots": 0,
+        "rules": [
+          {
+            "feature": "market_ret20",
+            "operator": "<=",
+            "percentile": 0.2,
+            "slots": 3
+          },
+          {
+            "feature": "vvix",
+            "operator": "<=",
+            "percentile": 0.8,
+            "slots": 1
+          }
+        ]
+      },
+      "heldout": {
+        "return": 0.06354989356158991,
+        "mdd_tx": -0.1101571179633648,
+        "trades": 6,
+        "missed": 18
+      },
+      "heldout_score": 0.06602122814149741,
+      "tested": 3662
+    }
+  ],
+  "protected_accessed": false,
+  "test17_accessed": false,
+  "preserved50_accessed": false
+}
