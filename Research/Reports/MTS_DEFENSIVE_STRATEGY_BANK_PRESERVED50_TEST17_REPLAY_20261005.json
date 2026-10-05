@@ -1,0 +1,693 @@
+{
+  "format": "MTS_DEFENSIVE_STRATEGY_BANK_PRESERVED50_TEST17_REPLAY_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_FINALISTS_REPLAYED_ONCE",
+  "population": {
+    "tickers": 67,
+    "preserved50": 50,
+    "test17": 17,
+    "events": 15114
+  },
+  "condition_thresholds": "development-frozen numeric thresholds",
+  "accounting": "exact daily mark-to-market, 5 equal-capacity slots, episode-reset capital",
+  "provenance_note": "preserved50 candidate population reconstructed from surviving deterministic search specification; TEST17 from reconstructed consumed cache; neither is pristine validation evidence",
+  "results": [
+    {
+      "id": "DEF_PF1",
+      "source_frontier_index": 2,
+      "development_metrics": {
+        "cagr": 0.47642818935640374,
+        "max_daily_mtm_drawdown": -0.08938669138361854,
+        "compounded_reset_return": 2.6421278367233625,
+        "worst_episode_return": 0.07417548638397298,
+        "total_trades": 321,
+        "positive_episodes": 6
+      },
+      "replay": {
+        "score": -0.10043121856495515,
+        "n": 1173,
+        "g": {
+          "fmask": 163,
+          "hmask": 6,
+          "entry_rules": [
+            37,
+            45,
+            64,
+            166
+          ],
+          "entry_k": 1,
+          "entry_delay": 0,
+          "exit_rules": [
+            24,
+            64
+          ],
+          "exit_k": 1,
+          "min_hold": 3,
+          "max_hold": 20
+        },
+        "cagr": 0.12807655594179757,
+        "max_daily_mtm_drawdown": -0.15636357178812332,
+        "compounded_reset_return": 0.4915270746518017,
+        "worst_episode_return": -0.07584966729827092,
+        "total_trades": 264,
+        "episodes": {
+          "GFC": {
+            "sessions": 341,
+            "return": 0.21735542867468172,
+            "max_daily_mtm_drawdown": -0.14395850163383805,
+            "trades": 136,
+            "missed_capacity": 29
+          },
+          "2011": {
+            "sessions": 94,
+            "return": 0.08307335795201354,
+            "max_daily_mtm_drawdown": -0.051999492975367545,
+            "trades": 21,
+            "missed_capacity": 0
+          },
+          "2015_16": {
+            "sessions": 169,
+            "return": -0.07584966729827092,
+            "max_daily_mtm_drawdown": -0.15636357178812332,
+            "trades": 35,
+            "missed_capacity": 0
+          },
+          "2018": {
+            "sessions": 42,
+            "return": 0.056459612890890964,
+            "max_daily_mtm_drawdown": -0.05555798928583755,
+            "trades": 15,
+            "missed_capacity": 0
+          },
+          "COVID": {
+            "sessions": 9,
+            "return": 0.07581292044053267,
+            "max_daily_mtm_drawdown": -0.0053294045429831405,
+            "trades": 4,
+            "missed_capacity": 0
+          },
+          "2022": {
+            "sessions": 181,
+            "return": 0.07701956395477949,
+            "max_daily_mtm_drawdown": -0.0872011905143334,
+            "trades": 53,
+            "missed_capacity": 3
+          }
+        },
+        "positive_episodes": 5
+      },
+      "g_described": {
+        "fmask": 163,
+        "hmask": 6,
+        "entry_rules": [
+          37,
+          45,
+          64,
+          166
+        ],
+        "entry_k": 1,
+        "entry_delay": 0,
+        "exit_rules": [
+          24,
+          64
+        ],
+        "exit_k": 1,
+        "min_hold": 3,
+        "max_hold": 20,
+        "families": [
+          "MOMENTUM",
+          "BREAKOUT",
+          "VOLUME_LIQUIDITY",
+          "MARKET_REGIME_STRUCTURE"
+        ],
+        "horizons": [
+          5,
+          10
+        ],
+        "entry_conditions": [
+          {
+            "feature": "stock_range20",
+            "direction": "<=",
+            "quantile": 0.65,
+            "threshold": 0.661138117313385
+          },
+          {
+            "feature": "stock_rsi14",
+            "direction": "<=",
+            "quantile": 0.5,
+            "threshold": 48.65354919433594
+          },
+          {
+            "feature": "stock_drawdown252",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": -0.2264423668384552
+          },
+          {
+            "feature": "ofr_funding_lag2",
+            "direction": ">=",
+            "quantile": 0.65,
+            "threshold": 1.965000033378601
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_close_sma20",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": -0.0028700658585876226
+          },
+          {
+            "feature": "stock_drawdown252",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": -0.2264423668384552
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEF_PF2",
+      "source_frontier_index": 10,
+      "development_metrics": {
+        "cagr": 0.2921749579771311,
+        "max_daily_mtm_drawdown": -0.07460505912866056,
+        "compounded_reset_return": 1.3404753015091728,
+        "worst_episode_return": 0.029057044244016783,
+        "total_trades": 95,
+        "positive_episodes": 6
+      },
+      "replay": {
+        "score": -0.18758819781084277,
+        "n": 302,
+        "g": {
+          "fmask": 31,
+          "hmask": 3,
+          "entry_rules": [
+            49,
+            84
+          ],
+          "entry_k": 1,
+          "entry_delay": 2,
+          "exit_rules": [
+            28
+          ],
+          "exit_k": 1,
+          "min_hold": 1,
+          "max_hold": 10
+        },
+        "cagr": -0.006800657470391935,
+        "max_daily_mtm_drawdown": -0.12082747517766701,
+        "compounded_reset_return": -0.022383659113819565,
+        "worst_episode_return": -0.05818531029580132,
+        "total_trades": 70,
+        "episodes": {
+          "GFC": {
+            "sessions": 341,
+            "return": 0.008988923107071667,
+            "max_daily_mtm_drawdown": -0.12082747517766701,
+            "trades": 47,
+            "missed_capacity": 0
+          },
+          "2011": {
+            "sessions": 94,
+            "return": -0.04751314240511739,
+            "max_daily_mtm_drawdown": -0.06788785120874519,
+            "trades": 3,
+            "missed_capacity": 0
+          },
+          "2015_16": {
+            "sessions": 169,
+            "return": -0.05818531029580132,
+            "max_daily_mtm_drawdown": -0.09194080333650811,
+            "trades": 5,
+            "missed_capacity": 0
+          },
+          "2018": {
+            "sessions": 42,
+            "return": 0.03572437121707539,
+            "max_daily_mtm_drawdown": -0.014329514790572984,
+            "trades": 3,
+            "missed_capacity": 0
+          },
+          "COVID": {
+            "sessions": 9,
+            "return": -0.004445203257829711,
+            "max_daily_mtm_drawdown": -0.015047147967330088,
+            "trades": 2,
+            "missed_capacity": 0
+          },
+          "2022": {
+            "sessions": 181,
+            "return": 0.04748602363943322,
+            "max_daily_mtm_drawdown": -0.03533948230388295,
+            "trades": 10,
+            "missed_capacity": 0
+          }
+        },
+        "positive_episodes": 3
+      },
+      "g_described": {
+        "fmask": 31,
+        "hmask": 3,
+        "entry_rules": [
+          49,
+          84
+        ],
+        "entry_k": 1,
+        "entry_delay": 2,
+        "exit_rules": [
+          28
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 10,
+        "families": [
+          "MOMENTUM",
+          "BREAKOUT",
+          "TREND",
+          "MEAN_REVERSION",
+          "VOLATILITY"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "stock_rsi14",
+            "direction": "<=",
+            "quantile": 0.8,
+            "threshold": 63.20540237426758
+          },
+          {
+            "feature": "market_ret5",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": 0.0011415948392823339
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_close_sma20",
+            "direction": ">=",
+            "quantile": 0.8,
+            "threshold": 0.04171442240476608
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEF_PF3",
+      "source_frontier_index": 15,
+      "development_metrics": {
+        "cagr": 0.26776040700896053,
+        "max_daily_mtm_drawdown": -0.06615473493086133,
+        "compounded_reset_return": 1.1969580801595767,
+        "worst_episode_return": 0.012822147961116359,
+        "total_trades": 87,
+        "positive_episodes": 6
+      },
+      "replay": {
+        "score": -0.21496364541585747,
+        "n": 293,
+        "g": {
+          "fmask": 31,
+          "hmask": 3,
+          "entry_rules": [
+            70,
+            84
+          ],
+          "entry_k": 1,
+          "entry_delay": 2,
+          "exit_rules": [
+            28
+          ],
+          "exit_k": 1,
+          "min_hold": 1,
+          "max_hold": 10
+        },
+        "cagr": -0.0209443091572743,
+        "max_daily_mtm_drawdown": -0.12631533912308857,
+        "compounded_reset_return": -0.06781115544460847,
+        "worst_episode_return": -0.05818531029580132,
+        "total_trades": 67,
+        "episodes": {
+          "GFC": {
+            "sessions": 341,
+            "return": -0.024016387057259947,
+            "max_daily_mtm_drawdown": -0.12631533912308857,
+            "trades": 47,
+            "missed_capacity": 0
+          },
+          "2011": {
+            "sessions": 94,
+            "return": -0.04751314240511739,
+            "max_daily_mtm_drawdown": -0.06788785120874519,
+            "trades": 3,
+            "missed_capacity": 0
+          },
+          "2015_16": {
+            "sessions": 169,
+            "return": -0.05818531029580132,
+            "max_daily_mtm_drawdown": -0.09194080333650811,
+            "trades": 5,
+            "missed_capacity": 0
+          },
+          "2018": {
+            "sessions": 42,
+            "return": 0.022896586266477392,
+            "max_daily_mtm_drawdown": -0.01368791786697432,
+            "trades": 2,
+            "missed_capacity": 0
+          },
+          "COVID": {
+            "sessions": 9,
+            "return": -0.009261082630640627,
+            "max_daily_mtm_drawdown": -0.013692190940247428,
+            "trades": 1,
+            "missed_capacity": 0
+          },
+          "2022": {
+            "sessions": 181,
+            "return": 0.05062074418188245,
+            "max_daily_mtm_drawdown": -0.035440608312617194,
+            "trades": 9,
+            "missed_capacity": 0
+          }
+        },
+        "positive_episodes": 2
+      },
+      "g_described": {
+        "fmask": 31,
+        "hmask": 3,
+        "entry_rules": [
+          70,
+          84
+        ],
+        "entry_k": 1,
+        "entry_delay": 2,
+        "exit_rules": [
+          28
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 10,
+        "families": [
+          "MOMENTUM",
+          "BREAKOUT",
+          "TREND",
+          "MEAN_REVERSION",
+          "VOLATILITY"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "stock_rv_pct",
+            "direction": ">=",
+            "quantile": 0.2,
+            "threshold": 0.22580644488334656
+          },
+          {
+            "feature": "market_ret5",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": 0.0011415948392823339
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_close_sma20",
+            "direction": ">=",
+            "quantile": 0.8,
+            "threshold": 0.04171442240476608
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEF_PF4",
+      "source_frontier_index": 20,
+      "development_metrics": {
+        "cagr": 0.17159326113684026,
+        "max_daily_mtm_drawdown": -0.04217011680273541,
+        "compounded_reset_return": 0.6910814296217884,
+        "worst_episode_return": 0.00027510081905091077,
+        "total_trades": 97,
+        "positive_episodes": 6
+      },
+      "replay": {
+        "score": -0.02082170901237136,
+        "n": 262,
+        "g": {
+          "fmask": 24,
+          "hmask": 3,
+          "entry_rules": [
+            49,
+            84
+          ],
+          "entry_k": 1,
+          "entry_delay": 2,
+          "exit_rules": [
+            0
+          ],
+          "exit_k": 1,
+          "min_hold": 1,
+          "max_hold": 10
+        },
+        "cagr": 0.03207845471316784,
+        "max_daily_mtm_drawdown": -0.03978289457531625,
+        "compounded_reset_return": 0.11043048940845468,
+        "worst_episode_return": -0.03290328745025928,
+        "total_trades": 77,
+        "episodes": {
+          "GFC": {
+            "sessions": 341,
+            "return": 0.09385515665666344,
+            "max_daily_mtm_drawdown": -0.026153327310331043,
+            "trades": 56,
+            "missed_capacity": 0
+          },
+          "2011": {
+            "sessions": 94,
+            "return": -0.03290328745025928,
+            "max_daily_mtm_drawdown": -0.03978289457531625,
+            "trades": 4,
+            "missed_capacity": 0
+          },
+          "2015_16": {
+            "sessions": 169,
+            "return": 0.0567802127100927,
+            "max_daily_mtm_drawdown": -0.01639235790907656,
+            "trades": 3,
+            "missed_capacity": 0
+          },
+          "2018": {
+            "sessions": 42,
+            "return": 0.0074888949640326,
+            "max_daily_mtm_drawdown": -0.003953355019348348,
+            "trades": 2,
+            "missed_capacity": 0
+          },
+          "COVID": {
+            "sessions": 9,
+            "return": -0.004445203257829711,
+            "max_daily_mtm_drawdown": -0.015047147967330088,
+            "trades": 2,
+            "missed_capacity": 0
+          },
+          "2022": {
+            "sessions": 181,
+            "return": -0.0096891383170421,
+            "max_daily_mtm_drawdown": -0.01601561803297813,
+            "trades": 10,
+            "missed_capacity": 0
+          }
+        },
+        "positive_episodes": 3
+      },
+      "g_described": {
+        "fmask": 24,
+        "hmask": 3,
+        "entry_rules": [
+          49,
+          84
+        ],
+        "entry_k": 1,
+        "entry_delay": 2,
+        "exit_rules": [
+          0
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 10,
+        "families": [
+          "MEAN_REVERSION",
+          "VOLATILITY"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "stock_rsi14",
+            "direction": "<=",
+            "quantile": 0.8,
+            "threshold": 63.20540237426758
+          },
+          {
+            "feature": "market_ret5",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": 0.0011415948392823339
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "stock_ret5",
+            "direction": ">=",
+            "quantile": 0.2,
+            "threshold": -0.04389967769384384
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEF_PF5",
+      "source_frontier_index": 23,
+      "development_metrics": {
+        "cagr": 0.08165418170338401,
+        "max_daily_mtm_drawdown": -0.02252481364695591,
+        "compounded_reset_return": 0.29743923139536,
+        "worst_episode_return": 0.006027981686659523,
+        "total_trades": 112,
+        "positive_episodes": 6
+      },
+      "replay": {
+        "score": -0.18371080698207315,
+        "n": 274,
+        "g": {
+          "fmask": 25,
+          "hmask": 3,
+          "entry_rules": [
+            49,
+            84
+          ],
+          "entry_k": 1,
+          "entry_delay": 8,
+          "exit_rules": [
+            140
+          ],
+          "exit_k": 1,
+          "min_hold": 1,
+          "max_hold": 10
+        },
+        "cagr": -0.04732161538342705,
+        "max_daily_mtm_drawdown": -0.08391061011057355,
+        "compounded_reset_return": -0.14855769633466742,
+        "worst_episode_return": -0.06209310573114313,
+        "total_trades": 85,
+        "episodes": {
+          "GFC": {
+            "sessions": 341,
+            "return": -0.06003176708131008,
+            "max_daily_mtm_drawdown": -0.08391061011057355,
+            "trades": 60,
+            "missed_capacity": 0
+          },
+          "2011": {
+            "sessions": 94,
+            "return": -0.029687533542407274,
+            "max_daily_mtm_drawdown": -0.03929821797482769,
+            "trades": 6,
+            "missed_capacity": 0
+          },
+          "2015_16": {
+            "sessions": 169,
+            "return": -0.06209310573114313,
+            "max_daily_mtm_drawdown": -0.06369132418671342,
+            "trades": 4,
+            "missed_capacity": 0
+          },
+          "2018": {
+            "sessions": 42,
+            "return": 0.0017166556415406653,
+            "max_daily_mtm_drawdown": -0.0039503171325799835,
+            "trades": 3,
+            "missed_capacity": 0
+          },
+          "COVID": {
+            "sessions": 9,
+            "return": -0.004445203257829711,
+            "max_daily_mtm_drawdown": -0.015047147967330088,
+            "trades": 2,
+            "missed_capacity": 0
+          },
+          "2022": {
+            "sessions": 181,
+            "return": -0.0019308217354776502,
+            "max_daily_mtm_drawdown": -0.010637593441348736,
+            "trades": 10,
+            "missed_capacity": 0
+          }
+        },
+        "positive_episodes": 1
+      },
+      "g_described": {
+        "fmask": 25,
+        "hmask": 3,
+        "entry_rules": [
+          49,
+          84
+        ],
+        "entry_k": 1,
+        "entry_delay": 8,
+        "exit_rules": [
+          140
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 10,
+        "families": [
+          "MOMENTUM",
+          "MEAN_REVERSION",
+          "VOLATILITY"
+        ],
+        "horizons": [
+          3,
+          5
+        ],
+        "entry_conditions": [
+          {
+            "feature": "stock_rsi14",
+            "direction": "<=",
+            "quantile": 0.8,
+            "threshold": 63.20540237426758
+          },
+          {
+            "feature": "market_ret5",
+            "direction": ">=",
+            "quantile": 0.5,
+            "threshold": 0.0011415948392823339
+          }
+        ],
+        "exit_conditions": [
+          {
+            "feature": "vix",
+            "direction": ">=",
+            "quantile": 0.2,
+            "threshold": 20.790000915527344
+          }
+        ]
+      }
+    }
+  ],
+  "remaining_discovery_accessed": false,
+  "verification_A_accessed": false,
+  "verification_B_accessed": false,
+  "mutation_after_reveal": false
+}
