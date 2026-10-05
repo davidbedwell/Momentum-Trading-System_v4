@@ -1,0 +1,71 @@
+{
+  "format": "MTS_DEFENSIVE_STRATEGY_BANK_GA_DISCOVERY_FREEZE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_NEW_OUTCOME_SEARCH",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "objective": "Discover the smallest useful bank of economically distinct trading strategies inside historically known Defensive environments by maximizing return/growth while minimizing exact daily mark-to-market drawdown, without prespecifying strategy mechanisms or morphology labels.",
+  "research_envelope": {
+    "rule": "For each frozen bear episode, include sessions from the 30th trading session after the historical market peak through the 15th trading session after the historical market trough, inclusive.",
+    "session_calendar": "canonical reconstructed predictor/market trading-session calendar; offsets are trading sessions, not calendar days",
+    "episodes": {
+      "GFC": {"peak": "2007-10-09", "trough": "2009-03-09"},
+      "2011": {"peak": "2011-04-29", "trough": "2011-10-03"},
+      "2015_16": {"peak": "2015-05-21", "trough": "2016-02-11"},
+      "2018": {"peak": "2018-10-03", "trough": "2018-12-24"},
+      "COVID": {"peak": "2020-02-19", "trough": "2020-03-23"},
+      "2022": {"peak": "2022-01-03", "trough": "2022-10-12"}
+    },
+    "important": "Peak/trough dates and offset windows define the historical research laboratory only. Chromosomes may not use peak identity, trough identity, distance from peak/trough, episode identity, or any future-derived timing variable."
+  },
+  "development_domain": {
+    "stocks": "consumed development population only",
+    "episodes": ["GFC","2011","2015_16","2018","COVID","2022"],
+    "protected_excluded": ["preserved50","TEST17","remaining Discovery","Verification A","Verification B"]
+  },
+  "discovery_architecture": {
+    "search": "GA/evolutionary search across the entire pooled Defensive envelope; do not presplit opportunities into hand-labeled strategy states",
+    "approved_strategy_vocabulary": ["momentum","breakout","trend","mean_reversion","volatility","volume_liquidity","relative_cross_sectional","market_regime_structure","reversal","pullback","volatility_breakout","composite_breadth"],
+    "chromosome_may_evolve": ["causal entry logic","causal exit logic","holding behavior","position sizing/exposure","causal feature combinations"],
+    "forbidden": ["episode/year/ticker identity as predictive rule","future returns","future peak/trough information","days since peak","days to trough","future morphology","protected evidence"]
+  },
+  "accounting": {
+    "required": "exact daily mark-to-market equity curve",
+    "costs": "use frozen realistic transaction-cost convention already established in Defensive research; report it explicitly",
+    "metrics": ["CAGR","maximum daily MTM drawdown","total return","volatility","trade count","win rate","profit factor","worst episode","episode returns","turnover","exposure"],
+    "prohibition": "Do not rank finalists using prior transaction-date/cost-basis drawdown approximation."
+  },
+  "optimization": {
+    "primary": "Pareto optimization of higher CAGR and lower exact daily MTM maximum drawdown",
+    "secondary_constraints": ["positive pooled economic value after costs","avoid single-episode dependence","adequate activity to support interpretation"],
+    "no_single_scalar_required": true,
+    "reason": "Preserve the return/risk frontier rather than hiding tradeoffs in an arbitrary CAGR/DD weighting."
+  },
+  "finalist_selection": {
+    "rank_within_frontier": true,
+    "deduplicate": "Collapse near-identical chromosomes/behaviors into strategy families; do not count parameter variants as independent strategies.",
+    "cross_episode_requirement": "Report every finalist in every development episode, including zero-trade episodes.",
+    "cross_strategy_challenge": "Run finalists across the full Defensive envelope to determine whether one strategy spans multiple conditions or distinct strategies are economically necessary.",
+    "bank_size_rule": "Prefer the smallest bank that preserves materially distinct Pareto-efficient economic behavior; Cash remains an allowed action."
+  },
+  "post_discovery_replay": {
+    "trigger": "Only after strategy bank, parameters, routing/selection rule, sizing, costs, and exact-MTM accounting are frozen.",
+    "first_replay": ["preserved50","TEST17"],
+    "interpretation": "preserved50 is preserved-not-pristine and TEST17 is consumed diagnostic evidence; the combined 50+17 replay is adversarial evidence, not pristine final validation.",
+    "no_mutation_after_reveal": "No tuning, strategy deletion/addition, threshold change, or selective reporting based on 50+17 outcomes.",
+    "next_if_survives": "Use a preselected performance-independent sample from genuinely untouched remaining Discovery for one reveal; Verification A/B remain sealed."
+  },
+  "decision_questions": [
+    "Does one strategy dominate enough of the Defensive envelope that a bank is unnecessary?",
+    "If multiple strategies survive, are their economic behaviors materially distinct rather than parameter variants?",
+    "Can any required strategy selection/routing be made from causal information available at the decision time?",
+    "Does the frozen bank survive the combined preserved50 + TEST17 adversarial replay without modification?"
+  ],
+  "governance": [
+    "Do not manufacture a strategy bank; allow one-strategy-plus-Cash to win if evidence supports it.",
+    "Do not use A/B/OTHER morphology-label accuracy as an optimization target.",
+    "Do not let profitability declare R1 or NORMAL.",
+    "Do not access protected evidence during discovery.",
+    "If a new causal routing hypothesis is needed after discovery, freeze it before testing it.",
+    "Failure is retained; do not repair against preserved50 or TEST17."
+  ]
+}
