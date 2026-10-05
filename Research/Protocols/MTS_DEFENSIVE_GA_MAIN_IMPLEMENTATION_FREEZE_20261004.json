@@ -1,0 +1,70 @@
+{
+  "format":"MTS_DEFENSIVE_GA_MAIN_IMPLEMENTATION_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_FIRST_GENERATION",
+  "parent":"MTS_DEFENSIVE_GA_MAIN_BROAD_DISCOVERY_FREEZE_20261004.json",
+  "provenance":"NEW_RESEARCH_POST_RECOVERY",
+  "representation":{
+    "signal_unit":"unique ticker + signal date; overlapping candidate families/horizons become bitmasks rather than duplicate trades",
+    "entry_rule":"GA selects 1-4 generic causal conditions and k-of-n concurrence",
+    "exit_rule":"GA independently selects 1-4 generic causal conditions and k-of-n concurrence",
+    "condition_form":"feature <= or >= development-distribution quantile; direction and quantile are genes",
+    "quantiles":[0.20,0.35,0.50,0.65,0.80],
+    "entry_delay_sessions":[0,1,2,3,5,8,10],
+    "minimum_hold_sessions":[1,2,3],
+    "maximum_hold_sessions":[2,3,5,8,10,15,20],
+    "family_subset":"GA selected",
+    "source_horizon_subset":"GA selected"
+  },
+  "feature_language":[
+    "stock return 5",
+    "stock return 20",
+    "stock close/SMA20",
+    "stock 20-session range position",
+    "stock RSI14",
+    "stock relative-volume percentile",
+    "stock 252-session drawdown",
+    "stock realized-volatility percentile",
+    "market median return 5",
+    "market median return 20",
+    "market median 252-session drawdown",
+    "market breadth above SMA200",
+    "market positive-20 breadth",
+    "market realized-volatility percentile",
+    "VIX",
+    "VVIX",
+    "OFR Funding lagged two business days",
+    "OFR Credit lagged two business days"
+  ],
+  "execution":{
+    "round_trip_cost_bps":10,
+    "entry":"after a causal entry condition is observed at a close, enter next available session open",
+    "exit":"after causal exit condition is observed at a close, exit next available session open; otherwise exit at maximum-hold close",
+    "same_day_future_use":false
+  },
+  "hard_gates":{
+    "minimum_total_trades":100,
+    "all_six_declining_windows_required":true,
+    "minimum_trades_per_window":5
+  },
+  "fitness":{
+    "mean_net_return":1.00,
+    "worst_window_mean":0.50,
+    "five_session_equivalent_return_per_session":0.25,
+    "log_profit_factor_capped_10":0.010,
+    "win_rate_excess_over_50pct":0.010,
+    "mean_MAE_magnitude_penalty":0.35,
+    "mean_profit_giveback_penalty":0.30,
+    "window_mean_dispersion_penalty":0.10,
+    "mean_duration_sessions_penalty":0.0005,
+    "negative_worst_window_extra_penalty":"0.10 + 2*abs(worst_window)"
+  },
+  "ga":{
+    "population":320,
+    "elite":48,
+    "maximum_generations":28,
+    "stale_stop":9,
+    "seed":20261004
+  },
+  "protected_evidence_access":false
+}
