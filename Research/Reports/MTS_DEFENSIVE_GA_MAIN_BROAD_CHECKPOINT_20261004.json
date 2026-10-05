@@ -1,0 +1,141 @@
+{
+  "format": "MTS_DEFENSIVE_GA_MAIN_BROAD_CHECKPOINT_V1",
+  "generation": 27,
+  "unique_genomes": 3791,
+  "best": {
+    "score": 0.09780331643742349,
+    "n": 145,
+    "mean": 0.06850919872522354,
+    "win": 0.8482758620689655,
+    "pf": 9.181886215345232,
+    "worst_window": 0.04646545276045799,
+    "window_dispersion": 0.02563980994824722,
+    "five_session_efficiency": 0.06128932317886312,
+    "mean_mae": -0.055840395390987396,
+    "mean_giveback": 0.02794589102268219,
+    "mean_duration": 8.848275862068965,
+    "by_window": {
+      "GFC": {
+        "n": 73,
+        "mean": 0.06820801645517349,
+        "win": 0.821917808219178
+      },
+      "2011": {
+        "n": 17,
+        "mean": 0.06629173457622528,
+        "win": 1.0
+      },
+      "2015_16": {
+        "n": 5,
+        "mean": 0.04924459010362625,
+        "win": 0.8
+      },
+      "2018": {
+        "n": 5,
+        "mean": 0.04748886451125145,
+        "win": 0.8
+      },
+      "COVID": {
+        "n": 17,
+        "mean": 0.12017582356929779,
+        "win": 0.8235294117647058
+      },
+      "2022": {
+        "n": 28,
+        "mean": 0.04646545276045799,
+        "win": 0.8571428571428571
+      }
+    },
+    "g": {
+      "fmask": 109,
+      "hmask": 2,
+      "entry_rules": [
+        71,
+        99,
+        105
+      ],
+      "entry_k": 2,
+      "entry_delay": 3,
+      "exit_rules": [
+        44,
+        92,
+        161
+      ],
+      "exit_k": 2,
+      "min_hold": 2,
+      "max_hold": 20
+    },
+    "g_described": {
+      "fmask": 109,
+      "hmask": 2,
+      "entry_rules": [
+        71,
+        99,
+        105
+      ],
+      "entry_k": 2,
+      "entry_delay": 3,
+      "exit_rules": [
+        44,
+        92,
+        161
+      ],
+      "exit_k": 2,
+      "min_hold": 2,
+      "max_hold": 20,
+      "families": [
+        "MOMENTUM",
+        "TREND",
+        "MEAN_REVERSION",
+        "VOLUME_LIQUIDITY",
+        "RELATIVE_CROSS_SECTIONAL"
+      ],
+      "horizons": [
+        5
+      ],
+      "entry_conditions": [
+        {
+          "feature": "stock_rv_pct",
+          "direction": "<=",
+          "quantile": 0.2,
+          "threshold": 0.22610722482204437
+        },
+        {
+          "feature": "market_ret20",
+          "direction": "<=",
+          "quantile": 0.8,
+          "threshold": 0.026431027799844742
+        },
+        {
+          "feature": "market_drawdown252",
+          "direction": "<=",
+          "quantile": 0.5,
+          "threshold": -0.19278621673583984
+        }
+      ],
+      "exit_conditions": [
+        {
+          "feature": "stock_rsi14",
+          "direction": ">=",
+          "quantile": 0.5,
+          "threshold": 45.97524642944336
+        },
+        {
+          "feature": "market_ret20",
+          "direction": ">=",
+          "quantile": 0.35,
+          "threshold": -0.054760489612817764
+        },
+        {
+          "feature": "ofr_funding_lag2",
+          "direction": "<=",
+          "quantile": 0.2,
+          "threshold": -0.23800000548362732
+        }
+      ]
+    }
+  },
+  "source_events": 10079,
+  "test17_accessed": false,
+  "protected_accessed": false
+}
