@@ -21,7 +21,8 @@ def summarize(rows):
   s=sum(c.values()); return 1/sum((v/s)**2 for v in c.values()) if s else 0
  return {'events':len(r),'tickers':len(tick),'unique_dates':len(dates),'date_effective_n':neff(dates),'ticker_effective_n':neff(tick),'family_effective_n':neff(fam),
  'top10_date_share':sum(v for _,v in dates.most_common(10))/max(1,len(r)),'max_same_date':max(dates.values(),default=0),'by_episode':epi,'by_family':fam,'by_horizon':hor}
-dev=load(DEV); rep=load(REP)
+DEV50=set('AMGN CI MPC STLD EXC CFG AJG NUE KKR TDG PPG TRV RL CTSH T FIS NOW SBAC SMCI KDP COST OMC NKE RSG ROK SO XEL DECK TRGP WELL CDW ITW DHI IRM COIN TPL FANG HWM NFLX BEN BNY BLDR EVRG GILD MCO TECH CLX PCAR COO FITB'.split())
+dev_all=load(DEV); dev=[x for x in dev_all if x['ticker'] in DEV50]; rep=load(REP)
 # split replay into P50/T17 using frozen names
 T17={'BAX','FCX','CMCSA','BG','APA','LIN','VRSN','LYV','ARE','SNPS','GLW','DLTR','VRSK','NI','HD','SPG','NTAP'}
 p50=[x for x in rep if x['ticker'] not in T17]; t17=[x for x in rep if x['ticker'] in T17]
