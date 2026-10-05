@@ -2,8 +2,6 @@
 import json, math
 from pathlib import Path
 import numpy as np, pandas as pd, pyarrow.parquet as pq, yfinance as yf
-from sklearn.linear_model import Ridge
-from sklearn.preprocessing import StandardScaler
 
 ROOT=Path('/home/ubuntu/Momentum-Trading-System_v4')
 PRED=Path('/home/ubuntu/mts-v4-nexus-derived-market-current-sp500-calibration-20260915-RECONSTRUCTED-CLEAN/data/sp500-current-sp500-calibration-20260915__a0dd6a1a76bb/mts_market_predictors_v2__3e9bdc71246a/predictor-v2-initial-20260929-predictors-2005-09-14-2026-09-14.parquet')
@@ -58,13 +56,13 @@ for f in range(5):
   hist=tr[tr.date < start-pd.Timedelta(days=2)]
   cur=te[te.date.dt.to_period('M').eq(mo)]
   if len(hist)<1000 or cur.empty: continue
-  sc=StandardScaler().fit(hist[SF]); X=sc.transform(hist[SF]); model=Ridge(alpha=10.0).fit(X,hist.excess_y)
-  z=cur.copy(); z['score']=model.predict(sc.transform(cur[SF])); preds.append(z)
+  mu=hist[SF].mean(); sd=hist[SF].std().replace(0,1); X=((hist[SF]-mu)/sd).to_numpy(float); yy=hist.excess_y.to_numpy(float); beta=np.linalg.solve(X.T@X+10.0*np.eye(X.shape[1]),X.T@yy)
+  z=cur.copy(); z['score']=((cur[SF]-mu)/sd).to_numpy(float)@beta; preds.append(z)
   if mi%6==0: print('FOLD',f,'MONTH',str(mo),'TRAIN',len(hist),'TEST',len(cur),flush=True)
  te=pd.concat(preds,ignore_index=True) if preds else te.iloc[0:0].assign(score=[])
  # choose policy on training via causal OOS monthly predictions inside training, using first 80% time for fit->later validation
  cut=tr.date.quantile(.70); fit=tr[tr.date<cut]; val=tr[tr.date>=cut].copy()
- sc=StandardScaler().fit(fit[SF]); model=Ridge(alpha=10.0).fit(sc.transform(fit[SF]),fit.excess_y); val['score']=model.predict(sc.transform(val[SF]))
+ mu=fit[SF].mean(); sd=fit[SF].std().replace(0,1); X=((fit[SF]-mu)/sd).to_numpy(float); yy=fit.excess_y.to_numpy(float); beta=np.linalg.solve(X.T@X+10.0*np.eye(X.shape[1]),X.T@yy); val['score']=((val[SF]-mu)/sd).to_numpy(float)@beta
  best=None
  for q,margin in GRID:
   thresh=float(val.score.quantile(q))
