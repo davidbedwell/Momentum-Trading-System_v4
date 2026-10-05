@@ -1,0 +1,58 @@
+{
+  "format":"MTS_DEFENSIVE_GA_ALLOCATOR_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_ALLOCATOR_GA",
+  "provenance":"NEW_RESEARCH_POST_RECOVERY",
+  "parent_core":"MTS_DEFENSIVE_GA_CORE_FAMILY_AND_PORTFOLIO_FREEZE_20261004.json",
+  "purpose":"Evolve ranking of simultaneous qualifying Defensive trades under scarce capital without changing the frozen entry/exit mechanism.",
+  "frozen_trade_mechanism":{
+    "variant":"D3_EXIT2",
+    "source_horizon":5,
+    "entry_delay":3,
+    "entry":"2-of-3 frozen core conditions",
+    "exit":"stock RSI14 >= q50 AND market 20-session return >= q35",
+    "maximum_hold_sessions":20,
+    "round_trip_cost_bps":10
+  },
+  "allocator_genome":{
+    "form":"sparse linear rank score over causal signal-time features",
+    "maximum_nonzero_features":6,
+    "weights":[-3,-2,-1,-0.5,0.5,1,2,3],
+    "features":[
+      "stock return 5","stock return 20","stock close/SMA20","stock range position 20","stock RSI14",
+      "stock relative-volume percentile","stock 252-session drawdown","stock realized-volatility percentile",
+      "market return 5","market return 20","market 252-session drawdown","breadth above SMA200",
+      "breadth positive20","market realized-volatility percentile","VIX","VVIX",
+      "OFR Funding lagged two business days","OFR Credit lagged two business days"
+    ],
+    "normalization":"development-only robust percentile rank by feature",
+    "tie_break":"ticker alphabetical"
+  },
+  "capital_models":[
+    {"slots":3,"position_cap":0.3333333333},
+    {"slots":5,"position_cap":0.20},
+    {"slots":10,"position_cap":0.10}
+  ],
+  "fitness":{
+    "primary":"mean episode portfolio return",
+    "worst_episode_weight":0.75,
+    "episode_dispersion_penalty":0.20,
+    "max_drawdown_penalty":0.35,
+    "capacity_miss_penalty":0.02,
+    "complexity_penalty_per_feature":0.002,
+    "negative_worst_episode_extra_penalty":"0.10 + 2*abs(worst_episode_return)"
+  },
+  "ga":{"population":300,"elite":45,"maximum_generations":30,"stale_stop":9,"seed":20261004},
+  "hard_rules":[
+    "Entry/exit chromosome cannot mutate.",
+    "No future trade return, MFE, MAE, exit date or outcome may be an allocator feature.",
+    "No leverage and no pyramiding same ticker.",
+    "No TEST17, preserved50, remaining Discovery, Verification A or Verification B."
+  ],
+  "transport":{
+    "method":"leave-one-bear-episode-out allocator evolution",
+    "heldout_episode_excluded_from allocator feature normalization and fitness",
+    "heldout result cannot alter fold genome",
+    "all six folds reported including failures"
+  }
+}
