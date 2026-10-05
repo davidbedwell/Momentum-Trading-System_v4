@@ -1,0 +1,37 @@
+{
+ "format":"MTS_DEFENSIVE_STRATEGY_BANK_ROUTER_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_ROUTER_RESEARCH",
+ "provenance":"NEW_RESEARCH_POST_RECOVERY",
+ "architecture":"DEFENSIVE strategy bank with causal market-state router",
+ "principles":[
+  "Strategies may be specialized and need not trade every bear episode.",
+  "Router may use only causal market-state information available at decision time.",
+  "Episode identity, future morphology, future returns, and protected evidence are forbidden router inputs.",
+  "Cash/no-new-entry is a valid router output.",
+  "A strategy is judged conditional on its setup and routing domain, not by requiring universal activity.",
+  "No strategy may declare R1 or NORMAL."
+ ],
+ "bank_v1":[
+  {"id":"CORE_D3_EXIT2","role":"general frozen defensive rebound mechanism"},
+  {"id":"CAPITULATION_REVERSION","role":"candidate specialized mechanism; preserve observed damage/relative-state association without promotion"},
+  {"id":"EMERGING_LEADERSHIP","role":"candidate specialized mechanism; preserve observed moderate-damage/strong-relative-state association without promotion"},
+  {"id":"CASH","role":"default when no validated routing domain applies"}
+ ],
+ "router_allowed_market_features":[
+  "market_ret5","market_ret20","market_drawdown252",
+  "breadth_above_sma200","breadth_positive20","market_rv_pct",
+  "vix","vvix","ofr_funding_lag2","ofr_credit_lag2"
+ ],
+ "router_forbidden":[
+  "ticker identity","bear episode identity","future returns","future trough/peak knowledge",
+  "TEST17","preserved50","remaining Discovery","Verification A","Verification B"
+ ],
+ "research_sequence":[
+  "Map causal market-state occupancy when each candidate strategy setup occurs.",
+  "Test whether setup occurrence can be distinguished prospectively from market state alone.",
+  "Freeze a finite router family before comparing routed portfolio outcomes.",
+  "Use consumed six-bear development only until full bank and router are frozen."
+ ],
+ "protected_evidence_access":false
+}
