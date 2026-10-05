@@ -1,0 +1,606 @@
+{
+  "format": "MTS_DEFENSIVE_STRATEGY_BANK_GENERALIZATION_AUTOPSY_V1",
+  "date": "2026-10-05",
+  "status": "DIAGNOSTIC_ONLY_NO_REPAIR",
+  "evidence": {
+    "development": "consumed DEV population",
+    "replay": "preserved50 reconstructed + consumed TEST17",
+    "protected_access": false
+  },
+  "population_structure": {
+    "development": {
+      "events": 19302,
+      "tickers": 42,
+      "unique_dates": 836,
+      "date_effective_n": 489.37004676088895,
+      "ticker_effective_n": 33.351505864419835,
+      "family_effective_n": 5.254155019001661,
+      "top10_date_share": 0.06942285773494974,
+      "max_same_date": 166,
+      "by_episode": {
+        "2018": 1009,
+        "2022": 5127,
+        "COVID": 421,
+        "GFC": 7707,
+        "2015_16": 3013,
+        "2011": 2025
+      },
+      "by_family": {
+        "MOMENTUM": 951,
+        "BREAKOUT": 1076,
+        "TREND": 1481,
+        "MEAN_REVERSION": 3612,
+        "VOLATILITY": 2015,
+        "VOLUME_LIQUIDITY": 6523,
+        "RELATIVE_CROSS_SECTIONAL": 1399,
+        "MARKET_REGIME_STRUCTURE": 2245
+      },
+      "by_horizon": {
+        "63": 8579,
+        "20": 9998,
+        "5": 188,
+        "10": 523,
+        "3": 14
+      }
+    },
+    "preserved50": {
+      "events": 22043,
+      "tickers": 46,
+      "unique_dates": 836,
+      "date_effective_n": 484.97869420403697,
+      "ticker_effective_n": 38.12982187678159,
+      "family_effective_n": 5.439624558383153,
+      "top10_date_share": 0.07222247425486548,
+      "max_same_date": 218,
+      "by_episode": {
+        "2015_16": 3793,
+        "2022": 5988,
+        "2011": 2215,
+        "2018": 1331,
+        "COVID": 544,
+        "GFC": 8172
+      },
+      "by_family": {
+        "MOMENTUM": 1298,
+        "BREAKOUT": 1248,
+        "TREND": 1707,
+        "MEAN_REVERSION": 3960,
+        "VOLATILITY": 2126,
+        "VOLUME_LIQUIDITY": 7259,
+        "RELATIVE_CROSS_SECTIONAL": 1778,
+        "MARKET_REGIME_STRUCTURE": 2667
+      },
+      "by_horizon": {
+        "63": 9627,
+        "20": 11022,
+        "10": 836,
+        "5": 504,
+        "3": 51,
+        "1": 3
+      }
+    },
+    "test17": {
+      "events": 7325,
+      "tickers": 16,
+      "unique_dates": 824,
+      "date_effective_n": 479.1236929286435,
+      "ticker_effective_n": 12.712286552521592,
+      "family_effective_n": 5.408454246401083,
+      "top10_date_share": 0.06853242320819113,
+      "max_same_date": 63,
+      "by_episode": {
+        "GFC": 2698,
+        "2015_16": 1369,
+        "2018": 467,
+        "2011": 671,
+        "2022": 1933,
+        "COVID": 187
+      },
+      "by_family": {
+        "MOMENTUM": 382,
+        "BREAKOUT": 472,
+        "TREND": 570,
+        "MEAN_REVERSION": 1253,
+        "VOLATILITY": 778,
+        "VOLUME_LIQUIDITY": 2447,
+        "RELATIVE_CROSS_SECTIONAL": 551,
+        "MARKET_REGIME_STRUCTURE": 872
+      },
+      "by_horizon": {
+        "63": 3293,
+        "20": 3664,
+        "10": 289,
+        "5": 78,
+        "3": 1
+      }
+    },
+    "combined_replay": {
+      "events": 29368,
+      "tickers": 62,
+      "unique_dates": 836,
+      "date_effective_n": 498.8342465832654,
+      "ticker_effective_n": 50.842006390742135,
+      "family_effective_n": 5.433649356459127,
+      "top10_date_share": 0.07096159084718061,
+      "max_same_date": 272,
+      "by_episode": {
+        "2015_16": 5162,
+        "2022": 7921,
+        "2011": 2886,
+        "2018": 1798,
+        "COVID": 731,
+        "GFC": 10870
+      },
+      "by_family": {
+        "MOMENTUM": 1680,
+        "BREAKOUT": 1720,
+        "TREND": 2277,
+        "MEAN_REVERSION": 5213,
+        "VOLATILITY": 2904,
+        "VOLUME_LIQUIDITY": 9706,
+        "RELATIVE_CROSS_SECTIONAL": 2329,
+        "MARKET_REGIME_STRUCTURE": 3539
+      },
+      "by_horizon": {
+        "63": 12920,
+        "20": 14686,
+        "10": 1125,
+        "5": 582,
+        "3": 52,
+        "1": 3
+      }
+    }
+  },
+  "candidate_preselection": {
+    "development": {
+      "unique_ticker_candidates": 2886,
+      "unique_family_candidate_ids": 699,
+      "top20_ticker_candidate_event_share": 0.04066936068801161,
+      "median_events_per_ticker_candidate": 4.0,
+      "max_events_one_ticker_candidate": 43
+    },
+    "preserved50": {
+      "unique_ticker_candidates": 3294,
+      "unique_family_candidate_ids": 811,
+      "top20_ticker_candidate_event_share": 0.03715465227056208,
+      "median_events_per_ticker_candidate": 5.0,
+      "max_events_one_ticker_candidate": 53
+    },
+    "combined_replay": {
+      "unique_ticker_candidates": 4412,
+      "unique_family_candidate_ids": 1291,
+      "top20_ticker_candidate_event_share": 0.028091800599291745,
+      "median_events_per_ticker_candidate": 4.0,
+      "max_events_one_ticker_candidate": 53
+    }
+  },
+  "cross_ticker_correlation": {
+    "development": {
+      "GFC": {
+        "median_pair_corr": 0.44107904866993225,
+        "pairs": 375,
+        "ticker_count": 28,
+        "corr_implied_effective_tickers": 2.16900679152766
+      },
+      "2011": {
+        "median_pair_corr": 0.4960607757649162,
+        "pairs": 435,
+        "ticker_count": 30,
+        "corr_implied_effective_tickers": 1.9498546143224023
+      },
+      "2015_16": {
+        "median_pair_corr": 0.23551444602691024,
+        "pairs": 435,
+        "ticker_count": 31,
+        "corr_implied_effective_tickers": 3.843562836160587
+      },
+      "2018": {
+        "median_pair_corr": 0.40790840265083583,
+        "pairs": 557,
+        "ticker_count": 38,
+        "corr_implied_effective_tickers": 2.3613321816245225
+      },
+      "COVID": {
+        "median_pair_corr": 0.6404303032717883,
+        "pairs": 131,
+        "ticker_count": 40,
+        "corr_implied_effective_tickers": 1.5398366227759939
+      },
+      "2022": {
+        "median_pair_corr": 0.3174980896636268,
+        "pairs": 829,
+        "ticker_count": 42,
+        "corr_implied_effective_tickers": 2.9962714235304198
+      }
+    },
+    "combined_replay": {
+      "GFC": {
+        "median_pair_corr": 0.44034329154486274,
+        "pairs": 741,
+        "ticker_count": 39,
+        "corr_implied_effective_tickers": 2.199283869572645
+      },
+      "2011": {
+        "median_pair_corr": 0.5931639560998541,
+        "pairs": 856,
+        "ticker_count": 42,
+        "corr_implied_effective_tickers": 1.6587859719821114
+      },
+      "2015_16": {
+        "median_pair_corr": 0.34722172703604953,
+        "pairs": 1245,
+        "ticker_count": 51,
+        "corr_implied_effective_tickers": 2.777613427812969
+      },
+      "2018": {
+        "median_pair_corr": 0.5189321645640139,
+        "pairs": 1362,
+        "ticker_count": 59,
+        "corr_implied_effective_tickers": 1.8972241188176089
+      },
+      "COVID": {
+        "median_pair_corr": 0.40034511797534666,
+        "pairs": 294,
+        "ticker_count": 62,
+        "corr_implied_effective_tickers": 2.438923437187452
+      },
+      "2022": {
+        "median_pair_corr": 0.28492711667938464,
+        "pairs": 1890,
+        "ticker_count": 62,
+        "corr_implied_effective_tickers": 3.373130081054754
+      }
+    }
+  },
+  "family_distribution_total_variation": 0.022583403918521608,
+  "finalist_transport": [
+    {
+      "id": "DEF_PF1",
+      "dev_cagr": 0.47642818935640374,
+      "replay_cagr": 0.12807655594179757,
+      "cagr_delta": -0.3483516334146062,
+      "dev_mdd": -0.08938669138361854,
+      "replay_mdd": -0.15636357178812332,
+      "mdd_delta": -0.06697688040450478,
+      "replay_episodes": {
+        "GFC": {
+          "sessions": 341,
+          "return": 0.21735542867468172,
+          "max_daily_mtm_drawdown": -0.14395850163383805,
+          "trades": 136,
+          "missed_capacity": 29
+        },
+        "2011": {
+          "sessions": 94,
+          "return": 0.08307335795201354,
+          "max_daily_mtm_drawdown": -0.051999492975367545,
+          "trades": 21,
+          "missed_capacity": 0
+        },
+        "2015_16": {
+          "sessions": 169,
+          "return": -0.07584966729827092,
+          "max_daily_mtm_drawdown": -0.15636357178812332,
+          "trades": 35,
+          "missed_capacity": 0
+        },
+        "2018": {
+          "sessions": 42,
+          "return": 0.056459612890890964,
+          "max_daily_mtm_drawdown": -0.05555798928583755,
+          "trades": 15,
+          "missed_capacity": 0
+        },
+        "COVID": {
+          "sessions": 9,
+          "return": 0.07581292044053267,
+          "max_daily_mtm_drawdown": -0.0053294045429831405,
+          "trades": 4,
+          "missed_capacity": 0
+        },
+        "2022": {
+          "sessions": 181,
+          "return": 0.07701956395477949,
+          "max_daily_mtm_drawdown": -0.0872011905143334,
+          "trades": 53,
+          "missed_capacity": 3
+        }
+      },
+      "genome": {
+        "fmask": 163,
+        "hmask": 6,
+        "entry_rules": [
+          37,
+          45,
+          64,
+          166
+        ],
+        "entry_k": 1,
+        "entry_delay": 0,
+        "exit_rules": [
+          24,
+          64
+        ],
+        "exit_k": 1,
+        "min_hold": 3,
+        "max_hold": 20
+      }
+    },
+    {
+      "id": "DEF_PF2",
+      "dev_cagr": 0.2921749579771311,
+      "replay_cagr": -0.006800657470391935,
+      "cagr_delta": -0.29897561544752305,
+      "dev_mdd": -0.07460505912866056,
+      "replay_mdd": -0.12082747517766701,
+      "mdd_delta": -0.046222416049006454,
+      "replay_episodes": {
+        "GFC": {
+          "sessions": 341,
+          "return": 0.008988923107071667,
+          "max_daily_mtm_drawdown": -0.12082747517766701,
+          "trades": 47,
+          "missed_capacity": 0
+        },
+        "2011": {
+          "sessions": 94,
+          "return": -0.04751314240511739,
+          "max_daily_mtm_drawdown": -0.06788785120874519,
+          "trades": 3,
+          "missed_capacity": 0
+        },
+        "2015_16": {
+          "sessions": 169,
+          "return": -0.05818531029580132,
+          "max_daily_mtm_drawdown": -0.09194080333650811,
+          "trades": 5,
+          "missed_capacity": 0
+        },
+        "2018": {
+          "sessions": 42,
+          "return": 0.03572437121707539,
+          "max_daily_mtm_drawdown": -0.014329514790572984,
+          "trades": 3,
+          "missed_capacity": 0
+        },
+        "COVID": {
+          "sessions": 9,
+          "return": -0.004445203257829711,
+          "max_daily_mtm_drawdown": -0.015047147967330088,
+          "trades": 2,
+          "missed_capacity": 0
+        },
+        "2022": {
+          "sessions": 181,
+          "return": 0.04748602363943322,
+          "max_daily_mtm_drawdown": -0.03533948230388295,
+          "trades": 10,
+          "missed_capacity": 0
+        }
+      },
+      "genome": {
+        "fmask": 31,
+        "hmask": 3,
+        "entry_rules": [
+          49,
+          84
+        ],
+        "entry_k": 1,
+        "entry_delay": 2,
+        "exit_rules": [
+          28
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 10
+      }
+    },
+    {
+      "id": "DEF_PF3",
+      "dev_cagr": 0.26776040700896053,
+      "replay_cagr": -0.0209443091572743,
+      "cagr_delta": -0.28870471616623483,
+      "dev_mdd": -0.06615473493086133,
+      "replay_mdd": -0.12631533912308857,
+      "mdd_delta": -0.06016060419222724,
+      "replay_episodes": {
+        "GFC": {
+          "sessions": 341,
+          "return": -0.024016387057259947,
+          "max_daily_mtm_drawdown": -0.12631533912308857,
+          "trades": 47,
+          "missed_capacity": 0
+        },
+        "2011": {
+          "sessions": 94,
+          "return": -0.04751314240511739,
+          "max_daily_mtm_drawdown": -0.06788785120874519,
+          "trades": 3,
+          "missed_capacity": 0
+        },
+        "2015_16": {
+          "sessions": 169,
+          "return": -0.05818531029580132,
+          "max_daily_mtm_drawdown": -0.09194080333650811,
+          "trades": 5,
+          "missed_capacity": 0
+        },
+        "2018": {
+          "sessions": 42,
+          "return": 0.022896586266477392,
+          "max_daily_mtm_drawdown": -0.01368791786697432,
+          "trades": 2,
+          "missed_capacity": 0
+        },
+        "COVID": {
+          "sessions": 9,
+          "return": -0.009261082630640627,
+          "max_daily_mtm_drawdown": -0.013692190940247428,
+          "trades": 1,
+          "missed_capacity": 0
+        },
+        "2022": {
+          "sessions": 181,
+          "return": 0.05062074418188245,
+          "max_daily_mtm_drawdown": -0.035440608312617194,
+          "trades": 9,
+          "missed_capacity": 0
+        }
+      },
+      "genome": {
+        "fmask": 31,
+        "hmask": 3,
+        "entry_rules": [
+          70,
+          84
+        ],
+        "entry_k": 1,
+        "entry_delay": 2,
+        "exit_rules": [
+          28
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 10
+      }
+    },
+    {
+      "id": "DEF_PF4",
+      "dev_cagr": 0.17159326113684026,
+      "replay_cagr": 0.03207845471316784,
+      "cagr_delta": -0.13951480642367242,
+      "dev_mdd": -0.04217011680273541,
+      "replay_mdd": -0.03978289457531625,
+      "mdd_delta": 0.0023872222274191612,
+      "replay_episodes": {
+        "GFC": {
+          "sessions": 341,
+          "return": 0.09385515665666344,
+          "max_daily_mtm_drawdown": -0.026153327310331043,
+          "trades": 56,
+          "missed_capacity": 0
+        },
+        "2011": {
+          "sessions": 94,
+          "return": -0.03290328745025928,
+          "max_daily_mtm_drawdown": -0.03978289457531625,
+          "trades": 4,
+          "missed_capacity": 0
+        },
+        "2015_16": {
+          "sessions": 169,
+          "return": 0.0567802127100927,
+          "max_daily_mtm_drawdown": -0.01639235790907656,
+          "trades": 3,
+          "missed_capacity": 0
+        },
+        "2018": {
+          "sessions": 42,
+          "return": 0.0074888949640326,
+          "max_daily_mtm_drawdown": -0.003953355019348348,
+          "trades": 2,
+          "missed_capacity": 0
+        },
+        "COVID": {
+          "sessions": 9,
+          "return": -0.004445203257829711,
+          "max_daily_mtm_drawdown": -0.015047147967330088,
+          "trades": 2,
+          "missed_capacity": 0
+        },
+        "2022": {
+          "sessions": 181,
+          "return": -0.0096891383170421,
+          "max_daily_mtm_drawdown": -0.01601561803297813,
+          "trades": 10,
+          "missed_capacity": 0
+        }
+      },
+      "genome": {
+        "fmask": 24,
+        "hmask": 3,
+        "entry_rules": [
+          49,
+          84
+        ],
+        "entry_k": 1,
+        "entry_delay": 2,
+        "exit_rules": [
+          0
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 10
+      }
+    },
+    {
+      "id": "DEF_PF5",
+      "dev_cagr": 0.08165418170338401,
+      "replay_cagr": -0.04732161538342705,
+      "cagr_delta": -0.12897579708681106,
+      "dev_mdd": -0.02252481364695591,
+      "replay_mdd": -0.08391061011057355,
+      "mdd_delta": -0.06138579646361764,
+      "replay_episodes": {
+        "GFC": {
+          "sessions": 341,
+          "return": -0.06003176708131008,
+          "max_daily_mtm_drawdown": -0.08391061011057355,
+          "trades": 60,
+          "missed_capacity": 0
+        },
+        "2011": {
+          "sessions": 94,
+          "return": -0.029687533542407274,
+          "max_daily_mtm_drawdown": -0.03929821797482769,
+          "trades": 6,
+          "missed_capacity": 0
+        },
+        "2015_16": {
+          "sessions": 169,
+          "return": -0.06209310573114313,
+          "max_daily_mtm_drawdown": -0.06369132418671342,
+          "trades": 4,
+          "missed_capacity": 0
+        },
+        "2018": {
+          "sessions": 42,
+          "return": 0.0017166556415406653,
+          "max_daily_mtm_drawdown": -0.0039503171325799835,
+          "trades": 3,
+          "missed_capacity": 0
+        },
+        "COVID": {
+          "sessions": 9,
+          "return": -0.004445203257829711,
+          "max_daily_mtm_drawdown": -0.015047147967330088,
+          "trades": 2,
+          "missed_capacity": 0
+        },
+        "2022": {
+          "sessions": 181,
+          "return": -0.0019308217354776502,
+          "max_daily_mtm_drawdown": -0.010637593441348736,
+          "trades": 10,
+          "missed_capacity": 0
+        }
+      },
+      "genome": {
+        "fmask": 25,
+        "hmask": 3,
+        "entry_rules": [
+          49,
+          84
+        ],
+        "entry_k": 1,
+        "entry_delay": 8,
+        "exit_rules": [
+          140
+        ],
+        "exit_k": 1,
+        "min_hold": 1,
+        "max_hold": 10
+      }
+    }
+  ]
+}
