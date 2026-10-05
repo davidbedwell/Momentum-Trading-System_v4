@@ -247,8 +247,8 @@ for f in ["dd","rel"]+mfeatures:
  a=np.sort(np.array([r[f] for r in rows if np.isfinite(r[f])]))
  for r in rows:r[f+"_pct"]=float(np.searchsorted(a,r[f],side="right")/len(a)) if np.isfinite(r[f]) else None
 for r in rows:
- r["A"]=r["dd_pct"]<=1/3 and r["rel_pct"]<=1/3
- r["B"]=r["dd_pct"]>1/3 and r["dd_pct"]<=2/3 and r["rel_pct"]>2/3
+ r["A"]=r["dd_pct"] is not None and r["rel_pct"] is not None and r["dd_pct"]<=1/3 and r["rel_pct"]<=1/3
+ r["B"]=r["dd_pct"] is not None and r["rel_pct"] is not None and r["dd_pct"]>1/3 and r["dd_pct"]<=2/3 and r["rel_pct"]>2/3
 def summary(rr):
  out={"n":len(rr),"episodes":{},"market_state_mean_percentiles":{}}
  for w in WNAMES:out["episodes"][w]=sum(r["t"]["window"]==w for r in rr)
