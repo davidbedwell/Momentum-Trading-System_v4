@@ -1,0 +1,16 @@
+{
+ "format":"MTS_DEFENSIVE_STOCK_MARKET_ROUTER_LOEO_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_OUTCOMES",
+ "provenance":"NEW_RESEARCH_POST_RECOVERY",
+ "objective":"Test whether causal candidate-stock morphology plus market state can prospectively route frozen Defensive opportunities to A, B, or OTHER.",
+ "labels":["A_CAPITULATION_REVERSION","B_EMERGING_LEADERSHIP","OTHER"],
+ "allowed_features":["stock_drawdown252","stock_ret5_minus_market_ret5","stock_ret20_minus_market_ret20","market_ret20","market_drawdown252","breadth_above_sma200","vix","vvix","ofr_funding_lag2","ofr_credit_lag2"],
+ "threshold_percentiles":[0.2,0.35,0.5,0.65,0.8],
+ "operators":["<=",">="],
+ "max_sequential_rules":3,
+ "selection":"highest training balanced domain-classification accuracy; ties prefer fewer rules then lexical order",
+ "validation":"six leave-one-bear-out folds; thresholds and router selected on five episodes only and applied unchanged to sixth",
+ "constraints":["causal signal-time observations only","no ticker identity","no episode identity","no future returns","no protected evidence","no heldout mutation"],
+ "interpretation":"This is a router-discrimination test, not portfolio promotion. Failure rejects this finite router family; success still requires frozen portfolio integration and exact daily MTM."
+}
