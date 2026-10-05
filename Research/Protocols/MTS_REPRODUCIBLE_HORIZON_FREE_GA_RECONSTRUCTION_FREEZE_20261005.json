@@ -1,0 +1,83 @@
+{
+  "format":"MTS_REPRODUCIBLE_HORIZON_FREE_GA_RECONSTRUCTION_FREEZE_V1",
+  "status":"FROZEN_BEFORE_GA_OUTCOMES",
+  "provenance":"NEW_RESEARCH_POST_RECOVERY",
+  "purpose":"Reinvent MTS strategy/chromosome/gene discovery without arbitrary session-count tenure constraints and preserve complete executable provenance.",
+  "governance":{
+    "development":"consumed DEV50 only for first search",
+    "preserved50":"CLOSED until architecture and finalist selection are frozen",
+    "test17":"CLOSED; consumed diagnostic only after preserved50 stage if explicitly authorized",
+    "remaining_discovery":"CLOSED",
+    "verification_a_b":"CLOSED",
+    "historical_artifacts":"immutable evidence; do not delete or overwrite"
+  },
+  "forbidden_genes_and_rules":[
+    "minimum_hold_sessions","maximum_hold_sessions","fixed_hold_sessions",
+    "holding_horizon_as_exit_rule","elapsed_position_age_as_exit_trigger",
+    "switch_cooldown_measured_in_sessions","future_return_horizon_as_live_decision_input"
+  ],
+  "principle":"GA discovers causal conditions for ENTER, CONTINUE, REPLACE, EXIT_TO_SAFE and regime-permitted SHORT; time held is an outcome, never a gene or rule.",
+  "state_authority":{
+    "path":"NORMAL -> A/B/C -> DEFENSIVE -> recovery evidence -> R1 -> NORMAL",
+    "allocator_subordinate_to_state":true,
+    "security_profitability_cannot_change_market_state":true
+  },
+  "genes":{
+    "opportunity_family":["MOMENTUM","BREAKOUT","TREND","MEAN_REVERSION","VOLATILITY","VOLUME_LIQUIDITY","RELATIVE_CROSS_SECTIONAL","MARKET_REGIME_STRUCTURE"],
+    "score_basis":["CAUSAL_EXPECTED_RETURN","CAUSAL_POSITIVE_PROBABILITY","CAUSAL_EV_OVER_DOWNSIDE","CAUSAL_COMPOSITE"],
+    "minimum_evidence_n":[100,250,500,750],
+    "uncertainty_penalty":["NONE","SE_1.0","SE_2.0"],
+    "minimum_positive_probability":[0.50,0.525,0.55,0.60],
+    "minimum_excess_ev_bps":[0,25,50,100,200,400],
+    "challenger_margin":[0.0,0.05,0.10,0.20,0.30],
+    "safe_margin_bps_annualized":[0,25,100,200,400],
+    "max_p10_loss":[0.10,0.125,0.15],
+    "family_duplication_penalty":[0.0,0.05,0.10,0.20],
+    "slot_ceiling":[1,2,3,5,8,10,15,20],
+    "confirmation_evidence_mode":["NONE","SCORE_PERSISTENCE","RANK_PERSISTENCE","THESIS_PERSISTENCE"],
+    "incumbent_rule":["ABSOLUTE_QUALIFICATION","RELATIVE_SCORE","COMPOSITE_PERSISTENCE"],
+    "replacement_rule":["WEAKEST_INCUMBENT","MARGINAL_PORTFOLIO_VALUE","BEST_SCORE_DELTA"]
+  },
+  "decision_semantics":{
+    "frequency":"each causal market session",
+    "incumbent_and_challenger_same_information_cutoff":true,
+    "continue":"incumbent remains while it qualifies and is not displaced under evolved replacement rule",
+    "replace":"only causal score/evidence/portfolio-value conditions may displace incumbent",
+    "exit":"qualification failure, state prohibition, risk rule, or SAFE dominance",
+    "no_clock_exit":true
+  },
+  "fitness":{
+    "portfolio_level":true,
+    "primary":["net_compound_return","max_drawdown","CVaR5","worst_day","era_stability","fold_stability"],
+    "secondary":["turnover","safe_fraction","concentration","value_per_switch"],
+    "transaction_model":{"equity_commission_bps":0,"spread_slippage_first_pass_bps_one_way":5,"zero_friction_sensitivity":true},
+    "future_horizon_labels_forbidden":true
+  },
+  "validation":{
+    "outer_stock_folds":5,
+    "fold_assignment":"deterministic lexicographic round-robin DEV50",
+    "temporal_reporting":"calendar-year and four-era",
+    "selection":"Pareto with deterministic tie breaks; no outer-fold outcome used to tune that fold",
+    "randomness":"all stochastic operations use recorded explicit seeds"
+  },
+  "reproducibility_required_outputs":[
+    "committed source before search",
+    "exact git commit",
+    "input file paths and SHA256",
+    "Python/package environment manifest",
+    "all random seeds",
+    "complete gene schema",
+    "generation checkpoints",
+    "full serialized chromosomes and lineage",
+    "fitness for every evaluated chromosome or content-addressed shard",
+    "finalists frozen before next evidence stage",
+    "deterministic replay command",
+    "unit/smoke tests for chromosome serialization and deterministic replay",
+    "Backblaze archive plus checksum after run"
+  ],
+  "known_input_hashes":{
+    "portable_genome_catalog":"e99d768e72e89462ba56d77a441e53c19ac341e83913a0b4d7257b2381eb5ab4",
+    "reconstructed_discovery_population_control_only":"b4c1556b9a66777c505d2fcd1b09f9aec5c3edd6bff7c74405a86146525b29e9"
+  },
+  "explicit_non_goal":"Do not recreate the lost GA by fitting its remembered 10-session result. Reinvent and test the strategy under the horizon-free governance above."
+}
