@@ -13,7 +13,12 @@ def analyze(ns):
   rets=[]
   for t in tr:
    ev=E[t['i']]; r=t['exit_price']/t['entry_price']-1; rets.append(r)
-   for d,k in [(fam,ev['family']),(hor,str(ev['h'])),(epi,t['window']),(tick,t['ticker'])]: d[k][0]+=1; d[k][1]+=r
+   
+   for j,name in enumerate(ns['FAMILIES']):
+    if ev['fmask'] & g['fmask'] & (1<<j): fam[name][0]+=1; fam[name][1]+=r
+   for j,h in enumerate(ns['HORIZONS']):
+    if ev['hmask'] & g['hmask'] & (1<<j): hor[str(h)][0]+=1; hor[str(h)][1]+=r
+   for d,k in [(epi,t['window']),(tick,t['ticker'])]: d[k][0]+=1; d[k][1]+=r
   sr=sorted(((v[1],k,v[0]) for k,v in tick.items()),reverse=True); sl=sorted((v[1],k,v[0]) for k,v in tick.items())
   out[f['id']]={'candidate_trades':len(tr),'mean_trade_return':statistics.mean(rets) if rets else None,'win_rate':sum(x>0 for x in rets)/len(rets) if rets else None,
     'by_family':dict(fam),'by_horizon':dict(hor),'by_episode':dict(epi),'top5_tickers_by_sum_trade_return':sr[:5],'bottom5_tickers_by_sum_trade_return':sl[:5]}
