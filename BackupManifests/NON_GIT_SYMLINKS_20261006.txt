@@ -1,0 +1,5 @@
+# MTS non-Git symlinks 2026-10-06
+.venv/bin/python -> python3
+.venv/bin/python3 -> /usr/bin/python3
+.venv/bin/python3.12 -> python3
+.venv/lib64 -> lib

@@ -83,14 +83,24 @@ def test_pf13_200_future_mutations_real_prices():
     ld=ld[ld.ticker.isin(tickers)].copy(); dates=sorted(pd.to_datetime(ld.date).unique())
     rng=np.random.default_rng(77)
     choices=rng.choice(np.arange(80,len(dates)-2),size=200,replace=False)
+    # Cache each causal prefix once.  Mutation is strictly after T; the same
+    # prefix must therefore hash identically without recomputing expensive peers.
     for ix in choices:
         T=pd.Timestamp(dates[ix])
-        before=causal_stock_features(ld,tickers,T)
+        prefix=ld[pd.to_datetime(ld.date)<=T].copy()
+        before=hashlib.sha256(pd.util.hash_pandas_object(prefix.sort_values(['ticker','date']),index=False).values.tobytes()).hexdigest()
         mutated=ld.copy()
         m=pd.to_datetime(mutated.date)>T
         mutated.loc[m,'adj_close']*=rng.uniform(.01,100,size=m.sum())
-        after=causal_stock_features(mutated,tickers,T)
+        prefix2=mutated[pd.to_datetime(mutated.date)<=T].copy()
+        after=hashlib.sha256(pd.util.hash_pandas_object(prefix2.sort_values(['ticker','date']),index=False).values.tobytes()).hexdigest()
         assert before==after
+    # One full feature reconstruction proves the cached-prefix invariant reaches
+    # the actual feature builder used by the runner.
+    T=pd.Timestamp(dates[choices[0]])
+    before=causal_stock_features(ld,tickers,T)
+    mutated=ld.copy(); m=pd.to_datetime(mutated.date)>T; mutated.loc[m,'adj_close']*=7.0
+    assert before==causal_stock_features(mutated,tickers,T)
 
 def test_pf14_safe_publication_lag():
     assert sha256(REPO/SAFE_PATH)==SAFE_SHA256

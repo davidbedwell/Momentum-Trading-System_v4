@@ -1,0 +1,17 @@
+{
+  "controlled_fixtures": [
+    "test_every_claude_alternative_is_directly_reachable",
+    "test_class_sampling_is_independent_of_low_level_count_exact_contract",
+    "test_plateau_does_not_touch_conditional_operation_distributions",
+    "test_replace_replaces_a_typed_subtree_not_necessarily_whole_slot",
+    "test_unwrap_can_remove_nested_wrapper_without_collapsing_root",
+    "test_wrap_all_claude_wrapper_families_are_reachable_and_valid",
+    "test_wrap_can_target_nested_subtree_without_replacing_root"
+  ],
+  "fixture_file": "Tests/conforming_ga/test_g2_mutation_proof.py",
+  "fixture_sha256": "3063457c148ab158d3d451f79fd932666143d950988659c09a7d4a6abb03d1d0",
+  "generated_at": 1791318467.2253468,
+  "passed": true,
+  "result": ".......                                                                  [100%]\n7 passed in 0.22s",
+  "schema": "MTS_G2_MUTATION_SEMANTIC_EVIDENCE_V1"
+}

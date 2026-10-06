@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import json,time,hashlib,sys
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from Core.conforming_ga.h7_g2 import run_planted_g2
+OUT=ROOT/"Research/Conformance/MTS_H7_PLANTED_CALIBRATION_20261006.json"
+CK=ROOT/"Research/Checkpoints/H7_G2_PLANTED_20261006"
+t=time.time()
+r=run_planted_g2(master_seed="MTS-G2-H7-20261006",seeds=(0,1,2,3),generations=500,population_size=250,workers=6,checkpoint_root=CK)
+report={"format":"MTS_H7_G2_PLANTED_V1","date":"2026-10-06","schema":"MTS-GA-G2","mechanics":{"islands":9,"population_per_island":250,"base_generations":500,"workers":6,"same_evolution":"Core.conforming_ga.ga_g2.evolve_g2","same_fitness":"Core.conforming_ga.g2fitness.make_g2_evaluator"},"criterion":"conditional planted structure with positive economic exploitation in >=3/4 seeds","recovered":r["recovered"],"passed":bool(r["passed"]),"elapsed_seconds":time.time()-t}
+OUT.parent.mkdir(parents=True,exist_ok=True);OUT.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
+(OUT.with_suffix(OUT.suffix+".sha256")).write_text(hashlib.sha256(OUT.read_bytes()).hexdigest()+"  "+OUT.name+"\n")
+print(json.dumps(report,indent=2),flush=True)

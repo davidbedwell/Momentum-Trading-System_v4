@@ -3,6 +3,7 @@ from __future__ import annotations
 import numpy as np
 from .ga import evolve,BASE_GENERATIONS,POPULATION_SIZE
 from .schema import Genome
+from .evolution import random_genome
 
 def block_permute_returns(returns:np.ndarray,block:int,seed:int)->np.ndarray:
     """Permute time blocks jointly across stocks, preserving within-date cross-sectional structure."""
@@ -36,7 +37,13 @@ def run_planted(*,evaluator_factory,master_seed,fold=0,seeds=(0,1,2,3),generatio
     for seed in seeds:
         data=planted_dataset(seed)
         evaluator=evaluator_factory(data,kind="planted")
-        result=evolve(evaluator=evaluator,master_seed=f"{master_seed}|PLANTED|{seed}",fold=fold,generations=generations,population_size=population_size)
+        def planted_factory(factory_seed):
+            return random_genome(factory_seed,
+                stock_features=("signal","noise_stock"),
+                market_features=("breadth_persistence","noise_market"),
+                sector_features=("noise_peer",))
+        result=evolve(evaluator=evaluator,master_seed=f"{master_seed}|PLANTED|{seed}",fold=fold,
+                      generations=generations,population_size=population_size,genome_factory=planted_factory)
         genomes=[g for archive in result["archives"].values() for g,_ in archive]
         out.append(any(planted_recovered(g) for g in genomes))
     return {"recovered":out,"passed":sum(out)>=3}

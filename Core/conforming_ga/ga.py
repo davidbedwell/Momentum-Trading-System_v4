@@ -6,8 +6,8 @@ proposed by Claude remain disabled unless separately user-approved.
 from __future__ import annotations
 from dataclasses import replace
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor
-import json,hashlib
+from multiprocessing import get_context
+import json,hashlib,os
 import numpy as np
 from .schema import *
 from .engine import AllocationMode
@@ -19,6 +19,15 @@ POPULATION_SIZE=250
 BASE_GENERATIONS=500
 MIGRATION_INTERVAL=25
 CHECKPOINT_INTERVAL=10
+
+_PROCESS_EVALUATOR=None
+
+def _process_eval_island(payload):
+    name,genomes=payload
+    pairs=[]
+    for g in genomes:
+        m=dict(_PROCESS_EVALUATOR(g));m["_worker_pid"]=os.getpid();pairs.append((g,m))
+    return name,pairs
 
 def _rng(master,fold,island,generation):
     return np.random.Generator(np.random.PCG64(deterministic_seed(master,fold,island,generation)))
@@ -133,16 +142,29 @@ def evolve(*,evaluator,master_seed:str,fold:int,generations:int=BASE_GENERATIONS
     for gen in range(start_gen,generations):
         stage=stage_for_generation(gen)
         scored={}
-        for ii,name in enumerate(ISLANDS):
-            # deterministic evaluation and reduction order independent of worker count.
-            genomes=list(pops[name])
-            if workers<=1:
-                metrics=[evaluator(g) for g in genomes]
-            else:
-                with ThreadPoolExecutor(max_workers=workers) as ex:
-                    metrics=list(ex.map(evaluator,genomes))
-            pairs=list(zip(genomes,metrics))
-            pairs.sort(key=lambda x:hashlib.sha256(canonical_genome(x[0]).encode()).hexdigest())
+        # Islands are independent during evaluation. CPU-bound production evaluation
+        # uses forked worker processes; deterministic reduction remains fixed-order.
+        if workers<=1:
+            evaluated=[]
+            for name in ISLANDS:
+                genomes=list(pops[name]);pairs=[]
+                for g in genomes:
+                    m=dict(evaluator(g));m["_worker_pid"]=os.getpid();pairs.append((g,m))
+                pairs.sort(key=lambda x:hashlib.sha256(canonical_genome(x[0]).encode()).hexdigest())
+                evaluated.append((name,pairs))
+        else:
+            global _PROCESS_EVALUATOR
+            _PROCESS_EVALUATOR=evaluator
+            payload=[(name,list(pops[name])) for name in ISLANDS]
+            ctx=get_context("fork")
+            with ctx.Pool(processes=min(int(workers),len(ISLANDS))) as pool:
+                evaluated=pool.map(_process_eval_island,payload)
+            for _,pairs in evaluated:
+                pairs.sort(key=lambda x:hashlib.sha256(canonical_genome(x[0]).encode()).hexdigest())
+            _PROCESS_EVALUATOR=None
+        by_name=dict(evaluated)
+        for name in ISLANDS:
+            pairs=by_name[name]
             scored[name]=pairs
             archives[name]=pareto_front(archives[name]+pairs)
             hv=max((m["cagr"] for _,m in archives[name]),default=-np.inf)

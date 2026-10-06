@@ -33,8 +33,12 @@ def _effective(table,when):
 def sec31_rate(when)->float:
     return _effective(SEC31,when)[1]/1_000_000.0
 
-def taf_fee(when,shares:float,price:float)->float:
+def taf_rate_cap(when)->tuple[float,float]:
     _,rate,cap=_effective(TAF,when)
+    return float(rate),float(cap)
+
+def taf_fee(when,shares:float,price:float)->float:
+    rate,cap=taf_rate_cap(when)
     if price < rate:return 0.0
     return min(abs(shares)*rate,cap)
 

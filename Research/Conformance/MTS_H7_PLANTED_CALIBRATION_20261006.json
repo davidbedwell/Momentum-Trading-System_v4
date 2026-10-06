@@ -1,0 +1,47 @@
+{
+  "criterion": "same module signal references planted stock ret20 and applicability references planted market breadth_positive20, with positive CAGR; recover in >=3/4 seeds within 500-generation base budget",
+  "date": "2026-10-06",
+  "decision": "early_pass",
+  "elapsed_seconds": 283.0621061325073,
+  "format": "MTS_H7_G2_PLANTED_V3",
+  "mechanics": {
+    "disk_checkpoint_interval": 10,
+    "islands": 9,
+    "maximum_generations_per_seed": 500,
+    "population_per_island": 64,
+    "recovery_observation_interval": 1,
+    "same_evolution": "Core.conforming_ga.ga_g2.evolve_g2",
+    "same_fitness": "Core.conforming_ga.g2fitness.make_g2_evaluator",
+    "seeds": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "workers": 6
+  },
+  "passed": true,
+  "recovered": [
+    true,
+    true,
+    true
+  ],
+  "results": [
+    {
+      "generation": 3,
+      "recovered": true,
+      "seed": 0
+    },
+    {
+      "generation": 7,
+      "recovered": true,
+      "seed": 1
+    },
+    {
+      "generation": 1,
+      "recovered": true,
+      "seed": 2
+    }
+  ],
+  "schema": "MTS-GA-G2"
+}

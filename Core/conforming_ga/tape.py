@@ -2,7 +2,7 @@
 from __future__ import annotations
 import numpy as np,pandas as pd
 from .engine import partition_rank
-from .peers import peer_indices
+from .peers import peer_indices_tape
 
 def build_tape(long_df:pd.DataFrame,tickers:tuple[str,...],start="2006-09-15",end="2026-09-14"):
     d=long_df[long_df.ticker.isin(tickers)].copy()
@@ -20,23 +20,25 @@ def build_tape(long_df:pd.DataFrame,tickers:tuple[str,...],start="2006-09-15",en
         rank_arrays[name]=partition_rank(frame.to_numpy(float))
     stock={};group={}
     r=ret.fillna(0).to_numpy(float)
+    m20=mom20.to_numpy(float);m63=mom63.to_numpy(float);rv=rv20.to_numpy(float);vr=vrel.to_numpy(float)
+    peer_tape=peer_indices_tape(r,60,3)
     for ti,dt in enumerate(dates):
         if ti<63:continue
         srow={};grow={}
-        peers=peer_indices(r,ti,60,3)
+        peers=peer_tape[ti]
         for j,t in enumerate(tickers):
             srow[t]={
-              "mom20":float(np.nan_to_num(mom20.iloc[ti,j])),
-              "mom63":float(np.nan_to_num(mom63.iloc[ti,j])),
-              "rv20":float(np.nan_to_num(rv20.iloc[ti,j])),
-              "volume_rel20":float(np.nan_to_num(vrel.iloc[ti,j])),
+              "mom20":float(np.nan_to_num(m20[ti,j])),
+              "mom63":float(np.nan_to_num(m63[ti,j])),
+              "rv20":float(np.nan_to_num(rv[ti,j])),
+              "volume_rel20":float(np.nan_to_num(vr[ti,j])),
               "mom20_rank":float(rank_arrays["mom20"][ti,j]) if np.isfinite(rank_arrays["mom20"][ti,j]) else .5,
               "mom63_rank":float(rank_arrays["mom63"][ti,j]) if np.isfinite(rank_arrays["mom63"][ti,j]) else .5,
             }
             ps=peers[j]
             grow[t]={
               "peer_ret1":float(np.mean(r[ti,ps])) if len(ps) else 0.0,
-              "peer_mom20":float(np.nanmean(mom20.iloc[ti,ps])) if len(ps) else 0.0,
+              "peer_mom20":float(np.nanmean(m20[ti,ps])) if len(ps) else 0.0,
             }
         stock[pd.Timestamp(dt)]=srow;group[pd.Timestamp(dt)]=grow
     mask=(dates>=pd.Timestamp(start))&(dates<=pd.Timestamp(end))

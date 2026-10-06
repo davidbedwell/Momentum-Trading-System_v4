@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "checkpoint_resume_population_bit_identical": true,
+    "checkpoint_resume_state_identical": true,
+    "extension_fired": true,
+    "migration_exercised": true,
+    "plateau_freeze_all_islands": true,
+    "reallocation_skips_frozen_evaluations": true,
+    "terminal_generation_exact": true
+  },
+  "controller": "Core/conforming_ga/ga_g2.py",
+  "controller_sha256": "fa6b3e58a5f937842ef5ff270d024927af1d9e08f0dd63b77ac1d66fc3896c77",
+  "events": {
+    "extensions": 1,
+    "freeze_events": 9,
+    "frozen_island_generation_skips": 9,
+    "migrants_accepted": 9,
+    "migration_events": 3
+  },
+  "fixture": "Tests/conforming_ga/test_g2_controller_semantics.py",
+  "fixture_sha256": "43edd0d4508fc366658d5e0df6ef4a73d9d98cdbfb27c50a0509611da0d7fc6a",
+  "production_defaults_unchanged": true,
+  "status": "PASS",
+  "test_only_mechanics": {
+    "checkpoint_interval": 1,
+    "extension_base": 2,
+    "extension_max": 3,
+    "extension_step": 1,
+    "extension_threshold": -1.0,
+    "extension_window": 1,
+    "migration_interval": 1,
+    "plateau_gain_threshold": 999.0,
+    "plateau_window": 1
+  }
+}

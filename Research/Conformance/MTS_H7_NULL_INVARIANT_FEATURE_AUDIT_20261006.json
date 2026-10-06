@@ -1,0 +1,27 @@
+{
+  "changed_stock_features": 42,
+  "conformance_rule": "Only features explicitly registered as chronological exogenous/PIT context may be intentionally carried unchanged into the null. Every feature derived wholly or partly from stock OHLCV, returns, or dynamic-peer stock paths must be recomputed exclusively from the synthetic path using the production builders. No chronology-derived stock-path feature may be copied from the original tape.",
+  "controlling_null_requirement": "Claude H.7: stock returns block-permuted while preserving cross-sectional factor structure and market path so features carry no forward information.",
+  "dynamic_peer_policy": "Every dynamic-peer feature must differ.",
+  "empirical_evidence": "On the controlled Fold0 Train80 fixture, all 42/42 stock-path-derived fields changed and all dynamic-peer fields changed.",
+  "fixture": "Fold0 Train80, raw 2018-01-01..2021-12-31, tape 2018-06-01..2021-06-30, seed 12345, block 20",
+  "identical_stock_features": {
+    "days_since_earnings__v1": "Derived from PIT earnings-event chronology, not from stock price chronology; deliberately remains aligned to real event calendar while synthetic returns are permuted.",
+    "earnings_estimate_eps__v1": "PIT published earnings-event value; exogenous stock-specific chronological context, not price-derived.",
+    "earnings_event_count__v1": "PIT earnings-event registry field; event chronology/context, not price-derived.",
+    "earnings_event_session__v1": "PIT earnings-event calendar/session indicator; exogenous chronological event context, not price-derived.",
+    "earnings_reported_eps__v1": "PIT published earnings-event value; exogenous stock-specific chronological context, not price-derived.",
+    "earnings_surprise_pct__v1": "PIT published earnings-event value; exogenous stock-specific chronological context. Null reassigns synthetic returns against this unchanged chronology.",
+    "earnings_timing_known__v1": "PIT publication/timing-availability field; chronological information-set context, not price-derived.",
+    "eligible": "PIT earnings-registry availability/eligibility field; exogenous chronological event context, not derived from synthetic price/volume chronology."
+  },
+  "market_policy": "External market/context bank remains chronological and identical.",
+  "numerical_change_policy": "NONCONTROLLING_EMPIRICAL_EVIDENCE_ONLY",
+  "numerical_change_policy_detail": "The observed 42/42 stock-path-derived features changing on the controlled fixture is strong empirical evidence, but numerical inequality is not an absolute present or future conformance requirement. A correctly rebuilt synthetic-path feature may coincidentally equal its original value without violating conformance.",
+  "provenance_boundary": "Only the eight explicitly registered PIT/exogenous stock-context fields may be intentionally carried unchanged. Every feature derived wholly or partly from stock OHLCV, returns, or dynamic-peer stock paths must be recomputed exclusively from the completed synthetic path using production builders.",
+  "provenance_boundary_status": "USER_FROZEN",
+  "required_invariant_policy": "Provenance registry defines conformance; numerical inequality does not. Unchanged fields must be a subset of the explicitly registered chronological exogenous/PIT context.",
+  "schema": "MTS_H7_NULL_INVARIANT_FEATURE_AUDIT_V1",
+  "status": "PASS",
+  "stock_feature_count": 50
+}

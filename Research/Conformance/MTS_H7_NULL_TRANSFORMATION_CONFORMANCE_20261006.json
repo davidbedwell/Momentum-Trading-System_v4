@@ -1,0 +1,16 @@
+{
+  "bindings": {
+    "Core/conforming_ga/g2features.py": "ea0ca4e7cb18aeeabe55c29502423dfd8ea17e5d6353b1d42d7bb8b014b2dcd3",
+    "Core/conforming_ga/h7_g2.py": "41a459ef88e5b83f8cfb4c60634fa021e9bd05d00696d8626e28313e068442ff",
+    "Core/conforming_ga/null_provenance.py": "344a03266973e644dd2db559f3d5fd97a9e06aa7f50e6ee28cf45c51d07e53d3",
+    "Research/Conformance/MTS_H7_NULL_INVARIANT_FEATURE_AUDIT_20261006.json": "ea837f29c07dae3f25cb23da9dd584ce67c952cc5707669c8fcf6504e0236688",
+    "Tests/conforming_ga/test_h7_null_conformance.py": "4e7e6dad293448d482dd781553c19f471d168e57830b4926b00b79627b8d40fb",
+    "Tests/conforming_ga/test_h7_null_transform.py": "14301676ff0cc3fed50e0fdb7f325c1b026f290d126c752cdac78b2363443198"
+  },
+  "conformance_basis": "explicit provenance registry plus production-path rebuild; numerical inequality is supporting empirical evidence only",
+  "empirical_evidence": "42/42 current stock-path-derived fields changed; all dynamic-peer fields changed",
+  "generated_at": 1791316777.6956913,
+  "passed": true,
+  "result": ".....                                                                    [100%]\n5 passed in 32.38s",
+  "schema": "MTS_H7_NULL_TRANSFORMATION_CONFORMANCE_V2"
+}

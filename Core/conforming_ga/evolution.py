@@ -40,7 +40,7 @@ def behavioral_distance(a:np.ndarray,b:np.ndarray)->float:
 def map_descriptor(metrics:dict[str,float])->tuple[float,...]:
     return tuple(float(metrics[k]) for k in MAP_DESCRIPTOR_NAMES)
 
-def random_genome(seed:int,stock_features=("mom20","mom63","rv20","volume_rel20"),
+def random_genome(seed:int,stock_features=("mom20","mom63","rv20","volume_rel20","earnings_surprise_pct__v1","days_since_earnings__v1","earnings_event_session__v1"),
                   market_features=("spy_ret_5","spy_ret_20","spy_dd","spy_vol_20","ofr_fsi"),
                   sector_features=("peer_ret1","peer_mom20"))->Genome:
     r=np.random.Generator(np.random.PCG64(seed))

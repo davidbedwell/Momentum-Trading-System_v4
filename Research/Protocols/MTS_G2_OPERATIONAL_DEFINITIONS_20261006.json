@@ -1,0 +1,29 @@
+{
+  "format":"MTS_G2_OPERATIONAL_DEFINITIONS_V1",
+  "date":"2026-10-06",
+  "status":"ENGINEERING_OPERATIONALIZATION_OF_FROZEN_CLAUDE_TEXT",
+  "scientific_redesign":false,
+  "recovery_capture":{
+    "source":"Claude J.2 + H.3",
+    "definition":"For ex-post SPY peak-to-trough decline episodes >=10%, recovery phase runs from the episode trough through SPY recovery of its prior high. Training recovery capture is compounded MTS return across those training recovery sessions divided by compounded SPY return across the same sessions.",
+    "fitness_role":"MAP/novelty descriptor only; not a CAGR/MDD objective or guard"
+  },
+  "training_gfc_episode_return":{
+    "source":"Claude H.3 and frozen GFC window",
+    "window_start":"2007-10-09",
+    "window_end":"2009-03-09",
+    "definition":"Compounded MTS session return over the training GFC decline window",
+    "fitness_role":"MAP/novelty descriptor only"
+  },
+  "hypervolume":{
+    "source":"Claude H.2/H.4",
+    "objectives":["maximize CAGR","maximize signed MDD (less negative is better)"],
+    "reference_point":{"cagr":-1.0,"mdd":-1.0},
+    "rationale":"-100% is the natural lower bound for both compounded CAGR and drawdown; fixed across folds and generations",
+    "use":"Only the pre-registered >1%/50-generation extension trigger and <0.5%/40-generation plateau test"
+  },
+  "parallelism":{
+    "thunder_logical_cpus":6,
+    "rule":"Use six process workers across the flattened island evaluation queue; deterministic fixed-order reduction after evaluation."
+  }
+}
