@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-06",
+  "engine_commit": "d21d873",
+  "verdict": "BLOCKED_NOT_CERTIFIED",
+  "ga_launch_authorized": false,
+  "compile": "PASS",
+  "combined_regression_passed": 125,
+  "production_preflight_behavioral_passed": 95,
+  "checks_passed": ["BEHAVIORAL_SUITE","CONTEXTUAL_LAYER_POLICY","DEV117_COUNT","OFR_HASH","OS_SANDBOX","SAFE_HASH","SPY_HASH"],
+  "checks_blocked": ["PIT_EARNINGS_REGISTRY","NULL_CALIBRATION_REPORT","PLANTED_CALIBRATION_REPORT"],
+  "root_blocker": "MANDATORY_PIT_EARNINGS_STREAM_ABSENT",
+  "null_and_planted_status": "NOT_RUN_BECAUSE_FULL_PIPELINE_PREREQUISITE_MISSING",
+  "paid_real_ga_launched": false
+}
