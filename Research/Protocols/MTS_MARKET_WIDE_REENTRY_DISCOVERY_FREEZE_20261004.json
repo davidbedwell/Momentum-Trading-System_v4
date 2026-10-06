@@ -1,0 +1,27 @@
+{
+ "format":"MTS_MARKET_WIDE_REENTRY_DISCOVERY_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_REENTRY_ANALYSIS",
+ "question":"After a destructive market regime/STOP state, what causal market-wide characteristics distinguish durable recovery suitable for reopening MTS entries from temporary bear-market rallies?",
+ "principle":"Analyze reentry independently using the same descriptor-first/falsification methodology used for exit. Stop-signal disappearance is not sufficient reentry.",
+ "benchmark":{
+   "name":"50/200 bullish EMA cross",
+   "purpose":"timing and false-recovery benchmark only; not presumed optimal"
+ },
+ "recovery_descriptor_families":{
+   "price_trend":["short/long EMA recovery geometry","long-EMA slope improvement","distance from rolling low","higher-low persistence"],
+   "breadth":["breadth-above-SMA20/200 recovery","breadth recovery velocity","breadth persistence"],
+   "return_structure":["positive-day persistence","multi-session return recovery","reduction in extreme negative-day clustering"],
+   "rebound_quality":["successful rebound persistence","failure to revisit prior low","recovery after pullbacks"],
+   "volatility":["realized-volatility compression","VIX/VVIX normalization/persistence"],
+   "external_stress":["OFR funding improvement","OFR credit improvement","OFR volatility normalization"]
+ },
+ "causality":["all features trailing-only","OFR shifted by known 2-business-day publication lag","no future trough knowledge in operational rule"],
+ "initial_windows":[5,10,15,20,30,40,50,60],
+ "false_reentry_definition":"A candidate reentry that is followed by renewed destructive deterioration / material retest before durable recovery; exact objective labels must be frozen before candidate search.",
+ "selection_priority":["fewest false reentries","earliest durable recovery","cross-regime portability","simplicity"],
+ "regimes_to_characterize":["2008","2011 severe dislocation","2015 correction control","2018 correction/control","2020 fast shock","2022 grinding bear"],
+ "prohibited":["portfolio CAGR fitness","portfolio DD fitness","terminal wealth fitness","retuning frozen Group C STOP","protected evidence"],
+ "protected":{"heldout50":false,"consumed67_for_tuning":false,"remaining186":false,"verification_a":false,"verification_b":false},
+ "next_step":"construct causal recovery trajectories and benchmark 50/200 bullish cross before searching descriptor combinations"
+}

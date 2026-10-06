@@ -1,0 +1,22 @@
+{
+ "format":"MTS_DEFENSIVE_GA_PHASE1_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_GA",
+ "purpose":"Broad Phase-1 GA search for opportunistic long trading behavior during identified falling-bear/DEFENSIVE research windows, using DEV50 only.",
+ "development50":["AMGN","CI","MPC","STLD","EXC","CFG","AJG","NUE","KKR","TDG","PPG","TRV","RL","CTSH","T","FIS","NOW","SBAC","SMCI","KDP","COST","OMC","NKE","RSG","ROK","SO","XEL","DECK","TRGP","WELL","CDW","ITW","DHI","IRM","COIN","TPL","FANG","HWM","NFLX","BEN","BNY","BLDR","EVRG","GILD","MCO","TECH","CLX","PCAR","COO","FITB"],
+ "test17_access":false,
+ "protected_access":false,
+ "research_windows":{
+   "GFC":["2007-10-09","2009-03-09"],
+   "2011":["2011-07-22","2011-10-03"],
+   "2015_16":["2015-08-20","2016-02-11"],
+   "2018":["2018-10-03","2018-12-24"],
+   "COVID":["2020-02-19","2020-03-23"],
+   "2022":["2022-01-03","2022-10-12"]
+ },
+ "window_note":"Dates define retrospective research laboratories only; endpoints/troughs are never GA features and are not operational recovery gates.",
+ "candidate_source":"Existing consumed discovery trajectory candidate signals. Phase 1 may search family, horizon, adverse-excursion/recovery entry geometry, confirmation timing, stop geometry and participation filters represented causally in those artifacts.",
+ "fitness":["net trade expectancy after 10 bps round-trip cost","profit factor","win rate","worst-window expectancy","tail loss","trade count","cross-window portability"],
+ "anti_overfit":["retain per-window results","penalize solutions dependent on one episode","minimum trade count","no TEST17","no protected data","no recovery labels as features"],
+ "interpretation":"Phase 1 is discovery, not validation. Its purpose is to expose promising defensive-market trading structures for subsequent deterministic simulation and diagnostic TEST17."
+}

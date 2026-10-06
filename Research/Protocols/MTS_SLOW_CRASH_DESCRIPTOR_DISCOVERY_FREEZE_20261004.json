@@ -1,0 +1,28 @@
+{
+ "format":"MTS_SLOW_CRASH_DESCRIPTOR_DISCOVERY_FREEZE_V1",
+ "date":"2026-10-04",
+ "question":"Among causal 20-60 session trajectories following trend-deterioration sentinels, what common characteristics distinguish known slow destructive bears from false-positive 50/200 EMA death-cross episodes?",
+ "design":{
+  "positive_archetypes":["2007-2008 slow destructive bear","2022 slow destructive bear"],
+  "negative_controls":"Every 50/200 EMA false-positive episode in evaluable history, not a hand-selected subset.",
+  "sentinel_role":"MA geometry is an anchor only; descriptor discovery is not restricted to 50/200 and may later support faster MA sentinels.",
+  "windows_sessions":[20,30,40,50,60],
+  "causality":"Only observations available through each session; no future trough/recovery fields as predictors."
+ },
+ "descriptor_families":[
+  "return path geometry and drawdown velocity",
+  "failed rebound frequency/magnitude and lower-high/lower-low behavior",
+  "breadth level, slope, persistence, deterioration and failed recovery",
+  "realized volatility level, persistence and acceleration",
+  "VIX/VVIX level, persistence, term/trajectory where available",
+  "OFR funding/credit/volatility level, change and persistence with publication lag",
+  "dispersion/correlation/common-factor proxies where causally available",
+  "moving-average geometry: distances, slopes, convergence/divergence and cross ordering",
+  "extreme down-day clustering and rebound asymmetry"
+ ],
+ "discovery_method":"Describe and rank effect separation between slow-crash windows and all false-positive windows. No single descriptor is assumed in advance. Sparse temporal combinations may be tested only after univariate/trajectory audit.",
+ "primary_metrics":["effect separation","direction consistency across both slow crashes","false-positive overlap","earliest window where separation appears","stability across 20-60 session windows"],
+ "prohibited":["portfolio CAGR/wealth optimization","future outcome fields as features","protected bank access","post-hoc removal of difficult false positives"],
+ "protected":{"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+ "status":"FROZEN_BEFORE_DESCRIPTOR_AUDIT"
+}

@@ -1,0 +1,31 @@
+{
+  "format":"MTS_R1_GFC_EPISODE_COMPARISON_FREEZE_V2",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_ANALYSIS",
+  "purpose":"Consolidate overlapping GFC rally launch days into independent rally episodes, then compare early causal characteristics of failed violent recoveries with the durable March 2009 emergence.",
+  "window":{"start":"2007-10-09","true_emergence_reference":"2009-03-09"},
+  "episode_generator":{
+    "candidate_low":"trailing-10-session local low",
+    "qualification":"broad-panel price subsequently rises at least 7% within 20 sessions",
+    "episode_merge":"All qualifying candidate lows belong to one episode until either (a) a new low below the episode launch low occurs after a rally of at least 7%, ending that episode and permitting a new one, or (b) 30 trading sessions elapse from launch; retain the lowest launch price/date within overlapping pre-rally candidates.",
+    "independence":"One feature vector series per consolidated rally episode; overlapping launch dates are never counted as independent examples.",
+    "labeling":"An episode is false if price subsequently breaks below its launch low before 2009-03-09; March 2009 is the durable true reference."
+  },
+  "observation_offsets":[1,2,3,5,7,10,15],
+  "features":[
+    "return from launch","short-horizon return velocity/acceleration","breadth_positive_20 level/change","breadth_above_sma_200 level/change",
+    "positive/negative-day persistence","failed-rebound fraction","extreme negative-day recurrence","realized volatility level/change",
+    "VIX/VVIX level/change","EMA 10/20/50/100/160/200 price gaps and slopes","OFR Funding/Credit/Volatility lagged levels/change",
+    "short pullback depth","higher-high/higher-low development where causally observable"
+  ],
+  "outcomes_for_description":["episode peak gain","sessions to peak","subsequent break below launch low","post-observation MAE 5/10/20/40/60","forward return 5/10/20/40/60"],
+  "rules":[
+    "Future data may label and score outcomes but never enter a contemporaneous descriptor.",
+    "Reference trough is descriptive only and never a gate.",
+    "Preserve each false episode individually; do not average away heterogeneity.",
+    "Do not fit thresholds or trading rules in this experiment.",
+    "Prioritize whether useful separation exists by sessions 1-15.",
+    "No protected banks, no portfolio fitness."
+  ],
+  "qualification":"Current-S&P broad panel survivorship qualification; OFR publication lag two business days."
+}

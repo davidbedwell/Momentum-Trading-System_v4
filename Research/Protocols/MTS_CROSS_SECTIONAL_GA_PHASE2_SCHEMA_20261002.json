@@ -1,0 +1,30 @@
+{
+  "format":"MTS_CROSS_SECTIONAL_GA_PHASE2_SCHEMA_V1",
+  "frozen_date":"2026-10-02",
+  "fitness_search":"consumed 67-stock Discovery only",
+  "architecture_holdout":"consumed 50-stock four-era; no fitness feedback",
+  "sealed":["remaining 186 Discovery","Verification A remainder","Verification B"],
+  "portable_genomes":396,
+  "qualification_genes":{
+    "min_excess_ev_bps":{"values":[0,25,50,100,200,400]},
+    "min_positive_probability":{"values":[0.50,0.525,0.55,0.575,0.60,0.625,0.65]},
+    "max_p10_loss":{"values":[0.05,0.075,0.10,0.125,0.15,0.20,0.30]},
+    "minimum_evidence_n":{"values":[100,150,250,400,750]},
+    "uncertainty_penalty":{"values":["NONE","SE_0.5","SE_1.0","SE_1.5","SE_2.0"]},
+    "safe_margin_bps_annualized":{"values":[0,25,50,100,200,400]},
+    "confirmation_sessions":{"values":[1,2,3,5]}
+  },
+  "competition_genes":{
+    "slot_ceiling":{"values":[3,5,8,10,15,20,30,50]},
+    "score_basis":{"values":["CAUSAL_EXPECTED_RETURN","CAUSAL_EV_OVER_DOWNSIDE","CAUSAL_POSITIVE_PROBABILITY","CAUSAL_COMPOSITE"]},
+    "challenger_margin":{"values":[0.0,0.05,0.10,0.20,0.30]},
+    "minimum_hold_sessions":{"values":[0,3,5,10,20]},
+    "switch_cooldown_sessions":{"values":[0,1,3,5,10]},
+    "family_duplication_penalty":{"values":[0.0,0.05,0.10,0.20]}
+  },
+  "hard_constraints":{"max_equity_exposure":1.0,"leverage":false,"safe_asset_annual_return":0.03,"point_in_time_only":true,"forced_slot_filling":false},
+  "fitness_cost_bps":10,
+  "cost_sensitivity_bps":[0,10,25,50],
+  "pareto_maximize":["ending_equity","max_drawdown","daily_cvar05","positive_return_capture"],
+  "pareto_minimize":["negative_return_capture","turnover_x_initial"]
+}

@@ -1,0 +1,22 @@
+{
+  "format":"MTS_FACTOR_AWARE_ALLOCATION_BAKEOFF_FREEZE_V1",
+  "date":"2026-10-04",
+  "question":"Can causal sizing of new trades by incremental common-factor independence reduce catastrophic drawdown while preserving more CAGR/wealth than simpler exposure reduction, with all MTS signals retained and no forced exits?",
+  "evidence":{"cache":"/home/ubuntu/mts-v4-cache/discovery_research_population_v1.pkl.gz","manifest":"/home/ubuntu/mts-v4-cache/discovery_research_population_v1.pkl.gz.manifest.json","expected_trades":125002,"expected_tickers":67,"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+  "portfolio_mechanics":"Reuse existing nonlevered cash-limited next-session-open entry and daily close marking. No signal rejection. No forced exit. Existing positions are never resized.",
+  "candidate_factor_rule":{
+    "name":"residual_variance_share20_floor25",
+    "at_each_entry":"Using only the prior 20 completed sessions, build the equal-weight return series of currently active unique underlying tickers. Regress the candidate ticker returns on that active-portfolio common-factor series with intercept. multiplier=max(0.25,1-R_squared). If insufficient history or fewer than 3 active tickers, multiplier=1.0.",
+    "same_day_causality":"All entries on a session use portfolio membership existing before that session's new entries.",
+    "no_fit":true
+  },
+  "null_controls":[
+    "BASELINE equal sizing",
+    "UNIFORM_MATCHED: a constant multiplier chosen only to match factor-aware average gross exposure, not performance",
+    "CONCURRENCY_MATCHED: causal inverse-concurrency entry sizing with one scalar chosen only to match factor-aware average gross exposure, not performance"
+  ],
+  "primary_metrics":["terminal wealth","CAGR-equivalent","max drawdown","daily CVaR05","average gross exposure","peak gross exposure","max drawdown dates"],
+  "decision_rule":"Factor-aware is promising only if it improves the CAGR/wealth-versus-drawdown tradeoff relative to BOTH matched-exposure nulls. If drawdown improvement is explained by lower exposure or factor-aware loses to either simple matched null, kill this formulation.",
+  "prohibitions":["no GA","no performance fitting","no signal rejection","no forced liquidation","no protected-bank access"],
+  "status":"FROZEN_BEFORE_TEST"
+}

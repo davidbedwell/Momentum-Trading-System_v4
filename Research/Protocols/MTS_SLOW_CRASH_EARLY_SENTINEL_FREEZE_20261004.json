@@ -1,0 +1,22 @@
+{
+ "format":"MTS_SLOW_CRASH_EARLY_SENTINEL_FREEZE_V1",
+ "date":"2026-10-04",
+ "parent":"MTS_SLOW_CRASH_DESCRIPTOR_DISCOVERY_FREEZE_V1",
+ "question":"Can faster EMA deterioration sentinels plus independently frozen post-sentinel slow-crash descriptors shorten peak-to-exit versus 50/200 while rejecting ordinary false deterioration?",
+ "positive_episodes":{"2008":["2007-10-09","2009-03-09"],"2022":["2022-01-03","2022-10-12"]},
+ "frozen_descriptor_families":{
+  "continued_damage":["post-sentinel worst drawdown","negative-day persistence"],
+  "breadth_non_recovery":["mean 20-day breadth","200-day breadth change"],
+  "credit_deterioration":["OFR Credit change with two-business-day publication lag"]
+ },
+ "sentinel_search":{"short_ema":[20,25,30,35,40,45,50,55,60],"long_ema":[80,90,100,110,120,130,140,150,160,180,200],"require_short_below_long":true},
+ "confirmation_windows_sessions":[5,10,15,20,25,30],
+ "descriptor_thresholds":"training/control-derived quantiles only; no portfolio outcomes",
+ "control_policy":"All non-positive historical sentinel episodes count toward false declarations; specifically retain all prior false 50/200 controls.",
+ "selection_priority":["fewest false declarations","coverage of both slow crashes","earliest peak-to-declaration","simplicity"],
+ "benchmark":"50/200 sentinel plus same descriptor confirmation",
+ "report":["sentinel date","declaration date","sessions peak-to-declaration","sessions sentinel-to-declaration","false declaration episodes","false declaration days","descriptor state at declaration","improvement versus 50/200 benchmark"],
+ "prohibited":["MTS CAGR/wealth fitness","future trough/recovery as features","protected bank access"],
+ "protected":{"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+ "status":"FROZEN_BEFORE_SEARCH"
+}

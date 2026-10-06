@@ -1,0 +1,34 @@
+{
+  "format": "MTS_GA_REDESIGN_MULTIFIDELITY_VALIDATION_V2",
+  "date": "2026-10-06",
+  "execution": "close T decision; T+1 adjusted-open execution",
+  "subset_size": 24,
+  "full_size": 80,
+  "calendar": "all sessions retained including all decline/recovery episodes",
+  "validation_genomes": 50,
+  "selection": "deterministic SHA256 hash sample per fold",
+  "required_spearman": 0.9,
+  "folds": [
+    {
+      "fold": 0,
+      "cagr_spearman": 0.9824067225088655,
+      "mdd_spearman": 0.9579885487962618
+    },
+    {
+      "fold": 1,
+      "cagr_spearman": 0.9394928744731962,
+      "mdd_spearman": 0.9743482397329367
+    },
+    {
+      "fold": 2,
+      "cagr_spearman": 0.9456442611016743,
+      "mdd_spearman": 0.9640863867993205
+    },
+    {
+      "fold": 3,
+      "cagr_spearman": 0.9853880072161858,
+      "mdd_spearman": 0.9798627387678731
+    }
+  ],
+  "pass": true
+}

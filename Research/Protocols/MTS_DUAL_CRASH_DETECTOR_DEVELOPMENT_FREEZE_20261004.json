@@ -1,0 +1,45 @@
+{
+ "format":"MTS_DUAL_CRASH_DETECTOR_DEVELOPMENT_FREEZE_V1",
+ "date":"2026-10-04",
+ "parent_protocol":"MTS_MULTIMARKET_CRASH_CLASSIFIER_FREEZE_20261004.json",
+ "architecture":{
+  "detector_A":"FAST_SHOCK_SYSTEMIC",
+  "detector_B":"SLOW_BEAR_DETERIORATION",
+  "combination":"OR for crash-management eligibility; detectors developed and scored independently"
+ },
+ "goal":"Causally identify destructive deterioration early enough to preserve a material fraction of subsequent crash loss without frequent false exits.",
+ "engineering_benchmark":"50_PERCENT_LOSS_SAVED is a major success benchmark, not a fitting target and not a requirement for every episode.",
+ "fitness":"classification quality, detection delay, false-alert episodes, temporal stability; portfolio CAGR/wealth prohibited from fitting",
+ "detector_A":{
+  "archetypes":["2020 fast shock","2008 acute systemic cascade segments"],
+  "features":["drawdown speed","1/5-day loss acceleration","extreme-move clustering","VIX level/change/percentile","VVIX level/change/percentile","breadth collapse velocity","OFR funding/credit/volatility acceleration","cross-market concurrence"],
+  "design":"rare high-specificity shock declaration; short confirmation allowed"
+ },
+ "detector_B":{
+  "archetypes":["2007-2008 grinding deterioration before acute cascade","2022 policy/inflation bear"],
+  "features":["persistent drawdown","20/60-day trend damage","failed rebound count","time below trailing trend","persistent breadth damage","breadth recovery failures","VIX regime persistence","OFR credit/funding persistence and acceleration","stress persistence"],
+  "design":"slower confirmation accepted; persistence and failed recovery emphasized over shock magnitude"
+ },
+ "controls":{
+  "2015":"elevated correction / hard control; may enter warning state but should not automatically become systemic crash",
+  "ordinary_stress":"all evaluable non-crash history contributes to false-alert burden"
+ },
+ "timing":"completed information through t can authorize action no earlier than next tradable session; OFR retains two-business-day lag",
+ "validation":{
+  "primary":"episode-level walk-forward and leave-archetype-out",
+  "report":["first detection date","sessions from peak/onset","drawdown already incurred","subsequent downside remaining","false alert episode starts","alert duration","feature ablations"],
+  "portfolio_diagnostic_after_classifier_freeze":"simulate exit-at-next-session and report fraction of baseline crash loss avoided, including 50% benchmark; do not use this to choose detector parameters"
+ },
+ "development_evidence":{
+  "public_market_history":true,
+  "consumed67":"diagnostic only after detector freeze; never parameter fitness",
+  "test17":"already consumed; not virgin",
+  "heldout50":false,
+  "remaining186":false,
+  "verification_a":false,
+  "verification_b":false
+ },
+ "search":"transparent sparse rules first; bounded search only; no unconstrained GA",
+ "stop_rule":"If neither detector shows out-of-sample discrimination with manageable false-alert burden, do not optimize portfolio exits to rescue it.",
+ "status":"FROZEN_BEFORE_DUAL_DETECTOR_SEARCH"
+}

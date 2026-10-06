@@ -1,0 +1,42 @@
+{
+  "format":"MTS_TRUE_RECOVERY_EMERGENCE_DESCRIPTOR_DISCOVERY_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_ANALYSIS",
+  "question":"What causal characteristics describe the genuine emergence from destructive market episodes, and which are common versus regime-specific?",
+  "purpose":"Descriptor discovery only. Characterize each true recovery independently before attempting generalization or fitting a reentry rule.",
+  "episodes":{
+    "2008":{"reference_trough":"2009-03-09","type":"structural/systemic"},
+    "2011":{"reference_trough":"2011-10-03","type":"severe dislocation/control"},
+    "2015":{"reference_trough":"2016-02-11","type":"correction/control"},
+    "2018":{"reference_trough":"2018-12-24","type":"sharp correction"},
+    "2020":{"reference_trough":"2020-03-23","type":"fast shock/systemic"},
+    "2022":{"reference_trough":"2022-10-12","type":"grinding bear"}
+  },
+  "analysis_offsets_sessions":[0,3,5,10,15,20,30,40,50,60],
+  "descriptor_families":[
+    "price recovery: return from reference low, distance from trailing lows, 5/10/20-session returns",
+    "pullback structure: rolling adverse excursion, higher-low behavior, failure to revisit prior low",
+    "breadth: fraction positive 20-day trend, fraction above 200-day trend, breadth change and persistence",
+    "return structure: positive-day fraction, negative-day fraction, extreme-negative-day clustering",
+    "rebound quality: successful 5-day rebounds and persistence",
+    "trend geometry: EMA 20/50/100/160/200 gaps, slopes, bullish ordering/reclaims",
+    "volatility: realized volatility, VIX, VVIX and normalization",
+    "external stress: OFR Funding/Credit/Volatility levels and lagged changes"
+  ],
+  "methodology":[
+    "The reference trough is used only to define historical true-emergence examples for descriptor discovery, never as an operational signal.",
+    "At each offset, descriptors use only information available through that date.",
+    "Analyze every episode separately first.",
+    "Only after per-episode characterization identify common descriptors and explicit regime-specific differences.",
+    "Do not force a single generalized recovery signature.",
+    "No candidate reentry threshold fitting in this stage.",
+    "No CAGR, portfolio drawdown, terminal wealth, or protected-bank fitness."
+  ],
+  "outputs":[
+    "per-episode recovery trajectory table",
+    "cross-episode commonality table",
+    "regime-specific descriptor differences",
+    "candidate descriptor families for later false-rally-vs-durable-recovery testing"
+  ],
+  "qualification":"Current-S&P broad-market panel has survivorship qualification; OFR data shifted by two business days."
+}

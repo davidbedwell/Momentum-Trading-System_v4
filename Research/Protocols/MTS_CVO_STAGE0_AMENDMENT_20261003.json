@@ -1,0 +1,22 @@
+{
+  "format":"MTS_CVO_STAGE0_AMENDMENT_V1",
+  "date":"2026-10-03",
+  "parent_freeze_sha256":"789d443c37a2b485694df263e70e72dc6683cdbfa8f2e085faa6eaae398f5f34",
+  "panel_packet_sha256":"78183551b1c59021804d6efee7d841adad30edb01b296cf75553b7b4ebd63e3b",
+  "scope":"Stage-0 integrity repair plus bounded deterministic falsification only; no GA and no portfolio intervention.",
+  "path_amendment":{"clerical_bad_path_in_parent":".../sp500-current-sp500-calibration-20260915__...","canonical_path":"/home/ubuntu/mts-v4-nexus-derived-market-current-sp500-calibration-20260915/data/sp500-current-calibration-20260915__a0dd6a1a76bb/mts_market_predictors_v2__3e9bdc71246a/predictor-v2-initial-20260929-predictors-2005-09-14-2026-09-14.parquet","rule":"canonical file must exist and be hashed before extraction; parent is not silently rewritten"},
+  "episode_semantics":{"decision_start":"first causal session baseline drawdown crosses -8% under episode builder","peak_field":"reporting field is mislabeled and is not used to select decision timestamp","episode28":"right-censored; report primary frozen label 0 and sensitivity label 1"},
+  "provenance":{"current_constituent_breadth_dispersion":"survivorship-contaminated; controls only, not primary scientific evidence","valid_fraction":"excluded from scientific scoring; negative-control only","shadow_mts":"frozen always-on Prior67 baseline only"},
+  "missingness":"No episode deletion or outcome-conditioned imputation. Raw causal scores primary; shadow_z1 excluded from primary tests.",
+  "prespecified_scores":[
+    {"id":"ASTRA_FRACTURE_VR","formula":"shadow_vr5_60 - mkt_vr5_60","direction":"higher_is_destructive","fixed_threshold":0.0,"terms":2},
+    {"id":"CLAUDE_FRACTURE_RETURN","formula":"-0.5*((shadow_r10-mret10)+(shadow_r20-mret20))","direction":"higher_is_destructive","threshold_rule":"rank diagnostic: minimum positive score; count negatives at-or-above","terms":2},
+    {"id":"CLAUDE_GRIND_LOWVR","formula":"-shadow_vr5_60","direction":"higher_is_destructive (low short/long volatility ratio)","threshold_rule":"rank diagnostic","terms":1},
+    {"id":"CLAUDE_CLUSTER_HIGHVR","formula":"shadow_vr5_60","direction":"higher_is_destructive (competing volatility-clustering sign)","threshold_rule":"rank diagnostic","terms":1}
+  ],
+  "nulls_controls":["shadow_dd severity","shadow_downrv20 volatility","mret5 market-return severity"],
+  "primary_gate":{"collapse_recall":"4/4","max_false_alarms":"2/24","note":"fixed Astra threshold additionally reported; rank gate used for Claude diagnostics"},
+  "stability":["decision t-1","decision t","decision t+1","episode28 dual coding","same-regime sibling contrasts 2020-02-27 vs 2020-03-06 and 2022-03-07 vs 2022-04-20"],
+  "evidence_boundary":{"prior67_consumed":true,"heldout50_preserved_not_pristine_access":false,"remaining_discovery186_access":false,"verification_a_access":false,"verification_b_access":false},
+  "ga_authorized":false
+}

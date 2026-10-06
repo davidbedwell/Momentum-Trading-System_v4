@@ -1,0 +1,17 @@
+{
+ "format":"MTS_FOUR_DRAWDOWN_LOSS_ATTRIBUTION_FREEZE_V1",
+ "date":"2026-10-04",
+ "question":"Across the four destructive portfolio drawdowns, which capital cohorts create peak-to-trough losses, and are those losses concentrated in new entries and eventual losers?",
+ "evidence":{"cache":"/home/ubuntu/mts-v4-cache/discovery_research_population_v1.pkl.gz","expected_trades":125002,"expected_tickers":67,"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+ "drawdowns":[
+  {"name":"2008","peak":"2007-12-10","trough":"2009-03-09"},
+  {"name":"2015","peak":"2015-12-01","trough":"2016-02-11"},
+  {"name":"2020","peak":"2020-03-06","trough":"2020-03-23"},
+  {"name":"2022","peak":"2022-04-20","trough":"2022-06-16"}
+ ],
+ "frozen_cohorts":["positions active at peak","entries after peak through trough","eventual terminal winners","eventual terminal losers","new-entry winners","new-entry losers"],
+ "frozen_metrics":["net contribution","gross negative contribution","share of gross trade loss","capital allocated","trade count","worst 5% and 10% negative-contributor concentration","terminal-return mass"],
+ "hard_gate":"Per-position ledger must reconcile exactly to baseline portfolio equity change for every peak-to-trough interval.",
+ "prohibitions":["no strategy changes","no threshold search","no optimization","no GA","no protected-bank access"],
+ "status":"FROZEN_BEFORE_TEST"
+}

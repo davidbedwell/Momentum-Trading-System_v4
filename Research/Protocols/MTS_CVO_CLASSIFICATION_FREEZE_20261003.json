@@ -1,0 +1,371 @@
+{
+  "format": "MTS_CVO_CLASSIFICATION_FREEZE_V1",
+  "frozen_on": "2026-10-03",
+  "scientific_question": "Given that deterioration has begun, is causal information available at the time that distinguishes a developing destructive collapse from temporary deterioration that MTS should be allowed to exploit?",
+  "evidence_boundary": {
+    "prior67_consumed": true,
+    "heldout50_preserved_not_pristine_access": false,
+    "remaining_discovery186_access": false,
+    "verification_a_access": false,
+    "verification_b_access": false
+  },
+  "primary_design": {
+    "n_episodes": 28,
+    "n_positive": 4,
+    "n_negative": 24,
+    "decision_timestamp": "close of supplied episode start date",
+    "prediction_effective": "no earlier than next tradable observation",
+    "episodes": [
+      {
+        "episode_id": 1,
+        "decision_date": "2006-05-17",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 2,
+        "decision_date": "2007-03-05",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 3,
+        "decision_date": "2007-07-26",
+        "label": 1,
+        "class": "destructive_collapse"
+      },
+      {
+        "episode_id": 4,
+        "decision_date": "2009-10-02",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 5,
+        "decision_date": "2010-05-06",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 6,
+        "decision_date": "2011-08-04",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 7,
+        "decision_date": "2011-11-23",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 8,
+        "decision_date": "2012-10-24",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 9,
+        "decision_date": "2013-12-02",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 10,
+        "decision_date": "2015-07-24",
+        "label": 1,
+        "class": "destructive_collapse"
+      },
+      {
+        "episode_id": 11,
+        "decision_date": "2016-05-05",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 12,
+        "decision_date": "2018-12-18",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 13,
+        "decision_date": "2019-08-14",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 14,
+        "decision_date": "2020-02-27",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 15,
+        "decision_date": "2020-03-06",
+        "label": 1,
+        "class": "destructive_collapse"
+      },
+      {
+        "episode_id": 16,
+        "decision_date": "2020-06-11",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 17,
+        "decision_date": "2020-09-23",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 18,
+        "decision_date": "2020-11-30",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 19,
+        "decision_date": "2022-01-25",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 20,
+        "decision_date": "2022-03-07",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 21,
+        "decision_date": "2022-04-20",
+        "label": 1,
+        "class": "destructive_collapse"
+      },
+      {
+        "episode_id": 22,
+        "decision_date": "2023-08-17",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 23,
+        "decision_date": "2024-08-05",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 24,
+        "decision_date": "2024-09-04",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 25,
+        "decision_date": "2024-12-18",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 26,
+        "decision_date": "2025-04-03",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 27,
+        "decision_date": "2026-07-08",
+        "label": 0,
+        "class": "temporary_deterioration"
+      },
+      {
+        "episode_id": 28,
+        "decision_date": "2026-09-10",
+        "label": 0,
+        "class": "temporary_deterioration"
+      }
+    ]
+  },
+  "secondary_landmarks": {
+    "trading_sessions_after_start": [
+      5,
+      10,
+      20
+    ],
+    "status": "frozen_secondary",
+    "risk_set_rule": "Episode must still be unresolved at landmark; resolved episodes remain accounted for and may not be silently discarded.",
+    "cannot_replace_primary": true
+  },
+  "causality_contract": {
+    "primary": "Features must be known by decision close. Existing Section-F panel is shifted one session because it was built for next-session control; classifier extraction must explicitly reconstruct close-t values from raw causal inputs rather than accidentally reuse shifted t-1 values.",
+    "normalization": "Any fitted scaling/standardization uses training fold only.",
+    "forward_outcomes": "labels_only"
+  },
+  "eligible_raw_sources": {
+    "market_predictor_v2": {
+      "path": "/home/ubuntu/mts-v4-nexus-derived-market-current-sp500-calibration-20260915/data/sp500-current-sp500-calibration-20260915__a0dd6a1a76bb/mts_market_predictors_v2__3e9bdc71246a/predictor-v2-initial-20260929-predictors-2005-09-14-2026-09-14.parquet",
+      "note": "PATH MUST BE AVAILABILITY-AUDITED BEFORE EXTRACTION; typo/path mismatch is hard failure, not silently repaired."
+    },
+    "actual_predictor_path_from_section_f": "/home/ubuntu/mts-v4-nexus-derived-market-current-sp500-calibration-20260915/data/sp500-current-calibration-20260915__a0dd6a1a76bb/mts_market_predictors_v2__3e9bdc71246a/predictor-v2-initial-20260929-predictors-2005-09-14-2026-09-14.parquet",
+    "raw_fields": [
+      "security_id",
+      "effective_date",
+      "eligible",
+      "return_1__v1",
+      "close_to_sma_20__v1",
+      "close_to_sma_50__v1",
+      "close_to_sma_200__v1"
+    ],
+    "read_only_prior67_baseline": "Frozen always-on baseline daily return/equity state generated without classifier intervention."
+  },
+  "frozen_feature_library": {
+    "market_return_geometry": [
+      "mret1",
+      "mret3",
+      "mret5",
+      "mret10",
+      "mret20",
+      "mret40"
+    ],
+    "participation_breadth": [
+      "negfrac",
+      "breadth20",
+      "breadth50",
+      "breadth200",
+      "db20_3",
+      "db20_5",
+      "db20_10"
+    ],
+    "cross_sectional": [
+      "dispersion",
+      "valid_fraction"
+    ],
+    "downside_volatility": [
+      "mkt_downrv5",
+      "mkt_downrv10",
+      "mkt_downrv20",
+      "mkt_downrv60",
+      "mkt_downrv120",
+      "mkt_vr5_60",
+      "mkt_vr10_60"
+    ],
+    "read_only_shadow_mts": [
+      "shadow_r1",
+      "shadow_r3",
+      "shadow_r5",
+      "shadow_r10",
+      "shadow_r20",
+      "shadow_r40",
+      "shadow_dd",
+      "new_low_10",
+      "new_low_20",
+      "new_low_60",
+      "shadow_downrv5",
+      "shadow_downrv10",
+      "shadow_downrv20",
+      "shadow_downrv60",
+      "shadow_vr5_60",
+      "shadow_z1"
+    ],
+    "explicitly_not_frozen": [
+      "days_since_low because existing implementation uses all-time equity low and is known structurally suspect",
+      "sector participation",
+      "cross-sectional correlation",
+      "liquidity/bid-ask",
+      "credit/funding stress",
+      "intraday range/gaps unless later separately preregistered on fresh evidence"
+    ]
+  },
+  "transform_contract": {
+    "rolling_compound_windows": [
+      3,
+      5,
+      10,
+      20,
+      40
+    ],
+    "market_downside_vol_windows": [
+      5,
+      10,
+      20,
+      60,
+      120
+    ],
+    "shadow_downside_vol_windows": [
+      5,
+      10,
+      20,
+      60
+    ],
+    "breadth_delta_windows": [
+      3,
+      5,
+      10
+    ],
+    "new_low_windows": [
+      10,
+      20,
+      60
+    ],
+    "robust_z_lookback": 756,
+    "no_window_search": true
+  },
+  "prohibited_predictors": [
+    "episode_id",
+    "calendar-year/date memorization",
+    "trough date",
+    "end/recovery date",
+    "episode duration",
+    "final drawdown/severity",
+    "forward MTS returns",
+    "start_to_trough",
+    "start_to_end",
+    "trough_to_end",
+    "oracle fields",
+    "controller state/exposure",
+    "future-defined normalization",
+    "revised or publication-unsafe data"
+  ],
+  "missing_data_rule": "No outcome-conditioned imputation or episode deletion. Deterministic causal missingness indicators may be added only if specified before scores; otherwise unavailable feature is excluded globally and documented.",
+  "validation_freeze": {
+    "primary": "fully prespecified deterministic score across all 28",
+    "strict_temporal": "expanding-window; all fitted quantities trained only on earlier episodes",
+    "loco_positive_folds": [
+      "2007-07-26",
+      "2015-07-24",
+      "2020-03-06",
+      "2022-04-20"
+    ],
+    "ga_status": "NOT_AUTHORIZED_YET",
+    "ga_if_later_authorized": {
+      "max_scalar_terms": 3,
+      "max_interactions": 1,
+      "lookback_discovery": false,
+      "episode_exceptions": false,
+      "feature_selection_inside_each_fold": true,
+      "search_adjusted_label_permutation_required": true
+    }
+  },
+  "hard_falsification_gates": [
+    "availability failure",
+    "leakage failure",
+    "rare-event failure",
+    "LOCO: fewer than 4/4 collapses exceed frozen threshold",
+    "false alarms: >2/24 temporary episodes at 4/4 LOCO recall",
+    "strict temporal failure",
+    "search-adjusted null failure if GA later used",
+    "complexity >3 scalar terms or >1 interaction",
+    "stability failure",
+    "no material improvement over frozen simple severity/volatility baselines"
+  ],
+  "portfolio_boundary": [
+    "no entry blocking",
+    "no liquidation",
+    "no exposure scaling",
+    "no recovery latch",
+    "no holding period",
+    "no portfolio fitness",
+    "no claim of preserved alpha"
+  ],
+  "next_stage": "Deterministic availability audit and causal feature extraction only; no classifier fitting/scoring until freeze hashes are recorded."
+}

@@ -1,0 +1,25 @@
+{
+  "format":"MTS_MARKET_WIDE_STOP_SIGNAL_GROUP_C_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_MARKET_WIDE_STOP_LOCK_SIGNAL",
+  "scope":"market-wide MTS risk state; not stock-level",
+  "rule":{
+    "features":["negfrac20","failed30","negfrac40","fundingchg30"],
+    "threshold":"each feature >= causal rolling historical 90th percentile",
+    "confluence":"4 of 4",
+    "confirmation_sessions":3,
+    "external_data_lag":"OFR Funding uses 2-business-day publication lag"
+  },
+  "observed_discovery_result":{
+    "2022_peak":"2022-01-03",
+    "2022_declaration":"2022-01-25",
+    "trading_sessions_after_peak":15,
+    "false_declaration_episodes_in_evaluable_nonpositive_history":0,
+    "2008_detection":"2008-10-24",
+    "interpretation":"Group C is a grinding/persistent deterioration signature, not a general crash detector."
+  },
+  "action_when_active":["liquidate all MTS positions","block all new MTS entries"],
+  "explicitly_unknown":["effect on CAGR","effect on portfolio drawdown","effect on terminal wealth","transaction-cost impact","optimal reentry rule"],
+  "not_claimed":["validated production crash detector","stock-level stop","2008 detector","CAGR improvement","drawdown improvement"],
+  "governance":["do not retune this frozen rule during reentry research","protected banks remain untouched","reentry is an independent research problem"]
+}

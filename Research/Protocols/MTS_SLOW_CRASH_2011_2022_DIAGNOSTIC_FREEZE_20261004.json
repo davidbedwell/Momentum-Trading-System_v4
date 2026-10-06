@@ -1,0 +1,16 @@
+{
+ "format":"MTS_SLOW_CRASH_2011_2022_DIAGNOSTIC_FREEZE_V1",
+ "date":"2026-10-04",
+ "frozen_parent_result":{"sentinel":"55/160 EMA","2008_declaration":"2007-12-04","2022_declaration":"2022-06-29","false_declaration":"2011-09-08"},
+ "questions":[
+  "Was the 2011 declaration economically crash-like despite being outside the narrow positive labels?",
+  "What causal trajectory characteristics distinguish 2022 during sessions 30-80 after its peak from ordinary corrections and from 2011?",
+  "Is there evidence for a distinct grinding policy/trend bear mechanism that does not require severe credit deterioration?"
+ ],
+ "windows_from_peak_sessions":[20,30,40,50,60,70,80],
+ "diagnostic_families":["returns/drawdown speed","breadth level/change/persistence","failed rebound persistence","realized volatility","VIX/VVIX","OFR credit/funding/volatility with lag","MA distances/slopes/order","negative/extreme day clustering"],
+ "controls":["2011 stress episode retained","2015 correction","2018 correction","all evaluable prior false 50/200 controls"],
+ "prohibited":["changing frozen 55/160 result","portfolio CAGR/wealth fitting","protected evidence","removing 2011 because inconvenient"],
+ "protected":{"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+ "status":"FROZEN_BEFORE_DIAGNOSTIC"
+}

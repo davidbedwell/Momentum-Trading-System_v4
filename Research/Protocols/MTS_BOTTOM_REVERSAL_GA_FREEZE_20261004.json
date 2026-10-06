@@ -1,0 +1,27 @@
+{
+  "format":"MTS_BOTTOM_REVERSAL_GA_FREEZE_V1",
+  "date":"2026-10-04",
+  "question":"Once a crash has been recognized, can a sparse causal market-state genome identify the market trough within +/-7 trading sessions, preferably after rather than before the trough?",
+  "crashes":[
+    {"name":"2008","onset":"2007-07-26","trough":"2008-11-20"},
+    {"name":"2015","onset":"2015-07-24","trough":"2015-09-28"},
+    {"name":"2020","onset":"2020-03-06","trough":"2020-03-18"},
+    {"name":"2022","onset":"2022-04-20","trough":"2022-06-17"}
+  ],
+  "search_window":"onset through trough+30 trading sessions; genome may fire only after onset",
+  "causality":"All state features are available no later than prior session close. Derived changes/slopes use only lagged state.",
+  "feature_families":["market returns 1/5/20","volatility ratio and realized volatility","breadth 20/200","negative participation","cross-sectional dispersion","market drawdown","MTS signal density","3/5/10-session causal changes of state"],
+  "genome":"1-4 sparse clauses; each clause chooses feature, direction, training-only quantile threshold; conjunction or 2-of-N logic; optional 1/2/3-session confirmation",
+  "fitness":{
+    "target":"+/-7 sessions from known trough label",
+    "preference":"post-trough confirmation is cheaper than equally distant pre-trough anticipation",
+    "premature":"Every firing earlier than trough-7 is heavily penalized; first firing is primary event",
+    "late":"Firing after trough+7 is increasingly penalized",
+    "missing":"No firing by trough+30 receives a large penalty",
+    "complexity":"sparse genomes preferred"
+  },
+  "validation":"Four leave-one-crash-out folds. For each fold, evolve and calibrate thresholds on three crashes only, freeze winner, score untouched fourth crash. Also run one four-crash descriptive fit, never treated as validation.",
+  "success_gate":"At least 3 of 4 LOCO heldout crashes first-fire within +/-7 sessions, no heldout firing earlier than -7, and median absolute heldout error <=7. Four of four is strong support.",
+  "prohibitions":["no portfolio-return fitness","no CAGR/DD optimization","no GA access to Heldout50","no Remaining186","no Verification A/B","no post-hoc threshold repair"],
+  "status":"FROZEN_BEFORE_GA"
+}

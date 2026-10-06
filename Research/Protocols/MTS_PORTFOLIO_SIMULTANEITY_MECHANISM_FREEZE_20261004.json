@@ -1,0 +1,13 @@
+{
+  "format":"MTS_PORTFOLIO_SIMULTANEITY_MECHANISM_FREEZE_V1",
+  "date":"2026-10-04",
+  "hypothesis":"Catastrophic MTS drawdowns arise because many otherwise-profitable signals enter close together during dislocation and experience correlated adverse excursions before recovery; portfolio-level timing/overlap, not simply bad signal expectancy, creates the large drawdown.",
+  "evidence":{"cache":"/home/ubuntu/mts-v4-cache/discovery_research_population_v1.pkl.gz","manifest":"/home/ubuntu/mts-v4-cache/discovery_research_population_v1.pkl.gz.manifest.json","expected_trades":125002,"expected_tickers":67,"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+  "portfolio_mechanics":"Reuse run_discovery_portfolio_capital_stage1_portfolio build_events/simulate assumptions: next-session-open entry, close marking, nonlevered cash limited equal sizing, base trade fraction=1/median concurrency.",
+  "collapse_intervals":[["2008","2007-07-26","2009-05-29"],["2015","2015-07-24","2016-03-02"],["2020","2020-03-06","2020-06-05"],["2022","2022-04-20","2023-03-30"]],
+  "control_intervals":[["2006","2006-05-17","2006-12-31"],["2007pre","2007-03-05","2007-07-25"],["2011","2011-08-04","2011-12-31"],["2018","2018-12-18","2019-03-31"],["2020pre","2020-02-27","2020-03-05"],["2022pre","2022-01-25","2022-04-19"],["2024","2024-08-05","2024-12-31"],["2025","2025-04-03","2025-06-30"]],
+  "frozen_metrics":["daily active position count","daily new-entry count","5-session rolling entry count","fraction active currently underwater vs entry","fraction active down >=5% and >=10%","mean current PnL of active positions","within each collapse local portfolio peak/trough drawdown using equal-weight nonlevered portfolio","at each collapse trough: active count, underwater fraction, eventual-winner fraction, eventual winners currently underwater, eventual winners down >=5%/10%","terminal-winner MAE distribution inside collapse vs controls","share of collapse terminal winners that first suffered >=5%/10%/20% MAE"],
+  "interpretation":{"strong_support":"collapse troughs show broad simultaneous underwater exposure while a substantial share of those same active positions later finish profitable, plus collapse-period terminal winners commonly suffer meaningful MAE before recovery","refute":"collapse trough exposure is dominated by trades that ultimately remain losers, with little evidence of profitable trades suffering synchronized temporary drawdowns"},
+  "prohibitions":["no optimization","no GA","no exposure rule design","no threshold search beyond frozen descriptive 5/10/20 percent diagnostics","no protected bank access"],
+  "status":"FROZEN_BEFORE_TEST"
+}

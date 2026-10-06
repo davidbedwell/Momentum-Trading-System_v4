@@ -1,0 +1,28 @@
+{
+  "format":"MTS_CRASH_CAUSAL_PACK_V1_FREEZE",
+  "frozen_on":"2026-10-04",
+  "scientific_question":"At the already-frozen 28 deterioration decision timestamps, do independently motivated funding-market or credit-market stress mechanisms distinguish the 4 destructive collapses from 24 temporary deteriorations better than the consumed equity/MTS information?",
+  "parent_cvo_freeze_sha256":"789d443c37a2b485694df263e70e72dc6683cdbfa8f2e085faa6eaae398f5f34",
+  "stage0_amendment_sha256":"3099985950c25548715b427eb0d8334976bfe774205d5067531cfd2454351067",
+  "source":{"provider":"Office of Financial Research","artifact":"OFR Financial Stress Index full CSV","downloaded_on":"2026-10-04","raw_path":"Research/Data/CrashCausalPackV1/ofr_fsi_raw_20261004.csv","raw_sha256":"ad4de65362098ebace4077bdf598ef4d3f389f99ddcf9580173456ee36320b69","coverage":"2000-01-03 through 2026-09-30","publication_lag":"OFR states FSI publishes with data current from two business days prior","revision_warning":"Current historical file is revision-capable, not a preserved real-time vintage. Any pass is hypothesis-generating and requires vintage/independent validation before operational use."},
+  "admitted_raw_series":[
+    {"id":"OFR_FUNDING","column":"Funding","mechanism":"difficulty financial institutions have funding activities / counterparty-liquidity stress"},
+    {"id":"OFR_CREDIT","column":"Credit","mechanism":"credit-spread/default-risk/credit-market-functioning stress"}
+  ],
+  "excluded_fsi_columns":["OFR FSI headline","Equity valuation","Safe assets","Volatility","regional composites"],
+  "transforms_per_series":[
+    {"id":"LEVEL","formula":"x_t"},
+    {"id":"CHANGE_20","formula":"x_t - x_(t-20 trading observations)"},
+    {"id":"ACCEL_5_VS_PRIOR15","formula":"(x_t-x_(t-5))/5 - (x_(t-5)-x_(t-20))/15"}
+  ],
+  "direction":"higher or more positive means greater stress; no sign search",
+  "decision_alignment":"Use latest OFR observation that would have been published by the frozen decision close under the stated two-business-day publication lag; operational extraction therefore uses source observation t-2 business observations, never same-day revised value.",
+  "primary_tests":"Each of six transformed variables is tested independently; no combinations, interactions, threshold optimization, GA, or portfolio action.",
+  "primary_gate":{"recall":"4/4 destructive collapses","false_alarms":"<=2/24 temporary deteriorations","threshold_rule":"minimum score among the 4 positives; count negatives at or above it"},
+  "multiple_testing":"Six prespecified independent diagnostics; a pass is hypothesis-generating only and does not establish an operational crash predictor.",
+  "sensitivity":["same-day revised-value diagnostic reported separately but cannot override lagged primary","episode28 label=1 sensitivity if relevant"],
+  "stop_rule":"If neither Funding nor Credit produces a compelling independent pass, terminate OFR FSI mechanism family; do not add OFR FSI components post hoc. Cboe VIX/VVIX remains a separately preregistered mechanism family, not a rescue search.",
+  "evidence_boundary":{"prior67_consumed":true,"heldout50_preserved_not_pristine_access":false,"remaining_discovery186_access":false,"verification_a_access":false,"verification_b_access":false},
+  "ga_authorized":false,
+  "portfolio_intervention_authorized":false
+}

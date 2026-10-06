@@ -1,0 +1,51 @@
+{
+  "format": "MTS_V4_RISK_BUDGETED_ALLOCATION_HOLDOUT_NOMINEES_V1",
+  "gross_ceiling": 0.9804155104588794,
+  "gross_ceiling_source": "equal-sizing Development p90 gross exposure",
+  "holdout_accessed": false,
+  "nominees": [
+    {
+      "development": {
+        "daily_cvar05": -0.03231241180750501,
+        "family_fraction": 0.75,
+        "max_drawdown": -0.4524937945775317,
+        "terminal_wealth": 17.344433553406642,
+        "ticker_cluster_ci95": [
+          0.00420342336761174,
+          0.0065026328505405195
+        ],
+        "ticker_fraction": 0.9285714285714286,
+        "wealth_vs_equal_rel": 0.09618378350362744,
+        "wealth_vs_exposure_matched_rel": 0.01876840939887159,
+        "year_fraction": 0.9411764705882353
+      },
+      "name": "budget_top50_c1.50_gross_p90",
+      "redistribution_cap": 1.5,
+      "top_fraction": 0.5
+    },
+    {
+      "development": {
+        "daily_cvar05": -0.03218228043161868,
+        "family_fraction": 0.625,
+        "max_drawdown": -0.45205372827865653,
+        "terminal_wealth": 16.432606763698292,
+        "ticker_cluster_ci95": [
+          0.0020394539409647246,
+          0.0033634172321827522
+        ],
+        "ticker_fraction": 0.9107142857142857,
+        "wealth_vs_equal_rel": 0.038555511172638335,
+        "wealth_vs_exposure_matched_rel": 0.00805067148196792,
+        "year_fraction": 0.8823529411764706
+      },
+      "name": "budget_top25_c1.50_gross_p90",
+      "redistribution_cap": 1.5,
+      "top_fraction": 0.25
+    }
+  ],
+  "score": "causal_ev_over_p10_downside",
+  "selection_basis": "two structurally distinct representatives from broad passing Development families; no Holdout access",
+  "selection_frozen_before_holdout": true,
+  "verification_a_accessed": false,
+  "verification_b_accessed": false
+}

@@ -1,0 +1,15 @@
+{
+  "format": "MTS_V4_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_NOMINEES_V1",
+  "selection_basis": "Frozen after Development-only coarse frontier work and before this architecture's Holdout replay. Choose broad representative points, not a fine-tuned peak.",
+  "score": "causal_ev_over_p10_downside",
+  "min_history": 100,
+  "architecture": "same-day relative ranking; boost selected top fraction; all other signaled trades remain 1.0x",
+  "nominees": [
+    {"id":"RELATIVE_TOP25_C6_BROAD","top_fraction":0.25,"boost":6.0,"reason":"interior broad frontier representative with strong wealth and risk behavior"},
+    {"id":"RELATIVE_TOP25_C10_BOUNDARY","top_fraction":0.25,"boost":10.0,"reason":"coarse upper boundary stress nominee; Development wealth still rising, explicitly not claimed optimum"}
+  ],
+  "comparison_control": {"id":"RELATIVE_TOP50_C6_SELECTIVITY_CONTROL","top_fraction":0.50,"boost":6.0,"reason":"tests whether concentrating capital in top quartile matters versus broader top half at same boost"},
+  "holdout_rule": "Replay reserved Discovery Holdout once for all frozen entries. Report breadth, arithmetic contribution, terminal wealth/CAGR, maxDD/CVaR5, exposure, and exposure-matched equal controls. Do not add or modify nominees after opening Holdout.",
+  "verification_a_accessed": false,
+  "verification_b_accessed": false
+}

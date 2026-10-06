@@ -1,0 +1,26 @@
+{
+ "format":"MTS_REENTRY_CAUSAL_STATE_MACHINE_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_TEST",
+ "question":"Starting only when a market-wide STOP has actually fired, can recovery rules reopen MTS causally without knowledge of the future trough?",
+ "state_machine":["OPEN","STOP fires -> LOCKED","while LOCKED evaluate recovery rule every session","candidate fires -> REOPEN","score subsequent path retrospectively only after declaration"],
+ "start_rule":"Each test begins on the actual causal STOP declaration date supplied by the relevant frozen/descriptive stop episode. No trough date may initialize, reset, or gate a candidate.",
+ "reentry_candidates":{
+   "H1_OFF":{"rule":"Group C 4-of-4 >=90th-percentile stress condition absent for 3 consecutive sessions"},
+   "H2_50":{"rule":"all four Group C percentile ranks <0.50 for 3 sessions"},
+   "H2_60":{"rule":"all four Group C percentile ranks <0.60 for 3 sessions"},
+   "H2_70":{"rule":"all four Group C percentile ranks <0.70 for 3 sessions"},
+   "H2_80":{"rule":"all four Group C percentile ranks <0.80 for 3 sessions"},
+   "H3_50_200":{"rule":"EMA50 > EMA200 for 3 consecutive sessions"}
+ },
+ "stop_episodes":{
+   "2008":{"stop":"2007-11-26","reference_trough":"2009-03-09","stop_source":"heldout-2008 Path-B descriptor rule; diagnostic only, not frozen Group C"},
+   "2022":{"stop":"2022-01-25","reference_trough":"2022-10-12","stop_source":"frozen Group C"}
+ },
+ "primary_scope":"2022 is the valid frozen Group-C STOP/reentry pairing. 2008 is included only as a secondary recovery-mechanism diagnostic because Group C is not the 2008 stop.",
+ "false_reentry":"If declaration occurs before the reference trough, it is presumptively premature; additionally report whether within 60 sessions it makes a new lower market level than at declaration and/or suffers >=10% drawdown from declaration.",
+ "durability":"After declaration, report 60-session max drawdown and whether a lower market level occurs. Reference trough is used only for retrospective scoring.",
+ "metrics":["first declaration after STOP","sessions from STOP","whether before/after reference trough","sessions relative to trough","60-session max drawdown","lower-level occurrence"],
+ "prohibited":["using trough to start search","resetting at trough","CAGR/DD/wealth fitness","retuning Group C STOP","protected evidence"],
+ "qualification":"Current-S&P broad-market panel survivorship qualification applies."
+}

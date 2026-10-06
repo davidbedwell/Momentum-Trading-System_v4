@@ -1,0 +1,32 @@
+{
+  "format": "MTS_V4_DISCOVERY_WITHIN_TICKER_NOMINEE_FROZEN_V1",
+  "freeze_date": "2026-10-02",
+  "source_protocol": "Research/Protocols/MTS_DISCOVERY_WITHIN_GROUP_RANKING_PROTOCOL_20261002.md",
+  "source_development_report": "Research/Reports/MTS_DISCOVERY_WITHIN_GROUP_RANKING_DEVELOPMENT_20261002.json",
+  "nominee": {
+    "name": "within_ticker_top50_c1.10",
+    "predictor": "causal historical expected return / p10 downside",
+    "min_history": 100,
+    "backoff": ["genome", "family", "global", "neutral_1.0"],
+    "grouping": "same entry date + ticker",
+    "selection": "top 50 percent of finite-score simultaneous signals within ticker",
+    "cap": 1.10,
+    "budget_rule": "fixed budget within each ticker/day group; total scheduled multiplier equals group size",
+    "singleton_policy": "1.0x",
+    "base_trade_fraction": "unchanged ordinary Discovery portfolio base fraction"
+  },
+  "selection_reason": "All three within-ticker caps 1.10, 1.25, and 1.50 passed the frozen Development gate. Per protocol, freeze the simplest/lower cap because higher caps did not provide broader ticker/year/family evidence.",
+  "development_evidence": {
+    "terminal_wealth": 15.952550090164138,
+    "wealth_vs_equal_relative": 0.008215498103287144,
+    "ticker_positive_fraction": 1.0,
+    "year_positive_fraction": 0.9411764705882353,
+    "family_positive_fraction": 0.625,
+    "ticker_cluster_ci95": [0.0003034413398596832, 0.00045736251794261756],
+    "max_drawdown": -0.4573103239646713,
+    "daily_cvar05": -0.032692966932282005
+  },
+  "holdout_accessed_after_freeze": false,
+  "verification_a_accessed": false,
+  "verification_b_accessed": false
+}

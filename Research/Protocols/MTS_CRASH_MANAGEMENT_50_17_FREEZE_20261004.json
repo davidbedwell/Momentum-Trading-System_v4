@@ -1,0 +1,18 @@
+{
+  "format":"MTS_CRASH_MANAGEMENT_50_17_FREEZE_V2",
+  "date":"2026-10-04",
+  "question":"Can MTS manage destructive declines with two distinct causal pathways: (a) immediate full exit for a COVID-like fast shock signature, and (b) rapid full exit for slower recognized bear-market collapses followed by causal bottom-approximation reentry?",
+  "split_method":"Rank the already-consumed 67 tickers by SHA256('mts-crash-50-17-20261004|'+ticker); first 50 development, remaining 17 untouched test.",
+  "development50":["AMGN","CI","MPC","STLD","EXC","CFG","AJG","NUE","KKR","TDG","PPG","TRV","RL","CTSH","T","FIS","NOW","SBAC","SMCI","KDP","COST","OMC","NKE","RSG","ROK","SO","XEL","DECK","TRGP","WELL","CDW","ITW","DHI","IRM","COIN","TPL","FANG","HWM","NFLX","BEN","BNY","BLDR","EVRG","GILD","MCO","TECH","CLX","PCAR","COO","FITB"],
+  "test17":["BAX","FCX","CMCSA","BG","APA","LIN","VRSN","LYV","ARE","SNPS","GLW","DLTR","VRSK","NI","HD","SPG","NTAP"],
+  "governance":{"heldout50_access":false,"remaining186_access":false,"verification_a_access":false,"verification_b_access":false,"test17_access_during_design":false},
+  "fast_shock_design":{"episode":"2020","peak":"2020-03-06","trough":"2020-03-23","intent":"Describe causal contemporaneous conditions that occur in unison during the COVID-style fast shock; if matched, liquidate all positions immediately."},
+  "slow_bear_design":{"2008":{"peak":"2007-12-10","trough":"2009-03-09"},"2015":{"peak":"2015-12-01","trough":"2016-02-11"},"2022":{"peak":"2022-04-20","trough":"2022-06-16"}},
+  "stage1_fast_signature":"On development50 only, search sparse conjunctions of predeclared rolling stress-percentile features for the earliest COVID-shock recognition with low pre-episode false-alert burden. Trigger means selected stress conditions occur together. No portfolio-return optimization.",
+  "stage2_slow_bear_exit":"On development50 only, search sparse rolling stress-percentile conjunctions for the earliest causal recognition shared across 2008, 2015, and 2022. Once recognized, liquidate all active positions at next tradable opportunity and block new entries.",
+  "stage3_reentry":"After any exit, estimate bottom using episode-relative reversal geometry rather than fixed absolute levels: short-horizon return reversal, breadth rebound, negative-participation retreat, volatility contraction, drawdown improvement. Reopen MTS on the next tradable session after confirmation.",
+  "fitness_priority":["recognition delay","false-alert burden","reentry timing relative to trough","crash drawdown reduction","terminal wealth retention","CAGR"],
+  "test17":"After architecture and parameters are frozen on development50, construct the same causal state from test17 and run exactly once with no repair.",
+  "success":"Test17 should materially reduce destructive-period drawdowns while retaining substantially more wealth/CAGR than prior always-on risk overlays. Report failure as failure.",
+  "status":"FROZEN_BEFORE_ANALYSIS"
+}

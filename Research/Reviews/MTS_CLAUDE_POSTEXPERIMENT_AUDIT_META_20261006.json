@@ -1,0 +1,30 @@
+{
+  "id": "gen-1791278742-0Ac000mZbkkEimxrrMnj",
+  "model": "anthropic/claude-opus-5.5",
+  "usage": {
+    "prompt_tokens": 28263,
+    "completion_tokens": 48000,
+    "total_tokens": 76263,
+    "cost": 1.073052,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 1.073052,
+      "upstream_inference_prompt_cost": 0.113052,
+      "upstream_inference_completions_cost": 0.96
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 48000,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "prompt_sha256": "11dbf4e49cae4d120189315efce47f166486de2a153dd9fad4673f3b8beef301",
+  "chars": 0,
+  "created_utc": "2026-10-06T09:33:59.899025+00:00"
+}

@@ -1,0 +1,500 @@
+{
+  "discovery_total": 303,
+  "format": "MTS_V4_HELDOUT_TICKER_WALKFORWARD_COHORT_V1",
+  "primary": [
+    {
+      "industry_id": "Packaged Foods & Meats",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000047111_HSY",
+      "ticker": "HSY"
+    },
+    {
+      "industry_id": "Managed Health Care",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001156039_ELV",
+      "ticker": "ELV"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000093556_SWK",
+      "ticker": "SWK"
+    },
+    {
+      "industry_id": "Environmental & Facilities Services",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000084839_ROL",
+      "ticker": "ROL"
+    },
+    {
+      "industry_id": "Transaction & Payment Processing Services",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001403161_V",
+      "ticker": "V"
+    },
+    {
+      "industry_id": "Construction Machinery & Heavy Transportation Equipment",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000943452_WAB",
+      "ticker": "WAB"
+    },
+    {
+      "industry_id": "Diversified Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000713676_PNC",
+      "ticker": "PNC"
+    },
+    {
+      "industry_id": "Electrical Components & Equipment",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001551182_ETN",
+      "ticker": "ETN"
+    },
+    {
+      "industry_id": "Building Products",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001579241_ALLE",
+      "ticker": "ALLE"
+    },
+    {
+      "industry_id": "Air Freight & Logistics",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001090727_UPS",
+      "ticker": "UPS"
+    },
+    {
+      "industry_id": "Oil & Gas Storage & Transportation",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0001506307_KMI",
+      "ticker": "KMI"
+    },
+    {
+      "industry_id": "Asset Management & Custody Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000820027_AMP",
+      "ticker": "AMP"
+    },
+    {
+      "industry_id": "Pharmaceuticals",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001555280_ZTS",
+      "ticker": "ZTS"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000050863_INTC",
+      "ticker": "INTC"
+    },
+    {
+      "industry_id": "Consumer Finance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001601712_SYF",
+      "ticker": "SYF"
+    },
+    {
+      "industry_id": "Asset Management & Custody Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000914208_IVZ",
+      "ticker": "IVZ"
+    },
+    {
+      "industry_id": "Multi-Family Residential REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000912595_MAA",
+      "ticker": "MAA"
+    },
+    {
+      "industry_id": "Regional Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000036270_MTB",
+      "ticker": "MTB"
+    },
+    {
+      "industry_id": "Life & Health Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001126328_PFG",
+      "ticker": "PFG"
+    },
+    {
+      "industry_id": "Data Processing & Outsourced Services",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001383312_BR",
+      "ticker": "BR"
+    },
+    {
+      "industry_id": "Pharmaceuticals",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000200406_JNJ",
+      "ticker": "JNJ"
+    },
+    {
+      "industry_id": "Multi-Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001002910_AEE",
+      "ticker": "AEE"
+    },
+    {
+      "industry_id": "Consumer Finance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000927628_COF",
+      "ticker": "COF"
+    },
+    {
+      "industry_id": "Technology Hardware, Storage & Peripherals",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001571996_DELL",
+      "ticker": "DELL"
+    },
+    {
+      "industry_id": "IT Consulting & Other Services",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001467373_ACN",
+      "ticker": "ACN"
+    },
+    {
+      "industry_id": "Integrated Oil & Gas",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0002115436_XOM",
+      "ticker": "XOM"
+    },
+    {
+      "industry_id": "Homefurnishing Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000719955_WSM",
+      "ticker": "WSM"
+    },
+    {
+      "industry_id": "Specialty Chemicals",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000031462_ECL",
+      "ticker": "ECL"
+    },
+    {
+      "industry_id": "Other Specialty Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001403568_ULTA",
+      "ticker": "ULTA"
+    },
+    {
+      "industry_id": "Investment Banking & Brokerage",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000316709_SCHW",
+      "ticker": "SCHW"
+    },
+    {
+      "industry_id": "Electrical Components & Equipment",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001037868_AME",
+      "ticker": "AME"
+    },
+    {
+      "industry_id": "Heavy Electrical Equipment",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001996810_GEV",
+      "ticker": "GEV"
+    },
+    {
+      "industry_id": "Specialty Chemicals",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0001489393_LYB",
+      "ticker": "LYB"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000788784_PEG",
+      "ticker": "PEG"
+    },
+    {
+      "industry_id": "Insurance Brokers",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000062709_MRSH",
+      "ticker": "MRSH"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000885725_BSX",
+      "ticker": "BSX"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000310764_SYK",
+      "ticker": "SYK"
+    },
+    {
+      "industry_id": "Gas Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000731802_ATO",
+      "ticker": "ATO"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001108524_CRM",
+      "ticker": "CRM"
+    },
+    {
+      "industry_id": "Semiconductor Materials & Equipment",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000319201_KLAC",
+      "ticker": "KLAC"
+    },
+    {
+      "industry_id": "Movies & Entertainment",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001744489_DIS",
+      "ticker": "DIS"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000813672_CDNS",
+      "ticker": "CDNS"
+    },
+    {
+      "industry_id": "Financial Exchanges & Data",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001374310_CBOE",
+      "ticker": "CBOE"
+    },
+    {
+      "industry_id": "Multi-line Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000005272_AIG",
+      "ticker": "AIG"
+    },
+    {
+      "industry_id": "Personal Care Products",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0001944048_KVUE",
+      "ticker": "KVUE"
+    },
+    {
+      "industry_id": "Technology Hardware, Storage & Peripherals",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001645590_HPE",
+      "ticker": "HPE"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000040545_GE",
+      "ticker": "GE"
+    },
+    {
+      "industry_id": "Distributors",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000040987_GPC",
+      "ticker": "GPC"
+    },
+    {
+      "industry_id": "Movies & Entertainment",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0002041610_PSKY",
+      "ticker": "PSKY"
+    },
+    {
+      "industry_id": "Financial Exchanges & Data",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001156375_CME",
+      "ticker": "CME"
+    }
+  ],
+  "primary_count": 50,
+  "prior_research_tickers": 67,
+  "reserve_count": 186,
+  "reserve_security_ids": [
+    "CAL_SEC_CIK_0000105634_EME",
+    "CAL_SEC_CIK_0000764478_BBY",
+    "CAL_SEC_CIK_0000313927_CHD",
+    "CAL_SEC_CIK_0000860731_TYL",
+    "CAL_SEC_CIK_0001071739_CNC",
+    "CAL_SEC_CIK_0000313616_DHR",
+    "CAL_SEC_CIK_0001000228_HSIC",
+    "CAL_SEC_CIK_0000920148_LH",
+    "CAL_SEC_CIK_0001671933_TTD",
+    "CAL_SEC_CIK_0001130310_CNP",
+    "CAL_SEC_CIK_0000051253_IFF",
+    "CAL_SEC_CIK_0000866787_AZO",
+    "CAL_SEC_CIK_0000011544_WRB",
+    "CAL_SEC_CIK_0001682852_MRNA",
+    "CAL_SEC_CIK_0000100517_UAL",
+    "CAL_SEC_CIK_0000060667_LOW",
+    "CAL_SEC_CIK_0000277135_GWW",
+    "CAL_SEC_CIK_0001289490_EXR",
+    "CAL_SEC_CIK_0001501585_HII",
+    "CAL_SEC_CIK_0001101239_EQIX",
+    "CAL_SEC_CIK_0000315293_AON",
+    "CAL_SEC_CIK_0000728535_JBHT",
+    "CAL_SEC_CIK_0001091667_CHTR",
+    "CAL_SEC_CIK_0000310158_MRK",
+    "CAL_SEC_CIK_0001327567_PANW",
+    "CAL_SEC_CIK_0000320335_GL",
+    "CAL_SEC_CIK_0001140536_WTW",
+    "CAL_SEC_CIK_0001385157_TEL",
+    "CAL_SEC_CIK_0001326801_META",
+    "CAL_SEC_CIK_0000045012_HAL",
+    "CAL_SEC_CIK_0001601046_KEYS",
+    "CAL_SEC_CIK_0000877212_ZBRA",
+    "CAL_SEC_CIK_0000764622_PNW",
+    "CAL_SEC_CIK_0001751788_DOW",
+    "CAL_SEC_CIK_0000072331_NDSN",
+    "CAL_SEC_CIK_0001032208_SRE",
+    "CAL_SEC_CIK_0001123360_GPN",
+    "CAL_SEC_CIK_0000021344_KO",
+    "CAL_SEC_CIK_0001093557_DXCM",
+    "CAL_SEC_CIK_0000014272_BMY",
+    "CAL_SEC_CIK_0000001800_ABT",
+    "CAL_SEC_CIK_0001004980_PCG",
+    "CAL_SEC_CIK_0000092380_LUV",
+    "CAL_SEC_CIK_0000051143_IBM",
+    "CAL_SEC_CIK_0000884887_RCL",
+    "CAL_SEC_CIK_0000074208_UDR",
+    "CAL_SEC_CIK_0000865752_MNST",
+    "CAL_SEC_CIK_0001048286_MAR",
+    "CAL_SEC_CIK_0001413447_NXPI",
+    "CAL_SEC_CIK_0000900075_CPRT",
+    "CAL_SEC_CIK_0001018724_AMZN",
+    "CAL_SEC_CIK_0000898293_JBL",
+    "CAL_SEC_CIK_0001058090_CMG",
+    "CAL_SEC_CIK_0000906107_VMRK",
+    "CAL_SEC_CIK_0001381197_IBKR",
+    "CAL_SEC_CIK_0000874766_HIG",
+    "CAL_SEC_CIK_0002011641_FERG",
+    "CAL_SEC_CIK_0000012927_BA",
+    "CAL_SEC_CIK_0000726728_O",
+    "CAL_SEC_CIK_0001039684_OKE",
+    "CAL_SEC_CIK_0001674101_VRT",
+    "CAL_SEC_CIK_0001141391_MA",
+    "CAL_SEC_CIK_0000947484_ACGL",
+    "CAL_SEC_CIK_0000820318_COHR",
+    "CAL_SEC_CIK_0001099800_EW",
+    "CAL_SEC_CIK_0000320193_AAPL",
+    "CAL_SEC_CIK_0001070750_HST",
+    "CAL_SEC_CIK_0000087347_SLB",
+    "CAL_SEC_CIK_0000910606_REG",
+    "CAL_SEC_CIK_0000940944_DRI",
+    "CAL_SEC_CIK_0000765880_DOC",
+    "CAL_SEC_CIK_0001543151_UBER",
+    "CAL_SEC_CIK_0000051434_IP",
+    "CAL_SEC_CIK_0001659166_FTV",
+    "CAL_SEC_CIK_0000920522_ESS",
+    "CAL_SEC_CIK_0000746515_EXPD",
+    "CAL_SEC_CIK_0000943819_RMD",
+    "CAL_SEC_CIK_0000105770_WST",
+    "CAL_SEC_CIK_0001031296_FE",
+    "CAL_SEC_CIK_0000019617_JPM",
+    "CAL_SEC_CIK_0000048465_HRL",
+    "CAL_SEC_CIK_0000822416_PHM",
+    "CAL_SEC_CIK_0001705696_VICI",
+    "CAL_SEC_CIK_0000077360_PNR",
+    "CAL_SEC_CIK_0001140859_COR",
+    "CAL_SEC_CIK_0000849395_CRH",
+    "CAL_SEC_CIK_0000829224_SBUX",
+    "CAL_SEC_CIK_0000779152_JKHY",
+    "CAL_SEC_CIK_0000798354_FISV",
+    "CAL_SEC_CIK_0000096021_SYY",
+    "CAL_SEC_CIK_0000823768_WM",
+    "CAL_SEC_CIK_0001324424_EXPE",
+    "CAL_SEC_CIK_0001138118_CBRE",
+    "CAL_SEC_CIK_0001415404_ECHO",
+    "CAL_SEC_CIK_0000029905_DOV",
+    "CAL_SEC_CIK_0000898173_ORLY",
+    "CAL_SEC_CIK_0000866374_FLEX",
+    "CAL_SEC_CIK_0001045810_NVDA",
+    "CAL_SEC_CIK_0000946581_TTWO",
+    "CAL_SEC_CIK_0001341439_ORCL",
+    "CAL_SEC_CIK_0001048911_FDX",
+    "CAL_SEC_CIK_0001163165_COP",
+    "CAL_SEC_CIK_0001336920_LDOS",
+    "CAL_SEC_CIK_0001133421_NOC",
+    "CAL_SEC_CIK_0001285785_MOS",
+    "CAL_SEC_CIK_0000056873_KR",
+    "CAL_SEC_CIK_0000016918_STZ",
+    "CAL_SEC_CIK_0001048695_FFIV",
+    "CAL_SEC_CIK_0000896878_INTU",
+    "CAL_SEC_CIK_0001067701_URI",
+    "CAL_SEC_CIK_0000864749_TRMB",
+    "CAL_SEC_CIK_0000100885_UNP",
+    "CAL_SEC_CIK_0000002488_AMD",
+    "CAL_SEC_CIK_0000004977_AFL",
+    "CAL_SEC_CIK_0000064040_SPGI",
+    "CAL_SEC_CIK_0000009389_BALL",
+    "CAL_SEC_CIK_0000804328_QCOM",
+    "CAL_SEC_CIK_0000820313_APH",
+    "CAL_SEC_CIK_0002082247_FDXF",
+    "CAL_SEC_CIK_0001318605_TSLA",
+    "CAL_SEC_CIK_0000008818_AVY",
+    "CAL_SEC_CIK_0001035002_VLO",
+    "CAL_SEC_CIK_0000875320_VRTX",
+    "CAL_SEC_CIK_0001097864_ON",
+    "CAL_SEC_CIK_0001000697_WAT",
+    "CAL_SEC_CIK_0000040533_GD",
+    "CAL_SEC_CIK_0001755672_CTVA",
+    "CAL_SEC_CIK_0001410636_AWK",
+    "CAL_SEC_CIK_0000080424_PG",
+    "CAL_SEC_CIK_0000101829_RTX",
+    "CAL_SEC_CIK_0000745732_ROST",
+    "CAL_SEC_CIK_0000063754_MKC",
+    "CAL_SEC_CIK_0001095073_EG",
+    "CAL_SEC_CIK_0001551152_ABBV",
+    "CAL_SEC_CIK_0001262039_FTNT",
+    "CAL_SEC_CIK_0001097149_ALGN",
+    "CAL_SEC_CIK_0000773840_HON",
+    "CAL_SEC_CIK_0000858877_CSCO",
+    "CAL_SEC_CIK_0000091142_AOS",
+    "CAL_SEC_CIK_0000097476_TXN",
+    "CAL_SEC_CIK_0000920760_LEN",
+    "CAL_SEC_CIK_0001100682_CRL",
+    "CAL_SEC_CIK_0000052988_J",
+    "CAL_SEC_CIK_0000063908_MCD",
+    "CAL_SEC_CIK_0000789570_MGM",
+    "CAL_SEC_CIK_0000922224_PPL",
+    "CAL_SEC_CIK_0000726958_CASY",
+    "CAL_SEC_CIK_0000749251_IT",
+    "CAL_SEC_CIK_0001754301_FOXA",
+    "CAL_SEC_CIK_0000789019_MSFT",
+    "CAL_SEC_CIK_0000048898_HUBB",
+    "CAL_SEC_CIK_0001113169_TROW",
+    "CAL_SEC_CIK_0000277948_CSX",
+    "CAL_SEC_CIK_0001137789_STX",
+    "CAL_SEC_CIK_0000753308_NEE",
+    "CAL_SEC_CIK_0001932393_GEHC",
+    "CAL_SEC_CIK_0000895421_MS",
+    "CAL_SEC_CIK_0001652044_GOOGL",
+    "CAL_SEC_CIK_0001393052_VEEV",
+    "CAL_SEC_CIK_0000092230_TFC",
+    "CAL_SEC_CIK_0000037996_F",
+    "CAL_SEC_CIK_0001564708_NWSA",
+    "CAL_SEC_CIK_0000352915_UHS",
+    "CAL_SEC_CIK_0000027419_TGT",
+    "CAL_SEC_CIK_0000886982_GS",
+    "CAL_SEC_CIK_0000004904_AEP",
+    "CAL_SEC_CIK_0000899051_ALL",
+    "CAL_SEC_CIK_0000026172_CMI",
+    "CAL_SEC_CIK_0000814547_FICO",
+    "CAL_SEC_CIK_0000080661_PGR",
+    "CAL_SEC_CIK_0000049196_HBAN",
+    "CAL_SEC_CIK_0000104169_WMT",
+    "CAL_SEC_CIK_0001094285_TDY",
+    "CAL_SEC_CIK_0001136869_ZBH",
+    "CAL_SEC_CIK_0001637459_KHC",
+    "CAL_SEC_CIK_0001050915_PWR",
+    "CAL_SEC_CIK_0001013871_NRG",
+    "CAL_SEC_CIK_0001393818_BX",
+    "CAL_SEC_CIK_0000202058_LHX",
+    "CAL_SEC_CIK_0001037540_BXP",
+    "CAL_SEC_CIK_0000097745_TMO",
+    "CAL_SEC_CIK_0000731766_UNH",
+    "CAL_SEC_CIK_0000046080_HAS",
+    "CAL_SEC_CIK_0000916365_TSCO",
+    "CAL_SEC_CIK_0000879169_INCY",
+    "CAL_SEC_CIK_0001274494_FSLR"
+  ],
+  "salt": "MTS_V4_HELDOUT_TICKER_WALKFORWARD_PRIMARY_20261002",
+  "selection_rule": "SHA256(salt|security_id), ascending; first 50 primary; no price/outcome fields used",
+  "unseen_discovery_tickers": 236
+}

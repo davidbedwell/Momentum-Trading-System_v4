@@ -1,0 +1,36 @@
+{
+  "format": "MTS_V4_GENERAL_WINNER_RULE_DISCOVERY_NOMINEES_V1",
+  "date": "2026-10-02",
+  "selection_basis": "structurally distinct broad Development relationships; frozen before Discovery Holdout access",
+  "holdout_accessed_before_freeze": false,
+  "verification_a_accessed_for_selection": false,
+  "verification_b_accessed_for_selection": false,
+  "nominees": [
+    {
+      "id": "CONTROL_EV_P10_BROAD",
+      "score": "ev_p10",
+      "floor": 0.75,
+      "cap": 1.50,
+      "rationale": "simpler causal reward/downside relationship; broad plateau representative with 49/56 ticker, 14/17 year, 6/8 family positive Development breadth"
+    },
+    {
+      "id": "PROPOSED_EV_P10_X_WINRATE_BROAD",
+      "score": "ev_p10_x_winrate",
+      "floor": 0.75,
+      "cap": 1.50,
+      "rationale": "tests incremental historical win-rate modifier while using same conservative plateau setting; 49/56 ticker, 14/17 year, 6/8 family positive Development breadth"
+    }
+  ],
+  "holdout_pass_requirements": {
+    "positive_mean_sizing_contribution": true,
+    "positive_ticker_fraction_min": 0.60,
+    "positive_year_fraction_min": 0.60,
+    "positive_family_fraction_min": 0.60,
+    "max_positive_ticker_share": 0.15,
+    "max_positive_genome_share": 0.15,
+    "ticker_cluster_ci95_lower_gt_zero": true,
+    "terminal_wealth_gt_equal": true,
+    "not_both_max_drawdown_and_cvar05_worse": true
+  },
+  "selection_rule_after_holdout": "Report both independently. Do not select a winner merely by terminal wealth. The win-rate modifier is supported only if it passes all frozen gates and demonstrates a consistent incremental advantage over the simpler EV/p10 control across breadth and/or portfolio quality; otherwise retain the simpler relationship as the more parsimonious surviving hypothesis if it passes."
+}
