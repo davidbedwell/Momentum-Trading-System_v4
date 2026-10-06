@@ -1,0 +1,11 @@
+{
+  "current_gics_projected_backward": false,
+  "fold": 0,
+  "formal_pit_sector_used": false,
+  "observations": 48000,
+  "random_mean_corr": 0.1349499014580188,
+  "selected_mean_corr": 0.5574815960907099,
+  "selected_minus_random": 0.42253169463269113,
+  "train_count": 80,
+  "window_perturbation_mean_jaccard_churn": 0.25779375
+}
