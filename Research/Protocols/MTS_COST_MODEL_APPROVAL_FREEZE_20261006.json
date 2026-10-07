@@ -1,0 +1,19 @@
+{
+  "format": "MTS_COST_MODEL_APPROVAL_FREEZE_V1",
+  "date": "2026-10-06",
+  "status": "USER_APPROVED_CONTROLLING",
+  "spread_half_estimator": "HLC_RANGE_PROXY",
+  "spread_floor_bps": 2.0,
+  "spread_cap_bps": 50.0,
+  "market_impact_formula": "coefficient_bps * sqrt(order_notional / trailing_ADV_dollars)",
+  "market_impact_coefficient_bps": 10.0,
+  "ADV_definition": "trailing 20 observed sessions mean(close_T * volume_T), causal through decision session T",
+  "commission": 0.0,
+  "regulatory": "historical SEC Section 31 + FINRA TAF on sales",
+  "short_borrow_baseline_annual": 0.003,
+  "short_borrow_sensitivities_annual": [0.01,0.03],
+  "spread_sensitivity_bps_one_way": [0,5,10,20],
+  "calendar_day_accrual": true,
+  "decision_hurdle_rule": "same prospective cost model used by E.4 lifecycle hurdle and executed cash ledger",
+  "approved_by_user": true
+}

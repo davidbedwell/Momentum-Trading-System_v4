@@ -1,0 +1,2276 @@
+{
+  "DISCOVERY_UNTOUCHED": [
+    {
+      "industry_id": "Life Sciences Tools & Services",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001090872_A",
+      "ticker": "A"
+    },
+    {
+      "industry_id": "Biotechnology",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001551152_ABBV",
+      "ticker": "ABBV"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000001800_ABT",
+      "ticker": "ABT"
+    },
+    {
+      "industry_id": "Property & Casualty Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000947484_ACGL",
+      "ticker": "ACGL"
+    },
+    {
+      "industry_id": "Human Resource & Employment Services",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000008670_ADP",
+      "ticker": "ADP"
+    },
+    {
+      "industry_id": "Internet Services & Infrastructure",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001086222_AKAM",
+      "ticker": "AKAM"
+    },
+    {
+      "industry_id": "Health Care Supplies",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001097149_ALGN",
+      "ticker": "ALGN"
+    },
+    {
+      "industry_id": "Paper & Plastic Packaging Products & Materials",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0001748790_AMCR",
+      "ticker": "AMCR"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000002488_AMD",
+      "ticker": "AMD"
+    },
+    {
+      "industry_id": "Communications Equipment",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001596532_ANET",
+      "ticker": "ANET"
+    },
+    {
+      "industry_id": "Insurance Brokers",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000315293_AON",
+      "ticker": "AON"
+    },
+    {
+      "industry_id": "Asset Management & Custody Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001858681_APO",
+      "ticker": "APO"
+    },
+    {
+      "industry_id": "Asset Management & Custody Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001176948_ARES",
+      "ticker": "ARES"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001730168_AVGO",
+      "ticker": "AVGO"
+    },
+    {
+      "industry_id": "Paper & Plastic Packaging Products & Materials",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000008818_AVY",
+      "ticker": "AVY"
+    },
+    {
+      "industry_id": "Consumer Finance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000004962_AXP",
+      "ticker": "AXP"
+    },
+    {
+      "industry_id": "Automotive Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000866787_AZO",
+      "ticker": "AZO"
+    },
+    {
+      "industry_id": "Biotechnology",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000875045_BIIB",
+      "ticker": "BIIB"
+    },
+    {
+      "industry_id": "Pharmaceuticals",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000014272_BMY",
+      "ticker": "BMY"
+    },
+    {
+      "industry_id": "Office REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001037540_BXP",
+      "ticker": "BXP"
+    },
+    {
+      "industry_id": "Health Care Distributors",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000721371_CAH",
+      "ticker": "CAH"
+    },
+    {
+      "industry_id": "Building Products",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001783180_CARR",
+      "ticker": "CARR"
+    },
+    {
+      "industry_id": "Food Retail",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000726958_CASY",
+      "ticker": "CASY"
+    },
+    {
+      "industry_id": "Telecom Tower REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001051470_CCI",
+      "ticker": "CCI"
+    },
+    {
+      "industry_id": "Household Products",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000313927_CHD",
+      "ticker": "CHD"
+    },
+    {
+      "industry_id": "Restaurants",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001058090_CMG",
+      "ticker": "CMG"
+    },
+    {
+      "industry_id": "Construction Machinery & Heavy Transportation Equipment",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000026172_CMI",
+      "ticker": "CMI"
+    },
+    {
+      "industry_id": "Multi-Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001130310_CNP",
+      "ticker": "CNP"
+    },
+    {
+      "industry_id": "Transaction & Payment Processing Services",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001175454_CPAY",
+      "ticker": "CPAY"
+    },
+    {
+      "industry_id": "Life Sciences Tools & Services",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001100682_CRL",
+      "ticker": "CRL"
+    },
+    {
+      "industry_id": "Communications Equipment",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000858877_CSCO",
+      "ticker": "CSCO"
+    },
+    {
+      "industry_id": "Fertilizers & Agricultural Chemicals",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0001755672_CTVA",
+      "ticker": "CTVA"
+    },
+    {
+      "industry_id": "Industrial Conglomerates",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001666700_DD",
+      "ticker": "DD"
+    },
+    {
+      "industry_id": "Consumer Staples Merchandise Retail",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000029534_DG",
+      "ticker": "DG"
+    },
+    {
+      "industry_id": "Restaurants",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000940944_DRI",
+      "ticker": "DRI"
+    },
+    {
+      "industry_id": "Broadline Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001065088_EBAY",
+      "ticker": "EBAY"
+    },
+    {
+      "industry_id": "Research & Consulting Services",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000033185_EFX",
+      "ticker": "EFX"
+    },
+    {
+      "industry_id": "Reinsurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001095073_EG",
+      "ticker": "EG"
+    },
+    {
+      "industry_id": "Personal Care Products",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0001001250_EL",
+      "ticker": "EL"
+    },
+    {
+      "industry_id": "Oil & Gas Exploration & Production",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0000821189_EOG",
+      "ticker": "EOG"
+    },
+    {
+      "industry_id": "Data Center REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001101239_EQIX",
+      "ticker": "EQIX"
+    },
+    {
+      "industry_id": "Insurance Brokers",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000922621_ERIE",
+      "ticker": "ERIE"
+    },
+    {
+      "industry_id": "Multi-Family Residential REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000920522_ESS",
+      "ticker": "ESS"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000065984_ETR",
+      "ticker": "ETR"
+    },
+    {
+      "industry_id": "Hotels, Resorts & Cruise Lines",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001324424_EXPE",
+      "ticker": "EXPE"
+    },
+    {
+      "industry_id": "Air Freight & Logistics",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001048911_FDX",
+      "ticker": "FDX"
+    },
+    {
+      "industry_id": "Cargo Ground Transportation",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0002082247_FDXF",
+      "ticker": "FDXF"
+    },
+    {
+      "industry_id": "Trading Companies & Distributors",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0002011641_FERG",
+      "ticker": "FERG"
+    },
+    {
+      "industry_id": "Transaction & Payment Processing Services",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000798354_FISV",
+      "ticker": "FISV"
+    },
+    {
+      "industry_id": "Construction & Engineering",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001035983_FIX",
+      "ticker": "FIX"
+    },
+    {
+      "industry_id": "Broadcasting",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001754301_FOXA",
+      "ticker": "FOXA"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001274494_FSLR",
+      "ticker": "FSLR"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001659166_FTV",
+      "ticker": "FTV"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001932393_GEHC",
+      "ticker": "GEHC"
+    },
+    {
+      "industry_id": "Life & Health Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000320335_GL",
+      "ticker": "GL"
+    },
+    {
+      "industry_id": "Interactive Media & Services",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001652044_GOOGL",
+      "ticker": "GOOGL"
+    },
+    {
+      "industry_id": "Investment Banking & Brokerage",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000886982_GS",
+      "ticker": "GS"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001501585_HII",
+      "ticker": "HII"
+    },
+    {
+      "industry_id": "Hotels, Resorts & Cruise Lines",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001585689_HLT",
+      "ticker": "HLT"
+    },
+    {
+      "industry_id": "Packaged Foods & Meats",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000048465_HRL",
+      "ticker": "HRL"
+    },
+    {
+      "industry_id": "Hotel & Resort REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001070750_HST",
+      "ticker": "HST"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000048898_HUBB",
+      "ticker": "HUBB"
+    },
+    {
+      "industry_id": "IT Consulting & Other Services",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000051143_IBM",
+      "ticker": "IBM"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000832101_IEX",
+      "ticker": "IEX"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000896878_INTU",
+      "ticker": "INTU"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001035267_ISRG",
+      "ticker": "ISRG"
+    },
+    {
+      "industry_id": "Cargo Ground Transportation",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000728535_JBHT",
+      "ticker": "JBHT"
+    },
+    {
+      "industry_id": "Electronic Manufacturing Services",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000898293_JBL",
+      "ticker": "JBL"
+    },
+    {
+      "industry_id": "Building Products",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000833444_JCI",
+      "ticker": "JCI"
+    },
+    {
+      "industry_id": "Soft Drinks & Non-alcoholic Beverages",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000021344_KO",
+      "ticker": "KO"
+    },
+    {
+      "industry_id": "Diversified Support Services",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001336920_LDOS",
+      "ticker": "LDOS"
+    },
+    {
+      "industry_id": "Health Care Services",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000920148_LH",
+      "ticker": "LH"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000202058_LHX",
+      "ticker": "LHX"
+    },
+    {
+      "industry_id": "Home Improvement Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000060667_LOW",
+      "ticker": "LOW"
+    },
+    {
+      "industry_id": "Semiconductor Materials & Equipment",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000707549_LRCX",
+      "ticker": "LRCX"
+    },
+    {
+      "industry_id": "Hotels, Resorts & Cruise Lines",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001048286_MAR",
+      "ticker": "MAR"
+    },
+    {
+      "industry_id": "Building Products",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000062996_MAS",
+      "ticker": "MAS"
+    },
+    {
+      "industry_id": "Restaurants",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000063908_MCD",
+      "ticker": "MCD"
+    },
+    {
+      "industry_id": "Health Care Distributors",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000927653_MCK",
+      "ticker": "MCK"
+    },
+    {
+      "industry_id": "Packaged Foods & Meats",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0001103982_MDLZ",
+      "ticker": "MDLZ"
+    },
+    {
+      "industry_id": "Life & Health Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001099219_MET",
+      "ticker": "MET"
+    },
+    {
+      "industry_id": "Packaged Foods & Meats",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000063754_MKC",
+      "ticker": "MKC"
+    },
+    {
+      "industry_id": "Soft Drinks & Non-alcoholic Beverages",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000865752_MNST",
+      "ticker": "MNST"
+    },
+    {
+      "industry_id": "Tobacco",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000764180_MO",
+      "ticker": "MO"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001280452_MPWR",
+      "ticker": "MPWR"
+    },
+    {
+      "industry_id": "Financial Exchanges & Data",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001408198_MSCI",
+      "ticker": "MSCI"
+    },
+    {
+      "industry_id": "Systems Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000789019_MSFT",
+      "ticker": "MSFT"
+    },
+    {
+      "industry_id": "Life Sciences Tools & Services",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001037646_MTD",
+      "ticker": "MTD"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000723125_MU",
+      "ticker": "MU"
+    },
+    {
+      "industry_id": "Hotels, Resorts & Cruise Lines",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001513761_NCLH",
+      "ticker": "NCLH"
+    },
+    {
+      "industry_id": "Multi-Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000753308_NEE",
+      "ticker": "NEE"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001133421_NOC",
+      "ticker": "NOC"
+    },
+    {
+      "industry_id": "Independent Power Producers & Energy Traders",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001013871_NRG",
+      "ticker": "NRG"
+    },
+    {
+      "industry_id": "Homebuilding",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000906163_NVR",
+      "ticker": "NVR"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001413447_NXPI",
+      "ticker": "NXPI"
+    },
+    {
+      "industry_id": "Retail REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000726728_O",
+      "ticker": "O"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001097864_ON",
+      "ticker": "ON"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001781335_OTIS",
+      "ticker": "OTIS"
+    },
+    {
+      "industry_id": "Systems Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001327567_PANW",
+      "ticker": "PANW"
+    },
+    {
+      "industry_id": "Human Resource & Employment Services",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000723531_PAYX",
+      "ticker": "PAYX"
+    },
+    {
+      "industry_id": "Multi-Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001004980_PCG",
+      "ticker": "PCG"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000076334_PH",
+      "ticker": "PH"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001321655_PLTR",
+      "ticker": "PLTR"
+    },
+    {
+      "industry_id": "Multi-Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000764622_PNW",
+      "ticker": "PNW"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001145197_PODD",
+      "ticker": "PODD"
+    },
+    {
+      "industry_id": "Life & Health Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001137774_PRU",
+      "ticker": "PRU"
+    },
+    {
+      "industry_id": "Construction & Engineering",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001050915_PWR",
+      "ticker": "PWR"
+    },
+    {
+      "industry_id": "Hotels, Resorts & Cruise Lines",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000884887_RCL",
+      "ticker": "RCL"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000101829_RTX",
+      "ticker": "RTX"
+    },
+    {
+      "industry_id": "Specialty Chemicals",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000089800_SHW",
+      "ticker": "SHW"
+    },
+    {
+      "industry_id": "Oil & Gas Equipment & Services",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0000087347_SLB",
+      "ticker": "SLB"
+    },
+    {
+      "industry_id": "Health Care Technology",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001964738_SOLV",
+      "ticker": "SOLV"
+    },
+    {
+      "industry_id": "Multi-Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001032208_SRE",
+      "ticker": "SRE"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000004127_SWKS",
+      "ticker": "SWKS"
+    },
+    {
+      "industry_id": "Semiconductor Materials & Equipment",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000097210_TER",
+      "ticker": "TER"
+    },
+    {
+      "industry_id": "Wireless Telecommunication Services",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001283699_TMUS",
+      "ticker": "TMUS"
+    },
+    {
+      "industry_id": "Apparel, Accessories & Luxury Goods",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001116132_TPR",
+      "ticker": "TPR"
+    },
+    {
+      "industry_id": "Asset Management & Custody Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001113169_TROW",
+      "ticker": "TROW"
+    },
+    {
+      "industry_id": "Automobile Manufacturers",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001318605_TSLA",
+      "ticker": "TSLA"
+    },
+    {
+      "industry_id": "Interactive Home Entertainment",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0000946581_TTWO",
+      "ticker": "TTWO"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000217346_TXT",
+      "ticker": "TXT"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000860731_TYL",
+      "ticker": "TYL"
+    },
+    {
+      "industry_id": "Passenger Ground Transportation",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001543151_UBER",
+      "ticker": "UBER"
+    },
+    {
+      "industry_id": "Health Care Technology",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001393052_VEEV",
+      "ticker": "VEEV"
+    },
+    {
+      "industry_id": "Hotel & Resort REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001705696_VICI",
+      "ticker": "VICI"
+    },
+    {
+      "industry_id": "Oil & Gas Refining & Marketing",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0001035002_VLO",
+      "ticker": "VLO"
+    },
+    {
+      "industry_id": "Environmental & Facilities Services",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001967680_VLTO",
+      "ticker": "VLTO"
+    },
+    {
+      "industry_id": "Construction Materials",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0001396009_VMC",
+      "ticker": "VMC"
+    },
+    {
+      "industry_id": "Biotechnology",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000875320_VRTX",
+      "ticker": "VRTX"
+    },
+    {
+      "industry_id": "Health Care REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000740260_VTR",
+      "ticker": "VTR"
+    },
+    {
+      "industry_id": "Life Sciences Tools & Services",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001000697_WAT",
+      "ticker": "WAT"
+    },
+    {
+      "industry_id": "Broadcasting",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001437107_WBD",
+      "ticker": "WBD"
+    },
+    {
+      "industry_id": "Technology Hardware, Storage & Peripherals",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000106040_WDC",
+      "ticker": "WDC"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001524472_XYL",
+      "ticker": "XYL"
+    },
+    {
+      "industry_id": "Restaurants",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001041061_YUM",
+      "ticker": "YUM"
+    },
+    {
+      "industry_id": "Electronic Equipment & Instruments",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000877212_ZBRA",
+      "ticker": "ZBRA"
+    }
+  ],
+  "VERIFICATION_A": [
+    {
+      "industry_id": "Hotels, Resorts & Cruise Lines",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001559720_ABNB",
+      "ticker": "ABNB"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000004904_AEP",
+      "ticker": "AEP"
+    },
+    {
+      "industry_id": "Specialty Chemicals",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000915913_ALB",
+      "ticker": "ALB"
+    },
+    {
+      "industry_id": "Electronic Components",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000820313_APH",
+      "ticker": "APH"
+    },
+    {
+      "industry_id": "Water Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001410636_AWK",
+      "ticker": "AWK"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001069183_AXON",
+      "ticker": "AXON"
+    },
+    {
+      "industry_id": "Multi-Sector Holdings",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001067983_BRK_B",
+      "ticker": "BRK-B"
+    },
+    {
+      "industry_id": "Asset Management & Custody Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001393818_BX",
+      "ticker": "BX"
+    },
+    {
+      "industry_id": "Property & Casualty Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000020286_CINF",
+      "ticker": "CINF"
+    },
+    {
+      "industry_id": "Managed Health Care",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001071739_CNC",
+      "ticker": "CNC"
+    },
+    {
+      "industry_id": "Diversified Support Services",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000900075_CPRT",
+      "ticker": "CPRT"
+    },
+    {
+      "industry_id": "Real Estate Services",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001057352_CSGP",
+      "ticker": "CSGP"
+    },
+    {
+      "industry_id": "Rail Transportation",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000277948_CSX",
+      "ticker": "CSX"
+    },
+    {
+      "industry_id": "Integrated Oil & Gas",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0000093410_CVX",
+      "ticker": "CVX"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001561550_DDOG",
+      "ticker": "DDOG"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000029905_DOV",
+      "ticker": "DOV"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001326160_DUK",
+      "ticker": "DUK"
+    },
+    {
+      "industry_id": "Oil & Gas Exploration & Production",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0001090012_DVN",
+      "ticker": "DVN"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001093557_DXCM",
+      "ticker": "DXCM"
+    },
+    {
+      "industry_id": "Wireless Telecommunication Services",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001415404_ECHO",
+      "ticker": "ECHO"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000072741_ES",
+      "ticker": "ES"
+    },
+    {
+      "industry_id": "Automobile Manufacturers",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000037996_F",
+      "ticker": "F"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001031296_FE",
+      "ticker": "FE"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000814547_FICO",
+      "ticker": "FICO"
+    },
+    {
+      "industry_id": "Systems Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001262039_FTNT",
+      "ticker": "FTNT"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000040533_GD",
+      "ticker": "GD"
+    },
+    {
+      "industry_id": "Internet Services & Infrastructure",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001609711_GDDY",
+      "ticker": "GDDY"
+    },
+    {
+      "industry_id": "Systems Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000849399_GEN",
+      "ticker": "GEN"
+    },
+    {
+      "industry_id": "Heavy Electrical Equipment",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001474735_GNRC",
+      "ticker": "GNRC"
+    },
+    {
+      "industry_id": "Interactive Media & Services",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001652044_GOOG",
+      "ticker": "GOOG"
+    },
+    {
+      "industry_id": "Transaction & Payment Processing Services",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001123360_GPN",
+      "ticker": "GPN"
+    },
+    {
+      "industry_id": "Oil & Gas Equipment & Services",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0000045012_HAL",
+      "ticker": "HAL"
+    },
+    {
+      "industry_id": "Leisure Products",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000046080_HAS",
+      "ticker": "HAS"
+    },
+    {
+      "industry_id": "Regional Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000049196_HBAN",
+      "ticker": "HBAN"
+    },
+    {
+      "industry_id": "Health Care Facilities",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000860730_HCA",
+      "ticker": "HCA"
+    },
+    {
+      "industry_id": "Property & Casualty Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000874766_HIG",
+      "ticker": "HIG"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0002089271_HONA",
+      "ticker": "HONA"
+    },
+    {
+      "industry_id": "Investment Banking & Brokerage",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001381197_IBKR",
+      "ticker": "IBKR"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000874716_IDXX",
+      "ticker": "IDXX"
+    },
+    {
+      "industry_id": "Specialty Chemicals",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000051253_IFF",
+      "ticker": "IFF"
+    },
+    {
+      "industry_id": "Biotechnology",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000879169_INCY",
+      "ticker": "INCY"
+    },
+    {
+      "industry_id": "Single-Family Residential REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001687229_INVH",
+      "ticker": "INVH"
+    },
+    {
+      "industry_id": "Paper & Plastic Packaging Products & Materials",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000051434_IP",
+      "ticker": "IP"
+    },
+    {
+      "industry_id": "Life Sciences Tools & Services",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001478242_IQV",
+      "ticker": "IQV"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001699150_IR",
+      "ticker": "IR"
+    },
+    {
+      "industry_id": "Electronic Equipment & Instruments",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001601046_KEYS",
+      "ticker": "KEYS"
+    },
+    {
+      "industry_id": "Household Products",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000055785_KMB",
+      "ticker": "KMB"
+    },
+    {
+      "industry_id": "Multi-line Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000060086_L",
+      "ticker": "L"
+    },
+    {
+      "industry_id": "Homebuilding",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000920760_LEN",
+      "ticker": "LEN"
+    },
+    {
+      "industry_id": "Building Products",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001069202_LII",
+      "ticker": "LII"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000936468_LMT",
+      "ticker": "LMT"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000352541_LNT",
+      "ticker": "LNT"
+    },
+    {
+      "industry_id": "Apparel, Accessories & Luxury Goods",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001397187_LULU",
+      "ticker": "LULU"
+    },
+    {
+      "industry_id": "Casinos & Gaming",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001300514_LVS",
+      "ticker": "LVS"
+    },
+    {
+      "industry_id": "Interactive Media & Services",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001326801_META",
+      "ticker": "META"
+    },
+    {
+      "industry_id": "Communications Equipment",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000068505_MSI",
+      "ticker": "MSI"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000072331_NDSN",
+      "ticker": "NDSN"
+    },
+    {
+      "industry_id": "Gold",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0001164727_NEM",
+      "ticker": "NEM"
+    },
+    {
+      "industry_id": "Asset Management & Custody Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000073124_NTRS",
+      "ticker": "NTRS"
+    },
+    {
+      "industry_id": "Cargo Ground Transportation",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000878927_ODFL",
+      "ticker": "ODFL"
+    },
+    {
+      "industry_id": "Oil & Gas Exploration & Production",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0000797468_OXY",
+      "ticker": "OXY"
+    },
+    {
+      "industry_id": "Soft Drinks & Non-alcoholic Beverages",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000077476_PEP",
+      "ticker": "PEP"
+    },
+    {
+      "industry_id": "Personal Care Products",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000080424_PG",
+      "ticker": "PG"
+    },
+    {
+      "industry_id": "Property & Casualty Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000080661_PGR",
+      "ticker": "PGR"
+    },
+    {
+      "industry_id": "Paper & Plastic Packaging Products & Materials",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000075677_PKG",
+      "ticker": "PKG"
+    },
+    {
+      "industry_id": "Industrial REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001045609_PLD",
+      "ticker": "PLD"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000077360_PNR",
+      "ticker": "PNR"
+    },
+    {
+      "industry_id": "Transaction & Payment Processing Services",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001633917_PYPL",
+      "ticker": "PYPL"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000804328_QCOM",
+      "ticker": "QCOM"
+    },
+    {
+      "industry_id": "Biotechnology",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000872589_REGN",
+      "ticker": "REGN"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000943819_RMD",
+      "ticker": "RMD"
+    },
+    {
+      "industry_id": "Electronic Equipment & Instruments",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000882835_ROP",
+      "ticker": "ROP"
+    },
+    {
+      "industry_id": "Apparel Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000745732_ROST",
+      "ticker": "ROST"
+    },
+    {
+      "industry_id": "Restaurants",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000829224_SBUX",
+      "ticker": "SBUX"
+    },
+    {
+      "industry_id": "Technology Hardware, Storage & Peripherals",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0002023554_SNDK",
+      "ticker": "SNDK"
+    },
+    {
+      "industry_id": "Financial Exchanges & Data",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000064040_SPGI",
+      "ticker": "SPGI"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001757898_STE",
+      "ticker": "STE"
+    },
+    {
+      "industry_id": "Technology Hardware, Storage & Peripherals",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001137789_STX",
+      "ticker": "STX"
+    },
+    {
+      "industry_id": "Distillers & Vintners",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000016918_STZ",
+      "ticker": "STZ"
+    },
+    {
+      "industry_id": "Brewers",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000024545_TAP",
+      "ticker": "TAP"
+    },
+    {
+      "industry_id": "Electronic Manufacturing Services",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001385157_TEL",
+      "ticker": "TEL"
+    },
+    {
+      "industry_id": "Movies & Entertainment",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001973266_TKO",
+      "ticker": "TKO"
+    },
+    {
+      "industry_id": "Packaged Foods & Meats",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000100493_TSN",
+      "ticker": "TSN"
+    },
+    {
+      "industry_id": "Building Products",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001466258_TT",
+      "ticker": "TT"
+    },
+    {
+      "industry_id": "Advertising",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001671933_TTD",
+      "ticker": "TTD"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000097476_TXN",
+      "ticker": "TXN"
+    },
+    {
+      "industry_id": "Multi-Family Residential REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000074208_UDR",
+      "ticker": "UDR"
+    },
+    {
+      "industry_id": "Health Care Facilities",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000352915_UHS",
+      "ticker": "UHS"
+    },
+    {
+      "industry_id": "Trading Companies & Distributors",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001067701_URI",
+      "ticker": "URI"
+    },
+    {
+      "industry_id": "Diversified Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000036104_USB",
+      "ticker": "USB"
+    },
+    {
+      "industry_id": "Multi-Family Residential REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000906107_VMRK",
+      "ticker": "VMRK"
+    },
+    {
+      "industry_id": "Electrical Components & Equipment",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001674101_VRT",
+      "ticker": "VRT"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001327811_WDAY",
+      "ticker": "WDAY"
+    },
+    {
+      "industry_id": "Diversified Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000072971_WFC",
+      "ticker": "WFC"
+    },
+    {
+      "industry_id": "Consumer Staples Merchandise Retail",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000104169_WMT",
+      "ticker": "WMT"
+    },
+    {
+      "industry_id": "Property & Casualty Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000011544_WRB",
+      "ticker": "WRB"
+    },
+    {
+      "industry_id": "Health Care Supplies",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000105770_WST",
+      "ticker": "WST"
+    },
+    {
+      "industry_id": "Timber REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000106535_WY",
+      "ticker": "WY"
+    },
+    {
+      "industry_id": "Casinos & Gaming",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001174922_WYNN",
+      "ticker": "WYNN"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001136869_ZBH",
+      "ticker": "ZBH"
+    }
+  ],
+  "VERIFICATION_B": [
+    {
+      "industry_id": "Technology Hardware, Storage & Peripherals",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000320193_AAPL",
+      "ticker": "AAPL"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000796343_ADBE",
+      "ticker": "ADBE"
+    },
+    {
+      "industry_id": "Independent Power Producers & Energy Traders",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000874761_AES",
+      "ticker": "AES"
+    },
+    {
+      "industry_id": "Life & Health Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000004977_AFL",
+      "ticker": "AFL"
+    },
+    {
+      "industry_id": "Property & Casualty Insurance",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000899051_ALL",
+      "ticker": "ALL"
+    },
+    {
+      "industry_id": "Broadline Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001018724_AMZN",
+      "ticker": "AMZN"
+    },
+    {
+      "industry_id": "Building Products",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000091142_AOS",
+      "ticker": "AOS"
+    },
+    {
+      "industry_id": "Automotive Parts & Equipment",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001521332_APTV",
+      "ticker": "APTV"
+    },
+    {
+      "industry_id": "Aerospace & Defense",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000012927_BA",
+      "ticker": "BA"
+    },
+    {
+      "industry_id": "Metal, Glass & Plastic Containers",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000009389_BALL",
+      "ticker": "BALL"
+    },
+    {
+      "industry_id": "Computer & Electronics Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000764478_BBY",
+      "ticker": "BBY"
+    },
+    {
+      "industry_id": "Distillers & Vintners",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000014693_BF_B",
+      "ticker": "BF-B"
+    },
+    {
+      "industry_id": "Real Estate Services",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001138118_CBRE",
+      "ticker": "CBRE"
+    },
+    {
+      "industry_id": "Air Freight & Logistics",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0001043277_CHRW",
+      "ticker": "CHRW"
+    },
+    {
+      "industry_id": "Cable & Satellite",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001091667_CHTR",
+      "ticker": "CHTR"
+    },
+    {
+      "industry_id": "Multi-Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000811156_CMS",
+      "ticker": "CMS"
+    },
+    {
+      "industry_id": "Electronic Components",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000820318_COHR",
+      "ticker": "COHR"
+    },
+    {
+      "industry_id": "Oil & Gas Exploration & Production",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0001163165_COP",
+      "ticker": "COP"
+    },
+    {
+      "industry_id": "Health Care Distributors",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001140859_COR",
+      "ticker": "COR"
+    },
+    {
+      "industry_id": "Construction Materials",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000849395_CRH",
+      "ticker": "CRH"
+    },
+    {
+      "industry_id": "Multi-Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000715957_D",
+      "ticker": "D"
+    },
+    {
+      "industry_id": "Life Sciences Tools & Services",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000313616_DHR",
+      "ticker": "DHR"
+    },
+    {
+      "industry_id": "Health Care REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000765880_DOC",
+      "ticker": "DOC"
+    },
+    {
+      "industry_id": "Commodity Chemicals",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0001751788_DOW",
+      "ticker": "DOW"
+    },
+    {
+      "industry_id": "Restaurants",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0001286681_DPZ",
+      "ticker": "DPZ"
+    },
+    {
+      "industry_id": "Construction & Engineering",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000105634_EME",
+      "ticker": "EME"
+    },
+    {
+      "industry_id": "Electrical Components & Equipment",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000032604_EMR",
+      "ticker": "EMR"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001099800_EW",
+      "ticker": "EW"
+    },
+    {
+      "industry_id": "Air Freight & Logistics",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000746515_EXPD",
+      "ticker": "EXPD"
+    },
+    {
+      "industry_id": "Self-Storage REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001289490_EXR",
+      "ticker": "EXR"
+    },
+    {
+      "industry_id": "Financial Exchanges & Data",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001013237_FDS",
+      "ticker": "FDS"
+    },
+    {
+      "industry_id": "Communications Equipment",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001048695_FFIV",
+      "ticker": "FFIV"
+    },
+    {
+      "industry_id": "Electronic Manufacturing Services",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000866374_FLEX",
+      "ticker": "FLEX"
+    },
+    {
+      "industry_id": "Broadcasting",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001754301_FOX",
+      "ticker": "FOX"
+    },
+    {
+      "industry_id": "Packaged Foods & Meats",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000040704_GIS",
+      "ticker": "GIS"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000277135_GWW",
+      "ticker": "GWW"
+    },
+    {
+      "industry_id": "Industrial Conglomerates",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000773840_HON",
+      "ticker": "HON"
+    },
+    {
+      "industry_id": "Investment Banking & Brokerage",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001783879_HOOD",
+      "ticker": "HOOD"
+    },
+    {
+      "industry_id": "Technology Hardware, Storage & Peripherals",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000047217_HPQ",
+      "ticker": "HPQ"
+    },
+    {
+      "industry_id": "Health Care Distributors",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001000228_HSIC",
+      "ticker": "HSIC"
+    },
+    {
+      "industry_id": "Financial Exchanges & Data",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001571949_ICE",
+      "ticker": "ICE"
+    },
+    {
+      "industry_id": "IT Consulting & Other Services",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000749251_IT",
+      "ticker": "IT"
+    },
+    {
+      "industry_id": "Construction & Engineering",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000052988_J",
+      "ticker": "J"
+    },
+    {
+      "industry_id": "Transaction & Payment Processing Services",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000779152_JKHY",
+      "ticker": "JKHY"
+    },
+    {
+      "industry_id": "Diversified Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000019617_JPM",
+      "ticker": "JPM"
+    },
+    {
+      "industry_id": "Regional Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000091576_KEY",
+      "ticker": "KEY"
+    },
+    {
+      "industry_id": "Packaged Foods & Meats",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0001637459_KHC",
+      "ticker": "KHC"
+    },
+    {
+      "industry_id": "Retail REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000879101_KIM",
+      "ticker": "KIM"
+    },
+    {
+      "industry_id": "Food Retail",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000056873_KR",
+      "ticker": "KR"
+    },
+    {
+      "industry_id": "Communications Equipment",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001633978_LITE",
+      "ticker": "LITE"
+    },
+    {
+      "industry_id": "Passenger Airlines",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000092380_LUV",
+      "ticker": "LUV"
+    },
+    {
+      "industry_id": "Transaction & Payment Processing Services",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001141391_MA",
+      "ticker": "MA"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000827054_MCHP",
+      "ticker": "MCHP"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001613103_MDT",
+      "ticker": "MDT"
+    },
+    {
+      "industry_id": "Casinos & Gaming",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000789570_MGM",
+      "ticker": "MGM"
+    },
+    {
+      "industry_id": "Construction Materials",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0000916076_MLM",
+      "ticker": "MLM"
+    },
+    {
+      "industry_id": "Industrial Conglomerates",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000066740_MMM",
+      "ticker": "MMM"
+    },
+    {
+      "industry_id": "Fertilizers & Agricultural Chemicals",
+      "sector_id": "Materials",
+      "security_id": "CAL_SEC_CIK_0001285785_MOS",
+      "ticker": "MOS"
+    },
+    {
+      "industry_id": "Pharmaceuticals",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000310158_MRK",
+      "ticker": "MRK"
+    },
+    {
+      "industry_id": "Biotechnology",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001682852_MRNA",
+      "ticker": "MRNA"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001835632_MRVL",
+      "ticker": "MRVL"
+    },
+    {
+      "industry_id": "Investment Banking & Brokerage",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000895421_MS",
+      "ticker": "MS"
+    },
+    {
+      "industry_id": "Financial Exchanges & Data",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001120193_NDAQ",
+      "ticker": "NDAQ"
+    },
+    {
+      "industry_id": "Rail Transportation",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000702165_NSC",
+      "ticker": "NSC"
+    },
+    {
+      "industry_id": "Semiconductors",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001045810_NVDA",
+      "ticker": "NVDA"
+    },
+    {
+      "industry_id": "Publishing",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001564708_NWS",
+      "ticker": "NWS"
+    },
+    {
+      "industry_id": "Publishing",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001564708_NWSA",
+      "ticker": "NWSA"
+    },
+    {
+      "industry_id": "Oil & Gas Storage & Transportation",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0001039684_OKE",
+      "ticker": "OKE"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001341439_ORCL",
+      "ticker": "ORCL"
+    },
+    {
+      "industry_id": "Automotive Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000898173_ORLY",
+      "ticker": "ORLY"
+    },
+    {
+      "industry_id": "Pharmaceuticals",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000078003_PFE",
+      "ticker": "PFE"
+    },
+    {
+      "industry_id": "Homebuilding",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000822416_PHM",
+      "ticker": "PHM"
+    },
+    {
+      "industry_id": "Tobacco",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0001413329_PM",
+      "ticker": "PM"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000922224_PPL",
+      "ticker": "PPL"
+    },
+    {
+      "industry_id": "Self-Storage REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0001393311_PSA",
+      "ticker": "PSA"
+    },
+    {
+      "industry_id": "Oil & Gas Refining & Marketing",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0001534701_PSX",
+      "ticker": "PSX"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000857005_PTC",
+      "ticker": "PTC"
+    },
+    {
+      "industry_id": "Interactive Media & Services",
+      "sector_id": "Communication Services",
+      "security_id": "CAL_SEC_CIK_0001713445_RDDT",
+      "ticker": "RDDT"
+    },
+    {
+      "industry_id": "Retail REITs",
+      "sector_id": "Real Estate",
+      "security_id": "CAL_SEC_CIK_0000910606_REG",
+      "ticker": "REG"
+    },
+    {
+      "industry_id": "Regional Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001281761_RF",
+      "ticker": "RF"
+    },
+    {
+      "industry_id": "Health Care Equipment",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000031791_RVTY",
+      "ticker": "RVTY"
+    },
+    {
+      "industry_id": "Industrial Machinery & Supplies & Components",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000091440_SNA",
+      "ticker": "SNA"
+    },
+    {
+      "industry_id": "Asset Management & Custody Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000093751_STT",
+      "ticker": "STT"
+    },
+    {
+      "industry_id": "Food Distributors",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000096021_SYY",
+      "ticker": "SYY"
+    },
+    {
+      "industry_id": "Electronic Equipment & Instruments",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0001094285_TDY",
+      "ticker": "TDY"
+    },
+    {
+      "industry_id": "Diversified Banks",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0000092230_TFC",
+      "ticker": "TFC"
+    },
+    {
+      "industry_id": "Consumer Staples Merchandise Retail",
+      "sector_id": "Consumer Staples",
+      "security_id": "CAL_SEC_CIK_0000027419_TGT",
+      "ticker": "TGT"
+    },
+    {
+      "industry_id": "Apparel Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000109198_TJX",
+      "ticker": "TJX"
+    },
+    {
+      "industry_id": "Life Sciences Tools & Services",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000097745_TMO",
+      "ticker": "TMO"
+    },
+    {
+      "industry_id": "Application Software",
+      "sector_id": "Information Technology",
+      "security_id": "CAL_SEC_CIK_0000864749_TRMB",
+      "ticker": "TRMB"
+    },
+    {
+      "industry_id": "Other Specialty Retail",
+      "sector_id": "Consumer Discretionary",
+      "security_id": "CAL_SEC_CIK_0000916365_TSCO",
+      "ticker": "TSCO"
+    },
+    {
+      "industry_id": "Passenger Airlines",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000100517_UAL",
+      "ticker": "UAL"
+    },
+    {
+      "industry_id": "Managed Health Care",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0000731766_UNH",
+      "ticker": "UNH"
+    },
+    {
+      "industry_id": "Rail Transportation",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000100885_UNP",
+      "ticker": "UNP"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0001692819_VST",
+      "ticker": "VST"
+    },
+    {
+      "industry_id": "Pharmaceuticals",
+      "sector_id": "Health Care",
+      "security_id": "CAL_SEC_CIK_0001792044_VTRS",
+      "ticker": "VTRS"
+    },
+    {
+      "industry_id": "Electric Utilities",
+      "sector_id": "Utilities",
+      "security_id": "CAL_SEC_CIK_0000783325_WEC",
+      "ticker": "WEC"
+    },
+    {
+      "industry_id": "Environmental & Facilities Services",
+      "sector_id": "Industrials",
+      "security_id": "CAL_SEC_CIK_0000823768_WM",
+      "ticker": "WM"
+    },
+    {
+      "industry_id": "Oil & Gas Storage & Transportation",
+      "sector_id": "Energy",
+      "security_id": "CAL_SEC_CIK_0000107263_WMB",
+      "ticker": "WMB"
+    },
+    {
+      "industry_id": "Insurance Brokers",
+      "sector_id": "Financials",
+      "security_id": "CAL_SEC_CIK_0001140536_WTW",
+      "ticker": "WTW"
+    }
+  ],
+  "audit": {
+    "old_verification_b_evidence": "No access found; historical protocols repeatedly record Verification B sealed. Because original B membership was lost, eligibility is determined by demonstrable ticker-level non-use, not presumed old-bank identity.",
+    "touched_count": 167,
+    "touched_dev117_count": 117,
+    "touched_old_verification_a_count": 50,
+    "touched_sources": [
+      "Research/State/MTS_FROZEN_ARCH_GA_V2_INPUT_MANIFEST_20261005.json:dev117",
+      "Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_VERIFICATION_A1_FROZEN_SELECTION_20260930.json:a1",
+      "Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_INPUT_FROZEN_20261002.json:verification_a_targets",
+      "Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_INPUT_FROZEN_20261002.json:verification_a_targets",
+      "Research/Reports/MTS_V4_RELATIVE_CAPITAL_VERIFICATION_A4_20261002.json:ticker_contribution_delta"
+    ],
+    "touched_ticker_sha256": "07b5494861ae1b2f0dce2f0ad049babd877216d195689783a5291b58f9f80f13",
+    "touched_tickers": [
+      "ACN",
+      "ADI",
+      "ADM",
+      "ADSK",
+      "AEE",
+      "AIG",
+      "AIZ",
+      "AJG",
+      "ALLE",
+      "AMAT",
+      "AME",
+      "AMGN",
+      "AMP",
+      "AMT",
+      "APA",
+      "APD",
+      "APP",
+      "ARE",
+      "ATO",
+      "BAC",
+      "BAX",
+      "BDX",
+      "BEN",
+      "BG",
+      "BKNG",
+      "BKR",
+      "BLDR",
+      "BLK",
+      "BNY",
+      "BR",
+      "BRO",
+      "BSX",
+      "C",
+      "CAT",
+      "CB",
+      "CBOE",
+      "CCL",
+      "CDNS",
+      "CDW",
+      "CEG",
+      "CF",
+      "CFG",
+      "CI",
+      "CIEN",
+      "CL",
+      "CLX",
+      "CMCSA",
+      "CME",
+      "COF",
+      "COIN",
+      "COO",
+      "COST",
+      "CPT",
+      "CRM",
+      "CRWD",
+      "CTAS",
+      "CTSH",
+      "CVNA",
+      "CVS",
+      "DAL",
+      "DASH",
+      "DE",
+      "DECK",
+      "DELL",
+      "DGX",
+      "DHI",
+      "DIS",
+      "DLR",
+      "DLTR",
+      "DTE",
+      "DVA",
+      "ECL",
+      "ED",
+      "EIX",
+      "ELV",
+      "EQT",
+      "ETN",
+      "EVRG",
+      "EXC",
+      "EXE",
+      "FANG",
+      "FAST",
+      "FCX",
+      "FIS",
+      "FITB",
+      "FRT",
+      "GE",
+      "GEV",
+      "GILD",
+      "GLW",
+      "GM",
+      "GPC",
+      "GRMN",
+      "HD",
+      "HPE",
+      "HSY",
+      "HUM",
+      "HWM",
+      "INTC",
+      "IRM",
+      "ITW",
+      "IVZ",
+      "JNJ",
+      "KDP",
+      "KKR",
+      "KLAC",
+      "KMI",
+      "KVUE",
+      "LIN",
+      "LLY",
+      "LYB",
+      "LYV",
+      "MAA",
+      "MCO",
+      "MPC",
+      "MRSH",
+      "MTB",
+      "NFLX",
+      "NI",
+      "NKE",
+      "NOW",
+      "NTAP",
+      "NUE",
+      "OMC",
+      "PCAR",
+      "PEG",
+      "PFG",
+      "PNC",
+      "PPG",
+      "PSKY",
+      "Q",
+      "RJF",
+      "RL",
+      "ROK",
+      "ROL",
+      "RSG",
+      "SBAC",
+      "SCHW",
+      "SJM",
+      "SMCI",
+      "SNPS",
+      "SO",
+      "SPG",
+      "STLD",
+      "SW",
+      "SWK",
+      "SYF",
+      "SYK",
+      "T",
+      "TDG",
+      "TECH",
+      "TPL",
+      "TRGP",
+      "TRV",
+      "ULTA",
+      "UPS",
+      "V",
+      "VRSK",
+      "VRSN",
+      "VZ",
+      "WAB",
+      "WELL",
+      "WSM",
+      "XEL",
+      "XOM",
+      "XYZ",
+      "ZTS"
+    ],
+    "untouched_count_before_repartition": 336
+  },
+  "canonical_universe": {
+    "count": 503,
+    "source": "Reconstruction/Manifests/mts-v4-current-sp500-calibration-20260915.RECONSTRUCTED.csv",
+    "ticker_sha256": "3cc1c927a4c1aee8fc85e94fd3464470e3909d7aa99ee71fb14b4e7d69105ba5"
+  },
+  "counts": {
+    "DISCOVERY_UNTOUCHED": 136,
+    "TOUCHED_EXCLUDED": 167,
+    "VERIFICATION_A": 100,
+    "VERIFICATION_B": 100
+  },
+  "date": "2026-10-07",
+  "format": "MTS_V4_REPAIRED_SCIENTIFIC_PARTITION_UNTOUCHED_AB_V1",
+  "hashes": {
+    "DISCOVERY_UNTOUCHED_tickers_sha256": "13240c45a4bbe87f0a8a30657d46a38b8a424785060e406969a7f22afce829c6",
+    "VERIFICATION_A_tickers_sha256": "1a7c360acbbf6663b481ae00c41735d904783214dd2e5f4a78a4435c260362a4",
+    "VERIFICATION_B_tickers_sha256": "7a8b51e647e470c9b6e61116ef8ab7a7f01aa435227069992ccb0198a38a9fcf"
+  },
+  "scientific_boundary": "Original 303/100/100 partition membership file was lost. This is a new partition, not a reconstruction of the lost A/B assignment. Only demonstrably untouched canonical-universe names were eligible for new Verification A/B.",
+  "selection": {
+    "eligible_count": 336,
+    "eligible_pool": "canonical 503 minus demonstrably touched 167",
+    "eligible_sector_counts": {
+      "Communication Services": 15,
+      "Consumer Discretionary": 33,
+      "Consumer Staples": 24,
+      "Energy": 11,
+      "Financials": 45,
+      "Health Care": 42,
+      "Industrials": 60,
+      "Information Technology": 52,
+      "Materials": 15,
+      "Real Estate": 20,
+      "Utilities": 19
+    },
+    "full_universe_sector_counts": {
+      "Communication Services": 24,
+      "Consumer Discretionary": 47,
+      "Consumer Staples": 34,
+      "Energy": 21,
+      "Financials": 76,
+      "Health Care": 59,
+      "Industrials": 83,
+      "Information Technology": 73,
+      "Materials": 25,
+      "Real Estate": 30,
+      "Utilities": 31
+    },
+    "randomization": "Within each sector, deterministic PRNG shuffle; first quota -> A, next quota -> B",
+    "sector_quotas_each_bank": {
+      "Communication Services": 5,
+      "Consumer Discretionary": 9,
+      "Consumer Staples": 7,
+      "Energy": 4,
+      "Financials": 15,
+      "Health Care": 12,
+      "Industrials": 16,
+      "Information Technology": 15,
+      "Materials": 5,
+      "Real Estate": 6,
+      "Utilities": 6
+    },
+    "seed": "MTS_REPAIRED_UNTOUCHED_AB_20261007_V1",
+    "seed_sha256": "b6398053ead4e2712f9c3beb84a67c2a8de8f258c444c1c363e2f7a1dd925d57",
+    "stratification": "GICS sector_id from canonical calibration manifest",
+    "target": "Each A/B bank independently matches the canonical 503 sector proportions using Hamilton largest-remainder quotas"
+  },
+  "status": "FROZEN_REPAIR"
+}
