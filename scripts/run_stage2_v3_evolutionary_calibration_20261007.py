@@ -8,6 +8,7 @@ from Core.layered_ga.stage2_calibration_ga_adapter_v3 import MatchedEvaluator as
 from Core.layered_ga.stage2_calibration_outcomes_v3 import plant_endpoint_outcomes
 from Core.layered_ga.stage2_evaluator_v3 import cluster_ids_from_frame
 from Core.layered_ga.stage2_calibration_gate_v3 import certify_calibration
+from Core.layered_ga.stage2_calibration_shapes_v3 import planted_profile
 sys.path.insert(0,str(CERTIFIED_ROOT))
 from MTS_V4.computational_search import Candidate,Evaluation,EvolutionaryConfig,EvolutionarySearchOptimizer,SearchRunRequest
 CAL=ROOT/'Research/Runs/layered/stage2-opportunity-v3-20261007/calibration';CACHE=CAL.parent/'cache'
@@ -26,8 +27,7 @@ def main():
    day=points[1]
    for effect in (.02,.01,.005,.0025,0.):
     state('RUNNING_MATCHED_EVOLUTIONARY_SEARCH',family=family,shape=shape,effect=effect,completed=len(results),total=45)
-    knots={1:0.0,points[0]:0.0,points[1]:1.0,points[2]:1.0,points[3]:0.0,63:0.0}
-    profile=np.interp(np.arange(1,64),sorted(knots),[knots[k] for k in sorted(knots)])
+    profile=planted_profile(shape)
     planted=plant_endpoint_outcomes(paths,target,profile,effect)
     ev=OutcomeMatchedEvaluator(compiler,planted.paths,costs,cluster_ids_from_frame(df))
     baseline_curve=ev.curves.evaluate(family,entry['genome'],'LONG')
