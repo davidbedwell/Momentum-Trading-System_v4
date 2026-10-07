@@ -1,0 +1,69 @@
+{
+  "status": "DURABILITY_VERIFIED",
+  "timestamp_utc": "2026-10-07T18:03:12.432218+00:00",
+  "stage0_gate": "PASS",
+  "stage1_gate": "PASS",
+  "git_commit": "a9661a5eb0e5793e05a44c863fefcf015dc22540",
+  "git_remote_sha_verified": true,
+  "external_backup": "backblaze:DavidBedwell/MTS/Layered-Research-20261007-a9661a5",
+  "external_inventory_files": 13,
+  "external_inventory_bytes": 7707645,
+  "rclone_check_run_tree": "0 differences; 11 matching files",
+  "artifact_manifest": [
+    {
+      "path": "Research/Runs/layered/stage0-ga0-archaeology-20261007/certified_gene_registry.json",
+      "bytes": 4235,
+      "sha256": "646df0018a550c14a4d5ef549316173c8426a21d667809a68fd53067fe6141cf"
+    },
+    {
+      "path": "Research/Runs/layered/stage0-ga0-archaeology-20261007/evidence_inventory.json",
+      "bytes": 186975,
+      "sha256": "875374b6ace6cbaf65a56a720bede2392bd2ab010fa4bfa39e89c4ae9e60cbf4"
+    },
+    {
+      "path": "Research/Runs/layered/stage0-ga0-archaeology-20261007/gate.json",
+      "bytes": 466,
+      "sha256": "7a6ff2450285fc0c9ef65c837daaf92d699894079bf94d107cec02d76fb8e7e0"
+    },
+    {
+      "path": "Research/Runs/layered/stage0-ga0-archaeology-20261007/semantic_hits.json",
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "path": "Research/Runs/layered/stage0-ga0-archaeology-20261007/unresolved_ledger.json",
+      "bytes": 478,
+      "sha256": "f842456561bf9c82824f205e6135edef0cc5c57f5d2af5eca4351209ba9385ed"
+    },
+    {
+      "path": "Research/Runs/layered/stage1-context-map-20261007/audit.json",
+      "bytes": 14935,
+      "sha256": "582b4edaf79d990e0b9737cfd389c7d8342747e8bac8e630bbf6c5f400081d63"
+    },
+    {
+      "path": "Research/Runs/layered/stage1-context-map-20261007/galaxy_context.parquet",
+      "bytes": 645202,
+      "sha256": "97f013734def96dcbc03b020d43f515490a375a76a6d529b06d53c7e747b8947"
+    },
+    {
+      "path": "Research/Runs/layered/stage1-context-map-20261007/gate.json",
+      "bytes": 2395,
+      "sha256": "9a1a6c4fac2218620f4a28d4b8a907f107069b11820d26d33cfaf2a52fa9322f"
+    },
+    {
+      "path": "Research/Runs/layered/stage1-context-map-20261007/sector_context.parquet",
+      "bytes": 6646335,
+      "sha256": "71c79ceb543a18ee9c706c8058589ae11447e3d62a6ba6ba3608ff7447e3ff4c"
+    },
+    {
+      "path": "Research/Runs/layered/stage1-context-map-20261007/sector_etf_extension_xlre_xlc_yfinance_20261007.parquet",
+      "bytes": 200214,
+      "sha256": "31d697151669a974976bfe3aaf82ef6b0302a9957915e05b105b06f297c19b40"
+    },
+    {
+      "path": "Research/Runs/layered/stage1-context-map-20261007/sector_extension_provenance.json",
+      "bytes": 319,
+      "sha256": "83d07242cbe0d2147fa0a45a48b1eec363648bd1b3e01dfdcc919043c8315f43"
+    }
+  ]
+}
