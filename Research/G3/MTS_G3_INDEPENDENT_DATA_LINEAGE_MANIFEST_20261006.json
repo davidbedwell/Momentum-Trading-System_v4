@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-06",
+  "derived_store": "NEW_G3_ONLY_DERIVATION_PATH_TO_BE_CREATED",
+  "forbidden_inputs": [
+    "G2 derived stores",
+    "G2 cached feature matrices",
+    "G2 opportunity labels",
+    "G2 genomes",
+    "G2 portfolio outcomes",
+    "G2 metadata"
+  ],
+  "format": "MTS_G3_INDEPENDENT_DATA_LINEAGE_V1",
+  "raw_source": "yfinance",
+  "raw_store": "NEW_G3_ONLY_PATH_TO_BE_CREATED",
+  "required_properties": [
+    "fresh acquisition",
+    "immutable after acquisition",
+    "hash-addressed raw files",
+    "acquisition timestamp and library version recorded",
+    "ticker/date request manifest recorded"
+  ],
+  "status": "DESIGN_CONTRACT_NOT_YET_ACQUIRED",
+  "validation_note": "Lineage purity does not by itself establish statistically pristine validation evidence."
+}
