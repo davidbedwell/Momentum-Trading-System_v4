@@ -1,0 +1,75 @@
+{
+  "format": "MTS_G3_CLAUDE_PHASE_C_PLANTED_HETEROGENEITY",
+  "active": [
+    "S0",
+    "S1",
+    "S2"
+  ],
+  "inactive": [
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7"
+  ],
+  "oracle": "feature0<-1 AND feature1>1, long",
+  "criterion": "best screened candidate median/mean active-stock event return >= 0.025 requested by Claude",
+  "best": {
+    "rank": 0,
+    "genome": "Specialist(gate=Rule(feature=1, threshold=1.0, direction=1), signal=Rule(feature=0, threshold=-1.0, direction=-1), side=1, take_profit=0.08, stop_loss=0.06, max_horizon=10, add_at=0.04, reduce_at=0.04)",
+    "active_mean": 0.026960634031652473,
+    "inactive_mean": -0.005012201831332592,
+    "per_stock": {
+      "S0": {
+        "n": 62,
+        "mean": 0.025744231323013952,
+        "tail": -0.01648967496190705,
+        "duration": 9.983870967741936
+      },
+      "S1": {
+        "n": 63,
+        "mean": 0.029411881458031613,
+        "tail": -0.0007004923960122838,
+        "duration": 9.984126984126984
+      },
+      "S2": {
+        "n": 64,
+        "mean": 0.02572578931391186,
+        "tail": -0.016155128071883282,
+        "duration": 9.96875
+      },
+      "S3": {
+        "n": 64,
+        "mean": -0.0049696613617468376,
+        "tail": -0.046350945127871884,
+        "duration": 9.875
+      },
+      "S4": {
+        "n": 75,
+        "mean": -0.0060635852723586155,
+        "tail": -0.040184711755409074,
+        "duration": 9.933333333333334
+      },
+      "S5": {
+        "n": 61,
+        "mean": -0.006968053394481068,
+        "tail": -0.04902838836408008,
+        "duration": 9.934426229508198
+      },
+      "S6": {
+        "n": 62,
+        "mean": -0.0020365548663075082,
+        "tail": -0.026582505553934908,
+        "duration": 9.951612903225806
+      },
+      "S7": {
+        "n": 66,
+        "mean": -0.005023154261768934,
+        "tail": -0.03889973664039026,
+        "duration": 9.909090909090908
+      }
+    }
+  },
+  "pass": true,
+  "seconds": 1.921010356003535
+}

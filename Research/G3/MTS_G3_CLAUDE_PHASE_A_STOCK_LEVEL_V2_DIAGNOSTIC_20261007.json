@@ -1,0 +1,154 @@
+{
+  "format": "MTS_G3_CLAUDE_PHASE_A_STOCK_LEVEL_V2_DIAGNOSTIC",
+  "protocol": "frozen V2 structural_screen + 6x48 lifecycle GA",
+  "decision_rule": {
+    "strong_pooling_evidence": ">=5/8 final median > 0.003",
+    "weak_feature_signal": "<=2/8 final median > 0.003",
+    "ambiguous": "3-4/8 final median > 0.003"
+  },
+  "tickers": [
+    "AAPL",
+    "MSFT",
+    "XOM",
+    "JPM",
+    "JNJ",
+    "CAT",
+    "WMT",
+    "NVDA"
+  ],
+  "date_start": "2016-09-20 00:00:00",
+  "date_end": "2026-08-31 00:00:00",
+  "results": [
+    {
+      "ticker": "AAPL",
+      "generation": 6,
+      "median_mean": 0.06928131107790046,
+      "iqr_mean": [
+        0.06328450814887565,
+        0.07181152063993375
+      ],
+      "qualifying": 46,
+      "top": {
+        "n": 25,
+        "mean": 0.07559968542675344,
+        "tail": 0.060735634850334154,
+        "duration": 8.08
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "generation": 6,
+      "median_mean": 0.059619850526125166,
+      "iqr_mean": [
+        0.05845284361462775,
+        0.060236804682405956
+      ],
+      "qualifying": 45,
+      "top": {
+        "n": 47,
+        "mean": 0.06907585237446416,
+        "tail": 0.028345194450314092,
+        "duration": 7.319148936170213
+      }
+    },
+    {
+      "ticker": "XOM",
+      "generation": 6,
+      "median_mean": 0.06748516797062888,
+      "iqr_mean": [
+        0.0643575183123612,
+        0.0697637605203193
+      ],
+      "qualifying": 47,
+      "top": {
+        "n": 49,
+        "mean": 0.07304440019386194,
+        "tail": 0.02850156125609087,
+        "duration": 7.653061224489796
+      }
+    },
+    {
+      "ticker": "JPM",
+      "generation": 6,
+      "median_mean": 0.05031976075875831,
+      "iqr_mean": [
+        0.04763650586339143,
+        0.051372452779771635
+      ],
+      "qualifying": 46,
+      "top": {
+        "n": 30,
+        "mean": 0.05410896248173783,
+        "tail": -0.00555716302961698,
+        "duration": 8.633333333333333
+      }
+    },
+    {
+      "ticker": "JNJ",
+      "generation": 6,
+      "median_mean": 0.03523253095755128,
+      "iqr_mean": [
+        0.033708555331110016,
+        0.03654053718663945
+      ],
+      "qualifying": 46,
+      "top": {
+        "n": 31,
+        "mean": 0.04124281290626391,
+        "tail": -0.012435242190334981,
+        "duration": 9.838709677419354
+      }
+    },
+    {
+      "ticker": "CAT",
+      "generation": 6,
+      "median_mean": 0.06488062950217265,
+      "iqr_mean": [
+        0.06392166967106329,
+        0.06633277825465744
+      ],
+      "qualifying": 45,
+      "top": {
+        "n": 26,
+        "mean": 0.07156294609105733,
+        "tail": 0.035405624865299745,
+        "duration": 9.038461538461538
+      }
+    },
+    {
+      "ticker": "WMT",
+      "generation": 6,
+      "median_mean": 0.04458463270079305,
+      "iqr_mean": [
+        0.041897811285179935,
+        0.04458463270079305
+      ],
+      "qualifying": 45,
+      "top": {
+        "n": 26,
+        "mean": 0.044776016580290096,
+        "tail": 0.012554123912011052,
+        "duration": 9.423076923076923
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "generation": 6,
+      "median_mean": 0.08679972398265211,
+      "iqr_mean": [
+        0.08102230033604131,
+        0.09059990269147244
+      ],
+      "qualifying": 47,
+      "top": {
+        "n": 80,
+        "mean": 0.0949889668823109,
+        "tail": -0.06440900721993983,
+        "duration": 5.6
+      }
+    }
+  ],
+  "count_above_0_003": 8,
+  "decision": "PROCEED_PHASE_BC",
+  "seconds": 7.44241419500031
+}
