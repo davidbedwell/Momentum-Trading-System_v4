@@ -1,9 +1,26 @@
 {
-  "status":"FROZEN_BEFORE_V3_CALIBRATION_OUTCOMES",
-  "partition":{"path":"Research/Partitions/MTS_V4_REPAIRED_UNTOUCHED_PARTITION_A100_B100_DISCOVERY136_20261007.json","source_commit":"b662c9b44141cc438004a9465a88444c30261a32","source_blob":"840f45416769e7cd7d1d3c7ae23dd3f3c9121dbf","sha256":"a4fb7d79587656de3965b53fe28fb5ac3f672bb3fbbda81195f9ec60826a8952"},
-  "cost_freeze":{"path":"Research/Protocols/MTS_COST_MODEL_APPROVAL_FREEZE_20261006.json","sha256":"cc63906d6d33eecc9761095ab1925e7375020208c1b64f54c2a0e05488c197ba"},
-  "recovered_sources":{"derived_feature_factory_sha256":"a835697dccf07e142a6c142f286b9552b559d11fca64699f4b5115664cc47f73","search_families_sha256":"16a336f76bac33819c32816fdd68016e927ac716c3f8ffebb89f955c98da2b13","computational_search_sha256":"e75912fb0af3f6b648cc718d4f97dd984fcfeb2a257920a43a566be4e9a98402"},
-  "max_integer_forward_horizon":63,
-  "entry_semantics":"decision close T; hypothetical entry T+1 adjusted open",
-  "forbidden_stage2_objectives":["CAGR","max_drawdown","terminal_wealth"]
+  "status": "FROZEN_BEFORE_V3_CALIBRATION_OUTCOMES",
+  "partition": {
+    "path": "Research/Partitions/MTS_V4_REPAIRED_UNTOUCHED_PARTITION_A100_B100_DISCOVERY136_20261007.json",
+    "source_commit": "b662c9b44141cc438004a9465a88444c30261a32",
+    "source_blob": "840f45416769e7cd7d1d3c7ae23dd3f3c9121dbf",
+    "sha256": "a4fb7d79587656de3965b53fe28fb5ac3f672bb3fbbda81195f9ec60826a8952"
+  },
+  "cost_freeze": {
+    "path": "Research/Protocols/MTS_COST_MODEL_APPROVAL_FREEZE_20261006.json",
+    "sha256": "cc63906d6d33eecc9761095ab1925e7375020208c1b64f54c2a0e05488c197ba"
+  },
+  "recovered_sources": {
+    "derived_feature_factory_sha256": "a835697dccf07e142a6c142f286b9552b559d11fca64699f4b5115664cc47f73",
+    "search_families_sha256": "16a336f76bac33819c32816fdd68016e927ac716c3f8ffebb89f955c98da2b13",
+    "computational_search_sha256": "e75912fb0af3f6b648cc718d4f97dd984fcfeb2a257920a43a566be4e9a98402",
+    "costs_sha256": "edb1839083a6699e2e405d5b075a2cb48be5f7c7fc469b0c11cf31d7b0b57e16"
+  },
+  "max_integer_forward_horizon": 63,
+  "entry_semantics": "decision close T; hypothetical entry T+1 adjusted open",
+  "forbidden_stage2_objectives": [
+    "CAGR",
+    "max_drawdown",
+    "terminal_wealth"
+  ]
 }
