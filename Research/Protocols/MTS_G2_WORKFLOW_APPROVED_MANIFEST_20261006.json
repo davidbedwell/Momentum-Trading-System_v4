@@ -1,0 +1,340 @@
+{
+  "date": "2026-10-06",
+  "execution_resource_policy": {
+    "benchmark_required_on_destination": true,
+    "benchmark_runner": "scripts/benchmark_g2_compute_20261006.py",
+    "cpu_detection": "os.sched_getaffinity fallback os.cpu_count",
+    "note": "Worker count and fold concurrency affect wall-clock execution only; population, islands, generations, objectives, operators, seeds, fold membership, freeze barrier, and selection semantics remain frozen.",
+    "parallel_fold_policy": "maximum up to four folds while retaining >=6 evaluation workers per fold",
+    "reserve_policy": "2 CPUs when >=16, otherwise 0",
+    "scientific_semantics_unchanged": true,
+    "status": "EXECUTION_ONLY",
+    "workers_per_fold": "floor(usable CPUs / concurrent folds)"
+  },
+  "explicit_authorized_delta": {
+    "H7_planted_population_per_island": {
+      "from": 250,
+      "scope": "planted calibration only",
+      "to": 64
+    },
+    "first_plateau_structural_mutation_upweight": {
+      "after_window": "apply frozen next-plateau logic",
+      "approved_by_user": "2026-10-06",
+      "approved_interpretation": "frozen",
+      "class_ids": [
+        4,
+        5,
+        6,
+        11
+      ],
+      "context_applicability_excluded": [
+        7,
+        8
+      ],
+      "duration_generations": 40,
+      "multiplier": 2.0,
+      "other_mutation_probabilities": "unchanged unless explicitly specified by frozen design",
+      "scope": "baseline structural-mutation probability only"
+    },
+    "within_class_conditional_sampling": {
+      "approved_by_user": "2026-10-06",
+      "classes": {
+        "4": "1:1:1",
+        "5": "1:1",
+        "6": "1:1:1"
+      },
+      "scope": "conditional probabilities after mutation-class selection only"
+    }
+  },
+  "format": "MTS_G2_WORKFLOW_APPROVED_MANIFEST_V1",
+  "mutation_semantic_evidence_binding": {
+    "artifact": "Research/Conformance/MTS_G2_MUTATION_SEMANTIC_EVIDENCE_20261006.json",
+    "artifact_sha256": "76d55eedfec8f7e4ccadfb2a5127a430440be6f9c91d84454465f8753cf0d89e",
+    "controlled_fixture_count": 7,
+    "fixture": "Tests/conforming_ga/test_g2_mutation_proof.py",
+    "fixture_sha256": "3063457c148ab158d3d451f79fd932666143d950988659c09a7d4a6abb03d1d0",
+    "required_passed": true
+  },
+  "null": {
+    "base_generations": 500,
+    "blind": 37,
+    "folds": 4,
+    "matched_production_machinery": true,
+    "population_per_island": 250,
+    "provenance_boundary_freeze": {
+      "allowed_carry_through_class": "chronological_exogenous_pit",
+      "numerical_inequality_required": false,
+      "observed_42_of_42_changed": "empirical_evidence_only_not_gate",
+      "registered_field_count": 8,
+      "registry": "Core/conforming_ga/null_provenance.py",
+      "status": "USER_FROZEN",
+      "stock_path_and_dynamic_peer_rule": "production_rebuild_from_completed_synthetic_path_required"
+    },
+    "runner_gate": {
+      "compute_fixture": "Tests/conforming_ga/test_compute_plan.py",
+      "compute_fixture_sha256": "778888b0994b65256c0f718e9d94c684097b982a59ee44c501a130f9fabe71c6",
+      "compute_plan": "Core/conforming_ga/compute_plan.py",
+      "compute_plan_sha256": "13d13bc5f28cea3a3431ed05d85f5c299183f285b52ff35ba33b697947a1d115",
+      "fixture": "Tests/conforming_ga/test_h7_runner_barrier.py",
+      "fixture_sha256": "418794bbe97a5db9877b690b651dfbb0bdd65ff77c4c94e6522d49a80c26380d",
+      "fold_worker": "scripts/run_h7_null_fold_worker_20261006.py",
+      "fold_worker_sha256": "b6a4a725750a3efc66da1df7b7f427aa1c5d2bb30fbe30fdb351711963ec9af2",
+      "required_semantics": [
+        "all_four_train80_freezes_before_any_blind37_load",
+        "frozen_canonical_roundtrip_hash_identity",
+        "freeze_hash_tamper_fails_closed",
+        "population_per_island_250",
+        "shared_evolve_g2_controller",
+        "I4_2000_bootstrap"
+      ],
+      "runner": "scripts/run_h7_null_g2_20261006.py",
+      "runner_sha256": "35cc85e5d52dc328861035afadf4a97f1b2c1d1e1d19faa4f35b88be1c53cec0"
+    },
+    "train": 80,
+    "transformation_conformance": {
+      "artifact": "Research/Conformance/MTS_H7_NULL_TRANSFORMATION_CONFORMANCE_20261006.json",
+      "invariant_audit": "Research/Conformance/MTS_H7_NULL_INVARIANT_FEATURE_AUDIT_20261006.json",
+      "invariant_audit_sha256": "ea837f29c07dae3f25cb23da9dd584ce67c952cc5707669c8fcf6504e0236688",
+      "population_per_island": 250,
+      "provenance_registry": "Core/conforming_ga/null_provenance.py",
+      "provenance_registry_sha256": "344a03266973e644dd2db559f3d5fd97a9e06aa7f50e6ee28cf45c51d07e53d3",
+      "required_passed": true,
+      "sha256": "63441286ffd891f2eb44bbdf79a380e294bf1d5848504bba63238180716319d7"
+    },
+    "workers": 6
+  },
+  "planted": {
+    "max_generations": 500,
+    "passed_report": "Research/Conformance/MTS_H7_PLANTED_CALIBRATION_20261006.json",
+    "population_per_island": 64,
+    "recovery_observation_interval": 1,
+    "workers": 6
+  },
+  "production": {
+    "allocation_modes": [
+      "equal",
+      "strength",
+      "uncertainty",
+      "downside"
+    ],
+    "base_generations": 500,
+    "blind": 37,
+    "checkpoint_interval": 10,
+    "context_applicability_classes_excluded_from_plateau_structural_multiplier": [
+      7,
+      8
+    ],
+    "controller_semantic_gate": {
+      "controller": "Core/conforming_ga/ga_g2.py",
+      "controller_sha256": "2aef4d886ec0f7b3c349009880a081d633407a03a985d8c146bf1b2ac298f76e",
+      "evidence": "Research/Conformance/MTS_G2_CONTROLLER_SMOKE_20261006.json",
+      "evidence_sha256": "13565dce7815b78d184399e8fd4eaa04a2a86dd51b66ddd5bc924a70c2b12039",
+      "fixture": "Tests/conforming_ga/test_g2_controller_semantics.py",
+      "fixture_sha256": "43edd0d4508fc366658d5e0df6ef4a73d9d98cdbfb27c50a0509611da0d7fc6a",
+      "frozen_island_reallocation": "frozen island consumes no further simulation evaluations; worker capacity remains available to active islands; population size of active islands is not silently changed",
+      "migration_semantics": "reuse canonical island-independent raw metrics only; receiving island independently reapplies feasibility, constraints, ranking/objective treatment and archive admission",
+      "required": true,
+      "required_status": "PASS",
+      "smoke_runner": "scripts/run_g2_controller_smoke_20261006.py",
+      "smoke_runner_sha256": "4c0769324367adc78ec8256291828c05d4420663af52767ea9da1bf0d5c19375"
+    },
+    "extension_gain_threshold": 0.01,
+    "extension_generations": 100,
+    "extension_window": 50,
+    "finalist_selection": {
+      "all_four_training_finalist_sets_frozen_before_any_blind": true,
+      "block_length_rule": "Politis-White",
+      "bootstrap_type": "stationary_block_bootstrap",
+      "epsilon_rule": {
+        "comparison": "leader_relative",
+        "epsilon": "one_standard_error_of_paired_CAGR_difference",
+        "exact_remaining_tie": "canonical_genome_hash",
+        "no_chained_epsilon_equivalence": true,
+        "not_used": "SE_of_estimated_5th_percentile",
+        "pairing": "identical_stationary_block_bootstrap_resamples_applied_to_both_candidates",
+        "primary_ranking_statistic": "bootstrap_5th_percentile_training_CAGR",
+        "purpose": "comparison uncertainty; incorporates covariance from shared training history",
+        "status": "USER_FROZEN",
+        "tie_break": "lower_active_concept_count",
+        "within_epsilon": "absolute relevant CAGR performance difference <= paired_difference_SE"
+      },
+      "evidence_required": [
+        "replicate_count",
+        "seed_derivation",
+        "seed",
+        "selected_block_length",
+        "bootstrap_distribution_summary",
+        "cagr_5th_percentile",
+        "epsilon_uncertainty",
+        "complexity_tiebreak_if_applicable"
+      ],
+      "fixture": "Tests/conforming_ga/test_g2_finalists.py",
+      "fixture_sha256": "60e0c407e6c793b363e4c0a3cfbb7bf46806b77442c4b06c8895ef68fba30cf1",
+      "implementation": "Core/conforming_ga/g2finalists.py",
+      "implementation_sha256": "ca9e41a5fdcd6070d41dc7a34a18d1943c24865a376d701299bbcb62b9e3afe8",
+      "replicate_count_adaptive": false,
+      "replicates_per_candidate": 2000,
+      "rng": "deterministic",
+      "rule": "for each DD band select archive member with maximum stationary-block-bootstrap 5th-percentile training CAGR subject to train MDD <= band and approved guards; ties within epsilon use frozen uncertainty/complexity semantics",
+      "scope": "training_only_per_fold",
+      "seed_derivation": "SHA256(fold identity || canonical candidate identity || bootstrap purpose), reduced to deterministic integer seed",
+      "status": "USER_FROZEN"
+    },
+    "folds": 4,
+    "gross_max": 1.0,
+    "islands": 9,
+    "max_generations": 800,
+    "migration_interval": 25,
+    "mutation_runtime_preflight": {
+      "class_5_wrapper_families": [
+        "ifsoft",
+        "softthresh",
+        "temporal"
+      ],
+      "class_first_sampling": true,
+      "code_hash_binding": true,
+      "plateau_multiplier": 2.0,
+      "recursive_operators": [
+        "replace_subtree",
+        "wrap_subtree",
+        "unwrap_subtree"
+      ],
+      "required": true,
+      "structural_classes": [
+        4,
+        5,
+        6,
+        11
+      ],
+      "within_class_ratios": {
+        "4": [
+          1,
+          1,
+          1
+        ],
+        "5": [
+          1,
+          1
+        ],
+        "6": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "plateau_gain_threshold": 0.005,
+    "plateau_immigrants_fraction": 0.2,
+    "plateau_next_logic": "at end of 40-generation evaluation window apply frozen next-plateau logic",
+    "plateau_nonstructural_mutation_probabilities": "unchanged unless explicitly required by frozen design",
+    "plateau_structural_mutation_duration_generations": 40,
+    "plateau_structural_mutation_multiplier": 2.0,
+    "plateau_structural_mutation_scope": "classes 4,5,6,11 only",
+    "plateau_window": 40,
+    "population_per_island": 250,
+    "stage_b_mutation_freeze": {
+      "all_classes_reachable_all_stages": true,
+      "class_7_required_semantics": "applicability add/remove of both market-context and sector-context references",
+      "class_first_sampling_required": true,
+      "fixture": "Tests/conforming_ga/test_g2_stage_mutation.py",
+      "fixture_sha256": "e3cbdf6f2b47a7f0576485bbdd481c9dce1604e968abde2103eec606592461a5",
+      "plateau_structural": {
+        "classes": [
+          4,
+          5,
+          6,
+          11
+        ],
+        "combination": "independent_multiplicative",
+        "multiplier": 2.0,
+        "must_not_change_market_sector_conditional_ratio": true
+      },
+      "source_note": "Claude H.1 specifies 'up-weighted' but no numeric values; 2x class emphasis and 2:1 sector emphasis are project-level freezes resolving underspecified parameters, not verbatim Claude requirements.",
+      "stage_A": {
+        "class_weights": "baseline",
+        "market_sector_conditional_ratio": "1:1"
+      },
+      "stage_B": {
+        "class_7_weight_multiplier": 2.0,
+        "class_8_weight_multiplier": 2.0,
+        "other_class_weight_multiplier": 1.0,
+        "sector_market_conditional_ratio": "2:1"
+      },
+      "stage_C_D": {
+        "class_weights": "baseline",
+        "market_sector_conditional_ratio": "1:1"
+      },
+      "status": "USER_FROZEN"
+    },
+    "structural_mutation_class_ids": [
+      4,
+      5,
+      6,
+      11
+    ],
+    "structural_mutation_classes": {
+      "11": "simplification/pruning mutation",
+      "4": "subtree insert, delete, or replace",
+      "5": "wrap/unwrap in IfSoft, SoftThresh, or temporal operators",
+      "6": "module add, delete, or duplicate-and-mutate"
+    },
+    "structural_mutation_interpretation_rationale": "Claude C.7 identifies insertion/module addition as complexity growth and deletion/pruning/simplification as shrinkage; H.1 distinguishes context and structural operators, and Stage B separately up-weights context/applicability operators. Therefore classes 7-8 remain context/applicability and are excluded from the plateau structural multiplier.",
+    "train": 80,
+    "within_class_conditional_sampling": {
+      "class_4": {
+        "operations": [
+          "insert",
+          "delete",
+          "replace"
+        ],
+        "weights": [
+          1,
+          1,
+          1
+        ]
+      },
+      "class_5": {
+        "operations": [
+          "wrap",
+          "unwrap"
+        ],
+        "weights": [
+          1,
+          1
+        ]
+      },
+      "class_6": {
+        "operations": [
+          "module_add",
+          "module_delete",
+          "module_duplicate_and_mutate"
+        ],
+        "weights": [
+          1,
+          1,
+          1
+        ]
+      },
+      "conditional_after_class_selection": true,
+      "must_not_alter_aggregate_class_probability": true,
+      "plateau_behavior": "classes 4,5,6,11 receive 2.0x aggregate class-weight multiplier; within-class ratios unchanged",
+      "rule": "uniform among Claude-specified alternatives unless Claude explicitly specifies otherwise"
+    },
+    "workers": 6
+  },
+  "protocol_hashes": {
+    "compute_efficiency": "eea2f1f2bf2d5bb4a19197468ddc05d2c2ad2627cec32ffabd5018ede7921f2a",
+    "engineering_conformance": "519229799e3c785eee7923d1ad34560599ef73521535ce241d3e4da6c720e81c",
+    "ga_freeze": "08c3515acf057717acb410b62c5fd32986c640d61f744e72b4840ebe5bb162c7",
+    "handoff_governance": "bd9557622baabc1d9c9375613367e6d269ff58fa6222c3053bfeeef2161540b0",
+    "orchestration": "7d74ece4f4830dc54e6223d46484579ffc92e5d08861f28b9691e186238fa577"
+  },
+  "runtime_code_bindings": {
+    "Core/conforming_ga/g2evolution.py": "d339537972ec40e24bacdeede5e66fea2b90c5995189a605435b2c2cecbae526",
+    "Core/conforming_ga/g2schema.py": "6fe3661a0a0cd42db83b08afca2ec05c1a636c29b570666210541b690267cdef",
+    "Core/conforming_ga/ga_g2.py": "2aef4d886ec0f7b3c349009880a081d633407a03a985d8c146bf1b2ac298f76e",
+    "Core/conforming_ga/h7_runner.py": "5e8bb5f8d93ef9927ac5e89e60a798f3271ca3092f7c3ca2f2958106f2a580e6"
+  },
+  "schema": "MTS-GA-G2",
+  "scientific_blockers": []
+}
