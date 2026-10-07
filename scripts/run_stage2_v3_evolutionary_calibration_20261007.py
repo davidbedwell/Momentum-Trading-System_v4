@@ -26,14 +26,16 @@ def main():
    day=points[1]
    for effect in (.02,.01,.005,.0025,0.):
     state('RUNNING_MATCHED_EVOLUTIONARY_SEARCH',family=family,shape=shape,effect=effect,completed=len(results),total=45)
-    profile=np.interp(np.arange(1,64),[1,points[0],points[1],points[2],points[3],63],[0,0,1,1,0,0])
+    knots={1:0.0,points[0]:0.0,points[1]:1.0,points[2]:1.0,points[3]:0.0,63:0.0}
+    profile=np.interp(np.arange(1,64),sorted(knots),[knots[k] for k in sorted(knots)])
     planted=plant_endpoint_outcomes(paths,target,profile,effect)
     ev=OutcomeMatchedEvaluator(compiler,planted.paths,costs,cluster_ids_from_frame(df))
     baseline_curve=ev.curves.evaluate(family,entry['genome'],'LONG')
     baseline=max((p['lcb95'] for p in baseline_curve.points if np.isfinite(p.get('lcb95',np.nan))),default=-1e6)
     req=SearchRunRequest(run_id=f'{family}-{shape}-{effect}',optimizer_id='search.evolutionary.v1',search_space=spaces[family],evidence_identity='PLANTED',scientific_cohort='DISCOVERY',budget_evaluations=256,seed=rng.randrange(2**31))
     run=EvolutionarySearchOptimizer(EvolutionaryConfig()).run(req,ev)
-    result={'family':family,'shape':shape,'effect':effect,'baseline':baseline,'best_ga':ev.best,'full_63_day_curve':all(x['horizons']==63 for x in ev.ledger),'certified':False,'unique':run.unique_count,'target_visited':any(e.genome==entry['genome'] for e in run.ledger)}
+    if ev.calls != len(ev.ledger):raise RuntimeError('GA evaluation ledger inconsistent')
+    result={'family':family,'shape':shape,'effect':effect,'baseline':baseline,'best_ga':ev.best,'ga_evaluation_count':ev.calls,'baseline_excluded_from_ga':True,'full_63_day_curve':all(x['horizons']==63 for x in ev.ledger),'certified':False,'unique':run.unique_count,'target_visited':any(e.genome==entry['genome'] for e in run.ledger)}
     results.append(result);save('evolutionary_results.json',{'cases':results,'completed':len(results),'total':45})
  save('gate_diagnostic.json',certify_calibration(results,frozen_parameters_verified=False))
  state('STOPPED_ENGINEERING_MULTI_OBJECTIVE_AND_STATISTICAL_GATE_PENDING',completed=len(results),total=45)
