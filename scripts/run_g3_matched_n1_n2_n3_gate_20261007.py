@@ -39,12 +39,14 @@ def n2_data(events,seed):
 if __name__=="__main__":
  ap=argparse.ArgumentParser();ap.add_argument("--workers",type=int,default=60);ap.add_argument("--generations",type=int,default=6);ap.add_argument("--population",type=int,default=48);ap.add_argument("--rows",type=int,default=2500);a=ap.parse_args()
  assert_independent_path(ROOT);start=time.perf_counter();events=build_earnings_index(TICKERS)
- realdata={t:evidence_arrays_with_earnings(t,events[t])[:2] for t in TICKERS}
+ dates,AX,AY,cols=aligned_evidence_with_earnings(TICKERS,events)
+ realdata={t:(AX[:,i,:],AY[:,i,:]) for i,t in enumerate(TICKERS)}
  arms=[arm("real",None,realdata,a.generations,a.population,a.workers,a.rows,1776)]
  arms.append(arm("N1_TEMPORAL_BLOCK","N1_TEMPORAL_BLOCK",realdata,a.generations,a.population,a.workers,a.rows,1776))
- arms.append(arm("N2_DATEWISE_CROSS_SECTION",None,n2_data(events,2776),a.generations,a.population,a.workers,a.rows,1776))
+ n2Y=apply_aligned_n2(AY,2776); n2data={t:(AX[:,i,:],n2Y[:,i,:]) for i,t in enumerate(TICKERS)}
+ arms.append(arm("N2_DATEWISE_CROSS_SECTION",None,n2data,a.generations,a.population,a.workers,a.rows,1776))
  arms.append(arm("N3_GUARDED_SHIFT","N3_GUARDED_SHIFT",realdata,a.generations,a.population,a.workers,a.rows,1776))
  ev=[x["ticker_evaluations"] for x in arms]
- out={"format":"MTS_G3_MATCHED_N1_N2_N3_GATE_PILOT_V1","status":"PILOT_ONLY_THRESHOLD_NOT_FROZEN","workers":a.workers,"tickers":TICKERS,"rows":a.rows,"arms":arms,"matched_budget":len(set(ev))==1,"total_seconds":time.perf_counter()-start,"production_authorized":False}
- Path("Research/G3/MTS_G3_MATCHED_N1_N2_N3_GATE_PILOT_20261007.json").write_text(json.dumps(out,indent=2)+"\n")
+ out={"format":"MTS_G3_MATCHED_N1_N2_N3_GATE_PILOT_V2_ALIGNED","status":"PILOT_ONLY_THRESHOLD_NOT_FROZEN","workers":a.workers,"tickers":TICKERS,"rows":a.rows,"arms":arms,"matched_budget":len(set(ev))==1,"total_seconds":time.perf_counter()-start,"production_authorized":False}
+ Path("Research/G3/MTS_G3_MATCHED_N1_N2_N3_GATE_PILOT_V2_ALIGNED_20261007.json").write_text(json.dumps(out,indent=2)+"\n")
  print(json.dumps({"total_seconds":out["total_seconds"],"matched_budget":out["matched_budget"],"arms":[{"arm":x["arm"],"seconds":x["seconds"],"final":x["ledger"][-1]} for x in arms]},indent=2))

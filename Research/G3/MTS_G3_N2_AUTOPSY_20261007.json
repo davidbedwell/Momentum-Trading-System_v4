@@ -1,0 +1,25 @@
+{
+  "format": "MTS_G3_N2_AUTOPSY_20261007_V1",
+  "gate_result": {
+    "real_final_median": 0.00902008502050235,
+    "n1_final_median": 0.006385039945987016,
+    "n2_final_median": 0.015182756569759993,
+    "n3_final_median": 0.0046980988326014335,
+    "real_wins_vs_n2_generations": 1,
+    "generations": 6
+  },
+  "findings": [
+    "N2 preserves pooled outcome distribution exactly by construction.",
+    "N2 preserves each date's cross-sectional outcome multiset exactly.",
+    "N2 redistributes stock-specific drift and volatility across recipient feature streams.",
+    "Example: real NVDA forward-path std 0.03158 vs N2 recipient std 0.01950; real JNJ 0.01188 vs N2 0.01922.",
+    "The first four-arm gate was not sample-comparable: real/N1/N3 used each ticker's own last 2500 eligible rows, while N2 used the common aligned last 2500 dates.",
+    "Therefore the observed N2 advantage cannot be interpreted as a valid null-gate failure until all arms use the identical aligned date panel."
+  ],
+  "required_repair": {
+    "change_scientific_search": false,
+    "controller_fix": "Use identical common aligned dates/features/outcomes for real, N1, N2 and N3 arms before null transformation.",
+    "n2_followup": "After sample alignment, test whether cross-sectional permutation should be bucketed to preserve stock/sector/liquidity/volatility heterogeneity; do not decide from the contaminated comparison."
+  },
+  "production_authorized": false
+}
