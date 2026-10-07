@@ -1,0 +1,30 @@
+{
+  "id": "gen-1791353821-hiNliiQLxdezEGb5OEq5",
+  "model": "x-ai/grok-4.20",
+  "usage": {
+    "prompt_tokens": 796,
+    "completion_tokens": 704,
+    "total_tokens": 1500,
+    "cost": 0.0026206,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 128,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0026206,
+      "upstream_inference_prompt_cost": 0.0008606,
+      "upstream_inference_completions_cost": 0.00176
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "prompt_sha256": "55768cd1dde8c54a19465351f4699c40340028afa303305e625fbb273f162bfb",
+  "chars": 3148,
+  "created_utc": "2026-10-07T06:17:08.656899+00:00"
+}
