@@ -1,0 +1,52 @@
+You are serving as an independent outside scientist/statistical-methodology reviewer. Review the following experimental-design problem cold. Do not assume any proposed repair; recommend from first principles.
+
+PROJECT
+G3 is a financial-market research system intended to discover local opportunity specialists first, validate them, and only later construct portfolios. Discovery is explicitly NOT optimized on portfolio CAGR or maximum drawdown. Candidate specialists have causal feature gates/signals and lifecycle management; evaluation returns include net return, MFE, MAE, tail loss, duration, time-to-profit/failure, turnover/costs, and path signatures. A genetic/evolutionary search is used. Before any large discovery run, the machinery must demonstrate that real data are distinguishable from matched null controls under equal search budgets.
+
+PILOT DATA
+8 stocks: AAPL, MSFT, XOM, JPM, JNJ, CAT, WMT, NVDA.
+Common aligned date panel: 4,935 dates from 2007-01-19 through 2026-08-31. Pilot uses last 2,500 common dates. Features are causal/past-only price features plus point-in-time earnings features. Outcomes are complete 10-session forward paths. Search: 6 generations, population 48, equal 2,304 ticker evaluations per arm, same search machinery and seed structure.
+
+NULLS
+N1 TEMPORAL BLOCK: within each stock, permute outcome paths in temporal blocks, breaking local feature→future association while approximately retaining temporal structure.
+N2 DATEWISE CROSS SECTION: on each actual date, permute the complete forward outcome paths among the 8 stocks. Thus the exact cross-sectional multiset of outcomes for every date is preserved, and pooled outcome distribution is preserved exactly, but stock identity linking each feature vector to its own future path is broken.
+N3 GUARDED SHIFT: within each stock, circularly shift outcomes by a guarded offset to break contemporaneous feature→future association while preserving each stock's marginal outcome series structure.
+
+MATCHED GATE RESULT
+Final generation median mean net return:
+real = 0.0090200850
+N1 = 0.0063850399
+N2 = 0.0151827566
+N3 = 0.0046980988
+Real beat N1 in 5/6 generations and N3 in 5/6. N2 beat real in 5/6 and its advantage widened during evolution.
+Best final-generation mean:
+real 0.0102589580
+N1 0.0076370927
+N2 0.0210104419
+N3 0.0115726784.
+
+A first controller version had a sample mismatch (real/N1/N3 used each stock's own last 2500 eligible rows while N2 used common dates). We repaired it so ALL FOUR arms use exactly the same aligned date panel, X, and original Y before null transformation. The corrected run reproduced the numerical results exactly, so the sample mismatch was not the explanation.
+
+N2 AUTOPSY
+Across the common pilot panel, N2 preserves pooled mean/std/quantiles exactly and preserves each date's cross-sectional outcome multiset exactly. But it redistributes stock-specific marginal drift/volatility because paths move among recipient stocks.
+Illustrative forward-path std before N2 vs recipient after N2:
+AAPL 0.01837 -> 0.01908
+MSFT 0.01750 -> 0.01922
+XOM 0.01789 -> 0.01934
+JPM 0.01726 -> 0.01928
+JNJ 0.01188 -> 0.01922
+CAT 0.01983 -> 0.01929
+WMT 0.01394 -> 0.01972
+NVDA 0.03158 -> 0.01950.
+Real mean forward outcomes also differ by stock, e.g. JNJ ~0.000509 vs NVDA ~0.002463, whereas N2 pulls recipient means toward the pooled level.
+
+QUESTIONS
+1. Is N2, as constructed, a scientifically valid null for asking whether this evolutionary machinery discovers genuine stock-specific feature→future opportunity structure, or does changing stock-specific marginal distributions make it an unfair/easier/harder placebo?
+2. What exact null construction(s) would you recommend instead or in addition? State what invariants each should preserve and what relationship it should destroy.
+3. Should the system require real data to outperform every null? If not, what gate logic would you recommend before authorizing a large discovery search?
+4. With only 8 pilot stocks, how should we avoid tuning the null to make real win? What diagnostics/calibration should be frozen before rerunning?
+5. What independent-stock/time/episode effective-sample-size and multiplicity considerations matter here?
+6. Identify any deeper flaw in this null-testing framework or evolutionary comparison that we may be missing.
+7. Give a concrete next-step protocol, ordered, that a skeptical quantitative researcher would accept.
+
+Be critical. A conclusion that the current design should not proceed is acceptable. Separate fatal flaws, repairable flaws, and optional improvements. Do not optimize recommendations to agree with the project team.
