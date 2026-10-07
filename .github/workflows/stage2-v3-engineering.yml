@@ -1,0 +1,35 @@
+name: Stage 2 V3 engineering checks
+
+on:
+  push:
+    branches:
+      - research/layered-contextual-ga-redesign-20261007
+  workflow_dispatch:
+
+jobs:
+  static-and-isolated:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install isolated test dependencies
+        run: python -m pip install --disable-pip-version-check numpy pytest
+      - name: Compile calibration code without importing recovered sources
+        run: |
+          python -m compileall -q Core/layered_ga scripts/run_stage2_v3_evolutionary_calibration_20261007.py Tests
+      - name: Run tests independent of missing recovered source tree
+        run: |
+          python -m pytest -q \
+            Tests/test_stage2_calibration_gate_v3.py \
+            Tests/test_stage2_calibration_pareto_v3.py \
+            Tests/test_stage2_calibration_evidence_v3.py \
+            Tests/test_stage2_calibration_shapes_v3.py \
+            Tests/test_stage2_cluster_stats_v3.py \
+            Tests/test_stage2_recovered_source_preflight_v3.py
+      - name: Record missing-source preflight
+        if: always()
+        run: python -m Core.layered_ga.stage2_recovered_source_preflight_v3
