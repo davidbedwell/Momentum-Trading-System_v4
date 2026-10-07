@@ -2,7 +2,8 @@ from Core.layered_ga.architecture import Stage
 from Core.layered_ga.controller import (
     DurabilityReceipt, GateDecision, GateResult, RunState,
     advancement_allowed, destructive_action_allowed, prerequisites_for_stage,
-    terminal_state,
+    terminal_state, ComputeEnvelope, ComputeHandoffPackage, compute_handoff_required,
+    compute_boundary_state, controller_may_provision_compute,
 )
 
 
@@ -45,3 +46,40 @@ def test_controller_cannot_self_authorize_destruction():
 def test_incomplete_backup_never_allows_destruction():
     r=DurabilityReceipt(True,False,True,True)
     assert not destructive_action_allowed(r, True)
+
+
+def _ready_package():
+    return ComputeHandoffPackage(
+        code_commit_sha="abc",
+        scientific_config_hash="science",
+        data_manifest_hash="data",
+        parent_artifact_hashes=("parent",),
+        environment_specified=True,
+        bootstrap_specified=True,
+        launch_command_specified=True,
+        expected_outputs_specified=True,
+        gate_specified=True,
+        durability_verified=True,
+    )
+
+
+def test_thunder_six_cpu_does_not_assume_64_is_needed():
+    env=ComputeEnvelope(available_vcpus=6, target_vcpus=64, target_is_provisioned=False)
+    assert not compute_handoff_required(env, None)
+    assert not compute_handoff_required(env, 6)
+    assert compute_boundary_state(env, 6, None) is RunState.NEXT_STAGE
+
+
+def test_calibrated_heavy_work_stops_with_package_waiting_not_machine():
+    env=ComputeEnvelope(available_vcpus=6, target_vcpus=64, target_is_provisioned=False)
+    assert compute_handoff_required(env, 64)
+    assert compute_boundary_state(env, 64, _ready_package()) is RunState.WAITING_FOR_COMPUTE_PROVISIONING
+
+
+def test_incomplete_handoff_package_cannot_claim_ready():
+    env=ComputeEnvelope(available_vcpus=6, target_vcpus=64, target_is_provisioned=False)
+    assert compute_boundary_state(env, 64, None) is RunState.STOPPED_ENGINEERING
+
+
+def test_controller_never_provisions_paid_compute():
+    assert controller_may_provision_compute() is False
