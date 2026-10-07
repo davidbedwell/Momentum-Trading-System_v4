@@ -1,0 +1,281 @@
+{
+  "sizing_evidence": [
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv63",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06902983567120073,
+        "transport_ev": 0.06760343728260582,
+        "transport_lcb": 0.06524358440143534,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9662701271531638,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9649033707768504,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9649033707768504,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06316190225825069,
+        "transport_ev": 0.06315903965466373,
+        "transport_lcb": 0.06094638180609654,
+        "transport_n": 147052,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9661526634143496,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06235765255543784,
+        "transport_ev": 0.06257544190220829,
+        "transport_lcb": 0.0604062287004334,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9664958721566896,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.966058009153009,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.966058009153009,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.058445601729857424,
+        "transport_ev": 0.05932586780802223,
+        "transport_lcb": 0.057280676262077265,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9666749838201586,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9658121660637858,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9658121660637858,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9638687720994921,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9638687720994921,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "MEAN_REVERSION",
+        "feature": "rsi14",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05289279709674505,
+        "transport_ev": 0.0542287440889693,
+        "transport_lcb": 0.05233237275773253,
+        "transport_n": 148086,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9662117161445687,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "MEAN_REVERSION",
+        "feature": "z20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0520146516979077,
+        "transport_ev": 0.05290552304630233,
+        "transport_lcb": 0.051059630584235675,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9662859408304337,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "VOLUME_LIQUIDITY",
+        "feature": "volslope20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.043425435728230696,
+        "transport_ev": 0.04401574013924004,
+        "transport_lcb": 0.04228668327659205,
+        "transport_n": 147936,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9622021087430638,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    },
+    {
+      "candidate": {
+        "family": "VOLUME_LIQUIDITY",
+        "feature": "relvol20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.04248980103384585,
+        "transport_ev": 0.04311874036537629,
+        "transport_lcb": 0.041378322442923166,
+        "transport_n": 147936,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "evidence_weight": 0.9612026175059707,
+      "rule": "relative evidence weight only; portfolio normalization deferred to Stage9"
+    }
+  ],
+  "constraints": [
+    "no leverage",
+    "uncertainty reduces weight",
+    "context may modify size, never permission"
+  ]
+}

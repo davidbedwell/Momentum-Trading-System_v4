@@ -1,0 +1,2 @@
+# QUARANTINED DIAGNOSTIC RUN — DO NOT USE AS SCIENTIFIC EVIDENCE
+The 2026-10-07 abbreviated Stage 2 screened 128 primitive single-gene candidates rather than executing the preregistered semantic GA. Stages 3-10 inherited that invalid Stage-2 foundation and are quarantined. They may be inspected only as engineering diagnostics and must not influence corrected Stage-2 design, promotion, ranking, thresholds, or downstream scientific conclusions.

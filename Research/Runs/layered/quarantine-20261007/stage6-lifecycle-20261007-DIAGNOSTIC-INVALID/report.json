@@ -1,0 +1,402 @@
+{
+  "workers": 6,
+  "action_studies": [
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv63",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06902983567120073,
+        "transport_ev": 0.06760343728260582,
+        "transport_lcb": 0.06524358440143534,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 58562,
+          "next5_ev": 0.0077065822846787745
+        },
+        "HOLD": {
+          "n": 58607,
+          "next5_ev": 0.00460049091514349
+        },
+        "REDUCE": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "EXIT": {
+          "n": 476428,
+          "next5_ev": 0.0026732779142148145
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 59172,
+          "next5_ev": 0.006155888856795572
+        },
+        "HOLD": {
+          "n": 59104,
+          "next5_ev": 0.003986438193176181
+        },
+        "REDUCE": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "EXIT": {
+          "n": 475321,
+          "next5_ev": 0.0029342015070424328
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 59172,
+          "next5_ev": 0.006155888856795572
+        },
+        "HOLD": {
+          "n": 59104,
+          "next5_ev": 0.003986438193176181
+        },
+        "REDUCE": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "EXIT": {
+          "n": 475321,
+          "next5_ev": 0.0029342015070424328
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06316190225825069,
+        "transport_ev": 0.06315903965466373,
+        "transport_lcb": 0.06094638180609654,
+        "transport_n": 147052,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "HOLD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "REDUCE": {
+          "n": 122,
+          "next5_ev": 0.004483523121569685
+        },
+        "EXIT": {
+          "n": 476096,
+          "next5_ev": 0.0026710781531142434
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06235765255543784,
+        "transport_ev": 0.06257544190220829,
+        "transport_lcb": 0.0604062287004334,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "HOLD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "REDUCE": {
+          "n": 117,
+          "next5_ev": 0.00440367392907267
+        },
+        "EXIT": {
+          "n": 475412,
+          "next5_ev": 0.0027114242778269585
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "HOLD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "REDUCE": {
+          "n": 117,
+          "next5_ev": -0.0003136527191630781
+        },
+        "EXIT": {
+          "n": 476091,
+          "next5_ev": 0.0027938474848663614
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "HOLD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "REDUCE": {
+          "n": 117,
+          "next5_ev": -0.0003136527191630781
+        },
+        "EXIT": {
+          "n": 476091,
+          "next5_ev": 0.0027938474848663614
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.058445601729857424,
+        "transport_ev": 0.05932586780802223,
+        "transport_lcb": 0.057280676262077265,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "HOLD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "REDUCE": {
+          "n": 116,
+          "next5_ev": 0.010706464558997092
+        },
+        "EXIT": {
+          "n": 475437,
+          "next5_ev": 0.002737817925304227
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "HOLD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "REDUCE": {
+          "n": 117,
+          "next5_ev": 0.004429126880306441
+        },
+        "EXIT": {
+          "n": 475431,
+          "next5_ev": 0.002935931771359358
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "HOLD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "REDUCE": {
+          "n": 117,
+          "next5_ev": 0.004429126880306441
+        },
+        "EXIT": {
+          "n": 475431,
+          "next5_ev": 0.002935931771359358
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "HOLD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "REDUCE": {
+          "n": 117,
+          "next5_ev": -0.004626145078904913
+        },
+        "EXIT": {
+          "n": 476344,
+          "next5_ev": 0.00259145361248585
+        }
+      }
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "actions": {
+        "ADD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "HOLD": {
+          "n": 0,
+          "next5_ev": null
+        },
+        "REDUCE": {
+          "n": 117,
+          "next5_ev": -0.004626145078904913
+        },
+        "EXIT": {
+          "n": 476344,
+          "next5_ev": 0.00259145361248585
+        }
+      }
+    }
+  ],
+  "note": "Action questions remain separately measured; no monster combined policy."
+}

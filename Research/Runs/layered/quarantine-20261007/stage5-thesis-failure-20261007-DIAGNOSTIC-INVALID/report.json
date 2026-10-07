@@ -1,0 +1,234 @@
+{
+  "workers": 6,
+  "failure_study": [
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv63",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06902983567120073,
+        "transport_ev": 0.06760343728260582,
+        "transport_lcb": 0.06524358440143534,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 64776,
+      "failure_n": 52557,
+      "normal_next_ev": 0.008318944463441617,
+      "failure_next_ev": -0.007451219382955381
+    },
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 61696,
+      "failure_n": 56692,
+      "normal_next_ev": 0.008075523771955534,
+      "failure_next_ev": -0.006627931087035415
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 61696,
+      "failure_n": 56692,
+      "normal_next_ev": 0.008075523771955534,
+      "failure_next_ev": -0.006627931087035415
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06316190225825069,
+        "transport_ev": 0.06315903965466373,
+        "transport_lcb": 0.06094638180609654,
+        "transport_n": 147052,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 28309,
+      "failure_n": 89372,
+      "normal_next_ev": 0.015067034017531296,
+      "failure_next_ev": -0.002859051131691155
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06235765255543784,
+        "transport_ev": 0.06257544190220829,
+        "transport_lcb": 0.0604062287004334,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 11154,
+      "failure_n": 107227,
+      "normal_next_ev": 0.029605569046102037,
+      "failure_next_ev": -0.0014524049329071732
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 17288,
+      "failure_n": 100390,
+      "normal_next_ev": 0.020160041663359378,
+      "failure_next_ev": -0.0019524454925676875
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 17288,
+      "failure_n": 100390,
+      "normal_next_ev": 0.020160041663359378,
+      "failure_next_ev": -0.0019524454925676875
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.058445601729857424,
+        "transport_ev": 0.05932586780802223,
+        "transport_lcb": 0.057280676262077265,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 2997,
+      "failure_n": 115371,
+      "normal_next_ev": 0.05721318380521866,
+      "failure_next_ev": -8.80719378732021e-05
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 14491,
+      "failure_n": 103866,
+      "normal_next_ev": 0.021331537740953206,
+      "failure_next_ev": -0.001603097482788174
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 14491,
+      "failure_n": 103866,
+      "normal_next_ev": 0.021331537740953206,
+      "failure_next_ev": -0.001603097482788174
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 40108,
+      "failure_n": 77233,
+      "normal_next_ev": 0.011647523266593022,
+      "failure_next_ev": -0.003782503055207371
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "normal_n": 40108,
+      "failure_n": 77233,
+      "normal_next_ev": 0.011647523266593022,
+      "failure_next_ev": -0.003782503055207371
+    }
+  ],
+  "note": "These are learned-study candidate descriptors, not catastrophe stops."
+}

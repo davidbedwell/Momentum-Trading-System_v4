@@ -1,0 +1,378 @@
+{
+  "workers": 6,
+  "comparisons": [
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv63",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06902983567120073,
+        "transport_ev": 0.06760343728260582,
+        "transport_lcb": 0.06524358440143534,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 114330,
+        "ev": 0.06892783594061305
+      },
+      "gal_agree": {
+        "n": 57202,
+        "ev": 0.07694930522521
+      },
+      "sec_agree": {
+        "n": 48942,
+        "ev": 0.06405185393398558
+      },
+      "both_agree": {
+        "n": 41723,
+        "ev": 0.07464152764787264
+      }
+    },
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 115736,
+        "ev": 0.06464699834031512
+      },
+      "gal_agree": {
+        "n": 48523,
+        "ev": 0.07054911601040975
+      },
+      "sec_agree": {
+        "n": 42225,
+        "ev": 0.05473549722458058
+      },
+      "both_agree": {
+        "n": 34485,
+        "ev": 0.06522443144907336
+      }
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 115736,
+        "ev": 0.06464699834031512
+      },
+      "gal_agree": {
+        "n": 48523,
+        "ev": 0.07054911601040975
+      },
+      "sec_agree": {
+        "n": 42225,
+        "ev": 0.05473549722458058
+      },
+      "both_agree": {
+        "n": 34485,
+        "ev": 0.06522443144907336
+      }
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06316190225825069,
+        "transport_ev": 0.06315903965466373,
+        "transport_lcb": 0.06094638180609654,
+        "transport_n": 147052,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 115856,
+        "ev": 0.06309698689998938
+      },
+      "gal_agree": {
+        "n": 37465,
+        "ev": 0.05849610989918668
+      },
+      "sec_agree": {
+        "n": 24441,
+        "ev": 0.04785558998361291
+      },
+      "both_agree": {
+        "n": 19355,
+        "ev": 0.052446499600312724
+      }
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06235765255543784,
+        "transport_ev": 0.06257544190220829,
+        "transport_lcb": 0.0604062287004334,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 116430,
+        "ev": 0.06244008439209364
+      },
+      "gal_agree": {
+        "n": 39151,
+        "ev": 0.05592918565281899
+      },
+      "sec_agree": {
+        "n": 27786,
+        "ev": 0.05225511720533399
+      },
+      "both_agree": {
+        "n": 21989,
+        "ev": 0.0573001722861583
+      }
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 116191,
+        "ev": 0.059615377030446025
+      },
+      "gal_agree": {
+        "n": 36887,
+        "ev": 0.04815773182263872
+      },
+      "sec_agree": {
+        "n": 22509,
+        "ev": 0.040113759250516384
+      },
+      "both_agree": {
+        "n": 17712,
+        "ev": 0.04111763238750529
+      }
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 116191,
+        "ev": 0.059615377030446025
+      },
+      "gal_agree": {
+        "n": 36887,
+        "ev": 0.04815773182263872
+      },
+      "sec_agree": {
+        "n": 22509,
+        "ev": 0.040113759250516384
+      },
+      "both_agree": {
+        "n": 17712,
+        "ev": 0.04111763238750529
+      }
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.058445601729857424,
+        "transport_ev": 0.05932586780802223,
+        "transport_lcb": 0.057280676262077265,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 116664,
+        "ev": 0.05885400570487115
+      },
+      "gal_agree": {
+        "n": 41764,
+        "ev": 0.046930137276504205
+      },
+      "sec_agree": {
+        "n": 28963,
+        "ev": 0.044467962740940274
+      },
+      "both_agree": {
+        "n": 22974,
+        "ev": 0.047238088978971665
+      }
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 116782,
+        "ev": 0.05769858514652904
+      },
+      "gal_agree": {
+        "n": 38982,
+        "ev": 0.044969184233463244
+      },
+      "sec_agree": {
+        "n": 25404,
+        "ev": 0.042072340412838846
+      },
+      "both_agree": {
+        "n": 19951,
+        "ev": 0.04333236097129846
+      }
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 116782,
+        "ev": 0.05769858514652904
+      },
+      "gal_agree": {
+        "n": 38982,
+        "ev": 0.044969184233463244
+      },
+      "sec_agree": {
+        "n": 25404,
+        "ev": 0.042072340412838846
+      },
+      "both_agree": {
+        "n": 19951,
+        "ev": 0.04333236097129846
+      }
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 116018,
+        "ev": 0.05686450692207977
+      },
+      "gal_agree": {
+        "n": 40552,
+        "ev": 0.04565572110435788
+      },
+      "sec_agree": {
+        "n": 25792,
+        "ev": 0.032186283026344756
+      },
+      "both_agree": {
+        "n": 20811,
+        "ev": 0.03496990174691084
+      }
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "planet": {
+        "n": 116018,
+        "ev": 0.05686450692207977
+      },
+      "gal_agree": {
+        "n": 40552,
+        "ev": 0.04565572110435788
+      },
+      "sec_agree": {
+        "n": 25792,
+        "ev": 0.032186283026344756
+      },
+      "both_agree": {
+        "n": 20811,
+        "ev": 0.03496990174691084
+      }
+    }
+  ],
+  "conclusion": "Context retained only as evidence; no hard permission gate. Sector association is static 2026 metadata and explicitly not historical membership."
+}

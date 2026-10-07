@@ -1,0 +1,234 @@
+{
+  "workers": 6,
+  "entry_comparisons": [
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv63",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06902983567120073,
+        "transport_ev": 0.06760343728260582,
+        "transport_lcb": 0.06524358440143534,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.06892783594061305,
+      "confirm_next_session_ev": 0.060690750338845696,
+      "confirm_n": 60169,
+      "confirm_mae_mean": -0.10939079387413292
+    },
+    {
+      "candidate": {
+        "family": "VOLATILITY",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.06464699834031512,
+      "confirm_next_session_ev": 0.05698605341134507,
+      "confirm_n": 60502,
+      "confirm_mae_mean": -0.1095494479483752
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "rv20",
+        "tail": "HIGH",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06491017399133006,
+        "transport_ev": 0.06394056893663289,
+        "transport_lcb": 0.06161484544115012,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.06464699834031512,
+      "confirm_next_session_ev": 0.05698605341134507,
+      "confirm_n": 60502,
+      "confirm_mae_mean": -0.1095494479483752
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06316190225825069,
+        "transport_ev": 0.06315903965466373,
+        "transport_lcb": 0.06094638180609654,
+        "transport_n": 147052,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.06309698689998938,
+      "confirm_next_session_ev": 0.05534611410464098,
+      "confirm_n": 61572,
+      "confirm_mae_mean": -0.10375550203617784
+    },
+    {
+      "candidate": {
+        "family": "BREAKOUT",
+        "feature": "range20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.06235765255543784,
+        "transport_ev": 0.06257544190220829,
+        "transport_lcb": 0.0604062287004334,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.06244008439209364,
+      "confirm_next_session_ev": 0.055038760660011225,
+      "confirm_n": 62509,
+      "confirm_mae_mean": -0.10096754589681779
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.059615377030446025,
+      "confirm_next_session_ev": 0.052463357115156414,
+      "confirm_n": 61876,
+      "confirm_mae_mean": -0.09793631437747097
+    },
+    {
+      "candidate": {
+        "family": "MARKET_REGIME_STRUCTURE",
+        "feature": "gap50",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.0593577849775226,
+        "transport_ev": 0.05992108588948318,
+        "transport_lcb": 0.057815786901707314,
+        "transport_n": 147050,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.059615377030446025,
+      "confirm_next_session_ev": 0.052463357115156414,
+      "confirm_n": 61876,
+      "confirm_mae_mean": -0.09793631437747097
+    },
+    {
+      "candidate": {
+        "family": "TREND",
+        "feature": "gap20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.058445601729857424,
+        "transport_ev": 0.05932586780802223,
+        "transport_lcb": 0.057280676262077265,
+        "transport_n": 147938,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.05885400570487115,
+      "confirm_next_session_ev": 0.052227098406090626,
+      "confirm_n": 62660,
+      "confirm_mae_mean": -0.09466800043375455
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.05769858514652904,
+      "confirm_next_session_ev": 0.05079884981506713,
+      "confirm_n": 62220,
+      "confirm_mae_mean": -0.09639652882561185
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret20",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.05755673539558684,
+        "transport_ev": 0.05822111023354343,
+        "transport_lcb": 0.05616019847638614,
+        "transport_n": 147818,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.05769858514652904,
+      "confirm_next_session_ev": 0.05079884981506713,
+      "confirm_n": 62220,
+      "confirm_mae_mean": -0.09639652882561185
+    },
+    {
+      "candidate": {
+        "family": "MOMENTUM",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.05686450692207977,
+      "confirm_next_session_ev": 0.04928020186509365,
+      "confirm_n": 61290,
+      "confirm_mae_mean": -0.10131568519163642
+    },
+    {
+      "candidate": {
+        "family": "RELATIVE_CROSS_SECTIONAL",
+        "feature": "ret63",
+        "tail": "LOW",
+        "horizon": 63,
+        "direction": "LONG",
+        "discovery_ev": 0.056835056942885404,
+        "transport_ev": 0.057341278410804344,
+        "transport_lcb": 0.055191804479976146,
+        "transport_n": 146613,
+        "positive_transport_folds": 4,
+        "above_null95": true
+      },
+      "immediate_ev": 0.05686450692207977,
+      "confirm_next_session_ev": 0.04928020186509365,
+      "confirm_n": 61290,
+      "confirm_mae_mean": -0.10131568519163642
+    }
+  ],
+  "interpretation": "Confirmation uses only the next completed session then enters; no fixed wait is imposed as policy."
+}

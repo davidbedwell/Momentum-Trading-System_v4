@@ -1,0 +1,22 @@
+{
+  "workers": 6,
+  "representative_frozen_opportunity": {
+    "family": "VOLATILITY",
+    "feature": "rv63",
+    "tail": "HIGH",
+    "horizon": 63,
+    "direction": "LONG",
+    "discovery_ev": 0.06902983567120073,
+    "transport_ev": 0.06760343728260582,
+    "transport_lcb": 0.06524358440143534,
+    "transport_n": 146613,
+    "positive_transport_folds": 4,
+    "above_null95": true
+  },
+  "diagnostic_equal_event_daily_cagr": 0.21137490424472372,
+  "diagnostic_mdd": -0.5123871673593181,
+  "terminal_multiple": 65.09479125495794,
+  "worst_day": -0.13688542608993765,
+  "days": 5200,
+  "warning": "Diagnostic report-card projection, not a deployable portfolio claim; full lifecycle/capital/cost assembly remains governed by frozen layer findings."
+}
