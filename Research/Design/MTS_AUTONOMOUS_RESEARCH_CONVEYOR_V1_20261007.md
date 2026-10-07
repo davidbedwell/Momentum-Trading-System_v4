@@ -245,6 +245,27 @@ A local watchdog may restart only crashed processes under exact checkpoint/confi
 - no paid GPU/server is required merely because prior generations used one;
 - no automatic provisioning of additional paid machines.
 
+## Thunder 6-vCPU to unprovisioned 64-vCPU handoff
+Current assumption: Thunder provides 6 vCPUs. No 64-vCPU machine currently exists.
+
+The controller MUST NOT treat 64 vCPUs as required by default. Calibration/miniruns determine whether a pending exact workload is economically/practically unsuitable for 6 vCPUs.
+
+If a calibrated pending workload exceeds Thunder's execution envelope:
+1. finish/checkpoint the current safe unit;
+2. do not weaken or alter the scientific configuration to fit Thunder;
+3. freeze parent artifacts and scientific/data/config hashes;
+4. perform full durability verification;
+5. generate a self-contained 64-vCPU deployment package containing exact Git SHA, environment specification, bootstrap procedure, data/artifact manifest, checkpoint/frozen parents, scientific config, worker topology, launch command, expected outputs, gate evaluator and continuation instruction;
+6. verify the package is complete;
+7. enter WAITING_FOR_COMPUTE_PROVISIONING;
+8. stop compute on Thunder for that pending workload.
+
+The deployment PACKAGE waits in the wing; no 64-vCPU MACHINE waits in the wing.
+
+The controller is prohibited from provisioning, starting, resizing or purchasing a 64-vCPU machine. Provisioning occurs only after explicit human action. Once a machine is provisioned, deployment must verify that moving from 6 to 64 changes compute-only configuration and leaves scientific/data/config hashes unchanged.
+
+A missing/incomplete deployment package is STOPPED_ENGINEERING, not WAITING_FOR_COMPUTE_PROVISIONING.
+
 ## Durability protocol
 At stage freeze, scientific stop, engineering stop, and session close:
 1. generate artifact manifest;
