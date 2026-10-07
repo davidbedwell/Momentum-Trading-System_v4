@@ -83,3 +83,12 @@ def test_incomplete_handoff_package_cannot_claim_ready():
 
 def test_controller_never_provisions_paid_compute():
     assert controller_may_provision_compute() is False
+
+def test_full_conveyor_declares_every_downstream_stage_runner():
+    from Core.layered_ga.conveyor import RUNNERS
+    assert set(RUNNERS) == set(range(2,11))
+
+def test_full_conveyor_has_no_chat_wait_state_between_scientific_stages():
+    from Core.layered_ga.conveyor import STAGE_DIRS
+    assert set(STAGE_DIRS) == set(range(0,11))
+    assert all('chat' not in x.lower() for x in STAGE_DIRS.values())
