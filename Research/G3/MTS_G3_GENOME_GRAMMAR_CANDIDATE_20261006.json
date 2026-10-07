@@ -1,0 +1,66 @@
+{
+  "format": "MTS_G3_SPECIALIST_GENOME_GRAMMAR_V1",
+  "status": "CANDIDATE_NOT_FROZEN",
+  "principle": "Evolve single-opportunity specialists; portfolio construction is unavailable to discovery.",
+  "genome": {
+    "applicability_gate": {
+      "inputs": [
+        "stock",
+        "market",
+        "sector"
+      ]
+    },
+    "opportunity_expression": {
+      "inputs": [
+        "stock",
+        "market",
+        "sector"
+      ]
+    },
+    "direction_policy": [
+      "long",
+      "short",
+      "conditional"
+    ],
+    "entry_policy": {
+      "causal": true
+    },
+    "management_policy": {
+      "causal": true,
+      "actions": [
+        "hold",
+        "add",
+        "reduce",
+        "exit"
+      ],
+      "requirement": "scale-down must be first-class"
+    },
+    "exit_policy": {
+      "causal": true
+    },
+    "declared_scope": {
+      "freeze_before_transport": true
+    }
+  },
+  "discovery_outputs": [
+    "net_return",
+    "mfe",
+    "mae",
+    "tail_loss",
+    "duration",
+    "time_to_profit",
+    "time_to_failure",
+    "turnover",
+    "costs",
+    "path_signature"
+  ],
+  "forbidden_from_fitness_or_genome": [
+    "portfolio_CAGR",
+    "portfolio_MDD",
+    "portfolio_slot_count",
+    "sector_target_weights",
+    "portfolio_SAFE_fraction",
+    "specialist_to_specialist_allocation"
+  ],
+  "named_strategy_categories_are_targets": false
+}

@@ -1,0 +1,35 @@
+{
+  "format": "MTS_G3_CONTAMINATION_LEDGER_SCHEMA_V1",
+  "status": "SCHEMA_CANDIDATE",
+  "unit": "ticker_x_time_interval_x_data_family_x_adaptive_process",
+  "fields": [
+    "ticker",
+    "start_date",
+    "end_date",
+    "data_family",
+    "research_run_id",
+    "adaptive_use",
+    "human_reviewed_outcome",
+    "g2_ancestry_exposure",
+    "lineage_source",
+    "validation_eligibility",
+    "evidence_source_path",
+    "evidence_hash"
+  ],
+  "adaptive_use_values": [
+    "none",
+    "descriptive_only",
+    "design",
+    "tuning",
+    "selection",
+    "validation_seen"
+  ],
+  "validation_eligibility_values": [
+    "unknown",
+    "development_only",
+    "transport_candidate",
+    "final_candidate",
+    "prohibited"
+  ],
+  "rule": "Fresh acquisition may reset lineage_source but never erases prior adaptive or human outcome exposure."
+}
