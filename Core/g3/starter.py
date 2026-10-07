@@ -84,6 +84,28 @@ def temporal_block_permute(y:np.ndarray,seed:int,block:int=20)->np.ndarray:
     rng=np.random.default_rng(seed); n=len(y); blocks=[y[i:i+block].copy() for i in range(0,n,block)]
     rng.shuffle(blocks); return np.concatenate(blocks,axis=0)[:n]
 
+def guarded_circular_shift(y:np.ndarray,seed:int,min_shift:int=60)->np.ndarray:
+    """N3 null: break feature/outcome timing with a large deterministic circular shift."""
+    y=np.asarray(y); n=len(y)
+    if n < 2*min_shift+1: raise ValueError("series too short for requested circular-shift guard")
+    rng=np.random.default_rng(seed)
+    shift=int(rng.integers(min_shift,n-min_shift+1))
+    return np.roll(y,shift,axis=0)
+
+def datewise_cross_sectional_permute(y_by_ticker:np.ndarray,seed:int,buckets:np.ndarray|None=None)->np.ndarray:
+    """N2 null: permute outcomes across stocks per date, optionally within fixed buckets."""
+    y=np.asarray(y_by_ticker)
+    if y.ndim < 2: raise ValueError("expected [date, ticker, ...] outcome array")
+    n_tickers=y.shape[1]
+    b=np.zeros(n_tickers,dtype=int) if buckets is None else np.asarray(buckets)
+    if b.shape != (n_tickers,): raise ValueError("buckets must have one value per ticker")
+    rng=np.random.default_rng(seed); out=y.copy()
+    groups=[np.flatnonzero(b==v) for v in np.unique(b)]
+    for d in range(y.shape[0]):
+        for idx in groups:
+            perm=idx.copy(); rng.shuffle(perm); out[d,idx,...]=y[d,perm,...]
+    return out
+
 def planted_dataset(seed=1,n=2500,p=6,h=10,effect=.006):
     rng=np.random.default_rng(seed); x=rng.normal(size=(n,p)); y=rng.normal(0,.006,size=(n,h))
     mask=(x[:,0]>.7)&(x[:,1]<-.3); y[mask,:3]+=effect

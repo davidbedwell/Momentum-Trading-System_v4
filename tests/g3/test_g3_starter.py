@@ -66,3 +66,22 @@ def test_aggregate_quality_ignores_empty_sentinels():
     assert abs(a["mean"]-0.014)<1e-12
     assert a["tail"]==-0.04
     assert abs(a["duration"]-6.2)<1e-12
+
+def test_guarded_circular_shift_preserves_rows_and_breaks_alignment():
+    y=np.arange(300*3,dtype=float).reshape(300,3)
+    z=guarded_circular_shift(y,seed=7,min_shift=60)
+    assert z.shape==y.shape and not np.array_equal(z,y)
+    assert {tuple(r) for r in z}=={tuple(r) for r in y}
+    pos={tuple(r):i for i,r in enumerate(y)}
+    distances=[min(abs(i-pos[tuple(r)]),len(y)-abs(i-pos[tuple(r)])) for i,r in enumerate(z)]
+    assert min(distances)>=60
+
+def test_datewise_cross_sectional_null_preserves_day_and_bucket_membership():
+    y=np.array([[[100*d+10*t+h for h in range(2)] for t in range(6)] for d in range(5)],dtype=float)
+    buckets=np.array([0,0,0,1,1,1])
+    z=datewise_cross_sectional_permute(y,seed=19,buckets=buckets)
+    assert z.shape==y.shape
+    for d in range(len(y)):
+        for idx in (np.array([0,1,2]),np.array([3,4,5])):
+            assert {tuple(v) for v in z[d,idx]}=={tuple(v) for v in y[d,idx]}
+    assert not np.array_equal(z,y)
