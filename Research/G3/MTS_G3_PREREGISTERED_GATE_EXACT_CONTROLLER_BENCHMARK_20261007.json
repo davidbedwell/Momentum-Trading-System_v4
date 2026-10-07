@@ -1,0 +1,319 @@
+{
+  "format": "MTS_G3_PREREGISTERED_REPLICATED_GATE_V1",
+  "preregistration": "Research/G3/MTS_G3_NULL_GATE_PREREGISTRATION_20261007.md",
+  "tickers": [
+    "AAPL",
+    "MSFT",
+    "XOM",
+    "JPM",
+    "JNJ",
+    "CAT",
+    "WMT",
+    "NVDA"
+  ],
+  "date_start": "2016-09-20 00:00:00",
+  "date_end": "2026-08-31 00:00:00",
+  "rows": 2500,
+  "generations": 6,
+  "population": 48,
+  "workers": 60,
+  "replicates_requested": 1,
+  "records": [
+    {
+      "replicate": 0,
+      "arm": "REAL",
+      "search_seed": 1776000,
+      "null_seed_scheme": null,
+      "result": {
+        "seconds": 2.0052277329996286,
+        "ticker_evaluations": 2304,
+        "ledger": [
+          {
+            "generation": 1,
+            "best": {
+              "n": 1094,
+              "mean": 0.0074430755103736665,
+              "tail": -0.0966735090850586,
+              "duration": 6.7285191956124315
+            },
+            "median_mean": -0.004077222034342965
+          },
+          {
+            "generation": 2,
+            "best": {
+              "n": 2129,
+              "mean": 0.007670714875769558,
+              "tail": -0.07612478552941387,
+              "duration": 9.31564114607797
+            },
+            "median_mean": 0.005228385269040131
+          },
+          {
+            "generation": 3,
+            "best": {
+              "n": 7896,
+              "mean": 0.007750283821373278,
+              "tail": -0.09465736050365214,
+              "duration": 8.182877406281662
+            },
+            "median_mean": 0.006888547708708074
+          },
+          {
+            "generation": 4,
+            "best": {
+              "n": 7896,
+              "mean": 0.008245941380919606,
+              "tail": -0.11146947701388721,
+              "duration": 8.122340425531915
+            },
+            "median_mean": 0.007355028068125371
+          },
+          {
+            "generation": 5,
+            "best": {
+              "n": 7896,
+              "mean": 0.008719676690365828,
+              "tail": -0.09606529878604031,
+              "duration": 8.567882472137791
+            },
+            "median_mean": 0.007713991043764518
+          },
+          {
+            "generation": 6,
+            "best": {
+              "n": 755,
+              "mean": 0.01391863325843443,
+              "tail": -0.11420083435179841,
+              "duration": 7.464900662251655
+            },
+            "median_mean": 0.008272794734370982
+          }
+        ],
+        "primary": 0.008272794734370982
+      }
+    },
+    {
+      "replicate": 0,
+      "arm": "NA_MOVING_BLOCK_BOOTSTRAP_Y",
+      "search_seed": 1776000,
+      "null_seed_scheme": "sha256(rep,family,ticker)",
+      "result": {
+        "seconds": 1.8434299039981852,
+        "ticker_evaluations": 2304,
+        "ledger": [
+          {
+            "generation": 1,
+            "best": {
+              "n": 1419,
+              "mean": 0.00975682774035246,
+              "tail": -0.10229881136842238,
+              "duration": 9.38830162085976
+            },
+            "median_mean": -0.00409545239032889
+          },
+          {
+            "generation": 2,
+            "best": {
+              "n": 1419,
+              "mean": 0.010045094390286405,
+              "tail": -0.10229881136842238,
+              "duration": 9.37491190979563
+            },
+            "median_mean": 0.003842402049266405
+          },
+          {
+            "generation": 3,
+            "best": {
+              "n": 53,
+              "mean": 0.016770685360132504,
+              "tail": -0.05311962476766199,
+              "duration": 9.943396226415095
+            },
+            "median_mean": 0.005028072913427071
+          },
+          {
+            "generation": 4,
+            "best": {
+              "n": 49,
+              "mean": 0.02261276502375711,
+              "tail": -0.008377532117769747,
+              "duration": 9.938775510204081
+            },
+            "median_mean": 0.009783171967536546
+          },
+          {
+            "generation": 5,
+            "best": {
+              "n": 49,
+              "mean": 0.02261276502375711,
+              "tail": -0.008377532117769747,
+              "duration": 9.938775510204081
+            },
+            "median_mean": 0.011549067837505474
+          },
+          {
+            "generation": 6,
+            "best": {
+              "n": 49,
+              "mean": 0.02261276502375711,
+              "tail": -0.008377532117769747,
+              "duration": 9.938775510204081
+            },
+            "median_mean": 0.016826369411924058
+          }
+        ],
+        "primary": 0.016826369411924058
+      }
+    },
+    {
+      "replicate": 0,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "search_seed": 1776000,
+      "null_seed_scheme": "sha256(rep,family,ticker)",
+      "result": {
+        "seconds": 1.8087084110011347,
+        "ticker_evaluations": 2304,
+        "ledger": [
+          {
+            "generation": 1,
+            "best": {
+              "n": 183,
+              "mean": 0.01015721372389785,
+              "tail": -0.0988469454327749,
+              "duration": 9.26775956284153
+            },
+            "median_mean": -0.004166176362056037
+          },
+          {
+            "generation": 2,
+            "best": {
+              "n": 183,
+              "mean": 0.010414702555609874,
+              "tail": -0.0988469454327749,
+              "duration": 9.262295081967213
+            },
+            "median_mean": 0.004778388211454616
+          },
+          {
+            "generation": 3,
+            "best": {
+              "n": 183,
+              "mean": 0.012498487214279383,
+              "tail": -0.0988469454327749,
+              "duration": 9.245901639344263
+            },
+            "median_mean": 0.006411183266194449
+          },
+          {
+            "generation": 4,
+            "best": {
+              "n": 87,
+              "mean": 0.018971921113842532,
+              "tail": -0.07173222988797781,
+              "duration": 9.0
+            },
+            "median_mean": 0.010171399019261182
+          },
+          {
+            "generation": 5,
+            "best": {
+              "n": 45,
+              "mean": 0.021023477287174477,
+              "tail": -0.0841410985210141,
+              "duration": 8.822222222222223
+            },
+            "median_mean": 0.012274035419174873
+          },
+          {
+            "generation": 6,
+            "best": {
+              "n": 58,
+              "mean": 0.02791364133396322,
+              "tail": -0.05202872918429036,
+              "duration": 9.086206896551724
+            },
+            "median_mean": 0.013673919637282945
+          }
+        ],
+        "primary": 0.013673919637282945
+      }
+    },
+    {
+      "replicate": 0,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "search_seed": 1776000,
+      "null_seed_scheme": "sha256(rep,family,ticker)",
+      "result": {
+        "seconds": 1.823177123998903,
+        "ticker_evaluations": 2304,
+        "ledger": [
+          {
+            "generation": 1,
+            "best": {
+              "n": 183,
+              "mean": 0.01038805673666551,
+              "tail": -0.06693693734908845,
+              "duration": 9.426229508196721
+            },
+            "median_mean": -0.0050072454535684055
+          },
+          {
+            "generation": 2,
+            "best": {
+              "n": 183,
+              "mean": 0.010829435297619214,
+              "tail": -0.06693693734908845,
+              "duration": 9.40983606557377
+            },
+            "median_mean": 0.0050716688800236855
+          },
+          {
+            "generation": 3,
+            "best": {
+              "n": 183,
+              "mean": 0.011310174352274783,
+              "tail": -0.07500548455250615,
+              "duration": 9.3551912568306
+            },
+            "median_mean": 0.007498373383034333
+          },
+          {
+            "generation": 4,
+            "best": {
+              "n": 106,
+              "mean": 0.013566533990062198,
+              "tail": -0.06485095478708802,
+              "duration": 9.39622641509434
+            },
+            "median_mean": 0.009761978895390773
+          },
+          {
+            "generation": 5,
+            "best": {
+              "n": 106,
+              "mean": 0.013566533990062198,
+              "tail": -0.06485095478708802,
+              "duration": 9.39622641509434
+            },
+            "median_mean": 0.011099600021374459
+          },
+          {
+            "generation": 6,
+            "best": {
+              "n": 106,
+              "mean": 0.014183820629454594,
+              "tail": -0.07559691562979631,
+              "duration": 9.566037735849056
+            },
+            "median_mean": 0.012244345021526212
+          }
+        ],
+        "primary": 0.012244345021526212
+      }
+    }
+  ],
+  "complete": true,
+  "total_seconds": 7.491983814001287,
+  "production_discovery_authorized": false,
+  "gate_decision": "WITHHELD_REQUIRES_EXACTLY_25_COMPLETE_REPLICATES"
+}
