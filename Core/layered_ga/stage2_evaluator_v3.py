@@ -5,6 +5,7 @@ import math
 import numpy as np
 import pandas as pd
 from .stage2_path_v3 import ExecutionPaths,ProspectiveCosts,signed_excursions
+from .stage2_cluster_stats_v3 import row_weighted_cluster_se
 
 
 @dataclass(frozen=True)
@@ -53,7 +54,9 @@ def _ranges(horizons:list[int])->tuple[tuple[int,int],...]:
 
 
 def evaluate_curve(mask:np.ndarray,paths:ExecutionPaths,costs:ProspectiveCosts,side:str,cluster_ids:np.ndarray,*,min_raw_n:int=200,min_effective_n:int=20)->CurveEvaluation:
-    side=side.upper();mask=np.asarray(mask,dtype=bool)
+    side=side.upper()
+    if side not in ('LONG','SHORT'):raise ValueError('side must be LONG or SHORT')
+    mask=np.asarray(mask,dtype=bool)
     if len(mask)!=paths.endpoint_return.shape[0] or len(cluster_ids)!=len(mask):raise ValueError('alignment mismatch')
     sign=1.0 if side=='LONG' else -1.0
     cmatrix=costs.long_roundtrip if side=='LONG' else costs.short_roundtrip
@@ -71,7 +74,12 @@ def evaluate_curve(mask:np.ndarray,paths:ExecutionPaths,costs:ProspectiveCosts,s
         cm=sums[used]/cnt[used];ne=len(cm)
         if ne<min_effective_n:
             pts.append({'horizon':j+1,'n':raw_n,'effective_n':ne,'ev_net':np.nan,'lcb95':np.nan,'mae_mean':np.nan,'mfe_mean':np.nan});continue
-        ev=float(v.mean());se=float(cm.std(ddof=1)/math.sqrt(ne)) if ne>1 else float('nan');lcb=ev-1.96*se
+        ev=float(v.mean())
+        # Row-weighted point estimate requires row-weighted cluster-robust SE.
+        # Treat security-year clusters as independent; coverage under shared
+        # calendar shocks must be separately validated before certification.
+        se=row_weighted_cluster_se(v,ids)
+        lcb=ev-1.96*se
         wins=v[v>0];loss=v[v<0];ma=adverse[ix,j].astype(float);mf=favorable[ix,j].astype(float);ma=ma[np.isfinite(ma)];mf=mf[np.isfinite(mf)]
         pts.append({
             'horizon':j+1,'n':raw_n,'effective_n':ne,'ev_net':ev,'se_cluster':se,'lcb95':float(lcb),

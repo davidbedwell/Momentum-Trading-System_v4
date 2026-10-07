@@ -1,0 +1,362 @@
+from __future__ import annotations
+
+from dataclasses import asdict, replace
+import hashlib
+import json
+import os
+from pathlib import Path
+from typing import Callable, Mapping, Sequence
+
+from .batch_research_recording import BatchCampaignResearchRecorder
+from .bootstrap import DEFAULT_MISSION, build_batch_runtime
+from .contracts import AnalysisResult, EvidenceDescriptor, ResearchPhase, SubjectMetadata
+from .intake import IntakeEngine
+from .live_sources import CompositeEvidenceSource, FinraWeeklyOffExchangeSource, YFinanceDailyOhlcvSource
+from .openrouter_batch_provider import SubjectContextOpenRouterBatchResearchDirector
+from .pre_sol_substrates import build_for_subject as build_pre_sol_substrates
+from .participation_sources import YFinanceCatalystEventsSource, YFinanceIntradaySource, YFinanceMarketStructureSource
+from .sec_share_structure_source import SecEdgarShareStructureSource
+from .research_package_store import JsonResearchPackageStore
+from .subject_scientific_context import SubjectContextSolBatchResearchDirector, load_subject_scientific_context
+from .virgin_equivalence import (
+    EquivalenceProtocolError,
+    canonical_sha256,
+    freeze_arm_manifest,
+    freeze_starting_package,
+    verify_identical_start,
+    write_frozen_json,
+)
+
+
+
+def _equivalence_scientific_context(*, root: Path, experiment_root: Path, active_subject_id: str):
+    context = load_subject_scientific_context(
+        root,
+        active_subject_id=active_subject_id,
+        include_same_subject_prior_science=False,
+    )
+    prior = dict(context.prior_subject_science)
+    subjects = prior.get("subjects", [])
+    filtered_subjects = []
+    experiment_prefix = str(experiment_root.resolve()) + os.sep
+    if isinstance(subjects, list):
+        for subject_entry in subjects:
+            if not isinstance(subject_entry, Mapping):
+                continue
+            packages = subject_entry.get("research_packages", [])
+            kept = []
+            if isinstance(packages, list):
+                for package in packages:
+                    if not isinstance(package, Mapping):
+                        continue
+                    source_path = str(package.get("source_path", ""))
+                    if source_path.startswith(experiment_prefix):
+                        continue
+                    kept.append(dict(package))
+            if kept:
+                entry = dict(subject_entry)
+                entry["research_packages"] = kept
+                filtered_subjects.append(entry)
+    prior["subjects"] = filtered_subjects
+    return replace(context, prior_subject_science=prior)
+
+
+def equivalence_market_source() -> CompositeEvidenceSource:
+    """Frozen experiment evidence source: standard research inputs minus Unusual Whales.
+
+    Unusual Whales was explicitly excluded from this experiment after the subscription
+    expired. FINRA remains available symmetrically to both arms.
+    """
+    return CompositeEvidenceSource(
+        YFinanceDailyOhlcvSource(),
+        FinraWeeklyOffExchangeSource(),
+        YFinanceMarketStructureSource(),
+        YFinanceCatalystEventsSource(),
+        YFinanceIntradaySource(),
+        SecEdgarShareStructureSource(),
+    )
+
+
+
+def _restore_evidence_and_precomputed(*, start: Mapping[str, object], runtime) -> tuple[tuple[EvidenceDescriptor, ...], dict[str, AnalysisResult], Mapping[str, object]]:
+    frozen = start.get("package")
+    if not isinstance(frozen, Mapping):
+        raise EquivalenceProtocolError("frozen starting package is malformed")
+    raw_evidence = frozen.get("evidence")
+    if not isinstance(raw_evidence, list):
+        raise EquivalenceProtocolError("frozen evidence is malformed")
+    evidence: list[EvidenceDescriptor] = []
+    for item in raw_evidence:
+        if not isinstance(item, Mapping):
+            raise EquivalenceProtocolError("frozen evidence descriptor is malformed")
+        evidence.append(EvidenceDescriptor(
+            evidence_id=str(item["evidence_id"]),
+            subject_id=str(item["subject_id"]),
+            evidence_type=str(item["evidence_type"]),
+            artifact_type=str(item["artifact_type"]),
+            source_identity=str(item["source_identity"]),
+            coverage_start=item.get("coverage_start") if item.get("coverage_start") is None else str(item.get("coverage_start")),
+            coverage_end=item.get("coverage_end") if item.get("coverage_end") is None else str(item.get("coverage_end")),
+            row_count=int(item["row_count"]) if item.get("row_count") is not None else None,
+            schema=tuple(str(v) for v in item.get("schema", [])),
+            cache_key=str(item["cache_key"]),
+            provenance=dict(item.get("provenance", {})),
+            neutral_semantics=str(item.get("neutral_semantics", "")),
+            content_identity=item.get("content_identity") if item.get("content_identity") is None else str(item.get("content_identity")),
+        ))
+    state = frozen.get("starting_state")
+    if not isinstance(state, Mapping):
+        raise EquivalenceProtocolError("frozen starting state is malformed")
+    raw_payloads = state.get("frozen_evidence_payloads")
+    if not isinstance(raw_payloads, Mapping):
+        raise EquivalenceProtocolError("frozen evidence payloads are malformed")
+    for descriptor in evidence:
+        if descriptor.cache_key not in raw_payloads:
+            raise EquivalenceProtocolError(f"missing frozen evidence payload for {descriptor.cache_key}")
+        runtime.cache.put(descriptor.cache_key, raw_payloads[descriptor.cache_key])
+
+    raw_precomputed = state.get("precomputed_analysis_results")
+    if not isinstance(raw_precomputed, Mapping):
+        raise EquivalenceProtocolError("frozen precomputed analysis is malformed")
+    precomputed: dict[str, AnalysisResult] = {}
+    for key, item in raw_precomputed.items():
+        if not isinstance(item, Mapping):
+            raise EquivalenceProtocolError("frozen analysis result is malformed")
+        precomputed[str(key)] = AnalysisResult(
+            result_id=str(item["result_id"]),
+            request_id=str(item["request_id"]),
+            subject_id=str(item["subject_id"]),
+            method_id=str(item["method_id"]),
+            outputs=dict(item.get("outputs", {})),
+            evidence_ids=tuple(str(v) for v in item.get("evidence_ids", [])),
+            limitations=tuple(str(v) for v in item.get("limitations", [])),
+            execution_metadata=dict(item.get("execution_metadata", {})),
+        )
+    return tuple(evidence), precomputed, state
+
+def _required_env(name: str) -> str:
+    value = os.getenv(name, "").strip()
+    if not value:
+        raise EquivalenceProtocolError(f"required environment variable is not set: {name}")
+    return value
+
+
+
+def _load_scientific_record(root: Path) -> dict[str, object]:
+    record: dict[str, object] = {}
+    for name in ("decisions.json", "reports.json", "outcome.json"):
+        path = root / name
+        if not path.is_file():
+            raise EquivalenceProtocolError(f"arm scientific record missing {path}")
+        record[name.removesuffix(".json")] = json.loads(path.read_text(encoding="utf-8"))
+    packages = []
+    for path in sorted((root / "research_packages").glob("*.json")):
+        packages.append(json.loads(path.read_text(encoding="utf-8")))
+    record["research_packages"] = packages
+    return record
+
+
+def _artifact(path: Path) -> dict[str, object]:
+    payload = path.read_bytes()
+    return {"path": str(path), "sha256": hashlib.sha256(payload).hexdigest(), "bytes": len(payload)}
+
+
+def _jsonable(value: object) -> object:
+    if hasattr(value, "__dataclass_fields__"):
+        return asdict(value)
+    if isinstance(value, Mapping):
+        return {str(k): _jsonable(v) for k, v in value.items()}
+    if isinstance(value, (tuple, list)):
+        return [_jsonable(v) for v in value]
+    if hasattr(value, "value"):
+        return value.value
+    return str(value)
+
+
+def prepare_identical_start(*, root: Path, ticker: str, experiment_root: Path) -> dict[str, object]:
+    subject = SubjectMetadata(subject_id=f"equity:{ticker.upper()}", ticker=ticker.upper())
+    context = _equivalence_scientific_context(root=root, experiment_root=experiment_root, active_subject_id=subject.subject_id)
+    runtime = build_batch_runtime(rd=None, mission=DEFAULT_MISSION, nexus_path=experiment_root / "_prepare_nexus.json", scientific_memory=context.memory_selection.store)
+    evidence = IntakeEngine(runtime.cache).ingest(subject=subject, source=equivalence_market_source())
+    evidence_payloads = {descriptor.cache_key: _jsonable(runtime.cache.get(descriptor.cache_key)) for descriptor in evidence}
+    precomputed = dict(build_pre_sol_substrates(subject=subject, evidence=evidence, cache=runtime.cache, analysis=runtime.analysis))
+    package = freeze_starting_package(ticker.upper(), {
+        "mission": DEFAULT_MISSION,
+        "subject": _jsonable(subject),
+        "evidence": _jsonable(evidence),
+        "available_analysis_methods": [dict(item) for item in runtime.catalog.capability_payloads()],
+        "starting_state": {
+            "cross_subject_memory_source": str(context.memory_selection.source_path),
+            "cross_subject_memory_sha256": canonical_sha256(context.prior_subject_science),
+            "same_subject_prior_science": None,
+            "frozen_evidence_payloads": evidence_payloads,
+            "precomputed_analysis_results": _jsonable(precomputed),
+        },
+    })
+    write_frozen_json(experiment_root / ticker.upper() / "START.json", package)
+    prepare_nexus = experiment_root / "_prepare_nexus.json"
+    if prepare_nexus.exists():
+        prepare_nexus.unlink()
+    return package
+
+
+def _run_arm(*, root: Path, ticker: str, arm_root: Path, start: Mapping[str, object], rd_factory: Callable):
+    arm_root.mkdir(parents=True, exist_ok=False)
+    subject = SubjectMetadata(subject_id=f"equity:{ticker.upper()}", ticker=ticker.upper())
+    context = _equivalence_scientific_context(root=root, experiment_root=arm_root.parent.parent, active_subject_id=subject.subject_id)
+    package_store = JsonResearchPackageStore(arm_root / "research_packages")
+    recorder = BatchCampaignResearchRecorder(package_store=package_store)
+    rd = rd_factory(package_store, context, subject)
+    runtime = build_batch_runtime(rd=rd, mission=DEFAULT_MISSION, nexus_path=arm_root / "research_nexus.json", scientific_memory=context.memory_selection.store)
+
+    evidence, precomputed, frozen_state = _restore_evidence_and_precomputed(start=start, runtime=runtime)
+
+    live = freeze_starting_package(ticker.upper(), {
+        "mission": DEFAULT_MISSION,
+        "subject": _jsonable(subject),
+        "evidence": _jsonable(evidence),
+        "available_analysis_methods": [dict(item) for item in runtime.catalog.capability_payloads()],
+        "starting_state": {
+            "cross_subject_memory_source": str(context.memory_selection.source_path),
+            "cross_subject_memory_sha256": canonical_sha256(context.prior_subject_science),
+            "same_subject_prior_science": None,
+            "frozen_evidence_payloads": dict(frozen_state.get("frozen_evidence_payloads", {})),
+            "precomputed_analysis_results": _jsonable(precomputed),
+        },
+    })
+    verify_identical_start(start, live)
+    decisions: list[object] = []
+    reports: list[object] = []
+    analyses: list[object] = []
+    campaign_id = f"equivalence-{arm_root.name.lower()}-{ticker.lower()}"
+
+    def accepted(request):
+        recorder.record_accepted_request(campaign_id=campaign_id, subject=subject, request=request)
+
+    last_report = None
+
+    def on_decision(decision, decision_count, analysis_count):
+        nonlocal last_report
+        recorder.record_plan(campaign_id=campaign_id, subject=subject, decision=decision)
+        recorder.record_predictive_hypothesis_updates(decision, current_report=last_report)
+        recorder.record_closures(decision)
+        decisions.append(_jsonable(decision))
+
+    def on_report(report, decision_count, analysis_count):
+        nonlocal last_report
+        recorder.record_report(report)
+        last_report = report
+        reports.append(_jsonable(report))
+
+    outcome = runtime.orchestrator.run(subject=subject, evidence=evidence, decision_callback=on_decision, report_callback=on_report, accepted_request_callback=accepted, precomputed_results=precomputed)
+    analyses.extend(_jsonable(precomputed))
+    write_frozen_json(arm_root / "decisions.json", {"decisions": decisions})
+    write_frozen_json(arm_root / "reports.json", {"reports": reports})
+    write_frozen_json(arm_root / "outcome.json", {"outcome": _jsonable(outcome), "precomputed_results": _jsonable(precomputed)})
+    return rd, outcome
+
+
+
+def _sol_usage_from_telemetry(path: Path) -> dict[str, object]:
+    total = 0.0
+    calls = 0
+    if path.is_file():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if row.get("event") != "SOL_CALL_COMPLETE":
+                continue
+            calls += 1
+            value = row.get("estimated_call_cost_usd")
+            if isinstance(value, (int, float)):
+                total += float(value)
+    if calls < 1:
+        raise EquivalenceProtocolError(f"paid Sol telemetry is missing completed calls: {path}")
+    return {"actual_spend_usd": total, "completed_sol_calls": calls, "recovered_from_telemetry": True}
+
+
+def freeze_existing_direct_sol_arm(*, ticker: str, experiment_root: Path, start: Mapping[str, object]) -> Mapping[str, object]:
+    arm_root = experiment_root / ticker.upper() / "DIRECT_SOL"
+    manifest_path = arm_root / "ARM_MANIFEST.json"
+    if manifest_path.is_file():
+        return json.loads(manifest_path.read_text(encoding="utf-8"))
+    record = _load_scientific_record(arm_root)
+    raw_outcome = record.get("outcome", {})
+    outcome = raw_outcome.get("outcome", {}) if isinstance(raw_outcome, Mapping) else {}
+    if not isinstance(outcome, Mapping):
+        raise EquivalenceProtocolError("existing Direct Sol outcome is malformed")
+    closed = bool(outcome.get("closed"))
+    waiting = bool(outcome.get("waiting_for_future_cohorts"))
+    if not (closed or waiting):
+        raise EquivalenceProtocolError(
+            "existing Direct Sol arm contains paid work but is not at a governed terminal state; refusing paid rerun"
+        )
+    telemetry = arm_root / "sol_transport_telemetry.jsonl"
+    usage = [_sol_usage_from_telemetry(telemetry)]
+    artifacts = [_artifact(p) for p in sorted(arm_root.rglob("*.json")) if p.name != "ARM_MANIFEST.json"]
+    if telemetry.exists():
+        artifacts.append(_artifact(telemetry))
+    manifest = freeze_arm_manifest(
+        subject_id=ticker.upper(),
+        arm="DIRECT_SOL",
+        starting_sha256=str(start["sha256"]),
+        artifacts=artifacts,
+        usage=usage,
+        complete=True,
+        terminal_state="WAITING_FOR_FUTURE_COHORTS" if waiting else "CLOSED",
+        scientific_record={"trace": record, "final_assessment": record.get("outcome", {}).get("outcome", {}).get("final_decision")},
+    )
+    write_frozen_json(manifest_path, manifest)
+    return manifest
+
+
+def run_direct_sol_arm(*, root: Path, ticker: str, experiment_root: Path, start: Mapping[str, object], sol_spend_usd: float):
+    arm_root = experiment_root / ticker.upper() / "DIRECT_SOL"
+    telemetry = arm_root / "sol_transport_telemetry.jsonl"
+    old = os.environ.get("MTS_SOL_TELEMETRY_PATH")
+    os.environ["MTS_SOL_TELEMETRY_PATH"] = str(telemetry)
+    try:
+        def factory(store, context, subject):
+            return SubjectContextSolBatchResearchDirector(research_package_store=store, prior_subject_scientific_context=context.prior_subject_science, same_subject_prior_scientific_context=None, revisit_change_context=None, base_url=_required_env("MTS_SOL_BASE_URL"), model=_required_env("MTS_SOL_MODEL"), api_key=_required_env("MTS_SOL_API_KEY"), timeout_seconds=int(os.getenv("MTS_SOL_TIMEOUT_SECONDS", "600")), required_subject_id=subject.subject_id, required_research_phase=ResearchPhase.EXPLORATION, sol_spend_limit_usd=sol_spend_usd, human_spend_authorization_callback=None)
+        rd, outcome = _run_arm(root=root, ticker=ticker, arm_root=arm_root, start=start, rd_factory=factory)
+    finally:
+        if old is None: os.environ.pop("MTS_SOL_TELEMETRY_PATH", None)
+        else: os.environ["MTS_SOL_TELEMETRY_PATH"] = old
+    snapshot = rd.sol_spend_snapshot()
+    usage = [asdict(snapshot)] if snapshot is not None else []
+    artifacts = [_artifact(p) for p in sorted(arm_root.rglob("*.json"))]
+    if telemetry.exists(): artifacts.append(_artifact(telemetry))
+    complete = bool(outcome.closed or outcome.waiting_for_future_cohorts)
+    terminal_state = "WAITING_FOR_FUTURE_COHORTS" if outcome.waiting_for_future_cohorts else "CLOSED"
+    manifest = freeze_arm_manifest(
+        subject_id=ticker.upper(),
+        arm="DIRECT_SOL",
+        starting_sha256=str(start["sha256"]),
+        artifacts=artifacts,
+        usage=usage,
+        complete=complete,
+        terminal_state=terminal_state,
+        scientific_record={"trace": _load_scientific_record(arm_root), "final_assessment": _load_scientific_record(arm_root).get("outcome", {}).get("outcome", {}).get("final_decision")},
+    )
+    write_frozen_json(arm_root / "ARM_MANIFEST.json", manifest)
+    return manifest
+
+
+def run_gemini_rd_arm(*, root: Path, ticker: str, experiment_root: Path, start: Mapping[str, object], model: str, max_calls: int, max_spend_usd: float):
+    arm_root = experiment_root / ticker.upper() / "GEMINI_RD"
+    telemetry = arm_root / "openrouter_telemetry.jsonl"
+    old = os.environ.get("MTS_OPENROUTER_RD_TELEMETRY_PATH")
+    os.environ["MTS_OPENROUTER_RD_TELEMETRY_PATH"] = str(telemetry)
+    try:
+        def factory(store, context, subject):
+            return SubjectContextOpenRouterBatchResearchDirector(research_package_store=store, prior_subject_scientific_context=context.prior_subject_science, same_subject_prior_scientific_context=None, revisit_change_context=None, base_url=os.getenv("MTS_OPENROUTER_BASE_URL", "https://openrouter.ai/api"), model=model, api_key=_required_env("MTS_OPENROUTER_API_KEY"), timeout_seconds=int(os.getenv("MTS_OPENROUTER_TIMEOUT_SECONDS", "600")), required_subject_id=subject.subject_id, required_research_phase=ResearchPhase.EXPLORATION, sol_spend_limit_usd=max_spend_usd, human_spend_authorization_callback=None, max_model_calls=max_calls, max_model_spend_usd=max_spend_usd)
+        rd, outcome = _run_arm(root=root, ticker=ticker, arm_root=arm_root, start=start, rd_factory=factory)
+    finally:
+        if old is None: os.environ.pop("MTS_OPENROUTER_RD_TELEMETRY_PATH", None)
+        else: os.environ["MTS_OPENROUTER_RD_TELEMETRY_PATH"] = old
+    write_frozen_json(arm_root / "GEMINI_USAGE.json", dict(rd.openrouter_usage()))
+    return arm_root, rd.openrouter_usage(), outcome
