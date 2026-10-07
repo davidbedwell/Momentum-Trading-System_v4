@@ -2,6 +2,10 @@ import json,random,sys,time,traceback
 from pathlib import Path
 import numpy as np,pandas as pd
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from Core.layered_ga.stage2_recovered_source_preflight_v3 import verify_recovered_sources
+source_preflight=verify_recovered_sources()
+if source_preflight['decision']!='PASS':
+ raise RuntimeError('certified recovered Stage-2 sources missing or hash-mismatched: '+json.dumps(source_preflight))
 from Core.layered_ga.stage2_compiler_v3 import stage2_search_spaces,VectorSignalCompiler,CERTIFIED_ROOT
 from Core.layered_ga.stage2_data_v3 import load_path_cache
 from Core.layered_ga.stage2_calibration_ga_adapter_v3 import MatchedEvaluator as OutcomeMatchedEvaluator
