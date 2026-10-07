@@ -36,15 +36,31 @@ def derive(tickers):
         f=f.replace([np.inf,-np.inf],np.nan).dropna()
         p=DERIVED/f"{t}.parquet";f.to_parquet(p);out[t]={"path":str(p),"sha256":sha(p),"rows":len(f)}
     (ROOT/"derived_manifest.json").write_text(json.dumps(out,indent=2)+"\n");return out
-def evidence_arrays(ticker,horizon=10):
-    f=pd.read_parquet(DERIVED/f"{ticker}.parquet")
-    z=pd.read_parquet(RAW/f"{ticker}.parquet")
+def causal_zscore(f: pd.DataFrame, min_periods: int = 20) -> pd.DataFrame:
+    """Normalize each row using only observations available strictly before it."""
+    hist = f.shift(1)
+    mean = hist.expanding(min_periods=min_periods).mean()
+    std = hist.expanding(min_periods=min_periods).std(ddof=0).replace(0, np.nan)
+    return ((f - mean) / std).replace([np.inf, -np.inf], np.nan)
+
+def evidence_arrays(ticker,horizon=10,min_normalization_history=20):
+    if horizon < 1:
+        raise ValueError("horizon must be >= 1")
+    f=pd.read_parquet(DERIVED/f"{ticker}.parquet").sort_index()
+    z=pd.read_parquet(RAW/f"{ticker}.parquet").sort_index()
     a=z["adj_close"].astype(float) if "adj_close" in z else z["close"].astype(float)
     f=f.loc[f.index.intersection(a.index)]
-    X=((f-f.mean())/f.std(ddof=0).replace(0,1)).fillna(0).to_numpy(float)
-    loc=a.index.get_indexer(f.index);Y=np.zeros((len(f),horizon),float)
+    loc=a.index.get_indexer(f.index)
+    eligible=(loc >= 0) & ((loc + horizon) < len(a))
+    f=f.iloc[np.flatnonzero(eligible)]
+    loc=loc[eligible]
+    normalized=causal_zscore(f,min_periods=min_normalization_history)
+    finite=normalized.notna().all(axis=1).to_numpy()
+    normalized=normalized.iloc[np.flatnonzero(finite)]
+    loc=loc[finite]
+    X=normalized.to_numpy(float)
+    Y=np.empty((len(normalized),horizon),float)
     for i,k in enumerate(loc):
-        base=float(a.iloc[k])
-        for h in range(horizon):
-            j=min(k+h+1,len(a)-1);Y[i,h]=float(a.iloc[j]/(base if h==0 else a.iloc[j-1])-1)
+        path=a.iloc[k:k+horizon+1].to_numpy(float)
+        Y[i,:]=path[1:]/path[:-1]-1.0
     return X,Y,list(f.columns)
