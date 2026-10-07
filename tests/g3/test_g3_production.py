@@ -41,3 +41,42 @@ def test_mutation_stays_in_grammar():
 def test_crossover_stays_in_grammar():
     a=random_genome(7,17);b=random_genome(8,17)
     for i in range(50): validate_genome(crossover(a,b,i),17)
+
+def test_plateau_only_at_40_generation_boundaries():
+    from Core.g3.production import plateau_update
+    assert plateau_update(39,1,1,0,0)==(0,False)
+    assert plateau_update(40,1,1.004,0,0)==(1,False)
+    assert plateau_update(80,1,1.004,0,1)==(2,True)
+    assert plateau_update(80,1,1.006,0,1)==(0,False)
+    assert plateau_update(80,1,1.0,1,1)==(0,False)
+
+def test_perturbations_are_oat_and_bidirectional():
+    from Core.g3.production import random_genome,perturb_genomes
+    g=random_genome(7,4); q=perturb_genomes(g)
+    assert len(q)==len(g.modules)*12+2
+
+def test_qd_has_256_frozen_cells_and_is_deterministic():
+    from Core.g3.production import qd_fit,qd_cell
+    import numpy as np
+    A=np.arange(12*300,dtype=float).reshape(300,12)%37
+    a=qd_fit(A);b=qd_fit(A)
+    assert a['centroids'].shape==(256,12)
+    assert np.allclose(a['centroids'],b['centroids'])
+    assert qd_cell(A[0],a)==qd_cell(A[0],b)
+
+def test_behavioral_duplicate_merge_keeps_lower_uncertainty():
+    from Core.g3.production import qd_fit,qd_duplicate_merge
+    import numpy as np
+    model=qd_fit(np.zeros((300,12)))
+    old={'descriptor':[0.]*12,'fired_signature':[['A',1],['A',2]],'uncertainty_width':.2}
+    new={'descriptor':[0.]*12,'fired_signature':[['A',1],['A',2]],'uncertainty_width':.1}
+    cells={0:[('old',old)]};merged,other=qd_duplicate_merge(cells,'new',new,model)
+    assert merged and other=='old' and cells[0][0][0]=='new'
+
+def test_costs_are_monotone_for_identical_paths():
+    from Core.g3.production import random_genome,evaluate_genome
+    import numpy as np
+    g=random_genome(91,4);X=np.ones((100,4));Y=np.full((100,60),.001);data={'T':(X,Y)}
+    a=evaluate_genome(g,data,10);b=evaluate_genome(g,data,15);c=evaluate_genome(g,data,20)
+    if a.events:
+        assert a.mean>=b.mean>=c.mean

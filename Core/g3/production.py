@@ -159,9 +159,17 @@ def dominates(a,b):
 
 def descriptor(ev:Evidence):
     if not ev.events:return np.zeros(12)
-    E=ev.events; r=np.array([e.net_return for e in E]); dur=np.array([e.duration for e in E]); mfe=np.array([e.mfe for e in E]); mae=np.maximum(1e-9,-np.array([e.mae for e in E]));
-    tick=len(set(e.ticker for e in E)); short=np.mean([e.side<0 for e in E]); adds=np.mean([e.actions.count('add') for e in E]); reds=np.mean([e.actions.count('reduce') for e in E]);
-    return np.array([math.log1p(len(E)),tick,short,np.median(dur),np.median(mfe/mae),np.mean(r),np.std(r),np.quantile(r,.1),np.quantile(r,.9),adds,reds,ev.clusters],float)
+    E=ev.events;n=len(E);tick=len(set(e.ticker for e in E));short=np.mean([e.side<0 for e in E]);dur=np.median([e.duration for e in E])
+    # Frozen return-path shape: five equally-spaced cumulative-PnL samples normalized by |terminal|.
+    shapes=[]
+    for e in E:
+        p=np.cumprod(1+np.asarray(e.path,float))-1
+        if len(p):
+            ix=np.linspace(0,len(p)-1,5).round().astype(int);shapes.append(p[ix]/(abs(p[-1])+1e-9))
+    shp=np.median(np.stack(shapes),0) if shapes else np.zeros(5)
+    # Counts/session for lifecycle actions, compressed to enter+exit, hold, add, reduce.
+    sessions=max(1,sum(e.duration for e in E));acts=np.array([sum(e.actions.count(x) for e in E)/sessions for x in ('enter','hold','add','reduce','exit')])
+    return np.r_[math.log1p(n),tick,short,dur,shp,acts[[1,2,3]]].astype(float)
 
 def promotion(ev10:Evidence,ev20:Evidence,axes,perturb_positive_fraction:float,explicit_narrow_scope=False):
     if ev10.n<50 or ev10.clusters<25:return False
@@ -182,3 +190,77 @@ def genome_from_dict(d:dict)->Genome:
         apps=tuple(Predicate(**p) for p in x['applicability'])
         y=dict(x);y['applicability']=apps;y['signal_features']=tuple(y['signal_features']);y['signal_weights']=tuple(y['signal_weights']);mods.append(Module(**y))
     return Genome(tuple(mods),d['abstain_threshold'])
+
+def temporal_thirds_positive(g:Genome,data,cost_bps=10.0)->bool:
+    vals=[]
+    for k in range(3):
+        part={t:(x[k*len(x)//3:(k+1)*len(x)//3],y[k*len(y)//3:(k+1)*len(y)//3]) for t,(x,y) in data.items()}
+        vals.append(evaluate_genome(g,part,cost_bps).mean>0)
+    return sum(vals)>=2
+
+def perturb_genomes(g:Genome):
+    """Frozen OAT +/-10% numeric lifecycle/threshold perturbations."""
+    out=[]
+    for mi,m in enumerate(g.modules):
+        fields=('entry_threshold','take_profit','stop_loss','add_at','reduce_at','trail_retain')
+        for f in fields:
+            v=getattr(m,f)
+            for mult in (.9,1.1):
+                mm=replace(m,**{f:v*mult});mods=list(g.modules);mods[mi]=mm;out.append(Genome(tuple(mods),g.abstain_threshold))
+    for mult in (.9,1.1):out.append(replace(g,abstain_threshold=max(0,min(4,g.abstain_threshold*mult))))
+    return out
+
+def perturb_positive_fraction(g:Genome,data)->float:
+    gs=perturb_genomes(g)
+    ok=0
+    for x in gs:
+        z=evaluate_genome(x,data,10);med=np.median([e.net_return for e in z.events]) if z.events else -1e9;ok+=med>0
+    return ok/max(1,len(gs))
+
+def plateau_update(boundary_generation:int,hv_start:float,hv_end:float,new_promoted_cells:int,consecutive:int):
+    """Only non-overlapping 40-generation boundaries can increment/reset plateau count."""
+    if boundary_generation<=0 or boundary_generation%40:return consecutive,False
+    denom=max(abs(hv_start),1e-12);improvement=(hv_end-hv_start)/denom
+    hit=improvement < .005 and new_promoted_cells==0
+    c=consecutive+1 if hit else 0
+    return c,c>=2
+
+def contender(ev10:Evidence,ev15:Evidence,ev20:Evidence,temporal_ok:bool,perturb_frac:float,provenance_ok=True,concentration_ok=True):
+    return ev10.n>=50 and ev10.clusters>=25 and ev15.mean>0 and ev20.mean>0 and temporal_ok and perturb_frac>=.75 and provenance_ok and concentration_ok
+
+def qd_fit(dev_descriptors:np.ndarray,seed=20261007,k=256):
+    """Freeze robust descriptor scaling, deterministic 12-D projection and CVT centroids on dev-only behavior."""
+    A=np.asarray(dev_descriptors,float);med=np.median(A,0);iqr=np.quantile(A,.75,0)-np.quantile(A,.25,0);iqr=np.where(iqr>1e-12,iqr,1.)
+    Z=(A-med)/iqr;rng=np.random.default_rng(seed);P=rng.normal(size=(Z.shape[1],12));Q,_=np.linalg.qr(P);Z=Z@Q[:,:12]
+    if len(Z)<k:Z=np.resize(Z,(k,Z.shape[1]))
+    centers=Z[rng.choice(len(Z),k,replace=False)].copy()
+    for _ in range(20):
+        lab=np.argmin(((Z[:,None,:]-centers[None,:,:])**2).sum(2),1)
+        for j in range(k):
+            if np.any(lab==j):centers[j]=Z[lab==j].mean(0)
+    return {'median':med,'iqr':iqr,'projection':Q[:,:12],'centroids':centers}
+
+def qd_cell(desc,model):
+    z=((np.asarray(desc)-model['median'])/model['iqr'])@model['projection'];return int(np.argmin(((model['centroids']-z)**2).sum(1)))
+
+def qd_insert(cells:dict,cell:int,key:str,record:dict,max_per_cell=4):
+    bucket=cells.setdefault(cell,[])
+    # Dominated records are evicted first; otherwise preserve deterministic diversity.
+    bucket.append((key,record));bucket.sort(key=lambda kv:(-kv[1]['axes'][0],kv[1]['axes'][1],kv[1]['axes'][2],kv[0]))
+    keep=[]
+    for kv in bucket:
+        if any(dominates(x[1]['axes'],kv[1]['axes']) for x in bucket if x[0]!=kv[0]):continue
+        keep.append(kv)
+    if len(keep)>max_per_cell:keep=keep[:max_per_cell]
+    cells[cell]=keep
+    return any(k==key for k,_ in keep)
+
+def qd_duplicate_merge(cells:dict,key:str,rec:dict,model:dict):
+    z=((np.asarray(rec['descriptor'])-model['median'])/model['iqr'])@model['projection']; A=set(map(tuple,rec.get('fired_signature',[])))
+    for c,bucket in cells.items():
+        for j,(ok,old) in enumerate(bucket):
+            oz=((np.asarray(old['descriptor'])-model['median'])/model['iqr'])@model['projection'];dist=float(np.linalg.norm(z-oz));B=set(map(tuple,old.get('fired_signature',[])));jac=len(A&B)/max(1,len(A|B))
+            if dist<=.01 and jac>=.95:
+                if rec.get('uncertainty_width',1e99)<old.get('uncertainty_width',1e99):bucket[j]=(key,rec);return True,ok
+                return True,key
+    return False,None

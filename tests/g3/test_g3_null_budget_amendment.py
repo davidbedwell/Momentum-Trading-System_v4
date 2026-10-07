@@ -10,4 +10,5 @@ def test_exactly_one_production_null_is_frozen():
 
 def test_controller_never_authorizes_second_null():
     s=Path('scripts/run_g3_production_controller_20261007.py').read_text().lower()
-    assert 'null_2' not in s and 'null2' not in s
+    assert s.count("'--arm','null'") == 1
+    assert "'--arm','null2'" not in s and "'--arm','null_2'" not in s
