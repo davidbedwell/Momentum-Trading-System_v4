@@ -1,0 +1,10 @@
+{
+  "items": [
+    {
+      "severity": "NONBLOCKING_FOR_VOCABULARY",
+      "issue": "Catalog source transport aggregate is absent at its original absolute path on this snapshot.",
+      "declared_sha256": "80d218bd9d93091dcff4c0b0cc34eb9729f962448c25986f6ab9a2d46451890d",
+      "mitigation": "Frozen catalog itself, reconstruction manifest, recovered search grammar, runner, and GA implementation are present; do not claim re-verification of the missing aggregate."
+    }
+  ]
+}

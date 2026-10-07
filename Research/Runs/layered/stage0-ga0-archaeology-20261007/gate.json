@@ -1,0 +1,15 @@
+{
+  "decision": "PASS",
+  "gate_version": "stage0-v1",
+  "criteria": {
+    "family_vocabulary_recovered": true,
+    "gene_keys_recovered": true,
+    "ga_mechanics_recovered": true,
+    "search_scope_recovered": true,
+    "provenance_hashed": true,
+    "unresolved_ledger_written": true
+  },
+  "failed_criteria": [],
+  "next_action": "Freeze Stage0 registry; Stage2 may consume certified vocabulary subject to Stage1 PASS.",
+  "scientific_parameters_changed": false
+}

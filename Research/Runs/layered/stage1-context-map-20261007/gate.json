@@ -1,0 +1,83 @@
+{
+  "decision": "PASS",
+  "gate_version": "stage1-v1",
+  "criteria": {
+    "deterministic_replay_hash_match": true,
+    "galaxy_coverage_gt_90pct": true,
+    "all_11_sector_contexts_present": true,
+    "protected_banks_accessed": false,
+    "no_trading_objective_used": true
+  },
+  "observed": {
+    "galaxy": {
+      "coverage": 0.9411980216156806,
+      "one_day_state_persistence": 0.7956005450652132,
+      "rows": 5459
+    },
+    "sectors": {
+      "XLB": {
+        "coverage": 0.9393194706994329,
+        "one_day_state_persistence": 0.7876409017713365,
+        "rows": 5290
+      },
+      "XLC": {
+        "coverage": 0.8449275362318841,
+        "one_day_state_persistence": 0.7923340961098398,
+        "rows": 2070
+      },
+      "XLE": {
+        "coverage": 0.9393194706994329,
+        "one_day_state_persistence": 0.7914653784219001,
+        "rows": 5290
+      },
+      "XLF": {
+        "coverage": 0.9393194706994329,
+        "one_day_state_persistence": 0.8254830917874396,
+        "rows": 5290
+      },
+      "XLI": {
+        "coverage": 0.9393194706994329,
+        "one_day_state_persistence": 0.7920692431561996,
+        "rows": 5290
+      },
+      "XLK": {
+        "coverage": 0.9393194706994329,
+        "one_day_state_persistence": 0.784621578099839,
+        "rows": 5290
+      },
+      "XLP": {
+        "coverage": 0.9393194706994329,
+        "one_day_state_persistence": 0.7429549114331723,
+        "rows": 5290
+      },
+      "XLRE": {
+        "coverage": 0.8831877729257642,
+        "one_day_state_persistence": 0.7580379225061831,
+        "rows": 2748
+      },
+      "XLU": {
+        "coverage": 0.9393194706994329,
+        "one_day_state_persistence": 0.7642914653784219,
+        "rows": 5290
+      },
+      "XLV": {
+        "coverage": 0.9393194706994329,
+        "one_day_state_persistence": 0.7745571658615137,
+        "rows": 5290
+      },
+      "XLY": {
+        "coverage": 0.9393194706994329,
+        "one_day_state_persistence": 0.7844202898550725,
+        "rows": 5290
+      }
+    },
+    "sector_count": 11,
+    "hashes": {
+      "galaxy": "97f013734def96dcbc03b020d43f515490a375a76a6d529b06d53c7e747b8947",
+      "sectors": "71c79ceb543a18ee9c706c8058589ae11447e3d62a6ba6ba3608ff7447e3ff4c"
+    }
+  },
+  "failed_criteria": [],
+  "next_action": "Freeze Stage1 context map; Stage2 may start only if Stage0 is also PASS.",
+  "scientific_parameters_changed": false
+}

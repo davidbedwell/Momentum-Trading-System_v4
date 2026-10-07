@@ -1,0 +1,16 @@
+{
+  "source": "Yahoo Finance via yfinance 1.7.0",
+  "tickers": [
+    "XLRE",
+    "XLC"
+  ],
+  "requested_window": [
+    "2005-09-01",
+    "2026-09-14"
+  ],
+  "observed_first_dates": {
+    "XLC": "2018-06-19",
+    "XLRE": "2015-10-08"
+  },
+  "sha256": "31d697151669a974976bfe3aaf82ef6b0302a9957915e05b105b06f297c19b40"
+}

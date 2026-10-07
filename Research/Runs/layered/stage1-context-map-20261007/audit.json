@@ -1,0 +1,636 @@
+{
+  "stage": "STAGE1",
+  "objective": "causal context map only; no trading/P&L/CAGR/MDD optimization",
+  "inputs": {
+    "/home/ubuntu/Momentum-Trading-System_v4/Research/Data/Comparators/SPY_YFINANCE_2005_2026.parquet": "b182402afd15c074ee4cc596149bf0a821e6cbd00fa5329d84eef269636f6381",
+    "/home/ubuntu/Momentum-Trading-System_v4/Research/Data/ExternalMarket/G2/legacy_sector_etf_panel_2005_2026.parquet": "f7101f47c432e6bf8afd069c2f2ec3bf087f05ab8add79a5a0dc796a46b9d86a"
+  },
+  "galaxy": {
+    "name": "SPY",
+    "rows": 5459,
+    "date_min": "2005-01-03",
+    "date_max": "2026-09-15",
+    "state_coverage": 0.9411980216156806,
+    "state_counts": {
+      "Up": 2043,
+      "Flat": 1083,
+      "Down": 723,
+      "Strong Down": 661,
+      "Strong Up": 628,
+      "<NA>": 321
+    },
+    "transitions": {
+      "Down": {
+        "Down": 0.7008,
+        "Flat": 0.1136,
+        "Strong Down": 0.1301,
+        "Strong Up": 0.0,
+        "Up": 0.0034
+      },
+      "Flat": {
+        "Down": 0.1773,
+        "Flat": 0.7119,
+        "Strong Down": 0.0015,
+        "Strong Up": 0.0,
+        "Up": 0.0896
+      },
+      "Strong Down": {
+        "Down": 0.1163,
+        "Flat": 0.0018,
+        "Strong Down": 0.8684,
+        "Strong Up": 0.0,
+        "Up": 0.0005
+      },
+      "Strong Up": {
+        "Down": 0.0,
+        "Flat": 0.0018,
+        "Strong Down": 0.0,
+        "Strong Up": 0.8041,
+        "Up": 0.0592
+      },
+      "Up": {
+        "Down": 0.0055,
+        "Flat": 0.1708,
+        "Strong Down": 0.0,
+        "Strong Up": 0.1959,
+        "Up": 0.8473
+      }
+    }
+  },
+  "sectors": {
+    "XLB": {
+      "name": "XLB",
+      "rows": 5290,
+      "date_min": "2005-09-01",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.9393194706994329,
+      "state_counts": {
+        "Up": 1567,
+        "Flat": 1415,
+        "Down": 1056,
+        "Strong Down": 561,
+        "Strong Up": 370,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.7687,
+          "Flat": 0.1223,
+          "Strong Down": 0.123,
+          "Strong Up": 0.0,
+          "Up": 0.0019
+        },
+        "Flat": {
+          "Down": 0.1621,
+          "Flat": 0.7329,
+          "Strong Down": 0.0018,
+          "Strong Up": 0.0054,
+          "Up": 0.1302
+        },
+        "Strong Down": {
+          "Down": 0.0654,
+          "Flat": 0.0007,
+          "Strong Down": 0.8752,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0007,
+          "Strong Down": 0.0,
+          "Strong Up": 0.7865,
+          "Up": 0.0491
+        },
+        "Up": {
+          "Down": 0.0038,
+          "Flat": 0.1435,
+          "Strong Down": 0.0,
+          "Strong Up": 0.2081,
+          "Up": 0.8188
+        }
+      }
+    },
+    "XLC": {
+      "name": "XLC",
+      "rows": 2070,
+      "date_min": "2018-06-19",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.8449275362318841,
+      "state_counts": {
+        "Up": 569,
+        "Flat": 380,
+        "Down": 322,
+        "<NA>": 321,
+        "Strong Up": 246,
+        "Strong Down": 232
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.7671,
+          "Flat": 0.1184,
+          "Strong Down": 0.125,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Flat": {
+          "Down": 0.1335,
+          "Flat": 0.7158,
+          "Strong Down": 0.0086,
+          "Strong Up": 0.0,
+          "Up": 0.1109
+        },
+        "Strong Down": {
+          "Down": 0.0963,
+          "Flat": 0.0,
+          "Strong Down": 0.8664,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0,
+          "Strong Down": 0.0,
+          "Strong Up": 0.8252,
+          "Up": 0.0757
+        },
+        "Up": {
+          "Down": 0.0031,
+          "Flat": 0.1658,
+          "Strong Down": 0.0,
+          "Strong Up": 0.1748,
+          "Up": 0.8134
+        }
+      }
+    },
+    "XLE": {
+      "name": "XLE",
+      "rows": 5290,
+      "date_min": "2005-09-01",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.9393194706994329,
+      "state_counts": {
+        "Up": 1306,
+        "Down": 1134,
+        "Flat": 1100,
+        "Strong Up": 726,
+        "Strong Down": 703,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.7795,
+          "Flat": 0.1373,
+          "Strong Down": 0.1294,
+          "Strong Up": 0.0,
+          "Up": 0.0061
+        },
+        "Flat": {
+          "Down": 0.1358,
+          "Flat": 0.6955,
+          "Strong Down": 0.0028,
+          "Strong Up": 0.0014,
+          "Up": 0.1363
+        },
+        "Strong Down": {
+          "Down": 0.0802,
+          "Flat": 0.0018,
+          "Strong Down": 0.8677,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0,
+          "Strong Down": 0.0,
+          "Strong Up": 0.8814,
+          "Up": 0.0658
+        },
+        "Up": {
+          "Down": 0.0044,
+          "Flat": 0.1655,
+          "Strong Down": 0.0,
+          "Strong Up": 0.1172,
+          "Up": 0.7917
+        }
+      }
+    },
+    "XLF": {
+      "name": "XLF",
+      "rows": 5290,
+      "date_min": "2005-09-01",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.9393194706994329,
+      "state_counts": {
+        "Up": 1756,
+        "Flat": 1511,
+        "Down": 774,
+        "Strong Down": 538,
+        "Strong Up": 390,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.77,
+          "Flat": 0.0801,
+          "Strong Down": 0.0967,
+          "Strong Up": 0.0,
+          "Up": 0.0028
+        },
+        "Flat": {
+          "Down": 0.155,
+          "Flat": 0.8,
+          "Strong Down": 0.0056,
+          "Strong Up": 0.0051,
+          "Up": 0.1014
+        },
+        "Strong Down": {
+          "Down": 0.0633,
+          "Flat": 0.0033,
+          "Strong Down": 0.8978,
+          "Strong Up": 0.0,
+          "Up": 0.0006
+        },
+        "Strong Up": {
+          "Down": 0.0026,
+          "Flat": 0.0,
+          "Strong Down": 0.0,
+          "Strong Up": 0.8077,
+          "Up": 0.0416
+        },
+        "Up": {
+          "Down": 0.009,
+          "Flat": 0.1166,
+          "Strong Down": 0.0,
+          "Strong Up": 0.1872,
+          "Up": 0.8536
+        }
+      }
+    },
+    "XLI": {
+      "name": "XLI",
+      "rows": 5290,
+      "date_min": "2005-09-01",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.9393194706994329,
+      "state_counts": {
+        "Up": 1676,
+        "Flat": 1225,
+        "Down": 977,
+        "Strong Down": 562,
+        "Strong Up": 529,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.7687,
+          "Flat": 0.1135,
+          "Strong Down": 0.1444,
+          "Strong Up": 0.0,
+          "Up": 0.0036
+        },
+        "Flat": {
+          "Down": 0.1453,
+          "Flat": 0.7584,
+          "Strong Down": 0.0,
+          "Strong Up": 0.0,
+          "Up": 0.0919
+        },
+        "Strong Down": {
+          "Down": 0.0839,
+          "Flat": 0.0,
+          "Strong Down": 0.8556,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0,
+          "Strong Down": 0.0,
+          "Strong Up": 0.7448,
+          "Up": 0.0805
+        },
+        "Up": {
+          "Down": 0.002,
+          "Flat": 0.1282,
+          "Strong Down": 0.0,
+          "Strong Up": 0.2552,
+          "Up": 0.824
+        }
+      }
+    },
+    "XLK": {
+      "name": "XLK",
+      "rows": 5290,
+      "date_min": "2005-09-01",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.9393194706994329,
+      "state_counts": {
+        "Up": 1745,
+        "Flat": 1041,
+        "Down": 822,
+        "Strong Up": 781,
+        "Strong Down": 580,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.715,
+          "Flat": 0.1479,
+          "Strong Down": 0.1293,
+          "Strong Up": 0.0,
+          "Up": 0.0034
+        },
+        "Flat": {
+          "Down": 0.1839,
+          "Flat": 0.6792,
+          "Strong Down": 0.0017,
+          "Strong Up": 0.0013,
+          "Up": 0.1037
+        },
+        "Strong Down": {
+          "Down": 0.0938,
+          "Flat": 0.0,
+          "Strong Down": 0.8672,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0,
+          "Strong Down": 0.0,
+          "Strong Up": 0.8476,
+          "Up": 0.0682
+        },
+        "Up": {
+          "Down": 0.0073,
+          "Flat": 0.1729,
+          "Strong Down": 0.0017,
+          "Strong Up": 0.1511,
+          "Up": 0.8246
+        }
+      }
+    },
+    "XLP": {
+      "name": "XLP",
+      "rows": 5290,
+      "date_min": "2005-09-01",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.9393194706994329,
+      "state_counts": {
+        "Up": 1454,
+        "Flat": 1127,
+        "Down": 966,
+        "Strong Down": 777,
+        "Strong Up": 645,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.7016,
+          "Flat": 0.1526,
+          "Strong Down": 0.1274,
+          "Strong Up": 0.0,
+          "Up": 0.0124
+        },
+        "Flat": {
+          "Down": 0.1813,
+          "Flat": 0.6557,
+          "Strong Down": 0.0039,
+          "Strong Up": 0.0062,
+          "Up": 0.141
+        },
+        "Strong Down": {
+          "Down": 0.1036,
+          "Flat": 0.0027,
+          "Strong Down": 0.8674,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0027,
+          "Strong Down": 0.0,
+          "Strong Up": 0.7845,
+          "Up": 0.0935
+        },
+        "Up": {
+          "Down": 0.0135,
+          "Flat": 0.1863,
+          "Strong Down": 0.0013,
+          "Strong Up": 0.2093,
+          "Up": 0.7531
+        }
+      }
+    },
+    "XLRE": {
+      "name": "XLRE",
+      "rows": 2748,
+      "date_min": "2015-10-08",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.8831877729257642,
+      "state_counts": {
+        "Up": 681,
+        "Flat": 565,
+        "Down": 512,
+        "Strong Up": 341,
+        "Strong Down": 328,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.7065,
+          "Flat": 0.1699,
+          "Strong Down": 0.1524,
+          "Strong Up": 0.0,
+          "Up": 0.0073
+        },
+        "Flat": {
+          "Down": 0.1859,
+          "Flat": 0.669,
+          "Strong Down": 0.003,
+          "Strong Up": 0.0,
+          "Up": 0.1322
+        },
+        "Strong Down": {
+          "Down": 0.0959,
+          "Flat": 0.0035,
+          "Strong Down": 0.8445,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0,
+          "Strong Down": 0.0,
+          "Strong Up": 0.8475,
+          "Up": 0.0764
+        },
+        "Up": {
+          "Down": 0.0117,
+          "Flat": 0.1575,
+          "Strong Down": 0.0,
+          "Strong Up": 0.1525,
+          "Up": 0.7841
+        }
+      }
+    },
+    "XLU": {
+      "name": "XLU",
+      "rows": 5290,
+      "date_min": "2005-09-01",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.9393194706994329,
+      "state_counts": {
+        "Up": 1500,
+        "Flat": 1202,
+        "Down": 998,
+        "Strong Up": 635,
+        "Strong Down": 634,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.7295,
+          "Flat": 0.1423,
+          "Strong Down": 0.1438,
+          "Strong Up": 0.0,
+          "Up": 0.0053
+        },
+        "Flat": {
+          "Down": 0.1743,
+          "Flat": 0.6864,
+          "Strong Down": 0.0063,
+          "Strong Up": 0.0016,
+          "Up": 0.132
+        },
+        "Strong Down": {
+          "Down": 0.0932,
+          "Flat": 0.0025,
+          "Strong Down": 0.8483,
+          "Strong Up": 0.0,
+          "Up": 0.0007
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0,
+          "Strong Down": 0.0,
+          "Strong Up": 0.8252,
+          "Up": 0.0733
+        },
+        "Up": {
+          "Down": 0.003,
+          "Flat": 0.1689,
+          "Strong Down": 0.0016,
+          "Strong Up": 0.1732,
+          "Up": 0.7887
+        }
+      }
+    },
+    "XLV": {
+      "name": "XLV",
+      "rows": 5290,
+      "date_min": "2005-09-01",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.9393194706994329,
+      "state_counts": {
+        "Up": 1598,
+        "Flat": 1029,
+        "Down": 901,
+        "Strong Up": 754,
+        "Strong Down": 687,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.7436,
+          "Flat": 0.1341,
+          "Strong Down": 0.1266,
+          "Strong Up": 0.0,
+          "Up": 0.0038
+        },
+        "Flat": {
+          "Down": 0.1521,
+          "Flat": 0.6686,
+          "Strong Down": 0.0015,
+          "Strong Up": 0.0,
+          "Up": 0.1265
+        },
+        "Strong Down": {
+          "Down": 0.0966,
+          "Flat": 0.001,
+          "Strong Down": 0.8719,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0,
+          "Strong Down": 0.0,
+          "Strong Up": 0.8329,
+          "Up": 0.0789
+        },
+        "Up": {
+          "Down": 0.0078,
+          "Flat": 0.1963,
+          "Strong Down": 0.0,
+          "Strong Up": 0.1671,
+          "Up": 0.7909
+        }
+      }
+    },
+    "XLY": {
+      "name": "XLY",
+      "rows": 5290,
+      "date_min": "2005-09-01",
+      "date_max": "2026-09-14",
+      "state_coverage": 0.9393194706994329,
+      "state_counts": {
+        "Up": 1648,
+        "Flat": 1285,
+        "Down": 846,
+        "Strong Down": 635,
+        "Strong Up": 555,
+        "<NA>": 321
+      },
+      "transitions": {
+        "Down": {
+          "Down": 0.7124,
+          "Flat": 0.1292,
+          "Strong Down": 0.1134,
+          "Strong Up": 0.0,
+          "Up": 0.0036
+        },
+        "Flat": {
+          "Down": 0.1917,
+          "Flat": 0.7136,
+          "Strong Down": 0.0047,
+          "Strong Up": 0.0,
+          "Up": 0.1232
+        },
+        "Strong Down": {
+          "Down": 0.0888,
+          "Flat": 0.0008,
+          "Strong Down": 0.8803,
+          "Strong Up": 0.0,
+          "Up": 0.0
+        },
+        "Strong Up": {
+          "Down": 0.0,
+          "Flat": 0.0,
+          "Strong Down": 0.0,
+          "Strong Up": 0.8414,
+          "Up": 0.0528
+        },
+        "Up": {
+          "Down": 0.0071,
+          "Flat": 0.1564,
+          "Strong Down": 0.0016,
+          "Strong Up": 0.1586,
+          "Up": 0.8204
+        }
+      }
+    }
+  },
+  "causality": "rolling features use current/past prices; expanding normalization parameters are shifted one row and therefore prior-only",
+  "protected_banks_accessed": false
+}

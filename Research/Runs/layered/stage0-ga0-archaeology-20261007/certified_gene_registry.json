@@ -1,0 +1,129 @@
+{
+  "status": "CERTIFIED_RECOVERED_VOCABULARY",
+  "executable_families": [
+    "BREAKOUT",
+    "MARKET_REGIME_STRUCTURE",
+    "MEAN_REVERSION",
+    "MOMENTUM",
+    "RELATIVE_CROSS_SECTIONAL",
+    "TREND",
+    "VOLATILITY",
+    "VOLUME_LIQUIDITY"
+  ],
+  "family_count": 8,
+  "portable_genomes": 396,
+  "families": {
+    "BREAKOUT": {
+      "portable_survivors": 17,
+      "observed_gene_keys": [
+        "forward_horizon",
+        "participation_feature",
+        "participation_threshold_quantile",
+        "range_feature",
+        "range_threshold_quantile",
+        "volatility_feature",
+        "volatility_state",
+        "volatility_threshold_quantile"
+      ]
+    },
+    "MARKET_REGIME_STRUCTURE": {
+      "portable_survivors": 67,
+      "observed_gene_keys": [
+        "breadth_feature",
+        "breadth_state",
+        "breadth_threshold",
+        "forward_horizon",
+        "security_context",
+        "security_context_direction",
+        "security_context_threshold_quantile"
+      ]
+    },
+    "MEAN_REVERSION": {
+      "portable_survivors": 65,
+      "observed_gene_keys": [
+        "context_feature",
+        "context_state",
+        "context_threshold_quantile",
+        "displacement_feature",
+        "forward_horizon",
+        "severity",
+        "tail"
+      ]
+    },
+    "MOMENTUM": {
+      "portable_survivors": 50,
+      "observed_gene_keys": [
+        "context_feature",
+        "context_threshold",
+        "direction",
+        "forward_horizon",
+        "momentum_feature",
+        "threshold_quantile"
+      ]
+    },
+    "RELATIVE_CROSS_SECTIONAL": {
+      "portable_survivors": 68,
+      "observed_gene_keys": [
+        "forward_horizon",
+        "market_context",
+        "market_context_state",
+        "market_context_threshold",
+        "relative_feature",
+        "tail",
+        "threshold_quantile"
+      ]
+    },
+    "TREND": {
+      "portable_survivors": 58,
+      "observed_gene_keys": [
+        "confirmation_direction",
+        "confirmation_feature",
+        "confirmation_threshold_quantile",
+        "direction",
+        "forward_horizon",
+        "threshold_quantile",
+        "trend_feature"
+      ]
+    },
+    "VOLATILITY": {
+      "portable_survivors": 15,
+      "observed_gene_keys": [
+        "forward_horizon",
+        "price_context",
+        "state",
+        "threshold_quantile",
+        "volatility_feature"
+      ]
+    },
+    "VOLUME_LIQUIDITY": {
+      "portable_survivors": 56,
+      "observed_gene_keys": [
+        "forward_horizon",
+        "participation_feature",
+        "price_direction",
+        "price_feature",
+        "price_threshold_quantile",
+        "state",
+        "threshold_quantile"
+      ]
+    }
+  },
+  "search_mechanics": {
+    "population_size": 32,
+    "elite_count": 6,
+    "tournament_size": 3,
+    "mutation_probability": 0.2,
+    "crossover_probability": 0.8,
+    "fitness_metric": "search_fitness",
+    "crossover_scope": "within declared family SearchSpace in recovered one-ticker runner"
+  },
+  "cross_family_finding": "CROSS_FAMILY_COMPOSITE grammar exists in search_families.py but is excluded from EXECUTABLE_FAMILIES in recovered one-ticker runner; do not claim original free cross-family crossover.",
+  "provenance": {
+    "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/search_families.py": "16a336f76bac33819c32816fdd68016e927ac716c3f8ffebb89f955c98da2b13",
+    "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_one_ticker_computational_search.py": "d238daf76f9d67fa5ecfb0949ba67748a911ffef716393bed28434cf2c95d012",
+    "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/computational_search.py": "e75912fb0af3f6b648cc718d4f97dd984fcfeb2a257920a43a566be4e9a98402",
+    "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_PORTABLE_GENOME_CATALOG_20261002.json": "e99d768e72e89462ba56d77a441e53c19ac341e83913a0b4d7257b2381eb5ab4"
+  },
+  "catalog_source_transport_sha256_declared": "80d218bd9d93091dcff4c0b0cc34eb9729f962448c25986f6ab9a2d46451890d",
+  "catalog_evidence_boundary": "already-consumed 67-ticker Discovery evidence only; no held-out-50 outcomes accessed"
+}

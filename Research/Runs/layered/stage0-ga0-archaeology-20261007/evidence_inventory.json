@@ -1,0 +1,2536 @@
+{
+  "stage": "STAGE0",
+  "mode": "READ_ONLY_ARCHAEOLOGY",
+  "source_head": "79eab49e4ffbb903f9ef05f077a3ad57357be5ae",
+  "evidence_files": 1661,
+  "priority_files": [
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Logs/MTS_OPEN_STATE_RESPONSE_GA_20261003.log",
+      "size": 12255,
+      "sha256": "b362c7a062afaca1bb7630385e14d487e5a6183660cbf9e75db4df52aea8cf50",
+      "mtime": "2026-10-03T21:00:46+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json",
+      "size": 60233,
+      "sha256": "d3f4b8511a7d2ffd402a8079d6631b7746632a06cdb3f238e12c12bc863e97f9",
+      "mtime": "2026-10-02T13:27:42+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_REDUCED_PARETO_20261002.json",
+      "size": 1392194,
+      "sha256": "431975ff14450c0edf78e32eff536479662f47ce2ecd0707be45eea58e881767",
+      "mtime": "2026-10-03T00:55:02+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_HELDOUT50_VERIFICATION_20261003.json",
+      "size": 18609,
+      "sha256": "51fa0898af3574cb12d6ca1d6de4b491eb84b23247fb2584a975584f776315f8",
+      "mtime": "2026-10-03T23:05:04+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_20261002.json",
+      "size": 1430076,
+      "sha256": "1f2a4fb018bcebfdf339bd2d634674a0b6b1220818c02ae67950d32d41c0f43a",
+      "mtime": "2026-10-03T01:14:08+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_FOUR_STRATEGY_HOLDOUT50_20261002.json",
+      "size": 16918,
+      "sha256": "c2762208ed0501d6414e2b170fb4c223b9b8b60629cd81be8bbc0f71488c4529",
+      "mtime": "2026-10-03T01:31:33+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_20261003.json",
+      "size": 585492,
+      "sha256": "61fec8dda1c69bb9d0b763ad78c58e86003528d180269c8e159c75b00183153d",
+      "mtime": "2026-10-03T21:00:46+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT50_20261002.json",
+      "size": 21317,
+      "sha256": "0dc45684a22aee82f4e7b5a03badf195cfdd072176f8ced8b9c76c9244a88f1b",
+      "mtime": "2026-10-03T00:59:51+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json",
+      "size": 41694,
+      "sha256": "02d55a1f4be1a1974204932f4715887118b3d4459f35b838812917cadc178a35",
+      "mtime": "2026-10-02T13:08:26+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md",
+      "size": 2313,
+      "sha256": "d8055888b0183f7695eaed7e9855c09da0ba63f4d6e1df9c637650be96e3477d",
+      "mtime": "2026-10-02T13:14:02+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_DEVELOPMENT_AUDIT_20261002.md",
+      "size": 3440,
+      "sha256": "89f053dfec2c4e096d4b264d44006365f647e9d9fabd7aa5fc69a787f9f560fe",
+      "mtime": "2026-10-03T00:49:50+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT_FINDINGS_20261002.md",
+      "size": 3867,
+      "sha256": "c23fa473eda7c996044639407dcf8e52caf6c2a410d2c20f2c05026725f5940a",
+      "mtime": "2026-10-03T01:01:59+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json",
+      "size": 41480,
+      "sha256": "929881b4c0fc7af48d34366fbe9e81cec2bf7ae4faab9d8d8d79b141b0dc46f6",
+      "mtime": "2026-10-02T13:13:41+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md",
+      "size": 2129,
+      "sha256": "f4eb81bc14411da213bba3fa163277856dd9c844accc0ccacccfbcc11a82a987",
+      "mtime": "2026-10-02T13:08:41+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md",
+      "size": 2577,
+      "sha256": "5a22aeb87d2b089973a270c7df1165dfb1712ff53922549f039a012edbdb02f4",
+      "mtime": "2026-10-02T12:58:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_CHECKPOINT_20261003.json",
+      "size": 207,
+      "sha256": "acdc65df5996bd3852171751fdd3eaf0ee0f8bc9711598307bd6a92ef51af7ef",
+      "mtime": "2026-10-03T21:00:46+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md",
+      "size": 2805,
+      "sha256": "f549b69332bee23b656ae87dec2701e9d29dc155a7b7601d86a040746b2a4f66",
+      "mtime": "2026-10-02T12:42:40+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_20261002.json",
+      "size": 1446234,
+      "sha256": "1a79ce40f0b4f9ddbdc5bac61e0380c3aed91553432f33030fc91ef0db08d912",
+      "mtime": "2026-10-03T00:35:03+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json",
+      "size": 45274,
+      "sha256": "9ce014159f98e31a52f257de37e8527412779549c6deca5d0c8cbdc88191c6d2",
+      "mtime": "2026-10-02T12:21:02+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE3_20261002.json",
+      "size": 2654039,
+      "sha256": "06ee9197635a0b52f29bc47c398c0f874bbd02a71e9864e5e243a0d971798e1b",
+      "mtime": "2026-10-03T03:09:51+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md",
+      "size": 3196,
+      "sha256": "97791ca1becbfbe4531d198ed40951239093d6b048caafb778d2cde482a8d260",
+      "mtime": "2026-10-02T12:14:48+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md",
+      "size": 1989,
+      "sha256": "5e0af31192a0412ab773935449f3975c4f5c69b2d2ea806953b5139101152be7",
+      "mtime": "2026-10-02T13:08:53+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE3_SCHEMA_20261002.json",
+      "size": 3442,
+      "sha256": "066b5174939ae47091be9fb9d93f2c58f4667191dd1fa376d1025dfb69d72887",
+      "mtime": "2026-10-03T02:57:37+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_FROZEN_CANDIDATES_20261002.json",
+      "size": 8584,
+      "sha256": "58a02b38c6c391bd57e5f45983360cd629d3c72ec2f92c4d329cb359de2d3a45",
+      "mtime": "2026-10-03T00:55:52+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_PARETO_CORRECTION_20261002.json",
+      "size": 881,
+      "sha256": "101040584622e825e14e933e9cd97e8d6f4d3d1416ef24b10efbd8bd2b623d63",
+      "mtime": "2026-10-03T00:50:01+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_FROZEN_FOUR_20261002.json",
+      "size": 6256,
+      "sha256": "605d3f0d45ae4a725637539a694d336a7d26c46f7a3235c9f747460ee5e98aee",
+      "mtime": "2026-10-03T01:27:22+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_SCHEMA_20261002.json",
+      "size": 1662,
+      "sha256": "f192ff739f97caa376fe646849cbfb96ac2e524b0dd68a48b006056e07b8b6b4",
+      "mtime": "2026-10-03T01:07:31+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md",
+      "size": 3586,
+      "sha256": "8eb749d34161f6aad76b099ea1b68afa2492dbb27fee6bdacc4625dd2277970c",
+      "mtime": "2026-10-02T13:20:34+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_OPEN_STATE_RESPONSE_DISCOVERY_PROTOCOL_20261003.md",
+      "size": 4186,
+      "sha256": "6fc8ac22484a490911c3773f497231d6a3ed0f3ac163bf368b381d2f81905d8a",
+      "mtime": "2026-10-03T18:40:42+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md",
+      "size": 4166,
+      "sha256": "ff1b5fcac4ab5c12f5b92b7ed4242334ef778a62dfda388cd798e18ba9c81fc3",
+      "mtime": "2026-10-02T13:03:21+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_SCHEMA_20261002.json",
+      "size": 4296,
+      "sha256": "3f077b909d9d6edd91e9790d95c2fcd20e89ca96b76447f169fda23ad43b5aa7",
+      "mtime": "2026-10-03T00:19:13+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_ABSOLUTE_QUALIFICATION_PROTOCOL_20261002.md",
+      "size": 4516,
+      "sha256": "0da002ca79b111b90b11d3cd366abe0e6aa150ee91c8d7024257733a74cbb6aa",
+      "mtime": "2026-10-03T01:07:21+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_DISCOVERY_EARLY_RECOVERY_STOP_NEIGHBORHOOD_PROTOCOL_20260930.md",
+      "size": 2862,
+      "sha256": "9bb87ab765a8caf3f670e63d5c09abf9a60c4357a5f0fd27b53398c97e7ba0dc",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_causal_wealth_growth.py",
+      "size": 6587,
+      "sha256": "2c495f8f05b143dde34686e3135ed6f8ae2a00591ca5c96380b4eeb439eb1476",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_causal_wealth_expansion.py",
+      "size": 6966,
+      "sha256": "24ae06b6b80a1ae6f66d3a8f4670e2fb347300009641989471131edbff46053c",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_portfolio_allocation_architecture.py",
+      "size": 7739,
+      "sha256": "14dd7c78a5bc0da36fab9277552e0b14a9bb815687b83294e3598bbb21903b22",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_causal_wealth_growth_frontier.py",
+      "size": 6587,
+      "sha256": "d678cf0e3da87e6a118cbc03d5ba6eb0e7e1ee305d066dc76f2e25b963c1e523",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md",
+      "size": 2577,
+      "sha256": "5a22aeb87d2b089973a270c7df1165dfb1712ff53922549f039a012edbdb02f4",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json",
+      "size": 41480,
+      "sha256": "929881b4c0fc7af48d34366fbe9e81cec2bf7ae4faab9d8d8d79b141b0dc46f6",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md",
+      "size": 2129,
+      "sha256": "f4eb81bc14411da213bba3fa163277856dd9c844accc0ccacccfbcc11a82a987",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json",
+      "size": 60233,
+      "sha256": "d3f4b8511a7d2ffd402a8079d6631b7746632a06cdb3f238e12c12bc863e97f9",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json",
+      "size": 41694,
+      "sha256": "02d55a1f4be1a1974204932f4715887118b3d4459f35b838812917cadc178a35",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json",
+      "size": 45274,
+      "sha256": "9ce014159f98e31a52f257de37e8527412779549c6deca5d0c8cbdc88191c6d2",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md",
+      "size": 2313,
+      "sha256": "d8055888b0183f7695eaed7e9855c09da0ba63f4d6e1df9c637650be96e3477d",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md",
+      "size": 2805,
+      "sha256": "f549b69332bee23b656ae87dec2701e9d29dc155a7b7601d86a040746b2a4f66",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md",
+      "size": 3196,
+      "sha256": "97791ca1becbfbe4531d198ed40951239093d6b048caafb778d2cde482a8d260",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md",
+      "size": 3586,
+      "sha256": "8eb749d34161f6aad76b099ea1b68afa2492dbb27fee6bdacc4625dd2277970c",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md",
+      "size": 4166,
+      "sha256": "ff1b5fcac4ab5c12f5b92b7ed4242334ef778a62dfda388cd798e18ba9c81fc3",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md",
+      "size": 1989,
+      "sha256": "5e0af31192a0412ab773935449f3975c4f5c69b2d2ea806953b5139101152be7",
+      "mtime": "2026-10-02T13:28:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_DISCOVERY_EARLY_RECOVERY_STOP_NEIGHBORHOOD_PROTOCOL_20260930.md",
+      "size": 2862,
+      "sha256": "9bb87ab765a8caf3f670e63d5c09abf9a60c4357a5f0fd27b53398c97e7ba0dc",
+      "mtime": "2026-10-04T19:24:43.426211+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_causal_wealth_growth.py",
+      "size": 6587,
+      "sha256": "2c495f8f05b143dde34686e3135ed6f8ae2a00591ca5c96380b4eeb439eb1476",
+      "mtime": "2026-10-04T19:24:43.531213+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_portfolio_allocation_architecture.py",
+      "size": 7739,
+      "sha256": "14dd7c78a5bc0da36fab9277552e0b14a9bb815687b83294e3598bbb21903b22",
+      "mtime": "2026-10-04T19:24:43.531213+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_causal_wealth_growth_frontier.py",
+      "size": 6587,
+      "sha256": "d678cf0e3da87e6a118cbc03d5ba6eb0e7e1ee305d066dc76f2e25b963c1e523",
+      "mtime": "2026-10-04T19:24:43.531213+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_causal_wealth_expansion.py",
+      "size": 6966,
+      "sha256": "24ae06b6b80a1ae6f66d3a8f4670e2fb347300009641989471131edbff46053c",
+      "mtime": "2026-10-04T19:24:43.531213+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md",
+      "size": 3196,
+      "sha256": "97791ca1becbfbe4531d198ed40951239093d6b048caafb778d2cde482a8d260",
+      "mtime": "2026-10-04T19:24:43.411210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md",
+      "size": 4166,
+      "sha256": "ff1b5fcac4ab5c12f5b92b7ed4242334ef778a62dfda388cd798e18ba9c81fc3",
+      "mtime": "2026-10-04T19:24:43.411210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md",
+      "size": 3586,
+      "sha256": "8eb749d34161f6aad76b099ea1b68afa2492dbb27fee6bdacc4625dd2277970c",
+      "mtime": "2026-10-04T19:24:43.411210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md",
+      "size": 1989,
+      "sha256": "5e0af31192a0412ab773935449f3975c4f5c69b2d2ea806953b5139101152be7",
+      "mtime": "2026-10-04T19:24:43.411210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json",
+      "size": 45274,
+      "sha256": "9ce014159f98e31a52f257de37e8527412779549c6deca5d0c8cbdc88191c6d2",
+      "mtime": "2026-10-04T19:24:43.413210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json",
+      "size": 60233,
+      "sha256": "d3f4b8511a7d2ffd402a8079d6631b7746632a06cdb3f238e12c12bc863e97f9",
+      "mtime": "2026-10-04T19:24:43.412210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md",
+      "size": 2577,
+      "sha256": "5a22aeb87d2b089973a270c7df1165dfb1712ff53922549f039a012edbdb02f4",
+      "mtime": "2026-10-04T19:24:43.413210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md",
+      "size": 2313,
+      "sha256": "d8055888b0183f7695eaed7e9855c09da0ba63f4d6e1df9c637650be96e3477d",
+      "mtime": "2026-10-04T19:24:43.413210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md",
+      "size": 2129,
+      "sha256": "f4eb81bc14411da213bba3fa163277856dd9c844accc0ccacccfbcc11a82a987",
+      "mtime": "2026-10-04T19:24:43.412210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md",
+      "size": 2805,
+      "sha256": "f549b69332bee23b656ae87dec2701e9d29dc155a7b7601d86a040746b2a4f66",
+      "mtime": "2026-10-04T19:24:43.417211+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json",
+      "size": 41694,
+      "sha256": "02d55a1f4be1a1974204932f4715887118b3d4459f35b838812917cadc178a35",
+      "mtime": "2026-10-04T19:24:43.412210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json",
+      "size": 41480,
+      "sha256": "929881b4c0fc7af48d34366fbe9e81cec2bf7ae4faab9d8d8d79b141b0dc46f6",
+      "mtime": "2026-10-04T19:24:43.412210+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_causal_wealth_growth.py",
+      "size": 6587,
+      "sha256": "2c495f8f05b143dde34686e3135ed6f8ae2a00591ca5c96380b4eeb439eb1476",
+      "mtime": "2026-10-04T19:51:19.695544+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_causal_wealth_growth_frontier.py",
+      "size": 6587,
+      "sha256": "d678cf0e3da87e6a118cbc03d5ba6eb0e7e1ee305d066dc76f2e25b963c1e523",
+      "mtime": "2026-10-04T19:51:19.695544+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_causal_wealth_expansion.py",
+      "size": 6966,
+      "sha256": "24ae06b6b80a1ae6f66d3a8f4670e2fb347300009641989471131edbff46053c",
+      "mtime": "2026-10-04T19:51:19.695544+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_portfolio_allocation_architecture.py",
+      "size": 7739,
+      "sha256": "14dd7c78a5bc0da36fab9277552e0b14a9bb815687b83294e3598bbb21903b22",
+      "mtime": "2026-10-04T19:51:19.695544+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_DISCOVERY_EARLY_RECOVERY_STOP_NEIGHBORHOOD_PROTOCOL_20260930.md",
+      "size": 2862,
+      "sha256": "9bb87ab765a8caf3f670e63d5c09abf9a60c4357a5f0fd27b53398c97e7ba0dc",
+      "mtime": "2026-10-04T19:51:19.593541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md",
+      "size": 4166,
+      "sha256": "ff1b5fcac4ab5c12f5b92b7ed4242334ef778a62dfda388cd798e18ba9c81fc3",
+      "mtime": "2026-10-04T19:51:19.578541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md",
+      "size": 1989,
+      "sha256": "5e0af31192a0412ab773935449f3975c4f5c69b2d2ea806953b5139101152be7",
+      "mtime": "2026-10-04T19:51:19.578541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_SCHEMA_20261002.json",
+      "size": 4296,
+      "sha256": "3f077b909d9d6edd91e9790d95c2fcd20e89ca96b76447f169fda23ad43b5aa7",
+      "mtime": "2026-10-03T00:19:13+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_PARETO_CORRECTION_20261002.json",
+      "size": 881,
+      "sha256": "101040584622e825e14e933e9cd97e8d6f4d3d1416ef24b10efbd8bd2b623d63",
+      "mtime": "2026-10-03T00:50:01+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_OPEN_STATE_RESPONSE_DISCOVERY_PROTOCOL_20261003.md",
+      "size": 4186,
+      "sha256": "6fc8ac22484a490911c3773f497231d6a3ed0f3ac163bf368b381d2f81905d8a",
+      "mtime": "2026-10-03T18:40:42+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_SCHEMA_20261002.json",
+      "size": 1662,
+      "sha256": "f192ff739f97caa376fe646849cbfb96ac2e524b0dd68a48b006056e07b8b6b4",
+      "mtime": "2026-10-03T01:07:31+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md",
+      "size": 3586,
+      "sha256": "8eb749d34161f6aad76b099ea1b68afa2492dbb27fee6bdacc4625dd2277970c",
+      "mtime": "2026-10-04T19:51:19.578541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_ABSOLUTE_QUALIFICATION_PROTOCOL_20261002.md",
+      "size": 4516,
+      "sha256": "0da002ca79b111b90b11d3cd366abe0e6aa150ee91c8d7024257733a74cbb6aa",
+      "mtime": "2026-10-03T01:07:21+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md",
+      "size": 3196,
+      "sha256": "97791ca1becbfbe4531d198ed40951239093d6b048caafb778d2cde482a8d260",
+      "mtime": "2026-10-04T19:51:19.578541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_FROZEN_FOUR_20261002.json",
+      "size": 6256,
+      "sha256": "605d3f0d45ae4a725637539a694d336a7d26c46f7a3235c9f747460ee5e98aee",
+      "mtime": "2026-10-03T01:27:22+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE3_SCHEMA_20261002.json",
+      "size": 3442,
+      "sha256": "066b5174939ae47091be9fb9d93f2c58f4667191dd1fa376d1025dfb69d72887",
+      "mtime": "2026-10-03T02:57:37+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_FROZEN_CANDIDATES_20261002.json",
+      "size": 8584,
+      "sha256": "58a02b38c6c391bd57e5f45983360cd629d3c72ec2f92c4d329cb359de2d3a45",
+      "mtime": "2026-10-03T00:55:52+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json",
+      "size": 41694,
+      "sha256": "02d55a1f4be1a1974204932f4715887118b3d4459f35b838812917cadc178a35",
+      "mtime": "2026-10-04T19:51:19.579541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT_FINDINGS_20261002.md",
+      "size": 3867,
+      "sha256": "c23fa473eda7c996044639407dcf8e52caf6c2a410d2c20f2c05026725f5940a",
+      "mtime": "2026-10-03T01:01:59+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_20261002.json",
+      "size": 1446234,
+      "sha256": "1a79ce40f0b4f9ddbdc5bac61e0380c3aed91553432f33030fc91ef0db08d912",
+      "mtime": "2026-10-03T00:35:03+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json",
+      "size": 60233,
+      "sha256": "d3f4b8511a7d2ffd402a8079d6631b7746632a06cdb3f238e12c12bc863e97f9",
+      "mtime": "2026-10-04T19:51:19.579541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md",
+      "size": 2577,
+      "sha256": "5a22aeb87d2b089973a270c7df1165dfb1712ff53922549f039a012edbdb02f4",
+      "mtime": "2026-10-04T19:51:19.580541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_FOUR_STRATEGY_HOLDOUT50_20261002.json",
+      "size": 16918,
+      "sha256": "c2762208ed0501d6414e2b170fb4c223b9b8b60629cd81be8bbc0f71488c4529",
+      "mtime": "2026-10-03T01:31:33+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_OPEN_STATE_RESPONSE_HELDOUT50_VERIFICATION_20261003.json",
+      "size": 18609,
+      "sha256": "51fa0898af3574cb12d6ca1d6de4b491eb84b23247fb2584a975584f776315f8",
+      "mtime": "2026-10-03T23:05:04+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_DEVELOPMENT_AUDIT_20261002.md",
+      "size": 3440,
+      "sha256": "89f053dfec2c4e096d4b264d44006365f647e9d9fabd7aa5fc69a787f9f560fe",
+      "mtime": "2026-10-03T00:49:50+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_REDUCED_PARETO_20261002.json",
+      "size": 1392194,
+      "sha256": "431975ff14450c0edf78e32eff536479662f47ce2ecd0707be45eea58e881767",
+      "mtime": "2026-10-03T00:55:02+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json",
+      "size": 41480,
+      "sha256": "929881b4c0fc7af48d34366fbe9e81cec2bf7ae4faab9d8d8d79b141b0dc46f6",
+      "mtime": "2026-10-04T19:51:19.580541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE3_20261002.json",
+      "size": 2654039,
+      "sha256": "06ee9197635a0b52f29bc47c398c0f874bbd02a71e9864e5e243a0d971798e1b",
+      "mtime": "2026-10-03T03:09:51+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_20261002.json",
+      "size": 1430076,
+      "sha256": "1f2a4fb018bcebfdf339bd2d634674a0b6b1220818c02ae67950d32d41c0f43a",
+      "mtime": "2026-10-03T01:14:08+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT50_20261002.json",
+      "size": 21317,
+      "sha256": "0dc45684a22aee82f4e7b5a03badf195cfdd072176f8ced8b9c76c9244a88f1b",
+      "mtime": "2026-10-03T00:59:51+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json",
+      "size": 45274,
+      "sha256": "9ce014159f98e31a52f257de37e8527412779549c6deca5d0c8cbdc88191c6d2",
+      "mtime": "2026-10-04T19:51:19.580541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md",
+      "size": 2805,
+      "sha256": "f549b69332bee23b656ae87dec2701e9d29dc155a7b7601d86a040746b2a4f66",
+      "mtime": "2026-10-04T19:51:19.584541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md",
+      "size": 2313,
+      "sha256": "d8055888b0183f7695eaed7e9855c09da0ba63f4d6e1df9c637650be96e3477d",
+      "mtime": "2026-10-04T19:51:19.580541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_20261003.json",
+      "size": 585492,
+      "sha256": "61fec8dda1c69bb9d0b763ad78c58e86003528d180269c8e159c75b00183153d",
+      "mtime": "2026-10-03T21:00:46+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md",
+      "size": 2129,
+      "sha256": "f4eb81bc14411da213bba3fa163277856dd9c844accc0ccacccfbcc11a82a987",
+      "mtime": "2026-10-04T19:51:19.579541+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_CHECKPOINT_20261003.json",
+      "size": 207,
+      "sha256": "acdc65df5996bd3852171751fdd3eaf0ee0f8bc9711598307bd6a92ef51af7ef",
+      "mtime": "2026-10-03T21:00:46+00:00"
+    },
+    {
+      "path": "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Logs/MTS_OPEN_STATE_RESPONSE_GA_20261003.log",
+      "size": 12255,
+      "sha256": "b362c7a062afaca1bb7630385e14d487e5a6183660cbf9e75db4df52aea8cf50",
+      "mtime": "2026-10-03T21:00:46+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE3_SCHEMA_20261002.json",
+      "size": 3442,
+      "sha256": "066b5174939ae47091be9fb9d93f2c58f4667191dd1fa376d1025dfb69d72887",
+      "mtime": "2026-10-03T02:57:37+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md",
+      "size": 3196,
+      "sha256": "97791ca1becbfbe4531d198ed40951239093d6b048caafb778d2cde482a8d260",
+      "mtime": "2026-10-02T12:14:48+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md",
+      "size": 1989,
+      "sha256": "5e0af31192a0412ab773935449f3975c4f5c69b2d2ea806953b5139101152be7",
+      "mtime": "2026-10-02T13:08:53+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_PARETO_CORRECTION_20261002.json",
+      "size": 881,
+      "sha256": "101040584622e825e14e933e9cd97e8d6f4d3d1416ef24b10efbd8bd2b623d63",
+      "mtime": "2026-10-03T00:50:01+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_FROZEN_FOUR_20261002.json",
+      "size": 6256,
+      "sha256": "605d3f0d45ae4a725637539a694d336a7d26c46f7a3235c9f747460ee5e98aee",
+      "mtime": "2026-10-03T01:27:22+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_SCHEMA_20261002.json",
+      "size": 1662,
+      "sha256": "f192ff739f97caa376fe646849cbfb96ac2e524b0dd68a48b006056e07b8b6b4",
+      "mtime": "2026-10-03T01:07:31+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_FROZEN_CANDIDATES_20261002.json",
+      "size": 8584,
+      "sha256": "58a02b38c6c391bd57e5f45983360cd629d3c72ec2f92c4d329cb359de2d3a45",
+      "mtime": "2026-10-03T00:55:52+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_ABSOLUTE_QUALIFICATION_PROTOCOL_20261002.md",
+      "size": 4516,
+      "sha256": "0da002ca79b111b90b11d3cd366abe0e6aa150ee91c8d7024257733a74cbb6aa",
+      "mtime": "2026-10-03T01:07:21+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_SCHEMA_20261002.json",
+      "size": 4296,
+      "sha256": "3f077b909d9d6edd91e9790d95c2fcd20e89ca96b76447f169fda23ad43b5aa7",
+      "mtime": "2026-10-03T00:19:13+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_OPEN_STATE_RESPONSE_DISCOVERY_PROTOCOL_20261003.md",
+      "size": 4186,
+      "sha256": "6fc8ac22484a490911c3773f497231d6a3ed0f3ac163bf368b381d2f81905d8a",
+      "mtime": "2026-10-03T18:40:42+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md",
+      "size": 3586,
+      "sha256": "8eb749d34161f6aad76b099ea1b68afa2492dbb27fee6bdacc4625dd2277970c",
+      "mtime": "2026-10-02T13:20:34+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md",
+      "size": 4166,
+      "sha256": "ff1b5fcac4ab5c12f5b92b7ed4242334ef778a62dfda388cd798e18ba9c81fc3",
+      "mtime": "2026-10-02T13:03:21+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Logs/MTS_OPEN_STATE_RESPONSE_GA_20261003.log",
+      "size": 12255,
+      "sha256": "b362c7a062afaca1bb7630385e14d487e5a6183660cbf9e75db4df52aea8cf50",
+      "mtime": "2026-10-03T21:00:46+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md",
+      "size": 2129,
+      "sha256": "f4eb81bc14411da213bba3fa163277856dd9c844accc0ccacccfbcc11a82a987",
+      "mtime": "2026-10-02T13:08:41+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md",
+      "size": 2577,
+      "sha256": "5a22aeb87d2b089973a270c7df1165dfb1712ff53922549f039a012edbdb02f4",
+      "mtime": "2026-10-02T12:58:12+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json",
+      "size": 60233,
+      "sha256": "d3f4b8511a7d2ffd402a8079d6631b7746632a06cdb3f238e12c12bc863e97f9",
+      "mtime": "2026-10-02T13:27:42+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md",
+      "size": 2805,
+      "sha256": "f549b69332bee23b656ae87dec2701e9d29dc155a7b7601d86a040746b2a4f66",
+      "mtime": "2026-10-02T12:42:40+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_20261002.json",
+      "size": 1430076,
+      "sha256": "1f2a4fb018bcebfdf339bd2d634674a0b6b1220818c02ae67950d32d41c0f43a",
+      "mtime": "2026-10-03T01:14:08+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_REDUCED_PARETO_20261002.json",
+      "size": 1392194,
+      "sha256": "431975ff14450c0edf78e32eff536479662f47ce2ecd0707be45eea58e881767",
+      "mtime": "2026-10-03T00:55:02+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json",
+      "size": 45274,
+      "sha256": "9ce014159f98e31a52f257de37e8527412779549c6deca5d0c8cbdc88191c6d2",
+      "mtime": "2026-10-02T12:21:02+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json",
+      "size": 41480,
+      "sha256": "929881b4c0fc7af48d34366fbe9e81cec2bf7ae4faab9d8d8d79b141b0dc46f6",
+      "mtime": "2026-10-02T13:13:41+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE3_20261002.json",
+      "size": 2654039,
+      "sha256": "06ee9197635a0b52f29bc47c398c0f874bbd02a71e9864e5e243a0d971798e1b",
+      "mtime": "2026-10-03T03:09:51+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_HELDOUT50_VERIFICATION_20261003.json",
+      "size": 18609,
+      "sha256": "51fa0898af3574cb12d6ca1d6de4b491eb84b23247fb2584a975584f776315f8",
+      "mtime": "2026-10-03T23:05:04+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_CHECKPOINT_20261003.json",
+      "size": 207,
+      "sha256": "acdc65df5996bd3852171751fdd3eaf0ee0f8bc9711598307bd6a92ef51af7ef",
+      "mtime": "2026-10-03T21:00:46+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT50_20261002.json",
+      "size": 21317,
+      "sha256": "0dc45684a22aee82f4e7b5a03badf195cfdd072176f8ced8b9c76c9244a88f1b",
+      "mtime": "2026-10-03T00:59:51+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_FOUR_STRATEGY_HOLDOUT50_20261002.json",
+      "size": 16918,
+      "sha256": "c2762208ed0501d6414e2b170fb4c223b9b8b60629cd81be8bbc0f71488c4529",
+      "mtime": "2026-10-03T01:31:33+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_20261002.json",
+      "size": 1446234,
+      "sha256": "1a79ce40f0b4f9ddbdc5bac61e0380c3aed91553432f33030fc91ef0db08d912",
+      "mtime": "2026-10-03T00:35:03+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_20261003.json",
+      "size": 585492,
+      "sha256": "61fec8dda1c69bb9d0b763ad78c58e86003528d180269c8e159c75b00183153d",
+      "mtime": "2026-10-03T21:00:46+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md",
+      "size": 2313,
+      "sha256": "d8055888b0183f7695eaed7e9855c09da0ba63f4d6e1df9c637650be96e3477d",
+      "mtime": "2026-10-02T13:14:02+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT_FINDINGS_20261002.md",
+      "size": 3867,
+      "sha256": "c23fa473eda7c996044639407dcf8e52caf6c2a410d2c20f2c05026725f5940a",
+      "mtime": "2026-10-03T01:01:59+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json",
+      "size": 41694,
+      "sha256": "02d55a1f4be1a1974204932f4715887118b3d4459f35b838812917cadc178a35",
+      "mtime": "2026-10-02T13:08:26+00:00"
+    },
+    {
+      "path": "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_DEVELOPMENT_AUDIT_20261002.md",
+      "size": 3440,
+      "sha256": "89f053dfec2c4e096d4b264d44006365f647e9d9fabd7aa5fc69a787f9f560fe",
+      "mtime": "2026-10-03T00:49:50+00:00"
+    }
+  ],
+  "duplicate_groups": [
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/scripts/replay_phase3_cost_grid.py",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/scripts/replay_phase3_cost_grid.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/scripts/run_horizon_free_ga_final_study_20261005.py",
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/State/UNAUTHORIZED_REDUCED_GA_RUNNER_PRESERVED_20261005.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Architecture/RESEARCH_NEXUS_ARCHITECTURE.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Architecture/RESEARCH_NEXUS_ARCHITECTURE.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Architecture/RESEARCH_NEXUS_ARCHITECTURE.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Architecture/RESEARCH_NEXUS_ARCHITECTURE.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Project-Management/RESEARCH_DIRECTOR_V2_1_CAPABILITY_TARGETS.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Project-Management/RESEARCH_DIRECTOR_V2_1_CAPABILITY_TARGETS.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Project-Management/RESEARCH_DIRECTOR_V2_1_CAPABILITY_TARGETS.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Project-Management/RESEARCH_DIRECTOR_V2_1_CAPABILITY_TARGETS.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Policies/TASK_EXECUTION_POLICY.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Policies/TASK_EXECUTION_POLICY.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Policies/TASK_EXECUTION_POLICY.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Policies/TASK_EXECUTION_POLICY.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Policies/KNOWLEDGE_LIFECYCLE_POLICY.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Policies/KNOWLEDGE_LIFECYCLE_POLICY.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Policies/KNOWLEDGE_LIFECYCLE_POLICY.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Policies/KNOWLEDGE_LIFECYCLE_POLICY.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Policies/LIVE_PAPER_VALIDATION_POLICY.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Policies/LIVE_PAPER_VALIDATION_POLICY.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Policies/LIVE_PAPER_VALIDATION_POLICY.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Policies/LIVE_PAPER_VALIDATION_POLICY.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/LEARNING_GOVERNANCE_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/LEARNING_GOVERNANCE_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/LEARNING_GOVERNANCE_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/LEARNING_GOVERNANCE_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/ENGINE_INTERFACE_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/ENGINE_INTERFACE_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/ENGINE_INTERFACE_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/ENGINE_INTERFACE_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/STORAGE_RETENTION_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/STORAGE_RETENTION_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/STORAGE_RETENTION_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/STORAGE_RETENTION_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/IDENTITY_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/IDENTITY_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/IDENTITY_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/IDENTITY_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/SECURITY_AND_AUTHORITY_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/SECURITY_AND_AUTHORITY_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/SECURITY_AND_AUTHORITY_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/SECURITY_AND_AUTHORITY_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/TASK_MANAGEMENT_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/TASK_MANAGEMENT_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/TASK_MANAGEMENT_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/TASK_MANAGEMENT_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/ARTIFACT_GOVERNANCE_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/ARTIFACT_GOVERNANCE_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/ARTIFACT_GOVERNANCE_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/ARTIFACT_GOVERNANCE_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/DATA_QUALITY_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/DATA_QUALITY_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/DATA_QUALITY_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/DATA_QUALITY_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/CODING_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/CODING_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/CODING_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/CODING_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/TEST_AND_VALIDATION_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/TEST_AND_VALIDATION_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/TEST_AND_VALIDATION_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/TEST_AND_VALIDATION_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Governance/Standards/DECISION_STANDARD.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Governance/Standards/DECISION_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Governance/Standards/DECISION_STANDARD.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Governance/Standards/DECISION_STANDARD.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Logs/MTS_OPEN_STATE_RESPONSE_GA_20261003.log",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Logs/MTS_OPEN_STATE_RESPONSE_GA_20261003.log",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Logs/MTS_OPEN_STATE_RESPONSE_GA_20261003.log"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_CVO_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Packets/MTS_SOL_CVO_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_CVO_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_CRASH_CATCH22_COMPACT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Packets/MTS_SOL_CRASH_CATCH22_COMPACT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_CRASH_CATCH22_COMPACT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_CRASH_SECTION_F_FOLLOWUP_PACKET_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Packets/MTS_SOL_CRASH_SECTION_F_FOLLOWUP_PACKET_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_CRASH_SECTION_F_FOLLOWUP_PACKET_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_ARCHITECTURE_FOLLOWUP_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Packets/MTS_SOL_ARCHITECTURE_FOLLOWUP_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_ARCHITECTURE_FOLLOWUP_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Packets/MTS_CVO_BLIND_PANEL_PACKET_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Packets/MTS_CVO_BLIND_PANEL_PACKET_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Packets/MTS_CVO_BLIND_PANEL_PACKET_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_CRASH_RECOVERY_FORENSIC_PACKET_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Packets/MTS_SOL_CRASH_RECOVERY_FORENSIC_PACKET_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Packets/MTS_SOL_CRASH_RECOVERY_FORENSIC_PACKET_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CONTROLLER_INCREMENTAL_COST_FINDINGS_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CONTROLLER_INCREMENTAL_COST_FINDINGS_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CONTROLLER_INCREMENTAL_COST_FINDINGS_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_FOLLOWUP_DIAGNOSTICS_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_OPEN_STATE_FOLLOWUP_DIAGNOSTICS_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_FOLLOWUP_DIAGNOSTICS_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CVO_BLIND_grok-4_7_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CVO_BLIND_grok-4_7_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CVO_BLIND_grok-4_7_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_REDUCED_PARETO_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_REDUCED_PARETO_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_REDUCED_PARETO_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CANONICAL_ASYMMETRIC_CONTROLLER_INTEGRATION_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CANONICAL_ASYMMETRIC_CONTROLLER_INTEGRATION_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CANONICAL_ASYMMETRIC_CONTROLLER_INTEGRATION_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_PORTFOLIO_SIMULTANEITY_MECHANISM_TEST_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_PORTFOLIO_SIMULTANEITY_MECHANISM_TEST_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_PORTFOLIO_SIMULTANEITY_MECHANISM_TEST_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_WEALTH_EXPANSION_BOUNDARY_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_WEALTH_EXPANSION_BOUNDARY_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_WEALTH_EXPANSION_BOUNDARY_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_HELDOUT50_VERIFICATION_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_OPEN_STATE_RESPONSE_HELDOUT50_VERIFICATION_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_HELDOUT50_VERIFICATION_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_FOUR_STRATEGY_HOLDOUT50_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_FOUR_STRATEGY_HOLDOUT50_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_FOUR_STRATEGY_HOLDOUT50_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SECTION_F_SOL_DIAGNOSTIC_BATCH_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_SECTION_F_SOL_DIAGNOSTIC_BATCH_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SECTION_F_SOL_DIAGNOSTIC_BATCH_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CVO_BLIND_gpt-6-astra-pro_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CVO_BLIND_gpt-6-astra-pro_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CVO_BLIND_gpt-6-astra-pro_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_WITHIN_TICKER_HOLDOUT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_WITHIN_TICKER_HOLDOUT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_WITHIN_TICKER_HOLDOUT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_WITHIN_TICKER_HOLDOUT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_WITHIN_TICKER_HOLDOUT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_EVIDENCE_FIXED_AUTOPSY_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_EVIDENCE_FIXED_AUTOPSY_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_EVIDENCE_FIXED_AUTOPSY_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SECTION_F_ANALYSIS_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_SECTION_F_ANALYSIS_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SECTION_F_ANALYSIS_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_117_REGIME_RISK_STRUCTURAL_SCREEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_117_REGIME_RISK_STRUCTURAL_SCREEN_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_117_REGIME_RISK_STRUCTURAL_SCREEN_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT50_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT50_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT50_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_STATE_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_RISK_STATE_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_RISK_STATE_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_RISK_STATE_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_STATE_ALLOCATION_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_BOTTOM_REVERSAL_GA_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_BOTTOM_REVERSAL_GA_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_BOTTOM_REVERSAL_GA_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_A3_PARADOX_MECHANISM_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_A3_PARADOX_MECHANISM_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_A3_PARADOX_MECHANISM_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_ASYMMETRIC_PARETO_STRUCTURAL_SCREEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_ASYMMETRIC_PARETO_STRUCTURAL_SCREEN_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_ASYMMETRIC_PARETO_STRUCTURAL_SCREEN_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_2X2_ARCHITECTURE_DISCRIMINATION_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_2X2_ARCHITECTURE_DISCRIMINATION_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_2X2_ARCHITECTURE_DISCRIMINATION_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_PROTECTION_GROWTH_TRANSITION_AUDIT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_PROTECTION_GROWTH_TRANSITION_AUDIT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_PROTECTION_GROWTH_TRANSITION_AUDIT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DETERIORATION_EPISODE_BASELINE_OUTCOMES_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DETERIORATION_EPISODE_BASELINE_OUTCOMES_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DETERIORATION_EPISODE_BASELINE_OUTCOMES_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_DEVELOPMENT_AUDIT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_DEVELOPMENT_AUDIT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_DEVELOPMENT_AUDIT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_DIAGNOSTIC_AUTOPSY_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_DIAGNOSTIC_AUTOPSY_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_DIAGNOSTIC_AUTOPSY_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_CRASH_RECOVERY_FORENSIC_ASSESSMENT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_SOL_CRASH_RECOVERY_FORENSIC_ASSESSMENT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_CRASH_RECOVERY_FORENSIC_ASSESSMENT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_ALPHA_CRASH_COUPLING_TEST_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_ALPHA_CRASH_COUPLING_TEST_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_ALPHA_CRASH_COUPLING_TEST_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SECTION_F_ANALYSIS_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_SECTION_F_ANALYSIS_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SECTION_F_ANALYSIS_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT_FINDINGS_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT_FINDINGS_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_HOLDOUT_FINDINGS_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_ASYMMETRIC_PARETO_EXACT50_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_ASYMMETRIC_PARETO_EXACT50_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_ASYMMETRIC_PARETO_EXACT50_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_PHASE2_EVIDENCE_HIERARCHY_AUDIT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_PHASE2_EVIDENCE_HIERARCHY_AUDIT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_PHASE2_EVIDENCE_HIERARCHY_AUDIT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_FIXED_ENTRY_BUDGET_EXPOSURE_MATCH_DIAGNOSTIC_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_FIXED_ENTRY_BUDGET_EXPOSURE_MATCH_DIAGNOSTIC_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_FIXED_ENTRY_BUDGET_EXPOSURE_MATCH_DIAGNOSTIC_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CVO_BLIND_claude-opus-5_5_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CVO_BLIND_claude-opus-5_5_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CVO_BLIND_claude-opus-5_5_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_EVIDENCE_FIXED_AUTOPSY_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_EVIDENCE_FIXED_AUTOPSY_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_EVIDENCE_FIXED_AUTOPSY_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_ARCHITECTURE_FOLLOWUP_ASSESSMENT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_SOL_ARCHITECTURE_FOLLOWUP_ASSESSMENT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_ARCHITECTURE_FOLLOWUP_ASSESSMENT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_FACTOR_AWARE_ALLOCATION_BAKEOFF_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_FACTOR_AWARE_ALLOCATION_BAKEOFF_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_FACTOR_AWARE_ALLOCATION_BAKEOFF_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_STRICT_DRAWDOWN_DATES_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_STRICT_DRAWDOWN_DATES_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_STRICT_DRAWDOWN_DATES_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_CHECKPOINT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_CHECKPOINT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_CHECKPOINT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_RESEARCH_SPACE_EXHAUSTION_AUDIT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_RESEARCH_SPACE_EXHAUSTION_AUDIT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_RESEARCH_SPACE_EXHAUSTION_AUDIT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_CRASH_SECTION_F_FOLLOWUP_ASSESSMENT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_SOL_CRASH_SECTION_F_FOLLOWUP_ASSESSMENT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_CRASH_SECTION_F_FOLLOWUP_ASSESSMENT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_WITHIN_GROUP_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_WITHIN_GROUP_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_WITHIN_GROUP_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_WITHIN_GROUP_RANKING_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_WITHIN_GROUP_RANKING_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_DEVELOPMENT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SECTION_F_SOL_DIAGNOSTIC_BATCH_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_SECTION_F_SOL_DIAGNOSTIC_BATCH_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SECTION_F_SOL_DIAGNOSTIC_BATCH_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_AUDIT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_CHECKPOINT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_CHECKPOINT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_RESPONSE_GA_CHECKPOINT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_PORTFOLIO_ALLOCATION_ARCHITECTURE_SUMMARY_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_SCIENTIFIC_AUDIT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_OPEN_STATE_SCIENTIFIC_AUDIT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_OPEN_STATE_SCIENTIFIC_AUDIT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DRAWDOWN_ATTRIBUTION_AND_FIXED_TIMEOUT_TEST_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DRAWDOWN_ATTRIBUTION_AND_FIXED_TIMEOUT_TEST_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DRAWDOWN_ATTRIBUTION_AND_FIXED_TIMEOUT_TEST_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_MANAGEMENT_50_17_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_MANAGEMENT_50_17_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_MANAGEMENT_50_17_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RELATIVE_CAPITAL_FRONTIER_EXTENSION_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_RELATIVE_CAPITAL_FRONTIER_EXTENSION_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RELATIVE_CAPITAL_FRONTIER_EXTENSION_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_REENTRY_THREE_HYPOTHESIS_TEST_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_REENTRY_THREE_HYPOTHESIS_TEST_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_REENTRY_THREE_HYPOTHESIS_TEST_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_20261003.log",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_20261003.log",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_20261003.log"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_ASYMMETRIC_PARETO_STATE_CONTROLLER_FINDINGS_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_ASYMMETRIC_PARETO_STATE_CONTROLLER_FINDINGS_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_ASYMMETRIC_PARETO_STATE_CONTROLLER_FINDINGS_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_67_FOUR_ERA_ARCHITECTURE_TOURNAMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_67_FOUR_ERA_ARCHITECTURE_TOURNAMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_67_FOUR_ERA_ARCHITECTURE_TOURNAMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_2X2_ARCHITECTURE_DISCRIMINATION_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_2X2_ARCHITECTURE_DISCRIMINATION_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_2X2_ARCHITECTURE_DISCRIMINATION_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_CVO_ASSESSMENT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_SOL_CVO_ASSESSMENT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_CVO_ASSESSMENT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_DIAGNOSTIC_AUTOPSY_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_DIAGNOSTIC_AUTOPSY_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_67_ARCHITECTURE_TOURNAMENT_DIAGNOSTIC_AUTOPSY_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_67_FOUR_ERA_ARCHITECTURE_TOURNAMENT_EVIDENCE_FIXED_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_67_FOUR_ERA_ARCHITECTURE_TOURNAMENT_EVIDENCE_FIXED_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_67_FOUR_ERA_ARCHITECTURE_TOURNAMENT_EVIDENCE_FIXED_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_FOUR_ERA_FINDINGS_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_HELDOUT_50_FOUR_ERA_FINDINGS_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_FOUR_ERA_FINDINGS_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_117_REGIME_RISK_FINDINGS_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_117_REGIME_RISK_FINDINGS_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_117_REGIME_RISK_FINDINGS_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_FIXED_ENTRY_BUDGET_REDISTRIBUTION_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_FIXED_ENTRY_BUDGET_REDISTRIBUTION_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_FIXED_ENTRY_BUDGET_REDISTRIBUTION_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_V4_RELATIVE_CAPITAL_VERIFICATION_A4_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_V4_RELATIVE_CAPITAL_VERIFICATION_A4_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_V4_RELATIVE_CAPITAL_VERIFICATION_A4_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT50_REGIME_EXACT_REPLAY_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_HELDOUT50_REGIME_EXACT_REPLAY_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT50_REGIME_EXACT_REPLAY_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_MOMENTUM_CONFIRMATION_ADDON_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_MOMENTUM_CONFIRMATION_ADDON_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_MOMENTUM_CONFIRMATION_ADDON_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SOL_FOLLOWUP_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_SOL_FOLLOWUP_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CRASH_SOL_FOLLOWUP_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CONTROLLER_INCREMENTAL_COST_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CONTROLLER_INCREMENTAL_COST_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CONTROLLER_INCREMENTAL_COST_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_SIGNAL_MEANING_STATE_MATRIX_FINDINGS_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_SIGNAL_MEANING_STATE_MATRIX_FINDINGS_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_SIGNAL_MEANING_STATE_MATRIX_FINDINGS_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_FOUR_ERA_PORTFOLIO_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_HELDOUT_50_FOUR_ERA_PORTFOLIO_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_FOUR_ERA_PORTFOLIO_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_SP500TR_BENCHMARK_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_HELDOUT_50_SP500TR_BENCHMARK_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_SP500TR_BENCHMARK_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NO2020_SENSITIVITY_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_SP500TR_BENCHMARK_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_HELDOUT_50_SP500TR_BENCHMARK_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_SP500TR_BENCHMARK_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_FOUR_ERA_CAUSALITY_EQUIVALENCE_AUDIT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_HELDOUT_50_FOUR_ERA_CAUSALITY_EQUIVALENCE_AUDIT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_HELDOUT_50_FOUR_ERA_CAUSALITY_EQUIVALENCE_AUDIT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_FOUR_DRAWDOWN_LOSS_ATTRIBUTION_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_FOUR_DRAWDOWN_LOSS_ATTRIBUTION_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_FOUR_DRAWDOWN_LOSS_ATTRIBUTION_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_DEVELOPMENT_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CANONICAL_ASYMMETRIC_CONTROLLER_FINDINGS_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CANONICAL_ASYMMETRIC_CONTROLLER_FINDINGS_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CANONICAL_ASYMMETRIC_CONTROLLER_FINDINGS_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE3_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE3_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE3_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_REENTRY_CAUSAL_STATE_MACHINE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_REENTRY_CAUSAL_STATE_MACHINE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_REENTRY_CAUSAL_STATE_MACHINE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_V4_RELATIVE_CAPITAL_VERIFICATION_A4_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_V4_RELATIVE_CAPITAL_VERIFICATION_A4_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_V4_RELATIVE_CAPITAL_VERIFICATION_A4_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_CRASH_CATCH22_ASSESSMENT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_SOL_CRASH_CATCH22_ASSESSMENT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_SOL_CRASH_CATCH22_ASSESSMENT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_DEVELOPMENT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Reports/MTS_DISCOVERY_GENERAL_WINNER_RULE_HOLDOUT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DUAL_CRASH_DETECTOR_DEVELOPMENT_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DUAL_CRASH_DETECTOR_DEVELOPMENT_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DUAL_CRASH_DETECTOR_DEVELOPMENT_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CRASH_STATE_GENOME_PROTOCOL_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CRASH_STATE_GENOME_PROTOCOL_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CRASH_STATE_GENOME_PROTOCOL_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_ALLOCATION_ARCHITECTURE_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_R1_CROSS_SECTIONAL_STATE_REVERSAL_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_R1_CROSS_SECTIONAL_STATE_REVERSAL_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_R1_CROSS_SECTIONAL_STATE_REVERSAL_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_BEAR_PATH_B_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_SLOW_BEAR_PATH_B_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_BEAR_PATH_B_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_ASYMMETRIC_PARETO_STATE_CONTROLLER_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_ASYMMETRIC_PARETO_STATE_CONTROLLER_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_ASYMMETRIC_PARETO_STATE_CONTROLLER_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_PHASE3_HIERARCHICAL_EVIDENCE_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_PHASE3_HIERARCHICAL_EVIDENCE_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_PHASE3_HIERARCHICAL_EVIDENCE_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_PORTFOLIO_SIMULTANEITY_MECHANISM_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_PORTFOLIO_SIMULTANEITY_MECHANISM_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_PORTFOLIO_SIMULTANEITY_MECHANISM_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_BEAR_MA_GEOMETRY_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_SLOW_BEAR_MA_GEOMETRY_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_BEAR_MA_GEOMETRY_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_FIXED_BUDGET_OPPORTUNITY_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_FIXED_BUDGET_OPPORTUNITY_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_FIXED_BUDGET_OPPORTUNITY_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_FIXED_BUDGET_OPPORTUNITY_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_FIXED_BUDGET_OPPORTUNITY_RANKING_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAPACITY_AWARE_ALLOCATION_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CVO_CLASSIFICATION_FREEZE_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CVO_CLASSIFICATION_FREEZE_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CVO_CLASSIFICATION_FREEZE_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_FRONTIER_EXTENSION_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE3_SCHEMA_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE3_SCHEMA_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE3_SCHEMA_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_REENTRY_CAUSAL_STATE_MACHINE_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_REENTRY_CAUSAL_STATE_MACHINE_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_REENTRY_CAUSAL_STATE_MACHINE_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_HELDOUT_50_FOUR_ERA_WALKFORWARD_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_HELDOUT_50_FOUR_ERA_WALKFORWARD_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_HELDOUT_50_FOUR_ERA_WALKFORWARD_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_FROZEN_CANDIDATES_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_FROZEN_CANDIDATES_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_FROZEN_CANDIDATES_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CVO_STAGE0_AMENDMENT_20261003.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CVO_STAGE0_AMENDMENT_20261003.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CVO_STAGE0_AMENDMENT_20261003.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_ADVERSE_PATH_ENTRY_FAILURE_PROTOCOL_20261001.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_ADVERSE_PATH_ENTRY_FAILURE_PROTOCOL_20261001.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_ADVERSE_PATH_ENTRY_FAILURE_PROTOCOL_20261001.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_ADVERSE_PATH_ENTRY_FAILURE_PROTOCOL_20261001.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_ADVERSE_PATH_ENTRY_FAILURE_PROTOCOL_20261001.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_WITHIN_TICKER_NOMINEE_FROZEN_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_WITHIN_TICKER_NOMINEE_FROZEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_WITHIN_TICKER_NOMINEE_FROZEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_WITHIN_TICKER_NOMINEE_FROZEN_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_WITHIN_TICKER_NOMINEE_FROZEN_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_R1_GFC_FALSE_VS_TRUE_DISCOVERY_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_R1_GFC_FALSE_VS_TRUE_DISCOVERY_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_R1_GFC_FALSE_VS_TRUE_DISCOVERY_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_117_STOCK_PORTFOLIO_RISK_MECHANISM_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_117_STOCK_PORTFOLIO_RISK_MECHANISM_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_117_STOCK_PORTFOLIO_RISK_MECHANISM_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_NOMINEES_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_NOMINEES_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RELATIVE_CAPITAL_HOLDOUT_NOMINEES_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_PARETO_CORRECTION_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_PARETO_CORRECTION_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_PARETO_CORRECTION_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_FACTOR_AWARE_ALLOCATION_BAKEOFF_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_FACTOR_AWARE_ALLOCATION_BAKEOFF_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_FACTOR_AWARE_ALLOCATION_BAKEOFF_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_NOMINEES_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_NOMINEES_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_NOMINEES_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_NOMINEES_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_HOLDOUT_NOMINEES_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_117_REGIME_RISK_MITIGATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_117_REGIME_RISK_MITIGATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_117_REGIME_RISK_MITIGATION_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_MARKET_WIDE_STOP_SIGNAL_GROUP_C_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_MARKET_WIDE_STOP_SIGNAL_GROUP_C_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_MARKET_WIDE_STOP_SIGNAL_GROUP_C_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_DYNAMIC_ADVERSE_PATH_STOP_PROTOCOL_20261001.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_DYNAMIC_ADVERSE_PATH_STOP_PROTOCOL_20261001.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_DYNAMIC_ADVERSE_PATH_STOP_PROTOCOL_20261001.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_DYNAMIC_ADVERSE_PATH_STOP_PROTOCOL_20261001.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_DYNAMIC_ADVERSE_PATH_STOP_PROTOCOL_20261001.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CONSERVATIVE_RISK_NORMALIZED_NEIGHBORHOOD_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_DRAWDOWN_AWARE_RANKING_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_FROZEN_FOUR_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_FROZEN_FOUR_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_FROZEN_FOUR_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_SCHEMA_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_SCHEMA_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_SCHEMA_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_MULTIMARKET_CRASH_CLASSIFIER_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_MULTIMARKET_CRASH_CLASSIFIER_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_MULTIMARKET_CRASH_CLASSIFIER_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_MOMENTUM_TRANSITION_EXHAUSTION_PROTOCOL_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_MOMENTUM_TRANSITION_EXHAUSTION_PROTOCOL_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_MOMENTUM_TRANSITION_EXHAUSTION_PROTOCOL_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_SELECTIVE_SWITCH_RESEARCH_QUEUE_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_SELECTIVE_SWITCH_RESEARCH_QUEUE_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_SELECTIVE_SWITCH_RESEARCH_QUEUE_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CONTROLLER_INCREMENTAL_COST_AND_TURNOVER_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CONTROLLER_INCREMENTAL_COST_AND_TURNOVER_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CONTROLLER_INCREMENTAL_COST_AND_TURNOVER_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RISK_NORMALIZED_RANKING_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_CRASH_EARLY_SENTINEL_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_SLOW_CRASH_EARLY_SENTINEL_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_CRASH_EARLY_SENTINEL_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RISK_BUDGETED_ALLOCATION_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_PORTABLE_GENOME_CATALOG_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_PORTABLE_GENOME_CATALOG_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_PORTABLE_GENOME_CATALOG_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CANONICAL_ASYMMETRIC_CONTROLLER_INTEGRATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CANONICAL_ASYMMETRIC_CONTROLLER_INTEGRATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CANONICAL_ASYMMETRIC_CONTROLLER_INTEGRATION_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_FIXED_ENTRY_BUDGET_REDISTRIBUTION_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_FIXED_ENTRY_BUDGET_REDISTRIBUTION_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_FIXED_ENTRY_BUDGET_REDISTRIBUTION_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_CRASH_DESCRIPTOR_DISCOVERY_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_SLOW_CRASH_DESCRIPTOR_DISCOVERY_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_CRASH_DESCRIPTOR_DISCOVERY_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_EXPANSION_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_EVOLUTIONARY_PORTFOLIO_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_EVOLUTIONARY_PORTFOLIO_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_EVOLUTIONARY_PORTFOLIO_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_MOMENTUM_CONFIRMATION_ADDON_PROTOCOL_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_MOMENTUM_CONFIRMATION_ADDON_PROTOCOL_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_MOMENTUM_CONFIRMATION_ADDON_PROTOCOL_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RELATIVE_CAPITAL_FRONTIER_EXTENSION_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_RELATIVE_CAPITAL_FRONTIER_EXTENSION_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RELATIVE_CAPITAL_FRONTIER_EXTENSION_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_RISK_RETURN_TENABILITY_GATE_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_RISK_RETURN_TENABILITY_GATE_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_RISK_RETURN_TENABILITY_GATE_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_OPEN_STATE_RESPONSE_DISCOVERY_PROTOCOL_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_OPEN_STATE_RESPONSE_DISCOVERY_PROTOCOL_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_OPEN_STATE_RESPONSE_DISCOVERY_PROTOCOL_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_NEXT_EXPANSION_CROSS_SECTIONAL_EVOLUTIONARY_ARCHITECTURE_DRAFT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_NEXT_EXPANSION_CROSS_SECTIONAL_EVOLUTIONARY_ARCHITECTURE_DRAFT_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_NEXT_EXPANSION_CROSS_SECTIONAL_EVOLUTIONARY_ARCHITECTURE_DRAFT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DEFENSIVE_OPPORTUNISTIC_GA_SEARCH_ENVELOPE_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DEFENSIVE_OPPORTUNISTIC_GA_SEARCH_ENVELOPE_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DEFENSIVE_OPPORTUNISTIC_GA_SEARCH_ENVELOPE_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_BOTTOM_REVERSAL_GA_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_BOTTOM_REVERSAL_GA_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_BOTTOM_REVERSAL_GA_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_PROTOCOL_20261001.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_PROTOCOL_20261001.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_PROTOCOL_20261001.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_PROTOCOL_20261001.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_PROTOCOL_20261001.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_OPEN_STATE_BINARY_VERIFICATION_B_PROTOCOL_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_OPEN_STATE_BINARY_VERIFICATION_B_PROTOCOL_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_OPEN_STATE_BINARY_VERIFICATION_B_PROTOCOL_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_CAUSAL_WEALTH_GROWTH_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_MARKET_WIDE_REENTRY_DISCOVERY_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_MARKET_WIDE_REENTRY_DISCOVERY_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_MARKET_WIDE_REENTRY_DISCOVERY_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_SCHEMA_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_SCHEMA_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_SCHEMA_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_ABSOLUTE_QUALIFICATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_ABSOLUTE_QUALIFICATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE2_ABSOLUTE_QUALIFICATION_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_TRUE_RECOVERY_EMERGENCE_DESCRIPTOR_DISCOVERY_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_TRUE_RECOVERY_EMERGENCE_DESCRIPTOR_DISCOVERY_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_TRUE_RECOVERY_EMERGENCE_DESCRIPTOR_DISCOVERY_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_67_FOUR_ERA_ARCHITECTURE_TOURNAMENT_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_67_FOUR_ERA_ARCHITECTURE_TOURNAMENT_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_67_FOUR_ERA_ARCHITECTURE_TOURNAMENT_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_FOUR_DRAWDOWN_LOSS_ATTRIBUTION_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_FOUR_DRAWDOWN_LOSS_ATTRIBUTION_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_FOUR_DRAWDOWN_LOSS_ATTRIBUTION_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_PHASE3_CONDITIONAL_RISK_OVERLAY_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_PHASE3_CONDITIONAL_RISK_OVERLAY_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_PHASE3_CONDITIONAL_RISK_OVERLAY_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_PORTFOLIO_CAPITAL_NOMINEES_20261001.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_WITHIN_GROUP_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_WITHIN_GROUP_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_WITHIN_GROUP_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_WITHIN_GROUP_RANKING_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_WITHIN_GROUP_RANKING_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_REENTRY_THREE_HYPOTHESIS_TEST_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_REENTRY_THREE_HYPOTHESIS_TEST_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_REENTRY_THREE_HYPOTHESIS_TEST_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DRAWDOWN_ATTRIBUTION_AND_FIXED_TIMEOUT_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DRAWDOWN_ATTRIBUTION_AND_FIXED_TIMEOUT_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DRAWDOWN_ATTRIBUTION_AND_FIXED_TIMEOUT_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_SIGNAL_MEANING_STATE_MATRIX_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_SIGNAL_MEANING_STATE_MATRIX_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_SIGNAL_MEANING_STATE_MATRIX_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_WEALTH_EXPANSION_BOUNDARY_EXTENSION_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_WEALTH_EXPANSION_BOUNDARY_EXTENSION_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_WEALTH_EXPANSION_BOUNDARY_EXTENSION_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_WEALTH_EXPANSION_BOUNDARY_EXTENSION_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_WEALTH_EXPANSION_BOUNDARY_EXTENSION_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_CAPITAL_RULE_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_CAPITAL_RULE_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_CAPITAL_RULE_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_CAPITAL_RULE_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_CAPITAL_RULE_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RISK_STATE_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_RISK_STATE_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_RISK_STATE_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_RISK_STATE_ALLOCATION_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_RISK_STATE_ALLOCATION_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_MAJOR_DRAWDOWN_EX_ANTE_SEPARABILITY_TEST_20261003.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_MAJOR_DRAWDOWN_EX_ANTE_SEPARABILITY_TEST_20261003.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_MAJOR_DRAWDOWN_EX_ANTE_SEPARABILITY_TEST_20261003.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_ALPHA_CRASH_COUPLING_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_ALPHA_CRASH_COUPLING_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_ALPHA_CRASH_COUPLING_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_MOMENTUM_STAGE_ROLE_AUDIT_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_MOMENTUM_STAGE_ROLE_AUDIT_PROTOCOL_20261002.md",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_MOMENTUM_STAGE_ROLE_AUDIT_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_RULE_NOMINEES_20261002.json",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_RULE_NOMINEES_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_RULE_NOMINEES_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_RULE_NOMINEES_20261002.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_DISCOVERY_GENERAL_WINNER_RULE_NOMINEES_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_CRASH_MANAGEMENT_50_17_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_CRASH_MANAGEMENT_50_17_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_CRASH_MANAGEMENT_50_17_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_CRASH_2011_2022_DIAGNOSTIC_FREEZE_20261004.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Research/Protocols/MTS_SLOW_CRASH_2011_2022_DIAGNOSTIC_FREEZE_20261004.json",
+      "/home/ubuntu/research_restore_20261004/Momentum-Trading-System_v4/Research/Protocols/MTS_SLOW_CRASH_2011_2022_DIAGNOSTIC_FREEZE_20261004.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/.venv/lib/python3.12/site-packages/requests/sessions.py",
+      "/home/ubuntu/Momentum-Trading-System_v4/.venv/lib/python3.12/site-packages/pip/_vendor/requests/sessions.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Documentation/Migration/DATA_INTAKE_LEGACY_MIGRATION.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Documentation/Migration/DATA_INTAKE_LEGACY_MIGRATION.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Documentation/Migration/DATA_INTAKE_LEGACY_MIGRATION.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Documentation/Migration/DATA_INTAKE_LEGACY_MIGRATION.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Architecture/Technical-Design/RESEARCH_NEXUS_TECHNICAL_DESIGN.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Architecture/Technical-Design/RESEARCH_NEXUS_TECHNICAL_DESIGN.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Architecture/Technical-Design/RESEARCH_NEXUS_TECHNICAL_DESIGN.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Architecture/Technical-Design/RESEARCH_NEXUS_TECHNICAL_DESIGN.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Architecture/Technical-Design/ANALYSIS_ENGINE_TECHNICAL_DESIGN.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Architecture/Technical-Design/ANALYSIS_ENGINE_TECHNICAL_DESIGN.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Architecture/Technical-Design/ANALYSIS_ENGINE_TECHNICAL_DESIGN.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Architecture/Technical-Design/ANALYSIS_ENGINE_TECHNICAL_DESIGN.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Architecture/Engines/DATA_INTAKE_ENGINE_ARCHITECTURE.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Architecture/Engines/DATA_INTAKE_ENGINE_ARCHITECTURE.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Architecture/Engines/DATA_INTAKE_ENGINE_ARCHITECTURE.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Architecture/Engines/DATA_INTAKE_ENGINE_ARCHITECTURE.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/ChatGPT.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/ChatGPT.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/ChatGPT.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/GOVERNANCE_AMENDMENT_2026-09-15_TRADING_HYPOTHESIS_LIFECYCLE.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/GOVERNANCE_AMENDMENT_2026-09-15_TRADING_HYPOTHESIS_LIFECYCLE.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/GOVERNANCE_AMENDMENT_2026-09-15_TRADING_HYPOTHESIS_LIFECYCLE.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/GOVERNANCE_AMENDMENT_2026-09-28_COMPUTATIONAL_SEARCH.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/GOVERNANCE_AMENDMENT_2026-09-28_COMPUTATIONAL_SEARCH.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/GOVERNANCE_AMENDMENT_2026-09-28_COMPUTATIONAL_SEARCH.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Architecture/LIVE_PAPER_VALIDATION_ARCHITECTURE.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Architecture/LIVE_PAPER_VALIDATION_ARCHITECTURE.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Architecture/LIVE_PAPER_VALIDATION_ARCHITECTURE.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Architecture/GOVERNED_COMPUTATIONAL_SEARCH_ARCHITECTURE.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Architecture/GOVERNED_COMPUTATIONAL_SEARCH_ARCHITECTURE.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Architecture/GOVERNED_COMPUTATIONAL_SEARCH_ARCHITECTURE.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_INPUT_FROZEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_INPUT_FROZEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_INPUT_FROZEN_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_DISCOVERY_ADVERSE_EXCURSION_DELAYED_ENTRY_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_DISCOVERY_ADVERSE_EXCURSION_DELAYED_ENTRY_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_DISCOVERY_ADVERSE_EXCURSION_DELAYED_ENTRY_PROTOCOL_20260930.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_DISCOVERY_EARLY_RECOVERY_STOP_NEIGHBORHOOD_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_DISCOVERY_EARLY_RECOVERY_STOP_NEIGHBORHOOD_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_DISCOVERY_EARLY_RECOVERY_STOP_NEIGHBORHOOD_PROTOCOL_20260930.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_DISCOVERY_TRAJECTORY_PARTIAL_RECOVERY_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_DISCOVERY_TRAJECTORY_PARTIAL_RECOVERY_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_DISCOVERY_TRAJECTORY_PARTIAL_RECOVERY_PROTOCOL_20260930.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_DISCOVERY_RECOVERY_PATTERN_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_DISCOVERY_RECOVERY_PATTERN_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_DISCOVERY_RECOVERY_PATTERN_PROTOCOL_20260930.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_VALIDATION_SCOPE_INCIDENT_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_VALIDATION_SCOPE_INCIDENT_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_VALIDATION_SCOPE_INCIDENT_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_INPUT_FROZEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_INPUT_FROZEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_INPUT_FROZEN_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A_INPUT_FROZEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A_INPUT_FROZEN_20261002.json",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A_INPUT_FROZEN_20261002.json"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_GENERAL_WINNER_RULE_VERIFICATION_A3_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_VERIFICATION_A1_FROZEN_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_VERIFICATION_A1_FROZEN_PROTOCOL_20260930.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_VERIFICATION_A1_FROZEN_PROTOCOL_20260930.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_PROTOCOL_20261002.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/governance/MTS_V4_CAPITAL_SIZING_VERIFICATION_A2_PROTOCOL_20261002.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Documentation/2026-09-14_CROSS_SECTIONAL_BACKEND_IMPLEMENTATION_HANDOFF.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Documentation/2026-09-14_CROSS_SECTIONAL_BACKEND_IMPLEMENTATION_HANDOFF.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Documentation/2026-09-14_CROSS_SECTIONAL_BACKEND_IMPLEMENTATION_HANDOFF.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Documentation/2026-09-14_MTS_V4_CROSS_SECTIONAL_DERIVED_MARKET_STORE_DESIGN.md",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/origin_mts-v4-portfolio-capital-mitigation-20261001/Documentation/2026-09-14_MTS_V4_CROSS_SECTIONAL_DERIVED_MARKET_STORE_DESIGN.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Documentation/2026-09-14_MTS_V4_CROSS_SECTIONAL_DERIVED_MARKET_STORE_DESIGN.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Documentation/2026-09-14_MTS_V4_CROSS_SECTIONAL_DERIVED_MARKET_STORE_DESIGN.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Documentation/2026-09-14_CROSS_SECTIONAL_BACKEND_COMPLETION_HANDOFF.md",
+      "/home/ubuntu/mts-v4-recovered-oct2/Documentation/2026-09-14_CROSS_SECTIONAL_BACKEND_COMPLETION_HANDOFF.md",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Documentation/2026-09-14_CROSS_SECTIONAL_BACKEND_COMPLETION_HANDOFF.md"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/replay_frozen_structures_on_discovery2.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/replay_frozen_structures_on_discovery2.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/replay_frozen_structures_on_discovery2.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_risk_budgeted_allocation.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_risk_budgeted_allocation.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_risk_budgeted_allocation.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_portfolio_capital_stages34.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_portfolio_capital_stages34.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_portfolio_capital_stages34.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_risk_budgeted_allocation_holdout.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_risk_budgeted_allocation_holdout.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_risk_budgeted_allocation_holdout.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_recovery_pattern_measurement.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_recovery_pattern_measurement.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_recovery_pattern_measurement.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_general_winner_rule_verification_a3.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_general_winner_rule_verification_a3.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_general_winner_rule_verification_a3.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_capacity_aware_allocation.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_capacity_aware_allocation.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_capacity_aware_allocation.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_trajectory_partial_recovery.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_trajectory_partial_recovery.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_trajectory_partial_recovery.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_raw_boolean_state_composites.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_raw_boolean_state_composites.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_raw_boolean_state_composites.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_capital_sizing_verification_a2.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_capital_sizing_verification_a2.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_capital_sizing_verification_a2.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_causal_wealth_growth.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_causal_wealth_growth.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_causal_wealth_growth.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/audit_discovery2_independent_search_rediscovery.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/audit_discovery2_independent_search_rediscovery.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/audit_discovery2_independent_search_rediscovery.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_adverse_path_final_compliance.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_adverse_path_final_compliance.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_adverse_path_final_compliance.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery2b_sector_balancing_supplement.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery2b_sector_balancing_supplement.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery2b_sector_balancing_supplement.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/audit_discovery2_executable_path_diagnostics.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/audit_discovery2_executable_path_diagnostics.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/audit_discovery2_executable_path_diagnostics.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_adverse_path_phase1.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_adverse_path_phase1.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_adverse_path_phase1.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_portfolio_capital_no2020_sensitivity.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_portfolio_capital_no2020_sensitivity.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_portfolio_capital_no2020_sensitivity.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_conservative_risk_neighborhood.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_conservative_risk_neighborhood.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_conservative_risk_neighborhood.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_causal_wealth_expansion.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_causal_wealth_expansion.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_causal_wealth_expansion.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/summarize_raw_boolean_composite_recurrence.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/summarize_raw_boolean_composite_recurrence.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/summarize_raw_boolean_composite_recurrence.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_verification_a1_executable.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_verification_a1_executable.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_verification_a1_executable.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_drawdown_aware_ranking.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_drawdown_aware_ranking.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_drawdown_aware_ranking.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/audit_discovery2_frozen_replication.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/audit_discovery2_frozen_replication.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/audit_discovery2_frozen_replication.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_one_ticker_computational_search.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_one_ticker_computational_search.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_one_ticker_computational_search.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/replay_discovery2_executable_trade_paths.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/replay_discovery2_executable_trade_paths.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/replay_discovery2_executable_trade_paths.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_dynamic_adverse_path_stop.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_dynamic_adverse_path_stop.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_dynamic_adverse_path_stop.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_portfolio_allocation_architecture.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_portfolio_allocation_architecture.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_portfolio_allocation_architecture.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_general_winner_rule_holdout.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_general_winner_rule_holdout.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_general_winner_rule_holdout.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_adverse_path_phase2.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_adverse_path_phase2.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_adverse_path_phase2.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_risk_state_allocation.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_risk_state_allocation.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_risk_state_allocation.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/replay_recurring_boolean_composite_robustness.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/replay_recurring_boolean_composite_robustness.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/replay_recurring_boolean_composite_robustness.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_causal_wealth_growth_frontier.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_causal_wealth_growth_frontier.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_causal_wealth_growth_frontier.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/build_cross_ticker_falsification_manifest.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/build_cross_ticker_falsification_manifest.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/build_cross_ticker_falsification_manifest.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/analyze_frozen_candidate_falsification.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/analyze_frozen_candidate_falsification.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/analyze_frozen_candidate_falsification.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_portfolio_capital_stage1_portfolio.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_portfolio_capital_stage1_portfolio.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_portfolio_capital_stage1_portfolio.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_risk_normalized_ranking.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_risk_normalized_ranking.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_risk_normalized_ranking.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/audit_discovery2_cross_ticker_chronology.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/audit_discovery2_cross_ticker_chronology.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/audit_discovery2_cross_ticker_chronology.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_general_winner_rule.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_general_winner_rule.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_general_winner_rule.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/analyze_saved_search_candidates.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/analyze_saved_search_candidates.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/analyze_saved_search_candidates.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_literal_session_context_composites.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_literal_session_context_composites.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_literal_session_context_composites.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery2_frozen_sample.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery2_frozen_sample.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery2_frozen_sample.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_adverse_excursion_delayed_entry.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_adverse_excursion_delayed_entry.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_adverse_excursion_delayed_entry.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_adverse_path_completion.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_adverse_path_completion.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_adverse_path_completion.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/classify_existing_discovery2_sample.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/classify_existing_discovery2_sample.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/classify_existing_discovery2_sample.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/replay_discovery2_saved_search_candidates.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/replay_discovery2_saved_search_candidates.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/replay_discovery2_saved_search_candidates.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_portfolio_capital_stage2.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_portfolio_capital_stage2.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_portfolio_capital_stage2.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/analyze_saved_search_trade_paths.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/analyze_saved_search_trade_paths.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/analyze_saved_search_trade_paths.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_capital_sizing_verification_a.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_capital_sizing_verification_a.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_capital_sizing_verification_a.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_cross_ticker_falsification_batch.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_cross_ticker_falsification_batch.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_cross_ticker_falsification_batch.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_within_ticker_holdout.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_within_ticker_holdout.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_within_ticker_holdout.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_constrained_cross_family_composites.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_constrained_cross_family_composites.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_constrained_cross_family_composites.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_portfolio_capital_holdout.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_portfolio_capital_holdout.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_portfolio_capital_holdout.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/transport_discovery2_single_family_genomes.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/transport_discovery2_single_family_genomes.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/transport_discovery2_single_family_genomes.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_within_group_ranking.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_within_group_ranking.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_within_group_ranking.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_portfolio_capital_stage1.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_portfolio_capital_stage1.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_portfolio_capital_stage1.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_temporal_context_composites.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_temporal_context_composites.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_temporal_context_composites.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_verification_a1.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_verification_a1.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_verification_a1.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_portfolio_capital_breadth.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_portfolio_capital_breadth.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_portfolio_capital_breadth.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/rebuild_derived_market_store_copy_on_write.py",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/origin_mts-v4-portfolio-capital-mitigation-20261001/scripts/rebuild_derived_market_store_copy_on_write.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/rebuild_derived_market_store_copy_on_write.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/rebuild_derived_market_store_copy_on_write.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/audit_discovery2_unconditional_baseline.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/audit_discovery2_unconditional_baseline.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/audit_discovery2_unconditional_baseline.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/summarize_cross_ticker_falsification.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/summarize_cross_ticker_falsification.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/summarize_cross_ticker_falsification.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_adverse_path_close_five.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_adverse_path_close_five.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_adverse_path_close_five.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/scripts/run_discovery_wealth_expansion_boundary.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/scripts/run_discovery_wealth_expansion_boundary.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/scripts/run_discovery_wealth_expansion_boundary.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/batch_research_recording.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/batch_research_recording.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/batch_research_recording.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/search_families.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/search_families.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/search_families.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/search_candidate_analysis.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/search_candidate_analysis.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/search_candidate_analysis.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/derived_market_updater.py",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/origin_mts-v4-portfolio-capital-mitigation-20261001/MTS_V4/derived_market_updater.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/derived_market_updater.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/derived_market_updater.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/universe_market_structure_substrate.py",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/origin_mts-v4-portfolio-capital-mitigation-20261001/MTS_V4/universe_market_structure_substrate.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/universe_market_structure_substrate.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/universe_market_structure_substrate.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/computational_search.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/computational_search.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/computational_search.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/frozen_candidate_falsification.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/frozen_candidate_falsification.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/frozen_candidate_falsification.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/derived_feature_factory.py",
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/origin_mts-v4-portfolio-capital-mitigation-20261001/MTS_V4/derived_feature_factory.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/derived_feature_factory.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/derived_feature_factory.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/predictive_provenance.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/predictive_provenance.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/predictive_provenance.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/cross_subject_memory.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/cross_subject_memory.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/cross_subject_memory.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/MTS_V4/rolling_validation_provider.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/MTS_V4/rolling_validation_provider.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/MTS_V4/rolling_validation_provider.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Tests/mts_v4/test_search_candidate_analysis.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/Tests/mts_v4/test_search_candidate_analysis.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Tests/mts_v4/test_search_candidate_analysis.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Tests/mts_v4/test_nvda_live_cost_repairs.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/Tests/mts_v4/test_nvda_live_cost_repairs.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Tests/mts_v4/test_nvda_live_cost_repairs.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Tests/mts_v4/test_frozen_candidate_falsification.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/Tests/mts_v4/test_frozen_candidate_falsification.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Tests/mts_v4/test_frozen_candidate_falsification.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Tests/mts_v4/test_universe_market_structure_substrate.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/Tests/mts_v4/test_universe_market_structure_substrate.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Tests/mts_v4/test_universe_market_structure_substrate.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Tests/mts_v4/test_prospective_validation.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/Tests/mts_v4/test_prospective_validation.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Tests/mts_v4/test_prospective_validation.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Tests/mts_v4/test_computational_search.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/Tests/mts_v4/test_computational_search.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Tests/mts_v4/test_computational_search.py"
+    ],
+    [
+      "/home/ubuntu/Momentum-Trading-System_v4/Reconstruction/Recovered-GitHub/october-original-code/Tests/mts_v4/test_post_search_analysis_gate.py",
+      "/home/ubuntu/mts-v4-recovered-oct2/Tests/mts_v4/test_post_search_analysis_gate.py",
+      "/home/ubuntu/mts-v4-recovery-integration-20261004/Tests/mts_v4/test_post_search_analysis_gate.py"
+    ]
+  ]
+}
