@@ -5,6 +5,7 @@ import math
 import numpy as np
 import pandas as pd
 from .stage2_path_v3 import ExecutionPaths,ProspectiveCosts,signed_excursions
+from .stage2_cluster_stats_v3 import row_weighted_cluster_se
 
 
 @dataclass(frozen=True)
@@ -71,11 +72,11 @@ def evaluate_curve(mask:np.ndarray,paths:ExecutionPaths,costs:ProspectiveCosts,s
         cm=sums[used]/cnt[used];ne=len(cm)
         if ne<min_effective_n:
             pts.append({'horizon':j+1,'n':raw_n,'effective_n':ne,'ev_net':np.nan,'lcb95':np.nan,'mae_mean':np.nan,'mfe_mean':np.nan});continue
-        ev=float(v.mean());cluster_deviation=cm-ev
+        ev=float(v.mean())
         # Row-weighted point estimate requires row-weighted cluster-robust SE.
         # Treat security-year clusters as independent; coverage under shared
         # calendar shocks must be separately validated before certification.
-        se=float(math.sqrt(ne/(ne-1)*np.sum((cnt[used]*cluster_deviation)**2))/raw_n) if ne>1 else float('nan')
+        se=row_weighted_cluster_se(v,ids)
         lcb=ev-1.96*se
         wins=v[v>0];loss=v[v<0];ma=adverse[ix,j].astype(float);mf=favorable[ix,j].astype(float);ma=ma[np.isfinite(ma)];mf=mf[np.isfinite(mf)]
         pts.append({
