@@ -1,0 +1,22 @@
+/home/ubuntu/mts-layered-run-20261007/Core/layered_ga/stage2_path_v3.py:180: RuntimeWarning: divide by zero encountered in divide
+  impact = impact_coefficient_bps*np.sqrt(reference_notional/adv)
+Traceback (most recent call last):
+  File "/home/ubuntu/mts-layered-run-20261007/scripts/build_stage2_v3_path_cache_20261007.py", line 6, in <module>
+    t=time.time();cache=ROOT/'Research/Runs/layered/stage2-opportunity-v3-20261007/cache';m=build_path_cache(cache,cache/'dev117_predictors_v3.parquet');print(json.dumps({'seconds':time.time()-t,'rows':m['rows'],'bytes':sum(x['bytes'] for x in m['files'].values())}),flush=True)
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/mts-layered-run-20261007/Core/layered_ga/stage2_data_v3.py", line 39, in build_path_cache
+    p=build_execution_paths(raw,max_horizon=63);c=build_prospective_costs(raw,p)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/mts-layered-run-20261007/Core/layered_ga/stage2_path_v3.py", line 188, in build_prospective_costs
+    reg[i] = _frozen_costs.regulatory_sell_fee(when,reference_notional,shares,px)/reference_notional
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/mts-layered-run-20261007/Reconstruction/Certified-Stage2-Source-20261007/Core/conforming_ga/costs.py", line 46, in regulatory_sell_fee
+    return abs(notional)*sec31_rate(when)+taf_fee(when,shares,price)
+                         ^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/mts-layered-run-20261007/Reconstruction/Certified-Stage2-Source-20261007/Core/conforming_ga/costs.py", line 34, in sec31_rate
+    return _effective(SEC31,when)[1]/1_000_000.0
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/mts-layered-run-20261007/Reconstruction/Certified-Stage2-Source-20261007/Core/conforming_ga/costs.py", line 30, in _effective
+    if row is None: raise ValueError("date before registered schedule")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: date before registered schedule

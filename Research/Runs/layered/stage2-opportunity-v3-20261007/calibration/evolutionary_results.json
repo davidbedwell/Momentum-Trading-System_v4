@@ -1,0 +1,411 @@
+{
+  "cases": [
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.02,
+      "baseline": 0.02,
+      "best_ga": 0.02,
+      "unique": 171,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.01,
+      "baseline": 0.01,
+      "best_ga": 0.01,
+      "unique": 131,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.005,
+      "baseline": 0.005,
+      "best_ga": 0.005,
+      "unique": 131,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.0025,
+      "baseline": 0.0025,
+      "best_ga": 0.0025,
+      "unique": 129,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.0,
+      "baseline": 0.0,
+      "best_ga": 0.0,
+      "unique": 194,
+      "target_visited": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.02,
+      "baseline": 0.02,
+      "best_ga": 0.02,
+      "unique": 142,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.01,
+      "baseline": 0.01,
+      "best_ga": 0.01,
+      "unique": 136,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.005,
+      "baseline": 0.005,
+      "best_ga": 0.005,
+      "unique": 121,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.0025,
+      "baseline": 0.0025,
+      "best_ga": 0.0025,
+      "unique": 141,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.0,
+      "baseline": 0.0,
+      "best_ga": 0.0,
+      "unique": 194,
+      "target_visited": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.02,
+      "baseline": 0.02,
+      "best_ga": 0.020000000000000004,
+      "unique": 130,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.01,
+      "baseline": 0.01,
+      "best_ga": 0.010000000000000002,
+      "unique": 136,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.005,
+      "baseline": 0.005,
+      "best_ga": 0.005000000000000001,
+      "unique": 131,
+      "target_visited": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.0025,
+      "baseline": 0.0025,
+      "best_ga": 0.0025,
+      "unique": 137,
+      "target_visited": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.0,
+      "baseline": 0.0,
+      "best_ga": 0.0,
+      "unique": 186,
+      "target_visited": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.02,
+      "baseline": 0.020000000000000004,
+      "best_ga": 0.020000000000000004,
+      "unique": 143,
+      "target_visited": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.01,
+      "baseline": 0.010000000000000002,
+      "best_ga": 0.010000000000000002,
+      "unique": 155,
+      "target_visited": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.005,
+      "baseline": 0.005000000000000001,
+      "best_ga": 0.005000000000000001,
+      "unique": 166,
+      "target_visited": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.0025,
+      "baseline": 0.0025000000000000005,
+      "best_ga": 0.0025000000000000005,
+      "unique": 160,
+      "target_visited": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.0,
+      "baseline": 0.0,
+      "best_ga": 0.0,
+      "unique": 203,
+      "target_visited": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.02,
+      "baseline": 0.02,
+      "best_ga": 0.020000000000000004,
+      "unique": 153,
+      "target_visited": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.01,
+      "baseline": 0.01,
+      "best_ga": 0.010000000000000002,
+      "unique": 147,
+      "target_visited": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.005,
+      "baseline": 0.005,
+      "best_ga": 0.005000000000000001,
+      "unique": 126,
+      "target_visited": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.0025,
+      "baseline": 0.0025,
+      "best_ga": 0.0025000000000000005,
+      "unique": 164,
+      "target_visited": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.0,
+      "baseline": 0.0,
+      "best_ga": 0.0,
+      "unique": 210,
+      "target_visited": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.02,
+      "baseline": 0.020000000000000004,
+      "best_ga": 0.020000000000000004,
+      "unique": 156,
+      "target_visited": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.01,
+      "baseline": 0.010000000000000002,
+      "best_ga": 0.010000000000000002,
+      "unique": 166,
+      "target_visited": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.005,
+      "baseline": 0.005000000000000001,
+      "best_ga": 0.005000000000000001,
+      "unique": 176,
+      "target_visited": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.0025,
+      "baseline": 0.0025000000000000005,
+      "best_ga": 0.0025000000000000005,
+      "unique": 129,
+      "target_visited": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.0,
+      "baseline": 0.0,
+      "best_ga": 0.0,
+      "unique": 217,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.02,
+      "baseline": 0.02,
+      "best_ga": 0.020000000000000004,
+      "unique": 204,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.01,
+      "baseline": 0.01,
+      "best_ga": 0.01,
+      "unique": 189,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.005,
+      "baseline": 0.005,
+      "best_ga": 0.005000000000000001,
+      "unique": 217,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.0025,
+      "baseline": 0.0025,
+      "best_ga": 0.0025,
+      "unique": 191,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.0,
+      "baseline": 0.0,
+      "best_ga": 0.0,
+      "unique": 235,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.02,
+      "baseline": 0.02,
+      "best_ga": 0.02,
+      "unique": 205,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.01,
+      "baseline": 0.01,
+      "best_ga": 0.01,
+      "unique": 177,
+      "target_visited": true
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.005,
+      "baseline": 0.005,
+      "best_ga": 0.005000000000000001,
+      "unique": 210,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.0025,
+      "baseline": 0.0025,
+      "best_ga": 0.0025,
+      "unique": 213,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.0,
+      "baseline": 0.0,
+      "best_ga": 0.0,
+      "unique": 229,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.02,
+      "baseline": 0.02,
+      "best_ga": 0.02,
+      "unique": 224,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.01,
+      "baseline": 0.01,
+      "best_ga": 0.01,
+      "unique": 178,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.005,
+      "baseline": 0.005,
+      "best_ga": 0.005000000000000001,
+      "unique": 178,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.0025,
+      "baseline": 0.0025,
+      "best_ga": 0.0025,
+      "unique": 183,
+      "target_visited": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.0,
+      "baseline": 0.0,
+      "best_ga": 0.0,
+      "unique": 232,
+      "target_visited": true
+    }
+  ],
+  "completed": 45,
+  "total": 45
+}

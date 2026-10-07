@@ -1,0 +1,1116 @@
+{
+  "records": [
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.0,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": false,
+      "null_exact_zero": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.0025,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.005,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.01,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "FAST",
+      "effect": 0.02,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.0,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": false,
+      "null_exact_zero": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.0025,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.005,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.01,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "MEDIUM",
+      "effect": 0.02,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.0,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": false,
+      "null_exact_zero": true
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.0025,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.005,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.01,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MOMENTUM",
+      "shape": "SLOW",
+      "effect": 0.02,
+      "support_n_h20": 201219,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.0,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": false,
+      "null_exact_zero": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.0025,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.005,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.01,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "FAST",
+      "effect": 0.02,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.0,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": false,
+      "null_exact_zero": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.0025,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.005,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.01,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "MEDIUM",
+      "effect": 0.02,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.0,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": false,
+      "null_exact_zero": true
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.0025,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.005,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.01,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "MEAN_REVERSION",
+      "shape": "SLOW",
+      "effect": 0.02,
+      "support_n_h20": 28801,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.0,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": false,
+      "null_exact_zero": true
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.0025,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.005,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.01,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "FAST",
+      "effect": 0.02,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "true_high_window": [
+        3,
+        7
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.0,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": false,
+      "null_exact_zero": true
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.0025,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.005,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.01,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "MEDIUM",
+      "effect": 0.02,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "true_high_window": [
+        10,
+        20
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.0,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": false,
+      "null_exact_zero": true
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.0025,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.005,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.01,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    },
+    {
+      "family": "BREAKOUT",
+      "shape": "SLOW",
+      "effect": 0.02,
+      "support_n_h20": 25090,
+      "max_injection_error": 0.0,
+      "peak_window": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "true_high_window": [
+        25,
+        45
+      ],
+      "overlap": true,
+      "null_exact_zero": false
+    }
+  ],
+  "test_count": 45,
+  "passed": true
+}

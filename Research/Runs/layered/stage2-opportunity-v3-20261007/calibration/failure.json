@@ -1,0 +1,4 @@
+{
+  "error": "AssertionError('injection-alignment error MOMENTUM FAST 0.0025: 4.601199179887772e-06')",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/ubuntu/mts-layered-run-20261007/scripts/run_stage2_v3_calibration_20261007.py\", line 71, in <module>\n    try:main()\n        ^^^^^^\n  File \"/home/ubuntu/mts-layered-run-20261007/scripts/run_stage2_v3_calibration_20261007.py\", line 61, in main\n    if error>1e-7:raise AssertionError(f'injection-alignment error {family} {sn} {effect}: {error}')\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: injection-alignment error MOMENTUM FAST 0.0025: 4.601199179887772e-06\n"
+}

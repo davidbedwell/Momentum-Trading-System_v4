@@ -1,0 +1,66 @@
+{
+  "seed": 20261007,
+  "targets": {
+    "MOMENTUM": {
+      "genome": {
+        "momentum_feature": "return_252__v1",
+        "direction": "BELOW",
+        "threshold_quantile": 0.5,
+        "context_feature": "breadth_positive_20__v1",
+        "context_threshold": 0.4
+      },
+      "valid20_n": 201219
+    },
+    "MEAN_REVERSION": {
+      "genome": {
+        "displacement_feature": "return_10__v1",
+        "tail": "LOW",
+        "severity": 0.05,
+        "context_feature": "NONE",
+        "context_state": "HIGH",
+        "context_threshold_quantile": 0.2
+      },
+      "valid20_n": 28801
+    },
+    "BREAKOUT": {
+      "genome": {
+        "range_feature": "prior_high_break_distance_20__v1",
+        "range_threshold_quantile": 0.7,
+        "participation_feature": "relative_volume_20_percentile__v1",
+        "participation_threshold_quantile": 0.7,
+        "volatility_feature": "natr_20__v1",
+        "volatility_state": "LOW",
+        "volatility_threshold_quantile": 0.7
+      },
+      "valid20_n": 25090
+    }
+  },
+  "shapes": {
+    "FAST": [
+      1,
+      3,
+      7,
+      12
+    ],
+    "MEDIUM": [
+      3,
+      10,
+      20,
+      30
+    ],
+    "SLOW": [
+      8,
+      25,
+      45,
+      60
+    ]
+  },
+  "effects": [
+    0.0,
+    0.0025,
+    0.005,
+    0.01,
+    0.02
+  ],
+  "calibration_only": true
+}
