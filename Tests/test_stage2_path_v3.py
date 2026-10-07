@@ -34,3 +34,11 @@ def test_no_cross_security_path_bleed():
     for sec in ['X','Y']:
         ix=d.index[d.security_id.eq(sec)][0]
         assert np.isclose(p.endpoint_return[ix,2],1.01**3-1,rtol=1e-5)
+
+
+def test_pre_registered_sec_rate_is_unknown_not_fabricated():
+    d=fixture().copy();d['date']=pd.bdate_range('2004-10-01',periods=len(d))
+    p=build_execution_paths(d,max_horizon=3);c=build_prospective_costs(d,p)
+    assert np.isnan(c.regulatory_sell_fraction[20])
+    assert np.isnan(c.long_roundtrip[20,0])
+    assert np.isnan(c.short_roundtrip[20,0])

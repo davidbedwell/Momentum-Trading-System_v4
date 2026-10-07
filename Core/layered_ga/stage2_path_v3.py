@@ -185,6 +185,10 @@ def build_prospective_costs(raw: pd.DataFrame, paths: ExecutionPaths, *,
     valid_date = next_date.notna().to_numpy(); valid_px=np.isfinite(next_open)&(next_open>0)
     for i in np.flatnonzero(valid_date & valid_px):
         when = next_date.iloc[i].date(); px=float(next_open[i]); shares=reference_notional/px
+        # Rate history starts 2005-12-22; never infer a pre-schedule SEC rate.
+        # Mark these observations ineligible by preserving their NaN costs.
+        if when < _frozen_costs._d(_frozen_costs.SEC31[0][0]):
+            continue
         reg[i] = _frozen_costs.regulatory_sell_fee(when,reference_notional,shares,px)/reference_notional
     base = 2.0*(spread+impact)/10000.0 + reg
     long_cost = np.repeat(base[:,None],H,axis=1).astype(np.float32)
