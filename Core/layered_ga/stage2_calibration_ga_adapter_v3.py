@@ -7,6 +7,7 @@ multiobjective scientific selection or the independent statistical gate.
 import numpy as np
 
 from Core.layered_ga.stage2_calibration_outcomes_v3 import OutcomeOnlyCurveEvaluator
+from Core.layered_ga.stage2_calibration_pareto_v3 import describe_front
 
 
 class MatchedEvaluator:
@@ -29,6 +30,7 @@ class MatchedEvaluator:
         self.calls += 1
         self.best = max(self.best, score)
         self.ledger.append({"candidate_id": candidate.candidate_id,
-                            "score": score, "horizons": len(curve.points)})
+                            "score": score, "horizons": len(curve.points),
+                            "pareto_front": describe_front(curve)})
         return Evaluation(candidate.candidate_id, evidence_identity,
                           self.analysis_contract_version, {"net_expectancy": score})
