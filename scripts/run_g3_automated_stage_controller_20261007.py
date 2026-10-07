@@ -10,6 +10,7 @@ A=R/"MTS_G3_CLAUDE_PHASE_A_STOCK_LEVEL_V2_DIAGNOSTIC_20261007.json"
 B=R/"MTS_G3_CLAUDE_PHASE_B_NA_VARIANCE_20261007.json"
 C=R/"MTS_G3_CLAUDE_PHASE_C_PLANTED_HETEROGENEITY_20261007.json"
 V3_FREEZE=R/"MTS_G3_V3_PROTOCOL_FREEZE.sha256"
+V3_PLANTED=R/"MTS_G3_V3_HETEROGENEOUS_PLANTED_VALIDATION_20261007.json"
 LEDGER=R/"MTS_G3_AUTOMATED_STAGE_CONTROLLER_20261007.json"
 REAL_PHASE_A={"NVDA":0.08679972398265211,"AAPL":0.06928131107790046,"XOM":0.06748516797062888}
 
@@ -38,7 +39,13 @@ def decide():
     worst=max(v["n80_approx"] for v in power.values())
     na_action="STATIONARY_BOOTSTRAP_EXPECTED_BLOCK_50" if worst>80 else ("INCREASE_NA_REPLICATES" if worst>=30 else "INVESTIGATE_SEARCH_INSTABILITY")
     state="V3_PROTOCOL_FREEZE_REQUIRED"
-    if V3_FREEZE.exists() and V3_FREEZE.stat().st_size>0: state="V3_PLANTED_VALIDATION_AUTHORIZED"
+    if V3_FREEZE.exists() and V3_FREEZE.stat().st_size>0:
+        state="V3_PLANTED_VALIDATION_AUTHORIZED"
+        if V3_PLANTED.exists():
+            pv=load(V3_PLANTED)
+            if pv.get("format")!="MTS_G3_V3_HETEROGENEOUS_PLANTED_VALIDATION" or pv.get("complete") is not True or pv.get("ticker_identity_used") is not False:
+                raise RuntimeError("STOP_BAD_V3_PLANTED_ARTIFACT")
+            state="V3_INFERENTIAL_GATE_AUTHORIZED" if pv.get("pass") is True else "STOP_V3_PLANTED_VALIDATION_FAILED"
     return {"state":state,"phase_a_count":n,"phase_c_pass":True,"na_action":na_action,"phase_b_power":power,"worst_n80_approx":worst,
             "invariants":["ALL_8_STOCKS_RETAINED","NO_TICKER_IDENTITY_GENE","NO_PROTECTED_DATA","NO_V3_INFERENCE_BEFORE_FREEZE","FAIL_CLOSED"]}
 

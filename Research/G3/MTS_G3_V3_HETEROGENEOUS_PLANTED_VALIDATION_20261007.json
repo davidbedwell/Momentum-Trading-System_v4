@@ -1,0 +1,65 @@
+{
+  "format": "MTS_G3_V3_HETEROGENEOUS_PLANTED_VALIDATION",
+  "screen": "EXACT_THREE_RULE_LOCAL_ENUMERATION",
+  "complete": true,
+  "ticker_identity_used": false,
+  "criterion_active_mean": 0.025,
+  "best": {
+    "origin": "S0",
+    "genome": "V3Specialist(applicability=Rule(feature=7, threshold=0.0, direction=-1), gate=Rule(feature=1, threshold=1.0, direction=1), signal=Rule(feature=0, threshold=-1.0, direction=-1), side=1, take_profit=0.08, stop_loss=0.06, max_horizon=10, add_at=0.04, reduce_at=0.04)",
+    "active_mean": 0.029327442392159796,
+    "inactive_mean": -0.005582319100458722,
+    "per_stock": {
+      "S0": {
+        "n": 33,
+        "mean": 0.03314519031870164,
+        "tail": -0.008935933727693078,
+        "duration": 9.969696969696969
+      },
+      "S1": {
+        "n": 30,
+        "mean": 0.03192723888853541,
+        "tail": 0.004085615154810244,
+        "duration": 9.966666666666667
+      },
+      "S2": {
+        "n": 29,
+        "mean": 0.02290989796924233,
+        "tail": -0.02078722859211099,
+        "duration": 10.0
+      },
+      "S3": {
+        "n": 31,
+        "mean": -0.00012979161020235555,
+        "tail": -0.03271089831482721,
+        "duration": 10.0
+      },
+      "S4": {
+        "n": 44,
+        "mean": -0.00806556690526699,
+        "tail": -0.04131846124343435,
+        "duration": 9.909090909090908
+      },
+      "S5": {
+        "n": 34,
+        "mean": -0.005862023990193621,
+        "tail": -0.04709795426500958,
+        "duration": 9.911764705882353
+      },
+      "S6": {
+        "n": 37,
+        "mean": -0.003947892370177237,
+        "tail": -0.027215261478745378,
+        "duration": 9.91891891891892
+      },
+      "S7": {
+        "n": 33,
+        "mean": -0.009906320626453401,
+        "tail": -0.036837228226653876,
+        "duration": 9.909090909090908
+      }
+    }
+  },
+  "pass": true,
+  "seconds": 24.438235198002076
+}

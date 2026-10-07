@@ -16,4 +16,4 @@ def test_power_branch_stationary_bootstrap():
 def test_no_ticker_identity_in_invariants():
     d=c.decide()
     assert "NO_TICKER_IDENTITY_GENE" in d["invariants"]
-    assert d["state"] in {"V3_PROTOCOL_FREEZE_REQUIRED","V3_PLANTED_VALIDATION_AUTHORIZED"}
+    assert d["state"] in {"V3_PROTOCOL_FREEZE_REQUIRED","V3_PLANTED_VALIDATION_AUTHORIZED","V3_INFERENTIAL_GATE_AUTHORIZED"}
