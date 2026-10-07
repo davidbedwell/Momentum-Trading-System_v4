@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Machine-only V3 -> G3 transition controller. No assistant judgment authorizes launch."""
 from __future__ import annotations
-import json, hashlib, subprocess, sys, time
+import json, hashlib, subprocess, sys, time, os
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];R=ROOT/'Research/G3'
 V3=R/'MTS_G3_V3_PREREGISTERED_GATE_20261007.json';V3C=R/'MTS_G3_V3_CONFORMING_GATE_20261007.json';V4=R/'MTS_G3_V4_PREREGISTERED_GATE_20261007.json';V4FREEZE=R/'MTS_G3_V4_EXECUTION_FREEZE_20261007.sha256';FREEZE=R/'MTS_G3_PRODUCTION_EXECUTION_FREEZE_20261007.sha256';LEDGER=R/'MTS_G3_PRODUCTION_CONTROLLER_20261007.json';PREP=R/'MTS_G3_PRODUCTION_DATA_PREP.stdout'
@@ -24,6 +24,9 @@ def verify_hash_manifest(path):
         if not q.exists() or sha(q)!=h: raise RuntimeError('EXECUTION_FREEZE_HASH_MISMATCH:'+name)
 
 def verify_freeze(): verify_hash_manifest(FREEZE)
+def child_env():
+    e=os.environ.copy();e['PYTHONPATH']=str(ROOT)+(os.pathsep+e['PYTHONPATH'] if e.get('PYTHONPATH') else '');return e
+def call_child(args):return subprocess.call(args,cwd=ROOT,env=child_env())
 def main():
     if not V3.exists():return write('WAIT_V3')
     try:g=validate_v3()
@@ -31,7 +34,7 @@ def main():
     # Diagnostic V3 is provenance only. It can neither authorize nor veto production.
     if not V3C.exists():
         write('RUNNING_V3_CONFORMING_GATE',diagnostic_v3=g['state'])
-        rc=subprocess.call([sys.executable,'scripts/run_g3_v3_conforming_gate_20261007.py','--workers','60'],cwd=ROOT)
+        rc=call_child([sys.executable,'scripts/run_g3_v3_conforming_gate_20261007.py','--workers','60'])
         if rc:return write('STOP_V3_CONFORMING_EXECUTION_FAILED',returncode=rc)
     c=json.loads(V3C.read_text());cg=c.get('gate_decision');cstate=cg.get('state') if isinstance(cg,dict) else None
     if c.get('format')!='MTS_G3_V3_CONFORMING_GATE' or c.get('complete') is not True or c.get('replicates')!=25:return write('STOP_BAD_V3_CONFORMING_ARTIFACT')
@@ -41,7 +44,7 @@ def main():
     except Exception as e:return write('STOP_V4_EXECUTION_FREEZE_INVALID',reason=str(e))
     if not V4.exists():
         write('RUNNING_V4_PREREGISTERED_GATE',v3c=cstate)
-        rc=subprocess.call([sys.executable,'scripts/run_g3_v4_preregistered_gate_20261007.py','--workers','60'],cwd=ROOT)
+        rc=call_child([sys.executable,'scripts/run_g3_v4_preregistered_gate_20261007.py','--workers','60'])
         if rc:return write('STOP_V4_EXECUTION_FAILED',returncode=rc)
     v4=json.loads(V4.read_text());vg=v4.get('gate_decision');vstate=vg.get('state') if isinstance(vg,dict) else None
     if v4.get('format')!='MTS_G3_V4_PREREGISTERED_GATE' or v4.get('complete') is not True or v4.get('replicates')!=25:return write('STOP_BAD_V4_ARTIFACT')
@@ -52,13 +55,13 @@ def main():
     if not PREP.exists() or 'PREP_COMPLETE' not in PREP.read_text():return write('WAIT_DATA_PREP',v4=vstate)
     reach=R/'MTS_G3_PRODUCTION_REACHABILITY_20261007.json'
     if not reach.exists():
-        write('RUNNING_SEARCH_REACHABILITY');rc=subprocess.call([sys.executable,'scripts/run_g3_production_reachability_20261007.py'],cwd=ROOT)
+        write('RUNNING_SEARCH_REACHABILITY');rc=call_child([sys.executable,'scripts/run_g3_production_reachability_20261007.py'])
         if rc:return write('STOP_SEARCH_REACHABILITY_EXECUTION_FAILED',returncode=rc)
     rr=json.loads(reach.read_text())
     if rr.get('decision')!='PASS_SEARCH_REACHABILITY':return write('STOP_SEARCH_REACHABILITY_FAILED',descriptor_occupancy=rr.get('descriptor_occupancy'))
     b=R/'MTS_G3_PRODUCTION_BENCHMARK_REAL_20261007.json'
     if not b.exists():
-        write('RUNNING_EXACT_BENCHMARK',v4=vstate);rc=subprocess.call([sys.executable,'scripts/run_g3_production_discovery_20261007.py','--arm','REAL','--benchmark-only','--workers','60'],cwd=ROOT)
+        write('RUNNING_EXACT_BENCHMARK',v4=vstate);rc=call_child([sys.executable,'scripts/run_g3_production_discovery_20261007.py','--arm','REAL','--benchmark-only','--workers','60'])
         if rc:return write('STOP_BENCHMARK_FAILED',returncode=rc)
     bo=json.loads(b.read_text())
     if bo.get('complete') is not True or bo.get('benchmark_only') is not True:return write('STOP_BAD_BENCHMARK')
@@ -70,10 +73,10 @@ def main():
     write('G3_REAL_AUTHORIZED',v4=vstate,benchmark_seconds=sec,projected_seconds_real_plus_null=eta,aggregate_cpu_utilization=util)
     real=R/'MTS_G3_PRODUCTION_DISCOVERY_REAL_20261007.json';null=R/'MTS_G3_PRODUCTION_DISCOVERY_NULL_20261007.json'
     if not real.exists():
-        rc=subprocess.call([sys.executable,'scripts/run_g3_production_discovery_20261007.py','--arm','REAL','--workers','60'],cwd=ROOT)
+        rc=call_child([sys.executable,'scripts/run_g3_production_discovery_20261007.py','--arm','REAL','--workers','60'])
         if rc:return write('STOP_G3_REAL_EXECUTION_FAILED',returncode=rc)
     if not null.exists():
-        write('G3_MATCHED_NULL_AUTHORIZED');rc=subprocess.call([sys.executable,'scripts/run_g3_production_discovery_20261007.py','--arm','NULL','--workers','60'],cwd=ROOT)
+        write('G3_MATCHED_NULL_AUTHORIZED');rc=call_child([sys.executable,'scripts/run_g3_production_discovery_20261007.py','--arm','NULL','--workers','60'])
         if rc:return write('STOP_G3_NULL_EXECUTION_FAILED',returncode=rc)
     ro=json.loads(real.read_text());no=json.loads(null.read_text());threshold=float(no.get('null_max_stat',float('inf')))
     survivors={k:v for k,v in ro.get('promoted',{}).items() if float(v['axes'][0])>threshold}
