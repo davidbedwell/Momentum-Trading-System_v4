@@ -14,6 +14,7 @@ SOURCES = {
     "computational_search": RECOVERED / "MTS_V4/computational_search.py",
     "search_families": RECOVERED / "MTS_V4/search_families.py",
     "derived_feature_factory": RECOVERED / "MTS_V4/derived_feature_factory.py",
+    "costs": RECOVERED / "Core/conforming_ga/costs.py",
 }
 
 
@@ -26,8 +27,11 @@ def verify_recovered_sources():
             checks[key] = {"status": "MISSING", "path": str(path.relative_to(ROOT))}
             continue
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        expected_hash = expected.get(key + "_sha256")
+        # Cost source has no checksum in the recovered-sources manifest.
+        # An unpinned dependency cannot be certified as the frozen implementation.
         checks[key] = {
-            "status": "VERIFIED" if actual == expected.get(key + "_sha256") else "HASH_MISMATCH",
+            "status": "VERIFIED" if expected_hash and actual == expected_hash else "UNPINNED" if not expected_hash else "HASH_MISMATCH",
             "sha256": actual,
             "path": str(path.relative_to(ROOT)),
         }
