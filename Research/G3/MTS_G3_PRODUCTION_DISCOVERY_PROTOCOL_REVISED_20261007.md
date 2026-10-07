@@ -148,3 +148,15 @@ For production-null max-stat calibration, a CONTENDER is an organism satisfying 
 
 ## Clarifications
 The 60-session embargo is excluded from both discovery and confirmation; chronological percentages define target source intervals before embargo removal and exact row counts are written to the partition manifest. Non-retained generation checkpoints are deleted only after the next retained checkpoint hash is verified. Duplicate merge is checked at archive insertion and migration admission. The 2-of-3 temporal-third test is discovery-interval only. Exact benchmark uses descriptor-development data and includes projected perturbation work. Positive profitable-event PnL concentration is direction-agnostic.
+
+# User-Approved Prospective Amendment C — 2026-10-07
+Status: APPROVED BEFORE ANY PRODUCTION G3 REAL OR NULL SEARCH EXECUTION.
+
+## Production-null count reduced from two to one
+The production program is amended from 1 REAL + 2 matched NULL arms to **1 REAL + 1 matched NULL arm**. The single production NULL uses the already specified within-stock 60-session stationary-block-bootstrap outcome transformation and must receive the identical evolutionary search budget, genome grammar, archive mechanics, temporal partitioning, promotion/contender rules, costs, perturbation rules, and compute treatment as REAL. No Real-selected genome, scope, rank, feasibility, descriptor cell, or archive state transfers to NULL.
+
+Rationale: V3 separately tests whether the discovery machinery distinguishes Real structure from three preregistered null families. The production matched NULL has the narrower role of empirically calibrating the false-discovery/max-stat burden created by the much larger production grammar and adaptive search. One identically budgeted production NULL is sufficient for that role; a second full production NULL is not required.
+
+The production NULL max-statistic is the maximum 10-bps cluster-bootstrap reward LCB among NULL CONTENDERs under the definition frozen in Amendment B. If no NULL organism reaches CONTENDER status, the null max-statistic is -infinity and that fact is reported. A REAL candidate must satisfy all ordinary promotion requirements and have 10-bps reward LCB strictly greater than this single matched-NULL max-statistic.
+
+No other scientific search setting is changed by this amendment. The maximum evolutionary workload is therefore 409,600 generation-slots for REAL plus 409,600 identically budgeted generation-slots for NULL, before duplicate-cache savings and early island plateau freezes: **819,200 maximum total slots**. The exact benchmark projects both arms, not three. The existing 14-day hard program ceiling remains unchanged.
