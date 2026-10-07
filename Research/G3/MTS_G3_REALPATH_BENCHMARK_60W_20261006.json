@@ -1,0 +1,25 @@
+{
+  "format": "MTS_G3_REALPATH_BENCHMARK_V1",
+  "tickers": [
+    "AAPL",
+    "MSFT",
+    "XOM",
+    "JPM",
+    "JNJ",
+    "CAT",
+    "WMT",
+    "NVDA"
+  ],
+  "period": [
+    "2006-01-01",
+    "2026-09-16"
+  ],
+  "workers": 60,
+  "jobs": 120,
+  "rows_per_job": 2500,
+  "evaluations": 3840,
+  "download_seconds": 3.168236417001026,
+  "derive_seconds": 0.12092936900080531,
+  "eval_per_sec": 1351.3389331664282,
+  "lineage_root": "/home/ubuntu/g3-independent-data"
+}
