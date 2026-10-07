@@ -31,6 +31,5 @@ jobs:
             Tests/test_stage2_cluster_stats_v3.py \
             Tests/test_stage2_paired_null_v3.py \
             Tests/test_stage2_recovered_source_preflight_v3.py
-      - name: Record missing-source preflight
-        if: always()
-        run: python -m Core.layered_ga.stage2_recovered_source_preflight_v3
+      - name: Verify frozen source hashes (required)
+        run: python scripts/check_stage2_v3_readiness.py
