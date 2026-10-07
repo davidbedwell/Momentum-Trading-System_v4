@@ -1,0 +1,197 @@
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360625.2356875}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360655.2906826}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360685.345649}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360715.4018512}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360745.4579413}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360775.5135896}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360805.5688355}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360835.6238968}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360865.6787314}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "WAIT_V3", "time": 1791360895.7338505}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "RUNNING_V3_CONFORMING_GATE", "time": 1791360925.7874472, "diagnostic_v3": "STRONG_PASS_3_OF_3"}
+completed 1 / 25
+completed 2 / 25
+completed 3 / 25
+completed 4 / 25
+completed 5 / 25
+completed 6 / 25
+completed 7 / 25
+completed 8 / 25
+completed 9 / 25
+completed 10 / 25
+completed 11 / 25
+completed 12 / 25
+completed 13 / 25
+completed 14 / 25
+completed 15 / 25
+completed 16 / 25
+completed 17 / 25
+completed 18 / 25
+completed 19 / 25
+completed 20 / 25
+completed 21 / 25
+completed 22 / 25
+completed 23 / 25
+completed 24 / 25
+completed 25 / 25
+{
+  "seconds": 1798.8264719880026,
+  "gate": {
+    "state": "FAIL_NO_LARGE_DISCOVERY",
+    "significant_nulls": 1,
+    "tests": [
+      {
+        "family": "NA_STATIONARY_BOOTSTRAP_Y",
+        "statistic": 263.0,
+        "pvalue": 0.0006220509269210306,
+        "median_paired_difference": 0.015940790918755044,
+        "significant": true
+      },
+      {
+        "family": "NB_GUARDED_SHIFT_Y",
+        "statistic": 203.0,
+        "pvalue": 0.14361464977264404,
+        "median_paired_difference": 0.0021668292868528595,
+        "significant": false
+      },
+      {
+        "family": "NC_GUARDED_SHIFT_X",
+        "statistic": 227.0,
+        "pvalue": 0.042569518089294434,
+        "median_paired_difference": 0.005887926062776492,
+        "significant": false
+      }
+    ]
+  }
+}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "STOP_V3_CONFORMING_FAILED", "time": 1791362733.712006, "diagnostic_v3": "STRONG_PASS_3_OF_3", "conforming_v3": {"state": "FAIL_NO_LARGE_DISCOVERY", "significant_nulls": 1, "tests": [{"family": "NA_STATIONARY_BOOTSTRAP_Y", "statistic": 263.0, "pvalue": 0.0006220509269210306, "median_paired_difference": 0.015940790918755044, "significant": true}, {"family": "NB_GUARDED_SHIFT_Y", "statistic": 203.0, "pvalue": 0.14361464977264404, "median_paired_difference": 0.0021668292868528595, "significant": false}, {"family": "NC_GUARDED_SHIFT_X", "statistic": 227.0, "pvalue": 0.042569518089294434, "median_paired_difference": 0.005887926062776492, "significant": false}]}}
+TERMINAL STOP_V3_CONFORMING_FAILED
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "RUNNING_V4_PREREGISTERED_GATE", "time": 1791380668.95866, "v3c": "FAIL_NO_LARGE_DISCOVERY"}
+completed 1 / 25
+completed 2 / 25
+completed 3 / 25
+completed 4 / 25
+completed 5 / 25
+completed 6 / 25
+completed 7 / 25
+completed 8 / 25
+completed 9 / 25
+completed 10 / 25
+completed 11 / 25
+completed 12 / 25
+completed 13 / 25
+completed 14 / 25
+completed 15 / 25
+completed 16 / 25
+completed 17 / 25
+completed 18 / 25
+completed 19 / 25
+completed 20 / 25
+completed 21 / 25
+completed 22 / 25
+completed 23 / 25
+completed 24 / 25
+completed 25 / 25
+{
+  "seconds": 282.28321175400004,
+  "gate": {
+    "state": "FAIL_NO_LARGE_DISCOVERY",
+    "significant_nulls": 0,
+    "tests": [
+      {
+        "family": "NA_STATIONARY_BOOTSTRAP_Y",
+        "valid_pairs": 16,
+        "statistic": 0.0,
+        "pvalue": 1.0,
+        "median_paired_difference": null,
+        "significant": false
+      },
+      {
+        "family": "NB_GUARDED_SHIFT_Y",
+        "valid_pairs": 19,
+        "statistic": 0.0,
+        "pvalue": 1.0,
+        "median_paired_difference": null,
+        "significant": false
+      },
+      {
+        "family": "NC_GUARDED_SHIFT_X",
+        "valid_pairs": 19,
+        "statistic": 0.0,
+        "pvalue": 1.0,
+        "median_paired_difference": null,
+        "significant": false
+      }
+    ]
+  }
+}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "STOP_V4_FAILED", "time": 1791380961.1355495, "v3c": "FAIL_NO_LARGE_DISCOVERY", "v4": {"state": "FAIL_NO_LARGE_DISCOVERY", "significant_nulls": 0, "tests": [{"family": "NA_STATIONARY_BOOTSTRAP_Y", "valid_pairs": 16, "statistic": 0.0, "pvalue": 1.0, "median_paired_difference": null, "significant": false}, {"family": "NB_GUARDED_SHIFT_Y", "valid_pairs": 19, "statistic": 0.0, "pvalue": 1.0, "median_paired_difference": null, "significant": false}, {"family": "NC_GUARDED_SHIFT_X", "valid_pairs": 19, "statistic": 0.0, "pvalue": 1.0, "median_paired_difference": null, "significant": false}]}}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "RUNNING_V5_PREREGISTERED_GATE", "time": 1791381617.398401, "v4": "FAIL_NO_LARGE_DISCOVERY"}
+completed 1 / 25
+completed 2 / 25
+completed 3 / 25
+completed 4 / 25
+completed 5 / 25
+completed 6 / 25
+completed 7 / 25
+completed 8 / 25
+completed 9 / 25
+completed 10 / 25
+completed 11 / 25
+completed 12 / 25
+completed 13 / 25
+completed 14 / 25
+completed 15 / 25
+completed 16 / 25
+completed 17 / 25
+completed 18 / 25
+completed 19 / 25
+completed 20 / 25
+completed 21 / 25
+completed 22 / 25
+completed 23 / 25
+completed 24 / 25
+completed 25 / 25
+{
+  "seconds": 288.699573319,
+  "gate": {
+    "state": "FAIL_NO_LARGE_DISCOVERY",
+    "significant_nulls": 1,
+    "tests": [
+      {
+        "family": "NA_STATIONARY_BOOTSTRAP_Y",
+        "real_wins": 21,
+        "null_wins": 4,
+        "ties": 0,
+        "non_tied_pairs": 25,
+        "pvalue": 0.0004552602767944336,
+        "significant": true,
+        "decided_by_viability": 15,
+        "decided_by_return": 10
+      },
+      {
+        "family": "NB_GUARDED_SHIFT_Y",
+        "real_wins": 15,
+        "null_wins": 10,
+        "ties": 0,
+        "non_tied_pairs": 25,
+        "pvalue": 0.21217811107635498,
+        "significant": false,
+        "decided_by_viability": 15,
+        "decided_by_return": 10
+      },
+      {
+        "family": "NC_GUARDED_SHIFT_X",
+        "real_wins": 16,
+        "null_wins": 9,
+        "ties": 0,
+        "non_tied_pairs": 25,
+        "pvalue": 0.11476147174835205,
+        "significant": false,
+        "decided_by_viability": 15,
+        "decided_by_return": 10
+      }
+    ]
+  }
+}
+{"controller": "MTS_G3_PRODUCTION_CONTROLLER_V1", "state": "STOP_V5_FAILED", "time": 1791381916.985762, "v4": "FAIL_NO_LARGE_DISCOVERY", "v5": {"state": "FAIL_NO_LARGE_DISCOVERY", "significant_nulls": 1, "tests": [{"family": "NA_STATIONARY_BOOTSTRAP_Y", "real_wins": 21, "null_wins": 4, "ties": 0, "non_tied_pairs": 25, "pvalue": 0.0004552602767944336, "significant": true, "decided_by_viability": 15, "decided_by_return": 10}, {"family": "NB_GUARDED_SHIFT_Y", "real_wins": 15, "null_wins": 10, "ties": 0, "non_tied_pairs": 25, "pvalue": 0.21217811107635498, "significant": false, "decided_by_viability": 15, "decided_by_return": 10}, {"family": "NC_GUARDED_SHIFT_X", "real_wins": 16, "null_wins": 9, "ties": 0, "non_tied_pairs": 25, "pvalue": 0.11476147174835205, "significant": false, "decided_by_viability": 15, "decided_by_return": 10}]}}

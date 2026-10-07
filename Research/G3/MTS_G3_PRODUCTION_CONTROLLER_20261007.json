@@ -1,0 +1,45 @@
+{
+  "controller": "MTS_G3_PRODUCTION_CONTROLLER_V1",
+  "state": "STOP_V5_FAILED",
+  "time": 1791381916.985762,
+  "v4": "FAIL_NO_LARGE_DISCOVERY",
+  "v5": {
+    "state": "FAIL_NO_LARGE_DISCOVERY",
+    "significant_nulls": 1,
+    "tests": [
+      {
+        "family": "NA_STATIONARY_BOOTSTRAP_Y",
+        "real_wins": 21,
+        "null_wins": 4,
+        "ties": 0,
+        "non_tied_pairs": 25,
+        "pvalue": 0.0004552602767944336,
+        "significant": true,
+        "decided_by_viability": 15,
+        "decided_by_return": 10
+      },
+      {
+        "family": "NB_GUARDED_SHIFT_Y",
+        "real_wins": 15,
+        "null_wins": 10,
+        "ties": 0,
+        "non_tied_pairs": 25,
+        "pvalue": 0.21217811107635498,
+        "significant": false,
+        "decided_by_viability": 15,
+        "decided_by_return": 10
+      },
+      {
+        "family": "NC_GUARDED_SHIFT_X",
+        "real_wins": 16,
+        "null_wins": 9,
+        "ties": 0,
+        "non_tied_pairs": 25,
+        "pvalue": 0.11476147174835205,
+        "significant": false,
+        "decided_by_viability": 15,
+        "decided_by_return": 10
+      }
+    ]
+  }
+}

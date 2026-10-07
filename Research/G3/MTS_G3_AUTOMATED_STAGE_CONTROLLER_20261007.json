@@ -1,0 +1,40 @@
+{
+  "controller": "MTS_G3_AUTOMATED_STAGE_CONTROLLER_V1",
+  "decision": {
+    "state": "V3_INFERENTIAL_GATE_AUTHORIZED",
+    "phase_a_count": 8,
+    "phase_c_pass": true,
+    "na_action": "STATIONARY_BOOTSTRAP_EXPECTED_BLOCK_50",
+    "phase_b_power": {
+      "NVDA": {
+        "real": 0.08679972398265211,
+        "null_mean": 0.0821716000304067,
+        "effect": 0.004628123952245405,
+        "null_sd": 0.01825647353642611,
+        "n80_approx": 96.20374211250541
+      },
+      "AAPL": {
+        "real": 0.06928131107790046,
+        "null_mean": 0.05626671259940998,
+        "effect": 0.013014598478490479,
+        "null_sd": 0.0085971032614486,
+        "n80_approx": 2.697807040545511
+      },
+      "XOM": {
+        "real": 0.06748516797062888,
+        "null_mean": 0.050607727428546356,
+        "effect": 0.016877440542082525,
+        "null_sd": 0.009797353955543578,
+        "n80_approx": 2.083399562969514
+      }
+    },
+    "worst_n80_approx": 96.20374211250541,
+    "invariants": [
+      "ALL_8_STOCKS_RETAINED",
+      "NO_TICKER_IDENTITY_GENE",
+      "NO_PROTECTED_DATA",
+      "NO_V3_INFERENCE_BEFORE_FREEZE",
+      "FAIL_CLOSED"
+    ]
+  }
+}

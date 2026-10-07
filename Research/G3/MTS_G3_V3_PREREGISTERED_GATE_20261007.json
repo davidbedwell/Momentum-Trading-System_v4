@@ -1,0 +1,535 @@
+{
+  "format": "MTS_G3_V3_PREREGISTERED_GATE",
+  "complete": true,
+  "replicates": 25,
+  "records": [
+    {
+      "replicate": 0,
+      "arm": "REAL",
+      "primary": 0.05819241232255378
+    },
+    {
+      "replicate": 0,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.07494982981379228
+    },
+    {
+      "replicate": 0,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.05420584190994583
+    },
+    {
+      "replicate": 0,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.026123391790708286
+    },
+    {
+      "replicate": 1,
+      "arm": "REAL",
+      "primary": 0.05819241232255378
+    },
+    {
+      "replicate": 1,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.03212245467248523
+    },
+    {
+      "replicate": 1,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.01667796518111272
+    },
+    {
+      "replicate": 1,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.026791797606891234
+    },
+    {
+      "replicate": 2,
+      "arm": "REAL",
+      "primary": 0.0634144555255024
+    },
+    {
+      "replicate": 2,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.0248829760622198
+    },
+    {
+      "replicate": 2,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.03716342389740778
+    },
+    {
+      "replicate": 2,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.03072695816480406
+    },
+    {
+      "replicate": 3,
+      "arm": "REAL",
+      "primary": 0.05739519671676677
+    },
+    {
+      "replicate": 3,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.03784838745885681
+    },
+    {
+      "replicate": 3,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.021970420840116807
+    },
+    {
+      "replicate": 3,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.021012555492856865
+    },
+    {
+      "replicate": 4,
+      "arm": "REAL",
+      "primary": 0.0634144555255024
+    },
+    {
+      "replicate": 4,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.04874397358559078
+    },
+    {
+      "replicate": 4,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.01461417053238997
+    },
+    {
+      "replicate": 4,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.018432950448797784
+    },
+    {
+      "replicate": 5,
+      "arm": "REAL",
+      "primary": 0.05668350780471387
+    },
+    {
+      "replicate": 5,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.04904339748928095
+    },
+    {
+      "replicate": 5,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.02685070039983428
+    },
+    {
+      "replicate": 5,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.036735363300871675
+    },
+    {
+      "replicate": 6,
+      "arm": "REAL",
+      "primary": 0.06277112829286627
+    },
+    {
+      "replicate": 6,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.10048123980893221
+    },
+    {
+      "replicate": 6,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.07380834306182771
+    },
+    {
+      "replicate": 6,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.021407221821813496
+    },
+    {
+      "replicate": 7,
+      "arm": "REAL",
+      "primary": 0.05805678791834019
+    },
+    {
+      "replicate": 7,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.02198451788999284
+    },
+    {
+      "replicate": 7,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.019449731591169927
+    },
+    {
+      "replicate": 7,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.020160618947784727
+    },
+    {
+      "replicate": 8,
+      "arm": "REAL",
+      "primary": 0.0634144555255024
+    },
+    {
+      "replicate": 8,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.025500329099980526
+    },
+    {
+      "replicate": 8,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.0210299011962106
+    },
+    {
+      "replicate": 8,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.023286177998411785
+    },
+    {
+      "replicate": 9,
+      "arm": "REAL",
+      "primary": 0.05651648420649535
+    },
+    {
+      "replicate": 9,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.04190413382794786
+    },
+    {
+      "replicate": 9,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.01978439326992134
+    },
+    {
+      "replicate": 9,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.018679265323836937
+    },
+    {
+      "replicate": 10,
+      "arm": "REAL",
+      "primary": 0.05819241232255378
+    },
+    {
+      "replicate": 10,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.026040045928801867
+    },
+    {
+      "replicate": 10,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.059819509729940226
+    },
+    {
+      "replicate": 10,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.048605728642715604
+    },
+    {
+      "replicate": 11,
+      "arm": "REAL",
+      "primary": 0.05819241232255378
+    },
+    {
+      "replicate": 11,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.09364997708237148
+    },
+    {
+      "replicate": 11,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.06210515882946935
+    },
+    {
+      "replicate": 11,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.07868191982785061
+    },
+    {
+      "replicate": 12,
+      "arm": "REAL",
+      "primary": 0.05877597481407871
+    },
+    {
+      "replicate": 12,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.02862503461719948
+    },
+    {
+      "replicate": 12,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.02157386135475106
+    },
+    {
+      "replicate": 12,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.023889176446713106
+    },
+    {
+      "replicate": 13,
+      "arm": "REAL",
+      "primary": 0.05819241232255378
+    },
+    {
+      "replicate": 13,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.021733316278303747
+    },
+    {
+      "replicate": 13,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.03263748608427207
+    },
+    {
+      "replicate": 13,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.0312984062993754
+    },
+    {
+      "replicate": 14,
+      "arm": "REAL",
+      "primary": 0.05837756582896173
+    },
+    {
+      "replicate": 14,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.026803363954871744
+    },
+    {
+      "replicate": 14,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.03301131222657905
+    },
+    {
+      "replicate": 14,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.04162293674404155
+    },
+    {
+      "replicate": 15,
+      "arm": "REAL",
+      "primary": 0.056310309645571675
+    },
+    {
+      "replicate": 15,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.01863833940379811
+    },
+    {
+      "replicate": 15,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.04581613131276528
+    },
+    {
+      "replicate": 15,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.020287058683777948
+    },
+    {
+      "replicate": 16,
+      "arm": "REAL",
+      "primary": 0.058853287730689055
+    },
+    {
+      "replicate": 16,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.03464678495088954
+    },
+    {
+      "replicate": 16,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.02850180578201127
+    },
+    {
+      "replicate": 16,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.061624816349403526
+    },
+    {
+      "replicate": 17,
+      "arm": "REAL",
+      "primary": 0.055700863859331894
+    },
+    {
+      "replicate": 17,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.05738932019267473
+    },
+    {
+      "replicate": 17,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.04028103497849072
+    },
+    {
+      "replicate": 17,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.03373068452263364
+    },
+    {
+      "replicate": 18,
+      "arm": "REAL",
+      "primary": 0.05739519671676677
+    },
+    {
+      "replicate": 18,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.026583188110972215
+    },
+    {
+      "replicate": 18,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.019024401023682705
+    },
+    {
+      "replicate": 18,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.054686594627769446
+    },
+    {
+      "replicate": 19,
+      "arm": "REAL",
+      "primary": 0.06470387205048521
+    },
+    {
+      "replicate": 19,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.01823314567632177
+    },
+    {
+      "replicate": 19,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.020251122750336394
+    },
+    {
+      "replicate": 19,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.06586243949685949
+    },
+    {
+      "replicate": 20,
+      "arm": "REAL",
+      "primary": 0.06374674045515485
+    },
+    {
+      "replicate": 20,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.016462089885508978
+    },
+    {
+      "replicate": 20,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.0349302002130809
+    },
+    {
+      "replicate": 20,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.02661079312957152
+    },
+    {
+      "replicate": 21,
+      "arm": "REAL",
+      "primary": 0.055700863859331894
+    },
+    {
+      "replicate": 21,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.021748585348153687
+    },
+    {
+      "replicate": 21,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.014859143569621844
+    },
+    {
+      "replicate": 21,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.021665402759565966
+    },
+    {
+      "replicate": 22,
+      "arm": "REAL",
+      "primary": 0.05827077491225767
+    },
+    {
+      "replicate": 22,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.04914512378819807
+    },
+    {
+      "replicate": 22,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.025136402922666695
+    },
+    {
+      "replicate": 22,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.027077799768274374
+    },
+    {
+      "replicate": 23,
+      "arm": "REAL",
+      "primary": 0.056831112016045335
+    },
+    {
+      "replicate": 23,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.01898117070813891
+    },
+    {
+      "replicate": 23,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.030615844179378293
+    },
+    {
+      "replicate": 23,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.025049232161678994
+    },
+    {
+      "replicate": 24,
+      "arm": "REAL",
+      "primary": 0.05819241232255378
+    },
+    {
+      "replicate": 24,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": 0.04732078391301938
+    },
+    {
+      "replicate": 24,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": 0.022223903021124654
+    },
+    {
+      "replicate": 24,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": 0.01943954299111335
+    }
+  ],
+  "seconds": 1880.0002564499955,
+  "gate_decision": {
+    "state": "STRONG_PASS_3_OF_3",
+    "significant_nulls": 3,
+    "tests": [
+      {
+        "family": "NA_STATIONARY_BOOTSTRAP_Y",
+        "statistic": 281.0,
+        "pvalue": 0.00040405988693237305,
+        "median_paired_difference": 0.03015094019687923,
+        "significant": true
+      },
+      {
+        "family": "NB_GUARDED_SHIFT_Y",
+        "statistic": 317.0,
+        "pvalue": 7.450580596923828e-07,
+        "median_paired_difference": 0.030351481948677785,
+        "significant": true
+      },
+      {
+        "family": "NC_GUARDED_SHIFT_X",
+        "statistic": 314.0,
+        "pvalue": 1.6391277313232422e-06,
+        "median_paired_difference": 0.032069020531845495,
+        "significant": true
+      }
+    ]
+  }
+}

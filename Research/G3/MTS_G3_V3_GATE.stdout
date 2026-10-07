@@ -1,0 +1,55 @@
+completed 1 / 25
+completed 2 / 25
+completed 3 / 25
+completed 4 / 25
+completed 5 / 25
+completed 6 / 25
+completed 7 / 25
+completed 8 / 25
+completed 9 / 25
+completed 10 / 25
+completed 11 / 25
+completed 12 / 25
+completed 13 / 25
+completed 14 / 25
+completed 15 / 25
+completed 16 / 25
+completed 17 / 25
+completed 18 / 25
+completed 19 / 25
+completed 20 / 25
+completed 21 / 25
+completed 22 / 25
+completed 23 / 25
+completed 24 / 25
+completed 25 / 25
+{
+  "seconds": 1880.0002564499955,
+  "gate": {
+    "state": "STRONG_PASS_3_OF_3",
+    "significant_nulls": 3,
+    "tests": [
+      {
+        "family": "NA_STATIONARY_BOOTSTRAP_Y",
+        "statistic": 281.0,
+        "pvalue": 0.00040405988693237305,
+        "median_paired_difference": 0.03015094019687923,
+        "significant": true
+      },
+      {
+        "family": "NB_GUARDED_SHIFT_Y",
+        "statistic": 317.0,
+        "pvalue": 7.450580596923828e-07,
+        "median_paired_difference": 0.030351481948677785,
+        "significant": true
+      },
+      {
+        "family": "NC_GUARDED_SHIFT_X",
+        "statistic": 314.0,
+        "pvalue": 1.6391277313232422e-06,
+        "median_paired_difference": 0.032069020531845495,
+        "significant": true
+      }
+    ]
+  }
+}

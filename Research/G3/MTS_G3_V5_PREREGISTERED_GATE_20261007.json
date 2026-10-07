@@ -1,0 +1,4247 @@
+{
+  "format": "MTS_G3_V5_PREREGISTERED_GATE",
+  "complete": true,
+  "replicates": 25,
+  "records": [
+    {
+      "replicate": 0,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.0120652817553522
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.013774843269375872,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": 0.01501882690045362,
+          "valid_candidates": 4
+        },
+        "XOM": {
+          "endpoint": 0.012874944973893906,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.011255618536810494,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.004608129617402291,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.011276004698218253,
+          "valid_candidates": 7
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 0,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.0063065874372896825
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": 0.025279794096068113,
+          "valid_candidates": 4
+        },
+        "XOM": {
+          "endpoint": -0.006844177187573828,
+          "valid_candidates": 3
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.006791480965688674,
+          "valid_candidates": 46
+        },
+        "CAT": {
+          "endpoint": 0.026648142962635832,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": 0.005821693908890692,
+          "valid_candidates": 45
+        },
+        "NVDA": {
+          "endpoint": -0.028272157503241004,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 0,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.006677388161912607
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.0024229908183063284,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": 0.01459186559388077,
+          "valid_candidates": 46
+        },
+        "JPM": {
+          "endpoint": 0.025485616367321592,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.006677388161912607,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": -0.004662777957763425,
+          "valid_candidates": 47
+        },
+        "WMT": {
+          "endpoint": -0.014503568160672909,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": 0.02233394264824058,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 0,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.004572802546449173
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.007800900713266277,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": -0.006282850242865786,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": 0.009464925434249255,
+          "valid_candidates": 47
+        },
+        "JPM": {
+          "endpoint": 0.007557989888880981,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": 0.001587615204017365,
+          "valid_candidates": 33
+        },
+        "CAT": {
+          "endpoint": 0.012595316488392537,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.03011716189720616,
+          "valid_candidates": 6
+        },
+        "NVDA": {
+          "endpoint": -0.020074529066685123,
+          "valid_candidates": 39
+        }
+      }
+    },
+    {
+      "replicate": 1,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.012504743639513014
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.020321614335347363,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": 0.012504743639513014,
+          "valid_candidates": 4
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": 0.00017810851519132426,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.016298898391831667,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.01380884681698227,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": -0.006127770518201757,
+          "valid_candidates": 5
+        },
+        "NVDA": {
+          "endpoint": -0.005437904687386648,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 1,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 3,
+        "median_viable_return": -0.0021629201818281546
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.024281379686198996,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": 0.002895794197915317,
+          "valid_candidates": 18
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.0021629201818281546,
+          "valid_candidates": 8
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 1,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": -0.003270573602701563
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.04680975258311842,
+          "valid_candidates": 5
+        },
+        "MSFT": {
+          "endpoint": -0.001150078660796068,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": -0.04110217095190191,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": 0.006482397926214797,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": 0.007533586982620813,
+          "valid_candidates": 4
+        },
+        "CAT": {
+          "endpoint": -0.005391068544607058,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.014727444204240301,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": 0.007728869077869423,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 1,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": -0.00791792132396562
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.017687648771836977,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": 0.006694447661926073,
+          "valid_candidates": 47
+        },
+        "JPM": {
+          "endpoint": 0.010025848880517194,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": -0.015223879517211892,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": -0.00791792132396562,
+          "valid_candidates": 47
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 2,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.013818959903690683
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.017275425712558655,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.015776623890526018,
+          "valid_candidates": 4
+        },
+        "XOM": {
+          "endpoint": 0.007510312300402793,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.015744844927282807,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": 0.01189307488009856,
+          "valid_candidates": 4
+        },
+        "WMT": {
+          "endpoint": -0.011843653032648243,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 2,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 4,
+        "median_viable_return": 0.00467050315616351
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": 0.014495619198143716,
+          "valid_candidates": 6
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.0037581227721419537,
+          "valid_candidates": 45
+        },
+        "CAT": {
+          "endpoint": 0.005582883540185066,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.01881321025151597,
+          "valid_candidates": 6
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 2,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.00020114336232078032
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.0323015553032904,
+          "valid_candidates": 5
+        },
+        "MSFT": {
+          "endpoint": -0.021794281798968557,
+          "valid_candidates": 4
+        },
+        "XOM": {
+          "endpoint": 0.04123963382898049,
+          "valid_candidates": 3
+        },
+        "JPM": {
+          "endpoint": 0.014839578529754243,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.0007467362115287998,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": -0.025695947044409213,
+          "valid_candidates": 18
+        },
+        "WMT": {
+          "endpoint": 0.00020114336232078032,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 2,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": 0.006180825713274649
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.025315266453167454,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": 0.006180825713274649,
+          "valid_candidates": 5
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.02128907549118842,
+          "valid_candidates": 4
+        },
+        "CAT": {
+          "endpoint": 0.02616837555529796,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": 0.009576630112976898,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 3,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 4,
+        "median_viable_return": 0.0010186866190467657
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.020658286577045458,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.011849131409544756,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.009811758171451225,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.012495387751961438,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 3,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 4,
+        "median_viable_return": -0.015208489180563473
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": -0.017757313663154035,
+          "valid_candidates": 47
+        },
+        "XOM": {
+          "endpoint": 0.008304872982842649,
+          "valid_candidates": 18
+        },
+        "JPM": {
+          "endpoint": -0.045715626229801895,
+          "valid_candidates": 44
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.012659664697972911,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 3,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 3,
+        "median_viable_return": -0.012193078784974483
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.012193078784974483,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.028764127023036483,
+          "valid_candidates": 46
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.013961733773559044,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 3,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": -0.004111050535656585
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": 0.0006473888835901009,
+          "valid_candidates": 47
+        },
+        "XOM": {
+          "endpoint": 0.06938508048256478,
+          "valid_candidates": 13
+        },
+        "JPM": {
+          "endpoint": -0.009157879377809519,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": -0.022452527576141607,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": -0.009176917326471917,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": 0.0021146260176020176,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": -0.004111050535656585,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 4,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.006398434921787874
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.034785158508105256,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.02279071194292201,
+          "valid_candidates": 5
+        },
+        "XOM": {
+          "endpoint": -0.017024432587403836,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": -0.0118905448244152,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.007863295576452538,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.0063396292718846765,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": -0.014849697034375177,
+          "valid_candidates": 6
+        },
+        "NVDA": {
+          "endpoint": 0.006457240571691072,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 4,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": -0.0037518179620810448
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.013113645484861372,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": -0.01067142867136787,
+          "valid_candidates": 5
+        },
+        "XOM": {
+          "endpoint": 0.001396072443717037,
+          "valid_candidates": 3
+        },
+        "JPM": {
+          "endpoint": -0.014921127525038165,
+          "valid_candidates": 4
+        },
+        "JNJ": {
+          "endpoint": 0.017338540338702253,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": -0.0008823913282270155,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.006621244595935074,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.029289016143654593,
+          "valid_candidates": 33
+        }
+      }
+    },
+    {
+      "replicate": 4,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.005669276262886791
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.017523270810878653,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.005669276262886791,
+          "valid_candidates": 42
+        },
+        "XOM": {
+          "endpoint": 0.016354091818963672,
+          "valid_candidates": 3
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.0019956399088170173,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.0115281911713182,
+          "valid_candidates": 4
+        },
+        "WMT": {
+          "endpoint": 0.0010243387401395652,
+          "valid_candidates": 45
+        },
+        "NVDA": {
+          "endpoint": -0.006858148827937731,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 4,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.005163556469591469
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.02591959285701795,
+          "valid_candidates": 46
+        },
+        "MSFT": {
+          "endpoint": 0.029556454478574773,
+          "valid_candidates": 13
+        },
+        "XOM": {
+          "endpoint": -0.0010685876370995517,
+          "valid_candidates": 8
+        },
+        "JPM": {
+          "endpoint": -0.03722464936871515,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": -0.01379636066413244,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.011395700576282489,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": 0.02092678453173083,
+          "valid_candidates": 47
+        },
+        "NVDA": {
+          "endpoint": 0.04277389934833,
+          "valid_candidates": 46
+        }
+      }
+    },
+    {
+      "replicate": 5,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.008334167450115886
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.013448192207822817,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.017082397796921334,
+          "valid_candidates": 8
+        },
+        "XOM": {
+          "endpoint": 0.008973536145385482,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": -0.009220966900995685,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.00769479875484629,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.011929665775204091,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.009840115849361758,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": -0.024066208570165833,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 5,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.006901811738458971
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.012111593603586253,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.017415311715842655,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": 0.006901811738458971,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": 0.015795250875900575,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.0008715470364950713,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.005575723219514733,
+          "valid_candidates": 7
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": 0.015825211739850676,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 5,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": -0.0012714859258395913
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.004602688694590238,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.017422049795606975,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": -0.005858488243122575,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": 0.002045910526110434,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": -0.005517448320760819,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.0003475166593513546,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": -0.003608901614164424,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": -0.0028904885110305374,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 5,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.009027601875316777
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.004113607213989179,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": -0.002113572168309611,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": 0.018205825911895727,
+          "valid_candidates": 46
+        },
+        "JPM": {
+          "endpoint": 0.013941596536644377,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": -0.01441556040006635,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.03200209146510289,
+          "valid_candidates": 8
+        },
+        "WMT": {
+          "endpoint": -0.0020466975421217144,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.021388114500805775,
+          "valid_candidates": 45
+        }
+      }
+    },
+    {
+      "replicate": 6,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.006088494529160958
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.026047796265283966,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": -0.004256239231112986,
+          "valid_candidates": 6
+        },
+        "XOM": {
+          "endpoint": 0.005155960103480034,
+          "valid_candidates": 3
+        },
+        "JPM": {
+          "endpoint": -0.011588237513691469,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.00943702714486052,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.007021028954841883,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.011051995669519003,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.01391064224526546,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 6,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": -0.0005455787599293014
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": -0.002270028666418859,
+          "valid_candidates": 45
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.004904883788212566,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": -4.845349523000172e-05,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": 0.020125402159900323,
+          "valid_candidates": 47
+        },
+        "WMT": {
+          "endpoint": -0.001042704024628601,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": 0.036324576588243514,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 6,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": -0.004316371151443636
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.01783327967032175,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.017432243832086657,
+          "valid_candidates": 19
+        },
+        "XOM": {
+          "endpoint": -0.013777987474973599,
+          "valid_candidates": 4
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.0016739880547758054,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": -0.010193310495320601,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.004316371151443636,
+          "valid_candidates": 31
+        },
+        "NVDA": {
+          "endpoint": 0.022847279265028393,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 6,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": -0.00863008306151013
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.013353539916568534,
+          "valid_candidates": 45
+        },
+        "MSFT": {
+          "endpoint": -0.016542170470431605,
+          "valid_candidates": 47
+        },
+        "XOM": {
+          "endpoint": -0.013956909810695613,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": 0.012389472015517999,
+          "valid_candidates": 6
+        },
+        "JNJ": {
+          "endpoint": -0.011308168903488663,
+          "valid_candidates": 4
+        },
+        "CAT": {
+          "endpoint": 0.014959414023679823,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": -0.014413338251710194,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": -0.005951997219531599,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 7,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.007421317166809412
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.03395756387311889,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.012449727362818111,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.0118905448244152,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.0028222467168546287,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.011990210491496709,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": 0.012020387616764196,
+          "valid_candidates": 3
+        }
+      }
+    },
+    {
+      "replicate": 7,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": -0.0017651612942665498
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.0017651612942665498,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": -0.0022215496727831198,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": 0.014434708482316013,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": -0.01504407228855416,
+          "valid_candidates": 45
+        },
+        "CAT": {
+          "endpoint": -0.007162778854908191,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": 0.007458664030682769,
+          "valid_candidates": 48
+        },
+        "NVDA": {
+          "endpoint": 0.027549515001113457,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 7,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": 0.012389293357383509
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": 0.012832177889834234,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.0035529308179249926,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.012389293357383509,
+          "valid_candidates": 47
+        },
+        "CAT": {
+          "endpoint": 0.02698144675744301,
+          "valid_candidates": 46
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": 0.007752713836005749,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 7,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.018277719156405088
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.018277719156405088,
+          "valid_candidates": 40
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": -0.015802479782515283,
+          "valid_candidates": 47
+        },
+        "JPM": {
+          "endpoint": 0.018378278651481332,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": -0.011911201041074172,
+          "valid_candidates": 6
+        },
+        "CAT": {
+          "endpoint": 0.037725236631275985,
+          "valid_candidates": 10
+        },
+        "WMT": {
+          "endpoint": -0.012493987865438353,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": 0.028941868265094775,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 8,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.010209301095038321
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.014499416058143616,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.03204103694565646,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": 0.013776415813109635,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.003183791486030429,
+          "valid_candidates": 4
+        },
+        "CAT": {
+          "endpoint": 0.010209301095038321,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.008811016151695382,
+          "valid_candidates": 5
+        },
+        "NVDA": {
+          "endpoint": -0.003440041785844245,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 8,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.019132356571317056
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.012400645059431437,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.02949973255083871,
+          "valid_candidates": 39
+        },
+        "XOM": {
+          "endpoint": 0.03485647344226348,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.008493523180596917,
+          "valid_candidates": 6
+        },
+        "CAT": {
+          "endpoint": 0.023929468660973983,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": 0.019132356571317056,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": -0.004803385595136557,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 8,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 4,
+        "median_viable_return": 0.005130835489377121
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.01581182522024172,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.009688359201023095,
+          "valid_candidates": 47
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.0005733117777311472,
+          "valid_candidates": 5
+        },
+        "CAT": {
+          "endpoint": -0.01792587962628979,
+          "valid_candidates": 46
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 8,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.009963892571762788
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.006345229601110149,
+          "valid_candidates": 44
+        },
+        "MSFT": {
+          "endpoint": 0.009963892571762788,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": 0.00012588839859205346,
+          "valid_candidates": 5
+        },
+        "JPM": {
+          "endpoint": 0.024611309035002277,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": -0.014134499764561182,
+          "valid_candidates": 6
+        },
+        "CAT": {
+          "endpoint": 0.012643287437374121,
+          "valid_candidates": 48
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": 0.014579147621805254,
+          "valid_candidates": 12
+        }
+      }
+    },
+    {
+      "replicate": 9,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.007757745250712177
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.024378720260278944,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": 0.009624703800494546,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": 0.006406339143006637,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.005076724762294395,
+          "valid_candidates": 4
+        },
+        "CAT": {
+          "endpoint": 0.009109151358417717,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.009557063916757428,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 9,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.000998323637972693
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.001583654402574085,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": -0.0023694301303760577,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.015213321765167806,
+          "valid_candidates": 20
+        },
+        "CAT": {
+          "endpoint": -0.025394091378954712,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": 0.0004129928733713012,
+          "valid_candidates": 47
+        },
+        "NVDA": {
+          "endpoint": 0.029882830386954988,
+          "valid_candidates": 40
+        }
+      }
+    },
+    {
+      "replicate": 9,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": -0.0004932189913314317
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.014548382886893935,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": 0.0001421317570773336,
+          "valid_candidates": 43
+        },
+        "JPM": {
+          "endpoint": -0.0011285697397401969,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": -0.00667101022795743,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": 0.0013016378587564208,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.04958037907562181,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 9,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": -0.00019744774178960626
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.0002202736148987361,
+          "valid_candidates": 47
+        },
+        "MSFT": {
+          "endpoint": -0.0012002239471082354,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.01456176327450352,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.011800705003680257,
+          "valid_candidates": 34
+        },
+        "WMT": {
+          "endpoint": -0.0006151690984779486,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": 0.022755516979712252,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 10,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.007793365143471355
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.01323027740036054,
+          "valid_candidates": 7
+        },
+        "MSFT": {
+          "endpoint": 0.013316992942190185,
+          "valid_candidates": 6
+        },
+        "XOM": {
+          "endpoint": 0.007793365143471355,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.012919574949006205,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.007237547177335595,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.010225370614662829,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": -0.00028214304311018187,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 10,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.005067630815959026
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.0020438679884666046,
+          "valid_candidates": 36
+        },
+        "MSFT": {
+          "endpoint": 0.03632615381500187,
+          "valid_candidates": 45
+        },
+        "XOM": {
+          "endpoint": -0.005704453964364121,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": 0.012179129620384657,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": -0.007337483722308165,
+          "valid_candidates": 4
+        },
+        "CAT": {
+          "endpoint": 0.018653618106601152,
+          "valid_candidates": 36
+        },
+        "WMT": {
+          "endpoint": 0.012513248019381388,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": -0.014647060282994511,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 10,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": 0.012207894764972454
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.012207894764972454,
+          "valid_candidates": 42
+        },
+        "MSFT": {
+          "endpoint": 0.013604939727907252,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.008733199657365071,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": 0.025272175317530825,
+          "valid_candidates": 4
+        },
+        "WMT": {
+          "endpoint": -0.031380870756908104,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 10,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": 0.015048320121023598
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": 0.007930561620754133,
+          "valid_candidates": 35
+        },
+        "JPM": {
+          "endpoint": 0.015048320121023598,
+          "valid_candidates": 9
+        },
+        "JNJ": {
+          "endpoint": 0.01611232152643996,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": 0.00470083201033337,
+          "valid_candidates": 6
+        },
+        "NVDA": {
+          "endpoint": 0.03850849120893612,
+          "valid_candidates": 44
+        }
+      }
+    },
+    {
+      "replicate": 11,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.004790764080618867
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.035095673082237495,
+          "valid_candidates": 7
+        },
+        "MSFT": {
+          "endpoint": 0.016244811341098644,
+          "valid_candidates": 5
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.01014587528424459,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": 0.009079806657002518,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.004790764080618867,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.013195675315147959,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": -0.0018292555717126576,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 11,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": -0.002372366762196054
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.007477512991454124,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": -0.002372366762196054,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": 0.018784384546016407,
+          "valid_candidates": 43
+        },
+        "JNJ": {
+          "endpoint": -0.006345066453969249,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": 0.020199612213314122,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 11,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 9.332341650873351e-05
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.00921796698157838,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.01855995545255379,
+          "valid_candidates": 5
+        },
+        "XOM": {
+          "endpoint": -0.004633567214324502,
+          "valid_candidates": 46
+        },
+        "JPM": {
+          "endpoint": 0.004820214047341969,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.016946889449132814,
+          "valid_candidates": 45
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.019455614836398964,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 11,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.0022460791852605628
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.023333105287428123,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.005605156122273652,
+          "valid_candidates": 5
+        },
+        "XOM": {
+          "endpoint": -0.014501730264804898,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": -0.030723220287594027,
+          "valid_candidates": 43
+        },
+        "JNJ": {
+          "endpoint": -0.0011129977517525264,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": 0.041365262128931726,
+          "valid_candidates": 40
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 12,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": -0.005180312504611279
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.014397578644030042,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": -0.005180312504611279,
+          "valid_candidates": 9
+        },
+        "XOM": {
+          "endpoint": 0.012498124476686584,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": -0.00928565761841127,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": 0.010331546740048402,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.009620103616059757,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": -0.007760645142847695,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 12,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.0069572481198146765
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.006005987810951524,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.00790850842867783,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.00857129697803781,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": 0.012757719216699812,
+          "valid_candidates": 43
+        },
+        "CAT": {
+          "endpoint": -0.024950762322693713,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": 0.04478066769787381,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 12,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.0073902203202034595
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.000256810149230896,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.013842527542701514,
+          "valid_candidates": 4
+        },
+        "XOM": {
+          "endpoint": 0.005137543131561799,
+          "valid_candidates": 47
+        },
+        "JPM": {
+          "endpoint": 0.007646359081988852,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": 0.0073902203202034595,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.02424890289798805,
+          "valid_candidates": 47
+        },
+        "WMT": {
+          "endpoint": 0.007168936389549521,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 12,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.004648168102262444
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.007080206011631547,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.00221613019289334,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": -0.00017775814110749193,
+          "valid_candidates": 5
+        },
+        "JPM": {
+          "endpoint": 0.009187160389937067,
+          "valid_candidates": 47
+        },
+        "JNJ": {
+          "endpoint": -0.019193338257888846,
+          "valid_candidates": 7
+        },
+        "CAT": {
+          "endpoint": -0.02138318050101147,
+          "valid_candidates": 45
+        },
+        "WMT": {
+          "endpoint": 0.00742962256269745,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": 0.03385619754199929,
+          "valid_candidates": 3
+        }
+      }
+    },
+    {
+      "replicate": 13,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.009206415748255857
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.009206415748255857,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.00943296404477381,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": 0.007988241038733974,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.0066969286858433955,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.013721968844547355,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.00938638331578854,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.010273967028223658,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 13,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.008180150811960557
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.009622732249790988,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.006737569374130124,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": -0.0033541670706619614,
+          "valid_candidates": 46
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.010338097718260632,
+          "valid_candidates": 45
+        },
+        "CAT": {
+          "endpoint": -0.034159428091283264,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": 0.030706170432008323,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 13,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.018221976341423207
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.005583950477262976,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.02136711511982861,
+          "valid_candidates": 45
+        },
+        "XOM": {
+          "endpoint": 0.02756951941661654,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": 0.018221976341423207,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": 0.00890792643934446,
+          "valid_candidates": 18
+        },
+        "CAT": {
+          "endpoint": 0.013488650770475714,
+          "valid_candidates": 6
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": 0.04156160951524565,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 13,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.006971950598001177
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.006572205649063689,
+          "valid_candidates": 48
+        },
+        "MSFT": {
+          "endpoint": 0.004288986728699008,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": 0.00791797586539739,
+          "valid_candidates": 48
+        },
+        "JPM": {
+          "endpoint": 0.006025925330604965,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": 0.013047686776274943,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.009376816250166922,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 14,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.007045665184463075
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.025614733290519887,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": 0.015361459203076949,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": 0.006172017728844781,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": -0.010700495965103127,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.007919312640081368,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.011705626676011044,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": -0.014333073747660574,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": 0.005062214326193031,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 14,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": 0.009969505460280775
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.009649452790257942,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": 0.009969505460280775,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.006573866939243643,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": 0.010949295963021084,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.0244730001332666,
+          "valid_candidates": 36
+        }
+      }
+    },
+    {
+      "replicate": 14,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": 0.006754920307607258
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.03177604000930779,
+          "valid_candidates": 34
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": 0.006754920307607258,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": -0.0005554208660184589,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": -0.013715519462813765,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": 0.017974384472366666,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 14,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 3.678871962637327e-05
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.019613702474411472,
+          "valid_candidates": 31
+        },
+        "MSFT": {
+          "endpoint": 0.005888744809480104,
+          "valid_candidates": 45
+        },
+        "XOM": {
+          "endpoint": -0.005761025431271968,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": -0.011482484018780735,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 3.678871962637327e-05,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": 0.04272807185566656,
+          "valid_candidates": 44
+        },
+        "NVDA": {
+          "endpoint": -0.005962646731013024,
+          "valid_candidates": 11
+        }
+      }
+    },
+    {
+      "replicate": 15,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.004170577040412929
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.03420227071573286,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": 0.03912469641624792,
+          "valid_candidates": 7
+        },
+        "XOM": {
+          "endpoint": 0.0033075102113921586,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.004170577040412929,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.014544654937025484,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": -0.012312818943219419,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": -0.00091525232206306,
+          "valid_candidates": 5
+        }
+      }
+    },
+    {
+      "replicate": 15,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.0024745182231143714
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.008399877053062084,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.001291753503402983,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": 0.004743862283498628,
+          "valid_candidates": 47
+        },
+        "JPM": {
+          "endpoint": -0.011816772229518498,
+          "valid_candidates": 4
+        },
+        "JNJ": {
+          "endpoint": -0.013850248308624961,
+          "valid_candidates": 42
+        },
+        "CAT": {
+          "endpoint": 0.017121472555275904,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": 0.0024745182231143714,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 15,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.004321235969764485
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": 0.0047115622617381215,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": -0.013595480658959392,
+          "valid_candidates": 4
+        },
+        "JPM": {
+          "endpoint": 0.0136201747745413,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": 0.004321235969764485,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": -0.0042454649448352005,
+          "valid_candidates": 4
+        },
+        "WMT": {
+          "endpoint": 0.01810126181464813,
+          "valid_candidates": 36
+        },
+        "NVDA": {
+          "endpoint": -0.0033104994790904172,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 15,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.007077247903919233
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.011659898500288575,
+          "valid_candidates": 43
+        },
+        "MSFT": {
+          "endpoint": 0.004830417510153642,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": 0.0223574304033357,
+          "valid_candidates": 35
+        },
+        "JPM": {
+          "endpoint": 0.02943809546629792,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": -0.0008067741782790839,
+          "valid_candidates": 4
+        },
+        "CAT": {
+          "endpoint": 0.020585067208197798,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.0035359436504769533,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": 0.009324078297684824,
+          "valid_candidates": 4
+        }
+      }
+    },
+    {
+      "replicate": 16,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.0056406529413797046
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.02010143526391087,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.005098266356244842,
+          "valid_candidates": 6
+        },
+        "XOM": {
+          "endpoint": 0.0056406529413797046,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.014811312508577508,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.010399187026819306,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.00824787937345099,
+          "valid_candidates": 5
+        },
+        "NVDA": {
+          "endpoint": -0.005911487615182352,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 16,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.004509725222373752
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.00566087512768847,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.007607647123905334,
+          "valid_candidates": 7
+        },
+        "XOM": {
+          "endpoint": 0.0054540054316027506,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": 0.0005115623370547446,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.004509725222373752,
+          "valid_candidates": 12
+        },
+        "CAT": {
+          "endpoint": 0.006577042248577669,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.01822668722667763,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 16,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.001316406856947398
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.016681525664361534,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.015022784509146897,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": -0.007338793942046206,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": -0.00012583441432880284,
+          "valid_candidates": 44
+        },
+        "JNJ": {
+          "endpoint": 0.0004076674474171643,
+          "valid_candidates": 39
+        },
+        "CAT": {
+          "endpoint": 0.006496206984561101,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": 0.0022251462664776315,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": 0.05096874206211615,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 16,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": -0.0023583556336432628
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.01960779673413465,
+          "valid_candidates": 47
+        },
+        "MSFT": {
+          "endpoint": -0.014673924924929919,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": -0.013592584495408733,
+          "valid_candidates": 45
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.0023583556336432628,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.041286474235674636,
+          "valid_candidates": 37
+        },
+        "WMT": {
+          "endpoint": 0.01556571372219755,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.015362117964812027,
+          "valid_candidates": 45
+        }
+      }
+    },
+    {
+      "replicate": 17,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.01011308113904917
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.01096223394138122,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.014452007477988457,
+          "valid_candidates": 6
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.008414810743102246,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.01011308113904917,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.01542115351938347,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.011276004698218253,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.005558359833062536,
+          "valid_candidates": 4
+        }
+      }
+    },
+    {
+      "replicate": 17,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.00848991692214429
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": 0.021120214681829022,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": -0.006748954531567734,
+          "valid_candidates": 48
+        },
+        "JPM": {
+          "endpoint": 0.016241389810670803,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.0036235499102621337,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.013356283934026447,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": -0.03010188034251367,
+          "valid_candidates": 15
+        }
+      }
+    },
+    {
+      "replicate": 17,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.009344804851593549
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.015918931980942037,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.000404985093760151,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": 0.02991313689032209,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.009232699376936198,
+          "valid_candidates": 46
+        },
+        "CAT": {
+          "endpoint": 0.012444142443678722,
+          "valid_candidates": 44
+        },
+        "WMT": {
+          "endpoint": 0.009344804851593549,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.0075630582742273154,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 17,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": -0.005627123962891759
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.005627123962891759,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": -0.0097425012540599,
+          "valid_candidates": 43
+        },
+        "XOM": {
+          "endpoint": 0.010325778038649244,
+          "valid_candidates": 20
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.008799012057646395,
+          "valid_candidates": 4
+        },
+        "CAT": {
+          "endpoint": -0.034089936161730054,
+          "valid_candidates": 47
+        },
+        "WMT": {
+          "endpoint": 0.00036610607170845845,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": 0.027540795487143055,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 18,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.0063939954943005
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.018742866733064984,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.007161105972287016,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": 0.0063939954943005,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.01119506282294237,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.005635880711693438,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.010367188156776484,
+          "valid_candidates": 7
+        },
+        "NVDA": {
+          "endpoint": -0.014469581694361291,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 18,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": -0.004160530317693893
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": -0.02275535671373802,
+          "valid_candidates": 45
+        },
+        "XOM": {
+          "endpoint": -0.012394639721532022,
+          "valid_candidates": 3
+        },
+        "JPM": {
+          "endpoint": 0.0040735790861442375,
+          "valid_candidates": 4
+        },
+        "JNJ": {
+          "endpoint": 0.014201915594544489,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": 0.03909365452318009,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.017398709596291174,
+          "valid_candidates": 9
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 18,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": -0.005707511280431579
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.003445602324512213,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": -0.007381124612020141,
+          "valid_candidates": 5
+        },
+        "XOM": {
+          "endpoint": -0.012120124350617748,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": -0.011928059734426908,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": -0.004033897948843017,
+          "valid_candidates": 11
+        },
+        "CAT": {
+          "endpoint": -0.019655504197288502,
+          "valid_candidates": 8
+        },
+        "WMT": {
+          "endpoint": 0.016638379829235137,
+          "valid_candidates": 47
+        },
+        "NVDA": {
+          "endpoint": 0.018219589549113437,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 18,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.0005275388442277245
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.0005275388442277245,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": 0.015623424471056701,
+          "valid_candidates": 4
+        },
+        "JPM": {
+          "endpoint": -0.01933662513003947,
+          "valid_candidates": 7
+        },
+        "JNJ": {
+          "endpoint": -0.013426837097211455,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": 0.030583116401137315,
+          "valid_candidates": 48
+        },
+        "WMT": {
+          "endpoint": -0.02273655882082929,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": 0.03675856776472823,
+          "valid_candidates": 45
+        }
+      }
+    },
+    {
+      "replicate": 19,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.011700587771833115
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.03532240128036262,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.013251144987094133,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.0118905448244152,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.011700587771833115,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.01370666849910566,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.013345993148734194,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": -0.005141402173774041,
+          "valid_candidates": 3
+        }
+      }
+    },
+    {
+      "replicate": 19,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": -0.006279323908088959
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.02266241668173136,
+          "valid_candidates": 43
+        },
+        "MSFT": {
+          "endpoint": -0.021796812790585745,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": -0.0054994335075167254,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": 0.01268952416795228,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": -0.012407584930859016,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.006279323908088959,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": -0.018090747106505767,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 19,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.005008282054101437
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.021297299279148495,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": -0.0328890498200973,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": 0.005008282054101437,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": -8.410842157339908e-05,
+          "valid_candidates": 4
+        },
+        "CAT": {
+          "endpoint": 0.012517599787678985,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.0010168239887102032,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": 0.007928825206474668,
+          "valid_candidates": 6
+        }
+      }
+    },
+    {
+      "replicate": 19,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.004425073900307592
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.004005750598228622,
+          "valid_candidates": 10
+        },
+        "MSFT": {
+          "endpoint": 0.021825825941917155,
+          "valid_candidates": 22
+        },
+        "XOM": {
+          "endpoint": -0.03740720808037657,
+          "valid_candidates": 34
+        },
+        "JPM": {
+          "endpoint": 0.007398895084412424,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": -0.027618781354927187,
+          "valid_candidates": 48
+        },
+        "CAT": {
+          "endpoint": 0.004844397202386563,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": 0.019109306199461728,
+          "valid_candidates": 3
+        },
+        "NVDA": {
+          "endpoint": -0.013396925934329463,
+          "valid_candidates": 46
+        }
+      }
+    },
+    {
+      "replicate": 20,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.011045475098459318
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.0343237805472115,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.0029806136340806547,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.016298898391831667,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.015463569461555624,
+          "valid_candidates": 5
+        },
+        "WMT": {
+          "endpoint": -0.01191981267851355,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": 0.006627380735363012,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 20,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.009869767532451959
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.01152741434865425,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.012033507671423544,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.0053062561795669105,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.008212120716249669,
+          "valid_candidates": 44
+        },
+        "CAT": {
+          "endpoint": -0.006194705041853148,
+          "valid_candidates": 20
+        },
+        "WMT": {
+          "endpoint": 0.016608491994899076,
+          "valid_candidates": 11
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 20,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": -0.002950992445551401
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.03709361017527175,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.025356612712670194,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": 0.004308093479674591,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": -0.010210078370777392,
+          "valid_candidates": 7
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.018945649902898643,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": 0.0178995744613853,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 20,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": -0.0030636348638239524
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.0030636348638239524,
+          "valid_candidates": 45
+        },
+        "MSFT": {
+          "endpoint": -0.0031753084808318396,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": 0.04260712670035189,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": -0.01064379484567694,
+          "valid_candidates": 2
+        },
+        "JNJ": {
+          "endpoint": 0.007580495366951249,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.011396986986727933,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": 0.03478037664279482,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 21,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.008725402677739967
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.022964016934336952,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": 0.011212984425120354,
+          "valid_candidates": 4
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.006237820930359578,
+          "valid_candidates": 5
+        },
+        "CAT": {
+          "endpoint": 0.016486767143810355,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": -0.009232351285359373,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": -0.006348261572476218,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 21,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": -0.0034065938664716603
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.033204320027611506,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": -0.016885622711597856,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.0034065938664716603,
+          "valid_candidates": 41
+        },
+        "CAT": {
+          "endpoint": 0.03646404086373918,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": 0.004440158415292446,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 21,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.0033892007561652487
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.0032219474641901604,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.024265699661920232,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": -0.010878451598971715,
+          "valid_candidates": 47
+        },
+        "JNJ": {
+          "endpoint": 0.0025704879112233817,
+          "valid_candidates": 8
+        },
+        "CAT": {
+          "endpoint": 0.003556454048140337,
+          "valid_candidates": 6
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": 0.03273810662582529,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 21,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": -0.002433538906544224
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.005636081425892012,
+          "valid_candidates": 46
+        },
+        "MSFT": {
+          "endpoint": -0.0008044398901904254,
+          "valid_candidates": 5
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": 0.0055605106459091684,
+          "valid_candidates": 47
+        },
+        "JNJ": {
+          "endpoint": -0.02056952434984036,
+          "valid_candidates": 9
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.004062637922898023,
+          "valid_candidates": 6
+        },
+        "NVDA": {
+          "endpoint": 0.03414652097398889,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 22,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": 0.007466632324166426
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.03152160571725855,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": 0.01196609253391105,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": 0.007466632324166426,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": -0.010883914978203393,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": 0.006223323800815772,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 22,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": 0.009201367318280041
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.018250598725523346,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": -0.010439897127542595,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": 0.000659747685742851,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": 0.009201367318280041,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.021647361669238148,
+          "valid_candidates": 3
+        }
+      }
+    },
+    {
+      "replicate": 22,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": -0.0133367618348443
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.024346917995995608,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": 0.0018673976108251255,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": -0.0133367618348443,
+          "valid_candidates": 3
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.02559973759142348,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": 0.016336163802928426,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 22,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.017049636898402856
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.014272274753592135,
+          "valid_candidates": 1
+        },
+        "MSFT": {
+          "endpoint": -0.008157479739608993,
+          "valid_candidates": 38
+        },
+        "XOM": {
+          "endpoint": 0.06850952787740751,
+          "valid_candidates": 38
+        },
+        "JPM": {
+          "endpoint": 0.019826999043213576,
+          "valid_candidates": 3
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": 0.03402339923716577,
+          "valid_candidates": 2
+        },
+        "WMT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "NVDA": {
+          "endpoint": -0.00983249442993795,
+          "valid_candidates": 2
+        }
+      }
+    },
+    {
+      "replicate": 23,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 6,
+        "median_viable_return": 0.00647328475167756
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.031042749935827164,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": 0.005807483083449247,
+          "valid_candidates": 6
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.007139086419905872,
+          "valid_candidates": 1
+        },
+        "CAT": {
+          "endpoint": 0.014620312474328717,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.009184179974222082,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": 0.005318967933411615,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 23,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 5,
+        "median_viable_return": 0.010750456434899629
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.017527998164722378,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.010750456434899629,
+          "valid_candidates": 2
+        },
+        "XOM": {
+          "endpoint": 0.022428731868731122,
+          "valid_candidates": 3
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "CAT": {
+          "endpoint": -0.00022647067395886077,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.000800342504892494,
+          "valid_candidates": 46
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 23,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": -0.010513718359011586
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.04636043419171942,
+          "valid_candidates": 3
+        },
+        "MSFT": {
+          "endpoint": -0.010513718359011586,
+          "valid_candidates": 3
+        },
+        "XOM": {
+          "endpoint": -0.013788307925009876,
+          "valid_candidates": 47
+        },
+        "JPM": {
+          "endpoint": 0.029453676449417623,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": -0.005657422240368584,
+          "valid_candidates": 45
+        },
+        "CAT": {
+          "endpoint": 0.016952958789864064,
+          "valid_candidates": 21
+        },
+        "WMT": {
+          "endpoint": -0.013364536022022266,
+          "valid_candidates": 1
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 23,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 4,
+        "median_viable_return": 0.0004768863775148906
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.004894294865781356,
+          "valid_candidates": 4
+        },
+        "MSFT": {
+          "endpoint": 0.005848067620811137,
+          "valid_candidates": 1
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.02599831641444277,
+          "valid_candidates": 48
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.01822464629415131,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": null,
+          "valid_candidates": 0
+        }
+      }
+    },
+    {
+      "replicate": 24,
+      "arm": "REAL",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.011623283553539171
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": 0.011526985440317772,
+          "valid_candidates": 2
+        },
+        "MSFT": {
+          "endpoint": 0.021636693155229272,
+          "valid_candidates": 4
+        },
+        "XOM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JPM": {
+          "endpoint": 0.03263618832646948,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.011623283553539171,
+          "valid_candidates": 2
+        },
+        "CAT": {
+          "endpoint": 0.015084276469795885,
+          "valid_candidates": 1
+        },
+        "WMT": {
+          "endpoint": -0.011341258648929951,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": 0.0018089034605728632,
+          "valid_candidates": 3
+        }
+      }
+    },
+    {
+      "replicate": 24,
+      "arm": "NA_STATIONARY_BOOTSTRAP_Y",
+      "primary": {
+        "viable_stock_count": 4,
+        "median_viable_return": -0.007638283182993432
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "MSFT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "XOM": {
+          "endpoint": -0.03328836112267768,
+          "valid_candidates": 1
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": -0.013701095304923212,
+          "valid_candidates": 44
+        },
+        "CAT": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "WMT": {
+          "endpoint": -0.0015754710610636517,
+          "valid_candidates": 4
+        },
+        "NVDA": {
+          "endpoint": 0.04432989943870771,
+          "valid_candidates": 3
+        }
+      }
+    },
+    {
+      "replicate": 24,
+      "arm": "NB_GUARDED_SHIFT_Y",
+      "primary": {
+        "viable_stock_count": 8,
+        "median_viable_return": 0.0034670482299493373
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.033708928616217854,
+          "valid_candidates": 5
+        },
+        "MSFT": {
+          "endpoint": 0.004748855179345485,
+          "valid_candidates": 41
+        },
+        "XOM": {
+          "endpoint": 0.027819769298097614,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": -0.002392073001311981,
+          "valid_candidates": 1
+        },
+        "JNJ": {
+          "endpoint": 0.002859850822570063,
+          "valid_candidates": 3
+        },
+        "CAT": {
+          "endpoint": 0.0040742456373286115,
+          "valid_candidates": 3
+        },
+        "WMT": {
+          "endpoint": 0.008345433314983384,
+          "valid_candidates": 2
+        },
+        "NVDA": {
+          "endpoint": -0.012496107115956709,
+          "valid_candidates": 1
+        }
+      }
+    },
+    {
+      "replicate": 24,
+      "arm": "NC_GUARDED_SHIFT_X",
+      "primary": {
+        "viable_stock_count": 7,
+        "median_viable_return": 0.0001536385109445343
+      },
+      "ticker_detail": {
+        "AAPL": {
+          "endpoint": -0.011168717324043433,
+          "valid_candidates": 17
+        },
+        "MSFT": {
+          "endpoint": 0.004573541472909735,
+          "valid_candidates": 4
+        },
+        "XOM": {
+          "endpoint": 0.0001536385109445343,
+          "valid_candidates": 2
+        },
+        "JPM": {
+          "endpoint": null,
+          "valid_candidates": 0
+        },
+        "JNJ": {
+          "endpoint": 0.01960787652219618,
+          "valid_candidates": 44
+        },
+        "CAT": {
+          "endpoint": -0.002313404982091689,
+          "valid_candidates": 48
+        },
+        "WMT": {
+          "endpoint": 0.0027152148891258394,
+          "valid_candidates": 9
+        },
+        "NVDA": {
+          "endpoint": -0.017022401797318433,
+          "valid_candidates": 4
+        }
+      }
+    }
+  ],
+  "seconds": 288.699573319,
+  "gate_decision": {
+    "state": "FAIL_NO_LARGE_DISCOVERY",
+    "significant_nulls": 1,
+    "tests": [
+      {
+        "family": "NA_STATIONARY_BOOTSTRAP_Y",
+        "real_wins": 21,
+        "null_wins": 4,
+        "ties": 0,
+        "non_tied_pairs": 25,
+        "pvalue": 0.0004552602767944336,
+        "significant": true,
+        "decided_by_viability": 15,
+        "decided_by_return": 10
+      },
+      {
+        "family": "NB_GUARDED_SHIFT_Y",
+        "real_wins": 15,
+        "null_wins": 10,
+        "ties": 0,
+        "non_tied_pairs": 25,
+        "pvalue": 0.21217811107635498,
+        "significant": false,
+        "decided_by_viability": 15,
+        "decided_by_return": 10
+      },
+      {
+        "family": "NC_GUARDED_SHIFT_X",
+        "real_wins": 16,
+        "null_wins": 9,
+        "ties": 0,
+        "non_tied_pairs": 25,
+        "pvalue": 0.11476147174835205,
+        "significant": false,
+        "decided_by_viability": 15,
+        "decided_by_return": 10
+      }
+    ]
+  }
+}
