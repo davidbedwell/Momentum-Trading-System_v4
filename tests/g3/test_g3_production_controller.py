@@ -3,7 +3,8 @@ from pathlib import Path
 def test_controller_formal_gate_is_conforming_only_and_fail_closed():
     s=Path('scripts/run_g3_production_controller_20261007.py').read_text()
     assert "PASS_2_OF_3" in s and "STRONG_PASS_3_OF_3" in s
-    assert "STOP_V3_CONFORMING_FAILED" in s
+    assert "STOP_V4_FAILED" in s and "RUNNING_V4_PREREGISTERED_GATE" in s
+    assert "if cstate not in PASS" not in s
     assert "if g['state'] not in PASS" not in s
     assert "if g['state'] not in PASS" not in s
 
