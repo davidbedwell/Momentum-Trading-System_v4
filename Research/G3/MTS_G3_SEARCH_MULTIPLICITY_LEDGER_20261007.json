@@ -1,0 +1,28 @@
+{
+  "format": "MTS_G3_SEARCH_MULTIPLICITY_LEDGER_V1",
+  "rule": "append-only research accounting; reviewed pilots remain counted even if later superseded",
+  "attempts": [
+    {
+      "run_id": "MTS_G3_MATCHED_REAL_NULL_PILOT_20261006",
+      "status": "SUPERSEDED_BY_CAUSAL_DATA_FIX",
+      "arms": ["real", "N1_TEMPORAL_BLOCK"],
+      "generations": 6,
+      "population": 48,
+      "tickers": 8,
+      "ticker_evaluations_per_arm": 2304,
+      "reviewed": true
+    },
+    {
+      "run_id": "MTS_G3_EARNINGS_MATCHED_PILOT_20261007",
+      "status": "ENGINEERING_PILOT_VALID_FOR_THROUGHPUT_NOT_PRODUCTION_AUTHORIZATION",
+      "arms": ["real_earnings_enabled", "N1_TEMPORAL_BLOCK"],
+      "generations": 6,
+      "population": 48,
+      "tickers": 8,
+      "ticker_evaluations_per_arm": 2304,
+      "reviewed": true,
+      "total_seconds": 71.31729301000087
+    }
+  ],
+  "production_authorized": false
+}

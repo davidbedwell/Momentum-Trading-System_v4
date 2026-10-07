@@ -1,0 +1,160 @@
+{
+  "format": "MTS_G3_EARNINGS_MATCHED_PILOT_V1",
+  "status": "PILOT_ONLY_NOT_PRODUCTION",
+  "workers": 60,
+  "tickers": [
+    "AAPL",
+    "MSFT",
+    "XOM",
+    "JPM",
+    "JNJ",
+    "CAT",
+    "WMT",
+    "NVDA"
+  ],
+  "rows": 2500,
+  "feature_family": "price_volume_plus_PIT_earnings",
+  "arms": [
+    {
+      "arm": "real_earnings_enabled",
+      "generations": 6,
+      "population": 48,
+      "ticker_evaluations": 2304,
+      "seconds": 32.75151700499919,
+      "ledger": [
+        {
+          "generation": 1,
+          "best": {
+            "n": 1571,
+            "mean": 0.00843857008374427,
+            "tail": -0.07820380205830349,
+            "duration": 7.781667727562063
+          },
+          "median_mean": -0.005954211719521254
+        },
+        {
+          "generation": 2,
+          "best": {
+            "n": 1571,
+            "mean": 0.00850763959535331,
+            "tail": -0.07820380205830349,
+            "duration": 7.77848504137492
+          },
+          "median_mean": 0.003243174513866089
+        },
+        {
+          "generation": 3,
+          "best": {
+            "n": 1561,
+            "mean": 0.008649347481753987,
+            "tail": -0.07820380205830349,
+            "duration": 7.787315823190263
+          },
+          "median_mean": 0.005816682609128503
+        },
+        {
+          "generation": 4,
+          "best": {
+            "n": 1571,
+            "mean": 0.009347520592274085,
+            "tail": -0.08822317301270591,
+            "duration": 8.215786123488224
+          },
+          "median_mean": 0.0084381189287966
+        },
+        {
+          "generation": 5,
+          "best": {
+            "n": 1571,
+            "mean": 0.010180137242314634,
+            "tail": -0.09063061404167534,
+            "duration": 8.41056651814131
+          },
+          "median_mean": 0.00861543311866263
+        },
+        {
+          "generation": 6,
+          "best": {
+            "n": 1571,
+            "mean": 0.010258958010053346,
+            "tail": -0.08822317301270591,
+            "duration": 8.460216422660725
+          },
+          "median_mean": 0.00902008502050235
+        }
+      ]
+    },
+    {
+      "arm": "matched_temporal_block_null_earnings_enabled",
+      "generations": 6,
+      "population": 48,
+      "ticker_evaluations": 2304,
+      "seconds": 33.131371260999,
+      "ledger": [
+        {
+          "generation": 1,
+          "best": {
+            "n": 8465,
+            "mean": 0.004498054641481534,
+            "tail": -0.07997936683031218,
+            "duration": 8.99846426461902
+          },
+          "median_mean": -0.004207796504580121
+        },
+        {
+          "generation": 2,
+          "best": {
+            "n": 130,
+            "mean": 0.006972238101986061,
+            "tail": -0.04893109046101178,
+            "duration": 3.6
+          },
+          "median_mean": 0.003158784922776142
+        },
+        {
+          "generation": 3,
+          "best": {
+            "n": 130,
+            "mean": 0.007412332112198771,
+            "tail": -0.0897393402004462,
+            "duration": 3.5
+          },
+          "median_mean": 0.004516130382683936
+        },
+        {
+          "generation": 4,
+          "best": {
+            "n": 8873,
+            "mean": 0.006864935259891287,
+            "tail": -0.0847385989596432,
+            "duration": 9.23892708215936
+          },
+          "median_mean": 0.005530359175973034
+        },
+        {
+          "generation": 5,
+          "best": {
+            "n": 8873,
+            "mean": 0.007362415370097273,
+            "tail": -0.09470187518598265,
+            "duration": 9.315451369322664
+          },
+          "median_mean": 0.006062507074268248
+        },
+        {
+          "generation": 6,
+          "best": {
+            "n": 7817,
+            "mean": 0.007637092699012095,
+            "tail": -0.08717869979222374,
+            "duration": 9.258411155174619
+          },
+          "median_mean": 0.006385039945987016
+        }
+      ]
+    }
+  ],
+  "total_seconds": 71.31729301000087,
+  "matched_budget": true,
+  "production_authorized": false
+}
