@@ -32,4 +32,4 @@ jobs:
             Tests/test_stage2_paired_null_v3.py \
             Tests/test_stage2_recovered_source_preflight_v3.py
       - name: Verify frozen source hashes (required)
-        run: python scripts/check_stage2_v3_readiness.py
+        run: python -m scripts.check_stage2_v3_readiness
