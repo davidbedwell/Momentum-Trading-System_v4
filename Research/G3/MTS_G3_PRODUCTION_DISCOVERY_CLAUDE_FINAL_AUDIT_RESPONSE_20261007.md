@@ -1,0 +1,68 @@
+
+
+# Cold Freeze Audit Report
+
+**Date:** 2026-10-07
+**Auditor role:** Final BLOCKER/MAJOR defect scan
+**Scope:** Protocol draft + Amendments A and B as a unified document. V3 outcome not consulted.
+
+---
+
+## Audit methodology
+
+I examined every normative requirement for: (1) internal contradiction or logical impossibility, (2) executable ambiguity that would force an unlogged design choice during production, (3) scientific invalidity that would render conclusions uninterpretable, (4) missing safeguards whose absence could silently corrupt results. Minor stylistic or preference issues that do not create invalidity are not reopened.
+
+---
+
+## Findings
+
+### BLOCKER defects
+
+**None identified.**
+
+### MAJOR defects
+
+**None identified.**
+
+---
+
+## Detailed assessment of potential concern areas (all resolved or non-blocking)
+
+| Area | Status | Reasoning |
+|---|---|---|
+| **Parallel determinism** | Clean | Amendment A specifies synchronous generation boundaries, immutable work queue, deterministic restore to island/population order. Sufficient for reproducibility. |
+| **Plateau definition** | Clean | Amendment B gives a fully operational, immutable definition: 40-generation non-overlapping windows, dual condition (hypervolume <0.5% improvement AND zero new promoted-QD cells), consecutive count with explicit reset, freeze at count=2. No ambiguity. |
+| **Frozen-island resource reallocation** | Clean | Amendment A explicitly rejects spawning replacement islands or enlarging populations; freed workers service active-island tasks only. User plateau governance respected. |
+| **Bootstrap granularity** | Clean | Amendment A mandates cluster-level bootstrap (transitive overlap ≥1 session), 2,000 resamples, deterministic seeding. Event-level bootstrap explicitly prohibited for promotion. Amendment B null-contender definition is consistent. |
+| **Cost monotonicity** | Clean | Amendment A requires monotone cost in simulator for identical event/action path with conformance test. 10/15/20 bps ladder is well-defined. |
+| **Perturbation robustness** | Clean | Amendment A operationalizes one-at-a-time ±10%, 75% threshold, at 10 bps. Exact benchmark in Amendment A includes projected perturbation work. |
+| **Temporal stability** | Clean | 2-of-3 thirds on discovery interval (Amendment B confirms discovery-interval only); then LCB >0 on frozen final-20% confirmation. Amendment B specifies failure consequence (museum only, no repair). |
+| **Null calibration** | Clean | Amendment B gives precise contender definition (all floors except reward LCB >0), max-statistic across both null arms, -infinity fallback, strict inequality for real candidates. 1 REAL + 2 NULL matched budget. |
+| **Survivorship labeling** | Clean | Amendment A mandates DESIGN_PANEL_SURVIVORSHIP_EXPOSED label; portfolio eligibility blocked until PIT universe validated separately. |
+| **Data partition** | Clean | Chronological 20/60/20 split; 60-session embargo excluded from both sides (Amendment B); descriptor scaling/CVT on first 20% only; row counts written to manifest. |
+| **Scope generation** | Clean | Pre-frozen bins only; firing profitability cannot move boundaries; narrower post-hoc scope is a new version/hypothesis. |
+| **Multiplicity** | Clean | Every unique genome/scope/restart/variant logged; matched-null gate plus max-statistic calibration; budget cannot increase after outcomes observed. |
+| **Descriptor definition** | Clean | Amendment A operationalizes return-path shape, action frequencies, conditional direction. 12-D random projection with frozen seed. CVT 256 centroids frozen before evolution. |
+| **QD eviction / duplicate merge** | Clean | Amendment B specifies timing (archive insertion and migration admission), merge criteria (distance ≤0.01 AND Jaccard ≥0.95), retention rule (lower uncertainty). |
+| **Migration** | Clean | Every 20 generations; behavioral novelty criterion operationalized in Amendment A (distance > median NN distance in receiving population); full re-evaluation; no state transfer. Frozen islands excluded (Amendment B). |
+| **Checkpoint integrity** | Clean | SHA-256 mandatory; resume from last valid generation-boundary checkpoint; changed anything = new experiment; retention policy with verification before deletion (Amendment B); 500 GB preflight check. |
+| **Timeout / safety** | Clean | 120s per organism; 14-day hard stop; benchmark feasibility gate; utilization gate ≥80%. |
+| **Hypervolume normalization** | Minor note | "Fixed affine normalization from the descriptor-development interval" — this is a design choice already frozen in the protocol. The development interval provides the normalization constants. Operationally sufficient. Not a defect. |
+| **Archive capacity** | Clean | Promoted QD ≤1024 (≤4 per cell × 256 cells), novelty 512, museum 1024. Eviction rules specified. |
+| **Concentration rule** | Clean | No single ticker >50% of positive net PnL (direction-agnostic per Amendment B); narrow specialists (<3 tickers) allowed only with prospectively frozen scope. |
+
+---
+
+## Cross-reference consistency check
+
+- Amendment B's null-contender definition references "15/20-bps cost screens" — consistent with Amendment A's requirement of LCB >0 at 10 and 15 bps plus point mean >0 at 20 bps (the contender definition correctly omits the 10-bps LCB >0 requirement since that is the metric being calibrated against null).
+- Amendment B's plateau hypervolume uses "point-estimate front" — consistent with Amendment A's distinction between point estimates for population selection and cluster-bootstrap bounds for archive contenders.
+- The 60-session embargo arithmetic: if total data is D sessions, first 20% ≈ 0.20D, then 60-session gap, then discovery ≈ 0.60D, then 60-session gap, then confirmation ≈ 0.20D. Amendment B says "chronological percentages define target source intervals before embargo removal" — this means the 20/60/20 are targets and exact row counts are logged. Consistent and executable.
+
+---
+
+## Verdict
+
+The unified protocol (draft + Amendments A + B) contains no BLOCKER or MAJOR scientific or executable specification defect. All normative requirements are internally consistent, operationally defined to the level needed for machine-verified execution, and scientifically interpretable given the stated claim boundaries (design-panel hypothesis generation, not market-wide performance).
+
+**FREEZE_READY: YES**
