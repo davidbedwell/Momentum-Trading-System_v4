@@ -84,18 +84,16 @@ def score(mask,y,side,ticker,dates):
  loss=vv[vv<0];win=vv[vv>0]
  return {'n':int(len(vv)),'effective_n':int(ne),'ev_net':ev,'lcb95':lcb,'win_rate':float((vv>0).mean()),'avg_win':float(win.mean()) if len(win) else 0,'avg_loss':float(loss.mean()) if len(loss) else 0,'median_win':float(np.median(win)) if len(win) else 0,'median_loss':float(np.median(loss)) if len(loss) else 0,'cvar5':float(np.mean(np.sort(vv)[:max(1,len(vv)//20)]))}
 
-def calibration(d,preds):
- rng=np.random.default_rng(SEED);base=rng.normal(0,.04,12000);sel=(np.arange(12000)%10==0);lad=[]
- for e in (.0025,.005,.01,.02):
-  x=base.copy();x[sel]+=e; rec=float(x[sel].mean()-base[sel].mean()); lad.append({'effect':e,'recovered':rec,'relative_error':abs(rec-e)/e})
- # benchmark real predicate evaluation throughput
+def throughput_calibration(d,preds):
  y=d.f20.to_numpy();t=d.ticker.to_numpy();dt=pd.to_datetime(d.date).dt.to_pydatetime(); start=time.time();n=0
- for p in preds[:24]:
-  for side in ('LONG','SHORT'):score(pmask(d,p),y,side,t,dt);n+=1
- sec=time.time()-start;return {'ladder':lad,'benchmark_evaluations':n,'benchmark_seconds':sec,'eval_per_second':n/max(sec,1e-6)}
+ for p in preds[:12]:
+  for side in ("LONG","SHORT"):score(pmask(d,p),y,side,t,dt);n+=1
+ sec=time.time()-start;return {"benchmark_evaluations":n,"benchmark_seconds":sec,"eval_per_second":n/max(sec,1e-6)}
 
-def evolve(d,preds,budget,seed,side):
- rng=random.Random(seed);ticker=d.ticker.to_numpy();dates=pd.to_datetime(d.date).dt.to_pydatetime(); ys={h:d[f'f{h}'].to_numpy() for h in H}; masks=[pmask(d,p) for p in preds]
+def evolve(d,preds,budget,seed,side,plant_idx=None,plant_effect=0.0):
+ rng=random.Random(seed);ticker=d.ticker.to_numpy();dates=pd.to_datetime(d.date).dt.to_pydatetime(); ys={h:d[f'f{h}'].to_numpy().copy() for h in H}; masks=[pmask(d,p) for p in preds]
+ if plant_idx is not None and plant_effect:
+  ys[20][masks[plant_idx]] += plant_effect
  cache={}
  def ev(g):
   key=tuple(sorted(g));k=(key,side)
@@ -130,15 +128,29 @@ def _init_worker(d,preds,budget):
  global _GD,_GP,_GB;_GD=d;_GP=preds;_GB=budget
 def _run_worker(task):
  side,seed=task;return evolve(_GD,_GP,_GB,seed,side)
+def _cal_worker(task):
+ effect,seed,target=task;return effect,evolve(_GD,_GP,_GB,seed,'LONG',target,effect)
 
 def main():
  t0=time.time();status={'stage':2,'version':'v2','state':'PREFLIGHT','started':time.time(),'pid':os.getpid()};(RUN/'status.json').write_text(json.dumps(status,indent=2))
- d=make_panel();preds=predicate_catalog(d);cal=calibration(d,preds)
- # calibration-selected budget: target >= ~15 minutes total on Thunder, bounded 4k-20k evals/side across 4 independent populations
- eps=max(cal['eval_per_second'],.01); budget_each=int(max(1000,min(5000,eps*60*15/8)))
- projected=8*budget_each/eps
- cal.update({'predicate_count':len(preds),'budget_per_population':budget_each,'populations_per_side':4,'projected_search_seconds':projected})
+ d=make_panel();preds=predicate_catalog(d);cal=throughput_calibration(d,preds)
+ # matched-search calibration: GA must rediscover an unknown planted certified predicate through the same grammar/scorer.
+ target=next(i for i,p in enumerate(preds) if p.get('family')=='MOMENTUM' and p.get('feature')=='ret20' and p.get('op')=='>=' and abs(p.get('q',0)-.7)<1e-9)
+ cal_budget=2000; import multiprocessing as mp;ctx=mp.get_context('fork');ctasks=[(e,SEED+700+j,target) for j,e in enumerate((0.0,.0025,.005,.01,.02))]
+ with ctx.Pool(processes=5,initializer=_init_worker,initargs=(d,preds,cal_budget)) as pool: cout=pool.map(_cal_worker,ctasks)
+ ladder=[];null_lcb=0.0
+ for effect,(front,n) in cout:
+  top=front[:20]; recovered=any(any(g==preds[target] for g in x['genes']) for x in top)
+  best=max((x['lcb95'] for x in top),default=-99); ladder.append({'effect':effect,'recovered_target_top20':recovered,'best_lcb95':best,'evaluations':n})
+  if effect==0:null_lcb=best
+ recovered_effects=[x['effect'] for x in ladder if x['effect']>0 and x['recovered_target_top20'] and x['best_lcb95']>max(0,null_lcb)]
+ smallest=min(recovered_effects) if recovered_effects else None
+ budget_each={.0025:8000,.005:10000,.01:15000,.02:20000}.get(smallest,0)
+ eps=max(cal['eval_per_second'],.01);projected=(8*budget_each)/(eps*6) if budget_each else 0
+ cal.update({'matched_search_ladder':ladder,'target_predicate':preds[target],'calibration_budget_each':cal_budget,'smallest_recovered_effect':smallest,'predicate_count':len(preds),'budget_per_population':budget_each,'populations_per_side':4,'projected_parallel_search_seconds':projected})
  (RUN/'calibration.json').write_text(json.dumps(cal,indent=2))
+ if not budget_each:
+  status.update(state='STOPPED_SCIENTIFIC_CALIBRATION_FAIL',calibration=cal);(RUN/'status.json').write_text(json.dumps(status,indent=2));return
  status.update(state='RUNNING',calibration=cal);(RUN/'status.json').write_text(json.dumps(status,indent=2))
  tasks=[(side,SEED+100*j+(0 if side=='LONG' else 50)) for side in ('LONG','SHORT') for j in range(4)]
  # independent populations in parallel; deterministic fixed seeds. Standalone process uses fork only after preprocessing is complete.
