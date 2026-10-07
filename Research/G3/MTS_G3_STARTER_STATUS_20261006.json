@@ -1,0 +1,24 @@
+{
+  "format":"MTS_G3_STARTER_STATUS_V1",
+  "status":"STAGE1_EXECUTABLE_SLICE_PASS",
+  "production_compute_authorized":false,
+  "tests_passed":[
+    "portfolio_metric_firewall",
+    "g2_lineage_firewall",
+    "lifecycle_scale_down",
+    "planted_signal_beats_matched_null",
+    "checkpoint_restart_identity"
+  ],
+  "benchmark_interpretation":{
+    "synthetic_only":true,
+    "may_not_be_used_as_production_eta":true,
+    "next_required_measurement":"real G3 independent data/evidence-path benchmark"
+  },
+  "next_gate":[
+    "independent raw-data acquisition path",
+    "PIT/causality availability test",
+    "matched null invariants on real path",
+    "measured real-path throughput",
+    "user authorization before substantial evolutionary compute"
+  ]
+}

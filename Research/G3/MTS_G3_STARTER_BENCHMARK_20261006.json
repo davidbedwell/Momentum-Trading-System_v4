@@ -1,0 +1,9 @@
+{
+  "format": "MTS_G3_STARTER_BENCHMARK_V1",
+  "workers": 32,
+  "jobs": 64,
+  "rows": 2500,
+  "specialist_evaluations": 1024,
+  "seconds": 0.4770215589996951,
+  "eval_per_sec": 2146.6535016725616
+}
