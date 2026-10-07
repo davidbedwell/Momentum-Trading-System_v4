@@ -69,29 +69,43 @@ def predicate_catalog(d):
  return out
 
 def pmask(d,p):
- if p['op']=='==':return d[p['feature']].eq(p['value']).to_numpy()
- a=d[p['feature']].to_numpy();return (a>=p['thr']) if p['op']=='>=' else (a<=p['thr'])
+ # Always return a dense numpy bool mask. Pandas nullable/string comparisons can
+ # otherwise yield object/BooleanArray masks containing pd.NA, which cannot be
+ # safely combined in the evolutionary evaluator.
+ if p['op']=='==':
+  raw=d[p['feature']].eq(p['value'])
+ else:
+  a=pd.to_numeric(d[p['feature']],errors='coerce')
+  raw=(a>=p['thr']) if p['op']=='>=' else (a<=p['thr'])
+ return raw.fillna(False).to_numpy(dtype=np.bool_,na_value=False)
 
-def score(mask,y,side,ticker,dates):
+def score(mask,y,side,ticker,dates,cluster_ids=None):
  z=y[mask];z=z[np.isfinite(z)]
  if len(z)<200:return None
- s=1 if side=='LONG' else -1; gross=s*z; net=gross-COST
- # dependence-aware approximation: ticker-year clusters, not raw rows
- ix=np.flatnonzero(mask & np.isfinite(y)); keys=np.array([f'{ticker[i]}:{dates[i].year}' for i in ix]); vv=s*y[ix]-COST
- tmp=pd.DataFrame({'k':keys,'v':vv}).groupby('k').v.mean().to_numpy(); ne=len(tmp)
+ sign=1 if side=='LONG' else -1
+ valid=mask & np.isfinite(y);ix=np.flatnonzero(valid);vv=sign*y[ix]-COST
+ if cluster_ids is None:
+  # deterministic fallback used by unit/smoke callers
+  _,all_ids=np.unique(np.array([f'{ticker[i]}:{dates[i].year}' for i in range(len(ticker))]),return_inverse=True);ids=all_ids[ix]
+ else: ids=cluster_ids[ix]
+ ncl=int(ids.max())+1 if len(ids) else 0
+ sums=np.bincount(ids,weights=vv,minlength=ncl);counts=np.bincount(ids,minlength=ncl);used=counts>0;tmp=sums[used]/counts[used];ne=len(tmp)
  if ne<20:return None
  se=float(np.std(tmp,ddof=1)/math.sqrt(ne));ev=float(np.mean(vv));lcb=ev-1.96*se
  loss=vv[vv<0];win=vv[vv>0]
  return {'n':int(len(vv)),'effective_n':int(ne),'ev_net':ev,'lcb95':lcb,'win_rate':float((vv>0).mean()),'avg_win':float(win.mean()) if len(win) else 0,'avg_loss':float(loss.mean()) if len(loss) else 0,'median_win':float(np.median(win)) if len(win) else 0,'median_loss':float(np.median(loss)) if len(loss) else 0,'cvar5':float(np.mean(np.sort(vv)[:max(1,len(vv)//20)]))}
 
+def cluster_ids_for(ticker,dates):
+ keys=np.array([f'{ticker[i]}:{dates[i].year}' for i in range(len(ticker))]);return np.unique(keys,return_inverse=True)[1].astype(np.int32)
+
 def throughput_calibration(d,preds):
- y=d.f20.to_numpy();t=d.ticker.to_numpy();dt=pd.to_datetime(d.date).dt.to_pydatetime(); start=time.time();n=0
+ y=d.f20.to_numpy();t=d.ticker.to_numpy();dt=pd.to_datetime(d.date).dt.to_pydatetime();cid=cluster_ids_for(t,dt); start=time.time();n=0
  for p in preds[:12]:
-  for side in ("LONG","SHORT"):score(pmask(d,p),y,side,t,dt);n+=1
+  for side in ("LONG","SHORT"):score(pmask(d,p),y,side,t,dt,cid);n+=1
  sec=time.time()-start;return {"benchmark_evaluations":n,"benchmark_seconds":sec,"eval_per_second":n/max(sec,1e-6)}
 
 def evolve(d,preds,budget,seed,side,plant_idx=None,plant_effect=0.0):
- rng=random.Random(seed);ticker=d.ticker.to_numpy();dates=pd.to_datetime(d.date).dt.to_pydatetime(); ys={h:d[f'f{h}'].to_numpy().copy() for h in H}; masks=[pmask(d,p) for p in preds]
+ rng=random.Random(seed);ticker=d.ticker.to_numpy();dates=pd.to_datetime(d.date).dt.to_pydatetime();cluster_ids=cluster_ids_for(ticker,dates); ys={h:d[f'f{h}'].to_numpy().copy() for h in H}; masks=[pmask(d,p) for p in preds]
  if plant_idx is not None and plant_effect:
   ys[20][masks[plant_idx]] += plant_effect
  cache={}
@@ -102,7 +116,7 @@ def evolve(d,preds,budget,seed,side,plant_idx=None,plant_effect=0.0):
   for i in key:m &= masks[i]
   best=None
   for h,y in ys.items():
-   s=score(m,y,side,ticker,dates)
+   s=score(m,y,side,ticker,dates,cluster_ids)
    if s and (best is None or s['lcb95']>best['lcb95']):best=dict(s,horizon=h)
   if best:best['complexity']=len(key);best['fitness']=best['lcb95']-.00025*(len(key)-1)
   cache[k]=best;return best
@@ -173,4 +187,14 @@ def main():
  decision='PASS_DEV117_PENDING_VERIFICATION50' if promoted else 'FAIL'
  gate={'decision':decision,'gate_version':'stage2-v2','promoted':len(promoted),'scientific_parameters_changed':False,'next_action':'RESTORE_ORIGINAL_DISCOVERY_PARTITION_AND_SCORE_FROZEN_NEXT50' if promoted else 'STOP_SCIENTIFIC'}
  (RUN/'gate.json').write_text(json.dumps(gate,indent=2));status.update(state=decision,finished=time.time(),elapsed_seconds=time.time()-t0);(RUN/'status.json').write_text(json.dumps(status,indent=2));print(json.dumps(gate,indent=2),flush=True)
-if __name__=='__main__':main()
+def _record_fatal(exc):
+ import traceback
+ failure={'stage':2,'version':'v2','state':'ERROR','pid':os.getpid(),'time':time.time(),'exception_type':type(exc).__name__,'message':str(exc),'traceback':traceback.format_exc()}
+ (RUN/'failure.json').write_text(json.dumps(failure,indent=2))
+ status={'stage':2,'version':'v2','state':'ERROR','pid':os.getpid(),'failed':time.time(),'failure_file':'failure.json','message':str(exc)}
+ (RUN/'status.json').write_text(json.dumps(status,indent=2))
+if __name__=='__main__':
+ try: main()
+ except BaseException as exc:
+  _record_fatal(exc)
+  raise
