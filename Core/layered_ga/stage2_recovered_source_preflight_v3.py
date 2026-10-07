@@ -28,8 +28,7 @@ def verify_recovered_sources():
             continue
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
         expected_hash = expected.get(key + "_sha256")
-        # Cost source has no checksum in the recovered-sources manifest.
-        # An unpinned dependency cannot be certified as the frozen implementation.
+        # Every recovered dependency, including costs, must match its frozen hash.
         checks[key] = {
             "status": "VERIFIED" if expected_hash and actual == expected_hash else "UNPINNED" if not expected_hash else "HASH_MISMATCH",
             "sha256": actual,
