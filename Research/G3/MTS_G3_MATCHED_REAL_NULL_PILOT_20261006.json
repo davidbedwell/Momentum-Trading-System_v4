@@ -1,0 +1,159 @@
+{
+  "format": "MTS_G3_MATCHED_REAL_NULL_PILOT_V1",
+  "status": "PILOT_ONLY_NOT_PRODUCTION",
+  "workers": 60,
+  "tickers": [
+    "AAPL",
+    "MSFT",
+    "XOM",
+    "JPM",
+    "JNJ",
+    "CAT",
+    "WMT",
+    "NVDA"
+  ],
+  "rows": 2500,
+  "arms": [
+    {
+      "arm": "real",
+      "generations": 6,
+      "population": 48,
+      "ticker_evaluations": 2304,
+      "seconds": 27.51319272500041,
+      "ledger": [
+        {
+          "generation": 1,
+          "best": {
+            "n": 52,
+            "mean": 0.010097121105474262,
+            "tail": -0.10877462765199969,
+            "duration": 6.0576923076923075
+          },
+          "median_mean": -0.00498459855035741
+        },
+        {
+          "generation": 2,
+          "best": {
+            "n": 52,
+            "mean": 0.010097121105474262,
+            "tail": -0.10877462765199969,
+            "duration": 6.0576923076923075
+          },
+          "median_mean": 0.004487204942264931
+        },
+        {
+          "generation": 3,
+          "best": {
+            "n": 52,
+            "mean": 0.010097121105474262,
+            "tail": -0.10877462765199969,
+            "duration": 6.0576923076923075
+          },
+          "median_mean": 0.006298341437684082
+        },
+        {
+          "generation": 4,
+          "best": {
+            "n": 25,
+            "mean": 0.020592919763330605,
+            "tail": -0.08938285055862043,
+            "duration": 5.6
+          },
+          "median_mean": 0.00867952727298072
+        },
+        {
+          "generation": 5,
+          "best": {
+            "n": 25,
+            "mean": 0.020592919763330605,
+            "tail": -0.08938285055862043,
+            "duration": 5.6
+          },
+          "median_mean": 0.009510191578791401
+        },
+        {
+          "generation": 6,
+          "best": {
+            "n": 25,
+            "mean": 0.029526222422844892,
+            "tail": -0.08508389889232032,
+            "duration": 5.76
+          },
+          "median_mean": 0.013327811292044085
+        }
+      ]
+    },
+    {
+      "arm": "matched_temporal_block_null",
+      "generations": 6,
+      "population": 48,
+      "ticker_evaluations": 2304,
+      "seconds": 24.947264184000232,
+      "ledger": [
+        {
+          "generation": 1,
+          "best": {
+            "n": 50,
+            "mean": 0.009895968761748843,
+            "tail": -0.07695641510528521,
+            "duration": 8.76
+          },
+          "median_mean": -0.004266377801720017
+        },
+        {
+          "generation": 2,
+          "best": {
+            "n": 52,
+            "mean": 0.01510017677746353,
+            "tail": -0.11404385647897992,
+            "duration": 8.057692307692308
+          },
+          "median_mean": 0.003911837893932674
+        },
+        {
+          "generation": 3,
+          "best": {
+            "n": 52,
+            "mean": 0.01722586220074969,
+            "tail": -0.080424558660743,
+            "duration": 8.557692307692308
+          },
+          "median_mean": 0.005202568449012809
+        },
+        {
+          "generation": 4,
+          "best": {
+            "n": 692,
+            "mean": 0.016680084153535633,
+            "tail": -0.08675821083951771,
+            "duration": 9.052023121387283
+          },
+          "median_mean": 0.0053198952008575735
+        },
+        {
+          "generation": 5,
+          "best": {
+            "n": 52,
+            "mean": 0.021547468282004326,
+            "tail": -0.03971489824772685,
+            "duration": 8.25
+          },
+          "median_mean": 0.005948718742894828
+        },
+        {
+          "generation": 6,
+          "best": {
+            "n": 33,
+            "mean": 0.02049121745209546,
+            "tail": -0.05739829595470973,
+            "duration": 8.454545454545455
+          },
+          "median_mean": 0.006410351535979644
+        }
+      ]
+    }
+  ],
+  "total_seconds": 53.126706350998575,
+  "matched_budget": true,
+  "production_authorized": false
+}

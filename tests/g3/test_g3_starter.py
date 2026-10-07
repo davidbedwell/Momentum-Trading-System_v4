@@ -31,3 +31,38 @@ def test_checkpoint_restart_identity():
     with tempfile.TemporaryDirectory() as d:
         p=Path(d)/"x.pkl"; h1=checkpoint(p,s); r=restore(p); h2=checkpoint(p,r)
         assert h1==h2 and r["generation"]==7
+
+
+def test_reduce_turnover_is_charged():
+    import numpy as np
+    from Core.g3.starter import Rule, Specialist, evaluate_one
+    g=Specialist(
+        gate=Rule(0,-1,1),
+        signal=Rule(0,-1,1),
+        side=1,
+        take_profit=0.50,
+        stop_loss=0.50,
+        max_horizon=2,
+        add_at=0.50,
+        reduce_at=0.005,
+    )
+    x=np.array([[0.0]])
+    y=np.array([[0.01,0.0]])
+    out=evaluate_one(g,x,y,0)
+    assert len(out)==1
+    assert "reduce" in out[0].actions
+    assert out[0].turnover == 2.0
+
+
+def test_aggregate_quality_ignores_empty_sentinels():
+    from Core.g3.starter import aggregate_quality_summaries
+    q=[
+        {"n":0,"mean":float("-inf"),"tail":float("-inf"),"duration":float("inf")},
+        {"n":4,"mean":0.02,"tail":-0.03,"duration":5.0},
+        {"n":6,"mean":0.01,"tail":-0.04,"duration":7.0},
+    ]
+    a=aggregate_quality_summaries(q)
+    assert a["n"]==10
+    assert abs(a["mean"]-0.014)<1e-12
+    assert a["tail"]==-0.04
+    assert abs(a["duration"]-6.2)<1e-12

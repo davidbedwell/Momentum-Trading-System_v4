@@ -48,7 +48,10 @@ def evaluate_one(g:Specialist,features:np.ndarray,future_returns:np.ndarray,cost
             if pnl<=-g.add_at and exposure<1.5:
                 exposure=1.5; turnover+=.5; actions.append("add")
             if pnl>=g.reduce_at and exposure>0.5:
-                exposure=.5; turnover+=abs(exposure-.5); actions.append("reduce")
+                previous_exposure=exposure
+                exposure=.5
+                turnover+=abs(previous_exposure-exposure)
+                actions.append("reduce")
             if pnl>=g.take_profit or pnl<=-g.stop_loss:
                 actions.append("exit"); break
             actions.append("hold")
@@ -63,6 +66,19 @@ def quality(outputs:list[Outcome])->dict:
     if not outputs:return {"n":0,"mean":float("-inf"),"tail":float("-inf"),"duration":float("inf")}
     r=np.array([x.net_return for x in outputs])
     return {"n":len(r),"mean":float(r.mean()),"tail":float(np.quantile(r,.1)),"duration":float(np.mean([x.duration for x in outputs]))}
+
+def aggregate_quality_summaries(summaries:list[dict])->dict:
+    valid=[x for x in summaries if x["n"]>0]
+    n=sum(x["n"] for x in valid)
+    if not n:
+        return {"n":0,"mean":-1e9,"tail":-1e9,"duration":1e9}
+    mean=sum(x["mean"]*x["n"] for x in valid)/n
+    tail=min(x["tail"] for x in valid)
+    duration=sum(x["duration"]*x["n"] for x in valid)/n
+    vals=(mean,tail,duration)
+    if not all(np.isfinite(vals)):
+        raise RuntimeError(f"non-finite aggregate quality: {vals}")
+    return {"n":n,"mean":float(mean),"tail":float(tail),"duration":float(duration)}
 
 def temporal_block_permute(y:np.ndarray,seed:int,block:int=20)->np.ndarray:
     rng=np.random.default_rng(seed); n=len(y); blocks=[y[i:i+block].copy() for i in range(0,n,block)]
