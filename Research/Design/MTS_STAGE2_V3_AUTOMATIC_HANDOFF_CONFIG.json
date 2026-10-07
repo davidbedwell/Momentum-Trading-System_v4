@@ -1,0 +1,11 @@
+{
+  "format":"MTS_V3_HANDOFF_V1",
+  "approved_launch":false,
+  "dev117_only":true,
+  "protected_bank_access":false,
+  "stage2_script":"scripts/run_stage2_v3_production_20261007.py",
+  "stage2_script_sha256":"NOT_YET_CERTIFIED",
+  "calibration_gate_sha256":"NOT_YET_PASSED",
+  "stage2_config":"Research/Design/MTS_STAGE2_V3_PRODUCTION_CONFIG.json",
+  "python_executable":"/home/ubuntu/Momentum-Trading-System_v4/.venv/bin/python"
+}
