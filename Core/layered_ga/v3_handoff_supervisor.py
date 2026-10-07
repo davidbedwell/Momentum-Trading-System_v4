@@ -77,9 +77,11 @@ def loop():
         try:
             result=once()
             atomic(OUT/'supervisor_state.json',result)
-            if result['state'] in {'STAGE2_LAUNCHED','ALREADY_LAUNCHED','STOPPED_ENGINEERING'}:break
+            if result['state'] in {'STAGE2_LAUNCHED','ALREADY_LAUNCHED'}:break
         except Exception as exc:
-            atomic(OUT/'supervisor_state.json',{'state':'STOPPED_ENGINEERING','reason':repr(exc),'updated':time.time()});break
+            # Do not launch or repair on failure; keep observing in case a separately
+            # certified calibration or executable is installed later.
+            atomic(OUT/'supervisor_state.json',{'state':'STOPPED_ENGINEERING','reason':repr(exc),'updated':time.time()})
         time.sleep(30)
 
 if __name__=='__main__':loop()
