@@ -54,7 +54,9 @@ def _ranges(horizons:list[int])->tuple[tuple[int,int],...]:
 
 
 def evaluate_curve(mask:np.ndarray,paths:ExecutionPaths,costs:ProspectiveCosts,side:str,cluster_ids:np.ndarray,*,min_raw_n:int=200,min_effective_n:int=20)->CurveEvaluation:
-    side=side.upper();mask=np.asarray(mask,dtype=bool)
+    side=side.upper()
+    if side not in ('LONG','SHORT'):raise ValueError('side must be LONG or SHORT')
+    mask=np.asarray(mask,dtype=bool)
     if len(mask)!=paths.endpoint_return.shape[0] or len(cluster_ids)!=len(mask):raise ValueError('alignment mismatch')
     sign=1.0 if side=='LONG' else -1.0
     cmatrix=costs.long_roundtrip if side=='LONG' else costs.short_roundtrip
