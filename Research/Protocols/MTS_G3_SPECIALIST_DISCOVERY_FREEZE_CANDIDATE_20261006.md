@@ -183,11 +183,13 @@ A production G3 run cannot be interpreted unless null behavior is below a pre-ap
 Multiplicity accounting must reflect the total search effort: organisms evaluated, scopes attempted, generations, restarts, G2-derived hypotheses where applicable, and researcher-directed retries. Reporting only finalist count is prohibited.
 
 ## 13. Data governance
-A fresh yfinance download does NOT make previously observed history pristine.
+G3 distinguishes **data-lineage pristine** from **statistical-validation pristine**.
 
-Pristine means not used by the relevant adaptive research process.
+For the G3 independent arm, a fresh yfinance acquisition MAY and SHOULD create a data-lineage-pristine raw OHLCV store when technically feasible. That store and every G3-derived feature artifact must be independently constructed and hash-addressed. The independent arm MUST NOT read G2 derived stores, G2 cached features, G2 opportunity labels, G2 genomes, G2 portfolio outcomes, or G2 metadata.
 
-Canonical price/volume and PIT universe data should be immutable and hash-addressed. Re-download only for data repair/provenance, not cosmetic re-pristining.
+A fresh acquisition does not erase researcher knowledge of historical market outcomes. Therefore re-downloaded history can be pristine in software/data lineage while still not being pristine statistical confirmation evidence if that ticker/time outcome informed prior adaptive MTS research.
+
+G3 development may use independently acquired historical data subject to its declared development boundary. Claims of transport or final confirmation require evidence that was protected from the relevant adaptive process; redownload alone cannot create that stronger status.
 
 Quarterly fundamentals may be used only with verified historical availability timestamps. Fiscal period end is NOT assumed to equal public availability date.
 
@@ -198,9 +200,13 @@ Existing protected banks remain governed by their prior restrictions. DEV50 rema
 ## 14. Discovery arms
 The design should support three explicitly labeled conditions, but they need not all be run if compute-value analysis rejects one before freeze:
 
-A. PRISTINE/INDEPENDENT ARM
+A. DATA-LINEAGE-PRISTINE / INDEPENDENT ARM
+- fresh independently acquired yfinance raw OHLCV store when technically feasible;
+- independently derived G3 feature store;
+- no reads from G2 derived stores, cached features, opportunity labels, genomes, portfolio outcomes, or metadata;
 - no G2 genomes as seeds;
-- broad primitive/genetic diversity only.
+- broad primitive/genetic diversity only;
+- prior human/researcher exposure is tracked separately and affects validation status, not lineage purity.
 
 B. G2-SEEDED ARM
 - selected G2 archive/novelty organisms may seed hypotheses;
@@ -278,7 +284,7 @@ If G3 cannot materially exceed these on held-out evidence, complexity is suspect
 ## 20. Prohibited shortcuts / protocol violations
 - Optimizing G3 specialist survival directly on whole-portfolio CAGR/MDD.
 - Using validation/blind outcomes to choose discovery organisms or tune niche definitions.
-- Calling re-downloaded previously seen history pristine.
+- Calling re-downloaded previously seen history **statistically pristine validation evidence**. A fresh independent acquisition may correctly be called **data-lineage pristine** when the G3 firewall requirements are satisfied.
 - Treating thousands of correlated stock-days as thousands of independent confirmations.
 - Allowing source-island/archive status to substitute for receiving/archive evaluation.
 - Declaring a narrow scope after seeing where a specialist worked.

@@ -16,11 +16,11 @@ Status: LIVE DESIGN REGISTER — NOT A FREEZE
 11. Narrow specialists receive different evidence structure, not relaxed scientific standards.
 12. Effective evidence counts episodes/clusters, not correlated rows.
 13. Matched-null G3 is a hard gate; total search effort enters multiplicity accounting.
-14. Fresh downloads do not restore pristine status to previously observed history.
+14. Distinguish two meanings of pristine: a fresh independently acquired yfinance store plus independent G3 derivation can establish **data-lineage pristine** status, while previously adaptive/researcher-exposed ticker/time outcomes do not become **statistically pristine validation evidence** merely by redownload.
 15. PIT fundamentals are allowed only with verified public-availability timing.
 16. Historical options are excluded from G3 Phase 1 pending a separate PIT-chain audit.
 17. G2 remains the integrated-strategy control and must finish unchanged.
-18. Independent G3 and G2-seeded G3 are distinct experimental arms.
+18. Independent G3 and G2-seeded G3 are distinct experimental arms. The independent arm uses a fresh yfinance raw OHLCV store and independently derived G3 feature store and is technically barred from reading G2 derived stores, cached features, labels, genomes, portfolio outcomes, or metadata.
 19. G2-seeded ancestry permanently contaminates data G2 used adaptively for validation purposes.
 20. Large compute is gated behind small real-vs-null pilots and conformance.
 21. The final practical test is untouched G2 integrated vs G3 specialist+allocator frontier.

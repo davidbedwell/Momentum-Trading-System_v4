@@ -19,7 +19,8 @@ Status: DESIGN/PREFLIGHT — NO PRODUCTION COMPUTE AUTHORIZED
 7. This earnings registry is DEV117-only. It does NOT establish PIT earnings coverage for the 503-stock universe or protected banks.
 8. Historical research records show the original 67-stock Discovery laboratory and the 50-stock heldout cohort have been consumed/exposed. The 50 is preserved, not pristine, and remains unavailable for G3 design/tuning.
 9. Historical protocols repeatedly identify 186 remaining Discovery tickers plus Verification A/B as protected. Exact current ticker-level contamination must be reconstructed before assigning G3 validation partitions.
-10. Existing Oct 1-6 protocols are extensive enough that contamination cannot safely be inferred from labels alone. A machine-readable evidence ledger is required.
+10. Existing Oct 1-6 protocols are extensive enough that statistical-validation contamination cannot safely be inferred from labels alone. A machine-readable evidence ledger is required.
+11. Independent G3 data lineage will be rebuilt from a fresh yfinance raw OHLCV acquisition with G3-only feature derivation. G2 derived stores/artifacts are prohibited inputs to that arm. This provides lineage purity without falsely relabeling previously studied outcomes as untouched validation evidence.
 
 ## Immediate recommendation
 Proceed with G3 Stage 0 only:

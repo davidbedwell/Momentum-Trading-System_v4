@@ -215,7 +215,13 @@ Rare episode specialist:
 
 Validation data is loaded only after candidate genomes, scopes, archive status, code hashes, and thresholds are frozen.
 
-## 13. Data partition principle
+## 13. Data lineage and partition principle
+The independent G3 arm uses a separately acquired and derived data lineage. Its raw OHLCV store should be freshly acquired from yfinance when technically feasible, immutable after acquisition, and hash-addressed. Its derived feature store is built only by G3 code.
+
+The independent arm is prohibited from reading G2 derived stores, cached feature matrices, opportunity labels, genomes, portfolio outcomes, or G2 metadata. Reuse of a mathematical primitive definition is allowed only through audited G3 implementation; reuse of G2-derived values is not.
+
+This creates **data-lineage pristine** G3 evidence. It does not automatically create **statistically pristine validation evidence** for ticker/time outcomes previously used by adaptive MTS research.
+
 Do not allocate protected banks yet.
 
 Before final freeze create a contamination map listing every ticker/time/data source touched by:
@@ -230,7 +236,7 @@ Then designate:
 - G3 transport material;
 - final architecture comparison material.
 
-Previously viewed history cannot become pristine by redownload.
+Previously viewed history cannot become statistically pristine validation evidence merely by redownload; however, a fresh independent acquisition can establish pristine G3 data lineage.
 
 Protected DEV50 remains untouched absent explicit governance change.
 
