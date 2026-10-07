@@ -1,0 +1,23 @@
+{
+  "format": "MTS_G3_EODHD_EARNINGS_RAW_AUDIT_V1",
+  "source_description": "Historical EODHD Earnings Calendar",
+  "source_path": "/home/ubuntu/g3-independent-data/raw_eodhd_earnings/EODHD_EARNINGS_2006_2026.json",
+  "source_sha256": "71a1ba7e192a568d0a775e51cc23a1302bf2ed26bca422d37bd20d1f6151f7cc",
+  "source_bytes": 478601169,
+  "declared_from": "2006-01-01",
+  "declared_to": "2026-10-06",
+  "records": 2434857,
+  "fields": ["code","report_date","date","before_after_market","currency","actual","estimate","difference","percent"],
+  "market_timing_counts": {"unknown":1290442,"BeforeMarket":624161,"AfterMarket":520254},
+  "report_vs_fiscal_date": {"report_after":2250338,"same":184515,"report_before_quarantine":4},
+  "pit_policy": {
+    "fiscal_date_field": "date",
+    "publication_date_field": "report_date",
+    "BeforeMarket": "eligible on report-date trading session",
+    "AfterMarket": "eligible next trading session",
+    "unknown_timing": "eligible next trading session",
+    "report_date_before_fiscal_date": "quarantine"
+  },
+  "lineage": "G3_INDEPENDENT_RAW_SOURCE",
+  "production_authorized": false
+}
