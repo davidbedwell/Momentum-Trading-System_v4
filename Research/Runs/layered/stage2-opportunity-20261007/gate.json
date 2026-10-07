@@ -1,0 +1,16 @@
+{
+  "decision": "PASS",
+  "gate_version": "stage2-v1",
+  "criteria": {
+    "planted_recovered": true,
+    "transported_opportunities": true,
+    "protected_banks_accessed": false,
+    "cagr_mdd_optimized": false
+  },
+  "observed": {
+    "promoted": 16,
+    "null95": 0.04222092331052847
+  },
+  "failed_criteria": [],
+  "scientific_parameters_changed": false
+}

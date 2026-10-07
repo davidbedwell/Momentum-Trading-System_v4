@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 from layered_stage_common_20261007 import *
+bank=load_bank()[:12];names=['ADD','HOLD','REDUCE','EXIT']
+def task(t):
+ d=frame(t);out=[]
+ for ci,c in enumerate(bank):
+  m=mask(d,c);strength=d[c['feature']].rank(pct=True);sets=[m&(strength>.9),m&(strength.between(.5,.9)),m&(strength.between(.2,.5)),~m]
+  out.append((ci,[signed(d.loc[z,'f5'],c).dropna().tolist() for z in sets]))
+ return out
+agg=[[[] for _ in names] for _ in bank]
+for batch in pmap(task,[p.stem for p in sorted(ROOT.glob('*.parquet'))]):
+ for ci,sets in batch:
+  for j,v in enumerate(sets):agg[ci][j]+=v
 rows=[]
-for c in load_bank()[:12]:
- acts={'ADD':[],'HOLD':[],'REDUCE':[],'EXIT':[]}
- for p in ROOT.glob('*.parquet'):
-  d=frame(p.stem);m=mask(d,c);sg=1 if c['direction']=='LONG' else -1;strength=d[c['feature']].rank(pct=True)
-  for act,am in [('ADD',m&(strength>.9)),('HOLD',m&(strength.between(.5,.9))),('REDUCE',m&(strength.between(.2,.5))),('EXIT',~m)]:
-   acts[act]+=signed(d.loc[am,'f5'],c).dropna().tolist()
- rows.append({'candidate':c,'actions':{a:{'n':len(v),'next5_ev':float(np.mean(v)) if v else None} for a,v in acts.items()}})
-write(6,'lifecycle',{'action_studies':rows,'note':'Action questions remain separately measured; no monster combined policy.'})
+for i,c in enumerate(bank):rows.append({'candidate':c,'actions':{a:{'n':len(agg[i][j]),'next5_ev':float(np.mean(agg[i][j])) if agg[i][j] else None} for j,a in enumerate(names)}})
+write(6,'lifecycle',{'workers':WORKERS,'action_studies':rows,'note':'Action questions remain separately measured; no monster combined policy.'})

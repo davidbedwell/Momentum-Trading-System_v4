@@ -15,3 +15,14 @@ def mask(d,c):
 def signed(x,c): return x if c['direction']=='LONG' else -x
 def write(stage,name,report,decision='PASS',reason=''):
  o=RUN/f'stage{stage}-{name}-20261007';o.mkdir(parents=True,exist_ok=True);(o/'report.json').write_text(json.dumps(report,indent=2,default=str));g={'decision':decision,'gate_version':f'stage{stage}-v1','reason':reason,'scientific_parameters_changed':False};(o/'gate.json').write_text(json.dumps(g,indent=2));print(json.dumps(g))
+import os,concurrent.futures
+WORKERS=max(1,min(int(os.environ.get('MTS_WORKERS','6')),os.cpu_count() or 1))
+def pmap(fn,items,workers=WORKERS):
+ items=list(items)
+ if workers<=1:return [fn(x) for x in items]
+ with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as ex:
+  return list(ex.map(fn,items))
+_FRAME_CACHE={}
+def cached_frame(t):
+ if t not in _FRAME_CACHE:_FRAME_CACHE[t]=frame(t)
+ return _FRAME_CACHE[t]
