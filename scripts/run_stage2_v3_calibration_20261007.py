@@ -55,7 +55,7 @@ def main():
    for effect in EFFECTS:
     # Only the selected target row population receives a planted outcome addition.
     uplift=np.where(valid,profile[None,:]*effect,np.nan)
-    incremental=np.nanmean(uplift,axis=0)
+    incremental=np.nanmean(uplift.astype(np.float64),axis=0)
     expected=effect*profile
     error=float(np.nanmax(np.abs(incremental-expected)))
     if error>1e-7:raise AssertionError(f'injection-alignment error {family} {sn} {effect}: {error}')
