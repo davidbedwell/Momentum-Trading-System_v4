@@ -29,6 +29,7 @@ jobs:
             Tests/test_stage2_calibration_evidence_v3.py \
             Tests/test_stage2_calibration_shapes_v3.py \
             Tests/test_stage2_cluster_stats_v3.py \
+            Tests/test_stage2_paired_null_v3.py \
             Tests/test_stage2_recovered_source_preflight_v3.py
       - name: Record missing-source preflight
         if: always()
