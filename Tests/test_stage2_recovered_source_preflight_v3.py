@@ -8,7 +8,7 @@ def test_recovered_sources_are_never_implicitly_assumed_present():
     result = verify_recovered_sources()
     assert result["decision"] in ("PASS", "BLOCK")
     assert set(result["checks"]) == set(SOURCES)
-    assert all(v["status"] in ("VERIFIED", "MISSING", "HASH_MISMATCH")
+    assert all(v["status"] in ("VERIFIED", "MISSING", "HASH_MISMATCH", "UNPINNED")
                for v in result["checks"].values())
 
 
