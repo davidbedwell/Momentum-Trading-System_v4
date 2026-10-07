@@ -1,4 +1,4 @@
-import json,random,sys,time,traceback
+import json,random,sys,time,traceback,hashlib
 from pathlib import Path
 import numpy as np,pandas as pd
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
@@ -24,23 +24,28 @@ def main():
  CAL.mkdir(parents=True,exist_ok=True);state('RUNNING_MATCHED_EVOLUTIONARY_SEARCH')
  targets=json.loads((CAL/'target_manifest.json').read_text())['targets']
  df=pd.read_parquet(CACHE/'dev117_predictors_v3.parquet');paths,costs=load_path_cache(CACHE)
- compiler=VectorSignalCompiler(df);spaces=stage2_search_spaces();rng=random.Random(20261007);results=[]
+ compiler=VectorSignalCompiler(df);spaces=stage2_search_spaces()
+ checkpoint=CAL/'evolutionary_results.json'
+ results=json.loads(checkpoint.read_text())['cases'] if checkpoint.exists() else []
+ finished={(x['family'],x['shape'],float(x['effect'])) for x in results}
+ if len(finished)!=len(results):raise RuntimeError('duplicate checkpoint cases; refusing unsafe resume')
  for family,entry in targets.items():
   target=compiler.compile(family,entry['genome'])
   for shape,points in SHAPES.items():
    day=points[1]
    for effect in (.02,.01,.005,.0025,0.):
+    if (family,shape,float(effect)) in finished:continue
     state('RUNNING_MATCHED_EVOLUTIONARY_SEARCH',family=family,shape=shape,effect=effect,completed=len(results),total=45)
     profile=planted_profile(shape)
     planted=plant_endpoint_outcomes(paths,target,profile,effect)
     ev=OutcomeMatchedEvaluator(compiler,planted.paths,costs,cluster_ids_from_frame(df))
     baseline_curve=ev.curves.evaluate(family,entry['genome'],'LONG')
     baseline=max((p['lcb95'] for p in baseline_curve.points if np.isfinite(p.get('lcb95',np.nan))),default=-1e6)
-    req=SearchRunRequest(run_id=f'{family}-{shape}-{effect}',optimizer_id='search.evolutionary.v1',search_space=spaces[family],evidence_identity='PLANTED',scientific_cohort='DISCOVERY',budget_evaluations=256,seed=rng.randrange(2**31))
+    req=SearchRunRequest(run_id=f'{family}-{shape}-{effect}',optimizer_id='search.evolutionary.v1',search_space=spaces[family],evidence_identity='PLANTED',scientific_cohort='DISCOVERY',budget_evaluations=256,seed=int.from_bytes(hashlib.sha256(f'{family}|{shape}|{effect}|20261007'.encode()).digest()[:4],'big'))
     run=EvolutionarySearchOptimizer(EvolutionaryConfig()).run(req,ev)
     if ev.calls != len(ev.ledger):raise RuntimeError('GA evaluation ledger inconsistent')
-    result={'family':family,'shape':shape,'effect':effect,'baseline':baseline,'best_ga':ev.best,'ga_evaluation_count':ev.calls,'baseline_excluded_from_ga':True,'full_63_day_curve':all(x['horizons']==63 for x in ev.ledger),'certified':False,'unique':run.unique_count,'target_visited':any(e.genome==entry['genome'] for e in run.ledger)}
-    results.append(result);save('evolutionary_results.json',{'cases':results,'completed':len(results),'total':45})
+    result={'family':family,'shape':shape,'effect':effect,'baseline':baseline,'best_ga':ev.best,'ga_evaluation_count':ev.calls,'baseline_excluded_from_ga':True,'full_63_day_curve':bool(ev.ledger) and all(x['horizons']==63 for x in ev.ledger),'certified':False,'unique':run.unique_count,'target_visited':any(e.genome==entry['genome'] for e in run.ledger)}
+    results.append(result);finished.add((family,shape,float(effect)));save('evolutionary_results.json',{'cases':results,'completed':len(results),'total':45})
  save('gate_diagnostic.json',certify_calibration(results,frozen_parameters_verified=False))
  state('STOPPED_ENGINEERING_MULTI_OBJECTIVE_AND_STATISTICAL_GATE_PENDING',completed=len(results),total=45)
 if __name__=='__main__':
