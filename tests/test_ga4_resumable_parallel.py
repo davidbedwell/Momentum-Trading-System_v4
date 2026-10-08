@@ -1,0 +1,26 @@
+import tempfile,unittest
+from Core.layered_ga.ga4_resumable_parallel import run
+from Core.layered_ga.stage2_compiler_v3 import stage2_search_spaces
+from Core.layered_ga.stage2_evaluator_v3 import CurveEvaluation
+
+def synthetic(ch):
+ score=float(sum(len(str(x)) for x in ch))/1000
+ return CurveEvaluation('LONG',({'horizon':1,'ev_net':score,'lcb95':score-0.01,'mae_mean':-0.1,'mae_tail5':-0.2},),(),())
+
+class ParallelResumeTests(unittest.TestCase):
+ def test_replay_and_config_guard(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   kw=dict(seed=42,population_size=6,generations=3,workers=2,checkpoint_dir=tmp,identity='synthetic-test-v1')
+   a=run(stage2_search_spaces(),synthetic,**kw)
+   b=run(stage2_search_spaces(),synthetic,**kw)
+   self.assertEqual(a,b)
+   self.assertEqual(a['individuals'],18)
+   self.assertEqual(len(a['generations']),3)
+   with self.assertRaisesRegex(ValueError,'mismatch'):
+    run(stage2_search_spaces(),synthetic,**(kw|{'seed':43}))
+ def test_explicit_budget_required(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   with self.assertRaises(ValueError):
+    run(stage2_search_spaces(),synthetic,seed=1,population_size=0,generations=3,workers=2,checkpoint_dir=tmp,identity='x')
+
+if __name__=='__main__':unittest.main()
