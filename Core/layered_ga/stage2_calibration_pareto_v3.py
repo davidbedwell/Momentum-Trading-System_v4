@@ -1,7 +1,7 @@
 """Auditable non-scalar Stage-2 calibration phenotype selection.
 
-Keep the three frozen scientific dimensions independent: net EV, cluster
-LCB95 and adverse excursion. Do not substitute a weighted scalar objective.
+Keep the two economic objectives independent: net EV and cluster
+LCB95; adverse excursion is reported, not a selection objective. Do not substitute a weighted scalar objective.
 """
 from __future__ import annotations
 from dataclasses import dataclass
@@ -26,8 +26,8 @@ def nondominated_curve(curve):
     front = []
     for p in points:
         if any(
-            (q.ev_net >= p.ev_net and q.lcb95 >= p.lcb95 and q.mae_mean >= p.mae_mean)
-            and (q.ev_net > p.ev_net or q.lcb95 > p.lcb95 or q.mae_mean > p.mae_mean)
+            (q.ev_net >= p.ev_net and q.lcb95 >= p.lcb95)
+            and (q.ev_net > p.ev_net or q.lcb95 > p.lcb95)
             for q in points
         ):
             continue
@@ -40,8 +40,8 @@ def dominates(a, b):
     if a.horizon != b.horizon:
         raise ValueError("only matched-horizon phenotypes can be compared")
     return (
-        a.ev_net >= b.ev_net and a.lcb95 >= b.lcb95 and a.mae_mean >= b.mae_mean
-        and (a.ev_net > b.ev_net or a.lcb95 > b.lcb95 or a.mae_mean > b.mae_mean)
+        a.ev_net >= b.ev_net and a.lcb95 >= b.lcb95
+        and (a.ev_net > b.ev_net or a.lcb95 > b.lcb95)
     )
 
 

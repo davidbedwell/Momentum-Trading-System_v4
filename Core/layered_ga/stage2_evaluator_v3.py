@@ -28,7 +28,7 @@ def _tail_mean(v:np.ndarray,fraction:float=.05)->float:
 
 
 def _pareto_indices(points:list[dict])->list[int]:
-    # Maximize EV, LCB95 and MAE (less-negative adverse excursion is better).
+    # Maximize EV and LCB95; MAE is reported as risk evidence, not optimized.
     ids=[i for i,p in enumerate(points) if all(np.isfinite(p.get(k,np.nan)) for k in ('ev_net','lcb95','mae_mean'))]
     keep=[]
     for i in ids:
@@ -36,8 +36,8 @@ def _pareto_indices(points:list[dict])->list[int]:
         for j in ids:
             if i==j:continue
             b=points[j]
-            weak=(b['ev_net']>=a['ev_net'] and b['lcb95']>=a['lcb95'] and b['mae_mean']>=a['mae_mean'])
-            strict=(b['ev_net']>a['ev_net'] or b['lcb95']>a['lcb95'] or b['mae_mean']>a['mae_mean'])
+            weak=(b['ev_net']>=a['ev_net'] and b['lcb95']>=a['lcb95'])
+            strict=(b['ev_net']>a['ev_net'] or b['lcb95']>a['lcb95'])
             if weak and strict:
                 dominated=True;break
         if not dominated:keep.append(i)
@@ -106,8 +106,8 @@ def pooled_phenotype_front(evaluations:list[tuple[str,CurveEvaluation]])->list[d
         dominated=False
         for j,b in enumerate(flat):
             if i==j:continue
-            weak=(b['ev_net']>=a['ev_net'] and b['lcb95']>=a['lcb95'] and b['mae_mean']>=a['mae_mean'])
-            strict=(b['ev_net']>a['ev_net'] or b['lcb95']>a['lcb95'] or b['mae_mean']>a['mae_mean'])
+            weak=(b['ev_net']>=a['ev_net'] and b['lcb95']>=a['lcb95'])
+            strict=(b['ev_net']>a['ev_net'] or b['lcb95']>a['lcb95'])
             if weak and strict:dominated=True;break
         if not dominated:keep.append(a)
     return keep
