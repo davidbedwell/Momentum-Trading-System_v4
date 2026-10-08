@@ -7,6 +7,7 @@ from Core.layered_ga.stage2_compiler_v3 import stage2_search_spaces
 from Core.layered_ga.stage2_path_v3 import ExecutionPaths,ProspectiveCosts
 from Core.layered_ga.ga4_conditional_runner import evaluate_conditional_candidate
 from Core.layered_ga.stage2_evaluator_v3 import CurveEvaluation
+from Core.layered_ga.ga4_catalog_store import append_record
 from Core.layered_ga.ga4_resumable_parallel import run
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'Research/Runs/layered/stage2-opportunity-v3-20261007/ga4_dev80_checkpoint'
@@ -38,7 +39,7 @@ def evaluate(chromosomes):
  compiler,mask,paths,costs,clusters,provenance=initialize()
  r=evaluate_conditional_candidate(compiler=compiler,chromosomes=chromosomes,context_mask=mask,context={'scope':'DEV80_ELIGIBLE'},paths=paths,costs=costs,cluster_ids=clusters,fold='DEV80',data_provenance=provenance)
  points=tuple({k:(float('nan') if v is None and k in ('ev_net','lcb95','mae_mean','mae_tail5') else v) for k,v in p.items()} for p in r['daily_horizon_evidence'])
- return CurveEvaluation(r['side'],points,tuple(r['pareto_horizons']),tuple(tuple(x) for x in r['pareto_ranges']))
+ return CurveEvaluation(r['side'],points,tuple(r['pareto_horizons']),tuple(tuple(x) for x in r['pareto_ranges'])),r
 
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--budget',required=True);args=ap.parse_args()
@@ -53,6 +54,6 @@ def main():
   with frozen.open('x') as f:json.dump(budget,f,sort_keys=True);f.flush();os.fsync(f.fileno())
  identity={'fold':'DEV80','predictors_sha256':sha(SOURCE/'dev80_predictors.parquet'),'paths_sha256':sha(SOURCE/'dev80_execution_arrays.npz'),'budget':budget}
  initialize()
- result=run(stage2_search_spaces(),evaluate,seed=budget['seed'],population_size=budget['population_size'],generations=budget['generations'],workers=budget['workers'],checkpoint_dir=destination,identity=identity)
+ result=run(stage2_search_spaces(),evaluate,seed=budget['seed'],population_size=budget['population_size'],generations=budget['generations'],workers=budget['workers'],checkpoint_dir=destination,identity=identity,persist=lambda record:append_record(destination/'candidate_catalog',record))
  print(json.dumps(result,default=str),flush=True)
 if __name__=='__main__':main()
