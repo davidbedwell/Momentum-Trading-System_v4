@@ -1,10 +1,11 @@
 {
   "certified": false,
   "comparison_reference": "G0 checkpoint >=43370 unique evaluated genomes",
+  "feasibility_note": "Budget is a ceiling, not approved runtime. Benchmark 7 unique evaluations / 367.25 seconds on 2 workers; extrapolation of 50000 unique evaluations at equal throughput ~30.4 days. Actual 6-worker scaling unverified.",
   "generations": 200,
   "maximum_individual_slots": 50000,
   "population_size": 250,
-  "requires": "successful integrated benchmark with complete evidence catalog and verified restart",
+  "requires": "successful integrated evidence benchmark, reproducibility and restart; throughput feasibility/cost gate before freezing",
   "run_id": "dev80-production-v1",
   "scope": "DEV80 only",
   "seed": 20261010,
