@@ -22,10 +22,11 @@ def audit_evolutionary_ledger(ledger):
             if not all(isfinite(p.ev_net) and isfinite(p.lcb95) and isfinite(p.mae_mean) for p in obs):
                 failures.append(f'generation {i}: nonfinite objective')
             fronts=nondominated_sort(obs)
-            reported=set(gen.get('first_front',[]))
+            reported={tuple(x) for x in gen.get('first_front',[])}
             actual={(p.candidate_id,p.horizon) for p in fronts[0]}
-            if reported!={tuple(x) for x in actual}:failures.append(f'generation {i}: incorrect nondominated front')
-            if not gen.get('selection_lineage'):failures.append(f'generation {i}: reproduction lineage absent')
+            if reported!=actual:failures.append(f'generation {i}: incorrect nondominated front')
+            if i<len(generations)-1 and not gen.get('selection_lineage'):
+                failures.append(f'generation {i}: reproduction lineage absent')
         except (TypeError,ValueError,KeyError) as exc:
             failures.append(f'generation {i}: invalid ledger {exc}')
     if not ledger.get('heldout_selection_adjusted_validation'):
