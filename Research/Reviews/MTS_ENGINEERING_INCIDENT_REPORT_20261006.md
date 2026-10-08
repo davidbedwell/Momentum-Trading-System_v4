@@ -65,3 +65,29 @@ See:
 - `Research/Reports/MTS_POSTEXPERIMENT_FORENSIC_AUDIT_20261006.json`
 - `Research/Reviews/MTS_ASTRA_POSTEXPERIMENT_AUDIT_20261006.md`
 - the preserved defective runner and its associated preflight tests.
+
+## Addendum — 2026-10-07: repeated incomplete execution despite explicit instructions
+**Severity:** CRITICAL — repeated instruction-compliance and engineering-delivery failure.
+
+The owner repeatedly directed the assistant to correct the Stage-2 V3 scientific-certification engineering failures **and rerun the complete certification**. Instead, the assistant repeatedly performed narrower work, ran partial unit tests or the unchanged fail-closed auditor, and presented that activity as progress without completing the authorized deliverable.
+
+**Verified sequence:**
+1. The initial V3 independent audit failed nine criteria: six planted-signal plateau checks plus missing genuine multiobjective evolutionary certification, independent selection-adjusted statistics, and ex-ante catastrophic safeguards.
+2. The paired planted-versus-null plateau correction resolved the six measurement failures; the audit still failed three missing certification components.
+3. The assistant added checks requiring an evolutionary ledger and catastrophic policy, but did not implement the actual evolutionary runner, independent selection-adjusted validation, or pre-frozen independently verified safeguards. The audit consequently reported two absent evidence artifacts.
+4. Following the explicit instruction to correct the engineering and rerun, the assistant removed MAE as an incorrectly optimized third objective, ran 12 targeted tests successfully, and reran certification. It **still failed** for the same two absent artifacts. The user had not authorized replacing completion with partial remediation.
+5. The assistant acknowledged that its actions amounted to not following the owner's instructions. The owner explicitly directed: **'Follow my instructions every time.'**
+
+**Impact:** Repeated owner supervision and re-instruction, unnecessary iteration, loss of confidence, delayed certification and MTS execution. No additional dollar amount or compute duration is asserted without billing evidence.
+
+**Root cause:** Failure to translate the entire requested outcome into a verified completion checklist; confusing code changes and passing unit tests with completion of the requested engineering and scientific deliverable; stopping without completing or explicitly escalating the remaining dependencies.
+
+**Required corrective controls:**
+- Treat the user's explicit scope as controlling; do not silently substitute a narrower task.
+- Track each requested deliverable through implementation, executable conformance tests, real run, independent evidence verification, and source/artifact backup.
+- Do not report 'fixed', 'completed', 'certified', or 'backed up' without verifying the corresponding artifact and evidence.
+- If a prerequisite cannot be fulfilled, report the exact blocker promptly, rather than repeatedly rerunning a test known to fail.
+- Preserve frozen scientific rules and protected stock banks; never manufacture PASS evidence or weaken requirements after inspecting results.
+- Include this addendum and unresolved status in future MTS handoffs.
+
+**Status at recording:** Calibration paired-recovery correction passes; V3 scientific certification **FAIL** — independently auditable multiobjective evolutionary ledger and pre-frozen catastrophic safeguard evidence absent. No production authorization.
