@@ -9,7 +9,8 @@ def build_discovery_execution(stock_local, raw, membership):
     costs = build_prospective_costs(aligned, paths)
     if paths.endpoint_return.shape != (len(predictors), 63):
         raise ValueError('Execution paths misaligned')
-    clusters = aligned.security_id.astype(str).to_numpy()
-    if not np.array_equal(clusters, predictors.security_id.astype(str).to_numpy()):
+    from .stage2_evaluator_v3 import cluster_ids_from_frame
+    clusters = cluster_ids_from_frame(predictors)
+    if len(clusters) != len(predictors) or clusters.dtype.kind not in 'iu':
         raise ValueError('Cluster alignment mismatch')
     return predictors, paths, costs, clusters, scope
