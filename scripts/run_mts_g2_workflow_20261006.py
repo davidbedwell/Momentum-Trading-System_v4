@@ -41,8 +41,14 @@ def load(path):
 def evidence_ok(stage):
  p=EVIDENCE[stage]
  if not p.is_file():return False
- try:return bool(load(p).get("passed",False))
- except Exception:return False
+ try:
+  evidence=load(p)
+  if evidence.get("passed") is not True:return False
+  # A bare 'passed' flag is not proof of the bound evidence or its provenance.
+  binding=load(MANIFEST).get("stage_evidence_bindings",{}).get(stage)
+  if not binding or not binding.get("sha256"):return False
+  return sha(p)==binding["sha256"]
+ except (OSError,ValueError,KeyError,TypeError):return False
 
 def heartbeat(stage,status,**kw):
  atomic(HEARTBEAT,{"workflow":"MTS_G2_PRODUCTION_20261006","stage":stage,"status":status,
@@ -164,9 +170,22 @@ def main():
   state={"workflow":"MTS_G2_PRODUCTION_20261006","status":"RUNNING","stage":a.start,"completed":[],"started":time.time()}
   if STATE.is_file():
    old=load(STATE)
-   if old.get("workflow")==state["workflow"]:state=old
+   if old.get("workflow")==state["workflow"]:
+    state=old
+    if state.get("status")=="RUNNING":
+     state.update(status="BLOCKED",error="UNRECONCILED_PREVIOUS_RUN: manual process recovery required",failed_at=time.time())
+     atomic(STATE,state)
+     raise RuntimeError("UNRECONCILED_PREVIOUS_RUN")
+  # All approved stages must be present before launching costly calibration.
+  for stage in STAGES:
+   if not Path(COMMANDS[stage][1]).is_file():
+    raise RuntimeError(f"STAGE_RUNNER_MISSING:{stage}:{COMMANDS[stage][1]}")
   for stage in STAGES[start:]:
-   # Allow already-passed durable evidence to advance without rerunning.
+   # Recheck the complete frozen configuration even for previously passed stages.
+   m=load(MANIFEST)
+   verify_semantic_fingerprint(m)
+   m=verify_config_diff(m)
+   if stage=="NULL_CALIBRATION":verify_null_preflight(m)
    if evidence_ok(stage):
     if stage not in state["completed"]:state["completed"].append(stage)
     state["stage"]=stage;atomic(STATE,state);continue
