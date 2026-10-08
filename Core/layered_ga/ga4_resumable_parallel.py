@@ -16,7 +16,7 @@ def atomic_pickle(path,obj):
  temp=path.with_suffix('.tmp')
  with temp.open('wb') as f:pickle.dump(obj,f,protocol=5);f.flush();os.fsync(f.fileno())
  os.replace(temp,path)
-def run(spaces,evaluate,*,seed,population_size,generations,workers,checkpoint_dir,identity):
+def run(spaces,evaluate,*,seed,population_size,generations,workers,checkpoint_dir,identity,persist=None):
  if population_size<2 or generations<1 or workers<1:raise ValueError('Invalid explicit budget')
  if not identity:raise ValueError('Frozen run identity required')
  directory=Path(checkpoint_dir);directory.mkdir(parents=True,exist_ok=True)
@@ -40,7 +40,13 @@ def run(spaces,evaluate,*,seed,population_size,generations,workers,checkpoint_di
    missing={key_for(p['chromosomes']):p['chromosomes'] for p in population if key_for(p['chromosomes']) not in cache}
    keys=list(missing)
    results=list(executor.map(evaluate,(missing[k] for k in keys)))
-   cache.update(zip(keys,results))
+   if persist is not None:
+    for key,result in zip(keys,results):
+     curve,record=result
+     persist(record)
+     cache[key]=curve
+   else:
+    cache.update(zip(keys,results))
    individuals=[Individual({'chromosomes':p['chromosomes']},cache[key_for(p['chromosomes'])],p['id']) for p in population]
    selected,ranking=environmental_selection(individuals,population_size)
    by_id={p['id']:p for p in population}
