@@ -14,6 +14,7 @@ def annotate_discovery(record):
         "bank_status":"PROVISIONAL_UNTIL_INDEPENDENTLY_VALIDATED",
         "retention":"RETAIN_WITH_UNCERTAINTY",
         "fitness_unchanged":True,
+        "stage1_context_reference":record.get("stage1_context_reference", {"status":"NOT_LINKED", "source":"STAGE_1_REQUIRED"}),
         "regime_classification":"DEFER_TO_LATER_ANALYSIS",
         "crash_episode_validation":"DEFER_TO_STAGE_9",
         "correlation_scope":"security-year cluster SE; shared calendar shock dependence not established",
