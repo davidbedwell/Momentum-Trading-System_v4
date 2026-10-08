@@ -30,6 +30,7 @@ jobs:
             Tests/test_stage2_calibration_shapes_v3.py \
             Tests/test_stage2_cluster_stats_v3.py \
             Tests/test_stage2_paired_null_v3.py \
-            Tests/test_stage2_recovered_source_preflight_v3.py
+            Tests/test_stage2_recovered_source_preflight_v3.py \
+            Tests/test_layered_conveyor_end_to_end_20261007.py
       - name: Verify frozen source hashes (required)
         run: python -m scripts.check_stage2_v3_readiness
