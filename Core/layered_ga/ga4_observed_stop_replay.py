@@ -7,6 +7,7 @@ import json,hashlib
 from pathlib import Path
 import numpy as np,pandas as pd
 from .ga4_gap_fill import emergency_exit
+from .ga4_stop_fill_costs import estimate_fill_cost
 from .stage2_path_v3 import _adjusted_ohlc
 from .stage2_data_v3 import sha256_file
 
@@ -21,9 +22,10 @@ def replay(raw,policy,max_horizon=63):
     for side in ("LONG","SHORT"):
         for kind,threshold in cuts:
             results[f"{side}:{kind}:{threshold:g}"]={"eligible":0,"breached":0,"gap_fills":0,"intraday_fills":0,
-                "sum_realized_gross_return":0.,"sum_uncapped_gross_return":0.,"gap_loss_worse_than_stop":0}
+                "sum_realized_gross_return":0.,"sum_uncapped_gross_return":0.,"gap_loss_worse_than_stop":0,
+                "sum_realized_net_return":0.,"net_eligible":0,"cost_ineligible":0}
     for _,g0 in raw.groupby("security_id",sort=False):
-        g=g0.sort_values("date")
+        g=g0.sort_values("date").reset_index(drop=True)
         o,h,l,_=_adjusted_ohlc(g)
         adjclose=g["adj_close"].to_numpy(float)
         prev=np.r_[np.nan,adjclose[:-1]]
@@ -54,6 +56,14 @@ def replay(raw,policy,max_horizon=63):
                     rec["eligible"]+=1
                     fill=emergency_exit(side,entry,stop,bars)
                     rec["sum_uncapped_gross_return"]+=uncapped
+                    exit_index=decision+64 if fill is None else decision+1+fill["bar"]
+                    exit_price=exitopen if fill is None else fill["fill"]
+                    cost=estimate_fill_cost(g,decision,decision+1,exit_index,entry,exit_price)
+                    if np.isfinite(cost):
+                        rec["net_eligible"]+=1
+                        rec["sum_realized_net_return"]+=(uncapped if fill is None else fill["return"])-cost
+                    else:
+                        rec["cost_ineligible"]+=1
                     if fill is None:
                         rec["sum_realized_gross_return"]+=uncapped
                     else:
@@ -68,6 +78,7 @@ def replay(raw,policy,max_horizon=63):
         n=rec["eligible"]
         rec["uncapped_mean_gross"]=rec["sum_uncapped_gross_return"]/n if n else None
         rec["capped_mean_gross"]=rec["sum_realized_gross_return"]/n if n else None
+        rec["capped_mean_net"]=rec["sum_realized_net_return"]/rec["net_eligible"] if rec["net_eligible"] else None
     return results
 
 def main():
@@ -78,10 +89,12 @@ def main():
     result={"policy_hash":policy["policy_hash"],"source_hash_verified":True,
             "raw_sha256":sha256_file(BASE/"cache/dev117_raw_aligned_v3.parquet"),
             "max_horizon":63,"results":replay(raw,policy),
+            "causal_costs_verified":False,"candidate_level_replay_verified":False,
             "independently_verified":False,
-            "limitations":["Gross return replay; frozen causal roundtrip costs not yet applied to stopped trades",
+            "limitations":["Causal cost estimator integrated; independent cost verification still pending",
                            "Independent external recalculation and candidate-level certification pending"]}
     dest=BASE/"calibration/ga4_observed_stop_replay.json"
     dest.write_text(json.dumps(result,indent=2,allow_nan=False))
     print("OBSERVED_STOP_REPLAY",len(result["results"]),dest)
 if __name__=="__main__":main()
+
