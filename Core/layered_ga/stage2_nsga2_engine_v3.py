@@ -5,7 +5,7 @@ compared only at equal horizon. All complete paths are retained for auditing.
 """
 import random
 from dataclasses import dataclass
-from Core.layered_ga.stage2_multiobjective_v3 import rank_candidates
+from Core.layered_ga.stage2_multiobjective_v3 import rank_candidates,nondominated_sort,extract
 
 @dataclass
 class Individual:
@@ -47,7 +47,11 @@ def evolve(space,evaluate,*,seed,population_size=24,generations=5):
                 born=make(child)
                 offspring.append(born)
                 lineage.append({'child':born.candidate_id,'parents':[a.candidate_id,b.candidate_id]})
+        observed=[p for individual in pool for p in extract(individual.candidate_id,individual.curve)]
+        fronts=nondominated_sort(observed)
         ledger.append({'generation':gen,'evaluated_count':len(pool),
+                       'evaluated_observations':[vars(p) for p in observed],
+                       'first_front':[[p.candidate_id,p.horizon] for p in fronts[0]] if fronts else [],
                        'selected':[p.candidate_id for p in selected],
                        'selection_lineage':lineage,
                        'ranking':{p.candidate_id:list(ranks.get(p.candidate_id,(10**9,0,0))) for p in pool}})
