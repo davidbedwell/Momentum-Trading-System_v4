@@ -1,6 +1,7 @@
 """GA4 Stage 2 evidence builders: preserve observations, never self-certify."""
 import hashlib
 import json
+import math
 from datetime import datetime, timezone
 from pathlib import Path
 from Core.layered_ga.stage2_certification_evidence_v3 import audit_evolutionary_ledger, audit_catastrophic_policy
@@ -42,6 +43,15 @@ def catastrophic_evidence(policy, observed=None, search_start=None, independent=
     result["scientific_certification"] = "NOT_CERTIFIED"
     return result
 
+def finite_json(value):
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    if isinstance(value, dict):
+        return {k: finite_json(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [finite_json(v) for v in value]
+    return value
+
 def main():
     CAL.mkdir(parents=True, exist_ok=True)
     batch = json.loads((CAL / "nsga2_batch_evolutionary_evidence.json").read_text())
@@ -52,7 +62,7 @@ def main():
     risk = catastrophic_evidence(policy, observed, search_start=datetime.fromtimestamp(batch["started_at"], timezone.utc).isoformat())
     for filename, artifact in (("ga4_evolutionary_evidence_engineering.json", evo),
                                ("ga4_catastrophic_evidence_engineering.json", risk)):
-        (CAL / filename).write_text(json.dumps(artifact, indent=2, allow_nan=False))
+        (CAL / filename).write_text(json.dumps(finite_json(artifact), indent=2, allow_nan=False))
     print(json.dumps({"evolutionary_cases": len(evo["cases"]), "evolutionary_gaps": evo["engineering_gaps"],
                       "risk_audit_failures": risk["audit_failures"], "source_hash_verified": risk["source_hash_verified"]}, indent=2))
 
