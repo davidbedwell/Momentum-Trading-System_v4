@@ -55,6 +55,7 @@ def main():
  source_files=['Core/layered_ga/ga4_resumable_parallel.py','Core/layered_ga/ga4_combination_genetics.py','Core/layered_ga/ga4_conditional_runner.py','Core/layered_ga/ga4_causal_compiler.py','Core/layered_ga/stage2_evaluator_v3.py','Core/layered_ga/stage2_nsga2_engine_v3.py','Core/layered_ga/stage2_multiobjective_v3.py','Core/layered_ga/stage2_compiler_v3.py','scripts/run_ga4_parallel_dev80.py']
  identity={'fold':'DEV80','predictors_sha256':sha(SOURCE/'dev80_predictors.parquet'),'paths_sha256':sha(SOURCE/'dev80_execution_arrays.npz'),'budget':budget,'source_sha256':{p:sha(ROOT/p) for p in source_files}}
  provenance=destination/'frozen_provenance.json'
+ if (destination/'generation_state.pkl').exists() and not provenance.exists():raise ValueError('Legacy checkpoint lacks frozen source provenance; do not resume')
  if provenance.exists():
   if json.loads(provenance.read_text())!=identity:raise ValueError('Source or data provenance changed')
  else:
