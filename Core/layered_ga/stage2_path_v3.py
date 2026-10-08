@@ -177,8 +177,9 @@ def build_prospective_costs(raw: pd.DataFrame, paths: ExecutionPaths, *,
     spread = 10000.0*(high-low)/close/2.0
     spread = np.clip(spread, spread_floor_bps, spread_cap_bps)
     spread[~(np.isfinite(high)&np.isfinite(low)&np.isfinite(close)&(close>0)&(high>=low))]=np.nan
-    impact = impact_coefficient_bps*np.sqrt(reference_notional/adv)
-    impact[~np.isfinite(adv)|(adv<=0)] = np.nan
+    valid_adv = np.isfinite(adv) & (adv > 0)
+    impact = np.full(n, np.nan, dtype=float)
+    impact[valid_adv] = impact_coefficient_bps * np.sqrt(reference_notional / adv[valid_adv])
 
     # Regulatory sell fraction on the prospective T+1 execution date.
     reg = np.full(n,np.nan,dtype=float)
