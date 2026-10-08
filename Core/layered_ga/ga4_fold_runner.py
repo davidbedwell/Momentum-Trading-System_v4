@@ -5,8 +5,8 @@ from .ga4_combination_runner import run_combination_discovery
 def run_fold_discovery(*, stock_local, raw, membership, spaces, context_factory,
                        catalog_dir, seed, population_size=24, generations=5):
     predictors, paths, costs, clusters, scope = build_discovery_execution(stock_local, raw, membership)
-    from .stage2_compiler_v3 import VectorSignalCompiler
-    compiler = VectorSignalCompiler(predictors)
+    from .ga4_causal_compiler import CausalSignalCompiler
+    compiler = CausalSignalCompiler(predictors)
     context_mask, context = context_factory(predictors)
     return run_combination_discovery(
         spaces=spaces, compiler=compiler, context_mask=context_mask, context=context,
