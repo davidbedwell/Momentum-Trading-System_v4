@@ -5,6 +5,7 @@ import math
 import numpy as np
 import pandas as pd
 from .stage2_path_v3 import ExecutionPaths,ProspectiveCosts,signed_excursions
+from .ga4_horizon_contract import FORWARD_HORIZONS, validate_horizons
 from .stage2_cluster_stats_v3 import row_weighted_cluster_se
 
 
@@ -61,7 +62,11 @@ def evaluate_curve(mask:np.ndarray,paths:ExecutionPaths,costs:ProspectiveCosts,s
     sign=1.0 if side=='LONG' else -1.0
     cmatrix=costs.long_roundtrip if side=='LONG' else costs.short_roundtrip
     adverse,favorable=signed_excursions(paths,side)
-    H=paths.endpoint_return.shape[1];ncl=int(cluster_ids.max())+1 if len(cluster_ids) else 0
+    H=paths.endpoint_return.shape[1]
+    validate_horizons(range(1, H + 1))
+    if cmatrix.shape[1] != H or adverse.shape[1] != H or favorable.shape[1] != H:
+        raise ValueError('GA4 forward-path/cost/excursion horizon mismatch')
+    ncl=int(cluster_ids.max())+1 if len(cluster_ids) else 0
     pts=[]
     for j in range(H):
         gross=sign*paths.endpoint_return[:,j];c=cmatrix[:,j]
