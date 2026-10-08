@@ -1,3 +1,5 @@
+[Reading 47 lines from start (total: 47 lines, 0 remaining)]
+
 """Reproducible GA4 scientific audit from Git-tracked code and external evidence.
 
 Does not open protected banks. Missing evidence is an explicit FAIL, not PASS.
@@ -43,4 +45,7 @@ def main():
     dest.write_text(json.dumps(result,indent=2,allow_nan=False))
     print(json.dumps({"decision":result["decision"],"failure_count":len(failures),"report":str(dest)}))
     return result
-if __name__=="__main__":main()
+if __name__=="__main__":
+    sys.exit(0 if main()["decision"] == "PASS" else 1)
+
+[executed on device: instance-e298gycb-main (a21f8a9b-b225-483b-b45f-ba34708f98ee)]
