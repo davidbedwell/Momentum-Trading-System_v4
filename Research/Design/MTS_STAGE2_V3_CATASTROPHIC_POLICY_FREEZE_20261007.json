@@ -1,0 +1,33 @@
+{
+  "policy_id": "STAGE2_V3_PRESEARCH_DISASTER_LAYER_20261007",
+  "provenance": {
+    "source": "Research/Protocols/MTS_DISCOVERY_DYNAMIC_ADVERSE_PATH_STOP_PROTOCOL_20261001.md",
+    "source_sha256": "0ff0fc1d63114270f833790e34671ebf02301ae8d66447f05d1cf00391417f9d"
+  },
+  "metrics": [
+    "adverse_excursion_atr20",
+    "loss_from_entry_fraction",
+    "gap_through_fill_price"
+  ],
+  "thresholds": {
+    "atr20_sensitivity": [
+      6,
+      8,
+      10,
+      12
+    ],
+    "loss_fraction_sensitivity": [
+      0.2,
+      0.25,
+      0.3,
+      0.4
+    ]
+  },
+  "interpretation": "Sensitivity analysis of independent emergency cap; report uncapped and all cap scenarios. No 2R hard ceiling. No cap is chosen based on observed calibration results.",
+  "fill_rule": "first available observed price after gap; never assume fill at threshold",
+  "status": "FROZEN_FOR_NEW_SEARCH_NOT_CERTIFIED",
+  "frozen_at": "2026-10-08T03:08:48.257246+00:00",
+  "independent_recalculation": null,
+  "search_started_at": null,
+  "policy_hash": "59a16a43b1d1b24159514b1c7f1eefaad47d6b1751f665a3fbbfb8a5c2ccbc3b"
+}
