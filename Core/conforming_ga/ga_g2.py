@@ -124,7 +124,12 @@ def evolve_g2(*,evaluator,master_seed,fold,generations=BASE_GENERATIONS,populati
          "extension_max":800,"extension_window":50,"extension_threshold":.01}
     if mechanics:cfg.update(mechanics)
     if resume_path:
-        raw=Path(resume_path).read_bytes();state=pickle.loads(raw)
+        checkpoint=Path(resume_path)
+        raw=checkpoint.read_bytes()
+        digest_path=checkpoint.with_suffix(checkpoint.suffix+'.sha256')
+        if not digest_path.is_file() or digest_path.read_text().strip()!=hashlib.sha256(raw).hexdigest():
+            raise ValueError('checkpoint integrity verification failed')
+        state=pickle.loads(raw)
         if state["master_seed"]!=master_seed or state["fold"]!=fold:raise ValueError("checkpoint identity")
         pops=state["pops"];archives=state["archives"];history=state["history"];plateaus=state["plateaus"];start=state["generation"]
         plateau_state=state.get("plateau_state",{k:{"phase":"BASE","window_start":0,"structural_until":None,"frozen":False} for k in ISLANDS})
