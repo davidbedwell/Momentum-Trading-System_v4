@@ -32,15 +32,19 @@ def main():
   arrays[name]=getattr(costs,name)[idx]
  arrays['cluster_ids']=cluster_ids_from_frame(pred)
  arrfile=DIR/'dev80_execution_arrays.npz'
- if arrfile.exists():raise FileExistsError('refusing checkpoint overwrite')
- with arrfile.open('wb') as f:
-  np.savez(f,**arrays);f.flush();os.fsync(f.fileno())
+ if arrfile.exists():
+  with np.load(arrfile) as saved:
+   if set(saved.files)!=set(arrays) or any(not np.array_equal(saved[k],arrays[k],equal_nan=True) for k in arrays):
+    raise ValueError('existing execution checkpoint differs; refusing overwrite')
+ else:
+  with arrfile.open('wb') as f:
+   np.savez(f,**arrays);f.flush();os.fsync(f.fileno())
  from Core.layered_ga.stage2_path_v3 import ExecutionPaths,ProspectiveCosts
  from Core.layered_ga.stage2_evaluator_v3 import CurveEvaluation
  from dataclasses import fields
  projected_paths=ExecutionPaths(**{k:arrays[k] for k in ('endpoint_return','low_excursion','high_excursion','calendar_days')})
  projected_costs=ProspectiveCosts(**{k:arrays[k] for k in ('long_roundtrip','short_roundtrip','spread_bps','impact_bps','adv_dollars','regulatory_sell_fraction')})
- mask=np.asarray(pred.eligible,dtype=bool) if 'eligible' in pred else np.ones(len(pred),dtype=bool)
+ mask=np.array(pred.eligible,dtype=bool,copy=True) if 'eligible' in pred else np.ones(len(pred),dtype=bool)
  mask &= np.asarray(pred['return_20__v1'],dtype=float)>0
  samples=[]
  for j in range(3):
