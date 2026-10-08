@@ -1,0 +1,14 @@
+{
+  "certified": false,
+  "comparison_reference": "G0 checkpoint >=43370 unique evaluated genomes",
+  "generations": 200,
+  "maximum_individual_slots": 50000,
+  "population_size": 250,
+  "requires": "successful integrated benchmark with complete evidence catalog and verified restart",
+  "run_id": "dev80-production-v1",
+  "scope": "DEV80 only",
+  "seed": 20261010,
+  "status": "PROPOSED_NOT_FROZEN",
+  "validation": "none; DEV37 untouched",
+  "workers": 6
+}
