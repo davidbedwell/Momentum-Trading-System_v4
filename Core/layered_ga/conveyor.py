@@ -22,6 +22,13 @@ def write_state(stage,status,detail=''):
     x={'stage':stage,'stage_name':STAGE_DIRS.get(stage),'status':status,'detail':detail,'time':time.time()}
     STATE.write_text(json.dumps(x,indent=2)); print('CONVEYOR',json.dumps(x),flush=True)
 def main():
+    # Never substitute legacy Stage 2 for the frozen V3 calibration.
+    v3=RUN/'stage2-opportunity-v3-20261007'/'calibration'
+    evidence=v3/'gate.json'
+    if not evidence.is_file() or readj(evidence).get('decision')!='PASS':
+        status=readj(v3/'status.json').get('state','MISSING') if (v3/'status.json').is_file() else 'MISSING'
+        write_state(2,'STOPPED_ENGINEERING',f'V3 calibration not certified ({status}); legacy fallback prohibited')
+        return 20
     if not passed(0) or not passed(1): raise SystemExit('Stage0+1 must be PASS')
     for i in range(2,11):
         if passed(i):
