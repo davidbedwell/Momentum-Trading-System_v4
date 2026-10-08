@@ -1,7 +1,7 @@
 """Single fail-closed certification gate. No override flag exists."""
 from __future__ import annotations
 from pathlib import Path
-import json,subprocess
+import json,subprocess,hashlib
 from .availability import *
 from .external import *
 from .realdata import dev117
@@ -11,8 +11,15 @@ class PreflightFailure(RuntimeError):pass
 def _passed_report(path:Path)->bool:
     if not path.is_file():return False
     try:
-        return bool(json.loads(path.read_text()).get("passed",False))
-    except Exception:return False
+        data=path.read_bytes()
+        report=json.loads(data)
+        if report.get('passed') is not True:return False
+        sidecar=path.with_suffix(path.suffix+'.sha256')
+        if not sidecar.is_file():return False
+        expected=sidecar.read_text().split()[0]
+        if len(expected)!=64 or expected!=hashlib.sha256(data).hexdigest():return False
+        return True
+    except (OSError,ValueError,TypeError,IndexError):return False
 
 def static_external_checks(repo:Path)->tuple[dict,dict]:
     required={
