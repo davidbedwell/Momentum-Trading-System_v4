@@ -32,6 +32,22 @@ class ParallelResumeTests(unittest.TestCase):
    b=run(stage2_search_spaces(),synthetic_pair,seed=7,population_size=4,generations=2,workers=2,checkpoint_dir=tmp,identity="persist",persist=persist)
    self.assertEqual(a,b)
    self.assertEqual(len(records),a["unique_evaluations"])
+ def test_crash_before_checkpoint_recovers_without_duplicate_records(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   persisted={}
+   calls=[0]
+   def interrupt_once(record):
+    calls[0]+=1
+    if calls[0]==2:raise RuntimeError('injected interruption')
+    persisted[str(record)]=record
+   kw=dict(seed=21,population_size=4,generations=3,workers=2,checkpoint_dir=tmp,identity='crash-recovery')
+   with self.assertRaisesRegex(RuntimeError,'injected interruption'):
+    run(stage2_search_spaces(),synthetic_pair,**kw,persist=interrupt_once)
+   def persist(record):persisted[str(record)]=record
+   recovered=run(stage2_search_spaces(),synthetic_pair,**kw,persist=persist)
+   self.assertEqual(len(persisted),recovered['unique_evaluations'])
+   again=run(stage2_search_spaces(),synthetic_pair,**kw,persist=persist)
+   self.assertEqual(recovered,again)
  def test_explicit_budget_required(self):
   with tempfile.TemporaryDirectory() as tmp:
    with self.assertRaises(ValueError):
