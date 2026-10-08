@@ -52,7 +52,13 @@ def main():
  if frozen.exists() and json.loads(frozen.read_text())!=budget:raise ValueError('Frozen budget changed')
  if not frozen.exists():
   with frozen.open('x') as f:json.dump(budget,f,sort_keys=True);f.flush();os.fsync(f.fileno())
- identity={'fold':'DEV80','predictors_sha256':sha(SOURCE/'dev80_predictors.parquet'),'paths_sha256':sha(SOURCE/'dev80_execution_arrays.npz'),'budget':budget}
+ source_files=['Core/layered_ga/ga4_resumable_parallel.py','Core/layered_ga/ga4_combination_genetics.py','Core/layered_ga/ga4_conditional_runner.py','Core/layered_ga/ga4_causal_compiler.py','Core/layered_ga/stage2_evaluator_v3.py','Core/layered_ga/stage2_nsga2_engine_v3.py','Core/layered_ga/stage2_multiobjective_v3.py','Core/layered_ga/stage2_compiler_v3.py','scripts/run_ga4_parallel_dev80.py']
+ identity={'fold':'DEV80','predictors_sha256':sha(SOURCE/'dev80_predictors.parquet'),'paths_sha256':sha(SOURCE/'dev80_execution_arrays.npz'),'budget':budget,'source_sha256':{p:sha(ROOT/p) for p in source_files}}
+ provenance=destination/'frozen_provenance.json'
+ if provenance.exists():
+  if json.loads(provenance.read_text())!=identity:raise ValueError('Source or data provenance changed')
+ else:
+  with provenance.open('x') as f:json.dump(identity,f,sort_keys=True,indent=2);f.flush();os.fsync(f.fileno())
  initialize()
  result=run(stage2_search_spaces(),evaluate,seed=budget['seed'],population_size=budget['population_size'],generations=budget['generations'],workers=budget['workers'],checkpoint_dir=destination,identity=identity,persist=lambda record:append_record(destination/'candidate_catalog',record))
  print(json.dumps(result,default=str),flush=True)
