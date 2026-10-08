@@ -1,0 +1,13 @@
+{
+  "status": "PRECOMMITTED_SELECTION_RULE",
+  "source": "Research/Partitions/MTS_V4_REPAIRED_UNTOUCHED_PARTITION_A100_B100_DISCOVERY136_20261007.json",
+  "eligible_group": "DISCOVERY_UNTOUCHED",
+  "sample_size": 50,
+  "seed": "MTS_GA4_FRESH50_SECTOR_STRATIFIED_20261008_V1",
+  "rule": "Hamilton largest-remainder quotas proportional to 136 untouched Discovery stocks by sector_id, ties alphabetically; within each sector sort security_id then Python random.Random(seed).shuffle, take quota; no outcomes consulted",
+  "protected_groups": [
+    "VERIFICATION_A",
+    "VERIFICATION_B"
+  ],
+  "gate": "Freeze candidates and risk/cost rules before opening outcomes"
+}
