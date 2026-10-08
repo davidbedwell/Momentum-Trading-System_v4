@@ -14,11 +14,12 @@ def evolve_combinations(spaces, evaluate, *, seed, population_size=24, generatio
 
     def make(chromosomes):
         nonlocal counter
-        key = tuple(sorted(chromosome_key(x) for x in chromosomes))
+        canonical = tuple(sorted(chromosomes, key=chromosome_key))
+        key = tuple(chromosome_key(x) for x in canonical)
         if key not in cache:
-            cache[key] = evaluate(chromosomes)
+            cache[key] = evaluate(canonical)
         counter += 1
-        return Individual({"chromosomes": tuple(chromosomes)}, cache[key], f"c{counter:07d}")
+        return Individual({"chromosomes": canonical}, cache[key], f"c{counter:07d}")
 
     pool = [make(propose(spaces, rng)) for _ in range(population_size)]
     for generation in range(generations):
