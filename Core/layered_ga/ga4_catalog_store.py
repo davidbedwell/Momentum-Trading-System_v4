@@ -3,14 +3,25 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 
 from .ga4_horizon_contract import validate_horizons
 
 
+def _json_safe(value):
+    if isinstance(value, dict):
+        return {k: _json_safe(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(v) for v in value]
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    return value
+
+
 def _canonical(record):
-    return json.dumps(record, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return json.dumps(_json_safe(record), sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def append_record(path, record):
