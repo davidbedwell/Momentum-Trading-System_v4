@@ -48,6 +48,12 @@ class ParallelResumeTests(unittest.TestCase):
    self.assertEqual(len(persisted),recovered['unique_evaluations'])
    again=run(stage2_search_spaces(),synthetic_pair,**kw,persist=persist)
    self.assertEqual(recovered,again)
+ def test_elapsed_budget_stops_without_evaluating(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   a=run(stage2_search_spaces(),synthetic,seed=4,population_size=4,generations=100,workers=2,checkpoint_dir=tmp,identity='time-test',max_runtime_seconds=0.000001)
+   self.assertTrue(a['stopped_for_time'])
+   self.assertEqual(a['unique_evaluations'],0)
+   self.assertEqual(a['generations'],[])
  def test_explicit_budget_required(self):
   with tempfile.TemporaryDirectory() as tmp:
    with self.assertRaises(ValueError):
