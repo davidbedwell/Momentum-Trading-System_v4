@@ -17,7 +17,7 @@ RETURN_WINDOWS = (1, 3, 5, 10, 20, 63, 126, 252)
 RANGE_WINDOWS = (20, 50, 252)
 SMA_WINDOWS = (20, 50, 200)
 REALIZED_VOL_WINDOWS = (20, 63)
-FORWARD_HORIZONS = (1, 3, 5, 10, 20, 63)
+from Core.layered_ga.ga4_horizon_contract import FORWARD_HORIZONS
 
 
 def _feature(feature_id: str, description: str, lookback: int, *, dependencies=("OHLCV",), classification="PREDICTOR") -> DerivedFeatureDefinition:
