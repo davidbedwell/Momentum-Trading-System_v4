@@ -22,7 +22,7 @@ def write_state(stage,status,detail=''):
     x={'stage':stage,'stage_name':STAGE_DIRS.get(stage),'status':status,'detail':detail,'time':time.time()}
     STATE.write_text(json.dumps(x,indent=2)); print('CONVEYOR',json.dumps(x),flush=True)
 def main():
-    # Prevent the legacy Stage-2 runner from substituting for the frozen V3 study.
+    # Never substitute legacy Stage 2 for the frozen V3 calibration.
     v3=RUN/'stage2-opportunity-v3-20261007'/'calibration'
     evidence=v3/'gate.json'
     if not evidence.is_file() or readj(evidence).get('decision')!='PASS':
