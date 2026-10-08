@@ -5,6 +5,8 @@ from .ga4_discovery_inputs import prepare_discovery_frame
 def build_discovery_execution(stock_local, raw, membership):
     from .stage2_path_v3 import build_execution_paths, build_prospective_costs
     predictors, aligned, scope = prepare_discovery_frame(stock_local, raw, membership)
+    if not np.array_equal(aligned.security_id.astype(str).to_numpy(), predictors.security_id.astype(str).to_numpy()):
+        raise ValueError('Security alignment mismatch')
     paths = build_execution_paths(aligned, max_horizon=63)
     costs = build_prospective_costs(aligned, paths)
     if paths.endpoint_return.shape != (len(predictors), 63):
