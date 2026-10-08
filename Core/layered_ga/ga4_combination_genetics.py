@@ -11,7 +11,8 @@ def combine(left,right,rng):
     return validate(pool[:rng.randint(1,min(4,len(pool)))])
 
 def propose(spaces, rng):
-    from .stage2_compiler_v3 import random_genome
+    def random_genome(space, rng):
+        return {gene.gene_id:rng.choice(gene.values) for gene in space.genes}
     if not spaces: raise ValueError('No families')
     count=rng.randint(1,4)
     items=[]
