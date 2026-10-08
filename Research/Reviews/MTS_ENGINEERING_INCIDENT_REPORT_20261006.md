@@ -91,3 +91,31 @@ The owner repeatedly directed the assistant to correct the Stage-2 V3 scientific
 - Include this addendum and unresolved status in future MTS handoffs.
 
 **Status at recording:** Calibration paired-recovery correction passes; V3 scientific certification **FAIL** — independently auditable multiobjective evolutionary ledger and pre-frozen catastrophic safeguard evidence absent. No production authorization.
+
+## Addendum — 2026-10-07: unfinished scientific certification after completed evolutionary run
+**Severity: CRITICAL — repeated engineering delivery failure with owner time and cost impact.**
+
+The owner expressly requested documentation of the assistant's repeated inability to complete the assigned MTS engineering workflow, resulting in wasted owner time, repeated supervision, delays, and compute expense.
+
+### Verified sequence
+1. Following repeated instructions to correct and complete scientific certification, the assistant implemented and ran a 45-case V3 evolutionary calibration batch (15 each for MOMENTUM, MEAN_REVERSION, BREAKOUT).
+2. The batch finished 45/45 cases, producing 671 unique candidate evaluations. Independent structural inspection found zero ledger-structure failures.
+3. Nevertheless, independent selection-adjusted statistical validation was **not performed**. A successful evolutionary ledger does not establish that selected candidates survive search-related multiple comparisons.
+4. Independent catastrophic-risk safeguard recalculation and executable gap-through price replay were **not performed**. A prospective policy freeze is not proof that safeguards were independently tested. The examined predictor parquet has ATR20 but no OHLC execution-price fields; this file alone cannot establish execution-level risk behavior.
+5. The assistant subsequently acknowledged that overall scientific certification remained **NOT CERTIFIED**. The owner again had to intervene to determine why completion of the run did not mean completion of the assignment.
+6. The executed batch used 8 individuals and 2 generations per case and LONG-side evaluation. This evidence-generation configuration must not be silently represented as a full scientifically certified search.
+
+### Responsibility and impact
+**Responsible failure:** The assistant repeatedly substituted narrower coding, execution, and structural-check milestones for the owner's full requested outcome; failed to plan and execute required independent validation before claiming meaningful completion; and transferred supervision back to the owner. This is an engineering and delivery failure, not a demonstrated failure of the trading hypotheses.
+
+**Impact:** Additional owner supervision and repeated instructions; certification delay; consumed compute resources without a finished certified deliverable; reduced confidence. Precise incremental dollar and hour totals for this event are **not verified** and must not be invented. This is cumulative with previously documented MTS compute-cost incidents.
+
+### Required corrective controls
+- Complete independent selection-adjusted validation without contaminating protected stock partitions or tuning after observing heldout results.
+- Independently replay the prospectively frozen catastrophic policy using executable OHLC price paths, ATR20 and gap-through fills; independently verify provenance and thresholds.
+- Audit horizon-selection and search adequacy before declaring scientific PASS; preserve raw evidence and version hashes.
+- Verify GitHub source/report backup and separate artifact backup where applicable. Do not claim backup until confirmed.
+- Do not launch further paid compute on known incomplete certification machinery; report actual blockers immediately.
+- Carry this incident and unresolved status into all future MTS handoffs.
+
+**Disposition:** Evolutionary run COMPLETE; ledger structural audit PASS; independent statistical validation NOT DONE; independent catastrophic-risk recalculation NOT DONE; overall **NOT CERTIFIED**, no production authorization.
