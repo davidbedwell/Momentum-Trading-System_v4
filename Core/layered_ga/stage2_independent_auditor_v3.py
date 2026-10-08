@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 from Core.layered_ga.stage2_calibration_gate_v3 import SHAPES,EFFECTS
 from Core.layered_ga.stage2_paired_recovery_v3 import paired_recovery
+from Core.layered_ga.stage2_certification_evidence_v3 import audit_evolutionary_ledger,audit_catastrophic_policy
 
 def audit(observed, evolutionary=None, safeguards=None):
     cases=observed.get("cases",[])
@@ -32,12 +33,8 @@ def audit(observed, evolutionary=None, safeguards=None):
             if not any(paired_recovery(sides.get(side,{}),c["shape"],c["effect"])["pass"]
                        for side in ("LONG","SHORT")):
                 failures.append(ident+": strong planted signal lacks paired recovery and positive LCB in target window")
-    if not evolutionary or evolutionary.get("method")!="NSGA_II_TWO_OBJECTIVE_V3" or evolutionary.get("independent_selection_audit") is not True:
-        failures.append("independently audited true multiobjective evolutionary selection missing")
-    if not evolutionary or evolutionary.get("selection_adjusted_statistical_validation") is not True:
-        failures.append("selection-adjusted independent statistical validation missing")
-    if not safeguards or safeguards.get("frozen_before_search") is not True or safeguards.get("independently_verified") is not True:
-        failures.append("independently verified ex-ante catastrophic-risk safeguards missing")
+    failures.extend(audit_evolutionary_ledger(evolutionary))
+    failures.extend(audit_catastrophic_policy(safeguards))
     return {"decision":"PASS" if not failures else "FAIL","certification_scope":"V3 scientific calibration",
             "cases":len(cases),"failure_count":len(failures),"failed_criteria":failures}
 
