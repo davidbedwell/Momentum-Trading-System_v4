@@ -45,6 +45,7 @@ def main():
  ap=argparse.ArgumentParser();ap.add_argument('--budget',required=True);args=ap.parse_args()
  budget=json.loads(Path(args.budget).read_text())
  required={'seed','population_size','generations','workers','run_id'}
+ if 'max_runtime_seconds' in budget:required.add('max_runtime_seconds')
  if set(budget)!=required:raise ValueError('Budget fields mismatch')
  if not str(budget['run_id']).replace('-','').replace('_','').isalnum():raise ValueError('Invalid run ID')
  destination=SOURCE.parent/('ga4_parallel_'+budget['run_id']);destination.mkdir(exist_ok=True)
@@ -61,6 +62,6 @@ def main():
  else:
   with provenance.open('x') as f:json.dump(identity,f,sort_keys=True,indent=2);f.flush();os.fsync(f.fileno())
  initialize()
- result=run(stage2_search_spaces(),evaluate,seed=budget['seed'],population_size=budget['population_size'],generations=budget['generations'],workers=budget['workers'],checkpoint_dir=destination,identity=identity,persist=lambda record:append_record(destination/'candidate_catalog',record))
+ result=run(stage2_search_spaces(),evaluate,seed=budget['seed'],population_size=budget['population_size'],generations=budget['generations'],workers=budget['workers'],checkpoint_dir=destination,identity=identity,persist=lambda record:append_record(destination/'candidate_catalog',record),max_runtime_seconds=budget.get('max_runtime_seconds'))
  print(json.dumps(result,default=str),flush=True)
 if __name__=='__main__':main()
