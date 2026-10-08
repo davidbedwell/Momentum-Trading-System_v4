@@ -34,6 +34,9 @@ def _configure(tmp_path, monkeypatch):
     monkeypatch.setattr(conveyor, "RUNNERS", runners)
     _gate(tmp_path, 0)
     _gate(tmp_path, 1)
+    p = tmp_path / 'stage2-opportunity-v3-20261007' / 'calibration' / 'gate.json'
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps({'decision': 'PASS'}))
 
 
 def test_all_ten_stage_handoffs(tmp_path, monkeypatch):
