@@ -1,0 +1,8 @@
+"""Fail-closed breeding gate evidence inventory. Does not breed or certify."""
+import json,pathlib,hashlib
+r=pathlib.Path('Research/Runs/gen1-merit-screen-20261008');p=r/'horizon_grouped_pareto_20261009/provisional_168_priority.jsonl';cert=json.loads((r/'scientific_certification_20261009/result.json').read_text());div=json.loads((r/'scientific_certification_20261009/diversity_diagnostic.json').read_text());rows=[json.loads(x) for x in p.open()]
+assert len(rows)==168 and len({x['index'] for x in rows})==168
+assert hashlib.sha256(p.read_bytes()).hexdigest()==cert['parents_sha256']
+missing=[k for k,v in cert['checks'].items() if not v]
+report={'decision':'BLOCK_GEN2_BREEDING','parent_count':len(rows),'parent_sha256':cert['parents_sha256'],'certification_passed':cert['completed_checks'],'certification_required':cert['total_checks'],'blocking_gates':missing,'diversity':{'canonical_unique':div['unique_canonical_genomes'],'exact_duplicate_groups':len(div['exact_duplicate_groups']),'coarse_signatures':div['unique_coarse_horizon_signatures'],'coarse_collisions':len(div['coarse_signature_collisions'])},'interpretation':'Exact genome uniqueness verified; behavioral near-duplicate control remains unapproved. The six unresolved scientific gates cannot be inferred from descriptive diagnostics.','next_step':'Define and freeze missing eligibility/statistical thresholds, implement episode and portfolio/cost replay, rerun fail-closed certification; only then generate Gen2 children.','protected_banks_touched':False}
+out=r/'scientific_certification_20261009/breeding_gate_evidence.json';out.write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
