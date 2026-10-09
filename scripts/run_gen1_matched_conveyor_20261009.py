@@ -15,7 +15,8 @@ def main(batch):
    m=json.loads(marker.read_text())
    if m.get('status')=='PASS' and m.get('start_index')==offset and m.get('batch_size')==size:continue
   command=[sys.executable,'scripts/run_gen1_horizon_matched_full_20261009.py','--start-index',str(offset),'--limit',str(size)]
-  subprocess.run(command,check=True)
+  if not ((directory/'manifest.json').exists() and (directory/'results.jsonl').exists() and (directory/'heldout_event_predictions.parquet').exists()):
+   subprocess.run(command,check=True)
   manifest=json.loads((directory/'manifest.json').read_text())
   results=[json.loads(s) for s in (directory/'results.jsonl').open()]
   predictions=pd.read_parquet(directory/'heldout_event_predictions.parquet')
