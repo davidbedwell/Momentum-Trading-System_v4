@@ -22,6 +22,6 @@ with open(out/'results.jsonl','w') as file:
   r=records[parent['index']]
   mask=np.logical_and.reduce([compiler.compile(family,genome) for family,genome in r['chromosomes']])
   points=evaluate_curve(mask,paths,costs,r['side'],a['cluster_ids'],horizons=horizons).points
-  file.write(json.dumps({'index':r['index'],'side':r['side'],'allocation_window':parent['allocation_window'],'points':points},allow_nan=False,default=lambda x: None if isinstance(x,float) and np.isnan(x) else str(x))+'\n');file.flush()
+  file.write(json.dumps({'index':r['index'],'side':r['side'],'allocation_window':parent['allocation_window'],'points':points},allow_nan=True)+'\n');file.flush()
   (out/'progress.json').write_text(json.dumps({'completed':i+1,'total':168,'elapsed_seconds':round(time.time()-started,1),'status':'RUNNING_UNCERTIFIED'}))
 (out/'manifest.json').write_text(json.dumps({'status':'PHASE_B_HORIZON_EVALUATION_COMPLETE_UNCERTIFIED','candidate_count':168,'horizons':horizons,'scope':'DEV80 only','no_parent_selection_changes':True},indent=2))
