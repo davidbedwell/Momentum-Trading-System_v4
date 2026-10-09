@@ -29,7 +29,7 @@ with open(out/'comparisons.jsonl','w') as file:
   diffs=[]
   for point,ref in zip(ev.points,r['horizons']):
    checks+=1
-   bad=(point['horizon']!=ref['horizon'] or point['n']!=ref['n'] or point['effective_n']!=ref['effective_n'] or not ((point['ev_net'] is None and ref['ev_net'] is None) or (point['ev_net'] is not None and ref['ev_net'] is not None and np.isclose(point['ev_net'],ref['ev_net'],atol=1e-14,rtol=0,equal_nan=True))))
+   bad=(point['horizon']!=ref['horizon'] or point['n']!=ref['n'] or point['effective_n']!=ref['effective_n'] or not (((point['ev_net'] is None or (isinstance(point['ev_net'],float) and np.isnan(point['ev_net']))) and ref['ev_net'] is None) or (point['ev_net'] is not None and ref['ev_net'] is not None and np.isclose(point['ev_net'],ref['ev_net'],atol=1e-14,rtol=0,equal_nan=True))))
    if bad:diffs.append({'h':point['horizon'],'replay_n':point['n'],'archive_n':ref['n'],'replay_ev':point['ev_net'],'archive_ev':ref['ev_net']})
   failed+=bool(diffs)
   file.write(json.dumps({'index':r['index'],'side':r['side'],'families':r['families'],'passed':not bool(diffs),'diffs':diffs})+'\n');file.flush()
