@@ -1,0 +1,16 @@
+{
+  "status": "SOURCE_AUDIT_COMPLETE_REPLAY_NOT_STARTED",
+  "scope": "DEV80 only",
+  "candidate_short_genomes": 2180,
+  "measured_horizons": 23,
+  "aggregate_candidate_results": "all_candidates.jsonl",
+  "aggregate_additional_horizons": "phaseA_apples_to_apples/paired_results.jsonl",
+  "dated_trade_rows_in_gen1_outputs": false,
+  "point_in_time_predictor_rows": 399691,
+  "point_in_time_predictor_columns": 78,
+  "source_predictors": "Research/Runs/layered/stage2-opportunity-v3-20261007/ga4_dev80_checkpoint/dev80_predictors.parquet",
+  "source_raw_prices": "Research/Runs/layered/stage2-opportunity-v3-20261007/ga4_dev80_checkpoint/dev80_raw.parquet",
+  "source_execution_arrays": "Research/Runs/layered/stage2-opportunity-v3-20261007/ga4_dev80_checkpoint/dev80_execution_arrays.npz",
+  "next_gate": "Recover exact Gen1 signal evaluator and cost convention; verify replay reproduces archived aggregate EV and effective sample statistics before regime slicing.",
+  "constraints": ["Do not touch DEV37 DEV50 BLIND17", "Do not claim regime effectiveness from aggregate statistics", "Do not modify parent allocation"]
+}
