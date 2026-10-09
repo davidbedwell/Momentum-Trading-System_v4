@@ -17,9 +17,12 @@ def replay(entry_price: float, executable_prices: list[float], observed_features
         raise ValueError('one feature snapshot per executable session required')
     if not isfinite(roundtrip_cost) or roundtrip_cost < 0:
         raise ValueError('invalid cost')
+    # Validate the complete counterfactual path before any early exit can mask bad data.
+    if any(not isfinite(price) or price <= 0 for price in executable_prices):
+        raise ValueError('invalid executable price')
+    if any(not isinstance(snapshot, dict) for snapshot in observed_features):
+        raise ValueError('invalid observation snapshot')
     for i, (price, snapshot) in enumerate(zip(executable_prices, observed_features)):
-        if not isfinite(price) or price <= 0 or not isinstance(snapshot, dict):
-            raise ValueError('invalid executable price or snapshot')
         if i == len(executable_prices) - 1 or bool(exit_policy(snapshot)):
             realized = side * (price / entry_price - 1.0) - roundtrip_cost
             horizon = side * (executable_prices[-1] / entry_price - 1.0) - roundtrip_cost

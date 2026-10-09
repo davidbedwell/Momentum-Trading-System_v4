@@ -16,6 +16,10 @@ class SequentialExitTests(unittest.TestCase):
         self.assertAlmostEqual(r['missed_recovery'],.15)
         f=replay(100,[95,110],[{'age':1},{'age':2}],lambda _:False)
         self.assertTrue(f['forced']);self.assertEqual(f['gain_vs_horizon'],0)
+    def test_future_bad_price_rejected_even_when_policy_exits_early(self):
+        with self.assertRaises(ValueError):
+            replay(100,[90,float('nan')],[{},{}],lambda _:True)
+
     def test_short_and_invalid(self):
         r=replay(100,[90,120],[{},{}],lambda _:True,side=-1,roundtrip_cost=.02)
         self.assertAlmostEqual(r['realized_net'],.08)
