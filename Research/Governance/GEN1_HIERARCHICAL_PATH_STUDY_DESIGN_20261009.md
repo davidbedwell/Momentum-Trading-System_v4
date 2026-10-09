@@ -40,3 +40,11 @@ Status: DESIGN FROZEN, IMPLEMENTATION PENDING. The 12-genome single-checkpoint s
 - No claims of independent evidence from duplicated same-day or same-crash stock trades.
 - No leakage through future extrema, label windows, calibration, model selection, overlapping folds, or genome-level re-use.
 - No retroactive changes to the frozen Gen1 criteria; no protected heldout access.
+
+## Approved addition: matched distressed-winner versus loser analysis (2026-10-09)
+- At each failed trade's warning checkpoint, retrieve comparable states from successful trades of the same genome at ANY historical checkpoint, then from strategy-family and pooled trades where same-genome support is inadequate.
+- Match on the then-observable trajectory, adverse excursion, elapsed time or explicitly analyze elapsed time as a differentiator, volatility, and regime; report match quality, common support and sample size. Do not match on ultimate outcomes or future path features.
+- Quantify how frequently failure signatures also occur in eventual winners (false-exit risk), and which additional contemporaneously observable factors distinguish subsequent recovery from continued deterioration.
+- Measure sensitivity, specificity, precision, calibration, lead time before deterioration, missed recovery payoff, and realized incremental net EV under causal replay; report uncertainty by independent episode and leave-episode-out sensitivity.
+- In hindsight autopsy future paths may be inspected freely to form outcome labels and hypotheses. In walk-forward validation, matching libraries, fitted discriminators and exit rules must be trained exclusively on prior periods; evaluate on withheld future episodes.
+- If no reliable differentiator exists, report ambiguity and abstention rather than force an exit; preserve original parent rankings until a separately approved governance change.
