@@ -22,7 +22,9 @@ def main(batch):
   if manifest['genomes_processed']!=size or len(predictions)!=manifest['predictions'] or len({r['genome_index'] for r in results})!=size:
    raise RuntimeError('Batch output reconciliation failed '+str(offset))
   if len(predictions):
-   if predictions[['genome_index','checkpoint','event_id']].duplicated().any() or not predictions['genome_index'].between(offset,offset+size-1).all():
+   assignment_rows=[json.loads(x) for x in assignments.open()]
+   expected_indices={r['genome_index'] for r in assignment_rows[offset:offset+size]}
+   if predictions[['genome_index','checkpoint','event_id']].duplicated().any() or not predictions['genome_index'].isin(expected_indices).all():
     raise RuntimeError('Duplicate or out-of-batch predictions')
   marker.write_text(json.dumps({'status':'PASS','start_index':offset,'batch_size':size,'predictions':len(predictions)}))
   (ROOT/'progress.json').write_text(json.dumps({'done':offset+size,'total':4360,'elapsed_seconds':round(time.time()-start,1)}))
