@@ -29,7 +29,7 @@ def run(limit,neighbors):
         valid_date=(positions+c)<len(calendar)
         aligned=f[feature_cols].reindex(index=np.arange(len(f)))
         by_key=f.set_index(lookup)[feature_cols]
-        vals=by_key.reindex(keys).to_numpy(dtype=float)
+        vals=by_key.reindex(keys).to_numpy(dtype=float).copy()
         vals[~valid_date,:]=np.nan
         checkpoint_context[c]=vals
     candidates=[json.loads(s) for s in open(ROOT/'all_candidates.jsonl')]
