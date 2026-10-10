@@ -1,0 +1,863 @@
+{
+  "domain_policy": "numeric within min/max of certified original grid, precision .001; categorical exact",
+  "historical_genomes_unchanged": true,
+  "files": {
+    "gen1_parents": {
+      "count": 200,
+      "outside_proposed_bounds": 0,
+      "violations": [],
+      "sha256": "12463353f65f8ac68c86d5e36d6870e9a23614d5b36f8989c70d2e2bff2de16c"
+    },
+    "gen2_children": {
+      "count": 1200,
+      "outside_proposed_bounds": 110,
+      "violations": [
+        {
+          "family": "MEAN_REVERSION",
+          "key": "context_threshold_quantile",
+          "value": "0.85",
+          "count": 15
+        },
+        {
+          "family": "MEAN_REVERSION",
+          "key": "context_threshold_quantile",
+          "value": "0.15",
+          "count": 13
+        },
+        {
+          "family": "VOLATILITY",
+          "key": "threshold_quantile",
+          "value": "0.95",
+          "count": 9
+        },
+        {
+          "family": "TREND",
+          "key": "confirmation_threshold_quantile",
+          "value": "0.15",
+          "count": 8
+        },
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "market_context_threshold",
+          "value": "0.75",
+          "count": 7
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "price_threshold_quantile",
+          "value": "0.15",
+          "count": 6
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "threshold_quantile",
+          "value": "0.95",
+          "count": 5
+        },
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "market_context_threshold",
+          "value": "0.25",
+          "count": 5
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "context_threshold",
+          "value": "0.75",
+          "count": 5
+        },
+        {
+          "family": "TREND",
+          "key": "confirmation_threshold_quantile",
+          "value": "0.85",
+          "count": 5
+        },
+        {
+          "family": "MARKET_REGIME_STRUCTURE",
+          "key": "security_context_threshold_quantile",
+          "value": "0.85",
+          "count": 4
+        },
+        {
+          "family": "MARKET_REGIME_STRUCTURE",
+          "key": "security_context_threshold_quantile",
+          "value": "0.15",
+          "count": 4
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "threshold_quantile",
+          "value": "0.95",
+          "count": 3
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "threshold_quantile",
+          "value": "0.05",
+          "count": 3
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "context_threshold",
+          "value": "0.35",
+          "count": 3
+        },
+        {
+          "family": "BREAKOUT",
+          "key": "participation_threshold_quantile",
+          "value": "0.45",
+          "count": 2
+        },
+        {
+          "family": "VOLATILITY",
+          "key": "threshold_quantile",
+          "value": "0.05",
+          "count": 2
+        },
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "threshold_quantile",
+          "value": "0.05",
+          "count": 2
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "threshold_quantile",
+          "value": "0.45",
+          "count": 2
+        },
+        {
+          "family": "MARKET_REGIME_STRUCTURE",
+          "key": "breadth_threshold",
+          "value": "0.85",
+          "count": 2
+        },
+        {
+          "family": "BREAKOUT",
+          "key": "volatility_threshold_quantile",
+          "value": "0.15",
+          "count": 1
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "price_threshold_quantile",
+          "value": "0.85",
+          "count": 1
+        },
+        {
+          "family": "BREAKOUT",
+          "key": "range_threshold_quantile",
+          "value": "0.65",
+          "count": 1
+        },
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "threshold_quantile",
+          "value": "0.95",
+          "count": 1
+        },
+        {
+          "family": "TREND",
+          "key": "threshold_quantile",
+          "value": "0.95",
+          "count": 1
+        }
+      ],
+      "sha256": "500f25f3b3b46604780d4d04039cf542a4c239302287757d76fe77ba26c50dd0"
+    },
+    "gen3_pilot": {
+      "count": 120,
+      "outside_proposed_bounds": 43,
+      "violations": [
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "market_context_threshold",
+          "value": "0.75",
+          "count": 5
+        },
+        {
+          "family": "MEAN_REVERSION",
+          "key": "context_threshold_quantile",
+          "value": "0.85",
+          "count": 4
+        },
+        {
+          "family": "VOLATILITY",
+          "key": "threshold_quantile",
+          "value": "0.95",
+          "count": 3
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "threshold_quantile",
+          "value": "0.075",
+          "count": 3
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "context_threshold",
+          "value": "0.35",
+          "count": 3
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "context_threshold",
+          "value": "0.375",
+          "count": 2
+        },
+        {
+          "family": "MARKET_REGIME_STRUCTURE",
+          "key": "security_context_threshold_quantile",
+          "value": "0.15",
+          "count": 2
+        },
+        {
+          "family": "VOLATILITY",
+          "key": "threshold_quantile",
+          "value": "0.91",
+          "count": 2
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "threshold_quantile",
+          "value": "0.95",
+          "count": 2
+        },
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "market_context_threshold",
+          "value": "0.25",
+          "count": 2
+        },
+        {
+          "family": "MEAN_REVERSION",
+          "key": "context_threshold_quantile",
+          "value": "0.825",
+          "count": 2
+        },
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "market_context_threshold",
+          "value": "0.275",
+          "count": 2
+        },
+        {
+          "family": "MEAN_REVERSION",
+          "key": "context_threshold_quantile",
+          "value": "0.175",
+          "count": 1
+        },
+        {
+          "family": "MEAN_REVERSION",
+          "key": "context_threshold_quantile",
+          "value": "0.19",
+          "count": 1
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "price_threshold_quantile",
+          "value": "0.85",
+          "count": 1
+        },
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "market_context_threshold",
+          "value": "0.29",
+          "count": 1
+        },
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "threshold_quantile",
+          "value": "0.09",
+          "count": 1
+        },
+        {
+          "family": "TREND",
+          "key": "confirmation_threshold_quantile",
+          "value": "0.85",
+          "count": 1
+        },
+        {
+          "family": "MARKET_REGIME_STRUCTURE",
+          "key": "security_context_threshold_quantile",
+          "value": "0.81",
+          "count": 1
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "threshold_quantile",
+          "value": "0.925",
+          "count": 1
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "context_threshold",
+          "value": "0.36",
+          "count": 1
+        },
+        {
+          "family": "TREND",
+          "key": "confirmation_threshold_quantile",
+          "value": "0.175",
+          "count": 1
+        },
+        {
+          "family": "VOLATILITY",
+          "key": "threshold_quantile",
+          "value": "0.925",
+          "count": 1
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "threshold_quantile",
+          "value": "0.95",
+          "count": 1
+        },
+        {
+          "family": "MARKET_REGIME_STRUCTURE",
+          "key": "security_context_threshold_quantile",
+          "value": "0.175",
+          "count": 1
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "threshold_quantile",
+          "value": "0.05",
+          "count": 1
+        },
+        {
+          "family": "MOMENTUM",
+          "key": "threshold_quantile",
+          "value": "0.94",
+          "count": 1
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "threshold_quantile",
+          "value": "0.91",
+          "count": 1
+        },
+        {
+          "family": "MEAN_REVERSION",
+          "key": "severity",
+          "value": "0.04",
+          "count": 1
+        },
+        {
+          "family": "RELATIVE_CROSS_SECTIONAL",
+          "key": "threshold_quantile",
+          "value": "0.075",
+          "count": 1
+        },
+        {
+          "family": "MEAN_REVERSION",
+          "key": "severity",
+          "value": "0.025",
+          "count": 1
+        },
+        {
+          "family": "VOLUME_LIQUIDITY",
+          "key": "price_threshold_quantile",
+          "value": "0.175",
+          "count": 1
+        }
+      ],
+      "sha256": "3bb5cc9cd1ce7b04f17c9c4e792a6cb482090aed9ff878968587489ef5ace259"
+    }
+  },
+  "domains": {
+    "MOMENTUM": {
+      "momentum_feature": {
+        "kind": "categorical",
+        "values": [
+          "return_20__v1",
+          "return_63__v1",
+          "return_126__v1",
+          "return_252__v1",
+          "return_252_skip_20__v1",
+          "return_126_percentile__v1",
+          "return_252_percentile__v1",
+          "return_252_skip_20_percentile__v1"
+        ]
+      },
+      "direction": {
+        "kind": "categorical",
+        "values": [
+          "ABOVE",
+          "BELOW"
+        ]
+      },
+      "threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.5,
+        "max": 0.9,
+        "precision": 3,
+        "original_grid": [
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ]
+      },
+      "context_feature": {
+        "kind": "categorical",
+        "values": [
+          "NONE",
+          "breadth_above_sma_200__v1",
+          "breadth_positive_20__v1",
+          "natr_20_percentile__v1"
+        ]
+      },
+      "context_threshold": {
+        "kind": "continuous",
+        "min": 0.4,
+        "max": 0.7,
+        "precision": 3,
+        "original_grid": [
+          0.4,
+          0.5,
+          0.6,
+          0.7
+        ]
+      }
+    },
+    "BREAKOUT": {
+      "range_feature": {
+        "kind": "categorical",
+        "values": [
+          "range_position_20__v1",
+          "range_position_50__v1",
+          "range_position_252__v1",
+          "prior_high_break_distance_20__v1",
+          "prior_high_break_distance_50__v1",
+          "range_width_ratio_20_63__v1",
+          "compression_duration__v1",
+          "failed_breakout_20__v1",
+          "breakout_reentry_20__v1"
+        ]
+      },
+      "range_threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.7,
+        "max": 0.95,
+        "precision": 3,
+        "original_grid": [
+          0.7,
+          0.8,
+          0.9,
+          0.95
+        ]
+      },
+      "participation_feature": {
+        "kind": "categorical",
+        "values": [
+          "NONE",
+          "relative_volume_20__v1",
+          "relative_volume_20_percentile__v1"
+        ]
+      },
+      "participation_threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.5,
+        "max": 0.9,
+        "precision": 3,
+        "original_grid": [
+          0.5,
+          0.7,
+          0.8,
+          0.9
+        ]
+      },
+      "volatility_feature": {
+        "kind": "categorical",
+        "values": [
+          "NONE",
+          "natr_20__v1",
+          "natr_20_percentile__v1",
+          "realized_vol_20__v1"
+        ]
+      },
+      "volatility_state": {
+        "kind": "categorical",
+        "values": [
+          "LOW",
+          "HIGH"
+        ]
+      },
+      "volatility_threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.2,
+        "max": 0.8,
+        "precision": 3,
+        "original_grid": [
+          0.2,
+          0.3,
+          0.7,
+          0.8
+        ]
+      }
+    },
+    "TREND": {
+      "trend_feature": {
+        "kind": "categorical",
+        "values": [
+          "close_to_sma_20__v1",
+          "close_to_sma_50__v1",
+          "close_to_sma_200__v1",
+          "sma20_slope_5__v1",
+          "sma50_slope_10__v1",
+          "sma200_slope_20__v1",
+          "trend_above_sma200_duration__v1",
+          "pullback_from_high_20__v1",
+          "adx_14__v1"
+        ]
+      },
+      "direction": {
+        "kind": "categorical",
+        "values": [
+          "ABOVE",
+          "BELOW"
+        ]
+      },
+      "threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.1,
+        "max": 0.9,
+        "precision": 3,
+        "original_grid": [
+          0.1,
+          0.2,
+          0.3,
+          0.5,
+          0.7,
+          0.8,
+          0.9
+        ]
+      },
+      "confirmation_feature": {
+        "kind": "categorical",
+        "values": [
+          "NONE",
+          "return_63__v1",
+          "return_126__v1",
+          "range_position_50__v1"
+        ]
+      },
+      "confirmation_direction": {
+        "kind": "categorical",
+        "values": [
+          "ABOVE",
+          "BELOW"
+        ]
+      },
+      "confirmation_threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.2,
+        "max": 0.8,
+        "precision": 3,
+        "original_grid": [
+          0.2,
+          0.5,
+          0.8
+        ]
+      }
+    },
+    "MEAN_REVERSION": {
+      "displacement_feature": {
+        "kind": "categorical",
+        "values": [
+          "rsi_14__v1",
+          "close_to_sma_20__v1",
+          "close_to_sma_50__v1",
+          "return_5__v1",
+          "return_10__v1",
+          "return_20__v1",
+          "drawdown_252__v1",
+          "range_position_20__v1",
+          "price_zscore_20__v1",
+          "signed_return_streak__v1",
+          "exhaustion_score__v1"
+        ]
+      },
+      "tail": {
+        "kind": "categorical",
+        "values": [
+          "LOW",
+          "HIGH"
+        ]
+      },
+      "severity": {
+        "kind": "continuous",
+        "min": 0.05,
+        "max": 0.3,
+        "precision": 3,
+        "original_grid": [
+          0.05,
+          0.1,
+          0.2,
+          0.3
+        ]
+      },
+      "context_feature": {
+        "kind": "categorical",
+        "values": [
+          "NONE",
+          "realized_vol_20__v1",
+          "natr_20_percentile__v1",
+          "breadth_positive_20__v1"
+        ]
+      },
+      "context_state": {
+        "kind": "categorical",
+        "values": [
+          "LOW",
+          "HIGH"
+        ]
+      },
+      "context_threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.2,
+        "max": 0.8,
+        "precision": 3,
+        "original_grid": [
+          0.2,
+          0.5,
+          0.8
+        ]
+      }
+    },
+    "VOLATILITY": {
+      "volatility_feature": {
+        "kind": "categorical",
+        "values": [
+          "natr_14__v1",
+          "natr_20__v1",
+          "natr_20_percentile__v1",
+          "realized_vol_20__v1",
+          "realized_vol_63__v1",
+          "candle_range_fraction__v1",
+          "volatility_ratio_20_63__v1",
+          "range_width_ratio_20_63__v1",
+          "volatility_contraction_duration__v1",
+          "volatility_expansion_transition__v1",
+          "realized_vol_20_percentile__v1"
+        ]
+      },
+      "state": {
+        "kind": "categorical",
+        "values": [
+          "LOW",
+          "HIGH"
+        ]
+      },
+      "threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.1,
+        "max": 0.9,
+        "precision": 3,
+        "original_grid": [
+          0.1,
+          0.2,
+          0.3,
+          0.7,
+          0.8,
+          0.9
+        ]
+      },
+      "price_context": {
+        "kind": "categorical",
+        "values": [
+          "NONE",
+          "return_20__v1",
+          "range_position_20__v1",
+          "close_to_sma_50__v1"
+        ]
+      }
+    },
+    "VOLUME_LIQUIDITY": {
+      "participation_feature": {
+        "kind": "categorical",
+        "values": [
+          "relative_volume_20__v1",
+          "relative_volume_20_percentile__v1",
+          "dollar_volume__v1",
+          "dollar_volume_relative_20__v1",
+          "amihud_illiquidity_20__v1",
+          "high_low_spread_proxy__v1",
+          "volume_slope_20__v1",
+          "up_down_volume_balance_20__v1"
+        ]
+      },
+      "state": {
+        "kind": "categorical",
+        "values": [
+          "LOW",
+          "HIGH"
+        ]
+      },
+      "threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.1,
+        "max": 0.9,
+        "precision": 3,
+        "original_grid": [
+          0.1,
+          0.2,
+          0.5,
+          0.8,
+          0.9
+        ]
+      },
+      "price_feature": {
+        "kind": "categorical",
+        "values": [
+          "NONE",
+          "return_5__v1",
+          "return_20__v1",
+          "intraday_return__v1",
+          "close_location__v1"
+        ]
+      },
+      "price_direction": {
+        "kind": "categorical",
+        "values": [
+          "ABOVE",
+          "BELOW"
+        ]
+      },
+      "price_threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.2,
+        "max": 0.8,
+        "precision": 3,
+        "original_grid": [
+          0.2,
+          0.5,
+          0.8
+        ]
+      }
+    },
+    "RELATIVE_CROSS_SECTIONAL": {
+      "relative_feature": {
+        "kind": "categorical",
+        "values": [
+          "return_126_percentile__v1",
+          "return_252_percentile__v1",
+          "return_252_skip_20_percentile__v1",
+          "relative_strength_change_20__v1",
+          "sector_vs_universe_return_63__v1"
+        ]
+      },
+      "tail": {
+        "kind": "categorical",
+        "values": [
+          "LEADER",
+          "LAGGARD"
+        ]
+      },
+      "threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.1,
+        "max": 0.9,
+        "precision": 3,
+        "original_grid": [
+          0.1,
+          0.2,
+          0.3,
+          0.7,
+          0.8,
+          0.9
+        ]
+      },
+      "market_context": {
+        "kind": "categorical",
+        "values": [
+          "NONE",
+          "breadth_above_sma_200__v1",
+          "breadth_positive_20__v1"
+        ]
+      },
+      "market_context_state": {
+        "kind": "categorical",
+        "values": [
+          "LOW",
+          "HIGH"
+        ]
+      },
+      "market_context_threshold": {
+        "kind": "continuous",
+        "min": 0.3,
+        "max": 0.7,
+        "precision": 3,
+        "original_grid": [
+          0.3,
+          0.5,
+          0.7
+        ]
+      }
+    },
+    "MARKET_REGIME_STRUCTURE": {
+      "breadth_feature": {
+        "kind": "categorical",
+        "values": [
+          "breadth_above_sma_200__v1",
+          "breadth_positive_20__v1",
+          "advance_decline_breadth__v1",
+          "new_high_low_breadth_252__v1",
+          "realized_vol_20_percentile__v1"
+        ]
+      },
+      "breadth_state": {
+        "kind": "categorical",
+        "values": [
+          "LOW",
+          "MID",
+          "HIGH"
+        ]
+      },
+      "breadth_threshold": {
+        "kind": "continuous",
+        "min": 0.2,
+        "max": 0.8,
+        "precision": 3,
+        "original_grid": [
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8
+        ]
+      },
+      "security_context": {
+        "kind": "categorical",
+        "values": [
+          "NONE",
+          "return_20__v1",
+          "close_to_sma_200__v1",
+          "natr_20_percentile__v1"
+        ]
+      },
+      "security_context_direction": {
+        "kind": "categorical",
+        "values": [
+          "ABOVE",
+          "BELOW"
+        ]
+      },
+      "security_context_threshold_quantile": {
+        "kind": "continuous",
+        "min": 0.2,
+        "max": 0.8,
+        "precision": 3,
+        "original_grid": [
+          0.2,
+          0.5,
+          0.8
+        ]
+      }
+    }
+  }
+}
