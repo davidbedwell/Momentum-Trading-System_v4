@@ -7,7 +7,7 @@ import numpy as np,pandas as pd
 from Core.layered_ga.ga4_causal_compiler import CausalSignalCompiler
 R=pathlib.Path('Research/Runs/gen1-merit-screen-20261008')
 F=pathlib.Path('Research/Runs/layered/stage2-opportunity-v3-20261007/ga4_dev80_checkpoint/dev80_predictors.parquet')
-OUT=R/'four_window_stop_pilot_20261009'
+OUT=R/'four_window_frontier_stop_pilot_20261009'
 WINDOWS=[(2,5),(6,10),(11,15),(16,20)]
 POLICIES=[('hold',0.,0.),('fixed_close',-.02,0.),('fixed_close',-.04,0.),('fixed_close',-.06,0.),('trailing_close',0.,.025),('trailing_close',0.,.05),('trailing_close',0.,.08),('time_fail',0.,0.)]
 
@@ -52,16 +52,24 @@ def main():
  p=argparse.ArgumentParser();p.add_argument('--workers',type=int,default=6);p.add_argument('--genomes-per-window',type=int,default=24);args=p.parse_args()
  if args.workers!=6:raise ValueError('Frozen request: exactly six workers')
  OUT.mkdir(parents=True,exist_ok=True)
- candidates=[r for r in map(json.loads,(R/'all_candidates.jsonl').open()) if r['side']=='LONG']
+ frontier=[r for r in map(json.loads,(R/'horizon_grouped_pareto_20261009/ranked_memberships.jsonl').open()) if r['side']=='LONG' and r['phase']=='refined' and r['ev_net']>0]
  for lo,hi in WINDOWS:
-  dest=OUT/f'window_{lo:02d}_{hi:02d}.json';selected=[x['index'] for x in candidates[::max(1,len(candidates)//args.genomes_per_window)][:args.genomes_per_window]]
-  # Deliberately same diverse-index sample across windows: matched policy comparisons, NOT independent entry evolution.
+  dest=OUT/f'window_{lo:02d}_{hi:02d}.json'
+  eligible=[r for r in frontier if lo<=r['horizon']<=hi]
+  eligible.sort(key=lambda r:(r['pareto_rank'], -r['lcb95'], -r['ev_net']))
+  selected=[];seen=set()
+  for r in eligible:
+   if r['index'] not in seen:
+    selected.append(r['index']);seen.add(r['index'])
+   if len(selected)>=args.genomes_per_window:break
+  if not selected:raise RuntimeError(f'No eligible positive-EV refined frontier genomes for {lo}-{hi}')
+  # Frontier-ranked candidate selection, rather than uniform sampling of all genomes.
   chunks=[selected[i::6] for i in range(6)];start=time.time()
   print('START',lo,hi,'workers',6,'genomes',len(selected),flush=True)
   with concurrent.futures.ProcessPoolExecutor(max_workers=6) as pool:
    parts=list(pool.map(worker,[(lo,hi,chunk) for chunk in chunks]))
   results=[x for part in parts for x in part]
-  report={'status':'UNCERTIFIED_STOP_POLICY_SCREEN','window':[lo,hi],'six_workers':True,'long_only':True,'selected_genomes':selected,'evaluated_genome_horizon_pairs':len(results),'elapsed_seconds':round(time.time()-start,1),'results':results,'limitations':['Not a genetically evolving entry GA; exploratory matched-window stop screening','Daily endpoint proxy, not executable intraday stop-loss fills or overnight gap handling','Same candidate set and overlapping episodes; no independent inference','Chronological test not independent across market episodes','Unadjusted multiple policy and horizon search','No capital-constrained portfolio replay','No protected partitions accessed']}
+  report={'status':'UNCERTIFIED_STOP_POLICY_SCREEN','window':[lo,hi],'six_workers':True,'long_only':True,'selected_genomes':selected,'frontier_eligible_memberships':len(eligible),'selection_rule':'Refined LONG positive preliminary EV; horizon in window; ascending provisional Pareto rank then descending lower confidence bound; distinct genome index','evaluated_genome_horizon_pairs':len(results),'elapsed_seconds':round(time.time()-start,1),'results':results,'limitations':['Not a genetically evolving entry GA; exploratory frontier-selected stop screening','Daily endpoint proxy, not executable intraday stop-loss fills or overnight gap handling','Same candidate set and overlapping episodes; no independent inference','Chronological test not independent across market episodes','Unadjusted multiple policy and horizon search','No capital-constrained portfolio replay','No protected partitions accessed']}
   dest.write_text(json.dumps(report,indent=2)+'\n');print('COMPLETE',lo,hi,'pairs',len(results),'seconds',report['elapsed_seconds'],flush=True)
  print('ALL_FOUR_COMPLETE',flush=True)
 if __name__=='__main__':main()
