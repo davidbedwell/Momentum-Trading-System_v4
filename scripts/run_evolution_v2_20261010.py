@@ -66,6 +66,8 @@ def reconcile(out,config):
   batch=[c for c in cs if c['generation']==g]
   if len(batch)!=config['batch']:raise RuntimeError('Partial candidate generation; fail closed')
  if st['generation']>len(generations):raise RuntimeError('State ahead of journal')
+ if len(generations)>st['generation']+1:raise RuntimeError('Multiple uncommitted generations')
+ if len(generations)==st['generation']+1 and not (out/'pending.json').exists():raise RuntimeError('Pending RNG checkpoint missing')
  return st,cmap,rmap
 def main():
  p=argparse.ArgumentParser()
@@ -124,10 +126,11 @@ def main():
      if len(pool)>=2:niches.append((side,h,pool))
    if not niches:
     print('NO_ELIGIBLE_NICHES: need baseline signals before breeding',flush=True);break
-   pending=[];known=set(genomes)
+   pending=[];known=set(genomes);niche_attempts={ (side,h):0 for side,h,_ in niches }
    for attempt in range(a.batch*300):
     if len(pending)>=a.batch:break
-    side,h,pool=niches[len(pending)%len(niches)]
+    side,h,pool=niches[attempt%len(niches)]
+    niche_attempts[(side,h)]+=1
     x,y=rng.sample(pool,2)
     # Recombination of validated complete family blocks; at least one bounded mutation.
     genes={f:json.loads(json.dumps(g)) for f,g in x[1]['chromosomes']}

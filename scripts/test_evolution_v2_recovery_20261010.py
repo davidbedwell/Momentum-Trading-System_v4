@@ -12,10 +12,14 @@ class RecoveryTests(unittest.TestCase):
   cs=[self.candidate(1),self.candidate(2)]
   durable_append(self.out/'candidates.jsonl',cs)
   durable_append(self.out/'evaluations.jsonl',[{'genome_hash':'genome1','status':'EVALUATED_UNCERTIFIED','points':[]}])
+  atomic_json(self.out/'pending.json',{'generation':1,'rng_state':[3,[1,2,3],None]})
   st,c,r=reconcile(self.out,self.config)
   self.assertEqual(st['generation'],0)
   self.assertEqual(len(c),2)
   self.assertEqual([x['genome_hash'] for x in cs if x['genome_hash'] not in r],['genome2'])
+ def test_missing_rng_checkpoint_fail_closed(self):
+  durable_append(self.out/'candidates.jsonl',[self.candidate(1),self.candidate(2)])
+  with self.assertRaisesRegex(RuntimeError,'RNG checkpoint missing'):reconcile(self.out,self.config)
  def test_partial_candidate_generation_fail_closed(self):
   durable_append(self.out/'candidates.jsonl',[self.candidate(1)])
   with self.assertRaisesRegex(RuntimeError,'Partial candidate'):reconcile(self.out,self.config)
