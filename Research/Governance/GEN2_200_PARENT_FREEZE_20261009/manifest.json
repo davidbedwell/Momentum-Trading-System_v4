@@ -1,0 +1,24 @@
+{
+  "status": "USER_FROZEN_GEN2_PARENT_SET",
+  "count": 200,
+  "distinct": 200,
+  "source_original_candidate_count": 4360,
+  "source_screen_pass_count": 969,
+  "source_ranking": "provisional_overall_969_ranking.csv",
+  "selection_rule": "first 200 ranked candidates in exploratory Pareto analysis",
+  "user_authorization": "Freeze these 200 as parents for Gen 2",
+  "limitations": [
+    "not scientifically certified",
+    "unadjusted confidence bounds",
+    "best-horizon selection bias",
+    "overlapping horizon dependence",
+    "sampled-horizon continuity not market-period persistence",
+    "199 LONG 1 SHORT",
+    "no protected bank accessed"
+  ],
+  "gen2_execution_authorized": false,
+  "files_sha256": {
+    "frozen_200_parent_genomes.jsonl": "12463353f65f8ac68c86d5e36d6870e9a23614d5b36f8989c70d2e2bff2de16c",
+    "frozen_200_parent_ranking.csv": "560afbf19975019351ccb289de1da37fa170a0de7af4702804f300a79d7f65c8"
+  }
+}
