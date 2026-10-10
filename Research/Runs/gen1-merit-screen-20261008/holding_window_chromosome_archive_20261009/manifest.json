@@ -1,0 +1,141 @@
+{
+  "status": "FROZEN_EXPLORATORY_GENOME_DEFINITIONS",
+  "created_utc": "2026-10-10T04:46:42.088716+00:00",
+  "source": "Research/Runs/gen1-merit-screen-20261008/all_candidates.jsonl",
+  "source_sha256": "543b06ec07a16a478f63195b2b541c71fafc9e9227a03947291a3e87bbaa13f9",
+  "windows": [
+    {
+      "window": [
+        2,
+        5
+      ],
+      "file": "window_02_05_chromosomes.json",
+      "genomes": 23,
+      "evaluated_pairs": 92,
+      "sha256": "ff0dc94358e8b57a3a041145cf6c0b46dc7815f598d2ee59d768561f4dbef7db"
+    },
+    {
+      "window": [
+        6,
+        10
+      ],
+      "file": "window_06_10_chromosomes.json",
+      "genomes": 24,
+      "evaluated_pairs": 120,
+      "sha256": "56e0caabda8b0611870008b4e8322fce71151326dd2f8f0bce93b6b8fa8c923b"
+    },
+    {
+      "window": [
+        11,
+        15
+      ],
+      "file": "window_11_15_chromosomes.json",
+      "genomes": 23,
+      "evaluated_pairs": 115,
+      "sha256": "d60f2d135c5f1d64ae652fc17d2a3e0e3c60f932c731db1e4e0785d04f0731d9"
+    },
+    {
+      "window": [
+        16,
+        20
+      ],
+      "file": "window_16_20_chromosomes.json",
+      "genomes": 18,
+      "evaluated_pairs": 90,
+      "sha256": "6ac94c9a9d9a1241c3afd3341502914bd371a50d87eb9e87f3dbc97134061b75"
+    },
+    {
+      "window": [
+        21,
+        25
+      ],
+      "file": "window_21_25_chromosomes.json",
+      "genomes": 24,
+      "evaluated_pairs": 120,
+      "sha256": "2cdb0ed5d6cd5b390d8ca801ee59fc686414d3926a186c052265fd0abfdec4dd"
+    },
+    {
+      "window": [
+        26,
+        30
+      ],
+      "file": "window_26_30_chromosomes.json",
+      "genomes": 24,
+      "evaluated_pairs": 120,
+      "sha256": "8df3a07fe18d165f3b1612425ace9ca2316a289c4a7ae7ea0d4249a3cc31ada2"
+    },
+    {
+      "window": [
+        31,
+        35
+      ],
+      "file": "window_31_35_chromosomes.json",
+      "genomes": 24,
+      "evaluated_pairs": 120,
+      "sha256": "9d5e97eca73b0e73adf65de0e37d277cfb06567c598b2518a42316c8dc3e384f"
+    },
+    {
+      "window": [
+        36,
+        40
+      ],
+      "file": "window_36_40_chromosomes.json",
+      "genomes": 22,
+      "evaluated_pairs": 110,
+      "sha256": "df7d6b9a073914e4c568a7e171fa24b9f5eb9a258460b2e7c5c5c73addceb165"
+    },
+    {
+      "window": [
+        41,
+        45
+      ],
+      "file": "window_41_45_chromosomes.json",
+      "genomes": 23,
+      "evaluated_pairs": 115,
+      "sha256": "87cb70fd3a40b5fcc9f293458ea9827a8a561e64e618aed4de8b75a8c75d65ad"
+    },
+    {
+      "window": [
+        46,
+        50
+      ],
+      "file": "window_46_50_chromosomes.json",
+      "genomes": 17,
+      "evaluated_pairs": 85,
+      "sha256": "1e20e4bf7514a754159717909a17582d703a812f690f4d3c450176ef2eaf2ec1"
+    },
+    {
+      "window": [
+        51,
+        55
+      ],
+      "file": "window_51_55_chromosomes.json",
+      "genomes": 16,
+      "evaluated_pairs": 80,
+      "sha256": "f5f575c4f98a0affa9a54684dcf9ab2440516b1a9ab673745a9b3b66d03461d8"
+    },
+    {
+      "window": [
+        56,
+        60
+      ],
+      "file": "window_56_60_chromosomes.json",
+      "genomes": 23,
+      "evaluated_pairs": 115,
+      "sha256": "32e426679bb0d8e28e878f043053423208eb7a7189ff4d1fa9498e445091b6d0"
+    },
+    {
+      "window": [
+        61,
+        65
+      ],
+      "file": "window_61_65_chromosomes.json",
+      "genomes": 22,
+      "evaluated_pairs": 110,
+      "sha256": "0e9c52bbdd1887958daf9bd3231f277be2a910a06ff48fea1aa73c8268820f7b"
+    }
+  ],
+  "unique_evaluated_genomes": 149,
+  "evaluated_pairs": 1392,
+  "unique_genomes_sha256": "5e824fb3792127a35d285ad2bdaffdf08aa5b13764ffe7d3d362d373408d3b24"
+}
