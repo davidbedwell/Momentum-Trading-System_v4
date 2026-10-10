@@ -1,0 +1,69 @@
+{
+  "status": "DESCRIPTIVE_ONLY_NOT_CERTIFIED",
+  "parent_manifest_sha256": "5d1195e23b51f07c03c81629ceebb145ffbb0b3113c6d8d46d15050a310621b3",
+  "parent_count": 168,
+  "side_counts": {
+    "LONG": 166,
+    "SHORT": 2
+  },
+  "effective_n": {
+    "minimum": 22,
+    "median": 264.0,
+    "below_30": 1,
+    "below_50": 6
+  },
+  "provisional_lcb95": {
+    "nonpositive_count": 50,
+    "positive_count": 118
+  },
+  "per_window": {
+    "01_very_short": {
+      "count": 21,
+      "effective_n_median": 148,
+      "nonpositive_lcb95": 18
+    },
+    "02_short": {
+      "count": 29,
+      "effective_n_median": 168,
+      "nonpositive_lcb95": 26
+    },
+    "03_intermediate": {
+      "count": 29,
+      "effective_n_median": 311,
+      "nonpositive_lcb95": 5
+    },
+    "04_medium": {
+      "count": 29,
+      "effective_n_median": 273,
+      "nonpositive_lcb95": 0
+    },
+    "05_extended": {
+      "count": 29,
+      "effective_n_median": 334,
+      "nonpositive_lcb95": 0
+    },
+    "06_long": {
+      "count": 29,
+      "effective_n_median": 374,
+      "nonpositive_lcb95": 1
+    },
+    "DIVERSITY_RESERVE": {
+      "count": 2,
+      "effective_n_median": 1253.0,
+      "nonpositive_lcb95": 0
+    }
+  },
+  "lowest_effective_n_indices": [
+    2488,
+    1096,
+    2630,
+    828,
+    2356,
+    3124,
+    1420,
+    1660,
+    312,
+    756
+  ],
+  "interpretation": "Provisional confidence intervals are not certified multiplicity-adjusted or episode-independent. Counts are descriptive; no parent excluded or selected. No protected banks loaded."
+}
