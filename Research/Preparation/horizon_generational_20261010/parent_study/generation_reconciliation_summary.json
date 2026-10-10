@@ -1,0 +1,377 @@
+{
+  "status": "LINEAGE_AUDITED_PARENT_SELECTION_PENDING",
+  "gen1_unique_definitions": 262,
+  "gen2_ranked_candidates": 973,
+  "gen2_ranked_missing_parent_definitions": 0,
+  "gen2_missing_parent_details": [],
+  "gen2_top30": [
+    {
+      "id": 597,
+      "priority": 1,
+      "ev_net": 0.45070210099220276,
+      "lcb95": 0.13006925370147604,
+      "cvar5_best": -0.4577178359031677,
+      "parents": [
+        1660,
+        426
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 766,
+      "priority": 2,
+      "ev_net": 0.33028674125671387,
+      "lcb95": 0.16822780301446652,
+      "cvar5_best": -0.46984922885894775,
+      "parents": [
+        1660,
+        954
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 1162,
+      "priority": 3,
+      "ev_net": 0.16460993885993958,
+      "lcb95": 0.12249674475175887,
+      "cvar5_best": -0.2401885986328125,
+      "parents": [
+        1006,
+        1532
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 628,
+      "priority": 4,
+      "ev_net": 0.18439257144927979,
+      "lcb95": 0.09872771411798048,
+      "cvar5_best": -0.5845630764961243,
+      "parents": [
+        3202,
+        2733
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 1122,
+      "priority": 5,
+      "ev_net": 0.24069514870643616,
+      "lcb95": 0.06605945938977062,
+      "cvar5_best": -0.5131465196609497,
+      "parents": [
+        2906,
+        4078
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 23,
+      "priority": 6,
+      "ev_net": 0.189620241522789,
+      "lcb95": 0.13570160114837326,
+      "cvar5_best": -0.2357604205608368,
+      "parents": [
+        1006,
+        1648
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 935,
+      "priority": 7,
+      "ev_net": 0.2697206735610962,
+      "lcb95": 0.12065597689690297,
+      "cvar5_best": -0.22938326001167297,
+      "parents": [
+        1140,
+        426
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 765,
+      "priority": 8,
+      "ev_net": 0.2994321882724762,
+      "lcb95": 0.05996317410547872,
+      "cvar5_best": -0.5818256139755249,
+      "parents": [
+        1660,
+        1294
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 1010,
+      "priority": 9,
+      "ev_net": 0.14794063568115234,
+      "lcb95": 0.10244992271848027,
+      "cvar5_best": -0.4124297499656677,
+      "parents": [
+        586,
+        638
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 335,
+      "priority": 10,
+      "ev_net": 0.15972380340099335,
+      "lcb95": 0.05168566564135138,
+      "cvar5_best": -0.4690076410770416,
+      "parents": [
+        2992,
+        1034
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 590,
+      "priority": 11,
+      "ev_net": 0.15616187453269958,
+      "lcb95": 0.11152706867190895,
+      "cvar5_best": -0.40827876329421997,
+      "parents": [
+        1482,
+        2720
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 984,
+      "priority": 12,
+      "ev_net": 0.19564887881278992,
+      "lcb95": 0.10745059348722742,
+      "cvar5_best": -0.5628309845924377,
+      "parents": [
+        1440,
+        2770
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 258,
+      "priority": 13,
+      "ev_net": 0.17400264739990234,
+      "lcb95": 0.12589868217854605,
+      "cvar5_best": -0.23146222531795502,
+      "parents": [
+        1006,
+        3158
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 237,
+      "priority": 14,
+      "ev_net": 0.11285783350467682,
+      "lcb95": 0.07870469701267627,
+      "cvar5_best": -0.38037216663360596,
+      "parents": [
+        586,
+        172
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 310,
+      "priority": 15,
+      "ev_net": 0.11934083700180054,
+      "lcb95": 0.0680064179730677,
+      "cvar5_best": -0.5846374034881592,
+      "parents": [
+        3202,
+        668
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 449,
+      "priority": 16,
+      "ev_net": 0.12534099817276,
+      "lcb95": 0.05661464312602078,
+      "cvar5_best": -0.4858672320842743,
+      "parents": [
+        1660,
+        564
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 308,
+      "priority": 17,
+      "ev_net": 0.1516009122133255,
+      "lcb95": 0.10345132430178977,
+      "cvar5_best": -0.25982430577278137,
+      "parents": [
+        1522,
+        394
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 644,
+      "priority": 18,
+      "ev_net": 0.1644274890422821,
+      "lcb95": 0.09903829584503396,
+      "cvar5_best": -0.5723714232444763,
+      "parents": [
+        646,
+        2356
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 434,
+      "priority": 19,
+      "ev_net": 0.17257104814052582,
+      "lcb95": 0.0791127782950907,
+      "cvar5_best": -0.2609386444091797,
+      "parents": [
+        1140,
+        2906
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 265,
+      "priority": 20,
+      "ev_net": 0.19288167357444763,
+      "lcb95": 0.06531988929144286,
+      "cvar5_best": -0.5785553455352783,
+      "parents": [
+        626,
+        4298
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 592,
+      "priority": 21,
+      "ev_net": 0.16788087785243988,
+      "lcb95": 0.09522827868102168,
+      "cvar5_best": -0.40366238355636597,
+      "parents": [
+        1130,
+        3662
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 1170,
+      "priority": 22,
+      "ev_net": 0.18692763149738312,
+      "lcb95": 0.07600374238310063,
+      "cvar5_best": -0.43978217244148254,
+      "parents": [
+        1660,
+        2340
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 818,
+      "priority": 23,
+      "ev_net": 0.13853949308395386,
+      "lcb95": 0.1063945686238495,
+      "cvar5_best": -0.410509318113327,
+      "parents": [
+        1392,
+        2630
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 803,
+      "priority": 24,
+      "ev_net": 0.10701922327280045,
+      "lcb95": 0.06024111161218022,
+      "cvar5_best": -0.38650500774383545,
+      "parents": [
+        586,
+        458
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 588,
+      "priority": 25,
+      "ev_net": 0.16305838525295258,
+      "lcb95": 0.09445257563376584,
+      "cvar5_best": -0.6119707822799683,
+      "parents": [
+        646,
+        2358
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 428,
+      "priority": 26,
+      "ev_net": 0.1553470939397812,
+      "lcb95": 0.09776320879629538,
+      "cvar5_best": -0.4777633249759674,
+      "parents": [
+        4320,
+        2358
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 142,
+      "priority": 27,
+      "ev_net": 0.16019096970558167,
+      "lcb95": 0.09637814581894803,
+      "cvar5_best": -0.44077929854393005,
+      "parents": [
+        1482,
+        602
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 884,
+      "priority": 28,
+      "ev_net": 0.16363999247550964,
+      "lcb95": 0.07896356165956721,
+      "cvar5_best": -0.31075960397720337,
+      "parents": [
+        428,
+        2906
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 1025,
+      "priority": 29,
+      "ev_net": 0.10241789370775223,
+      "lcb95": 0.057799276111415845,
+      "cvar5_best": -0.48234227299690247,
+      "parents": [
+        330,
+        1532
+      ],
+      "parents_resolved": true
+    },
+    {
+      "id": 800,
+      "priority": 30,
+      "ev_net": 0.10274418443441391,
+      "lcb95": 0.04490744366918636,
+      "cvar5_best": -0.5222907662391663,
+      "parents": [
+        2572,
+        430
+      ],
+      "parents_resolved": true
+    }
+  ],
+  "source_sha256": {
+    "frozen_200_parents": "12463353f65f8ac68c86d5e36d6870e9a23614d5b36f8989c70d2e2bff2de16c",
+    "offspring": "500f25f3b3b46604780d4d04039cf542a4c239302287757d76fe77ba26c50dd0",
+    "evaluations": "40ff2e115022fdc79b2f86c100f5433d31dae1579e4ec1f936be1d23ba0e7a60",
+    "ranking": "d507b506f3d8d670a111f8693bac8c3208dc32f56d2d25427d5eb43628445074",
+    "manifest": "6fc46030247701904e03ac869643d718ed180e1fd7282defa420cb47aef43318"
+  },
+  "note": "Original Gen2 63-session evidence is not equivalent to reevaluated per-window parent fitness; not certified for promotion."
+}
