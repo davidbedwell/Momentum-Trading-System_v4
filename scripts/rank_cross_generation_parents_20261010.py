@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Produce provisional per-window rankings; no blind access or certification."""
-import json,pathlib,collections,statistics,hashlib
+import json,pathlib,collections,statistics,hashlib,math
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/"Research/Preparation/horizon_generational_20261010/parent_study"
 def load(name):
@@ -14,7 +14,7 @@ def main():
   for r in rows:
    if r["status"]!="EVALUATED_UNCERTIFIED":continue
    pts=r["points"];w=tuple(r["window"])
-   if len(pts)!=w[1]-w[0]+1:continue
+   if len(pts)!=w[1]-w[0]+1 or any(not all(k in p and isinstance(p[k],(int,float)) and math.isfinite(p[k]) for k in ("lcb95","ev_net","cvar5","effective_n")) for p in pts):continue
    lcb=[p["lcb95"] for p in pts];ev=[p["ev_net"] for p in pts];cv=[p["cvar5"] for p in pts]
    ident=r["source_index"]
    genes=(definitions[ident] if generation==1 else offspring[ident])["chromosomes"]
