@@ -16,3 +16,6 @@ Use SPY unadjusted closes for transparent index-proxy drawdowns; additionally as
 
 ## Current blocker
 The historical A/B/C state tape was recovered from /home/ubuntu/Momentum-Trading-System_v4/Research/State; raw VIX, VVIX and OFR are present in that separate checkout, but the current checkout does not contain the derived feature tape. Reconstruct and checksum it without editing the protected frozen baseline.
+
+## Scope amendment — user direction, October 9
+Only B (slow deterioration / 2008-style) is eligible for redesign in the next experiment. A and C must remain bit-for-bit frozen, as must R-1. Test B replacements/additions as A OR B_candidate OR C, and verify A/C individual signal series are identical to baseline. The exploratory early-B threshold relaxation did not improve 2008 timing (October 22 vs frozen October 10), so investigate independent slow-bear mechanisms rather than indiscriminate percentile relaxation. Preserve 2022 coverage and measure false Defensive episodes, missed upside, and cash-adjusted wealth. Do not promote without episode-separated validation.
