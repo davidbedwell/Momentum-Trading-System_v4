@@ -1,0 +1,221 @@
+{
+  "baseline_long": 1188,
+  "gen3_first_10_long": 1188,
+  "comparison": "Identical 1188-long-candidate budget, evaluate both cohorts on every horizon, same DEV80 execution arrays; selected winners are in-sample, not holdout-certified",
+  "short_note": "Gen2 contains 12 SHORT candidates; Gen3 contains no SHORT; no matched SHORT comparison possible.",
+  "results": [
+    {
+      "horizon": 1,
+      "gen2": {
+        "valid": 960,
+        "qualified": 0,
+        "best_lcb": null,
+        "top10_median_lcb": null,
+        "top10_median_cvar5": null,
+        "top10_median_mae_tail5": null,
+        "top10_median_ev_net": null,
+        "leader": null
+      },
+      "gen3_first10": {
+        "valid": 671,
+        "qualified": 75,
+        "best_lcb": 0.005141371116002175,
+        "top10_median_lcb": 0.004458486443789827,
+        "top10_median_cvar5": -0.0930386483669281,
+        "top10_median_mae_tail5": -0.08023468947085814,
+        "top10_median_ev_net": 0.009723580908030272,
+        "leader": "bd46dc630c97c9fdbae1ff5d9acdc96ce4d349bdc6b1367bc1485f23eb6de1ba"
+      }
+    },
+    {
+      "horizon": 2,
+      "gen2": {
+        "valid": 960,
+        "qualified": 3,
+        "best_lcb": 0.0009379905975117624,
+        "top10_median_lcb": 0.0002578691516737378,
+        "top10_median_cvar5": -0.12351768463850021,
+        "top10_median_mae_tail5": -0.14007072619817876,
+        "top10_median_ev_net": 0.004603230860084295,
+        "leader": "5eee88194d4407eedca9753babef5664aaad91be26b3ec009899becf50884a00"
+      },
+      "gen3_first10": {
+        "valid": 671,
+        "qualified": 348,
+        "best_lcb": 0.019843820388117547,
+        "top10_median_lcb": 0.015282557605297035,
+        "top10_median_cvar5": -0.09279928356409073,
+        "top10_median_mae_tail5": -0.1129930733392636,
+        "top10_median_ev_net": 0.026070568710565567,
+        "leader": "6c856bb1bbeb426b317ecb506f8af0a1e235ba044fe79956dd4f2a3086165746"
+      }
+    },
+    {
+      "horizon": 3,
+      "gen2": {
+        "valid": 960,
+        "qualified": 8,
+        "best_lcb": 0.004880596908377917,
+        "top10_median_lcb": 0.0022639514408581475,
+        "top10_median_cvar5": -0.13449420779943466,
+        "top10_median_mae_tail5": -0.16547971952438745,
+        "top10_median_ev_net": 0.00732208089902997,
+        "leader": "894f9e8142eef160f63593d41831dcd87d5647eaaf22fd15726eb329b1b47d9a"
+      },
+      "gen3_first10": {
+        "valid": 671,
+        "qualified": 466,
+        "best_lcb": 0.02519040631226159,
+        "top10_median_lcb": 0.023706120164113866,
+        "top10_median_cvar5": -0.1127263680100441,
+        "top10_median_mae_tail5": -0.13823673129081726,
+        "top10_median_ev_net": 0.038300491869449615,
+        "leader": "65e571c7ef4a3dd005e7a6530c8625dab75a94d2859ddac185f8d94f0478968c"
+      }
+    },
+    {
+      "horizon": 5,
+      "gen2": {
+        "valid": 960,
+        "qualified": 38,
+        "best_lcb": 0.017611711559920647,
+        "top10_median_lcb": 0.0060078707484515735,
+        "top10_median_cvar5": -0.1987929418683052,
+        "top10_median_mae_tail5": -0.2316803153103533,
+        "top10_median_ev_net": 0.01722265873104334,
+        "leader": "894f9e8142eef160f63593d41831dcd87d5647eaaf22fd15726eb329b1b47d9a"
+      },
+      "gen3_first10": {
+        "valid": 671,
+        "qualified": 545,
+        "best_lcb": 0.045935750674986175,
+        "top10_median_lcb": 0.044461556949024976,
+        "top10_median_cvar5": -0.1179148256778717,
+        "top10_median_mae_tail5": -0.16708769649267197,
+        "top10_median_ev_net": 0.06503129005432129,
+        "leader": "65e571c7ef4a3dd005e7a6530c8625dab75a94d2859ddac185f8d94f0478968c"
+      }
+    },
+    {
+      "horizon": 7,
+      "gen2": {
+        "valid": 960,
+        "qualified": 79,
+        "best_lcb": 0.029061090580781726,
+        "top10_median_lcb": 0.01585841685377816,
+        "top10_median_cvar5": -0.22987105697393417,
+        "top10_median_mae_tail5": -0.2741953082669343,
+        "top10_median_ev_net": 0.03117813542485237,
+        "leader": "894f9e8142eef160f63593d41831dcd87d5647eaaf22fd15726eb329b1b47d9a"
+      },
+      "gen3_first10": {
+        "valid": 671,
+        "qualified": 574,
+        "best_lcb": 0.08333164773324117,
+        "top10_median_lcb": 0.08056406910408191,
+        "top10_median_cvar5": -0.15815284848213196,
+        "top10_median_mae_tail5": -0.20171149523108156,
+        "top10_median_ev_net": 0.11403781175613403,
+        "leader": "a2717690dd3f70b91a928eecc223efd29ff3cf2db6cb5de47254ae3b79692ce1"
+      }
+    },
+    {
+      "horizon": 10,
+      "gen2": {
+        "valid": 960,
+        "qualified": 187,
+        "best_lcb": 0.04508325181263441,
+        "top10_median_lcb": 0.021637116082097767,
+        "top10_median_cvar5": -0.29529911279678345,
+        "top10_median_mae_tail5": -0.35678749644645935,
+        "top10_median_ev_net": 0.037348318845033646,
+        "leader": "894f9e8142eef160f63593d41831dcd87d5647eaaf22fd15726eb329b1b47d9a"
+      },
+      "gen3_first10": {
+        "valid": 671,
+        "qualified": 606,
+        "best_lcb": 0.10105490036381715,
+        "top10_median_lcb": 0.09797160964465915,
+        "top10_median_cvar5": -0.11713003739714622,
+        "top10_median_mae_tail5": -0.21312165029701732,
+        "top10_median_ev_net": 0.1311739683151245,
+        "leader": "00bd319dbda82b2330f02ddd9ce6baf8b92467095948494410ea615de9f37df8"
+      }
+    },
+    {
+      "horizon": 15,
+      "gen2": {
+        "valid": 960,
+        "qualified": 450,
+        "best_lcb": 0.08612560568374233,
+        "top10_median_lcb": 0.040471806166480884,
+        "top10_median_cvar5": -0.3713124096393585,
+        "top10_median_mae_tail5": -0.4696171991933476,
+        "top10_median_ev_net": 0.07209936901926994,
+        "leader": "894f9e8142eef160f63593d41831dcd87d5647eaaf22fd15726eb329b1b47d9a"
+      },
+      "gen3_first10": {
+        "valid": 671,
+        "qualified": 631,
+        "best_lcb": 0.15474345947525903,
+        "top10_median_lcb": 0.1442279537769265,
+        "top10_median_cvar5": -0.12665222585201263,
+        "top10_median_mae_tail5": -0.22555002321799597,
+        "top10_median_ev_net": 0.18703465908765793,
+        "leader": "65e571c7ef4a3dd005e7a6530c8625dab75a94d2859ddac185f8d94f0478968c"
+      }
+    },
+    {
+      "horizon": 20,
+      "gen2": {
+        "valid": 959,
+        "qualified": 613,
+        "best_lcb": 0.12890348173271407,
+        "top10_median_lcb": 0.05429554628945592,
+        "top10_median_cvar5": -0.3648597151041031,
+        "top10_median_mae_tail5": -0.5041484478386966,
+        "top10_median_ev_net": 0.0773613452911377,
+        "leader": "894f9e8142eef160f63593d41831dcd87d5647eaaf22fd15726eb329b1b47d9a"
+      },
+      "gen3_first10": {
+        "valid": 671,
+        "qualified": 631,
+        "best_lcb": 0.1740492930734748,
+        "top10_median_lcb": 0.16389435258001558,
+        "top10_median_cvar5": -0.13636724650859833,
+        "top10_median_mae_tail5": -0.2539410570725089,
+        "top10_median_ev_net": 0.21872228384017944,
+        "leader": "65e571c7ef4a3dd005e7a6530c8625dab75a94d2859ddac185f8d94f0478968c"
+      }
+    },
+    {
+      "horizon": 63,
+      "gen2": {
+        "valid": 956,
+        "qualified": 912,
+        "best_lcb": 0.16822780301446652,
+        "top10_median_lcb": 0.12157636082433092,
+        "top10_median_cvar5": -0.33405153453350067,
+        "top10_median_mae_tail5": -0.5108609955870744,
+        "top10_median_ev_net": 0.18181144446134567,
+        "leader": "894f9e8142eef160f63593d41831dcd87d5647eaaf22fd15726eb329b1b47d9a"
+      },
+      "gen3_first10": {
+        "valid": 669,
+        "qualified": 626,
+        "best_lcb": 0.23665078326574712,
+        "top10_median_lcb": 0.21339739545548714,
+        "top10_median_cvar5": -0.34705665707588196,
+        "top10_median_mae_tail5": -0.5025452896952629,
+        "top10_median_ev_net": 0.33675797283649445,
+        "leader": "e8dd4034dca6954902f59f4c52d5885feb4cfb54a1bafd68fad17c4ff7063120"
+      }
+    }
+  ],
+  "limitations": [
+    "Search processes differ, and Gen3 descendants inherit Gen2-selected information; same evaluation count does not erase adaptive selection bias.",
+    "CVAR is per-trade and not portfolio drawdown.",
+    "No protected data used.",
+    "No independent risk-adjusted superiority established."
+  ]
+}

@@ -1,0 +1,9 @@
+# MTS evolutionary deduplication optimization — DEV80
+
+- Equal-budget exploratory comparison: 1,188 Gen2 LONG offspring versus the first 1,188 Gen3 LONG offspring, evaluated across all nine horizons using identical DEV80 execution data. The new cohort had higher best and top-ten median positive LCB95 at all eight horizons with qualifying Gen2 leaders. The 63-day top-ten median CVaR5 was worse for the new cohort. See `MTS_GEN2_GEN3_EQUAL_BUDGET_DEV80_20261010.json`.
+- This is not a causal, independent, or heldout proof of superiority: Gen3 descends from Gen2-selected material; multiple testing and unequal search histories remain. No protected banks accessed.
+- Optimization candidate `scripts/evolution_active_dedup_fast_20261010.py` retains original `curate` acceptance gates, sort order, tie-breaks, Jaccard >= 0.85, and active/removed evidence. Uses packed-integer bit operations instead of repeated numpy unpacking, and computes overlap only once per comparison.
+- Random bitset equivalence: 800 cases across eight signal lengths passed.
+- Historical curation exact-output test: first 240 Gen3 offspring, nine horizons; original 19.29 seconds, accelerated 3.41 seconds (5.66x), exact Python-object equality and SHA256 `b820d4a5635239d6f8c5ef7bbe08c52e84c7bf50a697680fc77b43e012810331`.
+- Scope of benchmark: curation only, 240 candidate subset; no verified full-archive scaling or end-to-end runner improvement. The new module is not wired into the frozen GA runner pending larger equivalence and deterministic crash/restart replay certification. No new GA search was started.
+- Further optimization should also target repeated `pool_for` calls, validation and prior-history scans; preserve complete archive, niches, search breadth, 120 offspring, six workers, and all frozen scientific criteria. Benchmark before enabling.
