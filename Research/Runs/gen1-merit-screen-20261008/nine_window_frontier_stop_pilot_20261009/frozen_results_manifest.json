@@ -1,0 +1,119 @@
+{
+  "status": "FROZEN_EXPLORATORY_NOT_CERTIFIED",
+  "created_utc": "2026-10-10T03:51:47.767529+00:00",
+  "windows": [
+    {
+      "window": [
+        21,
+        25
+      ],
+      "eligible": 31,
+      "genomes": 24,
+      "pairs": 120,
+      "stop_ev": 0.018991951130495486,
+      "hold_ev": 0.027646425784526703
+    },
+    {
+      "window": [
+        26,
+        30
+      ],
+      "eligible": 818,
+      "genomes": 24,
+      "pairs": 120,
+      "stop_ev": 0.04627854127878284,
+      "hold_ev": 0.06606037748570089
+    },
+    {
+      "window": [
+        31,
+        35
+      ],
+      "eligible": 37,
+      "genomes": 24,
+      "pairs": 120,
+      "stop_ev": 0.013671232141526464,
+      "hold_ev": 0.030051952774010716
+    },
+    {
+      "window": [
+        36,
+        40
+      ],
+      "eligible": 38,
+      "genomes": 24,
+      "pairs": 110,
+      "stop_ev": 0.0170402889018078,
+      "hold_ev": 0.04063383322242192
+    },
+    {
+      "window": [
+        41,
+        45
+      ],
+      "eligible": 872,
+      "genomes": 24,
+      "pairs": 115,
+      "stop_ev": 0.04726874589636598,
+      "hold_ev": 0.07803281407399798
+    },
+    {
+      "window": [
+        46,
+        50
+      ],
+      "eligible": 17,
+      "genomes": 17,
+      "pairs": 85,
+      "stop_ev": 0.015271455400130328,
+      "hold_ev": 0.031002699053394336
+    },
+    {
+      "window": [
+        51,
+        55
+      ],
+      "eligible": 16,
+      "genomes": 16,
+      "pairs": 80,
+      "stop_ev": 0.018948774351156317,
+      "hold_ev": 0.036955670759198256
+    },
+    {
+      "window": [
+        56,
+        60
+      ],
+      "eligible": 42,
+      "genomes": 24,
+      "pairs": 115,
+      "stop_ev": 0.030153468503039734,
+      "hold_ev": 0.07541768839177879
+    },
+    {
+      "window": [
+        61,
+        65
+      ],
+      "eligible": 887,
+      "genomes": 24,
+      "pairs": 110,
+      "stop_ev": 0.05844870198475705,
+      "hold_ev": 0.08539135225794532
+    }
+  ],
+  "raw_result_sha256": {
+    "window_21_25.json": "a141ac89cb2e2dd09056364db987e1ea4281276006361cf2030899f3d79b184c",
+    "window_26_30.json": "2a7946ae79b6a09e3853ad8e63d4a2d7f3300ce73c689df6766c2686452140ad",
+    "window_31_35.json": "4aefd112d1ef3bd5344809db5f159e0d0e2d7d038015cde443943f5d72187a11",
+    "window_36_40.json": "ec6d2b894fc123981dbc367380de7815d211e7fdd1898b6254d7c91c5b8d69e3",
+    "window_41_45.json": "06e045b8e59c4724d6c16fd1ccfae7bce7a3e632a38819f1733e0fff07566437",
+    "window_46_50.json": "cbb91e909d1b5b410ef9c1358246b267fb1ee51a2681f184068c84bada95a99c",
+    "window_51_55.json": "851cc449396f13f64e3de9a2ac58a00dd0b87466adc4c9557e8a31574c198034",
+    "window_56_60.json": "e3a60dab2219f8264ad7df4939c22a4c6008326dcf8e9612ef0e449aa7baadf5",
+    "window_61_65.json": "ddda05f0bcb2c3b891d3eb8502c7659b0546985a6c6a8d2fbb356b6db3bb967e"
+  },
+  "ranked_pairs": 975,
+  "scope": "DEV80 LONG only, nine sequential six-worker windows",
+  "warning": "Observed test EV ranking is descriptive only; cannot tune against same test without selection bias; overlapping events not independent; stop fills are daily endpoint proxies, not executable orders; no portfolio MDD or catastrophic-risk certification"
+}
