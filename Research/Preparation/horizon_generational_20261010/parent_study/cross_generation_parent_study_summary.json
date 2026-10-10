@@ -1,0 +1,692 @@
+{
+  "status": "PROVISIONAL_UNCERTIFIED_NOT_FROZEN",
+  "windows": [
+    {
+      "window": [
+        2,
+        5
+      ],
+      "evaluated": 53,
+      "unique": 53,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 4,
+      "top5": [
+        {
+          "id": 1660,
+          "generation": 1,
+          "positive_lcb_days": 4,
+          "median_ev": 0.04184921644628048,
+          "median_lcb95": 0.015324873958501144,
+          "worst_cvar5": -0.32627519965171814
+        },
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 4,
+          "median_ev": 0.01904466887935996,
+          "median_lcb95": 0.007821668155805879,
+          "worst_cvar5": -0.2715680003166199
+        },
+        {
+          "id": 237,
+          "generation": 2,
+          "positive_lcb_days": 4,
+          "median_ev": 0.011476111598312855,
+          "median_lcb95": 0.006198023767851703,
+          "worst_cvar5": -0.14240869879722595
+        },
+        {
+          "id": 1010,
+          "generation": 2,
+          "positive_lcb_days": 4,
+          "median_ev": 0.012185308616608381,
+          "median_lcb95": 0.005723791695481203,
+          "worst_cvar5": -0.19519031047821045
+        },
+        {
+          "id": 3202,
+          "generation": 1,
+          "positive_lcb_days": 3,
+          "median_ev": 0.011082422453910112,
+          "median_lcb95": 0.002660095684325367,
+          "worst_cvar5": -0.20408980548381805
+        }
+      ]
+    },
+    {
+      "window": [
+        6,
+        10
+      ],
+      "evaluated": 54,
+      "unique": 54,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 26,
+      "top5": [
+        {
+          "id": 1660,
+          "generation": 1,
+          "positive_lcb_days": 5,
+          "median_ev": 0.08759751170873642,
+          "median_lcb95": 0.05652814142900926,
+          "worst_cvar5": -0.3237897455692291
+        },
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.05880817398428917,
+          "median_lcb95": 0.03602417117722258,
+          "worst_cvar5": -0.3119184076786041
+        },
+        {
+          "id": 237,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.035800039768218994,
+          "median_lcb95": 0.02418391308909474,
+          "worst_cvar5": -0.21180762350559235
+        },
+        {
+          "id": 1010,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.037102967500686646,
+          "median_lcb95": 0.022463156738208312,
+          "worst_cvar5": -0.24766871333122253
+        },
+        {
+          "id": 3202,
+          "generation": 1,
+          "positive_lcb_days": 5,
+          "median_ev": 0.03644764423370361,
+          "median_lcb95": 0.021030798743117814,
+          "worst_cvar5": -0.29505759477615356
+        }
+      ]
+    },
+    {
+      "window": [
+        11,
+        15
+      ],
+      "evaluated": 53,
+      "unique": 53,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 41,
+      "top5": [
+        {
+          "id": 1660,
+          "generation": 1,
+          "positive_lcb_days": 5,
+          "median_ev": 0.12840256094932556,
+          "median_lcb95": 0.07996925419646556,
+          "worst_cvar5": -0.34031346440315247
+        },
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.10324621200561523,
+          "median_lcb95": 0.06692099032901423,
+          "worst_cvar5": -0.3274286687374115
+        },
+        {
+          "id": 237,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.05774139240384102,
+          "median_lcb95": 0.041816049789002344,
+          "worst_cvar5": -0.22728049755096436
+        },
+        {
+          "id": 1010,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.05728140100836754,
+          "median_lcb95": 0.03565418315528845,
+          "worst_cvar5": -0.24693766236305237
+        },
+        {
+          "id": 265,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.08221404999494553,
+          "median_lcb95": 0.03543768243296678,
+          "worst_cvar5": -0.3339739739894867
+        }
+      ]
+    },
+    {
+      "window": [
+        16,
+        20
+      ],
+      "evaluated": 48,
+      "unique": 48,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 29,
+      "top5": [
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.16198484599590302,
+          "median_lcb95": 0.1120085507117469,
+          "worst_cvar5": -0.33463627099990845
+        },
+        {
+          "id": 765,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.1820278912782669,
+          "median_lcb95": 0.07129969688892518,
+          "worst_cvar5": -0.40665504336357117
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.13373661041259766,
+          "median_lcb95": 0.06253977243294252,
+          "worst_cvar5": -0.4558897912502289
+        },
+        {
+          "id": 265,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.12354391068220139,
+          "median_lcb95": 0.06019363186816459,
+          "worst_cvar5": -0.34878119826316833
+        },
+        {
+          "id": 588,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.06229043006896973,
+          "median_lcb95": 0.042880546609995865,
+          "worst_cvar5": -0.4170131981372833
+        }
+      ]
+    },
+    {
+      "window": [
+        21,
+        25
+      ],
+      "evaluated": 54,
+      "unique": 54,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 40,
+      "top5": [
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.21535290777683258,
+          "median_lcb95": 0.15349902024624207,
+          "worst_cvar5": -0.3154159188270569
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.19501791894435883,
+          "median_lcb95": 0.11486686071440937,
+          "worst_cvar5": -0.475523978471756
+        },
+        {
+          "id": 765,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.21688304841518402,
+          "median_lcb95": 0.08038933658398198,
+          "worst_cvar5": -0.3820817768573761
+        },
+        {
+          "id": 265,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.15657681226730347,
+          "median_lcb95": 0.07868086329818787,
+          "worst_cvar5": -0.40948545932769775
+        },
+        {
+          "id": 237,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.09575138986110687,
+          "median_lcb95": 0.07258231454618276,
+          "worst_cvar5": -0.2699154317378998
+        }
+      ]
+    },
+    {
+      "window": [
+        26,
+        30
+      ],
+      "evaluated": 54,
+      "unique": 54,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 51,
+      "top5": [
+        {
+          "id": 1660,
+          "generation": 1,
+          "positive_lcb_days": 5,
+          "median_ev": 0.26615142822265625,
+          "median_lcb95": 0.18785844667785495,
+          "worst_cvar5": -0.3511209785938263
+        },
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.2597903311252594,
+          "median_lcb95": 0.18350571527989507,
+          "worst_cvar5": -0.29759907722473145
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.25920581817626953,
+          "median_lcb95": 0.13696158827578064,
+          "worst_cvar5": -0.49123308062553406
+        },
+        {
+          "id": 765,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.30464795231819153,
+          "median_lcb95": 0.12351376323221647,
+          "worst_cvar5": -0.396052747964859
+        },
+        {
+          "id": 265,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.18534864485263824,
+          "median_lcb95": 0.0935036721518354,
+          "worst_cvar5": -0.43185076117515564
+        }
+      ]
+    },
+    {
+      "window": [
+        31,
+        35
+      ],
+      "evaluated": 54,
+      "unique": 54,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 49,
+      "top5": [
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.2934582829475403,
+          "median_lcb95": 0.19736201491851812,
+          "worst_cvar5": -0.3408247232437134
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.2918413579463959,
+          "median_lcb95": 0.1645409980921988,
+          "worst_cvar5": -0.489722341299057
+        },
+        {
+          "id": 984,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.1978389322757721,
+          "median_lcb95": 0.10853627667859124,
+          "worst_cvar5": -0.3873140215873718
+        },
+        {
+          "id": 765,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.32649579644203186,
+          "median_lcb95": 0.10784740358503803,
+          "worst_cvar5": -0.4543205499649048
+        },
+        {
+          "id": 265,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.19790969789028168,
+          "median_lcb95": 0.09317957082275471,
+          "worst_cvar5": -0.48662227392196655
+        }
+      ]
+    },
+    {
+      "window": [
+        36,
+        40
+      ],
+      "evaluated": 52,
+      "unique": 52,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 44,
+      "top5": [
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.3064940273761749,
+          "median_lcb95": 0.1910051743072343,
+          "worst_cvar5": -0.3794199228286743
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.3176496624946594,
+          "median_lcb95": 0.16187811520096448,
+          "worst_cvar5": -0.524877667427063
+        },
+        {
+          "id": 984,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.21676096320152283,
+          "median_lcb95": 0.12273813494452747,
+          "worst_cvar5": -0.41122445464134216
+        },
+        {
+          "id": 765,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.3467196226119995,
+          "median_lcb95": 0.10432817958020163,
+          "worst_cvar5": -0.5190120339393616
+        },
+        {
+          "id": 265,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.20098432898521423,
+          "median_lcb95": 0.09321915402980453,
+          "worst_cvar5": -0.5449820160865784
+        }
+      ]
+    },
+    {
+      "window": [
+        41,
+        45
+      ],
+      "evaluated": 53,
+      "unique": 53,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 52,
+      "top5": [
+        {
+          "id": 1660,
+          "generation": 1,
+          "positive_lcb_days": 5,
+          "median_ev": 0.334076464176178,
+          "median_lcb95": 0.18284515942020618,
+          "worst_cvar5": -0.41531136631965637
+        },
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.3075149655342102,
+          "median_lcb95": 0.17464321460204782,
+          "worst_cvar5": -0.42121270298957825
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.36527615785598755,
+          "median_lcb95": 0.1458558983559745,
+          "worst_cvar5": -0.5485935211181641
+        },
+        {
+          "id": 984,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.20542661845684052,
+          "median_lcb95": 0.11166872207187921,
+          "worst_cvar5": -0.4535873532295227
+        },
+        {
+          "id": 644,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.14570941030979156,
+          "median_lcb95": 0.10040708206259764,
+          "worst_cvar5": -0.5396035313606262
+        }
+      ]
+    },
+    {
+      "window": [
+        46,
+        50
+      ],
+      "evaluated": 47,
+      "unique": 47,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 40,
+      "top5": [
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.30843111872673035,
+          "median_lcb95": 0.15864009469822818,
+          "worst_cvar5": -0.43244948983192444
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.4070746600627899,
+          "median_lcb95": 0.13113751152522768,
+          "worst_cvar5": -0.5500212907791138
+        },
+        {
+          "id": 935,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.20580483973026276,
+          "median_lcb95": 0.10773049004432596,
+          "worst_cvar5": -0.24084623157978058
+        },
+        {
+          "id": 1162,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.13846763968467712,
+          "median_lcb95": 0.10243198377818559,
+          "worst_cvar5": -0.23569974303245544
+        },
+        {
+          "id": 644,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.15257501602172852,
+          "median_lcb95": 0.10197228066950584,
+          "worst_cvar5": -0.5553210973739624
+        }
+      ]
+    },
+    {
+      "window": [
+        51,
+        55
+      ],
+      "evaluated": 46,
+      "unique": 46,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 40,
+      "top5": [
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.31117942929267883,
+          "median_lcb95": 0.1462280986499078,
+          "worst_cvar5": -0.4556411802768707
+        },
+        {
+          "id": 935,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.24506668746471405,
+          "median_lcb95": 0.121044599510846,
+          "worst_cvar5": -0.2264876365661621
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.4534951150417328,
+          "median_lcb95": 0.1158327251472771,
+          "worst_cvar5": -0.48685401678085327
+        },
+        {
+          "id": 23,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.16054557263851166,
+          "median_lcb95": 0.11106539570162455,
+          "worst_cvar5": -0.20901724696159363
+        },
+        {
+          "id": 1162,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.1501944214105606,
+          "median_lcb95": 0.11090586459184947,
+          "worst_cvar5": -0.24174754321575165
+        }
+      ]
+    },
+    {
+      "window": [
+        56,
+        60
+      ],
+      "evaluated": 53,
+      "unique": 53,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 50,
+      "top5": [
+        {
+          "id": 1660,
+          "generation": 1,
+          "positive_lcb_days": 5,
+          "median_ev": 0.4268690049648285,
+          "median_lcb95": 0.1826710602618812,
+          "worst_cvar5": -0.43276020884513855
+        },
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.3209612965583801,
+          "median_lcb95": 0.15798198470816166,
+          "worst_cvar5": -0.4508219063282013
+        },
+        {
+          "id": 23,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.17869749665260315,
+          "median_lcb95": 0.12702894487927274,
+          "worst_cvar5": -0.2242562472820282
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.4496062397956848,
+          "median_lcb95": 0.12431540481581294,
+          "worst_cvar5": -0.4500409662723541
+        },
+        {
+          "id": 935,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.252269446849823,
+          "median_lcb95": 0.12061770077735717,
+          "worst_cvar5": -0.23564662039279938
+        }
+      ]
+    },
+    {
+      "window": [
+        61,
+        65
+      ],
+      "evaluated": 52,
+      "unique": 52,
+      "gen2_evaluated": 30,
+      "all_lcb_positive": 52,
+      "top5": [
+        {
+          "id": 766,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.33028674125671387,
+          "median_lcb95": 0.16822780301446652,
+          "worst_cvar5": -0.473056823015213
+        },
+        {
+          "id": 23,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.189620241522789,
+          "median_lcb95": 0.13570160114837326,
+          "worst_cvar5": -0.238108828663826
+        },
+        {
+          "id": 597,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.45295533537864685,
+          "median_lcb95": 0.13006925370147604,
+          "worst_cvar5": -0.47271910309791565
+        },
+        {
+          "id": 258,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.17400264739990234,
+          "median_lcb95": 0.12589868217854605,
+          "worst_cvar5": -0.23146222531795502
+        },
+        {
+          "id": 1162,
+          "generation": 2,
+          "positive_lcb_days": 5,
+          "median_ev": 0.16460993885993958,
+          "median_lcb95": 0.12249674475175887,
+          "worst_cvar5": -0.24722671508789062
+        }
+      ]
+    }
+  ],
+  "diversified_parent_assignments": 195,
+  "genome_hash_duplicates": 0,
+  "method": "rank nominal per-day cluster LCB, median LCB, min LCB, worst CVaR5, effective N; first 10 plus up to 5 distinct family signatures per window",
+  "limitations": [
+    "Selection on DEV80 is not independent validation",
+    "No multiple-selection correction for Gen2 combined screen",
+    "No independent market episode testing",
+    "CVaR5 is per trade not portfolio max drawdown",
+    "Gen2 evaluated top 30 only; not all 973",
+    "Diversity based on family signature only, not signal correlation"
+  ]
+}
