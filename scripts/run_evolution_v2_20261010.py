@@ -171,6 +171,9 @@ def main():
    redundant=any(overlap(r['signal'],old[2]['signal'])>=.85 and old[0][0]>=q[0] for old in previous[niche])
    redundant=redundant or any(overlap(r['signal'],old['signal'])>=.85 for old in incumbents)
    if not redundant:incumbents.append(r);accepted+=1
+  from scripts.evolution_active_dedup_20261010 import curate
+  curated=curate(genomes,results,domains,HORIZONS)
+  atomic_json(out/'active_population.json',curated)
   st['generation']=gen;st['stagnant']=st['stagnant']+1 if accepted==0 else 0
   st['history'].append({'generation':gen,'evaluated':len(pending),'distinct_positive_target_signals':accepted})
   st['rng_state']=list(rng.getstate());st['phase']='COMPLETE'
