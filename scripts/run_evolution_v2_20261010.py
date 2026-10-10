@@ -155,12 +155,19 @@ def main():
   for c in pending:genomes[key(c)]=c
   # Novelty counts distinct actual trading signals, not merely different gene strings.
   accepted=0;archive={}
+  # Compare against the existing cross-generation archive, not just siblings.
+  previous={}
+  for side in ('LONG','SHORT'):
+   for h in HORIZONS:
+    previous[(side,h)]=pool_for(side,h,{k:v for k,v in genomes.items() if k not in {key(x) for x in pending}},results,domains)
   for c in pending:
    h=c['target_horizon'];r=rmap[key(c)];q=qualify(r,h)
    if not q or not r.get('signal') or r['signal']['count']<30:continue
    niche=(c['side'],h);incumbents=archive.setdefault(niche,[])
-   if all(overlap(r['signal'],other['signal'])<.85 for other in incumbents):
-    incumbents.append(r);accepted+=1
+   # A near-identical trade signal only counts as progress if it improves LCB.
+   redundant=any(overlap(r['signal'],old[2]['signal'])>=.85 and old[0][0]>=q[0] for old in previous[niche])
+   redundant=redundant or any(overlap(r['signal'],old['signal'])>=.85 for old in incumbents)
+   if not redundant:incumbents.append(r);accepted+=1
   st['generation']=gen;st['stagnant']=st['stagnant']+1 if accepted==0 else 0
   st['history'].append({'generation':gen,'evaluated':len(pending),'distinct_positive_target_signals':accepted})
   st['rng_state']=list(rng.getstate());st['phase']='COMPLETE'
