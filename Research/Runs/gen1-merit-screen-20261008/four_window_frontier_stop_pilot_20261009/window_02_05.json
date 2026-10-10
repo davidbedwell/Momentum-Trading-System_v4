@@ -1,0 +1,1521 @@
+{
+  "status": "UNCERTIFIED_STOP_POLICY_SCREEN",
+  "window": [
+    2,
+    5
+  ],
+  "six_workers": true,
+  "long_only": true,
+  "selected_genomes": [
+    1660,
+    586,
+    3202,
+    1006,
+    2234,
+    1014,
+    2340,
+    180,
+    756,
+    1998,
+    312,
+    540,
+    2992,
+    1922,
+    1732,
+    974,
+    2182,
+    1010,
+    2254,
+    2574,
+    996,
+    798,
+    4298
+  ],
+  "frontier_eligible_memberships": 27,
+  "selection_rule": "Refined LONG positive preliminary EV; horizon in window; ascending provisional Pareto rank then descending lower confidence bound; distinct genome index",
+  "evaluated_genome_horizon_pairs": 92,
+  "elapsed_seconds": 34.1,
+  "results": [
+    {
+      "genome": 1660,
+      "horizon": 2,
+      "train_events": 139,
+      "test_events": 30,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.03701310232281685,
+      "test_mean_net": 0.02418762445449829,
+      "test_hold_mean_net": 0.02418762445449829,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1660,
+      "horizon": 3,
+      "train_events": 139,
+      "test_events": 30,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.03714197501540184,
+      "test_mean_net": 0.03463389724493027,
+      "test_hold_mean_net": 0.03463389724493027,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1660,
+      "horizon": 4,
+      "train_events": 139,
+      "test_events": 30,
+      "selected_policy": [
+        "fixed_close",
+        -0.04,
+        0.0
+      ],
+      "train_objective": -0.02394515834748745,
+      "test_mean_net": 0.03902411460876465,
+      "test_hold_mean_net": 0.03730202466249466,
+      "test_delta_vs_hold": 0.0017220901791006327,
+      "test_early_exit_rate": 0.1
+    },
+    {
+      "genome": 1660,
+      "horizon": 5,
+      "train_events": 139,
+      "test_events": 30,
+      "selected_policy": [
+        "fixed_close",
+        -0.06,
+        0.0
+      ],
+      "train_objective": -0.02590120956301689,
+      "test_mean_net": 0.0380873866379261,
+      "test_hold_mean_net": 0.035146236419677734,
+      "test_delta_vs_hold": 0.0029411499854177237,
+      "test_early_exit_rate": 0.06666666666666667
+    },
+    {
+      "genome": 2340,
+      "horizon": 2,
+      "train_events": 168,
+      "test_events": 230,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.014359422959387302,
+      "test_mean_net": -0.00019641545077320188,
+      "test_hold_mean_net": -0.00019641545077320188,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 2340,
+      "horizon": 3,
+      "train_events": 168,
+      "test_events": 230,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.010580675676465034,
+      "test_mean_net": 0.0028119985945522785,
+      "test_hold_mean_net": 0.0028119985945522785,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 2340,
+      "horizon": 4,
+      "train_events": 168,
+      "test_events": 230,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.025
+      ],
+      "train_objective": -0.005267546512186527,
+      "test_mean_net": 0.0025046442169696093,
+      "test_hold_mean_net": 0.0028591586742550135,
+      "test_delta_vs_hold": -0.00035451442818157375,
+      "test_early_exit_rate": 0.1826086956521739
+    },
+    {
+      "genome": 2340,
+      "horizon": 5,
+      "train_events": 168,
+      "test_events": 229,
+      "selected_policy": [
+        "time_fail",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.006455877795815468,
+      "test_mean_net": 0.004510489758104086,
+      "test_hold_mean_net": 0.004305269103497267,
+      "test_delta_vs_hold": 0.0002052201598417014,
+      "test_early_exit_rate": 0.4104803493449782
+    },
+    {
+      "genome": 2992,
+      "horizon": 2,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.027145763859152794,
+      "test_mean_net": -0.0030408576130867004,
+      "test_hold_mean_net": -0.0030408576130867004,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 2992,
+      "horizon": 3,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.029862435534596443,
+      "test_mean_net": 0.003501868573948741,
+      "test_hold_mean_net": 0.0061553725972771645,
+      "test_delta_vs_hold": -0.00265350379049778,
+      "test_early_exit_rate": 0.208
+    },
+    {
+      "genome": 2992,
+      "horizon": 4,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.031641703099012375,
+      "test_mean_net": 0.004584283102303743,
+      "test_hold_mean_net": 0.010093221440911293,
+      "test_delta_vs_hold": -0.005508939735591412,
+      "test_early_exit_rate": 0.318
+    },
+    {
+      "genome": 2992,
+      "horizon": 5,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.02988836169242859,
+      "test_mean_net": 0.014445072039961815,
+      "test_hold_mean_net": 0.014445072039961815,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 2254,
+      "horizon": 2,
+      "train_events": 113,
+      "test_events": 45,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.018860775977373123,
+      "test_mean_net": 0.0036989401560276747,
+      "test_hold_mean_net": 0.0036989401560276747,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 2254,
+      "horizon": 3,
+      "train_events": 113,
+      "test_events": 45,
+      "selected_policy": [
+        "fixed_close",
+        -0.04,
+        0.0
+      ],
+      "train_objective": -0.017839936539530754,
+      "test_mean_net": 0.008991539478302002,
+      "test_hold_mean_net": 0.008916613645851612,
+      "test_delta_vs_hold": 7.492560689570382e-05,
+      "test_early_exit_rate": 0.06666666666666667
+    },
+    {
+      "genome": 2254,
+      "horizon": 4,
+      "train_events": 113,
+      "test_events": 45,
+      "selected_policy": [
+        "fixed_close",
+        -0.04,
+        0.0
+      ],
+      "train_objective": -0.013547450304031372,
+      "test_mean_net": 0.005527281202375889,
+      "test_hold_mean_net": 0.009499229490756989,
+      "test_delta_vs_hold": -0.003971947357058525,
+      "test_early_exit_rate": 0.1111111111111111
+    },
+    {
+      "genome": 2254,
+      "horizon": 5,
+      "train_events": 113,
+      "test_events": 45,
+      "selected_policy": [
+        "time_fail",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.013956877402961254,
+      "test_mean_net": 0.010427284985780716,
+      "test_hold_mean_net": 0.01027754507958889,
+      "test_delta_vs_hold": 0.0001497394550824538,
+      "test_early_exit_rate": 0.4
+    },
+    {
+      "genome": 586,
+      "horizon": 2,
+      "train_events": 500,
+      "test_events": 383,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.020506540313363075,
+      "test_mean_net": -0.0014751387061551213,
+      "test_hold_mean_net": -0.0014751387061551213,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 586,
+      "horizon": 3,
+      "train_events": 500,
+      "test_events": 383,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.019032275304198265,
+      "test_mean_net": 0.007652197498828173,
+      "test_hold_mean_net": 0.00784972682595253,
+      "test_delta_vs_hold": -0.0001975295745069161,
+      "test_early_exit_rate": 0.16971279373368145
+    },
+    {
+      "genome": 586,
+      "horizon": 4,
+      "train_events": 500,
+      "test_events": 383,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.01784927025437355,
+      "test_mean_net": 0.01389135979115963,
+      "test_hold_mean_net": 0.016153743490576744,
+      "test_delta_vs_hold": -0.0022623836994171143,
+      "test_early_exit_rate": 0.2793733681462141
+    },
+    {
+      "genome": 586,
+      "horizon": 5,
+      "train_events": 500,
+      "test_events": 383,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.05
+      ],
+      "train_objective": -0.01678595319390297,
+      "test_mean_net": 0.020737426355481148,
+      "test_hold_mean_net": 0.021490121260285378,
+      "test_delta_vs_hold": -0.0007526931585744023,
+      "test_early_exit_rate": 0.08093994778067885
+    },
+    {
+      "genome": 180,
+      "horizon": 2,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.033837608993053436,
+      "test_mean_net": -0.008738115429878235,
+      "test_hold_mean_net": -0.008738115429878235,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 180,
+      "horizon": 3,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.031169654801487923,
+      "test_mean_net": -0.00978025235235691,
+      "test_hold_mean_net": -0.00978025235235691,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 180,
+      "horizon": 4,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "fixed_close",
+        -0.04,
+        0.0
+      ],
+      "train_objective": -0.03307303413748741,
+      "test_mean_net": -0.007843018509447575,
+      "test_hold_mean_net": -0.008112486451864243,
+      "test_delta_vs_hold": 0.00026946706930175424,
+      "test_early_exit_rate": 0.174
+    },
+    {
+      "genome": 180,
+      "horizon": 5,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "fixed_close",
+        -0.04,
+        0.0
+      ],
+      "train_objective": -0.028271421790122986,
+      "test_mean_net": -0.01162070780992508,
+      "test_hold_mean_net": -0.012918487191200256,
+      "test_delta_vs_hold": 0.0012977796141058207,
+      "test_early_exit_rate": 0.26
+    },
+    {
+      "genome": 1922,
+      "horizon": 2,
+      "train_events": 117,
+      "test_events": 141,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.016807986423373222,
+      "test_mean_net": -0.0009483403409831226,
+      "test_hold_mean_net": -0.0009483403409831226,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1922,
+      "horizon": 3,
+      "train_events": 117,
+      "test_events": 141,
+      "selected_policy": [
+        "fixed_close",
+        -0.06,
+        0.0
+      ],
+      "train_objective": -0.014481209218502045,
+      "test_mean_net": 0.0027848538011312485,
+      "test_hold_mean_net": 0.002727503888309002,
+      "test_delta_vs_hold": 5.7349709095433354e-05,
+      "test_early_exit_rate": 0.0070921985815602835
+    },
+    {
+      "genome": 1922,
+      "horizon": 4,
+      "train_events": 117,
+      "test_events": 141,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.01790257729589939,
+      "test_mean_net": 0.005421196110546589,
+      "test_hold_mean_net": 0.004557062406092882,
+      "test_delta_vs_hold": 0.000864134868606925,
+      "test_early_exit_rate": 0.18439716312056736
+    },
+    {
+      "genome": 1922,
+      "horizon": 5,
+      "train_events": 117,
+      "test_events": 141,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.01766655407845974,
+      "test_mean_net": 0.00806714128702879,
+      "test_hold_mean_net": 0.008250025101006031,
+      "test_delta_vs_hold": -0.00018288353749085218,
+      "test_early_exit_rate": 0.2624113475177305
+    },
+    {
+      "genome": 2574,
+      "horizon": 2,
+      "train_events": 273,
+      "test_events": 108,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.03238362446427345,
+      "test_mean_net": -0.002038322389125824,
+      "test_hold_mean_net": -0.002038322389125824,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 2574,
+      "horizon": 3,
+      "train_events": 273,
+      "test_events": 108,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.02475837431848049,
+      "test_mean_net": 0.0026797454338520765,
+      "test_hold_mean_net": 0.0026797454338520765,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 2574,
+      "horizon": 4,
+      "train_events": 273,
+      "test_events": 107,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.025
+      ],
+      "train_objective": -0.02359970659017563,
+      "test_mean_net": 0.009723342023789883,
+      "test_hold_mean_net": 0.01045787800103426,
+      "test_delta_vs_hold": -0.000734534696675837,
+      "test_early_exit_rate": 0.14953271028037382
+    },
+    {
+      "genome": 2574,
+      "horizon": 5,
+      "train_events": 273,
+      "test_events": 106,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.025
+      ],
+      "train_objective": -0.02379927970468998,
+      "test_mean_net": 0.010966203175485134,
+      "test_hold_mean_net": 0.01658407784998417,
+      "test_delta_vs_hold": -0.005617873277515173,
+      "test_early_exit_rate": 0.3113207547169811
+    },
+    {
+      "genome": 3202,
+      "horizon": 2,
+      "train_events": 500,
+      "test_events": 65,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.02759717032313347,
+      "test_mean_net": -0.0017697371076792479,
+      "test_hold_mean_net": -0.0017697371076792479,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 3202,
+      "horizon": 3,
+      "train_events": 500,
+      "test_events": 64,
+      "selected_policy": [
+        "fixed_close",
+        -0.04,
+        0.0
+      ],
+      "train_objective": -0.02645302563905716,
+      "test_mean_net": 0.00321625336073339,
+      "test_hold_mean_net": 0.0025257121305912733,
+      "test_delta_vs_hold": 0.0006905412883497775,
+      "test_early_exit_rate": 0.09375
+    },
+    {
+      "genome": 3202,
+      "horizon": 4,
+      "train_events": 500,
+      "test_events": 63,
+      "selected_policy": [
+        "fixed_close",
+        -0.04,
+        0.0
+      ],
+      "train_objective": -0.029521772637963295,
+      "test_mean_net": 0.006662989035248756,
+      "test_hold_mean_net": 0.00570625439286232,
+      "test_delta_vs_hold": 0.0009567343513481319,
+      "test_early_exit_rate": 0.1746031746031746
+    },
+    {
+      "genome": 3202,
+      "horizon": 5,
+      "train_events": 500,
+      "test_events": 63,
+      "selected_policy": [
+        "fixed_close",
+        -0.04,
+        0.0
+      ],
+      "train_objective": -0.026788804680109024,
+      "test_mean_net": 0.015340949408710003,
+      "test_hold_mean_net": 0.01588940992951393,
+      "test_delta_vs_hold": -0.0005484599387273192,
+      "test_early_exit_rate": 0.20634920634920634
+    },
+    {
+      "genome": 756,
+      "horizon": 2,
+      "train_events": 123,
+      "test_events": 142,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.01909133978188038,
+      "test_mean_net": -0.003428949508816004,
+      "test_hold_mean_net": -0.003428949508816004,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 756,
+      "horizon": 3,
+      "train_events": 123,
+      "test_events": 142,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.014734162017703056,
+      "test_mean_net": -0.0021526420023292303,
+      "test_hold_mean_net": -0.0021526420023292303,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 756,
+      "horizon": 4,
+      "train_events": 123,
+      "test_events": 142,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.013647756539285183,
+      "test_mean_net": -0.003322574542835355,
+      "test_hold_mean_net": -0.003322574542835355,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 756,
+      "horizon": 5,
+      "train_events": 123,
+      "test_events": 142,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.05
+      ],
+      "train_objective": -0.00767130684107542,
+      "test_mean_net": -0.0036739110946655273,
+      "test_hold_mean_net": -0.001477990299463272,
+      "test_delta_vs_hold": -0.002195918932557106,
+      "test_early_exit_rate": 0.19718309859154928
+    },
+    {
+      "genome": 1732,
+      "horizon": 2,
+      "train_events": 500,
+      "test_events": 436,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.038022469729185104,
+      "test_mean_net": -0.010120924562215805,
+      "test_hold_mean_net": -0.010120924562215805,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1732,
+      "horizon": 3,
+      "train_events": 500,
+      "test_events": 435,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.034220535308122635,
+      "test_mean_net": -0.010585150681436062,
+      "test_hold_mean_net": -0.011117315851151943,
+      "test_delta_vs_hold": 0.0005321654607541859,
+      "test_early_exit_rate": 0.30114942528735633
+    },
+    {
+      "genome": 1732,
+      "horizon": 4,
+      "train_events": 500,
+      "test_events": 434,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.025
+      ],
+      "train_objective": -0.035473182797431946,
+      "test_mean_net": -0.009584031999111176,
+      "test_hold_mean_net": -0.011535264551639557,
+      "test_delta_vs_hold": 0.0019512299913913012,
+      "test_early_exit_rate": 0.2511520737327189
+    },
+    {
+      "genome": 1732,
+      "horizon": 5,
+      "train_events": 500,
+      "test_events": 433,
+      "selected_policy": [
+        "fixed_close",
+        -0.06,
+        0.0
+      ],
+      "train_objective": -0.03185541555285454,
+      "test_mean_net": -0.00779412966221571,
+      "test_hold_mean_net": -0.009343239478766918,
+      "test_delta_vs_hold": 0.0015491109807044268,
+      "test_early_exit_rate": 0.2632794457274827
+    },
+    {
+      "genome": 996,
+      "horizon": 2,
+      "train_events": 500,
+      "test_events": 400,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.024335147812962532,
+      "test_mean_net": -0.0018019708804786205,
+      "test_hold_mean_net": -0.0018019708804786205,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 996,
+      "horizon": 3,
+      "train_events": 500,
+      "test_events": 400,
+      "selected_policy": [
+        "fixed_close",
+        -0.04,
+        0.0
+      ],
+      "train_objective": -0.024460189044475555,
+      "test_mean_net": 0.0015928767388686538,
+      "test_hold_mean_net": 0.0008324494701810181,
+      "test_delta_vs_hold": 0.0007604273268952966,
+      "test_early_exit_rate": 0.0425
+    },
+    {
+      "genome": 996,
+      "horizon": 4,
+      "train_events": 500,
+      "test_events": 400,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.022549716755747795,
+      "test_mean_net": 0.004263130947947502,
+      "test_hold_mean_net": 0.004263130947947502,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 996,
+      "horizon": 5,
+      "train_events": 500,
+      "test_events": 400,
+      "selected_policy": [
+        "time_fail",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.02166537381708622,
+      "test_mean_net": 0.0030068245250731707,
+      "test_hold_mean_net": 0.0046407729387283325,
+      "test_delta_vs_hold": -0.0016339481808245182,
+      "test_early_exit_rate": 0.35
+    },
+    {
+      "genome": 1006,
+      "horizon": 2,
+      "train_events": 118,
+      "test_events": 180,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.006958454847335815,
+      "test_mean_net": 0.0020481557585299015,
+      "test_hold_mean_net": 0.0020481557585299015,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1006,
+      "horizon": 3,
+      "train_events": 118,
+      "test_events": 180,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.005227455869317055,
+      "test_mean_net": 0.007628412451595068,
+      "test_hold_mean_net": 0.007411428727209568,
+      "test_delta_vs_hold": 0.00021698305499739945,
+      "test_early_exit_rate": 0.11666666666666667
+    },
+    {
+      "genome": 1006,
+      "horizon": 4,
+      "train_events": 118,
+      "test_events": 180,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.0029764315113425255,
+      "test_mean_net": 0.012727570720016956,
+      "test_hold_mean_net": 0.013676963746547699,
+      "test_delta_vs_hold": -0.0009493952966295183,
+      "test_early_exit_rate": 0.20555555555555555
+    },
+    {
+      "genome": 1006,
+      "horizon": 5,
+      "train_events": 118,
+      "test_events": 180,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.006030307151377201,
+      "test_mean_net": 0.01795261539518833,
+      "test_hold_mean_net": 0.018832487985491753,
+      "test_delta_vs_hold": -0.0008798726485110819,
+      "test_early_exit_rate": 0.2611111111111111
+    },
+    {
+      "genome": 1998,
+      "horizon": 2,
+      "train_events": 180,
+      "test_events": 152,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.017850050702691078,
+      "test_mean_net": -0.0070396605879068375,
+      "test_hold_mean_net": -0.0070396605879068375,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1998,
+      "horizon": 3,
+      "train_events": 180,
+      "test_events": 152,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.007940207608044147,
+      "test_mean_net": -0.0013961242511868477,
+      "test_hold_mean_net": -0.0013961242511868477,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1998,
+      "horizon": 4,
+      "train_events": 180,
+      "test_events": 152,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.025
+      ],
+      "train_objective": -0.003460671752691269,
+      "test_mean_net": -0.0004853774735238403,
+      "test_hold_mean_net": 0.0012397258542478085,
+      "test_delta_vs_hold": -0.00172510277479887,
+      "test_early_exit_rate": 0.21710526315789475
+    },
+    {
+      "genome": 1998,
+      "horizon": 5,
+      "train_events": 180,
+      "test_events": 152,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.08
+      ],
+      "train_objective": -0.003290478140115738,
+      "test_mean_net": 0.0037786290049552917,
+      "test_hold_mean_net": 0.005334651563316584,
+      "test_delta_vs_hold": -0.0015560220927000046,
+      "test_early_exit_rate": 0.09868421052631579
+    },
+    {
+      "genome": 974,
+      "horizon": 2,
+      "train_events": 72,
+      "test_events": 84,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.024655034765601158,
+      "test_mean_net": -0.012946697883307934,
+      "test_hold_mean_net": -0.012946697883307934,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 974,
+      "horizon": 3,
+      "train_events": 72,
+      "test_events": 84,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.01427554339170456,
+      "test_mean_net": -0.014242527075111866,
+      "test_hold_mean_net": -0.014242527075111866,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 974,
+      "horizon": 4,
+      "train_events": 72,
+      "test_events": 84,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.025
+      ],
+      "train_objective": -0.015264581888914108,
+      "test_mean_net": -0.01079325471073389,
+      "test_hold_mean_net": -0.010967744514346123,
+      "test_delta_vs_hold": 0.0001744894980220124,
+      "test_early_exit_rate": 0.09523809523809523
+    },
+    {
+      "genome": 974,
+      "horizon": 5,
+      "train_events": 72,
+      "test_events": 84,
+      "selected_policy": [
+        "time_fail",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.018124129623174667,
+      "test_mean_net": -0.011511646211147308,
+      "test_hold_mean_net": -0.012672719545662403,
+      "test_delta_vs_hold": 0.0011610734509304166,
+      "test_early_exit_rate": 0.5595238095238095
+    },
+    {
+      "genome": 798,
+      "horizon": 2,
+      "train_events": 182,
+      "test_events": 98,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.0234159454703331,
+      "test_mean_net": -0.0022702061105519533,
+      "test_hold_mean_net": -0.0022702061105519533,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 798,
+      "horizon": 3,
+      "train_events": 182,
+      "test_events": 98,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.021692698821425438,
+      "test_mean_net": 0.0003378446854185313,
+      "test_hold_mean_net": 0.0008999850251711905,
+      "test_delta_vs_hold": -0.0005621402524411678,
+      "test_early_exit_rate": 0.12244897959183673
+    },
+    {
+      "genome": 798,
+      "horizon": 4,
+      "train_events": 182,
+      "test_events": 98,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.023288624361157417,
+      "test_mean_net": 0.002358871279284358,
+      "test_hold_mean_net": 0.003192707197740674,
+      "test_delta_vs_hold": -0.0008338349871337414,
+      "test_early_exit_rate": 0.21428571428571427
+    },
+    {
+      "genome": 798,
+      "horizon": 5,
+      "train_events": 182,
+      "test_events": 98,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.022717216983437538,
+      "test_mean_net": 0.0015311792958527803,
+      "test_hold_mean_net": 0.005727728828787804,
+      "test_delta_vs_hold": -0.004196550231426954,
+      "test_early_exit_rate": 0.2857142857142857
+    },
+    {
+      "genome": 2234,
+      "horizon": 2,
+      "train_events": 500,
+      "test_events": 495,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.020472999662160873,
+      "test_mean_net": -0.0072392914444208145,
+      "test_hold_mean_net": -0.0072392914444208145,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 2234,
+      "horizon": 3,
+      "train_events": 500,
+      "test_events": 495,
+      "selected_policy": [
+        "fixed_close",
+        -0.06,
+        0.0
+      ],
+      "train_objective": -0.018880411982536316,
+      "test_mean_net": -0.002521297661587596,
+      "test_hold_mean_net": -0.002653556177392602,
+      "test_delta_vs_hold": 0.00013225822476670146,
+      "test_early_exit_rate": 0.01616161616161616
+    },
+    {
+      "genome": 2234,
+      "horizon": 4,
+      "train_events": 500,
+      "test_events": 495,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.020757462829351425,
+      "test_mean_net": -0.0001670211204327643,
+      "test_hold_mean_net": 0.0014409527648240328,
+      "test_delta_vs_hold": -0.001607973244972527,
+      "test_early_exit_rate": 0.3090909090909091
+    },
+    {
+      "genome": 2234,
+      "horizon": 5,
+      "train_events": 500,
+      "test_events": 495,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.05
+      ],
+      "train_objective": -0.017090030014514923,
+      "test_mean_net": 0.004944900516420603,
+      "test_hold_mean_net": 0.004859152249991894,
+      "test_delta_vs_hold": 8.574802632210776e-05,
+      "test_early_exit_rate": 0.08686868686868687
+    },
+    {
+      "genome": 312,
+      "horizon": 2,
+      "train_events": 154,
+      "test_events": 35,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.017026392742991447,
+      "test_mean_net": -0.034016795456409454,
+      "test_hold_mean_net": -0.034016795456409454,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 312,
+      "horizon": 3,
+      "train_events": 154,
+      "test_events": 35,
+      "selected_policy": [
+        "fixed_close",
+        -0.06,
+        0.0
+      ],
+      "train_objective": -0.017780717462301254,
+      "test_mean_net": -0.05065349116921425,
+      "test_hold_mean_net": -0.05436697602272034,
+      "test_delta_vs_hold": 0.003713485086336732,
+      "test_early_exit_rate": 0.22857142857142856
+    },
+    {
+      "genome": 312,
+      "horizon": 4,
+      "train_events": 154,
+      "test_events": 35,
+      "selected_policy": [
+        "fixed_close",
+        -0.06,
+        0.0
+      ],
+      "train_objective": -0.024347996339201927,
+      "test_mean_net": -0.04977639392018318,
+      "test_hold_mean_net": -0.05584787577390671,
+      "test_delta_vs_hold": 0.006071483716368675,
+      "test_early_exit_rate": 0.37142857142857144
+    },
+    {
+      "genome": 312,
+      "horizon": 5,
+      "train_events": 154,
+      "test_events": 35,
+      "selected_policy": [
+        "fixed_close",
+        -0.06,
+        0.0
+      ],
+      "train_objective": -0.017388038337230682,
+      "test_mean_net": -0.030651409178972244,
+      "test_hold_mean_net": -0.024261528626084328,
+      "test_delta_vs_hold": -0.006389885675162077,
+      "test_early_exit_rate": 0.4857142857142857
+    },
+    {
+      "genome": 2182,
+      "horizon": 2,
+      "train_events": 311,
+      "test_events": 266,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.014925743453204632,
+      "test_mean_net": -0.005916649010032415,
+      "test_hold_mean_net": -0.005916649010032415,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 2182,
+      "horizon": 3,
+      "train_events": 311,
+      "test_events": 266,
+      "selected_policy": [
+        "fixed_close",
+        -0.06,
+        0.0
+      ],
+      "train_objective": -0.009751562960445881,
+      "test_mean_net": -0.0027031709905713797,
+      "test_hold_mean_net": -0.0026331155095249414,
+      "test_delta_vs_hold": -7.005570660112426e-05,
+      "test_early_exit_rate": 0.03383458646616541
+    },
+    {
+      "genome": 2182,
+      "horizon": 4,
+      "train_events": 311,
+      "test_events": 266,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.025
+      ],
+      "train_objective": -0.011088442988693714,
+      "test_mean_net": -0.002882174216210842,
+      "test_hold_mean_net": -0.000578817562200129,
+      "test_delta_vs_hold": -0.0023033563047647476,
+      "test_early_exit_rate": 0.12781954887218044
+    },
+    {
+      "genome": 2182,
+      "horizon": 5,
+      "train_events": 311,
+      "test_events": 266,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.08
+      ],
+      "train_objective": -0.009322110563516617,
+      "test_mean_net": 0.0020108220633119345,
+      "test_hold_mean_net": 0.0021959017030894756,
+      "test_delta_vs_hold": -0.00018508004723116755,
+      "test_early_exit_rate": 0.02631578947368421
+    },
+    {
+      "genome": 4298,
+      "horizon": 2,
+      "train_events": 176,
+      "test_events": 54,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.0351748988032341,
+      "test_mean_net": 0.0020598960109055042,
+      "test_hold_mean_net": 0.0020598960109055042,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 4298,
+      "horizon": 3,
+      "train_events": 176,
+      "test_events": 54,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.03219638764858246,
+      "test_mean_net": -0.00024376105284318328,
+      "test_hold_mean_net": 0.00010070783901028335,
+      "test_delta_vs_hold": -0.0003444691828917712,
+      "test_early_exit_rate": 0.07407407407407407
+    },
+    {
+      "genome": 4298,
+      "horizon": 4,
+      "train_events": 176,
+      "test_events": 54,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.03408877179026604,
+      "test_mean_net": -0.0006230503786355257,
+      "test_hold_mean_net": 0.0018075709231197834,
+      "test_delta_vs_hold": -0.002430621301755309,
+      "test_early_exit_rate": 0.18518518518518517
+    },
+    {
+      "genome": 4298,
+      "horizon": 5,
+      "train_events": 176,
+      "test_events": 54,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.035370927304029465,
+      "test_mean_net": 0.0046812803484499454,
+      "test_hold_mean_net": 0.008114941418170929,
+      "test_delta_vs_hold": -0.003433661302551627,
+      "test_early_exit_rate": 0.24074074074074073
+    },
+    {
+      "genome": 1014,
+      "horizon": 2,
+      "train_events": 163,
+      "test_events": 171,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.022531596943736076,
+      "test_mean_net": -0.007905179634690285,
+      "test_hold_mean_net": -0.007905179634690285,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1014,
+      "horizon": 3,
+      "train_events": 163,
+      "test_events": 171,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.024462811648845673,
+      "test_mean_net": -0.002765406621620059,
+      "test_hold_mean_net": -0.0015005044406279922,
+      "test_delta_vs_hold": -0.0012649015989154577,
+      "test_early_exit_rate": 0.15204678362573099
+    },
+    {
+      "genome": 1014,
+      "horizon": 4,
+      "train_events": 163,
+      "test_events": 171,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.025668691843748093,
+      "test_mean_net": -0.003909229766577482,
+      "test_hold_mean_net": -0.002242596819996834,
+      "test_delta_vs_hold": -0.0016666328301653266,
+      "test_early_exit_rate": 0.25146198830409355
+    },
+    {
+      "genome": 1014,
+      "horizon": 5,
+      "train_events": 163,
+      "test_events": 171,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.025
+      ],
+      "train_objective": -0.02940094843506813,
+      "test_mean_net": -0.0016040157061070204,
+      "test_hold_mean_net": -0.00316243851557374,
+      "test_delta_vs_hold": 0.0015584229258820415,
+      "test_early_exit_rate": 0.23391812865497075
+    },
+    {
+      "genome": 540,
+      "horizon": 2,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.03524814918637276,
+      "test_mean_net": -0.007050772663205862,
+      "test_hold_mean_net": -0.007050772663205862,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 540,
+      "horizon": 3,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.03593188151717186,
+      "test_mean_net": -0.001040255301631987,
+      "test_hold_mean_net": -0.0013155114138498902,
+      "test_delta_vs_hold": 0.0002752562868408859,
+      "test_early_exit_rate": 0.194
+    },
+    {
+      "genome": 540,
+      "horizon": 4,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.03590402752161026,
+      "test_mean_net": -0.00257324636913836,
+      "test_hold_mean_net": -0.0029858574271202087,
+      "test_delta_vs_hold": 0.0004126109997741878,
+      "test_early_exit_rate": 0.33
+    },
+    {
+      "genome": 540,
+      "horizon": 5,
+      "train_events": 500,
+      "test_events": 500,
+      "selected_policy": [
+        "fixed_close",
+        -0.02,
+        0.0
+      ],
+      "train_objective": -0.03766116872429848,
+      "test_mean_net": -0.0006925706984475255,
+      "test_hold_mean_net": -0.0020838461350649595,
+      "test_delta_vs_hold": 0.0013912759022787213,
+      "test_early_exit_rate": 0.432
+    },
+    {
+      "genome": 1010,
+      "horizon": 2,
+      "train_events": 123,
+      "test_events": 125,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.015642516314983368,
+      "test_mean_net": -0.004364170134067535,
+      "test_hold_mean_net": -0.004364170134067535,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1010,
+      "horizon": 3,
+      "train_events": 123,
+      "test_events": 125,
+      "selected_policy": [
+        "hold",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.007363191805779934,
+      "test_mean_net": -0.005147507879883051,
+      "test_hold_mean_net": -0.005147507879883051,
+      "test_delta_vs_hold": 0.0,
+      "test_early_exit_rate": 0.0
+    },
+    {
+      "genome": 1010,
+      "horizon": 4,
+      "train_events": 123,
+      "test_events": 125,
+      "selected_policy": [
+        "trailing_close",
+        0.0,
+        0.025
+      ],
+      "train_objective": -0.009450657293200493,
+      "test_mean_net": -0.004742578137665987,
+      "test_hold_mean_net": -0.005598185118287802,
+      "test_delta_vs_hold": 0.0008556073298677802,
+      "test_early_exit_rate": 0.176
+    },
+    {
+      "genome": 1010,
+      "horizon": 5,
+      "train_events": 123,
+      "test_events": 125,
+      "selected_policy": [
+        "time_fail",
+        0.0,
+        0.0
+      ],
+      "train_objective": -0.012251578271389008,
+      "test_mean_net": -0.0038471422158181667,
+      "test_hold_mean_net": -0.005307611543685198,
+      "test_delta_vs_hold": 0.001460469327867031,
+      "test_early_exit_rate": 0.44
+    }
+  ],
+  "limitations": [
+    "Not a genetically evolving entry GA; exploratory frontier-selected stop screening",
+    "Daily endpoint proxy, not executable intraday stop-loss fills or overnight gap handling",
+    "Same candidate set and overlapping episodes; no independent inference",
+    "Chronological test not independent across market episodes",
+    "Unadjusted multiple policy and horizon search",
+    "No capital-constrained portfolio replay",
+    "No protected partitions accessed"
+  ]
+}

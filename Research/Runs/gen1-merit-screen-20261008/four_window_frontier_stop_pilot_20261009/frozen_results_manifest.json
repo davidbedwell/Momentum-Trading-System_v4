@@ -1,0 +1,76 @@
+{
+  "status": "FROZEN_EXPLORATORY_NOT_CERTIFIED",
+  "created_utc": "2026-10-10T03:25:48.053704+00:00",
+  "scope": "DEV80 only; LONG only; four sequential windows; six workers per window",
+  "window_summary": [
+    {
+      "window": [
+        2,
+        5
+      ],
+      "eligible_memberships": 27,
+      "selected_genomes": 23,
+      "evaluated_pairs": 92,
+      "mean_stop_ev_net": -0.00020254536518579064,
+      "mean_hold_ev_net": 7.444873130146374e-05,
+      "positive_stop_pairs": 41,
+      "positive_hold_pairs": 45
+    },
+    {
+      "window": [
+        6,
+        10
+      ],
+      "eligible_memberships": 120,
+      "selected_genomes": 24,
+      "evaluated_pairs": 120,
+      "mean_stop_ev_net": 0.0049852017313241955,
+      "mean_hold_ev_net": 0.008383736949084172,
+      "positive_stop_pairs": 87,
+      "positive_hold_pairs": 96
+    },
+    {
+      "window": [
+        11,
+        15
+      ],
+      "eligible_memberships": 452,
+      "selected_genomes": 24,
+      "evaluated_pairs": 115,
+      "mean_stop_ev_net": 0.022060563307225136,
+      "mean_hold_ev_net": 0.0306206305116496,
+      "positive_stop_pairs": 100,
+      "positive_hold_pairs": 105
+    },
+    {
+      "window": [
+        16,
+        20
+      ],
+      "eligible_memberships": 18,
+      "selected_genomes": 18,
+      "evaluated_pairs": 90,
+      "mean_stop_ev_net": 0.0063239440489269326,
+      "mean_hold_ev_net": 0.017514970516155397,
+      "positive_stop_pairs": 48,
+      "positive_hold_pairs": 66
+    }
+  ],
+  "raw_result_sha256": {
+    "window_02_05.json": "f1e1632932b5fcb9f015a2b25dddd64dff3a9e54cfb787c10dd4cb5b077c95f3",
+    "window_06_10.json": "d71ce5d2c201d87398b367f8f9b38cb0972a7304a17dfa99e8607b3d4da2bffa",
+    "window_11_15.json": "dcaee77d41849e0429ea4b88589d0cb1c2310b04dde787ef66eeaa08e36485fb",
+    "window_16_20.json": "dfc2d34cd4a535545a8ddb6c1017b0c8210705f552aad15165cb34daa7165d86"
+  },
+  "ranked_pairs": 417,
+  "ranking_warning": "Rankings use previously observed chronological test outcomes. They are descriptive only and cannot be used to select or tune strategies without contaminating that test. Genome-horizon observations share market episodes and are not independent.",
+  "limitations": [
+    "Stop fills use next-observation endpoint proxies, not actual stop orders",
+    "No overnight gap execution model",
+    "No capital-constrained portfolio drawdown",
+    "No market-episode independent inference",
+    "Frontier itself preselected on preliminary EV",
+    "No protected banks touched",
+    "No new genetic entry evolution"
+  ]
+}
