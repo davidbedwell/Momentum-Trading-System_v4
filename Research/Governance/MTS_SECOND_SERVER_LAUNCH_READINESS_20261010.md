@@ -18,7 +18,7 @@ Status: PREPARATION ONLY. No GA or historical replay launched.
 
 ## Launch blockers to resolve BEFORE purchase
 1. Validate the controller's actual A/B/C/R-1 signal-generation code and its causal, point-in-time inputs.
-2. Locate or regenerate the state tape from reproducible inputs. The expected Research/State/MTS_ABC_DEFENSIVE_R1_STATE_TAPE_20261005.csv is NOT present on the current Nebius instance as of this audit; the generation script exists, but has not been executed.
+2. Verify that the existing A/B/C and R-1 controller computes and records causal state declarations directly from its point-in-time data. No CSV state tape is required. Historical exports are optional research artifacts, never execution dependencies.
 3. Implement portfolio-level transition handling: multiple open positions, partial fills, order cancellations, cash balance, costs, and failed exits.
 4. Confirm security trading calendars and missing sessions. Existing per-security horizon mapper deliberately fails closed when a transition date is absent.
 5. Verify signal-close -> next executable open chronology and no lookahead.
