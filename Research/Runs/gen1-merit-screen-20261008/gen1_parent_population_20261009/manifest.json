@@ -1,0 +1,32 @@
+{
+  "status": "FROZEN_PROVISIONAL_PARENT_CANDIDATES_NOT_BREEDING_AUTHORIZED",
+  "count": 168,
+  "allocation": {
+    "01_very_short": 21,
+    "02_short": 29,
+    "03_intermediate": 29,
+    "04_medium": 29,
+    "05_extended": 29,
+    "06_long": 29,
+    "DIVERSITY_RESERVE": 2
+  },
+  "source_sha256": "5d1195e23b51f07c03c81629ceebb145ffbb0b3113c6d8d46d15050a310621b3",
+  "replay_result": {
+    "status": "PASS",
+    "tested_candidates": 178,
+    "tested_horizons": 9,
+    "checks": 1602,
+    "failed_candidates": 0,
+    "scope": "DEV80 only; provisional 168 plus preserved SHORT candidates; not scientific certification"
+  },
+  "gates_remaining": [
+    "Phase B extended horizon outcomes",
+    "Phase C local horizon refinement",
+    "Phase D robustness and market exposure",
+    "multiplicity adjusted reliability",
+    "behavioral diversity",
+    "execution cost scientific certification"
+  ],
+  "protected_data_access": "none",
+  "gen2_authorized": false
+}
