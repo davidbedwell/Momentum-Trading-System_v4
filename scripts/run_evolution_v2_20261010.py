@@ -75,10 +75,11 @@ def main():
  p.add_argument('--generations',type=int,default=200);p.add_argument('--batch',type=int,default=120)
  p.add_argument('--workers',type=int,default=6);p.add_argument('--seed',type=int,default=20261010)
  p.add_argument('--dry-run',action='store_true');a=p.parse_args()
- assert a.workers==6 and 1<=a.generations<=200 and 10<=a.batch<=1000
+ assert 1<=a.workers<=64 and 1<=a.generations<=200 and 10<=a.batch<=1000
  out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
  domains=schema()
- config={'seed':a.seed,'batch':a.batch,'workers':a.workers,'domain_sha256':hashlib.sha256(json.dumps(domains,sort_keys=True).encode()).hexdigest(),'gen2_sha256':hashlib.sha256((BASE/'offspring.jsonl').read_bytes()).hexdigest()}
+ # Preserve legacy checkpoint schema: 'workers' records the original 6-worker run, not current execution parallelism.
+ config={'seed':a.seed,'batch':a.batch,'workers':6,'domain_sha256':hashlib.sha256(json.dumps(domains,sort_keys=True).encode()).hexdigest(),'gen2_sha256':hashlib.sha256((BASE/'offspring.jsonl').read_bytes()).hexdigest()}
  st,cmap,rmap=reconcile(out,config)
  parents=rows(PARENTS);orig=rows(BASE/'offspring.jsonl');historical=parents+orig
  # Preserve all Gen2 definitions; only in-domain parents breed.
@@ -100,7 +101,7 @@ def main():
     if key(c) not in seed_cache:seeds.append(c)
  seeds=list({key(c):c for c in seeds}.values())
  if seeds and not a.dry_run:
-  with concurrent.futures.ProcessPoolExecutor(max_workers=a.workers,initializer=init_worker) as executor:
+  with concurrent.futures.ProcessPoolExecutor(max_workers=min(a.workers,a.batch),initializer=init_worker) as executor:
    for r in executor.map(evaluate_and_signal,seeds,chunksize=1):
     durable_append(seed_path,[r]);seed_cache[r['genome_hash']]=r
  for hash_,r in seed_cache.items():
@@ -119,7 +120,7 @@ def main():
    if pending_state['generation']!=gen:raise RuntimeError('Pending generation mismatch')
    rng.setstate(tup(pending_state['rng_state']))
   else:
-   from scripts.evolution_active_dedup_20261010 import curate
+   from scripts.evolution_active_dedup_fast_20261010 import curate
    curated=curate(genomes,results,domains,HORIZONS)
    allowed={(x['side'],x['horizon'],x['genome_hash']) for x in curated['active']}
    niches=[]
@@ -154,7 +155,7 @@ def main():
    cmap.update({key(c):c for c in pending})
   todo=[c for c in pending if key(c) not in rmap]
   if todo:
-   with concurrent.futures.ProcessPoolExecutor(max_workers=a.workers,initializer=init_worker) as executor:
+   with concurrent.futures.ProcessPoolExecutor(max_workers=min(a.workers,a.batch),initializer=init_worker) as executor:
     for r in executor.map(evaluate_and_signal,todo,chunksize=1):
      durable_append(out/'evaluations.jsonl',[r]);rmap[r['genome_hash']]=r;results[r['genome_hash']]=r
   if any(key(c) not in rmap for c in pending):raise RuntimeError('Incomplete generation')
@@ -163,9 +164,11 @@ def main():
   accepted=0;archive={}
   # Compare against the existing cross-generation archive, not just siblings.
   previous={}
+  pending_keys={key(x) for x in pending}
+  prior_genomes={k:v for k,v in genomes.items() if k not in pending_keys}
   for side in ('LONG','SHORT'):
    for h in HORIZONS:
-    previous[(side,h)]=pool_for(side,h,{k:v for k,v in genomes.items() if k not in {key(x) for x in pending}},results,domains)
+    previous[(side,h)]=pool_for(side,h,prior_genomes,results,domains)
   for c in pending:
    h=c['target_horizon'];r=rmap[key(c)];q=qualify(r,h)
    if not q or not r.get('signal') or r['signal']['count']<30:continue
@@ -174,7 +177,7 @@ def main():
    redundant=any(overlap(r['signal'],old[2]['signal'])>=.85 and old[0][0]>=q[0] for old in previous[niche])
    redundant=redundant or any(overlap(r['signal'],old['signal'])>=.85 for old in incumbents)
    if not redundant:incumbents.append(r);accepted+=1
-  from scripts.evolution_active_dedup_20261010 import curate
+  from scripts.evolution_active_dedup_fast_20261010 import curate
   curated=curate(genomes,results,domains,HORIZONS)
   atomic_json(out/'active_population.json',curated)
   st['generation']=gen;st['stagnant']=st['stagnant']+1 if accepted==0 else 0
