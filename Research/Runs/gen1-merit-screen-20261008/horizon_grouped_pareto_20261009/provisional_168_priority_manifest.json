@@ -1,0 +1,35 @@
+{
+  "status": "DIAGNOSTIC_PRIORITY_ONLY_NOT_CERTIFIED",
+  "unique_preliminary_parents": 168,
+  "allocation_counts": {
+    "01_very_short": 21,
+    "02_short": 29,
+    "03_intermediate": 29,
+    "04_medium": 29,
+    "05_extended": 29,
+    "06_long": 29,
+    "DIVERSITY_RESERVE": 2
+  },
+  "short_direction_eligible": 12,
+  "short_direction_preliminary_parents": 2,
+  "short_direction_unselected_for_review": [
+    887,
+    991,
+    1013,
+    1663,
+    1801,
+    2105,
+    2625,
+    3691,
+    3767,
+    4175
+  ],
+  "remaining_unique_eligible": 809,
+  "method": "Pareto rank ascending within each window; among same rank prefer novel family and gene signatures; horizon consistency and effective_n then stable index. Two extra novelty candidates. Provisional; reliability/multiplicity and behavioral similarity not yet certified.",
+  "warnings": [
+    "No calibrated statistical multiplicity correction",
+    "Family novelty is not validated behavioral diversity",
+    "Preliminary 168 are NOT authorized for breeding",
+    "Do not silently omit any of 12 short-direction candidates"
+  ]
+}

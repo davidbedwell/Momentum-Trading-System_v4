@@ -1,0 +1,163 @@
+{
+  "status": "COMPLETE_PROVISIONAL_DIAGNOSTIC",
+  "governance": "GEN1_HORIZON_GROUPED_PARETO_FREEZE_20261008.md",
+  "objective_definition": "maximize best positive EV_net, its lcb95, positive fraction among measured horizons IN WINDOW; best-horizon choice and unequal horizon grids introduce selection bias",
+  "mae_rank_weight": 0,
+  "no_parent_selection": true,
+  "no_candidate_elimination": true,
+  "phaseB_64_126_not_available": true,
+  "summary": {
+    "original": {
+      "unique_eligible_chromosomes": 969,
+      "windows": {
+        "01_very_short": {
+          "range": [
+            1,
+            3
+          ],
+          "chromosome_window_memberships": 21,
+          "pareto_levels": 8,
+          "rank1_count": 1,
+          "unique_chromosomes": 21
+        },
+        "02_short": {
+          "range": [
+            4,
+            7
+          ],
+          "chromosome_window_memberships": 124,
+          "pareto_levels": 25,
+          "rank1_count": 1,
+          "unique_chromosomes": 124
+        },
+        "03_intermediate": {
+          "range": [
+            8,
+            15
+          ],
+          "chromosome_window_memberships": 457,
+          "pareto_levels": 56,
+          "rank1_count": 1,
+          "unique_chromosomes": 457
+        },
+        "04_medium": {
+          "range": [
+            16,
+            30
+          ],
+          "chromosome_window_memberships": 660,
+          "pareto_levels": 78,
+          "rank1_count": 1,
+          "unique_chromosomes": 660
+        },
+        "05_extended": {
+          "range": [
+            31,
+            45
+          ],
+          "chromosome_window_memberships": 0,
+          "pareto_levels": 0,
+          "rank1_count": 0,
+          "unique_chromosomes": 0
+        },
+        "06_long": {
+          "range": [
+            46,
+            63
+          ],
+          "chromosome_window_memberships": 961,
+          "pareto_levels": 123,
+          "rank1_count": 1,
+          "unique_chromosomes": 961
+        },
+        "07_very_long": {
+          "range": [
+            64,
+            126
+          ],
+          "chromosome_window_memberships": 0,
+          "pareto_levels": 0,
+          "rank1_count": 0,
+          "unique_chromosomes": 0
+        }
+      },
+      "total_memberships": 2223
+    },
+    "refined": {
+      "unique_eligible_chromosomes": 977,
+      "windows": {
+        "01_very_short": {
+          "range": [
+            1,
+            3
+          ],
+          "chromosome_window_memberships": 21,
+          "pareto_levels": 8,
+          "rank1_count": 1,
+          "unique_chromosomes": 21
+        },
+        "02_short": {
+          "range": [
+            4,
+            7
+          ],
+          "chromosome_window_memberships": 125,
+          "pareto_levels": 23,
+          "rank1_count": 1,
+          "unique_chromosomes": 125
+        },
+        "03_intermediate": {
+          "range": [
+            8,
+            15
+          ],
+          "chromosome_window_memberships": 461,
+          "pareto_levels": 53,
+          "rank1_count": 1,
+          "unique_chromosomes": 461
+        },
+        "04_medium": {
+          "range": [
+            16,
+            30
+          ],
+          "chromosome_window_memberships": 873,
+          "pareto_levels": 94,
+          "rank1_count": 1,
+          "unique_chromosomes": 873
+        },
+        "05_extended": {
+          "range": [
+            31,
+            45
+          ],
+          "chromosome_window_memberships": 953,
+          "pareto_levels": 114,
+          "rank1_count": 1,
+          "unique_chromosomes": 953
+        },
+        "06_long": {
+          "range": [
+            46,
+            63
+          ],
+          "chromosome_window_memberships": 964,
+          "pareto_levels": 122,
+          "rank1_count": 1,
+          "unique_chromosomes": 964
+        },
+        "07_very_long": {
+          "range": [
+            64,
+            126
+          ],
+          "chromosome_window_memberships": 0,
+          "pareto_levels": 0,
+          "rank1_count": 0,
+          "unique_chromosomes": 0
+        }
+      },
+      "total_memberships": 3397
+    }
+  }
+}
