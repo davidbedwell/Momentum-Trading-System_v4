@@ -119,10 +119,13 @@ def main():
    if pending_state['generation']!=gen:raise RuntimeError('Pending generation mismatch')
    rng.setstate(tup(pending_state['rng_state']))
   else:
+   from scripts.evolution_active_dedup_20261010 import curate
+   curated=curate(genomes,results,domains,HORIZONS)
+   allowed={(x['side'],x['horizon'],x['genome_hash']) for x in curated['active']}
    niches=[]
    for side in ('LONG','SHORT'):
     for h in HORIZONS:
-     pool=pool_for(side,h,genomes,results,domains)
+     pool=[x for x in pool_for(side,h,genomes,results,domains) if (side,h,key(x[1])) in allowed]
      if len(pool)>=2:niches.append((side,h,pool))
    if not niches:
     print('NO_ELIGIBLE_NICHES: need baseline signals before breeding',flush=True);break
