@@ -1,0 +1,17 @@
+{
+  "status": "UNCERTIFIED_EXPLORATORY_TAIL_RISK",
+  "created_utc": "2026-10-10T04:28:14.554940+00:00",
+  "pairs": 975,
+  "source_sha256": {
+    "window_21_25.json": "3f4326b1995bdd0512b4d3120fa927cbce4fa83b83ea664acaf8d863cec14d18",
+    "window_26_30.json": "f6eadac5182b95bc0ac59538b734a459be2eafc67d1d4a29fabb88e298d8d989",
+    "window_31_35.json": "8092b55eb4a6a70757147efcc07a401ec8f8a735ffaf3798a001c3b330e301d0",
+    "window_36_40.json": "7d1030878ca430953c35fc633b04b3c9183eacafa352798278a8187a1bc31348",
+    "window_41_45.json": "7ab95598aca37f69c7bcff5ca81e2b95502c64bd7a9069ee48991f9d525191d6",
+    "window_46_50.json": "4ee5adfc7d50fe8cd891e499c8bd0b7108c2d9bfd16a59307e0f227d56d9bdb1",
+    "window_51_55.json": "a647daa4e1eaf7cfc908669cfe00f11a8478c0eadc8fc6cc80f73d91142a1f8c",
+    "window_56_60.json": "e65f81801113f90f71c32f41156f259047f9ddc3dd3311e990b42c95e26a9079",
+    "window_61_65.json": "c5953479d65838a2b2944707a52c7296c32b2e5c937cf8bf61922a78bfedb71a"
+  },
+  "warning": "Event sequence drawdown is not portfolio MDD; overlapping trades, non-executable daily stop proxies, non-independent market episodes; no portfolio risk certification"
+}
