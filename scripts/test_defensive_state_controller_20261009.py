@@ -17,3 +17,15 @@ class StateTests(unittest.TestCase):
   c=DefensiveStateController();c.update(abc_crash_detected=True,r1_confirmed=False);c.acknowledge_cash_transition(cancellations_confirmed=True,liquidations_confirmed=True)
   self.assertEqual(c.assess(**{**ENTRY,'max_defensive_horizon':None}).reason,'unfrozen_defensive_horizon')
 if __name__=='__main__':unittest.main()
+
+class ExclusiveBoundaryTests(unittest.TestCase):
+ def test_no_timeout_until_r1(self):
+  c=DefensiveStateController();c.update(abc_crash_detected=True,r1_confirmed=False)
+  for _ in range(1000):c.update(abc_crash_detected=False,r1_confirmed=False)
+  self.assertTrue(c.defensive)
+  c.update(abc_crash_detected=False,r1_confirmed=True)
+  self.assertFalse(c.defensive)
+ def test_repeated_abc_does_not_end_crash(self):
+  c=DefensiveStateController();c.update(abc_crash_detected=True,r1_confirmed=False)
+  for _ in range(30):c.update(abc_crash_detected=True,r1_confirmed=True)
+  self.assertTrue(c.defensive)
