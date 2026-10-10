@@ -12,6 +12,7 @@ class DayRecord:
     b: bool
     c: bool
     r1: bool
+    b1: bool = False
 
 
 def replay(records):
@@ -23,10 +24,10 @@ def replay(records):
             raise TypeError('expected DayRecord with independently computed PIT signals')
         if not row.date or (previous is not None and row.date <= previous):
             raise ValueError('dates must be nonempty, strictly increasing and unique')
-        if any(type(x) is not bool for x in (row.a, row.b, row.c, row.r1)):
-            raise ValueError('A/B/C/R1 must be observed booleans; missing signals cannot be inferred')
+        if any(type(x) is not bool for x in (row.a, row.b, row.b1, row.c, row.r1)):
+            raise ValueError('A/B/B1/C/R1 must be observed booleans; missing signals cannot be inferred')
         prior = ctl.defensive
-        actions = ctl.update(abc_crash_detected=row.a or row.b or row.c, r1_confirmed=row.r1)
+        actions = ctl.update(abc_crash_detected=row.a or row.b or row.b1 or row.c, r1_confirmed=row.r1)
         result.append(dict(date=row.date, state='DEFENSIVE' if ctl.defensive else 'NORMAL',
                            crash_entry=not prior and ctl.defensive,
                            r1_exit=prior and not ctl.defensive,
