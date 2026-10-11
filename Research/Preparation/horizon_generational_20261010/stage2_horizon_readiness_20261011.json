@@ -1,0 +1,63 @@
+{
+  "stage": 2,
+  "purpose": "EXPLORATORY_STRATEGY_LIBRARY_GENERATION",
+  "status": "BLOCKED",
+  "checks": {
+    "test_thirteen_window_oct09_seed_policy_20261011.py": {
+      "passed": true,
+      "output": "{\"status\": \"PASS_SEED_INTEGRATION\", \"legacy\": 23, \"random_tested\": 30, \"production_random_config\": 1200, \"production_expected\": 1223, \"source_sha256\": \"b04de8f65c4eee24c5ff3f88f01964b19fae4251e20df5a1c46ce807c8e79cd9\", \"full_1200_generated\": false}\n"
+    },
+    "test_thirteen_window_real_data_invariants_20261011.py": {
+      "passed": true,
+      "output": "{\"status\": \"PASS_REAL_DATA_INVARIANTS_ONLY\", \"dev80_rows\": 399691, \"horizons\": 64, \"windows\": 13, \"heldouts_accessed\": false}\n"
+    },
+    "test_thirteen_window_calendar_integrity_20261011.py": {
+      "passed": true,
+      "output": "CALENDAR_INTEGRITY_DUPLICATES_BOUNDARIES_PASS\n"
+    },
+    "test_thirteen_window_statistical_guard_20261011.py": {
+      "passed": true,
+      "output": "MULTIPLICITY_GUARD_TEST_PASS\n"
+    },
+    "test_thirteen_window_interrupted_worker_20261011.py": {
+      "passed": true,
+      "output": "{\"status\": \"PASS_REAL_PROCESS_KILL_RESTART_FIXTURE\", \"completed_before_kill\": 2, \"completed_after_restart\": 12, \"production_evaluator_recovery_certified\": false}\n"
+    },
+    "23_legacy_parents_valid": {
+      "passed": true,
+      "source_sha256": "b04de8f65c4eee24c5ff3f88f01964b19fae4251e20df5a1c46ce807c8e79cd9"
+    },
+    "all_64_horizons_partitioned": {
+      "passed": true
+    },
+    "data_present": {
+      "passed": true
+    },
+    "multiplicity_integrated_selection": {
+      "passed": true
+    },
+    "upstream_pit_provenance_audited": {
+      "passed": false,
+      "reason": "Upstream feature/forward-return point-in-time lineage has not been independently audited"
+    },
+    "production_runner_restart_tested": {
+      "passed": false,
+      "reason": "Only isolated worker fixture kill/restart passed"
+    },
+    "adaptive_selection_independently_calibrated": {
+      "passed": false,
+      "reason": "Repeated DEV80 adaptive search invalidates nominal independent p-value assumptions; discovery only"
+    },
+    "new_server_authorized": {
+      "passed": false,
+      "reason": "No authorization token for an isolated Horizon study server"
+    }
+  },
+  "deferred": [
+    "CRASH_DETECTOR_DEPLOYMENT",
+    "CATASTROPHIC_PORTFOLIO_RISK",
+    "PORTFOLIO_EXECUTION_ECONOMICS"
+  ],
+  "heldouts_accessed": false,
+  "horizon_ga_launched": false
+}
