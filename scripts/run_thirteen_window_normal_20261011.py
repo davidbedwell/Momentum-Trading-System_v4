@@ -10,6 +10,7 @@ from scripts.audit_evolution_domains_20261010 import schema,valid,mutate
 from scripts.evolution_safety_20261010 import atomic_json,durable_append,recover_jsonl,packed_signal,overlap
 from scripts.run_evolution_v2_20261010 import qualify,pool_for
 from scripts.evolution_active_dedup_fast_20261010 import curate
+from scripts.parallel_evolution_selection_20261011 import parallel_niches
 from scripts.ga4_rolling_progress_20261011 import frontier,checkpoint
 from scripts.thirteen_window_statistical_guard_20261011 import adjusted_lcb
 from scripts.thirteen_window_evolution_engine_20261011 import WINDOWS,HORIZONS
@@ -71,7 +72,7 @@ def main():
  config={'generations':a.generations,'batch':a.batch,'seed_size':a.seed_size,'seed':a.seed,'horizons':target_horizons,'window':window,'domain_sha256':digest(domains),'episodes_sha256':hashlib.sha256(EPISODES.read_bytes()).hexdigest(),'mask_policy':'GA4_ORACLE_FULL_PATH_EXCLUSION','scope':'DEV80_ONLY','population':'RANDOM_1200_PLUS_OCT09_23_REEVALUATED','legacy_seed_sha256':legacy_sha,'legacy_seed_count':len(legacy_seeds),'initial_population_count':initial_count,'evolution':'GA4_CURATED_MULTIPLICITY_ADJUSTED_EXPLORATORY','side':'LONG'}
  out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
  cp=out/'state.json';state=json.loads(cp.read_text()) if cp.exists() else None
- if state and state['config']!=config:raise RuntimeError('configuration mismatch')
+ if state and state['config']!=json.loads(json.dumps(config)):raise RuntimeError('configuration mismatch')
  rng=random.Random(a.seed)
  def tup(x):return tuple(tup(y) for y in x) if isinstance(x,list) else x
  if state:rng.setstate(tup(state['rng_state']))
@@ -105,14 +106,16 @@ def main():
      known.update(c['genome_hash'] for c in pending)
     else:
      adjusted_results=adjust_for_selection(results,target_horizons)
-     curated=curate(genomes,adjusted_results,domains,target_horizons)
-     active={(x['side'],x['horizon'],x['genome_hash']) for x in curated['active']}
-     niches=[]
-     for lo,hi in (window,):
-      for h in range(lo,hi+1):
-       pool=[x for x in pool_for('LONG',h,genomes,adjusted_results,domains) if ('LONG',h,x[1]['genome_hash']) in active]
-       if len(pool)>=2:niches.append((h,pool))
-     if not niches:raise RuntimeError('NO_ELIGIBLE_NICHES')
+     niches=parallel_niches(genomes,adjusted_results,domains,target_horizons,workers=5)
+     if not niches:
+      # A frozen eligibility screen can legitimately extinguish the breeding pool.
+      # Stop this window without weakening scientific gates or fabricating offspring.
+      state['completed']=True
+      state['stop_reason']='ELIGIBLE_PARENT_POOL_EXTINCT'
+      state['extinction_generation']=gen
+      atomic_json(cp,state)
+      print('ELIGIBLE_PARENT_POOL_EXTINCT',gen,'LAST_COMPLETED',state['generation'],flush=True)
+      break
      for i in range(a.batch):
       for attempt in range(5000):
        h,pool=niches[(i+attempt)%len(niches)];x,y=rng.sample(pool,2)
@@ -122,7 +125,17 @@ def main():
        child=mutate(sorted(genes.items()),rng,domains);key=digest(('LONG',child))
        if valid(child,domains) and key not in known:
         known.add(key);pending.append({'generation':gen,'side':'LONG','chromosomes':child,'genome_hash':key,'target_horizon':h,'parent_hashes':[x[1]['genome_hash'],y[1]['genome_hash']],'seed_origin':'EVOLVED','ancestor_legacy_ids':[{'generation':g,'id':i} for g,i in sorted({(v['generation'],v['id']) for parent in (x[1],y[1]) for v in parent.get('ancestor_legacy_ids',[])})]});break
-      else:raise RuntimeError('NOVELTY_EXHAUSTED')
+      else:
+       # Frozen 5,000-attempt novelty budget exhausted: end this window without
+       # weakening the mutation, validity, deduplication, or selection policy.
+       state['completed']=True
+       state['stop_reason']='NOVELTY_EXHAUSTED'
+       state['novelty_exhaustion_generation']=gen
+       state['novelty_exhaustion_offspring_index']=i
+       state['novelty_exhaustion_attempt_limit']=5000
+       atomic_json(cp,state)
+       print('NOVELTY_EXHAUSTED',gen,'OFFSPRING_INDEX',i,'LAST_COMPLETED',state['generation'],flush=True)
+       return
     atomic_json(out/'pending.json',{'generation':gen,'rng_state':list(rng.getstate())})
     durable_append(out/'candidates.jsonl',pending);cs.extend(pending);genomes.update({c['genome_hash']:c for c in pending})
    else:
