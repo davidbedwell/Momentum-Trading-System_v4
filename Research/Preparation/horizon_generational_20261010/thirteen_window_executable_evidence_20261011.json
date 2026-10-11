@@ -1,0 +1,92 @@
+{
+  "status": "BLOCKED",
+  "timestamp_utc": "2026-10-11T07:56:41.623416+00:00",
+  "test_count": 9,
+  "tests_passed": 9,
+  "tests": [
+    {
+      "test": "test_thirteen_window_oct09_seed_policy_20261011.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS_SEED_INTEGRATION\", \"legacy\": 23, \"random_tested\": 30, \"production_random_config\": 1200, \"production_expected\": 1223, \"source_sha256\": \"b04de8f65c4eee24c5ff3f88f01964b19fae4251e20df5a1c46ce807c8e79cd9\", \"full_1200_generated\": false}\n",
+      "stderr": "",
+      "source_sha256": "8f672792bb01a2f052a368bf25ce2f145787da52b857e76ca69ef9e58620f936"
+    },
+    {
+      "test": "test_thirteen_window_real_data_invariants_20261011.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS_REAL_DATA_INVARIANTS_ONLY\", \"dev80_rows\": 399691, \"horizons\": 64, \"windows\": 13, \"heldouts_accessed\": false}\n",
+      "stderr": "",
+      "source_sha256": "3624ada53e9afbd57ad65b7ec2eaa5cc586d30878ed99b7a321eb881734e22e2"
+    },
+    {
+      "test": "test_thirteen_window_calendar_integrity_20261011.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "CALENDAR_INTEGRITY_DUPLICATES_BOUNDARIES_PASS\n",
+      "stderr": "",
+      "source_sha256": "bb08ec07ea3bf819bf3ffe8fc316d2e1bea0c9ade93ecce9fdb49fd1c3543770"
+    },
+    {
+      "test": "test_thirteen_window_empirical_null_20261011.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS_IDEALIZED_NULL_DIAGNOSTIC_ONLY\", \"replicates\": 5000, \"hypotheses\": 256, \"empirical_fwer\": 0.0492, \"alpha\": 0.05, \"adaptive_ga_certified\": false, \"real_market_calibrated\": false}\n",
+      "stderr": "",
+      "source_sha256": "c523dab088542f9515db0f9b2601c35372d6c51321b4177d67b709bbbbf42cd2"
+    },
+    {
+      "test": "test_thirteen_window_historical_cash_20261011.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS_HISTORICAL_CASH_SOURCE_ALIGNMENT_ONLY\", \"sessions\": 5543, \"source_rows\": 11763, \"min_daily\": 0.0, \"max_daily\": 0.00021737376450348123, \"cash_proxy_not_total_return\": true, \"portfolio_economics_certified\": false}\n",
+      "stderr": "",
+      "source_sha256": "ccfd52258218461913703327938dfec2e1fcad289503a40149e0097d9ea18e26"
+    },
+    {
+      "test": "test_thirteen_window_interrupted_worker_20261011.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS_REAL_PROCESS_KILL_RESTART_FIXTURE\", \"completed_before_kill\": 2, \"completed_after_restart\": 12, \"production_evaluator_recovery_certified\": false}\n",
+      "stderr": "",
+      "source_sha256": "7cbf8db86d33eeaf94609c0fed46fc629b740ff929c6507135fde8b9e7b2e39e"
+    },
+    {
+      "test": "test_thirteen_window_regime_execution_20261011.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "THIRTEEN_WINDOW_LIQUIDATION_CASH_R1_TEST_PASS\n",
+      "stderr": "",
+      "source_sha256": "1d524e646b67d8a974135ca8aea4400521b769a5ef62b459cead1cb0c1eece20"
+    },
+    {
+      "test": "test_thirteen_window_multistock_execution_20261011.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "MULTISTOCK_CASH_R1_TEST_PASS\n",
+      "stderr": "",
+      "source_sha256": "d58c6d0ef9719de8b7296356a381da244602600ca0654bbb96a7f91e9c65f6da"
+    },
+    {
+      "test": "test_thirteen_window_statistical_guard_20261011.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "MULTIPLICITY_GUARD_TEST_PASS\n",
+      "stderr": "",
+      "source_sha256": "c927903719b24bf350a39e4028f97f1fd5fca3ca82e2ad243a46c23e514c1ff3"
+    }
+  ],
+  "scientific_gaps": [
+    "CAUSAL_POINT_IN_TIME_PROVENANCE_NOT_CERTIFIED",
+    "FROZEN_ORACLE_CRASH_INTERVALS_USE_RETROSPECTIVE_PEAK_TROUGH_NOT_LIVE_CAUSAL_SIGNALS",
+    "ADAPTIVE_GA_MULTIPLE_TESTING_NOT_IN_SELECTION",
+    "ADAPTIVE_MARKET_BLOCK_BOOTSTRAP_CALIBRATION_MISSING",
+    "HISTORICAL_EXECUTION_AND_CATASTROPHIC_RISK_NOT_CERTIFIED",
+    "FULL_PRODUCTION_EVALUATOR_KILL_RESTART_NOT_CERTIFIED",
+    "FULL_AUTHORIZED_RUNNER_DRY_RUN_NOT_PERFORMED"
+  ],
+  "certification_granted": false,
+  "protected_heldouts_accessed": false,
+  "horizon_ga_launched": false
+}
