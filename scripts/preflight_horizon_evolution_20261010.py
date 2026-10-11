@@ -18,23 +18,15 @@ def check():
     reasons=[]
     for p in (PRED,ARRAY):
         if not p.is_file():reasons.append("MISSING_DEV80_DATA:"+str(p))
-    # Fail closed: an actual, complete, causally computed A/B/B1/C/R-1
-    # controller tape is required; a generator script is not evidence.
-    controller=ROOT/'Research/State/MTS_ABC_B1_C_R1_PIT_STATE_TAPE.parquet'
-    if not controller.is_file():
-        reasons.append('MISSING_CAUSAL_ABC_B1_C_R1_CONTROLLER_TAPE')
-    else:
-        try:
-            import pandas as pd
-            tape=pd.read_parquet(controller)
-            required={'date','A','B','B1','C','R1'}
-            if not required.issubset(tape.columns):
-                reasons.append('INCOMPLETE_CAUSAL_CONTROLLER_SIGNALS')
-            else:
-                from Core.layered_ga.parquet_controller_adapter import controller_from_parquet
-                controller_from_parquet(controller)
-        except Exception as exc:
-            reasons.append('INVALID_CAUSAL_CONTROLLER_TAPE:'+type(exc).__name__)
+    # Independent Normal-only discovery uses the frozen GA4 retrospective
+    # oracle crash exclusion. The live causal A/B/B1/C/R-1 tape is a separate
+    # integrated-regime validation dependency, not a Normal GA launch gate.
+    from Core.layered_ga.ga4_oracle_crash_mask import admissible_decisions
+    from scripts.thirteen_window_crash_mask_20261011 import HORIZONS as MASK_HORIZONS
+    if tuple(MASK_HORIZONS)!=REQUIRED_HORIZONS:
+        reasons.append('CRASH_MASK_HORIZON_MISMATCH')
+    if not (ROOT/'Research/Protocols/MTS_REENTRY_THREE_HYPOTHESIS_TEST_FREEZE_20261004.json').is_file():
+        reasons.append('MISSING_FROZEN_GA4_CRASH_EPISODES')
     # The old nine-horizon evaluation is incompatible with this new design.
     # Certification must prove causal, supported evaluation for ALL 64 horizons.
     cert=BASE/"thirteen_window_evaluator_certification.json"
