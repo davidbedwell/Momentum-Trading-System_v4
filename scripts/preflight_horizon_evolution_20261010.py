@@ -18,6 +18,23 @@ def check():
     reasons=[]
     for p in (PRED,ARRAY):
         if not p.is_file():reasons.append("MISSING_DEV80_DATA:"+str(p))
+    # Fail closed: an actual, complete, causally computed A/B/B1/C/R-1
+    # controller tape is required; a generator script is not evidence.
+    controller=ROOT/'Research/State/MTS_ABC_B1_C_R1_PIT_STATE_TAPE.parquet'
+    if not controller.is_file():
+        reasons.append('MISSING_CAUSAL_ABC_B1_C_R1_CONTROLLER_TAPE')
+    else:
+        try:
+            import pandas as pd
+            tape=pd.read_parquet(controller)
+            required={'date','A','B','B1','C','R1'}
+            if not required.issubset(tape.columns):
+                reasons.append('INCOMPLETE_CAUSAL_CONTROLLER_SIGNALS')
+            else:
+                from Core.layered_ga.parquet_controller_adapter import controller_from_parquet
+                controller_from_parquet(controller)
+        except Exception as exc:
+            reasons.append('INVALID_CAUSAL_CONTROLLER_TAPE:'+type(exc).__name__)
     # The old nine-horizon evaluation is incompatible with this new design.
     # Certification must prove causal, supported evaluation for ALL 64 horizons.
     cert=BASE/"thirteen_window_evaluator_certification.json"
