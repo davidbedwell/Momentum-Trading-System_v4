@@ -14,6 +14,7 @@ from scripts.ga4_rolling_progress_20261011 import frontier,checkpoint
 from scripts.thirteen_window_evolution_engine_20261011 import WINDOWS,HORIZONS
 from scripts.thirteen_window_crash_mask_20261011 import mask as crash_mask,EPISODES
 from scripts.thirteen_window_launch_guard_20261011 import require_launch_authorization
+from scripts.thirteen_window_oct09_seeds_20261011 import load as load_legacy_seeds,seed_population
 ADMISSIBLE=None
 ACTIVE_HORIZONS=HORIZONS
 
@@ -59,13 +60,14 @@ def main():
  if not (1<=a.generations<=1000000 and 1<=a.workers<=64 and a.batch>=20 and a.seed_size>=a.batch):raise ValueError('invalid settings')
  if tuple(a.window) not in WINDOWS:raise ValueError('invalid window')
  window=tuple(a.window);target_horizons=tuple(range(window[0],window[1]+1))
- domains=schema();frame=pd.read_parquet(PRED,columns=['effective_date'])
+ domains=schema();legacy_seeds,legacy_sha=load_legacy_seeds(domains);initial_count=a.seed_size+len(legacy_seeds)
+ frame=pd.read_parquet(PRED,columns=['effective_date'])
  allowed=crash_mask(frame.effective_date,pd.DatetimeIndex(pd.to_datetime(frame.effective_date)).normalize().unique().sort_values())
  if a.preflight:
   print(json.dumps({'status':'DATA_ONLY_PREFLIGHT_NO_LAUNCH','rows':len(frame),'window':window,'horizons':target_horizons,'eligible_per_horizon':allowed[:,[h-2 for h in target_horizons]].sum(axis=0).tolist(),'domain_count':len(domains)}));return
  # This call MUST precede output creation, workers, or any genome evaluation.
  require_launch_authorization(authorization_path=a.authorization_file)
- config={'generations':a.generations,'batch':a.batch,'seed_size':a.seed_size,'seed':a.seed,'horizons':target_horizons,'window':window,'domain_sha256':digest(domains),'episodes_sha256':hashlib.sha256(EPISODES.read_bytes()).hexdigest(),'mask_policy':'GA4_ORACLE_FULL_PATH_EXCLUSION','scope':'DEV80_ONLY','population':'FRESH_NO_LEGACY_FITNESS','evolution':'GA4_CURATED_LCB_FIRST','side':'LONG'}
+ config={'generations':a.generations,'batch':a.batch,'seed_size':a.seed_size,'seed':a.seed,'horizons':target_horizons,'window':window,'domain_sha256':digest(domains),'episodes_sha256':hashlib.sha256(EPISODES.read_bytes()).hexdigest(),'mask_policy':'GA4_ORACLE_FULL_PATH_EXCLUSION','scope':'DEV80_ONLY','population':'RANDOM_1200_PLUS_OCT09_23_REEVALUATED','legacy_seed_sha256':legacy_sha,'legacy_seed_count':len(legacy_seeds),'initial_population_count':initial_count,'evolution':'GA4_CURATED_LCB_FIRST','side':'LONG'}
  out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
  cp=out/'state.json';state=json.loads(cp.read_text()) if cp.exists() else None
  if state and state['config']!=config:raise RuntimeError('configuration mismatch')
@@ -85,7 +87,7 @@ def main():
  if cs and sorted(set(c['generation'] for c in cs))!=list(range(max(c['generation'] for c in cs)+1)):raise RuntimeError('NONCONTIGUOUS_GENERATIONS')
  for g in set(c['generation'] for c in cs):
   count=sum(c['generation']==g for c in cs)
-  if count!=(a.seed_size if g==0 else a.batch):raise RuntimeError('PARTIAL_CANDIDATE_GENERATION')
+  if count!=(initial_count if g==0 else a.batch):raise RuntimeError('PARTIAL_CANDIDATE_GENERATION')
  if cs and max(c['generation'] for c in cs)>state['generation']+1:raise RuntimeError('JOURNAL_AHEAD_OF_CHECKPOINT')
  if cs and max(c['generation'] for c in cs)==state['generation']+1 and not (out/'pending.json').is_file():raise RuntimeError('MISSING_PENDING_RNG')
  if state['generation']>=0 and (not cs or max(c['generation'] for c in cs)<state['generation']):raise RuntimeError('CHECKPOINT_AHEAD_OF_JOURNAL')
@@ -96,7 +98,10 @@ def main():
   for gen in range(state['generation']+1,a.generations+1):
    pending=[c for c in cs if c['generation']==gen]
    if not pending:
-    if gen==0:pending=[dict(fresh(rng,domains,'LONG',known),generation=0) for _ in range(a.seed_size)]
+    if gen==0:
+     pending,check_sha=seed_population(rng,domains,a.seed_size,fresh)
+     if check_sha!=legacy_sha:raise RuntimeError('LEGACY_SEED_SOURCE_CHANGED')
+     known.update(c['genome_hash'] for c in pending)
     else:
      curated=curate(genomes,results,domains,target_horizons)
      active={(x['side'],x['horizon'],x['genome_hash']) for x in curated['active']}
@@ -114,12 +119,12 @@ def main():
         f,g=rng.choice(y[1]['chromosomes']);genes[f]=json.loads(json.dumps(g))
        child=mutate(sorted(genes.items()),rng,domains);key=digest(('LONG',child))
        if valid(child,domains) and key not in known:
-        known.add(key);pending.append({'generation':gen,'side':'LONG','chromosomes':child,'genome_hash':key,'target_horizon':h,'parent_hashes':[x[1]['genome_hash'],y[1]['genome_hash']]});break
+        known.add(key);pending.append({'generation':gen,'side':'LONG','chromosomes':child,'genome_hash':key,'target_horizon':h,'parent_hashes':[x[1]['genome_hash'],y[1]['genome_hash']],'seed_origin':'EVOLVED','ancestor_legacy_ids':[{'generation':g,'id':i} for g,i in sorted({(v['generation'],v['id']) for parent in (x[1],y[1]) for v in parent.get('ancestor_legacy_ids',[])})]});break
       else:raise RuntimeError('NOVELTY_EXHAUSTED')
     atomic_json(out/'pending.json',{'generation':gen,'rng_state':list(rng.getstate())})
     durable_append(out/'candidates.jsonl',pending);cs.extend(pending);genomes.update({c['genome_hash']:c for c in pending})
    else:
-    if len(pending)!=(a.seed_size if gen==0 else a.batch):raise RuntimeError('INCOMPLETE_CANDIDATE_GENERATION')
+    if len(pending)!=(initial_count if gen==0 else a.batch):raise RuntimeError('INCOMPLETE_CANDIDATE_GENERATION')
     pending_state=json.loads((out/'pending.json').read_text())
     if pending_state['generation']!=gen:raise RuntimeError('PENDING_GENERATION_MISMATCH')
     rng.setstate(tup(pending_state['rng_state']))
