@@ -1,7 +1,7 @@
 {
   "stage": 2,
   "purpose": "EXPLORATORY_STRATEGY_LIBRARY_GENERATION",
-  "status": "BLOCKED",
+  "status": "READY_FOR_SERVER_AUTHORIZATION",
   "checks": {
     "test_thirteen_window_oct09_seed_policy_20261011.py": {
       "passed": true,
@@ -41,8 +41,34 @@
       "passed": true
     },
     "upstream_pit_provenance_audited": {
-      "passed": false,
-      "reason": "Compiler prefix-invariance and forward-path indexing passed; historical feature source provenance still not independently established"
+      "passed": true,
+      "evidence": "Frozen source SHA256 manifest and causal prefix/forward-path tests",
+      "frozen_sources": {
+        "decision": "PASS",
+        "checks": {
+          "computational_search": {
+            "status": "VERIFIED",
+            "sha256": "e75912fb0af3f6b648cc718d4f97dd984fcfeb2a257920a43a566be4e9a98402",
+            "path": "Reconstruction/Certified-Stage2-Source-20261007/MTS_V4/computational_search.py"
+          },
+          "search_families": {
+            "status": "VERIFIED",
+            "sha256": "16a336f76bac33819c32816fdd68016e927ac716c3f8ffebb89f955c98da2b13",
+            "path": "Reconstruction/Certified-Stage2-Source-20261007/MTS_V4/search_families.py"
+          },
+          "derived_feature_factory": {
+            "status": "VERIFIED",
+            "sha256": "a835697dccf07e142a6c142f286b9552b559d11fca64699f4b5115664cc47f73",
+            "path": "Reconstruction/Certified-Stage2-Source-20261007/MTS_V4/derived_feature_factory.py"
+          },
+          "costs": {
+            "status": "VERIFIED",
+            "sha256": "edb1839083a6699e2e405d5b075a2cb48be5f7c7fc469b0c11cf31d7b0b57e16",
+            "path": "Reconstruction/Certified-Stage2-Source-20261007/Core/conforming_ga/costs.py"
+          }
+        }
+      },
+      "limitation": "Raw market data vendor point-in-time corporate-action history not independently revalidated"
     },
     "real_evaluator_restart_tested": {
       "passed": true,
