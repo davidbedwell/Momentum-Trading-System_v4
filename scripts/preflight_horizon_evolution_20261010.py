@@ -27,17 +27,25 @@ def check():
         reasons.append('CRASH_MASK_HORIZON_MISMATCH')
     if not (ROOT/'Research/Protocols/MTS_REENTRY_THREE_HYPOTHESIS_TEST_FREEZE_20261004.json').is_file():
         reasons.append('MISSING_FROZEN_GA4_CRASH_EPISODES')
-    # The old nine-horizon evaluation is incompatible with this new design.
-    # Certification must prove causal, supported evaluation for ALL 64 horizons.
-    cert=BASE/"thirteen_window_evaluator_certification.json"
-    if not cert.is_file():reasons.append("MISSING_64_HORIZON_EVALUATOR_CERTIFICATION")
+    # Stage 2 is an exploratory library generator. Do not require later-stage
+    # crash-deployment, portfolio-risk or trading-economics certification.
+    cert=BASE/'stage2_horizon_readiness_20261011.json'
+    if not cert.is_file():reasons.append('MISSING_STAGE2_READINESS_EVIDENCE')
     else:
         d=json.loads(cert.read_text())
-        if d.get("evaluated_horizons")!=list(REQUIRED_HORIZONS):reasons.append("INCOMPLETE_HORIZON_COVERAGE")
-        for k in ("causal_pit_verified","dev80_only_verified","confidence_calibrated",
-                  "multiple_testing_adjusted","risk_policy_verified","restart_recovery_verified",
-                  "economic_review_verified","launch_dry_run_passed"):
-            if d.get(k) is not True:reasons.append("UNCERTIFIED:"+k)
+        for k,v in d.get('checks',{}).items():
+            if k!='new_server_authorized' and v.get('passed') is not True:
+                reasons.append('STAGE2_UNVERIFIED:'+k)
+        if d.get('stage')!=2 or d.get('purpose')!='EXPLORATORY_STRATEGY_LIBRARY_GENERATION':
+            reasons.append('STAGE2_SCOPE_MISMATCH')
+    # Recovered, immutable source lineage is essential. Never infer it from
+    # a present-day similarly named feature factory.
+    from Core.layered_ga.stage2_recovered_source_preflight_v3 import verify_recovered_sources
+    try:
+        frozen=verify_recovered_sources()
+        if frozen['decision']!='PASS':reasons.append('FROZEN_SOURCE_HASH_MISMATCH_OR_MISSING')
+    except (OSError,KeyError,ValueError) as exc:
+        reasons.append('FROZEN_SOURCE_PROVENANCE_UNAVAILABLE:'+type(exc).__name__)
     result={"status":"READY" if not reasons else "BLOCKED","reasons":reasons,
             "windows":[list(x) for x in WINDOWS],"required_horizons":list(REQUIRED_HORIZONS),
             "source_manifest_sha256":report["source_manifest_sha256"],

@@ -21,4 +21,15 @@ paths=build_execution_paths(raw,max_horizon=65)
 for h in range(2,66):
  assert np.isclose(paths.endpoint_return[0,h-1],(101+h)/101-1,atol=1e-6),(h,paths.endpoint_return[0,h-1])
  assert np.isnan(paths.endpoint_return[75-h-1,h-1]) if 75-h-1>=0 else True
+# Feature factory must be prefix-invariant for every computed predictor column.
+from MTS_V4.derived_feature_factory import build_predictor_rows
+rawrows=[{'security_id':'X','date':str(t.date()),'open':100+i,'high':101+i,'low':99+i,'close':100+i,'volume':10000+i,'eligible':True} for i,t in enumerate(pd.bdate_range('2019-01-01',periods=300))]
+short=build_predictor_rows(rawrows[:275]);full=build_predictor_rows(rawrows)
+assert len(short)==275 and len(full)==300
+for i,(a,b) in enumerate(zip(short,full)):
+ for key,val in a.items():
+  other=b[key]
+  if isinstance(val,(int,float)) and not isinstance(val,bool) and val is not None:
+   assert other is not None and np.isclose(val,other,equal_nan=True), (i,key,val,other)
+  else:assert val==other,(i,key)
 print('PASS_STAGE2_PIT_PREFIX_AND_FORWARD_PATH_INDEXING')
