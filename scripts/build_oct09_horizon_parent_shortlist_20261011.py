@@ -12,6 +12,10 @@ chosen={(r['generation'],r['id']) for r in rankings if r['provisional_rank']<=5}
 # These six had positive nominal LCB on >=3 horizons in a top-three Gen1 window.
 extra_gen1={1006,586,4320,976,1568,2298}
 chosen|={(1,x) for x in extra_gen1}|{(1,1660),(2,766)}
+# Frozen GA4 domains reject Gen2 258 (MR threshold .85) and 946 (momentum context .35).
+# Replace with best eligible cross-window top-ten Gen2 candidates: 644 and 818.
+chosen-={(2,258),(2,946)}
+chosen|={(2,644),(2,818)}
 by_id=collections.defaultdict(list)
 for r in rankings:
  if (r['generation'],r['id']) in chosen:by_id[(r['generation'],r['id'])].append(r)
@@ -25,9 +29,9 @@ for gen,id_ in sorted(chosen):
  assert all(x['genome_hash']==rr[0]['genome_hash'] for x in rr)
  if 'genome_hash' in definition:assert definition['genome_hash']==rr[0]['genome_hash']
  top5=[x for x in rr if x['provisional_rank']<=5]
- output.append({'id':id_,'generation':gen,'genome_hash':rr[0]['genome_hash'],'side':'LONG','chromosomes':definition['chromosomes'],'parent_ids':definition.get('parents'),'top5_windows':[x['window'] for x in sorted(top5,key=lambda v:v['window'])],'top5_count':len(top5),'best_nominal_lcb95':max(x['median_lcb95'] for x in rr),'reason':'MANDATORY' if (gen,id_) in ((1,1660),(2,766)) else 'CROSS_GENERATION_TOP5' if top5 else 'GEN1_DIVERSITY','fitness_status':'REQUIRES_FRESH_DEV80_REEVALUATION'})
+ output.append({'id':id_,'generation':gen,'genome_hash':rr[0]['genome_hash'],'side':'LONG','chromosomes':definition['chromosomes'],'parent_ids':definition.get('parents'),'top5_windows':[x['window'] for x in sorted(top5,key=lambda v:v['window'])],'top5_count':len(top5),'best_nominal_lcb95':max(x['median_lcb95'] for x in rr),'reason':'MANDATORY' if (gen,id_) in ((1,1660),(2,766)) else 'CROSS_GENERATION_TOP5' if top5 else 'DOMAIN_VALID_TOP10_REPLACEMENT' if (gen,id_) in ((2,644),(2,818)) else 'GEN1_DIVERSITY','fitness_status':'REQUIRES_FRESH_DEV80_REEVALUATION'})
 assert len(output)==len(chosen) and {(1,1660),(2,766)}.issubset(chosen)
-result={'status':'PROPOSED_PARENT_SEEDS_NOT_LAUNCHED','source':'OCT09_GEN1_GEN2_DEV80_PROVISIONAL','selection':'union of top five per 13 windows plus six Gen1 breadth representatives','count':len(output),'gen1_count':sum(x['generation']==1 for x in output),'gen2_count':sum(x['generation']==2 for x in output),'no_legacy_fitness_import':True,'certification':'NOT_CERTIFIED','parents':output}
+result={'status':'PROPOSED_PARENT_SEEDS_NOT_LAUNCHED','source':'OCT09_GEN1_GEN2_DEV80_PROVISIONAL','selection':'top five per window plus six Gen1 breadth representatives; replace incompatible Gen2 258/946 with eligible Gen2 644/818' ,'count':len(output),'gen1_count':sum(x['generation']==1 for x in output),'gen2_count':sum(x['generation']==2 for x in output),'no_legacy_fitness_import':True,'certification':'NOT_CERTIFIED','parents':output}
 out=p/'oct09_parent_seed_shortlist_20261011.json'
 out.write_text(json.dumps(result,indent=2)+'\n')
 print(json.dumps({'status':result['status'],'count':len(output),'gen1':result['gen1_count'],'gen2':result['gen2_count'],'ids':[x['id'] for x in output]}))
