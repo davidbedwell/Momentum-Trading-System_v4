@@ -22,19 +22,27 @@ def main():
     jobs=plan(a.output,a.generations,a.workers,a.batch,a.seed_size,a.seed)
     if a.plan:
         print(json.dumps({'status':'PLAN_ONLY_NO_COMPUTE','jobs':jobs},indent=2));return
-    require_launch_authorization(authorization_path=a.authorization_file)
+    run(jobs,a.authorization_file)
+
+def is_complete(job):
+    path=pathlib.Path(job['output'])/'state.json'
+    return path.is_file() and json.loads(path.read_text()).get('completed') is True
+
+def remaining(jobs):
+    return [job for job in jobs if not is_complete(job)]
+
+def run(jobs,authorization_file):
+    require_launch_authorization(authorization_path=authorization_file)
     for job in jobs:
         cmd=[sys.executable,str(ROOT/'scripts/run_thirteen_window_normal_20261011.py'),
              '--window',str(job['window'][0]),str(job['window'][1]),
              '--output',job['output'],'--generations',str(job['generations']),
              '--workers',str(job['workers']),'--batch',str(job['batch']),
              '--seed-size',str(job['seed_size']),'--seed',str(job['seed']),
-             '--authorization-file',str(a.authorization_file)]
+             '--authorization-file',str(authorization_file)]
         state_path=pathlib.Path(job['output'])/'state.json'
-        if state_path.is_file():
-            state=json.loads(state_path.read_text())
-            if state.get('completed'):
-                print('SKIP_COMPLETED_WINDOW',job['window'],flush=True);continue
+        if is_complete(job):
+            print('SKIP_COMPLETED_WINDOW',job['window'],flush=True);continue
         print('START_WINDOW',job['window'],flush=True)
         subprocess.run(cmd,cwd=ROOT,check=True)
         if not state_path.is_file() or not json.loads(state_path.read_text()).get('completed'):
