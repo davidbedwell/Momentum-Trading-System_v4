@@ -1,0 +1,22 @@
+{
+  "status": "ENGINEERING_INCOMPLETE",
+  "checks": {
+    "source_archive_checksums": true,
+    "dev80_predictors_present": true,
+    "dev80_execution_arrays_present": true,
+    "window_count_13": true,
+    "all_64_horizons_required": true,
+    "protected_heldouts_not_accessed": true,
+    "scientific_certification_present": false,
+    "scientific_certification_valid": false,
+    "evaluator_smoke_pass": true
+  },
+  "blockers": [
+    "MISSING_64_HORIZON_EVALUATOR_CERTIFICATION"
+  ],
+  "smoke_stdout": "{\"status\": \"PASS_HORIZON_COVERAGE_ONLY\", \"horizons\": [2, 65], \"n_horizons\": 64, \"dev80_rows\": 399691, \"synthetic_evaluator_points\": 64}\n",
+  "smoke_stderr": "",
+  "dev80_predictor_sha256": "1ca5c217c2932e6f957f0d17c94251a6d765615f36e00448891c6572bb50735d",
+  "dev80_execution_array_sha256": "358d19784346da117ff9319716fa6522dbc6abfcdb114da7f3ab50e252803d34",
+  "protocol": "13 windows; DEV80 only; no crash masking; no protected heldout access"
+}
