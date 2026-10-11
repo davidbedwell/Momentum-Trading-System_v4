@@ -1,0 +1,23 @@
+{
+  "status": "GEN2_EVALUATION_COMPLETE_UNCERTIFIED",
+  "parents": 200,
+  "offspring_requested": 1200,
+  "seed": 20261010,
+  "workers": 6,
+  "horizons": [
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15,
+    20,
+    63
+  ],
+  "scope": "DEV80_ONLY",
+  "protected_banks_accessed": false,
+  "source_sha256": "12463353f65f8ac68c86d5e36d6870e9a23614d5b36f8989c70d2e2bff2de16c",
+  "design_status": "EXPLORATORY_NOT_CERTIFIED",
+  "genome_mutation": "shared-family crossover; optional family add/remove; bounded float threshold mutation; compiler rejection recorded"
+}

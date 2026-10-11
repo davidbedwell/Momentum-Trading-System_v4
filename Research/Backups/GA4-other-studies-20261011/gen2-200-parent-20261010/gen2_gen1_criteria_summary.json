@@ -1,0 +1,158 @@
+{
+  "method": "Gen1 exploratory 4D Pareto; same nine horizons; uncertified",
+  "evaluated": 1200,
+  "ranked": 973,
+  "pareto_front1": 2,
+  "best_ev_positive": 965,
+  "best_lcb_positive": 915,
+  "all_nine_positive": 1,
+  "lcb_positive_all_nine": 0,
+  "positive_horizons_distribution": {
+    "0": 8,
+    "1": 57,
+    "2": 94,
+    "3": 244,
+    "4": 243,
+    "5": 168,
+    "6": 98,
+    "7": 43,
+    "8": 17,
+    "9": 1
+  },
+  "best_horizon_distribution": {
+    "1": 5,
+    "2": 1,
+    "3": 2,
+    "7": 1,
+    "10": 2,
+    "15": 2,
+    "20": 2,
+    "63": 958
+  },
+  "side_distribution": {
+    "LONG": 963,
+    "SHORT": 10
+  },
+  "top10": [
+    {
+      "overall_priority": 1,
+      "offspring_id": 597,
+      "pareto_front": 1,
+      "ev_net": 0.45070210099220276,
+      "lcb95": 0.13006925370147604,
+      "effective_n": 59,
+      "best_horizon": 63,
+      "positive_count": 9,
+      "positive_run": 9,
+      "lcb_positive_count": 6
+    },
+    {
+      "overall_priority": 2,
+      "offspring_id": 766,
+      "pareto_front": 1,
+      "ev_net": 0.33028674125671387,
+      "lcb95": 0.16822780301446652,
+      "effective_n": 94,
+      "best_horizon": 63,
+      "positive_count": 8,
+      "positive_run": 8,
+      "lcb_positive_count": 8
+    },
+    {
+      "overall_priority": 3,
+      "offspring_id": 1162,
+      "pareto_front": 2,
+      "ev_net": 0.16460993885993958,
+      "lcb95": 0.12249674475175887,
+      "effective_n": 105,
+      "best_horizon": 63,
+      "positive_count": 8,
+      "positive_run": 8,
+      "lcb_positive_count": 6
+    },
+    {
+      "overall_priority": 4,
+      "offspring_id": 628,
+      "pareto_front": 2,
+      "ev_net": 0.18439257144927979,
+      "lcb95": 0.09872771411798048,
+      "effective_n": 101,
+      "best_horizon": 63,
+      "positive_count": 8,
+      "positive_run": 8,
+      "lcb_positive_count": 6
+    },
+    {
+      "overall_priority": 5,
+      "offspring_id": 1122,
+      "pareto_front": 2,
+      "ev_net": 0.24069514870643616,
+      "lcb95": 0.06605945938977062,
+      "effective_n": 60,
+      "best_horizon": 63,
+      "positive_count": 8,
+      "positive_run": 8,
+      "lcb_positive_count": 4
+    },
+    {
+      "overall_priority": 6,
+      "offspring_id": 23,
+      "pareto_front": 2,
+      "ev_net": 0.189620241522789,
+      "lcb95": 0.13570160114837326,
+      "effective_n": 71,
+      "best_horizon": 63,
+      "positive_count": 7,
+      "positive_run": 7,
+      "lcb_positive_count": 6
+    },
+    {
+      "overall_priority": 7,
+      "offspring_id": 935,
+      "pareto_front": 2,
+      "ev_net": 0.2697206735610962,
+      "lcb95": 0.12065597689690297,
+      "effective_n": 110,
+      "best_horizon": 63,
+      "positive_count": 7,
+      "positive_run": 7,
+      "lcb_positive_count": 3
+    },
+    {
+      "overall_priority": 8,
+      "offspring_id": 765,
+      "pareto_front": 2,
+      "ev_net": 0.2994321882724762,
+      "lcb95": 0.05996317410547872,
+      "effective_n": 40,
+      "best_horizon": 63,
+      "positive_count": 6,
+      "positive_run": 6,
+      "lcb_positive_count": 3
+    },
+    {
+      "overall_priority": 9,
+      "offspring_id": 1010,
+      "pareto_front": 3,
+      "ev_net": 0.14794063568115234,
+      "lcb95": 0.10244992271848027,
+      "effective_n": 197,
+      "best_horizon": 63,
+      "positive_count": 8,
+      "positive_run": 8,
+      "lcb_positive_count": 8
+    },
+    {
+      "overall_priority": 10,
+      "offspring_id": 335,
+      "pareto_front": 3,
+      "ev_net": 0.15972380340099335,
+      "lcb95": 0.05168566564135138,
+      "effective_n": 87,
+      "best_horizon": 63,
+      "positive_count": 8,
+      "positive_run": 8,
+      "lcb_positive_count": 6
+    }
+  ]
+}
