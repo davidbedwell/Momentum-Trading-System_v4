@@ -11,6 +11,7 @@ from scripts.evolution_safety_20261010 import atomic_json,durable_append,recover
 from scripts.run_evolution_v2_20261010 import qualify,pool_for
 from scripts.evolution_active_dedup_fast_20261010 import curate
 from scripts.ga4_rolling_progress_20261011 import frontier,checkpoint
+from scripts.thirteen_window_statistical_guard_20261011 import adjusted_lcb
 from scripts.thirteen_window_evolution_engine_20261011 import WINDOWS,HORIZONS
 from scripts.thirteen_window_crash_mask_20261011 import mask as crash_mask,EPISODES
 from scripts.thirteen_window_launch_guard_20261011 import require_launch_authorization
@@ -67,7 +68,7 @@ def main():
   print(json.dumps({'status':'DATA_ONLY_PREFLIGHT_NO_LAUNCH','rows':len(frame),'window':window,'horizons':target_horizons,'eligible_per_horizon':allowed[:,[h-2 for h in target_horizons]].sum(axis=0).tolist(),'domain_count':len(domains)}));return
  # This call MUST precede output creation, workers, or any genome evaluation.
  require_launch_authorization(authorization_path=a.authorization_file)
- config={'generations':a.generations,'batch':a.batch,'seed_size':a.seed_size,'seed':a.seed,'horizons':target_horizons,'window':window,'domain_sha256':digest(domains),'episodes_sha256':hashlib.sha256(EPISODES.read_bytes()).hexdigest(),'mask_policy':'GA4_ORACLE_FULL_PATH_EXCLUSION','scope':'DEV80_ONLY','population':'RANDOM_1200_PLUS_OCT09_23_REEVALUATED','legacy_seed_sha256':legacy_sha,'legacy_seed_count':len(legacy_seeds),'initial_population_count':initial_count,'evolution':'GA4_CURATED_LCB_FIRST','side':'LONG'}
+ config={'generations':a.generations,'batch':a.batch,'seed_size':a.seed_size,'seed':a.seed,'horizons':target_horizons,'window':window,'domain_sha256':digest(domains),'episodes_sha256':hashlib.sha256(EPISODES.read_bytes()).hexdigest(),'mask_policy':'GA4_ORACLE_FULL_PATH_EXCLUSION','scope':'DEV80_ONLY','population':'RANDOM_1200_PLUS_OCT09_23_REEVALUATED','legacy_seed_sha256':legacy_sha,'legacy_seed_count':len(legacy_seeds),'initial_population_count':initial_count,'evolution':'GA4_CURATED_MULTIPLICITY_ADJUSTED_EXPLORATORY','side':'LONG'}
  out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
  cp=out/'state.json';state=json.loads(cp.read_text()) if cp.exists() else None
  if state and state['config']!=config:raise RuntimeError('configuration mismatch')
@@ -103,12 +104,13 @@ def main():
      if check_sha!=legacy_sha:raise RuntimeError('LEGACY_SEED_SOURCE_CHANGED')
      known.update(c['genome_hash'] for c in pending)
     else:
-     curated=curate(genomes,results,domains,target_horizons)
+     adjusted_results=adjust_for_selection(results,target_horizons)
+     curated=curate(genomes,adjusted_results,domains,target_horizons)
      active={(x['side'],x['horizon'],x['genome_hash']) for x in curated['active']}
      niches=[]
      for lo,hi in (window,):
       for h in range(lo,hi+1):
-       pool=[x for x in pool_for('LONG',h,genomes,results,domains) if ('LONG',h,x[1]['genome_hash']) in active]
+       pool=[x for x in pool_for('LONG',h,genomes,adjusted_results,domains) if ('LONG',h,x[1]['genome_hash']) in active]
        if len(pool)>=2:niches.append((h,pool))
      if not niches:raise RuntimeError('NO_ELIGIBLE_NICHES')
      for i in range(a.batch):
@@ -138,11 +140,25 @@ def main():
    print('GEN',gen,'EVALUATED',len(pending),flush=True)
    if gen and gen%25==0:
     journal=out/'progress_checkpoints.jsonl';previous=recover_jsonl(journal)
-    verdict=checkpoint(previous,frontier(results.values(),target_horizons),gen)
+    verdict=checkpoint(previous,frontier(adjust_for_selection(results,target_horizons).values(),target_horizons),gen)
     durable_append(journal,[verdict]);print('PROGRESS_CHECKPOINT',json.dumps(verdict),flush=True)
     if verdict['stop']:
      state['completed']=True;state['stop_reason']='ROLLING_STOP';atomic_json(cp,state)
      print('ROLLING_STOP',gen,flush=True);break
   else:
    state['completed']=True;state['stop_reason']='GENERATION_CEILING';atomic_json(cp,state)
+def adjust_for_selection(results,horizons):
+ out={}
+ tests=max(1,len(results)*len(horizons))
+ for key,r in results.items():
+  points=[]
+  for p in r.get('points',[]):
+   q=dict(p)
+   if p.get('horizon') in horizons:
+    try:q['lcb95']=adjusted_lcb(p['ev_net'],p['se_cluster'],tests)
+    except (ValueError,KeyError,OverflowError):q['lcb95']=float('-inf')
+   points.append(q)
+  out[key]=dict(r,points=points)
+ return out
+
 if __name__=='__main__':main()
