@@ -15,12 +15,14 @@ from scripts.thirteen_window_evolution_engine_20261011 import WINDOWS,HORIZONS
 from scripts.thirteen_window_crash_mask_20261011 import mask as crash_mask,EPISODES
 from scripts.thirteen_window_launch_guard_20261011 import require_launch_authorization
 ADMISSIBLE=None
+ACTIVE_HORIZONS=HORIZONS
 
 def worker_init():
- global ADMISSIBLE
+ global ADMISSIBLE,ACTIVE_HORIZONS
  init_worker()
  frame=pd.read_parquet(PRED,columns=['effective_date'])
  ADMISSIBLE=crash_mask(frame.effective_date,frame.effective_date)
+ ACTIVE_HORIZONS=tuple(range(int(__import__('os').environ['MTS_WINDOW_LOW']),int(__import__('os').environ['MTS_WINDOW_HIGH'])+1))
 
 def evaluate(c):
  from scripts.run_gen2_200_parent_parallel_20261010 import WORKER
@@ -29,6 +31,7 @@ def evaluate(c):
   signal=np.logical_and.reduce([compiler.compile(f,g) for f,g in c['chromosomes']])
   points=[]
   for j,h in enumerate(HORIZONS):
+   if h not in ACTIVE_HORIZONS:continue
    r=curve(signal & ADMISSIBLE[:,j],paths,costs,c['side'],clusters,horizons=(h,))
    points.extend(r.points)
   return {'genome_hash':c['genome_hash'],'status':'EVALUATED_UNCERTIFIED','points':points,'signal':packed_signal(signal & ADMISSIBLE.any(axis=1))}
@@ -51,15 +54,18 @@ def main():
  p.add_argument('--generations',type=int,default=200);p.add_argument('--batch',type=int,default=120)
  p.add_argument('--seed-size',type=int,default=1200);p.add_argument('--workers',type=int,default=28)
  p.add_argument('--seed',type=int,default=20261011);p.add_argument('--authorization-file',type=pathlib.Path)
+ p.add_argument('--window',type=int,nargs=2,metavar=('LOW','HIGH'),required=True)
  p.add_argument('--preflight',action='store_true');a=p.parse_args()
  if not (1<=a.generations<=1000000 and 1<=a.workers<=64 and a.batch>=20 and a.seed_size>=a.batch):raise ValueError('invalid settings')
+ if tuple(a.window) not in WINDOWS:raise ValueError('invalid window')
+ window=tuple(a.window);target_horizons=tuple(range(window[0],window[1]+1))
  domains=schema();frame=pd.read_parquet(PRED,columns=['effective_date'])
  allowed=crash_mask(frame.effective_date,frame.effective_date)
  if a.preflight:
-  print(json.dumps({'status':'DATA_ONLY_PREFLIGHT_NO_LAUNCH','rows':len(frame),'windows':WINDOWS,'horizons':HORIZONS,'eligible_per_horizon':allowed.sum(axis=0).tolist(),'domain_count':len(domains)}));return
+  print(json.dumps({'status':'DATA_ONLY_PREFLIGHT_NO_LAUNCH','rows':len(frame),'window':window,'horizons':target_horizons,'eligible_per_horizon':allowed[:,[h-2 for h in target_horizons]].sum(axis=0).tolist(),'domain_count':len(domains)}));return
  # This call MUST precede output creation, workers, or any genome evaluation.
  require_launch_authorization(authorization_path=a.authorization_file)
- config={'generations':a.generations,'batch':a.batch,'seed_size':a.seed_size,'seed':a.seed,'horizons':HORIZONS,'windows':WINDOWS,'domain_sha256':digest(domains),'episodes_sha256':hashlib.sha256(EPISODES.read_bytes()).hexdigest(),'mask_policy':'GA4_ORACLE_FULL_PATH_EXCLUSION','scope':'DEV80_ONLY','population':'FRESH_NO_LEGACY_FITNESS','evolution':'GA4_CURATED_LCB_FIRST','side':'LONG'}
+ config={'generations':a.generations,'batch':a.batch,'seed_size':a.seed_size,'seed':a.seed,'horizons':HORIZONS,'window':window,'domain_sha256':digest(domains),'episodes_sha256':hashlib.sha256(EPISODES.read_bytes()).hexdigest(),'mask_policy':'GA4_ORACLE_FULL_PATH_EXCLUSION','scope':'DEV80_ONLY','population':'FRESH_NO_LEGACY_FITNESS','evolution':'GA4_CURATED_LCB_FIRST','side':'LONG'}
  out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
  cp=out/'state.json';state=json.loads(cp.read_text()) if cp.exists() else None
  if state and state['config']!=config:raise RuntimeError('configuration mismatch')
@@ -69,16 +75,18 @@ def main():
  else:state={'config':config,'generation':-1,'rng_state':None,'history':[]}
  cs=recover_jsonl(out/'candidates.jsonl');rs=recover_jsonl(out/'evaluations.jsonl')
  genomes={c['genome_hash']:c for c in cs};results={r['genome_hash']:r for r in rs};known=set(genomes)
+ import os
+ os.environ['MTS_WINDOW_LOW']=str(window[0]);os.environ['MTS_WINDOW_HIGH']=str(window[1])
  with concurrent.futures.ProcessPoolExecutor(max_workers=a.workers,initializer=worker_init) as executor:
   for gen in range(state['generation']+1,a.generations+1):
    pending=[c for c in cs if c['generation']==gen]
    if not pending:
     if gen==0:pending=[dict(fresh(rng,domains,'LONG',known),generation=0) for _ in range(a.seed_size)]
     else:
-     curated=curate(genomes,results,domains,HORIZONS)
+     curated=curate(genomes,results,domains,target_horizons)
      active={(x['side'],x['horizon'],x['genome_hash']) for x in curated['active']}
      niches=[]
-     for lo,hi in WINDOWS:
+     for lo,hi in (window,):
       for h in range(lo,hi+1):
        pool=[x for x in pool_for('LONG',h,genomes,results,domains) if ('LONG',h,x[1]['genome_hash']) in active]
        if len(pool)>=2:niches.append((h,pool))
@@ -107,7 +115,7 @@ def main():
    print('GEN',gen,'EVALUATED',len(pending),flush=True)
    if gen and gen%25==0:
     journal=out/'progress_checkpoints.jsonl';previous=recover_jsonl(journal)
-    verdict=checkpoint(previous,frontier(results.values(),HORIZONS),gen)
+    verdict=checkpoint(previous,frontier(results.values(),target_horizons),gen)
     durable_append(journal,[verdict]);print('PROGRESS_CHECKPOINT',json.dumps(verdict),flush=True)
     if verdict['stop']:print('ROLLING_STOP',gen,flush=True);break
 if __name__=='__main__':main()
