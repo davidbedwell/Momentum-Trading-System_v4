@@ -1,0 +1,28 @@
+{
+  "classification": "G4_MIXED_REGIME_UNCERTIFIED_FOR_NORMAL",
+  "runner_directory": "Research/Runs/gen3-v2-eta-pilot-20261010",
+  "archived_at_utc": "2026-10-11T01:55:29.556535+00:00",
+  "files": {
+    "state.json": {
+      "size": 14753,
+      "sha256": "a79fb1a584bfa5f285f355eec8509bdb1063b512e7fdec1943825d04c0b0f89c"
+    },
+    "active_population.json": {
+      "size": 9887627,
+      "sha256": "f8b70200582e597630bb8b80f04c2eb037e29f53b8a07d24e66d0cf1ca923cf6"
+    },
+    "candidates.jsonl": {
+      "size": 15271655,
+      "sha256": "ec02ba12bbc9e2ab0cc441019d9a3036f72026516949ccadf6d524393f0c8400"
+    },
+    "evaluations.jsonl": {
+      "size": 1137594320,
+      "sha256": "4e9df663a2490786554105524311f2b5205d6d5404837203ba4f415d8fdadcfb"
+    },
+    "seed_signals.jsonl": {
+      "size": 3604092,
+      "sha256": "d3277cab355359f8bd31fe08aa455a18e9f04e64c743d89f59da18fa7501729a"
+    }
+  },
+  "checkpoint": 91
+}
