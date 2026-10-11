@@ -11,6 +11,7 @@ from Core.layered_ga.ga4_oracle_crash_mask import admissible_decisions
 from scripts.run_evolution_v2_20261010 import qualify,pool_for
 from scripts.ga4_rolling_progress_20261011 import frontier,checkpoint
 from scripts.evolution_active_dedup_fast_20261010 import curate
+from scripts.parallel_evolution_selection_20261011 import parallel_niches
 from scripts.evolution_safety_20261010 import overlap
 EPISODES=ROOT/'Research/Protocols/MTS_REENTRY_THREE_HYPOTHESIS_TEST_FREEZE_20261004.json'
 DEFAULT=ROOT/'Research/Runs/ga4-normal-restored-20261011'
@@ -61,7 +62,7 @@ def main():
   print('PREFLIGHT_PASS',json.dumps({'rows':len(frame),'admissible_by_horizon':dict(zip(HORIZONS,admissible.sum(axis=0).astype(int).tolist())),'families':list(domains),'config':config}),flush=True);return
  out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
  cp=out/'state.json';state=json.loads(cp.read_text()) if cp.exists() else None
- if state and state['config']!=config:raise RuntimeError('configuration mismatch')
+ if state and state['config']!=json.loads(json.dumps(config)):raise RuntimeError('configuration mismatch')
  rng=random.Random(a.seed)
  if state:
   def tup(x):return tuple(tup(y) for y in x) if isinstance(x,list) else x
@@ -77,13 +78,7 @@ def main():
     if gen==0:
      pending=[dict(fresh(rng,domains,'LONG',known),generation=0) for i in range(a.seed_size)]
     else:
-     curated=curate(genomes,results,domains,HORIZONS)
-     allowed={(x['side'],x['horizon'],x['genome_hash']) for x in curated['active']}
-     niches=[]
-     for side in ('LONG',):
-      for h in HORIZONS:
-       pool=[x for x in pool_for(side,h,genomes,results,domains) if (side,h,x[1]['genome_hash']) in allowed]
-       if len(pool)>=2:niches.append((side,h,pool))
+     niches=[('LONG',h,pool) for h,pool in parallel_niches(genomes,results,domains,HORIZONS,workers=9)]
      if not niches:raise RuntimeError('NO_ELIGIBLE_NICHES: cannot breed; stop for audit')
      for i in range(a.batch):
       for attempt in range(5000):
@@ -103,8 +98,8 @@ def main():
     pending_state=json.loads((out/'pending.json').read_text());rng.setstate(tup(pending_state['rng_state']))
    if any(c['side']!='LONG' for c in pending):raise RuntimeError('SHORT_CANDIDATE_FORBIDDEN')
    todo=[c for c in pending if c['genome_hash'] not in results]
-   for r in executor.map(evaluate,todo,chunksize=1):
-    durable_append(out/'evaluations.jsonl',[r]);results[r['genome_hash']]=r
+   from scripts.ga4_durable_batching_20261011 import journal_evaluations
+   journal_evaluations(executor.map(evaluate,todo,chunksize=1),out/'evaluations.jsonl',results,batch_size=8)
    if any(c['genome_hash'] not in results for c in pending):raise RuntimeError('incomplete generation')
    previous={h:pool_for('LONG',h,{k:v for k,v in genomes.items() if k not in {c['genome_hash'] for c in pending}},results,domains) for h in HORIZONS}
    distinct=0
