@@ -1,0 +1,1418 @@
+{
+  "status": "PROPOSED_PARENT_SEEDS_NOT_LAUNCHED",
+  "source": "OCT09_GEN1_GEN2_DEV80_PROVISIONAL",
+  "selection": "union of top five per 13 windows plus six Gen1 breadth representatives",
+  "count": 23,
+  "gen1_count": 8,
+  "gen2_count": 15,
+  "no_legacy_fitness_import": true,
+  "certification": "NOT_CERTIFIED",
+  "parents": [
+    {
+      "id": 586,
+      "generation": 1,
+      "genome_hash": "3c71c0dc2a35ba6160f490a3ce10ff571c00be2886ad0bce3d46a1af178fbb17",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "realized_vol_20__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.5,
+            "displacement_feature": "return_5__v1",
+            "severity": 0.2,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "LOW",
+            "breadth_threshold": 0.3,
+            "security_context": "return_20__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.2
+          }
+        ]
+      ],
+      "parent_ids": null,
+      "top5_windows": [],
+      "top5_count": 0,
+      "best_nominal_lcb95": 0.0692511758208921,
+      "reason": "GEN1_DIVERSITY",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 976,
+      "generation": 1,
+      "genome_hash": "c0fb94d5853b5def8111967d0d9637919fc625060d0420ca162a5173049565c7",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MOMENTUM",
+          {
+            "context_feature": "breadth_above_sma_200__v1",
+            "context_threshold": 0.5,
+            "direction": "BELOW",
+            "momentum_feature": "return_20__v1",
+            "threshold_quantile": 0.9
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "breadth_positive_20__v1",
+            "context_state": "LOW",
+            "context_threshold_quantile": 0.8,
+            "displacement_feature": "exhaustion_score__v1",
+            "severity": 0.2,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "VOLUME_LIQUIDITY",
+          {
+            "participation_feature": "relative_volume_20__v1",
+            "price_direction": "ABOVE",
+            "price_feature": "return_5__v1",
+            "price_threshold_quantile": 0.5,
+            "state": "LOW",
+            "threshold_quantile": 0.1
+          }
+        ]
+      ],
+      "parent_ids": null,
+      "top5_windows": [],
+      "top5_count": 0,
+      "best_nominal_lcb95": 0.014215917660940696,
+      "reason": "GEN1_DIVERSITY",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 1006,
+      "generation": 1,
+      "genome_hash": "337f9eb05e9539828180985b37e6663b7e3a4d8bf53b795baa4b885e0d9ff77a",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MOMENTUM",
+          {
+            "context_feature": "natr_20_percentile__v1",
+            "context_threshold": 0.6,
+            "direction": "BELOW",
+            "momentum_feature": "return_252__v1",
+            "threshold_quantile": 0.5
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "NONE",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.5,
+            "displacement_feature": "return_10__v1",
+            "severity": 0.3,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "MID",
+            "breadth_threshold": 0.8,
+            "security_context": "close_to_sma_200__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.8
+          }
+        ]
+      ],
+      "parent_ids": null,
+      "top5_windows": [],
+      "top5_count": 0,
+      "best_nominal_lcb95": 0.11963393534287894,
+      "reason": "GEN1_DIVERSITY",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 1568,
+      "generation": 1,
+      "genome_hash": "e28ea4b9b4f1e7acec7dfd8c0eabbe919510ef0ba7a55952108132d11083b5ee",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "TREND",
+          {
+            "confirmation_direction": "BELOW",
+            "confirmation_feature": "NONE",
+            "confirmation_threshold_quantile": 0.2,
+            "direction": "BELOW",
+            "threshold_quantile": 0.2,
+            "trend_feature": "close_to_sma_50__v1"
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "close_to_sma_50__v1",
+            "state": "HIGH",
+            "threshold_quantile": 0.1,
+            "volatility_feature": "candle_range_fraction__v1"
+          }
+        ],
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "MID",
+            "breadth_threshold": 0.2,
+            "security_context": "natr_20_percentile__v1",
+            "security_context_direction": "BELOW",
+            "security_context_threshold_quantile": 0.2
+          }
+        ]
+      ],
+      "parent_ids": null,
+      "top5_windows": [],
+      "top5_count": 0,
+      "best_nominal_lcb95": 0.02461946998732014,
+      "reason": "GEN1_DIVERSITY",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 1660,
+      "generation": 1,
+      "genome_hash": "de79b52bfd6db90ed430af286bd8b5e0eb878b23823b338b748e7b1850ce662c",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "realized_vol_20__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.2,
+            "displacement_feature": "return_10__v1",
+            "severity": 0.05,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "NONE",
+            "state": "LOW",
+            "threshold_quantile": 0.9,
+            "volatility_feature": "range_width_ratio_20_63__v1"
+          }
+        ],
+        [
+          "RELATIVE_CROSS_SECTIONAL",
+          {
+            "market_context": "breadth_above_sma_200__v1",
+            "market_context_state": "LOW",
+            "market_context_threshold": 0.3,
+            "relative_feature": "return_126_percentile__v1",
+            "tail": "LAGGARD",
+            "threshold_quantile": 0.8
+          }
+        ]
+      ],
+      "parent_ids": null,
+      "top5_windows": [
+        [
+          2,
+          5
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          11,
+          15
+        ],
+        [
+          26,
+          30
+        ],
+        [
+          41,
+          45
+        ],
+        [
+          56,
+          60
+        ]
+      ],
+      "top5_count": 6,
+      "best_nominal_lcb95": 0.18785844667785495,
+      "reason": "MANDATORY",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 2298,
+      "generation": 1,
+      "genome_hash": "f697d39e865c1e26c36154c08b30e8825b213bd08ba1a592430570bdbf6cd382",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MOMENTUM",
+          {
+            "context_feature": "breadth_above_sma_200__v1",
+            "context_threshold": 0.5,
+            "direction": "ABOVE",
+            "momentum_feature": "return_252_skip_20__v1",
+            "threshold_quantile": 0.9
+          }
+        ],
+        [
+          "TREND",
+          {
+            "confirmation_direction": "BELOW",
+            "confirmation_feature": "return_126__v1",
+            "confirmation_threshold_quantile": 0.5,
+            "direction": "ABOVE",
+            "threshold_quantile": 0.2,
+            "trend_feature": "close_to_sma_20__v1"
+          }
+        ],
+        [
+          "VOLUME_LIQUIDITY",
+          {
+            "participation_feature": "relative_volume_20_percentile__v1",
+            "price_direction": "ABOVE",
+            "price_feature": "close_location__v1",
+            "price_threshold_quantile": 0.5,
+            "state": "HIGH",
+            "threshold_quantile": 0.2
+          }
+        ],
+        [
+          "RELATIVE_CROSS_SECTIONAL",
+          {
+            "market_context": "breadth_positive_20__v1",
+            "market_context_state": "LOW",
+            "market_context_threshold": 0.5,
+            "relative_feature": "return_252_skip_20_percentile__v1",
+            "tail": "LEADER",
+            "threshold_quantile": 0.2
+          }
+        ]
+      ],
+      "parent_ids": null,
+      "top5_windows": [],
+      "top5_count": 0,
+      "best_nominal_lcb95": 0.02489287070008931,
+      "reason": "GEN1_DIVERSITY",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 3202,
+      "generation": 1,
+      "genome_hash": "221ccf7678ebd0981637a5a20ca48670721fe22697ba93cc09ed7a1cb4a4b367",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "realized_vol_20__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.8,
+            "displacement_feature": "drawdown_252__v1",
+            "severity": 0.05,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "VOLUME_LIQUIDITY",
+          {
+            "participation_feature": "amihud_illiquidity_20__v1",
+            "price_direction": "BELOW",
+            "price_feature": "intraday_return__v1",
+            "price_threshold_quantile": 0.5,
+            "state": "HIGH",
+            "threshold_quantile": 0.5
+          }
+        ],
+        [
+          "RELATIVE_CROSS_SECTIONAL",
+          {
+            "market_context": "NONE",
+            "market_context_state": "LOW",
+            "market_context_threshold": 0.7,
+            "relative_feature": "return_252_percentile__v1",
+            "tail": "LAGGARD",
+            "threshold_quantile": 0.1
+          }
+        ],
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_positive_20__v1",
+            "breadth_state": "HIGH",
+            "breadth_threshold": 0.2,
+            "security_context": "return_20__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.5
+          }
+        ]
+      ],
+      "parent_ids": null,
+      "top5_windows": [
+        [
+          6,
+          10
+        ]
+      ],
+      "top5_count": 1,
+      "best_nominal_lcb95": 0.09304051402080803,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 4320,
+      "generation": 1,
+      "genome_hash": "43c8b848c3841739b42630344d3d1c98b3c7560244acd01d737ca180578a9b22",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "TREND",
+          {
+            "confirmation_direction": "BELOW",
+            "confirmation_feature": "return_63__v1",
+            "confirmation_threshold_quantile": 0.2,
+            "direction": "BELOW",
+            "threshold_quantile": 0.1,
+            "trend_feature": "sma50_slope_10__v1"
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "NONE",
+            "state": "HIGH",
+            "threshold_quantile": 0.2,
+            "volatility_feature": "realized_vol_20_percentile__v1"
+          }
+        ],
+        [
+          "VOLUME_LIQUIDITY",
+          {
+            "participation_feature": "relative_volume_20_percentile__v1",
+            "price_direction": "ABOVE",
+            "price_feature": "NONE",
+            "price_threshold_quantile": 0.5,
+            "state": "LOW",
+            "threshold_quantile": 0.5
+          }
+        ],
+        [
+          "RELATIVE_CROSS_SECTIONAL",
+          {
+            "market_context": "breadth_above_sma_200__v1",
+            "market_context_state": "LOW",
+            "market_context_threshold": 0.3,
+            "relative_feature": "relative_strength_change_20__v1",
+            "tail": "LAGGARD",
+            "threshold_quantile": 0.8
+          }
+        ],
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "realized_vol_20_percentile__v1",
+            "breadth_state": "HIGH",
+            "breadth_threshold": 0.2,
+            "security_context": "natr_20_percentile__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.5
+          }
+        ]
+      ],
+      "parent_ids": null,
+      "top5_windows": [],
+      "top5_count": 0,
+      "best_nominal_lcb95": 0.0778138351246411,
+      "reason": "GEN1_DIVERSITY",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 23,
+      "generation": 2,
+      "genome_hash": "b9741537fe0882f08ec2758b292f23c06c0a845c017c94f9546d517518acac33",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "MID",
+            "breadth_threshold": 0.8,
+            "security_context": "close_to_sma_200__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.8
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "natr_20_percentile__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.8,
+            "displacement_feature": "drawdown_252__v1",
+            "severity": 0.3,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "MOMENTUM",
+          {
+            "context_feature": "natr_20_percentile__v1",
+            "context_threshold": 0.6,
+            "direction": "BELOW",
+            "momentum_feature": "return_252__v1",
+            "threshold_quantile": 0.5
+          }
+        ]
+      ],
+      "parent_ids": [
+        1006,
+        1648
+      ],
+      "top5_windows": [
+        [
+          51,
+          55
+        ],
+        [
+          56,
+          60
+        ],
+        [
+          61,
+          65
+        ]
+      ],
+      "top5_count": 3,
+      "best_nominal_lcb95": 0.13570160114837326,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 67,
+      "generation": 2,
+      "genome_hash": "84687adb39117cdb402073625c7c9c4ebd1049245d3d62e7098cc5e00798e385",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "LOW",
+            "breadth_threshold": 0.3,
+            "security_context": "NONE",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.8
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "natr_20_percentile__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.2,
+            "displacement_feature": "drawdown_252__v1",
+            "severity": 0.1,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "MOMENTUM",
+          {
+            "context_feature": "natr_20_percentile__v1",
+            "context_threshold": 0.5,
+            "direction": "BELOW",
+            "momentum_feature": "return_63__v1",
+            "threshold_quantile": 0.9
+          }
+        ],
+        [
+          "TREND",
+          {
+            "confirmation_direction": "BELOW",
+            "confirmation_feature": "return_126__v1",
+            "confirmation_threshold_quantile": 0.8,
+            "direction": "BELOW",
+            "threshold_quantile": 0.8,
+            "trend_feature": "sma20_slope_5__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        2202,
+        646
+      ],
+      "top5_windows": [
+        [
+          41,
+          45
+        ],
+        [
+          46,
+          50
+        ]
+      ],
+      "top5_count": 2,
+      "best_nominal_lcb95": 0.11098764165902422,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 127,
+      "generation": 2,
+      "genome_hash": "1ca588147a37a78f65597dff29ddeb2afc888dbd82f6e808afcd5bd7b9480716",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "advance_decline_breadth__v1",
+            "breadth_state": "LOW",
+            "breadth_threshold": 0.3,
+            "security_context": "NONE",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.75
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "breadth_positive_20__v1",
+            "context_state": "LOW",
+            "context_threshold_quantile": 0.8,
+            "displacement_feature": "return_5__v1",
+            "severity": 0.05,
+            "tail": "HIGH"
+          }
+        ],
+        [
+          "TREND",
+          {
+            "confirmation_direction": "BELOW",
+            "confirmation_feature": "return_63__v1",
+            "confirmation_threshold_quantile": 0.8,
+            "direction": "BELOW",
+            "threshold_quantile": 0.2,
+            "trend_feature": "trend_above_sma200_duration__v1"
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "NONE",
+            "state": "HIGH",
+            "threshold_quantile": 0.8,
+            "volatility_feature": "natr_20__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        2992,
+        2982
+      ],
+      "top5_windows": [
+        [
+          46,
+          50
+        ]
+      ],
+      "top5_count": 1,
+      "best_nominal_lcb95": 0.10553831151968379,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 237,
+      "generation": 2,
+      "genome_hash": "5eee88194d4407eedca9753babef5664aaad91be26b3ec009899becf50884a00",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "LOW",
+            "breadth_threshold": 0.3,
+            "security_context": "return_20__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.2
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "realized_vol_20__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.5,
+            "displacement_feature": "return_5__v1",
+            "severity": 0.2,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "MOMENTUM",
+          {
+            "context_feature": "breadth_positive_20__v1",
+            "context_threshold": 0.4,
+            "direction": "BELOW",
+            "momentum_feature": "return_63__v1",
+            "threshold_quantile": 0.8
+          }
+        ]
+      ],
+      "parent_ids": [
+        586,
+        172
+      ],
+      "top5_windows": [
+        [
+          2,
+          5
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          11,
+          15
+        ],
+        [
+          21,
+          25
+        ]
+      ],
+      "top5_count": 4,
+      "best_nominal_lcb95": 0.0817840822660168,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 258,
+      "generation": 2,
+      "genome_hash": "4c1ecc4b051bce1f115a14978808c28739f491c823259c08584024757c48f85f",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "MID",
+            "breadth_threshold": 0.8,
+            "security_context": "close_to_sma_200__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.8
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "realized_vol_20__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.85,
+            "displacement_feature": "range_position_20__v1",
+            "severity": 0.3,
+            "tail": "HIGH"
+          }
+        ],
+        [
+          "MOMENTUM",
+          {
+            "context_feature": "natr_20_percentile__v1",
+            "context_threshold": 0.6,
+            "direction": "BELOW",
+            "momentum_feature": "return_252__v1",
+            "threshold_quantile": 0.5
+          }
+        ]
+      ],
+      "parent_ids": [
+        1006,
+        3158
+      ],
+      "top5_windows": [
+        [
+          61,
+          65
+        ]
+      ],
+      "top5_count": 1,
+      "best_nominal_lcb95": 0.12589868217854605,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 265,
+      "generation": 2,
+      "genome_hash": "2ee141ce282453d4254c11307f646eed46810051829bfb111bcfee87087e48a0",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "RELATIVE_CROSS_SECTIONAL",
+          {
+            "market_context": "breadth_above_sma_200__v1",
+            "market_context_state": "LOW",
+            "market_context_threshold": 0.35,
+            "relative_feature": "return_126_percentile__v1",
+            "tail": "LAGGARD",
+            "threshold_quantile": 0.2
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "range_position_20__v1",
+            "state": "HIGH",
+            "threshold_quantile": 0.9,
+            "volatility_feature": "natr_20_percentile__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        626,
+        4298
+      ],
+      "top5_windows": [
+        [
+          11,
+          15
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          21,
+          25
+        ],
+        [
+          26,
+          30
+        ],
+        [
+          31,
+          35
+        ],
+        [
+          36,
+          40
+        ]
+      ],
+      "top5_count": 6,
+      "best_nominal_lcb95": 0.0935036721518354,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 588,
+      "generation": 2,
+      "genome_hash": "d90d5c49a0b1cfa75193a90100540f8f7d20cbe534ac2d33891fdb71fe7497c6",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "LOW",
+            "breadth_threshold": 0.3,
+            "security_context": "NONE",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.8
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "NONE",
+            "state": "HIGH",
+            "threshold_quantile": 0.8,
+            "volatility_feature": "natr_20_percentile__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        646,
+        2358
+      ],
+      "top5_windows": [
+        [
+          16,
+          20
+        ]
+      ],
+      "top5_count": 1,
+      "best_nominal_lcb95": 0.10032932159948543,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 597,
+      "generation": 2,
+      "genome_hash": "4c87f38e9acdd4650ecc518213f2dbd2a36b6a5afd86cf1868aa35b4c874a048",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "breadth_positive_20__v1",
+            "context_state": "LOW",
+            "context_threshold_quantile": 0.8,
+            "displacement_feature": "close_to_sma_20__v1",
+            "severity": 0.2,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "RELATIVE_CROSS_SECTIONAL",
+          {
+            "market_context": "breadth_above_sma_200__v1",
+            "market_context_state": "LOW",
+            "market_context_threshold": 0.3,
+            "relative_feature": "return_126_percentile__v1",
+            "tail": "LAGGARD",
+            "threshold_quantile": 0.8
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "NONE",
+            "state": "LOW",
+            "threshold_quantile": 0.9,
+            "volatility_feature": "range_width_ratio_20_63__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        1660,
+        426
+      ],
+      "top5_windows": [
+        [
+          16,
+          20
+        ],
+        [
+          21,
+          25
+        ],
+        [
+          26,
+          30
+        ],
+        [
+          31,
+          35
+        ],
+        [
+          36,
+          40
+        ],
+        [
+          41,
+          45
+        ],
+        [
+          46,
+          50
+        ],
+        [
+          51,
+          55
+        ],
+        [
+          56,
+          60
+        ],
+        [
+          61,
+          65
+        ]
+      ],
+      "top5_count": 10,
+      "best_nominal_lcb95": 0.1645409980921988,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 765,
+      "generation": 2,
+      "genome_hash": "b6ed0a2db057180f4d53edd44a627ca5299dc9c712107c9530be651ac7b56b01",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "natr_20_percentile__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.8,
+            "displacement_feature": "price_zscore_20__v1",
+            "severity": 0.3,
+            "tail": "HIGH"
+          }
+        ],
+        [
+          "RELATIVE_CROSS_SECTIONAL",
+          {
+            "market_context": "breadth_above_sma_200__v1",
+            "market_context_state": "LOW",
+            "market_context_threshold": 0.3,
+            "relative_feature": "return_126_percentile__v1",
+            "tail": "LAGGARD",
+            "threshold_quantile": 0.8
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "NONE",
+            "state": "LOW",
+            "threshold_quantile": 0.9,
+            "volatility_feature": "range_width_ratio_20_63__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        1660,
+        1294
+      ],
+      "top5_windows": [
+        [
+          16,
+          20
+        ],
+        [
+          21,
+          25
+        ],
+        [
+          26,
+          30
+        ],
+        [
+          31,
+          35
+        ],
+        [
+          36,
+          40
+        ]
+      ],
+      "top5_count": 5,
+      "best_nominal_lcb95": 0.12351376323221647,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 766,
+      "generation": 2,
+      "genome_hash": "894f9e8142eef160f63593d41831dcd87d5647eaaf22fd15726eb329b1b47d9a",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "realized_vol_20__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.8,
+            "displacement_feature": "close_to_sma_50__v1",
+            "severity": 0.3,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "RELATIVE_CROSS_SECTIONAL",
+          {
+            "market_context": "breadth_above_sma_200__v1",
+            "market_context_state": "LOW",
+            "market_context_threshold": 0.3,
+            "relative_feature": "return_126_percentile__v1",
+            "tail": "LAGGARD",
+            "threshold_quantile": 0.8
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "NONE",
+            "state": "LOW",
+            "threshold_quantile": 0.9,
+            "volatility_feature": "range_width_ratio_20_63__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        1660,
+        954
+      ],
+      "top5_windows": [
+        [
+          2,
+          5
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          11,
+          15
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          21,
+          25
+        ],
+        [
+          26,
+          30
+        ],
+        [
+          31,
+          35
+        ],
+        [
+          36,
+          40
+        ],
+        [
+          41,
+          45
+        ],
+        [
+          46,
+          50
+        ],
+        [
+          51,
+          55
+        ],
+        [
+          56,
+          60
+        ],
+        [
+          61,
+          65
+        ]
+      ],
+      "top5_count": 13,
+      "best_nominal_lcb95": 0.19736201491851812,
+      "reason": "MANDATORY",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 935,
+      "generation": 2,
+      "genome_hash": "bb71637e896c514fd2366a4b100aa74e254f2a14a2a6d906d6b8e651ec5a112b",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "BREAKOUT",
+          {
+            "participation_feature": "NONE",
+            "participation_threshold_quantile": 0.7,
+            "range_feature": "compression_duration__v1",
+            "range_threshold_quantile": 0.9,
+            "volatility_feature": "natr_20__v1",
+            "volatility_state": "HIGH",
+            "volatility_threshold_quantile": 0.3
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "breadth_positive_20__v1",
+            "context_state": "LOW",
+            "context_threshold_quantile": 0.8,
+            "displacement_feature": "range_position_20__v1",
+            "severity": 0.05,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "TREND",
+          {
+            "confirmation_direction": "ABOVE",
+            "confirmation_feature": "NONE",
+            "confirmation_threshold_quantile": 0.2,
+            "direction": "BELOW",
+            "threshold_quantile": 0.75,
+            "trend_feature": "trend_above_sma200_duration__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        1140,
+        426
+      ],
+      "top5_windows": [
+        [
+          46,
+          50
+        ],
+        [
+          51,
+          55
+        ],
+        [
+          56,
+          60
+        ]
+      ],
+      "top5_count": 3,
+      "best_nominal_lcb95": 0.121044599510846,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 946,
+      "generation": 2,
+      "genome_hash": "e0044d8638c6bdf1a3dbbbb29eb73aed65861d3318e2059bbe6f1d7e163f5cdf",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "LOW",
+            "breadth_threshold": 0.5,
+            "security_context": "natr_20_percentile__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.5
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "breadth_positive_20__v1",
+            "context_state": "LOW",
+            "context_threshold_quantile": 0.2,
+            "displacement_feature": "signed_return_streak__v1",
+            "severity": 0.1,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "MOMENTUM",
+          {
+            "context_feature": "NONE",
+            "context_threshold": 0.35,
+            "direction": "BELOW",
+            "momentum_feature": "return_63__v1",
+            "threshold_quantile": 0.6
+          }
+        ]
+      ],
+      "parent_ids": [
+        1014,
+        1410
+      ],
+      "top5_windows": [
+        [
+          2,
+          5
+        ]
+      ],
+      "top5_count": 1,
+      "best_nominal_lcb95": 0.06830091754059817,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 984,
+      "generation": 2,
+      "genome_hash": "3ed02d1230ecae1bdb1952d9505e6570cdf3a331e42c19d1f172eac32f33a822",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "NONE",
+            "context_state": "LOW",
+            "context_threshold_quantile": 0.5,
+            "displacement_feature": "close_to_sma_50__v1",
+            "severity": 0.1,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "TREND",
+          {
+            "confirmation_direction": "BELOW",
+            "confirmation_feature": "range_position_50__v1",
+            "confirmation_threshold_quantile": 0.5,
+            "direction": "BELOW",
+            "threshold_quantile": 0.7,
+            "trend_feature": "close_to_sma_50__v1"
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "return_20__v1",
+            "state": "HIGH",
+            "threshold_quantile": 0.9,
+            "volatility_feature": "realized_vol_20_percentile__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        1440,
+        2770
+      ],
+      "top5_windows": [
+        [
+          31,
+          35
+        ],
+        [
+          36,
+          40
+        ],
+        [
+          41,
+          45
+        ]
+      ],
+      "top5_count": 3,
+      "best_nominal_lcb95": 0.12273813494452747,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 1010,
+      "generation": 2,
+      "genome_hash": "0381f630ca72d34f4aca9a8297f20148c6fb2929905d22a6430314db1666ca37",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "LOW",
+            "breadth_threshold": 0.3,
+            "security_context": "return_20__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.2
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "realized_vol_20__v1",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.5,
+            "displacement_feature": "return_5__v1",
+            "severity": 0.2,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "VOLATILITY",
+          {
+            "price_context": "return_20__v1",
+            "state": "HIGH",
+            "threshold_quantile": 0.9,
+            "volatility_feature": "natr_20__v1"
+          }
+        ]
+      ],
+      "parent_ids": [
+        586,
+        638
+      ],
+      "top5_windows": [
+        [
+          2,
+          5
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          11,
+          15
+        ]
+      ],
+      "top5_count": 3,
+      "best_nominal_lcb95": 0.10147728935978904,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    },
+    {
+      "id": 1162,
+      "generation": 2,
+      "genome_hash": "104713ecc99f6f6b56fa6184fbb6a5ce3df70f7f8eac727cf7eb9deda2c1a299",
+      "side": "LONG",
+      "chromosomes": [
+        [
+          "MARKET_REGIME_STRUCTURE",
+          {
+            "breadth_feature": "breadth_above_sma_200__v1",
+            "breadth_state": "MID",
+            "breadth_threshold": 0.8,
+            "security_context": "close_to_sma_200__v1",
+            "security_context_direction": "ABOVE",
+            "security_context_threshold_quantile": 0.8
+          }
+        ],
+        [
+          "MEAN_REVERSION",
+          {
+            "context_feature": "NONE",
+            "context_state": "HIGH",
+            "context_threshold_quantile": 0.5,
+            "displacement_feature": "return_10__v1",
+            "severity": 0.3,
+            "tail": "LOW"
+          }
+        ],
+        [
+          "MOMENTUM",
+          {
+            "context_feature": "natr_20_percentile__v1",
+            "context_threshold": 0.65,
+            "direction": "BELOW",
+            "momentum_feature": "return_252__v1",
+            "threshold_quantile": 0.5
+          }
+        ]
+      ],
+      "parent_ids": [
+        1006,
+        1532
+      ],
+      "top5_windows": [
+        [
+          51,
+          55
+        ],
+        [
+          61,
+          65
+        ]
+      ],
+      "top5_count": 2,
+      "best_nominal_lcb95": 0.12249674475175887,
+      "reason": "CROSS_GENERATION_TOP5",
+      "fitness_status": "REQUIRES_FRESH_DEV80_REEVALUATION"
+    }
+  ]
+}
