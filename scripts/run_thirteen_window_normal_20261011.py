@@ -21,7 +21,7 @@ def worker_init():
  global ADMISSIBLE,ACTIVE_HORIZONS
  init_worker()
  frame=pd.read_parquet(PRED,columns=['effective_date'])
- ADMISSIBLE=crash_mask(frame.effective_date,frame.effective_date)
+ ADMISSIBLE=crash_mask(frame.effective_date,pd.DatetimeIndex(pd.to_datetime(frame.effective_date)).normalize().unique().sort_values())
  ACTIVE_HORIZONS=tuple(range(int(__import__('os').environ['MTS_WINDOW_LOW']),int(__import__('os').environ['MTS_WINDOW_HIGH'])+1))
 
 def evaluate(c):
@@ -60,7 +60,7 @@ def main():
  if tuple(a.window) not in WINDOWS:raise ValueError('invalid window')
  window=tuple(a.window);target_horizons=tuple(range(window[0],window[1]+1))
  domains=schema();frame=pd.read_parquet(PRED,columns=['effective_date'])
- allowed=crash_mask(frame.effective_date,frame.effective_date)
+ allowed=crash_mask(frame.effective_date,pd.DatetimeIndex(pd.to_datetime(frame.effective_date)).normalize().unique().sort_values())
  if a.preflight:
   print(json.dumps({'status':'DATA_ONLY_PREFLIGHT_NO_LAUNCH','rows':len(frame),'window':window,'horizons':target_horizons,'eligible_per_horizon':allowed[:,[h-2 for h in target_horizons]].sum(axis=0).tolist(),'domain_count':len(domains)}));return
  # This call MUST precede output creation, workers, or any genome evaluation.
