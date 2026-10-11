@@ -9,6 +9,7 @@ from scripts.audit_evolution_domains_20261010 import schema,valid,mutate
 from scripts.evolution_safety_20261010 import atomic_json,durable_append,recover_jsonl,packed_signal
 from Core.layered_ga.ga4_oracle_crash_mask import admissible_decisions
 from scripts.run_evolution_v2_20261010 import qualify,pool_for
+from scripts.ga4_rolling_progress_20261011 import frontier,checkpoint
 EPISODES=ROOT/'Research/Protocols/MTS_REENTRY_THREE_HYPOTHESIS_TEST_FREEZE_20261004.json'
 DEFAULT=ROOT/'Research/Runs/ga4-normal-oracle-fresh-20261011'
 ADMISSIBLE=None
@@ -48,8 +49,8 @@ def fresh(rng,domains,side,known):
  raise RuntimeError('fresh novelty exhausted')
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--output',type=pathlib.Path,default=DEFAULT);p.add_argument('--generations',type=int,default=200);p.add_argument('--batch',type=int,default=120);p.add_argument('--seed-size',type=int,default=1200);p.add_argument('--workers',type=int,default=6);p.add_argument('--seed',type=int,default=20261011);p.add_argument('--preflight',action='store_true');a=p.parse_args()
- if not (1<=a.generations<=200 and 1<=a.workers<=64 and a.batch>=20 and a.seed_size>=a.batch):raise ValueError('invalid settings')
+ p=argparse.ArgumentParser();p.add_argument('--output',type=pathlib.Path,default=DEFAULT);p.add_argument('--generations',type=int,default=200);p.add_argument('--batch',type=int,default=120);p.add_argument('--seed-size',type=int,default=1200);p.add_argument('--workers',type=int,default=6);p.add_argument('--seed',type=int,default=20261011);p.add_argument('--preflight',action='store_true');p.add_argument('--rolling-stop',action='store_true');a=p.parse_args()
+ if not (1<=a.generations<=1000000 and 1<=a.workers<=64 and a.batch>=20 and a.seed_size>=a.batch):raise ValueError('invalid settings')
  domains=schema();ep=json.loads(EPISODES.read_text())['episodes'];frame=pd.read_parquet(PRED,columns=['effective_date'])
  admissible=admissible_decisions(frame.effective_date,frame.effective_date,ep,HORIZONS,offset=10)
  if not admissible.any():raise RuntimeError('No admissible Normal entries')
@@ -106,4 +107,14 @@ def main():
    state['history'].append({'generation':gen,'evaluated':len(pending),'positive_horizon_pairs':accepted})
    atomic_json(cp,state);(out/'pending.json').unlink(missing_ok=True)
    print('GEN',gen,'EVALUATED',len(pending),'POSITIVE_HORIZON_PAIRS',accepted,flush=True)
+   if a.rolling_stop and gen and gen%25==0:
+    journal=out/'progress_checkpoints.jsonl'
+    prior=recover_jsonl(journal)
+    snapshot=frontier(results.values(),HORIZONS)
+    verdict=checkpoint(prior,snapshot,gen)
+    if verdict is None:raise RuntimeError('missing checkpoint')
+    durable_append(journal,[verdict])
+    print('PROGRESS_CHECKPOINT',json.dumps(verdict),flush=True)
+    if verdict['stop']:
+     print('ROLLING_STOP',gen,flush=True);break
 if __name__=='__main__':main()
