@@ -53,7 +53,7 @@ def main():
  domains=schema();ep=json.loads(EPISODES.read_text())['episodes'];frame=pd.read_parquet(PRED,columns=['effective_date'])
  admissible=admissible_decisions(frame.effective_date,frame.effective_date,ep,HORIZONS,offset=10)
  if not admissible.any():raise RuntimeError('No admissible Normal entries')
- config={'generations':a.generations,'batch':a.batch,'seed_size':a.seed_size,'seed':a.seed,'horizons':HORIZONS,'domain_sha256':digest(domains),'episodes_sha256':hashlib.sha256(EPISODES.read_bytes()).hexdigest(),'mask_policy':'ORACLE_PEAK_PLUS_10_TO_TROUGH_PLUS_10_FULL_PATH_EXCLUSION','population':'FRESH_RANDOM_NO_LEGACY_PARENT_FITNESS','scope':'DEV80_ONLY'}
+ config={'generations':a.generations,'batch':a.batch,'seed_size':a.seed_size,'seed':a.seed,'horizons':HORIZONS,'domain_sha256':digest(domains),'episodes_sha256':hashlib.sha256(EPISODES.read_bytes()).hexdigest(),'mask_policy':'ORACLE_PEAK_PLUS_10_TO_TROUGH_PLUS_10_FULL_PATH_EXCLUSION','population':'FRESH_RANDOM_NO_LEGACY_PARENT_FITNESS','scope':'DEV80_ONLY','sides':['LONG']}
  if a.preflight:
   print('PREFLIGHT_PASS',json.dumps({'rows':len(frame),'admissible_by_horizon':dict(zip(HORIZONS,admissible.sum(axis=0).astype(int).tolist())),'families':list(domains),'config':config}),flush=True);return
  out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
@@ -72,10 +72,10 @@ def main():
    pending=[c for c in cs if c['generation']==gen]
    if not pending:
     if gen==0:
-     pending=[dict(fresh(rng,domains,'LONG' if i%2==0 else 'SHORT',known),generation=0) for i in range(a.seed_size)]
+     pending=[dict(fresh(rng,domains,'LONG',known),generation=0) for i in range(a.seed_size)]
     else:
      niches=[]
-     for side in ('LONG','SHORT'):
+     for side in ('LONG',):
       for h in HORIZONS:
        pool=pool_for(side,h,genomes,results,domains)
        if len(pool)>=2:niches.append((side,h,pool))
@@ -96,6 +96,7 @@ def main():
     durable_append(out/'candidates.jsonl',pending);cs.extend(pending);genomes.update({c['genome_hash']:c for c in pending})
    else:
     pending_state=json.loads((out/'pending.json').read_text());rng.setstate(tup(pending_state['rng_state']))
+   if any(c['side']!='LONG' for c in pending):raise RuntimeError('SHORT_CANDIDATE_FORBIDDEN')
    todo=[c for c in pending if c['genome_hash'] not in results]
    for r in executor.map(evaluate,todo,chunksize=1):
     durable_append(out/'evaluations.jsonl',[r]);results[r['genome_hash']]=r
