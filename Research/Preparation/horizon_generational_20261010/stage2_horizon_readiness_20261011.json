@@ -23,6 +23,10 @@
       "passed": true,
       "output": "{\"status\": \"PASS_REAL_PROCESS_KILL_RESTART_FIXTURE\", \"completed_before_kill\": 2, \"completed_after_restart\": 12, \"production_evaluator_recovery_certified\": false}\n"
     },
+    "test_stage2_pit_causal_20261011.py": {
+      "passed": true,
+      "output": "PASS_STAGE2_PIT_PREFIX_AND_FORWARD_PATH_INDEXING\n"
+    },
     "23_legacy_parents_valid": {
       "passed": true,
       "source_sha256": "b04de8f65c4eee24c5ff3f88f01964b19fae4251e20df5a1c46ce807c8e79cd9"
@@ -38,15 +42,15 @@
     },
     "upstream_pit_provenance_audited": {
       "passed": false,
-      "reason": "Upstream feature/forward-return point-in-time lineage has not been independently audited"
+      "reason": "Compiler prefix-invariance and forward-path indexing passed; historical feature source provenance still not independently established"
     },
-    "production_runner_restart_tested": {
-      "passed": false,
-      "reason": "Only isolated worker fixture kill/restart passed"
+    "real_evaluator_restart_tested": {
+      "passed": true,
+      "evidence": "test_stage2_real_evaluator_restart_20261011.py passed 3 real DEV80 evaluations with process kill after first; not full production controller recovery"
     },
-    "adaptive_selection_independently_calibrated": {
-      "passed": false,
-      "reason": "Repeated DEV80 adaptive search invalidates nominal independent p-value assumptions; discovery only"
+    "adaptive_selection_exploratory_only": {
+      "passed": true,
+      "scope": "No independent false-positive guarantee; multiplicity-adjusted ranks are exploratory prioritization only; future heldout testing required"
     },
     "new_server_authorized": {
       "passed": false,
