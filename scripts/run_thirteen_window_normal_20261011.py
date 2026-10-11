@@ -78,10 +78,17 @@ def main():
  cs=recover_jsonl(out/'candidates.jsonl');rs=recover_jsonl(out/'evaluations.jsonl')
  candidate_hashes=[c['genome_hash'] for c in cs]
  if len(candidate_hashes)!=len(set(candidate_hashes)):raise RuntimeError('DUPLICATE_CANDIDATE_HASH')
- if any(r['genome_hash'] not in set(candidate_hashes) for r in rs):raise RuntimeError('ORPHAN_EVALUATION')
+ candidate_set=set(candidate_hashes)
+ if any(r['genome_hash'] not in candidate_set for r in rs):raise RuntimeError('ORPHAN_EVALUATION')
  if len({r['genome_hash'] for r in rs})!=len(rs):raise RuntimeError('DUPLICATE_EVALUATION')
+ if any(c['generation']<0 for c in cs):raise RuntimeError('NEGATIVE_GENERATION')
+ if cs and sorted(set(c['generation'] for c in cs))!=list(range(max(c['generation'] for c in cs)+1)):raise RuntimeError('NONCONTIGUOUS_GENERATIONS')
+ for g in set(c['generation'] for c in cs):
+  count=sum(c['generation']==g for c in cs)
+  if count!=(a.seed_size if g==0 else a.batch):raise RuntimeError('PARTIAL_CANDIDATE_GENERATION')
  if cs and max(c['generation'] for c in cs)>state['generation']+1:raise RuntimeError('JOURNAL_AHEAD_OF_CHECKPOINT')
  if cs and max(c['generation'] for c in cs)==state['generation']+1 and not (out/'pending.json').is_file():raise RuntimeError('MISSING_PENDING_RNG')
+ if state['generation']>=0 and (not cs or max(c['generation'] for c in cs)<state['generation']):raise RuntimeError('CHECKPOINT_AHEAD_OF_JOURNAL')
  genomes={c['genome_hash']:c for c in cs};results={r['genome_hash']:r for r in rs};known=set(genomes)
  import os
  os.environ['MTS_WINDOW_LOW']=str(window[0]);os.environ['MTS_WINDOW_HIGH']=str(window[1])
