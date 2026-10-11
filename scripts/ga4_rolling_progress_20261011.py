@@ -16,7 +16,7 @@ def frontier(results, horizons):
    if x['best_lcb95'] is None or lo>x['best_lcb95']:x['best_lcb95']=float(lo)
  return out
 
-def checkpoint(history,front,gen,step=25,window=100,patience=2,tolerance=1e-12):
+def checkpoint(history,front,gen,step=25,window=100,patience=3,tolerance=1e-12):
  if gen==0 or gen%step:return None
  old=[x for x in history if x['generation']<=gen-window]
  previous=old[-1]['frontier'] if old else None
