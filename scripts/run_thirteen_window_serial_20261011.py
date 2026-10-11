@@ -30,7 +30,14 @@ def main():
              '--workers',str(job['workers']),'--batch',str(job['batch']),
              '--seed-size',str(job['seed_size']),'--seed',str(job['seed']),
              '--authorization-file',str(a.authorization_file)]
+        state_path=pathlib.Path(job['output'])/'state.json'
+        if state_path.is_file():
+            state=json.loads(state_path.read_text())
+            if state.get('completed'):
+                print('SKIP_COMPLETED_WINDOW',job['window'],flush=True);continue
         print('START_WINDOW',job['window'],flush=True)
         subprocess.run(cmd,cwd=ROOT,check=True)
+        if not state_path.is_file() or not json.loads(state_path.read_text()).get('completed'):
+            raise RuntimeError('WINDOW_EXITED_WITHOUT_COMPLETION:'+str(job['window']))
         print('COMPLETE_WINDOW',job['window'],flush=True)
 if __name__=='__main__':main()
