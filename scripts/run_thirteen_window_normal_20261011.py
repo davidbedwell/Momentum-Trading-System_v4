@@ -76,6 +76,12 @@ def main():
  if state.get('completed'):
   print('WINDOW_ALREADY_COMPLETE',window,flush=True);return
  cs=recover_jsonl(out/'candidates.jsonl');rs=recover_jsonl(out/'evaluations.jsonl')
+ candidate_hashes=[c['genome_hash'] for c in cs]
+ if len(candidate_hashes)!=len(set(candidate_hashes)):raise RuntimeError('DUPLICATE_CANDIDATE_HASH')
+ if any(r['genome_hash'] not in set(candidate_hashes) for r in rs):raise RuntimeError('ORPHAN_EVALUATION')
+ if len({r['genome_hash'] for r in rs})!=len(rs):raise RuntimeError('DUPLICATE_EVALUATION')
+ if cs and max(c['generation'] for c in cs)>state['generation']+1:raise RuntimeError('JOURNAL_AHEAD_OF_CHECKPOINT')
+ if cs and max(c['generation'] for c in cs)==state['generation']+1 and not (out/'pending.json').is_file():raise RuntimeError('MISSING_PENDING_RNG')
  genomes={c['genome_hash']:c for c in cs};results={r['genome_hash']:r for r in rs};known=set(genomes)
  import os
  os.environ['MTS_WINDOW_LOW']=str(window[0]);os.environ['MTS_WINDOW_HIGH']=str(window[1])
@@ -106,7 +112,10 @@ def main():
     atomic_json(out/'pending.json',{'generation':gen,'rng_state':list(rng.getstate())})
     durable_append(out/'candidates.jsonl',pending);cs.extend(pending);genomes.update({c['genome_hash']:c for c in pending})
    else:
-    pending_state=json.loads((out/'pending.json').read_text());rng.setstate(tup(pending_state['rng_state']))
+    if len(pending)!=(a.seed_size if gen==0 else a.batch):raise RuntimeError('INCOMPLETE_CANDIDATE_GENERATION')
+    pending_state=json.loads((out/'pending.json').read_text())
+    if pending_state['generation']!=gen:raise RuntimeError('PENDING_GENERATION_MISMATCH')
+    rng.setstate(tup(pending_state['rng_state']))
    todo=[c for c in pending if c['genome_hash'] not in results]
    for r in executor.map(evaluate,todo,chunksize=1):
     durable_append(out/'evaluations.jsonl',[r]);results[r['genome_hash']]=r
