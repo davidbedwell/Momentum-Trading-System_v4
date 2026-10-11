@@ -51,7 +51,7 @@ def fresh(rng,domains,side,known):
 def main():
  p=argparse.ArgumentParser()
  p.add_argument('--output',type=pathlib.Path,default=ROOT/'Research/Runs/thirteen-window-normal-20261011')
- p.add_argument('--generations',type=int,default=200);p.add_argument('--batch',type=int,default=120)
+ p.add_argument('--generations',type=int,default=1000000);p.add_argument('--batch',type=int,default=120)
  p.add_argument('--seed-size',type=int,default=1200);p.add_argument('--workers',type=int,default=28)
  p.add_argument('--seed',type=int,default=20261011);p.add_argument('--authorization-file',type=pathlib.Path)
  p.add_argument('--window',type=int,nargs=2,metavar=('LOW','HIGH'),required=True)

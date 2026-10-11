@@ -6,7 +6,7 @@ sys.path.insert(0,str(ROOT))
 from scripts.thirteen_window_evolution_engine_20261011 import WINDOWS
 from scripts.thirteen_window_launch_guard_20261011 import require_launch_authorization
 
-def plan(base, generations=200, workers=28, batch=120, seed_size=1200, seed=20261011):
+def plan(base, generations=1000000, workers=28, batch=120, seed_size=1200, seed=20261011):
     return [{'window':[lo,hi],'output':str(pathlib.Path(base)/f'window_{lo:02d}_{hi:02d}'),
              'seed':seed+i,'generations':generations,'workers':workers,'batch':batch,'seed_size':seed_size}
             for i,(lo,hi) in enumerate(WINDOWS)]
@@ -14,7 +14,7 @@ def plan(base, generations=200, workers=28, batch=120, seed_size=1200, seed=2026
 def main():
     p=argparse.ArgumentParser()
     p.add_argument('--output',type=pathlib.Path,default=ROOT/'Research/Runs/thirteen-window-serial-20261011')
-    p.add_argument('--generations',type=int,default=200);p.add_argument('--workers',type=int,default=28)
+    p.add_argument('--generations',type=int,default=1000000);p.add_argument('--workers',type=int,default=28)
     p.add_argument('--batch',type=int,default=120);p.add_argument('--seed-size',type=int,default=1200)
     p.add_argument('--seed',type=int,default=20261011);p.add_argument('--authorization-file',type=pathlib.Path)
     p.add_argument('--plan',action='store_true');a=p.parse_args()
