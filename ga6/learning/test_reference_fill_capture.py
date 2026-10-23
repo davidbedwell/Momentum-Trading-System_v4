@@ -7,6 +7,11 @@ class FakeLedger:
         self.cash=10000.
         self.holdings={}
         self.fills=[]
+        self.price_basis='split_adjusted'
+        self.action_log=[]
+    def apply_ex_date(self,date,ticker,split=0.,dividend=0.):
+        self.action_log.append((date,ticker,split,dividend))
+        self.cash += self.holdings.get(ticker,0)*dividend
     def available_cash(self):
         return self.cash
     def execute_open(self, order, execution_date, open_price):
@@ -21,7 +26,7 @@ def evaluator(frame, genome, **kwargs):
     ledger=module.SettledLedger()
     ledger.execute_open(SimpleNamespace(decision_date="2024-01-02",security="AAA",side="BUY",shares=10),"2024-01-03",100)
     ledger.execute_open(SimpleNamespace(decision_date="2024-01-04",security="AAA",side="SELL",shares=10),"2024-01-05",110)
-    return dict(fills=len(ledger.fills), final_nav=ledger.cash)
+    return dict(fills=len(ledger.fills), corporate_actions=len(ledger.action_log), final_nav=ledger.cash)
 
 module=SimpleNamespace(SettledLedger=FakeLedger,evaluate=evaluator)
 
