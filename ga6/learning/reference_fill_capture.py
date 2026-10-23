@@ -12,6 +12,17 @@ _LOCK = RLock()
 def _capture_ledger(base, sink, actions):
     class CapturingLedger(base):
         def apply_ex_date(self, date, ticker, split=0., dividend=0.):
+            shares_before = self.holdings.get(ticker, 0)
+            cash_before = self.cash
+            result = super().apply_ex_date(date, ticker, split, dividend)
+            corporate_sink.append(dict(date=str(date), security=ticker, split=split,
+                dividend=dividend, shares_before=shares_before,
+                shares_after=self.holdings.get(ticker, 0),
+                cash_before=cash_before, cash_after=self.cash,
+                price_basis=self.price_basis))
+            return result
+
+        def apply_ex_date(self, date, ticker, split=0., dividend=0.):
             before_cash = self.cash
             before_qty = self.holdings.get(ticker, 0)
             result = super().apply_ex_date(date, ticker, split, dividend)
@@ -49,6 +60,7 @@ def run_reference_with_fills(evaluator_module, frame, genome, **kwargs):
     with _LOCK:
         original = evaluator_module.SettledLedger
         fills = []
+        corporate_actions = []
         actions = []
         evaluator_module.SettledLedger = _capture_ledger(original, fills, actions)
         try:
@@ -66,5 +78,13 @@ def run_reference_with_fills(evaluator_module, frame, genome, **kwargs):
             expected = event["cash_before"] + (1 if event["side"] == "SELL" else -1) * event["quantity"] * event["price"] - event["fee"]
             if abs(expected - event["cash_after"]) > max(1e-6, abs(expected) * 1e-9):
                 raise RuntimeError("captured cash mismatch")
-        return {"metrics": metrics, "fills": fills, "corporate_actions": actions,
+        if len(corporate_actions) != metrics["corporate_actions"]:
+            raise RuntimeError("captured corporate action count differs from evaluator")
+        for action in corporate_actions:
+            if action["price_basis"] == "split_adjusted" and action["shares_before"] != action["shares_after"]:
+                raise RuntimeError("split-adjusted inventory changed on ex-date")
+            expected_dividend = action["shares_before"] * float(action["dividend"])
+            if abs(action["cash_after"] - action["cash_before"] - expected_dividend) > 1e-6:
+                raise RuntimeError("corporate dividend cash mismatch")
+        return {"metrics": metrics, "fills": fills, "corporate_actions": corporate_actions, "corporate_actions": actions,
                 "status": "REFERENCE_EXECUTED_FILLS_CAPTURED_NOT_DECISION_CERTIFIED"}
