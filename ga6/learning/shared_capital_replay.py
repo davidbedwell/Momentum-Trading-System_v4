@@ -34,7 +34,7 @@ def replay_orders(sessions, proposals, *, starting_cash, fee, annual_cash_yield,
         # All open positions are forcibly exited in defense or at 40 sessions.
         mandatory={s for s in owners if risk_veto[ds] is not True or i-entered[s]>=max_hold}
         for p in pending:
-            if p["action"]=="EXIT": mandatory.add(p["symbol"])
+            if p["action"]=="EXIT" and owners.get(p["symbol"])==str(p["chromosome"]): mandatory.add(p["symbol"])
         # Sell before buy; no same-open reversal.
         sold=set()
         for symbol in sorted(mandatory):
