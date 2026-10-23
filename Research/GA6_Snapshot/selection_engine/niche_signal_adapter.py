@@ -31,7 +31,7 @@ def evaluate_all(*,asof,symbol,market_features,recognized_niches,niche_evidence_
  positions=position_by_chromosome or {}
  out=[];missing=0
  for i,c in enumerate(candidates):
-  if c.genome.niche not in recognized_niches:continue
+  if c.genome.niche not in recognized_niches and not positions.get(i,PositionState()).shares:continue
   f={};valid=True
   for name in required_features(c):
    v=market_features.get(LEGACY.get(name,name))
@@ -40,5 +40,6 @@ def evaluate_all(*,asof,symbol,market_features,recognized_niches,niche_evidence_
   if not valid:missing+=1;continue
   p=positions.get(i,PositionState())
   action,weight=decision(c.genome,f,p,close_price,c.entry_tree)
+  if c.genome.niche not in recognized_niches and action=='ENTER':action,weight='NO_ENTRY',0.
   out.append(dict(chromosome=i,symbol=symbol,asof=asof,niche=c.genome.niche,action=action,raw_weight=weight,evidence_cutoff=asof,features=f,identity=c.identity()))
  return dict(decisions=out,missing_features=missing,eligible_chromosomes=sum(c.genome.niche in recognized_niches for c in candidates))
