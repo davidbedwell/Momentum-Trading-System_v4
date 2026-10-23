@@ -8,7 +8,7 @@ from math import isfinite
 def replay_orders(sessions, proposals, *, starting_cash, fee, annual_cash_yield,
                   ledger_class, order_class, max_positions=10, max_hold=40,
                   membership=None, earnings_allowed=None, risk_veto=None,
-                  corporate_actions=None):
+                  corporate_actions=None, decision_provider=None):
     """sessions: ordered (date, open_prices, close_prices); proposals by decision date.
 
     Proposals: {decision_date: [{symbol, chromosome, action, weight}]};
@@ -48,7 +48,10 @@ def replay_orders(sessions, proposals, *, starting_cash, fee, annual_cash_yield,
         for p in pending:
             symbol=p["symbol"]; action=p["action"]; chromosome=str(p["chromosome"])
             if action in ("HOLD","DECLINE"): continue
-            if action=="EXIT": continue
+            if action=="EXIT":
+                if symbol in owners and owners[symbol]!=chromosome:
+                    rejects.append((ds,symbol,action,"owner_mismatch"))
+                continue
             if symbol in sold:
                 rejects.append((ds,symbol,action,"same_session_exit")); continue
             if symbol not in opens:
@@ -96,7 +99,8 @@ def replay_orders(sessions, proposals, *, starting_cash, fee, annual_cash_yield,
             raise ValueError("missing held-security close")
         last.update(closes)
         nav.append((ds,ledger.nav(closes)))
-        proposals_today=proposals.get(ds,[])
+        proposals_today=(decision_provider(ds, closes, dict(owners), dict(ledger.holdings), dict(entered), i)
+                         if decision_provider is not None else proposals.get(ds,[]))
         seen=set()
         for p in proposals_today:
             symbol=p["symbol"]; action=p["action"]

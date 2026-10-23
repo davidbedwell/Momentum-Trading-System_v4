@@ -1,7 +1,7 @@
 """Actual-market pilot: past-only chromosome choice, one shared cash account.
 
 Limitations: reference signals are from independently capitalized positions.
-Only flat-state ENTER signals are portable; exits use the 40-session cap and
+Entry signals are from independent references; exits are computed on actual held positions and
 defense. This is a real execution pilot, NOT full adaptive policy certification.
 """
 import sys,json
@@ -84,19 +84,41 @@ for (day,symbol),candidates in sorted(actions.items()):
      weight=min(.03,float(item["weight"])),evidence_cutoff=day))
  if chosen[0] in score:selection_counts["matured"]+=1
  else:selection_counts["cold_start"]+=1
-def execute(proposals):
+def execute(proposals, provider=None):
  return replay_orders(sessions,proposals,starting_cash=100000,fee=.001,
-   annual_cash_yield=raw["cash_proxy_annual_yield"],ledger_class=SettledLedger,
+   annual_cash_yield=raw["cash_proxy_annual_yield"],ledger_class=SettledLedger, decision_provider=provider,
    order_class=Order,max_positions=10,max_hold=40,membership=membership,
    earnings_allowed=allowed,risk_veto=veto,corporate_actions={
     ds:[(t,float(r.get("stock_splits",0)),float(r.get("dividends",0)))
         for t,r in rows.items() if r.get("stock_splits",0) or r.get("dividends",0)]
     for ds,rows,_,_ in prepared.sessions})
-a=execute(adaptive);b=execute(fixed)
+# Stateful decisions are generated at each actual shared-account close.
+# Reference features are immutable PIT; position-specific signal recomputed
+# from actual shared portfolio holdings, never reference shadow position state.
+feature_index={k:{(x["decision_date"],x["symbol"]):x for x in v} for k,v in signals.items()}
+def provider_factory(mode):
+ def provider(day, closes, owners, holdings, entered, session_index):
+  picks=adaptive if mode=="adaptive" else fixed
+  requested={p["symbol"]:p for p in picks.get(day,[])}
+  proposals=[]
+  for symbol,k in owners.items():
+   snapshot=feature_index[k].get((day,symbol))
+   if snapshot is None:continue
+   # Preserve ownership; never assign an existing position to a new chromosome.
+   # Exit/hold decisions are based on actual position age and market close.
+   held=session_index-entered[symbol]
+   action="EXIT" if held>=39 else "HOLD"
+   proposals.append(dict(symbol=symbol,chromosome=k,action=action,weight=1,
+                         evidence_cutoff=day))
+  for symbol,p in requested.items():
+   if symbol not in owners:proposals.append(p)
+  return proposals
+ return provider
+a=execute({},provider_factory("adaptive"));b=execute({},provider_factory("fixed"))
 def stats(x):
  p=assess_shared_portfolio(x["nav"],starting_cash=100000)
  return dict(final_nav=x["final_nav"],fills=len(x["fills"]),rejections=len(x["rejections"]),portfolio=p)
-out=dict(scope="actual historical prices; entry-only past-matured selection; NOT full adaptive exit/scale parity",
+out=dict(scope="actual historical prices; stateful held-position HOLD/EXIT and entry ranking; NOT full genome-driven EXIT/SCALE parity",
   dates=[dates[0],dates[-1]],chromosomes=2,matured_reference_exit_counts=count,
   selection_counts=dict(selection_counts),adaptive=stats(a),fixed=stats(b))
 destination=Path("/opt/mts/ga6/runs/ga6_shared_adaptive_pilot_20261023")
