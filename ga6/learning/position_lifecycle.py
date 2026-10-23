@@ -7,11 +7,20 @@ adjustment stream or fail closed when shares change without recorded fills.
 from collections import defaultdict
 from math import isfinite
 
-def reconstruct_positions(fills, *, max_sessions=40, session_index=None):
+def reconstruct_positions(fills, *, max_sessions=40, session_index=None, corporate_actions=None):
     if not 1 <= max_sessions <= 40:
         raise ValueError("invalid swing cap")
     if session_index is None:
         raise ValueError("explicit chronological session index required")
+    corporate_actions = list(corporate_actions or [])
+    for action in corporate_actions:
+        if action["price_basis"] != "split_adjusted":
+            raise ValueError("unsupported corporate action price basis")
+        if action["pre_split_shares"] != action["post_split_shares"]:
+            raise ValueError("split-adjusted shares changed")
+        expected = action["pre_split_shares"] * action["dividend"]
+        if abs(action["cash_after"]-action["cash_before"]-expected) > 1e-6:
+            raise ValueError("corporate action dividend cash mismatch")
     states = {}
     events = []
     completed = []
@@ -85,4 +94,6 @@ def reconstruct_positions(fills, *, max_sessions=40, session_index=None):
                                   scale_out_count=st["scale_out_count"]))
             del states[symbol]
     return dict(events=events,completed=completed,open_positions=states,
+                corporate_actions=corporate_actions,
+                dividend_cash=sum(a["cash_after"]-a["cash_before"] for a in corporate_actions),
                 status="FILL_RECONSTRUCTED_NO_DECISION_ATTRIBUTION")
