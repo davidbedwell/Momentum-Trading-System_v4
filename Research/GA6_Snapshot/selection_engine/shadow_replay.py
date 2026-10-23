@@ -18,13 +18,15 @@ class ShadowPosition:
  cash:float=100000.
  realized:float=0.
 
-def replay_symbol(rows,candidates,niche_by_date,*,fee=.001,max_sessions=40,starting_cash=100000):
+def replay_symbol(rows,candidates,niche_by_date,*,fee=.001,max_sessions=40,starting_cash=100000,entry_allowed_by_date=None,risk_veto_by_date=None):
  """rows sorted date, with open/close/adj_close, all features; returns completed trades.
  Decisions at close execute at next open. Conservative no same-open reversal.
  All trade returns are entry-notional based after buy and sell commissions.
  """
  if not 1<=max_sessions<=40:raise ValueError('invalid hold cap')
  if not 0<=fee<1:raise ValueError('invalid fee')
+ if entry_allowed_by_date is not None and any(str(r["date"])[:10] not in entry_allowed_by_date for r in rows):raise ValueError("missing entry policy")
+ if risk_veto_by_date is not None and any(str(r["date"])[:10] not in risk_veto_by_date for r in rows):raise ValueError("missing defense policy")
  states={i:ShadowPosition(cash=starting_cash) for i in range(len(candidates))}
  pending={};trades=[];decisions=[]
  for day_index,row in enumerate(rows):
@@ -40,6 +42,7 @@ def replay_symbol(rows,candidates,niche_by_date,*,fee=.001,max_sessions=40,start
   # Orders queued at prior close fill at current open.
   for i,(action,weight,decision_id) in sorted(pending.items()):
    st=states[i]
+   if action=='ENTER' and risk_veto_by_date is not None and risk_veto_by_date[ds] is not True:continue
    if action in ('EXIT','REPLACE_CANDIDATE') and st.shares:
     proceeds=st.shares*open_price*(1-fee)
     cost=st.shares*st.entry_price*(1+fee)
@@ -49,7 +52,7 @@ def replay_symbol(rows,candidates,niche_by_date,*,fee=.001,max_sessions=40,start
     if held>max_sessions:raise RuntimeError('holding cap violated')
     trades.append(dict(chromosome=i,symbol=symbol,entry_date=st.entry_date,exit_date=ds,entry_decision_id=st.entry_decision_id,exit_decision_id=decision_id,entry_price=st.entry_price,exit_price=open_price,shares=st.shares,holding_sessions=held,net_return=pnl/cost,realized_pnl=pnl,exit_reason=action))
     st.shares=0;st.entry_index=-1;st.entry_decision_id=''
-   elif action=='ENTER' and not st.shares:
+   elif action=='ENTER' and not st.shares and (entry_allowed_by_date is None or entry_allowed_by_date[ds]):
     target=min(float(weight),float(candidates[i].genome.max_weight),.10)
     qty=int(min(st.cash/(open_price*(1+fee)),starting_cash*target/(open_price*(1+fee))))
     if qty>0:
@@ -57,6 +60,14 @@ def replay_symbol(rows,candidates,niche_by_date,*,fee=.001,max_sessions=40,start
      st.shares=qty;st.entry_price=open_price;st.peak_price=open_price
      st.entry_index=day_index;st.entry_date=ds;st.entry_decision_id=decision_id
   pending={}
+  # Defensive liquidation at the current open, including an overnight transition.
+  if risk_veto_by_date is not None and risk_veto_by_date[ds] is not True:
+   for i,st in states.items():
+    if not st.shares:continue
+    proceeds=st.shares*open_price*(1-fee);cost=st.shares*st.entry_price*(1+fee)
+    pnl=proceeds-cost;st.cash+=proceeds;st.realized+=pnl
+    trades.append(dict(chromosome=i,symbol=symbol,entry_date=st.entry_date,exit_date=ds,entry_decision_id=st.entry_decision_id,exit_decision_id='',entry_price=st.entry_price,exit_price=open_price,shares=st.shares,holding_sessions=day_index-st.entry_index,net_return=pnl/cost,realized_pnl=pnl,exit_reason='DEFENSIVE_OPEN'))
+    st.shares=0;st.entry_index=-1;st.entry_decision_id=''
   # Hard holding cap: exit on first available open at session 40.
   # In the current prototype this triggers at today's open only if the prior
   # session scheduled an exit. If an open-date cap is reached unexpectedly,
@@ -78,7 +89,8 @@ def replay_symbol(rows,candidates,niche_by_date,*,fee=.001,max_sessions=40,start
    did=f'{symbol}|{ds}|{i}'
    decisions.append(dict(decision_id=did,asof=ds,symbol=symbol,chromosome=i,niche=d['niche'],action=action,features=d['features'],weight=d['raw_weight']))
    if st.shares:
-    if action in ('EXIT','REPLACE_CANDIDATE'):pending[i]=(action,0.,did)
+    if risk_veto_by_date is not None and risk_veto_by_date[ds] is not True:pending[i]=('EXIT',0.,did)
+    elif action in ('EXIT','REPLACE_CANDIDATE'):pending[i]=(action,0.,did)
     elif day_index-st.entry_index>=max_sessions-1:pending[i]=('EXIT',0.,did)
-   elif action=='ENTER':pending[i]=('ENTER',d['raw_weight'],did)
+   elif action=='ENTER' and (entry_allowed_by_date is None or entry_allowed_by_date[ds]):pending[i]=('ENTER',d['raw_weight'],did)
  return dict(decisions=decisions,trades=trades,open_positions=sum(s.shares>0 for s in states.values()),status='RESEARCH_ONLY_SHADOW_NO_GA6_POLICY')
