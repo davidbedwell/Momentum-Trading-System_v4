@@ -18,7 +18,7 @@ def _capture_ledger(base, sink):
             after_qty = self.holdings.get(order.security, 0)
             fill = dict(self.fills[-1])
             sink.append({
-                "decision_date": str(order.date),
+                "decision_date": str(order.decision_date),
                 "execution_date": str(execution_date),
                 "security": order.security,
                 "side": order.side,
