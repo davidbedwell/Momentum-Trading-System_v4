@@ -21,7 +21,7 @@ def test_entry_scale_partial_exit_and_close():
     assert trade["scale_in_count"]==1 and trade["scale_out_count"]==1
     assert trade["fill_count"]==4
     assert trade["holding_sessions"]==8
-    assert trade["realized_pnl"]==350-4
+    assert trade["realized_pnl"]==pytest.approx(350-4)
     assert result["open_positions"]=={}
 
 def test_missing_split_adjustment_fails_closed():
