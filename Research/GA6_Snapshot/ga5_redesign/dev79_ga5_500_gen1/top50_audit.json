@@ -1,0 +1,57 @@
+{
+  "audit_utc": "2026-10-19T18:03:30.655207+00:00",
+  "ledger_rows": 18500,
+  "distinct_chromosomes": 14426,
+  "top50": {
+    "best": {
+      "rank": 1,
+      "chromosome_id": "d2df2d7f8e5d038a10f880d9522190e42b3edffec80207b7adec5a15e99eeeac",
+      "generation": 34,
+      "niche": "NICHE-0005",
+      "fitness": 0.043425368507227585,
+      "cagr": 0.14546146530678894,
+      "mdd": -0.17006016133260227,
+      "calmar": 0.8553529772460735,
+      "fills": 70286,
+      "buy_fills": 68846,
+      "sell_fills": 1440,
+      "scale_in": 67328,
+      "scale_out": 0,
+      "closed_trades": 1430,
+      "expectancy": 0.21091936875724118,
+      "tail": -0.30798687434468586,
+      "shadow_win_rate": 0.4643356643356643,
+      "shadow_mean_net_return": 0.21091936875724118,
+      "gross_buy_notional": 6148052.630794108,
+      "cash_yield": 91741.0055281706,
+      "final_nav": 1732007.5680885538,
+      "first_date": "2005-09-14",
+      "last_date": "2026-09-14"
+    },
+    "median_cagr": 0.056534330286957424,
+    "median_mdd": -0.03609710231355284,
+    "median_fitness": 0.03357104027811338,
+    "median_trades": 2119.0,
+    "niche_counts": {
+      "NICHE-0005": 14,
+      "NICHE-0013": 4,
+      "NICHE-0012": 1,
+      "NICHE-0004": 5,
+      "NICHE-0008": 2,
+      "NICHE-0006": 4,
+      "NICHE-0001": 11,
+      "NICHE-0007": 3,
+      "NICHE-0002": 1,
+      "NICHE-0010": 3,
+      "NICHE-0009": 1,
+      "NICHE-0011": 1
+    }
+  },
+  "diagnostic_flags": {
+    "shadow_returns_not_portfolio_returns": true,
+    "scale_in_fill_multiplicity": 1696627,
+    "trade_count_uses_shadow_closed_trades": true,
+    "capital_utilization_not_directly_recorded": true,
+    "ga4_same_engine_comparison_not_available_from_current_ledger": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "filters": "CAGR >15%, absolute MDD <20% and >0, Calmar >1.5, shadow closed trades >=100",
+  "scope": "GA5 exploratory DEV79 only",
+  "source_stats": {
+    "/opt/mts/ga5_redesign/dev79_ga5_500_gen1/all_evaluations.jsonl": {
+      "rows": 133000
+    },
+    "/opt/mts/ga5_redesign/dev79_niche_origin_500x1000_20261019/all_evaluations.jsonl": {
+      "rows": 61000
+    }
+  },
+  "distinct_qualifying_chromosomes": 0,
+  "best": null
+}

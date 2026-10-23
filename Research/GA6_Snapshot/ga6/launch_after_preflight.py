@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""Unattended research launch after actual 200-member GA6 preflight; no invented certification gates."""
+import json,subprocess,time,traceback
+from pathlib import Path
+root=Path('/opt/mts/ga6'); runs=root/'runs'; pre=runs/'ga6_200_preflight_v1'; dest=runs/'ga6_production_v1'; status=runs/'ga6_launch_status.json'
+def mark(phase,**kw):
+ status.write_text(json.dumps(dict(phase=phase,epoch=time.time(),**kw),indent=2))
+try:
+ mark('WAITING_FOR_200_PREFLIGHT')
+ while not (pre/'report.json').exists():
+  if (pre/'preflight_failure.json').exists():raise RuntimeError('200-member preflight failed: '+(pre/'preflight_failure.json').read_text()[:1000])
+  time.sleep(30)
+ report=json.loads((pre/'report.json').read_text())
+ h=report.get('history',[])
+ if report.get('evaluations')!=200 or len(h)!=1 or len(h[0].get('niche_counts',{}))!=13:raise RuntimeError('200-member preflight incomplete')
+ if not (pre/'checkpoint_unified.json').exists():raise RuntimeError('200-member checkpoint absent')
+ mark('PREFLIGHT_PASSED',evaluations=200,niches=13)
+ cmd=['/opt/mts/.venv/bin/python','-u',str(root/'production_runner.py'),'--features','/opt/mts/ga5_redesign/exploratory79_ga4_enriched.parquet','--policy-file','/opt/mts/ga5_redesign/exploratory79_policy.json','--output',str(dest),'--population','200','--workers','8','--generations','1000','--stagnation','100','--entry-mode','unrestricted','--production']
+ mark('PRODUCTION_RESEARCH_RUNNING',command=cmd,validity='RETROSPECTIVE_NOT_OOS_CERTIFIED')
+ with (runs/'ga6_production.log').open('a') as f:code=subprocess.call(cmd,stdout=f,stderr=subprocess.STDOUT)
+ if code:raise RuntimeError('Production research runner exited '+str(code))
+ mark('COMPLETED')
+except Exception as exc:
+ mark('BLOCKED',reason=str(exc),traceback=traceback.format_exc())
+ raise

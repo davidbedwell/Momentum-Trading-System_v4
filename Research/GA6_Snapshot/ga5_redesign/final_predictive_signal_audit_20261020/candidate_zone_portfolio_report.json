@@ -1,0 +1,20 @@
+{
+  "status": "EXPLORATORY_RETROSPECTIVE_SELECTION",
+  "start_cash": 100000,
+  "end_nav": 128555.48953222248,
+  "cagr": 0.05495380043143028,
+  "mdd": -0.2183301420632775,
+  "mean_utilization": 0.9719186106943166,
+  "buys": 2872,
+  "sells": 2852,
+  "open_positions": 20,
+  "years": 4.695414099931554,
+  "limitations": [
+    "Signals selected partly using 2022+ outcomes: in-sample selection bias",
+    "Research-only 12 frozen niches, not all 13",
+    "Split-adjusted opens and adjusted closes; dividend accounting may be approximate",
+    "Cash from sales available same day, settlement not modeled",
+    "No earnings embargo or defensive regime gate",
+    "No independent out-of-sample certification"
+  ]
+}

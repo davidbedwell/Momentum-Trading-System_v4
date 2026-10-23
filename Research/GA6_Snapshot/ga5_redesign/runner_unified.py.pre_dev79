@@ -1,0 +1,111 @@
+"""Unrestricted GA5 population runner, guarded research only.
+All seven historical seeds share one breeding pool; labels are provenance.
+"""
+import argparse,base64,hashlib,json,pickle,random,sys,time,os
+from concurrent.futures import ProcessPoolExecutor
+from pathlib import Path
+from dataclasses import asdict
+import pandas as pd
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
+from niche_seeds import initial
+from optimizer_v3 import NICHES,fitness
+from unified_evolution import breed
+from ga5_chromosome_contract import Genome
+from canonical_engine import ResultCache,digest_file
+from guarded_evaluator import evaluate,PreparedSessions
+from runner_v4 import engine_fingerprint
+from exit_objectives import pareto_front
+
+_WORKER_PREPARED=None
+_WORKER_POLICY=None
+
+def _worker_init(frame,blocked,membership,veto,cash_yield):
+ global _WORKER_PREPARED,_WORKER_POLICY
+ _WORKER_PREPARED=PreparedSessions(frame)
+ _WORKER_POLICY=(blocked,membership,veto,cash_yield)
+
+def _worker_evaluate(genome):
+ blocked,membership,veto,cash_yield=_WORKER_POLICY
+ return evaluate(_WORKER_PREPARED,genome,blocked=blocked,membership=membership,risk_veto=veto,annual_cash_yield=cash_yield)
+
+def run(argv=None):
+ p=argparse.ArgumentParser()
+ for arg in ('features','policy-file','output'):p.add_argument('--'+arg,required=True)
+ p.add_argument('--generations',type=int,default=1)
+ p.add_argument('--population',type=int,default=28)
+ p.add_argument('--workers',type=int,default=min(8,len(os.sched_getaffinity(0))))
+ p.add_argument('--diagnostic-only',action='store_true')
+ a=p.parse_args(argv)
+ if not a.diagnostic_only:raise ValueError('Research-only; explicit diagnostic flag required')
+ if a.population<len(NICHES) or a.generations<1 or not 1<=a.workers<=len(os.sched_getaffinity(0)):raise ValueError('Invalid budget or worker count')
+ source=Path(a.features);manifest=json.loads(source.with_suffix('.manifest.json').read_text())
+ if manifest.get('engine')!='ga5-research-v4' or not manifest.get('source_sha256'):raise ValueError('Unverified feature manifest')
+ frame=pd.read_parquet(source)
+ if not {'dividends','stock_splits'}.issubset(frame.columns):raise ValueError('Corporate actions required')
+ frame=frame[(frame.date>='2005-09-14')&(frame.date<'2026-09-15')]
+ prepared=PreparedSessions(frame)
+ policy=json.loads(Path(a.policy_file).read_text())
+ membership={(d,t):v for d,t,v in policy['membership']}
+ veto=policy['risk_veto'];blocked={t:frozenset(v) for t,v in policy['blocked'].items()}
+ if not prepared.membership_keys.issubset(membership) or not prepared.dates.issubset(veto):raise ValueError('Incomplete policies')
+ out=Path(a.output);out.mkdir(parents=True,exist_ok=True)
+ # Include the unrestricted engine in the cache fingerprint.
+ code=hashlib.sha256((engine_fingerprint()+digest_file(Path(__file__))+digest_file(Path(__file__).with_name('unified_evolution.py'))+digest_file(Path(__file__).with_name('exit_objectives.py'))+digest_file(Path(__file__).with_name('guarded_evaluator.py'))+digest_file(Path(__file__).with_name('shadow_signals.py'))+digest_file(Path(__file__).parent.parent/'ga5_chromosome_contract.py')).encode()).hexdigest()
+ data=digest_file(source);policy_hash=digest_file(Path(a.policy_file))
+ rng=random.Random(1700);cache=ResultCache(out/'evaluations.sqlite')
+ members=[initial(n) for n in NICHES]
+ seen={g.identity() for g in members}
+ while len(members)<a.population:
+  for g in breed(members,rng,1):
+   if g.identity() not in seen:members.append(g);seen.add(g.identity())
+ best=None;history=[]
+ checkpoint=out/'checkpoint_unified.json'
+ start=0
+ if checkpoint.exists():
+  state=json.loads(checkpoint.read_text())
+  if (state['data'],state['policy'],state['code'],state['population'])!=(data,policy_hash,code,a.population):raise ValueError('Checkpoint fingerprint mismatch')
+  start=state['generation'];rng.setstate(pickle.loads(base64.b64decode(state['rng'])))
+  members=[Genome(**g) for g in state['members']];history=state['history']
+  if state['best']:best=state['best']
+ try:
+  with ProcessPoolExecutor(max_workers=a.workers,initializer=_worker_init,initargs=(frame,blocked,membership,veto,policy['cash_proxy_annual_yield'])) as pool:
+   for generation in range(start,a.generations):
+    scored=[];missing=[]
+    for genome in members:
+     key=cache.key(genome,data,'DEV79_FULL','unified:'+policy_hash+':'+code)
+     result=cache.get(key)
+     if result is None:missing.append((genome,key))
+     else:scored.append((fitness(result),genome,result))
+    if missing:
+     for (genome,key),result in zip(missing,pool.map(_worker_evaluate,[g for g,_ in missing])):
+      cache.put(key,result)
+      scored.append((fitness(result),genome,result))
+    scored.sort(key=lambda v:(-v[0],v[1].identity()))
+    if best is None or scored[0][0]>best['fitness']:
+     best={'fitness':scored[0][0],'genome':asdict(scored[0][1]),'result':scored[0][2]}
+    history.append({'generation':generation+1,'unique':len({g.identity() for _,g,_ in scored}),'best_fitness':scored[0][0]})
+    # Pareto comparisons use complete historical trade outcomes for research
+    # ranking only. Future selector decisions must remain chronological.
+    eligible=[item for item in scored if item[2]['exit_objectives']['count']>=20]
+    front=pareto_front([item[2]['exit_objectives'] for item in eligible])
+    # Rank nondominated candidates by independently measured portfolio fitness;
+    # do not privilege arbitrary ordering from the Pareto implementation.
+    pareto_elites=sorted((eligible[i] for i in front),key=lambda item:(-item[0],item[1].identity()))
+    parent_count=max(2,a.population//4)
+    parents=[g for _,g,_ in pareto_elites[:parent_count]]
+    parents.extend(g for _,g,_ in scored if g.identity() not in {x.identity() for x in parents})
+    parents=parents[:parent_count]
+    history[-1]['exit_pareto_count']=len(front)
+    history[-1]['exit_metric_eligible']=len(eligible)
+    next_members=parents.copy();seen={g.identity() for g in next_members}
+    while len(next_members)<a.population:
+     for g in breed(parents,rng,1):
+      if g.identity() not in seen:next_members.append(g);seen.add(g.identity())
+    members=next_members
+    state={'data':data,'policy':policy_hash,'code':code,'population':a.population,'generation':generation+1,'rng':base64.b64encode(pickle.dumps(rng.getstate())).decode(),'members':[asdict(g) for g in members],'history':history,'best':best}
+    tmp=checkpoint.with_suffix('.tmp');tmp.write_text(json.dumps(state));tmp.replace(checkpoint)
+ finally:cache.close()
+ report={'status':'DIAGNOSTIC_ONLY','architecture':'single unrestricted breeding population','evaluations':a.generations*a.population,'history':history,'best':best}
+ (out/'report.json').write_text(json.dumps(report,indent=2))
+ print(json.dumps({'status':report['status'],'evaluations':report['evaluations'],'history':history,'best_fitness':best['fitness']},indent=2))
+if __name__=='__main__':run()

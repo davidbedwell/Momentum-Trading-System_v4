@@ -1,0 +1,11 @@
+# GA6-H Universe and Chronological Research Protocol v0.2 — 2026-10-22
+
+Decision: use current-listed NYSE, Nasdaq and NYSE American operating-company common stocks, excluding currently merged, delisted and departed companies. No paid historical point-in-time membership subscription. Do not represent this as survivorship-bias-free; historical results are conditional on 2026 survivors and cannot independently certify deployable historical CAGR.
+
+Acquire daily OHLCV and corporate actions from January 2016 onward where available; never fabricate older prices for newer listings. Preserve source, retrieval timestamp, ticker, exchange, stable ID when available, listing inception, adjustments and data gaps. Explicitly exclude ETFs, funds, preferreds, warrants, units, and other non-common equities according to frozen rules. Verify current symbol directory against actual tradable securities and record missing histories.
+
+Discovery uses rolling 6, 12, 24, 60 month training candidates and forward-only walk-forward evaluation with purged overlapping labels (1–40 sessions), timestamp-correct inputs and next-open execution. Historical crash dates are included in stock ranking discovery. Compare identical predictions with versus without prospective A/B/B1/C/R-1 portfolio gating. Do not use hindsight peak/trough windows. Freeze test periods and methodology before examining results. Previously explored periods cannot be called pristine.
+
+First engineering gates: inventory local price files and existing vendor credentials/entitlements without printing secrets; find freely available current symbol listings; estimate ticker count, data coverage, missing prices, API limits, storage and time. Stage and validate small samples before any mass download. Avoid saturating server or interfering with live GA6 optimizer. Log all exclusions and source limitations.
+
+Certification wording: chronological holdouts can test forward predictive ranking within a survivor-only universe, but are not proof of historical live-tradable universe performance. Prospective paper-trading of all currently eligible listings and future newly listed stocks can accumulate unbiased forward evidence. A low-cost historical delisting source may later improve historical confidence, but is not a dependency for initial research.

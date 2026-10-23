@@ -1,0 +1,32 @@
+{
+  "research_only": true,
+  "same_genome_except_base_weight": true,
+  "results": [
+    {
+      "base_weight": 0.001,
+      "actual_initial_weight_rule": "base_weight*(0.5+clamp(0.5+sizing_feature,0,1)); capped by max_weight and risk_budget",
+      "cagr": 0.14546146530678894,
+      "mdd": -0.17006016133260227,
+      "calmar": 0.8553529772460735,
+      "fees": 11992.252490033954,
+      "cash_yield": 91741.0055281706,
+      "fills": 70286,
+      "scale_ins": 67328,
+      "final_nav": 1732007.5680885538,
+      "seconds": 6.79
+    },
+    {
+      "base_weight": 0.03,
+      "actual_initial_weight_rule": "base_weight*(0.5+clamp(0.5+sizing_feature,0,1)); capped by max_weight and risk_budget",
+      "cagr": 0.16916846391729923,
+      "mdd": -0.4435395919634948,
+      "calmar": 0.38140555427850625,
+      "fees": 22103.072547793927,
+      "cash_yield": 61.929668807688806,
+      "fills": 3405,
+      "scale_ins": 2791,
+      "final_nav": 2663008.084245039,
+      "seconds": 9.98
+    }
+  ]
+}

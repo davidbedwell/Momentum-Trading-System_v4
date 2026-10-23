@@ -1,0 +1,31 @@
+{
+  "status": "DIAGNOSTIC_NOT_CERTIFIED",
+  "description": "Chronological frozen-ACN-only versus ACN+past-AMGN model, next-block evaluation on ACN and AMGN",
+  "summary": {
+    "ACN": {
+      "blocks": 40,
+      "evaluated_sessions": 2520,
+      "source_distance": 1.0131656415835015,
+      "adapted_distance": 1.0198142167136692,
+      "relative_distance_change": 0.0065621798226167295,
+      "assignment_retention": 0.5607142857142857,
+      "blocks_improved": 14
+    },
+    "AMGN": {
+      "blocks": 40,
+      "evaluated_sessions": 2520,
+      "source_distance": 1.0772599865813932,
+      "adapted_distance": 1.0334548495053537,
+      "relative_distance_change": -0.040663477360791865,
+      "assignment_retention": 0.5380952380952381,
+      "blocks_improved": 21
+    }
+  },
+  "interpretation_limits": [
+    "ACN retention is measured as agreement and geometric representation change, not semantic understanding",
+    "Adaptation changes niche centers and matching can be unstable",
+    "No baseline for random feature clustering yet",
+    "Feature provenance PIT audit pending",
+    "No future returns used"
+  ]
+}

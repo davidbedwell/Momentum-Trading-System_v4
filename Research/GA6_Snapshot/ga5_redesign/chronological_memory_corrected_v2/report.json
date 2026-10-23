@@ -1,0 +1,188 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "learning_mode": "global_calendar_single_pass",
+  "seed_source": "ACN through 2007-12-31",
+  "training_end": "2020-12-31",
+  "calibration_window": "Initial novelty threshold calibrated on ACN pre-2008 seed only; 2021-2022 excluded from learning",
+  "holdout_start": "2023-01-01",
+  "stock_count": 20,
+  "train_rows": 65480,
+  "test_rows": 18540,
+  "seed_niches": 6,
+  "final_niches": 12,
+  "promotions": [
+    {
+      "date": "2008-08-04",
+      "id": "NICHE-0007",
+      "source_stocks": [
+        "DECK",
+        "FCX",
+        "NUE"
+      ],
+      "support": 11
+    },
+    {
+      "date": "2008-10-15",
+      "id": "NICHE-0008",
+      "source_stocks": [
+        "ACN",
+        "COST",
+        "DECK",
+        "GE",
+        "JNJ"
+      ],
+      "support": 10
+    },
+    {
+      "date": "2008-10-28",
+      "id": "NICHE-0009",
+      "source_stocks": [
+        "CRM",
+        "FCX"
+      ],
+      "support": 10
+    },
+    {
+      "date": "2008-11-14",
+      "id": "NICHE-0010",
+      "source_stocks": [
+        "AMGN",
+        "GILD",
+        "T",
+        "XOM"
+      ],
+      "support": 13
+    },
+    {
+      "date": "2009-04-01",
+      "id": "NICHE-0011",
+      "source_stocks": [
+        "CRM",
+        "HD",
+        "INTC",
+        "NFLX",
+        "UPS"
+      ],
+      "support": 11
+    },
+    {
+      "date": "2020-04-28",
+      "id": "NICHE-0012",
+      "source_stocks": [
+        "ACN",
+        "AMGN",
+        "CRM",
+        "INTC",
+        "SO",
+        "UPS"
+      ],
+      "support": 11
+    }
+  ],
+  "profiles": [
+    {
+      "id": "NICHE-0001",
+      "observations": 2562,
+      "stocks": 19,
+      "efficiency_20": 0.12242403338467303,
+      "reversal_rate_20": 0.5193793911007026,
+      "mean_distance": 2.76545920527912
+    },
+    {
+      "id": "NICHE-0002",
+      "observations": 3897,
+      "stocks": 20,
+      "efficiency_20": 0.14966310308605116,
+      "reversal_rate_20": 0.40524762637926615,
+      "mean_distance": 2.496886309334528
+    },
+    {
+      "id": "NICHE-0003",
+      "observations": 3704,
+      "stocks": 20,
+      "efficiency_20": 0.13186603184486345,
+      "reversal_rate_20": 0.594748920086393,
+      "mean_distance": 2.3764990353875604
+    },
+    {
+      "id": "NICHE-0004",
+      "observations": 1698,
+      "stocks": 20,
+      "efficiency_20": 0.4350232367651971,
+      "reversal_rate_20": 0.4015017667844523,
+      "mean_distance": 3.1378344722348315
+    },
+    {
+      "id": "NICHE-0005",
+      "observations": 2071,
+      "stocks": 20,
+      "efficiency_20": 0.37710013475584875,
+      "reversal_rate_20": 0.47706422018348627,
+      "mean_distance": 3.0335380087986086
+    },
+    {
+      "id": "NICHE-0006",
+      "observations": 2180,
+      "stocks": 20,
+      "efficiency_20": 0.34841918736819144,
+      "reversal_rate_20": 0.5367201834862386,
+      "mean_distance": 2.780404701416325
+    },
+    {
+      "id": "NICHE-0007",
+      "observations": 772,
+      "stocks": 16,
+      "efficiency_20": 0.3217428353423937,
+      "reversal_rate_20": 0.4887953367875647,
+      "mean_distance": 3.4578982125632294
+    },
+    {
+      "id": "NICHE-0008",
+      "observations": 89,
+      "stocks": 10,
+      "efficiency_20": 0.12966635594712275,
+      "reversal_rate_20": 0.49101123595505614,
+      "mean_distance": 3.6217304290286036
+    },
+    {
+      "id": "NICHE-0009",
+      "observations": 82,
+      "stocks": 7,
+      "efficiency_20": 0.5818741597712107,
+      "reversal_rate_20": 0.5310975609756099,
+      "mean_distance": 4.270686209286307
+    },
+    {
+      "id": "NICHE-0010",
+      "observations": 73,
+      "stocks": 6,
+      "efficiency_20": 0.1648207118590263,
+      "reversal_rate_20": 0.5986301369863014,
+      "mean_distance": 3.5133805589723166
+    },
+    {
+      "id": "NICHE-0011",
+      "observations": 1293,
+      "stocks": 15,
+      "efficiency_20": 0.4150389215034173,
+      "reversal_rate_20": 0.4575792730085074,
+      "mean_distance": 3.8527500827014975
+    },
+    {
+      "id": "NICHE-0012",
+      "observations": 119,
+      "stocks": 10,
+      "efficiency_20": 0.11475617179068039,
+      "reversal_rate_20": 0.6348739495798319,
+      "mean_distance": 3.4949677538626176
+    }
+  ],
+  "feature_fix": "Adjusted high/low consistently; replaced invalid raw-volume variability with existing GA4 relative-volume percentile (PIT lineage unverified)",
+  "limitations": [
+    "Initial novelty threshold estimated on in-sample seed; potentially optimistic",
+    "Source GA4 indicators PIT provenance not independently audited; percentile feature may have non-PIT historical normalization",
+    "Heuristic recurrence criteria, no false-discovery control",
+    "Original 20-stock checkpoint not directly comparable because chronology and feature definition changed",
+    "No trading outcome or no-trade inference"
+  ]
+}

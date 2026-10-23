@@ -1,0 +1,26 @@
+[
+  {
+    "workers": 1,
+    "evaluations": 16,
+    "seconds": 1.076,
+    "evaluations_per_second": 14.865
+  },
+  {
+    "workers": 2,
+    "evaluations": 16,
+    "seconds": 0.538,
+    "evaluations_per_second": 29.721
+  },
+  {
+    "workers": 4,
+    "evaluations": 16,
+    "seconds": 0.307,
+    "evaluations_per_second": 52.034
+  },
+  {
+    "workers": 8,
+    "evaluations": 16,
+    "seconds": 0.272,
+    "evaluations_per_second": 58.919
+  }
+]

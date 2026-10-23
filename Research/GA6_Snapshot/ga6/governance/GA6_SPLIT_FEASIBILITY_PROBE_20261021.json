@@ -1,0 +1,14 @@
+{
+  "dataset": "DEV79 exploratory; PIT membership unverified",
+  "dates": 5282,
+  "start": "2005-09-14",
+  "end": "2026-09-14",
+  "assumed_lookback_sessions": 160,
+  "state_carry_sessions": "UNKNOWN: must derive from engine",
+  "result": {
+    "feasible": false,
+    "reason": "Missing regime labels",
+    "horizon_sessions": 160
+  },
+  "certifiable": false
+}

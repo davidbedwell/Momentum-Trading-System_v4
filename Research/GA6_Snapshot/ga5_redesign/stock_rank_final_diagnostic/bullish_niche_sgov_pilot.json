@@ -1,0 +1,103 @@
+{
+  "status": "EXPLORATORY_BULLISH_FILTER_PILOT",
+  "results": [
+    {
+      "horizon": 20,
+      "gate": "stock_bull",
+      "cagr": 0.16392229646443868,
+      "mdd": -0.3475004852158209,
+      "ending": 435627.44990208326,
+      "fees": 51473.973566726156,
+      "buys": 2397
+    },
+    {
+      "horizon": 20,
+      "gate": "breadth40",
+      "cagr": 0.15116539001129237,
+      "mdd": -0.2295324720131201,
+      "ending": 391483.7183826581,
+      "fees": 36815.20927210319,
+      "buys": 1820
+    },
+    {
+      "horizon": 20,
+      "gate": "breadth50",
+      "cagr": 0.11197487170070186,
+      "mdd": -0.17742671502603147,
+      "ending": 279819.71049813356,
+      "fees": 24010.43986677685,
+      "buys": 1400
+    },
+    {
+      "horizon": 20,
+      "gate": "breadth60",
+      "cagr": 0.0677368315053104,
+      "mdd": -0.14191301246024635,
+      "ending": 188778.68451213877,
+      "fees": 8367.6341528129,
+      "buys": 640
+    },
+    {
+      "horizon": 20,
+      "gate": "combined50",
+      "cagr": 0.09394557224294764,
+      "mdd": -0.17084587412481378,
+      "ending": 238810.22186861723,
+      "fees": 23775.438742422684,
+      "buys": 1400
+    },
+    {
+      "horizon": 63,
+      "gate": "stock_bull",
+      "cagr": 0.14039351241543718,
+      "mdd": -0.39524282509778697,
+      "ending": 357380.0121843537,
+      "fees": 13513.260086252045,
+      "buys": 727
+    },
+    {
+      "horizon": 63,
+      "gate": "breadth40",
+      "cagr": 0.11719472693141908,
+      "mdd": -0.4756805711390706,
+      "ending": 292817.1114842289,
+      "fees": 8629.530537316949,
+      "buys": 580
+    },
+    {
+      "horizon": 63,
+      "gate": "breadth50",
+      "cagr": 0.10288090417754137,
+      "mdd": -0.4756805711390706,
+      "ending": 258406.5070290351,
+      "fees": 6906.351328635078,
+      "buys": 480
+    },
+    {
+      "horizon": 63,
+      "gate": "breadth60",
+      "cagr": 0.024330697529722833,
+      "mdd": -0.4446717199718718,
+      "ending": 126245.17833331464,
+      "fees": 2581.742452076927,
+      "buys": 260
+    },
+    {
+      "horizon": 63,
+      "gate": "combined50",
+      "cagr": 0.09210750234438203,
+      "mdd": -0.4454096280622488,
+      "ending": 234948.46707206324,
+      "fees": 6844.064283025713,
+      "buys": 480
+    }
+  ],
+  "limitations": [
+    "These are forward-known deterministic bullish filters, not the learned 13 niches",
+    "Portfolio only changes stock exposure at scheduled 20/63-session rebalance",
+    "3% constant annual cash carry proxy, not actual historical SGOV (launched 2020)",
+    "79-stock exploratory universe may be survivorship biased",
+    "No earnings embargo, PIT verification, or blind validation",
+    "Parameter variants examined on already exposed sample"
+  ]
+}

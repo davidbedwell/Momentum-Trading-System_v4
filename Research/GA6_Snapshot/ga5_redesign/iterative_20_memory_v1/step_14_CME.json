@@ -1,0 +1,79 @@
+{
+  "step": 14,
+  "stock": "CME",
+  "accepted": true,
+  "proposed_niches": [],
+  "new_niches_committed": 0,
+  "total_niches": 10,
+  "worst_previous_stock_retention": 0.9169363538295577,
+  "max_previous_stock_distance_degradation_pct": 0.45116800703075105,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.9234088457389428,
+      "distance_change_pct": 0.1162013464483442
+    },
+    {
+      "stock": "AMGN",
+      "retention": 0.9352750809061489,
+      "distance_change_pct": -0.26692971604078797
+    },
+    {
+      "stock": "JNJ",
+      "retention": 0.970873786407767,
+      "distance_change_pct": -0.07331687619774188
+    },
+    {
+      "stock": "XOM",
+      "retention": 0.9449838187702265,
+      "distance_change_pct": -0.21564927233344106
+    },
+    {
+      "stock": "COST",
+      "retention": 0.9687162891046386,
+      "distance_change_pct": 0.11708384728616422
+    },
+    {
+      "stock": "INTC",
+      "retention": 0.9169363538295577,
+      "distance_change_pct": 0.45116800703075105
+    },
+    {
+      "stock": "HD",
+      "retention": 0.9611650485436893,
+      "distance_change_pct": -0.40775779718206984
+    },
+    {
+      "stock": "DIS",
+      "retention": 0.9525350593311759,
+      "distance_change_pct": -0.3737909888713444
+    },
+    {
+      "stock": "GILD",
+      "retention": 0.9676375404530745,
+      "distance_change_pct": -0.3912938157505836
+    },
+    {
+      "stock": "SO",
+      "retention": 0.9546925566343042,
+      "distance_change_pct": -0.13288430831395268
+    },
+    {
+      "stock": "FCX",
+      "retention": 0.9223300970873787,
+      "distance_change_pct": -0.7173922064072232
+    },
+    {
+      "stock": "NFLX",
+      "retention": 0.9234088457389428,
+      "distance_change_pct": -0.497905296193358
+    },
+    {
+      "stock": "GE",
+      "retention": 0.9212513484358145,
+      "distance_change_pct": 0.21082622409170096
+    }
+  ],
+  "learning_rows": 56392,
+  "notes": "Rollback on rejection; no hyperparameter auto-tuning"
+}

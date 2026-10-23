@@ -1,0 +1,47 @@
+{
+  "generation": 122,
+  "population": 500,
+  "matched_evaluations": 363,
+  "original": {
+    "niche_counts": {
+      "NICHE-0001": 38,
+      "NICHE-0002": 37,
+      "NICHE-0003": 37,
+      "NICHE-0004": 36,
+      "NICHE-0005": 37,
+      "NICHE-0006": 37,
+      "NICHE-0007": 38,
+      "NICHE-0008": 39,
+      "NICHE-0009": 39,
+      "NICHE-0010": 39,
+      "NICHE-0011": 49,
+      "NICHE-0012": 37,
+      "NICHE-0013": 37
+    },
+    "unique": 500,
+    "novel": 387,
+    "retained": 113
+  },
+  "corrected": {
+    "niche_counts": {
+      "NICHE-0001": 39,
+      "NICHE-0002": 39,
+      "NICHE-0003": 39,
+      "NICHE-0004": 39,
+      "NICHE-0005": 39,
+      "NICHE-0006": 39,
+      "NICHE-0007": 38,
+      "NICHE-0008": 38,
+      "NICHE-0009": 38,
+      "NICHE-0010": 38,
+      "NICHE-0011": 38,
+      "NICHE-0012": 38,
+      "NICHE-0013": 38
+    },
+    "unique": 500,
+    "novel": 422,
+    "retained": 78
+  },
+  "common_offspring": 54,
+  "comparison": "BREEDING_ONLY_NO_NEW_OFFSPRING_PORTFOLIO_EVALUATION"
+}

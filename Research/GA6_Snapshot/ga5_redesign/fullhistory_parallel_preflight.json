@@ -1,0 +1,124 @@
+[
+  {
+    "workers": 1,
+    "evaluations": 2,
+    "wall_seconds": 10.197,
+    "evals_per_second": 0.196,
+    "worker_details": [
+      {
+        "worker": 0,
+        "evaluations": 2,
+        "seconds": 2.428958406992024,
+        "result_count": 2
+      }
+    ]
+  },
+  {
+    "workers": 2,
+    "evaluations": 4,
+    "wall_seconds": 10.215,
+    "evals_per_second": 0.392,
+    "worker_details": [
+      {
+        "worker": 0,
+        "evaluations": 2,
+        "seconds": 2.4560718539869413,
+        "result_count": 2
+      },
+      {
+        "worker": 1,
+        "evaluations": 2,
+        "seconds": 2.4213441890024114,
+        "result_count": 2
+      }
+    ]
+  },
+  {
+    "workers": 4,
+    "evaluations": 8,
+    "wall_seconds": 10.63,
+    "evals_per_second": 0.753,
+    "worker_details": [
+      {
+        "worker": 0,
+        "evaluations": 2,
+        "seconds": 2.4968793419830035,
+        "result_count": 2
+      },
+      {
+        "worker": 1,
+        "evaluations": 2,
+        "seconds": 2.4755127980024554,
+        "result_count": 2
+      },
+      {
+        "worker": 2,
+        "evaluations": 2,
+        "seconds": 2.449736418988323,
+        "result_count": 2
+      },
+      {
+        "worker": 3,
+        "evaluations": 2,
+        "seconds": 2.463634590007132,
+        "result_count": 2
+      }
+    ]
+  },
+  {
+    "workers": 8,
+    "evaluations": 16,
+    "wall_seconds": 16.429,
+    "evals_per_second": 0.974,
+    "worker_details": [
+      {
+        "worker": 0,
+        "evaluations": 2,
+        "seconds": 4.042052843986312,
+        "result_count": 2
+      },
+      {
+        "worker": 1,
+        "evaluations": 2,
+        "seconds": 3.938222027005395,
+        "result_count": 2
+      },
+      {
+        "worker": 2,
+        "evaluations": 2,
+        "seconds": 3.8936325639951974,
+        "result_count": 2
+      },
+      {
+        "worker": 3,
+        "evaluations": 2,
+        "seconds": 4.008413378993282,
+        "result_count": 2
+      },
+      {
+        "worker": 4,
+        "evaluations": 2,
+        "seconds": 3.4298512660025153,
+        "result_count": 2
+      },
+      {
+        "worker": 5,
+        "evaluations": 2,
+        "seconds": 3.8313251649960876,
+        "result_count": 2
+      },
+      {
+        "worker": 6,
+        "evaluations": 2,
+        "seconds": 3.932988665997982,
+        "result_count": 2
+      },
+      {
+        "worker": 7,
+        "evaluations": 2,
+        "seconds": 3.892196895001689,
+        "result_count": 2
+      }
+    ]
+  }
+]

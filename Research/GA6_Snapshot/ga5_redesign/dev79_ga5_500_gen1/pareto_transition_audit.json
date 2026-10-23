@@ -1,0 +1,8 @@
+{
+  "old_fingerprint": "f209e7d77ef8fa9cabf8d4543392aed0b312ad43dde63ba8f634f3e6d07ae038",
+  "new_fingerprint": "51d70dae349210980b3f95a8a40568f33acc393d487f46a12233071707e44887",
+  "checkpoint_generation": 2,
+  "selection_active_from_generation": 3,
+  "backup": "ga5_redesign/dev79_ga5_500_gen1/checkpoint_unified.pre_pareto.json",
+  "caveat": "Generation 3 candidates bred under prior selection, Pareto breeding first creates Generation 4; Gen 3 fitness evaluated unchanged"
+}

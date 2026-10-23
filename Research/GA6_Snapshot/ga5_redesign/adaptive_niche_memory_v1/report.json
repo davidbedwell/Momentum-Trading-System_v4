@@ -1,0 +1,274 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "initial_niches": 6,
+  "final_niches": 40,
+  "promotions": [
+    {
+      "date": "2005-06-14",
+      "id": "NICHE-0007",
+      "support": 3,
+      "parent_nearest": "NICHE-0003",
+      "calibrated_distance_threshold": 1.2112198211838912
+    },
+    {
+      "date": "2005-07-12",
+      "id": "NICHE-0008",
+      "support": 3,
+      "parent_nearest": "NICHE-0002",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2005-07-22",
+      "id": "NICHE-0009",
+      "support": 3,
+      "parent_nearest": "NICHE-0008",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2005-08-10",
+      "id": "NICHE-0010",
+      "support": 3,
+      "parent_nearest": "NICHE-0008",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2005-08-19",
+      "id": "NICHE-0011",
+      "support": 3,
+      "parent_nearest": "NICHE-0001",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2006-05-23",
+      "id": "NICHE-0012",
+      "support": 3,
+      "parent_nearest": "NICHE-0001",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2006-08-01",
+      "id": "NICHE-0013",
+      "support": 3,
+      "parent_nearest": "NICHE-0001",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2007-03-26",
+      "id": "NICHE-0014",
+      "support": 3,
+      "parent_nearest": "NICHE-0005",
+      "calibrated_distance_threshold": 1.4447366906836805
+    },
+    {
+      "date": "2008-06-27",
+      "id": "NICHE-0015",
+      "support": 3,
+      "parent_nearest": "NICHE-0013",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2008-07-09",
+      "id": "NICHE-0016",
+      "support": 4,
+      "parent_nearest": "NICHE-0015",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2008-07-31",
+      "id": "NICHE-0017",
+      "support": 3,
+      "parent_nearest": "NICHE-0009",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2008-08-14",
+      "id": "NICHE-0018",
+      "support": 4,
+      "parent_nearest": "NICHE-0010",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2008-08-27",
+      "id": "NICHE-0019",
+      "support": 3,
+      "parent_nearest": "NICHE-0011",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2008-10-16",
+      "id": "NICHE-0020",
+      "support": 3,
+      "parent_nearest": "NICHE-0004",
+      "calibrated_distance_threshold": 1.9284950458728858
+    },
+    {
+      "date": "2008-11-18",
+      "id": "NICHE-0021",
+      "support": 3,
+      "parent_nearest": "NICHE-0015",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2008-12-04",
+      "id": "NICHE-0022",
+      "support": 3,
+      "parent_nearest": "NICHE-0012",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2008-12-09",
+      "id": "NICHE-0023",
+      "support": 3,
+      "parent_nearest": "NICHE-0001",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2009-03-24",
+      "id": "NICHE-0024",
+      "support": 3,
+      "parent_nearest": "NICHE-0005",
+      "calibrated_distance_threshold": 1.4447366906836805
+    },
+    {
+      "date": "2009-04-06",
+      "id": "NICHE-0025",
+      "support": 3,
+      "parent_nearest": "NICHE-0005",
+      "calibrated_distance_threshold": 1.4447366906836805
+    },
+    {
+      "date": "2009-04-08",
+      "id": "NICHE-0026",
+      "support": 3,
+      "parent_nearest": "NICHE-0005",
+      "calibrated_distance_threshold": 1.4447366906836805
+    },
+    {
+      "date": "2009-04-29",
+      "id": "NICHE-0027",
+      "support": 3,
+      "parent_nearest": "NICHE-0007",
+      "calibrated_distance_threshold": 1.2112198211838912
+    },
+    {
+      "date": "2009-07-10",
+      "id": "NICHE-0028",
+      "support": 3,
+      "parent_nearest": "NICHE-0016",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2009-07-17",
+      "id": "NICHE-0029",
+      "support": 3,
+      "parent_nearest": "NICHE-0008",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2009-07-30",
+      "id": "NICHE-0030",
+      "support": 3,
+      "parent_nearest": "NICHE-0029",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2010-06-04",
+      "id": "NICHE-0031",
+      "support": 3,
+      "parent_nearest": "NICHE-0012",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2010-06-23",
+      "id": "NICHE-0032",
+      "support": 3,
+      "parent_nearest": "NICHE-0002",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2011-06-17",
+      "id": "NICHE-0033",
+      "support": 3,
+      "parent_nearest": "NICHE-0012",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2011-08-22",
+      "id": "NICHE-0034",
+      "support": 3,
+      "parent_nearest": "NICHE-0012",
+      "calibrated_distance_threshold": 1.2468537847327412
+    },
+    {
+      "date": "2013-04-17",
+      "id": "NICHE-0035",
+      "support": 4,
+      "parent_nearest": "NICHE-0010",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2013-05-09",
+      "id": "NICHE-0036",
+      "support": 3,
+      "parent_nearest": "NICHE-0007",
+      "calibrated_distance_threshold": 1.2112198211838912
+    },
+    {
+      "date": "2014-11-12",
+      "id": "NICHE-0037",
+      "support": 3,
+      "parent_nearest": "NICHE-0030",
+      "calibrated_distance_threshold": 1.1793484395774803
+    },
+    {
+      "date": "2016-10-25",
+      "id": "NICHE-0038",
+      "support": 3,
+      "parent_nearest": "NICHE-0003",
+      "calibrated_distance_threshold": 1.2112198211838912
+    },
+    {
+      "date": "2016-11-30",
+      "id": "NICHE-0039",
+      "support": 3,
+      "parent_nearest": "NICHE-0003",
+      "calibrated_distance_threshold": 1.2112198211838912
+    },
+    {
+      "date": "2019-08-20",
+      "id": "NICHE-0040",
+      "support": 3,
+      "parent_nearest": "NICHE-0028",
+      "calibrated_distance_threshold": 1.2468537847327412
+    }
+  ],
+  "ACN_holdout": {
+    "sessions": 1649,
+    "mean_distance_before": 1.1800563759675418,
+    "mean_distance_after": 0.9350063793925325,
+    "original_assignment_retention": 0.6221952698605215,
+    "new_niche_fraction": 0.37355973317161917
+  },
+  "AMGN_holdout": {
+    "sessions": 1649,
+    "mean_distance_before": 1.0997611589106795,
+    "mean_distance_after": 0.8155198315518566,
+    "original_assignment_retention": 0.5567010309278351,
+    "new_niche_fraction": 0.4378411158277744
+  },
+  "calibration_thresholds": [
+    1.2468537847327412,
+    1.1793484395774803,
+    1.2112198211838912,
+    1.9284950458728858,
+    1.4447366906836805,
+    1.290128454947654
+  ],
+  "limitations": [
+    "Novelty quantiles .99, window 126 and minimum support floor 3 remain design hyperparameters",
+    "Feature PIT provenance unverified",
+    "Not globally calendar-synchronized across stocks",
+    "Niche semantics and stability not independently certified",
+    "Only original five feature families included; volume exists in dataset but is not yet calibrated for this memory"
+  ]
+}

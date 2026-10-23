@@ -1,0 +1,1289 @@
+{
+  "status": "DIAGNOSTIC_ONLY_NOT_CERTIFIED",
+  "boundaries": {
+    "train_end_exclusive": "2016-01-01",
+    "validation_end_exclusive": "2021-01-01"
+  },
+  "fold_sizes": [
+    186130,
+    96576,
+    112089
+  ],
+  "selected_identity": "e420d46b4e5ef1f66ff8552904c2b8f180419fe37d819db4a5556cd2e2041765",
+  "selected_by": "validation_fitness_train_tiebreak",
+  "selected_test": {
+    "status": "GUARDED_RESEARCH_ONLY",
+    "sessions": 1430,
+    "fills": 1335,
+    "corporate_actions": 1526,
+    "scale_fills": {
+      "in": 937,
+      "out": 0
+    },
+    "cash_yield_earned": 53.08457061586432,
+    "cash_proxy_annual_yield": 0.03,
+    "rejections": {
+      "earnings": 0,
+      "membership": 0,
+      "veto": 0,
+      "unsettled": 0,
+      "no_cash": 0,
+      "lot_too_expensive": 28258,
+      "below_minimum_allocation": 822,
+      "capacity": 0
+    },
+    "shadow": {
+      "eligible_signals": 1400,
+      "closed_trades": 1337,
+      "still_open": 63,
+      "missing_next_open": 0,
+      "events": 80904,
+      "win_rate": 0.26327599102468213,
+      "mean_net_return": -0.03255560971138208,
+      "median_net_return": -0.05315733031979684
+    },
+    "final_nav": 209658.26805414958,
+    "cagr_diagnostic": 0.13889837030727392,
+    "mdd_diagnostic": -0.2979903999015068,
+    "calmar_diagnostic": 0.4661169297842591,
+    "exit_objectives": {
+      "count": 1337,
+      "status": "DIAGNOSTIC_ONLY",
+      "expectancy": -0.032555609711382084,
+      "capture": 0.05846920484544363,
+      "capture_coverage": 1196,
+      "giveback": -0.16414107540534148,
+      "adverse": -0.06163344441532794,
+      "tail": -0.1584295948659955,
+      "efficiency": -0.004779514217383306
+    },
+    "first_date": "2021-01-04",
+    "last_date": "2026-09-14"
+  },
+  "candidates": [
+    {
+      "identity": "07cb7e561cecfbc71bef828c4f8eb933f0729e26a9bbf65027fb9d4ebe4e6aa3",
+      "genome": {
+        "niche": "growth",
+        "entry_feature": "ga4_return_126_percentile__v1",
+        "entry_threshold": -0.1,
+        "hold_feature": "ga4_close_to_sma_50__v1",
+        "hold_threshold": -0.8,
+        "exit_feature": "ga4_drawdown_252__v1",
+        "exit_threshold": -0.8,
+        "regime_feature": "ga4_breadth_above_sma_200__v1",
+        "regime_threshold": -0.2,
+        "sizing_feature": "ga4_relative_strength_change_20__v1",
+        "base_weight": 0.06,
+        "max_weight": 0.15,
+        "replace_feature": "relative_strength_20",
+        "replace_threshold": -0.8,
+        "stop_loss": 0.15,
+        "trailing_stop": 0.2,
+        "max_hold_sessions": 30,
+        "time_exit_enabled": false,
+        "risk_budget": 0.2,
+        "scale_in_threshold": 0.15,
+        "scale_out_threshold": -0.15,
+        "scale_step": 0.25
+      },
+      "train": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 2854,
+        "fills": 10763,
+        "corporate_actions": 2192,
+        "scale_fills": {
+          "in": 2888,
+          "out": 7249
+        },
+        "cash_yield_earned": 3126.1059272693997,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 40208,
+          "below_minimum_allocation": 2180,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 1119,
+          "closed_trades": 1045,
+          "still_open": 74,
+          "missing_next_open": 0,
+          "events": 56035,
+          "win_rate": 0.47081339712918663,
+          "mean_net_return": 0.011683422235841012,
+          "median_net_return": -0.004554377060541672
+        },
+        "final_nav": 346635.88036262966,
+        "cagr_diagnostic": 0.11597166052112295,
+        "mdd_diagnostic": -0.47065921519585874,
+        "calmar_diagnostic": 0.24640261313668924,
+        "exit_objectives": {
+          "count": 1045,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": 0.011683422235841012,
+          "capture": 0.14869727382906636,
+          "capture_coverage": 922,
+          "giveback": -0.2696834072484051,
+          "adverse": -0.10577993373345038,
+          "tail": -0.2323871729202246,
+          "efficiency": -0.007365202556368492
+        },
+        "first_date": "2004-09-01",
+        "last_date": "2015-12-31"
+      },
+      "validation": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1259,
+        "fills": 4915,
+        "corporate_actions": 1245,
+        "scale_fills": {
+          "in": 1419,
+          "out": 3205
+        },
+        "cash_yield_earned": 50.00943573534771,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 22994,
+          "below_minimum_allocation": 992,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 598,
+          "closed_trades": 521,
+          "still_open": 77,
+          "missing_next_open": 0,
+          "events": 31790,
+          "win_rate": 0.4740882917466411,
+          "mean_net_return": -6.90923465051721e-05,
+          "median_net_return": -0.0035510789663146304
+        },
+        "final_nav": 136289.2634140024,
+        "cagr_diagnostic": 0.06399667763296413,
+        "mdd_diagnostic": -0.37755111504504935,
+        "calmar_diagnostic": 0.1695046712425364,
+        "exit_objectives": {
+          "count": 521,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -6.90923465051721e-05,
+          "capture": 0.1322303045515864,
+          "capture_coverage": 453,
+          "giveback": -0.25194572725440545,
+          "adverse": -0.1135541204284948,
+          "tail": -0.2351998372306201,
+          "efficiency": -0.009157289619950222
+        },
+        "first_date": "2016-01-04",
+        "last_date": "2020-12-31"
+      },
+      "test": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1430,
+        "fills": 4450,
+        "corporate_actions": 1526,
+        "scale_fills": {
+          "in": 1246,
+          "out": 2834
+        },
+        "cash_yield_earned": 88.64926367619339,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 19645,
+          "below_minimum_allocation": 1200,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 669,
+          "closed_trades": 590,
+          "still_open": 79,
+          "missing_next_open": 0,
+          "events": 37788,
+          "win_rate": 0.5305084745762711,
+          "mean_net_return": 0.02324976178460614,
+          "median_net_return": 0.005813928102918291
+        },
+        "final_nav": 299949.97365241573,
+        "cagr_diagnostic": 0.21285958986333853,
+        "mdd_diagnostic": -0.3268361146291352,
+        "calmar_diagnostic": 0.6512731621010512,
+        "exit_objectives": {
+          "count": 590,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": 0.02324976178460614,
+          "capture": 0.118887114752992,
+          "capture_coverage": 557,
+          "giveback": -0.28301736464678273,
+          "adverse": -0.095717920205901,
+          "tail": -0.20085644529239377,
+          "efficiency": -0.0019448163684073958
+        },
+        "first_date": "2021-01-04",
+        "last_date": "2026-09-14"
+      }
+    },
+    {
+      "identity": "48b2c8cdf5b77c529a33f892423bbae4f1fe2f49b49270b79eba7c49a2ee334e",
+      "genome": {
+        "niche": "trend",
+        "entry_feature": "ga4_close_to_sma_200__v1",
+        "entry_threshold": -0.1,
+        "hold_feature": "ga4_sma50_slope_10__v1",
+        "hold_threshold": -0.8,
+        "exit_feature": "ga4_sma20_slope_5__v1",
+        "exit_threshold": -0.8,
+        "regime_feature": "ga4_breadth_positive_20__v1",
+        "regime_threshold": -0.2,
+        "sizing_feature": "ga4_return_252_percentile__v1",
+        "base_weight": 0.08,
+        "max_weight": 0.2,
+        "replace_feature": "relative_strength_20",
+        "replace_threshold": -0.8,
+        "stop_loss": 0.15,
+        "trailing_stop": 0.18,
+        "max_hold_sessions": 30,
+        "time_exit_enabled": false,
+        "risk_budget": 0.2,
+        "scale_in_threshold": 0.15,
+        "scale_out_threshold": -0.15,
+        "scale_step": 0.25
+      },
+      "train": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 2854,
+        "fills": 631,
+        "corporate_actions": 2192,
+        "scale_fills": {
+          "in": 464,
+          "out": 0
+        },
+        "cash_yield_earned": 3009.8380859145623,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 79253,
+          "below_minimum_allocation": 1218,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 740,
+          "closed_trades": 676,
+          "still_open": 64,
+          "missing_next_open": 0,
+          "events": 136113,
+          "win_rate": 0.05029585798816568,
+          "mean_net_return": -0.10220046342649011,
+          "median_net_return": -0.10358689826597134
+        },
+        "final_nav": 415349.42269121704,
+        "cagr_diagnostic": 0.13392854112282282,
+        "mdd_diagnostic": -0.5034291326539843,
+        "calmar_diagnostic": 0.2660325603660968,
+        "exit_objectives": {
+          "count": 676,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.10220046342649011,
+          "capture": 0.010051159445828586,
+          "capture_coverage": 623,
+          "giveback": -0.25459798373546516,
+          "adverse": -0.11580025354137952,
+          "tail": -0.22038776902407503,
+          "efficiency": -0.0048425697913521545
+        },
+        "first_date": "2004-09-01",
+        "last_date": "2015-12-31"
+      },
+      "validation": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1259,
+        "fills": 266,
+        "corporate_actions": 1245,
+        "scale_fills": {
+          "in": 212,
+          "out": 0
+        },
+        "cash_yield_earned": 13.21319888545149,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 30086,
+          "below_minimum_allocation": 846,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 470,
+          "closed_trades": 394,
+          "still_open": 76,
+          "missing_next_open": 0,
+          "events": 78928,
+          "win_rate": 0.007614213197969543,
+          "mean_net_return": -0.11903604924039685,
+          "median_net_return": -0.11444177844108179
+        },
+        "final_nav": 173108.92923921737,
+        "cagr_diagnostic": 0.11621760528084502,
+        "mdd_diagnostic": -0.2591064935416476,
+        "calmar_diagnostic": 0.4485321988357066,
+        "exit_objectives": {
+          "count": 394,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.11903604924039685,
+          "capture": 0.0014541804064147255,
+          "capture_coverage": 355,
+          "giveback": -0.23548687649303096,
+          "adverse": -0.13223900842203096,
+          "tail": -0.23112402668246956,
+          "efficiency": -0.006134698052708847
+        },
+        "first_date": "2016-01-04",
+        "last_date": "2020-12-31"
+      },
+      "test": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1430,
+        "fills": 513,
+        "corporate_actions": 1526,
+        "scale_fills": {
+          "in": 371,
+          "out": 0
+        },
+        "cash_yield_earned": 20.711046547473213,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 43707,
+          "below_minimum_allocation": 864,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 668,
+          "closed_trades": 593,
+          "still_open": 75,
+          "missing_next_open": 0,
+          "events": 93192,
+          "win_rate": 0.047217537942664416,
+          "mean_net_return": -0.0964132557815107,
+          "median_net_return": -0.10001647332414246
+        },
+        "final_nav": 273587.2969671559,
+        "cagr_diagnostic": 0.1934147035216185,
+        "mdd_diagnostic": -0.2340636804199454,
+        "calmar_diagnostic": 0.8263336848100631,
+        "exit_objectives": {
+          "count": 593,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.09641325578151072,
+          "capture": 0.010408731874656614,
+          "capture_coverage": 556,
+          "giveback": -0.25539643625428565,
+          "adverse": -0.11056306450609972,
+          "tail": -0.21505176759890104,
+          "efficiency": -0.0028389243843188403
+        },
+        "first_date": "2021-01-04",
+        "last_date": "2026-09-14"
+      }
+    },
+    {
+      "identity": "c7b3340c81882ec0e56a671c3ba1a9b7dce238be067e921a709b427ae91b3bb9",
+      "genome": {
+        "niche": "rotation",
+        "entry_feature": "ga4_sector_vs_universe_return_63__v1",
+        "entry_threshold": -0.1,
+        "hold_feature": "ga4_relative_strength_change_20__v1",
+        "hold_threshold": -0.8,
+        "exit_feature": "ga4_return_20__v1",
+        "exit_threshold": -0.8,
+        "regime_feature": "ga4_breadth_positive_20__v1",
+        "regime_threshold": -0.2,
+        "sizing_feature": "ga4_sector_return_252_percentile__v1",
+        "base_weight": 0.06,
+        "max_weight": 0.15,
+        "replace_feature": "relative_strength_20",
+        "replace_threshold": -0.8,
+        "stop_loss": 0.08,
+        "trailing_stop": 0.12,
+        "max_hold_sessions": 30,
+        "time_exit_enabled": false,
+        "risk_budget": 0.2,
+        "scale_in_threshold": 0.15,
+        "scale_out_threshold": -0.15,
+        "scale_step": 0.25
+      },
+      "train": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 2854,
+        "fills": 1989,
+        "corporate_actions": 2192,
+        "scale_fills": {
+          "in": 1332,
+          "out": 0
+        },
+        "cash_yield_earned": 3008.318602105076,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 69944,
+          "below_minimum_allocation": 1367,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 2038,
+          "closed_trades": 1972,
+          "still_open": 66,
+          "missing_next_open": 0,
+          "events": 130244,
+          "win_rate": 0.2210953346855984,
+          "mean_net_return": -0.03996812354768805,
+          "median_net_return": -0.05638343793988639
+        },
+        "final_nav": 316387.42823320045,
+        "cagr_diagnostic": 0.10701368384255017,
+        "mdd_diagnostic": -0.5471444664214582,
+        "calmar_diagnostic": 0.19558579207144705,
+        "exit_objectives": {
+          "count": 1972,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.03996812354768805,
+          "capture": 0.05677399011747611,
+          "capture_coverage": 1709,
+          "giveback": -0.16562024141542753,
+          "adverse": -0.06473863591964349,
+          "tail": -0.1719646665192531,
+          "efficiency": -0.008696404847950851
+        },
+        "first_date": "2004-09-01",
+        "last_date": "2015-12-31"
+      },
+      "validation": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1259,
+        "fills": 798,
+        "corporate_actions": 1245,
+        "scale_fills": {
+          "in": 550,
+          "out": 0
+        },
+        "cash_yield_earned": 12.713131189544328,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 44557,
+          "below_minimum_allocation": 545,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 1131,
+          "closed_trades": 1058,
+          "still_open": 73,
+          "missing_next_open": 0,
+          "events": 76508,
+          "win_rate": 0.17958412098298676,
+          "mean_net_return": -0.047243310659477344,
+          "median_net_return": -0.0595117923305735
+        },
+        "final_nav": 197424.11385763882,
+        "cagr_diagnostic": 0.14600197457173736,
+        "mdd_diagnostic": -0.2607008070850323,
+        "calmar_diagnostic": 0.5600365269452969,
+        "exit_objectives": {
+          "count": 1058,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.047243310659477344,
+          "capture": 0.0441314189352126,
+          "capture_coverage": 907,
+          "giveback": -0.15880626747086074,
+          "adverse": -0.06963720033305064,
+          "tail": -0.17147650793428998,
+          "efficiency": -0.007923569455465731
+        },
+        "first_date": "2016-01-04",
+        "last_date": "2020-12-31"
+      },
+      "test": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1430,
+        "fills": 1243,
+        "corporate_actions": 1526,
+        "scale_fills": {
+          "in": 841,
+          "out": 0
+        },
+        "cash_yield_earned": 21.84505655379097,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 42846,
+          "below_minimum_allocation": 817,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 1486,
+          "closed_trades": 1414,
+          "still_open": 71,
+          "missing_next_open": 0,
+          "events": 86481,
+          "win_rate": 0.22206506364922207,
+          "mean_net_return": -0.03872766410345073,
+          "median_net_return": -0.05450157883763592
+        },
+        "final_nav": 330998.3772705442,
+        "cagr_diagnostic": 0.23403031406613417,
+        "mdd_diagnostic": -0.17469459846591018,
+        "calmar_diagnostic": 1.3396539796953295,
+        "exit_objectives": {
+          "count": 1414,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.03872766410345073,
+          "capture": 0.049891688931155045,
+          "capture_coverage": 1256,
+          "giveback": -0.16440049610242932,
+          "adverse": -0.061707611827642755,
+          "tail": -0.1577596299864185,
+          "efficiency": -0.005015855002570458
+        },
+        "first_date": "2021-01-04",
+        "last_date": "2026-09-14"
+      }
+    },
+    {
+      "identity": "e420d46b4e5ef1f66ff8552904c2b8f180419fe37d819db4a5556cd2e2041765",
+      "genome": {
+        "niche": "range",
+        "entry_feature": "ga4_price_zscore_20__v1",
+        "entry_threshold": -0.1,
+        "hold_feature": "ga4_range_position_20__v1",
+        "hold_threshold": -0.8,
+        "exit_feature": "ga4_range_position_50__v1",
+        "exit_threshold": -0.8,
+        "regime_feature": "ga4_volatility_ratio_20_63__v1",
+        "regime_threshold": -0.2,
+        "sizing_feature": "ga4_natr_20_percentile__v1",
+        "base_weight": 0.05,
+        "max_weight": 0.12,
+        "replace_feature": "relative_strength_20",
+        "replace_threshold": -0.8,
+        "stop_loss": 0.08,
+        "trailing_stop": 0.12,
+        "max_hold_sessions": 30,
+        "time_exit_enabled": false,
+        "risk_budget": 0.2,
+        "scale_in_threshold": 0.15,
+        "scale_out_threshold": -0.15,
+        "scale_step": 0.25
+      },
+      "train": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 2854,
+        "fills": 2163,
+        "corporate_actions": 2192,
+        "scale_fills": {
+          "in": 1486,
+          "out": 0
+        },
+        "cash_yield_earned": 866.0076206927221,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 45059,
+          "below_minimum_allocation": 1677,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 2020,
+          "closed_trades": 1957,
+          "still_open": 63,
+          "missing_next_open": 0,
+          "events": 134622,
+          "win_rate": 0.227899846704139,
+          "mean_net_return": -0.03870918945207152,
+          "median_net_return": -0.05858410621270499
+        },
+        "final_nav": 164713.55346791644,
+        "cagr_diagnostic": 0.0450332502562909,
+        "mdd_diagnostic": -0.6193487684605392,
+        "calmar_diagnostic": 0.07271064794110448,
+        "exit_objectives": {
+          "count": 1957,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.03870918945207152,
+          "capture": 0.05778958308695915,
+          "capture_coverage": 1665,
+          "giveback": -0.16248194696279125,
+          "adverse": -0.06642326948386369,
+          "tail": -0.17373253822911647,
+          "efficiency": -0.00793581741236534
+        },
+        "first_date": "2004-09-01",
+        "last_date": "2015-12-31"
+      },
+      "validation": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1259,
+        "fills": 846,
+        "corporate_actions": 1245,
+        "scale_fills": {
+          "in": 600,
+          "out": 0
+        },
+        "cash_yield_earned": 146.74961423616608,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 26474,
+          "below_minimum_allocation": 657,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 987,
+          "closed_trades": 910,
+          "still_open": 76,
+          "missing_next_open": 0,
+          "events": 71838,
+          "win_rate": 0.24505494505494504,
+          "mean_net_return": -0.03135809148135254,
+          "median_net_return": -0.05060146927152811
+        },
+        "final_nav": 204289.1511369895,
+        "cagr_diagnostic": 0.15387743464635983,
+        "mdd_diagnostic": -0.24398406397747807,
+        "calmar_diagnostic": 0.6306864150789951,
+        "exit_objectives": {
+          "count": 910,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.03135809148135254,
+          "capture": 0.05950588078864926,
+          "capture_coverage": 813,
+          "giveback": -0.162340492116892,
+          "adverse": -0.06107093241518184,
+          "tail": -0.1452151488082785,
+          "efficiency": -0.004611075442449226
+        },
+        "first_date": "2016-01-04",
+        "last_date": "2020-12-31"
+      },
+      "test": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1430,
+        "fills": 1335,
+        "corporate_actions": 1526,
+        "scale_fills": {
+          "in": 937,
+          "out": 0
+        },
+        "cash_yield_earned": 53.08457061586432,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 28258,
+          "below_minimum_allocation": 822,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 1400,
+          "closed_trades": 1337,
+          "still_open": 63,
+          "missing_next_open": 0,
+          "events": 80904,
+          "win_rate": 0.26327599102468213,
+          "mean_net_return": -0.03255560971138208,
+          "median_net_return": -0.05315733031979684
+        },
+        "final_nav": 209658.26805414958,
+        "cagr_diagnostic": 0.13889837030727392,
+        "mdd_diagnostic": -0.2979903999015068,
+        "calmar_diagnostic": 0.4661169297842591,
+        "exit_objectives": {
+          "count": 1337,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.032555609711382084,
+          "capture": 0.05846920484544363,
+          "capture_coverage": 1196,
+          "giveback": -0.16414107540534148,
+          "adverse": -0.06163344441532794,
+          "tail": -0.1584295948659955,
+          "efficiency": -0.004779514217383306
+        },
+        "first_date": "2021-01-04",
+        "last_date": "2026-09-14"
+      }
+    },
+    {
+      "identity": "f7038fc84c9a0baf0a08f3a7cb2511ecbd9cc8df8aa14038a9869f2478575f38",
+      "genome": {
+        "niche": "decline",
+        "entry_feature": "ga4_relative_strength_change_20__v1",
+        "entry_threshold": -0.1,
+        "hold_feature": "ga4_return_5__v1",
+        "hold_threshold": -0.8,
+        "exit_feature": "ga4_failed_breakout_20__v1",
+        "exit_threshold": -0.8,
+        "regime_feature": "ga4_breadth_positive_20__v1",
+        "regime_threshold": -0.2,
+        "sizing_feature": "ga4_realized_vol_20_percentile__v1",
+        "base_weight": 0.04,
+        "max_weight": 0.1,
+        "replace_feature": "relative_strength_20",
+        "replace_threshold": -0.8,
+        "stop_loss": 0.08,
+        "trailing_stop": 0.12,
+        "max_hold_sessions": 30,
+        "time_exit_enabled": false,
+        "risk_budget": 0.2,
+        "scale_in_threshold": 0.15,
+        "scale_out_threshold": -0.15,
+        "scale_step": 0.25
+      },
+      "train": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 2854,
+        "fills": 2613,
+        "corporate_actions": 2192,
+        "scale_fills": {
+          "in": 1874,
+          "out": 0
+        },
+        "cash_yield_earned": 1763.6564157333005,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 50574,
+          "below_minimum_allocation": 2065,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 2378,
+          "closed_trades": 2308,
+          "still_open": 69,
+          "missing_next_open": 0,
+          "events": 141148,
+          "win_rate": 0.2993934142114385,
+          "mean_net_return": -0.02707374256947961,
+          "median_net_return": -0.05001083791908662
+        },
+        "final_nav": 251683.15666092152,
+        "cagr_diagnostic": 0.08488150454855847,
+        "mdd_diagnostic": -0.4916122184484004,
+        "calmar_diagnostic": 0.17265946891323578,
+        "exit_objectives": {
+          "count": 2308,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.02707374256947961,
+          "capture": 0.08457688065131919,
+          "capture_coverage": 1948,
+          "giveback": -0.16573962439159282,
+          "adverse": -0.06367544389927468,
+          "tail": -0.1840952149195769,
+          "efficiency": -0.009468090819069337
+        },
+        "first_date": "2004-09-01",
+        "last_date": "2015-12-31"
+      },
+      "validation": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1259,
+        "fills": 1209,
+        "corporate_actions": 1245,
+        "scale_fills": {
+          "in": 837,
+          "out": 0
+        },
+        "cash_yield_earned": 11.664273469805348,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 40311,
+          "below_minimum_allocation": 546,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 1232,
+          "closed_trades": 1155,
+          "still_open": 77,
+          "missing_next_open": 0,
+          "events": 77917,
+          "win_rate": 0.2831168831168831,
+          "mean_net_return": -0.028405671990629152,
+          "median_net_return": -0.053365417690673475
+        },
+        "final_nav": 202174.6072050254,
+        "cagr_diagnostic": 0.1514745139536271,
+        "mdd_diagnostic": -0.29288990265474546,
+        "calmar_diagnostic": 0.5171721953562296,
+        "exit_objectives": {
+          "count": 1155,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.028405671990629155,
+          "capture": 0.08069402343324653,
+          "capture_coverage": 982,
+          "giveback": -0.16006956821744986,
+          "adverse": -0.06554290258378419,
+          "tail": -0.17522590834420437,
+          "efficiency": -0.008164090923985628
+        },
+        "first_date": "2016-01-04",
+        "last_date": "2020-12-31"
+      },
+      "test": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1430,
+        "fills": 1595,
+        "corporate_actions": 1526,
+        "scale_fills": {
+          "in": 1139,
+          "out": 0
+        },
+        "cash_yield_earned": 19.639997128664422,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 37262,
+          "below_minimum_allocation": 799,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 1577,
+          "closed_trades": 1506,
+          "still_open": 70,
+          "missing_next_open": 0,
+          "events": 89249,
+          "win_rate": 0.32138114209827356,
+          "mean_net_return": -0.022693948108086094,
+          "median_net_return": -0.046916712813434666
+        },
+        "final_nav": 212682.04226455,
+        "cagr_diagnostic": 0.14176711130718544,
+        "mdd_diagnostic": -0.1796154370344012,
+        "calmar_diagnostic": 0.7892813315374069,
+        "exit_objectives": {
+          "count": 1506,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.022693948108086094,
+          "capture": 0.08072806544586537,
+          "capture_coverage": 1351,
+          "giveback": -0.16559639219299777,
+          "adverse": -0.05812316024738147,
+          "tail": -0.16591363900387796,
+          "efficiency": -0.005002643186135341
+        },
+        "first_date": "2021-01-04",
+        "last_date": "2026-09-14"
+      }
+    },
+    {
+      "identity": "6251b90269cfeddde83ab0a822943042dcbbb9ef1d1fd3855962ea5c5ebe3c92",
+      "genome": {
+        "niche": "crash",
+        "entry_feature": "ga4_return_3__v1",
+        "entry_threshold": -0.1,
+        "hold_feature": "ga4_return_5__v1",
+        "hold_threshold": -0.8,
+        "exit_feature": "ga4_volatility_expansion_transition__v1",
+        "exit_threshold": -0.8,
+        "regime_feature": "ga4_advance_decline_breadth__v1",
+        "regime_threshold": -0.2,
+        "sizing_feature": "ga4_relative_volume_20_percentile__v1",
+        "base_weight": 0.03,
+        "max_weight": 0.1,
+        "replace_feature": "relative_strength_20",
+        "replace_threshold": -0.8,
+        "stop_loss": 0.07,
+        "trailing_stop": 0.1,
+        "max_hold_sessions": 30,
+        "time_exit_enabled": false,
+        "risk_budget": 0.2,
+        "scale_in_threshold": 0.15,
+        "scale_out_threshold": -0.15,
+        "scale_step": 0.25
+      },
+      "train": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 2854,
+        "fills": 4651,
+        "corporate_actions": 2192,
+        "scale_fills": {
+          "in": 3327,
+          "out": 0
+        },
+        "cash_yield_earned": 973.2844197084775,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 49066,
+          "below_minimum_allocation": 1178,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 3497,
+          "closed_trades": 3425,
+          "still_open": 72,
+          "missing_next_open": 0,
+          "events": 153812,
+          "win_rate": 0.34364963503649637,
+          "mean_net_return": -0.012210690655934227,
+          "median_net_return": -0.04055908749381441
+        },
+        "final_nav": 232786.0488347244,
+        "cagr_diagnostic": 0.0774330451744738,
+        "mdd_diagnostic": -0.5842117920468792,
+        "calmar_diagnostic": 0.1325427631359079,
+        "exit_objectives": {
+          "count": 3425,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.012210690655934227,
+          "capture": 0.12701323648234125,
+          "capture_coverage": 2874,
+          "giveback": -0.13392266366587707,
+          "adverse": -0.053493983123887666,
+          "tail": -0.1649748576676736,
+          "efficiency": -0.009013431158147426
+        },
+        "first_date": "2004-09-01",
+        "last_date": "2015-12-31"
+      },
+      "validation": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1259,
+        "fills": 2039,
+        "corporate_actions": 1245,
+        "scale_fills": {
+          "in": 1438,
+          "out": 0
+        },
+        "cash_yield_earned": 69.29490432513963,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 33546,
+          "below_minimum_allocation": 430,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 1756,
+          "closed_trades": 1679,
+          "still_open": 77,
+          "missing_next_open": 0,
+          "events": 82290,
+          "win_rate": 0.37284097677188804,
+          "mean_net_return": -0.01228110889617989,
+          "median_net_return": -0.035043012515783706
+        },
+        "final_nav": 174982.8704461478,
+        "cagr_diagnostic": 0.11862816174434254,
+        "mdd_diagnostic": -0.2893764132255744,
+        "calmar_diagnostic": 0.40994412924687695,
+        "exit_objectives": {
+          "count": 1679,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.01228110889617989,
+          "capture": 0.13561966880632792,
+          "capture_coverage": 1375,
+          "giveback": -0.1306416069630315,
+          "adverse": -0.054234428061888856,
+          "tail": -0.1651191398711267,
+          "efficiency": -0.007774252568095432
+        },
+        "first_date": "2016-01-04",
+        "last_date": "2020-12-31"
+      },
+      "test": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1430,
+        "fills": 2644,
+        "corporate_actions": 1526,
+        "scale_fills": {
+          "in": 1969,
+          "out": 0
+        },
+        "cash_yield_earned": 127.70549955806904,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 38003,
+          "below_minimum_allocation": 465,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 2227,
+          "closed_trades": 2148,
+          "still_open": 78,
+          "missing_next_open": 0,
+          "events": 95661,
+          "win_rate": 0.36685288640595903,
+          "mean_net_return": -0.005585174263812257,
+          "median_net_return": -0.03538334769711717
+        },
+        "final_nav": 251802.4254688116,
+        "cagr_diagnostic": 0.1761436843770936,
+        "mdd_diagnostic": -0.11042929788509115,
+        "calmar_diagnostic": 1.595081085821831,
+        "exit_objectives": {
+          "count": 2148,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": -0.005585174263812257,
+          "capture": 0.13262546257141006,
+          "capture_coverage": 1896,
+          "giveback": -0.13386153059623052,
+          "adverse": -0.051085069397154195,
+          "tail": -0.14926702892386529,
+          "efficiency": -0.004750531384403515
+        },
+        "first_date": "2021-01-04",
+        "last_date": "2026-09-14"
+      }
+    },
+    {
+      "identity": "49f54d45a362d70cd7ab785f6378eead7bf88d489fea6a6688f9235f054eb026",
+      "genome": {
+        "niche": "recovery",
+        "entry_feature": "ga4_return_20__v1",
+        "entry_threshold": -0.1,
+        "hold_feature": "ga4_sma20_slope_5__v1",
+        "hold_threshold": -0.8,
+        "exit_feature": "ga4_failed_breakout_20__v1",
+        "exit_threshold": -0.8,
+        "regime_feature": "ga4_new_high_low_breadth_252__v1",
+        "regime_threshold": -0.2,
+        "sizing_feature": "ga4_relative_strength_change_20__v1",
+        "base_weight": 0.07,
+        "max_weight": 0.18,
+        "replace_feature": "relative_strength_20",
+        "replace_threshold": -0.8,
+        "stop_loss": 0.08,
+        "trailing_stop": 0.12,
+        "max_hold_sessions": 30,
+        "time_exit_enabled": false,
+        "risk_budget": 0.2,
+        "scale_in_threshold": 0.15,
+        "scale_out_threshold": -0.15,
+        "scale_step": 0.25
+      },
+      "train": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 2854,
+        "fills": 6592,
+        "corporate_actions": 2192,
+        "scale_fills": {
+          "in": 2739,
+          "out": 2856
+        },
+        "cash_yield_earned": 3067.4975489234052,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 43346,
+          "below_minimum_allocation": 2006,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 2265,
+          "closed_trades": 2195,
+          "still_open": 70,
+          "missing_next_open": 0,
+          "events": 55137,
+          "win_rate": 0.4164009111617312,
+          "mean_net_return": 3.4702128479383444e-05,
+          "median_net_return": -0.01677548542432177
+        },
+        "final_nav": 140344.32779767326,
+        "cagr_diagnostic": 0.030368303148055054,
+        "mdd_diagnostic": -0.6440544476706211,
+        "calmar_diagnostic": 0.04715176373346908,
+        "exit_objectives": {
+          "count": 2195,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": 3.4702128479383444e-05,
+          "capture": 0.1382243384202636,
+          "capture_coverage": 1831,
+          "giveback": -0.15547624672425098,
+          "adverse": -0.06298042033720834,
+          "tail": -0.1654059045352391,
+          "efficiency": -0.007705332339599532
+        },
+        "first_date": "2004-09-01",
+        "last_date": "2015-12-31"
+      },
+      "validation": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1259,
+        "fills": 3381,
+        "corporate_actions": 1245,
+        "scale_fills": {
+          "in": 1360,
+          "out": 1612
+        },
+        "cash_yield_earned": 49.42321832173278,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 30649,
+          "below_minimum_allocation": 812,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 1159,
+          "closed_trades": 1082,
+          "still_open": 77,
+          "missing_next_open": 0,
+          "events": 30608,
+          "win_rate": 0.4602587800369686,
+          "mean_net_return": 0.010761783060585287,
+          "median_net_return": -0.009839712516830263
+        },
+        "final_nav": 218005.0176310077,
+        "cagr_diagnostic": 0.16899856988954376,
+        "mdd_diagnostic": -0.29781062720831175,
+        "calmar_diagnostic": 0.5674699102370618,
+        "exit_objectives": {
+          "count": 1082,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": 0.010761783060585287,
+          "capture": 0.13338725451708297,
+          "capture_coverage": 948,
+          "giveback": -0.15363163837455954,
+          "adverse": -0.06048381634017381,
+          "tail": -0.1427775188568884,
+          "efficiency": -0.004109347192843799
+        },
+        "first_date": "2016-01-04",
+        "last_date": "2020-12-31"
+      },
+      "test": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 1430,
+        "fills": 3063,
+        "corporate_actions": 1526,
+        "scale_fills": {
+          "in": 1320,
+          "out": 1199
+        },
+        "cash_yield_earned": 53.313719160248475,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 27360,
+          "below_minimum_allocation": 1097,
+          "capacity": 0
+        },
+        "shadow": {
+          "eligible_signals": 1644,
+          "closed_trades": 1570,
+          "still_open": 73,
+          "missing_next_open": 0,
+          "events": 36795,
+          "win_rate": 0.4299363057324841,
+          "mean_net_return": 0.0062473217152960656,
+          "median_net_return": -0.010934592824769445
+        },
+        "final_nav": 239517.3508945707,
+        "cagr_diagnostic": 0.16585349439581365,
+        "mdd_diagnostic": -0.20963819108743376,
+        "calmar_diagnostic": 0.7911416022791438,
+        "exit_objectives": {
+          "count": 1570,
+          "status": "DIAGNOSTIC_ONLY",
+          "expectancy": 0.006247321715296066,
+          "capture": 0.1331306053354118,
+          "capture_coverage": 1375,
+          "giveback": -0.15599899294835892,
+          "adverse": -0.05839657010364869,
+          "tail": -0.15085584917032388,
+          "efficiency": -0.003925997596693997
+        },
+        "first_date": "2021-01-04",
+        "last_date": "2026-09-14"
+      }
+    }
+  ],
+  "warnings": [
+    "Fixed chromosome set: no walk-forward evolutionary retraining",
+    "Provisional policy and historical membership not independently certified",
+    "Test outcomes excluded from candidate selection",
+    "Fold-boundary holdings are reset; this is not a continuous live portfolio"
+  ]
+}

@@ -1,0 +1,16 @@
+"""GA6-only automatic research launch, guarded by smoke evidence."""
+from pathlib import Path
+import json,subprocess,sys
+root=Path('/opt/mts')
+smoke=root/'ga6/runs/smoke_v2/report.json'
+r=json.loads(smoke.read_text())
+h=r['history'][0]
+assert r['status']=='DIAGNOSTIC_ONLY' and r['evaluations']==26
+assert h['niches_represented']==13 and h['unique']==26
+assert h['next_population_diversity']['unique_chromosomes']==26
+out=root/'ga6/runs/production_v1'
+assert not out.exists(),'Production output already exists; refuse overwrite'
+args=[str(root/'.venv/bin/python'),'-u',str(root/'ga6/runner.py'),'--features',str(root/'ga5_redesign/exploratory79_ga4_enriched.parquet'),'--policy-file',str(root/'ga5_redesign/exploratory79_policy.json'),'--output',str(out),'--generations','1000','--stagnation','100','--population','500','--workers','8','--entry-mode','origin','--diagnostic-only']
+print('GA6_PRODUCTION_START',flush=True)
+subprocess.run(args,check=True)
+print('GA6_PRODUCTION_COMPLETE',flush=True)

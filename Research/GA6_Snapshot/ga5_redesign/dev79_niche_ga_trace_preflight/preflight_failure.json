@@ -1,0 +1,14 @@
+{
+  "status": "PREFLIGHT_FAILED_ZERO_TRADES",
+  "population": 13,
+  "signals": {
+    "feature_valid": 4890314,
+    "feature_missing": 47918,
+    "signal_enter": 3465857,
+    "niche_match": 230577,
+    "niche_reject": 3235280,
+    "scheduled_entries": 230577,
+    "executed_buys": 0,
+    "executed_sells": 0
+  }
+}

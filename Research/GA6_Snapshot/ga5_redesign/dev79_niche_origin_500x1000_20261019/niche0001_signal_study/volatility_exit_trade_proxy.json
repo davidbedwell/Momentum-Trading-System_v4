@@ -1,0 +1,32 @@
+{
+  "threshold": 0.030044,
+  "execution": "next available open",
+  "caveat": "shadow trades, conditional triggered sample, no portfolio/cash/reentry simulation",
+  "triggered_trades": 1212,
+  "cohorts": {
+    "bottom": {
+      "trades": 91,
+      "mean_original": 0.03825708587484935,
+      "mean_early": 0.03028107993678407,
+      "mean_delta": -0.007976005938065276,
+      "improved_fraction": 0.37362637362637363,
+      "winners_interrupted": 72
+    },
+    "middle": {
+      "trades": 414,
+      "mean_original": 0.028398444701974494,
+      "mean_early": 0.01083014648278962,
+      "mean_delta": -0.017568298219184878,
+      "improved_fraction": 0.5362318840579711,
+      "winners_interrupted": 193
+    },
+    "top": {
+      "trades": 707,
+      "mean_original": 0.0465235962585511,
+      "mean_early": 0.016685609501290777,
+      "mean_delta": -0.029837986757260324,
+      "improved_fraction": 0.5586987270155587,
+      "winners_interrupted": 343
+    }
+  }
+}

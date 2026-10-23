@@ -1,0 +1,117 @@
+{
+  "status": "DIAGNOSTIC_ONLY",
+  "architecture": "single unrestricted breeding population",
+  "evaluations": 13,
+  "history": [
+    {
+      "generation": 1,
+      "unique": 13,
+      "niches_represented": 13,
+      "best_fitness": -1.0852430065710905e-14,
+      "niche_counts": {
+        "NICHE-0001": 1,
+        "NICHE-0002": 1,
+        "NICHE-0003": 1,
+        "NICHE-0004": 1,
+        "NICHE-0005": 1,
+        "NICHE-0006": 1,
+        "NICHE-0007": 1,
+        "NICHE-0008": 1,
+        "NICHE-0009": 1,
+        "NICHE-0010": 1,
+        "NICHE-0011": 1,
+        "NICHE-0012": 1,
+        "NICHE-0013": 1
+      },
+      "distinct_gene_patterns": 7,
+      "fitness_mean": -1.0852430065710905e-14,
+      "fitness_median": -1.0852430065710905e-14,
+      "best_ever_fitness": -1.0852430065710905e-14,
+      "exit_pareto_count": 0,
+      "exit_metric_eligible": 0
+    }
+  ],
+  "best": {
+    "fitness": -1.0852430065710905e-14,
+    "genome": {
+      "niche": "NICHE-0001",
+      "entry_feature": "ga4_return_126_percentile__v1",
+      "entry_threshold": -0.1,
+      "hold_feature": "ga4_close_to_sma_50__v1",
+      "hold_threshold": -0.8,
+      "exit_feature": "ga4_drawdown_252__v1",
+      "exit_threshold": -0.8,
+      "regime_feature": "ga4_breadth_above_sma_200__v1",
+      "regime_threshold": -0.2,
+      "sizing_feature": "ga4_relative_strength_change_20__v1",
+      "base_weight": 0.06,
+      "max_weight": 0.15,
+      "replace_feature": "relative_strength_20",
+      "replace_threshold": -0.8,
+      "stop_loss": 0.15,
+      "trailing_stop": 0.2,
+      "max_hold_sessions": 30,
+      "time_exit_enabled": false,
+      "risk_budget": 0.2,
+      "scale_in_threshold": 0.15,
+      "scale_out_threshold": -0.15,
+      "scale_step": 0.25
+    },
+    "result": {
+      "status": "GUARDED_RESEARCH_ONLY",
+      "sessions": 5282,
+      "fills": 0,
+      "corporate_actions": 4798,
+      "scale_fills": {
+        "in": 0,
+        "out": 0
+      },
+      "cash_yield_earned": 86025.69348007313,
+      "cash_proxy_annual_yield": 0.03,
+      "rejections": {
+        "earnings": 0,
+        "membership": 0,
+        "veto": 0,
+        "unsettled": 0,
+        "no_cash": 0,
+        "lot_too_expensive": 0,
+        "below_minimum_allocation": 0,
+        "capacity": 0
+      },
+      "shadow": {
+        "eligible_signals": 0,
+        "closed_trades": 0,
+        "still_open": 0,
+        "missing_next_open": 0,
+        "events": 0,
+        "win_rate": null,
+        "mean_net_return": null,
+        "median_net_return": null
+      },
+      "reconciliation": {
+        "portfolio_basis": "cash_constrained_realized_and_mark_to_market",
+        "shadow_basis": "independent_unit_notional_including_signals_not_portfolio_filled",
+        "shadow_portfolio_pnl_comparable": false,
+        "portfolio_trade_count": 0,
+        "shadow_closed_trade_count": 0,
+        "cash_flow_nav_error": 1.1641532182693481e-10,
+        "gross_buy_notional": 0,
+        "gross_sell_notional": 0,
+        "fees": 0,
+        "dividend_cash": 0.0,
+        "cash_yield": 86025.69348007313,
+        "closing_holdings_value": 0
+      },
+      "final_nav": 186025.693480073,
+      "cagr_diagnostic": 0.029999999999989146,
+      "mdd_diagnostic": 0.0,
+      "calmar_diagnostic": 2.9999999999989146,
+      "exit_objectives": {
+        "count": 0,
+        "status": "INSUFFICIENT_TRADES"
+      },
+      "first_date": "2005-09-14",
+      "last_date": "2026-09-14"
+    }
+  }
+}

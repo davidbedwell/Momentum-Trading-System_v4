@@ -1,0 +1,217 @@
+{
+  "step": 39,
+  "stock": "FANG",
+  "accepted": true,
+  "prelearning_holdout_distance": 2.925704466879199,
+  "recognized_existing_niches": {
+    "NICHE-0001": 339,
+    "NICHE-0002": 134,
+    "NICHE-0003": 64,
+    "NICHE-0004": 83,
+    "NICHE-0005": 107,
+    "NICHE-0006": 125,
+    "NICHE-0007": 25,
+    "NICHE-0008": 6,
+    "NICHE-0011": 39,
+    "NICHE-0012": 5
+  },
+  "recognized_niche_count": 10,
+  "candidate_promotions": [],
+  "committed_promotions": 0,
+  "worst_retention": 0.9795037756202805,
+  "max_distance_degradation_pct": 0.27607885021709855,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.9892125134843581,
+      "distance_degradation_pct": -0.16497988868218183
+    },
+    {
+      "stock": "AMGN",
+      "retention": 0.9902912621359223,
+      "distance_degradation_pct": -0.17543155145411937
+    },
+    {
+      "stock": "JNJ",
+      "retention": 0.9892125134843581,
+      "distance_degradation_pct": 0.20211040736730634
+    },
+    {
+      "stock": "XOM",
+      "retention": 0.9870550161812298,
+      "distance_degradation_pct": -0.239552032349577
+    },
+    {
+      "stock": "COST",
+      "retention": 0.9924487594390508,
+      "distance_degradation_pct": 0.06213573355944302
+    },
+    {
+      "stock": "INTC",
+      "retention": 0.9913700107874865,
+      "distance_degradation_pct": -0.18678691342501885
+    },
+    {
+      "stock": "HD",
+      "retention": 0.9913700107874865,
+      "distance_degradation_pct": -0.04292724325620778
+    },
+    {
+      "stock": "DIS",
+      "retention": 0.9892125134843581,
+      "distance_degradation_pct": -0.07938745959595872
+    },
+    {
+      "stock": "GILD",
+      "retention": 0.9870550161812298,
+      "distance_degradation_pct": -0.19826295722310538
+    },
+    {
+      "stock": "SO",
+      "retention": 0.9859762675296656,
+      "distance_degradation_pct": 0.2270229383368072
+    },
+    {
+      "stock": "FCX",
+      "retention": 0.9881337648327939,
+      "distance_degradation_pct": -0.34040824788591495
+    },
+    {
+      "stock": "NFLX",
+      "retention": 0.9924487594390508,
+      "distance_degradation_pct": -0.2909852589827233
+    },
+    {
+      "stock": "GE",
+      "retention": 0.9870550161812298,
+      "distance_degradation_pct": -0.289197104652239
+    },
+    {
+      "stock": "CME",
+      "retention": 0.9881337648327939,
+      "distance_degradation_pct": 0.17758462772021755
+    },
+    {
+      "stock": "UPS",
+      "retention": 0.9892125134843581,
+      "distance_degradation_pct": -0.1317010876178859
+    },
+    {
+      "stock": "CRM",
+      "retention": 0.9838187702265372,
+      "distance_degradation_pct": -0.31779327985691497
+    },
+    {
+      "stock": "XEL",
+      "retention": 0.9881337648327939,
+      "distance_degradation_pct": 0.06775211988070406
+    },
+    {
+      "stock": "DECK",
+      "retention": 0.9913700107874865,
+      "distance_degradation_pct": -0.3402399810344514
+    },
+    {
+      "stock": "T",
+      "retention": 0.9881337648327939,
+      "distance_degradation_pct": -0.07946826528165696
+    },
+    {
+      "stock": "NUE",
+      "retention": 0.9859762675296656,
+      "distance_degradation_pct": -0.34171331119846604
+    },
+    {
+      "stock": "ARE",
+      "retention": 0.9848975188781014,
+      "distance_degradation_pct": -0.34763744076168335
+    },
+    {
+      "stock": "ATO",
+      "retention": 0.9902912621359223,
+      "distance_degradation_pct": 0.25050057692375116
+    },
+    {
+      "stock": "BEN",
+      "retention": 0.9859762675296656,
+      "distance_degradation_pct": -0.31912122120542064
+    },
+    {
+      "stock": "BG",
+      "retention": 0.9805825242718447,
+      "distance_degradation_pct": -0.2389711059989752
+    },
+    {
+      "stock": "BLDR",
+      "retention": 0.9859762675296656,
+      "distance_degradation_pct": -0.45838197863691255
+    },
+    {
+      "stock": "BNY",
+      "retention": 0.9859762675296656,
+      "distance_degradation_pct": 0.010196831215791846
+    },
+    {
+      "stock": "CBOE",
+      "retention": 0.9881337648327939,
+      "distance_degradation_pct": 0.0989522635134632
+    },
+    {
+      "stock": "CDNS",
+      "retention": 0.9881337648327939,
+      "distance_degradation_pct": -0.4057303315633476
+    },
+    {
+      "stock": "CDW",
+      "retention": 0.9913700107874865,
+      "distance_degradation_pct": -0.12480442869376995
+    },
+    {
+      "stock": "CFG",
+      "retention": 0.9795037756202805,
+      "distance_degradation_pct": -0.26996828482799273
+    },
+    {
+      "stock": "COF",
+      "retention": 0.9859762675296656,
+      "distance_degradation_pct": -0.2804675756705399
+    },
+    {
+      "stock": "COIN",
+      "retention": 0.9935275080906149,
+      "distance_degradation_pct": -0.00644231383556404
+    },
+    {
+      "stock": "CTSH",
+      "retention": 0.9881337648327939,
+      "distance_degradation_pct": -0.10083677408003755
+    },
+    {
+      "stock": "DELL",
+      "retention": 0.9848975188781014,
+      "distance_degradation_pct": -0.23954013368501226
+    },
+    {
+      "stock": "DLTR",
+      "retention": 0.9924487594390508,
+      "distance_degradation_pct": -0.38333784480445443
+    },
+    {
+      "stock": "ELV",
+      "retention": 0.9859762675296656,
+      "distance_degradation_pct": -0.08446129506279876
+    },
+    {
+      "stock": "ETN",
+      "retention": 0.9816612729234089,
+      "distance_degradation_pct": -0.3801019006296036
+    },
+    {
+      "stock": "EVRG",
+      "retention": 0.9870550161812298,
+      "distance_degradation_pct": 0.27607885021709855
+    }
+  ],
+  "learning_rows": 2019,
+  "niches": 12
+}

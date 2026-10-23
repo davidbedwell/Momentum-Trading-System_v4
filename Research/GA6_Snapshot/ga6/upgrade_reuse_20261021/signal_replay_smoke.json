@@ -1,0 +1,20 @@
+{
+  "status": "SIGNAL_ONLY_SMOKE_NOT_PORTFOLIO_EVALUATION",
+  "source": "ga5_redesign/exploratory79_ga4_enriched.parquet",
+  "rows": [
+    {
+      "families": 2,
+      "sessions": 200,
+      "true": 44,
+      "false": 107,
+      "missing": 49
+    },
+    {
+      "families": 3,
+      "sessions": 200,
+      "true": 67,
+      "false": 84,
+      "missing": 49
+    }
+  ]
+}

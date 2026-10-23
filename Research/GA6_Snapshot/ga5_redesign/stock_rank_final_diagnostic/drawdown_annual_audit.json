@@ -1,0 +1,242 @@
+[
+  {
+    "horizon": 20,
+    "method": "rank_top",
+    "worst_drawdown": -0.4652531185506448,
+    "peak_date": "2020-02-06",
+    "trough_date": "2020-03-19",
+    "drawdown_sessions": 29,
+    "annual": [
+      {
+        "year": 2017,
+        "return": 0.16569632361467557,
+        "worst_drawdown_from_alltime_peak": -0.07341102106290398
+      },
+      {
+        "year": 2018,
+        "return": -0.032533186672838,
+        "worst_drawdown_from_alltime_peak": -0.18657157932432233
+      },
+      {
+        "year": 2019,
+        "return": 0.4403004650042708,
+        "worst_drawdown_from_alltime_peak": -0.14851611055735048
+      },
+      {
+        "year": 2020,
+        "return": 0.1114931210698289,
+        "worst_drawdown_from_alltime_peak": -0.4652531185506448
+      },
+      {
+        "year": 2021,
+        "return": 0.5307330089566704,
+        "worst_drawdown_from_alltime_peak": -0.08574354688885688
+      },
+      {
+        "year": 2022,
+        "return": -0.13701396330991378,
+        "worst_drawdown_from_alltime_peak": -0.2820021588578213
+      },
+      {
+        "year": 2023,
+        "return": 0.5193247969031842,
+        "worst_drawdown_from_alltime_peak": -0.14728944821669
+      },
+      {
+        "year": 2024,
+        "return": 0.12480753820466473,
+        "worst_drawdown_from_alltime_peak": -0.14598514099178528
+      },
+      {
+        "year": 2025,
+        "return": 0.17793180859979696,
+        "worst_drawdown_from_alltime_peak": -0.2767906720051052
+      },
+      {
+        "year": 2026,
+        "return": 0.4468253563264244,
+        "worst_drawdown_from_alltime_peak": -0.07054343899519355
+      }
+    ]
+  },
+  {
+    "horizon": 20,
+    "method": "equal_universe",
+    "worst_drawdown": -0.37491664301784056,
+    "peak_date": "2020-02-20",
+    "trough_date": "2020-03-23",
+    "drawdown_sessions": 22,
+    "annual": [
+      {
+        "year": 2017,
+        "return": 0.2039645636344165,
+        "worst_drawdown_from_alltime_peak": -0.03523089675649316
+      },
+      {
+        "year": 2018,
+        "return": -0.07718522571613895,
+        "worst_drawdown_from_alltime_peak": -0.1844291468940239
+      },
+      {
+        "year": 2019,
+        "return": 0.27758365793591633,
+        "worst_drawdown_from_alltime_peak": -0.14925727410692835
+      },
+      {
+        "year": 2020,
+        "return": 0.1137276632059252,
+        "worst_drawdown_from_alltime_peak": -0.37491664301784056
+      },
+      {
+        "year": 2021,
+        "return": 0.35630274620854174,
+        "worst_drawdown_from_alltime_peak": -0.05409926354811134
+      },
+      {
+        "year": 2022,
+        "return": -0.09969764078870225,
+        "worst_drawdown_from_alltime_peak": -0.20868285520787622
+      },
+      {
+        "year": 2023,
+        "return": 0.24436893098469592,
+        "worst_drawdown_from_alltime_peak": -0.10785873030465576
+      },
+      {
+        "year": 2024,
+        "return": 0.1537343478836719,
+        "worst_drawdown_from_alltime_peak": -0.07852850969883496
+      },
+      {
+        "year": 2025,
+        "return": 0.11482264498437966,
+        "worst_drawdown_from_alltime_peak": -0.19265347881993466
+      },
+      {
+        "year": 2026,
+        "return": 0.16515951417460806,
+        "worst_drawdown_from_alltime_peak": -0.05538725109495268
+      }
+    ]
+  },
+  {
+    "horizon": 63,
+    "method": "rank_top",
+    "worst_drawdown": -0.4071298358547767,
+    "peak_date": "2020-01-17",
+    "trough_date": "2020-03-19",
+    "drawdown_sessions": 42,
+    "annual": [
+      {
+        "year": 2017,
+        "return": 0.22439907342520327,
+        "worst_drawdown_from_alltime_peak": -0.06639998730020735
+      },
+      {
+        "year": 2018,
+        "return": -0.03928958367969004,
+        "worst_drawdown_from_alltime_peak": -0.17975877660472528
+      },
+      {
+        "year": 2019,
+        "return": 0.34416632981662687,
+        "worst_drawdown_from_alltime_peak": -0.14269482349243856
+      },
+      {
+        "year": 2020,
+        "return": 0.31108130932994826,
+        "worst_drawdown_from_alltime_peak": -0.4071298358547767
+      },
+      {
+        "year": 2021,
+        "return": 0.5669337174344049,
+        "worst_drawdown_from_alltime_peak": -0.06639645541266892
+      },
+      {
+        "year": 2022,
+        "return": -0.058452070840246395,
+        "worst_drawdown_from_alltime_peak": -0.23005060013935963
+      },
+      {
+        "year": 2023,
+        "return": 0.5731039840154979,
+        "worst_drawdown_from_alltime_peak": -0.12233607460567064
+      },
+      {
+        "year": 2024,
+        "return": 0.17508575712514296,
+        "worst_drawdown_from_alltime_peak": -0.12262093796426432
+      },
+      {
+        "year": 2025,
+        "return": 0.30267731961563205,
+        "worst_drawdown_from_alltime_peak": -0.2721209381664891
+      },
+      {
+        "year": 2026,
+        "return": 0.44800401713550375,
+        "worst_drawdown_from_alltime_peak": -0.07301407813963245
+      }
+    ]
+  },
+  {
+    "horizon": 63,
+    "method": "equal_universe",
+    "worst_drawdown": -0.3654935245265789,
+    "peak_date": "2020-02-19",
+    "trough_date": "2020-03-23",
+    "drawdown_sessions": 23,
+    "annual": [
+      {
+        "year": 2017,
+        "return": 0.22301873361776603,
+        "worst_drawdown_from_alltime_peak": -0.03338467929060829
+      },
+      {
+        "year": 2018,
+        "return": -0.059396178160873725,
+        "worst_drawdown_from_alltime_peak": -0.18030396770431611
+      },
+      {
+        "year": 2019,
+        "return": 0.29666187173792746,
+        "worst_drawdown_from_alltime_peak": -0.14504996573221707
+      },
+      {
+        "year": 2020,
+        "return": 0.16951452984675108,
+        "worst_drawdown_from_alltime_peak": -0.3654935245265789
+      },
+      {
+        "year": 2021,
+        "return": 0.37481476922169144,
+        "worst_drawdown_from_alltime_peak": -0.053649820754108735
+      },
+      {
+        "year": 2022,
+        "return": -0.07938521436930268,
+        "worst_drawdown_from_alltime_peak": -0.19612120234276387
+      },
+      {
+        "year": 2023,
+        "return": 0.2669219107262253,
+        "worst_drawdown_from_alltime_peak": -0.0948179830216126
+      },
+      {
+        "year": 2024,
+        "return": 0.17861343628872484,
+        "worst_drawdown_from_alltime_peak": -0.07706189161096566
+      },
+      {
+        "year": 2025,
+        "return": 0.1556697695485525,
+        "worst_drawdown_from_alltime_peak": -0.1846313138604233
+      },
+      {
+        "year": 2026,
+        "return": 0.17673529101518293,
+        "worst_drawdown_from_alltime_peak": -0.053803116125324846
+      }
+    ]
+  }
+]

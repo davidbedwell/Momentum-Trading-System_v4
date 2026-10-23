@@ -1,0 +1,94 @@
+{
+  "step": 17,
+  "stock": "XEL",
+  "accepted": true,
+  "proposed_niches": [],
+  "new_niches_committed": 0,
+  "total_niches": 10,
+  "worst_previous_stock_retention": 0.9622437971952535,
+  "max_previous_stock_distance_degradation_pct": 0.3380969000214494,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.970873786407767,
+      "distance_change_pct": -0.0944200694754205
+    },
+    {
+      "stock": "AMGN",
+      "retention": 0.9687162891046386,
+      "distance_change_pct": -0.31090717742244234
+    },
+    {
+      "stock": "JNJ",
+      "retention": 0.9730312837108953,
+      "distance_change_pct": -0.5103212183445534
+    },
+    {
+      "stock": "XOM",
+      "retention": 0.9762675296655879,
+      "distance_change_pct": -0.5531275153070035
+    },
+    {
+      "stock": "COST",
+      "retention": 0.9859762675296656,
+      "distance_change_pct": -0.49853557040276586
+    },
+    {
+      "stock": "INTC",
+      "retention": 0.9633225458468176,
+      "distance_change_pct": 0.3380969000214494
+    },
+    {
+      "stock": "HD",
+      "retention": 0.9848975188781014,
+      "distance_change_pct": -0.1502449163322138
+    },
+    {
+      "stock": "DIS",
+      "retention": 0.9751887810140237,
+      "distance_change_pct": -0.15282286034007184
+    },
+    {
+      "stock": "GILD",
+      "retention": 0.9816612729234089,
+      "distance_change_pct": -0.2062518470908115
+    },
+    {
+      "stock": "SO",
+      "retention": 0.9741100323624595,
+      "distance_change_pct": -0.2796110977413414
+    },
+    {
+      "stock": "FCX",
+      "retention": 0.9719525350593312,
+      "distance_change_pct": 0.23601063543335224
+    },
+    {
+      "stock": "NFLX",
+      "retention": 0.9795037756202805,
+      "distance_change_pct": -0.044560745133441014
+    },
+    {
+      "stock": "GE",
+      "retention": 0.9622437971952535,
+      "distance_change_pct": -0.1920157072216141
+    },
+    {
+      "stock": "CME",
+      "retention": 0.9687162891046386,
+      "distance_change_pct": -0.23723420435208964
+    },
+    {
+      "stock": "UPS",
+      "retention": 0.9816612729234089,
+      "distance_change_pct": -0.20745654844310865
+    },
+    {
+      "stock": "CRM",
+      "retention": 0.9687162891046386,
+      "distance_change_pct": 0.059607445283539236
+    }
+  ],
+  "learning_rows": 68476,
+  "notes": "Rollback on rejection; no hyperparameter auto-tuning"
+}

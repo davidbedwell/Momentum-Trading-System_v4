@@ -1,0 +1,84 @@
+{
+  "step": 15,
+  "stock": "UPS",
+  "accepted": true,
+  "proposed_niches": [],
+  "new_niches_committed": 0,
+  "total_niches": 10,
+  "worst_previous_stock_retention": 0.8683926645091694,
+  "max_previous_stock_distance_degradation_pct": 0.5052942433803158,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.9266450916936354,
+      "distance_change_pct": 0.20829796974746162
+    },
+    {
+      "stock": "AMGN",
+      "retention": 0.9590075512405609,
+      "distance_change_pct": -0.15010676876230877
+    },
+    {
+      "stock": "JNJ",
+      "retention": 0.9676375404530745,
+      "distance_change_pct": 0.4247736112237223
+    },
+    {
+      "stock": "XOM",
+      "retention": 0.9633225458468176,
+      "distance_change_pct": 0.2616875854016619
+    },
+    {
+      "stock": "COST",
+      "retention": 0.9741100323624595,
+      "distance_change_pct": 0.35752312296432515
+    },
+    {
+      "stock": "INTC",
+      "retention": 0.8683926645091694,
+      "distance_change_pct": -0.7098518566066122
+    },
+    {
+      "stock": "HD",
+      "retention": 0.9838187702265372,
+      "distance_change_pct": 0.30474027509667884
+    },
+    {
+      "stock": "DIS",
+      "retention": 0.9546925566343042,
+      "distance_change_pct": 0.18942322134131057
+    },
+    {
+      "stock": "GILD",
+      "retention": 0.9816612729234089,
+      "distance_change_pct": 0.0017174946574154094
+    },
+    {
+      "stock": "SO",
+      "retention": 0.9816612729234089,
+      "distance_change_pct": 0.5052942433803158
+    },
+    {
+      "stock": "FCX",
+      "retention": 0.8824163969795038,
+      "distance_change_pct": -0.6359506497096828
+    },
+    {
+      "stock": "NFLX",
+      "retention": 0.9525350593311759,
+      "distance_change_pct": -0.629044437370599
+    },
+    {
+      "stock": "GE",
+      "retention": 0.941747572815534,
+      "distance_change_pct": -0.3085708795879723
+    },
+    {
+      "stock": "CME",
+      "retention": 0.9676375404530745,
+      "distance_change_pct": 0.36158703345942156
+    }
+  ],
+  "learning_rows": 60420,
+  "notes": "Rollback on rejection; no hyperparameter auto-tuning"
+}

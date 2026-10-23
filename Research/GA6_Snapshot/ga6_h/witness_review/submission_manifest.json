@@ -1,0 +1,8 @@
+{
+  "model_requested": "anthropic/claude-sonnet-4.6",
+  "utc": "2026-10-23T03:11:23.627296+00:00",
+  "sha256": "43558d46b677a7c40953fb43e627c04039805a5884ce5714e1962636872fc92b",
+  "plan_sha256": "eab7db028edad10956f4da33aeccb4325e176e7c452cab753ef4f54c1f75f7e0",
+  "evidence_sources": 5,
+  "matched_rows": 26
+}

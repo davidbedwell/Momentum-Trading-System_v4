@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "strategy": "ranking_reference_20",
+      "cagr": 0.22130882578415423,
+      "mdd": -0.4652531185506448,
+      "trades": 2500,
+      "losers": 1100,
+      "net_trade_pnl": 593930.8250881471,
+      "ending_nav": 694623.8725071525
+    },
+    {
+      "strategy": "ranking_reference_63",
+      "cagr": 0.2765247467738676,
+      "mdd": -0.4071298358547767,
+      "trades": 780,
+      "losers": 304,
+      "net_trade_pnl": 965346.7531068715,
+      "ending_nav": 1066411.453066194
+    }
+  ],
+  "caveat": "REFERENCE RANKING MODEL ONLY; not recovered GA original strategy; marks open positions at end; 10bps each side; approximate adjusted opens; DEV79 survivorship uncertainty; no earnings blackout; no SGOV carry; no blind validation"
+}

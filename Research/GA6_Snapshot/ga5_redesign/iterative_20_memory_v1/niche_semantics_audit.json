@@ -1,0 +1,260 @@
+{
+  "status": "DIAGNOSTIC_NOT_CERTIFIED",
+  "holdout": "2023-01-01 through 2026-09-14",
+  "rows": 18540,
+  "baseline": {
+    "efficiency_20": 0.24457872758134586,
+    "reversal_rate_20": 0.492348975188781
+  },
+  "niches": [
+    {
+      "id": "NICHE-0001",
+      "observations": 3030,
+      "stock_coverage": 20,
+      "top_stocks": {
+        "UPS": 241,
+        "NFLX": 230,
+        "FCX": 223,
+        "NUE": 203,
+        "ACN": 200
+      },
+      "mean_distance": 2.9349554334344137,
+      "efficiency_20": 0.31666369977784936,
+      "reversal_rate_20": 0.48797029702970296,
+      "volume_variability_20": 2.2062319712191574,
+      "trend": -0.065387726069915,
+      "volatility": 0.018871716439950767
+    },
+    {
+      "id": "NICHE-0002",
+      "observations": 1668,
+      "stock_coverage": 20,
+      "top_stocks": {
+        "GILD": 144,
+        "HD": 115,
+        "JNJ": 112,
+        "XOM": 111,
+        "AMGN": 105
+      },
+      "mean_distance": 3.2047981034509645,
+      "efficiency_20": 0.19668471121199216,
+      "reversal_rate_20": 0.49541366906474815,
+      "volume_variability_20": -83.95004408394276,
+      "trend": 0.0034796478619432128,
+      "volatility": 0.01538199843427
+    },
+    {
+      "id": "NICHE-0003",
+      "observations": 4069,
+      "stock_coverage": 20,
+      "top_stocks": {
+        "COST": 333,
+        "SO": 327,
+        "XEL": 316,
+        "JNJ": 307,
+        "XOM": 290
+      },
+      "mean_distance": 2.533061408300808,
+      "efficiency_20": 0.15190608652104753,
+      "reversal_rate_20": 0.42485868763824036,
+      "volume_variability_20": 0.4761501713670992,
+      "trend": 0.00925439693130908,
+      "volatility": 0.013612939397005993
+    },
+    {
+      "id": "NICHE-0004",
+      "observations": 1337,
+      "stock_coverage": 20,
+      "top_stocks": {
+        "T": 92,
+        "JNJ": 91,
+        "XEL": 87,
+        "GILD": 85,
+        "SO": 82
+      },
+      "mean_distance": 3.110076416644935,
+      "efficiency_20": 0.20771402742351247,
+      "reversal_rate_20": 0.49611069558713533,
+      "volume_variability_20": 264.65632452874723,
+      "trend": 0.007931603453679985,
+      "volatility": 0.015953361843988545
+    },
+    {
+      "id": "NICHE-0005",
+      "observations": 3526,
+      "stock_coverage": 20,
+      "top_stocks": {
+        "DIS": 267,
+        "CME": 266,
+        "GE": 242,
+        "HD": 215,
+        "UPS": 215
+      },
+      "mean_distance": 2.458091538499505,
+      "efficiency_20": 0.13297284194542902,
+      "reversal_rate_20": 0.6000709018718092,
+      "volume_variability_20": -0.022783605202729817,
+      "trend": 0.007859082987891071,
+      "volatility": 0.015021128249810424
+    },
+    {
+      "id": "NICHE-0006",
+      "observations": 1821,
+      "stock_coverage": 20,
+      "top_stocks": {
+        "JNJ": 179,
+        "COST": 169,
+        "GE": 142,
+        "CME": 133,
+        "SO": 133
+      },
+      "mean_distance": 2.920546903337475,
+      "efficiency_20": 0.4202250899663999,
+      "reversal_rate_20": 0.43544755628775395,
+      "volume_variability_20": -2.031437212833647,
+      "trend": 0.08842105128121512,
+      "volatility": 0.012057441175056922
+    },
+    {
+      "id": "NICHE-0007",
+      "observations": 1644,
+      "stock_coverage": 20,
+      "top_stocks": {
+        "FCX": 187,
+        "CRM": 148,
+        "DECK": 137,
+        "GE": 135,
+        "INTC": 130
+      },
+      "mean_distance": 2.9008665063920023,
+      "efficiency_20": 0.35252462616941377,
+      "reversal_rate_20": 0.4982968369829684,
+      "volume_variability_20": 0.5523111822928012,
+      "trend": 0.08714821053581462,
+      "volatility": 0.02143168663729227
+    },
+    {
+      "id": "NICHE-0008",
+      "observations": 419,
+      "stock_coverage": 9,
+      "top_stocks": {
+        "INTC": 163,
+        "FCX": 79,
+        "DECK": 63,
+        "NFLX": 25,
+        "NUE": 24
+      },
+      "mean_distance": 3.468827385680755,
+      "efficiency_20": 0.09990437421262022,
+      "reversal_rate_20": 0.5140811455847255,
+      "volume_variability_20": 1.066887685525879,
+      "trend": 0.002221218622780796,
+      "volatility": 0.04191027497203088
+    },
+    {
+      "id": "NICHE-0009",
+      "observations": 404,
+      "stock_coverage": 12,
+      "top_stocks": {
+        "INTC": 92,
+        "DECK": 84,
+        "ACN": 52,
+        "CRM": 50,
+        "FCX": 40
+      },
+      "mean_distance": 4.238881707488928,
+      "efficiency_20": 0.41957812187157567,
+      "reversal_rate_20": 0.5155940594059406,
+      "volume_variability_20": -5.566098131964978,
+      "trend": -0.17913590183017958,
+      "volatility": 0.03880511891423702
+    },
+    {
+      "id": "NICHE-0010",
+      "observations": 622,
+      "stock_coverage": 14,
+      "top_stocks": {
+        "INTC": 140,
+        "NFLX": 78,
+        "FCX": 74,
+        "DECK": 72,
+        "GE": 58
+      },
+      "mean_distance": 3.8381027854171945,
+      "efficiency_20": 0.5242714968298549,
+      "reversal_rate_20": 0.44935691318327975,
+      "volume_variability_20": 2.2456408901034566,
+      "trend": 0.20319664021108702,
+      "volatility": 0.032010469275831246
+    }
+  ],
+  "nearest_pairs": [
+    {
+      "a": "NICHE-0003",
+      "b": "NICHE-0005",
+      "distance": 2.2091354562062815
+    },
+    {
+      "a": "NICHE-0001",
+      "b": "NICHE-0003",
+      "distance": 2.41064552351824
+    },
+    {
+      "a": "NICHE-0001",
+      "b": "NICHE-0005",
+      "distance": 2.7305143901931483
+    },
+    {
+      "a": "NICHE-0006",
+      "b": "NICHE-0007",
+      "distance": 2.8077497334673387
+    },
+    {
+      "a": "NICHE-0005",
+      "b": "NICHE-0007",
+      "distance": 2.9463209418324574
+    },
+    {
+      "a": "NICHE-0003",
+      "b": "NICHE-0007",
+      "distance": 3.261181492796047
+    },
+    {
+      "a": "NICHE-0003",
+      "b": "NICHE-0006",
+      "distance": 3.359967083658586
+    },
+    {
+      "a": "NICHE-0002",
+      "b": "NICHE-0005",
+      "distance": 3.4032656696252093
+    },
+    {
+      "a": "NICHE-0002",
+      "b": "NICHE-0003",
+      "distance": 3.4039956115081837
+    },
+    {
+      "a": "NICHE-0005",
+      "b": "NICHE-0008",
+      "distance": 3.679609984103177
+    },
+    {
+      "a": "NICHE-0007",
+      "b": "NICHE-0008",
+      "distance": 3.7807472761652408
+    },
+    {
+      "a": "NICHE-0005",
+      "b": "NICHE-0006",
+      "distance": 3.82252836054089
+    }
+  ],
+  "caveats": [
+    "Final memory is trained using observations from all historical stocks including earlier 2023+? Training loop uses pre-2021 only; 2023+ is held out.",
+    "Stock-by-stock 2005-2020 replay is not single-pass chronological memory",
+    "2023+ assignments use final frozen memory and are descriptive, not causal no-trade evidence",
+    "Center distances in standardized high-dimensional feature space are not sufficient to establish unique niches",
+    "Range width mixes raw high/low with adjusted close; invalid when adjustment factors differ"
+  ]
+}

@@ -1,0 +1,16 @@
+import json
+from pathlib import Path
+import numpy as np,pandas as pd
+R=Path('/opt/mts/ga5_redesign');O=R/'precert_niche_distinction_v1';m=json.load(open(R/'chronological_memory_validation_v1/memory.json'));p=pd.read_parquet(R/'exploratory79_ga4_enriched.parquet');tickers=json.load(open(R/'iterative_20_memory_v1/checkpoint.json'))['accepted']+['ARE','ATO','BEN','BG','BLDR','BNY','CBOE','CDNS','CDW','CFG'];p=p[p.ticker.isin(tickers)].copy();p['date']=pd.to_datetime(p.date);parts=[]
+for t,g in p.groupby('ticker'):
+ g=g.sort_values('date').copy();c=g.adj_close.astype(float);delta=c.diff();flip=((np.sign(delta)*np.sign(delta.shift(1)))<0).astype(float)
+ for w in (10,20,40):
+  net=(c-c.shift(w)).abs();g[f'efficiency_{w}']=(net/delta.abs().rolling(w).sum().replace(0,np.nan)).clip(0,1);g[f'reversal_rate_{w}']=flip.rolling(w).mean();g[f'net_to_volatility_{w}']=net/(delta.abs().rolling(w).std()*np.sqrt(w)).replace(0,np.nan)
+ ratio=g.adj_close/g.close.replace(0,np.nan);g['range_width_20']=((g.high*ratio).rolling(20).max()-(g.low*ratio).rolling(20).min())/c.replace(0,np.nan);g['volume_variability_20']=g.volume.rolling(20).std()/g.volume.rolling(20).mean().replace(0,np.nan);parts.append(g)
+p=pd.concat(parts).replace([np.inf,-np.inf],np.nan).dropna(subset=m['features']);p=p[p.date>='2023-01-01'].sort_values(['date','ticker']);F=m['features'];x=np.clip((p[F].to_numpy()-np.array(m['median']))/np.array(m['scale']),-5,5);cent=np.array(m['centers']);dist=np.linalg.norm(x[:,None,:]-cent[None,:,:],axis=2);p=p.assign(niche=dist.argmin(axis=1));i,j=1,4;z=p[p.niche.isin([i,j])].copy();x1=z[z.niche==i];x2=z[z.niche==j];features=[]
+for f in F:
+ a=x1[f].to_numpy(float);b=x2[f].to_numpy(float);s=np.sqrt((a.var()+b.var())/2);features.append({'feature':f,'mean_0002':float(a.mean()),'mean_0005':float(b.mean()),'standardized_difference':float((a.mean()-b.mean())/max(s,1e-8))})
+features.sort(key=lambda v:abs(v['standardized_difference']),reverse=True)
+# A feature not included in previous eight can encode the distinction. Also inspect conditional temporal/stock distributions.
+by_year={str(y):{'0002':int(((z.date.dt.year==y)&(z.niche==i)).sum()),'0005':int(((z.date.dt.year==y)&(z.niche==j)).sum())} for y in sorted(z.date.dt.year.unique())};by_stock={str(t):{'0002':int(((z.ticker==t)&(z.niche==i)).sum()),'0005':int(((z.ticker==t)&(z.niche==j)).sum())} for t in sorted(z.ticker.unique())};center_delta=(cent[i]-cent[j]);cent_features=sorted([{'feature':f,'normalized_center_difference':float(v)} for f,v in zip(F,center_delta)],key=lambda v:abs(v['normalized_center_difference']),reverse=True)
+report={'pair':['NICHE-0002','NICHE-0005'],'counts':[len(x1),len(x2)],'full_18_feature_distinctions':features,'center_differences':cent_features,'year_counts':by_year,'stock_counts':by_stock,'decision':'PRESERVE: no merge until all feature differences, time, and stock distribution distinctions are tested','limitations':['Descriptive only, no block bootstrap significance','Same repeatedly used holdout','Potential dependence of feature construction on historical corporate actions']};(O/'pair_0002_0005_deep_audit.json').write_text(json.dumps(report,indent=2));print(json.dumps({'counts':report['counts'],'top_features':features[:8],'top_center_differences':cent_features[:6],'year_counts':by_year},indent=2))

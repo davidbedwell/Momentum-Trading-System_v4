@@ -1,0 +1,21 @@
+{
+  "families": [
+    "trend",
+    "momentum",
+    "volatility",
+    "volume",
+    "recursive",
+    "sector",
+    "breadth",
+    "relative_strength"
+  ],
+  "unordered_nonempty_subsets": 255,
+  "flat_AND_OR_structures": 510,
+  "grouped_structures": "NOT_ENUMERATED: canonical expression grammar required",
+  "current_ga6_executable_structures": 0,
+  "reason": "Existing GA6 genome supports six independent feature roles, not combinatorial family logic",
+  "coverage_status": {
+    "NOT_IMPLEMENTED_IN_GA6_EVALUATOR": 510
+  },
+  "production_modified": false
+}

@@ -1,0 +1,3984 @@
+[
+  {
+    "rank": 1,
+    "strategy_key": "add465b4c26e96086f624ce0f4dc147b293d8ff039703f3c16e644b315e2c1be",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "b7d4a436ce2c397320fd307111c5b0be482c3100eb9cebbd8590cd5cde20e7ac",
+    "horizon_sessions": "63",
+    "definition_hash": "5c6abfee2ac46c8b7ff8d1cf770eb32660a0d4b8beb893e06177e57701e60000",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.822411756935622,
+    "mdd_reported_pct": 13.27655296718099,
+    "calmar_reported": 1.794322051501131,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume__v1",
+          "price_direction": "BELOW",
+          "price_feature": "close_location__v1",
+          "price_threshold_quantile": 0.8,
+          "state": "LOW",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "close_location__v1": "GA4_TANH_ONLY",
+      "dollar_volume__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 2,
+    "strategy_key": "4cc52ec3fc6e552f6e6031210208f9c08c7294f2a98a689fb84fca15cb31d144",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "52dfea97f19f43aaeb3d944705bbd84d7569a6084b15ac5557da93e039eefd79",
+    "horizon_sessions": "63",
+    "definition_hash": "8eead6dbcc563bff404436b6622fbc3d53554f6f2d54220c50fbc75f9dc2df9a",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.89134884378088,
+    "mdd_reported_pct": 15.259899796081527,
+    "calmar_reported": 1.5656294709035872,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "NONE",
+          "price_threshold_quantile": 0.2,
+          "state": "LOW",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "dollar_volume__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 3,
+    "strategy_key": "77264ea2e180c23cc25dc73244dcf55fdc7dccef6b1795586f69484c5b4c8083",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "5c54736aff59d110b0cdef2d5503aef3fd2e30a2ef4e253657b269b3a41e49d5",
+    "horizon_sessions": "63",
+    "definition_hash": "385a825deccca60ea32c817c74f7cba9d00f00075a86f4b8e9b877f803963db0",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.75392319009908,
+    "mdd_reported_pct": 15.555356834656523,
+    "calmar_reported": 1.5270574273922524,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "close_location__v1",
+          "price_threshold_quantile": 0.2,
+          "state": "LOW",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "close_location__v1": "GA4_TANH_ONLY",
+      "dollar_volume__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 4,
+    "strategy_key": "46bd71e089eab95e1494e3d1e609d29515cd13825802cf8e263dc22514a3f3f8",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "80f025fe3b35d3cd0f476e860519a43809c35c6c0eacce70d3c18304af05c267",
+    "horizon_sessions": "63",
+    "definition_hash": "6e86e4c29b13dbf17129aca96938ed04882e8bae455dea08b3f01ea457c0de5b",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.81295799164036,
+    "mdd_reported_pct": 15.840691721894453,
+    "calmar_reported": 1.3770205477511597,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "NONE",
+          "market_context_state": "HIGH",
+          "market_context_threshold": 0.5,
+          "relative_feature": "relative_strength_change_20__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.3
+        }
+      ]
+    ],
+    "required_features": {
+      "relative_strength_change_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 5,
+    "strategy_key": "781eed1f41ae5ac451dd6ec09379c69c44d965eaef6bff0ff66d3b916165f14d",
+    "study": "DEV80_LONG",
+    "chromosome_id": "136",
+    "horizon_sessions": "63",
+    "definition_hash": "0cc4ba64986807d3dab14131403f7a1327072289ec8835c8e257c57134e5b9a5",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.812464446177216,
+    "mdd_reported_pct": 15.840691721894453,
+    "calmar_reported": 1.376989390938578,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "NONE",
+          "market_context_state": "LOW",
+          "market_context_threshold": 0.3,
+          "relative_feature": "relative_strength_change_20__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.3
+        }
+      ]
+    ],
+    "required_features": {
+      "relative_strength_change_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 6,
+    "strategy_key": "0791a4ede2aab5c659e6838071a430362645bd3d7b52e9305c2620c7d02002f4",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "2d9dc09c376c5c08a02ba6f1389f8ffb5a9df673efd96b7d21b53ed7b4981758",
+    "horizon_sessions": "63",
+    "definition_hash": "05c6011ded52ff54210208e4cbbde0757d8e170fdd6e189ccbcf02bebd3a31d6",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.994542247926805,
+    "mdd_reported_pct": 15.306156674789651,
+    "calmar_reported": 1.371640359758393,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.2,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.7,
+          "trend_feature": "adx_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "adx_14__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 7,
+    "strategy_key": "64694b904b80862435e71ce4d918e35698c06051738aa6908ec2de84df08498b",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "a804c98d6408b6b436c2916ff6ba76837971f7bc1e0ca6d7de11bf8a4fe6ee11",
+    "horizon_sessions": "63",
+    "definition_hash": "005f332e7a910d2e2408b6ede0c42b08048611c823fe017c4a187d7a61dc7b2e",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 18.284541591222016,
+    "mdd_reported_pct": 13.662105553520156,
+    "calmar_reported": 1.3383399447174416,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "NONE",
+          "context_state": "LOW",
+          "context_threshold_quantile": 0.8,
+          "displacement_feature": "signed_return_streak__v1",
+          "severity": 0.2,
+          "tail": "HIGH"
+        }
+      ],
+      [
+        "VOLATILITY",
+        {
+          "price_context": "NONE",
+          "state": "LOW",
+          "threshold_quantile": 0.3,
+          "volatility_feature": "candle_range_fraction__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "candle_range_fraction__v1": "GA4_TANH_ONLY",
+      "signed_return_streak__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 8,
+    "strategy_key": "614ac469e4cbcb37f7e037847517686ae78bfc4bdb4f9a2a30471b69d6884f79",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "80013bce5c32a429c52a39ca56a95c39d6adac915457556298e24e480314074b",
+    "horizon_sessions": "63",
+    "definition_hash": "48d28b3e11e377f6d6c9a20c0accf3c8543918fa25b0d6132369dda707d66e07",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.345207213327644,
+    "mdd_reported_pct": 16.7545210403305,
+    "calmar_reported": 1.3336822437084042,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_3.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "return_63__v1",
+          "confirmation_threshold_quantile": 0.5,
+          "direction": "BELOW",
+          "threshold_quantile": 0.2,
+          "trend_feature": "pullback_from_high_20__v1"
+        }
+      ],
+      [
+        "VOLATILITY",
+        {
+          "price_context": "NONE",
+          "state": "HIGH",
+          "threshold_quantile": 0.2,
+          "volatility_feature": "realized_vol_20_percentile__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "pullback_from_high_20__v1": "GA4_TANH_ONLY",
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_63__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 9,
+    "strategy_key": "e6ecd62f97b6034c3bc6f278c94196f6cef5afaf171112bba6b9f1a84e5bd36d",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "b0647b60c96cda822a2a27fe3717c261e8211122228ba61e7161df83440a7e0c",
+    "horizon_sessions": "63",
+    "definition_hash": "e16db7dc6fa8b33867eb8d9ded0271d3815645ec12d1567377ab670a5b40c637",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 18.824573990282744,
+    "mdd_reported_pct": 14.156320912996723,
+    "calmar_reported": 1.3297645699031986,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "MOMENTUM",
+        {
+          "context_feature": "breadth_positive_20__v1",
+          "context_threshold": 0.6,
+          "direction": "ABOVE",
+          "momentum_feature": "return_63__v1",
+          "threshold_quantile": 0.6
+        }
+      ]
+    ],
+    "required_features": {
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "return_63__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 10,
+    "strategy_key": "8ad406120b862c71b61440becff4b6cb47b049db74eb70a6290bc5492af12de3",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "0d64f52550e7041b66fe77a37bacf4bc20282a07416177e51afcd10181a3a77e",
+    "horizon_sessions": "63",
+    "definition_hash": "553407145bab0c3d88c20beab564cd7094bf5dceef8b72648649781ff32bccdd",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.498661231861682,
+    "mdd_reported_pct": 15.435235063250552,
+    "calmar_reported": 1.32804334678819,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "breadth_positive_20__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.5,
+          "displacement_feature": "signed_return_streak__v1",
+          "severity": 0.3,
+          "tail": "LOW"
+        }
+      ]
+    ],
+    "required_features": {
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "signed_return_streak__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 11,
+    "strategy_key": "e3380d0bb08e79bd62479ea1ad0b317f68aaad5b102fd0144d9e89ed3210e597",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "07da32e02fd991d683dddac1892178f7a6568a3bdbf113718b666c2f3c0d53d1",
+    "horizon_sessions": "63",
+    "definition_hash": "a9ee17e4d1a3ff7fca303d7bdec9b7ee6d268fc369bf7f3406a050886a1f04b2",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.30750430074955,
+    "mdd_reported_pct": 17.61329966260395,
+    "calmar_reported": 1.323290056220151,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_3.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "return_5__v1",
+          "price_threshold_quantile": 0.8,
+          "state": "LOW",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "dollar_volume__v1": "GA4_TANH_ONLY",
+      "return_5__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 12,
+    "strategy_key": "f5e235bc6525fd53ca2b3d33ccac0cbd567a800e7573116de739d25c42525cab",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "2f4530f9510444c6f70f464a1cc244748ae0e6939441d80d4e574484833a8c7a",
+    "horizon_sessions": "63",
+    "definition_hash": "bb20097a6110b949dc6c69709602bed1e6dbc664b277dade8591bdf63dd193c3",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.218961291243367,
+    "mdd_reported_pct": 16.127498579200427,
+    "calmar_reported": 1.3157007075238176,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "range_position_20__v1",
+          "state": "LOW",
+          "threshold_quantile": 0.7,
+          "volatility_feature": "volatility_contraction_duration__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "volatility_contraction_duration__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 13,
+    "strategy_key": "98ed1e11340b74c8f31d82124d158e267abb2a07b8eae3c991877ce0f2301a93",
+    "study": "DEV80_LONG",
+    "chromosome_id": "94",
+    "horizon_sessions": "63",
+    "definition_hash": "743fd3f958fcb70fa5658a78c4077de52587eecdf7f67a92e253980e018d7bee",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 19.672902226981016,
+    "mdd_reported_pct": 15.012759960482638,
+    "calmar_reported": 1.3104120946957818,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "close_to_sma_50__v1",
+          "state": "LOW",
+          "threshold_quantile": 0.1,
+          "volatility_feature": "volatility_expansion_transition__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "volatility_expansion_transition__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 14,
+    "strategy_key": "a24e5dde1df7eccc7b45157578500bc3fed9ee60a67858ec0f57533ac91a04ef",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "a3d3339ed6144f1bb7a94e47c821a61f102cf62b3dfb0faa647ccff2a83df972",
+    "horizon_sessions": "63",
+    "definition_hash": "b88834d50013ebec03e34b4be5a652468821c108ac2afc773ffc0652bba52c12",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.806685325404974,
+    "mdd_reported_pct": 17.44656074749146,
+    "calmar_reported": 1.3072310156421068,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "NONE",
+          "participation_threshold_quantile": 0.8,
+          "range_feature": "compression_duration__v1",
+          "range_threshold_quantile": 0.7,
+          "volatility_feature": "realized_vol_20__v1",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "compression_duration__v1": "GA4_TANH_ONLY",
+      "realized_vol_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 15,
+    "strategy_key": "2d436a5fedafe71297a0929b01ea792a7db94012b493b452085aad26695f0842",
+    "study": "DEV80_LONG",
+    "chromosome_id": "690",
+    "horizon_sessions": "63",
+    "definition_hash": "78b550e01c63445bb18b7cf888cbe9674850530d07df7c42a9a4440a94b0926e",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.215996063170152,
+    "mdd_reported_pct": 17.12036408024964,
+    "calmar_reported": 1.297635725445753,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume__v1",
+          "price_direction": "BELOW",
+          "price_feature": "return_20__v1",
+          "price_threshold_quantile": 0.2,
+          "state": "LOW",
+          "threshold_quantile": 0.5
+        }
+      ],
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_positive_20__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.3,
+          "security_context": "NONE",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "dollar_volume__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 16,
+    "strategy_key": "6694212952ea4ce42aee5656faed7a8e9e2e8a083149a42049359af058255c1b",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "d3210ad50d7cc09c6c99acf54fc47682f1c9a6abae808ab940685e81b38b2c3c",
+    "horizon_sessions": "63",
+    "definition_hash": "a26e480249cedb3a4c96a478dbc5b8886b19d63c9bfb2662cfe7cf854d34e55b",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.746374087735255,
+    "mdd_reported_pct": 16.80057054039499,
+    "calmar_reported": 1.2943830708277833,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "close_location__v1",
+          "price_threshold_quantile": 0.5,
+          "state": "LOW",
+          "threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "close_location__v1": "GA4_TANH_ONLY",
+      "dollar_volume__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 17,
+    "strategy_key": "066b3ca794c60ac4e5309c66dc0531fde5fd34022a52d1667b3576fa4d87eb23",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "9dce2cef714dad5e10a4dd2a9b402bae7973c9e150d6fb6e8cdc5e57d49b2b56",
+    "horizon_sessions": "63",
+    "definition_hash": "1323b3566edbdb5c0c13821e7c4067a805892a96893107cd409a2ae943a06cbf",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.01448387164735,
+    "mdd_reported_pct": 15.480983742859323,
+    "calmar_reported": 1.292843155453808,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "close_to_sma_50__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.2,
+          "volatility_feature": "volatility_ratio_20_63__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "volatility_ratio_20_63__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 18,
+    "strategy_key": "dacdd36ed6b9070d0c8dfbb92dc440644d9aabb5cfc241e69d47d9b097b41468",
+    "study": "DEV80_LONG",
+    "chromosome_id": "476",
+    "horizon_sessions": "63",
+    "definition_hash": "a5a1a131d6ea6319115655a1a5ed18a423b24f96809c430cbd3cdff626417237",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.89843247701484,
+    "mdd_reported_pct": 16.33234898563859,
+    "calmar_reported": 1.2795729809221756,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.2,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.3,
+          "trend_feature": "close_to_sma_20__v1"
+        }
+      ],
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "relative_volume_20__v1",
+          "price_direction": "BELOW",
+          "price_feature": "NONE",
+          "price_threshold_quantile": 0.8,
+          "state": "LOW",
+          "threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "close_to_sma_20__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY",
+      "relative_volume_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 19,
+    "strategy_key": "dcd0e0f10529116b9fcdb680af5fcd7a2cd7e54097fa10f856a4734cc1d087e7",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "44b73aa67bb5c982b7a9cfe935ae0c5706b5c35f71b9b21f9983475bb323f639",
+    "horizon_sessions": "63",
+    "definition_hash": "29172e15c5a67741fb574d82a4f63226eebfd7f15e26d1914c787090ef440d7f",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 11.923585685733485,
+    "mdd_reported_pct": 9.3379230659372,
+    "calmar_reported": 1.2768991135971386,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_positive_20__v1",
+          "breadth_state": "LOW",
+          "breadth_threshold": 0.3,
+          "security_context": "return_20__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.225
+        }
+      ],
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "realized_vol_20__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.2,
+          "displacement_feature": "range_position_20__v1",
+          "severity": 0.125,
+          "tail": "LOW"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "NONE",
+          "market_context_state": "LOW",
+          "market_context_threshold": 0.3,
+          "relative_feature": "return_126_percentile__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.2
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.8,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.1,
+          "trend_feature": "trend_above_sma200_duration__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "range_position_20__v1": "GA4_TANH_ONLY",
+      "realized_vol_20__v1": "GA4_TANH_ONLY",
+      "return_126_percentile__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY",
+      "trend_above_sma200_duration__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 20,
+    "strategy_key": "b89e393aebd47ec8e7e3e827f18e40abba0ce55c73a31026391651c906536569",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "f4421d4b3d9190e70286f4f843a6f3ad95cc46382e5fe6c94451712453d44f39",
+    "horizon_sessions": "20",
+    "definition_hash": "59065214c3741bc0cf2f4703df10c16495f35ae03665da4630e6d83f962fa583",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 18.655511772081802,
+    "mdd_reported_pct": 14.634626110323016,
+    "calmar_reported": 1.2747515127101554,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "NONE",
+          "context_state": "LOW",
+          "context_threshold_quantile": 0.5,
+          "displacement_feature": "signed_return_streak__v1",
+          "severity": 0.05,
+          "tail": "LOW"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "signed_return_streak__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 21,
+    "strategy_key": "3f5dc240c6b5c92146eac3575727a89356b5247cfdda5ffe933678ec51b7b5ab",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "ac1dcd0e14f2dd571266e6d74c167e8ada0a5a7e391b3d59f201402ce7b97c11",
+    "horizon_sessions": "63",
+    "definition_hash": "6757df477ecac14f6ede729617966bc4a1d78d135abb935af440842e20d6e8d1",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 19.1172284529318,
+    "mdd_reported_pct": 15.072676729367892,
+    "calmar_reported": 1.2683366595187056,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_3.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "relative_volume_20_percentile__v1",
+          "participation_threshold_quantile": 0.8,
+          "range_feature": "range_position_20__v1",
+          "range_threshold_quantile": 0.8,
+          "volatility_feature": "NONE",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.8
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "range_position_20__v1": "GA4_TANH_ONLY",
+      "relative_volume_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 22,
+    "strategy_key": "cc3d9f94901d726713f8615142a17c728c193d8b3f02fd78a4e13d2095e6d292",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "ca856b1c0bbdd6a3ca1c66631adb683e6e2c33cb8336fbb00a4f8ff69162ed6f",
+    "horizon_sessions": "63",
+    "definition_hash": "380d37d5d651d6323e32e28e345bfbb3af2cc31318d81947740dfd5b2115e80a",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 17.696824732297078,
+    "mdd_reported_pct": 14.006017141562726,
+    "calmar_reported": 1.2635158556090806,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "range_position_20__v1",
+          "state": "LOW",
+          "threshold_quantile": 0.2,
+          "volatility_feature": "realized_vol_20_percentile__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 23,
+    "strategy_key": "5ffd553b1dadd64101ed6b8f9c9ee196ae9526b1abffc03e545694d1235e9fda",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "f16a322a9e59b708f8440d7693e8aacb8c7d0f30817cecff6ccfde685626c05d",
+    "horizon_sessions": "63",
+    "definition_hash": "34f2e3a84fd3a7c3f08411b51753284d4096c2fa133a121de7bc30084017511e",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.908242805525347,
+    "mdd_reported_pct": 18.144965166007086,
+    "calmar_reported": 1.2625123606432611,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "relative_volume_20__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "return_5__v1",
+          "price_threshold_quantile": 0.8,
+          "state": "LOW",
+          "threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "relative_volume_20__v1": "GA4_TANH_ONLY",
+      "return_5__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 24,
+    "strategy_key": "514032d7a6784e9cf4b1996beeebbe6187f9f76be01e81d53a23319ef9c39674",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "2c95f2415cbb02e9282b6861ef4f56d919dbc4c9bcf771c791a2dd5867bdc825",
+    "horizon_sessions": "20",
+    "definition_hash": "21c8270f25659933982e0f637988ec90e17dd248c30de3224f2b1104f8078bb3",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 7.758005294944859,
+    "mdd_reported_pct": 6.145805428995463,
+    "calmar_reported": 1.2623252370377938,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_positive_20__v1",
+          "breadth_state": "LOW",
+          "breadth_threshold": 0.25,
+          "security_context": "close_to_sma_200__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.265
+        }
+      ],
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "realized_vol_20__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.2,
+          "displacement_feature": "range_position_20__v1",
+          "severity": 0.16,
+          "tail": "LOW"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "breadth_positive_20__v1",
+          "market_context_state": "LOW",
+          "market_context_threshold": 0.3,
+          "relative_feature": "sector_vs_universe_return_63__v1",
+          "tail": "LEADER",
+          "threshold_quantile": 0.15
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.8,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.1,
+          "trend_feature": "trend_above_sma200_duration__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "close_to_sma_200__v1": "GA4_TANH_ONLY",
+      "range_position_20__v1": "GA4_TANH_ONLY",
+      "realized_vol_20__v1": "GA4_TANH_ONLY",
+      "sector_vs_universe_return_63__v1": "GA4_TANH_ONLY",
+      "trend_above_sma200_duration__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 25,
+    "strategy_key": "195031a4a54973893c2961dd15db6c87db2ace4b854ae1e38bd58e81242c39b2",
+    "study": "DEV80_LONG",
+    "chromosome_id": "580",
+    "horizon_sessions": "63",
+    "definition_hash": "0b7cf6c8fe15aaeb73dcd8e26fd64321d8d9e1584cae3ffe49e63adb53bb5f88",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 15.322384660874345,
+    "mdd_reported_pct": 12.230546200431867,
+    "calmar_reported": 1.25279643359945,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "realized_vol_20__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.2,
+          "displacement_feature": "return_5__v1",
+          "severity": 0.2,
+          "tail": "LOW"
+        }
+      ],
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "advance_decline_breadth__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.6,
+          "security_context": "return_20__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.8
+        }
+      ]
+    ],
+    "required_features": {
+      "advance_decline_breadth__v1": "GA4_TANH_ONLY",
+      "realized_vol_20__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY",
+      "return_5__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 26,
+    "strategy_key": "7d6bb2c2cd532c4eddc89952c08a09c27e2a37663651d1fd3df2d15783625721",
+    "study": "DEV80_LONG",
+    "chromosome_id": "90",
+    "horizon_sessions": "63",
+    "definition_hash": "9277813027743275ef57778352e5208a8a0553d2fe54819523b02fa362ce07d9",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 19.2911123817334,
+    "mdd_reported_pct": 15.39932505691446,
+    "calmar_reported": 1.2527245389285087,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "range_position_20__v1",
+          "state": "LOW",
+          "threshold_quantile": 0.1,
+          "volatility_feature": "natr_20_percentile__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 27,
+    "strategy_key": "50e01b40a3ca9b627629ca412b958be58b4e9b379d7bd2647e3a7dade0b24e02",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "e15fe37012b34617c6065a420f105b0054d723c361e90bbda61318337dd37a29",
+    "horizon_sessions": "63",
+    "definition_hash": "ac6e1bbcc86aca0fbc560726596cfe7f5a7a029640a1d65fde0335f18604cd2a",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 17.721528370117735,
+    "mdd_reported_pct": 14.22167222151657,
+    "calmar_reported": 1.2460931523443555,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "NONE",
+          "participation_threshold_quantile": 0.8,
+          "range_feature": "range_position_50__v1",
+          "range_threshold_quantile": 0.8,
+          "volatility_feature": "NONE",
+          "volatility_state": "LOW",
+          "volatility_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "range_position_50__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 28,
+    "strategy_key": "0bc5d72eeacbb7d4fb813eed8d2a2494e47576e5b592762122f4d03676ac1344",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "703e0b2d5a1c4b1f3b77d23c743ad9bf36354ba394a59f5ba21aa3a9492b6b7f",
+    "horizon_sessions": "20",
+    "definition_hash": "5ebdcd55bd6bb1bb40b882e957897769e97191583a5892ded2ae6e7e7f0f26cc",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 8.66243375604192,
+    "mdd_reported_pct": 6.966340120516208,
+    "calmar_reported": 1.2434698286594756,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_positive_20__v1",
+          "breadth_state": "LOW",
+          "breadth_threshold": 0.25,
+          "security_context": "close_to_sma_200__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.265
+        }
+      ],
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "natr_20_percentile__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.2,
+          "displacement_feature": "range_position_20__v1",
+          "severity": 0.16,
+          "tail": "LOW"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "breadth_positive_20__v1",
+          "market_context_state": "LOW",
+          "market_context_threshold": 0.3,
+          "relative_feature": "relative_strength_change_20__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.1
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.8,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.2,
+          "trend_feature": "adx_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "adx_14__v1": "GA4_TANH_ONLY",
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "close_to_sma_200__v1": "GA4_TANH_ONLY",
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "range_position_20__v1": "GA4_TANH_ONLY",
+      "relative_strength_change_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 29,
+    "strategy_key": "d423f911dd2f5e45f034b81304bc7f6f6b843bd79fbff80d683388061bf52cf8",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "e38a601f8a3d014f357c6594bc3c871796649fa0e1ec2c637895f803f5be8d1c",
+    "horizon_sessions": "63",
+    "definition_hash": "071a2497c624631338dc18fdb7f4c985701842897e67894c672022da12e26e13",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 19.363404442717513,
+    "mdd_reported_pct": 15.602711577748869,
+    "calmar_reported": 1.2410281601520978,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.5,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.2,
+          "trend_feature": "sma20_slope_5__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "range_position_50__v1": "GA4_TANH_ONLY",
+      "sma20_slope_5__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 30,
+    "strategy_key": "ec56465ba218e4db0b0c7c0a5ace32e67eb08868b3787806f166733065d4f049",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "e2c976671397308994d134472ebdcde5ff399b585ba8c528dbf38ac061311573",
+    "horizon_sessions": "63",
+    "definition_hash": "3001710a875534ca6c5aea7df2706189fe99e3c1b7167b51848079968edd1207",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.79140470127814,
+    "mdd_reported_pct": 17.56603249099478,
+    "calmar_reported": 1.2405422062409082,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.8,
+          "direction": "BELOW",
+          "threshold_quantile": 0.2,
+          "trend_feature": "sma20_slope_5__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "sma20_slope_5__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 31,
+    "strategy_key": "7a7a106f0f31c8e943f1a96681edbcda5338ccbca72daa78c2f50997161860fe",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "f90e4f6f586d6602378983c0cb28fcb39fe158a5afe5d10445cae905611fe424",
+    "horizon_sessions": "63",
+    "definition_hash": "0b6a56c7e9f3e9d0a7846ebd2a3701f0aea142697aa72925dc91a7736df0b61b",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.921456972872022,
+    "mdd_reported_pct": 17.73557017182417,
+    "calmar_reported": 1.2360164776488447,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "relative_volume_20_percentile__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "close_location__v1",
+          "price_threshold_quantile": 0.2,
+          "state": "LOW",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "close_location__v1": "GA4_TANH_ONLY",
+      "relative_volume_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 32,
+    "strategy_key": "9451a1455ed0006df015787cda9244f8b58a70040fba5a3ebb4b61f6a4c85878",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "61a7dc13f724abbd11729fe1a55c6a77cf53c4ca338701505273fd536b81c478",
+    "horizon_sessions": "63",
+    "definition_hash": "b302d6c3a310ecfe03a85e875409805b8097027476ed5076d7207a368f82af00",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 26.3481852374704,
+    "mdd_reported_pct": 21.328503542602327,
+    "calmar_reported": 1.23535086204438,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_positive_20__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.6,
+          "security_context": "natr_20_percentile__v1",
+          "security_context_direction": "ABOVE",
+          "security_context_threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "natr_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 33,
+    "strategy_key": "7dbfd123b17e9466e2970af0d9849a3daf876745cf6cdf268061b425fce0a24c",
+    "study": "DEV80_LONG",
+    "chromosome_id": "1026",
+    "horizon_sessions": "63",
+    "definition_hash": "16752dcba47003d346b2433f03ad45fcd82f3385f71a6a090b322af47b6b833b",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 16.78556636433475,
+    "mdd_reported_pct": 13.596149459433516,
+    "calmar_reported": 1.2345823657218107,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "MOMENTUM",
+        {
+          "context_feature": "NONE",
+          "context_threshold": 0.4,
+          "direction": "BELOW",
+          "momentum_feature": "return_63__v1",
+          "threshold_quantile": 0.6
+        }
+      ],
+      [
+        "VOLATILITY",
+        {
+          "price_context": "NONE",
+          "state": "LOW",
+          "threshold_quantile": 0.8,
+          "volatility_feature": "volatility_contraction_duration__v1"
+        }
+      ],
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "amihud_illiquidity_20__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "NONE",
+          "price_threshold_quantile": 0.8,
+          "state": "HIGH",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "amihud_illiquidity_20__v1": "GA4_TANH_ONLY",
+      "return_63__v1": "GA4_TANH_ONLY",
+      "volatility_contraction_duration__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 34,
+    "strategy_key": "e8773ac523250e6aed0e495507d6404a3ded7bf727934d8fb9029751febdbd95",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "9e1a92a6f0a376d0c16cba8c4f65e77ad67157157f491becd2a7a8214554661d",
+    "horizon_sessions": "20",
+    "definition_hash": "bc144274f8b0ea990ab3ba15e792ed29c9ef911ee4a28ab1801cc50f63f89fd1",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.809847420728843,
+    "mdd_reported_pct": 16.881473823920107,
+    "calmar_reported": 1.2327032365647157,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.8,
+          "direction": "BELOW",
+          "threshold_quantile": 0.2,
+          "trend_feature": "close_to_sma_20__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "close_to_sma_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 35,
+    "strategy_key": "9a5b155757790c41f09bfa02188f3f687af25fdecb31384f962b6057055bd80b",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "3297b3d6983191bb081ae2ac4169cab999ff9c5468e08c4c71b375e141290bba",
+    "horizon_sessions": "15",
+    "definition_hash": "de50dc15eac4e28a474595de506cc0e8279147708b7a19fdd9b4bed8c319f9ab",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 7.345113627503697,
+    "mdd_reported_pct": 5.981320898049555,
+    "calmar_reported": 1.2280086209550904,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_positive_20__v1",
+          "breadth_state": "LOW",
+          "breadth_threshold": 0.265,
+          "security_context": "close_to_sma_200__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.225
+        }
+      ],
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "realized_vol_20__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.2,
+          "displacement_feature": "range_position_20__v1",
+          "severity": 0.16,
+          "tail": "LOW"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "breadth_positive_20__v1",
+          "market_context_state": "LOW",
+          "market_context_threshold": 0.3,
+          "relative_feature": "sector_vs_universe_return_63__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.15
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.8,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.15,
+          "trend_feature": "adx_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "adx_14__v1": "GA4_TANH_ONLY",
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "close_to_sma_200__v1": "GA4_TANH_ONLY",
+      "range_position_20__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY",
+      "realized_vol_20__v1": "GA4_TANH_ONLY",
+      "sector_vs_universe_return_63__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 36,
+    "strategy_key": "0162b45c526f8cb0e22273b15e439f34cdc7fc4749f3e2ab03377bac094775fc",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "8160b8bb51d7b55fae8bcff8dd72403fd81cf35fc5d2de7ad338d3433f158b84",
+    "horizon_sessions": "63",
+    "definition_hash": "68b72bff66d2a63b371b7edcdc2840216a357dce93f2ef50559710d75dd50de3",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.107032029633576,
+    "mdd_reported_pct": 17.23569107861305,
+    "calmar_reported": 1.2246118785352498,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "volume_slope_20__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "close_location__v1",
+          "price_threshold_quantile": 0.5,
+          "state": "LOW",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "close_location__v1": "GA4_TANH_ONLY",
+      "volume_slope_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 37,
+    "strategy_key": "7c60a4b5594bcb1b7a4831fb037495315bc5077c6e1e02544bdd83c852ce5fbf",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "599ad53e1c4ed75298f0bbcd9a1227b00b32ba98d2535707f74d66a63a3eb0c3",
+    "horizon_sessions": "20",
+    "definition_hash": "68bbcef48a0fae0bd48476d23509d6b3d6ffe1896b933fe948a6080fa3952e6b",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 19.54800061328852,
+    "mdd_reported_pct": 15.970121667691267,
+    "calmar_reported": 1.2240357976004381,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "high_low_spread_proxy__v1",
+          "price_direction": "BELOW",
+          "price_feature": "intraday_return__v1",
+          "price_threshold_quantile": 0.8,
+          "state": "LOW",
+          "threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "high_low_spread_proxy__v1": "GA4_TANH_ONLY",
+      "intraday_return__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 38,
+    "strategy_key": "b54d91387193e6d39b70d837a2ae345680f1fcc64e706e72805cfae7861d85e3",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "e123891af69c0d64cde15a15e2f6847099210feced16f76450c8d711fadd430a",
+    "horizon_sessions": "15",
+    "definition_hash": "31967352f13948213f5ddb6959fcffef319d5d28a6106cd2b19b823ff202e437",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 8.378379988695306,
+    "mdd_reported_pct": 6.84850926575321,
+    "calmar_reported": 1.2233874064524375,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_positive_20__v1",
+          "breadth_state": "LOW",
+          "breadth_threshold": 0.265,
+          "security_context": "close_to_sma_200__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.225
+        }
+      ],
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "realized_vol_20__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.2,
+          "displacement_feature": "range_position_20__v1",
+          "severity": 0.16,
+          "tail": "LOW"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "breadth_positive_20__v1",
+          "market_context_state": "LOW",
+          "market_context_threshold": 0.3,
+          "relative_feature": "sector_vs_universe_return_63__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.15
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.775,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.1,
+          "trend_feature": "adx_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "adx_14__v1": "GA4_TANH_ONLY",
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "close_to_sma_200__v1": "GA4_TANH_ONLY",
+      "range_position_20__v1": "GA4_TANH_ONLY",
+      "realized_vol_20__v1": "GA4_TANH_ONLY",
+      "sector_vs_universe_return_63__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 39,
+    "strategy_key": "2fcab3788a05f67b803d9c35b05e005212a4d8c9fec77f8cc7d2efdb270f5e12",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "7e7787503383728aeb24a4243fd7821aaa60e5e8c6ef435a1a3a021ba910913e",
+    "horizon_sessions": "63",
+    "definition_hash": "51762178c586f4589ceabfc9d354200f2cd7e160175ded9d8066697423eba5bf",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.996957574225018,
+    "mdd_reported_pct": 17.989898580625546,
+    "calmar_reported": 1.2227393876425143,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "return_20__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.2,
+          "volatility_feature": "natr_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_14__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 40,
+    "strategy_key": "0336da7934a0403fcb646a7b8d3f320aef5bfc44bdf49c477c4a7b2ca8e5abf6",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "a4c7f77abef16952893679724982205678aa0040b942124582206b6371f3c156",
+    "horizon_sessions": "63",
+    "definition_hash": "6a17172ac3a79a4120699058698036a91516e02266eb055252de7259ec3df198",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.917550944779563,
+    "mdd_reported_pct": 17.112028019841485,
+    "calmar_reported": 1.2223887735881191,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "relative_volume_20__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "return_20__v1",
+          "price_threshold_quantile": 0.5,
+          "state": "LOW",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "relative_volume_20__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 41,
+    "strategy_key": "577269e25bf2de549e162bdf12b50ff53dc1389647ba6724e59df43cd333d0b7",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "53c35e01050f370114df6ebe051d0eb052f5c9a47a0c3cc76cbd79b6bd62d298",
+    "horizon_sessions": "63",
+    "definition_hash": "3413571e462b08b6c73d486e7ea31f18037d2e211ac5f8f26db4f73c73cb72a6",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 19.95565254852698,
+    "mdd_reported_pct": 16.356794453384154,
+    "calmar_reported": 1.2200222118948396,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume_relative_20__v1",
+          "price_direction": "BELOW",
+          "price_feature": "intraday_return__v1",
+          "price_threshold_quantile": 0.5,
+          "state": "HIGH",
+          "threshold_quantile": 0.9
+        }
+      ]
+    ],
+    "required_features": {
+      "dollar_volume_relative_20__v1": "GA4_TANH_ONLY",
+      "intraday_return__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 42,
+    "strategy_key": "07bc40583552d81c788ebe48de1f0c27e02cc6cefd8b87c847668a133e0d4a9d",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "33e5835efb484ba3d30f4be63af6a3b20f13c18081a2db4b7114a7a4521c03ac",
+    "horizon_sessions": "63",
+    "definition_hash": "f22ff8e344d9c6daea6c4d997ac4d9369a7e118925e4772a96ace660c4dabcd2",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.613381769314334,
+    "mdd_reported_pct": 18.55616117915158,
+    "calmar_reported": 1.2186454704177265,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "range_position_20__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.2,
+          "volatility_feature": "realized_vol_20_percentile__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 43,
+    "strategy_key": "8abd019dd37cad7112db9be81c07c9cb6c278fe8ffcfc258d82375e3d8bad4ec",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "1cb0d838ada46d82c926c1d711b1445c3f73a5987ab457fd7542a35d1858ae97",
+    "horizon_sessions": "63",
+    "definition_hash": "d7612dd013caa5e45007a223ac7d2cdb49c58a270f1db8a9a21d63800d66c15a",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 19.497405009279078,
+    "mdd_reported_pct": 16.102784895287154,
+    "calmar_reported": 1.2108095050679983,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_3.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.5,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.2,
+          "trend_feature": "adx_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "adx_14__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 44,
+    "strategy_key": "d361e3dbb3c29356b279842f6c23dd6f18e054bbfca6a319c19775401f0f1074",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "75abf8dbb232e4ba8a0f6d76c6c133a92626c9f262b19cbef6d1ea75b92fa7a4",
+    "horizon_sessions": "63",
+    "definition_hash": "854cb4ab2e7d8b788dd7d6286daa2f759dd48cca9a3354ed7879e2a3ceeae6ab",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 27.943111548363575,
+    "mdd_reported_pct": 23.102606785178867,
+    "calmar_reported": 1.209522016636238,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "realized_vol_20_percentile__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.2,
+          "security_context": "natr_20_percentile__v1",
+          "security_context_direction": "ABOVE",
+          "security_context_threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 45,
+    "strategy_key": "ca5b218b6bd47cf77fb5169b60716100aee98a137ae7b029fbf95789353676cd",
+    "study": "DEV80_LONG",
+    "chromosome_id": "478",
+    "horizon_sessions": "63",
+    "definition_hash": "986d10630ddf5104e93c0833d909ca1be30f0c159bb0e0635042f91c65bad85a",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.97102494952985,
+    "mdd_reported_pct": 17.3438699886367,
+    "calmar_reported": 1.209131812177419,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.2,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.2,
+          "trend_feature": "sma20_slope_5__v1"
+        }
+      ],
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "volume_slope_20__v1",
+          "price_direction": "BELOW",
+          "price_feature": "return_5__v1",
+          "price_threshold_quantile": 0.8,
+          "state": "HIGH",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "return_5__v1": "GA4_TANH_ONLY",
+      "sma20_slope_5__v1": "GA4_TANH_ONLY",
+      "volume_slope_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 46,
+    "strategy_key": "8d3fa06e2972ec4dfee4360b714b2c49fc9cc7b5ca355591a7f72ff51457d224",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "e6485fe3f3b2b9e9b2539b53fd375e6d5d058e0d935601434fc0bbd56d407ff1",
+    "horizon_sessions": "63",
+    "definition_hash": "0bb042a14fccd2962d9c96aad6d4d872df0936f17b84a1b9f96551b8ea731a14",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.146886270795772,
+    "mdd_reported_pct": 17.511060467808065,
+    "calmar_reported": 1.2076302465902466,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "relative_volume_20__v1",
+          "participation_threshold_quantile": 0.9,
+          "range_feature": "failed_breakout_20__v1",
+          "range_threshold_quantile": 0.9,
+          "volatility_feature": "NONE",
+          "volatility_state": "LOW",
+          "volatility_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "failed_breakout_20__v1": "GA4_TANH_ONLY",
+      "relative_volume_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 47,
+    "strategy_key": "3ce786b7a3f88021f6fa21cdc3cee36c6a379c592c00ed7b9ac6143f4dbe6fba",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "18b587642a45e395b620a8ec90f0a483459800632464d3dad45d4d50183966d7",
+    "horizon_sessions": "63",
+    "definition_hash": "c60bd25815dcf8a18b032b9f18da83c292dce018bae237267f39ca885c208139",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 16.00723888458113,
+    "mdd_reported_pct": 13.266426551523569,
+    "calmar_reported": 1.2065976336892918,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "range_position_20__v1",
+          "state": "LOW",
+          "threshold_quantile": 0.3,
+          "volatility_feature": "realized_vol_20__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "realized_vol_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 48,
+    "strategy_key": "b4a0039dd45c9f3eacaf721e7bdac8c3e69f058862bbbc8638443607edd0a98a",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "cc72021953a3b6f411e8b487ed08e7ed15b55b0c5614cc9fb2a42b035f8add0b",
+    "horizon_sessions": "15",
+    "definition_hash": "389f848012decba36a7c798f192952de157b272f580de0cb85d284a336a1b694",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.225984368536242,
+    "mdd_reported_pct": 16.794898385463604,
+    "calmar_reported": 1.2042933457723286,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "relative_volume_20_percentile__v1",
+          "price_direction": "BELOW",
+          "price_feature": "intraday_return__v1",
+          "price_threshold_quantile": 0.2,
+          "state": "HIGH",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "intraday_return__v1": "GA4_TANH_ONLY",
+      "relative_volume_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 49,
+    "strategy_key": "4cea1fbfbb498ad24fb1a1576c1d8cb45cf81a5a6140ae4a9e7562ff8c962b36",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "7f2e9f607de6379f97e5c6bd72d01bcaa5223e345ee24711fba1c036886a3cb2",
+    "horizon_sessions": "15",
+    "definition_hash": "6c8ddbc62e55b3d35e8345daaa8bb2594f99453fe22a54d0e5b3f817efd54eaf",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 13.621892041260653,
+    "mdd_reported_pct": 11.351619179616538,
+    "calmar_reported": 1.1999955095146881,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "NONE",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.5,
+          "displacement_feature": "signed_return_streak__v1",
+          "severity": 0.05,
+          "tail": "LOW"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "NONE",
+          "market_context_state": "HIGH",
+          "market_context_threshold": 0.3,
+          "relative_feature": "return_126_percentile__v1",
+          "tail": "LEADER",
+          "threshold_quantile": 0.1
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.8,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.2,
+          "trend_feature": "close_to_sma_50__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "close_to_sma_50__v1": "GA4_TANH_ONLY",
+      "return_126_percentile__v1": "GA4_TANH_ONLY",
+      "signed_return_streak__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 50,
+    "strategy_key": "89c09b6f86973398305157bcf1da963b44dc93e5cfa4119880b88e64c2341bf8",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "a8306bd6d820175f4dc277e481b1fba30ecd3046e1afe0a1497ea9742567a285",
+    "horizon_sessions": "15",
+    "definition_hash": "e5bf947aab8a5e8ac932f6f9259d9aa06bbbf45ae5a413298e263116ffa3942e",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 7.160161409765342,
+    "mdd_reported_pct": 5.970154503167317,
+    "calmar_reported": 1.1993259815917154,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_positive_20__v1",
+          "breadth_state": "LOW",
+          "breadth_threshold": 0.3,
+          "security_context": "return_20__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.225
+        }
+      ],
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "natr_20_percentile__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.21,
+          "displacement_feature": "range_position_20__v1",
+          "severity": 0.175,
+          "tail": "LOW"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "breadth_positive_20__v1",
+          "market_context_state": "LOW",
+          "market_context_threshold": 0.3,
+          "relative_feature": "relative_strength_change_20__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.19
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.8,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.15,
+          "trend_feature": "adx_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "adx_14__v1": "GA4_TANH_ONLY",
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "range_position_20__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY",
+      "relative_strength_change_20__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 51,
+    "strategy_key": "6e521048c578ba2ee39e2a2eb3fb703bba78585309c3c7206483983cfbb8dac7",
+    "study": "DEV80_LONG",
+    "chromosome_id": "1344",
+    "horizon_sessions": "63",
+    "definition_hash": "8fefbc7c616ca29afd501e8e96e5c7b3ca0a4457b36869f791b880e4797de606",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.65381558673942,
+    "mdd_reported_pct": 17.286535428372744,
+    "calmar_reported": 1.1947920780493637,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "NONE",
+          "participation_threshold_quantile": 0.8,
+          "range_feature": "failed_breakout_20__v1",
+          "range_threshold_quantile": 0.95,
+          "volatility_feature": "realized_vol_20__v1",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.2
+        }
+      ],
+      [
+        "VOLATILITY",
+        {
+          "price_context": "close_to_sma_50__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.1,
+          "volatility_feature": "realized_vol_63__v1"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "NONE",
+          "market_context_state": "HIGH",
+          "market_context_threshold": 0.5,
+          "relative_feature": "return_126_percentile__v1",
+          "tail": "LEADER",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "failed_breakout_20__v1": "GA4_TANH_ONLY",
+      "realized_vol_20__v1": "GA4_TANH_ONLY",
+      "realized_vol_63__v1": "GA4_TANH_ONLY",
+      "return_126_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 52,
+    "strategy_key": "cafb2f1ecaaa4a4a6c457887e0dfa699d36ee7bf8f254e3a92bee65864580238",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "d836a3b9f844e3448d79ec7ea069d4df8616b1e73b7c1b9ddf37d4947e936d62",
+    "horizon_sessions": "63",
+    "definition_hash": "47ef0814733c42ce987076000f80d05582c8685ee4c8e1e8957304f5797a014e",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.496652048129096,
+    "mdd_reported_pct": 19.68575022677982,
+    "calmar_reported": 1.1935868218100754,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_3.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "high_low_spread_proxy__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "return_5__v1",
+          "price_threshold_quantile": 0.5,
+          "state": "HIGH",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "high_low_spread_proxy__v1": "GA4_TANH_ONLY",
+      "return_5__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 53,
+    "strategy_key": "a3c2866ea016a5ccbb420fbe7220834dbbe03fdc8983d9f9557fd4d8a88c1a4f",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "d8df5adfb10a8b8f9ec2db1e5be0fd0320b6aae0bc1f7762e5e03ac57352c148",
+    "horizon_sessions": "63",
+    "definition_hash": "62d56de44fac3fbdefdeb0fb7c6b3478211370b0c2723b07cba7c7757514bf00",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 17.50220903404127,
+    "mdd_reported_pct": 14.691025714829909,
+    "calmar_reported": 1.1913537811300408,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "close_to_sma_50__v1",
+          "state": "LOW",
+          "threshold_quantile": 0.2,
+          "volatility_feature": "realized_vol_20_percentile__v1"
+        }
+      ],
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "up_down_volume_balance_20__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "return_5__v1",
+          "price_threshold_quantile": 0.5,
+          "state": "LOW",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_5__v1": "GA4_TANH_ONLY",
+      "up_down_volume_balance_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 54,
+    "strategy_key": "37fec8352ff04a5215592855d6539dbd7b3fdf058a5d899eb24ad77c6aa67ece",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "a9e16bd1450c89d69a86963cce05a9a368b92bd499dbe412211c0871cd0762ba",
+    "horizon_sessions": "20",
+    "definition_hash": "e14ac5f5e058c151be9ae4a764199a2507413e12c9efa8414a722e791ce1727c",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.941008233607803,
+    "mdd_reported_pct": 17.604391043595914,
+    "calmar_reported": 1.189533235301864,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "relative_volume_20__v1",
+          "participation_threshold_quantile": 0.7,
+          "range_feature": "breakout_reentry_20__v1",
+          "range_threshold_quantile": 0.7,
+          "volatility_feature": "natr_20__v1",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.3
+        }
+      ]
+    ],
+    "required_features": {
+      "breakout_reentry_20__v1": "GA4_TANH_ONLY",
+      "natr_20__v1": "GA4_TANH_ONLY",
+      "relative_volume_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 55,
+    "strategy_key": "9aedd2ffef8024a1cd9ec8d657914cdbeda1970f0a99af4ab5ea4f7997ba6983",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "b92bfdceb40c912c142090b35a12b7ed67eb59ef98d2765b83065ba4b40ab444",
+    "horizon_sessions": "63",
+    "definition_hash": "6149208a0844fe3f64c8d0742665fad8f4c808aff974acfb700c19896997b185",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.103323095164917,
+    "mdd_reported_pct": 16.90996819701666,
+    "calmar_reported": 1.1888445241849506,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "high_low_spread_proxy__v1",
+          "price_direction": "BELOW",
+          "price_feature": "NONE",
+          "price_threshold_quantile": 0.8,
+          "state": "LOW",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "high_low_spread_proxy__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 56,
+    "strategy_key": "c0953345e253ead96e0e123bc0bd808611c634a6c7ee90b99b700885020e47c9",
+    "study": "DEV80_LONG",
+    "chromosome_id": "12",
+    "horizon_sessions": "63",
+    "definition_hash": "f4fe843f6d80cf978a551d9592016fa454336802719d83f7146d8193c2ddae6c",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 24.898460379127087,
+    "mdd_reported_pct": 20.95011385324619,
+    "calmar_reported": 1.188464203752721,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "MOMENTUM",
+        {
+          "context_feature": "natr_20_percentile__v1",
+          "context_threshold": 0.4,
+          "direction": "BELOW",
+          "momentum_feature": "return_20__v1",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 57,
+    "strategy_key": "e39939a5d36904bbe33bc5eef6cc1ced789b2940e201f1aa57b9409bab59fb15",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "a19b091c0bebd038c58b21941d025e8a5d9dc7738af9d23028f63591bb97115d",
+    "horizon_sessions": "63",
+    "definition_hash": "679171cb674f11f5e69c6dfcc5120af86ca93af351df9b72052aa1df894ffcd1",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.265037588399704,
+    "mdd_reported_pct": 17.057381406590977,
+    "calmar_reported": 1.1880509150466254,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "close_to_sma_50__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.1,
+          "volatility_feature": "candle_range_fraction__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "candle_range_fraction__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 58,
+    "strategy_key": "339c44bad203c51683320a65606e137b968f514e452c722fb37b43910d4a9000",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "b9830069be2289d71d6a4a0fb2cc9a5a1f978ec8af46718ffc97b6a349a4c5f0",
+    "horizon_sessions": "63",
+    "definition_hash": "b7824539b29323bb1da095d6fdcfa6f610773e96a2fe2260263ab4ccdff97ae8",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 19.88757456928294,
+    "mdd_reported_pct": 16.74885952399127,
+    "calmar_reported": 1.1873987324806048,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "close_to_sma_50__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.1,
+          "volatility_feature": "volatility_ratio_20_63__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "volatility_ratio_20_63__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 59,
+    "strategy_key": "851228763a8ac354fc9515e9b099dde293565fc6f0231886bdbceb917f8354bc",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "622e209522b8ddbdf09ff5c9accdc0e7b97f78f5873b49e9af308afd07a61b21",
+    "horizon_sessions": "63",
+    "definition_hash": "90d6698cd9f7e3e48a78ac44f23b6a9889a53c3371725af46fb0528e4d87db8b",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 24.454099039623458,
+    "mdd_reported_pct": 20.64850774708791,
+    "calmar_reported": 1.184303453748238,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.5,
+          "direction": "BELOW",
+          "threshold_quantile": 0.7,
+          "trend_feature": "pullback_from_high_20__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "pullback_from_high_20__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 60,
+    "strategy_key": "99b7b33859b3b8d39d28c74a4dde68b6a8070fb4f7634959f6456e1c2725c4d9",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "4480bac8c493868ece50ad7ef8dc73dff67001464c07d7531d8f989324d88f56",
+    "horizon_sessions": "63",
+    "definition_hash": "01b3226893dd7ed5581f437c6ee6553cb4949c9f25cb1c0402b1192d12285ec5",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 25.17661005372689,
+    "mdd_reported_pct": 21.843274701142885,
+    "calmar_reported": 1.1526023638026033,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "realized_vol_20_percentile__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.3,
+          "security_context": "NONE",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 61,
+    "strategy_key": "c9a6e9fe885ba1a9b294cc60392271e37e0bf0821e89da5d9dcb96dbad59bc96",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "b4960bfed7a1065330a32902210e5bfce24acf025e7258f9f1e9a35ec22cec8a",
+    "horizon_sessions": "63",
+    "definition_hash": "94a2ac1a2e021b7d9f8d1c8fd3cfa72dcb33360a0c3d0883fdcd727772e1c450",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 25.05523176629303,
+    "mdd_reported_pct": 24.42382716459065,
+    "calmar_reported": 1.0258519927056224,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "realized_vol_20__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.5,
+          "displacement_feature": "return_5__v1",
+          "severity": 0.2,
+          "tail": "LOW"
+        }
+      ]
+    ],
+    "required_features": {
+      "realized_vol_20__v1": "GA4_TANH_ONLY",
+      "return_5__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 62,
+    "strategy_key": "664817d24286aa88e43578ac30d6346da7164a301a6154b7fed861e299c69906",
+    "study": "DEV80_LONG",
+    "chromosome_id": "696",
+    "horizon_sessions": "63",
+    "definition_hash": "c0646e8d535e4739b171a68668a6df195b2294c9bd94033d17235145d9679df9",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 24.952675430910197,
+    "mdd_reported_pct": 22.54390915717272,
+    "calmar_reported": 1.106847763488751,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume_relative_20__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "intraday_return__v1",
+          "price_threshold_quantile": 0.2,
+          "state": "HIGH",
+          "threshold_quantile": 0.2
+        }
+      ],
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_above_sma_200__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.2,
+          "security_context": "natr_20_percentile__v1",
+          "security_context_direction": "ABOVE",
+          "security_context_threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "breadth_above_sma_200__v1": "GA4_TANH_ONLY",
+      "dollar_volume_relative_20__v1": "GA4_TANH_ONLY",
+      "intraday_return__v1": "GA4_TANH_ONLY",
+      "natr_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 63,
+    "strategy_key": "e75f1c24dd7ec8d7c8b2bce53cde385429d1a3658507040a15963f8d7f652ea8",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "6869fe29226ace01fdce072a29118ac84aca09681dded0f0a5bd4f393a8f70ed",
+    "horizon_sessions": "63",
+    "definition_hash": "d00ca2f8149b343b4bc71daf5c293d1adf72c3a78d4e1050b7c3d5eeb25066da",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 24.557282332520924,
+    "mdd_reported_pct": 23.8337123885982,
+    "calmar_reported": 1.0303590952229864,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.5,
+          "direction": "BELOW",
+          "threshold_quantile": 0.7,
+          "trend_feature": "pullback_from_high_20__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "pullback_from_high_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 64,
+    "strategy_key": "89b0b0bb74bbd5a5ab4d5356a9d5581b25559d408a4fe6dfbad4707ab2f05be7",
+    "study": "DEV80_LONG",
+    "chromosome_id": "316",
+    "horizon_sessions": "63",
+    "definition_hash": "bd474db80aa1a2f4471d826c8c66c4edf9938dc30a6b8000ab98ed21a39ff35c",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 24.047546417722067,
+    "mdd_reported_pct": 21.422468966720725,
+    "calmar_reported": 1.1225385110875565,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "relative_volume_20_percentile__v1",
+          "participation_threshold_quantile": 0.5,
+          "range_feature": "failed_breakout_20__v1",
+          "range_threshold_quantile": 0.7,
+          "volatility_feature": "NONE",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.8
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.5,
+          "direction": "BELOW",
+          "threshold_quantile": 0.7,
+          "trend_feature": "pullback_from_high_20__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "failed_breakout_20__v1": "GA4_TANH_ONLY",
+      "pullback_from_high_20__v1": "GA4_TANH_ONLY",
+      "relative_volume_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 65,
+    "strategy_key": "6ad51a6f4541181c238b02fd75e3c0e734b46e02cd094fc0294b43ad7f65ef5a",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "6c9b2e15757a38240d023c304266e48932c48b9b50f40dabf7e91867778f351e",
+    "horizon_sessions": "63",
+    "definition_hash": "f697bc2adb6e7de86312431d053b7b63b2868707a1976eac2d893312ae10197c",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 24.01925071023252,
+    "mdd_reported_pct": 20.54589908720588,
+    "calmar_reported": 1.169053279600187,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "NONE",
+          "participation_threshold_quantile": 0.9,
+          "range_feature": "breakout_reentry_20__v1",
+          "range_threshold_quantile": 0.8,
+          "volatility_feature": "realized_vol_20__v1",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "breakout_reentry_20__v1": "GA4_TANH_ONLY",
+      "realized_vol_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 66,
+    "strategy_key": "bdda227f1b9a8def0a20a1371163e4dd510f0c0fef2ba4298326b2790ae2eb06",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "186e2b8b053ac9239a74357abbd6a6dd934f48b9f4bf800a616364bc4ae7b92e",
+    "horizon_sessions": "63",
+    "definition_hash": "56e826262d5ffd0670ac0cb030b5aec258530174415b528335b5bf228e2f7cad",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.75246529941326,
+    "mdd_reported_pct": 21.910458213249086,
+    "calmar_reported": 1.0840697655994398,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_above_sma_200__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.21,
+          "security_context": "natr_20_percentile__v1",
+          "security_context_direction": "ABOVE",
+          "security_context_threshold_quantile": 0.5
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.2,
+          "direction": "BELOW",
+          "threshold_quantile": 0.3,
+          "trend_feature": "close_to_sma_20__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "breadth_above_sma_200__v1": "GA4_TANH_ONLY",
+      "close_to_sma_20__v1": "GA4_TANH_ONLY",
+      "natr_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 67,
+    "strategy_key": "382637a85ea9aee46e5d595acdf1f29875ed1df6f3567f3118668ad5347cba3a",
+    "study": "DEV80_LONG",
+    "chromosome_id": "1194",
+    "horizon_sessions": "63",
+    "definition_hash": "80ce4c1719188310cd6f083d0da93e50b8921b8d2c2f37e99bd034d3872f5cad",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.545097898694056,
+    "mdd_reported_pct": 20.453384391516245,
+    "calmar_reported": 1.151159018380362,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "NONE",
+          "participation_threshold_quantile": 0.7,
+          "range_feature": "failed_breakout_20__v1",
+          "range_threshold_quantile": 0.9,
+          "volatility_feature": "natr_20_percentile__v1",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.2
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.2,
+          "direction": "BELOW",
+          "threshold_quantile": 0.5,
+          "trend_feature": "pullback_from_high_20__v1"
+        }
+      ],
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "relative_volume_20__v1",
+          "price_direction": "BELOW",
+          "price_feature": "return_20__v1",
+          "price_threshold_quantile": 0.5,
+          "state": "HIGH",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "failed_breakout_20__v1": "GA4_TANH_ONLY",
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "pullback_from_high_20__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY",
+      "relative_volume_20__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 68,
+    "strategy_key": "454abca62148b2c2b1f3859ce898271e726fb1b1e01bb845b62b89ea9f9d4203",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "3969637630f9fefb32f1895cd3c8aaf83ecc172289a5a898e73e8dc2eb70d509",
+    "horizon_sessions": "63",
+    "definition_hash": "2312c34f058b8f8c69c0e9855df7b7d4ae7cf490717ed27fffc05cb3f21a9040",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.51169567729201,
+    "mdd_reported_pct": 21.968324777148553,
+    "calmar_reported": 1.0702543737767785,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "NONE",
+          "participation_threshold_quantile": 0.5,
+          "range_feature": "failed_breakout_20__v1",
+          "range_threshold_quantile": 0.7,
+          "volatility_feature": "natr_20__v1",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "failed_breakout_20__v1": "GA4_TANH_ONLY",
+      "natr_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 69,
+    "strategy_key": "00c0eede72512cf71c7fb0ba22ed410602169bc64533bd1a6344f5bdd3a15134",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "3bf15283b1732040c3c51f8ca602f819aac40abfbbf762c625ef61615d7c4f52",
+    "horizon_sessions": "63",
+    "definition_hash": "c294dd9e2b5df6f2c85e0cec106d1ac5c8dbbba6abb5f6e0f477c44aed231f70",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.507502154269687,
+    "mdd_reported_pct": 20.46635258034555,
+    "calmar_reported": 1.1485926503994974,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "realized_vol_20_percentile__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.2,
+          "security_context": "NONE",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.8
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "NONE",
+          "market_context_state": "HIGH",
+          "market_context_threshold": 0.3,
+          "relative_feature": "relative_strength_change_20__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY",
+      "relative_strength_change_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 70,
+    "strategy_key": "356ccb8c6bcc597c1f89c83f26ed3864becb4a31bc30312b5d2effc391f53026",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "f80081c6f37212c068c48571b7df4cec67933c0cadc970f98765c592c4dab9f9",
+    "horizon_sessions": "63",
+    "definition_hash": "16af60d5fdfbdd26b4038e14a10f9b1cf9e5fbde361393f6a431887ca383787d",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.476597690200496,
+    "mdd_reported_pct": 22.478956282057467,
+    "calmar_reported": 1.0443811267580665,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_3.jsonl",
+    "chromosome_definition": [
+      [
+        "MOMENTUM",
+        {
+          "context_feature": "natr_20_percentile__v1",
+          "context_threshold": 0.5,
+          "direction": "BELOW",
+          "momentum_feature": "return_20__v1",
+          "threshold_quantile": 0.8
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 71,
+    "strategy_key": "d3fc984a73dba85fac958a29cbc7d5230458640b3d9bdefddcaada4af2802cc6",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "0003e9ea7bdadaf2342765c170508480e1d67113b5843222e221b6b1f35b908c",
+    "horizon_sessions": "63",
+    "definition_hash": "be65836fed24fd8c7debbdffc3e7d90738cc70cc4632d39353096dd6a2028f10",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.46448701143029,
+    "mdd_reported_pct": 20.10412080407521,
+    "calmar_reported": 1.1671481304804892,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "natr_20_percentile__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.2,
+          "displacement_feature": "signed_return_streak__v1",
+          "severity": 0.2,
+          "tail": "HIGH"
+        }
+      ],
+      [
+        "VOLATILITY",
+        {
+          "price_context": "NONE",
+          "state": "LOW",
+          "threshold_quantile": 0.1,
+          "volatility_feature": "volatility_contraction_duration__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "signed_return_streak__v1": "GA4_TANH_ONLY",
+      "volatility_contraction_duration__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 72,
+    "strategy_key": "ce9f449c93d6dacbc88a9d0c59071bac10cec09c7643c43902f0486805bd352f",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "6cf50d8f89ab5c61d0afcdfa03d6ecb0df8a5c4fca0c582c3352e1d01109a9e2",
+    "horizon_sessions": "63",
+    "definition_hash": "0318f291ee690f3212a44aa40e14af753288e84e9f38e6287d039b0292e88a46",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.43463297891799,
+    "mdd_reported_pct": 20.982657883512072,
+    "calmar_reported": 1.116857221283327,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "amihud_illiquidity_20__v1",
+          "price_direction": "BELOW",
+          "price_feature": "NONE",
+          "price_threshold_quantile": 0.8,
+          "state": "HIGH",
+          "threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "amihud_illiquidity_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 73,
+    "strategy_key": "d414d87f4f2f2720e06e779f27ecf154ece052c8d2e4e25e654ecb2b6a8c3041",
+    "study": "DEV80_LONG",
+    "chromosome_id": "534",
+    "horizon_sessions": "63",
+    "definition_hash": "8bdc6f7890fd9c12a3c32d09c28c4ddf6910bd258a882b6b9c8002c7e6f39ab2",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.251392599315835,
+    "mdd_reported_pct": 24.840094891451166,
+    "calmar_reported": 0.936042825155145,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "natr_20_percentile__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.5,
+          "displacement_feature": "return_10__v1",
+          "severity": 0.3,
+          "tail": "HIGH"
+        }
+      ],
+      [
+        "VOLATILITY",
+        {
+          "price_context": "return_20__v1",
+          "state": "LOW",
+          "threshold_quantile": 0.9,
+          "volatility_feature": "volatility_contraction_duration__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_10__v1": "GA4_TANH_ONLY",
+      "volatility_contraction_duration__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 74,
+    "strategy_key": "4becb401529399bbbfdf134b13a7b8105707adec39a46b5e6357cf5c26bc3599",
+    "study": "DEV80_LONG",
+    "chromosome_id": "786",
+    "horizon_sessions": "63",
+    "definition_hash": "bee1e71c84a1b8709ef7af0035508b8936fa28400c1409140193933bcdd3645f",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 23.018681407966945,
+    "mdd_reported_pct": 20.019086860876886,
+    "calmar_reported": 1.1498367317118814,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "MOMENTUM",
+        {
+          "context_feature": "natr_20_percentile__v1",
+          "context_threshold": 0.5,
+          "direction": "BELOW",
+          "momentum_feature": "return_20__v1",
+          "threshold_quantile": 0.6
+        }
+      ],
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "NONE",
+          "participation_threshold_quantile": 0.8,
+          "range_feature": "failed_breakout_20__v1",
+          "range_threshold_quantile": 0.9,
+          "volatility_feature": "realized_vol_20__v1",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.3
+        }
+      ],
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume_relative_20__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "close_location__v1",
+          "price_threshold_quantile": 0.5,
+          "state": "LOW",
+          "threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "close_location__v1": "GA4_TANH_ONLY",
+      "dollar_volume_relative_20__v1": "GA4_TANH_ONLY",
+      "failed_breakout_20__v1": "GA4_TANH_ONLY",
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "realized_vol_20__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 75,
+    "strategy_key": "6f2e045ba65f292285cd0b2ce5b7430d6f0cff90f2d3a93ec14f2157a6ee54c9",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "571f3c942b75bb05beeb508db4f82807298fcd160bec3d79e927dfdda591b220",
+    "horizon_sessions": "63",
+    "definition_hash": "784dd9a49400aaf96041da67d5c05d280a5c355dc6f68e055105efad366a9cb6",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.90719222722124,
+    "mdd_reported_pct": 23.593793019817994,
+    "calmar_reported": 0.9708990923155072,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_3.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "realized_vol_20_percentile__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.7,
+          "security_context": "return_20__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 76,
+    "strategy_key": "d0e917adcc1dd07b7c50254e78536069dab3f9d8e7025effc1e05dc21d36db91",
+    "study": "DEV80_LONG",
+    "chromosome_id": "106",
+    "horizon_sessions": "63",
+    "definition_hash": "2a4608ee1e145b0b68729c98cd6b742fe6edb5314d7c3751e9074107e03c3dd1",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.820220570167415,
+    "mdd_reported_pct": 21.38022067618521,
+    "calmar_reported": 1.0673519659030544,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "relative_volume_20__v1",
+          "price_direction": "BELOW",
+          "price_feature": "return_20__v1",
+          "price_threshold_quantile": 0.8,
+          "state": "LOW",
+          "threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "relative_volume_20__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 77,
+    "strategy_key": "a68509fcdf20e8446d7153f7b79496b69c72fd40e0fba2f8cca7376d868dbd2a",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "b34a482159178817df31b1156c737207a5f14a9f3af9f112a575f7bd17960762",
+    "horizon_sessions": "63",
+    "definition_hash": "9b4782102f812b187affac2cd8f0c1f16c97c3d7592e9c0b77b7ebed503d50a7",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.689415474811536,
+    "mdd_reported_pct": 21.168776828825848,
+    "calmar_reported": 1.0718340345444528,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "range_position_20__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.2,
+          "volatility_feature": "natr_20_percentile__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 78,
+    "strategy_key": "ce858b9eed49d386081145184ae833db8ccb0106f9eed6b9795a67a1f0c75a3f",
+    "study": "DEV80_LONG",
+    "chromosome_id": "98",
+    "horizon_sessions": "63",
+    "definition_hash": "170b46bbd5ae9908fb14e5c78140015662a4e7b9c9155e0a93efd2a53ad4141a",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.63970288812347,
+    "mdd_reported_pct": 19.71302645520975,
+    "calmar_reported": 1.1484640848813075,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "NONE",
+          "state": "HIGH",
+          "threshold_quantile": 0.1,
+          "volatility_feature": "natr_20__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 79,
+    "strategy_key": "e373bc80952b49a8def91fa994338bd49c702812381a756bf4dcfdfd88fe893f",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "980cdc62828c0a79cbf1527cdcbb58adcd370b2a30fb9ec5320d7f09912cced1",
+    "horizon_sessions": "63",
+    "definition_hash": "dc9b73e3a7cc5fe3c9ef61d425d5458ca3b2722edbd5005e7d33c638afe8bf7e",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.617496431547846,
+    "mdd_reported_pct": 19.24109677988539,
+    "calmar_reported": 1.175478544195679,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "high_low_spread_proxy__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "close_location__v1",
+          "price_threshold_quantile": 0.2,
+          "state": "HIGH",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "close_location__v1": "GA4_TANH_ONLY",
+      "high_low_spread_proxy__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 80,
+    "strategy_key": "7199b45e657088679516c5522c3d27976656eae8cc76827cb823ef01823e1abd",
+    "study": "DEV80_LONG",
+    "chromosome_id": "104",
+    "horizon_sessions": "63",
+    "definition_hash": "4cf0c1cf43cf3758357c21fd3988ab38d3ffe5e814eb97e47272e03b34bd5365",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.602348002177884,
+    "mdd_reported_pct": 19.755850489072287,
+    "calmar_reported": 1.1440837748129398,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "up_down_volume_balance_20__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "close_location__v1",
+          "price_threshold_quantile": 0.2,
+          "state": "LOW",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "close_location__v1": "GA4_TANH_ONLY",
+      "up_down_volume_balance_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 81,
+    "strategy_key": "2fab11aaf4448bfe07bcd5fa4e9d50be551ec48e3d77f8f0eb2bf98f3667cba9",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "bf527f026c8a0e03e946a702699f39fc0798882bb3dcfc43e90fe5e86511ce54",
+    "horizon_sessions": "63",
+    "definition_hash": "c84e182f4fe1d72b7163ea168ddf2f4eaeb421ad7218842c462448e52295f309",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.559845424068946,
+    "mdd_reported_pct": 23.756174936532613,
+    "calmar_reported": 0.9496413241753018,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "new_high_low_breadth_252__v1",
+          "breadth_state": "LOW",
+          "breadth_threshold": 0.2,
+          "security_context": "natr_20_percentile__v1",
+          "security_context_direction": "ABOVE",
+          "security_context_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "new_high_low_breadth_252__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 82,
+    "strategy_key": "39c7361481c96fe0a158fdc29930f5d9d69eb3f528244f2b7ae6b58580a6fb72",
+    "study": "DEV80_LONG",
+    "chromosome_id": "424",
+    "horizon_sessions": "63",
+    "definition_hash": "18b4019ab44afd7e740cb621089f0e4f1c68a9fceb23226f6bee269c6eec804e",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.49486121194868,
+    "mdd_reported_pct": 22.641042586729956,
+    "calmar_reported": 0.9935435228205015,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.2,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.2,
+          "trend_feature": "pullback_from_high_20__v1"
+        }
+      ],
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "natr_20_percentile__v1",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.5,
+          "displacement_feature": "signed_return_streak__v1",
+          "severity": 0.2,
+          "tail": "HIGH"
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "pullback_from_high_20__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY",
+      "signed_return_streak__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 83,
+    "strategy_key": "3b3a99f773d4fb84f39835c72a4983440d6bd69e01b9aa9e7cbc605b6cce28ae",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "028ae5a853a3fbaf30300e840478930cb959815a4f20be9585ef4f6afcdba450",
+    "horizon_sessions": "63",
+    "definition_hash": "72bf1fe87e4259cde75bf708c395130759858e19c8750e831cd8f11e9be8d72a",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.47432874489681,
+    "mdd_reported_pct": 21.068047495182434,
+    "calmar_reported": 1.0667494816515837,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_3.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.5,
+          "direction": "BELOW",
+          "threshold_quantile": 0.7,
+          "trend_feature": "adx_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "adx_14__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 84,
+    "strategy_key": "9bed5eef0aeb4853ba689c71e9508b3562862b1d670ad7ac7e48efee5d768239",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "d91b6e221abbc0d338189d524a822184ba70ebc3d0833b209b48e5cb40b57175",
+    "horizon_sessions": "63",
+    "definition_hash": "4fc04cb3fd3cf37d9e0f9673e04e90059a556bcf3faa5d09a19808de74d08448",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.460124718824037,
+    "mdd_reported_pct": 20.441327704950936,
+    "calmar_reported": 1.0987605620834573,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "NONE",
+          "context_state": "LOW",
+          "context_threshold_quantile": 0.8,
+          "displacement_feature": "return_10__v1",
+          "severity": 0.2,
+          "tail": "LOW"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "return_10__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 85,
+    "strategy_key": "60e575dc0c2a3fa637cf2d51e68557e4506b2c6878ccffc4087b5aae4e82863d",
+    "study": "DEV80_LONG",
+    "chromosome_id": "632",
+    "horizon_sessions": "63",
+    "definition_hash": "4a75b7ae9458f947a7af655e93fcd398124b4c48ce3cb50570cca1abba63f23d",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.370861846442104,
+    "mdd_reported_pct": 23.127908872255915,
+    "calmar_reported": 0.9672669487762484,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "NONE",
+          "state": "HIGH",
+          "threshold_quantile": 0.2,
+          "volatility_feature": "natr_20_percentile__v1"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "NONE",
+          "market_context_state": "HIGH",
+          "market_context_threshold": 0.7,
+          "relative_feature": "return_126_percentile__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_126_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 86,
+    "strategy_key": "2f4c2898e6d45fe25376786da48575c51a9c92004f7bcab860249b9f33982bf4",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "1b75749d225de4e0a14a8503d3822df588015b475eefbd9221c714ac49a63813",
+    "horizon_sessions": "63",
+    "definition_hash": "5da689a64e9eea1789fc2efae43b227c247bce2f3e90d0e48f267c25c1a6a935",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.360770808294372,
+    "mdd_reported_pct": 20.685364838282993,
+    "calmar_reported": 1.0809947507868296,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.2,
+          "direction": "BELOW",
+          "threshold_quantile": 0.2,
+          "trend_feature": "adx_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "adx_14__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 87,
+    "strategy_key": "dc360a523c83e4037303f03c1ca44565e0235454c7ef93cc86eccc1bde74921c",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "e3065d1b6a63e27f02a6b8f06908b87ec576d6f2e92b251de15cec15c503c058",
+    "horizon_sessions": "63",
+    "definition_hash": "8ee606b3cd45fa187143a9d641388ef1adf31f7053cfb0c6a3f817e9ce1cb9c2",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.333705981363615,
+    "mdd_reported_pct": 20.769343908756067,
+    "calmar_reported": 1.075320726522711,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_0.jsonl",
+    "chromosome_definition": [
+      [
+        "MOMENTUM",
+        {
+          "context_feature": "NONE",
+          "context_threshold": 0.6,
+          "direction": "BELOW",
+          "momentum_feature": "return_20__v1",
+          "threshold_quantile": 0.7
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 88,
+    "strategy_key": "baa375bda002eabad16b66152d4e2efca4213daab2baa5a7938c18f3bbff1034",
+    "study": "DEV80_LONG",
+    "chromosome_id": "618",
+    "horizon_sessions": "63",
+    "definition_hash": "e9b0b27b3673c2d9477e3f73e8d4a46a9be8d9080d7934ff285ab69eb81e11bb",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.175639182527405,
+    "mdd_reported_pct": 19.40653001794217,
+    "calmar_reported": 1.1426895566608288,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "range_position_20__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.2,
+          "volatility_feature": "realized_vol_20_percentile__v1"
+        }
+      ],
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "dollar_volume_relative_20__v1",
+          "price_direction": "ABOVE",
+          "price_feature": "NONE",
+          "price_threshold_quantile": 0.2,
+          "state": "HIGH",
+          "threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "dollar_volume_relative_20__v1": "GA4_TANH_ONLY",
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 89,
+    "strategy_key": "4f997809f0c50c0eec3e6a0bff301a6664c159236f4b4fea9fa2b0c2b71591c7",
+    "study": "DEV80_LONG",
+    "chromosome_id": "108",
+    "horizon_sessions": "63",
+    "definition_hash": "88761fc609f422ff1e9db129a829d408e1b857601c3879d630de1ce74d78750b",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.161402914257945,
+    "mdd_reported_pct": 22.700369483473303,
+    "calmar_reported": 0.9762573657839471,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "relative_volume_20_percentile__v1",
+          "price_direction": "BELOW",
+          "price_feature": "return_20__v1",
+          "price_threshold_quantile": 0.8,
+          "state": "LOW",
+          "threshold_quantile": 0.5
+        }
+      ]
+    ],
+    "required_features": {
+      "relative_volume_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 90,
+    "strategy_key": "e2ba897627afac3034c0d97740f614a23ecbc8e416a0a1b8cf54d8ae3ae679f5",
+    "study": "DEV80_LONG",
+    "chromosome_id": "502",
+    "horizon_sessions": "63",
+    "definition_hash": "132824b5516de88992c137e7b764628c73df25836d121fd9816dbf0214325471",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.15717115232223,
+    "mdd_reported_pct": 20.70533239369428,
+    "calmar_reported": 1.070119075174572,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.2,
+          "direction": "BELOW",
+          "threshold_quantile": 0.9,
+          "trend_feature": "adx_14__v1"
+        }
+      ],
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "realized_vol_20_percentile__v1",
+          "breadth_state": "HIGH",
+          "breadth_threshold": 0.2,
+          "security_context": "natr_20_percentile__v1",
+          "security_context_direction": "ABOVE",
+          "security_context_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "adx_14__v1": "GA4_TANH_ONLY",
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY",
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 91,
+    "strategy_key": "b8683bdcdd34b6723800a3e13d05e45f21df68465ff5426855ecec5c6a156be1",
+    "study": "DEV80_LONG",
+    "chromosome_id": "72",
+    "horizon_sessions": "63",
+    "definition_hash": "42df6efe3f82bec6a16479b6b1f78dbd586161e63bec5700fdb5553a25aba0dd",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.071818659926777,
+    "mdd_reported_pct": 19.334124038888707,
+    "calmar_reported": 1.1415991029917603,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "NONE",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.5,
+          "displacement_feature": "signed_return_streak__v1",
+          "severity": 0.3,
+          "tail": "HIGH"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "signed_return_streak__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 92,
+    "strategy_key": "6682a9918cc7000c69cf328cfcc1c95585e52a704c18765bcf7e47ba66193d1a",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "fcd71021e95ae5ef03d89d7bc6263056b675435040305121fe82b54ad80b9936",
+    "horizon_sessions": "63",
+    "definition_hash": "f5d3646967f21178afdb587d1f5e051499d375718a7d55eb434ee7d2c7aefecd",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.03415172175127,
+    "mdd_reported_pct": 21.361533562495406,
+    "calmar_reported": 1.031487353531433,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_4.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLUME_LIQUIDITY",
+        {
+          "participation_feature": "relative_volume_20_percentile__v1",
+          "price_direction": "BELOW",
+          "price_feature": "close_location__v1",
+          "price_threshold_quantile": 0.2,
+          "state": "LOW",
+          "threshold_quantile": 0.1
+        }
+      ]
+    ],
+    "required_features": {
+      "close_location__v1": "GA4_TANH_ONLY",
+      "relative_volume_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 93,
+    "strategy_key": "fdf97cb2f653c5ef9bde5e9c68ba98fe490b1732cfe53bb74680f73274c4a9e5",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "12de7a4e512d4dd126218a84d1f6c769c4a06a97970bff35cfaa412a6104db00",
+    "horizon_sessions": "63",
+    "definition_hash": "b29d2ddbd0f5295e8957ecc61cd79a578e79b8b1622160cb44364ac2066e988f",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.031793249159314,
+    "mdd_reported_pct": 21.02489484597339,
+    "calmar_reported": 1.0478907699925435,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_5.jsonl",
+    "chromosome_definition": [
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "NONE",
+          "market_context_state": "HIGH",
+          "market_context_threshold": 0.3,
+          "relative_feature": "sector_vs_universe_return_63__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.7
+        }
+      ]
+    ],
+    "required_features": {
+      "sector_vs_universe_return_63__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 94,
+    "strategy_key": "03b6bd80112645898f4afc165bd1ff200a70dedd587b4539736934774f60d5bf",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "27c67d17a0016dd149babb577a75b6f9c3845e918d9785eae5516fc1b77aab52",
+    "horizon_sessions": "63",
+    "definition_hash": "0714b45c6dc88e73c5e633e75569944bd243a027ff490bac59db2535894d8f8b",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 22.01002943597652,
+    "mdd_reported_pct": 19.695052371423778,
+    "calmar_reported": 1.117541046395572,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.5,
+          "direction": "BELOW",
+          "threshold_quantile": 0.3,
+          "trend_feature": "pullback_from_high_20__v1"
+        }
+      ],
+      [
+        "VOLATILITY",
+        {
+          "price_context": "range_position_20__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.7,
+          "volatility_feature": "volatility_contraction_duration__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "pullback_from_high_20__v1": "GA4_TANH_ONLY",
+      "volatility_contraction_duration__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 95,
+    "strategy_key": "02ce86c84415f989feb090c99f16fb5766c3c3ccae65020d1be48b9b49c23567",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "92034f125670661cce2836c966f608a81da3c5e15e8a1788c84a535305c6b4f6",
+    "horizon_sessions": "63",
+    "definition_hash": "a2a7f52dd47fb1543feb7acf743e0d9d93fc18ba4350941458915769090ed76b",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.874418413977324,
+    "mdd_reported_pct": 20.800109347223568,
+    "calmar_reported": 1.0516492028392705,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "realized_vol_20_percentile__v1",
+          "breadth_state": "MID",
+          "breadth_threshold": 0.8,
+          "security_context": "return_20__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 96,
+    "strategy_key": "88f108ab55f0d2fabacfd7992a52d343c23a330ec959663ab3c6d16ced53423b",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "78640d26bcf9a776a87b0d8e07480e07717c47d1e0a1751bf55657a16897dea9",
+    "horizon_sessions": "63",
+    "definition_hash": "acc55d11887d02aa7fdc7c38b8dd9c6037fe618cf87f9971abf7a8b584336080",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.847664516457076,
+    "mdd_reported_pct": 22.067370043575345,
+    "calmar_reported": 0.9900438735252807,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "relative_volume_20_percentile__v1",
+          "participation_threshold_quantile": 0.7,
+          "range_feature": "breakout_reentry_20__v1",
+          "range_threshold_quantile": 0.7,
+          "volatility_feature": "natr_20__v1",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "breakout_reentry_20__v1": "GA4_TANH_ONLY",
+      "natr_20__v1": "GA4_TANH_ONLY",
+      "relative_volume_20_percentile__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 97,
+    "strategy_key": "37ef0c3e9d79559ebb21b146a8270faf9785bc96cc960cab2f6aa9f318eb871d",
+    "study": "DEV80_LONG",
+    "chromosome_id": "300",
+    "horizon_sessions": "63",
+    "definition_hash": "4f6a6cf4dba75e93f637d1c1580a46891c76f13279ab379e94ea67a2f09bf02d",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 21.72988561938267,
+    "mdd_reported_pct": 21.173995395870723,
+    "calmar_reported": 1.0262534402751573,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "BREAKOUT",
+        {
+          "participation_feature": "relative_volume_20__v1",
+          "participation_threshold_quantile": 0.7,
+          "range_feature": "breakout_reentry_20__v1",
+          "range_threshold_quantile": 0.95,
+          "volatility_feature": "natr_20_percentile__v1",
+          "volatility_state": "HIGH",
+          "volatility_threshold_quantile": 0.3
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "ABOVE",
+          "confirmation_feature": "range_position_50__v1",
+          "confirmation_threshold_quantile": 0.2,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.1,
+          "trend_feature": "sma50_slope_10__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "breakout_reentry_20__v1": "GA4_TANH_ONLY",
+      "natr_20_percentile__v1": "GA4_TANH_ONLY",
+      "range_position_50__v1": "GA4_TANH_ONLY",
+      "relative_volume_20__v1": "GA4_TANH_ONLY",
+      "sma50_slope_10__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 98,
+    "strategy_key": "e1bd99252232c6fdf0c1264469459c3ea5e01db4b625114d69ade14d78d0b63b",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "608703e7f0f0e855734b60e4e22f0637d910afc8915178de2307003ceeb37d76",
+    "horizon_sessions": "63",
+    "definition_hash": "a4d40171e956d75548014a09d69837cd4793e50ff4a34c2a7d586bfcb9111483",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 20.582004354426985,
+    "mdd_reported_pct": 17.429599458643235,
+    "calmar_reported": 1.1808650223583015,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_2.jsonl",
+    "chromosome_definition": [
+      [
+        "VOLATILITY",
+        {
+          "price_context": "range_position_20__v1",
+          "state": "HIGH",
+          "threshold_quantile": 0.3,
+          "volatility_feature": "range_width_ratio_20_63__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "range_width_ratio_20_63__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 99,
+    "strategy_key": "fd05862cd9d9a4648f4e61d79d74f23b6fb2f5eaaa92a30c4a8104c72e4159bf",
+    "study": "DEV80_LONG",
+    "chromosome_id": "140",
+    "horizon_sessions": "63",
+    "definition_hash": "d7ddd776b60d015c1ae6c92f40620455f17f4af6e6188c6e4f84b8a498c5da94",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 16.242096064239185,
+    "mdd_reported_pct": 13.76299328683523,
+    "calmar_reported": 1.1801281687592844,
+    "source": "/home/ubuntu/mts-certification-20261011/repair_20261012/long_2180_dev80_performance_screen_checkpoint.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "realized_vol_20_percentile__v1",
+          "breadth_state": "LOW",
+          "breadth_threshold": 0.5,
+          "security_context": "return_20__v1",
+          "security_context_direction": "ABOVE",
+          "security_context_threshold_quantile": 0.2
+        }
+      ]
+    ],
+    "required_features": {
+      "realized_vol_20_percentile__v1": "GA4_TANH_ONLY",
+      "return_20__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  },
+  {
+    "rank": 100,
+    "strategy_key": "80edbd95233058572bccd04e31a9639f65082f0ff8d38ff21373a2bd72e5bb9c",
+    "study": "GA4_DIAGNOSTIC",
+    "chromosome_id": "dd578e3fa7c724750d601c60da2188c3719f0ddd27d9a72e457a925859c3e969",
+    "horizon_sessions": "15",
+    "definition_hash": "b399206ccfc1363912505782fb072005120fb9bc6534258c9ea126ac0e70dd0f",
+    "definition_status": "RESOLVED",
+    "selected_cohort": "DEV80",
+    "cagr_reported_pct": 7.709967502416459,
+    "mdd_reported_pct": 6.537973046375707,
+    "calmar_reported": 1.1792596035082221,
+    "source": "/home/ubuntu/mts-certification-20261011/ga4_cagr_diagnostic/ga4_replay_worker_1.jsonl",
+    "chromosome_definition": [
+      [
+        "MARKET_REGIME_STRUCTURE",
+        {
+          "breadth_feature": "breadth_positive_20__v1",
+          "breadth_state": "LOW",
+          "breadth_threshold": 0.265,
+          "security_context": "close_to_sma_200__v1",
+          "security_context_direction": "BELOW",
+          "security_context_threshold_quantile": 0.225
+        }
+      ],
+      [
+        "MEAN_REVERSION",
+        {
+          "context_feature": "NONE",
+          "context_state": "HIGH",
+          "context_threshold_quantile": 0.2,
+          "displacement_feature": "range_position_20__v1",
+          "severity": 0.16,
+          "tail": "LOW"
+        }
+      ],
+      [
+        "RELATIVE_CROSS_SECTIONAL",
+        {
+          "market_context": "breadth_positive_20__v1",
+          "market_context_state": "LOW",
+          "market_context_threshold": 0.3,
+          "relative_feature": "sector_vs_universe_return_63__v1",
+          "tail": "LAGGARD",
+          "threshold_quantile": 0.225
+        }
+      ],
+      [
+        "TREND",
+        {
+          "confirmation_direction": "BELOW",
+          "confirmation_feature": "NONE",
+          "confirmation_threshold_quantile": 0.8,
+          "direction": "ABOVE",
+          "threshold_quantile": 0.1,
+          "trend_feature": "adx_14__v1"
+        }
+      ]
+    ],
+    "required_features": {
+      "NONE": "MISSING",
+      "adx_14__v1": "GA4_TANH_ONLY",
+      "breadth_positive_20__v1": "GA4_TANH_ONLY",
+      "close_to_sma_200__v1": "GA4_TANH_ONLY",
+      "range_position_20__v1": "GA4_TANH_ONLY",
+      "sector_vs_universe_return_63__v1": "GA4_TANH_ONLY"
+    },
+    "ready_for_exact_replay": false,
+    "execution_contract_status": "NOT_VERIFIED",
+    "notes": "Portfolio accounting, signal threshold calibration, original order/fill/exit contract not yet independently recovered"
+  }
+]

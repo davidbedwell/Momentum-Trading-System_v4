@@ -1,0 +1,172 @@
+{
+  "created_utc": "2026-10-19T18:14:36.010923+00:00",
+  "source": "/opt/mts/thunder-migration/mts-certification-20261011/cagr_mdd_library_20261013/MASTER_COMBINED_CAGR_MDD_ALL_STUDIES.csv",
+  "study_counts": {
+    "DEV80_LONG": 1489,
+    "GA4_DIAGNOSTIC": 250110,
+    "HORIZONS": 317560
+  },
+  "groups": [
+    {
+      "study": "DEV80_LONG",
+      "comparability": "DEV80_TRAIN_PROVISIONAL",
+      "evaluations": 1489,
+      "best_cagr_pct": 24.952675430910197,
+      "median_cagr_pct": 1.1127679084884878,
+      "p90_cagr_pct": 14.591101440861532,
+      "profitable_fraction": 0.8912021490933513,
+      "best_mdd_pct": 22.54390915717272,
+      "best_chromosome": "696",
+      "best_horizon": "63",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "GA4_DIAGNOSTIC",
+      "comparability": "GA4_ORACLE",
+      "evaluations": 250110,
+      "best_cagr_pct": 27.943111548363575,
+      "median_cagr_pct": 0.9862864398970217,
+      "p90_cagr_pct": 2.036099098060795,
+      "profitable_fraction": 0.9442885130542561,
+      "best_mdd_pct": 23.102606785178867,
+      "best_chromosome": "75abf8dbb232e4ba8a0f6d76c6c133a92626c9f262b19cbef6d1ea75b92fa7a4",
+      "best_horizon": "63",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_blind_E1",
+      "evaluations": 31756,
+      "best_cagr_pct": 19.54290797578193,
+      "median_cagr_pct": 3.484640057937538,
+      "p90_cagr_pct": 10.302640439937694,
+      "profitable_fraction": 0.6387769240458496,
+      "best_mdd_pct": 36.7329918212949,
+      "best_chromosome": "8957c5c3484992164f5f94939c987d1d74bd6d0245e67f7c3cb14e43be890218",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_blind_E2",
+      "evaluations": 31756,
+      "best_cagr_pct": 21.0496068028738,
+      "median_cagr_pct": 0.18518476911129067,
+      "p90_cagr_pct": 2.4785809863001607,
+      "profitable_fraction": 0.5690893059579292,
+      "best_mdd_pct": 13.28522986750288,
+      "best_chromosome": "8fadf265d37366884e09d0ad41cd82ca82d8ed1dc73e9d9e74b6f2ef133227ab",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_blind_E3",
+      "evaluations": 31756,
+      "best_cagr_pct": 25.537940997156827,
+      "median_cagr_pct": -0.07528187564984634,
+      "p90_cagr_pct": 6.677061564621667,
+      "profitable_fraction": 0.49842549439476,
+      "best_mdd_pct": 39.54629420708876,
+      "best_chromosome": "75fe4e397997cedb9508056eb897702d7f0183462911ff6dd45eaaa80b1e707f",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_blind_E4",
+      "evaluations": 31756,
+      "best_cagr_pct": 18.34812153776253,
+      "median_cagr_pct": 1.8882687430724188,
+      "p90_cagr_pct": 6.349759576270553,
+      "profitable_fraction": 0.6829260612167779,
+      "best_mdd_pct": 23.36049674690608,
+      "best_chromosome": "b84ef1f371e40d86030a218c63ffeb4c8bc819304770ca6280deb3bb4f21a688",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_blind_full",
+      "evaluations": 31756,
+      "best_cagr_pct": 17.73989935856428,
+      "median_cagr_pct": 1.5793055014999502,
+      "p90_cagr_pct": 5.74378903098689,
+      "profitable_fraction": 0.6391233152790023,
+      "best_mdd_pct": 41.11233577220316,
+      "best_chromosome": "fdd623827db8273caa81e7f206987802af9b615a70284174a532f29450cd4fcd",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_train_E1",
+      "evaluations": 31756,
+      "best_cagr_pct": 22.43981732927245,
+      "median_cagr_pct": 3.84339144091147,
+      "p90_cagr_pct": 4.443478314977867,
+      "profitable_fraction": 1.0,
+      "best_mdd_pct": 46.66293660231374,
+      "best_chromosome": "c13abba5362e40c3fd33f85508272efcaf31efc13215f691d672b6be9e1b3408",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_train_E2",
+      "evaluations": 31756,
+      "best_cagr_pct": 21.277472923274665,
+      "median_cagr_pct": 1.6642418961947847,
+      "p90_cagr_pct": 3.0639050345018903,
+      "profitable_fraction": 1.0,
+      "best_mdd_pct": 27.17435290670699,
+      "best_chromosome": "7cb38af67734a9bd80ad070140e5a3ffa555edc72ce7459114d40859e0303aa9",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_train_E3",
+      "evaluations": 31756,
+      "best_cagr_pct": 21.282119458699245,
+      "median_cagr_pct": 2.0782884911364485,
+      "p90_cagr_pct": 3.6008189928522727,
+      "profitable_fraction": 1.0,
+      "best_mdd_pct": 52.35629058322764,
+      "best_chromosome": "8ec954ad47789b12b2c8903e7a1b9cdcab2b6af3d2a4edd81800cd3ca74541be",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_train_E4",
+      "evaluations": 31756,
+      "best_cagr_pct": 15.23858418203179,
+      "median_cagr_pct": 3.235593134058945,
+      "p90_cagr_pct": 3.4484029716338904,
+      "profitable_fraction": 1.0,
+      "best_mdd_pct": 24.129241022922443,
+      "best_chromosome": "8957c5c3484992164f5f94939c987d1d74bd6d0245e67f7c3cb14e43be890218",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    },
+    {
+      "study": "HORIZONS",
+      "comparability": "HORIZONS_train_full",
+      "evaluations": 31756,
+      "best_cagr_pct": 16.645480800011093,
+      "median_cagr_pct": 2.6949710078531197,
+      "p90_cagr_pct": 3.3908434773403995,
+      "profitable_fraction": 1.0,
+      "best_mdd_pct": 58.56826425921674,
+      "best_chromosome": "e6061db4b2c7be0d61978b7fd9b8f2a7dd7c3061fb5f5d1bf2e457ae58a681ec",
+      "best_horizon": "",
+      "ranking_unit": "chromosome-horizon evaluation; repeated chromosomes possible"
+    }
+  ],
+  "caveats": [
+    "These are retrospective diagnostic cohort rankings, not directly comparable performance.",
+    "GA0 through GA3 are not separately identified in this combined ranking file.",
+    "No blind partition was evaluated or modified."
+  ]
+}

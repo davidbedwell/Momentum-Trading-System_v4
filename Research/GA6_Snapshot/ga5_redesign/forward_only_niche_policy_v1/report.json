@@ -1,0 +1,102 @@
+{
+  "status": "EXPLORATORY_FORWARD_POLICY_NOT_CERTIFIED",
+  "memory_train_end": "2020-12-31",
+  "policy_fit": "2021-2022",
+  "evaluation": "2023-2026",
+  "memory_niches": 12,
+  "calibration_stocks": 40,
+  "test_stocks": 40,
+  "results": [
+    {
+      "horizon": 5,
+      "calibration_rows": 19602,
+      "test_rows": 36840,
+      "test_stocks": 40,
+      "active_niches": [
+        "NICHE-0008"
+      ],
+      "trade_rate": 0.007328990228013029,
+      "mean_policy_net_per_opportunity": 0.0001664644104704223,
+      "mean_all_long_net_per_opportunity": 0.003050980916679919,
+      "mean_cash": 0.0,
+      "mean_trade_net_conditional": 0.022713144006408732,
+      "mean_date_matched_excess_while_trading": 0.008121251865517277
+    },
+    {
+      "horizon": 10,
+      "calibration_rows": 19362,
+      "test_rows": 36640,
+      "test_stocks": 40,
+      "active_niches": [
+        "NICHE-0008"
+      ],
+      "trade_rate": 0.007368995633187773,
+      "mean_policy_net_per_opportunity": 0.00039703123126322873,
+      "mean_all_long_net_per_opportunity": 0.00696734225400631,
+      "mean_cash": 0.0,
+      "mean_trade_net_conditional": 0.053878608568461855,
+      "mean_date_matched_excess_while_trading": 0.023026614392931754
+    },
+    {
+      "horizon": 20,
+      "calibration_rows": 18922,
+      "test_rows": 36240,
+      "test_stocks": 40,
+      "active_niches": [
+        "NICHE-0008",
+        "NICHE-0012"
+      ],
+      "trade_rate": 0.01826710816777042,
+      "mean_policy_net_per_opportunity": 0.00101405546072826,
+      "mean_all_long_net_per_opportunity": 0.014838104822124725,
+      "mean_cash": 0.0,
+      "mean_trade_net_conditional": 0.055512643348628606,
+      "mean_date_matched_excess_while_trading": 0.02321608746096402
+    },
+    {
+      "horizon": 40,
+      "calibration_rows": 18042,
+      "test_rows": 35440,
+      "test_stocks": 40,
+      "active_niches": [
+        "NICHE-0005",
+        "NICHE-0008",
+        "NICHE-0010",
+        "NICHE-0012"
+      ],
+      "trade_rate": 0.1350451467268623,
+      "mean_policy_net_per_opportunity": 0.0067331535935124115,
+      "mean_all_long_net_per_opportunity": 0.030177834200955597,
+      "mean_cash": 0.0,
+      "mean_trade_net_conditional": 0.04985853810156286,
+      "mean_date_matched_excess_while_trading": 0.007305385620584608
+    },
+    {
+      "horizon": 63,
+      "calibration_rows": 17002,
+      "test_rows": 34520,
+      "test_stocks": 40,
+      "active_niches": [
+        "NICHE-0003",
+        "NICHE-0008",
+        "NICHE-0010",
+        "NICHE-0012"
+      ],
+      "trade_rate": 0.21581691772885284,
+      "mean_policy_net_per_opportunity": 0.012532249855519173,
+      "mean_all_long_net_per_opportunity": 0.04884982998562485,
+      "mean_cash": 0.0,
+      "mean_trade_net_conditional": 0.05806889463255327,
+      "mean_date_matched_excess_while_trading": 0.009742161429023325
+    }
+  ],
+  "limitations": [
+    "Memory frozen from pre-2021, but feature PIT provenance unverified",
+    "2023+ previously inspected by other studies, not pristine independent blind",
+    "Calibration includes stocks not used in niche memory learning; 2021-22 labels censored conservatively",
+    "Single entry signal at every stock-date; overlapping positions not portfolio implementable",
+    "Portfolio capital limits, realistic exits, borrow, slippage beyond 10 bps not modeled",
+    "Niche 0013 does not exist in this frozen 2020 memory; testing 12 niches only",
+    "Fixed 1 percentage point hurdle across horizons is a provisional baseline, not optimized"
+  ]
+}

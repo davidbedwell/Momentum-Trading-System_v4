@@ -1,0 +1,154 @@
+{
+  "step": 29,
+  "stock": "CDW",
+  "accepted": true,
+  "prelearning_holdout_distance": 3.043698875214781,
+  "candidate_promotions": [],
+  "committed_promotions": 0,
+  "worst_retention": 0.982740021574973,
+  "max_distance_degradation_pct": 0.10915134457385456,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.9946062567421791,
+      "distance_degradation_pct": -0.08356216866991506
+    },
+    {
+      "stock": "AMGN",
+      "retention": 0.9902912621359223,
+      "distance_degradation_pct": -0.17127980436887347
+    },
+    {
+      "stock": "JNJ",
+      "retention": 0.9870550161812298,
+      "distance_degradation_pct": 0.06641199895423
+    },
+    {
+      "stock": "XOM",
+      "retention": 0.9913700107874865,
+      "distance_degradation_pct": -0.17276990709892415
+    },
+    {
+      "stock": "COST",
+      "retention": 0.9935275080906149,
+      "distance_degradation_pct": 0.006209287468594837
+    },
+    {
+      "stock": "INTC",
+      "retention": 0.9924487594390508,
+      "distance_degradation_pct": 0.0851416128800686
+    },
+    {
+      "stock": "HD",
+      "retention": 0.9956850053937433,
+      "distance_degradation_pct": -0.09650253691643185
+    },
+    {
+      "stock": "DIS",
+      "retention": 0.9913700107874865,
+      "distance_degradation_pct": -0.10299225444362348
+    },
+    {
+      "stock": "GILD",
+      "retention": 0.9935275080906149,
+      "distance_degradation_pct": -0.18697051403799847
+    },
+    {
+      "stock": "SO",
+      "retention": 0.9913700107874865,
+      "distance_degradation_pct": 0.033752136368758734
+    },
+    {
+      "stock": "FCX",
+      "retention": 0.9924487594390508,
+      "distance_degradation_pct": 0.04845620403717277
+    },
+    {
+      "stock": "NFLX",
+      "retention": 0.9935275080906149,
+      "distance_degradation_pct": -0.09827780917853746
+    },
+    {
+      "stock": "GE",
+      "retention": 0.9935275080906149,
+      "distance_degradation_pct": -0.2266080675815907
+    },
+    {
+      "stock": "CME",
+      "retention": 0.9946062567421791,
+      "distance_degradation_pct": -0.016903970385839795
+    },
+    {
+      "stock": "UPS",
+      "retention": 0.9881337648327939,
+      "distance_degradation_pct": -0.05793349743375975
+    },
+    {
+      "stock": "CRM",
+      "retention": 0.9946062567421791,
+      "distance_degradation_pct": -0.1719763457130874
+    },
+    {
+      "stock": "XEL",
+      "retention": 0.9924487594390508,
+      "distance_degradation_pct": -0.10171117463020352
+    },
+    {
+      "stock": "DECK",
+      "retention": 0.9902912621359223,
+      "distance_degradation_pct": -0.035400508109051376
+    },
+    {
+      "stock": "T",
+      "retention": 0.9902912621359223,
+      "distance_degradation_pct": -0.07349539739051059
+    },
+    {
+      "stock": "NUE",
+      "retention": 0.9902912621359223,
+      "distance_degradation_pct": -0.19227392617503503
+    },
+    {
+      "stock": "ARE",
+      "retention": 0.982740021574973,
+      "distance_degradation_pct": -0.12790786990682923
+    },
+    {
+      "stock": "ATO",
+      "retention": 0.9946062567421791,
+      "distance_degradation_pct": 0.10915134457385456
+    },
+    {
+      "stock": "BEN",
+      "retention": 0.9956850053937433,
+      "distance_degradation_pct": -0.23440626227365646
+    },
+    {
+      "stock": "BG",
+      "retention": 0.9838187702265372,
+      "distance_degradation_pct": -0.14966015615602846
+    },
+    {
+      "stock": "BLDR",
+      "retention": 0.9892125134843581,
+      "distance_degradation_pct": -0.03587040013116605
+    },
+    {
+      "stock": "BNY",
+      "retention": 0.9956850053937433,
+      "distance_degradation_pct": -0.06958061482762457
+    },
+    {
+      "stock": "CBOE",
+      "retention": 0.9870550161812298,
+      "distance_degradation_pct": -0.1180369881255916
+    },
+    {
+      "stock": "CDNS",
+      "retention": 0.9881337648327939,
+      "distance_degradation_pct": -0.17595872155771186
+    }
+  ],
+  "learning_rows": 1844,
+  "niches": 15
+}

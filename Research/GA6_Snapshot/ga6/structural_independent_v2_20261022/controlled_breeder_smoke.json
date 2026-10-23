@@ -1,0 +1,35 @@
+{
+  "production": {
+    "children": 400,
+    "unique_genomes": 400,
+    "distinct_patterns": 321,
+    "repeated_pattern_children": 126,
+    "niche_min": 29,
+    "niche_max": 34,
+    "valid": true,
+    "metadata": {
+      "unique_chromosomes": 400,
+      "niches_represented": 13,
+      "cross_niche_donors": true,
+      "selection": "ga6_ev"
+    }
+  },
+  "diversity_reference": {
+    "children": 400,
+    "unique_genomes": 400,
+    "distinct_patterns": 358,
+    "repeated_pattern_children": 77,
+    "niche_min": 30,
+    "niche_max": 34,
+    "valid": true,
+    "metadata": {
+      "unique_chromosomes": 400,
+      "distinct_gene_patterns": 358,
+      "niches_represented": 13,
+      "minimum_niche_population": 30,
+      "quota": 15,
+      "cross_niche_donors": true,
+      "selection": "ga6_diversity_v2"
+    }
+  }
+}

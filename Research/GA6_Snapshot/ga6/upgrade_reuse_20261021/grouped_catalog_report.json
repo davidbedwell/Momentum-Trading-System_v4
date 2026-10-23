@@ -1,0 +1,13 @@
+{
+  "grouped_two_block_count": 14142,
+  "by_arity": {
+    "3": 336,
+    "4": 1820,
+    "5": 3920,
+    "6": 4536,
+    "7": 2800,
+    "8": 730
+  },
+  "scope": "canonical unordered two-block partitions only; excludes deeper nested trees and ordered signal pipelines",
+  "all_status": "NOT_INTEGRATED_WITH_PORTFOLIO_EVALUATOR"
+}

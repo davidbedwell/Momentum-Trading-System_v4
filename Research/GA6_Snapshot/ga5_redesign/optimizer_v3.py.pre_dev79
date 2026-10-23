@@ -1,0 +1,85 @@
+"""GA5 v3 research engine: protected niches, diverse elites, risk-aware fitness.
+Not a certified simulator. No production launch permitted without validation gate.
+"""
+from dataclasses import replace
+from collections import Counter
+import math
+import random
+from ga5_chromosome_contract import mutate,crossover
+from ga5_feature_families import compute
+from ga5_chromosome_portfolio_pilot import evaluate
+
+NICHES=("growth","trend","rotation","range","decline","crash","recovery")
+def fitness(result):
+    c=float(result["cagr_diagnostic"])
+    dd=abs(float(result["mdd_diagnostic"]))
+    if not math.isfinite(c) or not math.isfinite(dd) or dd>1: return -1e9
+    # Penalize risk from the first percentage point; penalize idle portfolios.
+    return c-0.60*dd-0.40*max(0.,dd-0.20)-(.03 if result.get("fills",0)==0 else 0.)
+
+def diversify(scored, count):
+    """Retain unique chromosomes; spread elites across niches when available."""
+    selected=[];seen=set()
+    for niche in NICHES:
+        for score,g,r in scored:
+            if g.niche==niche and g.identity() not in seen:
+                selected.append((score,g,r));seen.add(g.identity());break
+            if len(selected)>=count:break
+    for item in scored:
+        if len(selected)>=count:break
+        if item[1].identity() not in seen:
+            selected.append(item);seen.add(item[1].identity())
+    return selected[:count]
+
+def evolve(frame, seed, generations=2, population=56, random_seed=11,
+           blocked=None, membership=None, risk_veto=None, settlement=None,
+           cash_proxy=None, earnings_verified=False):
+    """Research-only evolutionary step. Fail closed on unverified safeguards.
+    The underlying pilot evaluator cannot yet implement settlement, cash proxy
+    or independent risk veto; therefore this function never claims certification.
+    """
+    if population< len(NICHES)*4 or generations<1:
+        raise ValueError("Minimum four chromosomes per protected niche")
+    if blocked is None or not earnings_verified:
+        raise ValueError("Verified PIT earnings embargo required")
+    if membership is None or risk_veto is None or settlement is None or cash_proxy is None:
+        raise ValueError("PIT membership, risk veto, settlement and cash proxy required")
+    raise NotImplementedError("Pilot evaluator cannot enforce the full safeguards; production evolution blocked")
+
+def research_diagnostic(frame, seed, generations=2, population=56, random_seed=11):
+    """Explicitly uncertified multi-niche diagnostic, no orders or deployment."""
+    if population<len(NICHES)*4 or generations<1:raise ValueError("Insufficient niche breadth")
+    rng=random.Random(random_seed)
+    prepared=compute(frame)
+    pools={}
+    for niche in NICHES:
+        g=replace(seed,niche=niche)
+        n=population//len(NICHES)+(1 if NICHES.index(niche)<population%len(NICHES) else 0)
+        members=[g]
+        while len(members)<n:
+            candidate=mutate(rng.choice(members),rng)
+            if candidate.identity() not in {x.identity() for x in members}:members.append(candidate)
+        pools[niche]=members
+    best={}; history=[]
+    for generation in range(1,generations+1):
+        stats={}
+        for niche,members in pools.items():
+            scored=sorted(((fitness(r:=evaluate(prepared,g,prepared=True)),g,r) for g in members),
+                          key=lambda x:(-x[0],x[1].identity()))
+            if niche not in best or scored[0][0]>best[niche][0]:best[niche]=scored[0]
+            stats[niche]={"best_score":scored[0][0],"unique":len({g.identity() for _,g,_ in scored})}
+            elite=diversify(scored,max(2,len(members)//4))
+            parents=[g for _,g,_ in elite]
+            next_pool=parents.copy();seen={g.identity() for g in next_pool}
+            attempts=0
+            while len(next_pool)<len(members):
+                attempts+=1
+                if attempts>1000:raise RuntimeError("Insufficient novel chromosomes")
+                child=mutate(crossover(rng.choice(parents),rng.choice(parents),rng),rng)
+                if child.identity() not in seen:
+                    next_pool.append(child);seen.add(child.identity())
+            pools[niche]=next_pool
+        history.append({"generation":generation,"niches":stats})
+    return {"status":"DIAGNOSTIC_ONLY","generations":generations,
+            "evaluations":generations*population,"history":history,
+            "best_by_niche":{n:{"fitness":s,"genome":g.identity(),"result":r} for n,(s,g,r) in best.items()}}

@@ -1,0 +1,31 @@
+{
+  "status": "RESEARCH_IN_SAMPLE_SELECTION",
+  "starting_cash": 100000,
+  "final_nav": 2138372.9204156552,
+  "cagr": 0.15701601782892105,
+  "mdd": -0.396831828283145,
+  "years": 20.999315537303218,
+  "sessions": 5282,
+  "fills": 2275,
+  "buys": 1155,
+  "sells": 1120,
+  "mean_capital_utilization": 0.8382810526933794,
+  "cash_yield": 51609.15984098556,
+  "fees": 36165.64211926496,
+  "niches_selected": [
+    "NICHE-0010",
+    "NICHE-0003",
+    "NICHE-0011",
+    "NICHE-0004",
+    "NICHE-0005",
+    "NICHE-0012",
+    "NICHE-0008",
+    "NICHE-0009",
+    "NICHE-0006",
+    "NICHE-0013",
+    "NICHE-0002",
+    "NICHE-0001",
+    "NICHE-0007"
+  ],
+  "limitations": "Chromosomes selected by full-sample CAGR (lookahead selection); no out-of-sample certification; excludes scale-in/out for initial shared allocator; one best full-sample chromosome per niche with >=100 fills; selected from historical evaluation ledger rather than corrected-breeder offspring."
+}

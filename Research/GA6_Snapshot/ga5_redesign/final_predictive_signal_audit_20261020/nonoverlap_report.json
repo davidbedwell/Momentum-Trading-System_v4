@@ -1,0 +1,15 @@
+{
+  "test_combinations": 70,
+  "test_positive_edge": 42,
+  "positive_both_periods": 24,
+  "positive_net_after_20bps": 50,
+  "median_test_edge": 0.0012140136004237688,
+  "status": "DIAGNOSTIC_NOT_CERTIFIED",
+  "limitations": [
+    "Retrospectively fitted niche centers",
+    "Cross-stock correlated observations",
+    "20bps illustrative roundtrip cost",
+    "No multiple-comparison correction",
+    "No executable capital-constrained portfolio"
+  ]
+}

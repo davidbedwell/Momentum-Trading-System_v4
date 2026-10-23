@@ -1,0 +1,131 @@
+{
+  "status": "RETROSPECTIVE_CRASH_WINDOW_RETURN_EXCISION",
+  "results": [
+    {
+      "horizon": 20,
+      "method": "rank_top",
+      "window": "covid_peak_trough",
+      "excluded_sessions": 32,
+      "cagr_excluding_window": 0.30284683359753406,
+      "mdd_excluding_window": -0.2820021588578221,
+      "ending_hypothetical": 1256812.3702667388,
+      "excluded_window_compounded_return": -0.4473129888435683
+    },
+    {
+      "horizon": 20,
+      "method": "rank_top",
+      "window": "covid_extended",
+      "excluded_sessions": 59,
+      "cagr_excluding_window": 0.26843284480951324,
+      "mdd_excluding_window": -0.28200215885782054,
+      "ending_hypothetical": 948358.6002726989,
+      "excluded_window_compounded_return": -0.26755145964045757
+    },
+    {
+      "horizon": 20,
+      "method": "rank_top",
+      "window": "covid_calendar",
+      "excluded_sessions": 253,
+      "cagr_excluding_window": 0.23473409645754728,
+      "mdd_excluding_window": -0.28200215885782154,
+      "ending_hypothetical": 624946.6230061486,
+      "excluded_window_compounded_return": 0.11149312106982934
+    },
+    {
+      "horizon": 20,
+      "method": "equal_universe",
+      "window": "covid_peak_trough",
+      "excluded_sessions": 32,
+      "cagr_excluding_window": 0.19879277367730008,
+      "mdd_excluding_window": -0.20868285520787666,
+      "ending_hypothetical": 566765.8387687516,
+      "excluded_window_compounded_return": -0.36483857994699354
+    },
+    {
+      "horizon": 20,
+      "method": "equal_universe",
+      "window": "covid_extended",
+      "excluded_sessions": 59,
+      "cagr_excluding_window": 0.1672253083516173,
+      "mdd_excluding_window": -0.20868285520787566,
+      "ending_hypothetical": 431841.0181128341,
+      "excluded_window_compounded_return": -0.16638813847962242
+    },
+    {
+      "horizon": 20,
+      "method": "equal_universe",
+      "window": "covid_calendar",
+      "excluded_sessions": 253,
+      "cagr_excluding_window": 0.14452815978666744,
+      "mdd_excluding_window": -0.20868285520787533,
+      "ending_hypothetical": 323227.84724018513,
+      "excluded_window_compounded_return": 0.11372766320592653
+    },
+    {
+      "horizon": 63,
+      "method": "rank_top",
+      "window": "covid_peak_trough",
+      "excluded_sessions": 32,
+      "cagr_excluding_window": 0.3478741581262912,
+      "mdd_excluding_window": -0.2721209381664892,
+      "ending_hypothetical": 1739610.2474599232,
+      "excluded_window_compounded_return": -0.38698254127709775
+    },
+    {
+      "horizon": 63,
+      "method": "rank_top",
+      "window": "covid_extended",
+      "excluded_sessions": 59,
+      "cagr_excluding_window": 0.30668427506166873,
+      "mdd_excluding_window": -0.2721209381664885,
+      "ending_hypothetical": 1256158.6664957064,
+      "excluded_window_compounded_return": -0.15105354004271065
+    },
+    {
+      "horizon": 63,
+      "method": "rank_top",
+      "window": "covid_calendar",
+      "excluded_sessions": 253,
+      "cagr_excluding_window": 0.2727492703599499,
+      "mdd_excluding_window": -0.2721209381664884,
+      "ending_hypothetical": 813383.155931959,
+      "excluded_window_compounded_return": 0.31108130932994826
+    },
+    {
+      "horizon": 63,
+      "method": "equal_universe",
+      "window": "covid_peak_trough",
+      "excluded_sessions": 32,
+      "cagr_excluding_window": 0.2246199892189249,
+      "mdd_excluding_window": -0.19612120234276287,
+      "ending_hypothetical": 694983.4529754986,
+      "excluded_window_compounded_return": -0.35486047926088315
+    },
+    {
+      "horizon": 63,
+      "method": "equal_universe",
+      "window": "covid_extended",
+      "excluded_sessions": 59,
+      "cagr_excluding_window": 0.19178423238921538,
+      "mdd_excluding_window": -0.1961212023427633,
+      "ending_hypothetical": 525866.5550229916,
+      "excluded_window_compounded_return": -0.1473858006531228
+    },
+    {
+      "horizon": 63,
+      "method": "equal_universe",
+      "window": "covid_calendar",
+      "excluded_sessions": 253,
+      "cagr_excluding_window": 0.16722439759472874,
+      "mdd_excluding_window": -0.19612120234276365,
+      "ending_hypothetical": 383373.85327994154,
+      "excluded_window_compounded_return": 0.16951452984675375
+    }
+  ],
+  "limitations": [
+    "Removes realized daily portfolio returns in selected crash window and compounds remaining returns; NOT a tradable exit/reentry strategy",
+    "Window selection informed by hindsight",
+    "Portfolio ranks and subsequent positions still derived from original continuous historical replay",
+    "Excludes window time from annualization; comparisons remain within same data universe"
+  ]
+}

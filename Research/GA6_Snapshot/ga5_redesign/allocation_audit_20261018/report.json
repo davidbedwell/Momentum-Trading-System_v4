@@ -1,0 +1,264 @@
+{
+  "status": "DIAGNOSTIC_ONLY",
+  "workers": 8,
+  "elapsed_s": 52.4,
+  "total_evaluations": 28,
+  "evaluator": "guarded-v2",
+  "code_sha256": "ae6e945bcd6e7f831e2b7c330a735bba168b988af082d9d5059a135acdfefc37",
+  "policy_sha256": "1f0c99c8154c81bdf10a54ba97a3d1bef833122c433356d02da3a97c23345dd9",
+  "cache_hits": 0,
+  "niches": [
+    {
+      "niche": "growth",
+      "evaluations": 4,
+      "cache_hits": 0,
+      "best_fitness": -0.17252355320844298,
+      "best_result": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 5282,
+        "fills": 771,
+        "corporate_actions": 4798,
+        "cash_yield_earned": 42988.58644254033,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 61,
+          "below_minimum_allocation": 0,
+          "capacity": 5280
+        },
+        "final_nav": 862517.1921485569,
+        "cagr_diagnostic": 0.10805628633891429,
+        "mdd_diagnostic": -0.3605798395473573,
+        "first_date": "2005-09-14",
+        "last_date": "2026-09-14"
+      },
+      "history": [
+        {
+          "generation": 1,
+          "best_fitness": -0.17252355320844298,
+          "unique": 4
+        }
+      ]
+    },
+    {
+      "niche": "trend",
+      "evaluations": 4,
+      "cache_hits": 0,
+      "best_fitness": -0.2310519206457072,
+      "best_result": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 5282,
+        "fills": 596,
+        "corporate_actions": 4798,
+        "cash_yield_earned": 1487.403210082642,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 25817,
+          "below_minimum_allocation": 4819,
+          "capacity": 0
+        },
+        "final_nav": 2335235.1462859213,
+        "cagr_diagnostic": 0.16187852492488508,
+        "mdd_diagnostic": -0.4729304455705923,
+        "first_date": "2005-09-14",
+        "last_date": "2026-09-14"
+      },
+      "history": [
+        {
+          "generation": 1,
+          "best_fitness": -0.2310519206457072,
+          "unique": 4
+        }
+      ]
+    },
+    {
+      "niche": "rotation",
+      "evaluations": 4,
+      "cache_hits": 0,
+      "best_fitness": 0.02624281845429357,
+      "best_result": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 5282,
+        "fills": 8602,
+        "corporate_actions": 4798,
+        "cash_yield_earned": 87295.9706991016,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 0,
+          "below_minimum_allocation": 10637,
+          "capacity": 0
+        },
+        "final_nav": 227254.11177827293,
+        "cagr_diagnostic": 0.03986581998836303,
+        "mdd_diagnostic": -0.022705002556782428,
+        "first_date": "2005-09-14",
+        "last_date": "2026-09-14"
+      },
+      "history": [
+        {
+          "generation": 1,
+          "best_fitness": 0.02624281845429357,
+          "unique": 4
+        }
+      ]
+    },
+    {
+      "niche": "range",
+      "evaluations": 4,
+      "cache_hits": 0,
+      "best_fitness": -0.2438010293111607,
+      "best_result": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 5282,
+        "fills": 2495,
+        "corporate_actions": 4798,
+        "cash_yield_earned": 570.2484450292164,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 40802,
+          "below_minimum_allocation": 4820,
+          "capacity": 0
+        },
+        "final_nav": 1569297.2065111105,
+        "cagr_diagnostic": 0.1400927890329482,
+        "mdd_diagnostic": -0.4638938183441089,
+        "first_date": "2005-09-14",
+        "last_date": "2026-09-14"
+      },
+      "history": [
+        {
+          "generation": 1,
+          "best_fitness": -0.2438010293111607,
+          "unique": 4
+        }
+      ]
+    },
+    {
+      "niche": "decline",
+      "evaluations": 4,
+      "cache_hits": 0,
+      "best_fitness": -0.3494370004929371,
+      "best_result": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 5282,
+        "fills": 2525,
+        "corporate_actions": 4798,
+        "cash_yield_earned": 438.59933494761907,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 20139,
+          "below_minimum_allocation": 4967,
+          "capacity": 0
+        },
+        "final_nav": 1193992.2491682908,
+        "cagr_diagnostic": 0.12534959172226046,
+        "mdd_diagnostic": -0.5547865922151975,
+        "first_date": "2005-09-14",
+        "last_date": "2026-09-14"
+      },
+      "history": [
+        {
+          "generation": 1,
+          "best_fitness": -0.3494370004929371,
+          "unique": 4
+        }
+      ]
+    },
+    {
+      "niche": "crash",
+      "evaluations": 4,
+      "cache_hits": 0,
+      "best_fitness": -0.37254262065650307,
+      "best_result": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 5282,
+        "fills": 4714,
+        "corporate_actions": 4798,
+        "cash_yield_earned": 2032.0976090628762,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 20103,
+          "below_minimum_allocation": 3137,
+          "capacity": 0
+        },
+        "final_nav": 1052080.187131085,
+        "cagr_diagnostic": 0.11858908906201626,
+        "mdd_diagnostic": -0.5711317097185193,
+        "first_date": "2005-09-14",
+        "last_date": "2026-09-14"
+      },
+      "history": [
+        {
+          "generation": 1,
+          "best_fitness": -0.37254262065650307,
+          "unique": 4
+        }
+      ]
+    },
+    {
+      "niche": "recovery",
+      "evaluations": 4,
+      "cache_hits": 0,
+      "best_fitness": 0.02980691315991968,
+      "best_result": {
+        "status": "GUARDED_RESEARCH_ONLY",
+        "sessions": 5282,
+        "fills": 1777,
+        "corporate_actions": 4798,
+        "cash_yield_earned": 86048.82634649261,
+        "cash_proxy_annual_yield": 0.03,
+        "rejections": {
+          "earnings": 0,
+          "membership": 0,
+          "veto": 0,
+          "unsettled": 0,
+          "no_cash": 0,
+          "lot_too_expensive": 0,
+          "below_minimum_allocation": 458,
+          "capacity": 5250
+        },
+        "final_nav": 192490.45963420058,
+        "cagr_diagnostic": 0.031676972808613924,
+        "mdd_diagnostic": -0.003116766081157074,
+        "first_date": "2005-09-14",
+        "last_date": "2026-09-14"
+      },
+      "history": [
+        {
+          "generation": 1,
+          "best_fitness": 0.02980691315991968,
+          "unique": 4
+        }
+      ]
+    }
+  ]
+}

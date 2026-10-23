@@ -1,0 +1,59 @@
+{
+  "status": "WALK_FORWARD_STOCK_RANKING_DIAGNOSTIC",
+  "summary": [
+    {
+      "horizon": 5,
+      "years": 10,
+      "positive_years": 8,
+      "mean_yearly_top_edge": 0.002562299822510008,
+      "median_yearly_top_edge": 0.0029279098712461514,
+      "mean_top_net_20bps": 0.004419040203919811,
+      "mean_top_minus_bottom": 0.0036584607292967385
+    },
+    {
+      "horizon": 20,
+      "years": 10,
+      "positive_years": 9,
+      "mean_yearly_top_edge": 0.0100619643139373,
+      "median_yearly_top_edge": 0.008518706822229724,
+      "mean_top_net_20bps": 0.023730615302489412,
+      "mean_top_minus_bottom": 0.015434961923849678
+    },
+    {
+      "horizon": 63,
+      "years": 10,
+      "positive_years": 9,
+      "mean_yearly_top_edge": 0.03717292911981966,
+      "median_yearly_top_edge": 0.02657686150673181,
+      "mean_top_net_20bps": 0.0872548991780232,
+      "mean_top_minus_bottom": 0.051555411588690626
+    }
+  ],
+  "features": [
+    "ga4_return_5__v1",
+    "ga4_return_20__v1",
+    "ga4_return_63__v1",
+    "ga4_return_126__v1",
+    "ga4_return_252__v1",
+    "ga4_return_252_skip_20__v1",
+    "ga4_close_to_sma_20__v1",
+    "ga4_close_to_sma_50__v1",
+    "ga4_close_to_sma_200__v1",
+    "ga4_sma50_slope_10__v1",
+    "ga4_pullback_from_high_20__v1",
+    "ga4_range_position_252__v1",
+    "ga4_natr_20__v1",
+    "ga4_rsi_14__v1",
+    "ga4_relative_volume_20__v1",
+    "ga4_realized_vol_20__v1",
+    "ga4_volatility_ratio_20_63__v1"
+  ],
+  "limitations": [
+    "79-stock exploratory selection may be survivorship-biased and not NAS100 historical membership",
+    "Feature point-in-time provenance not independently audited",
+    "Nonoverlap dates per year, but cross-stock dependence remains",
+    "Top bucket 20% and horizons chosen before evaluation; repeated research exposure to later years",
+    "No portfolio, liquidity, earnings embargo or defensive gate",
+    "Adjusted next-open price approximation; costs only deducted from average return"
+  ]
+}

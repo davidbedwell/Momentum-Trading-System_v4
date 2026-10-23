@@ -1,0 +1,121 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "features": [
+    "trend",
+    "momentum",
+    "volatility",
+    "breadth",
+    "relative_strength",
+    "ga4_relative_volume_20__v1",
+    "ga4_volume_slope_20__v1",
+    "efficiency_10",
+    "efficiency_20",
+    "efficiency_40",
+    "reversal_rate_10",
+    "reversal_rate_20",
+    "reversal_rate_40",
+    "net_to_volatility_10",
+    "net_to_volatility_20",
+    "net_to_volatility_40",
+    "range_width_20",
+    "volume_variability_20"
+  ],
+  "initial_niches": 6,
+  "final_niches": 18,
+  "new_niches": 12,
+  "promotions": [
+    {
+      "date": "2005-07-26",
+      "id": "NICHE-0007",
+      "support": 5,
+      "nearest_prior": "NICHE-0005"
+    },
+    {
+      "date": "2005-08-11",
+      "id": "NICHE-0008",
+      "support": 5,
+      "nearest_prior": "NICHE-0004"
+    },
+    {
+      "date": "2007-03-16",
+      "id": "NICHE-0009",
+      "support": 5,
+      "nearest_prior": "NICHE-0001"
+    },
+    {
+      "date": "2007-06-06",
+      "id": "NICHE-0010",
+      "support": 5,
+      "nearest_prior": "NICHE-0002"
+    },
+    {
+      "date": "2008-07-09",
+      "id": "NICHE-0011",
+      "support": 5,
+      "nearest_prior": "NICHE-0005"
+    },
+    {
+      "date": "2008-08-18",
+      "id": "NICHE-0012",
+      "support": 5,
+      "nearest_prior": "NICHE-0002"
+    },
+    {
+      "date": "2008-10-29",
+      "id": "NICHE-0013",
+      "support": 5,
+      "nearest_prior": "NICHE-0001"
+    },
+    {
+      "date": "2008-12-01",
+      "id": "NICHE-0014",
+      "support": 5,
+      "nearest_prior": "NICHE-0013"
+    },
+    {
+      "date": "2009-04-07",
+      "id": "NICHE-0015",
+      "support": 6,
+      "nearest_prior": "NICHE-0001"
+    },
+    {
+      "date": "2011-02-24",
+      "id": "NICHE-0016",
+      "support": 5,
+      "nearest_prior": "NICHE-0009"
+    },
+    {
+      "date": "2012-01-19",
+      "id": "NICHE-0017",
+      "support": 5,
+      "nearest_prior": "NICHE-0005"
+    },
+    {
+      "date": "2013-04-17",
+      "id": "NICHE-0018",
+      "support": 5,
+      "nearest_prior": "NICHE-0011"
+    }
+  ],
+  "ACN_holdout": {
+    "sessions": 1649,
+    "mean_distance_before": 3.1195288966706767,
+    "mean_distance_after": 3.022047157339482,
+    "original_assignment_retention": 0.873862947240752,
+    "new_niche_fraction": 0.10976349302607641
+  },
+  "AMGN_holdout": {
+    "sessions": 1649,
+    "mean_distance_before": 3.0248715642884405,
+    "mean_distance_after": 2.9284678483293405,
+    "original_assignment_retention": 0.8799272286234081,
+    "new_niche_fraction": 0.09702850212249849
+  },
+  "limitations": [
+    "No calendar-synchronized cross-stock learning",
+    "Feature provenance PIT audit pending",
+    "Novelty quantile/window/support hyperparameters still heuristic",
+    "Cluster semantic distinctness and false discovery unverified",
+    "No learned no-trade policy"
+  ]
+}

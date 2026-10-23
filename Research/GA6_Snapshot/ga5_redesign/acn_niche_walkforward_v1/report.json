@@ -1,0 +1,37 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "stock": "ACN",
+  "dates": [
+    "2004-11-10",
+    "2026-09-14"
+  ],
+  "features": [
+    "trend",
+    "momentum",
+    "volatility",
+    "breadth",
+    "relative_strength"
+  ],
+  "clusters": 6,
+  "warmup_rows": 500,
+  "refit_interval_sessions": 63,
+  "predictions": 4994,
+  "snapshots": 80,
+  "within_version_day_to_day_persistence": 0.7639397639397639,
+  "mean_distance_margin_not_probability": 0.35965350401942275,
+  "niche_counts_by_version_local_id": {
+    "0": 1061,
+    "2": 856,
+    "3": 804,
+    "1": 796,
+    "5": 753,
+    "4": 724
+  },
+  "limitations": [
+    "Unsupervised clusters are not proof of economically meaningful niches",
+    "Cluster identities may permute between refits; no cross-version transition claims",
+    "Features sourced from existing GA5 data; independent point-in-time audit pending",
+    "No supervised predictive accuracy or calibrated confidence claim",
+    "20-day forward return stored for retrospective audit only and never used in fitting"
+  ]
+}

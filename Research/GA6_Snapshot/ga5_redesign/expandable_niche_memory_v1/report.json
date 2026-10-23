@@ -1,0 +1,59 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "source": "ACN",
+  "target": "AMGN",
+  "initial_niches": 6,
+  "final_niches": 8,
+  "new_niches": 2,
+  "promotion_events": [
+    {
+      "date": "2005-07-26",
+      "action": "new_niche_created",
+      "id": "NICHE-0007",
+      "support": 5,
+      "center": [
+        4.516349446909577,
+        4.795921923263859,
+        1.3837605185171598,
+        1.420689655172414,
+        4.4819134500757425
+      ],
+      "nearest_prior_distance": 6.119843737931428
+    },
+    {
+      "date": "2008-07-08",
+      "action": "new_niche_created",
+      "id": "NICHE-0008",
+      "support": 5,
+      "center": [
+        2.2266948575800227,
+        1.726607968675679,
+        -0.0834592212953269,
+        -1.535483870967742,
+        3.6982460709121705
+      ],
+      "nearest_prior_distance": 3.8161964386244764
+    }
+  ],
+  "ACN_holdout": {
+    "n": 1649,
+    "distance_original": 1.1840483710359944,
+    "distance_expanded": 1.1565180880021428,
+    "original_niche_retention": 0.968465736810188,
+    "new_niche_assignment_fraction": 0.014554275318374773
+  },
+  "AMGN_holdout": {
+    "n": 1649,
+    "distance_original": 1.0954280439409987,
+    "distance_expanded": 1.0548850662794247,
+    "original_niche_retention": 0.9484536082474226,
+    "new_niche_assignment_fraction": 0.03699211643420255
+  },
+  "limitations": [
+    "Thresholds and support are provisional heuristics; no false-novelty calibration",
+    "New niche formation is geometric, not proven semantic discovery",
+    "ACN source training and AMGN target training are separate historical blocks, not synchronized across calendar dates",
+    "Existing features need independent PIT audit",
+    "Holdout predictions do not update memory"
+  ]
+}

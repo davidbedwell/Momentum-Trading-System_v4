@@ -1,0 +1,197 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "stocks": 40,
+  "rows": 37080,
+  "unconditional_by_horizon": [
+    {
+      "horizon": 1,
+      "unconditional_avg_pct": 0.083,
+      "avg_date_dispersion_pct": 1.873
+    },
+    {
+      "horizon": 2,
+      "unconditional_avg_pct": 0.164,
+      "avg_date_dispersion_pct": 2.651
+    },
+    {
+      "horizon": 3,
+      "unconditional_avg_pct": 0.244,
+      "avg_date_dispersion_pct": 3.261
+    },
+    {
+      "horizon": 5,
+      "unconditional_avg_pct": 0.405,
+      "avg_date_dispersion_pct": 4.245
+    },
+    {
+      "horizon": 10,
+      "unconditional_avg_pct": 0.797,
+      "avg_date_dispersion_pct": 6.074
+    },
+    {
+      "horizon": 15,
+      "unconditional_avg_pct": 1.197,
+      "avg_date_dispersion_pct": 7.528
+    },
+    {
+      "horizon": 20,
+      "unconditional_avg_pct": 1.584,
+      "avg_date_dispersion_pct": 8.847
+    },
+    {
+      "horizon": 30,
+      "unconditional_avg_pct": 2.346,
+      "avg_date_dispersion_pct": 11.187
+    },
+    {
+      "horizon": 40,
+      "unconditional_avg_pct": 3.118,
+      "avg_date_dispersion_pct": 13.176
+    },
+    {
+      "horizon": 63,
+      "unconditional_avg_pct": 4.985,
+      "avg_date_dispersion_pct": 16.879
+    }
+  ],
+  "horizon63_niches": [
+    {
+      "niche": "NICHE-0013",
+      "horizon": 63,
+      "obs": 299,
+      "stocks": 5,
+      "absolute_mean_pct": 19.492,
+      "date_matched_excess_pct": 15.97,
+      "stock_average_excess_pct": 2.337,
+      "positive_date_matched_share": 0.579
+    },
+    {
+      "niche": "NICHE-0012",
+      "horizon": 63,
+      "obs": 426,
+      "stocks": 28,
+      "absolute_mean_pct": 20.572,
+      "date_matched_excess_pct": 14.608,
+      "stock_average_excess_pct": 12.865,
+      "positive_date_matched_share": 0.545
+    },
+    {
+      "niche": "NICHE-0008",
+      "horizon": 63,
+      "obs": 247,
+      "stocks": 23,
+      "absolute_mean_pct": 26.191,
+      "date_matched_excess_pct": 12.542,
+      "stock_average_excess_pct": 15.127,
+      "positive_date_matched_share": 0.571
+    },
+    {
+      "niche": "NICHE-0010",
+      "horizon": 63,
+      "obs": 268,
+      "stocks": 15,
+      "absolute_mean_pct": 20.486,
+      "date_matched_excess_pct": 11.906,
+      "stock_average_excess_pct": 8.32,
+      "positive_date_matched_share": 0.545
+    },
+    {
+      "niche": "NICHE-0007",
+      "horizon": 63,
+      "obs": 1971,
+      "stocks": 34,
+      "absolute_mean_pct": 9.424,
+      "date_matched_excess_pct": 3.316,
+      "stock_average_excess_pct": 2.775,
+      "positive_date_matched_share": 0.499
+    },
+    {
+      "niche": "NICHE-0011",
+      "horizon": 63,
+      "obs": 2237,
+      "stocks": 30,
+      "absolute_mean_pct": 5.492,
+      "date_matched_excess_pct": 0.835,
+      "stock_average_excess_pct": -2.214,
+      "positive_date_matched_share": 0.453
+    },
+    {
+      "niche": "NICHE-0009",
+      "horizon": 63,
+      "obs": 252,
+      "stocks": 16,
+      "absolute_mean_pct": 8.207,
+      "date_matched_excess_pct": 0.767,
+      "stock_average_excess_pct": 1.9,
+      "positive_date_matched_share": 0.389
+    },
+    {
+      "niche": "NICHE-0001",
+      "horizon": 63,
+      "obs": 4710,
+      "stocks": 37,
+      "absolute_mean_pct": 5.304,
+      "date_matched_excess_pct": -0.059,
+      "stock_average_excess_pct": -0.218,
+      "positive_date_matched_share": 0.468
+    },
+    {
+      "niche": "NICHE-0002",
+      "horizon": 63,
+      "obs": 6509,
+      "stocks": 39,
+      "absolute_mean_pct": 3.99,
+      "date_matched_excess_pct": -0.726,
+      "stock_average_excess_pct": 0.085,
+      "positive_date_matched_share": 0.474
+    },
+    {
+      "niche": "NICHE-0003",
+      "horizon": 63,
+      "obs": 6410,
+      "stocks": 39,
+      "absolute_mean_pct": 3.605,
+      "date_matched_excess_pct": -0.747,
+      "stock_average_excess_pct": -0.228,
+      "positive_date_matched_share": 0.486
+    },
+    {
+      "niche": "NICHE-0005",
+      "horizon": 63,
+      "obs": 3927,
+      "stocks": 39,
+      "absolute_mean_pct": 5.211,
+      "date_matched_excess_pct": -0.829,
+      "stock_average_excess_pct": 1.609,
+      "positive_date_matched_share": 0.458
+    },
+    {
+      "niche": "NICHE-0004",
+      "horizon": 63,
+      "obs": 3130,
+      "stocks": 39,
+      "absolute_mean_pct": 3.504,
+      "date_matched_excess_pct": -1.073,
+      "stock_average_excess_pct": -1.373,
+      "positive_date_matched_share": 0.461
+    },
+    {
+      "niche": "NICHE-0006",
+      "horizon": 63,
+      "obs": 4134,
+      "stocks": 39,
+      "absolute_mean_pct": 1.721,
+      "date_matched_excess_pct": -2.292,
+      "stock_average_excess_pct": -3.2,
+      "positive_date_matched_share": 0.449
+    }
+  ],
+  "limitations": [
+    "Date-matched benchmark uses other available study stocks, not independent SPY",
+    "Final adapted memory is retrospectively applied; not walk-forward",
+    "Overlapping forward returns and correlated market dates",
+    "Unverified PIT predictor lineage and universe partitions",
+    "Same previously used 2023-2026 sample; descriptive comparisons only",
+    "No statistical significance or multiple-testing correction"
+  ]
+}

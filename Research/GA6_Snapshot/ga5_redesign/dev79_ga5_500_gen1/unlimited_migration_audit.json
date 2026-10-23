@@ -1,0 +1,7 @@
+{
+  "old": "7f8ea110bee23faa6066082baa02898a2be5ea1a6cf67cfe4f19bd945d5c2d16",
+  "new": "f209e7d77ef8fa9cabf8d4543392aed0b312ad43dde63ba8f634f3e6d07ae038",
+  "checkpoint_generation": 2,
+  "stop": "100-generation stagnation; no finite cap",
+  "backup": "ga5_redesign/dev79_ga5_500_gen1/checkpoint_unified.pre_unlimited.json"
+}

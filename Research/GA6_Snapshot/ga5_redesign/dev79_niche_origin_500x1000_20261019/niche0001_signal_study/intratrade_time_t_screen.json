@@ -1,0 +1,54 @@
+{
+  "observations": 153788,
+  "unique_tickers": 79,
+  "future_adverse5_rate": 0.09555361926808334,
+  "cohorts": {
+    "bottom": {
+      "observations": 5000,
+      "future_adverse5_rate": 0.021,
+      "winner_fraction": 0.8626
+    },
+    "middle": {
+      "observations": 50989,
+      "future_adverse5_rate": 0.10190433230696817,
+      "winner_fraction": 0.6709486359803095
+    },
+    "top": {
+      "observations": 97799,
+      "future_adverse5_rate": 0.09605415188294358,
+      "winner_fraction": 0.768290064315586
+    }
+  },
+  "signals": {
+    "ret5": {
+      "low_adverse_rate": 0.10878470641784252,
+      "high_adverse_rate": 0.13934586123935236,
+      "low_n": 30758,
+      "high_n": 30758
+    },
+    "ret20": {
+      "low_adverse_rate": 0.10953247935496456,
+      "high_adverse_rate": 0.13342870147603875,
+      "low_n": 30758,
+      "high_n": 30758
+    },
+    "vol": {
+      "low_adverse_rate": 0.02672475453540542,
+      "high_adverse_rate": 0.22075557578516158,
+      "low_n": 30758,
+      "high_n": 30758
+    },
+    "rs": {
+      "low_adverse_rate": 0.08665052461662631,
+      "high_adverse_rate": 0.0992686494392979,
+      "low_n": 30975,
+      "high_n": 30765
+    },
+    "breadth": {
+      "low_adverse_rate": 0.11458873897249611,
+      "high_adverse_rate": 0.09131374383124213,
+      "low_n": 30832,
+      "high_n": 31003
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "status": "BENCHMARK_ONLY_UNVERIFIED_SECTOR_AND_POLICIES",
+  "rows": 394795,
+  "sessions": 5543,
+  "tickers": 79,
+  "read_s": 0.043,
+  "feature_compute_s": 0.198,
+  "session_prepare_s": 7.218,
+  "baseline_eval_s": 9.684,
+  "reused_eval_s": 2.125,
+  "speedup": 4.56,
+  "exact_result_parity": true
+}

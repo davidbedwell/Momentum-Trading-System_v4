@@ -1,0 +1,36 @@
+{
+  "source": "/opt/mts/thunder-migration/mts-certification-20261011/cagr_mdd_library_20261013/STRATEGY_BANK_INDEX.sqlite",
+  "counts": {
+    "strategies": 283349,
+    "measurements": 569159,
+    "nonempty_definitions": 283349
+  },
+  "studies": [
+    [
+      "GA4_DIAGNOSTIC",
+      250110
+    ],
+    [
+      "HORIZONS",
+      31750
+    ],
+    [
+      "DEV80_LONG",
+      1489
+    ]
+  ],
+  "definition_status": [
+    [
+      "RESOLVED",
+      283349
+    ]
+  ],
+  "complete_chromosome_definitions.jsonl": {
+    "bytes": 283900746,
+    "sha256": "6dc9c8d9261ddc3c88b5d271a0ebf8079601efab0431c9a8623d8b5dbba9ba03"
+  },
+  "chromosome_performance_index.csv": {
+    "bytes": 222914988,
+    "sha256": "8e98eaef1268668a8ea730b5b65a9d60e96b9144e3fa242ceb918e022af65471"
+  }
+}

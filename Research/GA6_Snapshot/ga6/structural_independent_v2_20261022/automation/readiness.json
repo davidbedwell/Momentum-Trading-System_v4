@@ -1,0 +1,47 @@
+{
+  "utc": "2026-10-23T03:37:36.538481+00:00",
+  "ready": false,
+  "checks": {
+    "logic_unit": {
+      "passed": true,
+      "returncode": 0,
+      "tail": "\ntest_duplicate_rejected (test_family_logic.TestLogic.test_duplicate_rejected) ... ok\ntest_flat (test_family_logic.TestLogic.test_flat) ... ok\ntest_grouped (test_family_logic.TestLogic.test_grouped) ... ok\ntest_missing (test_family_logic.TestLogic.test_missing) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+    },
+    "real_data_signal": {
+      "passed": true,
+      "returncode": 0,
+      "tail": "{\n  \"status\": \"SIGNAL_ONLY_SMOKE_NOT_PORTFOLIO_EVALUATION\",\n  \"source\": \"ga5_redesign/exploratory79_ga4_enriched.parquet\",\n  \"rows\": [\n    {\n      \"families\": 2,\n      \"sessions\": 200,\n      \"true\": 44,\n      \"false\": 107,\n      \"missing\": 49\n    },\n    {\n      \"families\": 3,\n      \"sessions\": 200,\n      \"true\": 67,\n      \"false\": 84,\n      \"missing\": 49\n    }\n  ]\n}\n\n"
+    },
+    "catalog_integrity": {
+      "passed": true,
+      "count": 14652,
+      "unique": 14652
+    },
+    "structural_grammar_full_portfolio": {
+      "passed": true,
+      "returncode": 0,
+      "tail": "\ntest_tree_parameter_and_chronological_replay_preserved (ga6.structural_independent_v2_20261022.test_structural_portfolio_integration.IntegrationContract.test_tree_parameter_and_chronological_replay_preserved) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.006s\n\nOK\n"
+    },
+    "sobol_structure_parameters": {
+      "passed": false,
+      "reason": "REQUIRED_INTEGRATION_TEST_NOT_IMPLEMENTED"
+    },
+    "cheap_medium_full_calibration": {
+      "passed": false,
+      "reason": "REQUIRED_INTEGRATION_TEST_NOT_IMPLEMENTED"
+    },
+    "adaptive_scheduler": {
+      "passed": false,
+      "reason": "REQUIRED_INTEGRATION_TEST_NOT_IMPLEMENTED"
+    },
+    "protected_niche_archive": {
+      "passed": false,
+      "reason": "REQUIRED_INTEGRATION_TEST_NOT_IMPLEMENTED"
+    },
+    "end_to_end_launch_preflight": {
+      "passed": false,
+      "reason": "REQUIRED_INTEGRATION_TEST_NOT_IMPLEMENTED"
+    }
+  },
+  "production_policy": "NEVER_STOP_OR_SWITCH_AUTOMATICALLY"
+}

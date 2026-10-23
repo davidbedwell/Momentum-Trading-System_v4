@@ -1,0 +1,59 @@
+{
+  "status": "FIXED_BANK_WALK_FORWARD_DIAGNOSTIC_NOT_CERTIFIED",
+  "windows": [
+    {
+      "train_end_exclusive": "2014-09-01",
+      "test_start": "2019-09-01",
+      "test_end_exclusive": "2021-09-01",
+      "selected_identity": "e420d46b4e5ef1f66ff8552904c2b8f180419fe37d819db4a5556cd2e2041765",
+      "validation_fitness": 0.0695260699162065,
+      "test_cagr": 0.1734658221837484,
+      "test_mdd": -0.23113594232006462,
+      "test_final_nav": 137551.519036586,
+      "test_sessions": 504,
+      "test_shadow_mean_return": -0.017122855287680074,
+      "test_scale_fills": {
+        "in": 279,
+        "out": 0
+      }
+    },
+    {
+      "train_end_exclusive": "2016-09-01",
+      "test_start": "2021-09-01",
+      "test_end_exclusive": "2023-09-01",
+      "selected_identity": "c7b3340c81882ec0e56a671c3ba1a9b7dce238be067e921a709b427ae91b3bb9",
+      "validation_fitness": 0.005557332287011656,
+      "test_cagr": 0.13086114927473602,
+      "test_mdd": -0.17383405508991967,
+      "test_final_nav": 127820.1221697001,
+      "test_sessions": 503,
+      "test_shadow_mean_return": -0.047204068280073855,
+      "test_scale_fills": {
+        "in": 306,
+        "out": 0
+      }
+    },
+    {
+      "train_end_exclusive": "2018-09-01",
+      "test_start": "2023-09-01",
+      "test_end_exclusive": "2025-09-01",
+      "selected_identity": "c7b3340c81882ec0e56a671c3ba1a9b7dce238be067e921a709b427ae91b3bb9",
+      "validation_fitness": -0.038385409684199415,
+      "test_cagr": 0.16627054175544953,
+      "test_mdd": -0.17327849249763816,
+      "test_final_nav": 135875.57531002694,
+      "test_sessions": 500,
+      "test_shadow_mean_return": -0.05368772572307835,
+      "test_scale_fills": {
+        "in": 287,
+        "out": 0
+      }
+    }
+  ],
+  "warnings": [
+    "No evolutionary retraining: fixed seed bank only",
+    "Do not compound independent fold NAVs as a continuous portfolio",
+    "Provisional PIT/earnings/market policy",
+    "Candidate bank provenance must be verified frozen before evaluation"
+  ]
+}

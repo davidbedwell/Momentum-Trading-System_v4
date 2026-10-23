@@ -1,0 +1,60 @@
+from ga6.prospective_policy import Policy
+
+def simulate(path,policy=Policy(),fee=.001,cash_daily=0.):
+ if len(path)<3:raise ValueError('path too short')
+ trigger=policy.trigger;recovery=policy.recovery;min_wait=policy.min_wait;max_wait=policy.max_wait
+ shares=1/(path[0][1]*(1+fee));cash=0.;actions=[];held=True
+ peak=None;trough=None;out=False;wait=0;pending=None
+ for i,(date,op,close) in enumerate(path):
+  if i:
+   act=pending;pending=None
+   if act=='SELL':out=True;wait=0;trough=op
+   elif act=='BUY':out=False;peak=op;trough=None
+   if act=='SELL' and held:
+    cash=shares*op*(1-fee);shares=0.;held=False;actions.append((date,'SELL',op))
+   elif act=='BUY' and not held:
+    shares=cash/(op*(1+fee));cash=0.;held=True;actions.append((date,'BUY',op))
+  if not held:cash*=1+cash_daily
+  if close<=0:raise ValueError('bad close')
+  if out:
+   wait+=1;trough=min(trough,close)
+   target=trough+(peak-trough)*recovery
+   if wait>=min_wait and (close>=target or wait>=max_wait):pending='BUY'
+  else:
+   peak=max(peak or close,close)
+   if close<=peak*(1-trigger):pending='SELL'
+ final=(shares*path[-1][2]*(1-fee) if held else cash)-1
+ hold=path[-1][2]*(1-fee)/(path[0][1]*(1+fee))-1
+ return {'policy_net':final,'hold_net':hold,'incremental_net':final-hold,'actions':actions,'trades':len(actions),'cash_at_end':not held}
+
+
+def simulate_incremental(path,policy,fee=.001,cash_daily=0.):
+ if len(path)<3:raise ValueError('path too short')
+ trigger=policy.trigger;recovery=policy.recovery;min_wait=policy.min_wait;max_wait=policy.max_wait
+ first_open=path[0][1];shares=1/(first_open*(1+fee));cash=0.;held=True
+ peak=0.;trough=0.;out=False;wait=0;pending=None
+ one_minus_fee=1-fee;one_plus_fee=1+fee;cash_multiplier=1+cash_daily
+ for i in range(len(path)):
+  _,op,close=path[i]
+  if i:
+   act=pending;pending=None
+   if act=='SELL':out=True;wait=0;trough=op
+   elif act=='BUY':out=False;peak=op;trough=0.
+   if act=='SELL' and held:
+    cash=shares*op*one_minus_fee;shares=0.;held=False
+   elif act=='BUY' and not held:
+    shares=cash/(op*one_plus_fee);cash=0.;held=True
+  if not held:cash*=cash_multiplier
+  if close<=0:raise ValueError('bad close')
+  if out:
+   wait+=1
+   if close<trough:trough=close
+   target=trough+(peak-trough)*recovery
+   if wait>=min_wait and (close>=target or wait>=max_wait):pending='BUY'
+  else:
+   if peak==0. or close>peak:peak=close
+   if close<=peak*(1-trigger):pending='SELL'
+ last_close=path[-1][2]
+ final=(shares*last_close*one_minus_fee if held else cash)-1
+ hold=last_close*one_minus_fee/(first_open*one_plus_fee)-1
+ return final,hold

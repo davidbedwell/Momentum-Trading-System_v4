@@ -1,0 +1,16 @@
+{
+  "frozen_niches": 12,
+  "test_combinations": 58,
+  "positive_test": 38,
+  "positive_both": 22,
+  "median_test_edge": 0.002015757658552662,
+  "positive_absolute_net_20bps": 47,
+  "status": "CHRONOLOGICAL_FROZEN12_DIAGNOSTIC",
+  "limitations": [
+    "Pre-2021 fitted 12-center memory; training-period evaluation may not be independent of center formation",
+    "Niche 13 not pre-frozen, excluded rather than leaked",
+    "Feature PIT provenance remains unverified",
+    "Cross-stock dependence and multiple testing not controlled",
+    "No portfolio simulation"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "status": "DIAGNOSTIC_ONLY",
+  "architecture": "single unrestricted breeding population",
+  "evaluations": 7,
+  "history": [
+    {
+      "generation": 1,
+      "unique": 7,
+      "best_fitness": -0.2310519206457072
+    }
+  ],
+  "best": {
+    "fitness": -0.2310519206457072,
+    "genome": {
+      "niche": "trend",
+      "entry_feature": "ga4_close_to_sma_200__v1",
+      "entry_threshold": -0.1,
+      "hold_feature": "ga4_sma50_slope_10__v1",
+      "hold_threshold": -0.8,
+      "exit_feature": "ga4_sma20_slope_5__v1",
+      "exit_threshold": -0.8,
+      "regime_feature": "ga4_breadth_positive_20__v1",
+      "regime_threshold": -0.2,
+      "sizing_feature": "ga4_return_252_percentile__v1",
+      "base_weight": 0.08,
+      "max_weight": 0.2,
+      "replace_feature": "relative_strength_20",
+      "replace_threshold": -0.8,
+      "stop_loss": 0.15,
+      "trailing_stop": 0.18,
+      "max_hold_sessions": 30,
+      "time_exit_enabled": false,
+      "risk_budget": 0.2
+    },
+    "result": {
+      "status": "GUARDED_RESEARCH_ONLY",
+      "sessions": 5282,
+      "fills": 596,
+      "corporate_actions": 4798,
+      "cash_yield_earned": 1487.403210082642,
+      "cash_proxy_annual_yield": 0.03,
+      "rejections": {
+        "earnings": 0,
+        "membership": 0,
+        "veto": 0,
+        "unsettled": 0,
+        "no_cash": 0,
+        "lot_too_expensive": 25817,
+        "below_minimum_allocation": 4819,
+        "capacity": 0
+      },
+      "shadow": {
+        "eligible_signals": 1784,
+        "closed_trades": 1709,
+        "still_open": 75,
+        "missing_next_open": 0,
+        "win_rate": 0.4289057928613224,
+        "mean_net_return": 0.11173137591378583,
+        "median_net_return": -0.04528184553368875
+      },
+      "final_nav": 2335235.1462859213,
+      "cagr_diagnostic": 0.16187852492488508,
+      "mdd_diagnostic": -0.4729304455705923,
+      "first_date": "2005-09-14",
+      "last_date": "2026-09-14"
+    }
+  }
+}

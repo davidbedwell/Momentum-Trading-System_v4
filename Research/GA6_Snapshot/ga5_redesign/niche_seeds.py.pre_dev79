@@ -1,0 +1,16 @@
+"""Diverse initial GA5 niche hypotheses, not prevalidated regime classifiers."""
+from dataclasses import replace
+from test_ga5_chromosome_contract import seed
+CONFIG={
+'growth':dict(entry_feature='ga4_return_126_percentile__v1',hold_feature='ga4_close_to_sma_50__v1',exit_feature='ga4_drawdown_252__v1',regime_feature='ga4_breadth_above_sma_200__v1',sizing_feature='ga4_relative_strength_change_20__v1',base_weight=.06,max_weight=.15,stop_loss=.15,trailing_stop=.20),
+'trend':dict(entry_feature='ga4_close_to_sma_200__v1',hold_feature='ga4_sma50_slope_10__v1',exit_feature='ga4_sma20_slope_5__v1',regime_feature='ga4_breadth_positive_20__v1',sizing_feature='ga4_return_252_percentile__v1',base_weight=.08,max_weight=.20,stop_loss=.15,trailing_stop=.18),
+'rotation':dict(entry_feature='ga4_sector_vs_universe_return_63__v1',hold_feature='ga4_relative_strength_change_20__v1',exit_feature='ga4_return_20__v1',regime_feature='ga4_breadth_positive_20__v1',sizing_feature='ga4_sector_return_252_percentile__v1',base_weight=.06,max_weight=.15),
+'range':dict(entry_feature='ga4_price_zscore_20__v1',hold_feature='ga4_range_position_20__v1',exit_feature='ga4_range_position_50__v1',regime_feature='ga4_volatility_ratio_20_63__v1',sizing_feature='ga4_natr_20_percentile__v1',base_weight=.05,max_weight=.12),
+'decline':dict(entry_feature='ga4_relative_strength_change_20__v1',hold_feature='ga4_return_5__v1',exit_feature='ga4_failed_breakout_20__v1',regime_feature='ga4_breadth_positive_20__v1',sizing_feature='ga4_realized_vol_20_percentile__v1',base_weight=.04,max_weight=.10),
+'crash':dict(entry_feature='ga4_return_3__v1',hold_feature='ga4_return_5__v1',exit_feature='ga4_volatility_expansion_transition__v1',regime_feature='ga4_advance_decline_breadth__v1',sizing_feature='ga4_relative_volume_20_percentile__v1',base_weight=.03,max_weight=.10,stop_loss=.07,trailing_stop=.10),
+'recovery':dict(entry_feature='ga4_return_20__v1',hold_feature='ga4_sma20_slope_5__v1',exit_feature='ga4_failed_breakout_20__v1',regime_feature='ga4_new_high_low_breadth_252__v1',sizing_feature='ga4_relative_strength_change_20__v1',base_weight=.07,max_weight=.18),
+}
+def initial(niche):
+ g=replace(seed(niche),**CONFIG[niche],entry_threshold=-.1,regime_threshold=-.2,hold_threshold=-.8,exit_threshold=-.8,replace_threshold=-.8)
+ if not g.valid():raise ValueError('Invalid niche seed '+niche)
+ return g

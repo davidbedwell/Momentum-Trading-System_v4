@@ -1,0 +1,1 @@
+First-wave all-13 fitness diagnostic on existing eligibility evaluations. NOT trajectory-level A/B/C classification, not counterfactual portfolio replay, not out-of-sample certification. Chromosomes remain niche-specific.

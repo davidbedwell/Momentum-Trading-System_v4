@@ -1,0 +1,15 @@
+{
+  "production_untouched": true,
+  "reuse_sources": {
+    "ga6/breeder_portfolio_20261021.py": "4eee14a49bbcd5159daed4f15b3c7007c11b3c0f95bcb0201e049bac779e5ce6",
+    "ga6/breeder_portfolio_diversity_20261021.py": "1201fe1015d5f73a6131d5482a00ef13f0fa8256ade909a67c81b056e1848f82",
+    "ga6/dual_track_breeder_20261021.py": "b470165de2683003e443bc22b38d04586fb488c32741fe204bf6d5a2f73bdb85",
+    "ga5_redesign/pareto_breeding.py": "2bbb79c9c1d98e6aa77554ea02b3bd27dddbdaef7b78d042b1dab0896daa038f",
+    "ga5_chromosome_contract.py": "c1ab917d200c4fae41cab09592656301fa313ec33038e1df74ff20b424439fb4"
+  },
+  "limitations": [
+    "No validated 1-8 family AND/OR/grouped grammar in active GA6 Genome",
+    "Changing grammar requires evaluator adaptation and independent validation",
+    "Reference breeders are not drop-in replacements without controlled comparison"
+  ]
+}

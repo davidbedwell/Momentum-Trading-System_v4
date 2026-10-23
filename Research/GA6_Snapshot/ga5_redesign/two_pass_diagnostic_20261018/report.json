@@ -1,0 +1,20 @@
+{
+  "status": "DIAGNOSTIC_ONLY",
+  "chromosomes": [
+    "crash",
+    "decline",
+    "growth",
+    "range",
+    "recovery",
+    "rotation",
+    "trend"
+  ],
+  "shadow_closed_trades": 28774,
+  "candidate_signals": 29295,
+  "decision_days": 4056,
+  "scored_days": 3962,
+  "oracle_match_rate": 0.4136799596163554,
+  "selector_mean_net_return": 0.060763431225549565,
+  "oracle_mean_net_return": 0.23768674335885273,
+  "limitations": "One opportunity/day; no capital-constrained execution, scaling, or out-of-sample certification. Oracle only for retrospective comparison."
+}

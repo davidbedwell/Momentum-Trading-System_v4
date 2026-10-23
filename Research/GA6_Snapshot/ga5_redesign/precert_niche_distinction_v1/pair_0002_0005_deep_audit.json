@@ -1,0 +1,340 @@
+{
+  "pair": [
+    "NICHE-0002",
+    "NICHE-0005"
+  ],
+  "counts": [
+    1899,
+    1733
+  ],
+  "full_18_feature_distinctions": [
+    {
+      "feature": "volume_variability_20",
+      "mean_0002": 208.029818780616,
+      "mean_0005": -123.05124597183328,
+      "standardized_difference": 0.16851050116985403
+    },
+    {
+      "feature": "net_to_volatility_10",
+      "mean_0002": 1.1914477254603881,
+      "mean_0005": 1.3006604594982336,
+      "standardized_difference": -0.12337247849173844
+    },
+    {
+      "feature": "efficiency_10",
+      "mean_0002": 0.3002102704778288,
+      "mean_0005": 0.32538536462788237,
+      "standardized_difference": -0.11616397878643718
+    },
+    {
+      "feature": "net_to_volatility_20",
+      "mean_0002": 1.0811313255447348,
+      "mean_0005": 1.162360563792605,
+      "standardized_difference": -0.10072404286907222
+    },
+    {
+      "feature": "efficiency_20",
+      "mean_0002": 0.2005607846589108,
+      "mean_0005": 0.2149550108813132,
+      "standardized_difference": -0.0983132995733304
+    },
+    {
+      "feature": "ga4_volume_slope_20__v1",
+      "mean_0002": -0.002967142820864365,
+      "mean_0005": -0.0050606695981981805,
+      "standardized_difference": 0.08388134476289429
+    },
+    {
+      "feature": "range_width_20",
+      "mean_0002": 0.1020239875869318,
+      "mean_0005": 0.10482260495661647,
+      "standardized_difference": -0.07450265055145718
+    },
+    {
+      "feature": "reversal_rate_40",
+      "mean_0002": 0.49932859399684043,
+      "mean_0005": 0.49496537795729945,
+      "standardized_difference": 0.05732367283052906
+    },
+    {
+      "feature": "volatility",
+      "mean_0002": 0.015075690189061245,
+      "mean_0005": 0.015320609481602993,
+      "standardized_difference": -0.04970792860296698
+    },
+    {
+      "feature": "breadth",
+      "mean_0002": 0.5553384919273695,
+      "mean_0005": 0.5622738849673922,
+      "standardized_difference": -0.03501288344007212
+    },
+    {
+      "feature": "trend",
+      "mean_0002": 0.009786678242813826,
+      "mean_0005": 0.008175032623229949,
+      "standardized_difference": 0.030289183254761414
+    },
+    {
+      "feature": "efficiency_40",
+      "mean_0002": 0.1534171876004801,
+      "mean_0005": 0.15633552652995525,
+      "standardized_difference": -0.02667460322468039
+    },
+    {
+      "feature": "net_to_volatility_40",
+      "mean_0002": 1.1403659138082747,
+      "mean_0005": 1.160820221177327,
+      "standardized_difference": -0.024958994476998436
+    },
+    {
+      "feature": "ga4_relative_volume_20__v1",
+      "mean_0002": 0.7147439177155528,
+      "mean_0005": 0.7172116893071668,
+      "standardized_difference": -0.017783380119403554
+    },
+    {
+      "feature": "momentum",
+      "mean_0002": 0.007805077043758608,
+      "mean_0005": 0.008751074521703206,
+      "standardized_difference": -0.016121149064874322
+    },
+    {
+      "feature": "reversal_rate_10",
+      "mean_0002": 0.49620853080568716,
+      "mean_0005": 0.4976341604154645,
+      "standardized_difference": -0.009348359163465755
+    },
+    {
+      "feature": "relative_strength",
+      "mean_0002": -0.005882546145213335,
+      "mean_0005": -0.006295199135895577,
+      "standardized_difference": 0.007434421786846649
+    },
+    {
+      "feature": "reversal_rate_20",
+      "mean_0002": 0.4983675618746709,
+      "mean_0005": 0.49835545297172534,
+      "standardized_difference": 0.00011326489640058445
+    }
+  ],
+  "center_differences": [
+    {
+      "feature": "volume_variability_20",
+      "normalized_center_difference": 8.256825763318574
+    },
+    {
+      "feature": "volatility",
+      "normalized_center_difference": 0.08979127670130213
+    },
+    {
+      "feature": "net_to_volatility_20",
+      "normalized_center_difference": -0.08873633670301886
+    },
+    {
+      "feature": "efficiency_20",
+      "normalized_center_difference": -0.07356753948610067
+    },
+    {
+      "feature": "efficiency_40",
+      "normalized_center_difference": -0.07354905835093911
+    },
+    {
+      "feature": "net_to_volatility_10",
+      "normalized_center_difference": -0.06711630979256326
+    },
+    {
+      "feature": "net_to_volatility_40",
+      "normalized_center_difference": -0.06626738221329309
+    },
+    {
+      "feature": "reversal_rate_20",
+      "normalized_center_difference": 0.0651221051776461
+    },
+    {
+      "feature": "breadth",
+      "normalized_center_difference": -0.06171838049110367
+    },
+    {
+      "feature": "ga4_volume_slope_20__v1",
+      "normalized_center_difference": 0.05727397783046745
+    },
+    {
+      "feature": "efficiency_10",
+      "normalized_center_difference": -0.05521909940470324
+    },
+    {
+      "feature": "momentum",
+      "normalized_center_difference": -0.034322356797269235
+    },
+    {
+      "feature": "reversal_rate_10",
+      "normalized_center_difference": 0.028682438188002275
+    },
+    {
+      "feature": "trend",
+      "normalized_center_difference": -0.027121703727382263
+    },
+    {
+      "feature": "ga4_relative_volume_20__v1",
+      "normalized_center_difference": -0.024578734718838504
+    },
+    {
+      "feature": "reversal_rate_40",
+      "normalized_center_difference": 0.014275719021157339
+    },
+    {
+      "feature": "range_width_20",
+      "normalized_center_difference": 0.013362825029625158
+    },
+    {
+      "feature": "relative_strength",
+      "normalized_center_difference": 0.004083455967226909
+    }
+  ],
+  "year_counts": {
+    "2023": {
+      "0002": 471,
+      "0005": 406
+    },
+    "2024": {
+      "0002": 540,
+      "0005": 506
+    },
+    "2025": {
+      "0002": 572,
+      "0005": 510
+    },
+    "2026": {
+      "0002": 316,
+      "0005": 311
+    }
+  },
+  "stock_counts": {
+    "ACN": {
+      "0002": 44,
+      "0005": 55
+    },
+    "AMGN": {
+      "0002": 81,
+      "0005": 75
+    },
+    "ARE": {
+      "0002": 63,
+      "0005": 68
+    },
+    "ATO": {
+      "0002": 74,
+      "0005": 52
+    },
+    "BEN": {
+      "0002": 80,
+      "0005": 68
+    },
+    "BG": {
+      "0002": 76,
+      "0005": 73
+    },
+    "BLDR": {
+      "0002": 17,
+      "0005": 30
+    },
+    "BNY": {
+      "0002": 86,
+      "0005": 65
+    },
+    "CBOE": {
+      "0002": 78,
+      "0005": 51
+    },
+    "CDNS": {
+      "0002": 55,
+      "0005": 52
+    },
+    "CDW": {
+      "0002": 72,
+      "0005": 75
+    },
+    "CFG": {
+      "0002": 69,
+      "0005": 63
+    },
+    "CME": {
+      "0002": 52,
+      "0005": 61
+    },
+    "COST": {
+      "0002": 72,
+      "0005": 49
+    },
+    "CRM": {
+      "0002": 34,
+      "0005": 27
+    },
+    "DECK": {
+      "0002": 44,
+      "0005": 25
+    },
+    "DIS": {
+      "0002": 55,
+      "0005": 37
+    },
+    "FCX": {
+      "0002": 37,
+      "0005": 39
+    },
+    "GE": {
+      "0002": 55,
+      "0005": 44
+    },
+    "GILD": {
+      "0002": 83,
+      "0005": 108
+    },
+    "HD": {
+      "0002": 76,
+      "0005": 91
+    },
+    "INTC": {
+      "0002": 26,
+      "0005": 28
+    },
+    "JNJ": {
+      "0002": 92,
+      "0005": 76
+    },
+    "NFLX": {
+      "0002": 44,
+      "0005": 45
+    },
+    "NUE": {
+      "0002": 48,
+      "0005": 55
+    },
+    "SO": {
+      "0002": 84,
+      "0005": 63
+    },
+    "T": {
+      "0002": 97,
+      "0005": 60
+    },
+    "UPS": {
+      "0002": 54,
+      "0005": 50
+    },
+    "XEL": {
+      "0002": 82,
+      "0005": 76
+    },
+    "XOM": {
+      "0002": 69,
+      "0005": 72
+    }
+  },
+  "decision": "PRESERVE: no merge until all feature differences, time, and stock distribution distinctions are tested",
+  "limitations": [
+    "Descriptive only, no block bootstrap significance",
+    "Same repeatedly used holdout",
+    "Potential dependence of feature construction on historical corporate actions"
+  ]
+}

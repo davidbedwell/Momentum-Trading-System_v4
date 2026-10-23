@@ -1,0 +1,135 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "niche_0013_creation": [
+    {
+      "date": "2009-05-21",
+      "id": "NICHE-0013",
+      "support": 12
+    }
+  ],
+  "stocks": {
+    "COIN": {
+      "rows": 1312,
+      "niche13_rows": 188,
+      "niche13_share": 0.14329268292682926,
+      "reassignments_to_0013": {
+        "NICHE-0010": 2,
+        "NICHE-0011": 186
+      },
+      "other_reassignments": 0,
+      "niche13_years": {
+        "2021": 14,
+        "2022": 12,
+        "2023": 73,
+        "2024": 55,
+        "2025": 33,
+        "2026": 1
+      },
+      "niche13_behavior": {
+        "efficiency_20": 0.4553316971682878,
+        "reversal_rate_20": 0.47526595744680855,
+        "volatility": 0.06274014234418318,
+        "momentum": 0.5141633464444113,
+        "ga4_relative_volume_20_percentile__v1": 0.45993273213229546
+      },
+      "pre2021_rows": 0
+    },
+    "DELL": {
+      "rows": 2483,
+      "niche13_rows": 70,
+      "niche13_share": 0.028191703584373742,
+      "reassignments_to_0013": {
+        "NICHE-0010": 4,
+        "NICHE-0011": 66
+      },
+      "other_reassignments": 0,
+      "niche13_years": {
+        "2023": 9,
+        "2024": 15,
+        "2026": 46
+      },
+      "niche13_behavior": {
+        "efficiency_20": 0.46331016438225847,
+        "reversal_rate_20": 0.4828571428571428,
+        "volatility": 0.06414846581109974,
+        "momentum": 0.43736918651905526,
+        "ga4_relative_volume_20_percentile__v1": 0.45124085742276865
+      },
+      "pre2021_rows": 1053
+    },
+    "FITB": {
+      "rows": 5494,
+      "niche13_rows": 74,
+      "niche13_share": 0.01346923917000364,
+      "reassignments_to_0013": {
+        "NICHE-0010": 2,
+        "NICHE-0011": 72
+      },
+      "other_reassignments": 0,
+      "niche13_years": {
+        "2008": 4,
+        "2009": 65,
+        "2020": 5
+      },
+      "niche13_behavior": {
+        "efficiency_20": 0.354240313754173,
+        "reversal_rate_20": 0.5202702702702703,
+        "volatility": 0.10495710880494363,
+        "momentum": 0.6577369762870354,
+        "ga4_relative_volume_20_percentile__v1": 0.44438753385472635
+      },
+      "pre2021_rows": 3274
+    },
+    "INTC": {
+      "rows": 5494,
+      "niche13_rows": 70,
+      "niche13_share": 0.012741172187841281,
+      "reassignments_to_0013": {
+        "NICHE-0010": 1,
+        "NICHE-0011": 69
+      },
+      "other_reassignments": 0,
+      "niche13_years": {
+        "2021": 1,
+        "2025": 23,
+        "2026": 46
+      },
+      "niche13_behavior": {
+        "efficiency_20": 0.5124722887336391,
+        "reversal_rate_20": 0.49642857142857133,
+        "volatility": 0.05673155013803484,
+        "momentum": 0.5319575411386498,
+        "ga4_relative_volume_20_percentile__v1": 0.47533474603823506
+      },
+      "pre2021_rows": 3274
+    }
+  },
+  "center_nearest_existing": [
+    {
+      "id": "NICHE-0011",
+      "distance": 6.370050487373736
+    },
+    {
+      "id": "NICHE-0010",
+      "distance": 7.491871145898078
+    },
+    {
+      "id": "NICHE-0012",
+      "distance": 9.91167200782703
+    },
+    {
+      "id": "NICHE-0006",
+      "distance": 9.960905211776208
+    },
+    {
+      "id": "NICHE-0001",
+      "distance": 10.253107401440584
+    }
+  ],
+  "limitations": [
+    "12-center baseline is the final adapted 13-center memory with the 13th center removed; it is not the exact frozen pre-FITB memory",
+    "Training and evaluation reuse prior stock histories",
+    "COIN post-listing period has not been used for adaptation",
+    "Source indicator PIT provenance and stock partition eligibility unverified"
+  ]
+}

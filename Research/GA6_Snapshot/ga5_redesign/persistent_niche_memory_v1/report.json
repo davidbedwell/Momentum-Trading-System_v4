@@ -1,0 +1,26 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "source_training": 3845,
+  "source_holdout": 1649,
+  "target_training": 3845,
+  "target_holdout": 1649,
+  "persistent_niches": 6,
+  "provisional_novelty_observations": 103,
+  "ACN": {
+    "assignment_retention": 0.9830200121285627,
+    "distance_before": 1.1840483710359944,
+    "distance_after": 1.1786653317155966
+  },
+  "AMGN": {
+    "assignment_retention_vs_source": 0.9842328684050939,
+    "distance_before": 1.0954280439409987,
+    "distance_after": 1.0850673224019862
+  },
+  "limitations": [
+    "Historical handoff uses full early ACN history, so target evaluation is a transfer demonstration, not a calendar-synchronous simulation",
+    "Source feature point-in-time audit pending",
+    "Centroid distances are representation metrics, not independent semantic correctness",
+    "Novelty observations are candidates, not validated new niches",
+    "Anchoring preserves old niche IDs but may constrain adaptation"
+  ]
+}

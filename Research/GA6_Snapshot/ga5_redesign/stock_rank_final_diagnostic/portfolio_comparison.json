@@ -1,0 +1,56 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "results": [
+    {
+      "horizon": 20,
+      "method": "rank_top",
+      "cagr": 0.22130882578415423,
+      "mdd": -0.4652531185506448,
+      "end_nav": 694623.8725071525,
+      "fees": 64324.18937095156,
+      "buys": 2500,
+      "sells": 2480,
+      "years": 9.69472963723477
+    },
+    {
+      "horizon": 20,
+      "method": "equal_universe",
+      "cagr": 0.14124905835814427,
+      "mdd": -0.37491664301784056,
+      "end_nav": 359987.7949898922,
+      "fees": 46838.35941092053,
+      "buys": 9725,
+      "sells": 9646,
+      "years": 9.69472963723477
+    },
+    {
+      "horizon": 63,
+      "method": "rank_top",
+      "cagr": 0.2765247467738676,
+      "mdd": -0.4071298358547767,
+      "end_nav": 1066411.453066194,
+      "fees": 23597.149067447313,
+      "buys": 780,
+      "sells": 760,
+      "years": 9.69472963723477
+    },
+    {
+      "horizon": 63,
+      "method": "equal_universe",
+      "cagr": 0.16738652508746554,
+      "mdd": -0.3654935245265789,
+      "end_nav": 448361.2917742278,
+      "fees": 15862.151279355485,
+      "buys": 3032,
+      "sells": 2953,
+      "years": 9.69472963723477
+    }
+  ],
+  "limitations": [
+    "Stock selection based on same 79 exploratory names with possible survivorship bias",
+    "Rank-top rebalance uses year-specific nonoverlap anchors; equal universe benchmark uses same anchors",
+    "Equal-universe benchmark equally weights all available stocks, but historical membership remains unaudited",
+    "No regime or earnings gate, no settlement, approximate dividend/split treatment",
+    "No independent PIT audit or untouched blind sample"
+  ]
+}

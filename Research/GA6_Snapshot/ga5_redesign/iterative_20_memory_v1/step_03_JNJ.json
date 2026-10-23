@@ -1,0 +1,24 @@
+{
+  "step": 3,
+  "stock": "JNJ",
+  "accepted": true,
+  "proposed_niches": [],
+  "new_niches_committed": 0,
+  "total_niches": 7,
+  "worst_previous_stock_retention": 0.8759439050701187,
+  "max_previous_stock_distance_degradation_pct": 0.16416800268155102,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.9158576051779935,
+      "distance_change_pct": 0.16416800268155102
+    },
+    {
+      "stock": "AMGN",
+      "retention": 0.8759439050701187,
+      "distance_change_pct": -0.8834754644616921
+    }
+  ],
+  "learning_rows": 12084,
+  "notes": "Rollback on rejection; no hyperparameter auto-tuning"
+}

@@ -1,0 +1,442 @@
+{
+  "source_generation": 15,
+  "seeds": 20,
+  "rows": [
+    {
+      "seed": 0,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 310,
+      "repeated_pattern_children": 143,
+      "niche_min": 30,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 0,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 362,
+      "repeated_pattern_children": 72,
+      "niche_min": 29,
+      "niche_max": 36,
+      "valid": true
+    },
+    {
+      "seed": 1,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 323,
+      "repeated_pattern_children": 129,
+      "niche_min": 29,
+      "niche_max": 38,
+      "valid": true
+    },
+    {
+      "seed": 1,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 362,
+      "repeated_pattern_children": 68,
+      "niche_min": 30,
+      "niche_max": 34,
+      "valid": true
+    },
+    {
+      "seed": 2,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 323,
+      "repeated_pattern_children": 127,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 2,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 370,
+      "repeated_pattern_children": 57,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 3,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 306,
+      "repeated_pattern_children": 154,
+      "niche_min": 29,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 3,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 358,
+      "repeated_pattern_children": 78,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 4,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 308,
+      "repeated_pattern_children": 146,
+      "niche_min": 29,
+      "niche_max": 36,
+      "valid": true
+    },
+    {
+      "seed": 4,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 357,
+      "repeated_pattern_children": 77,
+      "niche_min": 29,
+      "niche_max": 35,
+      "valid": true
+    },
+    {
+      "seed": 5,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 309,
+      "repeated_pattern_children": 142,
+      "niche_min": 29,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 5,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 361,
+      "repeated_pattern_children": 73,
+      "niche_min": 29,
+      "niche_max": 35,
+      "valid": true
+    },
+    {
+      "seed": 6,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 312,
+      "repeated_pattern_children": 143,
+      "niche_min": 30,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 6,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 356,
+      "repeated_pattern_children": 83,
+      "niche_min": 30,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 7,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 305,
+      "repeated_pattern_children": 151,
+      "niche_min": 29,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 7,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 369,
+      "repeated_pattern_children": 57,
+      "niche_min": 29,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 8,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 325,
+      "repeated_pattern_children": 126,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 8,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 362,
+      "repeated_pattern_children": 70,
+      "niche_min": 29,
+      "niche_max": 35,
+      "valid": true
+    },
+    {
+      "seed": 9,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 315,
+      "repeated_pattern_children": 134,
+      "niche_min": 30,
+      "niche_max": 34,
+      "valid": true
+    },
+    {
+      "seed": 9,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 366,
+      "repeated_pattern_children": 61,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 10,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 315,
+      "repeated_pattern_children": 139,
+      "niche_min": 29,
+      "niche_max": 34,
+      "valid": true
+    },
+    {
+      "seed": 10,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 376,
+      "repeated_pattern_children": 44,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 11,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 311,
+      "repeated_pattern_children": 140,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 11,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 362,
+      "repeated_pattern_children": 71,
+      "niche_min": 29,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 12,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 300,
+      "repeated_pattern_children": 158,
+      "niche_min": 29,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 12,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 362,
+      "repeated_pattern_children": 68,
+      "niche_min": 29,
+      "niche_max": 34,
+      "valid": true
+    },
+    {
+      "seed": 13,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 314,
+      "repeated_pattern_children": 138,
+      "niche_min": 29,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 13,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 362,
+      "repeated_pattern_children": 72,
+      "niche_min": 29,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 14,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 312,
+      "repeated_pattern_children": 150,
+      "niche_min": 30,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 14,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 367,
+      "repeated_pattern_children": 64,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 15,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 318,
+      "repeated_pattern_children": 134,
+      "niche_min": 30,
+      "niche_max": 35,
+      "valid": true
+    },
+    {
+      "seed": 15,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 370,
+      "repeated_pattern_children": 56,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 16,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 311,
+      "repeated_pattern_children": 142,
+      "niche_min": 29,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 16,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 363,
+      "repeated_pattern_children": 69,
+      "niche_min": 29,
+      "niche_max": 35,
+      "valid": true
+    },
+    {
+      "seed": 17,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 308,
+      "repeated_pattern_children": 143,
+      "niche_min": 29,
+      "niche_max": 34,
+      "valid": true
+    },
+    {
+      "seed": 17,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 359,
+      "repeated_pattern_children": 75,
+      "niche_min": 30,
+      "niche_max": 32,
+      "valid": true
+    },
+    {
+      "seed": 18,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 318,
+      "repeated_pattern_children": 133,
+      "niche_min": 30,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 18,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 358,
+      "repeated_pattern_children": 78,
+      "niche_min": 29,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 19,
+      "breeder": "production",
+      "unique_genomes": 400,
+      "distinct_patterns": 321,
+      "repeated_pattern_children": 130,
+      "niche_min": 30,
+      "niche_max": 33,
+      "valid": true
+    },
+    {
+      "seed": 19,
+      "breeder": "diversity_reference",
+      "unique_genomes": 400,
+      "distinct_patterns": 363,
+      "repeated_pattern_children": 73,
+      "niche_min": 29,
+      "niche_max": 33,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "production": {
+      "distinct_patterns": {
+        "mean": 313.2,
+        "minimum": 300,
+        "maximum": 325
+      },
+      "repeated_pattern_children": {
+        "mean": 140.1,
+        "minimum": 126,
+        "maximum": 158
+      },
+      "niche_min": {
+        "mean": 29.5,
+        "minimum": 29,
+        "maximum": 30
+      }
+    },
+    "diversity_reference": {
+      "distinct_patterns": {
+        "mean": 363.25,
+        "minimum": 356,
+        "maximum": 376
+      },
+      "repeated_pattern_children": {
+        "mean": 68.3,
+        "minimum": 44,
+        "maximum": 83
+      },
+      "niche_min": {
+        "mean": 29.45,
+        "minimum": 29,
+        "maximum": 30
+      }
+    }
+  }
+}

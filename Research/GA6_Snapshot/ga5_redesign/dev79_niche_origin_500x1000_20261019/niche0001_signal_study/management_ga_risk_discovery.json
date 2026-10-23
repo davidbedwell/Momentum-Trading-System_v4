@@ -1,0 +1,1016 @@
+{
+  "train_n": 78435,
+  "test_n": 74955,
+  "test_base_rate": 0.10103395370555666,
+  "unique_chromosomes_evaluated": 2746,
+  "generations": 120,
+  "top_candidates": [
+    {
+      "rules": [
+        "vol >= 0.02022",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01669",
+        "vol >= 0.02022",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01835",
+        "vol >= 0.02022",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01508",
+        "vol >= 0.02022",
+        "vol >= 0.02248",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01669",
+        "vol >= 0.01835",
+        "vol >= 0.02022",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.02022",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01315",
+        "vol >= 0.02248",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.02022",
+        "vol >= 0.02248",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01835",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01669",
+        "vol >= 0.02022",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01669",
+        "vol >= 0.02248",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01508",
+        "vol >= 0.01835",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01315",
+        "vol >= 0.01835",
+        "vol >= 0.02022",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01508",
+        "vol >= 0.02022",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01835",
+        "vol >= 0.02022",
+        "vol >= 0.02248",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01315",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01315",
+        "vol >= 0.01508",
+        "vol >= 0.02022",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01508",
+        "vol >= 0.01669",
+        "vol >= 0.02022",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01315",
+        "vol >= 0.01835",
+        "vol >= 0.02248",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01508",
+        "vol >= 0.01835",
+        "vol >= 0.02248",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01315",
+        "vol >= 0.01669",
+        "vol >= 0.02022",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01508",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01508",
+        "vol >= 0.01669",
+        "vol >= 0.03009",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01669",
+        "vol >= 0.01835",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.02022",
+        "vol >= 0.02248",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01315",
+        "vol >= 0.02022",
+        "vol >= 0.02248",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01315",
+        "vol >= 0.02022",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    },
+    {
+      "rules": [
+        "vol >= 0.01508",
+        "vol >= 0.01835",
+        "vol >= 0.02022",
+        "vol >= 0.03885"
+      ],
+      "train_risk_rate": 0.30022947475777667,
+      "train_coverage": 0.10000637470516989,
+      "holdout_risk_rate": 0.2670196671709531,
+      "holdout_coverage": 0.07054899606430524,
+      "holdout_lift": 2.6428706130725987,
+      "holdout_score": 0.04408756657974893
+    }
+  ],
+  "history": [
+    {
+      "generation": 0,
+      "evaluated": 134,
+      "best_training_fitness": 0.06458896678553609
+    },
+    {
+      "generation": 1,
+      "evaluated": 218,
+      "best_training_fitness": 0.06458896678553609
+    },
+    {
+      "generation": 2,
+      "evaluated": 292,
+      "best_training_fitness": 0.06458896678553609
+    },
+    {
+      "generation": 3,
+      "evaluated": 374,
+      "best_training_fitness": 0.06458896678553609
+    },
+    {
+      "generation": 4,
+      "evaluated": 440,
+      "best_training_fitness": 0.06458896678553609
+    },
+    {
+      "generation": 5,
+      "evaluated": 511,
+      "best_training_fitness": 0.06458896678553609
+    },
+    {
+      "generation": 6,
+      "evaluated": 581,
+      "best_training_fitness": 0.06458896678553609
+    },
+    {
+      "generation": 7,
+      "evaluated": 637,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 8,
+      "evaluated": 684,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 9,
+      "evaluated": 732,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 10,
+      "evaluated": 776,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 11,
+      "evaluated": 821,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 12,
+      "evaluated": 870,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 13,
+      "evaluated": 910,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 14,
+      "evaluated": 945,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 15,
+      "evaluated": 976,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 16,
+      "evaluated": 1003,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 17,
+      "evaluated": 1030,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 18,
+      "evaluated": 1055,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 19,
+      "evaluated": 1077,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 20,
+      "evaluated": 1104,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 21,
+      "evaluated": 1124,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 22,
+      "evaluated": 1155,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 23,
+      "evaluated": 1189,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 24,
+      "evaluated": 1216,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 25,
+      "evaluated": 1237,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 26,
+      "evaluated": 1261,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 27,
+      "evaluated": 1287,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 28,
+      "evaluated": 1309,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 29,
+      "evaluated": 1337,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 30,
+      "evaluated": 1353,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 31,
+      "evaluated": 1376,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 32,
+      "evaluated": 1386,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 33,
+      "evaluated": 1415,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 34,
+      "evaluated": 1442,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 35,
+      "evaluated": 1467,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 36,
+      "evaluated": 1487,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 37,
+      "evaluated": 1501,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 38,
+      "evaluated": 1518,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 39,
+      "evaluated": 1539,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 40,
+      "evaluated": 1561,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 41,
+      "evaluated": 1583,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 42,
+      "evaluated": 1603,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 43,
+      "evaluated": 1623,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 44,
+      "evaluated": 1645,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 45,
+      "evaluated": 1664,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 46,
+      "evaluated": 1683,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 47,
+      "evaluated": 1700,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 48,
+      "evaluated": 1715,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 49,
+      "evaluated": 1732,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 50,
+      "evaluated": 1748,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 51,
+      "evaluated": 1767,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 52,
+      "evaluated": 1788,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 53,
+      "evaluated": 1815,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 54,
+      "evaluated": 1833,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 55,
+      "evaluated": 1850,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 56,
+      "evaluated": 1868,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 57,
+      "evaluated": 1889,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 58,
+      "evaluated": 1911,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 59,
+      "evaluated": 1931,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 60,
+      "evaluated": 1952,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 61,
+      "evaluated": 1961,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 62,
+      "evaluated": 1987,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 63,
+      "evaluated": 1997,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 64,
+      "evaluated": 2015,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 65,
+      "evaluated": 2035,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 66,
+      "evaluated": 2050,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 67,
+      "evaluated": 2065,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 68,
+      "evaluated": 2083,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 69,
+      "evaluated": 2102,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 70,
+      "evaluated": 2114,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 71,
+      "evaluated": 2129,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 72,
+      "evaluated": 2140,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 73,
+      "evaluated": 2157,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 74,
+      "evaluated": 2173,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 75,
+      "evaluated": 2187,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 76,
+      "evaluated": 2199,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 77,
+      "evaluated": 2215,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 78,
+      "evaluated": 2227,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 79,
+      "evaluated": 2237,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 80,
+      "evaluated": 2251,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 81,
+      "evaluated": 2266,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 82,
+      "evaluated": 2279,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 83,
+      "evaluated": 2296,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 84,
+      "evaluated": 2309,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 85,
+      "evaluated": 2322,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 86,
+      "evaluated": 2337,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 87,
+      "evaluated": 2352,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 88,
+      "evaluated": 2363,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 89,
+      "evaluated": 2375,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 90,
+      "evaluated": 2390,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 91,
+      "evaluated": 2406,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 92,
+      "evaluated": 2425,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 93,
+      "evaluated": 2436,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 94,
+      "evaluated": 2450,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 95,
+      "evaluated": 2465,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 96,
+      "evaluated": 2478,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 97,
+      "evaluated": 2490,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 98,
+      "evaluated": 2503,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 99,
+      "evaluated": 2514,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 100,
+      "evaluated": 2522,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 101,
+      "evaluated": 2532,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 102,
+      "evaluated": 2544,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 103,
+      "evaluated": 2553,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 104,
+      "evaluated": 2567,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 105,
+      "evaluated": 2581,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 106,
+      "evaluated": 2595,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 107,
+      "evaluated": 2607,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 108,
+      "evaluated": 2620,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 109,
+      "evaluated": 2635,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 110,
+      "evaluated": 2647,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 111,
+      "evaluated": 2658,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 112,
+      "evaluated": 2669,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 113,
+      "evaluated": 2687,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 114,
+      "evaluated": 2692,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 115,
+      "evaluated": 2708,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 116,
+      "evaluated": 2717,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 117,
+      "evaluated": 2725,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 118,
+      "evaluated": 2739,
+      "best_training_fitness": 0.06626943302054411
+    },
+    {
+      "generation": 119,
+      "evaluated": 2746,
+      "best_training_fitness": 0.06626943302054411
+    }
+  ]
+}

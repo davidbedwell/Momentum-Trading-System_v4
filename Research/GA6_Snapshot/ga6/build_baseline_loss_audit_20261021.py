@@ -1,0 +1,16 @@
+from pathlib import Path
+src=Path('/opt/mts/ga6/guarded_evaluator_risk_experiment_20261021.py').read_text()
+src=src.replace('  for t,state in risk_positions.items():\n   if state.remaining_shares and t in opens and state.mark(opens[t],fee)[\'mandatory_exit\']:\n    risk_pending.add(t)','  for t,state in risk_positions.items():\n   if state.remaining_shares and t in opens:state.mark(opens[t],fee)')
+src=src.replace('     risk_pending.add(t)\n     risk_events.append({"date":ds,"ticker":t,"event":"MANDATORY_EXIT_TRIGGERED","loss_fraction":mark[\'loss_fraction_entry_equity\']})','     risk_events.append({"date":ds,"ticker":t,"event":"BASELINE_2PCT_BREACH","loss_fraction":mark[\'loss_fraction_entry_equity\']})')
+src=src.replace('risk_entry_equity={};nav=[]','risk_entry_equity={};closed_position_audit=[];risk_peak_losses={};nav=[]')
+src=src.replace("   if fill['side']=='BUY':\n    if t not in risk_positions:","   if fill['side']=='BUY':\n    if t not in risk_positions:")
+src=src.replace('     risk_positions[t]=PositionRisk(e0)','     risk_positions[t]=PositionRisk(e0)\n     risk_peak_losses[t]=0.')
+src=src.replace('     if not risk_positions[t].remaining_shares:risk_positions.pop(t)',"""     if not risk_positions[t].remaining_shares:
+      state=risk_positions.pop(t)
+      closed_position_audit.append({'ticker':t,'exit_date':ds,'entry_equity':state.entry_equity,'realized_pnl':state.cumulative_realized_pnl,'realized_loss_fraction':max(0.,-state.cumulative_realized_pnl)/state.entry_equity,'max_observed_loss_fraction':risk_peak_losses.pop(t,0.)})""")
+src=src.replace("    mark=state.mark(closes[t],fee)","    mark=state.mark(closes[t],fee)\n    risk_peak_losses[t]=max(risk_peak_losses.get(t,0.),mark['loss_fraction_entry_equity'])")
+src=src.replace('"ga6_position_risk_events":risk_events,','"ga6_position_risk_events":risk_events,"closed_position_audit":closed_position_audit,')
+path=Path('/opt/mts/ga6/guarded_evaluator_baseline_loss_audit_20261021.py')
+path.write_text(src)
+compile(src,str(path),'exec')
+print('BASELINE_AUDIT_COMPILES')

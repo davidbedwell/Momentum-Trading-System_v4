@@ -1,0 +1,175 @@
+{
+  "status": "EXPLORATORY_DESCRIPTIVE_NOT_CERTIFIED",
+  "stock_count": 40,
+  "rows": 37080,
+  "niches": 13,
+  "matrix_rows": 260,
+  "best_by_niche": [
+    {
+      "niche": "NICHE-0001",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.05203951530807175,
+        "win_rate": 0.6095541401273885,
+        "observations": 4710,
+        "stocks": 37
+      }
+    },
+    {
+      "niche": "NICHE-0002",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.03889610014350416,
+        "win_rate": 0.6277461975725918,
+        "observations": 6509,
+        "stocks": 39
+      }
+    },
+    {
+      "niche": "NICHE-0003",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.03504568421967649,
+        "win_rate": 0.621216848673947,
+        "observations": 6410,
+        "stocks": 39
+      }
+    },
+    {
+      "niche": "NICHE-0004",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.034040524102542505,
+        "win_rate": 0.6121405750798722,
+        "observations": 3130,
+        "stocks": 39
+      }
+    },
+    {
+      "niche": "NICHE-0005",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.051111468463872704,
+        "win_rate": 0.6119174942704354,
+        "observations": 3927,
+        "stocks": 39
+      }
+    },
+    {
+      "niche": "NICHE-0006",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.016211290158066112,
+        "win_rate": 0.5539429124334785,
+        "observations": 4134,
+        "stocks": 39
+      }
+    },
+    {
+      "niche": "NICHE-0007",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.0932373269149853,
+        "win_rate": 0.626078132927448,
+        "observations": 1971,
+        "stocks": 34
+      }
+    },
+    {
+      "niche": "NICHE-0008",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.2609135746391626,
+        "win_rate": 0.7530364372469636,
+        "observations": 247,
+        "stocks": 23
+      }
+    },
+    {
+      "niche": "NICHE-0009",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.08106806153192968,
+        "win_rate": 0.5634920634920635,
+        "observations": 252,
+        "stocks": 16
+      }
+    },
+    {
+      "niche": "NICHE-0010",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.2038616944088642,
+        "win_rate": 0.6305970149253731,
+        "observations": 268,
+        "stocks": 15
+      }
+    },
+    {
+      "niche": "NICHE-0011",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.05392112125605548,
+        "win_rate": 0.565042467590523,
+        "observations": 2237,
+        "stocks": 30
+      }
+    },
+    {
+      "niche": "NICHE-0012",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.2047194490346769,
+        "win_rate": 0.6901408450704225,
+        "observations": 426,
+        "stocks": 28
+      }
+    },
+    {
+      "niche": "NICHE-0013",
+      "qualified_combinations": 20,
+      "best_descriptive": {
+        "direction": "long",
+        "horizon_sessions": 63,
+        "mean_net_return": 0.19391594741480261,
+        "win_rate": 0.6120401337792643,
+        "observations": 299,
+        "stocks": 5
+      }
+    }
+  ],
+  "assumptions": [
+    "Niche assigned using final adapted memory (retrospective, not online walk-forward)",
+    "Entry next-session adjusted open, exit open after specified sessions",
+    "10 bps round-trip cost",
+    "Overlapping returns and shared market dates; naive SE invalid for inference",
+    "Short returns omit borrow fees and short availability",
+    "2023-2026 data repeatedly inspected; not independent holdout",
+    "Source features PIT provenance and stock partition eligibility unverified",
+    "No forward-return optimization, sizing, or deployment approval from this descriptive matrix"
+  ]
+}

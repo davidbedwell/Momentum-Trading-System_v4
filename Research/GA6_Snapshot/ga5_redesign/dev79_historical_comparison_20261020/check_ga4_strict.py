@@ -1,0 +1,4 @@
+import sqlite3,json
+p='/opt/mts/thunder-migration/mts-certification-20261011/cagr_mdd_library_20261013/STRATEGY_BANK_INDEX.sqlite';c=sqlite3.connect('file:'+p+'?mode=ro',uri=True)
+q="select s.study,s.chromosome,s.horizon,m.cohort,m.cagr,m.mdd,m.calmar,m.status from measurements m join strategies s on m.strategy_key=s.strategy_key where s.study in ('GA4_DIAGNOSTIC','DEV80_LONG') and m.cagr>15 and abs(m.mdd)<20 and m.mdd!=0 and m.calmar>1.5 order by m.calmar desc"
+r=c.execute(q).fetchall();print('COUNT',len(r));print('BY_STUDY',c.execute("select s.study,count(*) from measurements m join strategies s on m.strategy_key=s.strategy_key where s.study in ('GA4_DIAGNOSTIC','DEV80_LONG') and m.cagr>15 and abs(m.mdd)<20 and m.mdd!=0 and m.calmar>1.5 group by s.study").fetchall());print('TOP',json.dumps(r[:20]))

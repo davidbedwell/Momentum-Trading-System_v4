@@ -1,0 +1,29 @@
+{
+  "step": 4,
+  "stock": "XOM",
+  "accepted": true,
+  "proposed_niches": [],
+  "new_niches_committed": 0,
+  "total_niches": 7,
+  "worst_previous_stock_retention": 0.9385113268608414,
+  "max_previous_stock_distance_degradation_pct": -0.14170178779635662,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.9449838187702265,
+      "distance_change_pct": -1.5565520908526835
+    },
+    {
+      "stock": "AMGN",
+      "retention": 0.9385113268608414,
+      "distance_change_pct": -1.1758843986832348
+    },
+    {
+      "stock": "JNJ",
+      "retention": 0.9590075512405609,
+      "distance_change_pct": -0.14170178779635662
+    }
+  ],
+  "learning_rows": 16112,
+  "notes": "Rollback on rejection; no hyperparameter auto-tuning"
+}

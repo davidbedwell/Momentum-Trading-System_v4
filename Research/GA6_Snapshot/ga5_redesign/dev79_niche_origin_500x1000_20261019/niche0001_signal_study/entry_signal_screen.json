@@ -1,0 +1,102 @@
+{
+  "n": 76094,
+  "cohorts": {
+    "bottom": {
+      "trades": 59099,
+      "loser_rate": 0.6705,
+      "large_adverse_rate": 0.0006,
+      "median_mae": -0.0046
+    },
+    "middle": {
+      "trades": 11120,
+      "loser_rate": 0.4987,
+      "large_adverse_rate": 0.0693,
+      "median_mae": -0.0492
+    },
+    "top": {
+      "trades": 5875,
+      "loser_rate": 0.5721,
+      "large_adverse_rate": 0.0974,
+      "median_mae": -0.0485
+    }
+  },
+  "signals": {
+    "ga4_return_5__v1": {
+      "low_quintile_loss_rate": 0.7442,
+      "high_quintile_loss_rate": 0.5369,
+      "low_quintile_adverse_rate": 0.0419,
+      "high_quintile_adverse_rate": 0.0225,
+      "n": 76094
+    },
+    "ga4_return_20__v1": {
+      "low_quintile_loss_rate": 0.6701,
+      "high_quintile_loss_rate": 0.5987,
+      "low_quintile_adverse_rate": 0.0597,
+      "high_quintile_adverse_rate": 0.0083,
+      "n": 76094
+    },
+    "ga4_close_to_sma_20__v1": {
+      "low_quintile_loss_rate": 0.7275,
+      "high_quintile_loss_rate": 0.551,
+      "low_quintile_adverse_rate": 0.0536,
+      "high_quintile_adverse_rate": 0.0103,
+      "n": 76094
+    },
+    "ga4_close_to_sma_200__v1": {
+      "low_quintile_loss_rate": 0.6408,
+      "high_quintile_loss_rate": 0.6231,
+      "low_quintile_adverse_rate": 0.0544,
+      "high_quintile_adverse_rate": 0.011,
+      "n": 75968
+    },
+    "ga4_sma20_slope_5__v1": {
+      "low_quintile_loss_rate": 0.607,
+      "high_quintile_loss_rate": 0.6487,
+      "low_quintile_adverse_rate": 0.0606,
+      "high_quintile_adverse_rate": 0.0093,
+      "n": 76094
+    },
+    "ga4_natr_20__v1": {
+      "low_quintile_loss_rate": 0.6478,
+      "high_quintile_loss_rate": 0.6324,
+      "low_quintile_adverse_rate": 0.002,
+      "high_quintile_adverse_rate": 0.0663,
+      "n": 76094
+    },
+    "ga4_realized_vol_20__v1": {
+      "low_quintile_loss_rate": 0.6537,
+      "high_quintile_loss_rate": 0.6288,
+      "low_quintile_adverse_rate": 0.0024,
+      "high_quintile_adverse_rate": 0.0631,
+      "n": 76094
+    },
+    "ga4_relative_strength_change_20__v1": {
+      "low_quintile_loss_rate": 0.686,
+      "high_quintile_loss_rate": 0.6168,
+      "low_quintile_adverse_rate": 0.0195,
+      "high_quintile_adverse_rate": 0.0127,
+      "n": 76044
+    },
+    "ga4_breadth_positive_20__v1": {
+      "low_quintile_loss_rate": 0.6301,
+      "high_quintile_loss_rate": 0.6208,
+      "low_quintile_adverse_rate": 0.0483,
+      "high_quintile_adverse_rate": 0.0073,
+      "n": 76094
+    },
+    "ga4_breadth_above_sma_200__v1": {
+      "low_quintile_loss_rate": 0.6268,
+      "high_quintile_loss_rate": 0.6357,
+      "low_quintile_adverse_rate": 0.0546,
+      "high_quintile_adverse_rate": 0.005,
+      "n": 76094
+    },
+    "ga4_failed_breakout_20__v1": {
+      "low_quintile_loss_rate": 0.6334,
+      "high_quintile_loss_rate": 0.6378,
+      "low_quintile_adverse_rate": 0.0183,
+      "high_quintile_adverse_rate": 0.0181,
+      "n": 76094
+    }
+  }
+}

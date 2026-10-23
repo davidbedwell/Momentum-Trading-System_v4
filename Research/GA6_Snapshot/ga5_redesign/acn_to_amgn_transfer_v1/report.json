@@ -1,0 +1,26 @@
+{
+  "status": "EXPLORATORY_TRANSFER_NOT_CERTIFIED",
+  "source": "ACN",
+  "target": "AMGN",
+  "features": [
+    "trend",
+    "momentum",
+    "volatility",
+    "breadth",
+    "relative_strength"
+  ],
+  "niches": 6,
+  "predictions": 4994,
+  "updates": 80,
+  "acn_only_mean_distance": 1.1155342141768787,
+  "adapted_mean_distance": 1.0794595761988945,
+  "distance_improvement_fraction": 0.032338441546235046,
+  "assignment_agreement": 0.606127352823388,
+  "limitations": [
+    "Adaptation refits with past AMGN observations; it does not validate stable semantic niche labels",
+    "Distance reduction can result mechanically from fitting target data, not proof of useful learning",
+    "Both models are fitted using ACN data prior to the target calendar date, avoiding cross-stock future leakage",
+    "Source and target feature provenance still requires independent point-in-time audit",
+    "No profits or future returns used"
+  ]
+}

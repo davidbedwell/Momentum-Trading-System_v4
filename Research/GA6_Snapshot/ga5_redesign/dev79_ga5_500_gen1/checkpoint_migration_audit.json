@@ -1,0 +1,8 @@
+{
+  "change": "prepared data constructed once in parent and shared via fork; evaluator unchanged; expanded fingerprint",
+  "prior_code": "8e40c40b5b967be2d4e340a630d7a52d94fed60763ffa92b40176e4725523709",
+  "new_code": "7f8ea110bee23faa6066082baa02898a2be5ea1a6cf67cfe4f19bd945d5c2d16",
+  "generation": 1,
+  "population": 500,
+  "status": "MIGRATED; NUMERIC EQUIVALENCE STILL TO VALIDATE"
+}

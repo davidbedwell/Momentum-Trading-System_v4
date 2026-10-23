@@ -1,0 +1,50 @@
+{
+  "universe": "DEV79 exploratory, not PIT certified",
+  "rows": 394795,
+  "tickers": 79,
+  "start": "2004-09-01 00:00:00",
+  "end": "2026-09-14 00:00:00",
+  "models": [
+    {
+      "model": "MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.json",
+      "archived_reports": 5,
+      "first_report": "/opt/mts/thunder-migration/mts-v4-recovery-integration-20261004/Research/Reports/MTS_DISCOVERY_PORTFOLIO_CAPITAL_MITIGATION_FINAL_20261001.json",
+      "executable_model_verified": false,
+      "run_status": "BLOCKED_MISSING_ORIGINAL_EXECUTABLE_MODEL"
+    },
+    {
+      "model": "MTS_MOMENTUM_CONFIRMATION_ADDON_20261003.json",
+      "archived_reports": 3,
+      "first_report": "/opt/mts/thunder-migration/mts-v4-recovery-integration-20261004/Research/Reports/MTS_MOMENTUM_CONFIRMATION_ADDON_20261003.json",
+      "executable_model_verified": false,
+      "run_status": "BLOCKED_MISSING_ORIGINAL_EXECUTABLE_MODEL"
+    },
+    {
+      "model": "MTS_CRASH_STATE_GENOME_PIPELINE_20261003.json",
+      "archived_reports": 3,
+      "first_report": "/opt/mts/thunder-migration/mts-v4-recovery-integration-20261004/Research/Reports/MTS_CRASH_STATE_GENOME_PIPELINE_20261003.json",
+      "executable_model_verified": false,
+      "run_status": "BLOCKED_MISSING_ORIGINAL_EXECUTABLE_MODEL"
+    }
+  ],
+  "ledger_schema": [
+    "strategy",
+    "ticker",
+    "signal_date",
+    "entry_date",
+    "entry_price",
+    "exit_date",
+    "exit_price",
+    "shares",
+    "fees",
+    "net_pnl",
+    "return_pct",
+    "holding_sessions",
+    "max_adverse_excursion_pct",
+    "max_favorable_excursion_pct",
+    "entry_niche",
+    "exit_niche",
+    "exit_reason"
+  ],
+  "no_fabricated_results": true
+}

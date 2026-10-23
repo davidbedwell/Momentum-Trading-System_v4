@@ -1,0 +1,133 @@
+{
+  "status": "EXPLORATORY_SWEEP_NOT_VALIDATION",
+  "results": [
+    {
+      "horizon": 20,
+      "mode": "full",
+      "cagr": 0.22152099908934852,
+      "mdd": -0.46584018106808867,
+      "ending": 695794.6616243899,
+      "fees": 64437.052006843245,
+      "buys": 2500,
+      "sells": 2480
+    },
+    {
+      "horizon": 20,
+      "mode": "trend200",
+      "cagr": 0.013966341731617815,
+      "mdd": -0.12646373656403564,
+      "ending": 114392.24461909632,
+      "fees": 5682.879135658227,
+      "buys": 500,
+      "sells": 500
+    },
+    {
+      "horizon": 20,
+      "mode": "trend100",
+      "cagr": -0.0004145633796227566,
+      "mdd": -0.08167682421889777,
+      "ending": 99598.81558402273,
+      "fees": 1228.8921225632669,
+      "buys": 120,
+      "sells": 120
+    },
+    {
+      "horizon": 20,
+      "mode": "vol20",
+      "cagr": 0.20979524529069726,
+      "mdd": -0.24409482932303617,
+      "ending": 633678.9047262522,
+      "fees": 52850.348263966334,
+      "buys": 2160,
+      "sells": 2140
+    },
+    {
+      "horizon": 20,
+      "mode": "vol30",
+      "cagr": 0.22050028578262837,
+      "mdd": -0.2685362131850786,
+      "ending": 690178.4625861364,
+      "fees": 57560.00840464055,
+      "buys": 2160,
+      "sells": 2140
+    },
+    {
+      "horizon": 20,
+      "mode": "half",
+      "cagr": 0.11161610555145951,
+      "mdd": -0.24527504358684538,
+      "ending": 278945.69041019713,
+      "fees": 19859.900081133583,
+      "buys": 2500,
+      "sells": 2480
+    },
+    {
+      "horizon": 63,
+      "mode": "full",
+      "cagr": 0.2768629086100327,
+      "mdd": -0.4069559344704071,
+      "ending": 1069153.3811857963,
+      "fees": 23659.859688339388,
+      "buys": 780,
+      "sells": 760
+    },
+    {
+      "horizon": 63,
+      "mode": "trend200",
+      "cagr": -0.013117717167360432,
+      "mdd": -0.4066200643253257,
+      "ending": 87984.08886493508,
+      "fees": 2341.9237761541362,
+      "buys": 200,
+      "sells": 200
+    },
+    {
+      "horizon": 63,
+      "mode": "trend100",
+      "cagr": 0.0032803204925613283,
+      "mdd": -0.2326173488042902,
+      "ending": 103225.91749072548,
+      "fees": 1541.1040952353083,
+      "buys": 140,
+      "sells": 140
+    },
+    {
+      "horizon": 63,
+      "mode": "vol20",
+      "cagr": 0.13851344930796317,
+      "mdd": -0.41126453159476284,
+      "ending": 351708.8374451761,
+      "fees": 10209.330312643488,
+      "buys": 620,
+      "sells": 600
+    },
+    {
+      "horizon": 63,
+      "mode": "vol30",
+      "cagr": 0.13851344930796317,
+      "mdd": -0.41126453159476284,
+      "ending": 351708.8374451761,
+      "fees": 10209.330312643488,
+      "buys": 620,
+      "sells": 600
+    },
+    {
+      "horizon": 63,
+      "mode": "half",
+      "cagr": 0.14516174617050748,
+      "mdd": -0.20337214146397586,
+      "ending": 372132.860936131,
+      "fees": 6939.010720678048,
+      "buys": 780,
+      "sells": 760
+    }
+  ],
+  "limitations": [
+    "Risk gate computed on portfolio NAV at previous rebalance and is path dependent",
+    "Gates evaluated only on rebalance dates; may miss intra-horizon drawdowns",
+    "Same repeatedly exposed historical years; no independent validation",
+    "79-stock exploratory universe not PIT certified",
+    "No earnings embargo, regime model, or settlement accounting",
+    "Fixed 28% annualized volatility threshold and 100/200-session trends not calibrated independently"
+  ]
+}

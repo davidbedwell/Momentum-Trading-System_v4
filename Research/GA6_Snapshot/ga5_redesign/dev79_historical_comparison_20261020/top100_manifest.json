@@ -1,0 +1,157 @@
+{
+  "eligible_measurements": 148572,
+  "unique_strategies": 148572,
+  "selected": 100,
+  "selection": "70 highest Calmar then 30 highest CAGR, deduped by definition hash; research only",
+  "study_counts": {
+    "GA4_DIAGNOSTIC": 74,
+    "DEV80_LONG": 26
+  },
+  "cohort_counts": {
+    "DEV80": 100
+  },
+  "feature_gaps": [
+    [
+      "NONE",
+      38
+    ],
+    [
+      "natr_20_percentile__v1",
+      19
+    ],
+    [
+      "return_20__v1",
+      15
+    ],
+    [
+      "realized_vol_20_percentile__v1",
+      12
+    ],
+    [
+      "range_position_50__v1",
+      12
+    ],
+    [
+      "breadth_positive_20__v1",
+      11
+    ],
+    [
+      "realized_vol_20__v1",
+      11
+    ],
+    [
+      "adx_14__v1",
+      10
+    ],
+    [
+      "close_location__v1",
+      9
+    ],
+    [
+      "relative_volume_20__v1",
+      8
+    ],
+    [
+      "range_position_20__v1",
+      8
+    ],
+    [
+      "signed_return_streak__v1",
+      7
+    ],
+    [
+      "pullback_from_high_20__v1",
+      7
+    ],
+    [
+      "return_5__v1",
+      7
+    ],
+    [
+      "relative_volume_20_percentile__v1",
+      7
+    ],
+    [
+      "dollar_volume__v1",
+      6
+    ],
+    [
+      "failed_breakout_20__v1",
+      6
+    ],
+    [
+      "relative_strength_change_20__v1",
+      5
+    ],
+    [
+      "volatility_contraction_duration__v1",
+      5
+    ],
+    [
+      "close_to_sma_200__v1",
+      5
+    ],
+    [
+      "sector_vs_universe_return_63__v1",
+      5
+    ],
+    [
+      "return_126_percentile__v1",
+      4
+    ],
+    [
+      "high_low_spread_proxy__v1",
+      4
+    ],
+    [
+      "intraday_return__v1",
+      4
+    ],
+    [
+      "dollar_volume_relative_20__v1",
+      4
+    ],
+    [
+      "breakout_reentry_20__v1",
+      4
+    ],
+    [
+      "natr_20__v1",
+      4
+    ],
+    [
+      "return_63__v1",
+      3
+    ],
+    [
+      "close_to_sma_20__v1",
+      3
+    ],
+    [
+      "sma20_slope_5__v1",
+      3
+    ]
+  ],
+  "gene_families": {
+    "VOLUME_LIQUIDITY": 29,
+    "RELATIVE_CROSS_SECTIONAL": 14,
+    "TREND": 27,
+    "MEAN_REVERSION": 18,
+    "VOLATILITY": 23,
+    "MOMENTUM": 6,
+    "BREAKOUT": 13,
+    "MARKET_REGIME_STRUCTURE": 20
+  },
+  "exact_replay_ready": 0,
+  "replay_blocker": "Original signal/threshold calibration and execution semantics not verified; GA4 features are tanh transformed in DEV79 file",
+  "files": {
+    "top100_complete_chromosome_test_package.json": {
+      "bytes": 152510,
+      "sha256": "c4823aaaef99325cbd80d4a0e55d36e4c187c6fb78ced10ef1580d9e29a0d201"
+    },
+    "top100_rankings.csv": {
+      "bytes": 20618,
+      "sha256": "058aa856d78ad6b38896fbb3ddd73764f2a609ca325919f96199ce2fe48f4726"
+    }
+  }
+}

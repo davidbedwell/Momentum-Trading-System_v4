@@ -1,0 +1,78 @@
+{
+  "status": "RESEARCH_ONLY",
+  "universe": "DEV79",
+  "niches": 13,
+  "labeled_rows": 390924,
+  "niche_counts": [
+    {
+      "research_niche": "NICHE-0001",
+      "rows": 55785,
+      "stocks": 79
+    },
+    {
+      "research_niche": "NICHE-0002",
+      "rows": 76988,
+      "stocks": 77
+    },
+    {
+      "research_niche": "NICHE-0003",
+      "rows": 82061,
+      "stocks": 78
+    },
+    {
+      "research_niche": "NICHE-0004",
+      "rows": 38810,
+      "stocks": 78
+    },
+    {
+      "research_niche": "NICHE-0005",
+      "rows": 36556,
+      "stocks": 79
+    },
+    {
+      "research_niche": "NICHE-0006",
+      "rows": 42340,
+      "stocks": 78
+    },
+    {
+      "research_niche": "NICHE-0007",
+      "rows": 16429,
+      "stocks": 79
+    },
+    {
+      "research_niche": "NICHE-0008",
+      "rows": 5462,
+      "stocks": 79
+    },
+    {
+      "research_niche": "NICHE-0009",
+      "rows": 3322,
+      "stocks": 74
+    },
+    {
+      "research_niche": "NICHE-0010",
+      "rows": 3853,
+      "stocks": 78
+    },
+    {
+      "research_niche": "NICHE-0011",
+      "rows": 20940,
+      "stocks": 78
+    },
+    {
+      "research_niche": "NICHE-0012",
+      "rows": 6219,
+      "stocks": 79
+    },
+    {
+      "research_niche": "NICHE-0013",
+      "rows": 2159,
+      "stocks": 53
+    }
+  ],
+  "limitations": [
+    "Retrospectively adapted 13-center library; research-only",
+    "PIT feature provenance unverified",
+    "No forward evaluation or profitability inference"
+  ]
+}

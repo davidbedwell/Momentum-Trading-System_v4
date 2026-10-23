@@ -1,0 +1,10 @@
+{
+  "status": "DIAGNOSTIC_NOT_CERTIFICATION",
+  "rows": 390924,
+  "niches": 13,
+  "features_screened": 59,
+  "test_feature_horizon_pairs": 117,
+  "positive_test_edge_count": 72,
+  "positive_validation_and_test": 52,
+  "limitations": "Full-sample niche labels may have retrospective leakage; returns overlap and are not independent; no transaction costs or executable portfolio; no multiplicity correction; test is diagnostic and must remain untouched in future tuning."
+}

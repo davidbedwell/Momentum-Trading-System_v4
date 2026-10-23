@@ -1,0 +1,41 @@
+{
+  "step": 6,
+  "stock": "INTC",
+  "accepted": true,
+  "proposed_niches": [
+    "NICHE-0008"
+  ],
+  "new_niches_committed": 1,
+  "total_niches": 8,
+  "worst_previous_stock_retention": 0.9363538295577131,
+  "max_previous_stock_distance_degradation_pct": 0.48004665271492614,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.9363538295577131,
+      "distance_change_pct": -1.835311504826469
+    },
+    {
+      "stock": "AMGN",
+      "retention": 0.95361380798274,
+      "distance_change_pct": -0.0035545751565603093
+    },
+    {
+      "stock": "JNJ",
+      "retention": 0.9697950377562028,
+      "distance_change_pct": 0.48004665271492614
+    },
+    {
+      "stock": "XOM",
+      "retention": 0.9795037756202805,
+      "distance_change_pct": -0.03020373698610268
+    },
+    {
+      "stock": "COST",
+      "retention": 0.9762675296655879,
+      "distance_change_pct": 0.26085221346528453
+    }
+  ],
+  "learning_rows": 24168,
+  "notes": "Rollback on rejection; no hyperparameter auto-tuning"
+}

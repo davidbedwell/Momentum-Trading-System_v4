@@ -1,0 +1,27 @@
+{
+  "audit": "GA5 prelaunch",
+  "tests": "56 passed",
+  "checks": {
+    "guarded_runner": true,
+    "eight_worker_cap": true,
+    "checkpoint_policy_sha": true,
+    "checkpoint_rng_pickle": true,
+    "single_niche_per_worker": true,
+    "policy_file_required": true,
+    "earnings_policy_file_present": true,
+    "cash_yield_constant": true,
+    "SGOV_real_prices": false,
+    "verified_pit_membership": false,
+    "full_history_8_cpu_benchmark": false,
+    "risk_veto_forced_liquidation": false,
+    "checkpoint_code_hash": false,
+    "duplicate_work_atomic_cache_claim": false,
+    "full_history_per_genome_decision_fast_path": true
+  },
+  "critical_blockers": [
+    "verified_pit_membership",
+    "risk_veto_forced_liquidation",
+    "checkpoint_code_hash"
+  ],
+  "recommendation": "NO PRODUCTION LAUNCH; engineering preflight may continue"
+}

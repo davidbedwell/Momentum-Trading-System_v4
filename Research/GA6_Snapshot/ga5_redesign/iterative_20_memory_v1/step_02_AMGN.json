@@ -1,0 +1,21 @@
+{
+  "step": 2,
+  "stock": "AMGN",
+  "accepted": true,
+  "proposed_niches": [
+    "NICHE-0007"
+  ],
+  "new_niches_committed": 1,
+  "total_niches": 7,
+  "worst_previous_stock_retention": 0.8101402373247033,
+  "max_previous_stock_distance_degradation_pct": -3.0641532390613184,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.8101402373247033,
+      "distance_change_pct": -3.0641532390613184
+    }
+  ],
+  "learning_rows": 8056,
+  "notes": "Rollback on rejection; no hyperparameter auto-tuning"
+}

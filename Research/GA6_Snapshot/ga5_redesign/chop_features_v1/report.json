@@ -1,0 +1,26 @@
+{
+  "rows": 11006,
+  "stocks": {
+    "ACN": 5503,
+    "AMGN": 5503
+  },
+  "features": [
+    "efficiency_10",
+    "reversal_rate_10",
+    "net_to_volatility_10",
+    "efficiency_20",
+    "reversal_rate_20",
+    "net_to_volatility_20",
+    "efficiency_40",
+    "reversal_rate_40",
+    "net_to_volatility_40",
+    "range_width_20",
+    "volume_variability_20"
+  ],
+  "interpretation": "Features measure historical path efficiency, reversals, range and volume variability; no niche classification or no-trade policy certified",
+  "cautions": [
+    "Inputs only through each observation date",
+    "Feature-source PIT audit remains pending",
+    "These features must be integrated and tested in the expandable memory before claiming learned disorganization niches"
+  ]
+}

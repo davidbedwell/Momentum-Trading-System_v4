@@ -1,0 +1,298 @@
+{
+  "name": "DEV50b",
+  "status": "FROZEN_SELECTION_PENDING_DATA_PREFLIGHT",
+  "selection_rule": "greedy sector-proportional quotas against DEV79+DEV87, SHA256 deterministic tie break; no performance data",
+  "seed": "DEV50b-20261023",
+  "source_partition": "/opt/mts/thunder-migration/Momentum-Trading-System_v4/Research/Partitions/MTS_V4_REPAIRED_UNTOUCHED_PARTITION_A100_B100_DISCOVERY136_20261007.json",
+  "source_sha256": "a4fb7d79587656de3965b53fe28fb5ac3f672bb3fbbda81195f9ec60826a8952",
+  "period_start": "2019-01-01",
+  "period_end_exclusive": "2025-01-01",
+  "stock_count": 50,
+  "reference_count": 166,
+  "reference_sector_mix": {
+    "Information Technology": 20,
+    "Utilities": 12,
+    "Consumer Discretionary": 14,
+    "Real Estate": 10,
+    "Materials": 10,
+    "Financials": 31,
+    "Energy": 10,
+    "Industrials": 23,
+    "Consumer Staples": 10,
+    "Health Care": 17,
+    "Communication Services": 9
+  },
+  "selected_sector_mix": {
+    "Financials": 9,
+    "Industrials": 7,
+    "Information Technology": 6,
+    "Health Care": 5,
+    "Consumer Discretionary": 4,
+    "Utilities": 4,
+    "Energy": 3,
+    "Materials": 3,
+    "Consumer Staples": 3,
+    "Real Estate": 3,
+    "Communication Services": 3
+  },
+  "stocks": [
+    {
+      "ticker": "ARES",
+      "sector": "Financials",
+      "industry": "Asset Management & Custody Banks"
+    },
+    {
+      "ticker": "GL",
+      "sector": "Financials",
+      "industry": "Life & Health Insurance"
+    },
+    {
+      "ticker": "TROW",
+      "sector": "Financials",
+      "industry": "Asset Management & Custody Banks"
+    },
+    {
+      "ticker": "EFX",
+      "sector": "Industrials",
+      "industry": "Research & Consulting Services"
+    },
+    {
+      "ticker": "APO",
+      "sector": "Financials",
+      "industry": "Asset Management & Custody Banks"
+    },
+    {
+      "ticker": "ON",
+      "sector": "Information Technology",
+      "industry": "Semiconductors"
+    },
+    {
+      "ticker": "FTV",
+      "sector": "Industrials",
+      "industry": "Industrial Machinery & Supplies & Components"
+    },
+    {
+      "ticker": "AXP",
+      "sector": "Financials",
+      "industry": "Consumer Finance"
+    },
+    {
+      "ticker": "CRL",
+      "sector": "Health Care",
+      "industry": "Life Sciences Tools & Services"
+    },
+    {
+      "ticker": "AKAM",
+      "sector": "Information Technology",
+      "industry": "Internet Services & Infrastructure"
+    },
+    {
+      "ticker": "ADP",
+      "sector": "Industrials",
+      "industry": "Human Resource & Employment Services"
+    },
+    {
+      "ticker": "FISV",
+      "sector": "Financials",
+      "industry": "Transaction & Payment Processing Services"
+    },
+    {
+      "ticker": "DRI",
+      "sector": "Consumer Discretionary",
+      "industry": "Restaurants"
+    },
+    {
+      "ticker": "CAH",
+      "sector": "Health Care",
+      "industry": "Health Care Distributors"
+    },
+    {
+      "ticker": "ANET",
+      "sector": "Information Technology",
+      "industry": "Communications Equipment"
+    },
+    {
+      "ticker": "LDOS",
+      "sector": "Industrials",
+      "industry": "Diversified Support Services"
+    },
+    {
+      "ticker": "ETR",
+      "sector": "Utilities",
+      "industry": "Electric Utilities"
+    },
+    {
+      "ticker": "ERIE",
+      "sector": "Financials",
+      "industry": "Insurance Brokers"
+    },
+    {
+      "ticker": "HLT",
+      "sector": "Consumer Discretionary",
+      "industry": "Hotels, Resorts & Cruise Lines"
+    },
+    {
+      "ticker": "WAT",
+      "sector": "Health Care",
+      "industry": "Life Sciences Tools & Services"
+    },
+    {
+      "ticker": "MU",
+      "sector": "Information Technology",
+      "industry": "Semiconductors"
+    },
+    {
+      "ticker": "SLB",
+      "sector": "Energy",
+      "industry": "Oil & Gas Equipment & Services"
+    },
+    {
+      "ticker": "VMC",
+      "sector": "Materials",
+      "industry": "Construction Materials"
+    },
+    {
+      "ticker": "MNST",
+      "sector": "Consumer Staples",
+      "industry": "Soft Drinks & Non-alcoholic Beverages"
+    },
+    {
+      "ticker": "O",
+      "sector": "Real Estate",
+      "industry": "Retail REITs"
+    },
+    {
+      "ticker": "NOC",
+      "sector": "Industrials",
+      "industry": "Aerospace & Defense"
+    },
+    {
+      "ticker": "TTWO",
+      "sector": "Communication Services",
+      "industry": "Interactive Home Entertainment"
+    },
+    {
+      "ticker": "CNP",
+      "sector": "Utilities",
+      "industry": "Multi-Utilities"
+    },
+    {
+      "ticker": "ACGL",
+      "sector": "Financials",
+      "industry": "Property & Casualty Insurance"
+    },
+    {
+      "ticker": "LOW",
+      "sector": "Consumer Discretionary",
+      "industry": "Home Improvement Retail"
+    },
+    {
+      "ticker": "PODD",
+      "sector": "Health Care",
+      "industry": "Health Care Equipment"
+    },
+    {
+      "ticker": "TER",
+      "sector": "Information Technology",
+      "industry": "Semiconductor Materials & Equipment"
+    },
+    {
+      "ticker": "VLO",
+      "sector": "Energy",
+      "industry": "Oil & Gas Refining & Marketing"
+    },
+    {
+      "ticker": "MO",
+      "sector": "Consumer Staples",
+      "industry": "Tobacco"
+    },
+    {
+      "ticker": "HST",
+      "sector": "Real Estate",
+      "industry": "Hotel & Resort REITs"
+    },
+    {
+      "ticker": "AMCR",
+      "sector": "Materials",
+      "industry": "Paper & Plastic Packaging Products & Materials"
+    },
+    {
+      "ticker": "FIX",
+      "sector": "Industrials",
+      "industry": "Construction & Engineering"
+    },
+    {
+      "ticker": "WBD",
+      "sector": "Communication Services",
+      "industry": "Broadcasting"
+    },
+    {
+      "ticker": "NEE",
+      "sector": "Utilities",
+      "industry": "Multi-Utilities"
+    },
+    {
+      "ticker": "MSCI",
+      "sector": "Financials",
+      "industry": "Financial Exchanges & Data"
+    },
+    {
+      "ticker": "NVR",
+      "sector": "Consumer Discretionary",
+      "industry": "Homebuilding"
+    },
+    {
+      "ticker": "ISRG",
+      "sector": "Health Care",
+      "industry": "Health Care Equipment"
+    },
+    {
+      "ticker": "IBM",
+      "sector": "Information Technology",
+      "industry": "IT Consulting & Other Services"
+    },
+    {
+      "ticker": "KO",
+      "sector": "Consumer Staples",
+      "industry": "Soft Drinks & Non-alcoholic Beverages"
+    },
+    {
+      "ticker": "CCI",
+      "sector": "Real Estate",
+      "industry": "Telecom Tower REITs"
+    },
+    {
+      "ticker": "EOG",
+      "sector": "Energy",
+      "industry": "Oil & Gas Exploration & Production"
+    },
+    {
+      "ticker": "SHW",
+      "sector": "Materials",
+      "industry": "Specialty Chemicals"
+    },
+    {
+      "ticker": "PWR",
+      "sector": "Industrials",
+      "industry": "Construction & Engineering"
+    },
+    {
+      "ticker": "TMUS",
+      "sector": "Communication Services",
+      "industry": "Wireless Telecommunication Services"
+    },
+    {
+      "ticker": "PNW",
+      "sector": "Utilities",
+      "industry": "Multi-Utilities"
+    }
+  ],
+  "excluded_prior_groups": 166,
+  "excluded_protected_A_B": 200,
+  "candidate_pool_count": 136,
+  "limitations": [
+    "Historical 2019-2024 time period already researched",
+    "Current 2026 survivor universe; not point-in-time survivorship-free",
+    "Original partition labels unexposed for GA6, not proof of never studied anywhere"
+  ]
+}

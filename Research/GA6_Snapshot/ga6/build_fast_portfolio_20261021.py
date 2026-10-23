@@ -1,0 +1,21 @@
+from pathlib import Path
+r=Path('/opt/mts/ga6')
+s=(r/'guarded_evaluator_risk_experiment_20261021.py').read_text()
+s=s.replace('from shadow_niche_single_exit import ShadowBook','',1)
+s=s.replace('from exit_objectives import metrics as exit_metrics,calmar','from exit_objectives import calmar',1)
+s=s.replace(' shadow=ShadowBook(genome,fee)','',1)
+s=s.replace('  shadow.start(ds,opens,blocked,membership,risk_veto,{t:{"dividends":r.get("dividends",0),"stock_splits":r.get("stock_splits",0)} for t,r in rows.items()})','',1)
+s=s.replace('  shadow.finish(ds,rows,closes,blocked,membership,risk_veto,session_features)','',1)
+s=s.replace('"shadow":shadow.summary(),','',1)
+s=s.replace('"shadow_basis":"independent_unit_notional_including_signals_not_portfolio_filled","shadow_portfolio_pnl_comparable":False,','',1)
+s=s.replace('"shadow_closed_trade_count":len(shadow.closed),','',1)
+s=s.replace(',"exit_objectives":exit_metrics(shadow.closed)','',1)
+s=s.replace('risk_events.append({"date":ds,"ticker":t,"event":"MANDATORY_EXIT_FILLED"})','',1)
+s=s.replace('risk_events.append({"date":ds,"ticker":t,"event":"REASSESSMENT_ACTIVATED"})','',1)
+s=s.replace('risk_events.append({"date":ds,"ticker":t,"event":"MANDATORY_EXIT_TRIGGERED","loss_fraction":mark[\'loss_fraction_entry_equity\']})','',1)
+s=s.replace('risk_events=[];','',1)
+s=s.replace('"ga6_position_risk_events":risk_events,','',1)
+# At 1% the existing genome decision continues to evaluate; scaling is not blocked.
+p=r/'fast_portfolio_evaluator_20261021.py'
+p.write_text(s);compile(s,str(p),'exec')
+print('FAST_PORTFOLIO_EVALUATOR_COMPILES',len(s))

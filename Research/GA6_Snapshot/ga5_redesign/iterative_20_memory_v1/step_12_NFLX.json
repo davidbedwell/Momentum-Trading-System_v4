@@ -1,0 +1,69 @@
+{
+  "step": 12,
+  "stock": "NFLX",
+  "accepted": true,
+  "proposed_niches": [],
+  "new_niches_committed": 0,
+  "total_niches": 10,
+  "worst_previous_stock_retention": 0.895361380798274,
+  "max_previous_stock_distance_degradation_pct": 0.6365728367966018,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 0.9460625674217907,
+      "distance_change_pct": -0.9812877155924261
+    },
+    {
+      "stock": "AMGN",
+      "retention": 0.9676375404530745,
+      "distance_change_pct": 0.48740706757282565
+    },
+    {
+      "stock": "JNJ",
+      "retention": 0.9816612729234089,
+      "distance_change_pct": 0.46178322680107087
+    },
+    {
+      "stock": "XOM",
+      "retention": 0.9805825242718447,
+      "distance_change_pct": 0.23782863859675776
+    },
+    {
+      "stock": "COST",
+      "retention": 0.9892125134843581,
+      "distance_change_pct": 0.31408668022178543
+    },
+    {
+      "stock": "INTC",
+      "retention": 0.9039913700107874,
+      "distance_change_pct": -0.6353495356382537
+    },
+    {
+      "stock": "HD",
+      "retention": 0.9838187702265372,
+      "distance_change_pct": 0.6365728367966018
+    },
+    {
+      "stock": "DIS",
+      "retention": 0.948220064724919,
+      "distance_change_pct": -0.3325752234215962
+    },
+    {
+      "stock": "GILD",
+      "retention": 0.9546925566343042,
+      "distance_change_pct": -0.5286658016129282
+    },
+    {
+      "stock": "SO",
+      "retention": 0.982740021574973,
+      "distance_change_pct": 0.5403047839732633
+    },
+    {
+      "stock": "FCX",
+      "retention": 0.895361380798274,
+      "distance_change_pct": -2.364212153395263
+    }
+  ],
+  "learning_rows": 48336,
+  "notes": "Rollback on rejection; no hyperparameter auto-tuning"
+}

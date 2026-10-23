@@ -1,0 +1,179 @@
+{
+  "step": 32,
+  "stock": "COIN",
+  "accepted": true,
+  "prelearning_holdout_distance": 3.918602881757423,
+  "recognized_existing_niches": {
+    "NICHE-0001": 60,
+    "NICHE-0007": 327,
+    "NICHE-0008": 56,
+    "NICHE-0009": 36,
+    "NICHE-0010": 91,
+    "NICHE-0011": 305,
+    "NICHE-0012": 52
+  },
+  "recognized_niche_count": 7,
+  "candidate_promotions": [],
+  "committed_promotions": 0,
+  "worst_retention": 1.0,
+  "max_distance_degradation_pct": 0.0,
+  "review": [
+    {
+      "stock": "ACN",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "AMGN",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "JNJ",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "XOM",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "COST",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "INTC",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "HD",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "DIS",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "GILD",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "SO",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "FCX",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "NFLX",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "GE",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "CME",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "UPS",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "CRM",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "XEL",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "DECK",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "T",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "NUE",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "ARE",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "ATO",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "BEN",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "BG",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "BLDR",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "BNY",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "CBOE",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "CDNS",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "CDW",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "CFG",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    },
+    {
+      "stock": "COF",
+      "retention": 1.0,
+      "distance_degradation_pct": 0.0
+    }
+  ],
+  "learning_rows": 0,
+  "niches": 12
+}

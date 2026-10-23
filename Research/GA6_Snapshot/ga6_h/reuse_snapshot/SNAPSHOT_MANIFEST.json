@@ -1,0 +1,77 @@
+{
+  "created_utc": "2026-10-23T01:23:31.333492+00:00",
+  "source_unchanged": true,
+  "files": [
+    {
+      "name": "validation_governance.py",
+      "source": "/opt/mts/ga6/structural_independent_v2_20261022/validation_governance.py",
+      "snapshot": "/opt/mts/ga6_h/reuse_snapshot/validation_governance.py",
+      "sha256": "e5b0bea4d6149cd8260c66e67dc22ca05534c9058d1e78869bcc7cc3145e37ba",
+      "status": "snapshot only; import dependencies and stock-ranking semantics require adapter review"
+    },
+    {
+      "name": "multiplicity_accounting.py",
+      "source": "/opt/mts/ga6/structural_independent_v2_20261022/multiplicity_accounting.py",
+      "snapshot": "/opt/mts/ga6_h/reuse_snapshot/multiplicity_accounting.py",
+      "sha256": "4ae539533828624d3505fe778e27dc79d24fc49e49272f9b41b30c158d557818",
+      "status": "snapshot only; import dependencies and stock-ranking semantics require adapter review"
+    },
+    {
+      "name": "calendar_block_statistics.py",
+      "source": "/opt/mts/ga6/structural_independent_v2_20261022/calendar_block_statistics.py",
+      "snapshot": "/opt/mts/ga6_h/reuse_snapshot/calendar_block_statistics.py",
+      "sha256": "732ab6334b69b0204c358bf52cbdc5703865a19a87eff2905e4e99bec1eca245",
+      "status": "snapshot only; import dependencies and stock-ranking semantics require adapter review"
+    },
+    {
+      "name": "statistical_preregistration.py",
+      "source": "/opt/mts/ga6/structural_independent_v2_20261022/statistical_preregistration.py",
+      "snapshot": "/opt/mts/ga6_h/reuse_snapshot/statistical_preregistration.py",
+      "sha256": "a3dee4a9f098f90d157f820b8f3aa3247642c0416f35991c71e4152344beee53",
+      "status": "snapshot only; import dependencies and stock-ranking semantics require adapter review"
+    },
+    {
+      "name": "scientific_selection.py",
+      "source": "/opt/mts/ga6/structural_independent_v2_20261022/scientific_selection.py",
+      "snapshot": "/opt/mts/ga6_h/reuse_snapshot/scientific_selection.py",
+      "sha256": "898ff7f13c61ff37331a6f19aa5a59b212e9ad715c43e9f1a08919f1bc72b20e",
+      "status": "snapshot only; import dependencies and stock-ranking semantics require adapter review"
+    },
+    {
+      "name": "coverage_ledger.py",
+      "source": "/opt/mts/ga6/structural_independent_v2_20261022/coverage_ledger.py",
+      "snapshot": "/opt/mts/ga6_h/reuse_snapshot/coverage_ledger.py",
+      "sha256": "e81a19e2e5a2821568419da39ec7b669443efc914fb29ad441bc5192f3f3a15b",
+      "status": "snapshot only; import dependencies and stock-ranking semantics require adapter review"
+    },
+    {
+      "name": "structural_manifest.py",
+      "source": "/opt/mts/ga6/structural_independent_v2_20261022/structural_manifest.py",
+      "snapshot": "/opt/mts/ga6_h/reuse_snapshot/structural_manifest.py",
+      "sha256": "867678a7264c98c8e0e8e24bbb8290fc4076c212003901d5e334283af179c90d",
+      "status": "snapshot only; import dependencies and stock-ranking semantics require adapter review"
+    },
+    {
+      "name": "development_feedback_ledger.py",
+      "source": "/opt/mts/ga6/structural_independent_v2_20261022/development_feedback_ledger.py",
+      "snapshot": "/opt/mts/ga6_h/reuse_snapshot/development_feedback_ledger.py",
+      "sha256": "04942f422d7f44939aaab6df8b936d0634a5186b021d0e9a795ef818509be833",
+      "status": "snapshot only; import dependencies and stock-ranking semantics require adapter review"
+    },
+    {
+      "name": "stagnation_watch.py",
+      "source": "/opt/mts/ga6/structural_independent_v2_20261022/stagnation_watch.py",
+      "snapshot": "/opt/mts/ga6_h/reuse_snapshot/stagnation_watch.py",
+      "sha256": "c090061550f10a0fade5e8d379f72ab8efe82b8a0fb229ba446592f71503e1b6",
+      "status": "snapshot only; import dependencies and stock-ranking semantics require adapter review"
+    }
+  ],
+  "excluded": [
+    "GA6 niche genomes and fitness",
+    "GA6 prepared data and historical membership",
+    "GA6-specific structural replay/evaluator",
+    "GA6 running databases/checkpoints",
+    "GA6 discovery partitions as pristine validation"
+  ],
+  "rule": "GA6-H must not import from live GA6 implementation; reuse only audited versioned snapshots with tests and adapters"
+}

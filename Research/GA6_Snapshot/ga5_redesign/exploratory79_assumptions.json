@@ -1,0 +1,17 @@
+{
+  "status": "EXPLORATORY_UNCERTIFIED",
+  "ticker_count": 79,
+  "raw_sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+  "predictor_sha256": "1ca5c217c2932e6f957f0d17c94251a6d765615f36e00448891c6572bb50735d",
+  "earnings_reconciliation_sha256": "07c5f3d77d940a99168b6ea95b6148e24a8a8c608eec51dc084d5a04bcc5c5c3",
+  "features_sha256": "88460b94aa6373f460b511cd46a1d7b5ad43cd88bca602a66f66ce52c10b33d4",
+  "policy_sha256": "1f0c99c8154c81bdf10a54ba97a3d1bef833122c433356d02da3a97c23345dd9",
+  "limitations": [
+    "Membership approximated by observed price bars, not verified historical index eligibility",
+    "Sector classification is static retrospectively assigned",
+    "Crash-risk veto is uniformly permissive; defensive risk control not tested",
+    "Earnings event dates retrospectively sourced, availability timing unverified",
+    "Cash proxy assumes 3 percent annual yield, not historical SGOV",
+    "Research diagnostic only; no blind/holdout promotion"
+  ]
+}

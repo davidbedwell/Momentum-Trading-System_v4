@@ -1,0 +1,30 @@
+{
+  "status": "EXPLORATORY_NOT_CERTIFIED",
+  "universe": "DEV79",
+  "starting_niches": 13,
+  "runs": [
+    {
+      "seed": 17,
+      "final_niches": 13,
+      "events": []
+    },
+    {
+      "seed": 37,
+      "final_niches": 13,
+      "events": []
+    },
+    {
+      "seed": 71,
+      "final_niches": 13,
+      "events": []
+    }
+  ],
+  "limitations": [
+    "PIT feature lineage unverified",
+    "13-niche initial memory retrospectively adapted",
+    "Stock-order learning is not global-calendar chronological",
+    "Random orders not sector-balanced",
+    "Novelty thresholds heuristic; proposed niches unvalidated",
+    "No blind data accessed"
+  ]
+}

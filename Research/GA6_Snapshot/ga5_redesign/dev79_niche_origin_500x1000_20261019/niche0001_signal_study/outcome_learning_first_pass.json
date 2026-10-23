@@ -1,0 +1,22 @@
+{
+  "volatility": {
+    "train_observations": 78435,
+    "test_observations": 74955,
+    "test_base_rate": 0.10103395370555666,
+    "roc_auc": 0.6863082013920385,
+    "average_precision": 0.2012005958544076,
+    "brier": 0.08685266962429714,
+    "top_decile_adverse_rate": 0.2415603900975244,
+    "top_decile_count": 7998
+  },
+  "multifeature": {
+    "train_observations": 78435,
+    "test_observations": 74955,
+    "test_base_rate": 0.10103395370555666,
+    "roc_auc": 0.6858264969785858,
+    "average_precision": 0.20415930903607607,
+    "brier": 0.08685249097450184,
+    "top_decile_adverse_rate": 0.24376583544472596,
+    "top_decile_count": 7499
+  }
+}

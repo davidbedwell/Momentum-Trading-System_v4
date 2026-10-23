@@ -1,0 +1,10 @@
+import pathlib,json,hashlib,urllib.request
+p=pathlib.Path('/opt/mts/ga6/runs/independent_review');data=json.loads((p/'FULL_POPULATION_ANALYSIS.json').read_text());brief=(p/'REVIEW_BRIEF.txt').read_text()
+message=brief+'\n\nFull-population analysis computed from all 8218 trade rows, all 3269 distinct stock-entry events, 53 chromosome equity curves, and all market indicator records. The raw evidence archive is retained on the server. The model receives COMPLETE aggregate statistics rather than an arbitrary row sample; it cannot inspect the raw parquet files in this API call. Do not claim otherwise. Analyze the complete evidence and propose falsifiable experiments, with statistical limitations.\n'+json.dumps(data,separators=(',',':'))
+line=next(x for x in pathlib.Path('/root/.openrouter_api_env').read_text().splitlines() if 'OPENROUTER_API_KEY=' in x);key=line.split('=',1)[1].strip().strip('"').strip("'")
+payload={'model':'anthropic/claude-sonnet-4.6','messages':[{'role':'user','content':message}],'max_tokens':8000,'temperature':0.2}
+(p/'FULL_POPULATION_REQUEST_METADATA.json').write_text(json.dumps({'trade_rows':8218,'events':3269,'portfolio_count':53,'feature_count':len(data['feature_full_population_event_level_quintiles']),'prompt_sha256':hashlib.sha256(message.encode()).hexdigest(),'prompt_bytes':len(message.encode())},indent=2))
+req=urllib.request.Request('https://openrouter.ai/api/v1/chat/completions',data=json.dumps(payload,allow_nan=False).encode(),headers={'Authorization':'Bearer '+key,'Content-Type':'application/json','HTTP-Referer':'https://chatgpt.com','X-Title':'GA6 Full Population Independent Review'})
+with urllib.request.urlopen(req,timeout=240) as r:response=json.load(r)
+(p/'FULL_POPULATION_CLAUDE_RESPONSE.json').write_text(json.dumps(response,indent=2));answer=response.get('choices',[{}])[0].get('message',{}).get('content','');(p/'FULL_POPULATION_CLAUDE_REVIEW.md').write_text(answer if isinstance(answer,str) else json.dumps(answer))
+print('SUCCESS',response.get('model'),'CHARS',len(answer),'USAGE',response.get('usage'))
