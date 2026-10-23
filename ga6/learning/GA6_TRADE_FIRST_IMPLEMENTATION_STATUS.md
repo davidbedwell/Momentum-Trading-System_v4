@@ -27,3 +27,8 @@
 - `test_shared_capital_replay.py`: synthetic tests for competing cash demands, unsettled proceeds, ownership, execution-day defense, and intentional fill/NAV parity corruption.
 - **NOT DONE**: real frozen-evaluator single-genome integration parity; actual decision capture and constraints mapping; live chronological adaptive proposals; scaling/exit counterfactuals; full study rerun. Synthetic parity tests do not establish frozen-evaluator parity.
 - A shared replay can legitimately differ from independent reference portfolios when chromosomes compete for capital. The strict single-genome reference parity test must use the same orders, risk policy and settlement configuration.
+
+## Actual historical parity — 2026-10-23
+Executed `run_historical_fill_parity.py` on the real 2025-01-02 to 2025-03-31 OHLCV frame with a saved GA6 chromosome, actual PIT policy, frozen structural evaluator, and a second independently instantiated SettledLedger.
+**PASS:** 60 trading sessions; 179 actual fills matched (side, symbol, quantity, price, fee); all 60 daily NAV observations matched; final NAV $100,593.30268724849; evaluator diagnostic CAGR 2.485656739%; diagnostic MDD -0.309763044%. Audit: `/opt/mts/ga6/runs/ga6_historical_shared_parity_20261023/RESULT.json`.
+This is actual market execution/accounting parity for **replayed captured orders**, NOT independently generated policy decisions, multi-chromosome selection, or adaptive strategy parity. Those remain open.
