@@ -19,8 +19,8 @@ class FakeLedger:
 
 def evaluator(frame, genome, **kwargs):
     ledger=module.SettledLedger()
-    ledger.execute_open(SimpleNamespace(date="2024-01-02",security="AAA",side="BUY",shares=10),"2024-01-03",100)
-    ledger.execute_open(SimpleNamespace(date="2024-01-04",security="AAA",side="SELL",shares=10),"2024-01-05",110)
+    ledger.execute_open(SimpleNamespace(decision_date="2024-01-02",security="AAA",side="BUY",shares=10),"2024-01-03",100)
+    ledger.execute_open(SimpleNamespace(decision_date="2024-01-04",security="AAA",side="SELL",shares=10),"2024-01-05",110)
     return dict(fills=len(ledger.fills), final_nav=ledger.cash)
 
 module=SimpleNamespace(SettledLedger=FakeLedger,evaluate=evaluator)
