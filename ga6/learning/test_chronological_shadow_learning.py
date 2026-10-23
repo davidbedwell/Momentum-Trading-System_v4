@@ -4,7 +4,7 @@ def candidate(chromosome,decision_date,exit_date,ret):
     return {str(chromosome):{"decisions":[dict(decision_date=decision_date,symbol="AAA",
         evidence_cutoff=decision_date,action="ENTER",features={"x":1})],
         "positions":{"completed":[dict(entry_decision_date=decision_date,symbol="AAA",
-        exit_date=exit_date,net_return=ret)]}}}
+        exit_date=exit_date,net_return=ret,holding_sessions=5)]}}}
 
 def test_same_day_outcome_excluded():
     bank=candidate(1,"2025-01-02","2025-01-10",.1)
