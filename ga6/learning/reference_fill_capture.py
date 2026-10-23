@@ -79,7 +79,7 @@ def run_reference_with_fills(evaluator_module, frame, genome, **kwargs):
             if abs(expected - event["cash_after"]) > max(1e-6, abs(expected) * 1e-9):
                 raise RuntimeError("captured cash mismatch")
         if len(corporate_actions) != metrics["corporate_actions"]:
-            raise RuntimeError("captured corporate action count differs from evaluator")
+            raise RuntimeError(f"captured corporate action count {len(corporate_actions)} differs from evaluator {metrics[\u0027corporate_actions\u0027]}")
         for action in corporate_actions:
             if action["price_basis"] == "split_adjusted" and action["shares_before"] != action["shares_after"]:
                 raise RuntimeError("split-adjusted inventory changed on ex-date")
