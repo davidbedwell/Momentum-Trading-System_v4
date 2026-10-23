@@ -20,3 +20,10 @@
 6. Run DEV first; preserve held-out validation until design frozen. Include dependence-aware uncertainty and promotion gates.
 
 **Do not run or describe the current independent-shadow comparison as a validated adaptive shared-capital CAGR experiment.**
+
+## Shared-capital replay increment
+- `shared_capital_replay.py`: one real SettledLedger for all chromosome proposals; next-open execution, actual available settled cash, fees, immutable per-symbol owner, capacity, membership, earnings and execution-day defense checks, mandatory 40-session/defense liquidation, and actual daily NAV.
+- `verify_reference_parity`: fail-closed, every-fill and every-session NAV comparison with frozen-evaluator capture.
+- `test_shared_capital_replay.py`: synthetic tests for competing cash demands, unsettled proceeds, ownership, execution-day defense, and intentional fill/NAV parity corruption.
+- **NOT DONE**: real frozen-evaluator single-genome integration parity; actual decision capture and constraints mapping; live chronological adaptive proposals; scaling/exit counterfactuals; full study rerun. Synthetic parity tests do not establish frozen-evaluator parity.
+- A shared replay can legitimately differ from independent reference portfolios when chromosomes compete for capital. The strict single-genome reference parity test must use the same orders, risk policy and settlement configuration.
