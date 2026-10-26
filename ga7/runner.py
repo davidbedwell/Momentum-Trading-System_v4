@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import pickle
 import random
+import time
 import pandas as pd
 
 from ga7.engine import FAMILIES, Genome, next_population, random_genome
@@ -160,6 +161,13 @@ def run(args):
     policy_hash = file_hash(args.policy)
     config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "policy_sha256": policy_hash, "population": args.population, "seed": args.seed}
     checkpoint = output / "checkpoint.json"
+    cache_file = output / "evaluation_cache.jsonl"
+    cache = {}
+    if cache_file.exists():
+        for line in cache_file.read_text().splitlines():
+            item = json.loads(line)
+            if item["config"] == config:
+                cache[item["id"]] = item["metrics"]
     rng = random.Random(args.seed)
     generation = 0
     population = [random_genome(rng, FEATURES, FAMILIES[i % len(FAMILIES)]) for i in range(args.population)]
@@ -172,9 +180,18 @@ def run(args):
         rng.setstate(pickle.loads(base64.b64decode(saved["rng_state"])))
     with ProcessPoolExecutor(max_workers=args.workers, initializer=init_worker, initargs=(args.data, args.tape, args.policy)) as pool:
         while generation < args.generations:
-            results = list(pool.map(evaluate, population, chunksize=1))
+            started = time.monotonic()
+            pending = {g.identity(): g for g in population if g.identity() not in cache}
+            fresh = list(pool.map(evaluate, pending.values(), chunksize=1))
+            with cache_file.open("a") as stream:
+                for (identity, _), metrics in zip(pending.items(), fresh):
+                    stream.write(json.dumps({"config": config, "id": identity, "metrics": metrics}) + "\n")
+                    cache[identity] = metrics
+                stream.flush()
+                os.fsync(stream.fileno())
+            results = [cache[g.identity()] for g in population]
             scored = list(zip(population, results))
-            with (output / "evaluations.jsonl").open("a") as stream:
+            with (output / ("generation_%04d.jsonl" % (generation + 1))).open("w") as stream:
                 for g, metrics in scored:
                     stream.write(json.dumps({"generation": generation + 1, "genome": asdict(g), "metrics": metrics}) + "\n")
             generation += 1
@@ -185,6 +202,8 @@ def run(args):
             tmp.write_text(json.dumps(saved))
             os.replace(tmp, checkpoint)
             print(json.dumps({"generation": generation, "evaluated": len(scored),
+                              "new_evaluations": len(pending), "cache_hits": len(population)-len(pending),
+                              "elapsed_seconds": time.monotonic()-started,
                               "best_cagr": max(x["cagr"] for x in results)}), flush=True)
 
 def main():
