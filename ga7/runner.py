@@ -193,7 +193,6 @@ def main():
     parser.add_argument("--tape", required=True)
     parser.add_argument("--policy", required=True)
     parser.add_argument("--output", required=True)
-    parser.add_argument("--policy", required=True)
     parser.add_argument("--generations", type=int, default=1000)
     parser.add_argument("--population", type=int, default=300)
     parser.add_argument("--workers", type=int, default=8)
