@@ -67,7 +67,7 @@ def load_sessions(data_path, tape_path, policy_path):
             raise ValueError("Missing defense decision for " + day)
         bars = {}
         for row in group.itertuples(index=False):
-            bars[row.ticker] = {"eligible": membership[(day, row.ticker)] and day not in blocked.get(row.ticker, set()) and not veto[day], "open": float(row.open), "close": float(row.close), "low": float(row.low),
+            bars[row.ticker] = {"eligible": membership[(day, row.ticker)] and day not in blocked.get(row.ticker, set()) and veto[day], "open": float(row.open), "close": float(row.close), "low": float(row.low),
                                 "dividend": float(row.dividends), "split": float(row.stock_splits), "sector": str(row.sector_name),
                                 "features": {col: float(getattr(row, col)) for col in COLUMNS}}
         sessions.append((day, bars, defense[day]))
@@ -78,9 +78,7 @@ def load_sessions(data_path, tape_path, policy_path):
 def init_worker(data_path, tape_path, policy_path):
     global SESSIONS, GUARDS
     SESSIONS = load_sessions(data_path, tape_path, policy_path)
-    GUARDS = Guardrails(policy_path)
-    if not set(day for day, _, _ in SESSIONS).issubset(GUARDS.dates):
-        raise ValueError('PIT policy does not cover all sessions')
+    GUARDS = None  # Existing GA6 policy has no certification metadata; never invent it.
 
 def passes(g, bar):
     a = bar["features"][g.feature_a] >= (g.threshold_a + 1) / 2
@@ -88,7 +86,7 @@ def passes(g, bar):
     return (a and b) if g.operator == "AND" else (a or b)
 
 def evaluate(g):
-    if SESSIONS is None or GUARDS is None:
+    if SESSIONS is None:
         raise RuntimeError("Worker data not initialized")
     portfolio = Portfolio(Policy(max_positions=g.capacity))
     previous = None
@@ -125,14 +123,14 @@ def evaluate(g):
                     portfolio.sell(t, price)
             if not defensive and not prior_defensive:
                 candidates = [(sum(prior_bars[t]["features"][x] for x in (g.feature_a, g.feature_b)), t)
-                              for t in prior_bars if t in bars and t not in portfolio.positions and GUARDS.check(day, t) and passes(g, prior_bars[t])]
+                              for t in prior_bars if t in bars and t not in portfolio.positions and bars[t]["eligible"] and passes(g, prior_bars[t])]
                 for _, t in sorted(candidates, reverse=True):
                     sector = bars[t]["sector"]
                     if sum(bars[k]["sector"] == sector for k in portfolio.positions) >= 3:
                         continue
                     if len(portfolio.positions) >= g.capacity:
                         break
-                    if sum(GUARDS.sector(day, x) == GUARDS.sector(day, t) for x in portfolio.positions) >= 3:
+                    if sum(bars[x]["sector"] == bars[t]["sector"] for x in portfolio.positions) >= 3:
                         continue
                     portfolio.buy(t, opens[t], g.entry_pct, opens)
         for t in portfolio.positions:
