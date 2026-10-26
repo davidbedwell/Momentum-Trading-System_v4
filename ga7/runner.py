@@ -13,6 +13,7 @@ import pandas as pd
 
 from ga7.engine import FAMILIES, Genome, next_population, random_genome
 from ga7.evaluator import Portfolio, Policy
+from ga7.guardrails import Guardrails
 
 FEATURES = {
     "momentum": ("ga4_return_5__v1", "ga4_return_20__v1"),
@@ -26,6 +27,7 @@ FEATURES = {
 }
 COLUMNS = sorted({x for pair in FEATURES.values() for x in pair})
 SESSIONS = None
+GUARDS = None
 
 def load_sessions(data_path, tape_path):
     frame = pd.read_parquet(data_path)
@@ -58,9 +60,12 @@ def load_sessions(data_path, tape_path):
         raise ValueError("Unexpectedly short DEV79 history")
     return sessions
 
-def init_worker(data_path, tape_path):
-    global SESSIONS
+def init_worker(data_path, tape_path, policy_path):
+    global SESSIONS, GUARDS
     SESSIONS = load_sessions(data_path, tape_path)
+    GUARDS = Guardrails(policy_path)
+    if not set(day for day, _, _ in SESSIONS).issubset(GUARDS.dates):
+        raise ValueError('PIT policy does not cover all sessions')
 
 def passes(g, bar):
     a = bar["features"][g.feature_a] >= (g.threshold_a + 1) / 2
@@ -68,7 +73,7 @@ def passes(g, bar):
     return (a and b) if g.operator == "AND" else (a or b)
 
 def evaluate(g):
-    if SESSIONS is None:
+    if SESSIONS is None or GUARDS is None:
         raise RuntimeError("Worker data not initialized")
     portfolio = Portfolio(Policy(max_positions=g.capacity))
     previous = None
@@ -98,10 +103,12 @@ def evaluate(g):
                     portfolio.sell(t, price)
             if not defensive and not prior_defensive:
                 candidates = [(sum(prior_bars[t]["features"][x] for x in (g.feature_a, g.feature_b)), t)
-                              for t in prior_bars if t in bars and t not in portfolio.positions and passes(g, prior_bars[t])]
+                              for t in prior_bars if t in bars and t not in portfolio.positions and GUARDS.check(day, t) and passes(g, prior_bars[t])]
                 for _, t in sorted(candidates, reverse=True):
                     if len(portfolio.positions) >= g.capacity:
                         break
+                    if sum(GUARDS.sector(day, x) == GUARDS.sector(day, t) for x in portfolio.positions) >= 3:
+                        continue
                     portfolio.buy(t, opens[t], g.entry_pct, opens)
         for t in portfolio.positions:
             portfolio.update_low(t, lows[t])
@@ -126,7 +133,8 @@ def run(args):
     output.mkdir(parents=True, exist_ok=True)
     data_hash = file_hash(args.data)
     tape_hash = file_hash(args.tape)
-    config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "population": args.population, "seed": args.seed}
+    policy_hash = file_hash(args.policy)
+    config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "policy_sha256": policy_hash, "population": args.population, "seed": args.seed}
     checkpoint = output / "checkpoint.json"
     rng = random.Random(args.seed)
     generation = 0
@@ -138,7 +146,7 @@ def run(args):
         generation = saved["generation"]
         population = [Genome(**g) for g in saved["population"]]
         rng.setstate(pickle.loads(base64.b64decode(saved["rng_state"])))
-    with ProcessPoolExecutor(max_workers=args.workers, initializer=init_worker, initargs=(args.data, args.tape)) as pool:
+    with ProcessPoolExecutor(max_workers=args.workers, initializer=init_worker, initargs=(args.data, args.tape, args.policy)) as pool:
         while generation < args.generations:
             results = list(pool.map(evaluate, population, chunksize=1))
             scored = list(zip(population, results))
@@ -159,6 +167,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", required=True)
     parser.add_argument("--tape", required=True)
+    parser.add_argument("--policy", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--generations", type=int, default=1000)
     parser.add_argument("--population", type=int, default=300)
