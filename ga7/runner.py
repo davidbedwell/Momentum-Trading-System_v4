@@ -31,10 +31,14 @@ GUARDS = None
 
 def load_sessions(data_path, tape_path, policy_path):
     frame = pd.read_parquet(data_path)
-    required = {"date", "ticker", "open", "close", "low", *COLUMNS}
+    if not {"dividends", "stock_splits", "security_id"}.issubset(frame.columns):
+        raise ValueError("Missing corporate action or security identity columns")
+    required = {"date", "ticker", "open", "close", "low", "dividends", "stock_splits", "sector_name", *COLUMNS}
     if not required.issubset(frame.columns):
         raise ValueError("Missing data columns: " + str(sorted(required - set(frame.columns))))
     frame["date"] = pd.to_datetime(frame.date).dt.strftime("%Y-%m-%d")
+    frame["dividends"] = frame["dividends"].fillna(0)
+    frame["stock_splits"] = frame["stock_splits"].fillna(0)
     frame = frame[(frame.date >= "2005-09-14") & (frame.date <= "2026-09-14")].copy()
     if frame.ticker.nunique() != 79:
         raise ValueError("DEV79 ticker count mismatch")
@@ -63,6 +67,7 @@ def load_sessions(data_path, tape_path, policy_path):
         bars = {}
         for row in group.itertuples(index=False):
             bars[row.ticker] = {"eligible": membership[(day, row.ticker)] and day not in blocked.get(row.ticker, set()) and not veto[day], "open": float(row.open), "close": float(row.close), "low": float(row.low),
+                                "dividend": float(row.dividends), "split": float(row.stock_splits), "sector": str(row.sector_name),
                                 "features": {col: float(getattr(row, col)) for col in COLUMNS}}
         sessions.append((day, bars, defense[day]))
     if len(sessions) < 5000:
@@ -91,6 +96,13 @@ def evaluate(g):
     for i, (day, bars, defensive) in enumerate(SESSIONS):
         portfolio.session = i
         portfolio.accrue_cash()
+        for t, p in list(portfolio.positions.items()):
+            if t not in bars:
+                raise ValueError("Held security missing corporate actions")
+            split = bars[t]["split"]
+            if split and split != 1:
+                raise ValueError("Split requires audited share-adjustment convention")
+            portfolio.cash += p["shares"] * bars[t]["dividend"]
         opens = {t: b["open"] for t, b in bars.items()}
         closes = {t: b["close"] for t, b in bars.items()}
         lows = {t: b["low"] for t, b in bars.items()}
@@ -114,6 +126,9 @@ def evaluate(g):
                 candidates = [(sum(prior_bars[t]["features"][x] for x in (g.feature_a, g.feature_b)), t)
                               for t in prior_bars if t in bars and t not in portfolio.positions and GUARDS.check(day, t) and passes(g, prior_bars[t])]
                 for _, t in sorted(candidates, reverse=True):
+                    sector = bars[t]["sector"]
+                    if sum(bars[k]["sector"] == sector for k in portfolio.positions) >= 3:
+                        continue
                     if len(portfolio.positions) >= g.capacity:
                         break
                     if sum(GUARDS.sector(day, x) == GUARDS.sector(day, t) for x in portfolio.positions) >= 3:
