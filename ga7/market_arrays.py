@@ -63,6 +63,8 @@ def prepare(frame, feature_columns, policy, defense, *, start="2005-09-14", end=
             numeric[col][i, j] = 0.0 if col in ("dividends", "stock_splits") and pd.isna(value) else float(value)
         for k, col in enumerate(feature_columns):
             features[i, j, k] = float(getattr(row, col))
+    if np.any(~np.isfinite(numeric["dividends"][present])) or np.any(~np.isfinite(numeric["stock_splits"][present])):
+        raise ValueError("Invalid corporate action values")
     if np.any(~np.isfinite(numeric["open"][present])) or np.any(numeric["open"][present] <= 0):
         raise ValueError("Invalid open price")
     if np.any(~np.isfinite(numeric["close"][present])) or np.any(numeric["close"][present] <= 0):
