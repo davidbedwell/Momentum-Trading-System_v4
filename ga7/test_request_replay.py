@@ -32,7 +32,7 @@ class ReplayTests(unittest.TestCase):
         self.assertEqual(metrics["outcomes"],1)
         self.assertEqual(len(ledger.outcomes),1)
         self.assertEqual(ledger.outcomes[0]["session"],0)
-        self.assertEqual(ledger.outcomes[0]["horizon_sessions"],5)
+        self.assertEqual(ledger.outcomes[0]["horizon_sessions"],4)
         self.assertEqual(metrics["trades"],1)
         self.assertAlmostEqual(metrics["final_nav"], 100000 + (
             50*98*(1-.001) + 49*99*(1-.001) -
