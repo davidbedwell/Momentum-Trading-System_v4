@@ -20,7 +20,7 @@ class ReplayTests(unittest.TestCase):
 
     def test_partial_reduction_and_final_liquidation_accounting(self):
         g = Genome("momentum","a","b","AND",0,0,10,.10,1,"time",.03)
-        prices = [(100.,100.), (100.,100.), (100.,98.), (98.,98.),
+        prices = [(100.,100.), (100.,100.), (100.,100.), (98.,98.),
                   (98.,100.), (99.,99.)]
         sessions = []
         for i, (op, close) in enumerate(prices):
