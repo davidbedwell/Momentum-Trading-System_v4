@@ -13,7 +13,7 @@ import time
 import pandas as pd
 
 from ga7.engine import FAMILIES, Genome, next_population, random_genome
-from ga7.evaluator import Portfolio, Policy
+from ga7.request_replay import replay_requests
 from ga7.guardrails import Guardrails
 from ga7.stagnation import update_stagnation
 
@@ -93,60 +93,7 @@ def passes(g, bar):
 def evaluate(g):
     if SESSIONS is None:
         raise RuntimeError("Worker data not initialized")
-    portfolio = Portfolio(Policy(max_positions=g.capacity))
-    previous = None
-    last_date = None
-    last_closes = None
-    for i, (day, bars, defensive) in enumerate(SESSIONS):
-        portfolio.session = i
-        portfolio.accrue_cash()
-        for t, p in list(portfolio.positions.items()):
-            if t not in bars:
-                raise ValueError("Held security missing corporate actions")
-            split = bars[t]["split"]
-            if split and split != 1:
-                raise ValueError("Split requires audited share-adjustment convention")
-            portfolio.cash += p["shares"] * bars[t]["dividend"]
-        opens = {t: b["open"] for t, b in bars.items()}
-        closes = {t: b["close"] for t, b in bars.items()}
-        lows = {t: b["low"] for t, b in bars.items()}
-        if set(portfolio.positions) - set(opens):
-            raise ValueError("Missing held security open; no silent delisting")
-        if previous is not None:
-            prior_day, prior_bars, prior_defensive = previous
-            for t in list(portfolio.positions):
-                p = portfolio.positions[t]
-                age = i - p["session"]
-                price = opens[t]
-                pnl = price / p["entry"] - 1
-                decay = t in prior_bars and not passes(g, prior_bars[t])
-                should_exit = prior_defensive or defensive or age >= min(g.hold_sessions, 40) or pnl <= -g.stop_pct
-                should_exit |= g.exit_rule == "signal_decay" and decay
-                should_exit |= g.exit_rule == "reversal" and pnl < -.005
-                should_exit |= g.exit_rule == "volatility" and abs(pnl) > .04
-                if should_exit:
-                    portfolio.sell(t, price)
-            if not defensive and not prior_defensive:
-                candidates = [(sum(prior_bars[t]["features"][x] for x in (g.feature_a, g.feature_b)), t)
-                              for t in prior_bars if t in bars and t not in portfolio.positions and bars[t]["eligible"] and passes(g, prior_bars[t])]
-                for _, t in sorted(candidates, reverse=True):
-                    sector = bars[t]["sector"]
-                    if sum(bars[k]["sector"] == sector for k in portfolio.positions) >= 3:
-                        continue
-                    if len(portfolio.positions) >= g.capacity:
-                        break
-                    if sum(bars[x]["sector"] == bars[t]["sector"] for x in portfolio.positions) >= 3:
-                        continue
-                    portfolio.buy(t, opens[t], g.entry_pct, opens)
-        for t in portfolio.positions:
-            portfolio.update_low(t, lows[t])
-        if i < len(SESSIONS) - 1:
-            portfolio.mark(day, closes)
-        previous = (day, bars, defensive)
-        last_date, last_closes = day, closes
-    if last_date is None:
-        raise ValueError("No sessions")
-    result = portfolio.finish(last_date, last_closes)
+    result, _ledger = replay_requests(g, SESSIONS, passes)
     return result
 
 def file_hash(path):
@@ -166,7 +113,7 @@ def run(args):
     selected_tickers = tuple(sorted(x["ticker"] for x in selection["tickers"])) if selection else None
     if selection and (len(selected_tickers) != 32 or len(set(selected_tickers)) != 32):
         raise ValueError("Invalid DEV32 selection")
-    source_files = ("runner.py", "engine.py", "evaluator.py", "compiled_portfolio.py", "compiled_signals.py", "market_arrays.py", "stagnation.py")
+    source_files = ("runner.py", "engine.py", "evaluator.py", "compiled_portfolio.py", "compiled_signals.py", "market_arrays.py", "stagnation.py", "request_replay.py", "proposals.py", "shadow_ledger.py")
     source_digest = hashlib.sha256("".join(file_hash(Path(__file__).with_name(name)) for name in source_files).encode()).hexdigest()
     config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "policy_sha256": policy_hash, "runner_sha256": source_digest, "population": args.population, "seed": args.seed, "selection_sha256": file_hash(args.selection) if args.selection else None, "patience": args.patience}
     checkpoint = output / "checkpoint.json"
