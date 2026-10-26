@@ -15,6 +15,10 @@ class Position:
     cost: float
     entered: int
     low: float
+    origin_session: int
+
+def score_signal(genome, bar):
+    return sum(bar["features"][x] for x in (genome.feature_a, genome.feature_b))/2
 
 def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
                     fee=.001, cash_yield=.0297, record_pass=False):
@@ -45,7 +49,7 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
                     cash += proceeds
                     ret = proceeds / pos.cost - 1
                     completed.append((ticker, ret, i-pos.entered))
-                    ledger.settle(identity, ticker, proposal.session, ret,
+                    ledger.settle(identity, ticker, pos.origin_session, ret,
                                   ret > 0, min(40, max(1, i-pos.entered)))
                 elif proposal.action in ("ENTER", "INCREASE") and not defensive and not previous_defense and bars[ticker]["eligible"]:
                     if ticker not in positions and len(positions) < genome.capacity:
@@ -55,7 +59,7 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
                         if qty > 0:
                             cost = qty * price * (1+fee)
                             cash -= cost
-                            positions[ticker] = Position(qty, price, cost, i, price)
+                            positions[ticker] = Position(qty, price, cost, i, price, proposal.session)
             for ticker, pos in list(positions.items()):
                 if ticker not in bars:
                     raise ValueError("Held ticker disappeared: " + ticker)
@@ -75,6 +79,10 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
                 exit_now |= genome.exit_rule == "reversal" and pnl < -.005
                 exit_now |= genome.exit_rule == "volatility" and abs(pnl) > .04
                 action = "EXIT" if exit_now else "HOLD"
+                if action == "HOLD" and pnl > .03 and score_signal(genome, bar) > .75:
+                    action = "INCREASE"
+                elif action == "HOLD" and pnl < -.01:
+                    action = "REDUCE"
             elif signal and not defensive and bar["eligible"]:
                 action = "ENTER"
             else:
@@ -82,10 +90,10 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
             if action == "PASS" and not record_pass:
                 continue
             # Feature score is NOT a calibrated probability.
-            score = sum(bar["features"][x] for x in (genome.feature_a, genome.feature_b))/2
+            score = score_signal(genome, bar)
             score = max(0., min(1., score)) if score == score else 0.
             request = Proposal(i, ticker, identity, action, score,
-                (score-.5)*.1, .02, genome.entry_pct if action=="ENTER" else 0.,
+                (score-.5)*.1, .02, genome.entry_pct if action=="ENTER" else (.03 if action=="INCREASE" else 0.),
                 min(40, genome.hold_sessions), score, False).validate()
             ledger.record(request)
             pending.append(request)
