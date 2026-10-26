@@ -68,6 +68,10 @@ def dominates(a, b):
     bv = [float(b.get(k) or 0) * direction for k, direction in directions.items()]
     return all(x >= y for x, y in zip(av, bv)) and any(x > y for x, y in zip(av, bv))
 
+def breeding_eligible(m):
+    return (m.get('trades', 0) >= 30 and m.get('cagr', 0) > 0
+            and m.get('cagr', 0) > m.get('mdd', float('inf')))
+
 def pareto_fronts(scored):
     remaining, result = list(range(len(scored))), []
     while remaining:
@@ -82,7 +86,8 @@ def pareto_fronts(scored):
 def next_population(scored, rng, features, size=300):
     if len(scored) < 2:
         raise ValueError("Need at least two scored chromosomes")
-    ordered = [scored[i][0] for front in pareto_fronts(scored) for i in sorted(front, key=lambda j: scored[j][0].identity())]
+    eligible = [(g, m) for g, m in scored if breeding_eligible(m)]
+    ordered = [eligible[i][0] for front in pareto_fronts(eligible) for i in sorted(front, key=lambda j: eligible[j][0].identity())] if eligible else []
     parents = ordered[:max(2, size // 4)]
     output, seen = [], set()
     def add(g):
@@ -101,7 +106,9 @@ def next_population(scored, rng, features, size=300):
             raise RuntimeError("Population diversity exhausted")
         if rng.random() < .15:
             child = random_genome(rng, features)
-        else:
+        elif parents:
             child = mutate(crossover(rng.choice(parents), rng.choice(parents), rng, features), rng, features)
+        else:
+            child = random_genome(rng, features)
         add(child)
     return output
