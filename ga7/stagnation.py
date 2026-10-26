@@ -1,10 +1,13 @@
 """Track GA7 chromosome-level improvement without portfolio risk gates."""
 import math
+from ga7.engine import breeding_eligible
 
 def feasible_signature(results, **_unused):
-    """Quantized chromosome-level objectives; no CAGR, MDD, or trade-count cutoff."""
+    """Track only eligible chromosome fitness frontier."""
     points = []
     for m in results:
+        if not breeding_eligible(m):
+            continue
         vals = (m.get("fitness"), m.get("return_per_session"), m.get("mae"))
         if all(v is not None and math.isfinite(float(v)) for v in vals):
             points.append((round(float(vals[0]), 5),
