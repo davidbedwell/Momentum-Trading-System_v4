@@ -63,7 +63,7 @@ def crossover(a, b, rng, features):
     return validate(Genome(**{k: getattr(rng.choice((a, b)), k) for k in asdict(a)}), features)
 
 def dominates(a, b):
-    directions = {"cagr": 1, "mdd": -1, "calmar": 1, "ev": 1, "mae": 1}
+    directions = {"fitness": 1, "return_per_session": 1, "mae": 1, "ev": 1}
     av = [float(a.get(k) or 0) * direction for k, direction in directions.items()]
     bv = [float(b.get(k) or 0) * direction for k, direction in directions.items()]
     return all(x >= y for x, y in zip(av, bv)) and any(x > y for x, y in zip(av, bv))
