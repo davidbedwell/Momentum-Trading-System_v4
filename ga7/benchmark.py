@@ -42,12 +42,12 @@ def benchmark(data, policy_path, tape, output, count=32, seed=70079):
         metrics = replay(arrays.opens, arrays.closes, arrays.lows,
             arrays.dividends, arrays.splits, arrays.present, arrays.eligible,
             arrays.sector, arrays.defense, signals, genome.hold_sessions,
-            genome.entry_pct, genome.capacity, cash_yield=0.)
+            genome.entry_pct, genome.capacity, cash_yield=.0297)
         results.append({"genome": asdict(genome), "final_nav": float(metrics[0]),
             "cagr": float(metrics[1]), "mdd": float(metrics[2]),
             "trades": int(metrics[6])})
     elapsed = time.perf_counter() - first
-    manifest = {"status": "UNCERTIFIED_ZERO_CASH_YIELD_COMPILED_BENCHMARK",
+    manifest = {"status": "UNCERTIFIED_FIXED_2_97_PERCENT_SGOV_BENCHMARK",
         "stock_count": len(arrays.tickers), "sessions": len(arrays.dates),
         "genomes": count, "preparation_seconds": preparation_seconds,
         "evaluation_seconds_including_jit": elapsed,
