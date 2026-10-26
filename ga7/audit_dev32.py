@@ -28,7 +28,10 @@ def audit(frame, selection, *, cutoff="2005-09-14"):
     per_sector=sectors.value_counts().sort_index()
     chosen=sectors.loc[selected].value_counts().reindex(per_sector.index,fill_value=0)
     gap=(chosen/32-per_sector/79).abs()
-    return {"pass_for_evolution":not failures,"blocking_findings":failures,
+    structural = [x for x in failures if x not in ("No audited PIT financial solvency evidence","Selector output is provisional")]
+    return {"pass_for_exploratory_evolution":not structural,
+        "certification_deferred":True,
+        "pass_for_evolution":not failures,"blocking_findings":failures,
         "sector_total_variation_distance":float(gap.sum()/2),
         "sector_max_weight_gap":float(gap.max()),
         "eligible_at_cutoff":len(eligible),
