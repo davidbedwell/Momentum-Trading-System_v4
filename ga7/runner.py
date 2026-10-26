@@ -191,15 +191,23 @@ def run(args):
                 os.fsync(stream.fileno())
             results = [cache[g.identity()] for g in population]
             scored = list(zip(population, results))
-            with (output / ("generation_%04d.jsonl" % (generation + 1))).open("w") as stream:
+            generation_path = output / ("generation_%04d.jsonl" % (generation + 1))
+            generation_tmp = generation_path.with_suffix(".tmp")
+            with generation_tmp.open("w") as stream:
                 for g, metrics in scored:
                     stream.write(json.dumps({"generation": generation + 1, "genome": asdict(g), "metrics": metrics}) + "\n")
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(generation_tmp, generation_path)
             generation += 1
             population = next_population(scored, rng, FEATURES, args.population)
             saved = {"config": config, "generation": generation, "population": [asdict(g) for g in population],
                      "rng_state": base64.b64encode(pickle.dumps(rng.getstate())).decode()}
             tmp = checkpoint.with_suffix(".tmp")
-            tmp.write_text(json.dumps(saved))
+            with tmp.open("w") as stream:
+                stream.write(json.dumps(saved))
+                stream.flush()
+                os.fsync(stream.fileno())
             os.replace(tmp, checkpoint)
             print(json.dumps({"generation": generation, "evaluated": len(scored),
                               "new_evaluations": len(pending), "cache_hits": len(population)-len(pending),
