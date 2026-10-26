@@ -29,7 +29,7 @@ COLUMNS = sorted({x for pair in FEATURES.values() for x in pair})
 SESSIONS = None
 GUARDS = None
 
-def load_sessions(data_path, tape_path):
+def load_sessions(data_path, tape_path, policy_path):
     frame = pd.read_parquet(data_path)
     required = {"date", "ticker", "open", "close", "low", *COLUMNS}
     if not required.issubset(frame.columns):
@@ -47,13 +47,22 @@ def load_sessions(data_path, tape_path):
     if state.date.duplicated().any() or not {"date", "defensive"}.issubset(state.columns):
         raise ValueError("Invalid defense tape")
     defense = dict(zip(state.date, state.defensive.astype(bool)))
+    policy = json.loads(Path(policy_path).read_text())
+    membership = {(str(d)[:10], t): bool(v) for d, t, v in policy["membership"]}
+    blocked = {t: set(map(lambda d: str(d)[:10], days)) for t, days in policy["blocked"].items()}
+    veto = {str(d)[:10]: bool(v) for d, v in policy["risk_veto"].items()}
     sessions = []
     for day, group in frame.groupby("date", sort=True):
+        if day not in veto:
+            raise ValueError("Missing risk veto for " + day)
+        for ticker in group.ticker:
+            if (day, ticker) not in membership:
+                raise ValueError("Missing PIT membership for " + day + " " + ticker)
         if day not in defense:
             raise ValueError("Missing defense decision for " + day)
         bars = {}
         for row in group.itertuples(index=False):
-            bars[row.ticker] = {"open": float(row.open), "close": float(row.close), "low": float(row.low),
+            bars[row.ticker] = {"eligible": membership[(day, row.ticker)] and day not in blocked.get(row.ticker, set()) and not veto[day], "open": float(row.open), "close": float(row.close), "low": float(row.low),
                                 "features": {col: float(getattr(row, col)) for col in COLUMNS}}
         sessions.append((day, bars, defense[day]))
     if len(sessions) < 5000:
@@ -62,7 +71,7 @@ def load_sessions(data_path, tape_path):
 
 def init_worker(data_path, tape_path, policy_path):
     global SESSIONS, GUARDS
-    SESSIONS = load_sessions(data_path, tape_path)
+    SESSIONS = load_sessions(data_path, tape_path, policy_path)
     GUARDS = Guardrails(policy_path)
     if not set(day for day, _, _ in SESSIONS).issubset(GUARDS.dates):
         raise ValueError('PIT policy does not cover all sessions')
@@ -169,6 +178,7 @@ def main():
     parser.add_argument("--tape", required=True)
     parser.add_argument("--policy", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--policy", required=True)
     parser.add_argument("--generations", type=int, default=1000)
     parser.add_argument("--population", type=int, default=300)
     parser.add_argument("--workers", type=int, default=8)
