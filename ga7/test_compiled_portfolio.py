@@ -18,7 +18,7 @@ class CompiledPortfolioTests(unittest.TestCase):
         a = self.inputs()
         sig = np.zeros((5, 2), dtype=np.bool_)
         sig[1, 0] = True
-        result = replay(*a, sig, 4, .10, 10, cash_yield=0.)
+        result = replay(*a, sig, 4, .10, 2, cash_yield=0.)
         self.assertEqual(result[6], 1)
         self.assertGreater(result[0], 100000.)
         self.assertEqual(result[8].shape, (5,))
@@ -40,7 +40,7 @@ class CompiledPortfolioTests(unittest.TestCase):
         a[8][0] = True
         sig = np.zeros((5, 2), dtype=np.bool_)
         sig[1, 0] = True
-        result = replay(*a, sig, 4, .10, 10, cash_yield=0.)
+        result = replay(*a, sig, 4, .10, 2, cash_yield=0.)
         self.assertEqual(result[6], 0)
 
     def test_split_adjusted_basis_does_not_multiply_shares(self):
@@ -48,9 +48,9 @@ class CompiledPortfolioTests(unittest.TestCase):
         a[4][2, 0] = 2.
         sig = np.zeros((5, 2), dtype=np.bool_)
         sig[1, 0] = True
-        adjusted = replay(*a, sig, 4, .10, 10, cash_yield=0.)
+        adjusted = replay(*a, sig, 4, .10, 2, cash_yield=0.)
         a[4][2, 0] = 0.
-        no_split_event = replay(*a, sig, 4, .10, 10, cash_yield=0.)
+        no_split_event = replay(*a, sig, 4, .10, 2, cash_yield=0.)
         self.assertAlmostEqual(adjusted[0], no_split_event[0], places=6)
 
 if __name__ == "__main__":
