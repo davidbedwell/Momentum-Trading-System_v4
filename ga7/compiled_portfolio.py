@@ -10,7 +10,7 @@ from numba import njit
 @njit(cache=True)
 def replay(opens, closes, lows, dividends, splits, present, eligible,
            sector, defense, signals, hold_limit, entry_fraction,
-           max_positions, fee=0.001, cash_yield=0.03,
+           max_positions, fee=0.001, cash_yield=0.0297,
            hard_stop=0.02, start_cash=100000.):
     n_days, n_stocks = opens.shape
     if n_days < 2 or n_stocks < 1 or hold_limit < 1 or hold_limit > 40:
@@ -35,8 +35,10 @@ def replay(opens, closes, lows, dividends, splits, present, eligible,
     peak = start_cash
     mdd = 0.
     for day in range(n_days):
-        if cash_yield != 0.:
-            raise ValueError("Cash yield requires GA6 calendar-day and settlement parity")
+        # Fixed SGOV proxy, user-approved: 2.97% annual on uninvested cash.
+        # Session accrual is an approximation, not GA6 T+1 cash settlement.
+        if day > 0:
+            cash *= 1. + cash_yield / 252.
         if day > 0:
             for stock in range(n_stocks):
                 if shares[stock] == 0:
