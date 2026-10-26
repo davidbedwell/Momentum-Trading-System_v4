@@ -29,6 +29,19 @@ def benchmark(data, policy_path, tape, output, count=32, seed=70079):
     defense = dict(zip(state.date.astype(str), state.defensive.astype(bool)))
     arrays = prepare(df, COLUMNS, policy, defense)
     preparation_seconds = time.perf_counter() - start
+    split_events = int(np.count_nonzero(arrays.splits[arrays.present]))
+    if split_events:
+        report = {"status": "BLOCKED_UNCERTIFIED_SPLIT_CONVENTION",
+                  "split_events": split_events,
+                  "stock_count": len(arrays.tickers),
+                  "sessions": len(arrays.dates),
+                  "preparation_seconds": preparation_seconds,
+                  "evaluations_completed": 0}
+        path = output / "benchmark.json"
+        temp = path.with_suffix(".tmp")
+        temp.write_text(json.dumps(report, indent=2))
+        temp.replace(path)
+        return report
     rng = random.Random(seed)
     genomes = [random_genome(rng, FEATURES, FAMILIES[i % 8]) for i in range(count)]
     first = time.perf_counter()
