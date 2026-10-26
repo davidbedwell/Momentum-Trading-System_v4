@@ -40,9 +40,9 @@ def select_dev32(frame, count=32):
         group = universe[universe.sector==sector].copy()
         # Coverage first, then stable ticker ordering. No future returns used.
         group = group.sort_values(["sessions"],ascending=[False],kind="stable")
-        group = group.assign(ticker=group.index).sort_values(
+        group = group.reset_index().sort_values(
             ["sessions","ticker"],ascending=[False,True])
-        picks.extend(group.head(int(quota)).index.tolist())
+        picks.extend(group.head(int(quota))["ticker"].tolist())
     selected = universe.loc[sorted(picks)]
     if len(selected)!=count or selected.sector.nunique()!=len(sector_counts):
         raise AssertionError("Selection count/sector coverage mismatch")
