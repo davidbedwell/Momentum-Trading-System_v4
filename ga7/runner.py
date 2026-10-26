@@ -30,7 +30,7 @@ COLUMNS = sorted({x for pair in FEATURES.values() for x in pair})
 SESSIONS = None
 GUARDS = None
 
-def load_sessions(data_path, tape_path, policy_path):
+def load_sessions(data_path, tape_path, policy_path, selected_tickers=None):
     frame = pd.read_parquet(data_path)
     if not {"dividends", "stock_splits", "security_id"}.issubset(frame.columns):
         raise ValueError("Missing corporate action or security identity columns")
@@ -45,6 +45,10 @@ def load_sessions(data_path, tape_path, policy_path):
         raise ValueError("DEV79 ticker count mismatch")
     if frame.duplicated(["date", "ticker"]).any():
         raise ValueError("Duplicate date/ticker bars")
+    if selected_tickers is not None:
+        if not set(selected_tickers).issubset(set(frame.ticker)):
+            raise ValueError("DEV32 contains tickers missing from DEV79")
+        frame = frame[frame.ticker.isin(selected_tickers)].copy()
     for col in COLUMNS:
         frame[col] = frame.groupby("date")[col].rank(pct=True)
     state = pd.read_csv(tape_path)
@@ -75,9 +79,9 @@ def load_sessions(data_path, tape_path, policy_path):
         raise ValueError("Unexpectedly short DEV79 history")
     return sessions
 
-def init_worker(data_path, tape_path, policy_path):
+def init_worker(data_path, tape_path, policy_path, selected_tickers=None):
     global SESSIONS, GUARDS
-    SESSIONS = load_sessions(data_path, tape_path, policy_path)
+    SESSIONS = load_sessions(data_path, tape_path, policy_path, selected_tickers)
     GUARDS = None  # Existing GA6 policy has no certification metadata; never invent it.
 
 def passes(g, bar):
@@ -157,9 +161,13 @@ def run(args):
     data_hash = file_hash(args.data)
     tape_hash = file_hash(args.tape)
     policy_hash = file_hash(args.policy)
+    selection = json.loads(Path(args.selection).read_text()) if args.selection else None
+    selected_tickers = tuple(sorted(x["ticker"] for x in selection["tickers"])) if selection else None
+    if selection and (len(selected_tickers) != 32 or len(set(selected_tickers)) != 32):
+        raise ValueError("Invalid DEV32 selection")
     source_files = ("runner.py", "engine.py", "evaluator.py", "compiled_portfolio.py", "compiled_signals.py", "market_arrays.py")
     source_digest = hashlib.sha256("".join(file_hash(Path(__file__).with_name(name)) for name in source_files).encode()).hexdigest()
-    config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "policy_sha256": policy_hash, "runner_sha256": source_digest, "population": args.population, "seed": args.seed}
+    config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "policy_sha256": policy_hash, "runner_sha256": source_digest, "population": args.population, "seed": args.seed, "selection_sha256": file_hash(args.selection) if args.selection else None}
     checkpoint = output / "checkpoint.json"
     cache_file = output / "evaluation_cache.jsonl"
     cache = {}
@@ -184,7 +192,7 @@ def run(args):
         generation = saved["generation"]
         population = [Genome(**g) for g in saved["population"]]
         rng.setstate(pickle.loads(base64.b64decode(saved["rng_state"])))
-    with ProcessPoolExecutor(max_workers=args.workers, initializer=init_worker, initargs=(args.data, args.tape, args.policy)) as pool:
+    with ProcessPoolExecutor(max_workers=args.workers, initializer=init_worker, initargs=(args.data, args.tape, args.policy, selected_tickers)) as pool:
         while generation < args.generations:
             started = time.monotonic()
             pending = {g.identity(): g for g in population if g.identity() not in cache}
@@ -226,6 +234,7 @@ def main():
     parser.add_argument("--tape", required=True)
     parser.add_argument("--policy", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--selection", help="DEV32 selection JSON")
     parser.add_argument("--generations", type=int, default=1000)
     parser.add_argument("--population", type=int, default=300)
     parser.add_argument("--workers", type=int, default=8)
