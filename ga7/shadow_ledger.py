@@ -6,16 +6,16 @@ class ShadowLedger:
     def __init__(self):
         self.requests = []
         self.outcomes = []
+        self._request_keys = set()
 
     def record(self, proposal):
         proposal.validate()
         self.requests.append(asdict(proposal))
+        self._request_keys.add((proposal.chromosome_id, proposal.ticker, proposal.session))
 
     def settle(self, chromosome_id, ticker, session, realized_net_return,
                target_achieved, horizon_sessions):
-        if not any(r["chromosome_id"] == chromosome_id and
-                   r["ticker"] == ticker and r["session"] == session
-                   for r in self.requests):
+        if (chromosome_id, ticker, session) not in self._request_keys:
             raise ValueError("Outcome without original proposal")
         if not isinstance(target_achieved, bool) or not 1 <= horizon_sessions <= 40:
             raise ValueError("Invalid outcome")
