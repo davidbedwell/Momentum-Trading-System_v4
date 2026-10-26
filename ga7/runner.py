@@ -105,7 +105,8 @@ def evaluate(g):
                     portfolio.buy(t, opens[t], g.entry_pct, opens)
         for t in portfolio.positions:
             portfolio.update_low(t, lows[t])
-        portfolio.mark(day, closes)
+        if i < len(SESSIONS) - 1:
+            portfolio.mark(day, closes)
         previous = (day, bars, defensive)
         last_date, last_closes = day, closes
     if last_date is None:
@@ -113,11 +114,18 @@ def evaluate(g):
     result = portfolio.finish(last_date, last_closes)
     return result
 
+def file_hash(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
 def run(args):
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=True)
-    data_hash = hashlib.sha256(Path(args.data).read_bytes()).hexdigest()
-    tape_hash = hashlib.sha256(Path(args.tape).read_bytes()).hexdigest()
+    data_hash = file_hash(args.data)
+    tape_hash = file_hash(args.tape)
     config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "population": args.population, "seed": args.seed}
     checkpoint = output / "checkpoint.json"
     rng = random.Random(args.seed)
