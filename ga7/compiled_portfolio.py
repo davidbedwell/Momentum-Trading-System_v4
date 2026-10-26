@@ -1,6 +1,7 @@
 """Numba chronological cash-funded portfolio replay.
 
-Research kernel: requires separate GA6 parity certification before production.\nSplit-adjusted OHLC convention matches GA6 SettledLedger(price_basis="split_adjusted").
+Research kernel: requires separate GA6 parity certification before production.
+Split-adjusted OHLC convention matches GA6 SettledLedger(price_basis="split_adjusted").
 Inputs are daily contiguous arrays, signal[t] derived from information at t-1.
 """
 import numpy as np
@@ -12,6 +13,14 @@ def replay(opens, closes, lows, dividends, splits, present, eligible,
            max_positions, fee=0.001, cash_yield=0.03,
            hard_stop=0.02, start_cash=100000.):
     n_days, n_stocks = opens.shape
+    if n_days < 2 or n_stocks < 1 or hold_limit < 1 or hold_limit > 40:
+        raise ValueError("Invalid dimensions or swing hold")
+    if not 0. < entry_fraction <= .30 or not 1 <= max_positions <= n_stocks:
+        raise ValueError("Invalid allocation or capacity")
+    if not 0. <= fee < 1. or not 0. <= cash_yield < 1. or not 0. < hard_stop <= .02:
+        raise ValueError("Invalid execution costs or risk policy")
+    if start_cash <= 0. or not np.isfinite(start_cash):
+        raise ValueError("Invalid starting capital")
     shares = np.zeros(n_stocks, np.int64)
     entry = np.zeros(n_stocks, np.float64)
     costs = np.zeros(n_stocks, np.float64)
@@ -26,7 +35,8 @@ def replay(opens, closes, lows, dividends, splits, present, eligible,
     peak = start_cash
     mdd = 0.
     for day in range(n_days):
-        cash *= 1. + cash_yield / 252.
+        if cash_yield != 0.:
+            raise ValueError("Cash yield requires GA6 calendar-day and settlement parity")
         if day > 0:
             for stock in range(n_stocks):
                 if shares[stock] == 0:
