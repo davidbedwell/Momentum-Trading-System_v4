@@ -19,7 +19,7 @@ class ReplayTests(unittest.TestCase):
         self.assertGreater(metrics["trades"],0)
 
     def test_partial_reduction_and_final_liquidation_accounting(self):
-        g = Genome("momentum","a","b","AND",0,0,10,.10,1,"time",.02)
+        g = Genome("momentum","a","b","AND",0,0,10,.10,1,"time",.03)
         prices = [(100.,100.), (100.,100.), (100.,98.), (98.,98.),
                   (98.,99.), (99.,99.)]
         sessions = []
@@ -35,8 +35,8 @@ class ReplayTests(unittest.TestCase):
         self.assertEqual(ledger.outcomes[0]["horizon_sessions"],5)
         self.assertEqual(metrics["trades"],1)
         self.assertAlmostEqual(metrics["final_nav"], 100000 + (
-            49*98*(1-.001) + 49*99*(1-.001) -
-            98*100*(1+.001)), places=5)
+            50*98*(1-.001) + 49*99*(1-.001) -
+            99*100*(1+.001)), places=5)
 
     def test_defense_blocks_entry(self):
         g = Genome("momentum","a","b","AND",0,0,2,.08,2,"time",.02)
