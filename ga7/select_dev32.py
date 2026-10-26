@@ -22,23 +22,24 @@ def select_dev32(frame, count=32):
     sector_counts = universe.groupby("sector").size().sort_index()
     if len(sector_counts) > count:
         raise ValueError("Not enough slots for all sectors")
+    baseline = pd.Timestamp("2005-09-14")
+    eligible = set(frame.loc[frame.date <= baseline,"ticker"])
+    asof_counts = universe.loc[universe.index.intersection(eligible)].groupby("sector").size().reindex(sector_counts.index,fill_value=0)
+    if (asof_counts == 0).any():
+        raise ValueError("Missing a sector at historical cutoff")
     quotas = pd.Series(1,index=sector_counts.index,dtype=int)
     remaining = count-len(quotas)
     capacities = sector_counts-1
     while remaining:
-        eligible = capacities > (quotas-1)
-        if not eligible.any():
+        eligible_sectors = (quotas < asof_counts) & (quotas < sector_counts)
+        if not eligible_sectors.any():
             raise ValueError("Insufficient sector capacity")
         # Largest deficit against proportional DEV79 representation.
         target = sector_counts / sector_counts.sum() * count
-        sector = sorted(quotas.index[eligible],
+        sector = sorted(quotas.index[eligible_sectors],
                         key=lambda s:(-(target[s]-quotas[s]),s))[0]
         quotas[sector] += 1
         remaining -= 1
-    baseline = pd.Timestamp("2005-09-14")
-    eligible = set(frame.loc[frame.date <= baseline,"ticker"])
-    if not eligible:
-        raise ValueError("No historical eligibility at baseline")
     picks = []
     for sector, quota in quotas.items():
         group = universe[universe.sector==sector].copy()
@@ -70,6 +71,7 @@ def main():
              "universe_count":79,"selected_count":32,
              "sector_counts":{k:int(v) for k,v in counts.items()},
              "sector_quotas":{k:int(v) for k,v in quotas.items()},
+             "asof_sector_counts":{k:int(v) for k,v in frame.loc[frame.date <= "2005-09-14"].groupby("sector_name").ticker.nunique().items()},
              "tickers":records}
     payload["selection_sha256"]=hashlib.sha256(json.dumps(records,sort_keys=True).encode()).hexdigest()
     Path(args.out).parent.mkdir(parents=True,exist_ok=True)
