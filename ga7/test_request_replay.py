@@ -18,6 +18,26 @@ class ReplayTests(unittest.TestCase):
         self.assertTrue(all(not r["calibrated"] for r in ledger.requests))
         self.assertGreater(metrics["trades"],0)
 
+    def test_partial_reduction_and_final_liquidation_accounting(self):
+        g = Genome("momentum","a","b","AND",0,0,10,.10,1,"time",.02)
+        prices = [(100.,100.), (100.,100.), (100.,98.), (98.,98.),
+                  (98.,99.), (99.,99.)]
+        sessions = []
+        for i, (op, close) in enumerate(prices):
+            sessions.append((str(i), {"AAA":{"open":op,"close":close,
+                "low":min(op,close),"eligible":True,"dividend":0.,
+                "features":{"a":1.,"b":1.}}},False))
+        metrics, ledger = replay_requests(g,sessions,lambda genome,bar:True,
+                                         cash_yield=0.)
+        self.assertEqual(metrics["outcomes"],1)
+        self.assertEqual(len(ledger.outcomes),1)
+        self.assertEqual(ledger.outcomes[0]["session"],0)
+        self.assertEqual(ledger.outcomes[0]["horizon_sessions"],5)
+        self.assertEqual(metrics["trades"],1)
+        self.assertAlmostEqual(metrics["final_nav"], 100000 + (
+            49*98*(1-.001) + 49*99*(1-.001) -
+            98*100*(1+.001)), places=5)
+
     def test_defense_blocks_entry(self):
         g = Genome("momentum","a","b","AND",0,0,2,.08,2,"time",.02)
         sessions = [(str(i),{"AAA":{"open":100.,"close":100.,
