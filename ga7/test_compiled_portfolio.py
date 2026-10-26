@@ -1,0 +1,43 @@
+import unittest
+import numpy as np
+from ga7.compiled_portfolio import replay
+
+class CompiledPortfolioTests(unittest.TestCase):
+    def inputs(self):
+        shape = (5, 2)
+        op = np.full(shape, 100., dtype=np.float64)
+        cl = np.full(shape, 100., dtype=np.float64)
+        lo = np.full(shape, 98., dtype=np.float64)
+        cl[1:, 0] = [101., 105., 108., 110.]
+        op[1:, 0] = [101., 105., 108., 110.]
+        return (op, cl, lo, np.zeros(shape), np.zeros(shape),
+                np.ones(shape, dtype=np.bool_), np.ones(shape, dtype=np.bool_),
+                np.zeros(shape, dtype=np.int16), np.zeros(5, dtype=np.bool_))
+
+    def test_cash_funded_close_all(self):
+        a = self.inputs()
+        sig = np.zeros((5, 2), dtype=np.bool_)
+        sig[1, 0] = True
+        result = replay(*a, sig, 4, .10, 10, cash_yield=0.)
+        self.assertEqual(result[6], 1)
+        self.assertGreater(result[0], 100000.)
+        self.assertEqual(result[8].shape, (5,))
+
+    def test_defense_prevents_entry(self):
+        a = list(self.inputs())
+        a[8][0] = True
+        sig = np.zeros((5, 2), dtype=np.bool_)
+        sig[1, 0] = True
+        result = replay(*a, sig, 4, .10, 10, cash_yield=0.)
+        self.assertEqual(result[6], 0)
+
+    def test_split_fails_closed(self):
+        a = list(self.inputs())
+        a[4][2, 0] = 2.
+        sig = np.zeros((5, 2), dtype=np.bool_)
+        sig[1, 0] = True
+        with self.assertRaises(ValueError):
+            replay(*a, sig, 4, .10, 10, cash_yield=0.)
+
+if __name__ == "__main__":
+    unittest.main()
