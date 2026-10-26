@@ -164,8 +164,14 @@ def run(args):
     cache_file = output / "evaluation_cache.jsonl"
     cache = {}
     if cache_file.exists():
-        for line in cache_file.read_text().splitlines():
-            item = json.loads(line)
+        lines = cache_file.read_text().splitlines()
+        for index, line in enumerate(lines):
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError:
+                if index != len(lines) - 1:
+                    raise
+                continue
             if item["config"] == config:
                 cache[item["id"]] = item["metrics"]
     rng = random.Random(args.seed)
