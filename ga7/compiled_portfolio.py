@@ -1,6 +1,6 @@
 """Numba chronological cash-funded portfolio replay.
 
-Research kernel: requires separate GA6 parity certification before production.
+Research kernel: requires separate GA6 parity certification before production.\nSplit-adjusted OHLC convention matches GA6 SettledLedger(price_basis="split_adjusted").
 Inputs are daily contiguous arrays, signal[t] derived from information at t-1.
 """
 import numpy as np
@@ -34,8 +34,9 @@ def replay(opens, closes, lows, dividends, splits, present, eligible,
                 if not present[day, stock]:
                     raise ValueError("Held ticker missing")
                 split = splits[day, stock]
-                if split != 0. and split != 1.:
-                    raise ValueError("Split convention uncertified")
+                if not np.isfinite(split) or split < 0.:
+                    raise ValueError("Invalid split ratio")
+                # GA6 split-adjusted basis: do not multiply held shares.
                 cash += shares[stock] * dividends[day, stock]
                 price = opens[day, stock]
                 if not np.isfinite(price) or price <= 0.:
