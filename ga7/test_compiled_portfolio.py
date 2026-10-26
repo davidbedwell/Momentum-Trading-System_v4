@@ -23,6 +23,18 @@ class CompiledPortfolioTests(unittest.TestCase):
         self.assertGreater(result[0], 100000.)
         self.assertEqual(result[8].shape, (5,))
 
+    def test_cash_yield_without_settlement_parity_rejected(self):
+        a = self.inputs()
+        sig = np.zeros((5, 2), dtype=np.bool_)
+        with self.assertRaises(ValueError):
+            replay(*a, sig, 4, .10, 2, cash_yield=.03)
+
+    def test_hold_limit_above_40_rejected(self):
+        a = self.inputs()
+        sig = np.zeros((5, 2), dtype=np.bool_)
+        with self.assertRaises(ValueError):
+            replay(*a, sig, 41, .10, 2, cash_yield=0.)
+
     def test_defense_prevents_entry(self):
         a = list(self.inputs())
         a[8][0] = True
