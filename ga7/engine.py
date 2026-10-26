@@ -62,7 +62,15 @@ def crossover(a, b, rng, features):
         return mutate(rng.choice((a, b)), rng, features)
     return validate(Genome(**{k: getattr(rng.choice((a, b)), k) for k in asdict(a)}), features)
 
+def breeding_metrics(m):
+    adjusted = dict(m)
+    mae = min(0.0, float(m.get('mae') or 0.0))
+    # Penalize adverse excursion beyond a 1% tolerance; do not reward low-trade noise.
+    adjusted['fitness'] = float(m.get('fitness') or -1) - 0.25 * max(0.0, -mae - 0.01)
+    return adjusted
+
 def dominates(a, b):
+    a, b = breeding_metrics(a), breeding_metrics(b)
     directions = {"fitness": 1, "return_per_session": 1, "mae": 1, "ev": 1}
     av = [float(a.get(k) or 0) * direction for k, direction in directions.items()]
     bv = [float(b.get(k) or 0) * direction for k, direction in directions.items()]
@@ -86,9 +94,13 @@ def pareto_fronts(scored):
 def next_population(scored, rng, features, size=300):
     if len(scored) < 2:
         raise ValueError("Need at least two scored chromosomes")
-    eligible = [(g, m) for g, m in scored if breeding_eligible(m)]
-    ordered = [eligible[i][0] for front in pareto_fronts(eligible) for i in sorted(front, key=lambda j: eligible[j][0].identity())] if eligible else []
-    parents = ordered[:max(2, size // 4)]
+    # Soft selection: qualified candidates receive preference, but other promising
+    # genetic material remains available for crossover and mutation.
+    qualified = [(g, m) for g, m in scored if breeding_eligible(m)]
+    exploratory = [(g, m) for g, m in scored if not breeding_eligible(m)]
+    def ranked(items):
+        return [items[i][0] for front in pareto_fronts(items) for i in sorted(front, key=lambda j: items[j][0].identity())] if items else []
+    parents = ranked(qualified)[:max(2, size // 8)] + ranked(exploratory)[:max(2, size // 8)]
     output, seen = [], set()
     def add(g):
         if g.identity() not in seen:
