@@ -35,7 +35,7 @@ class ReplayTests(unittest.TestCase):
         self.assertEqual(ledger.outcomes[0]["horizon_sessions"],4)
         self.assertEqual(metrics["trades"],1)
         self.assertAlmostEqual(metrics["final_nav"], 100000 + (
-            50*98*(1-.001) + 49*99*(1-.001) -
+            49*98*(1-.001) + 50*99*(1-.001) -
             99*100*(1+.001)), places=5)
 
     def test_defense_blocks_entry(self):
