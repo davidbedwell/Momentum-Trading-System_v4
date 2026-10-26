@@ -5,6 +5,7 @@ open; keep the proposal ledger even when a request cannot be funded.
 Probabilities are explicitly uncalibrated until separately validated.
 """
 from dataclasses import dataclass
+from math import sqrt
 from ga7.proposals import Proposal
 from ga7.shadow_ledger import ShadowLedger
 
@@ -52,7 +53,7 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
                     total_cost = pos.cost + pos.realized_cost
                     total_pnl = proceeds - pos.cost + pos.realized_pnl
                     ret = total_pnl / total_cost
-                    completed.append((ticker, ret, i-pos.entered))
+                    completed.append((ticker, ret, i-pos.entered, pos.low/pos.entry-1))
                     ledger.settle(identity, ticker, pos.origin_session, ret,
                                   ret > 0, min(40, max(1, i-pos.entered)))
                 elif proposal.action == "REDUCE" and ticker in positions:
@@ -68,7 +69,7 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
                     pos.cost -= allocated_cost
                     if pos.shares == 0:
                         ret = pos.realized_pnl / pos.realized_cost
-                        completed.append((ticker, ret, i-pos.entered))
+                        completed.append((ticker, ret, i-pos.entered, pos.low/pos.entry-1))
                         ledger.settle(identity, ticker, pos.origin_session, ret,
                                       ret > 0, min(40, max(1, i-pos.entered)))
                         positions.pop(ticker)
@@ -134,7 +135,7 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
         cash += proceeds
         total_cost = pos.cost + pos.realized_cost
         ret = (proceeds - pos.cost + pos.realized_pnl) / total_cost
-        completed.append((ticker, ret, len(sessions)-1-pos.entered))
+        completed.append((ticker, ret, len(sessions)-1-pos.entered, pos.low/pos.entry-1))
         ledger.settle(identity, ticker, pos.origin_session, ret,
                       ret > 0, min(40, max(1, len(sessions)-1-pos.entered)))
         del positions[ticker]
@@ -145,9 +146,17 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
         mdd = max(mdd, 1-value/peak)
     years = len(sessions)/252
     cagr = (cash/starting_cash)**(1/years)-1
-    return {"final_nav":cash,"cagr":cagr,"mdd":mdd,
+    n = len(completed)
+    mean = sum(x[1] for x in completed)/n if n else 0.
+    variance = sum((x[1]-mean)**2 for x in completed)/(n-1) if n>1 else 0.
+    effective_n = max(1., n/2.)
+    se = sqrt(variance/effective_n) if n>1 else None
+    fitness = mean-1.96*se if se is not None else -1.
+    return {"fitness":fitness,"fitness_lcb_net_ev":fitness,"effective_trades":effective_n,
+            "net_ev_se":se,"return_per_session":sum(x[1]/max(1,x[2]) for x in completed)/n if n else 0.,
+            "final_nav":cash,"cagr":cagr,"mdd":mdd,
             "calmar":cagr/mdd if mdd else None,
             "ev":sum(x[1] for x in completed)/len(completed) if completed else 0.,
-            "mae":0., "trades":len(completed),
+            "mae":sum(x[3] for x in completed)/n if n else 0., "trades":len(completed),
             "avg_hold":sum(x[2] for x in completed)/len(completed) if completed else 0.,
             "requests":len(ledger.requests),"outcomes":len(ledger.outcomes)}, ledger
