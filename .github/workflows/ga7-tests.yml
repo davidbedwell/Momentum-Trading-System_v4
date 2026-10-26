@@ -1,0 +1,19 @@
+name: GA7 unit tests
+on:
+  push:
+    branches: [research/ga7-dev79]
+  pull_request:
+    paths:
+      - 'ga7/**'
+      - '.github/workflows/ga7-tests.yml'
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install pandas pyarrow
+      - run: python -m compileall -q ga7
+      - run: python -m unittest ga7.test_ga7 -v
