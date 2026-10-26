@@ -157,7 +157,8 @@ def run(args):
     data_hash = file_hash(args.data)
     tape_hash = file_hash(args.tape)
     policy_hash = file_hash(args.policy)
-    source_digest = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    source_files = ("runner.py", "engine.py", "evaluator.py", "compiled_portfolio.py", "compiled_signals.py", "market_arrays.py")
+    source_digest = hashlib.sha256("".join(file_hash(Path(__file__).with_name(name)) for name in source_files).encode()).hexdigest()
     config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "policy_sha256": policy_hash, "runner_sha256": source_digest, "population": args.population, "seed": args.seed}
     checkpoint = output / "checkpoint.json"
     cache_file = output / "evaluation_cache.jsonl"
