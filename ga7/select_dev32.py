@@ -35,14 +35,19 @@ def select_dev32(frame, count=32):
                         key=lambda s:(-(target[s]-quotas[s]),s))[0]
         quotas[sector] += 1
         remaining -= 1
+    baseline = pd.Timestamp("2005-09-14")
+    eligible = set(frame.loc[frame.date <= baseline,"ticker"])
+    if not eligible:
+        raise ValueError("No historical eligibility at baseline")
     picks = []
     for sector, quota in quotas.items():
         group = universe[universe.sector==sector].copy()
-        # Coverage first, then stable ticker ordering. No future returns used.
-        group = group.sort_values(["sessions"],ascending=[False],kind="stable")
-        group = group.reset_index().sort_values(
-            ["sessions","ticker"],ascending=[False,True])
-        picks.extend(group.head(int(quota))["ticker"].tolist())
+        # Deterministic as-of sampling; never rank by eventual survival.
+        import random
+        available = sorted(set(group.index) & eligible)
+        if len(available) < int(quota):
+            raise ValueError("Insufficient historically eligible stocks in "+sector)
+        picks.extend(random.Random("dev32:20261025:"+sector).sample(available,int(quota)))
     selected = universe.loc[sorted(picks)]
     if len(selected)!=count or selected.sector.nunique()!=len(sector_counts):
         raise AssertionError("Selection count/sector coverage mismatch")
@@ -60,8 +65,8 @@ def main():
               "financial_solvency":"NOT_PIT_VERIFIED"}
              for t,r in selected.iterrows()]
     payload={"status":"PROVISIONAL_NOT_PIT_CERTIFIED",
-             "selection_method":"sector proportional quotas, maximum observed coverage, ticker tie-break",
-             "warning":"Full-period coverage selection uses future availability; historical survival and solvency not certified.",
+             "selection_method":"sector proportional quotas, as-of-2005-09-14 seeded selection",
+             "warning":"Financial solvency is not verified; DEV79 itself may contain survivorship bias.",
              "universe_count":79,"selected_count":32,
              "sector_counts":{k:int(v) for k,v in counts.items()},
              "sector_quotas":{k:int(v) for k,v in quotas.items()},
