@@ -51,8 +51,27 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
                     completed.append((ticker, ret, i-pos.entered))
                     ledger.settle(identity, ticker, pos.origin_session, ret,
                                   ret > 0, min(40, max(1, i-pos.entered)))
+                elif proposal.action == "REDUCE" and ticker in positions:
+                    pos = positions[ticker]
+                    qty = max(1, pos.shares // 2)
+                    cash += qty * price * (1-fee)
+                    original_shares = pos.shares
+                    pos.shares -= qty
+                    pos.cost *= pos.shares / original_shares
+                    if pos.shares == 0:
+                        positions.pop(ticker)
                 elif proposal.action in ("ENTER", "INCREASE") and not defensive and not previous_defense and bars[ticker]["eligible"]:
-                    if ticker not in positions and len(positions) < genome.capacity:
+                    if proposal.action == "INCREASE" and ticker in positions:
+                        pos = positions[ticker]
+                        equity = cash + sum(p.shares * bars[t]["open"] for t,p in positions.items())
+                        budget = min(cash, max(0., equity * .30 - pos.shares * price), equity * proposal.requested_weight)
+                        qty = int(budget / (price * (1+fee)))
+                        if qty:
+                            cost = qty * price * (1+fee)
+                            cash -= cost
+                            pos.shares += qty
+                            pos.cost += cost
+                    elif ticker not in positions and len(positions) < genome.capacity:
                         equity = cash + sum(p.shares * bars[t]["open"] for t,p in positions.items())
                         budget = min(cash, equity * proposal.requested_weight)
                         qty = int(budget / (price * (1+fee)))
