@@ -15,6 +15,7 @@ import pandas as pd
 from ga7.engine import FAMILIES, Genome, next_population, random_genome
 from ga7.evaluator import Portfolio, Policy
 from ga7.guardrails import Guardrails
+from ga7.stagnation import update_stagnation
 
 FEATURES = {
     "momentum": ("ga4_return_5__v1", "ga4_return_20__v1"),
@@ -165,9 +166,9 @@ def run(args):
     selected_tickers = tuple(sorted(x["ticker"] for x in selection["tickers"])) if selection else None
     if selection and (len(selected_tickers) != 32 or len(set(selected_tickers)) != 32):
         raise ValueError("Invalid DEV32 selection")
-    source_files = ("runner.py", "engine.py", "evaluator.py", "compiled_portfolio.py", "compiled_signals.py", "market_arrays.py")
+    source_files = ("runner.py", "engine.py", "evaluator.py", "compiled_portfolio.py", "compiled_signals.py", "market_arrays.py", "stagnation.py")
     source_digest = hashlib.sha256("".join(file_hash(Path(__file__).with_name(name)) for name in source_files).encode()).hexdigest()
-    config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "policy_sha256": policy_hash, "runner_sha256": source_digest, "population": args.population, "seed": args.seed, "selection_sha256": file_hash(args.selection) if args.selection else None}
+    config = {"data_sha256": data_hash, "tape_sha256": tape_hash, "policy_sha256": policy_hash, "runner_sha256": source_digest, "population": args.population, "seed": args.seed, "selection_sha256": file_hash(args.selection) if args.selection else None, "patience": args.patience}
     checkpoint = output / "checkpoint.json"
     cache_file = output / "evaluation_cache.jsonl"
     cache = {}
@@ -184,12 +185,16 @@ def run(args):
                 cache[item["id"]] = item["metrics"]
     rng = random.Random(args.seed)
     generation = 0
+    frontier = []
+    stagnant = 0
     population = [random_genome(rng, FEATURES, FAMILIES[i % len(FAMILIES)]) for i in range(args.population)]
     if checkpoint.exists():
         saved = json.loads(checkpoint.read_text())
         if saved["config"] != config:
             raise ValueError("Checkpoint data/configuration mismatch")
         generation = saved["generation"]
+        frontier = [tuple(x) for x in saved.get("frontier", [])]
+        stagnant = saved.get("stagnant", 0)
         population = [Genome(**g) for g in saved["population"]]
         rng.setstate(pickle.loads(base64.b64decode(saved["rng_state"])))
     with ProcessPoolExecutor(max_workers=args.workers, initializer=init_worker, initargs=(args.data, args.tape, args.policy, selected_tickers)) as pool:
@@ -205,6 +210,7 @@ def run(args):
                 os.fsync(stream.fileno())
             results = [cache[g.identity()] for g in population]
             scored = list(zip(population, results))
+            frontier, stagnant, improved = update_stagnation(results, frontier, stagnant)
             generation_path = output / ("generation_%04d.jsonl" % (generation + 1))
             generation_tmp = generation_path.with_suffix(".tmp")
             with generation_tmp.open("w") as stream:
@@ -216,7 +222,8 @@ def run(args):
             generation += 1
             population = next_population(scored, rng, FEATURES, args.population)
             saved = {"config": config, "generation": generation, "population": [asdict(g) for g in population],
-                     "rng_state": base64.b64encode(pickle.dumps(rng.getstate())).decode()}
+                     "rng_state": base64.b64encode(pickle.dumps(rng.getstate())).decode(),
+                     "frontier": frontier, "stagnant": stagnant}
             tmp = checkpoint.with_suffix(".tmp")
             with tmp.open("w") as stream:
                 stream.write(json.dumps(saved))
@@ -226,7 +233,13 @@ def run(args):
             print(json.dumps({"generation": generation, "evaluated": len(scored),
                               "new_evaluations": len(pending), "cache_hits": len(population)-len(pending),
                               "elapsed_seconds": time.monotonic()-started,
-                              "best_cagr": max(x["cagr"] for x in results)}), flush=True)
+                              "best_cagr": max(x["cagr"] for x in results),
+                              "feasible_frontier_improved": improved,
+                              "stagnant_generations": stagnant}), flush=True)
+            if stagnant >= args.patience:
+                print(json.dumps({"stopped": "PARETO_STAGNATION", "generation": generation,
+                                  "patience": args.patience}), flush=True)
+                break
 
 def main():
     parser = argparse.ArgumentParser()
@@ -239,8 +252,9 @@ def main():
     parser.add_argument("--population", type=int, default=300)
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--seed", type=int, default=70079)
+    parser.add_argument("--patience", type=int, default=100)
     args = parser.parse_args()
-    if args.generations < 1 or args.population < 16 or args.workers < 1:
+    if args.generations < 1 or args.population < 16 or args.workers < 1 or args.patience < 1:
         parser.error("Invalid evolution budget")
     run(args)
 
