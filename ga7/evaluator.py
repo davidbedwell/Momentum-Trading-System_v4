@@ -1,6 +1,6 @@
 """GA7 portfolio accounting. Research only; not a PIT certification."""
 from dataclasses import dataclass
-from math import isfinite
+from math import isfinite, sqrt
 
 @dataclass(frozen=True)
 class Policy:
@@ -94,4 +94,14 @@ class Portfolio:
         years = max(1, len(self.nav_history)) / 252
         cagr = (self.cash / self.policy.starting_cash) ** (1 / years) - 1
         n = len(self.closed)
-        return {"final_nav": self.cash, "cagr": cagr, "mdd": mdd, "calmar": cagr / mdd if mdd else None, "ev": sum(p["net_return"] for p in self.closed) / n if n else 0., "mae": sum(p["mae"] for p in self.closed) / n if n else 0., "trades": n, "avg_hold": sum(p["sessions"] for p in self.closed) / n if n else 0.}
+        returns = [p["net_return"] for p in self.closed]
+        mean = sum(returns) / n if n else 0.
+        variance = sum((x - mean)**2 for x in returns) / (n - 1) if n > 1 else 0.
+        # Conservative effective sample size: overlapping trades are not independent.
+        effective_n = max(1., n / 2.)
+        uncertainty = 1.96 * sqrt(variance / effective_n) if n > 1 else float("inf")
+        fitness = mean - uncertainty if n > 1 else -1.
+        return {"fitness": fitness, "fitness_lcb_net_ev": fitness,
+                "effective_trades": effective_n, "net_ev_se": sqrt(variance / effective_n) if n > 1 else None,
+                "return_per_session": sum(p["net_return"] / max(1, p["sessions"]) for p in self.closed) / n if n else 0.,
+                "final_nav": self.cash, "cagr": cagr, "mdd": mdd, "calmar": cagr / mdd if mdd else None, "ev": sum(p["net_return"] for p in self.closed) / n if n else 0., "mae": sum(p["mae"] for p in self.closed) / n if n else 0., "trades": n, "avg_hold": sum(p["sessions"] for p in self.closed) / n if n else 0.}
