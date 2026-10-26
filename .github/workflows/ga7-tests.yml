@@ -16,4 +16,4 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install pandas pyarrow numpy numba
       - run: python -m compileall -q ga7
-      - run: python -m unittest ga7.test_ga7 ga7.test_autonomous ga7.test_market_arrays -v
+      - run: python -m unittest ga7.test_ga7 ga7.test_autonomous ga7.test_market_arrays ga7.test_compiled_portfolio -v
