@@ -16,6 +16,8 @@ class Position:
     entered: int
     low: float
     origin_session: int
+    realized_pnl: float = 0.
+    realized_cost: float = 0.
 
 def score_signal(genome, bar):
     return sum(bar["features"][x] for x in (genome.feature_a, genome.feature_b))/2
@@ -47,18 +49,28 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
                     pos = positions.pop(ticker)
                     proceeds = pos.shares * price * (1-fee)
                     cash += proceeds
-                    ret = proceeds / pos.cost - 1
+                    total_cost = pos.cost + pos.realized_cost
+                    total_pnl = proceeds - pos.cost + pos.realized_pnl
+                    ret = total_pnl / total_cost
                     completed.append((ticker, ret, i-pos.entered))
                     ledger.settle(identity, ticker, pos.origin_session, ret,
                                   ret > 0, min(40, max(1, i-pos.entered)))
                 elif proposal.action == "REDUCE" and ticker in positions:
                     pos = positions[ticker]
                     qty = max(1, pos.shares // 2)
-                    cash += qty * price * (1-fee)
+                    proceeds = qty * price * (1-fee)
+                    cash += proceeds
                     original_shares = pos.shares
+                    allocated_cost = pos.cost * qty / original_shares
+                    pos.realized_cost += allocated_cost
+                    pos.realized_pnl += proceeds - allocated_cost
                     pos.shares -= qty
-                    pos.cost *= pos.shares / original_shares
+                    pos.cost -= allocated_cost
                     if pos.shares == 0:
+                        ret = pos.realized_pnl / pos.realized_cost
+                        completed.append((ticker, ret, i-pos.entered))
+                        ledger.settle(identity, ticker, pos.origin_session, ret,
+                                      ret > 0, min(40, max(1, i-pos.entered)))
                         positions.pop(ticker)
                 elif proposal.action in ("ENTER", "INCREASE") and not defensive and not previous_defense and bars[ticker]["eligible"]:
                     if proposal.action == "INCREASE" and ticker in positions:
@@ -120,7 +132,11 @@ def replay_requests(genome, sessions, passes, *, starting_cash=100000.,
     for ticker, pos in list(positions.items()):
         proceeds = pos.shares * sessions[-1][1][ticker]["close"] * (1-fee)
         cash += proceeds
-        completed.append((ticker, proceeds/pos.cost-1, len(sessions)-1-pos.entered))
+        total_cost = pos.cost + pos.realized_cost
+        ret = (proceeds - pos.cost + pos.realized_pnl) / total_cost
+        completed.append((ticker, ret, len(sessions)-1-pos.entered))
+        ledger.settle(identity, ticker, pos.origin_session, ret,
+                      ret > 0, min(40, max(1, len(sessions)-1-pos.entered)))
         del positions[ticker]
     peak = starting_cash
     mdd = 0.
