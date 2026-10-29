@@ -1,0 +1,238 @@
+{
+  "baseline_cost_matched": {
+    "cagr": 0.12536751283231773,
+    "daily_cvar05": -0.027435575835874654,
+    "ending_equity": 1188345.7270182918,
+    "max_drawdown": -0.4281719391716572,
+    "turnover_dollars": 64915201.747740634,
+    "turnover_x_initial": 649.1520174774064,
+    "worst_day": -0.13304196431580484
+  },
+  "candidates": [
+    {
+      "chromosome": {
+        "candidate_min_percentile": 0.9,
+        "challenger_margin_quantile": 0.1,
+        "confirmation_sessions": 2,
+        "family_duplication_penalty": 0.0,
+        "max_sector_slots": 0,
+        "minimum_hold_sessions": 10,
+        "ranking_scope": "GLOBAL",
+        "replacement_mode": "WEAKEST_INCUMBENT",
+        "safe_asset_hurdle": "NONE",
+        "safe_margin_bps_annualized": 25,
+        "score_basis": "CAUSAL_POSITIVE_PROBABILITY",
+        "slot_count": 5,
+        "slot_weighting": "EQUAL",
+        "switch_cooldown_sessions": 10
+      },
+      "label": "WEALTH",
+      "metrics": {
+        "avg_filled_slot_fraction": 0.969929937511835,
+        "avg_safe_fraction": 0.045253961634852215,
+        "cagr": 0.24186691728443388,
+        "daily_cvar05": -0.03243726747099382,
+        "ending_equity": 9364180.230567945,
+        "era_cagrs": [
+          0.1529495459079251,
+          0.2932486877802014,
+          0.18711226268706205,
+          0.32696544850713716
+        ],
+        "max_drawdown": -0.4049022249807588,
+        "min_era_cagr": 0.1529495459079251,
+        "negative_return_capture": 1.4277207072808515,
+        "net_value_per_switch": 36828.08334932276,
+        "positive_era_count": 4,
+        "positive_return_capture": 1.4860550595355106,
+        "switches": 222,
+        "switches_per_year": 10.593448210566182,
+        "turnover_dollars": 416372297.8603961,
+        "turnover_x_initial": 4163.722978603961,
+        "worst_day": -0.12173590985685134
+      }
+    },
+    {
+      "chromosome": {
+        "candidate_min_percentile": 0.6,
+        "challenger_margin_quantile": 0.3,
+        "confirmation_sessions": 1,
+        "family_duplication_penalty": 0.2,
+        "max_sector_slots": 0,
+        "minimum_hold_sessions": 20,
+        "ranking_scope": "GLOBAL",
+        "replacement_mode": "WEAKEST_INCUMBENT",
+        "safe_asset_hurdle": "NONE",
+        "safe_margin_bps_annualized": 25,
+        "score_basis": "CAUSAL_POSITIVE_PROBABILITY",
+        "slot_count": 5,
+        "slot_weighting": "EQUAL",
+        "switch_cooldown_sessions": 0
+      },
+      "label": "BALANCED_KNEE",
+      "metrics": {
+        "avg_filled_slot_fraction": 0.9670516947547813,
+        "avg_safe_fraction": 0.0477890020961284,
+        "cagr": 0.20682908903812702,
+        "daily_cvar05": -0.03411506611672774,
+        "ending_equity": 5140404.104423572,
+        "era_cagrs": [
+          0.17016404626522652,
+          0.20678067237384168,
+          0.2197747331579627,
+          0.20394270232425926
+        ],
+        "max_drawdown": -0.43057971950853313,
+        "min_era_cagr": 0.17016404626522652,
+        "negative_return_capture": 1.5068634839358375,
+        "net_value_per_switch": 57276.20836819247,
+        "positive_era_count": 4,
+        "positive_return_capture": 1.5297405009842304,
+        "switches": 69,
+        "switches_per_year": 3.2925582276084078,
+        "turnover_dollars": 323359139.1479789,
+        "turnover_x_initial": 3233.591391479789,
+        "worst_day": -0.14436980100451002
+      }
+    },
+    {
+      "chromosome": {
+        "candidate_min_percentile": 0.6,
+        "challenger_margin_quantile": 0.05,
+        "confirmation_sessions": 1,
+        "family_duplication_penalty": 0.05,
+        "max_sector_slots": 0,
+        "minimum_hold_sessions": 3,
+        "ranking_scope": "GLOBAL",
+        "replacement_mode": "WEAKEST_INCUMBENT",
+        "safe_asset_hurdle": "3PCT_HORIZON_PLUS_COST_PLUS_MARGIN",
+        "safe_margin_bps_annualized": 200,
+        "score_basis": "CAUSAL_COMPOSITE",
+        "slot_count": 5,
+        "slot_weighting": "EQUAL",
+        "switch_cooldown_sessions": 5
+      },
+      "label": "PROTECTION",
+      "metrics": {
+        "avg_filled_slot_fraction": 0.9736034841886008,
+        "avg_safe_fraction": 0.04470402745278451,
+        "cagr": 0.21127346118685764,
+        "daily_cvar05": -0.03286176210572077,
+        "ending_equity": 5552040.862746426,
+        "era_cagrs": [
+          0.10538523530335708,
+          0.3092338133793002,
+          0.23996132253657754,
+          0.20346042483450777
+        ],
+        "max_drawdown": -0.33415547088885034,
+        "min_era_cagr": 0.10538523530335708,
+        "negative_return_capture": 1.4381741629915603,
+        "net_value_per_switch": 7396.093450386667,
+        "positive_era_count": 4,
+        "positive_return_capture": 1.4598997759745713,
+        "switches": 590,
+        "switches_per_year": 28.153758757811023,
+        "turnover_dollars": 419934753.00739324,
+        "turnover_x_initial": 4199.347530073933,
+        "worst_day": -0.12137497262430941
+      }
+    },
+    {
+      "chromosome": {
+        "candidate_min_percentile": 0.9,
+        "challenger_margin_quantile": 0.2,
+        "confirmation_sessions": 1,
+        "family_duplication_penalty": 0.0,
+        "max_sector_slots": 0,
+        "minimum_hold_sessions": 0,
+        "ranking_scope": "GLOBAL",
+        "replacement_mode": "WEAKEST_INCUMBENT",
+        "safe_asset_hurdle": "NONE",
+        "safe_margin_bps_annualized": 25,
+        "score_basis": "CAUSAL_EXPECTED_RETURN",
+        "slot_count": 5,
+        "slot_weighting": "EQUAL",
+        "switch_cooldown_sessions": 0
+      },
+      "label": "ERA_ROBUST",
+      "metrics": {
+        "avg_filled_slot_fraction": 0.9740579435712933,
+        "avg_safe_fraction": 0.04445115853403255,
+        "cagr": 0.20219894687857343,
+        "daily_cvar05": -0.035386637956627484,
+        "ending_equity": 4742552.816332632,
+        "era_cagrs": [
+          0.19096837202606887,
+          0.19910021088560903,
+          0.24657676841181764,
+          0.20329500055794814
+        ],
+        "max_drawdown": -0.44101199245070566,
+        "min_era_cagr": 0.19096837202606887,
+        "negative_return_capture": 1.6149933056260348,
+        "net_value_per_switch": 7845.931764490816,
+        "positive_era_count": 4,
+        "positive_return_capture": 1.6231945869563065,
+        "switches": 453,
+        "switches_per_year": 21.616360537776938,
+        "turnover_dollars": 366495237.0875151,
+        "turnover_x_initial": 3664.9523708751512,
+        "worst_day": -0.1703981632613455
+      }
+    },
+    {
+      "chromosome": {
+        "candidate_min_percentile": 0.9,
+        "challenger_margin_quantile": 0.0,
+        "confirmation_sessions": 1,
+        "family_duplication_penalty": 0.0,
+        "max_sector_slots": 0,
+        "minimum_hold_sessions": 20,
+        "ranking_scope": "GLOBAL",
+        "replacement_mode": "WEAKEST_INCUMBENT",
+        "safe_asset_hurdle": "3PCT_HORIZON",
+        "safe_margin_bps_annualized": 25,
+        "score_basis": "CAUSAL_POSITIVE_PROBABILITY",
+        "slot_count": 30,
+        "slot_weighting": "EQUAL",
+        "switch_cooldown_sessions": 3
+      },
+      "label": "LOW_TURNOVER",
+      "metrics": {
+        "avg_filled_slot_fraction": 0.853089692608723,
+        "avg_safe_fraction": 0.15237764679979635,
+        "cagr": 0.127572680349882,
+        "daily_cvar05": -0.028669313982046696,
+        "ending_equity": 1238110.1748077716,
+        "era_cagrs": [
+          0.02481483641615201,
+          0.16832518397458696,
+          0.16335896611510248,
+          0.1693110639375608
+        ],
+        "max_drawdown": -0.4509614131897892,
+        "min_era_cagr": 0.02481483641615201,
+        "negative_return_capture": 1.2849290043781565,
+        "net_value_per_switch": 93.01765941958831,
+        "positive_era_count": 4,
+        "positive_return_capture": 1.2430191202620071,
+        "switches": 535,
+        "switches_per_year": 25.52925582276084,
+        "turnover_dollars": 79245165.89879924,
+        "turnover_x_initial": 792.4516589879925,
+        "worst_day": -0.13732573295229922
+      }
+    }
+  ],
+  "evidence_access": {
+    "consumed_67": true,
+    "heldout_50": false,
+    "remaining_186_discovery": false,
+    "verification_a_remainder": false,
+    "verification_b": false
+  },
+  "format": "MTS_CROSS_SECTIONAL_GA_PHASE1_FROZEN_CANDIDATES_V1",
+  "selection_rule": "Must be Pareto-nondominated, positive in all four development eras, then chosen as diverse operating points. Pareto controls eligibility; secondary selection does not rescue dominated candidates.",
+  "source": "Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE1_REDUCED_PARETO_20261002.json"
+}

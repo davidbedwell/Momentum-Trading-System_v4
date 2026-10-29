@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:controlled-vocabularies:1",
+  "schema_id": "mts.controlled-vocabularies",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Controlled Vocabularies",
+  "description": "Cross-system controlled vocabularies required by the minimum durable Research Nexus.",
+  "$defs": {
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "SOURCE_DATA", "NORMALIZED_DATASET", "DERIVED_DATASET", "OBSERVATION",
+        "MEASUREMENT", "EVIDENCE", "FINDING", "KNOWLEDGE", "RESEARCH_QUESTION",
+        "HYPOTHESIS", "RESEARCH_PLAN", "RESEARCH_NEED", "TASK_REQUEST",
+        "EXECUTION_RECORD", "DECISION", "OUTCOME", "POLICY_SNAPSHOT",
+        "MODEL_EVALUATION", "FEATURE_EVALUATION", "REPORT"
+      ]
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": ["DRAFT", "VALIDATING", "VALIDATED", "PUBLISHED", "CURRENT", "SUPERSEDED", "RETIRED", "INVALIDATED", "ARCHIVED"]
+    },
+    "persistence_class": {
+      "type": "string",
+      "enum": ["CLASS_I", "CLASS_II", "CLASS_III"]
+    },
+    "retention_class": {
+      "type": "string",
+      "enum": ["PERMANENT", "SEMI_PERMANENT", "CACHE", "SESSION", "TIME_LIMITED", "POLICY_CONTROLLED"]
+    },
+    "backup_requirement": {
+      "type": "string",
+      "enum": ["REQUIRED", "RECOVERABLE_FROM_SOURCE", "NONE"]
+    },
+    "producer_type": {
+      "type": "string",
+      "enum": ["ENGINE", "HUMAN", "SYSTEM"]
+    },
+    "reference_type": {
+      "type": "string",
+      "enum": [
+        "ARTIFACT", "TASK", "EXECUTION", "ENGINE", "WORKER", "INSTRUMENT",
+        "SCHEMA", "POLICY", "RESEARCH_PLAN", "RESEARCH_QUESTION", "RESEARCH_NEED",
+        "DECISION", "OUTCOME", "CAMPAIGN", "CAPABILITY", "HUMAN", "SYSTEM"
+      ]
+    },
+    "relationship_type": {
+      "type": "string",
+      "enum": [
+        "DERIVED_FROM", "SUPPORTS", "CONTRADICTS", "SUPERSEDES", "INVALIDATES",
+        "DEPENDS_ON", "ANSWERS", "TESTS", "GENERATED_BY", "REQUESTED_BY",
+        "USED_IN_DECISION", "PRODUCED_OUTCOME", "APPLIES_TO", "REQUIRES_CAPABILITY"
+      ]
+    }
+  }
+}

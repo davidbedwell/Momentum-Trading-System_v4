@@ -1,0 +1,38 @@
+{
+ "format":"MTS_R1_GFC_FALSE_VS_TRUE_DISCOVERY_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_ANALYSIS",
+ "question":"During the 2007-2009 bear, what causally observable characteristics distinguished the eventual March 2009 fast recovery from earlier large, convincing rallies that subsequently failed?",
+ "scope":"GFC within-regime adversarial discovery. No reentry rule fitting.",
+ "true_reference":{"date":"2009-03-09","label":"durable_GFC_emergence"},
+ "false_candidate_definition":{
+   "method":"algorithmic, not hand-selected",
+   "eligible_period":"2007-10-09 through 2009-03-08",
+   "local_low":"lowest broad-panel price in trailing 10 sessions",
+   "rally_requirement":"subsequent broad-panel gain >= 7% within 20 sessions",
+   "episode_dedup":"retain one launch per rally episode until a new lower local low occurs",
+   "false_label":"rally subsequently makes a lower low before 2009-03-09"
+ },
+ "observation_offsets":[1,2,3,5,7,10,15],
+ "descriptor_families":[
+  "price impulse and acceleration",
+  "breadth_positive_20 and breadth_above_sma_200 level/change",
+  "positive/negative day persistence",
+  "failed-rebound behavior",
+  "extreme negative-day recurrence",
+  "short trend geometry and slopes",
+  "realized volatility direction",
+  "VIX/VVIX level and change",
+  "OFR Funding/Credit/Volatility level and lagged change"
+ ],
+ "principles":[
+  "Use future path only to label false versus durable examples; every descriptor at candidate offset must use data available through that date.",
+  "Do not use eventual trough distance/date as an operational feature.",
+  "Do not require moving-average normalization or low VIX.",
+  "Do not optimize thresholds in this stage.",
+  "Report whether discrimination appears by days 1,2,3,5,7,10,15; early separation is economically preferred.",
+  "Preserve per-rally results; do not average away heterogeneous false rallies.",
+  "No portfolio CAGR/DD/wealth fitness and no protected banks."
+ ],
+ "qualification":"Current-S&P broad-market panel has survivorship qualification; OFR shifted two business days."
+}

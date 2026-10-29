@@ -1,0 +1,140 @@
+{
+  "baseline_nonlevered": {
+    "avg_gross_exposure": 0.8581666736549284,
+    "cagr_equivalent": 0.18544175751072922,
+    "daily_cvar05": -0.03267465615208526,
+    "daily_p05": -0.018736548373439344,
+    "daily_volatility": 0.013423085436765986,
+    "max_drawdown": -0.4573289134657734,
+    "max_drawdown_start": "2007-07-13",
+    "max_drawdown_trough": "2009-03-09",
+    "min_cash_fraction": 0.0035486006717544353,
+    "peak_gross_exposure": 0.9964513993282456,
+    "return_to_drawdown": 32.41115845301656,
+    "terminal_wealth": 15.822559879485082
+  },
+  "date": "2026-10-01",
+  "development_only_selection": true,
+  "holdout_accessed_for_selection": false,
+  "nominees": [
+    {
+      "breadth": {
+        "breadth_pass": true,
+        "family_positive": 6,
+        "family_total": 8,
+        "genome_positive": 633,
+        "genome_total": 983,
+        "ticker_cluster_bootstrap": {
+          "mean_delta_ci95": [
+            0.0021492387993981253,
+            0.0068265050576440155
+          ],
+          "median": 0.0044271415235210086,
+          "probability_delta_gt_0": 1.0,
+          "replicates": 2000,
+          "seed": 20261001
+        },
+        "ticker_positive": 47,
+        "ticker_total": 56,
+        "year_positive": 13,
+        "year_total": 17
+      },
+      "calibration": {
+        "cap": 2.0,
+        "floor": 0.5,
+        "mean_multiplier": 1.0,
+        "missing_policy": "neutral_1.0",
+        "mode": "ev_over_risk",
+        "risk_stat": "p10_loss",
+        "score_scale": 3.2434248679805613
+      },
+      "development_nonlevered": {
+        "avg_gross_exposure": 0.8862171242731383,
+        "cagr_equivalent": 0.19523865540398067,
+        "daily_cvar05": -0.031161539002605616,
+        "daily_p05": -0.01824903844329217,
+        "daily_volatility": 0.01297890269401934,
+        "max_drawdown": -0.4119451183351376,
+        "max_drawdown_start": "2007-07-13",
+        "max_drawdown_trough": "2009-03-09",
+        "min_cash_fraction": 0.002227890669013728,
+        "peak_gross_exposure": 0.9977721093309863,
+        "return_to_drawdown": 41.472010748653226,
+        "terminal_wealth": 18.08419237545005
+      },
+      "development_trade_metrics": {
+        "cvar05": -0.26157204963180963,
+        "max_drawdown_return_units": -5.144291277371622,
+        "mean": 0.0462188606047868,
+        "p05": -0.1435747306836308,
+        "total_return_units": 4044.1965217794495
+      },
+      "policy_name": "ev_over_risk_p10_loss_floor0.5_cap2.0",
+      "role": "growth"
+    },
+    {
+      "breadth": {
+        "breadth_pass": true,
+        "family_positive": 6,
+        "family_total": 8,
+        "genome_positive": 635,
+        "genome_total": 983,
+        "ticker_cluster_bootstrap": {
+          "mean_delta_ci95": [
+            0.0007147249390902509,
+            0.006799126429985444
+          ],
+          "median": 0.003864786349067569,
+          "probability_delta_gt_0": 0.992,
+          "replicates": 2000,
+          "seed": 20261001
+        },
+        "ticker_positive": 44,
+        "ticker_total": 56,
+        "year_positive": 14,
+        "year_total": 17
+      },
+      "calibration": {
+        "cap": 2.0,
+        "floor": 0.25,
+        "mean_multiplier": 1.0000000000000002,
+        "missing_policy": "neutral_1.0",
+        "mode": "ev_over_risk",
+        "risk_stat": "p10_loss",
+        "score_scale": 3.3772593524439287
+      },
+      "development_nonlevered": {
+        "avg_gross_exposure": 0.8690370903116863,
+        "cagr_equivalent": 0.18668890708774954,
+        "daily_cvar05": -0.02816317243627406,
+        "daily_p05": -0.016344281647839125,
+        "daily_volatility": 0.01176047006846648,
+        "max_drawdown": -0.36213821839872773,
+        "max_drawdown_start": "2020-02-20",
+        "max_drawdown_trough": "2020-03-23",
+        "min_cash_fraction": 0.002161222622437847,
+        "peak_gross_exposure": 0.9978387773775621,
+        "return_to_drawdown": 41.68283865803103,
+        "terminal_wealth": 16.094948929420973
+      },
+      "development_trade_metrics": {
+        "cvar05": -0.264570916378238,
+        "max_drawdown_return_units": -5.140673902352091,
+        "mean": 0.04562744033211579,
+        "p05": -0.14314108392956337,
+        "total_return_units": 3992.446656500464
+      },
+      "policy_name": "ev_over_risk_p10_loss_floor0.25_cap2.0",
+      "role": "drawdown"
+    }
+  ],
+  "protocol_sha256": "2ab3db3be38f60cda739ae5fead65587074273f2ac3390eeedc786065391512f",
+  "stage5": {
+    "eligible_cross_component_combinations": 0,
+    "reason": "Stage 1 failed breadth; Stages 3 and 4 failed independent wealth/risk usefulness. Protocol forbids unrestricted combinations of failed components."
+  },
+  "status": "FROZEN_BEFORE_HOLDOUT_REPLAY",
+  "verification_a_accessed": false,
+  "verification_b_accessed": false,
+  "year_concentration_caution": "2020 contributes a large share of net Development improvement; both nominees remain net-positive after removing 2020 and are positive across >=13 of 17 years. Preserve as a stability caution for Holdout interpretation."
+}

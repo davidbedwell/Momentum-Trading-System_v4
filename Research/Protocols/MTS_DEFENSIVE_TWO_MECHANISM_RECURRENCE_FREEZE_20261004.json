@@ -1,0 +1,14 @@
+{
+ "format":"MTS_DEFENSIVE_TWO_MECHANISM_RECURRENCE_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_RECURRENCE_TEST",
+ "provenance":"NEW_RESEARCH_POST_RECOVERY",
+ "frozen_trade_mechanism":"D3_EXIT2",
+ "mechanisms":{
+   "A_CAPITULATION_REVERSION":{"stock_drawdown252_percentile":"lowest third","stock_minus_market_ret20_percentile":"lowest third"},
+   "B_EMERGING_LEADERSHIP":{"stock_drawdown252_percentile":"middle third","stock_minus_market_ret20_percentile":"highest third"}
+ },
+ "required_outputs":["each bear episode support","win rate","mean and median net return","mean winner","mean loser","profit factor","pooled result","leave-one-episode-out pooled stability"],
+ "interpretation_rule":"A mechanism is recurrent only if evidence is distributed across multiple episodes; pooled strength alone is insufficient.",
+ "rules":["No threshold changes after outcomes.","No chromosome mutation.","No protected evidence access."]
+}

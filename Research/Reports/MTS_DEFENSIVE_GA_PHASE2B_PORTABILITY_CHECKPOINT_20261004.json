@@ -1,0 +1,78 @@
+{
+  "format": "MTS_DEFENSIVE_GA_PHASE2B_PORTABILITY_CHECKPOINT_V1",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "generation": 18,
+  "unique_genomes": 2309,
+  "best": {
+    "score": 0.007240031319938156,
+    "n": 341,
+    "mean": 0.016812765141377344,
+    "win": 0.624633431085044,
+    "pf": 1.8553782195702038,
+    "worst_window": 0.0033462905797025113,
+    "cvar05": -0.13456367267982156,
+    "window_dispersion": 0.012317117948466995,
+    "by_window": {
+      "COVID": {
+        "n": 25,
+        "mean": 0.032146276079081576,
+        "win": 0.72
+      },
+      "GFC": {
+        "n": 140,
+        "mean": 0.027153787135807225,
+        "win": 0.7
+      },
+      "2011": {
+        "n": 16,
+        "mean": 0.03022563940943427,
+        "win": 0.625
+      },
+      "2015_16": {
+        "n": 21,
+        "mean": 0.006599235577762546,
+        "win": 0.6190476190476191
+      },
+      "2018": {
+        "n": 13,
+        "mean": 0.00647223242254965,
+        "win": 0.38461538461538464
+      },
+      "2022": {
+        "n": 126,
+        "mean": 0.0033462905797025113,
+        "win": 0.5476190476190477
+      }
+    },
+    "g": {
+      "families": [
+        "BREAKOUT",
+        "MOMENTUM",
+        "TREND",
+        "VOLUME_LIQUIDITY"
+      ],
+      "horizons": [
+        10
+      ],
+      "entry_mode": "IMMEDIATE",
+      "depth": 0.1,
+      "reclaim": 0.5,
+      "deadline": 2,
+      "confirm": 1,
+      "hold": 20,
+      "stop": null,
+      "target": 0.08
+    }
+  },
+  "scoring": {
+    "mean": 1.0,
+    "worst_window": 0.55,
+    "log_profit_factor": 0.02,
+    "win_excess": 0.04,
+    "cvar05": 0.2,
+    "window_dispersion": -0.15
+  },
+  "source_rows": 18025,
+  "test17_accessed": false,
+  "protected_accessed": false
+}

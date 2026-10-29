@@ -1,0 +1,58 @@
+{
+  "format": "MTS_NORMAL_DEFENSIVE_TWO_TRACK_ARCHITECTURE_FREEZE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN",
+  "architecture": {
+    "NORMAL": "Existing MTS normal-market trading architecture.",
+    "DEFENSIVE": "Market deterioration evidence indicates a destructive or potentially destructive regime. Default posture is capital preservation, but trading is not categorically prohibited.",
+    "terminology_change": "Prior STOP/LOCKED language is superseded conceptually by DEFENSIVE where referring to market operating posture. Existing historical reports/protocols retain their original labels and are not rewritten."
+  },
+  "priority_tracks": [
+    {
+      "priority": 1,
+      "name": "RECOVERY_CLASSIFICATION",
+      "goal": "Discover causal characteristics of genuine market recovery and evidence-supported recovery morphologies R-1, R-2, R-3, etc.",
+      "rules": [
+        "Recovery groups use numerical labels specifically to avoid implied mapping to deterioration groups A/B/C.",
+        "Do not pre-decide the number of recovery groups.",
+        "Do not assume crash/deterioration morphology determines recovery morphology.",
+        "Distinguish true emergence from convincing failed recoveries/bear rallies.",
+        "Reference troughs may be used retrospectively for labeling and description only, never as operational features or pass/fail gates.",
+        "Early recovery recognition is economically important; emphasize causal observations at sessions 1,2,3,5,7,10,15 where appropriate.",
+        "A declaration before the ultimate trough is not inherently wrong; judge subsequent adverse excursion and recovery durability.",
+        "R-1 working candidate is sharp/V-shaped emergence; slow MA normalization and low absolute VIX are not required.",
+        "Other recovery morphologies remain evidence-determined and unfrozen."
+      ],
+      "output_role": "Determines when evidence supports transition out of DEFENSIVE toward NORMAL; it does not design defensive trades."
+    },
+    {
+      "priority": 2,
+      "name": "DEFENSIVE_OPPORTUNISTIC_GA",
+      "goal": "Use GA to discover trading strategies that can exploit opportunities while the market remains classified DEFENSIVE and has not satisfied a validated recovery classification.",
+      "rules": [
+        "GA searches trading policy; Analysis Engine performs deterministic calculations only.",
+        "Do not assume normal-MTS entries, stops, sizing, exits, holding periods, or strategy families are optimal in DEFENSIVE.",
+        "Search may include entry qualification, stop geometry, profit protection, sizing/exposure, holding period, re-entry logic, cooldowns, HH/HL/LL structure, breadth/volatility/context gates, and strategy-family choice.",
+        "A profitable defensive rally trade does not constitute evidence that the market has recovered.",
+        "After a stopped defensive trade, the policy may require renewed structural evidence before another entry; HH/HL versus LL is a research hypothesis, not a frozen rule.",
+        "GA fitness must be based on causal trading outcomes and risk/return behavior, not closeness to known troughs or reproduction of historical recovery labels.",
+        "Prevent lookahead leakage. Future path can score realized outcomes but cannot enter contemporaneous features.",
+        "Do not optimize recovery-classifier thresholds through trading fitness.",
+        "Defensive strategy may differ dramatically from NORMAL MTS.",
+        "False recoveries are not discarded; they are primary opportunity/adversarial episodes for this track."
+      ],
+      "output_role": "Determines how MTS may take risk while DEFENSIVE remains active; it does not decide that DEFENSIVE has ended."
+    }
+  ],
+  "separation_invariant": "Recovery classification and defensive trading policy are separate scientific objects. Neither may be tuned to make the other appear successful.",
+  "state_concept": "NORMAL -> DEFENSIVE when validated deterioration criteria activate. While DEFENSIVE, opportunistic defensive trades may occur without changing market state. Validated R-n recovery evidence governs transition out of DEFENSIVE.",
+  "governance": [
+    "Previously opened 50-stock heldout bank remains preserved, not pristine, and untouched.",
+    "Remaining Discovery and Verification A/B remain protected unless separately authorized.",
+    "Consumed 67-stock development laboratory may be used for downstream development when scientifically appropriate.",
+    "Broad-market recovery/deterioration classifiers are market-state objects and are not validated by requiring individual development stocks to emit the signal.",
+    "Current-S&P broad panel survivorship qualification remains explicit.",
+    "OFR features retain the frozen two-business-day publication lag.",
+    "No standards are weakened to obtain a desired result."
+  ]
+}

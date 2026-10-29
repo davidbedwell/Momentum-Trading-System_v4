@@ -1,0 +1,74 @@
+{
+  "format": "MTS_DEFENSIVE_GA_MAIN_LOEO_SUMMARY_V1",
+  "date": "2026-10-04",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "folds": [
+    {
+      "heldout": "GFC",
+      "n": 63,
+      "mean": 0.050964709371328354,
+      "win": 0.7301587301587301,
+      "train_score": 0.10827969581968144,
+      "train_mean": 0.07953175902366638,
+      "train_pf": 28.058749165010884,
+      "train_worst": 0.025623274967074394
+    },
+    {
+      "heldout": "2011",
+      "n": 13,
+      "mean": 0.01435589324682951,
+      "win": 0.6153846153846154,
+      "train_score": 0.09354644412222879,
+      "train_mean": 0.05058025196194649,
+      "train_pf": 13.617702199406539,
+      "train_worst": 0.031573858112096786
+    },
+    {
+      "heldout": "2015_16",
+      "n": 5,
+      "mean": -0.0017125725280493498,
+      "win": 0.6,
+      "train_score": 0.10909592003255435,
+      "train_mean": 0.07036450505256653,
+      "train_pf": 14.507274253354545,
+      "train_worst": 0.046515438705682755
+    },
+    {
+      "heldout": "2018",
+      "n": 9,
+      "mean": 0.013169866055250168,
+      "win": 0.6666666666666666,
+      "train_score": 0.0946560260863877,
+      "train_mean": 0.059646282345056534,
+      "train_pf": 15.579206258751086,
+      "train_worst": 0.02467506378889084
+    },
+    {
+      "heldout": "COVID",
+      "n": 30,
+      "mean": 0.0429987870156765,
+      "win": 0.6,
+      "train_score": 0.1305194276541536,
+      "train_mean": 0.10175634920597076,
+      "train_pf": 18.030412676300898,
+      "train_worst": 0.05484142154455185
+    },
+    {
+      "heldout": "2022",
+      "n": 38,
+      "mean": 0.018168075010180473,
+      "win": 0.6842105263157895,
+      "train_score": 0.09532618527202688,
+      "train_mean": 0.06097055971622467,
+      "train_pf": 9.479799918958067,
+      "train_worst": 0.051627255976200104
+    }
+  ],
+  "positive_heldout_folds": 5,
+  "nonpositive_heldout_folds": 1,
+  "weighted_heldout_mean": 0.034732403134915366,
+  "heldout_trade_count": 158,
+  "test17_accessed": false,
+  "preserved50_accessed": false,
+  "protected_accessed": false
+}

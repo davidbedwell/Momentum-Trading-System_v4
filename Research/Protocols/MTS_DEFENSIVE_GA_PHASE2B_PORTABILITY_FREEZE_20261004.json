@@ -1,0 +1,25 @@
+{
+  "format":"MTS_DEFENSIVE_GA_PHASE2B_PORTABILITY_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_PHASE2B",
+  "provenance":"NEW_RESEARCH_POST_RECOVERY",
+  "parent":"MTS_DEFENSIVE_GA_PHASE2_CAUSAL_PATH_FREEZE_20261004.json",
+  "reason":"Phase-2 discovery produced sparse high-scoring chromosomes but none had at least 3 trades in every one of the six consumed declining-market episodes.",
+  "chromosome_space":"Identical to Phase-2. No new features, families, thresholds, entry modes, stops, targets, or horizons are added.",
+  "hard_portability_gate":{
+    "all_six_windows_required":true,
+    "minimum_trades_per_window":5,
+    "minimum_total_trades":60,
+    "negative_worst_window_fails":true
+  },
+  "fitness":"Use the same fixed Phase-2 scoring weights after the hard portability gate.",
+  "evidence":{
+    "consumed_DEV50_only":true,
+    "TEST17":false,
+    "preserved50":false,
+    "remaining_Discovery":false,
+    "Verification_A":false,
+    "Verification_B":false
+  },
+  "interpretation":"Phase-2B asks whether the causal path chromosome family is portable across all six consumed declining-market laboratories. Failure is an acceptable result."
+}

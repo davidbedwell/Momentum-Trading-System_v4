@@ -1,0 +1,308 @@
+{
+  "format": "MTS_DEFENSIVE_STOCK_MARKET_ROUTER_LOEO_V1",
+  "folds": {
+    "GFC": {
+      "train_balanced_accuracy": 0.8888888888888888,
+      "genome": [
+        [
+          [
+            "stock_drawdown252",
+            "<=",
+            0.35
+          ],
+          "A"
+        ],
+        [
+          [
+            "rel20",
+            ">=",
+            0.8
+          ],
+          "B"
+        ]
+      ],
+      "heldout_n": 73,
+      "heldout_balanced_accuracy": 0.789795918367347,
+      "confusion": {
+        "A": {
+          "A": 14,
+          "B": 0,
+          "OTHER": 0
+        },
+        "B": {
+          "A": 1,
+          "B": 9,
+          "OTHER": 0
+        },
+        "OTHER": {
+          "A": 13,
+          "B": 13,
+          "OTHER": 23
+        }
+      },
+      "heldout_true_counts": {
+        "A": 14,
+        "B": 10,
+        "OTHER": 49
+      },
+      "heldout_pred_counts": {
+        "A": 28,
+        "B": 22,
+        "OTHER": 23
+      }
+    },
+    "2011": {
+      "train_balanced_accuracy": 0.850187265917603,
+      "genome": [
+        [
+          [
+            "stock_drawdown252",
+            "<=",
+            0.35
+          ],
+          "A"
+        ],
+        [
+          [
+            "rel20",
+            ">=",
+            0.65
+          ],
+          "B"
+        ]
+      ],
+      "heldout_n": 17,
+      "heldout_balanced_accuracy": 0.8235294117647058,
+      "confusion": {
+        "A": {
+          "A": 0,
+          "B": 0,
+          "OTHER": 0
+        },
+        "B": {
+          "A": 0,
+          "B": 0,
+          "OTHER": 0
+        },
+        "OTHER": {
+          "A": 0,
+          "B": 3,
+          "OTHER": 14
+        }
+      },
+      "heldout_true_counts": {
+        "A": 0,
+        "B": 0,
+        "OTHER": 17
+      },
+      "heldout_pred_counts": {
+        "A": 0,
+        "B": 3,
+        "OTHER": 14
+      }
+    },
+    "2015_16": {
+      "train_balanced_accuracy": 0.8514851485148515,
+      "genome": [
+        [
+          [
+            "stock_drawdown252",
+            "<=",
+            0.35
+          ],
+          "A"
+        ],
+        [
+          [
+            "rel20",
+            ">=",
+            0.65
+          ],
+          "B"
+        ]
+      ],
+      "heldout_n": 5,
+      "heldout_balanced_accuracy": 0.8,
+      "confusion": {
+        "A": {
+          "A": 0,
+          "B": 0,
+          "OTHER": 0
+        },
+        "B": {
+          "A": 0,
+          "B": 0,
+          "OTHER": 0
+        },
+        "OTHER": {
+          "A": 0,
+          "B": 1,
+          "OTHER": 4
+        }
+      },
+      "heldout_true_counts": {
+        "A": 0,
+        "B": 0,
+        "OTHER": 5
+      },
+      "heldout_pred_counts": {
+        "A": 0,
+        "B": 1,
+        "OTHER": 4
+      }
+    },
+    "2018": {
+      "train_balanced_accuracy": 0.8514851485148515,
+      "genome": [
+        [
+          [
+            "stock_drawdown252",
+            "<=",
+            0.35
+          ],
+          "A"
+        ],
+        [
+          [
+            "rel20",
+            ">=",
+            0.65
+          ],
+          "B"
+        ]
+      ],
+      "heldout_n": 5,
+      "heldout_balanced_accuracy": 0.2,
+      "confusion": {
+        "A": {
+          "A": 0,
+          "B": 0,
+          "OTHER": 0
+        },
+        "B": {
+          "A": 0,
+          "B": 0,
+          "OTHER": 0
+        },
+        "OTHER": {
+          "A": 0,
+          "B": 4,
+          "OTHER": 1
+        }
+      },
+      "heldout_true_counts": {
+        "A": 0,
+        "B": 0,
+        "OTHER": 5
+      },
+      "heldout_pred_counts": {
+        "A": 0,
+        "B": 4,
+        "OTHER": 1
+      }
+    },
+    "COVID": {
+      "train_balanced_accuracy": 0.8494623655913979,
+      "genome": [
+        [
+          [
+            "stock_drawdown252",
+            "<=",
+            0.35
+          ],
+          "A"
+        ],
+        [
+          [
+            "rel20",
+            ">=",
+            0.65
+          ],
+          "B"
+        ]
+      ],
+      "heldout_n": 17,
+      "heldout_balanced_accuracy": 0.6923076923076924,
+      "confusion": {
+        "A": {
+          "A": 2,
+          "B": 0,
+          "OTHER": 0
+        },
+        "B": {
+          "A": 0,
+          "B": 2,
+          "OTHER": 0
+        },
+        "OTHER": {
+          "A": 1,
+          "B": 11,
+          "OTHER": 1
+        }
+      },
+      "heldout_true_counts": {
+        "A": 2,
+        "B": 2,
+        "OTHER": 13
+      },
+      "heldout_pred_counts": {
+        "A": 3,
+        "B": 13,
+        "OTHER": 1
+      }
+    },
+    "2022": {
+      "train_balanced_accuracy": 0.8539325842696629,
+      "genome": [
+        [
+          [
+            "stock_drawdown252",
+            "<=",
+            0.35
+          ],
+          "A"
+        ],
+        [
+          [
+            "rel20",
+            ">=",
+            0.65
+          ],
+          "B"
+        ]
+      ],
+      "heldout_n": 28,
+      "heldout_balanced_accuracy": 0.8627450980392157,
+      "confusion": {
+        "A": {
+          "A": 9,
+          "B": 0,
+          "OTHER": 0
+        },
+        "B": {
+          "A": 0,
+          "B": 2,
+          "OTHER": 0
+        },
+        "OTHER": {
+          "A": 5,
+          "B": 2,
+          "OTHER": 10
+        }
+      },
+      "heldout_true_counts": {
+        "A": 9,
+        "B": 2,
+        "OTHER": 17
+      },
+      "heldout_pred_counts": {
+        "A": 14,
+        "B": 4,
+        "OTHER": 10
+      }
+    }
+  },
+  "protected_accessed": false,
+  "test17_accessed": false,
+  "preserved50_accessed": false
+}

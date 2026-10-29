@@ -1,0 +1,21 @@
+{
+  "response_id": "resp_0a49f6d751c7360b006ac4c15d31ac87d2b59d91b5ae7e5916",
+  "model": "gpt-6-astra",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 17274,
+    "input_tokens_details": {
+      "cache_write_tokens": 17271,
+      "cached_tokens": 0
+    },
+    "output_tokens": 30543,
+    "output_tokens_details": {
+      "reasoning_tokens": 21236
+    },
+    "total_tokens": 47817
+  },
+  "input_sha256": "6775994d7942c4dc90493b2fdd58f3193b6cb9f019ae12edff29062858e98e48",
+  "raw_response_file": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reviews/MTS_ASTRA_POSTEXPERIMENT_AUDIT_RAW_20261006.json",
+  "verbatim_text_file": "/home/ubuntu/Momentum-Trading-System_v4/Research/Reviews/MTS_ASTRA_POSTEXPERIMENT_AUDIT_20261006.md",
+  "created_utc": "2026-10-06T09:56:03.788564+00:00"
+}

@@ -1,0 +1,175 @@
+{
+  "candidates": [
+    {
+      "chromosome": {
+        "challenger_margin": 0.1,
+        "confirmation_sessions": 2,
+        "family_duplication_penalty": 0.2,
+        "max_p10_loss": 0.15,
+        "min_excess_ev_bps": 25,
+        "min_positive_probability": 0.5,
+        "minimum_evidence_n": 750,
+        "minimum_hold_sessions": 10,
+        "safe_margin_bps_annualized": 400,
+        "score_basis": "CAUSAL_EXPECTED_RETURN",
+        "slot_ceiling": 3,
+        "switch_cooldown_sessions": 0,
+        "uncertainty_penalty": "SE_2.0"
+      },
+      "label": "GROWTH",
+      "metrics": {
+        "avg_filled_slot_fraction": 0.8977466388941489,
+        "avg_safe_fraction": 0.11946705787245089,
+        "cagr": 0.26045712099732543,
+        "daily_cvar05": -0.03222798809787789,
+        "ending_equity": 12785021.691988276,
+        "era_cagrs": [
+          0.14724155313660114,
+          0.33395146154663524,
+          0.38040064161708576,
+          0.2628373823460912
+        ],
+        "max_drawdown": -0.36628602487920825,
+        "min_era_cagr": 0.14724155313660114,
+        "negative_return_capture": 1.3982183320543418,
+        "net_value_per_switch": 47527.36051217207,
+        "positive_era_count": 4,
+        "positive_return_capture": 1.476218700312244,
+        "switches": 244,
+        "switches_per_year": 11.643249384586253,
+        "turnover_dollars": 846608241.0451422,
+        "turnover_x_initial": 8466.082410451421,
+        "worst_day": -0.1305652117991556
+      }
+    },
+    {
+      "chromosome": {
+        "challenger_margin": 0.3,
+        "confirmation_sessions": 5,
+        "family_duplication_penalty": 0.2,
+        "max_p10_loss": 0.125,
+        "min_excess_ev_bps": 400,
+        "min_positive_probability": 0.6,
+        "minimum_evidence_n": 750,
+        "minimum_hold_sessions": 5,
+        "safe_margin_bps_annualized": 0,
+        "score_basis": "CAUSAL_POSITIVE_PROBABILITY",
+        "slot_ceiling": 3,
+        "switch_cooldown_sessions": 3,
+        "uncertainty_penalty": "NONE"
+      },
+      "label": "PROTECTION_GROWTH",
+      "metrics": {
+        "avg_filled_slot_fraction": 0.39657893075806355,
+        "avg_safe_fraction": 0.6108236543428871,
+        "cagr": 0.16029715200933037,
+        "daily_cvar05": -0.023106106151568023,
+        "ending_equity": 2254941.3645654456,
+        "era_cagrs": [
+          0.029999999999988702,
+          0.029999999999988702,
+          0.40411916600027675,
+          0.2465263100104036
+        ],
+        "max_drawdown": -0.25977506409791773,
+        "min_era_cagr": 0.029999999999988702,
+        "negative_return_capture": 0.5828175923248758,
+        "net_value_per_switch": 27348.60609095266,
+        "positive_era_count": 4,
+        "positive_return_capture": 0.6677305510322163,
+        "switches": 39,
+        "switches_per_year": 1.8610111721264913,
+        "turnover_dollars": 82029623.48699963,
+        "turnover_x_initial": 820.2962348699963,
+        "worst_day": -0.14879997697337233
+      }
+    },
+    {
+      "chromosome": {
+        "challenger_margin": 0.0,
+        "confirmation_sessions": 2,
+        "family_duplication_penalty": 0.1,
+        "max_p10_loss": 0.15,
+        "min_excess_ev_bps": 200,
+        "min_positive_probability": 0.5,
+        "minimum_evidence_n": 750,
+        "minimum_hold_sessions": 5,
+        "safe_margin_bps_annualized": 400,
+        "score_basis": "CAUSAL_EXPECTED_RETURN",
+        "slot_ceiling": 20,
+        "switch_cooldown_sessions": 0,
+        "uncertainty_penalty": "SE_2.0"
+      },
+      "label": "TAIL_BALANCE",
+      "metrics": {
+        "avg_filled_slot_fraction": 0.493486082181405,
+        "avg_safe_fraction": 0.5093949252799324,
+        "cagr": 0.136837501664117,
+        "daily_cvar05": -0.019552199959086664,
+        "ending_equity": 1469721.1477005018,
+        "era_cagrs": [
+          0.029999999999988702,
+          0.10125854676483503,
+          0.2314806585275786,
+          0.2279235852709698
+        ],
+        "max_drawdown": -0.3571006076748866,
+        "min_era_cagr": 0.029999999999988702,
+        "negative_return_capture": 0.6504304152837378,
+        "net_value_per_switch": 1099.1227370398828,
+        "positive_era_count": 4,
+        "positive_return_capture": 0.7068358219336937,
+        "switches": 256,
+        "switches_per_year": 12.21586820677902,
+        "turnover_dollars": 65234406.11242805,
+        "turnover_x_initial": 652.3440611242804,
+        "worst_day": -0.1370266705987232
+      }
+    },
+    {
+      "chromosome": {
+        "challenger_margin": 0.0,
+        "confirmation_sessions": 3,
+        "family_duplication_penalty": 0.1,
+        "max_p10_loss": 0.125,
+        "min_excess_ev_bps": 100,
+        "min_positive_probability": 0.5,
+        "minimum_evidence_n": 100,
+        "minimum_hold_sessions": 10,
+        "safe_margin_bps_annualized": 25,
+        "score_basis": "CAUSAL_COMPOSITE",
+        "slot_ceiling": 3,
+        "switch_cooldown_sessions": 0,
+        "uncertainty_penalty": "SE_2.0"
+      },
+      "label": "INTERMEDIATE_KNEE",
+      "metrics": {
+        "avg_filled_slot_fraction": 0.8638515432683204,
+        "avg_safe_fraction": 0.15160801352059194,
+        "cagr": 0.2501713482557002,
+        "daily_cvar05": -0.027334037873640086,
+        "ending_equity": 10767814.671633821,
+        "era_cagrs": [
+          0.11295898650609315,
+          0.2068940177788896,
+          0.33790171304448857,
+          0.3822997531354708
+        ],
+        "max_drawdown": -0.4297517775645633,
+        "min_era_cagr": 0.11295898650609315,
+        "negative_return_capture": 1.1524076133927157,
+        "net_value_per_switch": 32919.137266720034,
+        "positive_era_count": 4,
+        "positive_return_capture": 1.2459329730148059,
+        "switches": 291,
+        "switches_per_year": 13.886006438174588,
+        "turnover_dollars": 500216820.3333653,
+        "turnover_x_initial": 5002.168203333653,
+        "worst_day": -0.15333891841184755
+      }
+    }
+  ],
+  "format": "MTS_CROSS_SECTIONAL_GA_PHASE2_FROZEN_FOUR_V1",
+  "selection": "Four distinct Pareto-nondominated, four-era-positive, nontrivial-safe-allocation strategies frozen before holdout: growth, protection/growth, tail balance, intermediate knee.",
+  "source": "Research/Reports/MTS_CROSS_SECTIONAL_GA_PHASE2_20261002.json"
+}

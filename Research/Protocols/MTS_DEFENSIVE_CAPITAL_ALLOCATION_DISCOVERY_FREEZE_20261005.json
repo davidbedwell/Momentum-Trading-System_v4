@@ -1,0 +1,85 @@
+{
+  "format":"MTS_DEFENSIVE_CAPITAL_ALLOCATION_DISCOVERY_FREEZE_V1",
+  "date":"2026-10-05",
+  "status":"FROZEN_BEFORE_OUTCOME_SEARCH",
+  "purpose":"Discover whether and when taking risk during a causally identified DEFENSIVE regime adds value over the contemporaneously available safe alternative, without assuming long equity exposure is required.",
+  "scientific_question":"Given DEFENSIVE state and only information available at decision time, which eligible action, if any, has portable positive incremental value versus remaining in the safe asset?",
+  "governance":{
+    "development":"exact frozen DEV50 only",
+    "next_stage":"preserved50 verification only after DEV50 architecture/candidates/gates are frozen",
+    "subsequent_stage":"TEST17 only after preserved50 predeclared gate passes",
+    "protected_excluded":["remaining Discovery","Verification A","Verification B"],
+    "no_repair_after_reveal":true,
+    "preserved50_label":"preserved-not-pristine verification",
+    "test17_label":"consumed diagnostic subsequent test"
+  },
+  "core_principles":[
+    "DEFENSIVE describes the market environment; it does not dictate the direction of every security.",
+    "Individual securities remain individual research/trading objects.",
+    "Correlated same-date security outcomes are cross-sectional evidence, not independent market experiments.",
+    "Safe capital is an affirmative portfolio action, not a failed trade.",
+    "Risky exposure must earn the right to displace the contemporaneous safe alternative.",
+    "No strategy is required to trade every bear episode.",
+    "A zero-trade heldout episode is not automatically failure if the learned policy selects the safe asset because no qualifying risky opportunity exists."
+  ],
+  "action_space":{
+    "SAFE":"contemporaneous short-duration risk-free/cash-equivalent return; incumbent/default",
+    "LONG_SECURITY":"long an individually selected security",
+    "SHORT_SECURITY":"short an individually selected security, subject to modeled costs/borrow assumptions",
+    "LONG_MARKET":"broad-market long exposure when justified despite DEFENSIVE state",
+    "SHORT_MARKET":"broad-market short exposure when justified",
+    "PUT":"not included in first return engine unless historically adequate option-chain, strike, expiry, IV, spread and transaction-cost data are available; no synthetic put-return approximation"
+  },
+  "safe_hurdle":{
+    "rule":"Use the contemporaneous causal short-duration Treasury/risk-free proxy available on each historical date, annualized then accrued over the actual capital holding interval.",
+    "fallback_if_required_series_missing":"STOP and document missing input; do not substitute a hindsight constant such as 3 percent without a separately frozen amendment.",
+    "comparison":"Evaluate risky action excess return versus safe accrual over the same capital/time interval, after modeled trading costs."
+  },
+  "evidence_hierarchy":{
+    "level1":"bear episode",
+    "level2":"market date/opportunity date",
+    "level3":"security cross section",
+    "interpretation":"Multiple securities succeeding on one date strengthen breadth/cross-sectional robustness but do not multiply the date into independent market experiments."
+  },
+  "discovery_architecture":{
+    "stage1_environment":"existing causal DEFENSIVE declaration/window; no future peak/trough information may enter predictors",
+    "stage2_opportunity":"search causal market plus security conditions for conditional positive excess value versus SAFE; direction may be long, short, market or security-specific",
+    "stage3_selection":"when security-specific opportunity exists, rank/select individual securities using causal cross-sectional predictors",
+    "stage4_portfolio":"allocate among qualifying risky actions and SAFE subject to capacity; unallocated capital remains SAFE"
+  },
+  "predictor_concepts":{
+    "market":["short/intermediate return","drawdown","breadth level","breadth acceleration","volatility/stress","dispersion","trend deterioration/recovery","volume/liquidity","causal OFR variables"],
+    "security":["short/intermediate return","relative strength versus market/cross section","drawdown","trend","reversal/capitulation","pullback","volatility","volume/liquidity"],
+    "forbidden":["future return","future peak/trough","days to trough","episode identity/year as predictor","ticker identity as predictor","future morphology","protected evidence"]
+  },
+  "anti_overfit":{
+    "outer_stock_folds":"5 deterministic lexicographic round-robin DEV50 folds; omitted stocks excluded during evolution",
+    "outer_episode_folds":"6 leave-one-bear-out folds; omitted episode excluded during evolution",
+    "same_date_weighting":"aggregate economic evidence at opportunity-date level before high-level fitness; raw number of correlated ticker trades cannot multiply fitness credit",
+    "episode_balance":"episodes receive balanced high-level influence rather than influence proportional to row/trade count",
+    "mechanism_recurrence":"report recurring causal mechanism concepts across independently trained folds; do not require identical fitted numeric thresholds",
+    "complexity_penalty":"prefer simpler mechanisms when incremental heldout evidence does not justify added conditions/degrees of freedom",
+    "sparsity":"report distinct opportunity dates, securities, and episodes; high return from a tiny number of dates cannot qualify by mean return alone",
+    "candidate_layer":"Do not treat prior ticker-by-ticker optimized candidate events as independent evidence. Prefer direct causal raw/predictor panel opportunity construction; if old optimized candidate layer is required, STOP and document rather than silently reuse it."
+  },
+  "fitness_and_reporting":{
+    "primary_economic_quantity":"incremental return over SAFE on matched capital/time interval after costs",
+    "required":["exact daily MTM portfolio equity including SAFE accrual","incremental CAGR/return versus SAFE","max daily MTM drawdown","date-level excess-return distribution","episode-level excess return","worst episode","distinct opportunity dates","cross-sectional breadth of success","turnover","exposure","action mix","profit concentration by date and episode","mechanism recurrence across outer folds"],
+    "trade_count":"activity diagnostic only; never treated as independent confirmation count",
+    "objective":"maximize portable incremental value over SAFE while minimizing drawdown, concentration and unnecessary model complexity"
+  },
+  "advance_logic":{
+    "DEV50":"Complete all nested folds. Freeze recurrence findings and any candidate/gate before preserved50. Do not invent a pass threshold from preserved50/TEST17.",
+    "preserved50":"One frozen verification replay; no mutation. Failure retained.",
+    "TEST17":"Only if predeclared preserved50 gate passes; one frozen subsequent test; no mutation.",
+    "protected":"No remaining Discovery or Verification A/B during redesign."
+  },
+  "interpretation_examples":{
+    "broad_decline":"SHORT_MARKET, SHORT_SECURITY or SAFE may dominate; longs are not mandatory.",
+    "falling_market_with_leaders":"LONG_SECURITY may be valid when causally identifiable relative-strength opportunities exceed SAFE.",
+    "capitulation_rebound":"LONG_SECURITY may be valid for a short conditional rebound while regime remains DEFENSIVE.",
+    "no_portable_edge":"SAFE is the correct action.",
+    "options":"If bearish underlying opportunity is validated, puts may later be compared as an execution vehicle using historically adequate option data."
+  },
+  "provenance":"NEW_RESEARCH_POST_RECOVERY"
+}

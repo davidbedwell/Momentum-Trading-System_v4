@@ -1,0 +1,16 @@
+{
+ "format":"MTS_SLOW_BEAR_MA_GEOMETRY_FREEZE_V1",
+ "date":"2026-10-04",
+ "question":"Can a faster causal moving-average trend geometry recognize destructive slow bears earlier than conventional 50/200 without an unacceptable false-positive burden?",
+ "search_space":{"short_ema_days":[30,35,40,45,50,55,60],"long_ema_days":[100,110,120,130,140,150,160,170,180,190,200],"confirmation_sessions":[1,2,3,5],"long_ema_slope_filters":["none","falling_5d","falling_10d","falling_20d"]},
+ "control":"50 EMA below 200 EMA",
+ "signal":"short EMA below long EMA, optionally requiring selected long EMA slope filter, confirmed for N completed sessions; action no earlier than next tradable session",
+ "evaluation_history":"all available causal broad-market daily history; no handpicked benign-only controls",
+ "destructive_reference_episodes":{"2008":["2007-10-09","2009-03-09"],"2020":["2020-02-19","2020-03-23"],"2022":["2022-01-03","2022-10-12"]},
+ "hard_control_2015":["2015-05-21","2016-02-11"],
+ "metrics":["first signal date per destructive episode","sessions from peak","drawdown incurred","subsequent downside remaining","false-positive episode count","false-positive sessions","fraction of non-crash history falsely out","median false-positive duration","max false-positive duration","whipsaw count"],
+ "selection_priority":["false-positive burden","destructive episode coverage","earlier useful detection","simplicity"],
+ "prohibited":["portfolio CAGR fitness","terminal wealth fitness","MTS profit optimization","protected bank access"],
+ "protected":{"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+ "status":"FROZEN_BEFORE_SEARCH"
+}

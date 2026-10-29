@@ -1,0 +1,17 @@
+module_id,method_name,family,source,library_class,note
+A09-FOUNDATION-001,Foundation / Dataset Introspection,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-DESCRIPTIVE-001,Descriptive Analysis,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-COMPARATIVE-001,Outcome Comparison,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-STATISTICAL-001,Statistical Reliability,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-PREDICTIVE-001,Predictive Validation,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-INCREMENTAL-001,Incremental Contribution,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-ROBUSTNESS-001,Robustness Analysis,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-RELATIONSHIP-001,Relationship / Redundancy Analysis,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-ECONOMIC-001,Economic Analysis,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-CONTRADICTION-001,Contradiction Analysis,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-GENERALIZATION-001,Generalization Analysis,CORE_ANALYSIS,Legacy v1 Engine 09,ANALYSIS_METHOD,Not a deterministic measurement
+A09-KNOWLEDGE-001,Relationship Discovery,KNOWLEDGE_DISCOVERY,Legacy v1 Engine 09,ANALYSIS_METHOD,Separate from deterministic bank
+A09-KNOWLEDGE-002,Conditional Discovery,KNOWLEDGE_DISCOVERY,Legacy v1 Engine 09,ANALYSIS_METHOD,Separate from deterministic bank
+A09-KNOWLEDGE-003,Interaction Discovery,KNOWLEDGE_DISCOVERY,Legacy v1 Engine 09,ANALYSIS_METHOD,Separate from deterministic bank
+A09-KNOWLEDGE-004,Context Discovery,KNOWLEDGE_DISCOVERY,Legacy v1 Engine 09,ANALYSIS_METHOD,Separate from deterministic bank
+A09-KNOWLEDGE-005,Anomaly Discovery,KNOWLEDGE_DISCOVERY,Legacy v1 Engine 09,ANALYSIS_METHOD,Separate from deterministic bank

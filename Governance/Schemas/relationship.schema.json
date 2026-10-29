@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:relationship:1",
+  "schema_id": "mts.relationship",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Governed Relationship",
+  "description": "Auditable directed edge between two governed MTS identities. Endpoints are not restricted to artifacts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_ref", "relationship_type", "target_ref", "created_at", "producer"],
+  "properties": {
+    "source_ref": {"$ref": "governed_reference.schema.json"},
+    "relationship_type": {"$ref": "controlled_vocabularies.schema.json#/$defs/relationship_type"},
+    "target_ref": {"$ref": "governed_reference.schema.json"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["producer_type", "producer_id"],
+      "properties": {
+        "producer_type": {"$ref": "controlled_vocabularies.schema.json#/$defs/producer_type"},
+        "producer_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "metadata": {"type": "object", "default": {}}
+  }
+}

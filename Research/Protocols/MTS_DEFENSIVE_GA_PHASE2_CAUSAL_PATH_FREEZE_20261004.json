@@ -1,0 +1,63 @@
+{
+  "format": "MTS_DEFENSIVE_GA_PHASE2_CAUSAL_PATH_FREEZE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_GA",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "runner_provenance": "RECONSTRUCTED_FROM_SURVIVING_SPEC",
+  "purpose": "Discover short-duration opportunistic long chromosomes that can profit while the independent A OR B OR C market-state architecture remains DEFENSIVE.",
+  "state_invariant": "GA cannot declare crash, recovery, NORMAL, or modify A/B/C/R1.",
+  "source": {
+    "cache": "/home/ubuntu/mts-v4-cache/discovery_research_population_v1.RECONSTRUCTED.pkl.gz",
+    "cache_provenance": "RECONSTRUCTED_FROM_SURVIVING_SPEC",
+    "laboratory": "Consumed DEV50 only; only tickers present in reconstructed cache are eligible.",
+    "protected_access": false,
+    "test17_access": false
+  },
+  "research_windows": {
+    "GFC": ["2007-10-09", "2009-03-09"],
+    "2011": ["2011-07-22", "2011-10-03"],
+    "2015_16": ["2015-08-20", "2016-02-11"],
+    "2018": ["2018-10-03", "2018-12-24"],
+    "COVID": ["2020-02-19", "2020-03-23"],
+    "2022": ["2022-01-03", "2022-10-12"]
+  },
+  "window_note": "Window endpoints identify consumed retrospective laboratories only. They are never entry/exit features. Trades are simulated causally from each signal path.",
+  "chromosome": {
+    "families": "nonempty subset of observed candidate-signal families",
+    "source_horizons": [10, 20, 63],
+    "entry_mode": ["IMMEDIATE", "PULLBACK_RECLAIM"],
+    "pullback_depth": [0.02, 0.03, 0.04, 0.05, 0.07, 0.10],
+    "reclaim_fraction": [0.25, 0.50, 0.75, 1.00],
+    "entry_deadline_sessions": [2, 3, 5, 8, 10],
+    "confirmation_up_closes": [0, 1, 2],
+    "max_hold_sessions": [2, 3, 5, 8, 10, 15, 20],
+    "stop_loss": [null, 0.02, 0.03, 0.04, 0.05, 0.07, 0.10],
+    "profit_target": [null, 0.03, 0.05, 0.08, 0.12, 0.20]
+  },
+  "execution": {
+    "entry": "Next available path open for IMMEDIATE; for PULLBACK_RECLAIM, after an observed pullback from signal entry price, enter at next-session open after close reclaims the specified fraction of that observed decline and confirmation requirement is satisfied.",
+    "stop_target": "Evaluated causally from post-entry daily OHLC. If stop and target are both touched in the same bar, use stop first (conservative ambiguity rule).",
+    "timeout": "Exit at close after max_hold_sessions if no earlier stop/target.",
+    "round_trip_cost_bps": 10,
+    "no_future_path_use_for_entry": true
+  },
+  "fitness": {
+    "primary": ["net mean return", "profit factor", "win rate", "worst-window expectancy", "CVaR05", "trade count", "cross-window portability"],
+    "hard_penalties": ["fewer than 30 total trades", "fewer than 3 represented windows", "negative worst-window expectancy", "single-window dependence"],
+    "selection_principle": "Prefer portable short-term profitability across declining-market episodes over one-episode maximization."
+  },
+  "seeds": {
+    "phase1_quality_lineage": "Benchmark only; original executable semantics not assumed recovered.",
+    "phase1b_breakout_lineage": "Benchmark only; original executable semantics not assumed recovered."
+  },
+  "anti_overfit": [
+    "No TEST17.",
+    "No preserved 50.",
+    "No remaining Discovery.",
+    "No Verification A/B.",
+    "No known trough/peak/recovery labels as chromosome features.",
+    "Retain per-window metrics.",
+    "Do not allow one crash rally to dominate fitness.",
+    "Report null result if portability is absent."
+  ]
+}

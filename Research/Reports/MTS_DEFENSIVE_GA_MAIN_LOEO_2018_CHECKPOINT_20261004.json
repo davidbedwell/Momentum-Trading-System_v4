@@ -1,0 +1,141 @@
+{
+  "format": "MTS_DEFENSIVE_GA_MAIN_LOEO_CHECKPOINT_V1",
+  "heldout": "2018",
+  "generation": 27,
+  "unique_genomes": 4406,
+  "best": {
+    "score": 0.0946560260863877,
+    "n": 113,
+    "mean": 0.059646282345056534,
+    "win": 0.8584070796460177,
+    "pf": 15.579206258751086,
+    "worst_window": 0.02467506378889084,
+    "window_dispersion": 0.023845018426516408,
+    "five_session_efficiency": 0.096273664569021,
+    "mean_mae": -0.049209460616111755,
+    "mean_giveback": 0.019720040261745453,
+    "mean_duration": 4.964601769911504,
+    "heldout": "2018",
+    "heldout_metrics": {
+      "n": 9,
+      "mean": 0.013169866055250168,
+      "win": 0.6666666666666666
+    },
+    "by_window": {
+      "GFC": {
+        "n": 35,
+        "mean": 0.08659562468528748,
+        "win": 0.9142857142857143
+      },
+      "2011": {
+        "n": 18,
+        "mean": 0.04359538108110428,
+        "win": 0.7777777777777778
+      },
+      "2015_16": {
+        "n": 9,
+        "mean": 0.02467506378889084,
+        "win": 0.8888888888888888
+      },
+      "2018": {
+        "n": 9,
+        "mean": 0.013169866055250168,
+        "win": 0.6666666666666666
+      },
+      "COVID": {
+        "n": 19,
+        "mean": 0.07777121663093567,
+        "win": 0.8947368421052632
+      },
+      "2022": {
+        "n": 32,
+        "mean": 0.038273055106401443,
+        "win": 0.8125
+      }
+    },
+    "g": {
+      "fmask": 235,
+      "hmask": 2,
+      "entry_rules": [
+        3,
+        121,
+        156
+      ],
+      "entry_k": 2,
+      "entry_delay": 3,
+      "exit_rules": [
+        34,
+        143
+      ],
+      "exit_k": 1,
+      "min_hold": 1,
+      "max_hold": 20
+    },
+    "g_described": {
+      "fmask": 235,
+      "hmask": 2,
+      "entry_rules": [
+        3,
+        121,
+        156
+      ],
+      "entry_k": 2,
+      "entry_delay": 3,
+      "exit_rules": [
+        34,
+        143
+      ],
+      "exit_k": 1,
+      "min_hold": 1,
+      "max_hold": 20,
+      "families": [
+        "MOMENTUM",
+        "BREAKOUT",
+        "MEAN_REVERSION",
+        "VOLUME_LIQUIDITY",
+        "RELATIVE_CROSS_SECTIONAL",
+        "MARKET_REGIME_STRUCTURE"
+      ],
+      "horizons": [
+        5
+      ],
+      "entry_conditions": [
+        {
+          "feature": "stock_ret5",
+          "direction": "<=",
+          "quantile": 0.35,
+          "threshold": -0.02467372640967369
+        },
+        {
+          "feature": "breadth_positive20",
+          "direction": "<=",
+          "quantile": 0.2,
+          "threshold": 0.1155378520488739
+        },
+        {
+          "feature": "vvix",
+          "direction": ">=",
+          "quantile": 0.65,
+          "threshold": 102.87999725341797
+        }
+      ],
+      "exit_conditions": [
+        {
+          "feature": "stock_range20",
+          "direction": ">=",
+          "quantile": 0.5,
+          "threshold": 0.415416955947876
+        },
+        {
+          "feature": "vix",
+          "direction": "<=",
+          "quantile": 0.35,
+          "threshold": 24.299999237060547
+        }
+      ]
+    }
+  },
+  "source_events": 10079,
+  "test17_accessed": false,
+  "protected_accessed": false
+}

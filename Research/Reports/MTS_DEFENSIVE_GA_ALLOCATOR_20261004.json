@@ -1,0 +1,378 @@
+{
+  "format": "MTS_DEFENSIVE_GA_ALLOCATOR_V1",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "core_variant": "D3_EXIT2",
+  "full": {
+    "score": -0.297368815011466,
+    "genome": [
+      {
+        "feature": "stock_rv_pct",
+        "weight": -3
+      }
+    ],
+    "capacity_results": [
+      [
+        -0.5192946325511625,
+        3,
+        {
+          "GFC": {
+            "return": 0.6763829421824197,
+            "mdd_tx": -0.09859612403445994,
+            "trades": 47,
+            "missed": 10
+          },
+          "2011": {
+            "return": 0.18846412336069562,
+            "mdd_tx": -0.01159800476672146,
+            "trades": 11,
+            "missed": 5
+          },
+          "2015_16": {
+            "return": 0.07642032405835497,
+            "mdd_tx": -0.00016669444907480013,
+            "trades": 4,
+            "missed": 0
+          },
+          "2018": {
+            "return": 0.07539610267120334,
+            "mdd_tx": -0.0033028339709166854,
+            "trades": 4,
+            "missed": 1
+          },
+          "COVID": {
+            "return": -0.04391372977751551,
+            "mdd_tx": -0.11352181357511826,
+            "trades": 4,
+            "missed": 10
+          },
+          "2022": {
+            "return": -0.13835655514108658,
+            "mdd_tx": -0.3417874010052423,
+            "trades": 16,
+            "missed": 3
+          }
+        },
+        0.1390655345590119,
+        -0.13835655514108658,
+        0.2612702506017576,
+        -0.3417874010052423,
+        29
+      ],
+      [
+        -0.22524590000449027,
+        5,
+        {
+          "GFC": {
+            "return": 0.4956133870748354,
+            "mdd_tx": -0.07421129798064585,
+            "trades": 52,
+            "missed": 4
+          },
+          "2011": {
+            "return": 0.11879390821996072,
+            "mdd_tx": -0.007158358895445693,
+            "trades": 12,
+            "missed": 2
+          },
+          "2015_16": {
+            "return": 0.04585219443501298,
+            "mdd_tx": -0.00010001000100012813,
+            "trades": 4,
+            "missed": 0
+          },
+          "2018": {
+            "return": 0.0649152282443155,
+            "mdd_tx": -0.0020824694767155316,
+            "trades": 5,
+            "missed": 0
+          },
+          "COVID": {
+            "return": 0.006623301359850231,
+            "mdd_tx": -0.0999930438133676,
+            "trades": 6,
+            "missed": 5
+          },
+          "2022": {
+            "return": -0.045110918613312956,
+            "mdd_tx": -0.21878111409743495,
+            "trades": 19,
+            "missed": 0
+          }
+        },
+        0.11444785012011031,
+        -0.045110918613312956,
+        0.17774046312288685,
+        -0.21878111409743495,
+        11
+      ],
+      [
+        -0.1475659124787452,
+        10,
+        {
+          "GFC": {
+            "return": 0.27904169144188073,
+            "mdd_tx": -0.04172129746252917,
+            "trades": 55,
+            "missed": 0
+          },
+          "2011": {
+            "return": 0.06482209085216417,
+            "mdd_tx": -0.003629002979927076,
+            "trades": 13,
+            "missed": 0
+          },
+          "2015_16": {
+            "return": 0.02292609721750627,
+            "mdd_tx": -5.000250012499041e-05,
+            "trades": 4,
+            "missed": 0
+          },
+          "2018": {
+            "return": 0.03245761412215775,
+            "mdd_tx": -0.0010411826740177599,
+            "trades": 5,
+            "missed": 0
+          },
+          "COVID": {
+            "return": 0.08845745121097215,
+            "mdd_tx": -0.050809735184207616,
+            "trades": 11,
+            "missed": 0
+          },
+          "2022": {
+            "return": -0.022555459306656145,
+            "mdd_tx": -0.11930176548711224,
+            "trades": 19,
+            "missed": 0
+          }
+        },
+        0.0775249142563375,
+        -0.022555459306656145,
+        0.09653847860644506,
+        -0.11930176548711224,
+        0
+      ]
+    ],
+    "unique": 979,
+    "generations": 10
+  },
+  "loeo": [
+    {
+      "heldout": "GFC",
+      "train_score": -0.3505949854252088,
+      "genome": [
+        {
+          "feature": "stock_rv_pct",
+          "weight": -1
+        }
+      ],
+      "heldout_capacity_results": [
+        {
+          "slots": 3,
+          "return": 0.6763829421824197,
+          "mdd_tx": -0.09859612403445994,
+          "trades": 47,
+          "missed": 10
+        },
+        {
+          "slots": 5,
+          "return": 0.4956133870748354,
+          "mdd_tx": -0.07421129798064585,
+          "trades": 52,
+          "missed": 4
+        },
+        {
+          "slots": 10,
+          "return": 0.27904169144188073,
+          "mdd_tx": -0.04172129746252917,
+          "trades": 55,
+          "missed": 0
+        }
+      ],
+      "unique": 1097,
+      "generations": 11
+    },
+    {
+      "heldout": "2011",
+      "train_score": -0.30331098546679547,
+      "genome": [
+        {
+          "feature": "stock_rv_pct",
+          "weight": -0.5
+        }
+      ],
+      "heldout_capacity_results": [
+        {
+          "slots": 3,
+          "return": 0.18846412336069562,
+          "mdd_tx": -0.01159800476672146,
+          "trades": 11,
+          "missed": 5
+        },
+        {
+          "slots": 5,
+          "return": 0.11879390821996072,
+          "mdd_tx": -0.007158358895445693,
+          "trades": 12,
+          "missed": 2
+        },
+        {
+          "slots": 10,
+          "return": 0.06482209085216417,
+          "mdd_tx": -0.003629002979927076,
+          "trades": 13,
+          "missed": 0
+        }
+      ],
+      "unique": 991,
+      "generations": 10
+    },
+    {
+      "heldout": "2015_16",
+      "train_score": -0.287918844777965,
+      "genome": [
+        {
+          "feature": "stock_rv_pct",
+          "weight": -1
+        }
+      ],
+      "heldout_capacity_results": [
+        {
+          "slots": 3,
+          "return": 0.07642032405835497,
+          "mdd_tx": -0.00016669444907480013,
+          "trades": 4,
+          "missed": 0
+        },
+        {
+          "slots": 5,
+          "return": 0.04585219443501298,
+          "mdd_tx": -0.00010001000100012813,
+          "trades": 4,
+          "missed": 0
+        },
+        {
+          "slots": 10,
+          "return": 0.02292609721750627,
+          "mdd_tx": -5.000250012499041e-05,
+          "trades": 4,
+          "missed": 0
+        }
+      ],
+      "unique": 995,
+      "generations": 10
+    },
+    {
+      "heldout": "2018",
+      "train_score": -0.28987308080927404,
+      "genome": [
+        {
+          "feature": "stock_rv_pct",
+          "weight": -2
+        }
+      ],
+      "heldout_capacity_results": [
+        {
+          "slots": 3,
+          "return": 0.07539610267120334,
+          "mdd_tx": -0.0033028339709166854,
+          "trades": 4,
+          "missed": 1
+        },
+        {
+          "slots": 5,
+          "return": 0.0649152282443155,
+          "mdd_tx": -0.0020824694767155316,
+          "trades": 5,
+          "missed": 0
+        },
+        {
+          "slots": 10,
+          "return": 0.03245761412215775,
+          "mdd_tx": -0.0010411826740177599,
+          "trades": 5,
+          "missed": 0
+        }
+      ],
+      "unique": 1054,
+      "generations": 11
+    },
+    {
+      "heldout": "COVID",
+      "train_score": -0.2801255516421372,
+      "genome": [
+        {
+          "feature": "stock_rv_pct",
+          "weight": -1
+        }
+      ],
+      "heldout_capacity_results": [
+        {
+          "slots": 3,
+          "return": -0.04391372977751551,
+          "mdd_tx": -0.11352181357511826,
+          "trades": 4,
+          "missed": 10
+        },
+        {
+          "slots": 5,
+          "return": 0.006623301359850231,
+          "mdd_tx": -0.0999930438133676,
+          "trades": 6,
+          "missed": 5
+        },
+        {
+          "slots": 10,
+          "return": 0.08845745121097215,
+          "mdd_tx": -0.050809735184207616,
+          "trades": 11,
+          "missed": 0
+        }
+      ],
+      "unique": 964,
+      "generations": 10
+    },
+    {
+      "heldout": "2022",
+      "train_score": 0.015942821794392673,
+      "genome": [
+        {
+          "feature": "stock_drawdown252",
+          "weight": -1
+        },
+        {
+          "feature": "stock_rv_pct",
+          "weight": -1
+        }
+      ],
+      "heldout_capacity_results": [
+        {
+          "slots": 3,
+          "return": -0.14819086195798425,
+          "mdd_tx": -0.3440311158434003,
+          "trades": 16,
+          "missed": 3
+        },
+        {
+          "slots": 5,
+          "return": -0.045110918613312956,
+          "mdd_tx": -0.21878111409743495,
+          "trades": 19,
+          "missed": 0
+        },
+        {
+          "slots": 10,
+          "return": -0.022555459306656145,
+          "mdd_tx": -0.11930176548711224,
+          "trades": 19,
+          "missed": 0
+        }
+      ],
+      "unique": 1705,
+      "generations": 15
+    }
+  ],
+  "protected_accessed": false,
+  "test17_accessed": false,
+  "preserved50_accessed": false
+}

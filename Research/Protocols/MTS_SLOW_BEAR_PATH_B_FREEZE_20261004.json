@@ -1,0 +1,21 @@
+{
+ "format":"MTS_SLOW_BEAR_PATH_B_FREEZE_V1",
+ "date":"2026-10-04",
+ "question":"Can causal internal deterioration declare a slow destructive bear before an MA cross using breadth collapse/non-recovery, failed rebounds, negative-day persistence, and lagged funding/credit deterioration?",
+ "positives":{"2008":["2007-10-09","2009-03-09"],"2022":["2022-01-03","2022-10-12"]},
+ "features":{
+  "breadth":["20-session mean breadth-positive-20","change in breadth-above-SMA200 over trailing 20/30/40 sessions"],
+  "failed_rebounds":["fraction of sessions in trailing 20/30/40 where 5-day return <=0 while drawdown252<-5%"],
+  "negative_days":["negative 1-day return fraction trailing 20/30/40"],
+  "stress":["OFR Funding change trailing 20/30/40","OFR Credit change trailing 20/30/40"]
+ },
+ "thresholds":"rolling historical percentiles using past observations only; bounded percentiles 70/75/80/85/90",
+ "rule_family":"sparse confluence requiring at least one breadth/internal-damage condition and at least one funding/credit condition; 2-4 clauses; confirmation 1/2/3/5 sessions",
+ "selection_priority":["false declaration episodes","coverage of both positives","peak-to-declaration delay","simplicity"],
+ "controls":"all non-positive evaluable history; 2011, 2015 and 2018 explicitly retained",
+ "report":["heldout/LOCO detection dates","sessions from peak","all false declaration episode starts","false declaration days","feature clauses","2011/2015/2018 behavior"],
+ "validation":"leave-one-positive-out plus full-history descriptive; a positive episode cannot determine thresholds for its heldout fold",
+ "prohibited":["MA cross requirement","portfolio return/CAGR/wealth fitness","future trough/recovery predictors","protected evidence"],
+ "protected":{"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+ "status":"FROZEN_BEFORE_TEST"
+}

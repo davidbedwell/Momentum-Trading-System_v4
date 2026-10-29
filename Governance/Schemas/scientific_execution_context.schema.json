@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:scientific-execution-context:1",
+  "schema_id": "mts.scientific-execution-context",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Scientific Execution Context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "research_plan_ref",
+    "question_ref",
+    "input_artifact_refs",
+    "as_of_time",
+    "universe_scope",
+    "date_range",
+    "eligible_population",
+    "sample_construction_rule",
+    "exclusion_rule",
+    "event_or_opportunity_definition",
+    "comparison_or_control_definition",
+    "overlap_policy",
+    "future_information_policy",
+    "research_mode",
+    "discovery_interval",
+    "validation_interval",
+    "holdout_interval",
+    "method_specs",
+    "deterministic_computation_specs",
+    "parameters",
+    "software_version"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "research_plan_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_version"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "question_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_version"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "input_artifact_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "artifact_id",
+          "artifact_version"
+        ],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifact_version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "as_of_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "universe_scope": {
+      "type": "object"
+    },
+    "date_range": {
+      "type": "object"
+    },
+    "eligible_population": {
+      "type": "object"
+    },
+    "sample_construction_rule": {
+      "type": "object"
+    },
+    "exclusion_rule": {
+      "type": "object"
+    },
+    "event_or_opportunity_definition": {
+      "type": "object"
+    },
+    "comparison_or_control_definition": {
+      "type": "object"
+    },
+    "overlap_policy": {
+      "type": "object"
+    },
+    "future_information_policy": {
+      "type": "object"
+    },
+    "research_mode": {
+      "enum": [
+        "EXPLORATORY",
+        "CONFIRMATORY",
+        "VALIDATION",
+        "REPLICATION",
+        "ROBUSTNESS",
+        "RETROSPECTIVE_CHARACTERIZATION"
+      ]
+    },
+    "discovery_interval": {
+      "type": "object"
+    },
+    "validation_interval": {
+      "type": "object"
+    },
+    "holdout_interval": {
+      "type": "object"
+    },
+    "method_specs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "deterministic_computation_specs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "random_seed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "software_version": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

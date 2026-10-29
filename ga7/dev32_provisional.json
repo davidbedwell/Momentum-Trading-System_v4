@@ -1,0 +1,305 @@
+{
+  "asof_sector_counts": {
+    "Basic Materials": 4,
+    "Communication Services": 4,
+    "Consumer Cyclical": 5,
+    "Consumer Defensive": 4,
+    "Energy": 1,
+    "Financial Services": 9,
+    "Healthcare": 6,
+    "Industrials": 8,
+    "Real Estate": 4,
+    "Technology": 8,
+    "Utilities": 5
+  },
+  "sector_counts": {
+    "Basic Materials": 5,
+    "Communication Services": 5,
+    "Consumer Cyclical": 6,
+    "Consumer Defensive": 5,
+    "Energy": 5,
+    "Financial Services": 15,
+    "Healthcare": 7,
+    "Industrials": 11,
+    "Real Estate": 4,
+    "Technology": 11,
+    "Utilities": 5
+  },
+  "sector_quotas": {
+    "Basic Materials": 2,
+    "Communication Services": 2,
+    "Consumer Cyclical": 2,
+    "Consumer Defensive": 2,
+    "Energy": 1,
+    "Financial Services": 6,
+    "Healthcare": 3,
+    "Industrials": 5,
+    "Real Estate": 2,
+    "Technology": 5,
+    "Utilities": 2
+  },
+  "selected_count": 32,
+  "selection_method": "sector proportional quotas, as-of-2005-09-14 seeded selection",
+  "selection_sha256": "e23fb36cbc54ecea9effd279b25c8cca937c544a0dd97201d172a447d6d074ed",
+  "status": "PROVISIONAL_NOT_PIT_CERTIFIED",
+  "tickers": [
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Real Estate",
+      "ticker": "ARE"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Financial Services",
+      "ticker": "BEN"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Consumer Defensive",
+      "ticker": "BG"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2005-06-28",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5336,
+      "sector": "Industrials",
+      "ticker": "BLDR"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Technology",
+      "ticker": "CDNS"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Financial Services",
+      "ticker": "CME"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Financial Services",
+      "ticker": "COF"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Technology",
+      "ticker": "CTSH"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Consumer Cyclical",
+      "ticker": "DECK"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Communication Services",
+      "ticker": "DIS"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Industrials",
+      "ticker": "ETN"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Financial Services",
+      "ticker": "FITB"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Industrials",
+      "ticker": "GE"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Healthcare",
+      "ticker": "GILD"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Technology",
+      "ticker": "GLW"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Consumer Cyclical",
+      "ticker": "GPC"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Consumer Defensive",
+      "ticker": "HSY"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Technology",
+      "ticker": "INTC"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Financial Services",
+      "ticker": "MCO"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Financial Services",
+      "ticker": "PFG"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Basic Materials",
+      "ticker": "PPG"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Industrials",
+      "ticker": "RSG"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Utilities",
+      "ticker": "SO"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Real Estate",
+      "ticker": "SPG"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Basic Materials",
+      "ticker": "STLD"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Healthcare",
+      "ticker": "SYK"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Communication Services",
+      "ticker": "T"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Healthcare",
+      "ticker": "TECH"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Industrials",
+      "ticker": "UPS"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Technology",
+      "ticker": "VRSN"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Utilities",
+      "ticker": "XEL"
+    },
+    {
+      "financial_solvency": "NOT_PIT_VERIFIED",
+      "first_session": "2004-09-01",
+      "last_session": "2026-09-14",
+      "observed_sessions": 5543,
+      "sector": "Energy",
+      "ticker": "XOM"
+    }
+  ],
+  "universe_count": 79,
+  "warning": "Financial solvency is not verified; DEV79 itself may contain survivorship bias."
+}

@@ -1,0 +1,30 @@
+{
+  "format":"MTS_DRAWDOWN_ATTRIBUTION_AND_FIXED_TIMEOUT_FREEZE_V1",
+  "date":"2026-10-04",
+  "questions":[
+    "Which capital decisions actually create the catastrophic peak-to-trough losses, and how much lifetime alpha do those same decisions create?",
+    "Given a correctly identified crash onset, can a blind fixed-duration exit/reentry rule based only on prior crash durations avoid substantial downside without requiring bottom detection?"
+  ],
+  "evidence":{"cache":"/home/ubuntu/mts-v4-cache/discovery_research_population_v1.pkl.gz","manifest":"/home/ubuntu/mts-v4-cache/discovery_research_population_v1.pkl.gz.manifest.json","expected_trades":125002,"expected_tickers":67,"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+  "crashes":[
+    {"name":"2008","onset":"2007-07-26","trough":"2008-11-20"},
+    {"name":"2015","onset":"2015-07-24","trough":"2015-09-28"},
+    {"name":"2020","onset":"2020-03-06","trough":"2020-03-18"},
+    {"name":"2022","onset":"2022-04-20","trough":"2022-06-17"}
+  ],
+  "attribution":{
+    "portfolio":"existing equal-size nonlevered cash-limited portfolio",
+    "classifications":["pre-peak holding vs entered after peak","eventual terminal winner vs terminal loser","top negative contributors","entry date blocks"],
+    "metrics":["share of peak-to-trough dollar loss by class","share of lifetime terminal-return mass by implicated trade set","concentration of loss in worst 5% and 10% of trade contributions"]
+  },
+  "fixed_timeout":{
+    "purpose":"management ceiling test, not detector test",
+    "trigger":"frozen known crash onset only",
+    "duration_estimation":"for each crash, use trading-session onset-to-trough durations of the other three crashes only",
+    "variants":["LOCO arithmetic mean duration","LOCO median duration"],
+    "action":"one-shot liquidate all active positions at trigger close; suppress new entries for timeout sessions; then resume ordinary MTS automatically; no bottom/stabilization condition",
+    "metrics":["episode peak-to-trough DD","full-period terminal wealth","CAGR","max DD","wealth retained vs baseline","DD improvement vs baseline"]
+  },
+  "prohibitions":["no tuning of timeout beyond frozen mean/median","no GA","no protected-bank access","no post-hoc detector adjustment"],
+  "status":"FROZEN_BEFORE_TEST"
+}

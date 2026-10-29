@@ -1,0 +1,110 @@
+{
+  "version": "Research Director Architecture v2.1",
+  "status": "PROPOSED_DESIGN_TARGET",
+  "ratings_are": "architecture completeness targets, not empirical performance scores",
+  "capabilities": {
+    "evidence_lineage": {
+      "target": 10,
+      "mechanisms": [
+        "state fingerprints",
+        "evidence trigger refs",
+        "question selection record",
+        "durable lineage"
+      ]
+    },
+    "true_iterative_inquiry": {
+      "target": 10,
+      "mechanisms": [
+        "evidence change detector",
+        "uncertainty decomposition",
+        "Finding mutation test"
+      ]
+    },
+    "question_creativity": {
+      "target": 10,
+      "mechanisms": [
+        "working hypotheses",
+        "AI candidate generator",
+        "alternative explanations",
+        "cross-campaign analogies"
+      ]
+    },
+    "scientific_governance": {
+      "target": 10,
+      "mechanisms": [
+        "deterministic guardrails",
+        "authority separation",
+        "admission/promotion boundaries",
+        "temporal validation"
+      ]
+    },
+    "missing_evidence_reasoning": {
+      "target": 10,
+      "mechanisms": [
+        "first-class insufficiency state",
+        "targeted acquisition/refinement questions"
+      ]
+    },
+    "missing_capability_reasoning": {
+      "target": 10,
+      "mechanisms": [
+        "Research Need",
+        "alternative path evaluation",
+        "no silent substitution"
+      ]
+    },
+    "tool_sufficiency": {
+      "target": 10,
+      "mechanisms": [
+        "Tool Coverage Review",
+        "used-vs-available comparison",
+        "materiality requirement",
+        "cross-campaign tool history"
+      ]
+    },
+    "question_prioritization": {
+      "target": 10,
+      "mechanisms": [
+        "multi-dimensional evaluation",
+        "versioned selection policy",
+        "diversity control",
+        "cost/value separation"
+      ]
+    },
+    "contradiction_handling": {
+      "target": 10,
+      "mechanisms": [
+        "competing hypotheses",
+        "discriminating questions",
+        "contradiction lineage",
+        "convergence block"
+      ]
+    },
+    "objective_stopping": {
+      "target": 10,
+      "mechanisms": [
+        "criterion-by-criterion stopping",
+        "resource ceiling separation",
+        "holdout/replication/robustness hooks"
+      ]
+    },
+    "cross_research_learning": {
+      "target": 10,
+      "mechanisms": [
+        "Nexus retrieval",
+        "SoK context",
+        "cross-campaign similarity",
+        "generalization triggers"
+      ]
+    },
+    "restart_auditability": {
+      "target": 10,
+      "mechanisms": [
+        "durable Class II state",
+        "replay test",
+        "selection record",
+        "no conversational dependency"
+      ]
+    }
+  }
+}

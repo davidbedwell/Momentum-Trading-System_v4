@@ -1,0 +1,61 @@
+{
+  "format":"MTS_PATH_A_2020_FAILURE_AUTOPSY_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_NEW_ANALYSIS",
+  "question":"Why did the later FAST_SHOCK_SYSTEMIC Path-A formulation fail held-out 2020 when the broader causal multi-market classifier detected 2020 on 2020-03-12 and the earlier DEV50 emergency architecture fired on 2020-03-06; can a scientifically defensible market-wide fast-shock rule reduce detection damage without forcing an earlier date?",
+  "architecture_invariant":"A, B and C operate simultaneously; A OR B OR C authorizes DEFENSIVE. This experiment changes only A.",
+  "known_benchmarks":{
+    "multimarket_heldout_2020":{"date":"2020-03-12","peak_to_detection":-0.19373616984970632,"remaining_to_reference_trough":-0.23219451215681086,"rule":["funding","dd","vvix","b20"],"threshold":0.85,"k":4,"confirm":2},
+    "failed_fast_A_heldout_2020":{"date":null,"rule":["shock5","funding"],"threshold":0.85,"k":2,"confirm":5},
+    "old_DEV50_emergency":{"date":"2020-03-06","provenance":"diagnostic clue only; not admissible as a market-wide validated A rule"},
+    "OFR_2020_03_06_lagged":{"Funding_CHANGE_20":0.501,"Funding_ACCEL_5_VS_PRIOR15":0.11166666666666668,"Credit_CHANGE_20":0.355}
+  },
+  "failure_hypotheses":[
+    "five-session confirmation is structurally too slow/strict for a fast shock",
+    "requiring shock5 and funding simultaneously at the same high percentile loses useful cross-market concurrence",
+    "drawdown state and/or VVIX contains orthogonal information omitted from failed FAST-A",
+    "breadth collapse contains orthogonal information omitted from failed FAST-A",
+    "LOCO training on 2008 and 2022 selected morphology that does not transport to exogenous COVID shock",
+    "old DEV50 signal was stock-lab-specific and may not transport to a true market-wide rule"
+  ],
+  "admitted_feature_families":[
+    "market drawdown magnitude/speed and 1/5-day shock already admitted by parent protocols",
+    "realized volatility/extreme move clustering already admitted by parent protocols",
+    "VIX/VVIX level/change/causal rolling percentile already admitted by parent protocols",
+    "full-market breadth level/change/collapse velocity already admitted by parent protocols",
+    "OFR Funding/Credit level/change/acceleration with two-business-day publication lag",
+    "sparse cross-market concurrence among these families"
+  ],
+  "analysis_sequence":[
+    "reconstruct causal daily feature tape from surviving/raw admitted sources; label reconstruction explicitly",
+    "reproduce or explain the March-12 benchmark state feature-by-feature",
+    "reproduce or explain why failed FAST-A shock5+funding with five-session confirmation never fires",
+    "perform confirmation ablation 1/2/3/5 without portfolio fitness",
+    "perform sparse feature ablations/additions only within preregistered admitted families",
+    "evaluate all-history false-alert episodes and alert days, including 2015 and ordinary stress",
+    "evaluate leave-crisis-out transport on 2008, 2020 and 2022",
+    "select no rule unless detection improvement survives false-alert and transport scrutiny",
+    "freeze detector before any MTS portfolio DD/CAGR diagnostic"
+  ],
+  "selection_priority":[
+    "out-of-sample destructive-episode coverage",
+    "false-alert episode burden",
+    "material subsequent downside remaining at declaration",
+    "earlier declaration only after the above",
+    "simplicity and mechanism coherence"
+  ],
+  "portfolio_diagnostic_after_freeze":{
+    "authorized":true,
+    "metrics":["max_drawdown","CAGR","terminal_wealth","tail_loss","turnover/cost"],
+    "win_condition":"Reducing drawdown while holding or increasing CAGR is a win; earlier detection is not a win if false exits or lost upside reduce overall usefulness.",
+    "prohibition":"Portfolio DD/CAGR/wealth may judge the frozen detector but may not choose its features, thresholds, confirmation, or rule."
+  },
+  "stop_rules":[
+    "Do not force a rule earlier than 2020-03-12.",
+    "If earlier variants materially increase false alerts or fail transport, retain the later defensible detection.",
+    "If no market-wide A rule transports, report Path-A limitation/failure rather than tuning to 2020.",
+    "If the analysis reveals a genuinely distinct mechanism outside A/B/C, preregister it before testing; do not invent a path post hoc."
+  ],
+  "protected":{"preserved50":false,"remaining_discovery":false,"verification_a":false,"verification_b":false},
+  "R1_progression":"BLOCKED until Path-A 2020 discrepancy is resolved or explicitly accepted as a documented limitation."
+}

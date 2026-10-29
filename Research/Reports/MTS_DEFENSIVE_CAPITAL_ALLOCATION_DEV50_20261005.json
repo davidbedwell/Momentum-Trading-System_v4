@@ -1,0 +1,2646 @@
+{
+  "format": "MTS_DEFENSIVE_CAPITAL_ALLOCATION_DEV50_V1",
+  "status": "DEV50_NESTED_COMPLETE",
+  "safe_proxy": "DGS3MO",
+  "actions": [
+    "LONG_SECURITY",
+    "SHORT_SECURITY",
+    "LONG_MARKET",
+    "SHORT_MARKET",
+    "SAFE"
+  ],
+  "results": [
+    {
+      "outer": "STOCK_0",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "market_ret20",
+            0.2,
+            "<="
+          ],
+          [
+            "vvix",
+            0.35,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.3400881243257541
+        },
+        {
+          "feature": "market_ret20",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.06583661593693257
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": 87.34
+        }
+      ],
+      "train": {
+        "date_mean": 0.13646761365097893,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.017918036531537146,
+        "episode_mean": 0.14900017014442882,
+        "worst_episode": 0.1398378811969095,
+        "dates": 38,
+        "episodes": 3,
+        "rows": 340,
+        "tickers": 23
+      },
+      "heldout": {
+        "date_mean": 0.13026469546219357,
+        "date_win": 0.6666666666666666,
+        "date_downside": -0.0694042746902537,
+        "worst_date": -0.08412954173448263,
+        "episode_mean": 0.13026469546219357,
+        "worst_episode": 0.13026469546219357,
+        "dates": 21,
+        "episodes": 1,
+        "rows": 21,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "STOCK_0",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret20",
+            0.8,
+            ">="
+          ],
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "breadth_above_sma200",
+            0.8,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret20",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.03277768209240861
+        },
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.3400881243257541
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.5031446540880503
+        }
+      ],
+      "train": {
+        "date_mean": 0.19015320986588755,
+        "date_win": 0.9310344827586207,
+        "date_downside": -0.01412084743598293,
+        "worst_date": -0.02197988033823801,
+        "episode_mean": 0.11711555551113784,
+        "worst_episode": 0.025235437463900005,
+        "dates": 29,
+        "episodes": 3,
+        "rows": 62,
+        "tickers": 8
+      },
+      "heldout": {
+        "date_mean": -0.08883844008430411,
+        "date_win": 0.07142857142857142,
+        "date_downside": -0.09851770864927602,
+        "worst_date": -0.1490153524154673,
+        "episode_mean": -0.08759749547975702,
+        "worst_episode": -0.09628410771158664,
+        "dates": 14,
+        "episodes": 2,
+        "rows": 14,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "STOCK_0",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ],
+          [
+            "market_ret20",
+            0.2,
+            "<="
+          ],
+          [
+            "vix",
+            0.65,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.21411764705882352
+        },
+        {
+          "feature": "market_ret20",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.06708504551354344
+        },
+        {
+          "feature": "vix",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 28.34
+        }
+      ],
+      "train": {
+        "date_mean": 0.0695863028822088,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.018091210499923672,
+        "episode_mean": 0.08980631155320058,
+        "worst_episode": 0.050458011799003465,
+        "dates": 22,
+        "episodes": 3,
+        "rows": 22,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "STOCK_0",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret20",
+            0.65,
+            ">="
+          ],
+          [
+            "vvix",
+            0.2,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.012462371990375809
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 87.47
+        }
+      ],
+      "train": {
+        "date_mean": 0.051192780187207576,
+        "date_win": 0.8909090909090909,
+        "date_downside": -0.07610197255616727,
+        "worst_date": -0.11373929742123406,
+        "episode_mean": 0.026952557162258788,
+        "worst_episode": -0.0451418509490676,
+        "dates": 55,
+        "episodes": 3,
+        "rows": 55,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "STOCK_1",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ],
+          [
+            "market_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "stock_relvol_pct",
+            0.2,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.8025078369905956
+        },
+        {
+          "feature": "market_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.24913832810915315
+        },
+        {
+          "feature": "stock_relvol_pct",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.19583333333333333
+        }
+      ],
+      "train": {
+        "date_mean": 0.10152452542949522,
+        "date_win": 0.652542372881356,
+        "date_downside": -0.12100000593077118,
+        "worst_date": -0.30104447081413466,
+        "episode_mean": 0.19244163748249188,
+        "worst_episode": 0.11233186365166727,
+        "dates": 118,
+        "episodes": 3,
+        "rows": 215,
+        "tickers": 19
+      },
+      "heldout": {
+        "date_mean": 0.15086165294197315,
+        "date_win": 0.9117647058823529,
+        "date_downside": -0.21769043275774705,
+        "worst_date": -0.38678880083135464,
+        "episode_mean": 0.15798897829917116,
+        "worst_episode": 0.13683956987390503,
+        "dates": 34,
+        "episodes": 3,
+        "rows": 38,
+        "tickers": 5
+      }
+    },
+    {
+      "outer": "STOCK_1",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.8,
+            ">="
+          ],
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.5023696682464455
+        },
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.32957537930711944
+        },
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.8025078369905956
+        }
+      ],
+      "train": {
+        "date_mean": 0.14082097319067408,
+        "date_win": 0.8378378378378378,
+        "date_downside": -0.08493888223624511,
+        "worst_date": -0.2836003388883837,
+        "episode_mean": 0.098972637142139,
+        "worst_episode": -0.007451377383478698,
+        "dates": 74,
+        "episodes": 4,
+        "rows": 101,
+        "tickers": 8
+      },
+      "heldout": {
+        "date_mean": 0.0844367767624718,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.008736570415651766,
+        "episode_mean": 0.0844367767624718,
+        "worst_episode": 0.0844367767624718,
+        "dates": 17,
+        "episodes": 1,
+        "rows": 17,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "STOCK_1",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ],
+          [
+            "market_ret5",
+            0.65,
+            "<="
+          ],
+          [
+            "ofr_credit_lag2",
+            0.35,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.21411764705882352
+        },
+        {
+          "feature": "market_ret5",
+          "quantile": 0.65,
+          "direction": "<=",
+          "threshold": 0.014076402335415406
+        },
+        {
+          "feature": "ofr_credit_lag2",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 0.066
+        }
+      ],
+      "train": {
+        "date_mean": 0.06833275686852532,
+        "date_win": 0.967741935483871,
+        "date_downside": -0.017436353709288976,
+        "worst_date": -0.017436353709288976,
+        "episode_mean": 0.08940129419683229,
+        "worst_episode": 0.05718180957484894,
+        "dates": 31,
+        "episodes": 3,
+        "rows": 31,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "STOCK_1",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret20",
+            0.65,
+            ">="
+          ],
+          [
+            "vvix",
+            0.35,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.012462371990375809
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 91.34
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 0.21411764705882352
+        }
+      ],
+      "train": {
+        "date_mean": 0.06494817087503842,
+        "date_win": 0.95,
+        "date_downside": -0.04310848583280742,
+        "worst_date": -0.052325359278875216,
+        "episode_mean": 0.03557836987394334,
+        "worst_episode": -0.03389161238673962,
+        "dates": 40,
+        "episodes": 3,
+        "rows": 40,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "STOCK_2",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "breadth_positive20",
+            0.2,
+            "<="
+          ],
+          [
+            "vvix",
+            0.35,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.3456690199833037
+        },
+        {
+          "feature": "breadth_positive20",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.14705882352941177
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": 87.32
+        }
+      ],
+      "train": {
+        "date_mean": 0.11499138472710442,
+        "date_win": 0.8666666666666667,
+        "date_downside": -0.018946641222973883,
+        "worst_date": -0.044727348387668786,
+        "episode_mean": 0.14902751205750822,
+        "worst_episode": 0.1129391121906131,
+        "dates": 30,
+        "episodes": 3,
+        "rows": 182,
+        "tickers": 18
+      },
+      "heldout": {
+        "date_mean": 0.1275633192788507,
+        "date_win": 0.92,
+        "date_downside": -0.07756278884547001,
+        "worst_date": -0.10553195935051148,
+        "episode_mean": 0.18089893596341763,
+        "worst_episode": 0.15105525677987036,
+        "dates": 25,
+        "episodes": 2,
+        "rows": 62,
+        "tickers": 6
+      }
+    },
+    {
+      "outer": "STOCK_2",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "ofr_credit_lag2",
+            0.2,
+            "<="
+          ],
+          [
+            "breadth_positive20",
+            0.8,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.3456690199833037
+        },
+        {
+          "feature": "ofr_credit_lag2",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.059
+        },
+        {
+          "feature": "breadth_positive20",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.7166666666666667
+        }
+      ],
+      "train": {
+        "date_mean": 0.20558516358167286,
+        "date_win": 0.85,
+        "date_downside": -0.09292146875918166,
+        "worst_date": -0.12110172284119829,
+        "episode_mean": 0.07825693683633705,
+        "worst_episode": -0.06044308875430362,
+        "dates": 20,
+        "episodes": 3,
+        "rows": 28,
+        "tickers": 5
+      },
+      "heldout": {
+        "date_mean": -0.028048025158381704,
+        "date_win": 0.0,
+        "date_downside": -0.028048025158381704,
+        "worst_date": -0.028048025158381704,
+        "episode_mean": -0.028048025158381704,
+        "worst_episode": -0.028048025158381704,
+        "dates": 1,
+        "episodes": 1,
+        "rows": 1,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "STOCK_2",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ],
+          [
+            "market_ret20",
+            0.2,
+            "<="
+          ],
+          [
+            "vvix",
+            0.35,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.21411764705882352
+        },
+        {
+          "feature": "market_ret20",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.06708504551354344
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 91.34
+        }
+      ],
+      "train": {
+        "date_mean": 0.0695863028822088,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.018091210499923672,
+        "episode_mean": 0.08980631155320058,
+        "worst_episode": 0.050458011799003465,
+        "dates": 22,
+        "episodes": 3,
+        "rows": 22,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "STOCK_2",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "vvix",
+            0.35,
+            ">="
+          ],
+          [
+            "market_ret20",
+            0.65,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 91.34
+        },
+        {
+          "feature": "market_ret20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.012462371990375809
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 0.21411764705882352
+        }
+      ],
+      "train": {
+        "date_mean": 0.06494817087503842,
+        "date_win": 0.95,
+        "date_downside": -0.04310848583280742,
+        "worst_date": -0.052325359278875216,
+        "episode_mean": 0.03557836987394334,
+        "worst_episode": -0.03389161238673962,
+        "dates": 40,
+        "episodes": 3,
+        "rows": 40,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "STOCK_3",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "ofr_funding_lag2",
+            0.65,
+            "<="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ],
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "ofr_funding_lag2",
+          "quantile": 0.65,
+          "direction": "<=",
+          "threshold": 1.226
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.19343065693430658
+        },
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.8028673835125448
+        }
+      ],
+      "train": {
+        "date_mean": 0.10393278739740706,
+        "date_win": 0.9777777777777777,
+        "date_downside": -0.009089151545480316,
+        "worst_date": -0.009089151545480316,
+        "episode_mean": 0.08927299306026505,
+        "worst_episode": -0.009089151545480316,
+        "dates": 45,
+        "episodes": 6,
+        "rows": 274,
+        "tickers": 23
+      },
+      "heldout": {
+        "date_mean": 0.15252116990931713,
+        "date_win": 0.8571428571428571,
+        "date_downside": -0.09972830866075418,
+        "worst_date": -0.2852773605620661,
+        "episode_mean": 0.09002084400572667,
+        "worst_episode": -0.036585345620552996,
+        "dates": 42,
+        "episodes": 6,
+        "rows": 56,
+        "tickers": 5
+      }
+    },
+    {
+      "outer": "STOCK_3",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret5",
+            0.35,
+            "<="
+          ],
+          [
+            "breadth_above_sma200",
+            0.8,
+            ">="
+          ],
+          [
+            "stock_relvol_pct",
+            0.2,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret5",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": -0.012843660557237013
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.5
+        },
+        {
+          "feature": "stock_relvol_pct",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.2007168458781362
+        }
+      ],
+      "train": {
+        "date_mean": 0.08297178535028799,
+        "date_win": 0.9545454545454546,
+        "date_downside": -0.003579090561073292,
+        "worst_date": -0.003579090561073292,
+        "episode_mean": 0.09197038533335564,
+        "worst_episode": 0.02931405048578125,
+        "dates": 22,
+        "episodes": 5,
+        "rows": 112,
+        "tickers": 30
+      },
+      "heldout": {
+        "date_mean": 0.05877534922332024,
+        "date_win": 0.8571428571428571,
+        "date_downside": -0.030867328046714076,
+        "worst_date": -0.06041960718866848,
+        "episode_mean": 0.05389405048395707,
+        "worst_episode": -0.0036933473001462963,
+        "dates": 14,
+        "episodes": 5,
+        "rows": 28,
+        "tickers": 7
+      }
+    },
+    {
+      "outer": "STOCK_3",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret20",
+            0.2,
+            "<="
+          ],
+          [
+            "vix",
+            0.65,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret20",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.06708504551354344
+        },
+        {
+          "feature": "vix",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 28.34
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.21411764705882352
+        }
+      ],
+      "train": {
+        "date_mean": 0.0695863028822088,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.018091210499923672,
+        "episode_mean": 0.08980631155320058,
+        "worst_episode": 0.050458011799003465,
+        "dates": 22,
+        "episodes": 3,
+        "rows": 22,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "STOCK_3",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "vvix",
+            0.35,
+            ">="
+          ],
+          [
+            "market_ret20",
+            0.65,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 91.34
+        },
+        {
+          "feature": "market_ret20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.012462371990375809
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 0.21411764705882352
+        }
+      ],
+      "train": {
+        "date_mean": 0.06494817087503842,
+        "date_win": 0.95,
+        "date_downside": -0.04310848583280742,
+        "worst_date": -0.052325359278875216,
+        "episode_mean": 0.03557836987394334,
+        "worst_episode": -0.03389161238673962,
+        "dates": 40,
+        "episodes": 3,
+        "rows": 40,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "STOCK_4",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "market_ret5",
+            0.2,
+            "<="
+          ],
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.248731624462309
+        },
+        {
+          "feature": "market_ret5",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.02867099709169474
+        },
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.768025078369906
+        }
+      ],
+      "train": {
+        "date_mean": 0.07747535434026438,
+        "date_win": 0.696969696969697,
+        "date_downside": -0.11948653626100074,
+        "worst_date": -0.32075066462579166,
+        "episode_mean": 0.12952615103022638,
+        "worst_episode": 0.07952166507487385,
+        "dates": 66,
+        "episodes": 3,
+        "rows": 259,
+        "tickers": 20
+      },
+      "heldout": {
+        "date_mean": 0.06106784291492064,
+        "date_win": 0.5441176470588235,
+        "date_downside": -0.12964350109184977,
+        "worst_date": -0.3097410566263043,
+        "episode_mean": 0.11309723365629176,
+        "worst_episode": 0.03590206145328376,
+        "dates": 68,
+        "episodes": 3,
+        "rows": 179,
+        "tickers": 6
+      }
+    },
+    {
+      "outer": "STOCK_4",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_drawdown252",
+            0.8,
+            ">="
+          ],
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ],
+          [
+            "stock_drawdown252",
+            0.35,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_drawdown252",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": -0.12384466402771555
+        },
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.768025078369906
+        },
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": -0.23964345826676658
+        }
+      ],
+      "train": {
+        "date_mean": 0.09110537312597448,
+        "date_win": 0.8348623853211009,
+        "date_downside": -0.056461166780500664,
+        "worst_date": -0.12934851913736214,
+        "episode_mean": 0.12248450061649101,
+        "worst_episode": 0.03705921975048679,
+        "dates": 109,
+        "episodes": 5,
+        "rows": 175,
+        "tickers": 14
+      },
+      "heldout": {
+        "date_mean": 0.05208774418598085,
+        "date_win": 0.75,
+        "date_downside": -0.06798459630547202,
+        "worst_date": -0.1751416641724038,
+        "episode_mean": 0.05459396321610538,
+        "worst_episode": 0.04979124614405253,
+        "dates": 36,
+        "episodes": 3,
+        "rows": 67,
+        "tickers": 4
+      }
+    },
+    {
+      "outer": "STOCK_4",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ],
+          [
+            "market_ret20",
+            0.2,
+            "<="
+          ],
+          [
+            "vix",
+            0.65,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.21411764705882352
+        },
+        {
+          "feature": "market_ret20",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.06708504551354344
+        },
+        {
+          "feature": "vix",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 28.34
+        }
+      ],
+      "train": {
+        "date_mean": 0.0695863028822088,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.018091210499923672,
+        "episode_mean": 0.08980631155320058,
+        "worst_episode": 0.050458011799003465,
+        "dates": 22,
+        "episodes": 3,
+        "rows": 22,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "STOCK_4",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret20",
+            0.65,
+            ">="
+          ],
+          [
+            "vvix",
+            0.35,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.012462371990375809
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 91.34
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 0.21411764705882352
+        }
+      ],
+      "train": {
+        "date_mean": 0.06494817087503842,
+        "date_win": 0.95,
+        "date_downside": -0.04310848583280742,
+        "worst_date": -0.052325359278875216,
+        "episode_mean": 0.03557836987394334,
+        "worst_episode": -0.03389161238673962,
+        "dates": 40,
+        "episodes": 3,
+        "rows": 40,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_GFC",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret5",
+            0.35,
+            "<="
+          ],
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ],
+          [
+            "ofr_credit_lag2",
+            0.8,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret5",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": -0.010494916782174624
+        },
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.786833855799373
+        },
+        {
+          "feature": "ofr_credit_lag2",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.754
+        }
+      ],
+      "train": {
+        "date_mean": 0.10167336850657899,
+        "date_win": 0.8260869565217391,
+        "date_downside": -0.0357036171748279,
+        "worst_date": -0.09394919413846203,
+        "episode_mean": 0.1504723711338358,
+        "worst_episode": 0.06408501286438516,
+        "dates": 23,
+        "episodes": 4,
+        "rows": 159,
+        "tickers": 20
+      },
+      "heldout": {
+        "date_mean": 0.00032630255611594647,
+        "date_win": 0.49019607843137253,
+        "date_downside": -0.12317736536010288,
+        "worst_date": -0.3366161750611328,
+        "episode_mean": 0.011673006102038487,
+        "worst_episode": 0.011673006102038487,
+        "dates": 153,
+        "episodes": 1,
+        "rows": 877,
+        "tickers": 18
+      }
+    },
+    {
+      "outer": "EPISODE_GFC",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.8,
+            ">="
+          ],
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.786833855799373
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.5348101265822784
+        },
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.2801398311969421
+        }
+      ],
+      "train": {
+        "date_mean": 0.11606648846020744,
+        "date_win": 0.9777777777777777,
+        "date_downside": -0.029528521899437908,
+        "worst_date": -0.029528521899437908,
+        "episode_mean": 0.11694610482470756,
+        "worst_episode": 0.07168159458546355,
+        "dates": 45,
+        "episodes": 3,
+        "rows": 57,
+        "tickers": 9
+      },
+      "heldout": {
+        "date_mean": 0.11813815796733901,
+        "date_win": 0.8333333333333334,
+        "date_downside": -0.019372332886300407,
+        "worst_date": -0.021682188252221794,
+        "episode_mean": 0.11883826502417039,
+        "worst_episode": 0.11883826502417039,
+        "dates": 12,
+        "episodes": 1,
+        "rows": 44,
+        "tickers": 6
+      }
+    },
+    {
+      "outer": "EPISODE_GFC",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret20",
+            0.2,
+            "<="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ],
+          [
+            "vix",
+            0.65,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret20",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.06708504551354344
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.21411764705882352
+        },
+        {
+          "feature": "vix",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 28.34
+        }
+      ],
+      "train": {
+        "date_mean": 0.0695863028822088,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.018091210499923672,
+        "episode_mean": 0.08980631155320058,
+        "worst_episode": 0.050458011799003465,
+        "dates": 22,
+        "episodes": 3,
+        "rows": 22,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_GFC",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret20",
+            0.65,
+            ">="
+          ],
+          [
+            "vvix",
+            0.35,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.012462371990375809
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 91.34
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 0.21411764705882352
+        }
+      ],
+      "train": {
+        "date_mean": 0.06494817087503842,
+        "date_win": 0.95,
+        "date_downside": -0.04310848583280742,
+        "worst_date": -0.052325359278875216,
+        "episode_mean": 0.03557836987394334,
+        "worst_episode": -0.03389161238673962,
+        "dates": 40,
+        "episodes": 3,
+        "rows": 40,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_2011",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_drawdown252",
+            0.35,
+            "<="
+          ],
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "ofr_funding_lag2",
+            0.65,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_drawdown252",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": -0.21101835128225022
+        },
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.34542788958715587
+        },
+        {
+          "feature": "ofr_funding_lag2",
+          "quantile": 0.65,
+          "direction": "<=",
+          "threshold": 1.613
+        }
+      ],
+      "train": {
+        "date_mean": 0.0736495524040908,
+        "date_win": 0.7835051546391752,
+        "date_downside": -0.045292029606339754,
+        "worst_date": -0.1142071415269617,
+        "episode_mean": 0.14296542733461498,
+        "worst_episode": 0.07244629607784757,
+        "dates": 97,
+        "episodes": 5,
+        "rows": 951,
+        "tickers": 28
+      },
+      "heldout": {
+        "date_mean": 0.13708502292236635,
+        "date_win": 0.9,
+        "date_downside": -0.03618856819909631,
+        "worst_date": -0.03618856819909631,
+        "episode_mean": 0.14083067557243528,
+        "worst_episode": 0.14083067557243528,
+        "dates": 10,
+        "episodes": 1,
+        "rows": 49,
+        "tickers": 8
+      }
+    },
+    {
+      "outer": "EPISODE_2011",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.8,
+            ">="
+          ],
+          [
+            "vvix",
+            0.35,
+            "<="
+          ],
+          [
+            "stock_range20",
+            0.35,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.4881516587677725
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": 86.46
+        },
+        {
+          "feature": "stock_range20",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": 0.3271508821816552
+        }
+      ],
+      "train": {
+        "date_mean": 0.06620805175781394,
+        "date_win": 0.825,
+        "date_downside": -0.01238614157967714,
+        "worst_date": -0.024769004339541472,
+        "episode_mean": 0.08955787571971235,
+        "worst_episode": 0.053195385798681,
+        "dates": 40,
+        "episodes": 4,
+        "rows": 208,
+        "tickers": 25
+      },
+      "heldout": {
+        "date_mean": 0.09691709418497714,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.05804548929372736,
+        "episode_mean": 0.0993785785692075,
+        "worst_episode": 0.0993785785692075,
+        "dates": 3,
+        "episodes": 1,
+        "rows": 9,
+        "tickers": 5
+      }
+    },
+    {
+      "outer": "EPISODE_2011",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "vix",
+            0.8,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ],
+          [
+            "breadth_positive20",
+            0.35,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "vix",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 30.5
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.21411764705882352
+        },
+        {
+          "feature": "breadth_positive20",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": 0.26107226107226106
+        }
+      ],
+      "train": {
+        "date_mean": 0.06255847862535256,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.0018823796047664028,
+        "episode_mean": 0.0922412736415927,
+        "worst_episode": 0.04570447177882581,
+        "dates": 21,
+        "episodes": 3,
+        "rows": 21,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_2011",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_positive20",
+            0.65,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            ">="
+          ],
+          [
+            "vvix",
+            0.35,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_positive20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.5630841121495327
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 0.21411764705882352
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 91.34
+        }
+      ],
+      "train": {
+        "date_mean": 0.064929846382947,
+        "date_win": 0.95,
+        "date_downside": -0.04310848583280742,
+        "worst_date": -0.052325359278875216,
+        "episode_mean": 0.03556994482010822,
+        "worst_episode": -0.03389161238673962,
+        "dates": 40,
+        "episodes": 3,
+        "rows": 40,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_2015_16",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_positive20",
+            0.2,
+            "<="
+          ],
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "stock_ret20",
+            0.35,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_positive20",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.13953488372093023
+        },
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.358719650488347
+        },
+        {
+          "feature": "stock_ret20",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": -0.05047821367395067
+        }
+      ],
+      "train": {
+        "date_mean": 0.11993750515518957,
+        "date_win": 0.7924528301886793,
+        "date_downside": -0.051662183642346864,
+        "worst_date": -0.15703695165281356,
+        "episode_mean": 0.16464867836968816,
+        "worst_episode": 0.08217685214643904,
+        "dates": 53,
+        "episodes": 3,
+        "rows": 105,
+        "tickers": 18
+      },
+      "heldout": {
+        "date_mean": -0.06629095002095066,
+        "date_win": 0.3333333333333333,
+        "date_downside": -0.1201737042093052,
+        "worst_date": -0.18262616264131823,
+        "episode_mean": -0.06414852396003604,
+        "worst_episode": -0.06414852396003604,
+        "dates": 3,
+        "episodes": 1,
+        "rows": 4,
+        "tickers": 2
+      }
+    },
+    {
+      "outer": "EPISODE_2015_16",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret20",
+            0.8,
+            ">="
+          ],
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "vvix",
+            0.65,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret20",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.03396425535137659
+        },
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.358719650488347
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 96.83
+        }
+      ],
+      "train": {
+        "date_mean": 0.2952096102242689,
+        "date_win": 0.85,
+        "date_downside": -0.03335874229385626,
+        "worst_date": -0.06456795353893366,
+        "episode_mean": 0.10688498835242265,
+        "worst_episode": -0.04460643420330404,
+        "dates": 20,
+        "episodes": 3,
+        "rows": 44,
+        "tickers": 15
+      },
+      "heldout": {
+        "date_mean": -0.05502586326671045,
+        "date_win": 0.0,
+        "date_downside": -0.05502586326671045,
+        "worst_date": -0.1099857627837635,
+        "episode_mean": -0.05502586326671045,
+        "worst_episode": -0.05502586326671045,
+        "dates": 6,
+        "episodes": 1,
+        "rows": 6,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "EPISODE_2015_16",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_positive20",
+            0.35,
+            "<="
+          ],
+          [
+            "vix",
+            0.8,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_positive20",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": 0.26107226107226106
+        },
+        {
+          "feature": "vix",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 30.5
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.21411764705882352
+        }
+      ],
+      "train": {
+        "date_mean": 0.06255847862535256,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.0018823796047664028,
+        "episode_mean": 0.0922412736415927,
+        "worst_episode": 0.04570447177882581,
+        "dates": 21,
+        "episodes": 3,
+        "rows": 21,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_2015_16",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "market_ret20",
+            0.65,
+            ">="
+          ],
+          [
+            "vvix",
+            0.35,
+            ">="
+          ],
+          [
+            "breadth_above_sma200",
+            0.2,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_ret20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.012462371990375809
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 91.34
+        },
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 0.21411764705882352
+        }
+      ],
+      "train": {
+        "date_mean": 0.06494817087503842,
+        "date_win": 0.95,
+        "date_downside": -0.04310848583280742,
+        "worst_date": -0.052325359278875216,
+        "episode_mean": 0.03557836987394334,
+        "worst_episode": -0.03389161238673962,
+        "dates": 40,
+        "episodes": 3,
+        "rows": 40,
+        "tickers": 1
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_2018",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_positive20",
+            0.2,
+            "<="
+          ],
+          [
+            "ofr_credit_lag2",
+            0.35,
+            ">="
+          ],
+          [
+            "stock_ret20",
+            0.8,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_positive20",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.15234375
+        },
+        {
+          "feature": "ofr_credit_lag2",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 0.3689332938163762
+        },
+        {
+          "feature": "stock_ret20",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.05765506346108484
+        }
+      ],
+      "train": {
+        "date_mean": 0.11530059057370529,
+        "date_win": 0.8333333333333334,
+        "date_downside": -0.10518930549148751,
+        "worst_date": -0.2956541878255804,
+        "episode_mean": 0.11240620948449694,
+        "worst_episode": 0.09821456480820515,
+        "dates": 42,
+        "episodes": 4,
+        "rows": 53,
+        "tickers": 16
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_2018",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.8,
+            ">="
+          ],
+          [
+            "stock_drawdown252",
+            0.2,
+            "<="
+          ],
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.5031645569620253
+        },
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.3411733377173506
+        },
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.8023529411764706
+        }
+      ],
+      "train": {
+        "date_mean": 0.15393579685342598,
+        "date_win": 0.873015873015873,
+        "date_downside": -0.06266814681211685,
+        "worst_date": -0.12162767091644835,
+        "episode_mean": 0.12777208788271593,
+        "worst_episode": 0.043983492383157685,
+        "dates": 63,
+        "episodes": 3,
+        "rows": 98,
+        "tickers": 9
+      },
+      "heldout": {
+        "date_mean": -0.05617519103371099,
+        "date_win": 0.0,
+        "date_downside": -0.05617519103371099,
+        "worst_date": -0.062182231048161035,
+        "episode_mean": -0.05617519103371099,
+        "worst_episode": -0.05617519103371099,
+        "dates": 2,
+        "episodes": 1,
+        "rows": 2,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "EPISODE_2018",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 3,
+        "conds": [
+          [
+            "market_drawdown252",
+            0.35,
+            "<="
+          ],
+          [
+            "ofr_credit_lag2",
+            0.8,
+            "<="
+          ],
+          [
+            "market_ret20",
+            0.8,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_drawdown252",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": -0.22526195662308607
+        },
+        {
+          "feature": "ofr_credit_lag2",
+          "quantile": 0.8,
+          "direction": "<=",
+          "threshold": 0.7635993260076207
+        },
+        {
+          "feature": "market_ret20",
+          "quantile": 0.8,
+          "direction": "<=",
+          "threshold": 0.04483212597220617
+        }
+      ],
+      "train": null,
+      "heldout": {
+        "date_mean": 0.0426143217451343,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.03650760408699501,
+        "episode_mean": 0.0426143217451343,
+        "worst_episode": 0.0426143217451343,
+        "dates": 2,
+        "episodes": 1,
+        "rows": 2,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "EPISODE_2018",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 10,
+        "conds": [
+          [
+            "vix",
+            0.2,
+            ">="
+          ],
+          [
+            "vvix",
+            0.35,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "vix",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 23.012
+        },
+        {
+          "feature": "vvix",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": 91.34
+        }
+      ],
+      "train": null,
+      "heldout": {
+        "date_mean": -0.052766134526956956,
+        "date_win": 0.0,
+        "date_downside": -0.052766134526956956,
+        "worst_date": -0.06400658003141826,
+        "episode_mean": -0.052766134526956956,
+        "worst_episode": -0.052766134526956956,
+        "dates": 4,
+        "episodes": 1,
+        "rows": 4,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "EPISODE_COVID",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ],
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ],
+          [
+            "vix",
+            0.8,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.20094562647754138
+        },
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.7974683544303798
+        },
+        {
+          "feature": "vix",
+          "quantile": 0.8,
+          "direction": "<=",
+          "threshold": 32.89
+        }
+      ],
+      "train": {
+        "date_mean": 0.09265174551193897,
+        "date_win": 0.9473684210526315,
+        "date_downside": -0.03674586892087114,
+        "worst_date": -0.045959811669948086,
+        "episode_mean": 0.09577688460997337,
+        "worst_episode": 0.06252656284794711,
+        "dates": 38,
+        "episodes": 3,
+        "rows": 290,
+        "tickers": 23
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_COVID",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.8,
+            ">="
+          ],
+          [
+            "market_ret20",
+            0.65,
+            ">="
+          ],
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.5031446540880503
+        },
+        {
+          "feature": "market_ret20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.009495408515215353
+        },
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.7974683544303798
+        }
+      ],
+      "train": {
+        "date_mean": 0.07728377731184684,
+        "date_win": 0.86,
+        "date_downside": -0.05916885665298749,
+        "worst_date": -0.1682754444305917,
+        "episode_mean": 0.08942373251287529,
+        "worst_episode": 0.02356502871036093,
+        "dates": 100,
+        "episodes": 5,
+        "rows": 641,
+        "tickers": 29
+      },
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_COVID",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 5,
+        "conds": [
+          [
+            "breadth_positive20",
+            0.65,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_positive20",
+          "quantile": 0.65,
+          "direction": ">=",
+          "threshold": 0.5674891327972179
+        }
+      ],
+      "train": null,
+      "heldout": {
+        "date_mean": 0.007948062748296712,
+        "date_win": 0.5,
+        "date_downside": -0.017346887621113943,
+        "worst_date": -0.017346887621113943,
+        "episode_mean": 0.007948062748296712,
+        "worst_episode": 0.007948062748296712,
+        "dates": 2,
+        "episodes": 1,
+        "rows": 2,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "EPISODE_COVID",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 10,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.35,
+            ">="
+          ],
+          [
+            "vix",
+            0.65,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.35,
+          "direction": ">=",
+          "threshold": 0.2962359249329758
+        },
+        {
+          "feature": "vix",
+          "quantile": 0.65,
+          "direction": "<=",
+          "threshold": 27.75
+        }
+      ],
+      "train": null,
+      "heldout": null
+    },
+    {
+      "outer": "EPISODE_2022",
+      "action": "LONG_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "breadth_above_sma200",
+            0.2,
+            "<="
+          ],
+          [
+            "stock_rv_pct",
+            0.8,
+            ">="
+          ],
+          [
+            "market_ret5",
+            0.2,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "breadth_above_sma200",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": 0.16844919786096257
+        },
+        {
+          "feature": "stock_rv_pct",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": 0.8050847457627118
+        },
+        {
+          "feature": "market_ret5",
+          "quantile": 0.2,
+          "direction": "<=",
+          "threshold": -0.03003187885410974
+        }
+      ],
+      "train": {
+        "date_mean": 0.09803135762723278,
+        "date_win": 0.6440677966101694,
+        "date_downside": -0.11356744687343737,
+        "worst_date": -0.2738586565027913,
+        "episode_mean": 0.1468500890033207,
+        "worst_episode": 0.08027765938627966,
+        "dates": 59,
+        "episodes": 4,
+        "rows": 291,
+        "tickers": 23
+      },
+      "heldout": {
+        "date_mean": 0.10001956138993814,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.04055982914568875,
+        "episode_mean": 0.09705270296937771,
+        "worst_episode": 0.09705270296937771,
+        "dates": 7,
+        "episodes": 1,
+        "rows": 54,
+        "tickers": 11
+      }
+    },
+    {
+      "outer": "EPISODE_2022",
+      "action": "SHORT_SECURITY",
+      "genome": {
+        "hold": 20,
+        "conds": [
+          [
+            "stock_drawdown252",
+            0.35,
+            "<="
+          ],
+          [
+            "market_drawdown252",
+            0.8,
+            ">="
+          ],
+          [
+            "vix",
+            0.2,
+            ">="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "stock_drawdown252",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": -0.2492907728778181
+        },
+        {
+          "feature": "market_drawdown252",
+          "quantile": 0.8,
+          "direction": ">=",
+          "threshold": -0.11425733986503162
+        },
+        {
+          "feature": "vix",
+          "quantile": 0.2,
+          "direction": ">=",
+          "threshold": 18.86
+        }
+      ],
+      "train": {
+        "date_mean": 0.09170820333455251,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.007680814289512415,
+        "episode_mean": 0.10565057025056536,
+        "worst_episode": 0.039270941826064776,
+        "dates": 20,
+        "episodes": 3,
+        "rows": 82,
+        "tickers": 13
+      },
+      "heldout": {
+        "date_mean": 0.11583134840574134,
+        "date_win": 1.0,
+        "date_downside": 0.0,
+        "worst_date": 0.09129198812866496,
+        "episode_mean": 0.1144680891553867,
+        "worst_episode": 0.1144680891553867,
+        "dates": 5,
+        "episodes": 1,
+        "rows": 29,
+        "tickers": 9
+      }
+    },
+    {
+      "outer": "EPISODE_2022",
+      "action": "LONG_MARKET",
+      "genome": {
+        "hold": 5,
+        "conds": [
+          [
+            "vvix",
+            0.8,
+            "<="
+          ],
+          [
+            "breadth_positive20",
+            0.35,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "vvix",
+          "quantile": 0.8,
+          "direction": "<=",
+          "threshold": 111.42
+        },
+        {
+          "feature": "breadth_positive20",
+          "quantile": 0.35,
+          "direction": "<=",
+          "threshold": 0.15943796870689808
+        }
+      ],
+      "train": null,
+      "heldout": {
+        "date_mean": 0.0009556692916857009,
+        "date_win": 0.5,
+        "date_downside": -0.02592856922346179,
+        "worst_date": -0.06050389988366646,
+        "episode_mean": 0.000955669291685701,
+        "worst_episode": 0.000955669291685701,
+        "dates": 32,
+        "episodes": 1,
+        "rows": 32,
+        "tickers": 1
+      }
+    },
+    {
+      "outer": "EPISODE_2022",
+      "action": "SHORT_MARKET",
+      "genome": {
+        "hold": 3,
+        "conds": [
+          [
+            "market_rv_pct",
+            0.65,
+            "<="
+          ],
+          [
+            "market_ret5",
+            0.65,
+            "<="
+          ]
+        ]
+      },
+      "thresholds_used": [
+        {
+          "feature": "market_rv_pct",
+          "quantile": 0.65,
+          "direction": "<=",
+          "threshold": 0.5
+        },
+        {
+          "feature": "market_ret5",
+          "quantile": 0.65,
+          "direction": "<=",
+          "threshold": 0.01805101121437432
+        }
+      ],
+      "train": null,
+      "heldout": {
+        "date_mean": -0.0009970041051362319,
+        "date_win": 0.5161290322580645,
+        "date_downside": -0.023327518547167712,
+        "worst_date": -0.06335218316997993,
+        "episode_mean": -0.0009970041051362317,
+        "worst_episode": -0.0009970041051362317,
+        "dates": 124,
+        "episodes": 1,
+        "rows": 124,
+        "tickers": 1
+      }
+    }
+  ],
+  "preserved50_accessed": false,
+  "test17_accessed": false,
+  "protected_accessed": false
+}

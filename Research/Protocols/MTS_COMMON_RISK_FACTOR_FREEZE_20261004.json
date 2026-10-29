@@ -1,0 +1,24 @@
+{
+  "format":"MTS_COMMON_RISK_FACTOR_FREEZE_V1",
+  "date":"2026-10-04",
+  "hypothesis":"During destructive episodes, MTS's many nominally distinct positions become highly exposed to one common market factor, so new entries add redundant systemic risk rather than independent bets.",
+  "evidence":{"cache":"/home/ubuntu/mts-v4-cache/discovery_research_population_v1.pkl.gz","manifest":"/home/ubuntu/mts-v4-cache/discovery_research_population_v1.pkl.gz.manifest.json","expected_trades":125002,"expected_tickers":67,"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+  "unit_of_analysis":"Underlying ticker, not individual overlapping signal, to avoid mechanically inflating correlation from duplicate exposures.",
+  "collapse_intervals":[["2008","2007-07-26","2009-05-29"],["2015","2015-07-24","2016-03-02"],["2020","2020-03-06","2020-06-05"],["2022","2022-04-20","2023-03-30"]],
+  "control_intervals":[["2006","2006-05-17","2006-12-31"],["2007pre","2007-03-05","2007-07-25"],["2011","2011-08-04","2011-12-31"],["2018","2018-12-18","2019-03-31"],["2020pre","2020-02-27","2020-03-05"],["2022pre","2022-01-25","2022-04-19"],["2024","2024-08-05","2024-12-31"],["2025","2025-04-03","2025-06-30"]],
+  "frozen_metrics":[
+    "20-session rolling average pairwise correlation among active underlying tickers with sufficient observations",
+    "20-session rolling first-principal-component share of variance among active ticker returns",
+    "daily fraction of active tickers negative and absolute deviation from 50 percent",
+    "daily unique active ticker count",
+    "daily new-signal count and unique-entry-ticker count",
+    "daily entry redundancy ratio = signals / unique entry tickers",
+    "5-session new-signal and unique-entry-ticker counts",
+    "collapse-trough state for all metrics",
+    "collapse versus control medians and p90 values",
+    "era-specific results"
+  ],
+  "primary_interpretation":"Support if destructive episodes show materially higher common-factor concentration/co-movement and entry redundancy than temporary-deterioration controls, especially at portfolio troughs. Refute if collapse and control co-movement/concentration are similar.",
+  "prohibitions":["no optimization","no GA","no trading rule","no exposure cap design","no threshold search","no protected bank access"],
+  "status":"FROZEN_BEFORE_TEST"
+}

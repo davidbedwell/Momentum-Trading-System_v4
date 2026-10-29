@@ -1,0 +1,59 @@
+{
+  "format":"MTS_DEFENSIVE_OPPORTUNISTIC_GA_SEARCH_ENVELOPE_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_SEARCH_ENVELOPE_STRATEGY_UNFROZEN",
+  "objective":"Allow GA to discover opportunistic trading policies used only while the independent market-state classifier remains DEFENSIVE.",
+  "market_state_invariant":"GA cannot declare recovery, change DEFENSIVE to NORMAL, or tune the recovery classifier. Recovery state is an external input.",
+  "eligible_trade_context":"Only sessions in which market state is DEFENSIVE and market has not independently transitioned to NORMAL.",
+  "GA_may_search":[
+    "entry strategy family and combinations",
+    "entry strength/quality requirements",
+    "market and breadth context gates",
+    "position sizing and total exposure caps",
+    "initial stop type/distance and volatility adaptation",
+    "trailing stops and profit-protection geometry",
+    "partial profit taking/scaling out",
+    "maximum holding period",
+    "cooldown after loss/stop",
+    "conditions permitting another defensive entry",
+    "HH/HL/LL and pullback/rebound structure",
+    "breadth/participation persistence",
+    "volatility trajectory/context",
+    "relative strength and cross-sectional selection",
+    "momentum/breakout/trend/pullback/reversal/volatility/volume/liquidity/earnings/market-structure families",
+    "pyramiding or adding while still DEFENSIVE if evidence supports it",
+    "transition handling when a live DEFENSIVE-origin position experiences an independent state change to NORMAL"
+  ],
+  "transition_to_NORMAL":{
+    "principle":"A trade opened in DEFENSIVE need not be forcibly closed merely because market state becomes NORMAL.",
+    "GA_research_permission":"Test whether a profitable DEFENSIVE-origin position should be retained, have its risk rules normalized, and/or be added to after the independent NORMAL designation.",
+    "prohibition":"The position's profitability or price action cannot itself cause the market-state designation change unless that same information belongs to the separately frozen recovery classifier."
+  },
+  "fitness_design_requirements":[
+    "Reward net realized return after realistic costs.",
+    "Penalize drawdown, adverse excursion, repeated whipsaw losses, excessive turnover, concentration, and tail loss.",
+    "Measure opportunity capture from major defensive-market rallies without requiring prediction of rally peaks.",
+    "Include the cost of sitting out opportunities and the cost of false participation.",
+    "Use walk-forward/episode-heldout evaluation inside consumed development material before any protected-bank access.",
+    "Do not use known troughs, peaks, future rally labels, or recovery labels as GA features.",
+    "Do not optimize only aggregate wealth; retain per-episode and worst-case behavior so one rally cannot dominate fitness."
+  ],
+  "initial_research_laboratory":{
+    "market_episodes":"GFC independent false-rally episodes plus other already-consumed destructive/correction regimes as appropriate.",
+    "stock_data":"Consumed 67-stock development laboratory only when stock-level trading simulation is required.",
+    "protected":"Previously opened 50-stock bank remains untouched; remaining Discovery and Verification A/B remain protected."
+  },
+  "not_frozen":[
+    "actual defensive strategy",
+    "stop distance",
+    "position size",
+    "profit target",
+    "holding period",
+    "number of positions",
+    "reentry rule",
+    "HH/HL/LL rule",
+    "fitness weights",
+    "number or identity of strategy families retained"
+  ],
+  "scientific_role":"This freeze defines what GA may investigate, not what answer it should find."
+}

@@ -1,0 +1,5694 @@
+{
+  "format": "MTS_DEFENSIVE_GA_PHASE2_CAUSAL_PATH_V1",
+  "provenance": "NEW_RESEARCH_POST_RECOVERY",
+  "runner_provenance": "RECONSTRUCTED_FROM_SURVIVING_SPEC",
+  "protocol_sha256": "5ba8db4e1eae82433ada0d8ec8ad419f86fe79fbe1322d165cd3deae817e8c97",
+  "source_cache": "/home/ubuntu/mts-v4-cache/discovery_research_population_v1.RECONSTRUCTED.pkl.gz",
+  "source_rows": 18025,
+  "source_tickers": 42,
+  "row_family_counts": {
+    "MOMENTUM": 939,
+    "BREAKOUT": 1142,
+    "TREND": 1744,
+    "MEAN_REVERSION": 3796,
+    "VOLUME_LIQUIDITY": 6411,
+    "RELATIVE_CROSS_SECTIONAL": 1586,
+    "MARKET_REGIME_STRUCTURE": 2407
+  },
+  "row_window_counts": {
+    "2018": 1350,
+    "COVID": 1364,
+    "2022": 4809,
+    "GFC": 6984,
+    "2015_16": 2214,
+    "2011": 1304
+  },
+  "generations": 14,
+  "unique_valid_genomes": 1229,
+  "scoring": {
+    "mean": 1.0,
+    "worst_window": 0.55,
+    "log_profit_factor": 0.02,
+    "win_excess": 0.04,
+    "cvar05": 0.2,
+    "window_dispersion": -0.15
+  },
+  "test17_accessed": false,
+  "protected_accessed": false,
+  "top": [
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 10,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 10,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 10,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14396076879535763,
+      "n": 37,
+      "mean": 0.04537123594201297,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005982305062711011,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14386077030186917,
+      "n": 36,
+      "mean": 0.04527043694040221,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005976968341895528,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.04620662641231213,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14386077030186917,
+      "n": 36,
+      "mean": 0.04527043694040221,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005976968341895528,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.04620662641231213,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14386077030186917,
+      "n": 36,
+      "mean": 0.04527043694040221,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005976968341895528,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.04620662641231213,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14386077030186917,
+      "n": 36,
+      "mean": 0.04527043694040221,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005976968341895528,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.04620662641231213,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14386077030186917,
+      "n": 36,
+      "mean": 0.04527043694040221,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005976968341895528,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.04620662641231213,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14386077030186917,
+      "n": 36,
+      "mean": 0.04527043694040221,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005976968341895528,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.04620662641231213,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14386077030186917,
+      "n": 36,
+      "mean": 0.04527043694040221,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005976968341895528,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.04620662641231213,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 10,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.14386077030186917,
+      "n": 36,
+      "mean": 0.04527043694040221,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005976968341895528,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.04620662641231213,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1435231702224457,
+      "n": 33,
+      "mean": 0.04493138575316605,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005967294289810846,
+      "by_window": {
+        "GFC": {
+          "n": 13,
+          "mean": 0.045776876629590915,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1435231702224457,
+      "n": 33,
+      "mean": 0.04493138575316605,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005967294289810846,
+      "by_window": {
+        "GFC": {
+          "n": 13,
+          "mean": 0.045776876629590915,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1435231702224457,
+      "n": 33,
+      "mean": 0.04493138575316605,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005967294289810846,
+      "by_window": {
+        "GFC": {
+          "n": 13,
+          "mean": 0.045776876629590915,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1433965566648239,
+      "n": 32,
+      "mean": 0.044804241557952484,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.033606055611632844,
+      "cvar05": 0.0054445127763670395,
+      "window_dispersion": 0.005963756705865916,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.04550828301539015,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.12489919269187283,
+      "n": 37,
+      "mean": 0.02831863863156902,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12489919269187283,
+      "n": 37,
+      "mean": 0.02831863863156902,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12489919269187283,
+      "n": 37,
+      "mean": 0.02831863863156902,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12489919269187283,
+      "n": 37,
+      "mean": 0.02831863863156902,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12488026598719418,
+      "n": 36,
+      "mean": 0.02829971192689038,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12488026598719418,
+      "n": 36,
+      "mean": 0.02829971192689038,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12488026598719418,
+      "n": 36,
+      "mean": 0.02829971192689038,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12488026598719418,
+      "n": 36,
+      "mean": 0.02829971192689038,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12481660343509329,
+      "n": 33,
+      "mean": 0.0282360493747895,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "GFC": {
+          "n": 13,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12479272997805546,
+      "n": 32,
+      "mean": 0.028212175917751672,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.12479272997805546,
+      "n": 32,
+      "mean": 0.028212175917751672,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.02479827156134214,
+      "cvar05": 0.01639481468402637,
+      "window_dispersion": 0.0016806913754631543,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.02479827156134214,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.1103836443043297,
+      "n": 30,
+      "mean": 0.04603153668288089,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.03956934086034887,
+      "cvar05": 0.016261374167776732,
+      "window_dispersion": 0.003853001042521313,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.04550828301539015,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 5,
+          "mean": 0.03956934086034887,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1103836443043297,
+      "n": 30,
+      "mean": 0.04603153668288089,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.03956934086034887,
+      "cvar05": 0.016261374167776732,
+      "window_dispersion": 0.003853001042521313,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.04550828301539015,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 5,
+          "mean": 0.03956934086034887,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1103836443043297,
+      "n": 30,
+      "mean": 0.04603153668288089,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.03956934086034887,
+      "cvar05": 0.016261374167776732,
+      "window_dispersion": 0.003853001042521313,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.04550828301539015,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 5,
+          "mean": 0.03956934086034887,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1103836443043297,
+      "n": 30,
+      "mean": 0.04603153668288089,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.03956934086034887,
+      "cvar05": 0.016261374167776732,
+      "window_dispersion": 0.003853001042521313,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.04550828301539015,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 5,
+          "mean": 0.03956934086034887,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1103836443043297,
+      "n": 30,
+      "mean": 0.04603153668288089,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.03956934086034887,
+      "cvar05": 0.016261374167776732,
+      "window_dispersion": 0.003853001042521313,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.04550828301539015,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 5,
+          "mean": 0.03956934086034887,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1103836443043297,
+      "n": 30,
+      "mean": 0.04603153668288089,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.03956934086034887,
+      "cvar05": 0.016261374167776732,
+      "window_dispersion": 0.003853001042521313,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.04550828301539015,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 5,
+          "mean": 0.03956934086034887,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.1103836443043297,
+      "n": 30,
+      "mean": 0.04603153668288089,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.03956934086034887,
+      "cvar05": 0.016261374167776732,
+      "window_dispersion": 0.003853001042521313,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.04550828301539015,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 5,
+          "mean": 0.03956934086034887,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.09066464547107986,
+      "n": 30,
+      "mean": 0.029000000000000026,
+      "win": 1.0,
+      "pf": 99.0,
+      "worst_window": 0.029000000000000026,
+      "cvar05": 0.029000000000000026,
+      "window_dispersion": 0.0,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 5,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.08993288996667902,
+      "n": 37,
+      "mean": 0.036171032998270444,
+      "win": 0.9459459459459459,
+      "pf": 10.236590294226753,
+      "worst_window": 0.011571060499071417,
+      "cvar05": -0.07244709239580088,
+      "window_dispersion": 0.016466782442669123,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.04665366876170707,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.037515589524011406,
+          "win": 0.9375
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.011835005691760084,
+          "win": 0.8333333333333334
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.011571060499071417,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 5,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.08993288996667902,
+      "n": 37,
+      "mean": 0.036171032998270444,
+      "win": 0.9459459459459459,
+      "pf": 10.236590294226753,
+      "worst_window": 0.011571060499071417,
+      "cvar05": -0.07244709239580088,
+      "window_dispersion": 0.016466782442669123,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.04665366876170707,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.037515589524011406,
+          "win": 0.9375
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.011835005691760084,
+          "win": 0.8333333333333334
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.011571060499071417,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 5,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.0822252673019876,
+      "n": 32,
+      "mean": 0.03542924155795248,
+      "win": 0.9375,
+      "pf": 6.612553118091483,
+      "worst_window": 0.02400000000000004,
+      "cvar05": -0.10099999999999998,
+      "window_dispersion": 0.00988913905761298,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.04550828301539015,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.02400000000000004,
+          "win": 0.8333333333333334
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.07508361680154435,
+      "n": 37,
+      "mean": 0.0332090737798508,
+      "win": 0.918918918918919,
+      "pf": 5.055233431862968,
+      "worst_window": 0.025923076923076962,
+      "cvar05": -0.10100000000000003,
+      "window_dispersion": 0.008989244260547275,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.025923076923076962,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.03700621226154262,
+          "win": 0.9375
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.07508361680154435,
+      "n": 37,
+      "mean": 0.0332090737798508,
+      "win": 0.918918918918919,
+      "pf": 5.055233431862968,
+      "worst_window": 0.025923076923076962,
+      "cvar05": -0.10100000000000003,
+      "window_dispersion": 0.008989244260547275,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.025923076923076962,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.03700621226154262,
+          "win": 0.9375
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.07508361680154435,
+      "n": 37,
+      "mean": 0.0332090737798508,
+      "win": 0.918918918918919,
+      "pf": 5.055233431862968,
+      "worst_window": 0.025923076923076962,
+      "cvar05": -0.10100000000000003,
+      "window_dispersion": 0.008989244260547275,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.025923076923076962,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.03700621226154262,
+          "win": 0.9375
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.07508361680154435,
+      "n": 37,
+      "mean": 0.0332090737798508,
+      "win": 0.918918918918919,
+      "pf": 5.055233431862968,
+      "worst_window": 0.025923076923076962,
+      "cvar05": -0.10100000000000003,
+      "window_dispersion": 0.008989244260547275,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.025923076923076962,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.03700621226154262,
+          "win": 0.9375
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 10,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.0738987228023069,
+      "n": 36,
+      "mean": 0.03277043694040221,
+      "win": 0.9166666666666666,
+      "pf": 4.893517260245806,
+      "worst_window": 0.025923076923076962,
+      "cvar05": -0.10100000000000003,
+      "window_dispersion": 0.009028663557104638,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.025923076923076962,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.03620662641231212,
+          "win": 0.9333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.0738987228023069,
+      "n": 36,
+      "mean": 0.03277043694040221,
+      "win": 0.9166666666666666,
+      "pf": 4.893517260245806,
+      "worst_window": 0.025923076923076962,
+      "cvar05": -0.10100000000000003,
+      "window_dispersion": 0.009028663557104638,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.025923076923076962,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.03620662641231212,
+          "win": 0.9333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.0738987228023069,
+      "n": 36,
+      "mean": 0.03277043694040221,
+      "win": 0.9166666666666666,
+      "pf": 4.893517260245806,
+      "worst_window": 0.025923076923076962,
+      "cvar05": -0.10100000000000003,
+      "window_dispersion": 0.009028663557104638,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.025923076923076962,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.03620662641231212,
+          "win": 0.9333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.0738987228023069,
+      "n": 36,
+      "mean": 0.03277043694040221,
+      "win": 0.9166666666666666,
+      "pf": 4.893517260245806,
+      "worst_window": 0.025923076923076962,
+      "cvar05": -0.10100000000000003,
+      "window_dispersion": 0.009028663557104638,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.025923076923076962,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.03620662641231212,
+          "win": 0.9333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.07003767199025222,
+      "n": 53,
+      "mean": 0.03607273140785226,
+      "win": 0.9433962264150944,
+      "pf": 6.648486468575647,
+      "worst_window": 0.006407606350739299,
+      "cvar05": -0.11282401490808998,
+      "window_dispersion": 0.017453823910325118,
+      "by_window": {
+        "COVID": {
+          "n": 14,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 23,
+          "mean": 0.032177465486609595,
+          "win": 0.9130434782608695
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.007810470970469719,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.006407606350739299,
+          "win": 0.6666666666666666
+        },
+        "2022": {
+          "n": 11,
+          "mean": 0.03724906985467826,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.5,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.07003767199025222,
+      "n": 53,
+      "mean": 0.03607273140785226,
+      "win": 0.9433962264150944,
+      "pf": 6.648486468575647,
+      "worst_window": 0.006407606350739299,
+      "cvar05": -0.11282401490808998,
+      "window_dispersion": 0.017453823910325118,
+      "by_window": {
+        "COVID": {
+          "n": 14,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 23,
+          "mean": 0.032177465486609595,
+          "win": 0.9130434782608695
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.007810470970469719,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.006407606350739299,
+          "win": 0.6666666666666666
+        },
+        "2022": {
+          "n": 11,
+          "mean": 0.03724906985467826,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.5,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.07003767199025222,
+      "n": 53,
+      "mean": 0.03607273140785226,
+      "win": 0.9433962264150944,
+      "pf": 6.648486468575647,
+      "worst_window": 0.006407606350739299,
+      "cvar05": -0.11282401490808998,
+      "window_dispersion": 0.017453823910325118,
+      "by_window": {
+        "COVID": {
+          "n": 14,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 23,
+          "mean": 0.032177465486609595,
+          "win": 0.9130434782608695
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.007810470970469719,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.006407606350739299,
+          "win": 0.6666666666666666
+        },
+        "2022": {
+          "n": 11,
+          "mean": 0.03724906985467826,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.5,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06930696199420251,
+      "n": 52,
+      "mean": 0.0358241300887725,
+      "win": 0.9423076923076923,
+      "pf": 6.503718235087067,
+      "worst_window": 0.006407606350739299,
+      "cvar05": -0.11282401490808998,
+      "window_dispersion": 0.017442248590243563,
+      "by_window": {
+        "COVID": {
+          "n": 14,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 22,
+          "mean": 0.03141280482691003,
+          "win": 0.9090909090909091
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.007810470970469719,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.006407606350739299,
+          "win": 0.6666666666666666
+        },
+        "2022": {
+          "n": 11,
+          "mean": 0.03724906985467826,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.5,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06850091149671361,
+      "n": 53,
+      "mean": 0.03639347742974458,
+      "win": 0.9433962264150944,
+      "pf": 6.59348552058306,
+      "worst_window": 0.004285147861123291,
+      "cvar05": -0.11494647339770599,
+      "window_dispersion": 0.01811729345799743,
+      "by_window": {
+        "COVID": {
+          "n": 14,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 23,
+          "mean": 0.0321299115124781,
+          "win": 0.9130434782608695
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.007810470970469719,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.004285147861123291,
+          "win": 0.6666666666666666
+        },
+        "2022": {
+          "n": 11,
+          "mean": 0.039472765857784205,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.5,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06615203480932691,
+      "n": 48,
+      "mean": 0.03472614092950354,
+      "win": 0.9375,
+      "pf": 5.924645301132749,
+      "worst_window": 0.006407606350739299,
+      "cvar05": -0.11282401490808998,
+      "window_dispersion": 0.01743935360196902,
+      "by_window": {
+        "GFC": {
+          "n": 19,
+          "mean": 0.02863587927326424,
+          "win": 0.8947368421052632
+        },
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.007810470970469719,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.006407606350739299,
+          "win": 0.6666666666666666
+        },
+        "2022": {
+          "n": 11,
+          "mean": 0.03724906985467826,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.5,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06477289868648796,
+      "n": 37,
+      "mean": 0.028176418646739823,
+      "win": 0.7837837837837838,
+      "pf": 5.273698485517332,
+      "worst_window": 0.012839405808929782,
+      "cvar05": -0.06914882978952658,
+      "window_dispersion": 0.008276112499433141,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03306942555940578,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.029374643563110876,
+          "win": 0.75
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.012839405808929782,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.0372224570238312,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.02837176876991443,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 3,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06477289868648796,
+      "n": 37,
+      "mean": 0.028176418646739823,
+      "win": 0.7837837837837838,
+      "pf": 5.273698485517332,
+      "worst_window": 0.012839405808929782,
+      "cvar05": -0.06914882978952658,
+      "window_dispersion": 0.008276112499433141,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03306942555940578,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.029374643563110876,
+          "win": 0.75
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.012839405808929782,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.0372224570238312,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.02837176876991443,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 3,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06477289868648796,
+      "n": 37,
+      "mean": 0.028176418646739823,
+      "win": 0.7837837837837838,
+      "pf": 5.273698485517332,
+      "worst_window": 0.012839405808929782,
+      "cvar05": -0.06914882978952658,
+      "window_dispersion": 0.008276112499433141,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03306942555940578,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.029374643563110876,
+          "win": 0.75
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.012839405808929782,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.0372224570238312,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.02837176876991443,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 3,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06396908191880624,
+      "n": 53,
+      "mean": 0.03176156513869297,
+      "win": 0.8490566037735849,
+      "pf": 5.548893261310167,
+      "worst_window": 0.0058614365881849055,
+      "cvar05": -0.08469925881142144,
+      "window_dispersion": 0.015404370946517516,
+      "by_window": {
+        "GFC": {
+          "n": 27,
+          "mean": 0.03436900723471486,
+          "win": 0.8518518518518519
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.0058614365881849055,
+          "win": 0.3333333333333333
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 10,
+          "mean": 0.012718296922963935,
+          "win": 0.8
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.02263247801923185,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.02,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06383749487943396,
+      "n": 37,
+      "mean": 0.026652382672104354,
+      "win": 0.7837837837837838,
+      "pf": 5.259618317515742,
+      "worst_window": 0.0059131704394959255,
+      "cvar05": -0.04431767262340652,
+      "window_dispersion": 0.011707450528000807,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03803532968109772,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.02572272988978773,
+          "win": 0.75
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.0059131704394959255,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.031235870922943998,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.013400301217067478,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 2,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06383749487943396,
+      "n": 37,
+      "mean": 0.026652382672104354,
+      "win": 0.7837837837837838,
+      "pf": 5.259618317515742,
+      "worst_window": 0.0059131704394959255,
+      "cvar05": -0.04431767262340652,
+      "window_dispersion": 0.011707450528000807,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03803532968109772,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.02572272988978773,
+          "win": 0.75
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.0059131704394959255,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.031235870922943998,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.013400301217067478,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 2,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.06318077213046067,
+      "n": 36,
+      "mean": 0.027597985831371484,
+      "win": 0.7777777777777778,
+      "pf": 5.07282970477704,
+      "worst_window": 0.012839405808929782,
+      "cvar05": -0.06914882978952658,
+      "window_dispersion": 0.008254718871254278,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03306942555940578,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.028066286467318267,
+          "win": 0.7333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.012839405808929782,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.0372224570238312,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.02837176876991443,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 3,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.062163946662697665,
+      "n": 36,
+      "mean": 0.02603161552410725,
+      "win": 0.7777777777777778,
+      "pf": 5.047963088802257,
+      "worst_window": 0.0059131704394959255,
+      "cvar05": -0.04431767262340652,
+      "window_dispersion": 0.011647903019514665,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03803532968109772,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.024170911882440242,
+          "win": 0.7333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.0059131704394959255,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.031235870922943998,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.013400301217067478,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 2,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.061205192799779894,
+      "n": 37,
+      "mean": 0.02999445184493759,
+      "win": 0.7567567567567568,
+      "pf": 4.7158511203305284,
+      "worst_window": 0.0058584655766943565,
+      "cvar05": -0.05612555532755459,
+      "window_dispersion": 0.013834417196729027,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.045271575197817784,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.027592329693180123,
+          "win": 0.6875
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.0058584655766943565,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.031235870922943998,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.013400301217067478,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 2,
+        "stop": null,
+        "target": 0.2
+      }
+    },
+    {
+      "score": 0.0587406255889474,
+      "n": 37,
+      "mean": 0.025911776482553488,
+      "win": 0.8378378378378378,
+      "pf": 3.2505533564659115,
+      "worst_window": 0.021307692307692326,
+      "cvar05": -0.07100000000000006,
+      "window_dispersion": 0.011869333892526411,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.021307692307692326,
+          "win": 0.7692307692307693
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.023881212261542606,
+          "win": 0.8125
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.07,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.0587406255889474,
+      "n": 37,
+      "mean": 0.025911776482553488,
+      "win": 0.8378378378378378,
+      "pf": 3.2505533564659115,
+      "worst_window": 0.021307692307692326,
+      "cvar05": -0.07100000000000006,
+      "window_dispersion": 0.011869333892526411,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.021307692307692326,
+          "win": 0.7692307692307693
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.023881212261542606,
+          "win": 0.8125
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.07,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.0587406255889474,
+      "n": 37,
+      "mean": 0.025911776482553488,
+      "win": 0.8378378378378378,
+      "pf": 3.2505533564659115,
+      "worst_window": 0.021307692307692326,
+      "cvar05": -0.07100000000000006,
+      "window_dispersion": 0.011869333892526411,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.021307692307692326,
+          "win": 0.7692307692307693
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.023881212261542606,
+          "win": 0.8125
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 20,
+        "stop": 0.07,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.057147870879596316,
+      "n": 36,
+      "mean": 0.025270436940402194,
+      "win": 0.8333333333333334,
+      "pf": 3.1355298822875075,
+      "worst_window": 0.021307692307692326,
+      "cvar05": -0.07100000000000006,
+      "window_dispersion": 0.01220729192455802,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.021307692307692326,
+          "win": 0.7692307692307693
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.02220662641231211,
+          "win": 0.8
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.07,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.057147870879596316,
+      "n": 36,
+      "mean": 0.025270436940402194,
+      "win": 0.8333333333333334,
+      "pf": 3.1355298822875075,
+      "worst_window": 0.021307692307692326,
+      "cvar05": -0.07100000000000006,
+      "window_dispersion": 0.01220729192455802,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.021307692307692326,
+          "win": 0.7692307692307693
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.02220662641231211,
+          "win": 0.8
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.033606055611632844,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.07,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.05652747583532948,
+      "n": 67,
+      "mean": 0.016903193364700624,
+      "win": 0.8208955223880597,
+      "pf": 4.677764677018275,
+      "worst_window": 0.012039576799776363,
+      "cvar05": -0.049015532564489483,
+      "window_dispersion": 0.005910709373920426,
+      "by_window": {
+        "COVID": {
+          "n": 11,
+          "mean": 0.022676195917317288,
+          "win": 0.9090909090909091
+        },
+        "2022": {
+          "n": 17,
+          "mean": 0.020079907629481055,
+          "win": 0.8823529411764706
+        },
+        "GFC": {
+          "n": 24,
+          "mean": 0.012865812479969771,
+          "win": 0.7916666666666666
+        },
+        "2011": {
+          "n": 5,
+          "mean": 0.012039576799776363,
+          "win": 0.6
+        },
+        "2015_16": {
+          "n": 9,
+          "mean": 0.01597110968056857,
+          "win": 0.7777777777777778
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MARKET_REGIME_STRUCTURE",
+          "MEAN_REVERSION",
+          "MOMENTUM",
+          "TREND"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.07,
+        "reclaim": 0.25,
+        "deadline": 10,
+        "confirm": 1,
+        "hold": 3,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.05538116028277496,
+      "n": 30,
+      "mean": 0.05288082422416439,
+      "win": 0.9,
+      "pf": 6.804316996335088,
+      "worst_window": 0.026526701910475764,
+      "cvar05": -0.1164762162218424,
+      "window_dispersion": 0.020968346738649966,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.026526701910475764,
+          "win": 0.75
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.07900000000000007,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.032257599497477085,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 5,
+          "mean": 0.057569340860348886,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 1.0,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.08
+      }
+    },
+    {
+      "score": 0.05435179335831979,
+      "n": 36,
+      "mean": 0.028012238462853042,
+      "win": 0.8888888888888888,
+      "pf": 3.814639299398121,
+      "worst_window": 0.011571060499071417,
+      "cvar05": -0.10100000000000003,
+      "window_dispersion": 0.014380041200017358,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.025923076923076962,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.035990632667538464,
+          "win": 0.9333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.011835005691760084,
+          "win": 0.8333333333333334
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.011571060499071417,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 5,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.05398530848590498,
+      "n": 43,
+      "mean": 0.018206589743450307,
+      "win": 0.813953488372093,
+      "pf": 4.665821289585668,
+      "worst_window": 0.007399554466057723,
+      "cvar05": -0.051428232111252505,
+      "window_dispersion": 0.009125378484129837,
+      "by_window": {
+        "COVID": {
+          "n": 11,
+          "mean": 0.022676195917317288,
+          "win": 0.9090909090909091
+        },
+        "2022": {
+          "n": 12,
+          "mean": 0.024787722190524875,
+          "win": 0.9166666666666666
+        },
+        "GFC": {
+          "n": 12,
+          "mean": 0.007399554466057723,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 4,
+          "mean": 0.007799470999720448,
+          "win": 0.5
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MARKET_REGIME_STRUCTURE",
+          "MEAN_REVERSION",
+          "MOMENTUM",
+          "TREND"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.07,
+        "reclaim": 0.25,
+        "deadline": 5,
+        "confirm": 1,
+        "hold": 3,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.052174040267695024,
+      "n": 53,
+      "mean": 0.016902255556035046,
+      "win": 0.8113207547169812,
+      "pf": 4.209132465307531,
+      "worst_window": 0.011449863871613442,
+      "cvar05": -0.055829073880719705,
+      "window_dispersion": 0.007051913696726445,
+      "by_window": {
+        "COVID": {
+          "n": 9,
+          "mean": 0.02127090612116557,
+          "win": 0.8888888888888888
+        },
+        "GFC": {
+          "n": 20,
+          "mean": 0.011449863871613442,
+          "win": 0.75
+        },
+        "2022": {
+          "n": 10,
+          "mean": 0.027144624082309953,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 5,
+          "mean": 0.012039576799776363,
+          "win": 0.6
+        },
+        "2015_16": {
+          "n": 8,
+          "mean": 0.01434249839063964,
+          "win": 0.75
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MEAN_REVERSION",
+          "MOMENTUM",
+          "TREND"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.07,
+        "reclaim": 0.25,
+        "deadline": 8,
+        "confirm": 1,
+        "hold": 3,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.05122523154172432,
+      "n": 35,
+      "mean": 0.018143955162893195,
+      "win": 0.8285714285714286,
+      "pf": 4.388537704423357,
+      "worst_window": 0.007799470999720448,
+      "cvar05": -0.06285489385897935,
+      "window_dispersion": 0.009068216901267141,
+      "by_window": {
+        "COVID": {
+          "n": 9,
+          "mean": 0.02127090612116557,
+          "win": 0.8888888888888888
+        },
+        "GFC": {
+          "n": 10,
+          "mean": 0.008295615078879038,
+          "win": 0.7
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.026680780102887436,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 4,
+          "mean": 0.007799470999720448,
+          "win": 0.5
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MEAN_REVERSION",
+          "MOMENTUM"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.07,
+        "reclaim": 0.25,
+        "deadline": 5,
+        "confirm": 1,
+        "hold": 3,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.051115125174984066,
+      "n": 57,
+      "mean": 0.016353993678867893,
+      "win": 0.8070175438596491,
+      "pf": 4.056903141748679,
+      "worst_window": 0.01191592053230196,
+      "cvar05": -0.055829073880719705,
+      "window_dispersion": 0.006106066444081827,
+      "by_window": {
+        "COVID": {
+          "n": 9,
+          "mean": 0.02127090612116557,
+          "win": 0.8888888888888888
+        },
+        "GFC": {
+          "n": 22,
+          "mean": 0.01191592053230196,
+          "win": 0.7727272727272727
+        },
+        "2022": {
+          "n": 11,
+          "mean": 0.022331941979121615,
+          "win": 0.9090909090909091
+        },
+        "2011": {
+          "n": 5,
+          "mean": 0.012039576799776363,
+          "win": 0.6
+        },
+        "2015_16": {
+          "n": 9,
+          "mean": 0.01597110968056857,
+          "win": 0.7777777777777778
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MEAN_REVERSION",
+          "MOMENTUM",
+          "TREND"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.07,
+        "reclaim": 0.25,
+        "deadline": 10,
+        "confirm": 1,
+        "hold": 3,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.050818265245052105,
+      "n": 36,
+      "mean": 0.02545638990408897,
+      "win": 0.7777777777777778,
+      "pf": 3.854586084647062,
+      "worst_window": 0.012839405808929782,
+      "cvar05": -0.09309746055494794,
+      "window_dispersion": 0.007844596388763008,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.027138852222315737,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.028066286467318267,
+          "win": 0.7333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.012839405808929782,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.0372224570238312,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.02837176876991443,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 3,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04953566962180106,
+      "n": 32,
+      "mean": 0.024866151344807855,
+      "win": 0.78125,
+      "pf": 3.6996239555592143,
+      "worst_window": 0.012839405808929782,
+      "cvar05": -0.09309746055494794,
+      "window_dispersion": 0.007915242826522041,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.029106758624701874,
+          "win": 0.75
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.02531708990750871,
+          "win": 0.8333333333333334
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.012839405808929782,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.0372224570238312,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.02837176876991443,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 3,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.048465422577383975,
+      "n": 37,
+      "mean": 0.023949681078203406,
+      "win": 0.7837837837837838,
+      "pf": 3.6730479430044176,
+      "worst_window": 0.0059131704394959255,
+      "cvar05": -0.07304733606337394,
+      "window_dispersion": 0.009992151817645728,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03034302514461041,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.02572272988978773,
+          "win": 0.75
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.0059131704394959255,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.031235870922943998,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.013400301217067478,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 2,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04830406299971049,
+      "n": 43,
+      "mean": 0.03197481554347367,
+      "win": 0.9302325581395349,
+      "pf": 4.2181223392997484,
+      "worst_window": 0.0027420924594729335,
+      "cvar05": -0.14241400454532802,
+      "window_dispersion": 0.017954710184911543,
+      "by_window": {
+        "COVID": {
+          "n": 15,
+          "mean": 0.026968918165398075,
+          "win": 0.9333333333333333
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.015599964348096101,
+          "win": 0.875
+        },
+        "2015_16": {
+          "n": 2,
+          "mean": 0.0027420924594729335,
+          "win": 0.5
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MARKET_REGIME_STRUCTURE",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04830406299971049,
+      "n": 43,
+      "mean": 0.03197481554347367,
+      "win": 0.9302325581395349,
+      "pf": 4.2181223392997484,
+      "worst_window": 0.0027420924594729335,
+      "cvar05": -0.14241400454532802,
+      "window_dispersion": 0.017954710184911543,
+      "by_window": {
+        "COVID": {
+          "n": 15,
+          "mean": 0.026968918165398075,
+          "win": 0.9333333333333333
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.015599964348096101,
+          "win": 0.875
+        },
+        "2015_16": {
+          "n": 2,
+          "mean": 0.0027420924594729335,
+          "win": 0.5
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MARKET_REGIME_STRUCTURE",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.047284508713013804,
+      "n": 42,
+      "mean": 0.031569454008794476,
+      "win": 0.9285714285714286,
+      "pf": 4.103433244042023,
+      "worst_window": 0.0027420924594729335,
+      "cvar05": -0.14241400454532802,
+      "window_dispersion": 0.017930882535441582,
+      "by_window": {
+        "COVID": {
+          "n": 15,
+          "mean": 0.026968918165398075,
+          "win": 0.9333333333333333
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.04620662641231213,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.015599964348096101,
+          "win": 0.875
+        },
+        "2015_16": {
+          "n": 2,
+          "mean": 0.0027420924594729335,
+          "win": 0.5
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MARKET_REGIME_STRUCTURE",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04672557853658932,
+      "n": 36,
+      "mean": 0.02325383888593128,
+      "win": 0.7777777777777778,
+      "pf": 3.5252387759659642,
+      "worst_window": 0.0059131704394959255,
+      "cvar05": -0.07304733606337394,
+      "window_dispersion": 0.009874076174381864,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03034302514461041,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.024170911882440242,
+          "win": 0.7333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.0059131704394959255,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.031235870922943998,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.013400301217067478,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 2,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04672557853658932,
+      "n": 36,
+      "mean": 0.02325383888593128,
+      "win": 0.7777777777777778,
+      "pf": 3.5252387759659642,
+      "worst_window": 0.0059131704394959255,
+      "cvar05": -0.07304733606337394,
+      "window_dispersion": 0.009874076174381864,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.03034302514461041,
+          "win": 0.8461538461538461
+        },
+        "GFC": {
+          "n": 15,
+          "mean": 0.024170911882440242,
+          "win": 0.7333333333333333
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.0059131704394959255,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.031235870922943998,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.013400301217067478,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 2,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04566946448961397,
+      "n": 32,
+      "mean": 0.02260379489500646,
+      "win": 0.78125,
+      "pf": 3.4246064542241714,
+      "worst_window": 0.0059131704394959255,
+      "cvar05": -0.07304733606337394,
+      "window_dispersion": 0.009645587727746858,
+      "by_window": {
+        "GFC": {
+          "n": 12,
+          "mean": 0.024812242915273702,
+          "win": 0.75
+        },
+        "COVID": {
+          "n": 12,
+          "mean": 0.02878827723999461,
+          "win": 0.8333333333333334
+        },
+        "2022": {
+          "n": 6,
+          "mean": 0.0059131704394959255,
+          "win": 0.6666666666666666
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.031235870922943998,
+          "win": 1.0
+        },
+        "2015_16": {
+          "n": 1,
+          "mean": 0.013400301217067478,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 2,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04542605284370811,
+      "n": 36,
+      "mean": 0.01699658148625456,
+      "win": 0.8055555555555556,
+      "pf": 3.905822036928198,
+      "worst_window": 0.005435877599335695,
+      "cvar05": -0.06285489385897935,
+      "window_dispersion": 0.009739134477945225,
+      "by_window": {
+        "COVID": {
+          "n": 9,
+          "mean": 0.02127090612116557,
+          "win": 0.8888888888888888
+        },
+        "GFC": {
+          "n": 11,
+          "mean": 0.005435877599335695,
+          "win": 0.6363636363636364
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.026680780102887436,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 4,
+          "mean": 0.007799470999720448,
+          "win": 0.5
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MEAN_REVERSION",
+          "MOMENTUM",
+          "TREND"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.07,
+        "reclaim": 0.25,
+        "deadline": 5,
+        "confirm": 1,
+        "hold": 3,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.04542605284370811,
+      "n": 36,
+      "mean": 0.01699658148625456,
+      "win": 0.8055555555555556,
+      "pf": 3.905822036928198,
+      "worst_window": 0.005435877599335695,
+      "cvar05": -0.06285489385897935,
+      "window_dispersion": 0.009739134477945225,
+      "by_window": {
+        "COVID": {
+          "n": 9,
+          "mean": 0.02127090612116557,
+          "win": 0.8888888888888888
+        },
+        "GFC": {
+          "n": 11,
+          "mean": 0.005435877599335695,
+          "win": 0.6363636363636364
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.026680780102887436,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 4,
+          "mean": 0.007799470999720448,
+          "win": 0.5
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MEAN_REVERSION",
+          "MOMENTUM",
+          "TREND"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.07,
+        "reclaim": 0.25,
+        "deadline": 5,
+        "confirm": 1,
+        "hold": 3,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.04542605284370811,
+      "n": 36,
+      "mean": 0.01699658148625456,
+      "win": 0.8055555555555556,
+      "pf": 3.905822036928198,
+      "worst_window": 0.005435877599335695,
+      "cvar05": -0.06285489385897935,
+      "window_dispersion": 0.009739134477945225,
+      "by_window": {
+        "COVID": {
+          "n": 9,
+          "mean": 0.02127090612116557,
+          "win": 0.8888888888888888
+        },
+        "GFC": {
+          "n": 11,
+          "mean": 0.005435877599335695,
+          "win": 0.6363636363636364
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.026680780102887436,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 4,
+          "mean": 0.007799470999720448,
+          "win": 0.5
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MEAN_REVERSION",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.07,
+        "reclaim": 0.25,
+        "deadline": 5,
+        "confirm": 1,
+        "hold": 3,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.04542605284370811,
+      "n": 36,
+      "mean": 0.01699658148625456,
+      "win": 0.8055555555555556,
+      "pf": 3.905822036928198,
+      "worst_window": 0.005435877599335695,
+      "cvar05": -0.06285489385897935,
+      "window_dispersion": 0.009739134477945225,
+      "by_window": {
+        "COVID": {
+          "n": 9,
+          "mean": 0.02127090612116557,
+          "win": 0.8888888888888888
+        },
+        "GFC": {
+          "n": 11,
+          "mean": 0.005435877599335695,
+          "win": 0.6363636363636364
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.026680780102887436,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 4,
+          "mean": 0.007799470999720448,
+          "win": 0.5
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.029000000000000026,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MEAN_REVERSION",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.07,
+        "reclaim": 0.25,
+        "deadline": 5,
+        "confirm": 1,
+        "hold": 3,
+        "stop": null,
+        "target": 0.03
+      }
+    },
+    {
+      "score": 0.04491673672034384,
+      "n": 65,
+      "mean": 0.026612469099941322,
+      "win": 0.8153846153846154,
+      "pf": 3.559323050702549,
+      "worst_window": 0.0058614365881849055,
+      "cvar05": -0.10204733683781902,
+      "window_dispersion": 0.01677898133750416,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 33,
+          "mean": 0.02698437641596456,
+          "win": 0.7878787878787878
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.0058614365881849055,
+          "win": 0.3333333333333333
+        },
+        "2022": {
+          "n": 13,
+          "mean": 0.006084448759843571,
+          "win": 0.7692307692307693
+        },
+        "2011": {
+          "n": 3,
+          "mean": 0.03521464204227798,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.02,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04491673672034384,
+      "n": 65,
+      "mean": 0.026612469099941322,
+      "win": 0.8153846153846154,
+      "pf": 3.559323050702549,
+      "worst_window": 0.0058614365881849055,
+      "cvar05": -0.10204733683781902,
+      "window_dispersion": 0.01677898133750416,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 33,
+          "mean": 0.02698437641596456,
+          "win": 0.7878787878787878
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.0058614365881849055,
+          "win": 0.3333333333333333
+        },
+        "2022": {
+          "n": 13,
+          "mean": 0.006084448759843571,
+          "win": 0.7692307692307693
+        },
+        "2011": {
+          "n": 3,
+          "mean": 0.03521464204227798,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.02,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04487546328697867,
+      "n": 39,
+      "mean": 0.027195981203187117,
+      "win": 0.8717948717948718,
+      "pf": 3.370068791272089,
+      "worst_window": 0.0027420924594729335,
+      "cvar05": -0.10099999999999998,
+      "window_dispersion": 0.018660845204264802,
+      "by_window": {
+        "GFC": {
+          "n": 13,
+          "mean": 0.045776876629590915,
+          "win": 1.0
+        },
+        "COVID": {
+          "n": 14,
+          "mean": 0.016857142857142897,
+          "win": 0.7857142857142857
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.015757460727583647,
+          "win": 0.875
+        },
+        "2015_16": {
+          "n": 2,
+          "mean": 0.0027420924594729335,
+          "win": 0.5
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MARKET_REGIME_STRUCTURE",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": 0.1,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04409727337377777,
+      "n": 43,
+      "mean": 0.03074422801451508,
+      "win": 0.9302325581395349,
+      "pf": 3.7532682870795955,
+      "worst_window": 0.0077221391898431024,
+      "cvar05": -0.1600524257937345,
+      "window_dispersion": 0.01696992289727382,
+      "by_window": {
+        "COVID": {
+          "n": 15,
+          "mean": 0.02277722768500075,
+          "win": 0.9333333333333333
+        },
+        "GFC": {
+          "n": 16,
+          "mean": 0.046381212261542626,
+          "win": 1.0
+        },
+        "2022": {
+          "n": 8,
+          "mean": 0.015599964348096101,
+          "win": 0.875
+        },
+        "2015_16": {
+          "n": 2,
+          "mean": 0.0077221391898431024,
+          "win": 0.5
+        },
+        "2018": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "2011": {
+          "n": 1,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "MARKET_REGIME_STRUCTURE",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "TREND",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.03,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 8,
+        "stop": null,
+        "target": 0.05
+      }
+    },
+    {
+      "score": 0.04404253473230093,
+      "n": 64,
+      "mean": 0.026262663929627908,
+      "win": 0.8125,
+      "pf": 3.4868256123409886,
+      "worst_window": 0.0058614365881849055,
+      "cvar05": -0.10204733683781902,
+      "window_dispersion": 0.016761913774179352,
+      "by_window": {
+        "COVID": {
+          "n": 13,
+          "mean": 0.049000000000000044,
+          "win": 1.0
+        },
+        "GFC": {
+          "n": 32,
+          "mean": 0.02629638817896345,
+          "win": 0.78125
+        },
+        "2015_16": {
+          "n": 3,
+          "mean": 0.0058614365881849055,
+          "win": 0.3333333333333333
+        },
+        "2022": {
+          "n": 13,
+          "mean": 0.006084448759843571,
+          "win": 0.7692307692307693
+        },
+        "2011": {
+          "n": 3,
+          "mean": 0.03521464204227798,
+          "win": 1.0
+        }
+      },
+      "g": {
+        "families": [
+          "BREAKOUT",
+          "MOMENTUM",
+          "RELATIVE_CROSS_SECTIONAL",
+          "VOLUME_LIQUIDITY"
+        ],
+        "horizons": [
+          10
+        ],
+        "entry_mode": "PULLBACK_RECLAIM",
+        "depth": 0.02,
+        "reclaim": 0.75,
+        "deadline": 2,
+        "confirm": 0,
+        "hold": 15,
+        "stop": null,
+        "target": 0.05
+      }
+    }
+  ]
+}

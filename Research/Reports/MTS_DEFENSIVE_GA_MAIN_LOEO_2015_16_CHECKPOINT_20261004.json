@@ -1,0 +1,131 @@
+{
+  "format": "MTS_DEFENSIVE_GA_MAIN_LOEO_CHECKPOINT_V1",
+  "heldout": "2015_16",
+  "generation": 27,
+  "unique_genomes": 4000,
+  "best": {
+    "score": 0.10909592003255435,
+    "n": 109,
+    "mean": 0.07036450505256653,
+    "win": 0.8532110091743119,
+    "pf": 14.507274253354545,
+    "worst_window": 0.046515438705682755,
+    "window_dispersion": 0.017893152337670366,
+    "five_session_efficiency": 0.07917926027762616,
+    "mean_mae": -0.05264236405491829,
+    "mean_giveback": 0.024464165791869164,
+    "mean_duration": 6.651376146788991,
+    "heldout": "2015_16",
+    "heldout_metrics": {
+      "n": 5,
+      "mean": -0.0017125725280493498,
+      "win": 0.6
+    },
+    "by_window": {
+      "GFC": {
+        "n": 47,
+        "mean": 0.08751779049634933,
+        "win": 0.8936170212765957
+      },
+      "2011": {
+        "n": 18,
+        "mean": 0.053230732679367065,
+        "win": 0.7777777777777778
+      },
+      "2015_16": {
+        "n": 5,
+        "mean": -0.0017125725280493498,
+        "win": 0.6
+      },
+      "2018": {
+        "n": 9,
+        "mean": 0.046515438705682755,
+        "win": 0.6666666666666666
+      },
+      "COVID": {
+        "n": 15,
+        "mean": 0.08250518143177032,
+        "win": 0.8666666666666667
+      },
+      "2022": {
+        "n": 20,
+        "mean": 0.04710123687982559,
+        "win": 0.9
+      }
+    },
+    "g": {
+      "fmask": 89,
+      "hmask": 2,
+      "entry_rules": [
+        33
+      ],
+      "entry_k": 1,
+      "entry_delay": 8,
+      "exit_rules": [
+        22,
+        92,
+        158
+      ],
+      "exit_k": 2,
+      "min_hold": 3,
+      "max_hold": 20
+    },
+    "g_described": {
+      "fmask": 89,
+      "hmask": 2,
+      "entry_rules": [
+        33
+      ],
+      "entry_k": 1,
+      "entry_delay": 8,
+      "exit_rules": [
+        22,
+        92,
+        158
+      ],
+      "exit_k": 2,
+      "min_hold": 3,
+      "max_hold": 20,
+      "families": [
+        "MOMENTUM",
+        "MEAN_REVERSION",
+        "VOLATILITY",
+        "RELATIVE_CROSS_SECTIONAL"
+      ],
+      "horizons": [
+        5
+      ],
+      "entry_conditions": [
+        {
+          "feature": "stock_range20",
+          "direction": "<=",
+          "quantile": 0.35,
+          "threshold": 0.26493310928344727
+        }
+      ],
+      "exit_conditions": [
+        {
+          "feature": "stock_close_sma20",
+          "direction": ">=",
+          "quantile": 0.35,
+          "threshold": -0.03687615692615509
+        },
+        {
+          "feature": "market_ret20",
+          "direction": ">=",
+          "quantile": 0.35,
+          "threshold": -0.0576624795794487
+        },
+        {
+          "feature": "vvix",
+          "direction": ">=",
+          "quantile": 0.8,
+          "threshold": 113.91000366210938
+        }
+      ]
+    }
+  },
+  "source_events": 10079,
+  "test17_accessed": false,
+  "protected_accessed": false
+}

@@ -1,0 +1,41 @@
+{
+ "format":"MTS_MULTIMARKET_CRASH_CLASSIFIER_FREEZE_V1",
+ "date":"2026-10-04",
+ "question":"Using only information causally available by each decision date, can a sparse multi-market state distinguish deeper destructive deterioration from ordinary corrections early enough to leave meaningful downside remaining, with acceptably few false alarms?",
+ "objective":"classification/detection only; no portfolio-return, CAGR, terminal-wealth or drawdown optimization",
+ "positive_episodes":{
+   "2008":{"peak":"2007-10-09","reference_trough":"2009-03-09"},
+   "2020":{"peak":"2020-02-19","reference_trough":"2020-03-23"},
+   "2022":{"peak":"2022-01-03","reference_trough":"2022-10-12"}
+ },
+ "elevated_non_systemic_episode":{"2015":{"peak":"2015-05-21","reference_low":"2016-02-11","role":"must not automatically be labeled systemic crash; evaluate whether model appropriately assigns elevated but lower state"}},
+ "negative_controls":"All other evaluable dates/corrections are false-alarm territory; no hand-picked benign-only controls used for final false-positive accounting.",
+ "feature_families":[
+   "equity drawdown magnitude and speed using trailing-only index/market data",
+   "realized-volatility level, acceleration and extreme-move clustering",
+   "VIX level/change/rolling percentile where official historical data are available",
+   "VVIX level/change/rolling percentile where official historical data are available",
+   "breadth and participation from causally timestamped market predictors",
+   "OFR FSI total and available category contributions with explicit two-business-day lag",
+   "credit/funding series only where historical availability and publication timing can be established",
+   "cross-market concurrence among the above"
+ ],
+ "transforms":"Levels, 5/20-session changes, acceleration, and rolling 252-session percentiles computed using past data only. No future normalization.",
+ "decision_timing":"Features through completed session t may first authorize action on next tradable session. OFR observations are additionally lagged by two business days.",
+ "model_search":"Start with transparent sparse conjunction/score and regularized low-dimensional classifiers. No GA initially. Complexity is penalized. No date/year identifiers.",
+ "validation":[
+   "walk-forward/leave-crisis-out: no crisis being evaluated may determine its thresholds or coefficients",
+   "report detection date, sessions from peak, drawdown already incurred, and subsequent downside remaining",
+   "report all false-alert episodes and alert-days outside positives",
+   "2015 separately assessed as elevated correction rather than forced positive",
+   "permutation/search-adjustment audit before any claim of discrimination"
+ ],
+ "success_gate":{
+   "coverage":"meaningful causal distinction in at least 2 of 3 true deep declines under leave-crisis-out",
+   "economic_information_only":"at detection, nontrivial subsequent downside must remain; this is descriptive and not used to fit portfolio returns",
+   "false_alarms":"must be rare enough that a full-exit policy is plausibly usable; exact burden reported, never hidden",
+   "stability":"result must not depend on a single feature or single crisis"
+ },
+ "protected_evidence":{"consumed67_portfolio_outcomes_for_model_selection":false,"heldout50":false,"remaining186":false,"verification_a":false,"verification_b":false},
+ "status":"FROZEN_BEFORE_DATA_ASSEMBLY"
+}

@@ -1,0 +1,35 @@
+{
+  "format":"MTS_DEFENSIVE_ANTI_OVERFIT_METHOD_TOURNAMENT_FREEZE_V1",
+  "date":"2026-10-05",
+  "status":"FROZEN_BEFORE_METHOD_TOURNAMENT",
+  "purpose":"Select an internal DEV50 validation architecture that reduces correlated-event overcounting before rerunning Defensive GA.",
+  "design_population":"exact frozen DEV50 only",
+  "diagnostic_answer_key":"already-consumed preserved50+TEST17 outcomes for PF1-PF5; answer key may evaluate methods only after DEV50-only method scores are fixed",
+  "forbidden":["remaining Discovery","Verification A","Verification B","repairing PF1-PF5","choosing numeric thresholds from 50+17"],
+  "experimental_unit_principle":"Ticker/date events are observations, not automatically independent successes. Market episode and synchronized-date clusters are primary dependence units.",
+  "methods":[
+    {"id":"A_COMPOSITE","description":"Equal-weight normalized cross-sectional composite path by session/episode. Evaluate whether finalist-selected opportunities have aggregate directional/economic support without multiplying credit by ticker count."},
+    {"id":"B_CLUSTER_WEIGHTED","description":"Weight same-date selected events so each date contributes approximately one evidentiary unit; report episode-balanced performance so long episodes do not dominate."},
+    {"id":"C_STOCK_FOLDS","description":"Deterministic five-fold ticker cross-validation on DEV50. Score each frozen finalist separately in every held-out stock fold; emphasize worst-fold and dispersion rather than pooled event count."},
+    {"id":"D_EPISODE_HOLDOUT","description":"Leave-one-bear-episode-out stability diagnostic. Because finalists are already frozen, measure contribution/stability across six independent historical environments and penalize dependence on one episode."},
+    {"id":"E_HIERARCHICAL","description":"Combine stock-fold stability, episode balance, and same-date cluster weighting. No component may earn extra evidence merely from more correlated trades."}
+  ],
+  "deterministic_stock_fold_rule":"sort exact DEV50 ticker symbols lexicographically and assign round-robin fold index 0..4",
+  "predeclared_method_metrics":[
+    "mean selected-event return",
+    "win rate",
+    "date-cluster mean return distribution",
+    "episode-balanced mean return",
+    "worst episode mean return",
+    "five stock-fold mean returns",
+    "worst stock-fold mean return",
+    "stock-fold standard deviation",
+    "fraction positive stock folds",
+    "fraction positive episodes",
+    "cross-sectional composite support where defined"
+  ],
+  "method_evaluation_rule":"First compute all method metrics from DEV50 only. Freeze those outputs. Then compare method warnings/rankings to known PF1-PF5 50+17 transport. Prefer methods that would reject or downgrade nonportable finalists without requiring knowledge of replay-specific numeric cutoffs and that preserve materially more support for the relatively more portable PF1.",
+  "no_arbitrary_pass_threshold":"This tournament diagnoses which validation architecture is informative. It does not choose a trading pass/fail threshold from the answer key.",
+  "next_step_if_successful":"Freeze selected validation architecture and its future acceptance rule before rerunning GA on DEV50; only then verify frozen finalists on preserved50 and test on TEST17.",
+  "provenance":"NEW_RESEARCH_POST_RECOVERY"
+}

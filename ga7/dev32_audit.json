@@ -1,0 +1,16 @@
+{
+  "blocking_findings": [
+    "No audited PIT financial solvency evidence",
+    "Selector output is provisional"
+  ],
+  "certification_deferred": true,
+  "eligible_at_cutoff": 58,
+  "financial_solvency_certified": false,
+  "pass_for_evolution": false,
+  "pass_for_exploratory_evolution": true,
+  "sector_max_weight_gap": 0.03204113924050633,
+  "sector_total_variation_distance": 0.05102848101265825,
+  "selected_count": 32,
+  "selected_with_coverage_at_cutoff": 32,
+  "source_survivorship_certified": false
+}

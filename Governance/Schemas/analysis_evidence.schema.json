@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:analysis-evidence:1",
+  "schema_id": "mts.analysis-evidence",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Analysis Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidence_id",
+    "task_id",
+    "execution_id",
+    "context_fingerprint",
+    "method_id",
+    "method_version",
+    "input_artifact_refs",
+    "sample_definition",
+    "result",
+    "uncertainty",
+    "limitations",
+    "research_mode",
+    "deterministic_computations_used"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "context_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "method_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_artifact_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "artifact_id",
+          "artifact_version"
+        ],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifact_version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "sample_definition": {
+      "type": "object"
+    },
+    "result": {
+      "type": "object"
+    },
+    "uncertainty": {
+      "type": "object"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "research_mode": {
+      "enum": [
+        "EXPLORATORY",
+        "CONFIRMATORY",
+        "VALIDATION",
+        "REPLICATION",
+        "ROBUSTNESS",
+        "RETROSPECTIVE_CHARACTERIZATION"
+      ]
+    },
+    "deterministic_computations_used": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

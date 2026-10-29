@@ -1,0 +1,1241 @@
+{
+  "format": "MTS_DEFENSIVE_STRATEGY_BANK_FROZEN_CONDITION_LIBRARY_V1",
+  "source": "development-only discovery implementation",
+  "features": [
+    "stock_ret5",
+    "stock_ret20",
+    "stock_close_sma20",
+    "stock_range20",
+    "stock_rsi14",
+    "stock_relvol_pct",
+    "stock_drawdown252",
+    "stock_rv_pct",
+    "market_ret5",
+    "market_ret20",
+    "market_drawdown252",
+    "breadth_above_sma200",
+    "breadth_positive20",
+    "market_rv_pct",
+    "vix",
+    "vvix",
+    "ofr_funding_lag2",
+    "ofr_credit_lag2"
+  ],
+  "qlevels": [
+    0.2,
+    0.35,
+    0.5,
+    0.65,
+    0.8
+  ],
+  "cond_meta": [
+    {
+      "feature": "stock_ret5",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": -0.04389967769384384
+    },
+    {
+      "feature": "stock_ret5",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": -0.04389967769384384
+    },
+    {
+      "feature": "stock_ret5",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": -0.018812669441103935
+    },
+    {
+      "feature": "stock_ret5",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": -0.018812669441103935
+    },
+    {
+      "feature": "stock_ret5",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.0004825384239666164
+    },
+    {
+      "feature": "stock_ret5",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.0004825384239666164
+    },
+    {
+      "feature": "stock_ret5",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.018050518073141616
+    },
+    {
+      "feature": "stock_ret5",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.018050518073141616
+    },
+    {
+      "feature": "stock_ret5",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.04201557859778404
+    },
+    {
+      "feature": "stock_ret5",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.04201557859778404
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": -0.0984853133559227
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": -0.0984853133559227
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": -0.05493481606245043
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": -0.05493481606245043
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": -0.017699066549539566
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": -0.017699066549539566
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.02010273188352585
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.02010273188352585
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.06709646433591843
+    },
+    {
+      "feature": "stock_ret20",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.06709646433591843
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": -0.054085202515125275
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": -0.054085202515125275
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": -0.025318359956145287
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": -0.025318359956145287
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": -0.0028700658585876226
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": -0.0028700658585876226
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.017434751614928246
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.017434751614928246
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.04171442240476608
+    },
+    {
+      "feature": "stock_close_sma20",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.04171442240476608
+    },
+    {
+      "feature": "stock_range20",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 0.169780433177948
+    },
+    {
+      "feature": "stock_range20",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 0.169780433177948
+    },
+    {
+      "feature": "stock_range20",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 0.3210958242416382
+    },
+    {
+      "feature": "stock_range20",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 0.3210958242416382
+    },
+    {
+      "feature": "stock_range20",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.48451513051986694
+    },
+    {
+      "feature": "stock_range20",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.48451513051986694
+    },
+    {
+      "feature": "stock_range20",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.661138117313385
+    },
+    {
+      "feature": "stock_range20",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.661138117313385
+    },
+    {
+      "feature": "stock_range20",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.8245766758918762
+    },
+    {
+      "feature": "stock_range20",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.8245766758918762
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 34.44935989379883
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 34.44935989379883
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 42.11051559448242
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 42.11051559448242
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 48.65354919433594
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 48.65354919433594
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 55.450767517089844
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 55.450767517089844
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 63.20540237426758
+    },
+    {
+      "feature": "stock_rsi14",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 63.20540237426758
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 0.19409282505512238
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 0.19409282505512238
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 0.3476702570915222
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 0.3476702570915222
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.49789029359817505
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.49789029359817505
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.6499999761581421
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.6499999761581421
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.8028674125671387
+    },
+    {
+      "feature": "stock_relvol_pct",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.8028674125671387
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": -0.38311630487442017
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": -0.38311630487442017
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": -0.2973146438598633
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": -0.2973146438598633
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": -0.2264423668384552
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": -0.2264423668384552
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": -0.16395752131938934
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": -0.16395752131938934
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": -0.10099868178367573
+    },
+    {
+      "feature": "stock_drawdown252",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": -0.10099868178367573
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 0.22580644488334656
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 0.22580644488334656
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 0.39400920271873474
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 0.39400920271873474
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.5448028445243835
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.5448028445243835
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.6896551847457886
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.6896551847457886
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.8256227970123291
+    },
+    {
+      "feature": "stock_rv_pct",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.8256227970123291
+    },
+    {
+      "feature": "market_ret5",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": -0.029853379353880882
+    },
+    {
+      "feature": "market_ret5",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": -0.029853379353880882
+    },
+    {
+      "feature": "market_ret5",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": -0.01211333554238081
+    },
+    {
+      "feature": "market_ret5",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": -0.01211333554238081
+    },
+    {
+      "feature": "market_ret5",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.0011415948392823339
+    },
+    {
+      "feature": "market_ret5",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.0011415948392823339
+    },
+    {
+      "feature": "market_ret5",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.014293957501649857
+    },
+    {
+      "feature": "market_ret5",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.014293957501649857
+    },
+    {
+      "feature": "market_ret5",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.02809247002005577
+    },
+    {
+      "feature": "market_ret5",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.02809247002005577
+    },
+    {
+      "feature": "market_ret20",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": -0.07148737460374832
+    },
+    {
+      "feature": "market_ret20",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": -0.07148737460374832
+    },
+    {
+      "feature": "market_ret20",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": -0.04316464439034462
+    },
+    {
+      "feature": "market_ret20",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": -0.04316464439034462
+    },
+    {
+      "feature": "market_ret20",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": -0.015185872092843056
+    },
+    {
+      "feature": "market_ret20",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": -0.015185872092843056
+    },
+    {
+      "feature": "market_ret20",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.013431457802653313
+    },
+    {
+      "feature": "market_ret20",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.013431457802653313
+    },
+    {
+      "feature": "market_ret20",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.043304670602083206
+    },
+    {
+      "feature": "market_ret20",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.043304670602083206
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": -0.27602118253707886
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": -0.27602118253707886
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": -0.22122813761234283
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": -0.22122813761234283
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": -0.19528090953826904
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": -0.19528090953826904
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": -0.17197754979133606
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": -0.17197754979133606
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": -0.14138926565647125
+    },
+    {
+      "feature": "market_drawdown252",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": -0.14138926565647125
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 0.15492957830429077
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 0.15492957830429077
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 0.23664122819900513
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 0.23664122819900513
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.2943722903728485
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.2943722903728485
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.3636363744735718
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.3636363744735718
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.4444444477558136
+    },
+    {
+      "feature": "breadth_above_sma200",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.4444444477558136
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 0.1375291347503662
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 0.1375291347503662
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 0.2616822421550751
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 0.2616822421550751
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.40392157435417175
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.40392157435417175
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.5797545909881592
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.5797545909881592
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.7557077407836914
+    },
+    {
+      "feature": "breadth_positive20",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.7557077407836914
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 0.5
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 0.5
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 0.5
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 0.5
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.5
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.5
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 0.5
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 0.5
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 0.5
+    },
+    {
+      "feature": "market_rv_pct",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 0.5
+    },
+    {
+      "feature": "vix",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 20.790000915527344
+    },
+    {
+      "feature": "vix",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 20.790000915527344
+    },
+    {
+      "feature": "vix",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 23.59000015258789
+    },
+    {
+      "feature": "vix",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 23.59000015258789
+    },
+    {
+      "feature": "vix",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 26.190000534057617
+    },
+    {
+      "feature": "vix",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 26.190000534057617
+    },
+    {
+      "feature": "vix",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 30.5
+    },
+    {
+      "feature": "vix",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 30.5
+    },
+    {
+      "feature": "vix",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 39.189998626708984
+    },
+    {
+      "feature": "vix",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 39.189998626708984
+    },
+    {
+      "feature": "vvix",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 79.58999633789062
+    },
+    {
+      "feature": "vvix",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 79.58999633789062
+    },
+    {
+      "feature": "vvix",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 85.87999725341797
+    },
+    {
+      "feature": "vvix",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 85.87999725341797
+    },
+    {
+      "feature": "vvix",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 90.83999633789062
+    },
+    {
+      "feature": "vvix",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 90.83999633789062
+    },
+    {
+      "feature": "vvix",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 97.31999969482422
+    },
+    {
+      "feature": "vvix",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 97.31999969482422
+    },
+    {
+      "feature": "vvix",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 107.11000061035156
+    },
+    {
+      "feature": "vvix",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 107.11000061035156
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": -0.22599999606609344
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": -0.22599999606609344
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": -0.11045528948307037
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": -0.11045528948307037
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.23600000143051147
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.23600000143051147
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 1.965000033378601
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 1.965000033378601
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 3.1689999103546143
+    },
+    {
+      "feature": "ofr_funding_lag2",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 3.1689999103546143
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": ">=",
+      "quantile": 0.2,
+      "threshold": 0.164000004529953
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": "<=",
+      "quantile": 0.2,
+      "threshold": 0.164000004529953
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": ">=",
+      "quantile": 0.35,
+      "threshold": 0.49900001287460327
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": "<=",
+      "quantile": 0.35,
+      "threshold": 0.49900001287460327
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": ">=",
+      "quantile": 0.5,
+      "threshold": 0.8600000143051147
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": "<=",
+      "quantile": 0.5,
+      "threshold": 0.8600000143051147
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": ">=",
+      "quantile": 0.65,
+      "threshold": 2.0950000286102295
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": "<=",
+      "quantile": 0.65,
+      "threshold": 2.0950000286102295
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": ">=",
+      "quantile": 0.8,
+      "threshold": 3.6010000705718994
+    },
+    {
+      "feature": "ofr_credit_lag2",
+      "direction": "<=",
+      "quantile": 0.8,
+      "threshold": 3.6010000705718994
+    }
+  ],
+  "thresholds": {
+    "stock_ret5": [
+      -0.04389967769384384,
+      -0.018812669441103935,
+      0.0004825384239666164,
+      0.018050518073141616,
+      0.04201557859778404
+    ],
+    "stock_ret20": [
+      -0.0984853133559227,
+      -0.05493481606245043,
+      -0.017699066549539566,
+      0.02010273188352585,
+      0.06709646433591843
+    ],
+    "stock_close_sma20": [
+      -0.054085202515125275,
+      -0.025318359956145287,
+      -0.0028700658585876226,
+      0.017434751614928246,
+      0.04171442240476608
+    ],
+    "stock_range20": [
+      0.169780433177948,
+      0.3210958242416382,
+      0.48451513051986694,
+      0.661138117313385,
+      0.8245766758918762
+    ],
+    "stock_rsi14": [
+      34.44935989379883,
+      42.11051559448242,
+      48.65354919433594,
+      55.450767517089844,
+      63.20540237426758
+    ],
+    "stock_relvol_pct": [
+      0.19409282505512238,
+      0.3476702570915222,
+      0.49789029359817505,
+      0.6499999761581421,
+      0.8028674125671387
+    ],
+    "stock_drawdown252": [
+      -0.38311630487442017,
+      -0.2973146438598633,
+      -0.2264423668384552,
+      -0.16395752131938934,
+      -0.10099868178367573
+    ],
+    "stock_rv_pct": [
+      0.22580644488334656,
+      0.39400920271873474,
+      0.5448028445243835,
+      0.6896551847457886,
+      0.8256227970123291
+    ],
+    "market_ret5": [
+      -0.029853379353880882,
+      -0.01211333554238081,
+      0.0011415948392823339,
+      0.014293957501649857,
+      0.02809247002005577
+    ],
+    "market_ret20": [
+      -0.07148737460374832,
+      -0.04316464439034462,
+      -0.015185872092843056,
+      0.013431457802653313,
+      0.043304670602083206
+    ],
+    "market_drawdown252": [
+      -0.27602118253707886,
+      -0.22122813761234283,
+      -0.19528090953826904,
+      -0.17197754979133606,
+      -0.14138926565647125
+    ],
+    "breadth_above_sma200": [
+      0.15492957830429077,
+      0.23664122819900513,
+      0.2943722903728485,
+      0.3636363744735718,
+      0.4444444477558136
+    ],
+    "breadth_positive20": [
+      0.1375291347503662,
+      0.2616822421550751,
+      0.40392157435417175,
+      0.5797545909881592,
+      0.7557077407836914
+    ],
+    "market_rv_pct": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "vix": [
+      20.790000915527344,
+      23.59000015258789,
+      26.190000534057617,
+      30.5,
+      39.189998626708984
+    ],
+    "vvix": [
+      79.58999633789062,
+      85.87999725341797,
+      90.83999633789062,
+      97.31999969482422,
+      107.11000061035156
+    ],
+    "ofr_funding_lag2": [
+      -0.22599999606609344,
+      -0.11045528948307037,
+      0.23600000143051147,
+      1.965000033378601,
+      3.1689999103546143
+    ],
+    "ofr_credit_lag2": [
+      0.164000004529953,
+      0.49900001287460327,
+      0.8600000143051147,
+      2.0950000286102295,
+      3.6010000705718994
+    ]
+  }
+}

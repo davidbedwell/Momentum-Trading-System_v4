@@ -1,0 +1,18 @@
+{
+ "format":"MTS_DEFENSIVE_STRATEGY_BANK_ROUTER_LOEO_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_OUTCOMES",
+ "provenance":"NEW_RESEARCH_POST_RECOVERY",
+ "objective":"Test whether a small causal market-state router can prospectively select specialized Defensive strategy domains and add transportable value.",
+ "bank":["CORE_D3_EXIT2","CAPITULATION_REVERSION","EMERGING_LEADERSHIP","CASH"],
+ "router_features":["market_ret20","market_drawdown252","breadth_above_sma200","vix","vvix","ofr_funding_lag2","ofr_credit_lag2"],
+ "threshold_percentiles":[0.2,0.35,0.5,0.65,0.8],
+ "operators":["<=",">="],
+ "max_rules":2,
+ "selection":"highest training balanced domain-classification accuracy; ties prefer fewer rules then lexical order",
+ "labels":"A or B specialized setup when present; OTHER otherwise",
+ "validation":"six leave-one-bear-out folds; select on five episodes and apply unchanged to sixth",
+ "benchmark":"always OTHER/Core-Cash routing",
+ "constraints":["market-state features only","no ticker or episode identity","no future data","no protected evidence","no mutation after heldout result"],
+ "note":"This stage tests router discrimination/transport before portfolio integration; exact daily MTM remains required before production/preserved50 portfolio validation."
+}

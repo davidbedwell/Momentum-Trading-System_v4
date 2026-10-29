@@ -1,0 +1,20 @@
+{
+  "format":"MTS_ALPHA_CRASH_COUPLING_FREEZE_V1",
+  "date":"2026-10-04",
+  "hypothesis":"MTS alpha and catastrophic drawdown risk are coupled because the trade trigger preferentially activates under deterioration/dislocation conditions that generate outsized rebound profits when temporary but outsized losses when deterioration becomes systemic.",
+  "evidence":{"trajectory_dir":"/home/ubuntu/mts-v4-search-results/discovery_recovery_pattern_checkpoints_20260930","expected_tickers":67,"expected_rows":125002,"protected_heldout50_access":false,"remaining_discovery186_access":false,"verification_a_access":false,"verification_b_access":false},
+  "collapse_intervals":[["2007-07-26","2009-05-29"],["2015-07-24","2016-03-02"],["2020-03-06","2020-06-05"],["2022-04-20","2023-03-30"]],
+  "precollapse_deterioration_controls":[["2006-05-17","2006-12-31"],["2007-03-05","2007-07-25"],["2011-08-04","2011-12-31"],["2018-12-18","2019-03-31"],["2020-02-27","2020-03-05"],["2022-01-25","2022-04-19"],["2024-08-05","2024-12-31"],["2025-04-03","2025-06-30"]],
+  "metrics":[
+    "signal density per ticker-session inside collapse intervals versus outside",
+    "gross arithmetic return sum and positive/negative return mass by collapse versus noncollapse",
+    "winner rate, mean, median, profit factor, MAE",
+    "family and genome composition: collapse share versus global share and return sign",
+    "tail coupling: share of top-decile profitable trades and bottom-decile losing trades occurring during collapse intervals",
+    "same trigger identity coupling: families/genomes represented in both top-profit and catastrophic-loss tails",
+    "era-specific collapse results to prevent one-event dominance"
+  ],
+  "interpretation":"Support requires evidence that collapse losses arise from the same trigger identities/entry population that materially contribute profitable alpha outside collapse, not merely that crashes lose money. Strong support if trigger families/genomes are shared across profit and loss tails and collapse-period suppression would discard meaningful profitable mass/density in temporary deterioration.",
+  "prohibitions":["no optimization","no GA","no rule selection","no threshold search","no portfolio intervention","no protected bank access"],
+  "status":"FROZEN_BEFORE_TEST"
+}

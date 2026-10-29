@@ -1,0 +1,26 @@
+{
+ "format":"MTS_REENTRY_THREE_HYPOTHESIS_TEST_FREEZE_V1",
+ "date":"2026-10-04",
+ "status":"FROZEN_BEFORE_TEST",
+ "question":"After destructive market deterioration, which simple causal recovery hypothesis identifies durable reopening earliest with fewest false reentries?",
+ "hypotheses":{
+  "H1":{"name":"Group C OFF","rule":"Frozen Group C 4-of-4 >=90th-percentile stress condition is absent for 3 consecutive sessions after a STOP."},
+  "H2":{"name":"Group C positive normalization","rule":"All four frozen Group C percentile ranks (negfrac20, failed30, negfrac40, fundingchg30) are below a normalization ceiling for 3 consecutive sessions.","ceilings_to_compare":[0.50,0.60,0.70,0.80]},
+  "H3":{"name":"50/200 bullish EMA cross","rule":"Broad-market EMA50 crosses above EMA200 and remains above for 3 consecutive sessions."}
+ },
+ "episodes":{
+  "2008":{"peak":"2007-10-09","trough":"2009-03-09"},
+  "2011":{"peak":"2011-04-29","trough":"2011-10-03"},
+  "2015":{"peak":"2015-05-21","trough":"2016-02-11"},
+  "2018":{"peak":"2018-09-20","trough":"2018-12-24"},
+  "2020":{"peak":"2020-02-19","trough":"2020-03-23"},
+  "2022":{"peak":"2022-01-03","trough":"2022-10-12"}
+ },
+ "candidate_start":"first session after each episode trough; trough dates are used only to define retrospective evaluation episodes, never as an operational feature",
+ "durable_recovery_definition":"A reentry is durable if during the next 60 trading sessions the broad-market series does not close at a new post-episode low and does not experience a >=10% drawdown from the value at declaration.",
+ "false_reentry_definition":"Within 60 trading sessions after declaration, either a new post-episode low occurs or broad market falls >=10% from declaration.",
+ "metrics":["declaration date","sessions after trough","60-session false/durable result","maximum subsequent 60-session drawdown","new-low occurrence"],
+ "H2_selection":"Report all four frozen ceilings separately; do not choose a ceiling using MTS returns or portfolio outcomes.",
+ "prohibited":["CAGR fitness","MTS portfolio DD fitness","wealth fitness","protected evidence","retuning Group C STOP"],
+ "qualification":"Current-S&P broad-market panel has survivorship bias and is development evidence only."
+}

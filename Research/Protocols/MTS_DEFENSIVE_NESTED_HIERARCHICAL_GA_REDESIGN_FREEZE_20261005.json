@@ -1,0 +1,32 @@
+{
+  "format":"MTS_DEFENSIVE_NESTED_HIERARCHICAL_GA_REDESIGN_FREEZE_V1",
+  "date":"2026-10-05",
+  "status":"FROZEN_BEFORE_NESTED_GA",
+  "purpose":"Prevent correlated bear-market trades and whole-DEV50 model selection from masquerading as independent validation.",
+  "data_sequence":["DEV50 nested discovery","preserved50 verification","TEST17 subsequent test"],
+  "evidence_labels":{"DEV50":"development","preserved50":"preserved-not-pristine verification","TEST17":"consumed diagnostic subsequent test"},
+  "protected_excluded":["remaining Discovery","Verification A","Verification B"],
+  "stock_outer_folds":{"count":5,"assignment":"lexicographic DEV50 round-robin","procedure":"for each fold evolve only on other 4 folds; freeze fold winner/frontier before scoring omitted fold"},
+  "episode_outer_folds":{"count":6,"procedure":"for each bear evolve only on other 5 bears; freeze fold winner/frontier before scoring omitted bear"},
+  "training_fitness":{
+    "primary_units":"date clusters and bear episodes, not raw ticker-event count",
+    "same_date_rule":"selected events sharing an entry date are first aggregated cross-sectionally; ticker multiplicity does not multiply fitness credit",
+    "episode_rule":"episode contributions receive equal high-level weight; long GFC/2022 samples cannot dominate solely through event count",
+    "portfolio_accounting":"exact daily mark-to-market with frozen cost/capacity assumptions",
+    "pareto_objectives":["higher cluster/episode-balanced growth","lower exact daily MTM drawdown","greater internal fold stability"],
+    "raw_event_count":"activity diagnostic/constraint only, never independent-success count"
+  },
+  "selection_rule":{
+    "principle":"prefer chromosomes/families that recur or remain economically positive across independently trained outer folds",
+    "no_single_pooled_champion":"a chromosome discovered once on pooled DEV50 cannot qualify by pooled fitness alone",
+    "no_answer_key_tuning":"preserved50/TEST17 outcomes cannot set thresholds or choose chromosome parameters"
+  },
+  "candidate_layer":"Upstream per-ticker computational candidate generation is recognized as an optimization layer. Nested GA results must report dependence on candidate family/horizon and candidate density; a later architecture may require candidate-layer nesting if instability remains.",
+  "verification_sequence":{
+    "step1":"complete all DEV50 nested folds and freeze final architecture/candidates/acceptance rule",
+    "step2":"one frozen replay on preserved50; no mutation",
+    "step3":"if predeclared verification gate passes, one frozen replay on TEST17; no mutation",
+    "failure":"retain failure; do not repair against verification/test"
+  },
+  "provenance":"NEW_RESEARCH_POST_RECOVERY"
+}

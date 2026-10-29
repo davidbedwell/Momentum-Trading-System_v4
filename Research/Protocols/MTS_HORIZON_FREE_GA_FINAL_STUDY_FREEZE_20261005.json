@@ -1,0 +1,45 @@
+{
+  "format":"MTS_HORIZON_FREE_GA_FINAL_STUDY_FREEZE_V1",
+  "date":"2026-10-05",
+  "status":"FROZEN_BEFORE_GA_OUTCOMES",
+  "provenance":"NEW_RESEARCH_POST_RECOVERY",
+  "objective":"Pareto-optimize long-run CAGR versus maximum drawdown while explicitly measuring crash preservation, recovery burden, and behavioral tolerability.",
+  "evidence_sequence":["DEV117 repeated 80-discovery/37-blind-transport folds","DV25 fresh development-validation gate","A25 frozen blind proof","preserve A75 and B100"],
+  "development_foresight":"Forward trajectories may be used as discovery labels only inside each 80-stock discovery partition. No future outcome from the 37-stock transport partition may enter evolution for that fold. Live/replay decisions at T use T and earlier only.",
+  "r1":{
+    "role":"causal market-state information; not a mandatory action or rigid ordered gate",
+    "dimensions":[
+      "extreme prior destruction",
+      "initial price stabilization/impulse",
+      "delayed nonlinear breadth conversion with explicit breadth level, velocity and acceleration",
+      "breadth persistence / broader cross-sectional persistence",
+      "continued reduction in failed rebounds",
+      "short-trend repair",
+      "stress normalization with pullback/recovery retention"
+    ],
+    "critical_discriminator":"Genuine recoveries may show late explosive/accelerating cross-sectional conversion and persistence; false bull resumptions can show strong price bounces and temporary breadth improvement without the same sustained late-stage conversion.",
+    "ordering":"timing and order may vary by recovery episode; GA receives dimensions separately and may discover interactions",
+    "false_rally_control":"large price bounce alone is insufficient"
+  },
+  "market_state":"A/B/C/DEFENSIVE/R1 are causal context only. GA may choose long, short, SAFE, reduced exposure, sector rotation or combinations; market state does not prescribe action.",
+  "architecture":"market context -> sector context -> stock state/behavior -> applicable strategy -> opportunity ranking -> capital allocation, as soft information levels rather than rigid gates",
+  "forbidden":["ticker identity as predictive input","minimum_hold_sessions","maximum_hold_sessions","fixed_hold_sessions","elapsed position age exit","session cooldown","future-return horizon as live input","slot ceiling","one-stock-per-sector","fixed sector cap","leverage","options"],
+  "decisions":["ENTER","CONTINUE","REPLACE","EXIT_TO_SAFE","SHORT"],
+  "allocation":["equal","relative opportunity strength","uncertainty-adjusted opportunity strength","downside-adjusted opportunity strength"],
+  "safe_asset":"actual historical 3-month Treasury rate, causal latest-published observation only, forward-filled after publication and never future-backfilled",
+  "costs":{"commission_bps":0,"primary":"realistic spread/slippage plus regulatory/short-borrow where applicable","sensitivities_bps_one_way":[0,5,10,20]},
+  "fitness":{"primary_pareto":["maximize CAGR","minimize maximum drawdown"],"guards_diagnostics":["CVaR5","worst day","worst 5/10/20-session loss","drawdown velocity","time underwater","time to recovery","turnover","SAFE fraction","concentration","effective independent evidence","fold stability","era stability"]},
+  "behavioral_dd_bands":[0.10,0.15,0.20,0.25,0.30,0.35,0.40],
+  "evaluation_views":{
+    "reset_eras":[["2006-09-15","2011-09-14"],["2011-09-15","2016-09-14"],["2016-09-15","2021-09-14"],["2021-09-15","2026-09-14"]],
+    "initial_capital_each":100000,
+    "continuous":["2006-09-15","2026-09-14"],
+    "continuous_initial_capital":100000,
+    "continuous_no_reset":true
+  },
+  "decline_reporting":["MTS CAGR while broad market declining","MTS return each major decline","SPY same interval","Treasury same interval","max MTS DD","worst day","long contribution","short contribution","SAFE contribution","time to recover prior equity high"],
+  "evidence_accounting":["raw N","effective N","stocks","sectors","independent market episodes","cross-era recurrence","cross-stock transport","uncertainty"],
+  "ga":{"staged":true,"initial_active_concepts":"approximately 8-12","population_target":250,"generation_target":200,"duplicate_cache":true,"elitism":true,"stagnation_detection":true,"explicit_recorded_seeds":true,"complexity_tiebreak":"when economically indistinguishable within uncertainty, prefer simpler/more stable genome"},
+  "reproducibility":["commit source before search","input paths and SHA256","DEV117 identities and fold assignments","protected cohort identities governed and unopened until stage","Treasury hash","feature definitions","R1 definitions","environment manifest","random seeds","chromosome schema","GA parameters","fitness definition","deterministic replay command","generation checkpoints","serialized chromosomes and lineage","fitness provenance","freeze finalists before fresh evidence","Backblaze archive and checksum"],
+  "non_goal":"Do not recreate lost GA by fitting remembered results; reinvent under horizon-free governance."
+}

@@ -1,0 +1,42 @@
+{
+  "status":"FROZEN_BEFORE_INTEGRATED_ALLOCATOR_OUTCOME",
+  "provenance":"NEW_RESEARCH_POST_RECOVERY",
+  "scope":"DEV50 integrated-state replacement of six historical crash windows",
+  "state_path":"NORMAL -> (A OR B OR C) -> DEFENSIVE -> recovery evidence -> R1 -> NORMAL",
+  "A":{
+    "name":"rapid systemic concurrence",
+    "rule":"Funding stress percentile >=95%, median market drawdown bad-tail percentile >=95%, VVIX percentile >=95%, breadth-positive-20 damage percentile >=95%; 4-of-4 for 5 consecutive sessions",
+    "selection_basis":"lowest nuisance episode count in pre-portfolio strict-concurrence neighborhood while retaining 2020 detection; no portfolio fitness",
+    "qualification":"conservative reconstructed Path-A rule; 2020 declaration expected near 2020-03-09; B/C provide complementary coverage"
+  },
+  "B":{
+    "name":"slow deterioration",
+    "rule":"negative-day fraction 40-session percentile >=85% AND lagged OFR Funding 20-session change percentile >=85%; 2-of-2 for 3 consecutive sessions",
+    "selection_basis":"surviving heldout-2008 slow-bear LOCO rule; no portfolio fitness"
+  },
+  "C":{
+    "name":"strict slow-bear concurrence",
+    "rule":"negative-day fraction20, failed-rebound30, negative-day fraction40, lagged OFR Funding change30 each >= rolling historical 90th percentile; 4-of-4 for 3 consecutive sessions",
+    "selection_basis":"surviving strict Group-C/full-history rule; no portfolio fitness"
+  },
+  "DEFENSIVE":{
+    "entry":"first A OR B OR C declaration while NORMAL",
+    "activity":"daily competitive allocator subject to Defensive constraints; SAFE residual permitted",
+    "fixed_holding_horizon":false
+  },
+  "R1":{
+    "name":"H2_50 conservative stress normalization",
+    "rule":"all four Group-C causal percentile ranks <50% for 3 consecutive sessions while DEFENSIVE",
+    "basis":"among pre-frozen reentry candidates, looser H2_60/70/80 were premature in both 2008 and 2022; H2_50 declared after reference troughs without portfolio fitting",
+    "transition":"R1 declaration ends DEFENSIVE authority for this test; subsequent dates are NORMAL"
+  },
+  "causality":{
+    "rolling_percentiles":"past observations only",
+    "OFR":"lagged two business days",
+    "portfolio_outcomes_used_to_choose_state_rules":false,
+    "protected_evidence_accessed":false,
+    "preserved50_accessed":false,
+    "test17_accessed":false
+  },
+  "note":"This is the first integrated-state DEV50 test. It supersedes hand-cut crash-window boundaries only in the new integrated report; the original six-window diagnostic remains preserved."
+}

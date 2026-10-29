@@ -1,0 +1,40 @@
+{
+  "format":"MTS_DEFENSIVE_GA_CORE_FAMILY_AND_PORTFOLIO_FREEZE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_PORTFOLIO_OUTCOME",
+  "provenance":"NEW_RESEARCH_POST_RECOVERY",
+  "selection_basis":"Main broad GA top frontier plus LOEO transport, before finite-capital portfolio simulation.",
+  "core_family":{
+    "source_horizon":5,
+    "entry_core":"2-of-3: stock realized-volatility percentile <= development q20; market 20-session return <= development q80; market median 252-session drawdown <= development q50.",
+    "entry_delay_variants":[3,5],
+    "exit_core":"2-of-2: stock RSI14 >= development q50 AND market 20-session return >= development q35.",
+    "optional_exit_confirmation":"OFR Funding lagged two business days <= development q20 as a third condition with 2-of-3 concurrence.",
+    "maximum_hold_sessions":20,
+    "family_masks":"Treat broad main-frontier family-mask differences as eligibility variants, not independent scientific mechanisms."
+  },
+  "transport_context":{
+    "LOEO_positive_folds":5,
+    "LOEO_nonpositive_folds":1,
+    "LOEO_weighted_mean_net_per_trade":0.034732403134915366,
+    "LOEO_heldout_trades":158,
+    "known_failure":"2015-16: 5 trades, -0.1713% mean; retain as failure."
+  },
+  "portfolio_test":{
+    "purpose":"Determine whether overlapping defensive opportunities remain useful with finite capital.",
+    "initial_capital_each_episode":100000,
+    "episode_reset":true,
+    "allocation_policy":"equal-weight new entries across available slots; no leverage; no pyramiding same ticker",
+    "max_concurrent_positions":[1,3,5,10],
+    "position_cap_pct":[1.0,0.3333333333,0.20,0.10],
+    "signal_priority":"When simultaneous entries exceed available slots, rank by strongest entry-condition margin; ticker alphabetical only as deterministic final tie-break.",
+    "round_trip_cost_bps":10,
+    "metrics":["terminal wealth","return","max drawdown","trade count","capital utilization","missed signals due capacity","episode returns","aggregate reset-equivalent return"]
+  },
+  "selection_prohibitions":[
+    "Portfolio outcome cannot redefine A/B/C, recovery or R-1.",
+    "Portfolio outcome cannot alter the frozen core chromosome.",
+    "No TEST17, preserved50, remaining Discovery, Verification A or Verification B.",
+    "No selecting a different chromosome because its portfolio equity curve looks better."
+  ]
+}

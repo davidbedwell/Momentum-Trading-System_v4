@@ -1,0 +1,12 @@
+{
+  "format":"MTS_CROSS_SECTIONAL_GA_PHASE1_PARETO_CORRECTION_V1",
+  "reason":"Original 10-dimensional dominance produced 953/1152 nondominated chromosomes and inadequate selection pressure.",
+  "evidence_change":false,
+  "chromosome_space_change":false,
+  "controlling_maximize":["ending_equity","max_drawdown","daily_cvar05","positive_return_capture"],
+  "controlling_minimize":["negative_return_capture","turnover_x_initial"],
+  "robustness_gate":{"positive_era_count":4},
+  "secondary_diagnostics":["cagr","worst_day","min_era_cagr","switches_per_year","net_value_per_switch","avg_safe_fraction","avg_filled_slot_fraction"],
+  "near_pareto_tolerances_source":"Research/Protocols/MTS_CROSS_SECTIONAL_GA_PHASE1_SCHEMA_20261002.json",
+  "holdout_rule":"Do not evaluate heldout50 until rerun completes and a small diverse candidate set is frozen from development evidence only."
+}

@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mts:schema:analysis-finding:1",
+  "schema_id": "mts.analysis-finding",
+  "schema_version": 1,
+  "status": "INITIAL",
+  "title": "MTS Analysis Finding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "finding_id",
+    "task_id",
+    "research_plan_ref",
+    "question_ref",
+    "input_artifact_refs",
+    "method_id",
+    "method_version",
+    "sample_definition",
+    "result_proposition",
+    "scientific_outcome",
+    "effect_or_magnitude",
+    "uncertainty",
+    "supporting_evidence_refs",
+    "contradictory_evidence_refs",
+    "applicability",
+    "limitations",
+    "temporal_scope",
+    "validation_state",
+    "research_mode",
+    "producer"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "research_plan_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_version"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "question_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_version"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "input_artifact_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "artifact_id",
+          "artifact_version"
+        ],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifact_version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "method_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sample_definition": {
+      "type": "object"
+    },
+    "result_proposition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scientific_outcome": {
+      "enum": [
+        "SUPPORTED",
+        "NOT_SUPPORTED",
+        "CONTRADICTED",
+        "INSUFFICIENT_EVIDENCE",
+        "UNSTABLE",
+        "MISSING_CAPABILITY"
+      ]
+    },
+    "effect_or_magnitude": {
+      "type": "object"
+    },
+    "uncertainty": {
+      "type": "object"
+    },
+    "supporting_evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "artifact_id",
+          "artifact_version"
+        ],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifact_version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "contradictory_evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "artifact_id",
+          "artifact_version"
+        ],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifact_version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "applicability": {
+      "type": "object"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "temporal_scope": {
+      "type": "object"
+    },
+    "validation_state": {
+      "type": "string",
+      "minLength": 1
+    },
+    "research_mode": {
+      "enum": [
+        "EXPLORATORY",
+        "CONFIRMATORY",
+        "VALIDATION",
+        "REPLICATION",
+        "ROBUSTNESS",
+        "RETROSPECTIVE_CHARACTERIZATION"
+      ]
+    },
+    "producer": {
+      "type": "object"
+    }
+  }
+}
