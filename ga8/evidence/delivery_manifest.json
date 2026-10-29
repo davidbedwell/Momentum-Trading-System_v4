@@ -1,0 +1,23 @@
+{
+  "created_utc": "2026-10-29T01:22:07.543486+00:00",
+  "source_root": "/opt/mts/ga8/Momentum-Trading-System_v4-ga8",
+  "input_sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+  "source_sha256": {
+    "ga8/input_audit.py": "e5dcea032e776c494df9fa1d6e1eee776511306349c3f285dc67e333381c0c8b",
+    "ga8/run.py": "2d28094e27ab9e81fc9a9ec097d6018d5d430e786abab02befe887a61d09a255",
+    "ga8/verify.py": "9bfe5bd8d50dcc14e8113d527b92d77d3c778636a9db289b3b840cdbea8c6a34",
+    "ga8/engine.py": "b04f9941a6319871fec9d0018bf997582a8e42ca1b5a1838f9b10134fec6cee6",
+    "ga8/test_engine.py": "6a63396a2a58a66f5ce55d769e40a142f2f0f495e60286c07a75396adcd2af9b",
+    "ga8/__init__.py": "a82f3e7ce62c78c99cbe8f57359a7e4ddc9655088849cd720c38315cc3bf8222",
+    "ga8/package_evidence.py": "0e89b1a006c5625e1cf38660c72591064b5e4a8d8178502a608be0416012ff32"
+  },
+  "resources": {
+    "native_workers": 1,
+    "pilot_evaluations": 80,
+    "total_native_evaluations": 242,
+    "replay_wall_seconds": 70.12759160005953,
+    "cpu_and_peak_rss_this_trial": "not sampled; future driver records process counters",
+    "output_bytes": 11843603
+  },
+  "push": "Not attempted; isolated local repository has no remote and user did not request publication"
+}

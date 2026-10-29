@@ -1,0 +1,62 @@
+[
+  {
+    "replay": "smoke",
+    "annual_closed_trades": {
+      "2022": 309
+    },
+    "minimum_30_trades_pass": true,
+    "worst_daily_return": -0.03281050532428842,
+    "annualized_volatility": 0.13665380304450925,
+    "annualized_downside_deviation": 0.10833874680087902,
+    "maximum_close_symbol_weight": 0.10284705235673186,
+    "maximum_total_stop_risk": 0.017937201933662314
+  },
+  {
+    "replay": "fold_2023",
+    "annual_closed_trades": {
+      "2023": 371
+    },
+    "minimum_30_trades_pass": true,
+    "worst_daily_return": -0.012994432451126747,
+    "annualized_volatility": 0.06619407390783132,
+    "annualized_downside_deviation": 0.04430401765875002,
+    "maximum_close_symbol_weight": 0.09633058258569946,
+    "maximum_total_stop_risk": 0.012278623746138148
+  },
+  {
+    "replay": "fold_2024",
+    "annual_closed_trades": {
+      "2024": 170
+    },
+    "minimum_30_trades_pass": true,
+    "worst_daily_return": -0.023560918446753454,
+    "annualized_volatility": 0.0765820254450156,
+    "annualized_downside_deviation": 0.05512720940241972,
+    "maximum_close_symbol_weight": 0.1100763512833085,
+    "maximum_total_stop_risk": 0.009084616336657641
+  },
+  {
+    "replay": "fold_2025",
+    "annual_closed_trades": {
+      "2025": 271
+    },
+    "minimum_30_trades_pass": true,
+    "worst_daily_return": -0.02910646974392328,
+    "annualized_volatility": 0.09827304701366821,
+    "annualized_downside_deviation": 0.07118940617065667,
+    "maximum_close_symbol_weight": 0.10201436643723955,
+    "maximum_total_stop_risk": 0.01303249570654245
+  },
+  {
+    "replay": "final_holdout",
+    "annual_closed_trades": {
+      "2026": 244
+    },
+    "minimum_30_trades_pass": true,
+    "worst_daily_return": -0.02591159989528924,
+    "annualized_volatility": 0.14119077997704713,
+    "annualized_downside_deviation": 0.084019666891167,
+    "maximum_close_symbol_weight": 0.11050305837398511,
+    "maximum_total_stop_risk": 0.01302611907704765
+  }
+]

@@ -1,0 +1,3189 @@
+[
+  {
+    "generation": 0,
+    "id": "a122f79c5a997667",
+    "parents": [],
+    "genes": [
+      {
+        "family": "trend",
+        "second": "momentum",
+        "op": "single",
+        "threshold": 0.4,
+        "niche": 2,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.1,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.11400635458902475,
+      "max_drawdown": 0.17384634044260205,
+      "calmar": -0.6557880614499656,
+      "final_nav": 88641.9325195135,
+      "feasible": false,
+      "fills": 858,
+      "closed_trades": 309,
+      "exposure": 0.45829496173495743,
+      "costs": 2601.23425619783,
+      "turnover": 44.68387110867856,
+      "sessions": 251,
+      "attribution": [
+        -14320.627984473955,
+        514.0102421438681,
+        2448.5502618434975
+      ],
+      "open_positions": 9
+    },
+    "audit": {
+      "holds": 1138,
+      "abstentions": 55,
+      "competition": 202,
+      "correlation_rejections": 133,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 319,
+      "max_identity_error": 1.0186340659856796e-10,
+      "min_cash": 8917.026583878209,
+      "max_symbol_weight": 0.10284705235673186,
+      "max_total_risk": 0.017937201933662314
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.0030069617580690267,
+        "delta_mdd": -0.014373608043030117,
+        "delta_cost": 228.89296432418723,
+        "delta_turnover": 3.397679051416098,
+        "incremental_nav": -299.64481909426104
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.018003189920450247,
+        "delta_mdd": 0.010163197034075755,
+        "delta_cost": 198.0087877025012,
+        "delta_turnover": 3.5759871709135282,
+        "incremental_nav": -1793.9645650238672
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.023326671726133896,
+        "delta_mdd": 0.010060006592454096,
+        "delta_cost": 214.3237161355305,
+        "delta_turnover": 3.8484749896583423,
+        "incremental_nav": -2324.4064762594353
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      1,
+      2
+    ],
+    "families": [
+      "relative_strength",
+      "trend",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 0,
+    "id": "ff20a79e02eb99f0",
+    "parents": [],
+    "genes": [
+      {
+        "family": "trend",
+        "second": "relative_strength",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": -1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.3,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.0807976944046529,
+      "max_drawdown": 0.14128111309066593,
+      "calmar": -0.5718931047266146,
+      "final_nav": 91950.9666160256,
+      "feasible": false,
+      "fills": 726,
+      "closed_trades": 254,
+      "exposure": 0.3967034963017509,
+      "costs": 1974.8101136027221,
+      "turnover": 33.747062631906665,
+      "sessions": 251,
+      "attribution": [
+        -4531.717192443158,
+        -5007.810130793158,
+        1490.4939392620129
+      ],
+      "open_positions": 10
+    },
+    "audit": {
+      "holds": 1151,
+      "abstentions": 52,
+      "competition": 319,
+      "correlation_rejections": 145,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 307,
+      "max_identity_error": 1.1641532182693481e-10,
+      "min_cash": 27021.596827106,
+      "max_symbol_weight": 0.10314016962877774,
+      "max_total_risk": 0.014124755852785028
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.00628242375857524,
+        "delta_mdd": -0.011093133613465644,
+        "delta_cost": -53.70233672278118,
+        "delta_turnover": -1.1301226676198795,
+        "incremental_nav": 625.9670950439322
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.0653857278169293,
+        "delta_mdd": 0.038336648477664714,
+        "delta_cost": 137.60682390854754,
+        "delta_turnover": 3.1082159491522994,
+        "incremental_nav": -6513.905399266194
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.01685154846945558,
+        "delta_mdd": -0.011880217710084628,
+        "delta_cost": 282.89873248340973,
+        "delta_turnover": 4.2519706868297575,
+        "incremental_nav": 1679.0904185506515
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      1
+    ],
+    "families": [
+      "relative_strength",
+      "trend",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 0,
+    "id": "3cdcb6981e196550",
+    "parents": [],
+    "genes": [
+      {
+        "family": "momentum",
+        "second": "trend",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 2,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 8,
+      "reserve": 0.3,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.09691865581997439,
+      "max_drawdown": 0.14147277022653215,
+      "calmar": -0.6850693293471539,
+      "final_nav": 90344.67454770178,
+      "feasible": false,
+      "fills": 742,
+      "closed_trades": 268,
+      "exposure": 0.3526249714644213,
+      "costs": 2197.1513868632505,
+      "turnover": 37.483893000325615,
+      "sessions": 251,
+      "attribution": [
+        -6590.551206431197,
+        -2053.918936975604,
+        -1010.8553088914772
+      ],
+      "open_positions": 7
+    },
+    "audit": {
+      "holds": 901,
+      "abstentions": 54,
+      "competition": 197,
+      "correlation_rejections": 100,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 263,
+      "max_identity_error": 5.820766091346741e-11,
+      "min_cash": 27264.536052763164,
+      "max_symbol_weight": 0.10287116569652194,
+      "max_total_risk": 0.014003304531325918
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.008858930082169869,
+        "delta_mdd": -0.014378926189975938,
+        "delta_cost": 269.86449824759075,
+        "delta_turnover": 4.371204002122518,
+        "incremental_nav": -882.7174588908092
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.054080431810683005,
+        "delta_mdd": 0.04058049638891459,
+        "delta_cost": 59.20119210674193,
+        "delta_turnover": 1.8371127578434567,
+        "incremental_nav": -5388.134367952123
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.04723854704537789,
+        "delta_mdd": 0.026219665525855973,
+        "delta_cost": 96.40030721641006,
+        "delta_turnover": 2.3367516653666627,
+        "incremental_nav": -4706.532824515569
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      1,
+      2
+    ],
+    "families": [
+      "momentum",
+      "relative_strength",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 0,
+    "id": "ff8f9be7309ea03a",
+    "parents": [],
+    "genes": [
+      {
+        "family": "volatility",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.1,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 8,
+      "reserve": 0.1,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.07721980013949492,
+      "max_drawdown": 0.14377189426686843,
+      "calmar": -0.5370994138545608,
+      "final_nav": 92307.4526556308,
+      "feasible": false,
+      "fills": 806,
+      "closed_trades": 330,
+      "exposure": 0.3583959871885093,
+      "costs": 2566.0690128432148,
+      "turnover": 44.19462371214292,
+      "sessions": 251,
+      "attribution": [
+        -647.791006560324,
+        -8320.816750890737,
+        1276.0604130818242
+      ],
+      "open_positions": 6
+    },
+    "audit": {
+      "holds": 845,
+      "abstentions": 49,
+      "competition": 202,
+      "correlation_rejections": 66,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 233,
+      "max_identity_error": 8.731149137020111e-11,
+      "min_cash": 9703.274718339017,
+      "max_symbol_weight": 0.10297128336122699,
+      "max_total_risk": 0.01451239063923983
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.006709933321769057,
+        "delta_mdd": -0.02206009348816429,
+        "delta_cost": 557.3669301783318,
+        "delta_turnover": 9.64738548606146,
+        "incremental_nav": 668.5534975339542
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.05751215597283643,
+        "delta_mdd": 0.07434737640388689,
+        "delta_cost": -1013.0339787044368,
+        "delta_turnover": -16.29795192013888,
+        "incremental_nav": -5729.526154181833
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.021895146151739375,
+        "delta_mdd": 0.025912501511566544,
+        "delta_cost": -275.18297378623083,
+        "delta_turnover": -3.9774618467994856,
+        "incremental_nav": -2181.419757676471
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      0,
+      1
+    ],
+    "families": [
+      "relative_strength",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 0,
+    "id": "eaee84ec36ed30c9",
+    "parents": [],
+    "genes": [
+      {
+        "family": "volume",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.3,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 8,
+      "reserve": 0.2,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.1232263576966639,
+      "max_drawdown": 0.16572438848368232,
+      "calmar": -0.7435619996799512,
+      "final_nav": 87723.13068155335,
+      "feasible": false,
+      "fills": 913,
+      "closed_trades": 380,
+      "exposure": 0.3371373743661834,
+      "costs": 2864.1873259657687,
+      "turnover": 50.12520136450761,
+      "sessions": 251,
+      "attribution": [
+        -4396.039405545452,
+        -10110.759838241423,
+        2229.9299253402764
+      ],
+      "open_positions": 7
+    },
+    "audit": {
+      "holds": 743,
+      "abstentions": 49,
+      "competition": 207,
+      "correlation_rejections": 68,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 266,
+      "max_identity_error": 5.820766091346741e-11,
+      "min_cash": 17507.657745050936,
+      "max_symbol_weight": 0.10449895246104961,
+      "max_total_risk": 0.013826235478328853
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.03740143129529372,
+        "delta_mdd": -0.005126340425962939,
+        "delta_cost": 871.5321894334625,
+        "delta_turnover": 15.718258665275862,
+        "incremental_nav": -3726.934790454645
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.10463178275095952,
+        "delta_mdd": 0.08072022773418996,
+        "delta_cost": -804.6750637135265,
+        "delta_turnover": -11.775172743840407,
+        "incremental_nav": -10424.721863657687
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.009663139831266543,
+        "delta_mdd": 0.00517696261917755,
+        "delta_cost": 69.5254598130482,
+        "delta_turnover": 0.7421611648257311,
+        "incremental_nav": 963.0029417998594
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      0,
+      1
+    ],
+    "families": [
+      "relative_strength",
+      "volatility",
+      "volume"
+    ]
+  },
+  {
+    "generation": 0,
+    "id": "bee3e2e24e546545",
+    "parents": [],
+    "genes": [
+      {
+        "family": "recursive",
+        "second": "momentum",
+        "op": "or",
+        "threshold": 0.3,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.1,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.06750638070640225,
+      "max_drawdown": 0.150183516885679,
+      "calmar": -0.44949260815212294,
+      "final_nav": 93275.22851176673,
+      "feasible": false,
+      "fills": 873,
+      "closed_trades": 320,
+      "exposure": 0.43678213619356443,
+      "costs": 2694.480162841653,
+      "turnover": 46.067100391756085,
+      "sessions": 251,
+      "attribution": [
+        305.1715520616843,
+        -8106.016793799706,
+        1076.073753504804
+      ],
+      "open_positions": 9
+    },
+    "audit": {
+      "holds": 1147,
+      "abstentions": 53,
+      "competition": 193,
+      "correlation_rejections": 85,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 317,
+      "max_identity_error": 5.820766091346741e-11,
+      "min_cash": 8965.344350549853,
+      "max_symbol_weight": 0.10017076842041117,
+      "max_total_risk": 0.01727407332250875
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.043493012124553476,
+        "delta_mdd": -0.03803643159995318,
+        "delta_cost": 322.13887096801045,
+        "delta_turnover": 4.780908334493624,
+        "incremental_nav": 4333.651173158971
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.059056449627485685,
+        "delta_mdd": 0.041362238290462594,
+        "delta_cost": 84.91619516111405,
+        "delta_turnover": 1.9274225112704926,
+        "incremental_nav": -5883.117376809183
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.0015322149233878424,
+        "delta_mdd": 0.0031691333263969,
+        "delta_cost": 43.758871919115336,
+        "delta_turnover": 0.7052896385200853,
+        "incremental_nav": 152.65630218786828
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      1
+    ],
+    "families": [
+      "recursive",
+      "relative_strength",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 0,
+    "id": "7bd891ad0bf6733a",
+    "parents": [],
+    "genes": [
+      {
+        "family": "breadth",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.5,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.1,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.03737332971837859,
+      "max_drawdown": 0.1387772892244178,
+      "calmar": -0.2693043647649141,
+      "final_nav": 96277.21815966212,
+      "feasible": false,
+      "fills": 816,
+      "closed_trades": 291,
+      "exposure": 0.45421158002276624,
+      "costs": 2578.7047878691646,
+      "turnover": 43.511679928103035,
+      "sessions": 251,
+      "attribution": [
+        -1934.0353783662656,
+        -4044.3082032482835,
+        2255.561741276648
+      ],
+      "open_positions": 10
+    },
+    "audit": {
+      "holds": 1205,
+      "abstentions": 53,
+      "competition": 195,
+      "correlation_rejections": 121,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 302,
+      "max_identity_error": 2.9103830456733704e-11,
+      "min_cash": 9299.339010844697,
+      "max_symbol_weight": 0.10198557972540732,
+      "max_total_risk": 0.01706150994871754
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.07362606311257713,
+        "delta_mdd": -0.04944265926121438,
+        "delta_cost": 206.36349599552204,
+        "delta_turnover": 2.225487870840574,
+        "incremental_nav": 7335.64082105436
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.024196812024359304,
+        "delta_mdd": 0.04048175874122428,
+        "delta_cost": -82.23329917458432,
+        "delta_turnover": -1.1873509415432082,
+        "incremental_nav": -2410.3243836554757
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.008899379454891165,
+        "delta_mdd": -0.00739569264500517,
+        "delta_cost": 267.1575026801943,
+        "delta_turnover": 4.275075998183986,
+        "incremental_nav": 886.5567479107413
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      1
+    ],
+    "families": [
+      "breadth",
+      "relative_strength",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 0,
+    "id": "67c5dfe3250b3e6f",
+    "parents": [],
+    "genes": [
+      {
+        "family": "relative_strength",
+        "second": "volume",
+        "op": "or",
+        "threshold": 0.1,
+        "niche": -1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 8,
+      "reserve": 0.2,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.07928030472260705,
+      "max_drawdown": 0.14825145185478572,
+      "calmar": -0.5347691623301145,
+      "final_nav": 92102.15348730634,
+      "feasible": false,
+      "fills": 828,
+      "closed_trades": 330,
+      "exposure": 0.34804230214680293,
+      "costs": 2628.207455066973,
+      "turnover": 45.33007672734072,
+      "sessions": 251,
+      "attribution": [
+        -6384.6598297556975,
+        -3891.7875518899423,
+        2378.6008689520063
+      ],
+      "open_positions": 7
+    },
+    "audit": {
+      "holds": 839,
+      "abstentions": 49,
+      "competition": 212,
+      "correlation_rejections": 56,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 243,
+      "max_identity_error": 4.3655745685100555e-11,
+      "min_cash": 18117.065136405563,
+      "max_symbol_weight": 0.10159240831098484,
+      "max_total_risk": 0.01400757933438393
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.0065446216787631295,
+        "delta_mdd": -0.022599277054859535,
+        "delta_cost": 635.5523185346669,
+        "delta_turnover": 10.923134028108969,
+        "incremental_nav": 652.0880152983445
+      },
+      {
+        "gene": 1,
+        "delta_cagr": 0.014556011513243816,
+        "delta_mdd": -0.014553166178516097,
+        "delta_cost": 57.499007758300195,
+        "delta_turnover": 0.6280598773131345,
+        "incremental_nav": 1450.3459878656868
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.011111465552698263,
+        "delta_mdd": 0.0002388586668310433,
+        "delta_cost": 196.5987893558754,
+        "delta_turnover": 2.701287198290764,
+        "incremental_nav": 1107.1266824202175
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      1
+    ],
+    "families": [
+      "relative_strength",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 1,
+    "id": "7bd891ad0bf6733a",
+    "parents": [
+      "7bd891ad0bf6733a"
+    ],
+    "genes": [
+      {
+        "family": "breadth",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.5,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.1,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.03737332971837859,
+      "max_drawdown": 0.1387772892244178,
+      "calmar": -0.2693043647649141,
+      "final_nav": 96277.21815966212,
+      "feasible": false,
+      "fills": 816,
+      "closed_trades": 291,
+      "exposure": 0.45421158002276624,
+      "costs": 2578.7047878691646,
+      "turnover": 43.511679928103035,
+      "sessions": 251,
+      "attribution": [
+        -1934.0353783662656,
+        -4044.3082032482835,
+        2255.561741276648
+      ],
+      "open_positions": 10
+    },
+    "audit": {
+      "holds": 1205,
+      "abstentions": 53,
+      "competition": 195,
+      "correlation_rejections": 121,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 302,
+      "max_identity_error": 2.9103830456733704e-11,
+      "min_cash": 9299.339010844697,
+      "max_symbol_weight": 0.10198557972540732,
+      "max_total_risk": 0.01706150994871754
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.07362606311257713,
+        "delta_mdd": -0.04944265926121438,
+        "delta_cost": 206.36349599552204,
+        "delta_turnover": 2.225487870840574,
+        "incremental_nav": 7335.64082105436
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.024196812024359304,
+        "delta_mdd": 0.04048175874122428,
+        "delta_cost": -82.23329917458432,
+        "delta_turnover": -1.1873509415432082,
+        "incremental_nav": -2410.3243836554757
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.008899379454891165,
+        "delta_mdd": -0.00739569264500517,
+        "delta_cost": 267.1575026801943,
+        "delta_turnover": 4.275075998183986,
+        "incremental_nav": 886.5567479107413
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      1
+    ],
+    "families": [
+      "breadth",
+      "relative_strength",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 1,
+    "id": "ae3fc5d94ebe2392",
+    "parents": [
+      "bee3e2e24e546545",
+      "7bd891ad0bf6733a"
+    ],
+    "genes": [
+      {
+        "family": "recursive",
+        "second": "momentum",
+        "op": "or",
+        "threshold": 0.3,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "trend",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.48241016574375206,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 25,
+        "trailing": 0.03,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "relative_strength",
+        "exit_family": "volatility",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.35,
+      "correlation": 0.9,
+      "risk_cap": 0.02,
+      "replacement": 1.0
+    },
+    "metrics": {
+      "cagr": -0.04193246580314891,
+      "max_drawdown": 0.11965469123565209,
+      "calmar": -0.3504456479735146,
+      "final_nav": 95823.0408147378,
+      "feasible": false,
+      "fills": 752,
+      "closed_trades": 272,
+      "exposure": 0.35045714476319384,
+      "costs": 2071.078058844549,
+      "turnover": 34.91052562387924,
+      "sessions": 251,
+      "attribution": [
+        2275.4926137867283,
+        -7027.962305714014,
+        575.5105066650993
+      ],
+      "open_positions": 10
+    },
+    "audit": {
+      "holds": 1051,
+      "abstentions": 55,
+      "competition": 344,
+      "correlation_rejections": 21,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 291,
+      "max_identity_error": 7.275957614183426e-11,
+      "min_cash": 32538.306666508797,
+      "max_symbol_weight": 0.10050790191727446,
+      "max_total_risk": 0.012972387858881858
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.004473951450892355,
+        "delta_mdd": -0.006340468243889674,
+        "delta_cost": 352.99692897572527,
+        "delta_turnover": 6.177574772824617,
+        "incremental_nav": -445.6914009255852
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.029472883147319995,
+        "delta_mdd": 0.019544198291357895,
+        "delta_cost": -11.306265577482009,
+        "delta_turnover": -0.1486983940091946,
+        "incremental_nav": -2935.914390186561
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.0,
+        "delta_mdd": 0.0,
+        "delta_cost": 0.0,
+        "delta_turnover": 0.0,
+        "incremental_nav": 0.0
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      1
+    ],
+    "families": [
+      "recursive",
+      "relative_strength",
+      "trend"
+    ]
+  },
+  {
+    "generation": 1,
+    "id": "17b18686b9f9ba45",
+    "parents": [
+      "67c5dfe3250b3e6f",
+      "ff8f9be7309ea03a"
+    ],
+    "genes": [
+      {
+        "family": "volume",
+        "second": "recursive",
+        "op": "or",
+        "threshold": 0.30158095973532006,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 25,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.04,
+        "hold_family": "recursive",
+        "exit_family": "momentum",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.1,
+      "correlation": 0.65,
+      "risk_cap": 0.02,
+      "replacement": 0.7
+    },
+    "metrics": {
+      "cagr": -0.10132098999833672,
+      "max_drawdown": 0.1735253476661739,
+      "calmar": -0.5838973461863156,
+      "final_nav": 89906.00641938281,
+      "feasible": false,
+      "fills": 855,
+      "closed_trades": 320,
+      "exposure": 0.3987733395553416,
+      "costs": 2295.2251422254853,
+      "turnover": 39.96430245990226,
+      "sessions": 251,
+      "attribution": [
+        901.9864281959776,
+        -10867.969384577766,
+        -128.0106242354329
+      ],
+      "open_positions": 9
+    },
+    "audit": {
+      "holds": 1148,
+      "abstentions": 52,
+      "competition": 178,
+      "correlation_rejections": 628,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 295,
+      "max_identity_error": 5.820766091346741e-11,
+      "min_cash": 8810.649625926002,
+      "max_symbol_weight": 0.10198639893961592,
+      "max_total_risk": 0.015635524432861668
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.012712423363297587,
+        "delta_mdd": -0.023990193682400407,
+        "delta_cost": 84.1533558880028,
+        "delta_turnover": 1.248158638583412,
+        "incremental_nav": 1266.7703345779155
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.146203912534274,
+        "delta_mdd": 0.11790429556545456,
+        "delta_cost": 224.16182472708033,
+        "delta_turnover": 5.8134633039503925,
+        "incremental_nav": -14564.082887835422
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.024633666480929572,
+        "delta_mdd": 0.03181305808695789,
+        "delta_cost": 75.30311815234109,
+        "delta_turnover": 1.7822299907821062,
+        "incremental_nav": -2454.499453770026
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      1
+    ],
+    "families": [
+      "relative_strength",
+      "volatility",
+      "volume"
+    ]
+  },
+  {
+    "generation": 1,
+    "id": "9bd9a0bc2c93cf84",
+    "parents": [
+      "bee3e2e24e546545",
+      "7bd891ad0bf6733a"
+    ],
+    "genes": [
+      {
+        "family": "recursive",
+        "second": "momentum",
+        "op": "or",
+        "threshold": 0.3,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "trend",
+        "second": "recursive",
+        "op": "or",
+        "threshold": 0.23777229175120576,
+        "niche": 0,
+        "exit_threshold": -0.2,
+        "hold_sessions": 15,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "volatility",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "volume",
+          [
+            "or",
+            "recursive",
+            "relative_strength"
+          ]
+        ]
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.35,
+      "correlation": 0.9,
+      "risk_cap": 0.02,
+      "replacement": 1.0
+    },
+    "metrics": {
+      "cagr": 0.00018084041642829618,
+      "max_drawdown": 0.0977234735288165,
+      "calmar": 0.0018505320154729287,
+      "final_nav": 100018.01227311023,
+      "feasible": false,
+      "fills": 854,
+      "closed_trades": 312,
+      "exposure": 0.3384049289873661,
+      "costs": 2362.968523691755,
+      "turnover": 39.66950407471263,
+      "sessions": 251,
+      "attribution": [
+        -846.7081420213206,
+        1953.8070063631521,
+        -1089.0865912315805
+      ],
+      "open_positions": 10
+    },
+    "audit": {
+      "holds": 1107,
+      "abstentions": 52,
+      "competition": 271,
+      "correlation_rejections": 39,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 336,
+      "max_identity_error": 5.820766091346741e-11,
+      "min_cash": 33022.49448655947,
+      "max_symbol_weight": 0.09812779599030917,
+      "max_total_risk": 0.012272514034580538
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.01251567828932898,
+        "delta_mdd": 0.017814884693787558,
+        "delta_cost": 31.1157279601357,
+        "delta_turnover": 0.35933348130263454,
+        "incremental_nav": -1246.569573379311
+      },
+      {
+        "gene": 1,
+        "delta_cagr": 0.010720144037159929,
+        "delta_mdd": 0.009405510535173023,
+        "delta_cost": 182.9517877297185,
+        "delta_turnover": 3.065727153538674,
+        "incremental_nav": 1067.782401292483
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.004071487928795969,
+        "delta_mdd": -0.0022830568092838677,
+        "delta_cost": 65.0615161222504,
+        "delta_turnover": 0.9778871249773289,
+        "incremental_nav": 405.53611198875296
+      }
+    ],
+    "niche_coverage": [
+      0,
+      1
+    ],
+    "families": [
+      "recursive",
+      "trend",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 1,
+    "id": "1f5667a100ef0fb6",
+    "parents": [
+      "ff8f9be7309ea03a",
+      "a122f79c5a997667"
+    ],
+    "genes": [
+      {
+        "family": "volatility",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.1,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "momentum",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.2098062840869576,
+        "niche": 1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 15,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.04,
+        "hold_family": "recursive",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "relative_strength",
+          [
+            "or",
+            "trend",
+            "recursive"
+          ]
+        ]
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 7,
+      "reserve": 0.2,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 1.0
+    },
+    "metrics": {
+      "cagr": -0.0028641369899273794,
+      "max_drawdown": 0.054102510505008805,
+      "calmar": -0.0529390773772359,
+      "final_nav": 99714.72124057253,
+      "feasible": false,
+      "fills": 859,
+      "closed_trades": 351,
+      "exposure": 0.22589592664596175,
+      "costs": 2616.3369926095843,
+      "turnover": 43.71437226379236,
+      "sessions": 251,
+      "attribution": [
+        1831.0219998195346,
+        -1161.054740630747,
+        -955.2460186161316
+      ],
+      "open_positions": 6
+    },
+    "audit": {
+      "holds": 611,
+      "abstentions": 49,
+      "competition": 193,
+      "correlation_rejections": 80,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 243,
+      "max_identity_error": 1.3096723705530167e-10,
+      "min_cash": 21321.341213982894,
+      "max_symbol_weight": 0.09474929260361525,
+      "max_total_risk": 0.010239601212773257
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.017859496962364885,
+        "delta_mdd": 0.015029836075942105,
+        "delta_cost": 898.2449923740505,
+        "delta_turnover": 15.342512354343064,
+        "incremental_nav": -1778.8200001453515
+      },
+      {
+        "gene": 1,
+        "delta_cagr": 0.006594536254092009,
+        "delta_mdd": -0.016801968196435202,
+        "delta_cost": -507.0919116644559,
+        "delta_turnover": -8.91561374289438,
+        "incremental_nav": 656.8528602926672
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.034756982562196725,
+        "delta_mdd": -0.006388701001357133,
+        "delta_cost": 5.71702647771599,
+        "delta_turnover": -0.7435914883647854,
+        "incremental_nav": 3462.1874783388776
+      }
+    ],
+    "niche_coverage": [
+      0,
+      1
+    ],
+    "families": [
+      "momentum",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 1,
+    "id": "ec80714358dce736",
+    "parents": [
+      "ff8f9be7309ea03a",
+      "a122f79c5a997667"
+    ],
+    "genes": [
+      {
+        "family": "volatility",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.1,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "and",
+        "threshold": 0.2,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 30,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "relative_strength",
+        "second": "momentum",
+        "op": "single",
+        "threshold": 0.4037246341816436,
+        "niche": 2,
+        "exit_threshold": -0.4,
+        "hold_sessions": 15,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "volatility",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.1,
+      "correlation": 0.9,
+      "risk_cap": 0.02,
+      "replacement": 0.7
+    },
+    "metrics": {
+      "cagr": -0.11419944030021967,
+      "max_drawdown": 0.17358670952675959,
+      "calmar": -0.6578812433944722,
+      "final_nav": 88622.69132130733,
+      "feasible": false,
+      "fills": 1008,
+      "closed_trades": 417,
+      "exposure": 0.4055243199864178,
+      "costs": 3101.8057446491644,
+      "turnover": 53.97120163114319,
+      "sessions": 251,
+      "attribution": [
+        807.6016994843784,
+        -893.0533174013284,
+        -11291.857060775705
+      ],
+      "open_positions": 8
+    },
+    "audit": {
+      "holds": 999,
+      "abstentions": 49,
+      "competition": 216,
+      "correlation_rejections": 66,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 310,
+      "max_identity_error": 4.3655745685100555e-11,
+      "min_cash": 8791.187926325,
+      "max_symbol_weight": 0.1043080659337178,
+      "max_total_risk": 0.016731913397065014
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.021085397061450184,
+        "delta_mdd": -0.0025132748556663254,
+        "delta_cost": 1150.7624868098035,
+        "delta_turnover": 19.811247306763725,
+        "incremental_nav": -2101.0848830418545
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.023404239327148302,
+        "delta_mdd": 0.021773609908108837,
+        "delta_cost": -165.87228286449545,
+        "delta_turnover": -2.268691413018992,
+        "incremental_nav": -2332.137360037188
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.02983021283564291,
+        "delta_mdd": 0.014594051545703257,
+        "delta_cost": -158.626203804557,
+        "delta_turnover": -1.7598815614926764,
+        "incremental_nav": -2972.4175666716474
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      0,
+      2
+    ],
+    "families": [
+      "relative_strength",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 1,
+    "id": "402bcb63f5c9f72a",
+    "parents": [
+      "ff8f9be7309ea03a",
+      "7bd891ad0bf6733a"
+    ],
+    "genes": [
+      {
+        "family": "volatility",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.1,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "trend",
+        "second": "recursive",
+        "op": "and",
+        "threshold": -0.016089917076019686,
+        "niche": -1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 15,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.08,
+        "hold_family": "trend",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 5,
+      "reserve": 0.2,
+      "correlation": 0.9,
+      "risk_cap": 0.02,
+      "replacement": 1.0
+    },
+    "metrics": {
+      "cagr": -0.08217874974280903,
+      "max_drawdown": 0.12308954601174582,
+      "calmar": -0.6676338682325397,
+      "final_nav": 91813.36271350211,
+      "feasible": false,
+      "fills": 662,
+      "closed_trades": 258,
+      "exposure": 0.229993799077437,
+      "costs": 2457.4452196110587,
+      "turnover": 41.683515589044205,
+      "sessions": 251,
+      "attribution": [
+        547.8777000641677,
+        -8485.176346085102,
+        -249.33864047688309
+      ],
+      "open_positions": 4
+    },
+    "audit": {
+      "holds": 370,
+      "abstentions": 49,
+      "competition": 201,
+      "correlation_rejections": 12,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 198,
+      "max_identity_error": 1.0186340659856796e-10,
+      "min_cash": 29962.661600558567,
+      "max_symbol_weight": 0.102650500107722,
+      "max_total_risk": 0.00920307326131564
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.0261808915799,
+        "delta_mdd": 0.01740217418007628,
+        "delta_cost": 326.55730846539336,
+        "delta_turnover": 5.608550592386237,
+        "incremental_nav": -2608.441186321812
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.08091341178237732,
+        "delta_mdd": 0.06949711446003004,
+        "delta_cost": 221.46814743170262,
+        "delta_turnover": 4.164549882903636,
+        "incremental_nav": -8060.605292144901
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.0024044338041470104,
+        "delta_mdd": 0.006436224802855883,
+        "delta_cost": 5.697617359232481,
+        "delta_turnover": 0.03216254076333058,
+        "incremental_nav": -239.56950507992588
+      }
+    ],
+    "niche_coverage": [
+      -1,
+      0,
+      1
+    ],
+    "families": [
+      "trend",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 1,
+    "id": "d662d7928bd04615",
+    "parents": [],
+    "genes": [
+      {
+        "family": "trend",
+        "second": "momentum",
+        "op": "or",
+        "threshold": 0.3,
+        "niche": 2,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "trend",
+        "second": "momentum",
+        "op": "single",
+        "threshold": 0.4,
+        "niche": 2,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.1,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.05171055839127503,
+      "max_drawdown": 0.1353392985670795,
+      "calmar": -0.38208088071067725,
+      "final_nav": 94848.9263876978,
+      "feasible": false,
+      "fills": 738,
+      "closed_trades": 259,
+      "exposure": 0.4276867653611896,
+      "costs": 2297.0705607203795,
+      "turnover": 38.66523560487689,
+      "sessions": 251,
+      "attribution": [
+        2134.357804724133,
+        -7285.431417026329
+      ],
+      "open_positions": 9
+    },
+    "audit": {
+      "holds": 1077,
+      "abstentions": 67,
+      "competition": 161,
+      "correlation_rejections": 220,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 282,
+      "max_identity_error": 2.9103830456733704e-11,
+      "min_cash": 9516.30710592279,
+      "max_symbol_weight": 0.11566587023014048,
+      "max_total_risk": 0.016927435089579574
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.0664940574557501,
+        "delta_mdd": -0.043897386059478016,
+        "delta_cost": 210.79490724408288,
+        "delta_turnover": 2.5122953921349165,
+        "incremental_nav": 6625.358863865695
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.014162679020019997,
+        "delta_mdd": 0.006178536879862362,
+        "delta_cost": 1.1824137208805041,
+        "delta_turnover": 0.2807924738627463,
+        "incremental_nav": -1410.9034381212987
+      }
+    ],
+    "niche_coverage": [
+      2
+    ],
+    "families": [
+      "trend"
+    ]
+  },
+  {
+    "generation": 2,
+    "id": "9bd9a0bc2c93cf84",
+    "parents": [
+      "9bd9a0bc2c93cf84"
+    ],
+    "genes": [
+      {
+        "family": "recursive",
+        "second": "momentum",
+        "op": "or",
+        "threshold": 0.3,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "trend",
+        "second": "recursive",
+        "op": "or",
+        "threshold": 0.23777229175120576,
+        "niche": 0,
+        "exit_threshold": -0.2,
+        "hold_sessions": 15,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "volatility",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "volume",
+          [
+            "or",
+            "recursive",
+            "relative_strength"
+          ]
+        ]
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.35,
+      "correlation": 0.9,
+      "risk_cap": 0.02,
+      "replacement": 1.0
+    },
+    "metrics": {
+      "cagr": 0.00018084041642829618,
+      "max_drawdown": 0.0977234735288165,
+      "calmar": 0.0018505320154729287,
+      "final_nav": 100018.01227311023,
+      "feasible": false,
+      "fills": 854,
+      "closed_trades": 312,
+      "exposure": 0.3384049289873661,
+      "costs": 2362.968523691755,
+      "turnover": 39.66950407471263,
+      "sessions": 251,
+      "attribution": [
+        -846.7081420213206,
+        1953.8070063631521,
+        -1089.0865912315805
+      ],
+      "open_positions": 10
+    },
+    "audit": {
+      "holds": 1107,
+      "abstentions": 52,
+      "competition": 271,
+      "correlation_rejections": 39,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 336,
+      "max_identity_error": 5.820766091346741e-11,
+      "min_cash": 33022.49448655947,
+      "max_symbol_weight": 0.09812779599030917,
+      "max_total_risk": 0.012272514034580538
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.01251567828932898,
+        "delta_mdd": 0.017814884693787558,
+        "delta_cost": 31.1157279601357,
+        "delta_turnover": 0.35933348130263454,
+        "incremental_nav": -1246.569573379311
+      },
+      {
+        "gene": 1,
+        "delta_cagr": 0.010720144037159929,
+        "delta_mdd": 0.009405510535173023,
+        "delta_cost": 182.9517877297185,
+        "delta_turnover": 3.065727153538674,
+        "incremental_nav": 1067.782401292483
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.004071487928795969,
+        "delta_mdd": -0.0022830568092838677,
+        "delta_cost": 65.0615161222504,
+        "delta_turnover": 0.9778871249773289,
+        "incremental_nav": 405.53611198875296
+      }
+    ],
+    "niche_coverage": [
+      0,
+      1
+    ],
+    "families": [
+      "recursive",
+      "trend",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 2,
+    "id": "45fb89149e8396b3",
+    "parents": [
+      "7bd891ad0bf6733a",
+      "9bd9a0bc2c93cf84"
+    ],
+    "genes": [
+      {
+        "family": "breadth",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.5,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "breadth",
+        "second": "relative_strength",
+        "op": "or",
+        "threshold": 0.09440944220921385,
+        "niche": 1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 8,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.04,
+        "hold_family": "volatility",
+        "exit_family": "volume",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 7,
+      "reserve": 0.2,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.3
+    },
+    "metrics": {
+      "cagr": -0.02778139350544151,
+      "max_drawdown": 0.07049197776256944,
+      "calmar": -0.39410716491761083,
+      "final_nav": 97232.73104540259,
+      "feasible": false,
+      "fills": 866,
+      "closed_trades": 340,
+      "exposure": 0.2268943074851143,
+      "costs": 2279.422962143903,
+      "turnover": 38.47186274393845,
+      "sessions": 251,
+      "attribution": [
+        -1685.0316671614657,
+        -1584.5083782930585,
+        502.27109085707986
+      ],
+      "open_positions": 6
+    },
+    "audit": {
+      "holds": 649,
+      "abstentions": 49,
+      "competition": 198,
+      "correlation_rejections": 104,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 229,
+      "max_identity_error": 5.820766091346741e-11,
+      "min_cash": 28123.847763472448,
+      "max_symbol_weight": 0.09448715594772537,
+      "max_total_risk": 0.010210586952240487
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.007961784294873375,
+        "delta_mdd": 0.018280120351483298,
+        "delta_cost": 65.51711922913455,
+        "delta_turnover": 1.5692854989086484,
+        "incremental_nav": -793.0948071738821
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.005994648043746054,
+        "delta_mdd": 0.0018490960169018633,
+        "delta_cost": 235.84560696239168,
+        "delta_turnover": 3.9054127298385595,
+        "incremental_nav": -597.1454455390776
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.014554924780360246,
+        "delta_mdd": 0.013143355788390876,
+        "delta_cost": -21.98250059067186,
+        "delta_turnover": -0.20481257316687618,
+        "incremental_nav": -1449.8359542644466
+      }
+    ],
+    "niche_coverage": [
+      1
+    ],
+    "families": [
+      "breadth",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 2,
+    "id": "4ad31fa6d470253e",
+    "parents": [
+      "9bd9a0bc2c93cf84",
+      "d662d7928bd04615"
+    ],
+    "genes": [
+      {
+        "family": "volume",
+        "second": "trend",
+        "op": "single",
+        "threshold": 0.3391780149482795,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 15,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "trend",
+        "exit_family": "volume",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "trend",
+        "second": "recursive",
+        "op": "or",
+        "threshold": 0.23777229175120576,
+        "niche": 0,
+        "exit_threshold": -0.2,
+        "hold_sessions": 15,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "volatility",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "volume",
+          [
+            "or",
+            "recursive",
+            "relative_strength"
+          ]
+        ]
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 5,
+      "reserve": 0.1,
+      "correlation": 0.65,
+      "risk_cap": 0.02,
+      "replacement": 1.0
+    },
+    "metrics": {
+      "cagr": 0.0005042340025884773,
+      "max_drawdown": 0.05371421362254292,
+      "calmar": 0.009387347753646701,
+      "final_nav": 100050.22325716252,
+      "feasible": false,
+      "fills": 505,
+      "closed_trades": 185,
+      "exposure": 0.20108116751905333,
+      "costs": 1665.1900360392815,
+      "turnover": 27.905964915071582,
+      "sessions": 251,
+      "attribution": [
+        -3930.085765632477,
+        642.7903805329328,
+        3337.5186422621496
+      ],
+      "open_positions": 5
+    },
+    "audit": {
+      "holds": 560,
+      "abstentions": 50,
+      "competition": 189,
+      "correlation_rejections": 146,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 182,
+      "max_identity_error": 8.731149137020111e-11,
+      "min_cash": 42501.1831160256,
+      "max_symbol_weight": 0.09623416413751598,
+      "max_total_risk": 0.007907831946186352
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.00813905393099823,
+        "delta_mdd": -0.005842415333365714,
+        "delta_cost": 138.50032503314355,
+        "delta_turnover": 2.198319829519569,
+        "incremental_nav": -810.6609386696364
+      },
+      {
+        "gene": 1,
+        "delta_cagr": 0.036781157989892566,
+        "delta_mdd": -0.006574273121473073,
+        "delta_cost": 89.29655995161102,
+        "delta_turnover": 1.272080382813595,
+        "incremental_nav": 3663.7833451876068
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.00615119649339646,
+        "delta_mdd": -0.003923568979505299,
+        "delta_cost": 265.21189627243825,
+        "delta_turnover": 4.188354603081155,
+        "incremental_nav": 612.6849619688292
+      }
+    ],
+    "niche_coverage": [
+      0,
+      1
+    ],
+    "families": [
+      "trend",
+      "volatility",
+      "volume"
+    ]
+  },
+  {
+    "generation": 2,
+    "id": "da264146abe2b68d",
+    "parents": [
+      "9bd9a0bc2c93cf84",
+      "1f5667a100ef0fb6"
+    ],
+    "genes": [
+      {
+        "family": "recursive",
+        "second": "momentum",
+        "op": "or",
+        "threshold": 0.3,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "trend",
+        "second": "recursive",
+        "op": "or",
+        "threshold": 0.23777229175120576,
+        "niche": 0,
+        "exit_threshold": -0.2,
+        "hold_sessions": 15,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "volatility",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "volume",
+          [
+            "or",
+            "recursive",
+            "relative_strength"
+          ]
+        ]
+      },
+      {
+        "family": "recursive",
+        "second": "volatility",
+        "op": "and",
+        "threshold": 0.4083460810724524,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 25,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "breadth",
+        "exit_family": "momentum",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.35,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.3
+    },
+    "metrics": {
+      "cagr": 0.023738438380948912,
+      "max_drawdown": 0.08671964556616885,
+      "calmar": 0.27373772374145605,
+      "final_nav": 102364.313332652,
+      "feasible": false,
+      "fills": 839,
+      "closed_trades": 313,
+      "exposure": 0.33143459247550155,
+      "costs": 2390.141287694822,
+      "turnover": 39.94660990293342,
+      "sessions": 251,
+      "attribution": [
+        38.25161711537832,
+        2804.731215238808,
+        -478.6694997022513
+      ],
+      "open_positions": 9
+    },
+    "audit": {
+      "holds": 1099,
+      "abstentions": 56,
+      "competition": 231,
+      "correlation_rejections": 150,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 333,
+      "max_identity_error": 8.731149137020111e-11,
+      "min_cash": 33346.302619613394,
+      "max_symbol_weight": 0.09753681069955435,
+      "max_total_risk": 0.012667856044746307
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.005605741823930588,
+        "delta_mdd": 0.0002989667576585031,
+        "delta_cost": 505.6607880211168,
+        "delta_turnover": 8.395045218627327,
+        "incremental_nav": 558.3037788621441
+      },
+      {
+        "gene": 1,
+        "delta_cagr": 0.041104256160633845,
+        "delta_mdd": -0.024958336871752418,
+        "delta_cost": 244.60019879302217,
+        "delta_turnover": 3.4484800478256474,
+        "incremental_nav": 4094.0638606908324
+      },
+      {
+        "gene": 2,
+        "delta_cagr": 0.013954481775680705,
+        "delta_mdd": -0.0072421283070854825,
+        "delta_cost": -26.155858779625305,
+        "delta_turnover": -0.5812167191672444,
+        "incremental_nav": 1389.8190507932159
+      }
+    ],
+    "niche_coverage": [
+      0,
+      1
+    ],
+    "families": [
+      "recursive",
+      "trend"
+    ]
+  },
+  {
+    "generation": 2,
+    "id": "428a29abcf35b3a2",
+    "parents": [
+      "1f5667a100ef0fb6",
+      "d662d7928bd04615"
+    ],
+    "genes": [
+      {
+        "family": "volatility",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.1,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "momentum",
+        "second": "volatility",
+        "op": "or",
+        "threshold": 0.6047197420727174,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 15,
+        "trailing": 0.03,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "trend",
+        "exit_family": "breadth",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "recursive",
+          [
+            "or",
+            "breadth",
+            "recursive"
+          ]
+        ]
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.1,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.7
+    },
+    "metrics": {
+      "cagr": -0.033858218141511354,
+      "max_drawdown": 0.08577522364425327,
+      "calmar": -0.3947319132846093,
+      "final_nav": 96627.38482166796,
+      "feasible": false,
+      "fills": 1352,
+      "closed_trades": 588,
+      "exposure": 0.3415875602861652,
+      "costs": 4417.804669951932,
+      "turnover": 75.09111921794134,
+      "sessions": 251,
+      "attribution": [
+        -1532.037876875507,
+        458.9343008927467,
+        -2299.511602349316
+      ],
+      "open_positions": 7
+    },
+    "audit": {
+      "holds": 704,
+      "abstentions": 49,
+      "competition": 200,
+      "correlation_rejections": 138,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 334,
+      "max_identity_error": 8.731149137020111e-11,
+      "min_cash": 9357.96209883964,
+      "max_symbol_weight": 0.09960142496441937,
+      "max_total_risk": 0.01453634342502444
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.029540473777859844,
+        "delta_mdd": -0.010523329606983989,
+        "delta_cost": 1822.57100795607,
+        "delta_turnover": 31.483186195674918,
+        "incremental_nav": -2942.5504429393477
+      },
+      {
+        "gene": 1,
+        "delta_cagr": 0.003384472779129788,
+        "delta_mdd": -0.0008626252281269675,
+        "delta_cost": 102.0315660830438,
+        "delta_turnover": 1.622295366045833,
+        "incremental_nav": 337.1526596200856
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.008174783198020563,
+        "delta_mdd": -0.00673788654260854,
+        "delta_cost": -825.3392509062205,
+        "delta_turnover": -14.84711985662318,
+        "incremental_nav": -814.3320267789968
+      }
+    ],
+    "niche_coverage": [
+      0,
+      1
+    ],
+    "families": [
+      "momentum",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 2,
+    "id": "1ab1841090ceecb1",
+    "parents": [
+      "1f5667a100ef0fb6",
+      "7bd891ad0bf6733a"
+    ],
+    "genes": [
+      {
+        "family": "volatility",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.1,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "momentum",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.2098062840869576,
+        "niche": 1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 15,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.04,
+        "hold_family": "recursive",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "relative_strength",
+          [
+            "or",
+            "trend",
+            "recursive"
+          ]
+        ]
+      },
+      {
+        "family": "relative_strength",
+        "second": "volatility",
+        "op": "or",
+        "threshold": 0.3067450557829443,
+        "niche": 2,
+        "exit_threshold": -0.4,
+        "hold_sessions": 40,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.08,
+        "hold_family": "momentum",
+        "exit_family": "volatility",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 7,
+      "reserve": 0.35,
+      "correlation": 0.9,
+      "risk_cap": 0.02,
+      "replacement": 0.7
+    },
+    "metrics": {
+      "cagr": -0.02569271924576788,
+      "max_drawdown": 0.08511129981854071,
+      "calmar": -0.3018720111259652,
+      "final_nav": 97440.7920069637,
+      "feasible": false,
+      "fills": 857,
+      "closed_trades": 353,
+      "exposure": 0.26910897031197856,
+      "costs": 2945.121782955105,
+      "turnover": 49.42855835425744,
+      "sessions": 251,
+      "attribution": [
+        618.7266739508774,
+        -1097.6420738990819,
+        -2080.2925930881056
+      ],
+      "open_positions": 5
+    },
+    "audit": {
+      "holds": 566,
+      "abstentions": 49,
+      "competition": 219,
+      "correlation_rejections": 25,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 228,
+      "max_identity_error": 4.3655745685100555e-11,
+      "min_cash": 33282.746209288285,
+      "max_symbol_weight": 0.1096975792893212,
+      "max_total_risk": 0.011305100754023484
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.01179978435033846,
+        "delta_mdd": -0.008187621302280124,
+        "delta_cost": 633.5438650974843,
+        "delta_turnover": 10.218417314552426,
+        "incremental_nav": 1175.4457410613395
+      },
+      {
+        "gene": 1,
+        "delta_cagr": 0.0037753838989207367,
+        "delta_mdd": -0.002070201683394446,
+        "delta_cost": -190.40694963065516,
+        "delta_turnover": -3.1607871466694775,
+        "incremental_nav": 376.0819592697226
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.011194546550537088,
+        "delta_mdd": 0.03123161394093843,
+        "delta_cost": 317.1584574848548,
+        "delta_turnover": 4.981430847228765,
+        "incremental_nav": -1115.1022233629628
+      }
+    ],
+    "niche_coverage": [
+      0,
+      1,
+      2
+    ],
+    "families": [
+      "momentum",
+      "relative_strength",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 2,
+    "id": "0d130c5d5d977f50",
+    "parents": [
+      "1f5667a100ef0fb6",
+      "7bd891ad0bf6733a"
+    ],
+    "genes": [
+      {
+        "family": "recursive",
+        "second": "momentum",
+        "op": "or",
+        "threshold": -0.03560539515635287,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 25,
+        "trailing": 0.03,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "relative_strength",
+        "exit_family": "breadth",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "momentum",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.2098062840869576,
+        "niche": 1,
+        "exit_threshold": -0.2,
+        "hold_sessions": 15,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.04,
+        "hold_family": "recursive",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "relative_strength",
+          [
+            "or",
+            "trend",
+            "recursive"
+          ]
+        ]
+      },
+      {
+        "family": "volatility",
+        "second": "recursive",
+        "op": "and",
+        "threshold": 0.1,
+        "niche": 1,
+        "exit_threshold": -0.4,
+        "hold_sessions": 12,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 7,
+      "reserve": 0.2,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.3
+    },
+    "metrics": {
+      "cagr": -0.022759102087041128,
+      "max_drawdown": 0.06717802734237888,
+      "calmar": -0.33878788924609693,
+      "final_nav": 97733.01802700676,
+      "feasible": false,
+      "fills": 759,
+      "closed_trades": 309,
+      "exposure": 0.23175112130162026,
+      "costs": 2214.3067628340914,
+      "turnover": 37.58517572303784,
+      "sessions": 251,
+      "attribution": [
+        -1077.2781242703963,
+        218.15963967849726,
+        -1407.8634884012454
+      ],
+      "open_positions": 7
+    },
+    "audit": {
+      "holds": 727,
+      "abstentions": 53,
+      "competition": 182,
+      "correlation_rejections": 53,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 235,
+      "max_identity_error": 1.1641532182693481e-10,
+      "min_cash": 32395.153415767716,
+      "max_symbol_weight": 0.09380218354515583,
+      "max_total_risk": 0.009590700407354819
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": -0.012458331247671706,
+        "delta_mdd": 0.009094412867950319,
+        "delta_cost": 388.7306466210687,
+        "delta_turnover": 7.051364079374121,
+        "incremental_nav": -1240.9714546602045
+      },
+      {
+        "gene": 1,
+        "delta_cagr": 0.0030560575756070074,
+        "delta_mdd": -0.013401002743653967,
+        "delta_cost": -350.96854752008494,
+        "delta_turnover": -6.3017020999475974,
+        "incremental_nav": 304.4227370128501
+      },
+      {
+        "gene": 2,
+        "delta_cagr": -0.0024420286693365156,
+        "delta_mdd": 0.0026866385068122778,
+        "delta_cost": -8.93982042342168,
+        "delta_turnover": -0.12310696703978863,
+        "incremental_nav": -243.25482509442372
+      }
+    ],
+    "niche_coverage": [
+      1
+    ],
+    "families": [
+      "momentum",
+      "recursive",
+      "volatility"
+    ]
+  },
+  {
+    "generation": 2,
+    "id": "d662d7928bd04615",
+    "parents": [],
+    "genes": [
+      {
+        "family": "trend",
+        "second": "momentum",
+        "op": "or",
+        "threshold": 0.3,
+        "niche": 2,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "trend",
+        "second": "momentum",
+        "op": "single",
+        "threshold": 0.4,
+        "niche": 2,
+        "exit_threshold": -0.3,
+        "hold_sessions": 20,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.1,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.5
+    },
+    "metrics": {
+      "cagr": -0.05171055839127503,
+      "max_drawdown": 0.1353392985670795,
+      "calmar": -0.38208088071067725,
+      "final_nav": 94848.9263876978,
+      "feasible": false,
+      "fills": 738,
+      "closed_trades": 259,
+      "exposure": 0.4276867653611896,
+      "costs": 2297.0705607203795,
+      "turnover": 38.66523560487689,
+      "sessions": 251,
+      "attribution": [
+        2134.357804724133,
+        -7285.431417026329
+      ],
+      "open_positions": 9
+    },
+    "audit": {
+      "holds": 1077,
+      "abstentions": 67,
+      "competition": 161,
+      "correlation_rejections": 220,
+      "risk_rejections": 0,
+      "evaluate_minus_one": 282,
+      "max_identity_error": 2.9103830456733704e-11,
+      "min_cash": 9516.30710592279,
+      "max_symbol_weight": 0.11566587023014048,
+      "max_total_risk": 0.016927435089579574
+    },
+    "marginal": [
+      {
+        "gene": 0,
+        "delta_cagr": 0.0664940574557501,
+        "delta_mdd": -0.043897386059478016,
+        "delta_cost": 210.79490724408288,
+        "delta_turnover": 2.5122953921349165,
+        "incremental_nav": 6625.358863865695
+      },
+      {
+        "gene": 1,
+        "delta_cagr": -0.014162679020019997,
+        "delta_mdd": 0.006178536879862362,
+        "delta_cost": 1.1824137208805041,
+        "delta_turnover": 0.2807924738627463,
+        "incremental_nav": -1410.9034381212987
+      }
+    ],
+    "niche_coverage": [
+      2
+    ],
+    "families": [
+      "trend"
+    ]
+  }
+]

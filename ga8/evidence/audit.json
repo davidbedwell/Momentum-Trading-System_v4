@@ -1,0 +1,764 @@
+{
+  "prices": {
+    "missing_columns": [],
+    "rows": 92502,
+    "symbols": 79,
+    "first": "2022-01-03",
+    "last": "2026-09-14",
+    "peer_sessions": 1178,
+    "years": [
+      {
+        "year": 2022,
+        "rows": 19578,
+        "symbols": 78,
+        "sessions": 251
+      },
+      {
+        "year": 2023,
+        "rows": 19500,
+        "symbols": 78,
+        "sessions": 250
+      },
+      {
+        "year": 2024,
+        "rows": 19849,
+        "symbols": 79,
+        "sessions": 252
+      },
+      {
+        "year": 2025,
+        "rows": 19750,
+        "symbols": 79,
+        "sessions": 250
+      },
+      {
+        "year": 2026,
+        "rows": 13825,
+        "symbols": 79,
+        "sessions": 175
+      }
+    ],
+    "per_symbol": [
+      {
+        "ticker": "ACN",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "AMGN",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "ARE",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "ATO",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "BEN",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "BG",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "BLDR",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "BNY",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "CBOE",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "CDNS",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "CDW",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "CFG",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "CME",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "COF",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "COIN",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "COST",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "CRM",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "CTSH",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "DECK",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "DELL",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "DIS",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "DLTR",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "ELV",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "ETN",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "EVRG",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "FANG",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "FCX",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "FITB",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "GE",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "GEV",
+        "first": "2024-03-27",
+        "last": "2026-09-14",
+        "rows": 618,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 560
+      },
+      {
+        "ticker": "GILD",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "GLW",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "GPC",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "HD",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "HPE",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "HSY",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "HWM",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "INTC",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "IRM",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "ITW",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "JNJ",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "KDP",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "KKR",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "KMI",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "LYB",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "LYV",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "MCO",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "MPC",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "NFLX",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "NUE",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "OMC",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "PEG",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "PFG",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "PPG",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "RL",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "ROK",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "RSG",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "SBAC",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "SCHW",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "SNPS",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "SO",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "SPG",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "STLD",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "SYF",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "SYK",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "T",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "TECH",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "TRGP",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "TRV",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "ULTA",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "UPS",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "V",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "VRSK",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "VRSN",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "WAB",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "WSM",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "XEL",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "XOM",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      },
+      {
+        "ticker": "ZTS",
+        "first": "2022-01-03",
+        "last": "2026-09-14",
+        "rows": 1178,
+        "missing_peer_sessions_inside_observed_lifetime": 0,
+        "absent_peer_sessions_before_first_bar": 0
+      }
+    ],
+    "duplicate_bars": 0,
+    "null_required_values": 0,
+    "invalid_price_rows": 0,
+    "invalid_ohlc_range_rows": 0,
+    "usable": true,
+    "calendar_basis": "Observed peer-session union; not an independent exchange calendar.",
+    "cutoff_note": "2026 is partial through source cutoff; no future or missing bars filled."
+  },
+  "source": "/opt/mts/portfolio_evolution_dev80/dev80_raw_no_smci.parquet",
+  "sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+  "active_families": [
+    "trend",
+    "momentum",
+    "volatility",
+    "volume",
+    "recursive",
+    "breadth",
+    "relative_strength"
+  ],
+  "disabled": {
+    "sector": "No dated PIT history",
+    "earnings": "No verified knowledge-time events",
+    "crash_AB_B1_C_R1": "No verified causal input tape",
+    "SGOV": "No verified SGOV bars",
+    "SPY": "Not in source"
+  },
+  "corporate_actions": "Vendor split-normalized OHLC and per-share dividends; reject discontinuous split bars",
+  "universe": "Fixed DEV79 research cohort; survivorship and retrospective membership limitations",
+  "grammar": {
+    "source": "/opt/mts/ga5_chromosome_contract.py",
+    "sha256": "c1ab917d200c4fae41cab09592656301fa313ec33038e1df74ff20b424439fb4",
+    "genome_fields": [
+      "niche",
+      "entry_feature",
+      "entry_threshold",
+      "hold_feature",
+      "hold_threshold",
+      "exit_feature",
+      "exit_threshold",
+      "regime_feature",
+      "regime_threshold",
+      "sizing_feature",
+      "base_weight",
+      "max_weight",
+      "replace_feature",
+      "replace_threshold",
+      "stop_loss",
+      "trailing_stop",
+      "max_hold_sessions",
+      "time_exit_enabled",
+      "risk_budget",
+      "scale_in_threshold",
+      "scale_out_threshold",
+      "scale_step"
+    ],
+    "families": [
+      "trend",
+      "momentum",
+      "volatility",
+      "volume",
+      "recursive",
+      "sector",
+      "breadth",
+      "relative_strength"
+    ],
+    "entry_combinations": "Legacy structural entry trees exist; not evaluated.",
+    "native_capabilities": [
+      "entry",
+      "hold",
+      "exit",
+      "regime",
+      "sizing",
+      "replacement",
+      "stop_loss",
+      "trailing_stop",
+      "time_exit",
+      "scale_in",
+      "scale_out"
+    ],
+    "legacy_caveats": [
+      "13 niche IDs are identifiers, not causal membership proof.",
+      "Legacy GA4 registry requires inaccessible archived predictors.",
+      "Recompute backward-only features from bars for GA8; do not trust archived ranks.",
+      "Do not import old fitness, winners, or 2009-2018 performance as evidence."
+    ]
+  },
+  "blockers": [],
+  "optional_features_disabled": true,
+  "sector_history_not_required_for_price_only_pilot": true
+}

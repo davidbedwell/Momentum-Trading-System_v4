@@ -1,0 +1,44 @@
+{
+  "parent_id": "bee3e2e24e546545",
+  "child_id": "ae3fc5d94ebe2392",
+  "parents": [
+    "bee3e2e24e546545",
+    "7bd891ad0bf6733a"
+  ],
+  "parent_fills_sha256": "6efd808aa53ce21c48f260c990115777b4a748513dbb3a1e0bd0f39a577041a8",
+  "offspring_fills_sha256": "1e5e325127d04b437bcf21ab1d5afb87661ca3608b9794ddcfc5ec04bdbe0493",
+  "manager_counterfactual_fills_sha256": "cc619d35f07329818510e04481cfa72ace169f878dd9289151a1107506a87bd7",
+  "offspring_changes_funded_decisions": true,
+  "manager_changes_funded_decisions": true,
+  "smoke_actions": {
+    "ENTRY": 318,
+    "ADD": 134,
+    "REDUCE": 97,
+    "EXIT": 230,
+    "REPLACE": 79
+  },
+  "smoke_audit": {
+    "holds": 1138,
+    "abstentions": 55,
+    "competition": 202,
+    "correlation_rejections": 133,
+    "risk_rejections": 0,
+    "evaluate_minus_one": 319,
+    "max_identity_error": 1.0186340659856796e-10,
+    "min_cash": 8917.026583878209,
+    "max_symbol_weight": 0.10284705235673186,
+    "max_total_risk": 0.017937201933662314
+  },
+  "shadow_accounts": 23,
+  "pilot_family_coverage": [
+    "breadth",
+    "momentum",
+    "recursive",
+    "relative_strength",
+    "trend",
+    "volatility",
+    "volume"
+  ],
+  "nested_offspring": 8,
+  "all_ledger_accounting_passed": true
+}

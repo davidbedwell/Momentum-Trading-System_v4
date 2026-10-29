@@ -1,0 +1,42 @@
+{
+  "purpose": "Retrospective training diagnostic only; never used in live features or holdout selection",
+  "train_end_exclusive": "2025-01-01",
+  "labels": [
+    {
+      "niche": 0,
+      "horizon": 5,
+      "count": 12092,
+      "mean_forward_return": 0.005472422058198434
+    },
+    {
+      "niche": 0,
+      "horizon": 20,
+      "count": 11773,
+      "mean_forward_return": 0.026926072336838164
+    },
+    {
+      "niche": 1,
+      "horizon": 5,
+      "count": 25789,
+      "mean_forward_return": 0.00136376366038314
+    },
+    {
+      "niche": 1,
+      "horizon": 20,
+      "count": 25243,
+      "mean_forward_return": 0.00919831762916337
+    },
+    {
+      "niche": 2,
+      "horizon": 5,
+      "count": 15922,
+      "mean_forward_return": 0.0024521258534985066
+    },
+    {
+      "niche": 2,
+      "horizon": 20,
+      "count": 15602,
+      "mean_forward_return": 0.007371544695628273
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "genes": [
+    {
+      "family": "trend",
+      "second": "momentum",
+      "op": "single",
+      "threshold": 0.4,
+      "niche": 2,
+      "exit_threshold": -0.3,
+      "hold_sessions": 20,
+      "trailing": 0.05,
+      "add": 0.015,
+      "reduce": -0.01,
+      "weight": 0.06,
+      "hold_family": "momentum",
+      "exit_family": "trend",
+      "hold_threshold": -0.15,
+      "entry_tree": []
+    },
+    {
+      "family": "relative_strength",
+      "second": "momentum",
+      "op": "or",
+      "threshold": -0.08915234374056169,
+      "niche": 2,
+      "exit_threshold": -0.2,
+      "hold_sessions": 25,
+      "trailing": 0.05,
+      "add": 0.015,
+      "reduce": -0.01,
+      "weight": 0.06,
+      "hold_family": "volatility",
+      "exit_family": "recursive",
+      "hold_threshold": -0.15,
+      "entry_tree": []
+    },
+    {
+      "family": "volatility",
+      "second": "recursive",
+      "op": "and",
+      "threshold": 0.1,
+      "niche": 1,
+      "exit_threshold": -0.4,
+      "hold_sessions": 12,
+      "trailing": 0.05,
+      "add": 0.015,
+      "reduce": -0.01,
+      "weight": 0.06,
+      "hold_family": "momentum",
+      "exit_family": "trend",
+      "hold_threshold": -0.15,
+      "entry_tree": []
+    }
+  ],
+  "manager": {
+    "slots": 10,
+    "reserve": 0.35,
+    "correlation": 0.9,
+    "risk_cap": 0.02,
+    "replacement": 0.7
+  },
+  "id": "be35b4fa2fddca4e",
+  "train_end": "2025-01-01",
+  "selection_uses": "2022\u20132024 training only",
+  "seed": 80079
+}

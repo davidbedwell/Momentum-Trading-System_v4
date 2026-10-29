@@ -1,0 +1,12 @@
+{
+  "evaluations": 2,
+  "untouched_final_claim": false,
+  "reason": "Accounting correction: ex-date dividends must not become settled spendable cash without payment dates",
+  "preliminary_engine": "immediate ex-date spendable dividend cash; superseded, not used for promotion",
+  "corrected_engine": "nonspendable ex-date dividend receivables; no payment date assumed",
+  "parameters_retuned_from_holdout": false,
+  "seed_and_search_bounds_unchanged": true,
+  "preliminary_model_hash": "ba2a7d18a5eae6046e2959cc5ebf7b5dbd75b00c27fef594808669ac97556f18",
+  "corrected_model_hash": "ba2a7d18a5eae6046e2959cc5ebf7b5dbd75b00c27fef594808669ac97556f18",
+  "limitation": "Final 2026 window has been accessed under two accounting versions; neither globally blind nor strictly untouched. No new strategy tuning followed the preliminary outcomes."
+}

@@ -1,0 +1,8 @@
+{
+  "original_v4_files_compared": 896,
+  "mismatches": [],
+  "original_ga7_tree": "/opt/mts/ga7-deploy/Momentum-Trading-System_v4-research-ga7-dev79",
+  "ga6_action": "No writes or imports performed",
+  "ga7_action": "Read only; copied baseline matches source bytes",
+  "source_baseline_commit": "74fdf66aeed890dfe041afd2134e73e289710a7b"
+}

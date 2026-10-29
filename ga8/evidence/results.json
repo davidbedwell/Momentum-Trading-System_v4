@@ -1,0 +1,115 @@
+{
+  "folds": [
+    {
+      "train_end": "2023-01-01",
+      "end": "2024-01-01",
+      "id": "da264146abe2b68d",
+      "metrics": {
+        "cagr": 0.06383474848056658,
+        "max_drawdown": 0.05722591501332397,
+        "calmar": 1.1154867242525326,
+        "final_nav": 106331.24151196532,
+        "feasible": false,
+        "fills": 1051,
+        "closed_trades": 371,
+        "exposure": 0.4375259026235915,
+        "costs": 2954.219051277342,
+        "turnover": 47.887131904993765,
+        "sessions": 250,
+        "attribution": [
+          7182.089453755586,
+          389.96424823439514,
+          -1240.8121900248345
+        ],
+        "open_positions": 8
+      }
+    },
+    {
+      "train_end": "2024-01-01",
+      "end": "2025-01-01",
+      "id": "877e31dc7ad9f7e9",
+      "metrics": {
+        "cagr": 0.030550884886094698,
+        "max_drawdown": 0.036492798139919014,
+        "calmar": 0.8371757290015935,
+        "final_nav": 103055.08848860947,
+        "feasible": false,
+        "fills": 481,
+        "closed_trades": 170,
+        "exposure": 0.31781947710938485,
+        "costs": 1589.1567223698241,
+        "turnover": 26.12067155664575,
+        "sessions": 252,
+        "attribution": [
+          0.0,
+          3055.0884886094336
+        ],
+        "open_positions": 5
+      }
+    },
+    {
+      "train_end": "2025-01-01",
+      "end": "2026-01-01",
+      "id": "be35b4fa2fddca4e",
+      "metrics": {
+        "cagr": 0.04111359890734967,
+        "max_drawdown": 0.1174358157964589,
+        "calmar": 0.3500942078744378,
+        "final_nav": 104078.07361558272,
+        "feasible": false,
+        "fills": 790,
+        "closed_trades": 271,
+        "exposure": 0.49826416205041596,
+        "costs": 2066.5187382740246,
+        "turnover": 33.824978820461745,
+        "sessions": 250,
+        "attribution": [
+          264.9878847965073,
+          3250.542149611463,
+          562.5435811747479
+        ],
+        "open_positions": 8
+      }
+    }
+  ],
+  "holdout": {
+    "cagr": 0.37184212988667054,
+    "max_drawdown": 0.05635431455454176,
+    "calmar": 6.598290349655271,
+    "final_nav": 124551.82473711339,
+    "feasible": true,
+    "fills": 673,
+    "closed_trades": 244,
+    "exposure": 0.46576767432693794,
+    "costs": 2048.8730775167414,
+    "turnover": 29.953853461066018,
+    "sessions": 175,
+    "attribution": [
+      22791.52364207708,
+      1760.3010950363696,
+      0.0
+    ],
+    "open_positions": 6
+  },
+  "benchmarks": {
+    "cash": {
+      "cagr": 0.0,
+      "max_drawdown": 0.0,
+      "calmar": 0.0,
+      "annual_yield": 0.0
+    },
+    "SPY": null,
+    "note": "Cash zero yield; SPY unavailable; no invented benchmark prices"
+  },
+  "frozen_sha256": "ba2a7d18a5eae6046e2959cc5ebf7b5dbd75b00c27fef594808669ac97556f18",
+  "survivor": null,
+  "edge_claim": false,
+  "config": {
+    "output": "/opt/mts/ga8",
+    "generations": 3,
+    "budget": 180.0,
+    "seed": 80079,
+    "smoke_only": false
+  },
+  "runtime_seconds": 70.12759160005953
+}

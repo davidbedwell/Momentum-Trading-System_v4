@@ -1,0 +1,134 @@
+{
+  "evaluations": 83,
+  "runtime_seconds": 38.561903731082566,
+  "evaluations_per_second": 2.1523833620563293,
+  "generations": [
+    {
+      "generation": 0,
+      "best_id": "a122f79c5a997667",
+      "metrics": {
+        "cagr": 0.07758403388757595,
+        "max_drawdown": 0.17384634044260205,
+        "calmar": 0.4462793619356714,
+        "final_nav": 125016.4380296116,
+        "feasible": false,
+        "fills": 2550,
+        "closed_trades": 903,
+        "exposure": 0.5737385222843363,
+        "costs": 8314.296950396474,
+        "turnover": 133.00339995434533,
+        "sessions": 753,
+        "attribution": [
+          22246.665218134898,
+          733.4163052922287,
+          2036.3565061844533
+        ],
+        "open_positions": 7
+      },
+      "unique_genomes": 8,
+      "family_coverage": [
+        "breadth",
+        "momentum",
+        "recursive",
+        "relative_strength",
+        "trend",
+        "volatility",
+        "volume"
+      ],
+      "manager_variants": 6
+    },
+    {
+      "generation": 1,
+      "best_id": "be35b4fa2fddca4e",
+      "metrics": {
+        "cagr": 0.08949411196972745,
+        "max_drawdown": 0.09813074210907702,
+        "calmar": 0.9119885373968788,
+        "final_nav": 129190.77665253633,
+        "feasible": false,
+        "fills": 2346,
+        "closed_trades": 833,
+        "exposure": 0.4475478436458412,
+        "costs": 6635.849723120886,
+        "turnover": 100.73793688275035,
+        "sessions": 753,
+        "attribution": [
+          12355.22020632906,
+          15355.557001823974,
+          1479.9994443833307
+        ],
+        "open_positions": 6
+      },
+      "unique_genomes": 8,
+      "family_coverage": [
+        "momentum",
+        "recursive",
+        "relative_strength",
+        "trend",
+        "volatility"
+      ],
+      "manager_variants": 7
+    },
+    {
+      "generation": 2,
+      "best_id": "be35b4fa2fddca4e",
+      "metrics": {
+        "cagr": 0.08949411196972745,
+        "max_drawdown": 0.09813074210907702,
+        "calmar": 0.9119885373968788,
+        "final_nav": 129190.77665253633,
+        "feasible": false,
+        "fills": 2346,
+        "closed_trades": 833,
+        "exposure": 0.4475478436458412,
+        "costs": 6635.849723120886,
+        "turnover": 100.73793688275035,
+        "sessions": 753,
+        "attribution": [
+          12355.22020632906,
+          15355.557001823974,
+          1479.9994443833307
+        ],
+        "open_positions": 6
+      },
+      "unique_genomes": 8,
+      "family_coverage": [
+        "momentum",
+        "recursive",
+        "relative_strength",
+        "trend",
+        "volatility"
+      ],
+      "manager_variants": 7
+    }
+  ],
+  "best_id": "be35b4fa2fddca4e",
+  "best_metrics": {
+    "cagr": 0.08949411196972745,
+    "max_drawdown": 0.09813074210907702,
+    "calmar": 0.9119885373968788,
+    "final_nav": 129190.77665253633,
+    "feasible": false,
+    "fills": 2346,
+    "closed_trades": 833,
+    "exposure": 0.4475478436458412,
+    "costs": 6635.849723120886,
+    "turnover": 100.73793688275035,
+    "sessions": 753,
+    "attribution": [
+      12355.22020632906,
+      15355.557001823974,
+      1479.9994443833307
+    ],
+    "open_positions": 6
+  },
+  "feasible_ids": [],
+  "frontier_ids": [
+    "272fd6d9f11304fc",
+    "be35b4fa2fddca4e",
+    "5a6c0428519ea824",
+    "e194b513a542df6f"
+  ],
+  "stop_reason": "bounded_generation_limit",
+  "survivor": null
+}
