@@ -1,0 +1,676 @@
+{
+  "policy": {
+    "primary_benchmark": "QQQ",
+    "top_n": 10,
+    "weight": 0.09,
+    "stop_distance": 0.02,
+    "stop_policy": "daily close ratchet, next-open execution",
+    "risk_cap": 0.02,
+    "reserve": 0.1,
+    "cost_bps_per_side": 6,
+    "train": "2022",
+    "development_test": "2023-2024 previously exposed",
+    "sealed_data_access": false
+  },
+  "provenance": {
+    "kind": "available_real_historical",
+    "sources": [
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/AAL.parquet",
+        "sha256": "4af11371c681fe7d56d4151e8b22a391f38a94d563ee8b6a0963ddad7c05c3f2"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ADI.parquet",
+        "sha256": "16712f578d30ef5b8d31299c1b3db9dc4e983e34238dce4e8f47defb370356eb"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ADP.parquet",
+        "sha256": "6963f60f2642b84ba3f28b930d029905c86546629f6b758a9a5c60ad7c7c79c1"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ADSK.parquet",
+        "sha256": "6bd8f1ff2571db76363e61398d9a641699c04258dcd335030a226bfdfa23b56b"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/AKAM.parquet",
+        "sha256": "953a5e10aa3640e4a2e0915057da7a326f66a1a7b345e34d17d5561528dd722a"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ALGN.parquet",
+        "sha256": "f7731973862c13fd7fc6cb7f9a1ceb9880cd0556667bd5c055171444176c6113"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ALNY.parquet",
+        "sha256": "386c978d2642c691ccb678648866807eb09cab14929321be7e7c466634207bda"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/AMAT.parquet",
+        "sha256": "5be5bc2601e825e39d3e2228e65f0accf8f7f56e20f43f3b6114bf82c9aeb000"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/AMD.parquet",
+        "sha256": "393a1bff16818bf5dbe80e0f01b4946d08227dbf3d0ef0476f0669e189f39f7a"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/AMGN.parquet",
+        "sha256": "91e2eb2586eb2e6a24216a9df231aa7fc2c60eb871cacf50fb4391d7f5d85e7a"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ASML.parquet",
+        "sha256": "7786da4066774654616dd4e48a63cd48f258e5192bb7b54d4445a4e9dc23f811"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/AVGO.parquet",
+        "sha256": "06c776506d19145548e894dfaf101b14b802b29be5378711c08a43d078632d75"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/AZN.parquet",
+        "sha256": "a8d343c43f1eca0347b6e5350bcd4ea098ed846816b66bb5227d35250979210f"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/BATRA.parquet",
+        "sha256": "423ea6681f60d6d36181303eb34da84f670ecd6119b713a8755b21ae3bf3eeab"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/BATRK.parquet",
+        "sha256": "a5368b26249b2b4383fcc49233604b97fb02abed55291f032e5f6e423f8d5b74"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/BIDU.parquet",
+        "sha256": "4c6756f33dcf333d09ebb90fcd584647d0bf1e0224462314b4372cceb9387a61"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/BIIB.parquet",
+        "sha256": "5be1bd0c5d759ccbb212d3606b336a7549cbc2d1011fee0518197f35e1187ff1"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/BKR.parquet",
+        "sha256": "f8403ce59a509b1f7c6326630f7ca9e158b92179b1f8f5225a50f19aee9c90b2"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/BMRN.parquet",
+        "sha256": "96734c81945b4a6e7ca61ea8c19d2e1ce0d560943491e788de18efb67b98ee0b"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CCEP.parquet",
+        "sha256": "3e7e27c1cea6ba8f5872a6e9916b7ddd871617d1f2cb435a27324ace274b21ae"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CDNS.parquet",
+        "sha256": "c7499c6b951a7bbc937cea9722b4c17422b813128047c688b0cb0fcceb352203"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CDW.parquet",
+        "sha256": "e25c4649dbebc073b9fae2d89e4bbe75900edf66e70b1879544494ec421f2c20"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CEG.parquet",
+        "sha256": "74e5c1cccf9abaf4982fedcb98e0bd79202314100f4c2dea8efeafcbb674312c"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CHKP.parquet",
+        "sha256": "0b294e3c1cc56f00dee25266ea6511b4260b8423ffecb3cc311aa102d28ff8b2"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CMCSA.parquet",
+        "sha256": "299bcd7432c9ffd0f121dc1f1330cc0e7f7da6a7dbb5aaa9f1bf8a1b809ac9fe"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/COST.parquet",
+        "sha256": "010a9f522490720b7e3969f610935131f084dc3b13e71075302625d643e9f380"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CRWD.parquet",
+        "sha256": "63ad8d2c227c0538b654e71584d0cd60e6af4f71e533d511c21ca98e5eca9374"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CSCO.parquet",
+        "sha256": "d19319b9162252de7ada3843c090ade9dfb6520b4388eb4eb8217422640aca93"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CTAS.parquet",
+        "sha256": "5b7225dc150ac3507ccb2ac4cdd81ae39b090e325aa82674dda3153d9f7be7f9"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/CTSH.parquet",
+        "sha256": "b765885683d4300524dc2d0eaaa862d9dbc377681be36e0188b77035340b77c2"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/DASH.parquet",
+        "sha256": "4e6a43e28985a85f7af1082eb987f3f4eedded5c1c64356ec64716e8db75661f"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/DLTR.parquet",
+        "sha256": "8d3ef2d9c268fe4906608f149ad23a84099831c0af1dd2d5c9c0fbde49fad500"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/DOCU.parquet",
+        "sha256": "e6523fe0078b44775aeb8d8826c02f44fca2b9fd48211921f06b8167d03e12f4"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/EBAY.parquet",
+        "sha256": "eac975143655d8f97a91a51b446703f625d08b8167bb87ee59340cfee7cb720f"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ENPH.parquet",
+        "sha256": "23aa1115c685f94f4fa57d3549b4ba534c2ff0b0a3ccb220a9578c555da011e8"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/EQIX.parquet",
+        "sha256": "d540072af0ef366d042ca191ce5a297277d61704419b8a3bdf82b1a1947a3918"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ERIC.parquet",
+        "sha256": "2bd3331eaa550dd240029b17ce8ba5ea8755b08f62543b227c8aef38f5bc99cf"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/EXC.parquet",
+        "sha256": "ff2c34d7c191bec47785a3d5753f6834f1c619cb8f12f4bbaebdadb16313c4eb"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/EXPE.parquet",
+        "sha256": "a37d36673c207c35d179d762564314262e4fe71d82f10ad1e7da131241e08673"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/FANG.parquet",
+        "sha256": "ec5a29420dae09cc732aa6dbf6ae813d581e15bcf5a18f01b9a5049f78c8fd15"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/FAST.parquet",
+        "sha256": "054b0b89e3fa9a138028e55683ff8a8da1130ba37c989e21fbc62647ffc7b0bd"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/FER.parquet",
+        "sha256": "0c8c24cfb86dff93f83a2b03f87fac891b201b4f3eae891ed15116e293da8a35"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/FOSL.parquet",
+        "sha256": "2ad77a1125a1314f3b3809c1fe7efb22bb63ed13f004d826464c09f8ae87824a"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/FSLR.parquet",
+        "sha256": "366f6b1e948f2892cc8a8c9bd84ebcfffbc5fa6b4bad18f6e56500d75fec4395"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/GEHC.parquet",
+        "sha256": "6b562a2199e2231ef0e15e5522d56ae84fa10d45d892fccb8b7424464776c2c9"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/GENZ.parquet",
+        "sha256": "3c21b9f405b10274913a9eca1977e6f9942fdabfdeb3456e3f294f168ca759a1"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/GFS.parquet",
+        "sha256": "519e1a9e4b4500285f1158b8026495571308ac35da6cfdadbaa136d0ad864743"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/GILD.parquet",
+        "sha256": "9eb18d69931b81a02344de3d0aab62cdce5e8415a88e7ead9eef9507ee5e4644"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/GOLD.parquet",
+        "sha256": "290f65e52cb69e3e20828242424e1eb312b5572e149150bcdc35a581e4cb26d1"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/GRMN.parquet",
+        "sha256": "c096cc9ba4ca09963b6a349927e778078dbf2fcde8e3a62491b4f36eb7d7ab35"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ILMN.parquet",
+        "sha256": "1702226b31c0db5255e0d8e88d43d2a1553cee4569b1a66e5e302b1180eaa510"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/INFY.parquet",
+        "sha256": "a99a2031bf3f9af08cf242d543406adc1e53190b6baacee2ee9ea303cc4cb1b2"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/INSM.parquet",
+        "sha256": "264a6b47d804fc5ecb1598ad89535e276058694f604d516fc19f33dfa25deb66"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/INTC.parquet",
+        "sha256": "b90a19316971ce0fd29224aba189eda7fec2b9dc656b4159314b1f8ddbbd7154"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/INTU.parquet",
+        "sha256": "1162a82fd82b3eaaadc4dd38c9564999ec278d173d34575cf5f4494b26252987"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ISRG.parquet",
+        "sha256": "8409f6853e6902b886505030ff151ebf71d2165dbde1905f579605411172c36e"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/JAVA.parquet",
+        "sha256": "793689834854cfa6bccae1e961d97e26ef2c46688c7ce39a88bdede35148785a"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/JBHT.parquet",
+        "sha256": "a5d66b460b90ec28248eeedf1211bb4c0841cf2f2371ea3587ef89925c20e0f9"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/JD.parquet",
+        "sha256": "d95e9d7258d295f08b9b048fbd9cf75fe65351afd8edb0237f99cae9a5ba10c6"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/KDP.parquet",
+        "sha256": "7478b26084503748e54240a48186f4010b82cba1f53ad659b7312626110cb6cc"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/KLAC.parquet",
+        "sha256": "0482c9b8c87a4f9d9a6811795fe8097d6e4b6d837400c5aca152d82bf2cbdf86"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LAMR.parquet",
+        "sha256": "594bf47cd3ac062a536cfa4dd4e85ccee0a07071d52b476006446b585614e925"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LBTYA.parquet",
+        "sha256": "d83767656c684468084abb3ded40b716b31c9065a719ff378fd8ea67efef8341"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LBTYK.parquet",
+        "sha256": "93e3dec17435bc5b75ea5c593fe4bbe949e5f0798a464fb8c3f614c039af4dfa"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LCID.parquet",
+        "sha256": "012546d826f80dc4b1e0fb8cdc6c1ff69d0884cc57acb06cfdb17bdfb81603ba"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LIFE.parquet",
+        "sha256": "c89ed151d992a60cf3b1c26c5bfd2253d5c7ff70d21e034d41bc1e9e4ebbe725"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LILA.parquet",
+        "sha256": "618a6217c8d17b4f335c9e7ea4c8952fdc06ad4c9dd219def3bab93830432cd1"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LILAK.parquet",
+        "sha256": "17e418606237e320fe4de947e26175a589d7081bfc17ccfc320cff8c87add763"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LIN.parquet",
+        "sha256": "8cedd8267fb8dfde29e9dee22d70ebff3f640dbea2ce0679cb5bf43ef9ab69e1"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LOGI.parquet",
+        "sha256": "e9c0b5da7fb4b086f4a8581f6f2002c47c591387f81434154e817ece0c602b88"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/LRCX.parquet",
+        "sha256": "62cbac6bde307e1a6c75ac979e02708a19de3b44f5f006c2e0e18bb8f69d70fe"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MAR.parquet",
+        "sha256": "e80061eab004bd9fe3318a5b232e967a5b20c2cdc9c861578c76aedcfc9ca289"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MAT.parquet",
+        "sha256": "157dd4a40f0fcbc74477765cbbf5c1abfb39178e9d1562739470454f3c3dcb18"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MDB.parquet",
+        "sha256": "a836a4109a7bfd8e85626c423a224d94ac27520f84e483b4b0fac3930f2ae432"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MDLZ.parquet",
+        "sha256": "725f35050c5743f2bdd9dcd1e9991b29eb88d185184286cd88754901753d132c"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MEDI.parquet",
+        "sha256": "86bb90dd7f55ffe952227d9bdfcdf0c7d36da47496e06f9463160a15bc2c22c7"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MELI.parquet",
+        "sha256": "52f7fee21f5e0ecb625bd945c8d02316bdc3a11197d73db2ec292408ae7507f4"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MICC.parquet",
+        "sha256": "5d2b8a0a81eefb1d62e89cbee8f6c5a62078a72a56c35002a6c919f84bf3d2b1"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MNST.parquet",
+        "sha256": "af7776273dffd16553bdd278eff2ecf8f9499ded2042ab9d733bd7bcc8aa8760"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MPWR.parquet",
+        "sha256": "63c3487879d9796a7d12201def984a1eae6f56850281bc81dd4fdc46b3d5e4df"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MSFT.parquet",
+        "sha256": "ea01a3b4100a33c3d074c9a56be2089effbaa491a46b515beb9818f7404878f6"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MSTR.parquet",
+        "sha256": "92bc8e507841cdf5ececbdc4d2c673a8b08229df858f94d61fdb2a24c58284d7"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MTCH.parquet",
+        "sha256": "a0d6009c5d45f3b3bf6ab2607d8b20643810dbba071fa7dba18502ff1da28951"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/MU.parquet",
+        "sha256": "204bbbf55221b678caeeb680520ac26ace97b3581552234501a332b2bc48f3af"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/NCLH.parquet",
+        "sha256": "69bace33dc63347585ba631f8159c2105782bfda6a333492d5eb82993e3cdaba"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/NFLX.parquet",
+        "sha256": "840b0a3615ed8e13990ca52a2c4aad30c3e7d60aabde259f766287c3845763f6"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/NTAP.parquet",
+        "sha256": "d3f2ec0861edc543c51d24f47635f2f19d2edff24d36d379f5cb9ff7c5a041d8"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/NTES.parquet",
+        "sha256": "be72ac4f047cb38da78eccec82d492a13075564335630eeec9e5da49406d8d9f"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/NXPI.parquet",
+        "sha256": "ddf6546b3e3614b14fc86942561e652301cee221a3345e2507d439b5add904e7"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/OKTA.parquet",
+        "sha256": "a61eb59a2fbb23c942848a1de9dcd6b2c1608aa2c5e1a18cdceb1623854f41f0"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ON.parquet",
+        "sha256": "b52e63c01a46a12692c5673a32e721e1e0ca6ef0db5a1aa96b38dbe770e201f1"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/PANW.parquet",
+        "sha256": "9683cf5aa1c03f7f20252e612e61a8a718cd658120f7d1aa7578929ea7badc72"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/PAYX.parquet",
+        "sha256": "108ee952caf76aadf8c6608948f8badc4694509a9c798b18014d0a93be8632e7"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/PCAR.parquet",
+        "sha256": "0b428079b68f001860ad932f5279add8cd87d0877ed6ca5baba06d4b066bb79c"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/PDD.parquet",
+        "sha256": "3edff86948e65d258bcdea0693d4963090eb7e5639421baea769e8072e08584f"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/PLTR.parquet",
+        "sha256": "c33e9ae89d1a44deeb63d9be923be8734cb6c356930770cf10ad3288daa13743"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/PRGO.parquet",
+        "sha256": "140d649310c6ae796bc75df80ce3715d566d00c1b9fc9ecca91f38e91a243f9e"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/PTEN.parquet",
+        "sha256": "56432d8aa4734b0a78999a2335306792c430665d92987ca751df4213b545ef2d"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/PTON.parquet",
+        "sha256": "3f3c43d7c39104725cf106a759d8b0314c114964f6a364e236e89dbc85e45c12"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/QGEN.parquet",
+        "sha256": "d7510284b4de28d1337df0a2d4d38c35f69276b0cca4d111352421d320960a91"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/RIVN.parquet",
+        "sha256": "54f2745407bb15119ea692ef4ef4e7326859404715c4e1dfa0bca172bc32a8e7"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/RYAAY.parquet",
+        "sha256": "c5847d17d9aeac6599bebfa044a017a5cc87855124a3f6f5e1a5e2d650f068fa"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/SBAC.parquet",
+        "sha256": "a16de8f3bb34adaf58884e8afb7d82c608091e8bb755062fe3af2a3b33978e41"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/SHLD.parquet",
+        "sha256": "c661c1a4f270b01e087fc6af027a193fe9f718b6da3695e54406a3ca472f11de"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/SHOP.parquet",
+        "sha256": "25f6ea437d8adc8b5870793442428fdbd3527567088b2ab99395a7c0ef999226"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/SIRI.parquet",
+        "sha256": "e6ee954602ec652bd5f2b0592a48cf1a62ec2b98e18abaa61a27ec619d56ebc0"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/SMCI.parquet",
+        "sha256": "4f29b173e4a7face4a5b0e6913dd2186b94cce5e4a7e36c43b530dd5334bdc05"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/SNPS.parquet",
+        "sha256": "5e2eed4355be90b4d28d62d44d84cce40a517bdd036799d204e191a98dd69e45"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/SOLS.parquet",
+        "sha256": "f6d28f5fdb74947e46f089b525bd4869a5e85ecb8e2c36a5b6b339f6b6b78f7b"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/SPLS.parquet",
+        "sha256": "6b534461214d7b1a52e55f6c7c7fee839eb6aa9a80eec6ad304b304e47b2ed22"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/STLD.parquet",
+        "sha256": "8e60ff1362b7cc66a4e8a55d1aa92e8e05c6e7da9eb900af8bb2dbcac736b6b1"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/SWKS.parquet",
+        "sha256": "59c32bb2c0f290cb2cc583293f85a0b8ef5f25c2b7474d2e6bfd33e6c58efa4c"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/TEAM.parquet",
+        "sha256": "1fc783a80660b6c835b1024cb33fd4893dc2cf5993f56030864cb67667d6504f"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/TEVA.parquet",
+        "sha256": "06a8ffa690fb48d72eed949af82d17f6afca97e557059f25add9a82f4110c070"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/TMUS.parquet",
+        "sha256": "05444df29f8e7133f439acf3223a573d7ced4ec992e7eb6a13dfa85f3aad6403"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/TRI.parquet",
+        "sha256": "68020d1a44cc61c7cf7138839092b02f2b55d156815e025c7a33072119eccd86"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/TRIP.parquet",
+        "sha256": "4766776450de82131958834d52f0bafe2a6077c0b572dde335f11c0cc1a85739"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/TTWO.parquet",
+        "sha256": "39c13ecc0dac5f8d647b36ab1dc67d54c1312d8b4117c0df4e5f14d634aff056"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ULTA.parquet",
+        "sha256": "a105220b0f090bcb94bef093e30ea46a2ee891d457e7f253f008ecc140e17f66"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/URBN.parquet",
+        "sha256": "ff8848f87fae6fa66bf2b4b407acaeb236b8edec66e524fdc332ff8bb3ca0d3d"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/VIP.parquet",
+        "sha256": "07f59e9a4439adbe4f81e9ccf4a8f135494c24315a703e61171dbede127d0fe5"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/VOD.parquet",
+        "sha256": "9ceccca3c74cba1402a9d4fc71a9869b62fb06dc2f9410feea824df22edd5622"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/VRSK.parquet",
+        "sha256": "dde19ea9361c34b60c03e48bdd1cc45120fdd57dea96af98073da211eff17412"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/VRSN.parquet",
+        "sha256": "8016a88e5a45d148940c41e107d0f93ec1a08db76b9d6a2408a14b1835de6c93"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/VRTX.parquet",
+        "sha256": "cde1700070a2d9bf2b51b586fb819b2a27684dec106bd5e5010c66de28e2c033"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/VSNT.parquet",
+        "sha256": "fc894ab71031be918da69b91d54deca00670f1ecbc099efadf0a7df44d839a81"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/XEL.parquet",
+        "sha256": "04557fc4b73787d0f092200de71070cae0a6e7f65d130da04058e56aaefcb2b8"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/XRAY.parquet",
+        "sha256": "2961330176bd80210a6ea0ca4c1d47edbfa5e7bf33a36191d9e200f18ebd3f44"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ZM.parquet",
+        "sha256": "cfec889510698df7b7f8295b004e61b867571eece8c523e0564ec14fc3dd406b"
+      },
+      {
+        "path": "/tmp/ga9_nasdaq_archive/price_raw/ZS.parquet",
+        "sha256": "9514b1b1e6586db4e20597425d45e27a23319924e47a68d81a388467082bff01"
+      },
+      {
+        "path": "/opt/mts/ga6-git-backup/Research/Data/Comparators/SPY_YFINANCE_2005_2026.parquet",
+        "sha256": "b182402afd15c074ee4cc596149bf0a821e6cbd00fa5329d84eef269636f6381"
+      },
+      {
+        "source_file": "/tmp/ga9engineering/ga9/artifacts/alpaca_repair_live_batch_20261029/response_0001.json",
+        "source_sha256": "8a141ba3f6e79b3f471a368d463294fcc02f71710f0b965bdbd28a6c209c1e4b"
+      },
+      {
+        "source_file": "/tmp/ga9engineering/ga9/artifacts/alpaca_repair_live_batch_20261029/response_0002.json",
+        "source_sha256": "d9397f4e11f471dc596fbbccd62941ba3c258cb0861e277edabf9f2326dfd7a6"
+      },
+      {
+        "source_file": "/tmp/ga9engineering/ga9/artifacts/alpaca_repair_live_batch_20261029/response_0008.json",
+        "source_sha256": "0c2d40a771ed2eef4a37f4e2a817bf71131ac1e3f524870240f05ef1ae0ba905"
+      },
+      {
+        "source_file": "/tmp/ga9engineering/ga9/artifacts/alpaca_repair_live_batch_20261029/response_0014.json",
+        "source_sha256": "5dc3907f3928f8d56746c43ee1484de6d956fdffbd32d29504ecad7ac0f7d222"
+      },
+      {
+        "source_file": "/tmp/ga9engineering/ga9/artifacts/alpaca_repair_live_batch_20261029/response_0020.json",
+        "source_sha256": "42a0d48a82845d8b451200303e1df81b1b70a327ee3e192f3cb93066f89656d7"
+      }
+    ],
+    "excluded_incomplete": [],
+    "lineage_exclusions": [
+      {
+        "lineage": "FB/META",
+        "aliases": [
+          "FB",
+          "META"
+        ],
+        "reason": "FB_META_IDENTITY_LINEAGE_QUARANTINED_FOR_EXPLORATORY_DEVELOPMENT",
+        "matched_symbols": [],
+        "symbol_count": 0
+      },
+      {
+        "lineage": "XLNX",
+        "aliases": [
+          "XLNX"
+        ],
+        "reason": "XLNX_ACQUIRED_BY_AMD_DISTINCT_SUCCESSOR_NOT_A_BAR_ALIAS",
+        "matched_symbols": [],
+        "symbol_count": 0
+      }
+    ],
+    "excluded_lineage_count": 2,
+    "excluded_lineage_symbol_count": 0,
+    "cohort": "all available archive symbols outside protected identities; causal observed-bar eligibility; membership unverified",
+    "limitations": [
+      "survivorship and cohort selection bias",
+      "PIT eligibility and delisting outcomes unverified",
+      "zero distributions assumed; raw vendor split normalization unverified",
+      "peer sessions not independent calendar"
+    ]
+  },
+  "symbol_count": 125,
+  "train_ranking": {
+    "sessions": 66,
+    "top_net_20d": 0.01882446247772599,
+    "bottom_net_20d": -0.017944203094793856,
+    "spread": 0.03676866557251984
+  },
+  "development_ranking": {
+    "sessions": 471,
+    "top_net_20d": 0.029383999273927104,
+    "bottom_net_20d": 0.0159113320710117,
+    "spread": 0.013472667202915406
+  },
+  "momentum_diagnostic": {
+    "cagr": 0.16055852767378087,
+    "max_drawdown": 0.20008101454313876,
+    "calmar": 0.8024675806467555,
+    "final_nav": 134530.53324358212,
+    "feasible": true,
+    "above_drawdown_reference": true,
+    "fills": 1585,
+    "closed_trades": 790,
+    "exposure": 0.6071906677853182,
+    "costs": 8219.714102055574,
+    "turnover": 122.55680725506895,
+    "sessions": 502,
+    "attribution": [
+      34530.53324358213
+    ],
+    "open_positions": 5,
+    "max_symbol_weight": 0.1214321296730191,
+    "max_sector_weight": 0.9005006289976121,
+    "mean_concentration_hhi": 0.05354040426390526
+  },
+  "risk_audit": {
+    "holds": 3124,
+    "abstentions": 2,
+    "competition": 711,
+    "correlation_rejections": 0,
+    "risk_rejections": 29,
+    "sector_rejections": 0,
+    "evaluate_minus_one": 639,
+    "max_identity_error": 7.275957614183426e-11,
+    "min_cash": 9232.461093026765,
+    "max_symbol_weight": 0.1214321296730191,
+    "max_total_risk": 0.016124350308194393
+  },
+  "QQQ": {
+    "cagr": 0.38604670806647023,
+    "max_drawdown": 0.13557738189915702,
+    "calmar": 2.8474270756578943,
+    "final_nav": 191615.44419501498,
+    "feasible": true,
+    "above_drawdown_reference": true,
+    "fills": 0,
+    "closed_trades": 0,
+    "exposure": 1.0,
+    "costs": 0.0,
+    "turnover": 0.0,
+    "sessions": 502
+  },
+  "excess_cagr": -0.22548818039268936,
+  "pareto": [
+    {
+      "cagr": 0.16055852767378087,
+      "mdd": 0.20008101454313876,
+      "calmar": 0.8024675806467555,
+      "excess_cagr": -0.22548818039268936
+    }
+  ],
+  "status": "NO_VALID_PROOF_NO_TRADE",
+  "long_ga_started": false,
+  "limitations": [
+    "observed-bar eligibility is not verified historical membership",
+    "survivorship bias and missing delisting outcomes",
+    "archive distributions and split normalization unverified",
+    "QQQ completeness required for economic proof",
+    "fixed development diagnostic is not a positive expected net-edge model",
+    "close-observed stops execute next open; gaps can exceed 2% planned risk",
+    "close marked risk can drift above cap; admission constraint is not a guarantee"
+  ]
+}

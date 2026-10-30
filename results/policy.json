@@ -1,0 +1,12 @@
+{
+  "primary_benchmark": "QQQ",
+  "top_n": 10,
+  "weight": 0.09,
+  "stop_distance": 0.02,
+  "risk_cap": 0.02,
+  "reserve": 0.1,
+  "cost_bps_per_side": 6,
+  "train": "2022",
+  "development_test": "2023-2024 previously exposed",
+  "sealed_data_access": false
+}
