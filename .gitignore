@@ -1,3 +1,6 @@
 secrets/
 earnings_cache/
 pilot_2019_sample.csv
+
+universe_2019/
+universe_2019_run.log
