@@ -1,0 +1,13 @@
+{
+  "protocol_version": 1,
+  "frozen_before_new_outcomes": true,
+  "discovery": [2011, 2012, 2013, 2014],
+  "blind": [2015, 2016, 2017, 2018],
+  "exploratory": [2019],
+  "crash_separate": [2020],
+  "exclusions": {"2008": "crash", "2020": "crash and previously inspected"},
+  "holdout_locked": true,
+  "data_status": "incomplete; no certified PIT universe or delisting coverage",
+  "sector_benchmark": "equal-weight mean",
+  "horizons_months": [1, 3, 6]
+}

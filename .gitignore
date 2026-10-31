@@ -4,3 +4,7 @@ pilot_2019_sample.csv
 
 universe_2019/
 universe_2019_run.log
+.venv/
+__pycache__/
+.pytest_cache/
+reports/*/prices.csv

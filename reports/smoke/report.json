@@ -1,0 +1,157 @@
+{
+  "status": "exploratory incomplete",
+  "predictive_claim": false,
+  "manifest_sha256": "8dc029ad3c80b4870f5790efcaa9899d516f656df60a16e05fe3c9f0446dc043",
+  "years": [
+    2019
+  ],
+  "sources": [
+    "PIT constituent intervals: supplied/provisional pilot",
+    "Yahoo historical adjusted OHLCV: provisional",
+    "SEC companyfacts filed dates",
+    "Alpha Vantage reported dates",
+    "FRED vintage adapter"
+  ],
+  "analyst_revisions": "unavailable; not assumed free; excluded",
+  "price_rows": 5406,
+  "observations": 216,
+  "failures": [],
+  "price_issues": 0,
+  "limitations": [
+    "PIT constituent and sector certification missing",
+    "Delisting returns unavailable; survivor/selection bias",
+    "Yahoo adjustment history provisional; no trading claim",
+    "H4/H5 missing unless explicitly supplied",
+    "FRED regime fetched separately; no regime inference without vintage input",
+    "HAC normal approximation; small samples descriptive only",
+    "Unresolved price gaps diagnosed, not repaired"
+  ],
+  "summary": {
+    "H1_1": {
+      "n": 12,
+      "mean": -0.08333333333333331,
+      "se": 0.1739385800494808,
+      "p": 0.6318701087218456,
+      "holm_p": 1
+    },
+    "H2_1": {
+      "n": 12,
+      "mean": -0.15833333333333333,
+      "se": 0.13305091617984557,
+      "p": 0.2340382889121913,
+      "holm_p": 1
+    },
+    "H3_1": {
+      "n": 12,
+      "mean": -0.09166666666666666,
+      "se": 0.15610641550866178,
+      "p": 0.5570651789051607,
+      "holm_p": 1
+    },
+    "H4_1": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "p": null,
+      "holm_p": null
+    },
+    "H5_1": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "p": null,
+      "holm_p": null
+    },
+    "composite_1": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "p": null,
+      "holm_p": null
+    },
+    "H1_3": {
+      "n": 12,
+      "mean": -0.041666666666666664,
+      "se": 0.23214118956575572,
+      "p": 0.8575541708498781,
+      "holm_p": 1
+    },
+    "H2_3": {
+      "n": 12,
+      "mean": 0.03333333333333332,
+      "se": 0.11848234401640355,
+      "p": 0.7784528005732425,
+      "holm_p": 1
+    },
+    "H3_3": {
+      "n": 12,
+      "mean": -0.2833333333333333,
+      "se": 0.13758648608153118,
+      "p": 0.03946447689895957,
+      "holm_p": 0.3551802920906362
+    },
+    "H4_3": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "p": null,
+      "holm_p": null
+    },
+    "H5_3": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "p": null,
+      "holm_p": null
+    },
+    "composite_3": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "p": null,
+      "holm_p": null
+    },
+    "H1_6": {
+      "n": 12,
+      "mean": 0.13333333333333333,
+      "se": 0.10372436963398274,
+      "p": 0.1986322420746285,
+      "holm_p": 1
+    },
+    "H2_6": {
+      "n": 12,
+      "mean": 0.06666666666666665,
+      "se": 0.041974173913493104,
+      "p": 0.11222343791649436,
+      "holm_p": 0.8977875033319549
+    },
+    "H3_6": {
+      "n": 12,
+      "mean": -0.17500000000000002,
+      "se": 0.1421000316026759,
+      "p": 0.21812589215380057,
+      "holm_p": 1
+    },
+    "H4_6": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "p": null,
+      "holm_p": null
+    },
+    "H5_6": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "p": null,
+      "holm_p": null
+    },
+    "composite_6": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "p": null,
+      "holm_p": null
+    }
+  }
+}

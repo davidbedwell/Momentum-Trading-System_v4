@@ -1,5 +1,7 @@
 # Data-source policy
-Primary provider: Alpaca for historical OHLCV, market context, and supported corporate actions.
-Earnings requirement: independently verify whether Alpaca supplies historical earnings announcement timestamps, actual EPS, consensus estimates, surprises, revenue and guidance for each research year. Do not equate trading calendars or corporate-action records with complete earnings fundamentals. Record missing fields and coverage gaps; do not fabricate or silently backfill with another provider.
-Study years: four non-crash discovery and four different non-crash blind years, to be selected and frozen before inspecting outcomes.
-Isolation: no protected MTS research/validation banks or DEV79 datasets.
+
+Priorities: historical PIT constituents including exits and PIT sectors; Yahoo historical adjusted OHLCV (provisional); SEC EDGAR companyfacts using filing dates; Alpha Vantage reported earnings surprises subject to availability; FRED/ALFRED as-of vintages. Historical analyst revisions are not assumed free and remain unavailable. No fabricated data or silent provider substitution.
+
+Existing 2019 membership and 420/505 price coverage are provisional. No certification of dividend, delisting or identity completeness. Missing terminal returns cause selection bias. Eight candidate years and exclusions are frozen in manifest.json; blind years remain locked. See RESEARCH_PROTOCOL.md for evaluation rules and stop conditions.
+
+Work only inside this independent repository. No protected MTS DEV79/DEV37/DEV50 or GA datasets. No GitHub push.
