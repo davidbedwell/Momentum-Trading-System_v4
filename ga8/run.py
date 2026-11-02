@@ -232,7 +232,14 @@ def main():
 
 if __name__=='__main__':
     try:
-        main()
+        import sys
+        if '--long-search' in sys.argv:
+            sys.argv.remove('--long-search')
+            from .long_run import main as long_main
+            long_main()
+        else:
+            main()
     except Exception as exc:
-        status('FAILED',[],str(exc),None,blockers=[str(exc)])
+        if '--long-search' not in __import__('sys').orig_argv:
+            status('FAILED',[],str(exc),None,blockers=[str(exc)])
         raise

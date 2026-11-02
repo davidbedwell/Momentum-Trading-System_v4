@@ -1,0 +1,1140 @@
+{
+  "eligible": 5851,
+  "tested": 5851,
+  "forward_successes": 2712,
+  "forward_success_rate": 0.4635105110237566,
+  "benchmarks": {
+    "SPY": {
+      "cagr": 0.2601031449772373,
+      "max_drawdown": 0.08356003493890318,
+      "calmar": 3.112769701058857,
+      "final_nav": 126010.31449772374,
+      "feasible": true,
+      "fills": 1,
+      "closed_trades": 0,
+      "exposure": 0.9911874269773504,
+      "costs": 59.96901559218425,
+      "turnover": 0.865400305220079,
+      "sessions": 252,
+      "open_positions": 1
+    },
+    "equal_weight_DEV79": {
+      "cagr": 0.20697272507683895,
+      "max_drawdown": 0.07204119773782103,
+      "calmar": 2.8729772904397453,
+      "final_nav": 120697.2725076839,
+      "feasible": true,
+      "fills": 79,
+      "closed_trades": 0,
+      "exposure": 0.984063340238309,
+      "costs": 59.969015592187894,
+      "turnover": 0.8892273617570544,
+      "sessions": 252,
+      "open_positions": 79
+    }
+  },
+  "benchmark_wins": {
+    "SPY": 0,
+    "equal_weight_DEV79": 6
+  },
+  "distributions": {
+    "training": {
+      "cagr": {
+        "min": 0.018622565011586545,
+        "p05": 0.058670645006094535,
+        "p25": 0.08444027175567659,
+        "median": 0.10335611700305125,
+        "p75": 0.12324847379921033,
+        "p95": 0.1608618527458744,
+        "max": 0.2684470794822651
+      },
+      "max_drawdown": {
+        "min": 0.006410240754013086,
+        "p05": 0.029172515439159163,
+        "p25": 0.04368683580160204,
+        "median": 0.05268151800856691,
+        "p75": 0.06392215868783363,
+        "p95": 0.08535072319230319,
+        "max": 0.125930947962539
+      },
+      "calmar": {
+        "min": 1.500007222238194,
+        "p05": 1.5301705930201293,
+        "p25": 1.6553314450011651,
+        "median": 1.862979273025797,
+        "p75": 2.182784499739859,
+        "p95": 2.8111071067789655,
+        "max": 7.8368362488941115
+      },
+      "final_nav": {
+        "min": 103736.4039412587,
+        "p05": 112002.307445577,
+        "p25": 117487.63446273058,
+        "median": 121597.00938946768,
+        "p75": 125994.2633020039,
+        "p95": 134520.93688635592,
+        "max": 160440.96776727325
+      },
+      "closed_trades": {
+        "min": 45.0,
+        "p05": 209.5,
+        "p25": 353.0,
+        "median": 437.0,
+        "p75": 525.0,
+        "p95": 730.0,
+        "max": 1508.0
+      }
+    },
+    "forward": {
+      "cagr": {
+        "min": -0.1182235271284805,
+        "p05": -0.012189829197917279,
+        "p25": 0.02633464294791188,
+        "median": 0.051959010082338386,
+        "p75": 0.08855185704115165,
+        "p95": 0.13453159425165806,
+        "max": 0.23184024041202944
+      },
+      "max_drawdown": {
+        "min": 0.004699146588127423,
+        "p05": 0.019992199071676764,
+        "p25": 0.028146031487508327,
+        "median": 0.04118416778210554,
+        "p75": 0.05755463868049876,
+        "p95": 0.08204694502768645,
+        "max": 0.14896985688381492
+      },
+      "calmar": {
+        "min": -0.9800243072075697,
+        "p05": -0.21666284115100448,
+        "p25": 0.49366416545634406,
+        "median": 1.3214441222164526,
+        "p75": 2.7309797232075548,
+        "p95": 5.047821418103113,
+        "max": 9.598589701636124
+      },
+      "final_nav": {
+        "min": 88177.64728715195,
+        "p05": 98781.01708020827,
+        "p25": 102633.46429479119,
+        "median": 105195.90100823384,
+        "p75": 108855.18570411517,
+        "p95": 113453.15942516581,
+        "max": 123184.02404120294
+      },
+      "closed_trades": {
+        "min": 17.0,
+        "p05": 83.0,
+        "p25": 139.0,
+        "median": 207.0,
+        "p75": 259.0,
+        "p95": 428.0,
+        "max": 877.0
+      }
+    }
+  },
+  "winners": [
+    {
+      "behavior_sha256": "d65c432d99f34d520e9fbdcc9b93feeac75c8d282c81cd9010ab1fc41fab263d",
+      "id": "a63694c2458c4b41",
+      "source_ids": [
+        "a63694c2458c4b41"
+      ],
+      "training": {
+        "cagr": 0.11962566801459595,
+        "max_drawdown": 0.06024064331204082,
+        "calmar": 1.9857966555062558,
+        "final_nav": 125187.65147562543,
+        "feasible": true,
+        "fills": 1090,
+        "closed_trades": 484,
+        "exposure": 0.2419836575411938,
+        "costs": 5625.375282145142,
+        "turnover": 85.6879224055242,
+        "sessions": 501,
+        "attribution": [
+          9523.877249231247,
+          14881.825272014628,
+          781.9489543796261
+        ],
+        "open_positions": 4
+      },
+      "forward": {
+        "cagr": 0.23184024041202944,
+        "max_drawdown": 0.027863489137700315,
+        "calmar": 8.320574615271035,
+        "final_nav": 123184.02404120294,
+        "feasible": true,
+        "fills": 652,
+        "closed_trades": 280,
+        "exposure": 0.3141968356164611,
+        "costs": 3258.0674442908935,
+        "turnover": 48.32891877351878,
+        "sessions": 252,
+        "attribution": [
+          12505.46064385776,
+          2917.9935738936174,
+          7760.569823451591
+        ],
+        "open_positions": 1
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": true
+      }
+    },
+    {
+      "behavior_sha256": "0e3bcd7a81bd2bc24bb75b81eed0aff7c0471d22e919e0cdff738da961cbbb48",
+      "id": "e4ce29e8c1dbd5ea",
+      "source_ids": [
+        "e4ce29e8c1dbd5ea"
+      ],
+      "training": {
+        "cagr": 0.08485215339978658,
+        "max_drawdown": 0.05370689602977907,
+        "calmar": 1.579911699844621,
+        "final_nav": 117576.36590708162,
+        "feasible": true,
+        "fills": 1592,
+        "closed_trades": 640,
+        "exposure": 0.323569451595915,
+        "costs": 6299.1014989739115,
+        "turnover": 98.52340032293606,
+        "sessions": 501,
+        "attribution": [
+          7132.080462021928,
+          8233.416465236867,
+          2210.8689798229707
+        ],
+        "open_positions": 4
+      },
+      "forward": {
+        "cagr": 0.22005614545593222,
+        "max_drawdown": 0.02586039976977439,
+        "calmar": 8.509386839144446,
+        "final_nav": 122005.61454559321,
+        "feasible": true,
+        "fills": 735,
+        "closed_trades": 287,
+        "exposure": 0.37383122028705823,
+        "costs": 3060.138729601269,
+        "turnover": 44.59271993008129,
+        "sessions": 252,
+        "attribution": [
+          5947.317044554049,
+          17066.319041984665,
+          -1008.0215409455853
+        ],
+        "open_positions": 4
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": true
+      }
+    },
+    {
+      "behavior_sha256": "be0160989c3997922f44b446d66f88c61dcf4017839a21002468bbc699d1ef93",
+      "id": "d631bfe8dce598c4",
+      "source_ids": [
+        "d631bfe8dce598c4"
+      ],
+      "training": {
+        "cagr": 0.12856651868590685,
+        "max_drawdown": 0.0853996239631748,
+        "calmar": 1.505469377023792,
+        "final_nav": 127182.9810916151,
+        "feasible": true,
+        "fills": 1910,
+        "closed_trades": 707,
+        "exposure": 0.5546323453433581,
+        "costs": 6314.329760912235,
+        "turnover": 94.45856727448974,
+        "sessions": 501,
+        "attribution": [
+          7391.679329887934,
+          17470.421582584597,
+          2320.8801791426204
+        ],
+        "open_positions": 15
+      },
+      "forward": {
+        "cagr": 0.21783914025081796,
+        "max_drawdown": 0.04078927076768035,
+        "calmar": 5.340599038691916,
+        "final_nav": 121783.91402508179,
+        "feasible": true,
+        "fills": 1016,
+        "closed_trades": 347,
+        "exposure": 0.6510310632393289,
+        "costs": 2936.996710869094,
+        "turnover": 44.44765498632287,
+        "sessions": 252,
+        "attribution": [
+          10340.487894544485,
+          5547.886998874254,
+          5895.539131662981
+        ],
+        "open_positions": 8
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": true
+      }
+    },
+    {
+      "behavior_sha256": "ce1f08470dbdf2bb414bbb49065c74d2edf082c40abcbc7b1fe26672c1aab08d",
+      "id": "d8657e3857259685",
+      "source_ids": [
+        "d8657e3857259685"
+      ],
+      "training": {
+        "cagr": 0.08374361708931288,
+        "max_drawdown": 0.051984459928475224,
+        "calmar": 1.610935598918113,
+        "final_nav": 117337.63025346048,
+        "feasible": true,
+        "fills": 1430,
+        "closed_trades": 627,
+        "exposure": 0.29366047611216517,
+        "costs": 7018.6967167269,
+        "turnover": 110.1612327696297,
+        "sessions": 501,
+        "attribution": [
+          8832.333685374688,
+          12195.70641368853,
+          -3690.4098456027505
+        ],
+        "open_positions": 8
+      },
+      "forward": {
+        "cagr": 0.21452542291223775,
+        "max_drawdown": 0.025035245160880182,
+        "calmar": 8.568936374845372,
+        "final_nav": 121452.54229122377,
+        "feasible": true,
+        "fills": 743,
+        "closed_trades": 312,
+        "exposure": 0.3499810971754167,
+        "costs": 3846.4098018759114,
+        "turnover": 57.244971151942856,
+        "sessions": 252,
+        "attribution": [
+          9596.329295092866,
+          4484.165788439981,
+          7372.047207690797
+        ],
+        "open_positions": 1
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": true
+      }
+    },
+    {
+      "behavior_sha256": "6a975096075473abf2e4928ee5127dbce38dc5b5de4d13f690bee58a1e599ae1",
+      "id": "02fdc6046f89e534",
+      "source_ids": [
+        "02fdc6046f89e534"
+      ],
+      "training": {
+        "cagr": 0.13481183383167505,
+        "max_drawdown": 0.08320750468076688,
+        "calmar": 1.6201883994585928,
+        "final_nav": 128586.05028789531,
+        "feasible": true,
+        "fills": 1386,
+        "closed_trades": 567,
+        "exposure": 0.33896284136051236,
+        "costs": 6555.724678974909,
+        "turnover": 100.26142480495713,
+        "sessions": 501,
+        "attribution": [
+          2902.0545213336586,
+          15384.533722216664,
+          10299.462044345015
+        ],
+        "open_positions": 4
+      },
+      "forward": {
+        "cagr": 0.2128574336969722,
+        "max_drawdown": 0.0393144103396883,
+        "calmar": 5.414234420860446,
+        "final_nav": 121285.74336969721,
+        "feasible": true,
+        "fills": 774,
+        "closed_trades": 286,
+        "exposure": 0.5214945418441129,
+        "costs": 3571.688240271579,
+        "turnover": 51.56109419825327,
+        "sessions": 252,
+        "attribution": [
+          2871.6793532273696,
+          4292.44225742452,
+          14121.621759045353
+        ],
+        "open_positions": 2
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": true
+      }
+    },
+    {
+      "behavior_sha256": "44f05bba76f4f29eb500ec40469f56c9a0b1da39c4d548d17ba591775061f073",
+      "id": "ca8ae54ed8a0c78c",
+      "source_ids": [
+        "ca8ae54ed8a0c78c"
+      ],
+      "training": {
+        "cagr": 0.11475801711328759,
+        "max_drawdown": 0.07615434401076593,
+        "calmar": 1.5069136055727073,
+        "final_nav": 124107.93081584442,
+        "feasible": true,
+        "fills": 1126,
+        "closed_trades": 453,
+        "exposure": 0.2626198996344121,
+        "costs": 4814.736263939141,
+        "turnover": 74.354467035012,
+        "sessions": 501,
+        "attribution": [
+          460.86501074828413,
+          10619.80345999813,
+          13027.26234509822
+        ],
+        "open_positions": 0
+      },
+      "forward": {
+        "cagr": 0.2107934192406693,
+        "max_drawdown": 0.023837892183483644,
+        "calmar": 8.842787676786285,
+        "final_nav": 121079.34192406693,
+        "feasible": true,
+        "fills": 610,
+        "closed_trades": 238,
+        "exposure": 0.2810932020131797,
+        "costs": 2681.3263957666886,
+        "turnover": 39.9565408451557,
+        "sessions": 252,
+        "attribution": [
+          11766.172568664188,
+          3666.3736737770537,
+          5646.79568162558
+        ],
+        "open_positions": 2
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": true
+      }
+    },
+    {
+      "behavior_sha256": "943c7beaedd6cd8bd523fed8df0dd3ac7afb7ec442cb415ab44acb66f9f39522",
+      "id": "943c7beaedd6cd8b",
+      "source_ids": [
+        "943c7beaedd6cd8b"
+      ],
+      "training": {
+        "cagr": 0.148455171102011,
+        "max_drawdown": 0.06356574507908785,
+        "calmar": 2.335458680100494,
+        "final_nav": 131677.76657155034,
+        "feasible": true,
+        "fills": 1469,
+        "closed_trades": 585,
+        "exposure": 0.4128935511146436,
+        "costs": 6268.61176880277,
+        "turnover": 92.9960464168897,
+        "sessions": 501,
+        "attribution": [
+          6295.036644699787,
+          17507.097356061506,
+          7875.63257078909
+        ],
+        "open_positions": 9
+      },
+      "forward": {
+        "cagr": 0.20683636894421809,
+        "max_drawdown": 0.03014697055993054,
+        "calmar": 6.8609337887877855,
+        "final_nav": 120683.6368944218,
+        "feasible": true,
+        "fills": 672,
+        "closed_trades": 247,
+        "exposure": 0.49220718838255323,
+        "costs": 2795.699222715279,
+        "turnover": 40.857941021562524,
+        "sessions": 252,
+        "attribution": [
+          2223.648830477465,
+          3630.688732064737,
+          14829.299331879572
+        ],
+        "open_positions": 2
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "e28783c34724253688cb5dfdec14eb99e9d6eef15e2199f78ac5ec57655f5727",
+      "id": "b7d7f01da8a15a30",
+      "source_ids": [
+        "b7d7f01da8a15a30"
+      ],
+      "training": {
+        "cagr": 0.18551260204643016,
+        "max_drawdown": 0.12336224533881213,
+        "calmar": 1.5038037086381106,
+        "final_nav": 140259.57363926992,
+        "feasible": true,
+        "fills": 1513,
+        "closed_trades": 612,
+        "exposure": 0.48833112200775236,
+        "costs": 5806.810029021393,
+        "turnover": 84.08406860218867,
+        "sessions": 501,
+        "attribution": [
+          9828.839256345773,
+          12447.847545065306,
+          17982.8868378589
+        ],
+        "open_positions": 7
+      },
+      "forward": {
+        "cagr": 0.2052762947581548,
+        "max_drawdown": 0.04446335098831189,
+        "calmar": 4.616752678225173,
+        "final_nav": 120527.62947581548,
+        "feasible": true,
+        "fills": 815,
+        "closed_trades": 315,
+        "exposure": 0.6505195257248206,
+        "costs": 2825.46705536395,
+        "turnover": 41.29896926361982,
+        "sessions": 252,
+        "attribution": [
+          16052.23512973975,
+          3956.7068872542213,
+          518.6874588215011
+        ],
+        "open_positions": 11
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "2162b10e0ddcdc1cd95b4c9216fa732f0290639751e0b801d01ad725da60ee53",
+      "id": "f0a51c4b65e4cacc",
+      "source_ids": [
+        "f0a51c4b65e4cacc"
+      ],
+      "training": {
+        "cagr": 0.16282704482723975,
+        "max_drawdown": 0.10285992349969553,
+        "calmar": 1.5829979187931413,
+        "final_nav": 134974.05825123546,
+        "feasible": true,
+        "fills": 1501,
+        "closed_trades": 631,
+        "exposure": 0.33018496717920337,
+        "costs": 7131.553989682788,
+        "turnover": 104.27890225171602,
+        "sessions": 501,
+        "attribution": [
+          12312.730635123937,
+          10504.751383938428,
+          12156.576232173016
+        ],
+        "open_positions": 4
+      },
+      "forward": {
+        "cagr": 0.2045268799673845,
+        "max_drawdown": 0.028764376568630512,
+        "calmar": 7.110422834278801,
+        "final_nav": 120452.68799673846,
+        "feasible": true,
+        "fills": 649,
+        "closed_trades": 267,
+        "exposure": 0.36040861198163815,
+        "costs": 3186.2284413070724,
+        "turnover": 47.15710869361112,
+        "sessions": 252,
+        "attribution": [
+          13779.36904471462,
+          2731.6457865807647,
+          3941.6731654430564
+        ],
+        "open_positions": 1
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "411113134b3b6de6f8075e819901690197a57d015e91af08aec15294c547fbcb",
+      "id": "8d1d6bec167b7805",
+      "source_ids": [
+        "8d1d6bec167b7805"
+      ],
+      "training": {
+        "cagr": 0.1662498657337732,
+        "max_drawdown": 0.10676514643406232,
+        "calmar": 1.5571548514331723,
+        "final_nav": 135765.07858577446,
+        "feasible": true,
+        "fills": 1387,
+        "closed_trades": 523,
+        "exposure": 0.44137247793764584,
+        "costs": 4631.019531317244,
+        "turnover": 68.72868757572459,
+        "sessions": 501,
+        "attribution": [
+          3216.9431633167296,
+          14068.368733907077,
+          18479.766688550593
+        ],
+        "open_positions": 11
+      },
+      "forward": {
+        "cagr": 0.20152413883181164,
+        "max_drawdown": 0.04257555993985396,
+        "calmar": 4.7333291474381705,
+        "final_nav": 120152.41388318117,
+        "feasible": true,
+        "fills": 859,
+        "closed_trades": 311,
+        "exposure": 0.5589429896437353,
+        "costs": 2507.2989727718036,
+        "turnover": 37.14750919859289,
+        "sessions": 252,
+        "attribution": [
+          14050.213223636481,
+          2105.459540668586,
+          3996.741118876095
+        ],
+        "open_positions": 5
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    }
+  ],
+  "losers": [
+    {
+      "behavior_sha256": "bb7eb65fc4e16bc9c19b7db04d4008e76b81eb77581995952a549cb090fbe76b",
+      "id": "d03d53ea6e6548da",
+      "source_ids": [
+        "d03d53ea6e6548da"
+      ],
+      "training": {
+        "cagr": 0.1724448600239763,
+        "max_drawdown": 0.10813531997306525,
+        "calmar": 1.5947135502713592,
+        "final_nav": 137202.5948876938,
+        "feasible": true,
+        "fills": 1869,
+        "closed_trades": 841,
+        "exposure": 0.2667794560493192,
+        "costs": 6974.427505984476,
+        "turnover": 102.76979349191147,
+        "sessions": 501,
+        "attribution": [
+          0.0,
+          11333.547405093912,
+          25869.0474825998
+        ],
+        "open_positions": 0
+      },
+      "forward": {
+        "cagr": -0.1182235271284805,
+        "max_drawdown": 0.14896985688381492,
+        "calmar": -0.7936070397159997,
+        "final_nav": 88177.64728715195,
+        "feasible": false,
+        "fills": 1669,
+        "closed_trades": 788,
+        "exposure": 0.28897573039127716,
+        "costs": 5239.001791431189,
+        "turnover": 92.55859889991967,
+        "sessions": 252,
+        "attribution": [
+          0.0,
+          -14394.315451662398,
+          2571.96273881449
+        ],
+        "open_positions": 0
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "48a9b0c64227bfea71384e1b9fadf2f51556eb0afaff1bdc99fe403098c00f81",
+      "id": "2356dd3eb10c85a3",
+      "source_ids": [
+        "2356dd3eb10c85a3"
+      ],
+      "training": {
+        "cagr": 0.20598444555079842,
+        "max_drawdown": 0.11386016637986762,
+        "calmar": 1.8091001629453083,
+        "final_nav": 145115.91990462388,
+        "feasible": true,
+        "fills": 2168,
+        "closed_trades": 1014,
+        "exposure": 0.3097765144396301,
+        "costs": 7506.4107593377,
+        "turnover": 111.87168297916135,
+        "sessions": 501,
+        "attribution": [
+          3581.3598439166426,
+          0.0,
+          41534.56006070717
+        ],
+        "open_positions": 5
+      },
+      "forward": {
+        "cagr": -0.10249218492211598,
+        "max_drawdown": 0.12537926967518365,
+        "calmar": -0.8174571856068347,
+        "final_nav": 89750.7815077884,
+        "feasible": false,
+        "fills": 1702,
+        "closed_trades": 810,
+        "exposure": 0.2873145875385831,
+        "costs": 5107.0544858990215,
+        "turnover": 90.80789392100499,
+        "sessions": 252,
+        "attribution": [
+          -1391.8201318484032,
+          0.0,
+          -8857.398360363173
+        ],
+        "open_positions": 0
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "58de8686772540d4df44068f9e26519bccaa78136aa5b6fb54b1d1b3a1fa0a5e",
+      "id": "b26973977458d098",
+      "source_ids": [
+        "b26973977458d098"
+      ],
+      "training": {
+        "cagr": 0.2087057086681865,
+        "max_drawdown": 0.10988131021682723,
+        "calmar": 1.8993740451069474,
+        "final_nav": 145767.64576131818,
+        "feasible": true,
+        "fills": 2165,
+        "closed_trades": 1012,
+        "exposure": 0.30990139327535565,
+        "costs": 7525.865495940265,
+        "turnover": 111.75545057198079,
+        "sessions": 501,
+        "attribution": [
+          3597.5108089111427,
+          170.9468000098797,
+          41999.18815239717
+        ],
+        "open_positions": 5
+      },
+      "forward": {
+        "cagr": -0.10183217971118574,
+        "max_drawdown": 0.12537926967518365,
+        "calmar": -0.8121931159353484,
+        "final_nav": 89816.78202888143,
+        "feasible": false,
+        "fills": 1704,
+        "closed_trades": 811,
+        "exposure": 0.287715500622171,
+        "costs": 5117.769124605333,
+        "turnover": 90.99661756940267,
+        "sessions": 252,
+        "attribution": [
+          -1391.8201318484032,
+          66.04921657168559,
+          -8857.447055841849
+        ],
+        "open_positions": 0
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "c8e8b342dd3155c23d003bfd920ebf5fb48541a5587b21a71fbcb44e33da8b62",
+      "id": "6a3e531544991f3a",
+      "source_ids": [
+        "6a3e531544991f3a"
+      ],
+      "training": {
+        "cagr": 0.08391968861286858,
+        "max_drawdown": 0.04504595935550515,
+        "calmar": 1.862979273025797,
+        "final_nav": 117375.53310856767,
+        "feasible": true,
+        "fills": 1401,
+        "closed_trades": 682,
+        "exposure": 0.09861094666122665,
+        "costs": 4009.6969764780642,
+        "turnover": 63.38977596450377,
+        "sessions": 501,
+        "attribution": [
+          0.0,
+          9960.061686238698,
+          7415.471422328954
+        ],
+        "open_positions": 0
+      },
+      "forward": {
+        "cagr": -0.09133853236729472,
+        "max_drawdown": 0.09320027237645767,
+        "calmar": -0.9800243072075697,
+        "final_nav": 90866.14676327053,
+        "feasible": false,
+        "fills": 1415,
+        "closed_trades": 694,
+        "exposure": 0.15711841435476903,
+        "costs": 3449.6213285799436,
+        "turnover": 60.379987547580455,
+        "sessions": 252,
+        "attribution": [
+          0.0,
+          -8377.064858143263,
+          -756.7883785861651
+        ],
+        "open_positions": 0
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "97f94efcc581fa3073d3e46db75d9d01b79f384aba259dcb7e1f3d8e1b4935ba",
+      "id": "fb59d23055112d29",
+      "source_ids": [
+        "fb59d23055112d29"
+      ],
+      "training": {
+        "cagr": 0.09107470929862083,
+        "max_drawdown": 0.05935996360536944,
+        "calmar": 1.5342783884453497,
+        "final_nav": 118920.93894526477,
+        "feasible": true,
+        "fills": 1966,
+        "closed_trades": 905,
+        "exposure": 0.2305178410435152,
+        "costs": 6608.0934517114865,
+        "turnover": 103.40410319939292,
+        "sessions": 501,
+        "attribution": [
+          9427.998914995944,
+          3326.7381214248426,
+          6166.201908844044
+        ],
+        "open_positions": 0
+      },
+      "forward": {
+        "cagr": -0.0904954541863453,
+        "max_drawdown": 0.11867224398776499,
+        "calmar": -0.7625663014822177,
+        "final_nav": 90950.45458136547,
+        "feasible": false,
+        "fills": 983,
+        "closed_trades": 450,
+        "exposure": 0.2425879105308888,
+        "costs": 3013.8220735810473,
+        "turnover": 52.53753425224938,
+        "sessions": 252,
+        "attribution": [
+          -6039.318392689925,
+          656.9596541599738,
+          -3667.1866801044894
+        ],
+        "open_positions": 0
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "9d2a8eb5fcf52cb411c4367ccf193d67b9982c16fd8e11153019135d01f64ad8",
+      "id": "1787e264ca231cee",
+      "source_ids": [
+        "1787e264ca231cee"
+      ],
+      "training": {
+        "cagr": 0.15314813602091015,
+        "max_drawdown": 0.05835376563377803,
+        "calmar": 2.624477347049913,
+        "final_nav": 132749.67767694977,
+        "feasible": true,
+        "fills": 1105,
+        "closed_trades": 481,
+        "exposure": 0.23577161939901028,
+        "costs": 5153.27461351462,
+        "turnover": 75.735116402282,
+        "sessions": 501,
+        "attribution": [
+          4963.263116913823,
+          4166.054891659477,
+          23620.35966837652
+        ],
+        "open_positions": 1
+      },
+      "forward": {
+        "cagr": -0.08050405844315844,
+        "max_drawdown": 0.11855467733681213,
+        "calmar": -0.6790458230040775,
+        "final_nav": 91949.59415568416,
+        "feasible": false,
+        "fills": 575,
+        "closed_trades": 257,
+        "exposure": 0.2086912658899943,
+        "costs": 2525.428224946029,
+        "turnover": 43.07728395800743,
+        "sessions": 252,
+        "attribution": [
+          -8738.51991827576,
+          4536.374505865438,
+          -3848.2604319054813
+        ],
+        "open_positions": 0
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "7980e155d9494712d686351edc416d33f7f683ee11c2fcd1b793fdb0315a85b1",
+      "id": "041fe8589b895a31",
+      "source_ids": [
+        "041fe8589b895a31"
+      ],
+      "training": {
+        "cagr": 0.1163679090804306,
+        "max_drawdown": 0.06712797768540368,
+        "calmar": 1.7335232356587684,
+        "final_nav": 124464.51542919633,
+        "feasible": true,
+        "fills": 1425,
+        "closed_trades": 658,
+        "exposure": 0.22895134662397842,
+        "costs": 7225.071889973851,
+        "turnover": 109.78693570744753,
+        "sessions": 501,
+        "attribution": [
+          5934.291281361957,
+          16123.118210242557,
+          2407.105937591882
+        ],
+        "open_positions": 3
+      },
+      "forward": {
+        "cagr": -0.07728342010984768,
+        "max_drawdown": 0.1085734609106952,
+        "calmar": -0.7118076504295605,
+        "final_nav": 92271.65798901524,
+        "feasible": false,
+        "fills": 506,
+        "closed_trades": 235,
+        "exposure": 0.14733161268808517,
+        "costs": 2556.6256172494845,
+        "turnover": 43.33485028330999,
+        "sessions": 252,
+        "attribution": [
+          -5596.549366830176,
+          2491.0250914776493,
+          -4622.817735632328
+        ],
+        "open_positions": 1
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "52ae79f30b515cd87e279a4fcf156916c4ba77e204b12ee063f31dc48b57a457",
+      "id": "907e650c7e143ff5",
+      "source_ids": [
+        "907e650c7e143ff5"
+      ],
+      "training": {
+        "cagr": 0.2151895144997722,
+        "max_drawdown": 0.125930947962539,
+        "calmar": 1.7087897612252165,
+        "final_nav": 147326.32651021777,
+        "feasible": true,
+        "fills": 2529,
+        "closed_trades": 1195,
+        "exposure": 0.33068498053217843,
+        "costs": 10091.545904236182,
+        "turnover": 146.98164689079334,
+        "sessions": 501,
+        "attribution": [
+          207.29463082071283,
+          12261.39710169899,
+          34857.63477769796
+        ],
+        "open_positions": 1
+      },
+      "forward": {
+        "cagr": -0.07709729464840043,
+        "max_drawdown": 0.12488943175629208,
+        "calmar": -0.6173244089928064,
+        "final_nav": 92290.27053515996,
+        "feasible": false,
+        "fills": 1805,
+        "closed_trades": 877,
+        "exposure": 0.29075574641941165,
+        "costs": 6006.281908611473,
+        "turnover": 103.62765137697815,
+        "sessions": 252,
+        "attribution": [
+          0.0,
+          2775.447659044455,
+          -10485.177123884558
+        ],
+        "open_positions": 1
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "487a47ec30ab4dac02f4fee9143b0517163c0a020a57727fdd15aba27bb06ab4",
+      "id": "6f269e7dd9ba2e31",
+      "source_ids": [
+        "6f269e7dd9ba2e31"
+      ],
+      "training": {
+        "cagr": 0.07091715061205917,
+        "max_drawdown": 0.03344619984156627,
+        "calmar": 2.1203350738795965,
+        "final_nav": 114592.84742751837,
+        "feasible": true,
+        "fills": 1039,
+        "closed_trades": 426,
+        "exposure": 0.18620444736764383,
+        "costs": 3986.7405595079936,
+        "turnover": 62.3683683425694,
+        "sessions": 501,
+        "attribution": [
+          811.4606984418976,
+          4902.216658645994,
+          8879.170070430235
+        ],
+        "open_positions": 5
+      },
+      "forward": {
+        "cagr": -0.07649776598031766,
+        "max_drawdown": 0.08148055545640598,
+        "calmar": -0.9388468887064199,
+        "final_nav": 92350.22340196824,
+        "feasible": false,
+        "fills": 518,
+        "closed_trades": 204,
+        "exposure": 0.21715547766230225,
+        "costs": 1712.1356816962211,
+        "turnover": 29.710761922607308,
+        "sessions": 252,
+        "attribution": [
+          -3052.236658840683,
+          -2550.2343241886374,
+          -2047.3056150024893
+        ],
+        "open_positions": 0
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    },
+    {
+      "behavior_sha256": "30d2dc5c96df23fc9b3a47e08d1cdb64d48b36058d140be90bec3856941696de",
+      "id": "095ef58335ba0370",
+      "source_ids": [
+        "095ef58335ba0370"
+      ],
+      "training": {
+        "cagr": 0.09844528587065793,
+        "max_drawdown": 0.06352758167626982,
+        "calmar": 1.549646362619708,
+        "final_nav": 120523.4073497812,
+        "feasible": true,
+        "fills": 1454,
+        "closed_trades": 673,
+        "exposure": 0.19166915975515547,
+        "costs": 5466.210507804861,
+        "turnover": 86.19033022271596,
+        "sessions": 501,
+        "attribution": [
+          3238.7732120374203,
+          2843.3766773505045,
+          14441.257460393352
+        ],
+        "open_positions": 0
+      },
+      "forward": {
+        "cagr": -0.07518478447318133,
+        "max_drawdown": 0.10053807180898289,
+        "calmar": -0.7478240145288296,
+        "final_nav": 92481.52155268186,
+        "feasible": false,
+        "fills": 1408,
+        "closed_trades": 687,
+        "exposure": 0.19846743422490418,
+        "costs": 4643.408582644874,
+        "turnover": 81.53484785974112,
+        "sessions": 252,
+        "attribution": [
+          -53.050233375123234,
+          -7613.015800135444,
+          147.5875861925126
+        ],
+        "open_positions": 0
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      }
+    }
+  ]
+}

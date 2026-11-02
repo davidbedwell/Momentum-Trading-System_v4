@@ -1,0 +1,15 @@
+{
+  "completed": true,
+  "qualifiers": 5851,
+  "results": 5851,
+  "independent_sql_gate_count": 5851,
+  "unique_and_complete": true,
+  "all_forward_sessions": 252,
+  "source_journals_and_frozen_snapshot_unchanged": true,
+  "frozen_code_unchanged": true,
+  "training_parity_checks": 3,
+  "previous_winner_forward_exact_parity": true,
+  "benchmark_exact_parity": true,
+  "runner_sha256": "93cd3c40e722f6479407474b9db61e13b12e4d87cda465f93e332b845a9ed1ba",
+  "resume_idempotence_passed": true
+}

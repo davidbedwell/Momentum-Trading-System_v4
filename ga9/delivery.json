@@ -1,0 +1,21 @@
+{
+  "tests": "29 passed: python -m unittest -q ga9.test_benchmarks ga9.test_objective ga9.test_execution",
+  "ledger_verification": "python -m ga9.verify ga9/artifacts/pilot_market_primary_override: verified true; all_forward_pass false",
+  "benchmark_policy": {
+    "universe_profile": "broad_us",
+    "primary": "SPY",
+    "secondary": "equal_weight_buy_and_hold_complete_PIT_universe",
+    "selection": "declared before training and forward; no outcome-based switching"
+  },
+  "risk_limit": 0.08,
+  "inspected_ga8_hashes_unchanged": {
+    "engine.py": true,
+    "run.py": true,
+    "input_audit.py": true
+  },
+  "artifacts": "/opt/mts/ga8/Momentum-Trading-System_v4-ga8/ga9/artifacts/pilot_market_primary_override",
+  "commit_blocker": "Existing filesystem policy makes .git read-only; prior git add -- ga9 failed creating index.lock",
+  "qqq_blocker": "QQQ requires --benchmark-data with verified OHLC/dividends; no benchmark fallback",
+  "historical_reports": "history/",
+  "no_long_search_launched": true
+}

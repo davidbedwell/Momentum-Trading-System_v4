@@ -1,0 +1,23 @@
+{
+  "tests": "21 passed: python -m unittest -q ga9.test_objective ga9.test_execution",
+  "ledger_verification": "python -m ga9.verify ga9/artifacts/pilot_8pct_delivery: verified true; all_forward_pass false",
+  "evaluated_core_hashes_unchanged": {
+    "execution.py": true,
+    "evolution.py": true,
+    "objective.py": true,
+    "risk.py": true,
+    "run.py": true
+  },
+  "inspected_ga8_hashes_unchanged": {
+    "engine.py": true,
+    "run.py": true,
+    "input_audit.py": true
+  },
+  "commit_attempt": {
+    "command": "git add -- ga9",
+    "exit_code": 128,
+    "blocker": "fatal: Unable to create '/opt/mts/ga8/Momentum-Trading-System_v4-ga8/.git/index.lock': Read-only file system"
+  },
+  "artifacts": "/opt/mts/ga8/Momentum-Trading-System_v4-ga8/ga9/artifacts/pilot_8pct_delivery",
+  "no_long_search_launched": true
+}

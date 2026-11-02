@@ -1,0 +1,414 @@
+{
+  "folds": [
+    {
+      "year": 2023,
+      "selected_id": "fa992ea7bb19c82b",
+      "metrics": {
+        "training_refit_in_sample": {
+          "cagr": 0.004861126280625294,
+          "max_drawdown": 0.007463632670137499,
+          "calmar": 0.6513083501650597,
+          "final_nav": 100484.17894728055,
+          "feasible": true,
+          "fills": 139,
+          "closed_trades": 69,
+          "exposure": 0.017104808772898928,
+          "costs": 497.32086695599577,
+          "turnover": 8.277780118963069,
+          "sessions": 251,
+          "attribution": [
+            484.1789472805575
+          ],
+          "open_positions": 0,
+          "max_symbol_weight": 0.06262188602852152,
+          "max_sector_weight": 0.12405617118985161,
+          "mean_concentration_hhi": 0.0010241170822207753,
+          "benchmark_cagr": -0.07143238264470864,
+          "excess_pp": 7.6293508925333935,
+          "incremental_nav": 7600.104436007503,
+          "risk_limit": 0.08,
+          "success": true
+        },
+        "forward_frozen": {
+          "cagr": 0.011821504957542528,
+          "max_drawdown": 0.005165417421669538,
+          "calmar": 2.2885865734586934,
+          "final_nav": 101172.71355075992,
+          "feasible": true,
+          "fills": 120,
+          "closed_trades": 60,
+          "exposure": 0.014425911148883575,
+          "costs": 435.44524145852426,
+          "turnover": 7.205311398365347,
+          "sessions": 250,
+          "attribution": [
+            1172.7135507598907
+          ],
+          "open_positions": 0,
+          "max_symbol_weight": 0.06219927868911421,
+          "max_sector_weight": 0.18181096079446513,
+          "mean_concentration_hhi": 0.0008672584071428009,
+          "benchmark_cagr": 0.2826612347849664,
+          "excess_pp": -27.083972982742388,
+          "incremental_nav": -26840.245928912977,
+          "risk_limit": 0.08,
+          "success": false
+        },
+        "ga8_seed_control": {
+          "cagr": 0.23704974144200097,
+          "max_drawdown": 0.08325242514272524,
+          "calmar": 2.8473613956063217,
+          "final_nav": 123496.2958045126,
+          "feasible": false,
+          "fills": 862,
+          "closed_trades": 294,
+          "exposure": 0.6275394505532761,
+          "costs": 2958.8582684276003,
+          "turnover": 44.93060356317131,
+          "sessions": 250,
+          "attribution": [
+            22840.518941955917,
+            568.3113652204262,
+            87.46549733615149
+          ],
+          "open_positions": 10,
+          "max_symbol_weight": 0.10780606534872811,
+          "max_sector_weight": 0.8962113773073508,
+          "mean_concentration_hhi": 0.049978834420422065,
+          "benchmark_cagr": 0.2826612347849664,
+          "excess_pp": -4.561149334296544,
+          "incremental_nav": -4516.663675160293,
+          "risk_limit": 0.08,
+          "success": false
+        },
+        "momentum_control": {
+          "cagr": 0.11949507318821939,
+          "max_drawdown": 0.13351715580609957,
+          "calmar": 0.894979169281858,
+          "final_nav": 111849.26167920843,
+          "feasible": false,
+          "fills": 891,
+          "closed_trades": 299,
+          "exposure": 0.6205800840218729,
+          "costs": 2812.6666265686927,
+          "turnover": 45.82962381656908,
+          "sessions": 250,
+          "attribution": [
+            11849.261679208394
+          ],
+          "open_positions": 10,
+          "max_symbol_weight": 0.10750844254531335,
+          "max_sector_weight": 0.8640127138964422,
+          "mean_concentration_hhi": 0.04928459870688091,
+          "benchmark_cagr": 0.2826612347849664,
+          "excess_pp": -16.3166161596747,
+          "incremental_nav": -16163.697800464462,
+          "risk_limit": 0.08,
+          "success": false
+        }
+      },
+      "contribution": [
+        {
+          "gene": 0,
+          "incremental_nav": 1172.713550759916,
+          "delta_excess_pp": 1.1821504957542537,
+          "delta_mdd": 0.005165417421669538,
+          "delta_costs": 435.44524145852426,
+          "phase": "post_freeze_diagnostic_never_used_for_selection"
+        }
+      ],
+      "frozen_sha256": "a593508528c9821eeb00ecf3d68a69164af9fef15a5d96c57123930b1184dc47",
+      "rejected_candidates": 0,
+      "selection_stop_reason": "generation_cap",
+      "accepted": false
+    },
+    {
+      "year": 2024,
+      "selected_id": "e854e6ca4b1106f8",
+      "metrics": {
+        "training_refit_in_sample": {
+          "cagr": 0.017018140134410276,
+          "max_drawdown": 0.01904116174983783,
+          "calmar": 0.8937553473886757,
+          "final_nav": 103411.81301165391,
+          "feasible": true,
+          "fills": 241,
+          "closed_trades": 110,
+          "exposure": 0.022494084767165353,
+          "costs": 560.2120767852688,
+          "turnover": 9.23355359138429,
+          "sessions": 501,
+          "attribution": [
+            3411.8130116538514,
+            0.0
+          ],
+          "open_positions": 0,
+          "max_symbol_weight": 0.07596144230338531,
+          "max_sector_weight": 0.1607105290229773,
+          "mean_concentration_hhi": 0.0010192500039044026,
+          "benchmark_cagr": 0.06259190277046,
+          "excess_pp": -4.557376263604973,
+          "incremental_nav": -9416.765686019513,
+          "risk_limit": 0.08,
+          "success": false
+        },
+        "forward_frozen": {
+          "cagr": 0.011417759471606281,
+          "max_drawdown": 0.014774229117214266,
+          "calmar": 0.7728159202772091,
+          "final_nav": 101141.77594716063,
+          "feasible": true,
+          "fills": 149,
+          "closed_trades": 68,
+          "exposure": 0.026974561165069383,
+          "costs": 340.4226569979431,
+          "turnover": 5.638143045026233,
+          "sessions": 252,
+          "attribution": [
+            1141.7759471605716,
+            0.0
+          ],
+          "open_positions": 0,
+          "max_symbol_weight": 0.06418113187699516,
+          "max_sector_weight": 0.1421480106570959,
+          "mean_concentration_hhi": 0.0011362474525572542,
+          "benchmark_cagr": 0.20697272507683895,
+          "excess_pp": -19.555496560523267,
+          "incremental_nav": -19555.496560523272,
+          "risk_limit": 0.08,
+          "success": false
+        },
+        "ga8_seed_control": {
+          "cagr": 0.18470009645995344,
+          "max_drawdown": 0.04050726115309489,
+          "calmar": 4.559678714438133,
+          "final_nav": 118470.00964599533,
+          "feasible": true,
+          "fills": 831,
+          "closed_trades": 288,
+          "exposure": 0.6376651096073761,
+          "costs": 2912.6456461719154,
+          "turnover": 43.74424084910481,
+          "sessions": 252,
+          "attribution": [
+            18379.86262174368,
+            0.0,
+            90.14702425161464
+          ],
+          "open_positions": 9,
+          "max_symbol_weight": 0.1098934986300145,
+          "max_sector_weight": 0.8545116442192248,
+          "mean_concentration_hhi": 0.0511120427541613,
+          "benchmark_cagr": 0.20697272507683895,
+          "excess_pp": -2.2272628616885504,
+          "incremental_nav": -2227.262861688563,
+          "risk_limit": 0.08,
+          "success": false
+        },
+        "momentum_control": {
+          "cagr": 0.1452076817809762,
+          "max_drawdown": 0.0365239730883008,
+          "calmar": 3.97568143613293,
+          "final_nav": 114520.76817809763,
+          "feasible": true,
+          "fills": 880,
+          "closed_trades": 305,
+          "exposure": 0.6237615330473746,
+          "costs": 2924.858160180428,
+          "turnover": 46.34068670499236,
+          "sessions": 252,
+          "attribution": [
+            14520.76817809756
+          ],
+          "open_positions": 8,
+          "max_symbol_weight": 0.11854697715291487,
+          "max_sector_weight": 0.8765040662549893,
+          "mean_concentration_hhi": 0.04993251098208023,
+          "benchmark_cagr": 0.20697272507683895,
+          "excess_pp": -6.176504329586274,
+          "incremental_nav": -6176.504329586271,
+          "risk_limit": 0.08,
+          "success": false
+        }
+      },
+      "contribution": [
+        {
+          "gene": 0,
+          "incremental_nav": 1141.775947160626,
+          "delta_excess_pp": 1.1417759471606281,
+          "delta_mdd": 0.014774229117214266,
+          "delta_costs": 340.4226569979431,
+          "phase": "post_freeze_diagnostic_never_used_for_selection"
+        },
+        {
+          "gene": 1,
+          "incremental_nav": 0.0,
+          "delta_excess_pp": 0.0,
+          "delta_mdd": 0.0,
+          "delta_costs": 0.0,
+          "phase": "post_freeze_diagnostic_never_used_for_selection"
+        }
+      ],
+      "frozen_sha256": "a6db9f1be0305bf08ddc584f92dfc8b86ce765c6669703ef411cd04aee0a9625",
+      "rejected_candidates": 0,
+      "selection_stop_reason": "generation_cap",
+      "accepted": false
+    },
+    {
+      "year": 2025,
+      "selected_id": "81e18e3209ec6abb",
+      "metrics": {
+        "training_refit_in_sample": {
+          "cagr": 0.010870526318411455,
+          "max_drawdown": 0.07576811113148041,
+          "calmar": 0.1434709953313714,
+          "final_nav": 103283.44210709445,
+          "feasible": true,
+          "fills": 1705,
+          "closed_trades": 657,
+          "exposure": 0.21888621137941894,
+          "costs": 3815.1902276482356,
+          "turnover": 64.7795377848252,
+          "sessions": 753,
+          "attribution": [
+            1456.1972277165737,
+            1827.2448793782742
+          ],
+          "open_positions": 6,
+          "max_symbol_weight": 0.102290778675527,
+          "max_sector_weight": 0.265417045207743,
+          "mean_concentration_hhi": 0.014692996846030168,
+          "benchmark_cagr": 0.10808880726322934,
+          "excess_pp": -9.721828094481788,
+          "incremental_nav": -32608.296394853067,
+          "risk_limit": 0.08,
+          "success": false
+        },
+        "forward_frozen": {
+          "cagr": -0.0031314533209226836,
+          "max_drawdown": 0.055466367438215314,
+          "calmar": -0.05645679473080419,
+          "final_nav": 99689.33608386654,
+          "feasible": true,
+          "fills": 566,
+          "closed_trades": 212,
+          "exposure": 0.22926639367152524,
+          "costs": 1272.3800504134,
+          "turnover": 21.22676002694309,
+          "sessions": 250,
+          "attribution": [
+            1958.2160043857878,
+            -2268.879920519283
+          ],
+          "open_positions": 6,
+          "max_symbol_weight": 0.10053001139704182,
+          "max_sector_weight": 0.2589591892564218,
+          "mean_concentration_hhi": 0.015573228194106793,
+          "benchmark_cagr": 0.13662369281672238,
+          "excess_pp": -13.975514613764506,
+          "incremental_nav": -13857.56924571129,
+          "risk_limit": 0.08,
+          "success": false
+        },
+        "ga8_seed_control": {
+          "cagr": 0.028515422163645,
+          "max_drawdown": 0.1438747636134149,
+          "calmar": 0.1981961356354661,
+          "final_nav": 102828.59384312473,
+          "feasible": false,
+          "fills": 903,
+          "closed_trades": 313,
+          "exposure": 0.6294621921341034,
+          "costs": 2863.388696568179,
+          "turnover": 47.5452937501992,
+          "sessions": 250,
+          "attribution": [
+            3637.4032751755963,
+            -760.3827951655583,
+            -48.42663688527025
+          ],
+          "open_positions": 9,
+          "max_symbol_weight": 0.10518335148881981,
+          "max_sector_weight": 0.8398107370080551,
+          "mean_concentration_hhi": 0.050793172385479333,
+          "benchmark_cagr": 0.13662369281672238,
+          "excess_pp": -10.810827065307738,
+          "incremental_nav": -10718.311486453094,
+          "risk_limit": 0.08,
+          "success": false
+        },
+        "momentum_control": {
+          "cagr": -0.019842680379369426,
+          "max_drawdown": 0.1592474493113284,
+          "calmar": -0.12460281445749899,
+          "final_nav": 98031.32407449573,
+          "feasible": false,
+          "fills": 973,
+          "closed_trades": 346,
+          "exposure": 0.5880669698815375,
+          "costs": 2951.9053242240484,
+          "turnover": 50.61470572695604,
+          "sessions": 250,
+          "attribution": [
+            -1968.6759255042682
+          ],
+          "open_positions": 9,
+          "max_symbol_weight": 0.10727236612091995,
+          "max_sector_weight": 0.8251655536695381,
+          "mean_concentration_hhi": 0.0457371917121184,
+          "benchmark_cagr": 0.13662369281672238,
+          "excess_pp": -15.64663731960918,
+          "incremental_nav": -15515.5812550821,
+          "risk_limit": 0.08,
+          "success": false
+        }
+      },
+      "contribution": [
+        {
+          "gene": 0,
+          "incremental_nav": 2543.0762597432913,
+          "delta_excess_pp": 2.563093262524262,
+          "delta_mdd": -0.029768411418706342,
+          "delta_costs": 80.8608526184164,
+          "phase": "post_freeze_diagnostic_never_used_for_selection"
+        },
+        {
+          "gene": 1,
+          "incremental_nav": 755.9073710320517,
+          "delta_excess_pp": 0.7619124957460972,
+          "delta_mdd": 0.017330624113366278,
+          "delta_costs": -137.9571213163831,
+          "phase": "post_freeze_diagnostic_never_used_for_selection"
+        }
+      ],
+      "frozen_sha256": "fe68c454b93687fdee3960e7fa2c126f1274b904a58715d2b793303c98e22623",
+      "rejected_candidates": 0,
+      "selection_stop_reason": "generation_cap",
+      "accepted": false
+    }
+  ],
+  "risk_limit": 0.08,
+  "all_forward_pass": false,
+  "artifact_directory": "/opt/mts/ga8/Momentum-Trading-System_v4-ga8/ga9/artifacts/pilot_8pct_delivery",
+  "command": "/opt/mts/.venv/bin/python -m ga9.run --output ga9/artifacts/pilot_8pct_delivery --generations 2 --population 4 --budget 20 --seed 90079",
+  "elapsed_seconds": 29.418233825825155,
+  "verification": {
+    "verified": true,
+    "folds": 3,
+    "all_forward_pass": false
+  },
+  "engineering_runs": [
+    {
+      "path": "ga9/artifacts/pilot_8pct_same_universe",
+      "outcome": "all forward excess gates failed; 2025 MDD 8.66% rejected"
+    },
+    {
+      "path": "ga9/artifacts/pilot_8pct_final",
+      "outcome": "failed in diagnostic serialization on constant-rank correlation; failure.json preserved"
+    },
+    {
+      "path": "ga9/artifacts/pilot_8pct_delivery",
+      "outcome": "completed and verified; all forward excess gates failed"
+    }
+  ]
+}

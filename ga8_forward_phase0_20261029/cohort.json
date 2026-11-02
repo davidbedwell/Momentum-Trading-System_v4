@@ -1,0 +1,455 @@
+[
+  {
+    "id": "d520b78763e1805a",
+    "first_phase": 0,
+    "first_generation": 147,
+    "genes": [
+      {
+        "family": "trend",
+        "second": "trend",
+        "op": "and",
+        "threshold": -0.16088874861514563,
+        "niche": 2,
+        "exit_threshold": -0.3,
+        "hold_sessions": 40,
+        "trailing": 0.03,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.08,
+        "hold_family": "relative_strength",
+        "exit_family": "volatility",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "breadth",
+          [
+            "or",
+            "trend",
+            "volume"
+          ]
+        ]
+      },
+      {
+        "family": "relative_strength",
+        "second": "trend",
+        "op": "single",
+        "threshold": 0.030631135848376678,
+        "niche": 0,
+        "exit_threshold": -0.2,
+        "hold_sessions": 15,
+        "trailing": 0.02,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.08,
+        "hold_family": "volatility",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "recursive",
+        "second": "volatility",
+        "op": "and",
+        "threshold": -0.008260637882364474,
+        "niche": 0,
+        "exit_threshold": -0.4,
+        "hold_sessions": 8,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.099,
+        "hold_family": "trend",
+        "exit_family": "breadth",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      }
+    ],
+    "manager": {
+      "slots": 15,
+      "reserve": 0.1,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 1.0
+    },
+    "parents": [
+      "ca9c1c7e6a3d8372",
+      "1bcb44c5d791f30c"
+    ],
+    "phase0_evidence": {
+      "id": "d520b78763e1805a",
+      "phase": 0,
+      "train_metrics": {
+        "cagr": 0.15078550679962266,
+        "max_drawdown": 0.07465047087283427,
+        "calmar": 2.019886881309604,
+        "final_nav": 115014.43291667066,
+        "feasible": true,
+        "fills": 1119,
+        "closed_trades": 429,
+        "exposure": 0.44769361738988195,
+        "costs": 4130.406135856137,
+        "turnover": 66.71928044002425,
+        "sessions": 251,
+        "attribution": [
+          2781.123026461434,
+          12571.978243115365,
+          -338.6683529061758
+        ],
+        "open_positions": 8
+      },
+      "forward_metrics": {
+        "cagr": 0.22193802792799278,
+        "max_drawdown": 0.060234323778686094,
+        "calmar": 3.684577397157159,
+        "final_nav": 121999.5739938193,
+        "feasible": true,
+        "fills": 1217,
+        "closed_trades": 446,
+        "exposure": 0.5799143133855406,
+        "costs": 4608.747701262341,
+        "turnover": 70.60068039577067,
+        "sessions": 250,
+        "attribution": [
+          15786.082180679598,
+          6168.785057349108,
+          44.7067557905834
+        ],
+        "open_positions": 13
+      },
+      "transfer_cagr_delta": 0.07115252112837012,
+      "transfer_ratio": 1.4718790461932392,
+      "forward_feasible": true,
+      "gene_niches": [
+        0,
+        2
+      ],
+      "gene_families": [
+        "recursive",
+        "relative_strength",
+        "trend"
+      ],
+      "trade_statistics": {
+        "realized_closures": 567,
+        "wins": 192,
+        "losses": 375,
+        "win_rate": 0.3386243386243386,
+        "avg_win_currency": 326.9997039249932,
+        "avg_loss_currency": -119.6308754233329,
+        "profit_factor": 1.3995036633907474,
+        "net_expectancy_currency": 31.609109117899212,
+        "unmatched_closures": 0,
+        "holding_period_status": "pending_entry_date_matching",
+        "open_lots": 18
+      },
+      "regime_attribution_status": "pending_point_in_time_trade_attribution"
+    },
+    "behavior_sha256": "1f58c9158222dac3f7e549674599c9b3741ff29579a4368c6ef3d3995c9774f2"
+  },
+  {
+    "id": "e4d65994319677d7",
+    "first_phase": 0,
+    "first_generation": 207,
+    "genes": [
+      {
+        "family": "relative_strength",
+        "second": "relative_strength",
+        "op": "single",
+        "threshold": 0.47918495495097574,
+        "niche": 1,
+        "exit_threshold": -0.3,
+        "hold_sessions": 40,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.099,
+        "hold_family": "momentum",
+        "exit_family": "trend",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "volume",
+          [
+            "or",
+            "momentum",
+            "breadth"
+          ]
+        ]
+      },
+      {
+        "family": "trend",
+        "second": "relative_strength",
+        "op": "or",
+        "threshold": 0.5494129084638482,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 25,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.08,
+        "hold_family": "breadth",
+        "exit_family": "recursive",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "breadth",
+        "second": "volatility",
+        "op": "or",
+        "threshold": 0.019192422549730914,
+        "niche": 0,
+        "exit_threshold": -0.4,
+        "hold_sessions": 15,
+        "trailing": 0.02,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.099,
+        "hold_family": "relative_strength",
+        "exit_family": "volatility",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "breadth",
+          [
+            "or",
+            "breadth",
+            "trend"
+          ]
+        ]
+      }
+    ],
+    "manager": {
+      "slots": 10,
+      "reserve": 0.35,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.3
+    },
+    "parents": [
+      "c965f39f7579948d",
+      "4acf78a4e0a3b022"
+    ],
+    "phase0_evidence": {
+      "id": "e4d65994319677d7",
+      "phase": 0,
+      "train_metrics": {
+        "cagr": 0.15382205647832903,
+        "max_drawdown": 0.04571503292058832,
+        "calmar": 3.3648024873028892,
+        "final_nav": 115316.71280871402,
+        "feasible": true,
+        "fills": 858,
+        "closed_trades": 388,
+        "exposure": 0.2406431520866933,
+        "costs": 3406.1531563694507,
+        "turnover": 54.79863512159384,
+        "sessions": 251,
+        "attribution": [
+          226.38742260295888,
+          6820.586720078103,
+          8269.738666033016
+        ],
+        "open_positions": 4
+      },
+      "forward_metrics": {
+        "cagr": 0.1503460728717121,
+        "max_drawdown": 0.03608209368055737,
+        "calmar": 4.1667779647921375,
+        "final_nav": 114906.80474116029,
+        "feasible": true,
+        "fills": 857,
+        "closed_trades": 373,
+        "exposure": 0.28210737692166477,
+        "costs": 3472.1846862800603,
+        "turnover": 53.944741521388494,
+        "sessions": 250,
+        "attribution": [
+          7253.516559175721,
+          3326.957367328314,
+          4326.330814656245
+        ],
+        "open_positions": 4
+      },
+      "transfer_cagr_delta": -0.003475983606616939,
+      "transfer_ratio": 0.9774025670557418,
+      "forward_feasible": true,
+      "gene_niches": [
+        0,
+        1
+      ],
+      "gene_families": [
+        "breadth",
+        "relative_strength",
+        "trend"
+      ],
+      "trade_statistics": {
+        "realized_closures": 440,
+        "wins": 182,
+        "losses": 258,
+        "win_rate": 0.41363636363636364,
+        "avg_win_currency": 230.95242593460304,
+        "avg_loss_currency": -107.5336300556504,
+        "profit_factor": 1.5150602494136782,
+        "net_expectancy_currency": 32.47651128577262,
+        "unmatched_closures": 0,
+        "holding_period_status": "pending_entry_date_matching",
+        "open_lots": 4
+      },
+      "regime_attribution_status": "pending_point_in_time_trade_attribution"
+    },
+    "behavior_sha256": "c54d37af207c37de36d623d09e6c9a66b119cd3fed884d37a0e6ac65b85949ee"
+  },
+  {
+    "id": "efe0ff726c852a0d",
+    "first_phase": 0,
+    "first_generation": 83,
+    "genes": [
+      {
+        "family": "recursive",
+        "second": "trend",
+        "op": "or",
+        "threshold": 0.47220835131691047,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 60,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.099,
+        "hold_family": "volatility",
+        "exit_family": "relative_strength",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "relative_strength",
+          [
+            "or",
+            "recursive",
+            "momentum"
+          ]
+        ]
+      },
+      {
+        "family": "trend",
+        "second": "relative_strength",
+        "op": "or",
+        "threshold": 0.5494129084638482,
+        "niche": 0,
+        "exit_threshold": -0.3,
+        "hold_sessions": 25,
+        "trailing": 0.08,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.08,
+        "hold_family": "breadth",
+        "exit_family": "recursive",
+        "hold_threshold": -0.15,
+        "entry_tree": []
+      },
+      {
+        "family": "volume",
+        "second": "momentum",
+        "op": "single",
+        "threshold": 0.0009514756138204183,
+        "niche": 0,
+        "exit_threshold": -0.4,
+        "hold_sessions": 60,
+        "trailing": 0.05,
+        "add": 0.015,
+        "reduce": -0.01,
+        "weight": 0.06,
+        "hold_family": "momentum",
+        "exit_family": "momentum",
+        "hold_threshold": -0.15,
+        "entry_tree": [
+          "and",
+          "momentum",
+          [
+            "or",
+            "relative_strength",
+            "breadth"
+          ]
+        ]
+      }
+    ],
+    "manager": {
+      "slots": 15,
+      "reserve": 0.35,
+      "correlation": 0.8,
+      "risk_cap": 0.02,
+      "replacement": 0.7
+    },
+    "parents": [
+      "19a5b23f6848acc0",
+      "fcf362304b0fd897"
+    ],
+    "phase0_evidence": {
+      "id": "efe0ff726c852a0d",
+      "phase": 0,
+      "train_metrics": {
+        "cagr": 0.1680896941528307,
+        "max_drawdown": 0.07579730321108358,
+        "calmar": 2.2176210370536182,
+        "final_nav": 116736.973470931,
+        "feasible": true,
+        "fills": 533,
+        "closed_trades": 225,
+        "exposure": 0.2777064471341127,
+        "costs": 1868.94710864413,
+        "turnover": 30.177957112461637,
+        "sessions": 251,
+        "attribution": [
+          134.3356948033677,
+          8255.771821103084,
+          8346.865955024603
+        ],
+        "open_positions": 2
+      },
+      "forward_metrics": {
+        "cagr": 0.1616235876194514,
+        "max_drawdown": 0.046299042168158944,
+        "calmar": 3.4908624466232294,
+        "final_nav": 116024.31949421315,
+        "feasible": true,
+        "fills": 305,
+        "closed_trades": 125,
+        "exposure": 0.1957267782370369,
+        "costs": 1228.0589022563022,
+        "turnover": 19.18769192164987,
+        "sessions": 250,
+        "attribution": [
+          147.27674990872308,
+          4608.986963805043,
+          11268.055780499468
+        ],
+        "open_positions": 1
+      },
+      "transfer_cagr_delta": -0.006466106533379312,
+      "transfer_ratio": 0.9615318085622775,
+      "forward_feasible": true,
+      "gene_niches": [
+        0
+      ],
+      "gene_families": [
+        "recursive",
+        "trend",
+        "volume"
+      ],
+      "trade_statistics": {
+        "realized_closures": 140,
+        "wins": 54,
+        "losses": 86,
+        "win_rate": 0.38571428571428573,
+        "avg_win_currency": 487.22336073476333,
+        "avg_loss_currency": -145.71605244235937,
+        "profit_factor": 2.099500654254436,
+        "net_expectancy_currency": 98.41772121167368,
+        "unmatched_closures": 0,
+        "holding_period_status": "pending_entry_date_matching",
+        "open_lots": 2
+      },
+      "regime_attribution_status": "pending_point_in_time_trade_attribution"
+    },
+    "behavior_sha256": "500de7118a10d5b82c4462c5096e6e75c36d963d9fc2c50341f491f448fe32a0"
+  }
+]

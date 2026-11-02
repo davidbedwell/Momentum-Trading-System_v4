@@ -1,0 +1,28 @@
+{
+  "cohort": "phase0_forward_survivor",
+  "survivor_ids": [
+    "d520b78763e1805a",
+    "e4d65994319677d7",
+    "efe0ff726c852a0d"
+  ],
+  "source_hashes": {
+    "/opt/mts/ga8/production_500_20261029/forward_2023.jsonl": "e8cd6ed0823844581240c6d0f3c0f9666bd0f44162a4e24b6a366f834bd6abcc",
+    "/opt/mts/ga8/production_500_20261029/forward_2023.summary.json": "a0a17678c8be489c80bf6f0b85d4b5316f9a81af32601f4b3c8c9a05558581cd",
+    "/opt/mts/ga8/production_500_20261029/checkpoint.json.pre_survivors_only": "1ba324d80cd0a1b148e95b2002d97229f105f9060cba6f57f2aa04897e8b79be"
+  },
+  "checkpoint_parent_ids": [
+    "d520b78763e1805a",
+    "e4d65994319677d7",
+    "efe0ff726c852a0d"
+  ],
+  "cohort_sha256": "eab848a017f8cd7b5cf81dbbd982d42f9118f2698325687f2b0f0fea2050d493",
+  "phase1_manifest_sha256": "0d2f5223a80d9fc70bf023388a10e811b389a4130c410002c9b5f4a116b76d0d",
+  "window": [
+    "2024-01-01",
+    "2025-01-01"
+  ],
+  "selection": "All three saved 2023 survivors, user-approved before 2024 supplement; no 2024 selection",
+  "deduplication": "Same canonical ordered normalized genes and manager as frozen Phase-1 job; memberships and source identities preserved",
+  "production_writes": false,
+  "evolution": false
+}

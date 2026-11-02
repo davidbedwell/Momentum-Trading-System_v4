@@ -1,0 +1,133 @@
+{
+  "survivors": [
+    {
+      "survivor_id": "d520b78763e1805a",
+      "behavior_sha256": "1f58c9158222dac3f7e549674599c9b3741ff29579a4368c6ef3d3995c9774f2",
+      "forward": {
+        "cagr": 0.0884239064224579,
+        "max_drawdown": 0.0526059228801381,
+        "calmar": 1.680873589537258,
+        "final_nav": 108842.3906422458,
+        "feasible": true,
+        "fills": 1248,
+        "closed_trades": 477,
+        "exposure": 0.5900045876615482,
+        "costs": 4452.942847588669,
+        "turnover": 71.99905932395089,
+        "sessions": 252,
+        "attribution": [
+          4336.055099358912,
+          4766.291495960346,
+          -259.95595307341995
+        ],
+        "open_positions": 4
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      },
+      "cohort_memberships": [
+        "phase1_training_qualifier",
+        "phase0_forward_survivor"
+      ]
+    },
+    {
+      "survivor_id": "e4d65994319677d7",
+      "behavior_sha256": "c54d37af207c37de36d623d09e6c9a66b119cd3fed884d37a0e6ac65b85949ee",
+      "forward": {
+        "cagr": 0.06112725727387325,
+        "max_drawdown": 0.028080390878847505,
+        "calmar": 2.176866324176399,
+        "final_nav": 106112.72572738733,
+        "feasible": true,
+        "fills": 1066,
+        "closed_trades": 469,
+        "exposure": 0.3028980750439309,
+        "costs": 4067.253301565307,
+        "turnover": 65.78980023695622,
+        "sessions": 252,
+        "attribution": [
+          3792.165692078993,
+          -2057.1611517165943,
+          4377.721187024977
+        ],
+        "open_positions": 1
+      },
+      "forward_success": true,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      },
+      "cohort_memberships": [
+        "phase1_training_qualifier",
+        "phase0_forward_survivor"
+      ]
+    },
+    {
+      "survivor_id": "efe0ff726c852a0d",
+      "behavior_sha256": "500de7118a10d5b82c4462c5096e6e75c36d963d9fc2c50341f491f448fe32a0",
+      "forward": {
+        "cagr": 0.04201032975626107,
+        "max_drawdown": 0.06544691505852562,
+        "calmar": 0.64189931211721,
+        "final_nav": 104201.0329756261,
+        "feasible": false,
+        "fills": 305,
+        "closed_trades": 122,
+        "exposure": 0.1684821173047416,
+        "costs": 1139.307447362426,
+        "turnover": 18.624268031794834,
+        "sessions": 252,
+        "attribution": [
+          0.0,
+          2890.271403429655,
+          1310.7615721964814
+        ],
+        "open_positions": 1
+      },
+      "forward_success": false,
+      "beats_benchmark": {
+        "SPY": false,
+        "equal_weight_DEV79": false
+      },
+      "cohort_memberships": [
+        "phase1_training_qualifier",
+        "phase0_forward_survivor"
+      ]
+    }
+  ],
+  "benchmarks": {
+    "SPY": {
+      "cagr": 0.2601031449772373,
+      "max_drawdown": 0.08356003493890318,
+      "calmar": 3.112769701058857,
+      "final_nav": 126010.31449772374,
+      "feasible": true,
+      "fills": 1,
+      "closed_trades": 0,
+      "exposure": 0.9911874269773504,
+      "costs": 59.96901559218425,
+      "turnover": 0.865400305220079,
+      "sessions": 252,
+      "open_positions": 1
+    },
+    "equal_weight_DEV79": {
+      "cagr": 0.20697272507683895,
+      "max_drawdown": 0.07204119773782103,
+      "calmar": 2.8729772904397453,
+      "final_nav": 120697.2725076839,
+      "feasible": true,
+      "fills": 79,
+      "closed_trades": 0,
+      "exposure": 0.984063340238309,
+      "costs": 59.969015592187894,
+      "turnover": 0.8892273617570544,
+      "sessions": 252,
+      "open_positions": 79
+    }
+  },
+  "reused_phase1_replays": 3,
+  "new_replays": 0,
+  "QQQ": "Absent from DEV79 and previous forward metadata reports no real QQQ parquet under /opt/mts."
+}

@@ -1,0 +1,13 @@
+{
+  "engine.py": "eaf7efcff2da6d4384b948b9ccd55b97180888c00aa67d371967b68f4cc938b6",
+  "input_audit.py": "e5dcea032e776c494df9fa1d6e1eee776511306349c3f285dc67e333381c0c8b",
+  "run.py": "07df43ce1409df3b5d7080239ec3654af8253741d9d04ee69f74438bfa7f71d5",
+  "host_status_read_only": {
+    "stage": "RUNNING",
+    "pid": 6,
+    "updated_utc": "2026-10-29T01:41:17.712575+00:00",
+    "phase": 0,
+    "generation": 6
+  },
+  "process_visibility": "Executor PID namespace only; host status is an observation, not liveness proof."
+}

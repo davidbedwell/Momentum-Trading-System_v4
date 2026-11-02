@@ -1,0 +1,128 @@
+{
+  "id": "3d8db5c6e547bd8c",
+  "genes": [
+    {
+      "family": "relative_strength",
+      "second": "recursive",
+      "op": "single",
+      "threshold": 0.5623284181475636,
+      "niche": 0,
+      "exit_threshold": -0.3,
+      "hold_sessions": 40,
+      "trailing": 0.02,
+      "add": 0.015,
+      "reduce": -0.01,
+      "weight": 0.04,
+      "hold_family": "volume",
+      "exit_family": "breadth",
+      "hold_threshold": -0.15,
+      "entry_tree": [
+        "and",
+        "volatility",
+        [
+          "or",
+          "volume",
+          "volume"
+        ]
+      ]
+    },
+    {
+      "family": "trend",
+      "second": "relative_strength",
+      "op": "or",
+      "threshold": 0.43053003120583877,
+      "niche": 0,
+      "exit_threshold": -0.3,
+      "hold_sessions": 25,
+      "trailing": 0.08,
+      "add": 0.015,
+      "reduce": -0.01,
+      "weight": 0.08,
+      "hold_family": "breadth",
+      "exit_family": "recursive",
+      "hold_threshold": -0.15,
+      "entry_tree": []
+    },
+    {
+      "family": "breadth",
+      "second": "momentum",
+      "op": "or",
+      "threshold": -0.05764252493286709,
+      "niche": 0,
+      "exit_threshold": -0.4,
+      "hold_sessions": 40,
+      "trailing": 0.08,
+      "add": 0.015,
+      "reduce": -0.01,
+      "weight": 0.06,
+      "hold_family": "breadth",
+      "exit_family": "trend",
+      "hold_threshold": -0.15,
+      "entry_tree": []
+    }
+  ],
+  "manager": {
+    "slots": 15,
+    "reserve": 0.2,
+    "correlation": 0.9,
+    "risk_cap": 0.02,
+    "replacement": 1.0
+  },
+  "metrics": {
+    "cagr": 0.2684470794822651,
+    "max_drawdown": 0.10603476308842985,
+    "calmar": 2.531689340960645,
+    "final_nav": 160440.96776727325,
+    "feasible": true,
+    "fills": 2435,
+    "closed_trades": 1141,
+    "exposure": 0.34419212104066454,
+    "costs": 9423.294588763389,
+    "turnover": 132.96809306136913,
+    "sessions": 501,
+    "attribution": [
+      3878.641898266554,
+      12601.966732877612,
+      43960.359136129075
+    ],
+    "open_positions": 5
+  },
+  "audit": {
+    "holds": 1292,
+    "abstentions": 97,
+    "competition": 1043,
+    "correlation_rejections": 91,
+    "risk_rejections": 0,
+    "evaluate_minus_one": 372,
+    "max_identity_error": 1.3096723705530167e-10,
+    "min_cash": 18491.96056203857,
+    "max_symbol_weight": 0.11708577918607949,
+    "max_total_risk": 0.015975740595382582
+  },
+  "marginal": [
+    {
+      "gene": 0,
+      "delta_cagr": 0.08931280824043863,
+      "delta_mdd": -0.013132978899391357,
+      "incremental_nav": 21677.680115066527
+    },
+    {
+      "gene": 1,
+      "delta_cagr": 0.06246263393146667,
+      "delta_mdd": -0.007825403291437771,
+      "incremental_nav": 15325.047862649371
+    },
+    {
+      "gene": 2,
+      "delta_cagr": 0.17074308879904665,
+      "delta_mdd": 0.054352597286144055,
+      "incremental_nav": 40079.21071713141
+    }
+  ],
+  "parents": [
+    "58c8c317552ec3ab",
+    "f9b64f05359a81ba"
+  ],
+  "generation": 87,
+  "phase": 1
+}

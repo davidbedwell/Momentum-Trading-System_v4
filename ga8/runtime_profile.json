@@ -1,0 +1,11 @@
+{
+  "workers": 8,
+  "worker_peak_bytes": 291807232,
+  "source_sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+  "code_sha256": "a01fc8f65ec7f1f9d7a3290560701b86a74bf250b2e83c1aa477c812bf65f11c",
+  "basis": "lowest combined measured wall time across both windows; exact returned-result parity; observed gain is modest and not statistically established",
+  "benchmarks": [
+    "/opt/mts/ga8/benchmark_500_final_20261029",
+    "/opt/mts/ga8/benchmark_500_late_20261029"
+  ]
+}

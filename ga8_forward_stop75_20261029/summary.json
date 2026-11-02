@@ -1,0 +1,80 @@
+{
+  "results": {
+    "GA8": {
+      "cagr": 0.005201352089875266,
+      "max_drawdown": 0.1189889965775206,
+      "calmar": 0.043712883035252906,
+      "final_nav": 100520.13520898753,
+      "feasible": false,
+      "fills": 1703,
+      "closed_trades": 809,
+      "exposure": 0.298463535850831,
+      "costs": 5581.160533408926,
+      "turnover": 93.89013130516156,
+      "sessions": 252,
+      "attribution": [
+        -1416.9287951348917,
+        2814.5329164699187,
+        -877.4689123474695
+      ],
+      "open_positions": 1,
+      "net_return": 0.005201352089875266,
+      "min_exposure": 0.0,
+      "max_exposure": 0.7989293282641097,
+      "terminal_exposure": 0.08010863338846054,
+      "entry_fills": 810
+    },
+    "SPY": {
+      "cagr": 0.2601031449772373,
+      "max_drawdown": 0.08356003493890318,
+      "calmar": 3.112769701058857,
+      "final_nav": 126010.31449772374,
+      "feasible": true,
+      "fills": 1,
+      "closed_trades": 0,
+      "exposure": 0.9911874269773504,
+      "costs": 59.96901559218425,
+      "turnover": 0.865400305220079,
+      "sessions": 252,
+      "open_positions": 1,
+      "net_return": 0.2601031449772373,
+      "min_exposure": 0.0,
+      "max_exposure": 1.0,
+      "terminal_exposure": 0.9880872503626207,
+      "entry_fills": 1
+    },
+    "equal_weight_DEV79": {
+      "cagr": 0.20697272507683895,
+      "max_drawdown": 0.07204119773782103,
+      "calmar": 2.8729772904397453,
+      "final_nav": 120697.2725076839,
+      "feasible": true,
+      "fills": 79,
+      "closed_trades": 0,
+      "exposure": 0.984063340238309,
+      "costs": 59.969015592187894,
+      "turnover": 0.8892273617570544,
+      "sessions": 252,
+      "open_positions": 79,
+      "net_return": 0.20697272507683895,
+      "min_exposure": 0.0,
+      "max_exposure": 0.9950816711265462,
+      "terminal_exposure": 0.9816456949310124,
+      "entry_fills": 79
+    }
+  },
+  "comparisons": {
+    "SPY": {
+      "net_return_difference_pp": -25.490179288736204,
+      "cagr_difference_pp": -25.490179288736204,
+      "mdd_difference_pp": 3.5428961638617418,
+      "final_nav_difference": -25490.17928873621
+    },
+    "equal_weight_DEV79": {
+      "net_return_difference_pp": -20.17713729869637,
+      "cagr_difference_pp": -20.17713729869637,
+      "mdd_difference_pp": 4.694779883969957,
+      "final_nav_difference": -20177.13729869637
+    }
+  }
+}

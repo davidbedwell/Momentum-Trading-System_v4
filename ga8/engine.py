@@ -47,14 +47,17 @@ class Panel:
     breadth: np.ndarray
 
 
-def load_panel(path):
+def load_panel(path, end="2027-01-01"):
     d = pd.read_parquet(path)
     d['date'] = pd.to_datetime(d.date)
-    d = d[(d.date >= '2022-01-01') & (d.date < '2027-01-01')].copy()
+    d = d[(d.date >= '2022-01-01') & (d.date < end)].copy()
     from .input_audit import inspect_prices
     audit = inspect_prices(d)
     if not audit['usable']:
         raise ValueError('Invalid required price data')
+    # GEV when-issued bars precede regular-way listing on 2024-04-02.
+    # Exclude them BEFORE all cross-sectional features, niche assignment and replay.
+    d = d[~((d.ticker == 'GEV') & (d.date < pd.Timestamp('2024-04-02')))].copy()
     dates = pd.DatetimeIndex(sorted(d.date.unique()))
     symbols = sorted(d.ticker.unique())
     def wide(col):
@@ -131,13 +134,14 @@ def metrics(equity, fills, exposure, sessions):
                 turnover=float(sum(f['notional'] for f in fills) / np.mean(nav)), sessions=sessions)
 
 
-def replay(p, genes, manager, start, end, detail=False):
+def replay(p, genes, manager, start, end, detail=False, signal=None):
     """Close t decisions, open t+1 execution, one settled shared account.
 
     Sale proceeds mature after two sessions (conservative T+2 throughout).
     Stops observed at close; next-open gaps may exceed the -2% trigger.
     """
-    signal = scores(p, genes)
+    if signal is None:
+        signal = scores(p, genes)
     days = np.flatnonzero((p.dates >= start) & (p.dates < end))
     cash = 100000.
     pending = []

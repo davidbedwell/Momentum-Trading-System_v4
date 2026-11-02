@@ -1,0 +1,30 @@
+{
+  "SPY": {
+    "cagr": 0.2601031449772373,
+    "max_drawdown": 0.08356003493890318,
+    "calmar": 3.112769701058857,
+    "final_nav": 126010.31449772374,
+    "feasible": true,
+    "fills": 1,
+    "closed_trades": 0,
+    "exposure": 0.9911874269773504,
+    "costs": 59.96901559218425,
+    "turnover": 0.865400305220079,
+    "sessions": 252,
+    "open_positions": 1
+  },
+  "equal_weight_DEV79": {
+    "cagr": 0.20697272507683895,
+    "max_drawdown": 0.07204119773782103,
+    "calmar": 2.8729772904397453,
+    "final_nav": 120697.2725076839,
+    "feasible": true,
+    "fills": 79,
+    "closed_trades": 0,
+    "exposure": 0.984063340238309,
+    "costs": 59.969015592187894,
+    "turnover": 0.8892273617570544,
+    "sessions": 252,
+    "open_positions": 79
+  }
+}

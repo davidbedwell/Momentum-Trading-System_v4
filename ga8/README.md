@@ -62,3 +62,63 @@ Vendor OHLC and dividends are split normalized; no second split multiplier is
 applied. Dividends are ex-date receivables that cannot be spent during the replay,
 because payment dates are unavailable. Ambiguous split discontinuities stop the run. Corporate-action fidelity
 still depends on the copied vendor data, and is explicitly reported as such.
+
+Long development evolution (approved 2026-10-29):
+
+```bash
+python -m ga8.long_run --output /opt/mts/ga8/long_YYYYMMDD --generations 1000 --population 500 --workers 4 --budget-hours 72
+```
+
+`ga8.run --long-search` also routes to this driver. The 1000-generation run budget is distributed across expanding training folds
+(2022; 2022–2023; 2022–2024), initially 333/333/334 generations. Unused fold
+budget rolls forward. Each fold stops after 100 consecutive generations without
+a meaningful funded Pareto frontier change; fold transitions continue the run.
+The generation-500 checkpoint uses the global generation counter.
+Feasible and infeasible frontiers separately maximize CAGR and Calmar and minimize
+MDD; changes smaller than 0.0001 in all objectives do not reset stagnation.
+The constraints remain strictly MDD <20% and Calmar >1.5; 35% CAGR is aspirational.
+Population defaults to 500, holds early exploration, targets 300 at 60% of the global budget and 175 late. Stagnation or low diversity adds a 50-candidate exploration cushion. Each fold starts at 500; subsequent generations follow global progress. Evolution uses family/niche preservation, crossover, mutation,
+weakest-contributor replacement, and independent immigrants. Candidate portfolios
+and every gene ablation run in isolated worker processes. There is no shared NAV.
+
+Generation checkpoints contain population, RNG, frontier, lineage parent IDs,
+fold progress, cumulative elapsed time and source/code fingerprints. Generation
+500 receives an additional permanent checkpoint. `--resume` requires the same
+output, population, seed, generation cap, data and code. Append-only generation
+and run journals preserve evidence; a process lock prevents concurrent writers.
+Next-year development fold results are diagnostics and never feed selection.
+2026 rows are filtered before features/audit and no holdout evaluation is invoked.
+Prior holdout access remains disclosed by the original pilot records.
+
+Monitor the run-specific `status.json` and `process.log`. ETA extrapolates measured
+generation time to all remaining fold caps; early stagnation can shorten it.
+Budget is cumulative across resumes and checked between complete generations.
+Request a clean stop with `touch <output>/STOP` or SIGTERM to the reported PID;
+remove STOP before resuming. Worker failure leaves the last complete generation
+checkpoint; `failure.json` records the error. Pilot outputs are never reused.
+
+Memory/throughput gates (2026-10-29):
+
+The Linux fork pool inherits one development-only panel, with NumPy arrays marked
+read-only. BLAS pools are limited to one thread. Each worker retains at most 128
+scalar replay results, including ablations; no full replay ledgers cross IPC.
+The Pareto archive keeps at most 128 feasible and 128 infeasible representatives,
+preserving objective extremes. This bounded search archive changes selection when
+the cap binds; funded replay semantics are unchanged. Detailed native evaluation
+remains available. Generations stream to JSONL; checkpoints omit evaluated rows.
+
+The resource monitor samples process-tree RSS/PSS every half second and reports
+per-logical-CPU utilization and disk bytes. Startup worker count is capped using
+the measured per-worker peak plus 50% headroom, against at most 75% of startup
+available RAM. Memory pressure stops dispatch between small batches and saves
+the last complete generation; restart retries the interrupted generation. A
+single replay/batch finishes before stopping. Runtime profile selects workers
+only after the fixed real-data benchmark.
+
+```bash
+/opt/mts/.venv/bin/python -m unittest -q ga8.test_engine ga8.test_long_run
+/opt/mts/.venv/bin/python -m ga8.benchmark --output /opt/mts/ga8/benchmark_NEW
+```
+
+No production evolution was launched by the optimization task. Read the
+optimization report and benchmark artifacts before choosing a wall-time budget.
