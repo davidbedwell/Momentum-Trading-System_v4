@@ -1,0 +1,56 @@
+{
+  "version": 4,
+  "seeds": [
+    841729,
+    926183
+  ],
+  "scenarios": [
+    "learnable",
+    "misleading",
+    "null",
+    "reversal"
+  ],
+  "train_signals": [
+    20,
+    77
+  ],
+  "calibration_signals": [
+    80,
+    121
+  ],
+  "holdout_signals": [
+    126,
+    249
+  ],
+  "portfolio_sessions": [
+    126,
+    251
+  ],
+  "split_detail": "Fresh seeds frozen before generation; old generator unchanged, identical tapes for all policies. Chronological train20..77/cal80..121, embargo, holdout126..249. Only matured holdout residuals feed safety.",
+  "maturity": "signal i entry open i+1 exit open i+2 available close i+3; require i+2<decision clock",
+  "method": "Frozen ridge linear ensemble (ridge=1), train20..77; independent cal80..121. Date-block residual uncertainty and calibration bias; whole interval within unchanged bands. Full/sensor-only/price-only fits are all reported without selection. Separate gate vetoes on forecast disagreement>.004, abs recent matured residual mean>.004, or standardized feature drift>4; permanent latch on deterioration. GREAT additionally requires full/sensor/price predictions agree within .004. No holdout refit.",
+  "boundaries": [
+    -0.006,
+    -0.002,
+    0.002,
+    0.006
+  ],
+  "sensors": "Original injected noisy class sensor retained explicitly as synthetic-only reference; observable OHLC-derived momentum features computed independently, no latent truth in predictor. No volume or revisions data available.",
+  "policies": [
+    "iteration4",
+    "iteration2_repaired",
+    "ungated",
+    "scaled"
+  ],
+  "max_full_replays": 32,
+  "max_seconds": 840,
+  "pass_rule": "For every non-null scenario/seed: coverage>=.5, each predicted tier>=20, conditional latent-tier accuracy>=.7, each recall including UNKNOWN>=.5, false GREAT on true TERRIBLE<=.01, all five realized means strictly monotone. Null safety requires zero assigned. Robust overall claim requires every seed. Improvement additionally requires paired non-null coverage increase and no reversal false-GREAT rate increase versus iteration2 repaired comparator. No portfolio gain alone constitutes discrimination. Candidate must not increase paired reversal false GREAT count relative to iteration2; allocation incremental value is descriptive paired scaled minus base.",
+  "risk": "10% position targets only; entire cost-inclusive modeled candidate risk<=2%; inherited corrected local kernel, T+1 and MDD latch; no GA or production modifications",
+  "limitations": [
+    "Synthetic sensor is injected, not real fundamentals; OHLC features have no predictive association in iid class generator by design.",
+    "Volume and revisions unavailable, excluded rather than fabricated.",
+    "Two fresh seeds, no holdout tuning or model selection; Gaussian date-block uncertainty is not guaranteed coverage.",
+    "One-session label differs from holdings, no terminal liquidation; no real alpha claim.",
+    "Unannounced reversal cannot be detected before matured evidence."
+  ]
+}

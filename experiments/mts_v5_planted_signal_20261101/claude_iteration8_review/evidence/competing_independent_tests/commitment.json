@@ -1,0 +1,14 @@
+{
+  "utc": "2026-11-01T20:30:18.165845+00:00",
+  "sources": {
+    "analyze.py": "52663a5d12cad7115b8c02f02dfb38c14f06d0d4607751e597c7ab3e024d102a",
+    "claude_review.md": "1f26a303b664753c25104980c46da50d6e84965c4d18e29ae129f15b235b67d9",
+    "engine.py": "86a6acc3b5eff4072f44efaf8715266007b35e83b97756a2901d5275344b0f17",
+    "frozen/iteration5_reference.py": "374e1fda136c50c643cbfce4ab2bd1ed26274b19b433dfc38109ead03a1b50a0",
+    "frozen/iteration6_engine.py": "0cb88a0fa95620f1d6881235bdf748be3349a142cd4002a565ba4d45bfb1b319",
+    "preregister.json": "0a78e3619f972cdf38e42beb9f0ce04f529db9fd16de961999df9d3dcda3a518",
+    "run.py": "efaf4047fab6bee3b6ac253247c8b7068e8a5a6227fead952b628d085b2c4ef9",
+    "test_engine.py": "cf2e03d85a665e163ff822529c6df74eecd5a5fa0f19f8eb02366d9aa0a362c9"
+  },
+  "public_timestamp": false
+}

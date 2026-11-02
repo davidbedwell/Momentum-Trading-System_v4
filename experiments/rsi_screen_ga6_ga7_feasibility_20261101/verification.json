@@ -1,0 +1,17 @@
+{
+  "fixed": {
+    "independent_max_nav_error": 2.3283064365386963e-09,
+    "fill_count": 646,
+    "causal_fills": true,
+    "cost_formulas": true,
+    "screened_buys": null
+  },
+  "ga7": {
+    "independent_max_nav_error": 1.0186340659856796e-10,
+    "fill_count": 2453,
+    "causal_fills": true,
+    "cost_formulas": true,
+    "screened_buys": true
+  },
+  "status": "PASS"
+}

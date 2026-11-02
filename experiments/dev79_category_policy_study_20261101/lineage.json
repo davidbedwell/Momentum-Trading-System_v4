@@ -1,0 +1,20 @@
+{
+  "replay_origin": "experiments/dev79_four_policy_comparison_20261101",
+  "snapshot_files": {
+    "comparison.py": {
+      "source_sha256": "bc3c1de06bd32bff13f03a26a30aa7e69eaa7f8c4494ee3af8befad507c359f1",
+      "snapshot_sha256": "bc3c1de06bd32bff13f03a26a30aa7e69eaa7f8c4494ee3af8befad507c359f1"
+    },
+    "trade_accounting.py": {
+      "source_sha256": "26038bc3db8345e10c4c263b0b7a3030677cde2752540fb6b0bfedc7549de757",
+      "snapshot_sha256": "26038bc3db8345e10c4c263b0b7a3030677cde2752540fb6b0bfedc7549de757"
+    },
+    "test_comparison.py": {
+      "source_sha256": "da43933ed7266235a465acc56725ab9901d0f59c96deb7a1db58bf072652b5ef",
+      "snapshot_sha256": "da43933ed7266235a465acc56725ab9901d0f59c96deb7a1db58bf072652b5ef"
+    }
+  },
+  "production_modified": false,
+  "phase": 1,
+  "selector_run": false
+}

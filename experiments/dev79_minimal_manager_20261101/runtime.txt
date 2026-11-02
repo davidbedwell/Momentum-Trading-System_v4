@@ -1,0 +1,1 @@
+elapsed_seconds=26.47 peak_rss_kb=628768 cpu=99%

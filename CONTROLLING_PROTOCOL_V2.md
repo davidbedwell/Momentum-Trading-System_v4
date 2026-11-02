@@ -1,0 +1,14 @@
+# Controlling protocol v2 — USER SPECIFICATION (supersedes v1)
+Do not inspect any additional outcome data until manifest and protocol are corrected. User provided these rules as fixed.
+Universe: S&P500 PIT membership at EACH month end including removed/delisted; PIT GICS sectors. Monthly Jan 2006 through Sep 2026. Target stock next 1m/3m return minus PIT sector MEDIAN; every stock. Formation close t, execution open t+1 (next trading session); no proxy in certified metrics.
+H1 12-1 momentum months t-12 to t-2, expected positive.
+H2 adjusted close / 52-week high, positive.
+H3 standardized earnings surprise = surprise / std of PRIOR EIGHT surprises; positive. Require all eight prior, no substitutions.
+H4 gross profit / assets, SEC EDGAR filing date + 1 day, positive.
+H5 12-month realized volatility, NEGATIVE.
+H6 equal-weight composite of within-sector percentile ranks H1,H3,H4, NEGATIVE H5; positive. Exactly four components, no optimization. Convert each H to within-sector percentile ranks with correct negative orientation for H5 composite. No other primary hypotheses.
+Stage1 2006-2015 run six once; Stage2 2016-Sep2026 SEALED until Stage1 result and gate logged, only passers. Stage2 excluding 2019/2020 separately because previously contaminated; NEVER describe 2019/2020 as pristine.
+Per signal/horizon monthly sector cross-sectional Spearman IC, monthly mean, Newey-West lag 3 for 1m and 5 for 3m, decile10-minus-decile1 sector-neutral spread, fraction months positive IC. Stage1 pass mean IC >0.01, NW t >3, correct sign (for H5 negative unless orientation predeclared), positive IC in >=3 of 4 chronological subperiods. Stage2 same sign, t >2, decile spread net positive after 15bp ONE-WAY turnover costs monthly. Log every later hypothesis/variant and correct multiple tests.
+Placebo 1000 shuffles within sector-month; real IC must beat 99th percentile, using correct direction for H5. Lookahead diagnostic t+1 signal vs return t (warning: can correlate due persistence, not a logically definitive leak test). Report 1/3/6m decay and turnover; 6m exploratory only, not third primary gate.
+Source: Yahoo prices provisional; Wikipedia SP500 changes insufficient for full PIT GICS and pre-2006 histories—validate/reconstruct and mark incomplete; SEC EDGAR as-filed PIT fundamentals; Alpha Vantage earnings. No fake data, no blind release without full coverage. Track missing delisted terminal prices. No subscriptions.
+Critical: immediately replace v1 manifest and protocol with controlling v2, implement tests and stage gate before touching Stage2, preserve independent repo. Existing smoke output must be labeled exploratory/old protocol. Do not claim 2006–2026 certification when source gaps exist. Run tests and report exactly what is functional and blocked.

@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "seeds": [
+    2101,
+    2102,
+    2103,
+    2104
+  ],
+  "scenarios": [
+    "learnable",
+    "misleading",
+    "null",
+    "reversal"
+  ],
+  "train_signal_indices": [
+    0,
+    77
+  ],
+  "calibration_signal_indices": [
+    80,
+    121
+  ],
+  "evaluation_signal_indices": [
+    126,
+    249
+  ],
+  "evaluation_portfolio_indices": [
+    126,
+    251
+  ],
+  "maturity": "signal k executes open k+1; outcome open k+2; require k+2 < cutoff",
+  "net_tier_boundaries": [
+    -0.006,
+    -0.002,
+    0.002,
+    0.006
+  ],
+  "tiers_ascending": [
+    "TERRIBLE",
+    "POOR",
+    "AVERAGE",
+    "GOOD",
+    "GREAT"
+  ],
+  "confidence": "Frozen training cell means; radius max(2.58 training date SE, absolute calibration bias + 2.58 calibration date SE); at least 20 dates in each; assign only if entire interval in one absolute economic tier; else UNKNOWN",
+  "policies": [
+    "existing_ev10",
+    "tier10",
+    "tier15",
+    "tier20"
+  ],
+  "max_full_replays": 64,
+  "max_seconds": 840,
+  "pass_rule": "Every scenario: coverage >=0.5; all five predicted tiers >=20 observations; conditional exact EV-tier accuracy >=0.7; each EV-tier recall including abstentions >=0.5; false GREAT / true TERRIBLE <=0.01; five realized tier means strictly monotone. Null may pass safety via abstention but cannot establish discrimination. Overall five-way claim requires all scenarios.",
+  "no_holdout_tuning": true,
+  "no_GA": true,
+  "limitations": "Synthetic EV ground truth is evaluator-only conditional mean, distinct from individual realized return. No causal learner can guarantee recognition under unannounced regime inversion. 2.58-SE intervals are diagnostic, not a formal dependence-robust guarantee.",
+  "method": "Rolling 60 signal-date outcome ledger; train older 40 dates, calibration recent 20 dates; strict maturity < current clock; 2.58 SE plus train/calibration discrepancy; no identifiable signal if mean spread <0.003; drift recent 8 vs older >=30 dates, threshold max(0.004,3 pooled SE); global quarantine 20 clocks; no oracle regimes.",
+  "risk_thresholds": {
+    "positive_tier_downside05_min": -0.03,
+    "other_tier_downside05_min": -0.05,
+    "independent_candidate_risk": 0.02
+  },
+  "online_evaluation": "Untouched chronological prequential evaluation; fixed algorithm may ingest only realized outcomes strictly matured before current decision. No evaluation truth labels or parameter selection."
+}

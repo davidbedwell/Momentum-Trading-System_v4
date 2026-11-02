@@ -1,0 +1,18 @@
+{
+  "status": "ENGINEERING_PREFIX_INVARIANCE_PASS",
+  "sessions": 263,
+  "tickers": 500,
+  "features": 142,
+  "shorter_end": "2022-12-30",
+  "longer_end": "2023-06-30",
+  "shorter_chunk_sessions": 47,
+  "longer_chunk_sessions": 32,
+  "reference_sha256": "6404ba977c9f250899bcc2e5162cceac902cb45a44c6aac1b0756ce9bc8a073f",
+  "implementation_sha256": "ef5cbee96770397d546bf62b0556b736930ae4341f14ee55c34453a2582cc782",
+  "proof_values_read": false,
+  "performance": {
+    "wall_seconds": 142.89523620298132,
+    "cpu_seconds": 186.139385809,
+    "peak_rss_mib": 401.25390625
+  }
+}

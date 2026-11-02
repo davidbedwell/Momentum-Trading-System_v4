@@ -1,0 +1,23 @@
+{
+  "scope": "READ_ONLY_METADATA_NO_PRICE_OR_OUTCOME_COLUMNS",
+  "native_status": "CHRONOLOGY_VERIFIED_FEATURE_PROVENANCE_PENDING",
+  "rows": 329406,
+  "tickers": 79,
+  "synthetic_identity_overlap": 0,
+  "first_date": "2009-01-02",
+  "last_date": "2026-09-14",
+  "model_count": 18,
+  "training_chronology": true,
+  "publication_times": "UNKNOWN",
+  "synthetic_applicability": "BLOCKED_NO_MAPPING_OR_TRAINING_LINEAGE",
+  "limitations": [
+    "Source PIT provenance not independently certified",
+    "Chronological niche IDs are not original retrospective GA6 niche IDs"
+  ],
+  "sources": {
+    "/opt/mts/ga7-deploy/ga7_unbounded/niche_pit_manifest.json": "af278ace6e364420dbdefa5c8878ced0ebf56a898c941282ae7df99ef56e3e78",
+    "/opt/mts/ga7-deploy/ga7_unbounded/niche_pit_models.json": "13eafd9215d4dd711bd02d07d71e420c8dd0f45a35e8aadcd3a3552e0533c581",
+    "/opt/mts/ga7-deploy/ga7_unbounded/niche_pit_distances.parquet": "5b89806b4d92b046b02a6dcdd2d082d6a3fe0eba3904ec9377f02645fbae481f",
+    "/opt/mts/ga7-deploy/ga7_unbounded/build_chronological_niches.py": "a7e412a189c4b29239a4cfc8df67416e2568957b47a70b14592b27c8785108fd"
+  }
+}

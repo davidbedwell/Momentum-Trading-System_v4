@@ -1,0 +1,7438 @@
+{
+  "status": "COMPLETED PROVISIONAL contaminated-2019 offline pilot",
+  "finished_utc": "2026-10-31T06:19:30.608112+00:00",
+  "stage2": "SEALED; no certified executor or ledger invoked",
+  "certified": false,
+  "manifest_sha256_before": "9684e85103b917df05192327d4ab74ba48c4bcf69caff81c2b4ca7ba258e8549",
+  "manifest_sha256_after": "9684e85103b917df05192327d4ab74ba48c4bcf69caff81c2b4ca7ba258e8549",
+  "membership_source_sha256": "b103c0f0c084454748df75dabc40e0f8e379189ef0fde8c8ed7f69a45a6b1aa9",
+  "sector_source_sha256": "b686917c2f3ceaefcb91c6fec053eb8b98b69af66424858cba6be72c15f6ddcb",
+  "membership_intervals": 534,
+  "unique_members": 534,
+  "cached_symbols": 433,
+  "price_rows": 324137,
+  "missing_cache_symbols": [
+    "ABC",
+    "ABMD",
+    "ADS",
+    "AGN",
+    "ALXN",
+    "ANSS",
+    "ANTM",
+    "APC",
+    "ARNC",
+    "ATVI",
+    "AVB",
+    "BF.B",
+    "BHF",
+    "BHGE",
+    "BK",
+    "BLL",
+    "BRK.B",
+    "CBOE",
+    "CBS",
+    "CELG",
+    "CERN",
+    "CMA",
+    "COG",
+    "CTL",
+    "CTXS",
+    "CXO",
+    "DFS",
+    "DISCA",
+    "DISCK",
+    "DISH",
+    "DLR",
+    "DRE",
+    "DWDP",
+    "EA",
+    "EQR",
+    "ESS",
+    "ETFC",
+    "EXR",
+    "FB",
+    "FBHS",
+    "FL",
+    "FLIR",
+    "FLT",
+    "FRC",
+    "FRT",
+    "GE",
+    "GPS",
+    "HBI",
+    "HCP",
+    "HES",
+    "HFC",
+    "HOLX",
+    "HRS",
+    "INFO",
+    "IPG",
+    "JEC",
+    "JNPR",
+    "JWN",
+    "K",
+    "KSU",
+    "LB",
+    "LEG",
+    "LLL",
+    "MMC",
+    "MRO",
+    "MXIM",
+    "MYL",
+    "NBL",
+    "NFLX",
+    "NFX",
+    "NLOK",
+    "NLSN",
+    "NTRS",
+    "PBCT",
+    "PEAK",
+    "PKI",
+    "PXD",
+    "QRVO",
+    "RE",
+    "RHT",
+    "RTN",
+    "SCG",
+    "SEE",
+    "SIVB",
+    "STI",
+    "SYMC",
+    "TIF",
+    "TMK",
+    "TSS",
+    "TWTR",
+    "UTX",
+    "VAR",
+    "VIAB",
+    "VIAC",
+    "VNO",
+    "WBA",
+    "WCG",
+    "WLTW",
+    "WRK",
+    "XEC",
+    "XLNX"
+  ],
+  "invalid_price_rows": [],
+  "membership_anomalies": [],
+  "coverage": [
+    {
+      "asof": "2019-01-31",
+      "expected_members": 505,
+      "priced": 406,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "APC",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BHF",
+        "BHGE",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "DWDP",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FL",
+        "FLIR",
+        "FLT",
+        "FOX",
+        "FOXA",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "HRS",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "LLL",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NFX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RHT",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TMK",
+        "TSS",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 406,
+        "3": 406,
+        "6": 406
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-02-28",
+      "expected_members": 505,
+      "priced": 407,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "APC",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BHF",
+        "BHGE",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "DWDP",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FL",
+        "FLIR",
+        "FLT",
+        "FOX",
+        "FOXA",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "HRS",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "LLL",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RHT",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TMK",
+        "TSS",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 407,
+        "3": 407,
+        "6": 407
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-03-29",
+      "expected_members": 505,
+      "priced": 409,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "APC",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BHF",
+        "BHGE",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "DWDP",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FL",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "HRS",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "LLL",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RHT",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TMK",
+        "TSS",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 409,
+        "3": 409,
+        "6": 409
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-04-30",
+      "expected_members": 505,
+      "priced": 410,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "APC",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BHGE",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "DWDP",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FL",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "HRS",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "LLL",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RHT",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TMK",
+        "TSS",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 410,
+        "3": 410,
+        "6": 410
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-05-31",
+      "expected_members": 505,
+      "priced": 410,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "APC",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BHGE",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "DWDP",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FL",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "HRS",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "LLL",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RHT",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TMK",
+        "TSS",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 410,
+        "3": 410,
+        "6": 410
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-06-28",
+      "expected_members": 505,
+      "priced": 412,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "APC",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BHGE",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FL",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "LLL",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RHT",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TMK",
+        "TSS",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 412,
+        "3": 412,
+        "6": 412
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-07-31",
+      "expected_members": 505,
+      "priced": 414,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "APC",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BHGE",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FL",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TMK",
+        "TSS",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 414,
+        "3": 414,
+        "6": 0
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-08-30",
+      "expected_members": 505,
+      "priced": 417,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BHGE",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TSS",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 417,
+        "3": 417,
+        "6": 0
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-09-30",
+      "expected_members": 505,
+      "priced": 418,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BHGE",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 418,
+        "3": 418,
+        "6": 0
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-10-31",
+      "expected_members": 505,
+      "priced": 419,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CELG",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HCP",
+        "HES",
+        "HFC",
+        "HOLX",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "SYMC",
+        "TIF",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 419,
+        "3": 0,
+        "6": 0
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-11-29",
+      "expected_members": 505,
+      "priced": 420,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CBS",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HES",
+        "HFC",
+        "HOLX",
+        "INFO",
+        "IPG",
+        "JEC",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLOK",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PEAK",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "STI",
+        "TIF",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAB",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 420,
+        "3": 0,
+        "6": 0
+      },
+      "known_sector_signal_rows": {
+        "H1": 15,
+        "H2": 15,
+        "H3": 10,
+        "H4": 0,
+        "H5": 15,
+        "H6": 0
+      }
+    },
+    {
+      "asof": "2019-12-31",
+      "expected_members": 505,
+      "priced": 423,
+      "missing_symbols": [
+        "ABC",
+        "ABMD",
+        "ADS",
+        "AGN",
+        "ALXN",
+        "ANSS",
+        "ANTM",
+        "ARNC",
+        "ATVI",
+        "AVB",
+        "BF.B",
+        "BK",
+        "BLL",
+        "BRK.B",
+        "CBOE",
+        "CERN",
+        "CMA",
+        "COG",
+        "CTL",
+        "CTXS",
+        "CXO",
+        "DFS",
+        "DISCA",
+        "DISCK",
+        "DISH",
+        "DLR",
+        "DRE",
+        "EA",
+        "EQR",
+        "ESS",
+        "ETFC",
+        "EXR",
+        "FB",
+        "FBHS",
+        "FLIR",
+        "FLT",
+        "FRC",
+        "FRT",
+        "GE",
+        "GPS",
+        "HBI",
+        "HES",
+        "HFC",
+        "HOLX",
+        "INFO",
+        "IPG",
+        "JNPR",
+        "JWN",
+        "K",
+        "KSU",
+        "LB",
+        "LEG",
+        "MMC",
+        "MRO",
+        "MXIM",
+        "MYL",
+        "NBL",
+        "NFLX",
+        "NLOK",
+        "NLSN",
+        "NTRS",
+        "PBCT",
+        "PEAK",
+        "PKI",
+        "PXD",
+        "QRVO",
+        "RE",
+        "RTN",
+        "SEE",
+        "SIVB",
+        "TIF",
+        "TWTR",
+        "UTX",
+        "VAR",
+        "VIAC",
+        "VNO",
+        "WBA",
+        "WCG",
+        "WLTW",
+        "WRK",
+        "XEC",
+        "XLNX"
+      ],
+      "unknown_sector": 490,
+      "outcomes": {
+        "1": 0,
+        "3": 0,
+        "6": 0
+      },
+      "known_sector_signal_rows": {
+        "H1": 0,
+        "H2": 0,
+        "H3": 0,
+        "H4": 0,
+        "H5": 0,
+        "H6": 0
+      }
+    }
+  ],
+  "known_sector_symbols": [
+    "AAPL",
+    "ABBV",
+    "AMD",
+    "BAC",
+    "C",
+    "GS",
+    "INTC",
+    "JNJ",
+    "JPM",
+    "MRK",
+    "MSFT",
+    "NVDA",
+    "PFE",
+    "UNH",
+    "WFC"
+  ],
+  "earnings_cache_symbols": [
+    "ABBV",
+    "BAC",
+    "C",
+    "GS",
+    "INTC",
+    "JNJ",
+    "JPM",
+    "MRK",
+    "MSFT",
+    "NVDA"
+  ],
+  "source_evidence": [
+    {
+      "symbol": "A",
+      "path": "/opt/mts/ga6_h/data/prices/A.parquet",
+      "sha256": "246b425a8305be4f29e527ffa83779d5c5cab79ba818111150b70bb2074df724",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AAL",
+      "path": "/opt/mts/ga6_h/data/prices/AAL.parquet",
+      "sha256": "2fc01fa48720ee6c1ef1007b45b148d88280fd969c586eb373bd2428e83c8f5d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AAP",
+      "path": "/opt/mts/ga6_h/data/prices/AAP.parquet",
+      "sha256": "d1e84b7304a352d4d2e800e3438f99b26890068b503eea6363cda76a99c6da24",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AAPL",
+      "path": "/opt/mts/ga6_h/data/prices/AAPL.parquet",
+      "sha256": "4a20d1135bc461f1faad46a85ded39ae0fcdffa9a295b2efde26a98fdd9687ac",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ABBV",
+      "path": "/opt/mts/ga6_h/data/prices/ABBV.parquet",
+      "sha256": "192dc9b87d5bf486bd0a611646ea3318f40d2fbc69d0c9a75e698f6309c1256c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ABT",
+      "path": "/opt/mts/ga6_h/data/prices/ABT.parquet",
+      "sha256": "6fa5cb412b383de5a0101ad6cd07bf162f666eb807e1fb75b1213b20655d6667",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ACN",
+      "path": "/opt/mts/ga6_h/data/prices/ACN.parquet",
+      "sha256": "81a855ad93a79ff74a72a0b4f6eb5936989eb5cff0798dab812ef10a9d704c00",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ADBE",
+      "path": "/opt/mts/ga6_h/data/prices/ADBE.parquet",
+      "sha256": "c7d338421df44e55460f6f4bdaed99c87016b5024f09178c4e591ad40833a490",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ADI",
+      "path": "/opt/mts/ga6_h/data/prices/ADI.parquet",
+      "sha256": "67573ad784d5cdd929f4c5953d9cc9339be53cb75c197620fc5e14d9672fd37c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ADM",
+      "path": "/opt/mts/ga6_h/data/prices/ADM.parquet",
+      "sha256": "d62916d83eef96e2cc7c94ce286e2bdcaea63d84ca21fdb3470cd6c9c6c3740f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ADP",
+      "path": "/opt/mts/ga6_h/data/prices/ADP.parquet",
+      "sha256": "29759fe8c73b862f60e641cc3ed4afc7c0b3678c84f88f14dc86a4ff3b100ad4",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ADSK",
+      "path": "/opt/mts/ga6_h/data/prices/ADSK.parquet",
+      "sha256": "c757a72f00d06c1403b9c446aeda69c3fad5122e7bd4bca31d208a376746a07a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AEE",
+      "path": "/opt/mts/ga6_h/data/prices/AEE.parquet",
+      "sha256": "6f207b5fb74a28fd40ab5c99ba9f0c492dd341ba879c1a73d82bf6909c6dcab1",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AEP",
+      "path": "/opt/mts/ga6_h/data/prices/AEP.parquet",
+      "sha256": "e5e60908980a061fb61487c5eb20c5542aeda713d85481d9a6ff6f4a49b67d99",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AES",
+      "path": "/opt/mts/ga6_h/data/prices/AES.parquet",
+      "sha256": "2fe97bd8bb8973043583384026459391c1332f99d0693e7328025653638dc459",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AFL",
+      "path": "/opt/mts/ga6_h/data/prices/AFL.parquet",
+      "sha256": "cf7a76ecf612c5ad8225610f378850f0a82dfdfefec530718b13e694c088f544",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AIG",
+      "path": "/opt/mts/ga6_h/data/prices/AIG.parquet",
+      "sha256": "9c605685bb31c3efba69e104aa64433995a36c55a6fb5aa65688f346c1b20ca6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AIV",
+      "path": "/opt/mts/ga6_h/data/prices/AIV.parquet",
+      "sha256": "96bef108378bf7d61a3943ada955db69c147f1d31a643c8763e02f8e35a3eb77",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AIZ",
+      "path": "/opt/mts/ga6_h/data/prices/AIZ.parquet",
+      "sha256": "b2714fbfa3f2831a604d334baf3fcfb0f301c409872336edd21647a71e5c07d7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AJG",
+      "path": "/opt/mts/ga6_h/data/prices/AJG.parquet",
+      "sha256": "99dfac43a0cc703b307567114ea7c33b4e47e3f7a78b330ff62505dc14fabf11",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AKAM",
+      "path": "/opt/mts/ga6_h/data/prices/AKAM.parquet",
+      "sha256": "12a67f2ba283c7e6e02c9f936f00812d9226b05fff7e7aebfa9d08a8d144d1df",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ALB",
+      "path": "/opt/mts/ga6_h/data/prices/ALB.parquet",
+      "sha256": "1b7a959922194675571a289aa79499d4c7b57812baae576f9ab0e29700bbd53f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ALGN",
+      "path": "/opt/mts/ga6_h/data/prices/ALGN.parquet",
+      "sha256": "eec759fd6e362242b15655b74eda5c2c7d1da1bb69af4714be1beec75d8592c9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ALK",
+      "path": "/opt/mts/ga6_h/data/prices/ALK.parquet",
+      "sha256": "e534cbe92e5f17849d8d494f36b338cc1d1496354b4900d3f73ca8dcc91a2cd4",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ALL",
+      "path": "/opt/mts/ga6_h/data/prices/ALL.parquet",
+      "sha256": "d5531d9fbf3809ef9f5ac2860819053252cb29f91ba8365d0c800836c79d5c09",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ALLE",
+      "path": "/opt/mts/ga6_h/data/prices/ALLE.parquet",
+      "sha256": "fb16f2c960d50cf8c0a85c034f6fb2567b5e3ad69c69f14aaab9d09a4322df46",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AMAT",
+      "path": "/opt/mts/ga6_h/data/prices/AMAT.parquet",
+      "sha256": "6bfea0239f9c3cf6eea237712906efad5f204dfba2bf3943b16dae992f755d01",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AMCR",
+      "path": "/opt/mts/ga6_h/data/prices/AMCR.parquet",
+      "sha256": "4bf0305db9b29762e9c19b3b993492501125296bc899d69be5ba3cc35c301ffe",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AMD",
+      "path": "/opt/mts/ga6_h/data/prices/AMD.parquet",
+      "sha256": "e6ce12361522a4007c098bf91b9a24fe2f8435c5391120b0a52aa234e626f5cf",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AME",
+      "path": "/opt/mts/ga6_h/data/prices/AME.parquet",
+      "sha256": "53868dc34b25cc3c51b13a2d4d2398d68a6e1b343d1796ea2443553c30fdc4b8",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AMG",
+      "path": "/opt/mts/ga6_h/data/prices/AMG.parquet",
+      "sha256": "b0930f77597c0217db638f3cf9fc87c993ab2b3f2b7664bf4b910d1caa8d1024",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AMGN",
+      "path": "/opt/mts/ga6_h/data/prices/AMGN.parquet",
+      "sha256": "c5903bca6d60819cd67c8ff10428fb6a7f8440efe4d51d92f20446258d0b4552",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AMP",
+      "path": "/opt/mts/ga6_h/data/prices/AMP.parquet",
+      "sha256": "4d4191c4b995bcce0c59ae4f17fb88c9137cb4cbc3d38b96341d028d08b0b5d9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AMT",
+      "path": "/opt/mts/ga6_h/data/prices/AMT.parquet",
+      "sha256": "171561cafa0db008a264241a4ec446c1bb3624264ec34c4f7e830cf05affda67",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AMZN",
+      "path": "/opt/mts/ga6_h/data/prices/AMZN.parquet",
+      "sha256": "c86b06146ed0bac48a466f24de5649b375245cd83eec0ed61c883798069c5e60",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ANET",
+      "path": "/opt/mts/ga6_h/data/prices/ANET.parquet",
+      "sha256": "a02dede0b954a45d3f7aad19fa1479bdb459d2182a4cbf7b06636035623a8492",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AON",
+      "path": "/opt/mts/ga6_h/data/prices/AON.parquet",
+      "sha256": "83a6ccb2ae5f4af9d2b7e2306ed777e74d242567884c6e145f55cc1029ced195",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AOS",
+      "path": "/opt/mts/ga6_h/data/prices/AOS.parquet",
+      "sha256": "6f9b7247f03fec4aae5156f3ca3d9cb38bc7e5b476110f91e4a1286b29653fb7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "APA",
+      "path": "/opt/mts/ga6_h/data/prices/APA.parquet",
+      "sha256": "7e145a5f256b7676171a33035ba015d911ad1e4ea23065ee6d1cee85e6211302",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "APD",
+      "path": "/opt/mts/ga6_h/data/prices/APD.parquet",
+      "sha256": "ea441bfde5b36d9c611851f52a7cdfe85bb0f218e1a03434bea18f360aba1dd7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "APH",
+      "path": "/opt/mts/ga6_h/data/prices/APH.parquet",
+      "sha256": "7ee654548763c8ece48c62516e73937ed3fb4d00da7da06dc8e9f088a74a50a0",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "APTV",
+      "path": "/opt/mts/ga6_h/data/prices/APTV.parquet",
+      "sha256": "ff6a354b18395101f5780da238d7280edd67118abb925f9380bda5bf2ab9056f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ARE",
+      "path": "/opt/mts/ga6_h/data/prices/ARE.parquet",
+      "sha256": "062d6e638a984eb316e085eb9b5dea0bc102b972331240673de22216379e3d39",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ATO",
+      "path": "/opt/mts/ga6_h/data/prices/ATO.parquet",
+      "sha256": "1fbfe9373ba42f1be14bd44426102793cdfe5efd9b5f76be013dcce5f42ab48b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AVGO",
+      "path": "/opt/mts/ga6_h/data/prices/AVGO.parquet",
+      "sha256": "202305005de95b458d487ac5f113c687ecf13b557045a19be29c1cb0efa30286",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AVY",
+      "path": "/opt/mts/ga6_h/data/prices/AVY.parquet",
+      "sha256": "727c4bdc345c0fab52f8ae0ea6c591cf8d8c19c3dcc8565b6bb92abfb2e8e294",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AWK",
+      "path": "/opt/mts/ga6_h/data/prices/AWK.parquet",
+      "sha256": "e3b88ae61f563ce08c25ee656d8637c074f91b29d05cb53fe6cd56546c85cdd8",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AXP",
+      "path": "/opt/mts/ga6_h/data/prices/AXP.parquet",
+      "sha256": "de1032c2945b26ee9eea2b90263ceb05b4b0cbb585bbae6bace5d240de3fcca3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "AZO",
+      "path": "/opt/mts/ga6_h/data/prices/AZO.parquet",
+      "sha256": "295ee0c63f9673efd832be60a196980a1a5bca085e4630520c3988690e61e8b3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BA",
+      "path": "/opt/mts/ga6_h/data/prices/BA.parquet",
+      "sha256": "1b44b858fbdd941768f5cbfd33a6a4448dd0d73c0a32ac2e754184f06e556288",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BAC",
+      "path": "/opt/mts/ga6_h/data/prices/BAC.parquet",
+      "sha256": "a408b19845ace64ba69c535a2f4dab6b27b62d3318009ee78341275df4bde8ed",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BAX",
+      "path": "/opt/mts/ga6_h/data/prices/BAX.parquet",
+      "sha256": "e7e47e1ca4ab51c3d8420aee455afd7a44727ca9cb32aad9f90867dab67f8395",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BBT",
+      "path": "/opt/mts/ga6_h/data/prices/BBT.parquet",
+      "sha256": "3c0377c5b507c74ad34b234a5a13deb3f08e58ded24523ea3b6d2ad8d4b7893c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BBY",
+      "path": "/opt/mts/ga6_h/data/prices/BBY.parquet",
+      "sha256": "421e1238881295082c59e680c075b8c4e946109bc2728aa07f5d051f161842b5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BDX",
+      "path": "/opt/mts/ga6_h/data/prices/BDX.parquet",
+      "sha256": "7c1b12f0c9cc77e5594f720631f6039c0d1da725767be13f39fe2df87b634452",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BEN",
+      "path": "/opt/mts/ga6_h/data/prices/BEN.parquet",
+      "sha256": "46eec7a58772b9563389c27c3a9cd5741bf5c541c61dcfda84ba5c995ce6097b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BIIB",
+      "path": "/opt/mts/ga6_h/data/prices/BIIB.parquet",
+      "sha256": "a0f5065bf5409fa916f3c7259ee9a40c38a5ff39a6ea1c74e1f637ab8d6f21ac",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BKNG",
+      "path": "/opt/mts/ga6_h/data/prices/BKNG.parquet",
+      "sha256": "a0486ce58442f40bf143b7792a1e665940cacb4736a0f619ff5257311712f1d4",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BKR",
+      "path": "/opt/mts/ga6_h/data/prices/BKR.parquet",
+      "sha256": "d84031e236904ab0809988715026385983424bd0bca51ad3eb3fb10458671c2c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BLK",
+      "path": "/opt/mts/ga6_h/data/prices/BLK.parquet",
+      "sha256": "efc7102f1334466eac38447322d40299e59237934d74f321adb2c39d2fdcadc6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BMY",
+      "path": "/opt/mts/ga6_h/data/prices/BMY.parquet",
+      "sha256": "ca3c9cac8d77759cf6a4e37ae6587b6961c35263ffb28b369309922dfc1f718e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BR",
+      "path": "/opt/mts/ga6_h/data/prices/BR.parquet",
+      "sha256": "288c97bec1a2ba38f737fad0f7e3a22d9ffd3b31c1a123931274dc78231f1ffb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BSX",
+      "path": "/opt/mts/ga6_h/data/prices/BSX.parquet",
+      "sha256": "1620d1e78211efe0130fce0399529396456ade318c5cb54ff35b87e3d27598e5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BWA",
+      "path": "/opt/mts/ga6_h/data/prices/BWA.parquet",
+      "sha256": "ead88cae1daa6e1f7f5dc82be021e66e39ce07b47d59f5edb3db29afe17dd682",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "BXP",
+      "path": "/opt/mts/ga6_h/data/prices/BXP.parquet",
+      "sha256": "f9b24a1eb0bf0536e8bb97b643aa5367122560dd4fac1716cf11941f20a9890a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "C",
+      "path": "/opt/mts/ga6_h/data/prices/C.parquet",
+      "sha256": "200dc44c5d264f87c013dde46490a9b45db256b756c03dcdfd7a18f21d0961df",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CAG",
+      "path": "/opt/mts/ga6_h/data/prices/CAG.parquet",
+      "sha256": "dc388d0f4a420d77d787e9ca0532c0f31f6ade57f846136dd41efb38290c1c84",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CAH",
+      "path": "/opt/mts/ga6_h/data/prices/CAH.parquet",
+      "sha256": "477638dce4642d260ffc682172aaff6cfe99353f31202522828b7e9ba6520715",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CAT",
+      "path": "/opt/mts/ga6_h/data/prices/CAT.parquet",
+      "sha256": "3d94f983be3dd9033607327d5922a599703ae37505fc7631fe761c95f619e714",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CB",
+      "path": "/opt/mts/ga6_h/data/prices/CB.parquet",
+      "sha256": "348c466e9f52ec06eeec3c02ecccbbafa43c39cf3891ae0ae96e529766dad3c7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CBRE",
+      "path": "/opt/mts/ga6_h/data/prices/CBRE.parquet",
+      "sha256": "af92adc1658019466ac92fda4f8893e0c579646e3f72ba0b68077d1f90bdf028",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CCI",
+      "path": "/opt/mts/ga6_h/data/prices/CCI.parquet",
+      "sha256": "fefbd656e2c703e137ca44bf1b5d289ec50cf9a42a343337bc19bd8683dc0e15",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CCL",
+      "path": "/opt/mts/ga6_h/data/prices/CCL.parquet",
+      "sha256": "af38056de53e59c69e1d7b375a299bbbc792a945b28a6dda82a79902edcff854",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CDNS",
+      "path": "/opt/mts/ga6_h/data/prices/CDNS.parquet",
+      "sha256": "ca27aea54110996dc04daab527ad2ad2aeb9c20cdd144ebec8d6f1b89262487d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CDW",
+      "path": "/opt/mts/ga6_h/data/prices/CDW.parquet",
+      "sha256": "41ad3f9f9f82775084b5dcbe7c2c0717049d76cb126972974722e1edaf3a9b5c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CE",
+      "path": "/opt/mts/ga6_h/data/prices/CE.parquet",
+      "sha256": "c157b54a83a4b4806cea1f7eb68024d64c5120ff6909980d787f35aab91c12b3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CF",
+      "path": "/opt/mts/ga6_h/data/prices/CF.parquet",
+      "sha256": "7400d84e1e337a255d14b20ab0198f26b9b2dac8ee0277777ecf27a4c1ccbdb5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CFG",
+      "path": "/opt/mts/ga6_h/data/prices/CFG.parquet",
+      "sha256": "c8cf3b432e2a23a298dd8d71c8b05da6f14b19a50246d085fe58bfde28b407b3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CHD",
+      "path": "/opt/mts/ga6_h/data/prices/CHD.parquet",
+      "sha256": "be9cdebca5d273ffbddaec9de750f42d49a7700906d8af0dbfaece07b92e4b54",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CHRW",
+      "path": "/opt/mts/ga6_h/data/prices/CHRW.parquet",
+      "sha256": "bf0f22d0152b5ecdb5515a5c49e9295a7711369a294f1bb61c240f321a4a56c7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CHTR",
+      "path": "/opt/mts/ga6_h/data/prices/CHTR.parquet",
+      "sha256": "ea5a5289f9a4623396ff6a06e984a1d5177a4c76bef57a00a2ba85e92b6dbbf2",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CI",
+      "path": "/opt/mts/ga6_h/data/prices/CI.parquet",
+      "sha256": "cbc42ced298c03c1c0852632568217cc29c9dfec9787a1a172e3715637f69b54",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CINF",
+      "path": "/opt/mts/ga6_h/data/prices/CINF.parquet",
+      "sha256": "269e35460f0637edc72734420858a8205bccb1ad0e405bc57b409dc9765144b1",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CL",
+      "path": "/opt/mts/ga6_h/data/prices/CL.parquet",
+      "sha256": "55e835ba2856941520b2994ad84054d0e40d00a930d3e95b5accdb59f5300149",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CLX",
+      "path": "/opt/mts/ga6_h/data/prices/CLX.parquet",
+      "sha256": "2742dd9ce4137b05add9d50f97d41e0af904e82343a04a7e63a07885666ec1d0",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CMCSA",
+      "path": "/opt/mts/ga6_h/data/prices/CMCSA.parquet",
+      "sha256": "f40a06071a732f02ce45606ccabd39b36c8081be737cbad978aff89d2e52b14f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CME",
+      "path": "/opt/mts/ga6_h/data/prices/CME.parquet",
+      "sha256": "f017d2aa49db7af8ddf6d1dd82a2346ca946d703e8e6c744178264cd2a248559",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CMG",
+      "path": "/opt/mts/ga6_h/data/prices/CMG.parquet",
+      "sha256": "a6a7acae55252ab477f064c26649c6b418194dfac5cab4e9935f25d3c5d14815",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CMI",
+      "path": "/opt/mts/ga6_h/data/prices/CMI.parquet",
+      "sha256": "2fd1deb074421bdb80b1ac66a254066efa662d2e65a102b5dedaa483b8576ce7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CMS",
+      "path": "/opt/mts/ga6_h/data/prices/CMS.parquet",
+      "sha256": "590d1041f3b468d5dc1581f6fdc5a1e494732f5f7253e90b68b0fccd4059aa21",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CNC",
+      "path": "/opt/mts/ga6_h/data/prices/CNC.parquet",
+      "sha256": "297a43204800f7f14960b88a143216a0a172b8d126f1df75a2997fddd703204d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CNP",
+      "path": "/opt/mts/ga6_h/data/prices/CNP.parquet",
+      "sha256": "147e9752ca0eeaf545148a9dbaa6ac7887a2be6a9eb1c676d15f6e3f568b6394",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "COF",
+      "path": "/opt/mts/ga6_h/data/prices/COF.parquet",
+      "sha256": "348dc95cc085f0be61774556db35c0961d13c3ab0a70c41160cc459b307baf6d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "COO",
+      "path": "/opt/mts/ga6_h/data/prices/COO.parquet",
+      "sha256": "bd8ed2d88c663c9902ec9816fc9b9562d6e929c66587573200b0a2b0dd4104ae",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "COP",
+      "path": "/opt/mts/ga6_h/data/prices/COP.parquet",
+      "sha256": "eb2556310ef93aa3737afdd9b1f1bdeb136cdb826639745a283a341fca8f083f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "COST",
+      "path": "/opt/mts/ga6_h/data/prices/COST.parquet",
+      "sha256": "c5d97d5148e53725e325e2239d108d3e00eb1396498e97dffce93c126c2ac5ba",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "COTY",
+      "path": "/opt/mts/ga6_h/data/prices/COTY.parquet",
+      "sha256": "cd4ab3a76fe8c183ef733a0a0b778e4bc094e27bffee2f07bf734667c1ff636d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CPB",
+      "path": "/opt/mts/ga6_h/data/prices/CPB.parquet",
+      "sha256": "5a1621449b6c9ff8c2cd2e7e85a1063307e95640238212dcb7efb57341909e7f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CPRI",
+      "path": "/opt/mts/ga6_h/data/prices/CPRI.parquet",
+      "sha256": "88b718677a23fa4f1b13a01fc70b6f287067b38b14aadafd77d2723b3a4ac4d5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CPRT",
+      "path": "/opt/mts/ga6_h/data/prices/CPRT.parquet",
+      "sha256": "62d5a48b36404f22a1a5246a6e449830eafb8ba1524b6d8e70d4a0ae00e889b8",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CRM",
+      "path": "/opt/mts/ga6_h/data/prices/CRM.parquet",
+      "sha256": "db429100ae6fbf1e6af7ea8ef079f534cfbb923755e2f95c54967e8220313dcc",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CSCO",
+      "path": "/opt/mts/ga6_h/data/prices/CSCO.parquet",
+      "sha256": "06db3a34b457ea140841453fa3b3a07f57ea57878a561d1548fbf792bd11e20c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CSX",
+      "path": "/opt/mts/ga6_h/data/prices/CSX.parquet",
+      "sha256": "4e4e59637b4871bb553188aa662f86d8c8915f598555663a95092535c0f9b0e7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CTAS",
+      "path": "/opt/mts/ga6_h/data/prices/CTAS.parquet",
+      "sha256": "b0dc9f96d383efdd5fffd033980f94e9c265ae349fb449df065c5ebed2375886",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CTSH",
+      "path": "/opt/mts/ga6_h/data/prices/CTSH.parquet",
+      "sha256": "dfaff44e6469ea7c5fcfa07d22a45079d807da6c26491554572fd79c182e0240",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CTVA",
+      "path": "/opt/mts/ga6_h/data/prices/CTVA.parquet",
+      "sha256": "407fbee490ff5163ace1b66844483bdd4afe2ac0e6654df42d93fe28713e6dda",
+      "rows_used": 153,
+      "first": "2019-05-24",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CVS",
+      "path": "/opt/mts/ga6_h/data/prices/CVS.parquet",
+      "sha256": "07bf83251adab1bfda92edd0b256a3cb238ca5ae994aeaf73a2e2f7d1c1a0425",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "CVX",
+      "path": "/opt/mts/ga6_h/data/prices/CVX.parquet",
+      "sha256": "c6814c7514de40bcc70adb311465f1a5b5deddc232a5127155013bab4a028a8f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "D",
+      "path": "/opt/mts/ga6_h/data/prices/D.parquet",
+      "sha256": "048573e817121dc93688489c9580018e3df7c69374c53768e6a8af8aa69ee124",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DAL",
+      "path": "/opt/mts/ga6_h/data/prices/DAL.parquet",
+      "sha256": "cfb9a96232ac3431cb6d14a55c8a48f6613b0fc6502f70101528fb7d7b48874c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DD",
+      "path": "/opt/mts/ga6_h/data/prices/DD.parquet",
+      "sha256": "c0575e95f5715a651bbdeafb602110c387522ef13a6bbe85d8d21d280367322c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DE",
+      "path": "/opt/mts/ga6_h/data/prices/DE.parquet",
+      "sha256": "e7d78613b4a1b65e831ca6ac5cff3036bc36bfd8f816bf9580dc3bc1a6d30898",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DG",
+      "path": "/opt/mts/ga6_h/data/prices/DG.parquet",
+      "sha256": "65d3a89e3b731c5715300527339c10dd7962ae57b39d1d3edf79acd791958d21",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DGX",
+      "path": "/opt/mts/ga6_h/data/prices/DGX.parquet",
+      "sha256": "fca37e16765f07eec1f20387242a14e0a706e412badd6e5334b59ff2741a8d40",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DHI",
+      "path": "/opt/mts/ga6_h/data/prices/DHI.parquet",
+      "sha256": "431b4c56b7c383d6a739e281f882ea1c64b3bd00792dcd3aebf572c29548a0b3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DHR",
+      "path": "/opt/mts/ga6_h/data/prices/DHR.parquet",
+      "sha256": "0a434f0284949b8450b5844dfbe0d4642bcac75293f872d6e86303bddc146cc1",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DIS",
+      "path": "/opt/mts/ga6_h/data/prices/DIS.parquet",
+      "sha256": "5bd6c4a3a424b256006fcfb23f8000649d612b875ee55ad3d09cf336bf31551e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DLTR",
+      "path": "/opt/mts/ga6_h/data/prices/DLTR.parquet",
+      "sha256": "b09a43f540e51d70c131ff0cb8de9cc640d40dc6e939e5e6dd23e1354fc06176",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DOV",
+      "path": "/opt/mts/ga6_h/data/prices/DOV.parquet",
+      "sha256": "6253e7d6c235f6ac5fb576d1200bab67f7af37303bfbdfd5a109efd815bbb44a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DOW",
+      "path": "/opt/mts/ga6_h/data/prices/DOW.parquet",
+      "sha256": "1df96e5350e88f507610101ae33290a22ceb34e79cff69d63312e7b2bdff232a",
+      "rows_used": 199,
+      "first": "2019-03-20",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DRI",
+      "path": "/opt/mts/ga6_h/data/prices/DRI.parquet",
+      "sha256": "201d41317ef68227940eb2bfc1220933e3483793cd4fc56354ded681a328d633",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DTE",
+      "path": "/opt/mts/ga6_h/data/prices/DTE.parquet",
+      "sha256": "98395631564f34d0c835d0ea1fe785b167dd5e0dfea7126ef938fd7e5f4e6af7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DUK",
+      "path": "/opt/mts/ga6_h/data/prices/DUK.parquet",
+      "sha256": "550fc3082545c917bef0c0df6dd50a6ac07093b2168dc09412ee410e5e646ceb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DVA",
+      "path": "/opt/mts/ga6_h/data/prices/DVA.parquet",
+      "sha256": "b5f14cec2a4abaf2da17cba3074f8f403e572116f9e4d8d3470db7769188fb98",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DVN",
+      "path": "/opt/mts/ga6_h/data/prices/DVN.parquet",
+      "sha256": "60b853d0d0a415622dcc23d468d21a64b530dcd6c9b4d6025a19136a1cbf754d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "DXC",
+      "path": "/opt/mts/ga6_h/data/prices/DXC.parquet",
+      "sha256": "8b434a0a6c05d9fbe26198798a221b6e107596b25efa9492ff77eae89d8e7d26",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EBAY",
+      "path": "/opt/mts/ga6_h/data/prices/EBAY.parquet",
+      "sha256": "390713a19a6dc0df147576ba0280cf2473bf65ebe171a0cda9d2a55447100180",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ECL",
+      "path": "/opt/mts/ga6_h/data/prices/ECL.parquet",
+      "sha256": "2d2fd2d6c9e506feb5e50817a207774523cb6911e72501b859a18f64ad020d77",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ED",
+      "path": "/opt/mts/ga6_h/data/prices/ED.parquet",
+      "sha256": "fe7101278eb7474a2c9cd9af188fb393e5a75a23d46012617c40442ad4712c4e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EFX",
+      "path": "/opt/mts/ga6_h/data/prices/EFX.parquet",
+      "sha256": "8b630a9573c330677ac71b29186c5e43c576f85d3989d4c56133007b9fe4a693",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EIX",
+      "path": "/opt/mts/ga6_h/data/prices/EIX.parquet",
+      "sha256": "6a92f790dd7eb714d6a4bf70c717512d9972a58c708e228dd79a02de2f3bcf0c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EL",
+      "path": "/opt/mts/ga6_h/data/prices/EL.parquet",
+      "sha256": "b350614bb1019b4872eb6d534dae16fcf0b4d47c42c6353f5e1e1e8a087c92d1",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EMN",
+      "path": "/opt/mts/ga6_h/data/prices/EMN.parquet",
+      "sha256": "f85aa8499a5aa843d34984bbeb7f361514af8fc02c91f3a98cef7045d2a2d14d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EMR",
+      "path": "/opt/mts/ga6_h/data/prices/EMR.parquet",
+      "sha256": "71f3ff9cfd116a8b3474d5252ae1a6437801d1af8fb36f5d5a9972b6e6af00c6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EOG",
+      "path": "/opt/mts/ga6_h/data/prices/EOG.parquet",
+      "sha256": "d0d8fcb20b4951f24a938f1c7a570c07b8180f0c4ff156dfe6ad1a9249ccff6f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EQIX",
+      "path": "/opt/mts/ga6_h/data/prices/EQIX.parquet",
+      "sha256": "1b398673a82571775a19464263ee1ef9b6578c4813fc7584dc8e5f125df45868",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ES",
+      "path": "/opt/mts/ga6_h/data/prices/ES.parquet",
+      "sha256": "cd3b05670119357642efef74b0cce0c979f5c141d7702165bf0f7fb172991fdc",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ETN",
+      "path": "/opt/mts/ga6_h/data/prices/ETN.parquet",
+      "sha256": "a3b2f1fd2939a9dde2af3c9de94a932bd4dbe76877b9b1756d55a22b5e3d2b41",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ETR",
+      "path": "/opt/mts/ga6_h/data/prices/ETR.parquet",
+      "sha256": "2bf8ed64ced472ab183a318d308ca774c78eac4cca8478bdd6658c7a7f47560c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EVRG",
+      "path": "/opt/mts/ga6_h/data/prices/EVRG.parquet",
+      "sha256": "d4436d7ab9131f381e93c1615427ae63fc0708beddea036bfca07c22480103df",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EW",
+      "path": "/opt/mts/ga6_h/data/prices/EW.parquet",
+      "sha256": "37aab681d6f13a736e2e502e8dfa6c10308942bc50dd5be4d81f1efb1f52b790",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EXC",
+      "path": "/opt/mts/ga6_h/data/prices/EXC.parquet",
+      "sha256": "3dd3571cb79ca384eade9d1afd0cb52eb1751e466090fe5a1a9184f31ae9f4dd",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EXPD",
+      "path": "/opt/mts/ga6_h/data/prices/EXPD.parquet",
+      "sha256": "8acb82a60a1e5ecd5cbac6a868037230fda02ef549c0a7ba41ad176983f06a8c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "EXPE",
+      "path": "/opt/mts/ga6_h/data/prices/EXPE.parquet",
+      "sha256": "78077f083a1ccb3631318bdca7dbacd91c7cd5864fdd850c6d7f32027e19482b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "F",
+      "path": "/opt/mts/ga6_h/data/prices/F.parquet",
+      "sha256": "35a72c858ff70929790fc5d3bf8f25ac82ac9e17e8526454dfee41aefa04ef97",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FANG",
+      "path": "/opt/mts/ga6_h/data/prices/FANG.parquet",
+      "sha256": "6c544e7b64ec7e410737606b7d3ed9d17dc0642b95f8c95e33e865cd6af0b7fa",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FAST",
+      "path": "/opt/mts/ga6_h/data/prices/FAST.parquet",
+      "sha256": "dff8356ff4644daa304f4aad40326282feb53b29c6fb9ea776719c1a14f6bb44",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FCX",
+      "path": "/opt/mts/ga6_h/data/prices/FCX.parquet",
+      "sha256": "6d3bd3bceded61fef8d725e971c3da16501a6529f076d5ad4891d6d6b55f7808",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FDX",
+      "path": "/opt/mts/ga6_h/data/prices/FDX.parquet",
+      "sha256": "083acf52e0104d83e684385ddbb70c2cb0a8407981820e709e130ddb24f64f6d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FE",
+      "path": "/opt/mts/ga6_h/data/prices/FE.parquet",
+      "sha256": "9074f4f57387708329979ab8d9b73111b4ec70e7f0159319ad5ef219e2c5fbfd",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FFIV",
+      "path": "/opt/mts/ga6_h/data/prices/FFIV.parquet",
+      "sha256": "ecfbdf62f701d8ad00db229711233e4bf868e545b2af418fba5af35c8daeaef7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FIS",
+      "path": "/opt/mts/ga6_h/data/prices/FIS.parquet",
+      "sha256": "392ecc1f7d4d9b76f6f055d4a68112d0853c01d2c7105343ffbbf106809d52cf",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FISV",
+      "path": "/opt/mts/ga6_h/data/prices/FISV.parquet",
+      "sha256": "ed2596bc9d0def47d22d73bde29d37180b6babe3fb713c0bae85920e61f9bf82",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FITB",
+      "path": "/opt/mts/ga6_h/data/prices/FITB.parquet",
+      "sha256": "155f3db62630dea4eab56585425f43b16aa73df17f778b44a74ed82446053ad5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FLR",
+      "path": "/opt/mts/ga6_h/data/prices/FLR.parquet",
+      "sha256": "fbc6f8cc0c48a5ac3b861c35da18f8168349ac5ad4686aeb5ead196d2578916e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FLS",
+      "path": "/opt/mts/ga6_h/data/prices/FLS.parquet",
+      "sha256": "63fecc66b3a7d27be315c907f27917ce2c89d79278cf0c25431119cac69ad5f1",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FMC",
+      "path": "/opt/mts/ga6_h/data/prices/FMC.parquet",
+      "sha256": "a58ef0db58cb6eaf126dc2e06bd0a1b8681303e4c3157d8dac95e4dbf0bcb277",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FOX",
+      "path": "/opt/mts/ga6_h/data/prices/FOX.parquet",
+      "sha256": "8dadcfb0f5551e63c4dbec49531a8e33eb67655b0825387978ca106cf139db8a",
+      "rows_used": 204,
+      "first": "2019-03-13",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FOXA",
+      "path": "/opt/mts/ga6_h/data/prices/FOXA.parquet",
+      "sha256": "c60af52c5c2e41e7398ef93e240ea90cea431874c57d6e6ad46339681e7b4c27",
+      "rows_used": 205,
+      "first": "2019-03-12",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FTI",
+      "path": "/opt/mts/ga6_h/data/prices/FTI.parquet",
+      "sha256": "20d540e394905ec74580443cc131e52be0269ba94d60f73cb6c46220f3e3cfb6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FTNT",
+      "path": "/opt/mts/ga6_h/data/prices/FTNT.parquet",
+      "sha256": "1e44b821fe2912f6fc87440faa1e5de1d3cf1b0ec6f39ebbf09a634034c8e469",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "FTV",
+      "path": "/opt/mts/ga6_h/data/prices/FTV.parquet",
+      "sha256": "8f5bcf74df0ca95e40544bb1094e2d57d459b14f254ddae70e36e03b7aa9e7e7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GD",
+      "path": "/opt/mts/ga6_h/data/prices/GD.parquet",
+      "sha256": "9d1100931fc9be9124a5987ba0f8df497eec0b42cbe4ef35e1a395e70acc8161",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GILD",
+      "path": "/opt/mts/ga6_h/data/prices/GILD.parquet",
+      "sha256": "182759c794e1ee85978a771a1fbe543a4c6895bd89ffc7db38779f03728206db",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GIS",
+      "path": "/opt/mts/ga6_h/data/prices/GIS.parquet",
+      "sha256": "0d56eac4ed614dd02e8c27e546da5d29e6e26f7524ae955d7c0575790cd16c41",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GL",
+      "path": "/opt/mts/ga6_h/data/prices/GL.parquet",
+      "sha256": "2baa7ad13b74d6afe9f18185469ad0eae44848d8701ff6feb1b27ff69eb1878b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GLW",
+      "path": "/opt/mts/ga6_h/data/prices/GLW.parquet",
+      "sha256": "4c9422b7c8392bba7f4082268d0ae6dfce39d915bf1f4600d51f162326a68434",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GM",
+      "path": "/opt/mts/ga6_h/data/prices/GM.parquet",
+      "sha256": "c8b54760d1900d8dd2e58c31b5476a6b43af58e1a31cb138310bebb472cea2fe",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GOOG",
+      "path": "/opt/mts/ga6_h/data/prices/GOOG.parquet",
+      "sha256": "21bcbc0d8b5b84fc58d0146fd336b4f5fc55f2b0f01b35e81f400df65de0c05a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GOOGL",
+      "path": "/opt/mts/ga6_h/data/prices/GOOGL.parquet",
+      "sha256": "d3374ff465ec6428d245aa13e2e36c3ce6e8a0d4ced1081007417a4150434857",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GPC",
+      "path": "/opt/mts/ga6_h/data/prices/GPC.parquet",
+      "sha256": "5dfdada688354310f83288fcb669bb75c682dd833516f7431df47b469af48ff5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GPN",
+      "path": "/opt/mts/ga6_h/data/prices/GPN.parquet",
+      "sha256": "a369ebfd6255277d857c1030c6da9d3a9757dfcb8ca771333c9ea56ef260b430",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GRMN",
+      "path": "/opt/mts/ga6_h/data/prices/GRMN.parquet",
+      "sha256": "967fc4c5bff37626bfbd9e0aeffee8c14352ee624857b01b052613c24865cec3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GS",
+      "path": "/opt/mts/ga6_h/data/prices/GS.parquet",
+      "sha256": "efe04367da3f2825821c7ea43eb717ffc82177f7cbdc068908d6f53c7459f7be",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GT",
+      "path": "/opt/mts/ga6_h/data/prices/GT.parquet",
+      "sha256": "2d587a8e556536f8eb67cb2c354dc9cb001c76056f6cdc8631e4d41b261adc56",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "GWW",
+      "path": "/opt/mts/ga6_h/data/prices/GWW.parquet",
+      "sha256": "725b465404ca6696e34e4d56ff1fc0087598d16b3d13790d7fdf6e09718eff8f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HAL",
+      "path": "/opt/mts/ga6_h/data/prices/HAL.parquet",
+      "sha256": "c1fe14af007747f35351fe4772332eea2ac16f9ad7a4e5403320c17c312b6ea0",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HAS",
+      "path": "/opt/mts/ga6_h/data/prices/HAS.parquet",
+      "sha256": "199a42acfa28845a9ff1e35e1430995e07be93f10dc3d4ed83f132fef22c0b7e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HBAN",
+      "path": "/opt/mts/ga6_h/data/prices/HBAN.parquet",
+      "sha256": "2a5b4ce8704e7b7c5a2b0f06fbdea78c2f165f952b100afa58ac0c1213bde23e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HCA",
+      "path": "/opt/mts/ga6_h/data/prices/HCA.parquet",
+      "sha256": "74576ee2df05fbed833e2bd0687f18c0b8bafa6e2e2013d73396bbd6b5983045",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HD",
+      "path": "/opt/mts/ga6_h/data/prices/HD.parquet",
+      "sha256": "cd5a4020c8ef2b2b4c86483bfe8fed18d2e88e2ecfa4ba1568a4ef02cc34c26a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HIG",
+      "path": "/opt/mts/ga6_h/data/prices/HIG.parquet",
+      "sha256": "de138c3f8be35e64c73767bb8cd1710de49154cab9c2cea47f4771b7aed82210",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HII",
+      "path": "/opt/mts/ga6_h/data/prices/HII.parquet",
+      "sha256": "124aeec382cd6cf1921869086fe70bdcbd10faf7e95d9fc743acdd66f6328fac",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HLT",
+      "path": "/opt/mts/ga6_h/data/prices/HLT.parquet",
+      "sha256": "70143ba6d6630640e78791be8371089db15b47ba21bf207849328c0cad20c50b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HOG",
+      "path": "/opt/mts/ga6_h/data/prices/HOG.parquet",
+      "sha256": "9d1114f14a0fb75c459924ca9f30fb7ee5f0a8c451d4d8d519c91096e4f2f8ae",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HON",
+      "path": "/opt/mts/ga6_h/data/prices/HON.parquet",
+      "sha256": "ca0d6921bf5a8db8d50809a0277dbee3a436bd29fd50be35a0f044c742042d39",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HP",
+      "path": "/opt/mts/ga6_h/data/prices/HP.parquet",
+      "sha256": "77e4bcd22639bc9906dae54a6d269f170863b36e903549e6809b5de6ad37f660",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HPE",
+      "path": "/opt/mts/ga6_h/data/prices/HPE.parquet",
+      "sha256": "c572f14fdd037cdb8c9717022131b6c760f376853f1996ce1b23da5db9b0f39b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HPQ",
+      "path": "/opt/mts/ga6_h/data/prices/HPQ.parquet",
+      "sha256": "574c7d17f7f58c39c39166b05c168cddf65526503576932f273080d2b53f1c03",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HRB",
+      "path": "/opt/mts/ga6_h/data/prices/HRB.parquet",
+      "sha256": "4c56302a2583a52099953de875ae63d81139605bce046611c38c1151543a658c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HRL",
+      "path": "/opt/mts/ga6_h/data/prices/HRL.parquet",
+      "sha256": "a44674f9439fb4c701a3a9466b97d3fbc9a25a4ccc4ddf2533b4cac94dec52a4",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HSIC",
+      "path": "/opt/mts/ga6_h/data/prices/HSIC.parquet",
+      "sha256": "477a3a2e5f551951b6217959dda35dc01ad445074f168e2a2f792b4630950e4b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HST",
+      "path": "/opt/mts/ga6_h/data/prices/HST.parquet",
+      "sha256": "647f1f7f8c23ea3be9770d712861320e6a1d12d8aee7ce11586f81b252a24e8c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HSY",
+      "path": "/opt/mts/ga6_h/data/prices/HSY.parquet",
+      "sha256": "dfa60842dbd72943792e093caff73aae8257232856fab55dc57184276edebe28",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "HUM",
+      "path": "/opt/mts/ga6_h/data/prices/HUM.parquet",
+      "sha256": "030e7bfdf5d12a8449d5187dadb7edcecc4403f29c678cae4a705539e0503b46",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IBM",
+      "path": "/opt/mts/ga6_h/data/prices/IBM.parquet",
+      "sha256": "7abb2c783744c1381c408c925c6cd8fd5fe9496b48fb4fd4245dbd4728f4b3fc",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ICE",
+      "path": "/opt/mts/ga6_h/data/prices/ICE.parquet",
+      "sha256": "73f0d01d9ae52cb140ffa0fa9e41f6c2fd18b25f08472fa1cacf53213ae86f10",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IDXX",
+      "path": "/opt/mts/ga6_h/data/prices/IDXX.parquet",
+      "sha256": "997bc28ef38e6a38d320f85eda66a353f0ddf7f7224c9016fa2ed08758c6639f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IEX",
+      "path": "/opt/mts/ga6_h/data/prices/IEX.parquet",
+      "sha256": "c374edb610e0bbfef4762cbe4e9642a1e5570190133671eca2a8d72a0dbcb157",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IFF",
+      "path": "/opt/mts/ga6_h/data/prices/IFF.parquet",
+      "sha256": "0ee2acd13997470c5fa38bb78a840037c395993b0371646aa554315a094d758c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ILMN",
+      "path": "/opt/mts/ga6_h/data/prices/ILMN.parquet",
+      "sha256": "5bef30ade16aa20597e2cafbb9f3b0ae05d1701cc39ae4d2aa3ff201734c381b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "INCY",
+      "path": "/opt/mts/ga6_h/data/prices/INCY.parquet",
+      "sha256": "20ee2b2c52a6f1d54cbdc49f51806ca44bf7f99d426c604ee17139db4eae9a11",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "INTC",
+      "path": "/opt/mts/ga6_h/data/prices/INTC.parquet",
+      "sha256": "4eecb5c1e4d7117177b3d486f50835061fc8d46f45027f0a8c92e094c1cc60cf",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "INTU",
+      "path": "/opt/mts/ga6_h/data/prices/INTU.parquet",
+      "sha256": "1d29b6d67bb5374aef8db8cbdbd4ad87ef35fcc029c4c6460d3dee518dd1cbeb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IP",
+      "path": "/opt/mts/ga6_h/data/prices/IP.parquet",
+      "sha256": "94022722156d824c551612bce02410fa4ac6da3828691a53327c6a280854550a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IPGP",
+      "path": "/opt/mts/ga6_h/data/prices/IPGP.parquet",
+      "sha256": "f72e1fbd99244892c33dfb56d3dd724fedbc3d5d88cc6fe5c6346ddcfa0ad08d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IQV",
+      "path": "/opt/mts/ga6_h/data/prices/IQV.parquet",
+      "sha256": "da69e6faab488154c6d4bd2da71f6d440afdfe9f67c65c9409229660b391bebb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IR",
+      "path": "/opt/mts/ga6_h/data/prices/IR.parquet",
+      "sha256": "c378cf7fb739477d1c783f332b6afba54b421f338de903400de51773f902bfd5",
+      "rows_used": 664,
+      "first": "2017-05-12",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IRM",
+      "path": "/opt/mts/ga6_h/data/prices/IRM.parquet",
+      "sha256": "42ebaf219011e0fee826f3ea7d33dffccb8918e18c3ac57cee3b43fdf41027eb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ISRG",
+      "path": "/opt/mts/ga6_h/data/prices/ISRG.parquet",
+      "sha256": "4bccc967a8715cf40d2d99ef10f54d2b648ed42e40883575ef82455e8fadcaa5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IT",
+      "path": "/opt/mts/ga6_h/data/prices/IT.parquet",
+      "sha256": "82b2f73babb64653b9eb61e320929c39df0d7efeaec7926a92e206fdd4e2a8cf",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ITW",
+      "path": "/opt/mts/ga6_h/data/prices/ITW.parquet",
+      "sha256": "f89c3996fcf7c417bb66fb8978e2c18a0c97d1a26d729103d63c04447a65a371",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "IVZ",
+      "path": "/opt/mts/ga6_h/data/prices/IVZ.parquet",
+      "sha256": "cfee921a625ab172a8037dd3ffdc9c13d1378b2166f06203a5ada280c55895ff",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "J",
+      "path": "/opt/mts/ga6_h/data/prices/J.parquet",
+      "sha256": "b8376b45cdee16a9d9c9953741f4c9d4f309991319d5bac0cb132e9b881c220d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "JBHT",
+      "path": "/opt/mts/ga6_h/data/prices/JBHT.parquet",
+      "sha256": "53c49f556296fe2cf18349f46408477a05fbf84702684c0bb4fc540e1a61a90a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "JCI",
+      "path": "/opt/mts/ga6_h/data/prices/JCI.parquet",
+      "sha256": "b0d2380fd8293f78f0d5335f517a91628d8e89282b06b5e60bb64c3e32d662b0",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "JEF",
+      "path": "/opt/mts/ga6_h/data/prices/JEF.parquet",
+      "sha256": "202aaf8d8d16da1520d07e818a2419a76617cad057fe7f0f2d95a708751b7f05",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "JKHY",
+      "path": "/opt/mts/ga6_h/data/prices/JKHY.parquet",
+      "sha256": "22cd0a1a70964b6d70ade9de047263a929d26d27852e94b1e743ec009d403e3b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "JNJ",
+      "path": "/opt/mts/ga6_h/data/prices/JNJ.parquet",
+      "sha256": "7cc7c61188628ac044a133454de1be31e2a2161cf2170fb927dbf540ac5dcf2d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "JPM",
+      "path": "/opt/mts/ga6_h/data/prices/JPM.parquet",
+      "sha256": "7b1487f970b580a53324bd6e50e92c9e2e76cc6fc99a5e4fcba29600319f166d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KEY",
+      "path": "/opt/mts/ga6_h/data/prices/KEY.parquet",
+      "sha256": "c72a0cbc4a39c6d20570c485865f8677680073e3ae8695e985dbc316c17ac472",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KEYS",
+      "path": "/opt/mts/ga6_h/data/prices/KEYS.parquet",
+      "sha256": "b52157472a7e2822cf1c3760faf6129938311199c402f558633e4931c26ed5bd",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KHC",
+      "path": "/opt/mts/ga6_h/data/prices/KHC.parquet",
+      "sha256": "09fc9a8d173d7c095d486d4d60048d60ff2c679da69e9c4556da99ed7c657d56",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KIM",
+      "path": "/opt/mts/ga6_h/data/prices/KIM.parquet",
+      "sha256": "b36c947a40fcb615984d5853c767f3ae4da0cd9526f9f9708cf133037ca55850",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KLAC",
+      "path": "/opt/mts/ga6_h/data/prices/KLAC.parquet",
+      "sha256": "003733fe4630affcc666c7d39ae0bfe957b44da75c8e26931798402228c5dc64",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KMB",
+      "path": "/opt/mts/ga6_h/data/prices/KMB.parquet",
+      "sha256": "bda3eceffbcdaee660bd2120340159774ed9788c74f24045df99c463f6e146ed",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KMI",
+      "path": "/opt/mts/ga6_h/data/prices/KMI.parquet",
+      "sha256": "c552c37591cb77638c422644add5414b609f165c289af2ae1349d844d50b769d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KMX",
+      "path": "/opt/mts/ga6_h/data/prices/KMX.parquet",
+      "sha256": "b6067eab36d4adc8eb5f43b06252e4975b3cacbdd0e02de40346900f1676df7f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KO",
+      "path": "/opt/mts/ga6_h/data/prices/KO.parquet",
+      "sha256": "72d671269a96cac75860334de1ad2cfbd94bbe292eb12c3a63281ec2a74ddc95",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KR",
+      "path": "/opt/mts/ga6_h/data/prices/KR.parquet",
+      "sha256": "4fa4eb590c41c769e1b337d5fc20601b70692816026898fd9cd1cf959e98bd09",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "KSS",
+      "path": "/opt/mts/ga6_h/data/prices/KSS.parquet",
+      "sha256": "7dfb28c23b1bfb02d8602d1964d67720831c5359fc7a5667534e6fec2fb44f74",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "L",
+      "path": "/opt/mts/ga6_h/data/prices/L.parquet",
+      "sha256": "0be6550a513d5dd754792654eb6a70770665fd62b03b4984c2b87bf3dc10313c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LDOS",
+      "path": "/opt/mts/ga6_h/data/prices/LDOS.parquet",
+      "sha256": "fe0a10b092d45081417c35373d5a551b62f5c2abc34d288e6750b1e49423f145",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LEN",
+      "path": "/opt/mts/ga6_h/data/prices/LEN.parquet",
+      "sha256": "9951ab304f45921fbc652deacbfa86a8882e020cda713face7170be7c02b7468",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LH",
+      "path": "/opt/mts/ga6_h/data/prices/LH.parquet",
+      "sha256": "83f5efbc932794b488bd0134d36e3be900f7a7f3cb9152e22465d343f092a3da",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LHX",
+      "path": "/opt/mts/ga6_h/data/prices/LHX.parquet",
+      "sha256": "e8634bf5218eb2b79ccb15c2c2baf7042217c1a0d4c2703de2c1a0cb791f7c8d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LIN",
+      "path": "/opt/mts/ga6_h/data/prices/LIN.parquet",
+      "sha256": "b90c0e1c4140ee20d69db9a581afd8ad7f7013aaec73e048d534eed0c845e2cf",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LKQ",
+      "path": "/opt/mts/ga6_h/data/prices/LKQ.parquet",
+      "sha256": "fbe341909634a65e3e4afb98c8c3176493e8812b359c42d5dab5fcdc768afe06",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LLY",
+      "path": "/opt/mts/ga6_h/data/prices/LLY.parquet",
+      "sha256": "f8db9f232add23af62ef5a73ec116ef8ec857c37c876454f2fcb1d9da601ae2c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LMT",
+      "path": "/opt/mts/ga6_h/data/prices/LMT.parquet",
+      "sha256": "18a6cd73df3be4cbe1c1ecc466788a9216db6eeb28b6b1b28a538bb4fb06a37b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LNC",
+      "path": "/opt/mts/ga6_h/data/prices/LNC.parquet",
+      "sha256": "2eebe60f4d40b55a4f4eff9c8301b4e1e658a325503c1cdc1e5751fd43ef43f6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LNT",
+      "path": "/opt/mts/ga6_h/data/prices/LNT.parquet",
+      "sha256": "56f71996b8e06bc390304e982112b1ddac5935ca9bbffc04ca08755450bbfec9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LOW",
+      "path": "/opt/mts/ga6_h/data/prices/LOW.parquet",
+      "sha256": "b041fa4d844a4b1011ebd30b86cea14f1f25a31ca9f61f3107344de1c81a13a6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LRCX",
+      "path": "/opt/mts/ga6_h/data/prices/LRCX.parquet",
+      "sha256": "9f7c5d29adf40c060a7d0394665f44d3f249b6fd2f3672519bcec46a44161efc",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LUV",
+      "path": "/opt/mts/ga6_h/data/prices/LUV.parquet",
+      "sha256": "882156ba962e9b56b61292b58ddc3b237e6c1a3de7d1707d414cb5a2b29b1a5f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LVS",
+      "path": "/opt/mts/ga6_h/data/prices/LVS.parquet",
+      "sha256": "e5a3aa25b6940125722911a536b0d455fa4d81bd9837747d2cca93ba45693e94",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LW",
+      "path": "/opt/mts/ga6_h/data/prices/LW.parquet",
+      "sha256": "8265208ae206c4ae288ae7b910f288286b5b7a7262203ddeec376a9d25a62c7b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LYB",
+      "path": "/opt/mts/ga6_h/data/prices/LYB.parquet",
+      "sha256": "8d5e600d22c90d4af6f4e6537113bc0811d37e122395633cb0aa2a3178aa1102",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "LYV",
+      "path": "/opt/mts/ga6_h/data/prices/LYV.parquet",
+      "sha256": "120f8667b1b759e0447da5bf5e1a20b6d0e355b9ec903cae815972bb79feacbd",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "M",
+      "path": "/opt/mts/ga6_h/data/prices/M.parquet",
+      "sha256": "22ff9fb8f1274849cd2bd997ad3d78302e994f35dc2cc6ae94424d6796493d93",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MA",
+      "path": "/opt/mts/ga6_h/data/prices/MA.parquet",
+      "sha256": "8be4b4d3cb8cab86b2d95bca3a9535b24e4527096b1a8305e4f313d4b5f96ff0",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MAA",
+      "path": "/opt/mts/ga6_h/data/prices/MAA.parquet",
+      "sha256": "a7b465cee13d6cac649e0900acd188ac4a15196527747d207a176e9494c2b2a9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MAC",
+      "path": "/opt/mts/ga6_h/data/prices/MAC.parquet",
+      "sha256": "1c901cc0e0d4ab94199dab4e1cb5f96dc8c9d077415d8d29f9d6fb5b95f8ad35",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MAR",
+      "path": "/opt/mts/ga6_h/data/prices/MAR.parquet",
+      "sha256": "a4aa45dc576d003d5b7c280293676694122fc00f6253d6c216d9072997335940",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MAS",
+      "path": "/opt/mts/ga6_h/data/prices/MAS.parquet",
+      "sha256": "c3489f2c564ce33e7ddfc17099c4b061829cf195c44a7f9531196e9ad8ae4bee",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MAT",
+      "path": "/opt/mts/ga6_h/data/prices/MAT.parquet",
+      "sha256": "e776676bc0988c52ecbd26d566fb81626e99ca25e20df179e0ffdba34101f2c9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MCD",
+      "path": "/opt/mts/ga6_h/data/prices/MCD.parquet",
+      "sha256": "5441a43c37e256bd6629df0d475300f08ffd5b47fb3bb863a9d8040cfee70d3e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MCHP",
+      "path": "/opt/mts/ga6_h/data/prices/MCHP.parquet",
+      "sha256": "5f8b36a6dc51281ee55858077d4ad5a6ea83b319fd30715cf4a8abbf29e7850b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MCK",
+      "path": "/opt/mts/ga6_h/data/prices/MCK.parquet",
+      "sha256": "a1c3355b9bbd7577e77e5301c9ed7b23ea556e6a6e17fb856f4330d6c083bc77",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MCO",
+      "path": "/opt/mts/ga6_h/data/prices/MCO.parquet",
+      "sha256": "1c636962d53e3968812027cb3a4678958cfd03c5f109463833cec934bc2608eb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MDLZ",
+      "path": "/opt/mts/ga6_h/data/prices/MDLZ.parquet",
+      "sha256": "6559c45e5e7e8020c9e6cbcc0abdd2003805c47f01264c98ecd942e89b2ebc40",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MDT",
+      "path": "/opt/mts/ga6_h/data/prices/MDT.parquet",
+      "sha256": "718c9cc1ea87a9b3dab5f3a6583005895657caf49665f5b76ea081dfa310e96b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MET",
+      "path": "/opt/mts/ga6_h/data/prices/MET.parquet",
+      "sha256": "73ae30b74d3526e0fa352c8cd3724ec9f3842d136dc2914d58832e1b16f04599",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MGM",
+      "path": "/opt/mts/ga6_h/data/prices/MGM.parquet",
+      "sha256": "1aed1a7ba4a4c8093ffc7b96ed8efc9b16dc92ce0a0e6cb17379ce907c63b17c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MHK",
+      "path": "/opt/mts/ga6_h/data/prices/MHK.parquet",
+      "sha256": "b28430a133005f7e5e997c8e61cea4bafd8368e535b8987a9c980480ca95e361",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MKC",
+      "path": "/opt/mts/ga6_h/data/prices/MKC.parquet",
+      "sha256": "dda931de377f14252f2573481a2d4aad4ba4bf067ac74c8189884a6a51f38456",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MKTX",
+      "path": "/opt/mts/ga6_h/data/prices/MKTX.parquet",
+      "sha256": "836621ff2eb3e1b9bbc5a319fc9f6b0cd9b92b534db64f9f1ed090947726409f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MLM",
+      "path": "/opt/mts/ga6_h/data/prices/MLM.parquet",
+      "sha256": "f8c16bf6db09c0837b57ec89f08e5c2b414264262a71b8ff115336e21553b66b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MMM",
+      "path": "/opt/mts/ga6_h/data/prices/MMM.parquet",
+      "sha256": "b865c2b7bc05f9dd0c0b7a749749c976834565bfa8a124383e8a9812e48f7885",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MNST",
+      "path": "/opt/mts/ga6_h/data/prices/MNST.parquet",
+      "sha256": "a8b211e430ead1cd3120e85f2b41f5c6182de659b94bbc679d0d1bd3e5babb6c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MO",
+      "path": "/opt/mts/ga6_h/data/prices/MO.parquet",
+      "sha256": "0dbcbc9c3a1dff46481f0a331989a625c826bcfcbf0fd9f1958c92cb02b31733",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MOS",
+      "path": "/opt/mts/ga6_h/data/prices/MOS.parquet",
+      "sha256": "60dc99323523c8adb8568950a1a4e4be604db644f45855c7de5650e74678bffa",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MPC",
+      "path": "/opt/mts/ga6_h/data/prices/MPC.parquet",
+      "sha256": "fd5a9b516149e15f752d11ad3111240e48f8c6b7f88d86d49ed024ebee8a3590",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MRK",
+      "path": "/opt/mts/ga6_h/data/prices/MRK.parquet",
+      "sha256": "ab04259d0d3d0807f9ab31cfe9c81d8490e733cabc5a7247bb217bbfe47aeb00",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MS",
+      "path": "/opt/mts/ga6_h/data/prices/MS.parquet",
+      "sha256": "07ca09dc28f74b4389c132a7539c12e10cb39ac08bdd6648d39fdb19d284364a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MSCI",
+      "path": "/opt/mts/ga6_h/data/prices/MSCI.parquet",
+      "sha256": "9885ae68f3ab8e17cf2a5ccddf663ec4da2b02c661888dda5188cb0c4c223671",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MSFT",
+      "path": "/opt/mts/ga6_h/data/prices/MSFT.parquet",
+      "sha256": "57c07bce7d018f72e5de797fd6efc85f6e01a111230c51e5ac512ccdfee7f1ca",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MSI",
+      "path": "/opt/mts/ga6_h/data/prices/MSI.parquet",
+      "sha256": "8ead1126d0e8fe4f9d16431c2cba5d374a04d5c7c351b252f11ed04d3139467f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MTB",
+      "path": "/opt/mts/ga6_h/data/prices/MTB.parquet",
+      "sha256": "b90f2f7994912b478044c4696269102517e38360b9aac47eff52e425ae05c629",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MTD",
+      "path": "/opt/mts/ga6_h/data/prices/MTD.parquet",
+      "sha256": "be5a56cd8857d5d145bcdc492a587c6f3d9647149c5c7eff87e37a79347b5284",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "MU",
+      "path": "/opt/mts/ga6_h/data/prices/MU.parquet",
+      "sha256": "bfe81549754493b919046c1acc52c6be7b371f813106444b15b1625c5b51fc5c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NCLH",
+      "path": "/opt/mts/ga6_h/data/prices/NCLH.parquet",
+      "sha256": "2769e6748a93781a776d8646b1d7f037546fea5627fdcfa7c503a49e3f949847",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NDAQ",
+      "path": "/opt/mts/ga6_h/data/prices/NDAQ.parquet",
+      "sha256": "89821c7ea8e6c7582665b36f63d4354cbee92b10f5656a7faef11884da6eacc7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NEE",
+      "path": "/opt/mts/ga6_h/data/prices/NEE.parquet",
+      "sha256": "ec1dec7708a205ad9ebefb72508f58e8a5657522a9862736da7ba88c4f28a61c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NEM",
+      "path": "/opt/mts/ga6_h/data/prices/NEM.parquet",
+      "sha256": "7e23b314bc5ef5f7be9574bf2528ffb2204437474c027b1ab83794493e3438d1",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NI",
+      "path": "/opt/mts/ga6_h/data/prices/NI.parquet",
+      "sha256": "b38da9c67b1b9cb4c9bc89fb547e8c3d903e4434b18e4fcc56115c223d3f3f7d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NKE",
+      "path": "/opt/mts/ga6_h/data/prices/NKE.parquet",
+      "sha256": "3d32776e1ce53fedf4d0dd46d9869165c8e2a16872944d06af2c3759b6e3b8d5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NKTR",
+      "path": "/opt/mts/ga6_h/data/prices/NKTR.parquet",
+      "sha256": "02231c3f2860b057d59289401feaced5c8fa81edca48ddd5919ebb0e8e04bb2b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NOC",
+      "path": "/opt/mts/ga6_h/data/prices/NOC.parquet",
+      "sha256": "fda40158715f1f46131397b7e68dca6fa9aeb18150a5f1a09f5165d513bfedd7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NOV",
+      "path": "/opt/mts/ga6_h/data/prices/NOV.parquet",
+      "sha256": "37842aa69c97fcd114fcd5d2a94f42be4b6c50c15448825964cac0f36cb5ca0c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NOW",
+      "path": "/opt/mts/ga6_h/data/prices/NOW.parquet",
+      "sha256": "cbfd75bb16ba088cc393e801ce885665a3e3ad926595689c5cc0e9cd7ef544a6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NRG",
+      "path": "/opt/mts/ga6_h/data/prices/NRG.parquet",
+      "sha256": "055e9e7b818711c6a150e07ec2249f31ecbed8127eb4aaae752e226cd1bfc5fa",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NSC",
+      "path": "/opt/mts/ga6_h/data/prices/NSC.parquet",
+      "sha256": "060ec2be8e9f58ea6d9ca70d4bd5ccc4a3f6d11acd648eab73c917a2f208eb2f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NTAP",
+      "path": "/opt/mts/ga6_h/data/prices/NTAP.parquet",
+      "sha256": "8829b35270fe54d2e5896e69e9324b5036fcac8be873a7cbfd1bb241bce245df",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NUE",
+      "path": "/opt/mts/ga6_h/data/prices/NUE.parquet",
+      "sha256": "c8b93dea8bed54a09f7531fb2b4c26d31fdd931536c035a486dc20e0abb2f051",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NVDA",
+      "path": "/opt/mts/ga6_h/data/prices/NVDA.parquet",
+      "sha256": "e5baf16fecbc8f808a0e5cd9ee914c760719679dddc05f0caded41775980abce",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NVR",
+      "path": "/opt/mts/ga6_h/data/prices/NVR.parquet",
+      "sha256": "26e1f479ff0f02229728012a084294b48f64ecccc402681a7455d602e73e4925",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NWL",
+      "path": "/opt/mts/ga6_h/data/prices/NWL.parquet",
+      "sha256": "a80e5819a5e1c6259458655e1558f2416e87c08c05056a5ff9b4b3c8d97b29fb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NWS",
+      "path": "/opt/mts/ga6_h/data/prices/NWS.parquet",
+      "sha256": "320e12051fa28b66b530f30209716894664f6ec51b3515f635572daf5f9f99f4",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "NWSA",
+      "path": "/opt/mts/ga6_h/data/prices/NWSA.parquet",
+      "sha256": "c9990cabe0f69e70ac6cf44a5b01f4645eb7fe08a86032b6698cef82568784eb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "O",
+      "path": "/opt/mts/ga6_h/data/prices/O.parquet",
+      "sha256": "460d1cbe2576f00716c4e29ad7147f6fe5652fa91706892b7340d65d4224f867",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ODFL",
+      "path": "/opt/mts/ga6_h/data/prices/ODFL.parquet",
+      "sha256": "befa35893620dd4b4936c8d254d6b58bbd45e2d966905f85f8fa6e9a6cbb9b67",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "OKE",
+      "path": "/opt/mts/ga6_h/data/prices/OKE.parquet",
+      "sha256": "9a0dd0ea8dfe8b9d09f62a544ccc0f429ab6a369bcac036ddd84c963ebb1a062",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "OMC",
+      "path": "/opt/mts/ga6_h/data/prices/OMC.parquet",
+      "sha256": "1cbc425629f5028b182f0019d73585a705f153fdc342dea1d98a88cf6e594557",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ORCL",
+      "path": "/opt/mts/ga6_h/data/prices/ORCL.parquet",
+      "sha256": "93359222b7d5e14c10fcc46418fb3d919f9592a3251d18bf3259091b1c175e93",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ORLY",
+      "path": "/opt/mts/ga6_h/data/prices/ORLY.parquet",
+      "sha256": "281d85c498e3d5b179f99505a2b2987a44d58fba1b83cbd2e7dc31271abfdd2d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "OXY",
+      "path": "/opt/mts/ga6_h/data/prices/OXY.parquet",
+      "sha256": "c4ff9219aa25a3f7feac2018178fc2accce1ea8ad60d55666d1e5d4c70005272",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PAYX",
+      "path": "/opt/mts/ga6_h/data/prices/PAYX.parquet",
+      "sha256": "1f2900e56fe38a9bf8e88e9725c2b747645ad23df9be169bfd5e0c70516ef9cd",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PCAR",
+      "path": "/opt/mts/ga6_h/data/prices/PCAR.parquet",
+      "sha256": "8a98e2595abf3dc2577bc7c0f1b13c225638fba4f8ada87202543120a73960ef",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PCG",
+      "path": "/opt/mts/ga6_h/data/prices/PCG.parquet",
+      "sha256": "f8c5043bcaaa94a6864a7eba66c1e7b1cf5d56943159afbf0438662aa3708409",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PEG",
+      "path": "/opt/mts/ga6_h/data/prices/PEG.parquet",
+      "sha256": "7479bf100ab92a7dcc1fd72e13ffa6b339b2a7bf11c580c910c1eb18d0138149",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PEP",
+      "path": "/opt/mts/ga6_h/data/prices/PEP.parquet",
+      "sha256": "ec911ab2aab91eccdb86f1ea756f98111f1dc50faa5e7811b28981b1b21fb816",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PFE",
+      "path": "/opt/mts/ga6_h/data/prices/PFE.parquet",
+      "sha256": "029b146b65595f6ba3495846230fd79c4ce092f5ef53264efc3062d74bddc1bd",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PFG",
+      "path": "/opt/mts/ga6_h/data/prices/PFG.parquet",
+      "sha256": "b99747ce7f14c42ad020a5e2da979b85df11dbf61494b0b1dc6f1be1094a672f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PG",
+      "path": "/opt/mts/ga6_h/data/prices/PG.parquet",
+      "sha256": "81fbe51f9ae6cddc8c870628715ea00e40efea40ff2b9cd7b3ad664acd224165",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PGR",
+      "path": "/opt/mts/ga6_h/data/prices/PGR.parquet",
+      "sha256": "9e8e06a90cdf2dc4141cce9d284c0472f4966e757647159b8a3f19daf03a308c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PH",
+      "path": "/opt/mts/ga6_h/data/prices/PH.parquet",
+      "sha256": "d1dca23d321c48b9283ab1163a869e6c1277b9db29e4674ea799792db37c3116",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PHM",
+      "path": "/opt/mts/ga6_h/data/prices/PHM.parquet",
+      "sha256": "a5adbb3293684e0d4a75e61b490211b7b84b56a23a943b66154a8ce1fe2acf1f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PKG",
+      "path": "/opt/mts/ga6_h/data/prices/PKG.parquet",
+      "sha256": "8e0a255e89114c159bf45151e5192a76a5f5f959ad04bb1e20b4a3b9017230bd",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PLD",
+      "path": "/opt/mts/ga6_h/data/prices/PLD.parquet",
+      "sha256": "61d1fed36d55641c44e44bfa5b1ad10e3ba0f166349e461eefb3c9284dfa4868",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PM",
+      "path": "/opt/mts/ga6_h/data/prices/PM.parquet",
+      "sha256": "6f96d0bdceb4832893bb0a6471262295f4b9e61fd3037021dba13e0fbedb1887",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PNC",
+      "path": "/opt/mts/ga6_h/data/prices/PNC.parquet",
+      "sha256": "48efb2467fb9512673414a522e0e385e289ff6128b941bef2083db0166f38df9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PNR",
+      "path": "/opt/mts/ga6_h/data/prices/PNR.parquet",
+      "sha256": "476aabede028253efb4c951e895cfd9bd6aa9aba16ae47cf02df11cf8e1b2375",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PNW",
+      "path": "/opt/mts/ga6_h/data/prices/PNW.parquet",
+      "sha256": "de6881b0fe0901646b5d974e0fbf3a4df654e9c5142a76d9888a6c8ce885be93",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PPG",
+      "path": "/opt/mts/ga6_h/data/prices/PPG.parquet",
+      "sha256": "32a97fb8fa9c94d18a669c2122770a685a0db877d14d49b8dda01e909e65801d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PPL",
+      "path": "/opt/mts/ga6_h/data/prices/PPL.parquet",
+      "sha256": "fa8180e9cbe6de1976a0b1589ed535ab439bb562f6154bc2b74e98fe2ef24cbc",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PRGO",
+      "path": "/opt/mts/ga6_h/data/prices/PRGO.parquet",
+      "sha256": "1f3c2c7d611b56510dd87eded238981fbaa741627ff1bca89a6b3ca4ad51d3a9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PRU",
+      "path": "/opt/mts/ga6_h/data/prices/PRU.parquet",
+      "sha256": "fb34254493c706fd639915c62f4f73acbe9ce8c5509bdba59145dcaaf8806dcb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PSA",
+      "path": "/opt/mts/ga6_h/data/prices/PSA.parquet",
+      "sha256": "c68eb0b23a3061d0f444936d221f709d7ece770a48f5e386c07534011be0b081",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PSX",
+      "path": "/opt/mts/ga6_h/data/prices/PSX.parquet",
+      "sha256": "f28b72b135d3c156e0776eb40c524e305c9b64dabb5c9a5b2b886d6b7e7a6a9e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PVH",
+      "path": "/opt/mts/ga6_h/data/prices/PVH.parquet",
+      "sha256": "728b3d1881917898d140c2164ebbc2f361fc21818807e002352dc48e5b31e939",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PWR",
+      "path": "/opt/mts/ga6_h/data/prices/PWR.parquet",
+      "sha256": "e6884f933eca4dd137d494c0e9ed6556b23924c172af7eb53039836034914200",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "PYPL",
+      "path": "/opt/mts/ga6_h/data/prices/PYPL.parquet",
+      "sha256": "14c6fc5929eabc7cf68efe011a05e07aa57cc74ed143ec3f8e00a0cbdca7aa3f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "QCOM",
+      "path": "/opt/mts/ga6_h/data/prices/QCOM.parquet",
+      "sha256": "aa8f7921cf12fd121b349440cf359dc0c72ba8fc9c1340ea696f4b27aae02952",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "RCL",
+      "path": "/opt/mts/ga6_h/data/prices/RCL.parquet",
+      "sha256": "03f1ebfa5828abba586f8112e1116ca9dc50f42d2aa48599136c6430e932536f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "REG",
+      "path": "/opt/mts/ga6_h/data/prices/REG.parquet",
+      "sha256": "f4491e73156075670c55f0d36484222ac8b4fc592922c9d1bf4bda2fecf4b8fc",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "REGN",
+      "path": "/opt/mts/ga6_h/data/prices/REGN.parquet",
+      "sha256": "a8bb10f0fec0d372af774986542ace47b7a2b08489d211d5ae0ad2d264b3aa09",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "RF",
+      "path": "/opt/mts/ga6_h/data/prices/RF.parquet",
+      "sha256": "2c9ecf4827c31330a2da785fbf18761bc7f8794118b955dde04ac25720827bde",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "RHI",
+      "path": "/opt/mts/ga6_h/data/prices/RHI.parquet",
+      "sha256": "040e848fc969658d92a90739d4a2757440b01ee505c3f63cbf0d62213f9633a9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "RJF",
+      "path": "/opt/mts/ga6_h/data/prices/RJF.parquet",
+      "sha256": "01a890e91385a88308bc6e78461eb0da9b47ecf42764e5a1329e21c8de0104a3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "RL",
+      "path": "/opt/mts/ga6_h/data/prices/RL.parquet",
+      "sha256": "7c9fc9e19da2f7b1a98397ec9e0077c500cd835da45cd24d800e948c06971fbb",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "RMD",
+      "path": "/opt/mts/ga6_h/data/prices/RMD.parquet",
+      "sha256": "725f6b1c391470fefb82b10bff5a3d80eaebe0d72e88c70a32e5924fbc494716",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ROK",
+      "path": "/opt/mts/ga6_h/data/prices/ROK.parquet",
+      "sha256": "792ccf7af7bbf900d537ab3ff08fa7d92d846d039321dcedc743592696f686a5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ROL",
+      "path": "/opt/mts/ga6_h/data/prices/ROL.parquet",
+      "sha256": "e878c05b8f096a8e6e843b565e6a4acebc5008dc1169f486ab19fcfc27f77175",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ROP",
+      "path": "/opt/mts/ga6_h/data/prices/ROP.parquet",
+      "sha256": "fba1f7c52e523df898d915dfbb843253fb89c8e80217c63dea0cc920fe80fe47",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ROST",
+      "path": "/opt/mts/ga6_h/data/prices/ROST.parquet",
+      "sha256": "0d7853f71e6b6ec8014751c953454feefe771b0d23c9c754dee0bdbfde4bf3da",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "RSG",
+      "path": "/opt/mts/ga6_h/data/prices/RSG.parquet",
+      "sha256": "972d2c15abf44f99922602a5fda87e468464967d3dd3ce916e4b2585764e940a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SBAC",
+      "path": "/opt/mts/ga6_h/data/prices/SBAC.parquet",
+      "sha256": "7e8d2acf7af286199faacf92229ed8e522dc8b0c19838a37d3894ec9a860c953",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SBUX",
+      "path": "/opt/mts/ga6_h/data/prices/SBUX.parquet",
+      "sha256": "83496b41ee6a61f05c864b65f564132e6eee0180bf4fe04bd9318aeb75dca7db",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SCHW",
+      "path": "/opt/mts/ga6_h/data/prices/SCHW.parquet",
+      "sha256": "17e94e0f42121a3a4453a55498d8dcd1bfe9d1219de4d7aac7ca3fe28b5dcfed",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SHW",
+      "path": "/opt/mts/ga6_h/data/prices/SHW.parquet",
+      "sha256": "472463728c6f2f1c8682fe824939fa20a76f8c89f582ff8f6d3c2df037ea096c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SJM",
+      "path": "/opt/mts/ga6_h/data/prices/SJM.parquet",
+      "sha256": "e5f2805a418c3f590e7dd7b8f25b0de04d27d94869d944b0f5ed60ce112394a0",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SLB",
+      "path": "/opt/mts/ga6_h/data/prices/SLB.parquet",
+      "sha256": "44a08c3d0cfaed54651e95362d9da534f16dfd97a88a8aa8d14a8ae008c43810",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SLG",
+      "path": "/opt/mts/ga6_h/data/prices/SLG.parquet",
+      "sha256": "11410848fe8f6254012904b027a502d6150401ac972d9123d32e494fc5aa768f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SNA",
+      "path": "/opt/mts/ga6_h/data/prices/SNA.parquet",
+      "sha256": "3c7c71f100cb5c46911862178d40f2342f7a56c5b947dc836434c8e7b3f008d8",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SNPS",
+      "path": "/opt/mts/ga6_h/data/prices/SNPS.parquet",
+      "sha256": "e8db7470349a07604b64b19d236958140c4b54a4a734cb75155d4ad0d6803e8d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SO",
+      "path": "/opt/mts/ga6_h/data/prices/SO.parquet",
+      "sha256": "293e7da4d312a3b0def4d7e1fc8150a243e8fe6600629bb997d6e88796f4541b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SPG",
+      "path": "/opt/mts/ga6_h/data/prices/SPG.parquet",
+      "sha256": "3ae46798a499f81fff00e104d1354fb4f46838966cbfddb1ccbf23842c640cd6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SPGI",
+      "path": "/opt/mts/ga6_h/data/prices/SPGI.parquet",
+      "sha256": "06b05283089315ccc1862133e86a5198e9b64cf620ddfe2f5b8e0c5ac058b3e5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SRE",
+      "path": "/opt/mts/ga6_h/data/prices/SRE.parquet",
+      "sha256": "c273d941f6e3a4830dcb8125c0a647f139a8cf449fbe6507990b9be1801df09e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "STE",
+      "path": "/opt/mts/ga6_h/data/prices/STE.parquet",
+      "sha256": "1dd877cd217c84815aa38ccf4a8987bf31c7b6ae5ea1285bbe0eda073229e0e5",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "STT",
+      "path": "/opt/mts/ga6_h/data/prices/STT.parquet",
+      "sha256": "93d8f85f0debaac8d35993cd0677d00ca2bf5bab65362d6cbd2d5eb93d14f429",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "STX",
+      "path": "/opt/mts/ga6_h/data/prices/STX.parquet",
+      "sha256": "3666346b93e26f73792eb4fa4aa7a71e6fcea6d0a5dd9cb6d5228bca1d53dff7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "STZ",
+      "path": "/opt/mts/ga6_h/data/prices/STZ.parquet",
+      "sha256": "744946c7623da7a11eaea8bca3fce9e337792f8c01e20624a5969afcfdc6caa8",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SWK",
+      "path": "/opt/mts/ga6_h/data/prices/SWK.parquet",
+      "sha256": "3d22aa121c696e56bf3cacf1f161561efac489e042cadbbea53b49acc20b0f8f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SWKS",
+      "path": "/opt/mts/ga6_h/data/prices/SWKS.parquet",
+      "sha256": "cf1d74dc92092a8b6492c259398f096790dad632189221d43d059afe3a8cf865",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SYF",
+      "path": "/opt/mts/ga6_h/data/prices/SYF.parquet",
+      "sha256": "4707696c35d045c24f8c1c51377297d087b467620e0334294feec9e264bd770f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SYK",
+      "path": "/opt/mts/ga6_h/data/prices/SYK.parquet",
+      "sha256": "f6006e9d9f303daca0a0244ca6f3df36111702135e9e2f8b400256b5bfb227bf",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "SYY",
+      "path": "/opt/mts/ga6_h/data/prices/SYY.parquet",
+      "sha256": "1ee62882068334b63b7567c39119a8e4e3775e9867bde082ae6eda21a0c25789",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "T",
+      "path": "/opt/mts/ga6_h/data/prices/T.parquet",
+      "sha256": "4a967160d8338a9c579b6f79425179d8914a6486f6eb5ef49e84f1496bfa032d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TAP",
+      "path": "/opt/mts/ga6_h/data/prices/TAP.parquet",
+      "sha256": "9032c37845aaf38ac5d6ab9496c63af95911a95def029d6e50514bef5e74b40a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TDG",
+      "path": "/opt/mts/ga6_h/data/prices/TDG.parquet",
+      "sha256": "7bc0ce50dce0e439580343a152a7e23df4a649c3025b1c970277e721000f7461",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TEL",
+      "path": "/opt/mts/ga6_h/data/prices/TEL.parquet",
+      "sha256": "ed3adc3ecccd6697bfd7e555aa1cc09831114b59e6dd2bee5d02ff2eaf2c41d7",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TFC",
+      "path": "/opt/mts/ga6_h/data/prices/TFC.parquet",
+      "sha256": "5d2458684d73ff9d1f729fd9e41003a3d5c4ed9b4e0cbd32b410012c64bd37ce",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TFX",
+      "path": "/opt/mts/ga6_h/data/prices/TFX.parquet",
+      "sha256": "f9c9a081c3825d04a7ef49d8c5ed192402ca853c306497643ed03e2a18f493a3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TGT",
+      "path": "/opt/mts/ga6_h/data/prices/TGT.parquet",
+      "sha256": "8eea74928f0ed7e756b6f2caba11de3dcfba37283f08222297e9c0ec8180cf41",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TJX",
+      "path": "/opt/mts/ga6_h/data/prices/TJX.parquet",
+      "sha256": "79e019943ab381b01ff204134d8876f6fbb0b1192aba7f0399c9c187ab8196fc",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TMO",
+      "path": "/opt/mts/ga6_h/data/prices/TMO.parquet",
+      "sha256": "1b17fe39b31346206a6fce920d0b23b9ab51cade38cfd280e67bc545dfbe2018",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TMUS",
+      "path": "/opt/mts/ga6_h/data/prices/TMUS.parquet",
+      "sha256": "b38870248964d1d756e0647f11c98f4ca6e88db7205d3559f6fa90e667edba59",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TPR",
+      "path": "/opt/mts/ga6_h/data/prices/TPR.parquet",
+      "sha256": "1517c53414e0deaf561e80e3e6da243b20ad243e72c5e3c70b275895f64b44bd",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TRIP",
+      "path": "/opt/mts/ga6_h/data/prices/TRIP.parquet",
+      "sha256": "40ce57e431934b8381ae637d4783181f981558b61789dfad5e4bdd8ed362f8b8",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TROW",
+      "path": "/opt/mts/ga6_h/data/prices/TROW.parquet",
+      "sha256": "e137a2be196929225e9b017e52dd44f941eecb916574c5d44280aa67a81896ce",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TRV",
+      "path": "/opt/mts/ga6_h/data/prices/TRV.parquet",
+      "sha256": "2b2c0e7de286f4cb3dd575d5a87ce0daa7f30aac016258d7c397e475ad94858c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TSCO",
+      "path": "/opt/mts/ga6_h/data/prices/TSCO.parquet",
+      "sha256": "5253f0db181326da71cc6807835906b38682e77bcfd08fd7050390a884963970",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TSN",
+      "path": "/opt/mts/ga6_h/data/prices/TSN.parquet",
+      "sha256": "4a51f93ae13bc08af9bfe5916889aea499933ace66c1a39d7f39f85cc018785b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TTWO",
+      "path": "/opt/mts/ga6_h/data/prices/TTWO.parquet",
+      "sha256": "c2b8e44e1200fc207019f37255d55163e77485a3086d726cafeb9178313ede60",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TXN",
+      "path": "/opt/mts/ga6_h/data/prices/TXN.parquet",
+      "sha256": "7fead94edd41a1c65edd29794a0a765c93202bdfad62001a18aef54f8bd1242b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "TXT",
+      "path": "/opt/mts/ga6_h/data/prices/TXT.parquet",
+      "sha256": "5dcdc36b721cb6dbd576a8cacdc11b10ad849bf3a1fffa8616fa39a2c626def3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "UA",
+      "path": "/opt/mts/ga6_h/data/prices/UA.parquet",
+      "sha256": "fdb2486cc1b0db88a3700009e6a6b0e9ac6443ff1b51507150b1e639c7bd44ad",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "UAA",
+      "path": "/opt/mts/ga6_h/data/prices/UAA.parquet",
+      "sha256": "4b442d541984943000357f8ae548ce0c74036823c619cd883310f5f44fe46af4",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "UAL",
+      "path": "/opt/mts/ga6_h/data/prices/UAL.parquet",
+      "sha256": "be9108bbe130c3b0ed62e1c9f0da21df99d58b1187039f0bd23179775e2909aa",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "UDR",
+      "path": "/opt/mts/ga6_h/data/prices/UDR.parquet",
+      "sha256": "9a3d0cfb81f02aa58eafde5d5945f6965c6c44bf07cf164af9db7a7c46eb754f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "UHS",
+      "path": "/opt/mts/ga6_h/data/prices/UHS.parquet",
+      "sha256": "d39046d38d9dfe6241e8ea508ebb657ff2b4cf2e9bd7be50ef8763abdbed5854",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ULTA",
+      "path": "/opt/mts/ga6_h/data/prices/ULTA.parquet",
+      "sha256": "4fd580f18f365d5dbd7aba6c0a7b50b6e3df5c8377720510d949f8346b0cdd0c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "UNH",
+      "path": "/opt/mts/ga6_h/data/prices/UNH.parquet",
+      "sha256": "1b91a298ce9a1daa54b9cd5eab043841ac65f154ae0c1d78fdde1687d5f6fd85",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "UNM",
+      "path": "/opt/mts/ga6_h/data/prices/UNM.parquet",
+      "sha256": "ad5f7cf94eb534672c354bd98ed72c5c8bcbf5277c4fe1b1d8fa5eddbee7b425",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "UNP",
+      "path": "/opt/mts/ga6_h/data/prices/UNP.parquet",
+      "sha256": "7e00616bb886bf29be66fd2a0509e039b3adb1b1f0ba1b3c92c6e3e5e068021b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "UPS",
+      "path": "/opt/mts/ga6_h/data/prices/UPS.parquet",
+      "sha256": "5a5045700b358c8be72fc29b0fb7c2f99fe97133dfbd5ab7bd9e43e25ecb7d1b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "URI",
+      "path": "/opt/mts/ga6_h/data/prices/URI.parquet",
+      "sha256": "d2b67a86c6e1a06a6b5d44660930a3752b81c9f1ac7bcb6edc3a218c20bff40f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "USB",
+      "path": "/opt/mts/ga6_h/data/prices/USB.parquet",
+      "sha256": "3ecb4ca89802650c6650b442371e48f885179a2d8790dd81447bb75a5cec56cf",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "V",
+      "path": "/opt/mts/ga6_h/data/prices/V.parquet",
+      "sha256": "3c02c9f18de12b44e3535c324cccc98e30828b4e314bc99b7a9b01b92b21eb6d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "VFC",
+      "path": "/opt/mts/ga6_h/data/prices/VFC.parquet",
+      "sha256": "bcb0541347b5733c438469ceab2f56a4aacf141a0f4345b748aa58581dc1907c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "VLO",
+      "path": "/opt/mts/ga6_h/data/prices/VLO.parquet",
+      "sha256": "4238ef14b45c9ce4f573ed961b690f775a6a593159fc4e6fa8f374b56827e76b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "VMC",
+      "path": "/opt/mts/ga6_h/data/prices/VMC.parquet",
+      "sha256": "5195ca9732193bd2ebefd00e939e4e4028f12a7bf875ec1ea6ec56e930c75980",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "VRSK",
+      "path": "/opt/mts/ga6_h/data/prices/VRSK.parquet",
+      "sha256": "b88029f265d53aafc47d03b0d32b72aa196db009ac6d9eb21eab64c6e8eca7d9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "VRSN",
+      "path": "/opt/mts/ga6_h/data/prices/VRSN.parquet",
+      "sha256": "c106150a20fde25a339fabfa66cf66b27bb21ebee5f7976be4b4f3c22ffd306e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "VRTX",
+      "path": "/opt/mts/ga6_h/data/prices/VRTX.parquet",
+      "sha256": "8e07fad977fd213b8c71d3289c2944d13167f167c5b1f3e300a5cf6a413c4191",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "VTR",
+      "path": "/opt/mts/ga6_h/data/prices/VTR.parquet",
+      "sha256": "0c3dcdf0ab00eeb8df039e56056785bc18bc09d522adf85a46017a8523d0f6f4",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "VZ",
+      "path": "/opt/mts/ga6_h/data/prices/VZ.parquet",
+      "sha256": "a7afeab9edda8c3ea4638f24ffede3df0e111028587f42d3deb333adbc8e6a06",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WAB",
+      "path": "/opt/mts/ga6_h/data/prices/WAB.parquet",
+      "sha256": "29ba4d2595e8c38d0adb33702c09c3d7dd73b461f653af9e4d6759e2d92cb882",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WAT",
+      "path": "/opt/mts/ga6_h/data/prices/WAT.parquet",
+      "sha256": "4b8c685c1977a043c6e944968835491ee5bdef84c89c3a642466d7993fdb093a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WDC",
+      "path": "/opt/mts/ga6_h/data/prices/WDC.parquet",
+      "sha256": "07430bcfdedee6677bc3cbc2808c8287abc9c26a22ab1f869a75e61cd0a4c275",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WEC",
+      "path": "/opt/mts/ga6_h/data/prices/WEC.parquet",
+      "sha256": "deb2b421d293e8830da71b4ed1d1d925f96421d496f765170fdcc6c48075a91f",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WELL",
+      "path": "/opt/mts/ga6_h/data/prices/WELL.parquet",
+      "sha256": "f7e09c2033ca872dc36c48e297e47708b17e864449e2ba1d4a6ada196889aa61",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WFC",
+      "path": "/opt/mts/ga6_h/data/prices/WFC.parquet",
+      "sha256": "9421d94f0a8f6fd9a64705381451f080b767c863665f6de58e2c5dfa54677db9",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WHR",
+      "path": "/opt/mts/ga6_h/data/prices/WHR.parquet",
+      "sha256": "3f59ddca03c5f164783a46549b618fa5e4ebbff4e6bb1d84f1d36c097773620b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WM",
+      "path": "/opt/mts/ga6_h/data/prices/WM.parquet",
+      "sha256": "d3606f194b71b9c8fc1f3de3e0066a03dbc0fd0b289a72dafbf23b1d20dd8a0b",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WMB",
+      "path": "/opt/mts/ga6_h/data/prices/WMB.parquet",
+      "sha256": "40274aa76ea2dc447b65f5934e544c5266798bbe99f7f9a909a0456f5cd47d3c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WMT",
+      "path": "/opt/mts/ga6_h/data/prices/WMT.parquet",
+      "sha256": "062d5d10cbc4b6c9f1c14bddf2f14ba1c8ed4d0e778752c1c153e37905fa68f2",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WRB",
+      "path": "/opt/mts/ga6_h/data/prices/WRB.parquet",
+      "sha256": "a106340edbd0a44c78547f4dcfa4921bf08d7e9ec964133062cb283b4758ec7c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WU",
+      "path": "/opt/mts/ga6_h/data/prices/WU.parquet",
+      "sha256": "9ecc30a29b51624a7fa2c56435d6c997bb8a73e890ca0bfcb4d1fca9cb7ed9b6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WY",
+      "path": "/opt/mts/ga6_h/data/prices/WY.parquet",
+      "sha256": "25413b3588612a63ddfcfec78d2c07a92d3ffde3b4235cc7787371c1b4f59aae",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "WYNN",
+      "path": "/opt/mts/ga6_h/data/prices/WYNN.parquet",
+      "sha256": "ae0434e0601cd72c587c8c852e1be518fa05fedcb4aa060e936d59765b089ef1",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "XEL",
+      "path": "/opt/mts/ga6_h/data/prices/XEL.parquet",
+      "sha256": "9952709f64615f964550fe89e06ad96406299e6a042443461910768dd8ad2e9e",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "XOM",
+      "path": "/opt/mts/ga6_h/data/prices/XOM.parquet",
+      "sha256": "d8a0d565fdafcfa369b4695a00a43c1a72e3264b8d066f51dae03ac678afa69a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "XRAY",
+      "path": "/opt/mts/ga6_h/data/prices/XRAY.parquet",
+      "sha256": "61301d22ada16c9605cc00e80adc15e6b27f6f6751cfc3cee1a60115fcb10668",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "XRX",
+      "path": "/opt/mts/ga6_h/data/prices/XRX.parquet",
+      "sha256": "3153c0f9d77e3d8c80ebf3aae50f2d5d607d921ff8bfde040069bbee29e08e6d",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "XYL",
+      "path": "/opt/mts/ga6_h/data/prices/XYL.parquet",
+      "sha256": "f2365813d70488f56d78d598362a64ece6523ed03052d5ee87a3d07b32c40e61",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "YUM",
+      "path": "/opt/mts/ga6_h/data/prices/YUM.parquet",
+      "sha256": "901bb1e44e0888fb2ecd753b76ea0592f6dc19f0b673d413c71e6e0fc4f9d99a",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ZBH",
+      "path": "/opt/mts/ga6_h/data/prices/ZBH.parquet",
+      "sha256": "fd4b1c799a32e7214307243ca085802207800bf9556a391161dddca85bac1bc3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ZBRA",
+      "path": "/opt/mts/ga6_h/data/prices/ZBRA.parquet",
+      "sha256": "fc730b042a3ec73ef1ad65cf080bed602942b7b839b4b4e5db9f3e90571ad3e6",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ZION",
+      "path": "/opt/mts/ga6_h/data/prices/ZION.parquet",
+      "sha256": "b4e04a1667ec60563c72f164571e03290dda6f2ca51a23d7d2f7507893c01dd3",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    },
+    {
+      "symbol": "ZTS",
+      "path": "/opt/mts/ga6_h/data/prices/ZTS.parquet",
+      "sha256": "8bb8cef592fe0664cc5eb09b0e87fc5363d6771efd98a8a796c863ee1877818c",
+      "rows_used": 754,
+      "first": "2017-01-03",
+      "last": "2019-12-31"
+    }
+  ],
+  "earnings_evidence": [
+    {
+      "path": "earnings_cache/MRK.json",
+      "sha256": "8dc2e9c563339f792ecc92b70d59cc404bf6062878e8cc829df1999adca38f1e"
+    },
+    {
+      "path": "earnings_cache/ABBV.json",
+      "sha256": "36f3bcac4afdfc3f379103582fd5c7647620747794db669b5806c28fd84b870c"
+    },
+    {
+      "path": "earnings_cache/JPM.json",
+      "sha256": "9d8891171f1139cf8835c3ab125539d26bb222298a133c812c604a0fe91e4eaa"
+    },
+    {
+      "path": "earnings_cache/MSFT.json",
+      "sha256": "30afefe488556f19d71e499f4c7ec4d245e173910d6c4feb1e28cec42fa2a648"
+    },
+    {
+      "path": "earnings_cache/INTC.json",
+      "sha256": "b1dc310e6bb900963b1c2b354cb29935acdf2706be7e7795607bca82eed4ab20"
+    },
+    {
+      "path": "earnings_cache/BAC.json",
+      "sha256": "8cd72325d71540f6495e2e1ce2bf72adac9139d91018afc8df3da2186398dbec"
+    },
+    {
+      "path": "earnings_cache/C.json",
+      "sha256": "66673de72ccbdb733ba0ff684284c7f5eb388ac09f88b5df26cd715ed7d96637"
+    },
+    {
+      "path": "earnings_cache/NVDA.json",
+      "sha256": "3f349af12e930c2652bb16b5394b763a44184201d1194cbeb52dae6da48baa96"
+    },
+    {
+      "path": "earnings_cache/GS.json",
+      "sha256": "d75f5bc6de413182b47287e7cafa243182fd6daf3cd7dfd4fc04cc2311201a5e"
+    },
+    {
+      "path": "earnings_cache/JNJ.json",
+      "sha256": "776a2dedd3c9aa8808dcba2d125e12365bd819f9c382ee75726f1b1f297f11f0"
+    }
+  ],
+  "summary": {
+    "H1_1": {
+      "n": 11,
+      "mean": -0.021212121212121224,
+      "se": 0.06527298096596616,
+      "t": -0.32497552430126314,
+      "p": 0.7451995959467115,
+      "fraction_positive_ic": 0.45454545454545453,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": 1,
+      "placebo": {
+        "real": -0.021212121212121224,
+        "percentile99": 0.18181818181818182,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H2_1": {
+      "n": 11,
+      "mean": -0.08484848484848484,
+      "se": 0.07203606546124049,
+      "t": -1.1778611769702798,
+      "p": 0.23885195466348508,
+      "fraction_positive_ic": 0.36363636363636365,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": 1,
+      "placebo": {
+        "real": -0.08484848484848484,
+        "percentile99": 0.18484848484848485,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H3_1": {
+      "n": 11,
+      "mean": -0.009090909090909075,
+      "se": 0.0823262923249403,
+      "t": -0.11042534327948877,
+      "p": 0.9120720550003547,
+      "fraction_positive_ic": 0.36363636363636365,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": 1,
+      "placebo": {
+        "real": -0.009090909090909075,
+        "percentile99": 0.2545454545454546,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H4_1": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": null,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": null,
+        "percentile99": null,
+        "passed": false,
+        "shuffles": 0,
+        "seed": 0,
+        "status": "undefined IC; no valid permutation statistic"
+      },
+      "certified_pass": false
+    },
+    "H5_1": {
+      "n": 11,
+      "mean": -0.06363636363636366,
+      "se": 0.11040509859420823,
+      "t": -0.5763897179265051,
+      "p": 0.5643517927061925,
+      "fraction_positive_ic": 0.6363636363636364,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": 1,
+      "placebo": {
+        "real": 0.06363636363636366,
+        "percentile99": 0.18484848484848482,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H6_1": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": null,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": null,
+        "percentile99": null,
+        "passed": false,
+        "shuffles": 0,
+        "seed": 0,
+        "status": "undefined IC; no valid permutation statistic"
+      },
+      "certified_pass": false
+    },
+    "H1_3": {
+      "n": 9,
+      "mean": 0.0037037037037037073,
+      "se": 0.13644090689594443,
+      "t": 0.027145112033946737,
+      "p": 0.9783439938031859,
+      "fraction_positive_ic": 0.4444444444444444,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": 1,
+      "placebo": {
+        "real": 0.0037037037037037073,
+        "percentile99": 0.2185185185185185,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H2_3": {
+      "n": 9,
+      "mean": -0.1,
+      "se": 0.10506165585873227,
+      "t": -0.9518220437574461,
+      "p": 0.34118724049520033,
+      "fraction_positive_ic": 0.3333333333333333,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": 1,
+      "placebo": {
+        "real": -0.1,
+        "percentile99": 0.21111111111111108,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H3_3": {
+      "n": 9,
+      "mean": -0.337037037037037,
+      "se": 0.0707595587949438,
+      "t": -4.763130844466491,
+      "p": 1.9061215511187265e-06,
+      "fraction_positive_ic": 0.1111111111111111,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": 2.287345861342472e-05,
+      "placebo": {
+        "real": -0.337037037037037,
+        "percentile99": 0.31851851851851853,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H4_3": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": null,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": null,
+        "percentile99": null,
+        "passed": false,
+        "shuffles": 0,
+        "seed": 0,
+        "status": "undefined IC; no valid permutation statistic"
+      },
+      "certified_pass": false
+    },
+    "H5_3": {
+      "n": 9,
+      "mean": -0.06666666666666667,
+      "se": 0.09493337494797258,
+      "t": -0.7022468831767833,
+      "p": 0.4825252123138823,
+      "fraction_positive_ic": 0.6666666666666666,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": 1,
+      "placebo": {
+        "real": 0.06666666666666667,
+        "percentile99": 0.19629629629629627,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H6_3": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": null,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": false,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": null,
+        "percentile99": null,
+        "passed": false,
+        "shuffles": 0,
+        "seed": 0,
+        "status": "undefined IC; no valid permutation statistic"
+      },
+      "certified_pass": false
+    },
+    "H1_6": {
+      "n": 6,
+      "mean": 0.17777777777777776,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": 0.6666666666666666,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": true,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": 0.17777777777777776,
+        "percentile99": 0.28888888888888886,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H2_6": {
+      "n": 6,
+      "mean": 0.05555555555555555,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": 0.5,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": true,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": 0.05555555555555555,
+        "percentile99": 0.26666666666666666,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H3_6": {
+      "n": 6,
+      "mean": -0.3388888888888889,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": 0,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": true,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": -0.3388888888888889,
+        "percentile99": 0.3833333333333333,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H4_6": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": null,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": true,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": null,
+        "percentile99": null,
+        "passed": false,
+        "shuffles": 0,
+        "seed": 0,
+        "status": "undefined IC; no valid permutation statistic"
+      },
+      "certified_pass": false
+    },
+    "H5_6": {
+      "n": 6,
+      "mean": -0.1722222222222222,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": 0.6666666666666666,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": true,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": 0.1722222222222222,
+        "percentile99": 0.25,
+        "passed": false,
+        "shuffles": 1000,
+        "seed": 0
+      },
+      "certified_pass": false
+    },
+    "H6_6": {
+      "n": 0,
+      "mean": null,
+      "se": null,
+      "t": null,
+      "p": null,
+      "fraction_positive_ic": null,
+      "positive_blocks": 0,
+      "contiguous": true,
+      "exploratory": true,
+      "complete": false,
+      "holm_p": null,
+      "placebo": {
+        "real": null,
+        "percentile99": null,
+        "passed": false,
+        "shuffles": 0,
+        "seed": 0,
+        "status": "undefined IC; no valid permutation statistic"
+      },
+      "certified_pass": false
+    }
+  },
+  "lookahead": {
+    "warning": "Future signal versus prior return can correlate through persistence; not definitive proof of leakage.",
+    "sector_month": [
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.6
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.4
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.09999999999999991
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.6
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -0.8
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.4000000000000001
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.10000000000000002
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": -0.8
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.10000000000000002
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.7999999999999998
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.49999999999999994
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.7999999999999999
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.09999999999999991
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.3
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.3000000000000001
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.6
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": 0.49999999999999994
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.7000000000000001
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.19999999999999996
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.6000000000000001
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.5000000000000001
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.5000000000000001
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.19999999999999993
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.09999999999999995
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.4999999999999999
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.3
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.3999999999999999
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-01-31",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.3999999999999999
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": -0.6999999999999998
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -0.4
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.20000000000000004
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.3000000000000001
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.09999999999999995
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": -0.3
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": -0.8
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.3
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.49999999999999994
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.3
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.5000000000000001
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": -0.09999999999999991
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.19999999999999996
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": 0.49999999999999994
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.3
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": -0.7999999999999999
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.3
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.10000000000000002
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-02-28",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": 0.10000000000000002
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.10000000000000012
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.8999999999999999
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.10000000000000006
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 0.6
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.3999999999999999
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": 0.8
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": 0.10000000000000003
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.29999999999999993
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.8000000000000002
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.6
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.7000000000000001
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.09999999999999998
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.29999999999999993
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.6
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.8999999999999999
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.20000000000000004
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.10000000000000002
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.6
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.8000000000000002
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": 0.5000000000000001
+      },
+      {
+        "asof": "2019-03-29",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.6000000000000001
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": -0.19999999999999993
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.4
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": -0.7999999999999999
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -0.4
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.6000000000000001
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.6000000000000001
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.20000000000000004
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": 0.2
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.10000000000000003
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.10000000000000003
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.5000000000000001
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.20000000000000004
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.4000000000000001
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.4000000000000001
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.3
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.20000000000000004
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.20000000000000004
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": 0.5000000000000001
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.09999999999999999
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.8000000000000002
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.9
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.5000000000000001
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.3
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.8999999999999999
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 0.5000000000000001
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.30000000000000004
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-04-30",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.10000000000000002
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": -0.10000000000000002
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -0.4
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.8999999999999999
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -0.2
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.20000000000000004
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": 0.09999999999999998
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": 0.09999999999999998
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Financials",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.7000000000000001
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Healthcare",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": 0.6000000000000001
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.8999999999999999
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": -0.7999999999999999
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.10000000000000002
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.4000000000000001
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": -0.3000000000000001
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 0.49999999999999994
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.09999999999999991
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H1",
+        "ic": -0.5000000000000001
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H2",
+        "ic": -0.7000000000000001
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-05-31",
+        "sector": "Technology",
+        "horizon": 6,
+        "signal": "H5",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.10000000000000003
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.10000000000000003
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.4
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.3
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.29999999999999993
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": -0.29999999999999993
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.6
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.49999999999999994
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.19999999999999993
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.3
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.10000000000000002
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.3000000000000001
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.3
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.49999999999999994
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.3000000000000001
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.3
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 0.49999999999999994
+      },
+      {
+        "asof": "2019-06-28",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.4999999999999999
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": -0.3999999999999999
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.8
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.3999999999999999
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 0.4
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.3
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.49999999999999994
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.3
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.10000000000000002
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.7000000000000001
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.6000000000000001
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.5000000000000001
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.3999999999999999
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.7999999999999999
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": -0.8999999999999999
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-07-31",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.4000000000000001
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.8999999999999999
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.2
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.7999999999999999
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": 0.3
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": 0.4000000000000001
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Financials",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": -0.7000000000000001
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.3
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.30000000000000004
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.09999999999999995
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": -0.7000000000000001
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Healthcare",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.8999999999999999
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.10000000000000003
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.4000000000000001
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H1",
+        "ic": -0.8999999999999999
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H2",
+        "ic": -0.6999999999999998
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-08-30",
+        "sector": "Technology",
+        "horizon": 3,
+        "signal": "H5",
+        "ic": 0.6999999999999998
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.9
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.29999999999999993
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 0.8
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.4000000000000001
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.6
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.7000000000000001
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": -0.3000000000000001
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-09-30",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.09999999999999995
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.5
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": 1.0
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Financials",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": -0.2999999999999998
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": 0.0
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -1.0
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Healthcare",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.8999999999999999
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H1",
+        "ic": 0.10000000000000002
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H2",
+        "ic": -0.6
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H3",
+        "ic": -0.5
+      },
+      {
+        "asof": "2019-10-31",
+        "sector": "Technology",
+        "horizon": 1,
+        "signal": "H5",
+        "ic": 0.7000000000000001
+      }
+    ]
+  },
+  "limitations": [
+    "2019 is previously contaminated and cannot test Stage1 or release Stage2.",
+    "Third-party local membership reconstruction is unverified; no historical membership invented.",
+    "Only 15 legacy sample sector labels exist; unverified historical proxies, no full-sector GICS coverage. UNKNOWN excluded.",
+    "Available-stock sector median sensitivity, not full-membership sector benchmark; legacy 15-stock sample was outcome-selected.",
+    "H4 unavailable: no SEC as-filed cache. H6 unavailable: requires all four original components.",
+    "H3 uses actual cached prior eight surprises and reported date+1; retrieval vintage is retrospective.",
+    "Price caches are retrospective and survivorship/identity/action provenance unverified. No ticker alias substitution.",
+    "No 2020 outcomes read; 1/3/6m right-censored. Month ends derive from observed cache sessions.",
+    "Five-stock sectors cannot form both exact top and bottom deciles; unavailable spread/turnover/cost metrics remain null.",
+    "No certified passers; frozen 2006-2015 chronological blocks unavailable."
+  ],
+  "network": {
+    "web_tool": "SUCCESS: official Wikipedia page accessible using permitted web.run",
+    "url": "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+    "runtime_policy": "environment_status tool unavailable; /etc/codex/network-policy.json absent",
+    "used_for_offline_pilot": false
+  },
+  "sample_sizes": {
+    "H1_1": {
+      "stock_outcome_rows": 165,
+      "symbols": 15,
+      "sectors": 3
+    },
+    "H1_3": {
+      "stock_outcome_rows": 135,
+      "symbols": 15,
+      "sectors": 3
+    },
+    "H1_6": {
+      "stock_outcome_rows": 90,
+      "symbols": 15,
+      "sectors": 3
+    },
+    "H2_1": {
+      "stock_outcome_rows": 165,
+      "symbols": 15,
+      "sectors": 3
+    },
+    "H2_3": {
+      "stock_outcome_rows": 135,
+      "symbols": 15,
+      "sectors": 3
+    },
+    "H2_6": {
+      "stock_outcome_rows": 90,
+      "symbols": 15,
+      "sectors": 3
+    },
+    "H3_1": {
+      "stock_outcome_rows": 110,
+      "symbols": 10,
+      "sectors": 3
+    },
+    "H3_3": {
+      "stock_outcome_rows": 90,
+      "symbols": 10,
+      "sectors": 3
+    },
+    "H3_6": {
+      "stock_outcome_rows": 60,
+      "symbols": 10,
+      "sectors": 3
+    },
+    "H4_1": {
+      "stock_outcome_rows": 0,
+      "symbols": 0,
+      "sectors": 0
+    },
+    "H4_3": {
+      "stock_outcome_rows": 0,
+      "symbols": 0,
+      "sectors": 0
+    },
+    "H4_6": {
+      "stock_outcome_rows": 0,
+      "symbols": 0,
+      "sectors": 0
+    },
+    "H5_1": {
+      "stock_outcome_rows": 165,
+      "symbols": 15,
+      "sectors": 3
+    },
+    "H5_3": {
+      "stock_outcome_rows": 135,
+      "symbols": 15,
+      "sectors": 3
+    },
+    "H5_6": {
+      "stock_outcome_rows": 90,
+      "symbols": 15,
+      "sectors": 3
+    },
+    "H6_1": {
+      "stock_outcome_rows": 0,
+      "symbols": 0,
+      "sectors": 0
+    },
+    "H6_3": {
+      "stock_outcome_rows": 0,
+      "symbols": 0,
+      "sectors": 0
+    },
+    "H6_6": {
+      "stock_outcome_rows": 0,
+      "symbols": 0,
+      "sectors": 0
+    }
+  }
+}

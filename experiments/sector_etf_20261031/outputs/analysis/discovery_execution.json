@@ -1,0 +1,11 @@
+{
+  "completed_utc": "2026-10-31T13:21:38.057471+00:00",
+  "stage": "discovery",
+  "protocol_sha256": "23a49749f06cfc44c4c7f5a203e5f18cd04343d5763e7541100c4f977a2f756f",
+  "signal_implementation": "last observed close on/before calendar lookback; minimum nine with full observed lookback",
+  "execution": "next session close; weights drift; entry and exit included; raw opens unused",
+  "predictive_labels": "signal close to future month-end close; labels crossing splits excluded",
+  "bootstrap_reps": 2000,
+  "bootstrap_seed": 20261031,
+  "data_audit_sha256": "668c96b2d7051c9e78bbee21121aa13bec76720b706d22ece70c2480546fcf38"
+}

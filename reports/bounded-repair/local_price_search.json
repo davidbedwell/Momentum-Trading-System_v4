@@ -1,0 +1,25 @@
+{
+  "targets": [
+    "AABA",
+    "BSC",
+    "BSC.1",
+    "CFC",
+    "LEH",
+    "LEHMQ",
+    "MER",
+    "WAMUQ",
+    "WB",
+    "YHOO"
+  ],
+  "roots": [
+    "/opt/mts/thunder-migration/mts-v4-market-store-RECONSTRUCTED-20261004",
+    "/opt/mts/ga6_h/data/prices",
+    "/opt/mts/thunder-migration/mts-v4-cache"
+  ],
+  "max_depth": 4,
+  "seconds": 0.026195351034402847,
+  "directories": 4,
+  "hits": [],
+  "errors": [],
+  "recorded_utc": "2026-10-31T10:09:56.672643+00:00"
+}

@@ -1,0 +1,18 @@
+{
+ "title":"Two competing independent tests against frozen iteration6",
+ "max_replays":120,"max_runtime_seconds":1200,"cpus":1,
+ "primary":{"seeds":6,"fit":[0,400],"cal":[403,603],"test":[606,732]},
+ "extended_secondary":{"seeds":2,"fit":[0,600],"cal":[603,903],"test":[906,1032],"interpretation":"Claude exact extended split, matched across arms; extended comparator is not frozen iteration6 configuration; never pool with primary"},
+ "scenarios":["learnable","reversal","random_reversal","outer_noise","null"],
+ "arms":["iteration6","A","B"],
+ "seed_design":"OS entropy after source freeze; same seed and random switch for all policies; independent seeds across strata; random switch uniform START+20..START+80",
+ "A":"Literal MixtureEProcessDetector.update pseudocode, sigma .018 windows 2/4/8 alpha .01/3 and current-positive-delta clipped lambda. Priority1 bias<se_cal radius replacement exactly. No sign or mathematical corrections. Full latch no recovery.",
+ "A_conflicts":"Displayed product/sign formula differs from runnable update class and dates(n,w) undefined; use runnable class as explicit interpretation. Later calibrate re-widens corrected radius and contradicts priority1; prioritize explicit priority1 replacement, not both incompatible procedures. Neither choice called uniquely literal whole architecture.",
+ "B":"Unchanged classifier/radius. Training eligible date contrast baseline lower CI sigma .018 delta .002; remaining .008 error for mixture of 16 fixed start times START+8k and lambdas 16,32,64,96 equal weights. Each component uses each eligible test date once at signal+3. Threshold125. No funded second channel. No recovery.",
+ "comparability":"All trading/costs/DGP/bands/disagreement identical. Baseline primary uses exact imported iteration6 engine and iteration5 candidate incl inherited gate. New arms replace both old monitors. Extended split shared in secondary only.",
+ "acceptance":{"stable_coverage_min":0.15,"stable_false_great":0,"stable_no_alarms":true,"learnable_each_tier_min":20,"reversal_delay_range":[3,8],"adverse_return_min":-0.05,"adverse_mdd_max":0.05,"stable_return_delta_margin":-0.05,"null_coverage":0},
+ "uncertainty":"Independent seed as unit. Report exact binomial Clopper Pearson two-sided95 intervals and one-sided95 upper false-alarm bound; paired return deltas t95 descriptive interval; six primary seeds cannot establish population<=5%. No pooling paired scenarios as independent seeds. Missing detections count failure/censored126, never excluded from power denominator.",
+ "analysis":"Per-seed confusion latent and realized; false GREAT first3/post3; support, return, adverse return/MDD, full MDD, costs, delay and prechange alarms. All 120 portfolios run even on statistical failure, no tuning. Stop immediately on infrastructure error with partial outputs/failure report. Runtime wall cap external timeout1200 and internal elapsed checks. Tests consume zero portfolio replays.",
+ "not_testable":"Real PIT (no dataset), conformal prediction set (no score/quantile/target/algorithm), full structured policy (ellipses; retain supplied baseline controls), automatic recovery (unspecified and not implemented), unique unified formula/class e-process (contradictory), unique bias-correction+calibrate procedure (contradictory), public timestamp (no service authorized/configured), guaranteed2% realized loss/zero delay/zero unavoidable false GREAT (impossible). No GA/production edits. Longer history concrete test restricted to secondary stratum.",
+ "frozen_claim":"Local SHA256 commitment only; seeds fresh conditional on inherited synthetic DGP, no real alpha claim"
+}

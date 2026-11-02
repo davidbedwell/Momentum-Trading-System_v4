@@ -1,0 +1,107 @@
+{
+  "label": "SYNTHETIC_ONLY_NOT_HISTORICAL_PERFORMANCE_NOT_AUTHENTIC_PIT",
+  "sessions": 126,
+  "initial_nav": 100000.0,
+  "source_sha256": {
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/functional_niche_manager.py": "e6abdf744ce80bdf17416d38b4f8cc8fa3fbda9d03af28ab980417596c9fd834",
+    "/opt/Momentum-Trading-System_v5-alpha/engines/portfolio_replay/kernel.py": "69ce56e126eca1242e65340cedd1c9f6a3ec6a35dc50fc27b277c467a845c2d5"
+  },
+  "costs": {
+    "fees": 0.0005,
+    "spread": 0.001,
+    "slippage": 0.0003,
+    "impact": 0.0002
+  },
+  "settlement": "T+1; zero cash yield",
+  "exposure_method": "Arithmetic mean of session-close equity/NAV; equally spaced trading-session time weights.",
+  "annualization": "252 sessions/year; includes initial capital before session zero; CAGR is scenario arithmetic, not a forecast.",
+  "benchmark_method": "Same ten assets, capital, sessions, next-open start and buy costs; equal dollars then hold; terminal mark, no liquidation.",
+  "controls": {
+    "t_plus_one_no_same_open_reuse": "PASS",
+    "mandatory_loss_clipping": "PASS",
+    "open_gap_mdd_latch_and_exit": "PASS",
+    "gap_loss_guaranteed": false
+  },
+  "scenarios": {
+    "0.7": {
+      "requested_initial_equity_target": 0.7,
+      "permitted_equity_allocation": 1.0,
+      "metrics": {
+        "final_nav": 96581.54923435484,
+        "cagr": -0.06720043474918924,
+        "mdd": 0.057019227628479,
+        "calmar": -1.1785574365729414,
+        "time_weighted_equity_exposure": 0.6263508250968373,
+        "min_exposure": 0.0,
+        "max_exposure": 0.7023102702802213,
+        "trade_count": 120
+      },
+      "reconciliation": {
+        "max_absolute_error": 5.820766091346741e-11,
+        "realized_pnl": -3418.450765645206,
+        "unrealized_pnl": 0.0,
+        "final_settled_cash": 32148.244795302904,
+        "final_unsettled_cash": 64433.30443905187,
+        "final_equity": 0.0
+      },
+      "max_modeled_trade_loss": 0.002309999999999992,
+      "mdd_policy": {
+        "ceiling": 0.2,
+        "breached": false,
+        "feasible": true,
+        "action": "LATCH_NEW_RISK_ADMISSION_KEEP_NATIVE_EXITS",
+        "guaranteed_loss_ceiling": false
+      },
+      "pending_unexecuted": 5,
+      "note": "Target applies on entries; HOLD drifts. No forced portfolio rebalance or hard 70% ceiling."
+    },
+    "1.0": {
+      "requested_initial_equity_target": 1.0,
+      "permitted_equity_allocation": 1.0,
+      "metrics": {
+        "final_nav": 95183.78313672407,
+        "cagr": -0.09400474277810811,
+        "mdd": 0.08208663764626212,
+        "calmar": -1.1451893447409183,
+        "time_weighted_equity_exposure": 0.904761904761905,
+        "min_exposure": 0.0,
+        "max_exposure": 1.0000000000000007,
+        "trade_count": 120
+      },
+      "reconciliation": {
+        "max_absolute_error": 7.275957614183426e-11,
+        "realized_pnl": -4816.2168632759785,
+        "unrealized_pnl": 0.0,
+        "final_settled_cash": -5.820766091346741e-11,
+        "final_unsettled_cash": 95183.78313672406,
+        "final_equity": 0.0
+      },
+      "max_modeled_trade_loss": 0.003299999999999989,
+      "mdd_policy": {
+        "ceiling": 0.2,
+        "breached": false,
+        "feasible": true,
+        "action": "LATCH_NEW_RISK_ADMISSION_KEEP_NATIVE_EXITS",
+        "guaranteed_loss_ceiling": false
+      },
+      "pending_unexecuted": 0,
+      "note": "Target applies on entries; HOLD drifts. No forced portfolio rebalance or hard 70% ceiling."
+    }
+  },
+  "benchmark": {
+    "final_nav": 97008.6703801126,
+    "cagr": -0.05893178710826652,
+    "mdd": 0.07934288416024637,
+    "calmar": -0.7427482342240522,
+    "time_weighted_equity_exposure": 0.9920634920634921,
+    "min_exposure": 0.0,
+    "max_exposure": 1.0,
+    "trade_count": 10
+  },
+  "failures": [],
+  "execution_notes": [
+    "Initial invocation with python failed: executable unavailable (exit 127). Required PYTHONPATH invocation with python3 succeeded (exit 0).",
+    "One bounded 126-session execution; no source edits, historical data, live trades, GA, tuning, or authentic PIT validation.",
+    "Final sale proceeds remain T+1 receivables at the horizon; included in NAV, not spendable cash. Final-close pending signals are reported and never executed beyond the horizon."
+  ]
+}

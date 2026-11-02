@@ -1,0 +1,27 @@
+{
+  "source_archive_hashes_match": true,
+  "python_syntax": true,
+  "request_content_matches_package": true,
+  "requested_model": "anthropic/claude-sonnet-4.6",
+  "new_portfolios_run": 0,
+  "credential_material_saved": false,
+  "historical_commitments": {
+    "competing_independent_tests": {
+      "analyze.py": true,
+      "claude_review.md": true,
+      "engine.py": true,
+      "frozen/iteration5_reference.py": true,
+      "frozen/iteration6_engine.py": true,
+      "preregister.json": true,
+      "run.py": true,
+      "test_engine.py": true
+    },
+    "discrimination_iteration6": {
+      "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration6/engine.py": true,
+      "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration6/run.py": true,
+      "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration6/test_engine.py": true,
+      "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration6/preregister.json": true,
+      "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration5/experiment.py": true
+    }
+  }
+}

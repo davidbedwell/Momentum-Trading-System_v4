@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "adapter": "experiment.validate_pit(rows)",
+  "required_row_fields": ["asset","feature","value","event_time","release_time","available_time","decision_time","revision_id","source_uri","source_sha256","vintage_id"],
+  "constraints": ["finite numeric feature","timezone-aware release_time <= available_time <= decision_time","64-character lowercase hex source SHA256","one explicit source vintage and revision ID per row"],
+  "dataset_readiness_requirements": ["original release archive and immutable snapshot hashes","revision chain with superseded availability dates","missingness by asset, feature, date and regime including unavailable values","corporate-action and universe membership timing","licensing/access and reproducible retrieval manifest","disjoint fit/calibration/test regime episodes","OOS rank IC with uncertainty and dependence-aware sampling"],
+  "current_status": "No accepted real predictor rows. Adapter validation alone does not certify source authenticity or predictive information."
+}

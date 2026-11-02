@@ -1,0 +1,98 @@
+[
+  {
+    "split": "discovery",
+    "cost_bps": 15,
+    "cagr_difference": {
+      "ci_low": -0.10622072644834951,
+      "ci_high": 0.06708366021985952,
+      "bootstrap_p": 0.4097951024487756,
+      "holm_p": 0.8195902048975512
+    },
+    "absolute_mdd_improvement": {
+      "ci_low": -0.15233142817126458,
+      "ci_high": 0.4693382105236438,
+      "bootstrap_p": 0.5137431284357821,
+      "holm_p": 0.8195902048975512
+    }
+  },
+  {
+    "split": "discovery",
+    "cost_bps": 30,
+    "cagr_difference": {
+      "ci_low": -0.1181796237042798,
+      "ci_high": 0.05957952674060244,
+      "bootstrap_p": 0.31384307846076964,
+      "holm_p": 0.6276861569215393
+    },
+    "absolute_mdd_improvement": {
+      "ci_low": -0.20223409677697732,
+      "ci_high": 0.4458892670045254,
+      "bootstrap_p": 0.6006996501749126,
+      "holm_p": 0.6276861569215393
+    }
+  },
+  {
+    "split": "discovery_early",
+    "cost_bps": 15,
+    "cagr_difference": {
+      "ci_low": -0.10310463046688707,
+      "ci_high": 0.25006791448112864,
+      "bootstrap_p": 0.6106946526736632,
+      "holm_p": 0.8295852073963018
+    },
+    "absolute_mdd_improvement": {
+      "ci_low": -0.1137810454657971,
+      "ci_high": 0.5420896534990176,
+      "bootstrap_p": 0.4147926036981509,
+      "holm_p": 0.8295852073963018
+    }
+  },
+  {
+    "split": "discovery_early",
+    "cost_bps": 30,
+    "cagr_difference": {
+      "ci_low": -0.12060652792174625,
+      "ci_high": 0.23892100744351788,
+      "bootstrap_p": 0.6776611694152923,
+      "holm_p": 0.9315342328835582
+    },
+    "absolute_mdd_improvement": {
+      "ci_low": -0.15403805645866928,
+      "ci_high": 0.5288561772206302,
+      "bootstrap_p": 0.4657671164417791,
+      "holm_p": 0.9315342328835582
+    }
+  },
+  {
+    "split": "discovery_late",
+    "cost_bps": 15,
+    "cagr_difference": {
+      "ci_low": -0.12442428454752885,
+      "ci_high": -0.020255841243688927,
+      "bootstrap_p": 0.0079960019990005,
+      "holm_p": 0.015992003998001
+    },
+    "absolute_mdd_improvement": {
+      "ci_low": -0.1502739603417602,
+      "ci_high": 0.16671078342634307,
+      "bootstrap_p": 0.8185907046476761,
+      "holm_p": 0.8185907046476761
+    }
+  },
+  {
+    "split": "discovery_late",
+    "cost_bps": 30,
+    "cagr_difference": {
+      "ci_low": -0.13455524432054672,
+      "ci_high": -0.025179497086746015,
+      "bootstrap_p": 0.0079960019990005,
+      "holm_p": 0.015992003998001
+    },
+    "absolute_mdd_improvement": {
+      "ci_low": -0.1805866187219599,
+      "ci_high": 0.15602869849557732,
+      "bootstrap_p": 0.9675162418790605,
+      "holm_p": 0.9675162418790605
+    }
+  }
+]

@@ -23,15 +23,16 @@ def test_filing_lookahead_and_restatement():
 def test_earnings_date_conservative():
     data = {'quarterlyEarnings':[dict(reportedDate=f'2018-0{i}-01',reportedEPS=i,estimatedEPS=0) for i in range(1,7)]}
     assert earnings_signal(data,'2018-05-01') is None
-    assert earnings_signal(data,'2018-06-01') is not None
+    assert earnings_signal(data,'2018-06-01') is None
 
 
 def test_frozen_splits():
     m = json.loads((ROOT/'manifest.json').read_text())
-    assert len(m['discovery']) == len(m['blind']) == 4
-    assert not set(m['discovery']) & set(m['blind'])
-    assert not {2019,2020} & set(m['blind'])
-    assert m['holdout_locked']
+    assert m['protocol_version'] == 2
+    assert m['stage1'] == list(range(2006,2016))
+    assert m['stage2'] == list(range(2016,2027))
+    assert m['contaminated_years'] == [2019,2020]
+    assert m['stage2_sealed'] and not m['certified']
 
 
 def test_no_mts_contamination():
@@ -49,10 +50,13 @@ def test_corporate_action_gaps_and_adjustments():
 
 
 def test_signal_windows_no_future():
-    h = [dict(adj_close=i+1) for i in range(253)]
-    assert technical(h)['H1'] == 232/1-1
-    assert technical(h)['H2'] == 253/190-1
-    assert technical(h)['H3'] == 1
+    h = [dict(date=f'{year}-{month:02d}-28',adj_close=i+1)
+         for i,(year,month) in enumerate(( (2018+i//12, i%12+1) for i in range(26)))]
+    assert technical(h)['H1'] == 24/13-1
+    assert technical(h)['H2'] is None
+    daily = [dict(adj_close=i+1) for i in range(253)]
+    assert technical(daily)['H2'] == 1
+    assert technical(daily)['H5'] > 0
 
 
 def test_hac_and_holm():
@@ -84,12 +88,47 @@ def test_terminal_missingness_does_not_change_formation_ranks():
                 b.append(dict(date=str(d),adj_close=100,adj_open=100))
     members = [dict(symbol=s,sector='Tech',start='2019-01-01',end='2019-02-01') for s in ('A','B')]
     result = form_rows({'A':a,'B':b},members,[2019],{}, {})
-    assert result and all(r['symbol']=='A' and r['H2_rank']==1 for r in result)
+    assert result and all(r['symbol']=='A' and r['H2_rank']==.75 and r['excess'] is None for r in result)
 
 
 def test_blind_cli_rejects_before_reading_inputs(tmp_path):
     import subprocess
     import sys
-    r = subprocess.run([sys.executable,'-m','sector_pipeline','run','--prices','absent.csv','--members','absent.csv','--years','2015'],capture_output=True,text=True,cwd=ROOT)
+    r = subprocess.run([sys.executable,'-m','sector_pipeline','run','--prices','absent.csv','--members','absent.csv','--years','2016'],capture_output=True,text=True,cwd=ROOT)
     assert r.returncode == 2
-    assert 'Blind years are locked' in r.stderr
+    assert 'Stage2 SEALED' in r.stderr
+
+
+def test_eight_prior_surprises_exact():
+    import statistics
+    events = [dict(reportedDate=f'2018-{i:02d}-01',reportedEPS=i,estimatedEPS=0) for i in range(1,10)]
+    assert earnings_signal({'quarterlyEarnings':events},'2018-09-01') is None
+    assert earnings_signal({'quarterlyEarnings':events},'2018-09-02') == 9/statistics.stdev(range(1,9))
+    events[0]['reportedEPS'] = 'None'
+    assert earnings_signal({'quarterlyEarnings':events},'2018-09-02') is None
+
+
+def test_stage_gates_and_seal():
+    from sector_pipeline.gate import stage_gate, authorize
+    good = dict(mean=.02,t=3.1,positive_blocks=3,complete=True,placebo_pass=True)
+    assert stage_gate(good)
+    for key,value in [('mean',.01),('t',3),('positive_blocks',2),('complete',False),('placebo_pass',False)]:
+        assert not stage_gate(dict(good,**{key:value}))
+    assert stage_gate(dict(good,t=2.1,same_sign=True,net_spread=.001),2)
+    assert not stage_gate(dict(good,t=2.1,same_sign=True,net_spread=0),2)
+    m = json.loads((ROOT/'manifest.json').read_text())
+    for years in ([2006],[2016],[2019],[2026],[2006,2016]):
+        with pytest.raises(ValueError):
+            authorize(years,m)
+
+
+def test_missing_open_has_no_proxy():
+    rows = [dict(date='2019-01-31',adj_close=100),dict(date='2019-02-01',adj_close=100),dict(date='2019-03-31',adj_close=100)]
+    assert not form_rows({'A':rows},[dict(symbol='A',sector='T',start='2019-01-01',end='2019-02-01')],[2019],{}, {})
+
+
+def test_placebo_direction():
+    from sector_pipeline.core import placebo
+    rows = [dict(asof='2006-01-31',sector='T',horizon=1,H5_rank=(i+1)/20,excess=-i) for i in range(20)]
+    result = placebo(rows,'H5',1)
+    assert result['real'] == pytest.approx(1) and result['passed'] and result['shuffles'] == 1000

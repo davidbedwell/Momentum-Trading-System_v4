@@ -1,0 +1,17 @@
+{
+  "local_artifacts_valid": true,
+  "manifest_entries": 55,
+  "checks": [
+    "All source and archived evidence bytes/SHA256 match",
+    "Package/submission/validation Python syntax valid; no code executed by this check",
+    "Exact requested model; request content equals package; no Authorization field stored"
+  ],
+  "package_bytes": 848557,
+  "package_sha256": "29c72aaf327fed2886461b21aca6dea8fe24a2b079bd1f7cbf2aa4e0daf71a2e",
+  "request_file_sha256": "46e5066fcf8297d080c51796d4461f25e8cae71efc957b5f54654a24c39b7adf",
+  "http_200_verified": false,
+  "provider_response_verified": false,
+  "external_review_obtained": false,
+  "status": "NOT_SUBMITTED_CREDENTIAL_ACCESS_DENIED",
+  "no_experiment_or_test_replays": true
+}

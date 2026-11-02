@@ -1,0 +1,6 @@
+{
+  "rule": "DEV79_breadth50_weak",
+  "direction": 1,
+  "discovery_effect": 0.010892195797937827,
+  "selection": "largest absolute 21d return uplift, n>=100, onsets>=20; frozen before validation inspection"
+}

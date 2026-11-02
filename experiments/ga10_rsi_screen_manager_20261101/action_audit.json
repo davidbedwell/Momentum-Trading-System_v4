@@ -1,0 +1,10 @@
+{
+  "train": {
+    "offscreen_management_fills": 589,
+    "entries_outside_screen": 0
+  },
+  "examined_holdout": {
+    "offscreen_management_fills": 359,
+    "entries_outside_screen": 0
+  }
+}

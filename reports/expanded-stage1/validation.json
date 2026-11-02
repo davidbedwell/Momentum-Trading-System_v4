@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "sealed_hashes_unchanged": true,
+  "no_stage2_rows": true,
+  "source_hashes_verified": true,
+  "price_rows": 869522,
+  "priced_symbols": 322,
+  "scenarios": {
+    "dated_holdings_available": {
+      "observation_rows": 75008,
+      "independently_recomputed_sector_ics": 12,
+      "defined_statistics": 12
+    },
+    "annual_corroborated_available": {
+      "observation_rows": 74330,
+      "independently_recomputed_sector_ics": 12,
+      "defined_statistics": 12
+    }
+  }
+}

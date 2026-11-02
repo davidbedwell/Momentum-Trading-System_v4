@@ -1,0 +1,9 @@
+{
+  "source": "/opt/mts/portfolio_evolution_dev80/dev80_raw_no_smci.parquet",
+  "source_sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+  "code_sha256": "912a491ac267022c8bcffd21fb6d89a63e6e25fbdba7e2e1b37b61c285ef2d78",
+  "workers": 8,
+  "seed": 1010,
+  "fee_side": 0.001,
+  "pit_certified": false
+}

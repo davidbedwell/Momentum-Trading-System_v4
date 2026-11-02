@@ -1,0 +1,174 @@
+{
+  "files": [
+    {
+      "path": "/opt/mts/sector-leadership-independent/experiments/sector_etf_20261031/data/legacy_sector_etf_panel_2005_2026.parquet",
+      "sha256": "f7101f47c432e6bf8afd069c2f2ec3bf087f05ab8add79a5a0dc796a46b9d86a",
+      "rows": 47610,
+      "parquet_metadata_keys": [
+        "ARROW:schema",
+        "pandas"
+      ],
+      "schema": {
+        "date": "datetime64[ms]",
+        "open": "float64",
+        "high": "float64",
+        "low": "float64",
+        "close": "float64",
+        "adj_close": "float64",
+        "volume": "float64",
+        "ticker": "str"
+      },
+      "symbols": {
+        "XLB": {
+          "first": "2005-09-01",
+          "last": "2026-09-14",
+          "rows_through_2025": 5115,
+          "adjustment_factor_min": 0.6287392384162187,
+          "adjustment_factor_max": 0.9954191216383071
+        },
+        "XLE": {
+          "first": "2005-09-01",
+          "last": "2026-09-14",
+          "rows_through_2025": 5115,
+          "adjustment_factor_min": 0.5437341054278712,
+          "adjustment_factor_max": 0.9940911451322997
+        },
+        "XLF": {
+          "first": "2005-09-01",
+          "last": "2026-09-14",
+          "rows_through_2025": 5115,
+          "adjustment_factor_min": 0.6559778819707199,
+          "adjustment_factor_max": 0.9964733458401864
+        },
+        "XLI": {
+          "first": "2005-09-01",
+          "last": "2026-09-14",
+          "rows_through_2025": 5115,
+          "adjustment_factor_min": 0.6681926088880037,
+          "adjustment_factor_max": 0.9973196191255584
+        },
+        "XLK": {
+          "first": "2005-09-01",
+          "last": "2026-09-14",
+          "rows_through_2025": 5115,
+          "adjustment_factor_min": 0.7645182541457001,
+          "adjustment_factor_max": 0.9988344106479061
+        },
+        "XLP": {
+          "first": "2005-09-01",
+          "last": "2026-09-14",
+          "rows_through_2025": 5115,
+          "adjustment_factor_min": 0.5731590018312346,
+          "adjustment_factor_max": 0.993466244137156
+        },
+        "XLU": {
+          "first": "2005-09-01",
+          "last": "2026-09-14",
+          "rows_through_2025": 5115,
+          "adjustment_factor_min": 0.48232292406486743,
+          "adjustment_factor_max": 0.9927007969460248
+        },
+        "XLV": {
+          "first": "2005-09-01",
+          "last": "2026-09-14",
+          "rows_through_2025": 5115,
+          "adjustment_factor_min": 0.6966518640485848,
+          "adjustment_factor_max": 0.9961874920802722
+        },
+        "XLY": {
+          "first": "2005-09-01",
+          "last": "2026-09-14",
+          "rows_through_2025": 5115,
+          "adjustment_factor_min": 0.7682283765203238,
+          "adjustment_factor_max": 0.9978024083324987
+        }
+      }
+    },
+    {
+      "path": "/opt/mts/sector-leadership-independent/experiments/sector_etf_20261031/data/sector_etf_extension_xlre_xlc_yfinance_20261007.parquet",
+      "sha256": "31d697151669a974976bfe3aaf82ef6b0302a9957915e05b105b06f297c19b40",
+      "rows": 4818,
+      "parquet_metadata_keys": [
+        "ARROW:schema",
+        "pandas"
+      ],
+      "schema": {
+        "date": "datetime64[ms]",
+        "open": "float64",
+        "high": "float64",
+        "low": "float64",
+        "close": "float64",
+        "adj_close": "float64",
+        "volume": "int64",
+        "ticker": "str"
+      },
+      "symbols": {
+        "XLC": {
+          "first": "2018-06-19",
+          "last": "2026-09-14",
+          "rows_through_2025": 1895,
+          "adjustment_factor_min": 0.9217837615240706,
+          "adjustment_factor_max": 0.9967151027582801
+        },
+        "XLRE": {
+          "first": "2015-10-08",
+          "last": "2026-09-14",
+          "rows_through_2025": 2573,
+          "adjustment_factor_min": 0.6847793328911869,
+          "adjustment_factor_max": 0.9916530078147825
+        }
+      }
+    },
+    {
+      "path": "/opt/mts/ga6-git-backup/Research/Data/Comparators/SPY_YFINANCE_2005_2026.parquet",
+      "sha256": "b182402afd15c074ee4cc596149bf0a821e6cbd00fa5329d84eef269636f6381",
+      "rows": 5459,
+      "parquet_metadata_keys": [
+        "ARROW:schema",
+        "pandas"
+      ],
+      "schema": {
+        "date": "datetime64[ms]",
+        "adj_close": "float64",
+        "capital_gains": "float64",
+        "close": "float64",
+        "dividends": "float64",
+        "high": "float64",
+        "low": "float64",
+        "open": "float64",
+        "stock_splits": "float64",
+        "volume": "int64",
+        "ticker": "str"
+      },
+      "symbols": {
+        "SPY": {
+          "first": "2005-01-03",
+          "last": "2026-09-15",
+          "rows_through_2025": 5283,
+          "adjustment_factor_min": 0.6730964457334386,
+          "adjustment_factor_max": 0.9975229873506252
+        }
+      }
+    }
+  ],
+  "internal_missing_sessions": {
+    "SPY": 0,
+    "XLB": 0,
+    "XLC": 0,
+    "XLE": 0,
+    "XLF": 0,
+    "XLI": 0,
+    "XLK": 0,
+    "XLP": 0,
+    "XLRE": 0,
+    "XLU": 0,
+    "XLV": 0,
+    "XLY": 0
+  },
+  "excluded_2026": true,
+  "adjustment_evidence": "Explicit vendor-cache adj_close; sector files lack corporate-action ledger and acquisition metadata. Dividend/split correctness cannot be independently reconciled. Raw opens not used.",
+  "limitations": [
+    "No 2000-2004 sector observations; earliest sector observation 2005-09-01.",
+    "No supplied SGOV; hybrid H4 blocked. Cash-only sensitivity executed."
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "rows": [
+    {
+      "seed": 1564008556893530022,
+      "first": 606,
+      "last": 627,
+      "unavoidable_first3": 13,
+      "count": 108,
+      "funded": 98,
+      "funded_pnl": -8376.142758054018,
+      "earliest_original_window_threshold_crossing_without_scan_schedule": 623,
+      "post_first_information": 95
+    },
+    {
+      "seed": 1634635432866334191,
+      "first": 606,
+      "last": 627,
+      "unavoidable_first3": 15,
+      "count": 120,
+      "funded": 93,
+      "funded_pnl": -9873.711183342166,
+      "earliest_original_window_threshold_crossing_without_scan_schedule": 621,
+      "post_first_information": 105
+    },
+    {
+      "seed": 5015368413594993126,
+      "first": 606,
+      "last": 627,
+      "unavoidable_first3": 9,
+      "count": 105,
+      "funded": 99,
+      "funded_pnl": -9163.047269291692,
+      "earliest_original_window_threshold_crossing_without_scan_schedule": 623,
+      "post_first_information": 96
+    },
+    {
+      "seed": 3584306075979195116,
+      "first": 606,
+      "last": 627,
+      "unavoidable_first3": 12,
+      "count": 109,
+      "funded": 93,
+      "funded_pnl": -9140.929660953743,
+      "earliest_original_window_threshold_crossing_without_scan_schedule": 623,
+      "post_first_information": 97
+    }
+  ],
+  "first_eligible_outcome": 609,
+  "first_allowed_scan": 628,
+  "hard_min_delay": 3,
+  "explanation": "Sensor marginal and complete price paths identical under reversal. Earliest post-switch outcome signal606 available609. First scan628 uses signals606..625; 19 extra sessions are hard-coded. Frozen means and sensor/full agreement cannot detect reversed sign.",
+  "qualification": "First3 counts quantify an information lower bound for these tapes. Later counts are potentially avoidable exposure, not a guarantee of error-free detection at session609. Original20-date window itself needs accumulation; threshold crossings below isolate scheduling from window/threshold delay."
+}

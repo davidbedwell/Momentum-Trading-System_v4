@@ -1,0 +1,38 @@
+[
+  {
+    "symbol": "LEH",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/LEH?period1=1072915200&period2=1451606400&interval=1d",
+    "error": "HTTP Error 404: Not Found",
+    "recorded_utc": "2026-10-31T10:09:54.426618+00:00"
+  },
+  {
+    "symbol": "LEHMQ",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/LEHMQ?period1=1072915200&period2=1451606400&interval=1d",
+    "error": "HTTP Error 404: Not Found",
+    "recorded_utc": "2026-10-31T10:09:54.426618+00:00"
+  },
+  {
+    "symbol": "BSC",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/BSC?period1=1072915200&period2=1451606400&interval=1d",
+    "error": "HTTP Error 404: Not Found",
+    "recorded_utc": "2026-10-31T10:09:54.426618+00:00"
+  },
+  {
+    "symbol": "WAMUQ",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/WAMUQ?period1=1072915200&period2=1451606400&interval=1d",
+    "error": "HTTP Error 404: Not Found",
+    "recorded_utc": "2026-10-31T10:09:54.426618+00:00"
+  },
+  {
+    "symbol": "MER",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/MER?period1=1072915200&period2=1451606400&interval=1d",
+    "error": "HTTP Error 404: Not Found",
+    "recorded_utc": "2026-10-31T10:09:54.426618+00:00"
+  },
+  {
+    "symbol": "CFC",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/CFC?period1=1072915200&period2=1451606400&interval=1d",
+    "error": "HTTP Error 404: Not Found",
+    "recorded_utc": "2026-10-31T10:09:54.426618+00:00"
+  }
+]

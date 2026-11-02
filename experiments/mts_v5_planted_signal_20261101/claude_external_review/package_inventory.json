@@ -1,0 +1,150 @@
+[
+  {
+    "label": "Iteration 1 ORIGINAL baseline",
+    "directory": "five_tier_discrimination",
+    "seeds": [
+      2101,
+      2102,
+      2103,
+      2104
+    ],
+    "opportunities_per_seed_scenario_variant": [
+      2976
+    ],
+    "classification_scenario_variant_groups": 4,
+    "portfolio_replays": 64,
+    "paired_rows": 64,
+    "paired_seed_counts_by_scenario_and_comparator": {
+      "('learnable', 'existing_ev10')": 4,
+      "('learnable', 'tier10')": 4,
+      "('learnable', 'tier15')": 4,
+      "('learnable', 'tier20')": 4,
+      "('misleading', 'existing_ev10')": 4,
+      "('misleading', 'tier10')": 4,
+      "('misleading', 'tier15')": 4,
+      "('misleading', 'tier20')": 4,
+      "('null', 'existing_ev10')": 4,
+      "('null', 'tier10')": 4,
+      "('null', 'tier15')": 4,
+      "('null', 'tier20')": 4,
+      "('reversal', 'existing_ev10')": 4,
+      "('reversal', 'tier10')": 4,
+      "('reversal', 'tier15')": 4,
+      "('reversal', 'tier20')": 4
+    }
+  },
+  {
+    "label": "Iteration 1 REPAIRED evaluator (separate chronological report)",
+    "directory": "opportunity_evaluator_fix",
+    "seeds": [
+      2101,
+      2102,
+      2103,
+      2104
+    ],
+    "opportunities_per_seed_scenario_variant": [
+      2976
+    ],
+    "classification_scenario_variant_groups": 4,
+    "portfolio_replays": 64,
+    "paired_rows": 64,
+    "paired_seed_counts_by_scenario_and_comparator": {
+      "('learnable', 'existing_ev10')": 4,
+      "('learnable', 'tier10')": 4,
+      "('learnable', 'tier15')": 4,
+      "('learnable', 'tier20')": 4,
+      "('misleading', 'existing_ev10')": 4,
+      "('misleading', 'tier10')": 4,
+      "('misleading', 'tier15')": 4,
+      "('misleading', 'tier20')": 4,
+      "('null', 'existing_ev10')": 4,
+      "('null', 'tier10')": 4,
+      "('null', 'tier15')": 4,
+      "('null', 'tier20')": 4,
+      "('reversal', 'existing_ev10')": 4,
+      "('reversal', 'tier10')": 4,
+      "('reversal', 'tier15')": 4,
+      "('reversal', 'tier20')": 4
+    }
+  },
+  {
+    "label": "Iteration 2",
+    "directory": "discrimination_iteration2",
+    "seeds": [
+      3101,
+      3102,
+      3103,
+      3104
+    ],
+    "opportunities_per_seed_scenario_variant": [
+      2976
+    ],
+    "classification_scenario_variant_groups": 8,
+    "portfolio_replays": 48,
+    "paired_rows": 32,
+    "paired_seed_counts_by_scenario_and_comparator": {
+      "('learnable', 'previous_repaired')": 4,
+      "('learnable', 'existing_ev10')": 4,
+      "('misleading', 'previous_repaired')": 4,
+      "('misleading', 'existing_ev10')": 4,
+      "('null', 'previous_repaired')": 4,
+      "('null', 'existing_ev10')": 4,
+      "('reversal', 'previous_repaired')": 4,
+      "('reversal', 'existing_ev10')": 4
+    }
+  },
+  {
+    "label": "Iteration 3",
+    "directory": "discrimination_iteration3",
+    "seeds": [
+      3101,
+      3102,
+      3103,
+      3104
+    ],
+    "opportunities_per_seed_scenario_variant": [
+      2976
+    ],
+    "classification_scenario_variant_groups": 8,
+    "portfolio_replays": 48,
+    "paired_rows": 32,
+    "paired_seed_counts_by_scenario_and_comparator": {
+      "('learnable', 'iteration2_repaired')": 4,
+      "('learnable', 'existing_ev10')": 4,
+      "('misleading', 'iteration2_repaired')": 4,
+      "('misleading', 'existing_ev10')": 4,
+      "('null', 'iteration2_repaired')": 4,
+      "('null', 'existing_ev10')": 4,
+      "('reversal', 'iteration2_repaired')": 4,
+      "('reversal', 'existing_ev10')": 4
+    }
+  },
+  {
+    "label": "Iteration 4",
+    "directory": "discrimination_iteration4",
+    "seeds": [
+      841729,
+      926183
+    ],
+    "opportunities_per_seed_scenario_variant": [
+      2976
+    ],
+    "classification_scenario_variant_groups": 20,
+    "portfolio_replays": 32,
+    "paired_rows": 24,
+    "paired_seed_counts_by_scenario_and_comparator": {
+      "('learnable', 'iteration2_repaired')": 2,
+      "('learnable', 'ungated')": 2,
+      "('learnable', 'scaled')": 2,
+      "('misleading', 'iteration2_repaired')": 2,
+      "('misleading', 'ungated')": 2,
+      "('misleading', 'scaled')": 2,
+      "('null', 'iteration2_repaired')": 2,
+      "('null', 'ungated')": 2,
+      "('null', 'scaled')": 2,
+      "('reversal', 'iteration2_repaired')": 2,
+      "('reversal', 'ungated')": 2,
+      "('reversal', 'scaled')": 2
+    }
+  }
+]

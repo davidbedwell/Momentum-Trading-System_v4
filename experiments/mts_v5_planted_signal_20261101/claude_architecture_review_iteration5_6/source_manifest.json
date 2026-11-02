@@ -1,0 +1,332 @@
+[
+  {
+    "path": "claude_external_review/review.md",
+    "bytes": 27106,
+    "sha256": "3a95b8e17966d4cc0169f5b2904d9d34bfdc8035f0dcade80a1561d5e4e72aed",
+    "representation": "verbatim historical Claude review"
+  },
+  {
+    "path": "claude_external_review/submission_metadata.json",
+    "bytes": 2413,
+    "sha256": "a75333b154d739d9731fd651dac5b0f27da0b8aa0639af7a62cc465ad37c75b2",
+    "representation": "verbatim historical submission metadata"
+  },
+  {
+    "path": "discrimination_iteration5/README.md",
+    "bytes": 8922,
+    "sha256": "db531c8cae3e47018f8861680f56bce98e51be4604e117df32e426a89bc995b7",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/benchmark_correction_commitment.json",
+    "bytes": 290,
+    "sha256": "da1e1ed1401c36576858d16d3b3536afb1fcb0979af2ee897b5e741c34681078",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/checksums.json",
+    "bytes": 2211,
+    "sha256": "d97409aae267acebf857a1923f673f238257ea61472644e81277ca85ad249453",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/commitment.json",
+    "bytes": 757,
+    "sha256": "7f51d54ee11a8f342021321d5d8f6ad4b788e6c4a52f6c1b387a68ed1baae9a7",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/corrected_benchmark.py",
+    "bytes": 3120,
+    "sha256": "f22cc50c64a942a22ed19a1d23b8d61269df6c9c239a84000f221acd65f8acc1",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/corrected_benchmark_metrics.csv",
+    "bytes": 711,
+    "sha256": "3acaaa98b2cea7daa637bb838763784b1d0628daa3f70bcd27c98f2f0fd3845c",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/corrected_benchmark_paired.csv",
+    "bytes": 685,
+    "sha256": "34200da72ecb4851b068d9d8e586a49390d053c9c78e5392e019de0c93a9c9a3",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/corrected_benchmark_results.json",
+    "bytes": 1679,
+    "sha256": "9d9d97e30345112dd12c189e090703c5c146ceaa97b0f0045dbcd696e3219a4e",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/execution.log",
+    "bytes": 871,
+    "sha256": "2f60496a87daa3873e1ec7f2c770566330b5f1c0f67b91f2b4f90838d5cc401b",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/experiment.py",
+    "bytes": 19758,
+    "sha256": "374e1fda136c50c643cbfce4ab2bd1ed26274b19b433dfc38109ead03a1b50a0",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/finalize.py",
+    "bytes": 17268,
+    "sha256": "c6c98d50a7d6532697dc61c0817ad5baf21397ee27b64f018ab384ed120f6014",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/ledger_audit.csv",
+    "bytes": 4403,
+    "sha256": "60befbe0ca58e5fc5571dd4b952faf06d49de9c6c22d68f15128bee381b69286",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/metrics.csv",
+    "bytes": 9540,
+    "sha256": "7f61882fba2627e740ac51003742861e036fc05e93629bc227220d946e579a8b",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/paired.csv",
+    "bytes": 4122,
+    "sha256": "467494525463a05dfe864aa70ae1ec3fd1ba83845b4e088ff8a284021d2eb8e1",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/pit_schema.json",
+    "bytes": 1035,
+    "sha256": "0a32482af58c4fab83b220829fc3498c6750757bb6558387da61a7082958c73e",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/preregister.json",
+    "bytes": 3771,
+    "sha256": "f6253010529818262e3b4f52511d307ae0cafb3129629c164e4293db06495b0c",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/raw_report.json",
+    "bytes": 963115,
+    "sha256": "3b7f4677cb0af3324c1068554780a3b646a39498a0fa4724682cd57f55e1af50",
+    "representation": "archived only; pre-correction duplicate, final report transmitted"
+  },
+  {
+    "path": "discrimination_iteration5/report.json",
+    "bytes": 973379,
+    "sha256": "feb70078c9f945a1a1dbe13884b6525ad572b40f69c3cce8777e42169250f64f",
+    "representation": "semantic compaction; only date index arrays summarized"
+  },
+  {
+    "path": "discrimination_iteration5/seeds.json",
+    "bytes": 84,
+    "sha256": "c6b9508f47995a779cd4b8d86e285d9ba33727a4d3959d6abb330ade3bf146be",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/test_experiment.py",
+    "bytes": 3749,
+    "sha256": "4ae56648ea21e1edb241d2699b08aeb00c3e3401baf9b8c8a4dadff82f6408a9",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/tests.log",
+    "bytes": 1200,
+    "sha256": "8432c726eebebf7df9915e81f43bd4e4d1d60b27e1d2de00e9f0461266db660c",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/tier_metrics.csv",
+    "bytes": 22549,
+    "sha256": "61be4e90ebb679e759e0abbd54f454d8719fa6334a2d3f27c1e6ef3f1b3f27b1",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/opportunities.jsonl.gz",
+    "bytes": 5385730,
+    "sha256": "dd17c242a2bdea1610c6e0eadfff8f975f4324ecf67ba74709f6e653a204e495",
+    "representation": "archived full compressed ledger; exact counts and deterministic representative excerpts transmitted"
+  },
+  {
+    "path": "discrimination_iteration5/replays.jsonl.gz",
+    "bytes": 1503576,
+    "sha256": "1eae2fd4dc0e24ed2969edb7d71a5e7abde5e57511c8dfc05f9517464b7aca8c",
+    "representation": "archived full compressed ledger; exact counts and deterministic representative excerpts transmitted"
+  },
+  {
+    "path": "discrimination_iteration5/corrected_benchmark_replays.jsonl.gz",
+    "bytes": 173679,
+    "sha256": "9d273a2bcf85d33781b7e8dad70a0b0d31ee80eb9c3e15edec7278cd137bb3f2",
+    "representation": "archived full compressed ledger; exact counts and deterministic representative excerpts transmitted"
+  },
+  {
+    "path": "discrimination_iteration6/README.md",
+    "bytes": 6936,
+    "sha256": "8db5b65448905b58e26ad726aff16226e517b901d226e09793d0ff1d145062df",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/analyze.py",
+    "bytes": 11292,
+    "sha256": "789010a010d39f5a2713bdf845bfe8fe95a1e05f9fb92aec2aaef4a27f3593c8",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/audit.csv",
+    "bytes": 6665,
+    "sha256": "f94d042f765215a0405b278c3ee9e8c55054f70f741ab9d427d53acc35c4219c",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/checksums.json",
+    "bytes": 1657,
+    "sha256": "7abd6d9a24b081b75425e788560b090ee98ebe3526e1a7e679cf47510f20300f",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/commitment.json",
+    "bytes": 1100,
+    "sha256": "aacaaedb6fae349e737d8dd92d23463abfae354551e3fe3c7ceeb8da9ab3c596",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/confusion.csv",
+    "bytes": 20184,
+    "sha256": "a2c7049524f02ef77b14b0ff67401090c599ec21927b5db73734e050cf60b23a",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/detection.csv",
+    "bytes": 9887,
+    "sha256": "549b4af865c9cc210df6c86d92149225f6a1be3f7b430c48616d33082c2467a4",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/economic_paired.csv",
+    "bytes": 2726,
+    "sha256": "368befdbee6460fe954af6bdae2d3c952ee48fa56ff2f79104deddc9983cf343",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/engine.py",
+    "bytes": 6123,
+    "sha256": "0cb88a0fa95620f1d6881235bdf748be3349a142cd4002a565ba4d45bfb1b319",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/iteration5_diagnosis.json",
+    "bytes": 1954,
+    "sha256": "1374a92cd2c79654f86b71ee2da8bdae93c82cc25dab3c345395c2bf8945ea2b",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/paired.csv",
+    "bytes": 1153,
+    "sha256": "ba5f70a5d2d343f863e4885e40f3e7377e87d65080db1826c698b4cd02d0c236",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/portfolio.csv",
+    "bytes": 13206,
+    "sha256": "51c0281836b479f73fac1d720bf9014465b4993e184bb4c0d977c35cfdefd0b5",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/preregister.json",
+    "bytes": 3716,
+    "sha256": "6fc3d1acbe2ad094c3986175f49a87c934e8c101965e96d8df2aa136c3ecdb57",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/report.json",
+    "bytes": 786658,
+    "sha256": "bf5d6f58651f932cf36e2d32c4f77de80d2f8e5312d1f78063430eab007663b4",
+    "representation": "semantic compaction; only date index arrays summarized"
+  },
+  {
+    "path": "discrimination_iteration6/run.py",
+    "bytes": 9544,
+    "sha256": "0b01f2a6ffe8b15de312a3dc435bbfd9466657ff7b07f2e1d53defd06ca6df21",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/seeds.json",
+    "bytes": 181,
+    "sha256": "0d12cc468412377eeba76c2cc0e7de36abfc4b9f0206dba90e6464b40c6da511",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/test_engine.py",
+    "bytes": 2565,
+    "sha256": "b517d042804dd3704d2636244a37c33f8fe89f8ef4d40409d90299d875627bd6",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/tests.log",
+    "bytes": 712,
+    "sha256": "ff49442e6ba703461108559dd030276de2effec6559ba2daf9644a36e4ab95d8",
+    "representation": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/opportunities.jsonl.gz",
+    "bytes": 2541837,
+    "sha256": "a59fc743228adcef3aa522dc15e4fc5e0677451bff602d84f889ad691c44e379",
+    "representation": "archived full compressed ledger; exact counts and deterministic representative excerpts transmitted"
+  },
+  {
+    "path": "discrimination_iteration6/replays.jsonl.gz",
+    "bytes": 1370054,
+    "sha256": "bcc810a063d1e6af49e1f2dd8c5d13ffc89fdc31eb0d4a63f6cef7a0b8b03f78",
+    "representation": "archived full compressed ledger; exact counts and deterministic representative excerpts transmitted"
+  },
+  {
+    "path": "discrimination_iteration2/audit_artifacts.py",
+    "bytes": 4022,
+    "sha256": "4a9aa42e17e7888eaa78ee92161251436cb94744f419fc1024a3ac62e4ef26df",
+    "representation": "verbatim baseline reference source"
+  },
+  {
+    "path": "discrimination_iteration2/corrected_kernel.py",
+    "bytes": 9648,
+    "sha256": "eb549764c5cc8d035da4af9c37c2c9d23df4fade12da5662a13f4dc348ce8ef8",
+    "representation": "verbatim baseline reference source"
+  },
+  {
+    "path": "discrimination_iteration2/corrected_manager.py",
+    "bytes": 32384,
+    "sha256": "b4dc848ab141fd64f3490da52d15704c4e8d2f67325bb3a5f43d7ec95ae637ce",
+    "representation": "verbatim baseline reference source"
+  },
+  {
+    "path": "discrimination_iteration2/experiment.py",
+    "bytes": 15928,
+    "sha256": "49eb76c71c497036b909cfef9aa1bb6ba3cf9569f994c84b9494fb757e42b7ee",
+    "representation": "verbatim baseline reference source"
+  },
+  {
+    "path": "discrimination_iteration2/finalize.py",
+    "bytes": 13947,
+    "sha256": "1916c8d22d4685dc13ccfaa157683401e79c31db766088cfbd82ed48cfca8123",
+    "representation": "verbatim baseline reference source"
+  },
+  {
+    "path": "discrimination_iteration2/test_iteration2.py",
+    "bytes": 3836,
+    "sha256": "ab4db2bf1cfd424a089afa9af9a4f214e5d0272e1bb4d2db9aeb672a3ec377f7",
+    "representation": "verbatim baseline reference source"
+  },
+  {
+    "path": "opportunity_evaluator_fix/experiment.py",
+    "bytes": 19301,
+    "sha256": "2a1cde1c3bb92acf13d00d56b6cd21b6f0d67059f75d0be36e92b44c075b7778",
+    "representation": "verbatim inherited reference dependency; ancillary legacy production imports are not replayed"
+  },
+  {
+    "path": "scaling_blocker_audit/audit.py",
+    "bytes": 16250,
+    "sha256": "8ab1ad83d19adcc2e845e4af8626f9bf285d7cb1f56fad235663db178a675acb",
+    "representation": "verbatim inherited reference dependency; ancillary legacy production imports are not replayed"
+  }
+]

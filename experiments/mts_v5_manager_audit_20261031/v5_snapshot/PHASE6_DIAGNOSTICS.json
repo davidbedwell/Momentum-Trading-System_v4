@@ -1,0 +1,100 @@
+{
+  "status": "FIXED_TAPE_ACCOUNTING_RECONCILED_NOT_POLICY_EQUIVALENCE",
+  "proof_opened": false,
+  "sealed_sessions": 867,
+  "first": "2022-11-17",
+  "last": "2022-12-30",
+  "sessions": 32,
+  "opening_contract": "100000 settled cash; no holdings/receivables; fee .001; T+1; zero yield",
+  "corporate_action_contract": "adjusted prices; no raw split events; dividend credited ex-date; no pay-date certification",
+  "native_terminal_checks": [
+    {
+      "sessions": 2,
+      "native_nav": 99529.1102472906,
+      "bridge_nav": 99529.1102472906,
+      "residual": 0.0,
+      "cashflow_residual": 0.0,
+      "terminal_cashflow_residual": 0.0
+    },
+    {
+      "sessions": 8,
+      "native_nav": 99095.93825454182,
+      "bridge_nav": 99095.93825454182,
+      "residual": 0.0,
+      "cashflow_residual": 1.4551915228366852e-11,
+      "terminal_cashflow_residual": -1.4551915228366852e-11
+    },
+    {
+      "sessions": 16,
+      "native_nav": 98804.25531359027,
+      "bridge_nav": 98804.25531359027,
+      "residual": 0.0,
+      "cashflow_residual": 1.4551915228366852e-11,
+      "terminal_cashflow_residual": 1.4551915228366852e-11
+    },
+    {
+      "sessions": 32,
+      "native_nav": 98606.18180919687,
+      "bridge_nav": 98606.18180919687,
+      "residual": 0.0,
+      "cashflow_residual": 2.9103830456733704e-11,
+      "terminal_cashflow_residual": 2.9103830456733704e-11
+    }
+  ],
+  "native_terminal_fee": 8.949691485604955,
+  "native_fills": 97,
+  "fixed_tape_waterfall": [
+    {
+      "change": "fractional_shares",
+      "nav": 98615.5690244446,
+      "delta": 9.387215247727,
+      "fills": 97,
+      "max_cashflow_residual": 4.3655745685100555e-11
+    },
+    {
+      "change": "remove_capacity_and_sector_limits",
+      "nav": 106757.47262528165,
+      "delta": 8141.903600837046,
+      "fills": 170,
+      "max_cashflow_residual": 2.9103830456733704e-11
+    },
+    {
+      "change": "include_receivables_in_sizing_equity",
+      "nav": 107255.17417587055,
+      "delta": 497.7015505888994,
+      "fills": 174,
+      "max_cashflow_residual": 2.546585164964199e-11
+    },
+    {
+      "change": "retain_terminal_holdings",
+      "nav": 107362.53671258311,
+      "delta": 107.36253671256418,
+      "fills": 132,
+      "max_cashflow_residual": 2.546585164964199e-11
+    }
+  ],
+  "isolated_fixed_tape_deltas": {
+    "fractional_shares": 9.387215247727,
+    "remove_capacity_and_sector_limits": 6673.738043883015,
+    "include_receivables_in_sizing_equity": -144.13079384590674,
+    "retain_terminal_holdings": 8.949691485599033
+  },
+  "original_shadow_minus_native_both_marked": -2758.3122922965413,
+  "waterfall_total": 8756.354903386236,
+  "original_shadow_minus_native": -2749.3626008109422,
+  "original_shadow_minus_changed_fixed_tape": -11505.717504197179,
+  "remaining_scope": "Unallocated: endogenous held-state/action divergence, alphabetical versus native priority, target versus incremental sizing, and interactions. Ordered waterfall is path dependent; not attribution of original shadow gap.",
+  "sources": {
+    "PHASE5_DIAGNOSTICS.json": "0c3aa5e6c85ec6bc051a5cb179e6d2d2f9f868157214e5b92a9301bdb35cbbbf",
+    "/opt/mts/ga7-deploy/ga7_unbounded/runs/preflight_16/checkpoint.json": "8e70569141a33597449dbcbec81340dc9cb96e33d3f229d8319ce636ebf0f812",
+    "/tmp/mts_phase3_feature_audit/full.parquet": "da2a3d8e3ad72337bc145593c9942a98f25b0ff7b3155509b6d1f9972d643174",
+    "/opt/mts/synthetic-market-lab/runs/five_iteration_inputs/universe_1/stock_prices.parquet": "1fc1b849f81472e6d0684c010689c3bd6fca45021a1d9399d0ab1ddab0044a85"
+  },
+  "missing_inputs": [
+    "certified corporate actions/pay dates",
+    "synthetic risk/gap/group publications",
+    "GA4 approved exit archive linkage",
+    "joint synthetic Horizons stress source",
+    "verified family training lineage"
+  ]
+}

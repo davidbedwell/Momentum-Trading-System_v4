@@ -1,0 +1,20 @@
+{
+  "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_dev79_provenance_gate_20261028.json": "1952f65219e53ca497c4e81a53a2561b4e15aed1dee806b2f39245c87ac9ea03",
+  "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/iteration8b_calibration_validation/threshold_lock.json": "dbe845f9a5ed6aae2b325a37f3f460290441b3764dcae7d35381fae166929b5b",
+  "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/iteration8b_calibration_validation/calibration.json": "dc43b9acf256c1b512015a4c6c58244485a3ddfaf6e83fdec03e4e5bad98314d",
+  "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/iteration8b_calibration_validation/engine.py": "143a6ed79a624b4dbe88ea088c610b684a0c44e63f48c4c472f5ddb673d8db47",
+  "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/iteration8b_calibration_validation/run.py": "df770408e7ff398aa66a18a0da56ed88c4005d1afd651ab6b3961a8d1e325022",
+  "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/iteration8_four_arm/corrected/engine.py": "22d9954457e4f605fa57c91dca6fdd964f66d95a6dad18e4c3f6bccfb5fc8d50",
+  "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration6/engine.py": "0cb88a0fa95620f1d6881235bdf748be3349a142cd4002a565ba4d45bfb1b319",
+  "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration5/experiment.py": "374e1fda136c50c643cbfce4ab2bd1ed26274b19b433dfc38109ead03a1b50a0",
+  "/opt/mts/ga7-deploy/current/ga7/runner.py": "6410a19b8d958cf1498358977db2a24970d55332f7150ef35765a3dfe7ff6adc",
+  "/opt/mts/ga7-deploy/current/ga7/RESEARCH_CONTRACT.md": "5206c14f0fdf97739b8e30bd6ae9456430d0dd720c901d3eea8b740b36efda3f",
+  "/opt/mts/ga5_redesign/exploratory79_assumptions.json": "0d30ba2843526c937903808fce02035119b3bccf50c78f766b60a07e97add526",
+  "/opt/mts/ga5_redesign/launch_exploratory_79.py": "e2fa4f594b6fb6c34babdfee5c8978ed52a0de6bb3bbe36fc5aba88f4502a291",
+  "/opt/mts/ga5_redesign/canonical_engine.py": "d4c2b06af70b517211d72167654bf44e58ad1817799e2b27adf9634c9f9b0e47",
+  "/opt/mts/ga5_redesign/exploratory79_policy.json": "1f0c99c8154c81bdf10a54ba97a3d1bef833122c433356d02da3a97c23345dd9",
+  "/opt/mts/sector-leadership-independent/manifest.json": "9684e85103b917df05192327d4ab74ba48c4bcf69caff81c2b4ca7ba258e8549",
+  "/opt/mts/sector-leadership-independent/DATA_SOURCE_POLICY.md": "2b9bc7be2d0221e249f8e7aa36ea66adecb11c8264c797ea00655de155bc4011",
+  "/opt/mts/sector-leadership-independent/CONTROLLING_PROTOCOL_V2.md": "d7c78cc771741b38f8b8b06e74598c6f1352b770ff4dbd16bdea57bf8143af81",
+  "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/dev79_real_data_pilot/audit.py": "2db56efe2434ed0318ad8357ac25e1de1715c2ae072987a916b3c90936c1389c"
+}

@@ -1,0 +1,87 @@
+# Stage 1 planted-signal manager diagnostics — executed
+
+**Synthetic diagnostics only. No historical alpha, production certification, GA, or source edits. Hard stop reached.**
+
+Executed 12 fixed seeds (1101–1112), 252 sessions, 24 invented assets, $100,000 initial NAV, four signal qualities and seven variants: 336 retained portfolios. The first pass took 51.7 seconds; 48 corrected rank-shuffle replacements took 8.1 seconds. Total manager executions: 384; 48 initial ablations discarded. Verification executes no portfolios. Existing MTS files were imported from `/opt/Momentum-Trading-System_v5-alpha` and their hashes checked before/after. Runtime import hashes are in `verification.json`.
+
+## Reproduce
+
+```bash
+PYTHONPATH=/opt/Momentum-Trading-System_v5-alpha python3 experiments/mts_v5_planted_signal_20261101/run.py
+PYTHONPATH=/opt/Momentum-Trading-System_v5-alpha python3 experiments/mts_v5_planted_signal_20261101/verify.py
+```
+
+Standard library only. NumPy is unavailable and is not required. `run.py` contains the final corrected design and executes exactly 336 portfolios with a 900-second internal seed-boundary stop. `correct_ablation.py` records the one-time 48-run correction to the original execution; it refuses repetition when the correction marker exists. It is unnecessary for clean reproductions. The archived execution and correction logs describe the actual run, including the discarded initial ablation. No more simulations were launched after the correction.
+
+## Independent signal measurements
+
+Mean of per-seed measurements; calibration uses the 250 signal dates whose next-open-to-next-open forward move is realized inside the replay. Net prediction and net markout each subtract the same 30bp round-trip allowance. These one-session markouts measure EV calibration independently of funded trade selection, native holding duration, and portfolio P&L. They are not realized-trade EV estimates.
+
+| Quality | Mean daily Spearman rank IC | EV calibration slope | Mean EV bias (bp/session) |
+|---|---:|---:|---:|
+| oracle | 1.0000 | 1.000 | 0.00 |
+| strong | 0.5097 | 0.998 | 1.29 |
+| weak | 0.1493 | 1.005 | 0.76 |
+| null | 0.0028 | undefined (constant EV) | 0.53 |
+
+The IC uses the raw predictor. For null, the raw predictor varies but its correctly specified EV is constant; null EV ranks and calibration slope are undefined. Its single calibration bin avoids splitting ties by realized outcomes. Oracle is a deliberately clairvoyant creation-time predictor of the exact forward log return: a diagnostic upper-bound input, not a proof of a globally optimal portfolio.
+
+## Portfolio results
+
+Arithmetic mean across 12 seeds. CAGR is annualized at 252 sessions/year from initial capital through the last mark. Calmar is averaged per seed, not computed as the ratio of the two reported means. Exposure is mean close equity/NAV. Turnover sums absolute executed notional divided by same-session NAV; purchases and sales both count (a fully invested buy/hold is about 1×). No terminal liquidation is imposed.
+
+| Quality / variant | CAGR | MDD | Calmar | Exposure | Turnover |
+|---|---:|---:|---:|---:|---:|
+| oracle / baseline | 305.55% | 0.14% | 2267.07 | 60.17% | 95.78× |
+| strong / baseline | 145.49% | 1.01% | 164.79 | 78.99% | 33.43× |
+| strong / risk_score | 143.71% | 0.97% | 173.94 | 78.57% | 33.54× |
+| strong / cluster_score | 148.36% | 0.97% | 170.49 | 79.16% | 33.33× |
+| strong / rank_shuffle | 147.91% | 0.89% | 200.93 | 79.62% | 33.09× |
+| strong / equal_eligible | 144.33% | 0.87% | 181.61 | 78.91% | 33.66× |
+| strong / buy_hold | 13.54% | 5.89% | 3.35 | 99.60% | 1.00× |
+| strong / cash | 0.00% | 0.00% | undefined | 0.00% | 0.00× |
+| weak / baseline | 20.98% | 3.93% | 6.17 | 58.19% | 8.32× |
+| weak / risk_score | 21.20% | 3.87% | 6.35 | 58.18% | 8.30× |
+| weak / cluster_score | 20.98% | 3.93% | 6.17 | 58.19% | 8.32× |
+| weak / rank_shuffle | 21.28% | 3.85% | 6.42 | 58.16% | 8.30× |
+| weak / equal_eligible | 21.33% | 3.80% | 6.51 | 58.24% | 8.32× |
+| null / baseline | 0.00% | 0.00% | undefined | 0.00% | 0.00× |
+
+All 28 quality/variant combinations, seed ranges, individual runs, and paired differences are in `aggregate.csv`, `runs.csv`, and `paired.csv`. Same-universe buy/hold and cash results are identical across qualities within each seed. The large synthetic gains and extreme oracle Calmar arise from the deliberately planted, persistent signal and oracle foresight; they do not estimate historical performance.
+
+EV queue priority is **not shown to add value in the noisy cases**: rank-shuffling positive queue scores increases strong mean CAGR by 2.419 percentage points (8/12 wins) and weak by 0.299 points (2/12 wins, several ties). Oracle loses 76.344 points when shuffled. Strong risk scoring changes CAGR by −1.773 points (5/12 wins); cluster scoring changes it by +2.869 points (8/12 wins; across-seed SD 8.819 points). Weak cluster scoring produces identical portfolios to baseline. These are diagnostic comparisons, with no significance claim or allocator certification.
+
+## Generator, causality, and execution
+
+At tape creation, latent alpha z and independent predictor noise u each follow stationary Gaussian AR(1) with coefficient 0.85. The next tradable interval log return is 0.0002 + 0.006z + 0.008ε. ε has market loading 0.3, cluster loading 0.6 (four groups of six), and independent loading sqrt(0.55). Strong and weak predictors are ρz + sqrt(1−ρ²)u with ρ=0.85 and 0.25; null uses ρ=0. Known-law EV is exp(0.0002 + 0.006ρp + 0.5[0.006²(1−ρ²)+0.008²])−1, less 0.003 costs. Oracle receives the jointly created log-return predictor. Gap estimates cycle through 3%, 6%, 12%, 24%; they are illustrative stress inputs, independent of the return generator, not calibrated loss quantiles.
+
+`generate` returns price days, predictor tapes, and returns separately. `callback_factory` accepts only a predictor tape, quality, variant and seed; its callbacks capture predictor-derived gross/net values and scores, never the return array, bars, or price path. Independent verification inspects closures and checks all 290,304 archived tape observations. Signals at close t execute at open t+1, and their measured forward move occurs from open t+1 to open t+2. The last two predictions are saved but excluded from calibration. Open and close marks within each synthetic session are equal; there are no intraday paths, splits, or dividends.
+
+Every retained portfolio calls the actual repaired `functional_niche_manager.run_slice`, which invokes the actual `Replay.day`. Synthetic `NativeProposal` callbacks exercise entry, HOLD and EXIT through that interface; they do not reproduce evolved MTS native model alpha. The manifest/cutoff strings are explicit synthetic labels, not authentic PIT evidence.
+
+Manager entries request 10%; no scaling is attempted because `run_slice` caps increases at 10% and passes no scaling evidence. Unheld assets enter only with positive net EV. Incumbents exit when gross one-session EV falls below −15bp, or when outside the top ten and the top-ten cutoff exceeds incumbent EV by 40bp with a positive net-EV entrant. That 40bp buffer covers the 30bp modeled switch plus 10bp hysteresis. There is no age-triggered exit, fixed 21-day holding period, end-date exit, forced portfolio rebalance, or external incumbent override. The switching rule uses predictors for all assets, not future marks or funded-portfolio marginal estimates. Actual fills also pay costs.
+
+Costs are 5bp fees, 10bp full spread, 3bp one-way slippage and 2bp one-way impact: 15bp total one-way allowance, 30bp round trip. These are transparent illustrative assumptions for liquid small trades, not fitted execution realism. Sales settle T+1 and cannot fund purchases at the same open. Cash earns zero. The mandatory 2% **per-position modeled** trade-loss gate includes max(stop,gap) plus round-trip allowance. This is not an aggregate 2% portfolio risk limit or guaranteed realized loss bound. At 20% drawdown the kernel latches new risk admission while preserving signal-driven exits.
+
+## Allocation adapters and controls
+
+- Baseline: calibrated expected one-session net return per dollar supplies the native funded queue score; known-law reliability requires no fitted shrinkage.
+- Risk score: net EV / (max(2% stop, supplied gap estimate) + 30bp cost). The same absolute loss gate still applies.
+- Cluster score: net EV / (1 + positive-EV opportunity count in that six-asset cluster), recomputed once per close from predictors.
+- Rank shuffle: deterministically permutes **only positive scores among positive candidates**, preserving admission masks, score multiset and signal rules. It is a queue-rank ablation, not a full signal-destruction ablation.
+- Equal eligible: each entrant requests min(10%, 1/positive-EV-count) with equal positive queue scores; cash ties are alphabetical. Incumbents follow the same signal exits and retain drifting weights. It is an equal-request eligible control, not a continuously equal-weight rebalanced portfolio.
+- Buy/hold: every one of the same 24 assets requests 1/24 on the first close, then HOLD, through the same manager/kernel, cash, costs and risk rules. Funding reserves costs, so the final allocation is slightly below the request. Cash-only uses the same path with no proposals.
+
+`conditional_ev` is the sole separate ranking seam. The alternate allocations intentionally substitute explicit ordering scores there; risk scores, cluster scores, and equal-control constants are **not EV units** and are never used for EV calibration. This is an experimental score adapter, not a compliant production EV provider. There is no monkeypatch, source edit, true portfolio marginal recompute, iterative covariance-aware allocator, or same-open reuse of released cash. Native holdings and cash constraints can change realized exposure, so comparisons are not risk-matched alpha estimates.
+
+## Functional evidence, failures and stop
+
+Runtime failures: zero. Maximum fill-to-NAV/cash/share reconciliation error: $1.4e-09; maximum audited modeled trade loss: 2.00%; maximum observed close MDD across retained runs: 11.94%. All policy probes pass: T+1 non-reuse/release, oversized-loss clipping, and an opening-gap MDD latch that blocks entries but permits exits. None of the ordinary runs latches MDD, so the probe supplies that functional evidence. There are 16,549 signal-switch EXIT decisions and 45,552 explicit zero-funded queue increases across retained runs; decisions are not guaranteed executed fills. A full first-seed decision/risk audit is saved for every quality/variant.
+
+The initial shuffle erroneously mixed positive and negative scores, confounding rank with admission; only its 48 runs were discarded and replaced. Null calibration originally split equal predictions into outcome-ordered bins; it now uses one bin, rebuilt without portfolio reruns. These corrections were implementation fixes, not parameter searches. `execution_correction` in `report.json` records both changes and the 384-execution total.
+
+Remaining failure reasons: no independent allocator-score API, no evidence for scaling on this manager seam, no demonstrated noisy-signal queue-ranking advantage, no robust alternate-allocator winner, and no test of positive-EV miscalibration under null. No blockers remain for this bounded Stage 1 experiment. This does not certify MTS, risk guarantees, calibrated native production forecasts, or historical alpha. No further runs are scheduled.
+
+## Artifacts
+
+`run.py`: final reproducible runner; `README.md`: this report; `report.json` and `findings.json`: machine-readable results and failure reasons; `runs.csv`, `aggregate.csv`, `paired.csv`: portfolio metrics; `calibration.csv` and `calibration_bins.csv`: independent signal/EV measurements; `*_joint_tape.csv`: predictors and labeled forward returns; `*_input_prices.csv`: regenerated exact deterministic replay inputs; `*_daily.csv` and nonempty `*_fills.csv`: per-run evidence; first-seed `*_audit.json`: manager decisions and risk; `verification.json`/`.log`: independent checks and dependency hashes; `execution.log` and `correction.log`: execution evidence. Missing fill CSVs indicate zero fills. Total artifact size is about 89 MB.

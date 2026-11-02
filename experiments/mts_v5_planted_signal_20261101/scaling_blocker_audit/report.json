@@ -1,0 +1,1761 @@
+{
+  "status": "COMPLETE_DIAGNOSTIC_SYNTHETIC_ONLY",
+  "elapsed_seconds": 70.6470186971128,
+  "original_instrumented_replays": 72,
+  "corrected_replays": 36,
+  "total_comparison_replays": 108,
+  "original_metrics_identical": true,
+  "first_seed_original_decisions_identical": true,
+  "original_sources_sha256": {
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/functional_niche_manager.py": "e6abdf744ce80bdf17416d38b4f8cc8fa3fbda9d03af28ab980417596c9fd834",
+    "/opt/Momentum-Trading-System_v5-alpha/engines/portfolio_replay/kernel.py": "69ce56e126eca1242e65340cedd1c9f6a3ec6a35dc50fc27b277c467a845c2d5",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/progressive_scaling.py": "7668cb5e16dee4ff31ca4800caf5636061f495e5c711d3449e142cd0e2a0837d",
+    "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/stage2_fix/functional_niche_manager.py": "439a9aceefc9ff606522a43c0c1691f82fafe346141566f1f31079211f7fe41e",
+    "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/stage2_fix/support.py": "cf11186de47645347bbe538105c12f11c910608b988cdee252577ab1ead291e2",
+    "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/run.py": "7e138f2a51ccfbff4794120bb93c4b645bd2a14d7c7af3f0fbd7df12d0c2f852"
+  },
+  "source_unchanged": true,
+  "reconstruction_exact": true,
+  "groups": {
+    "strong_scale15": {
+      "unique_positive_ev_incumbent_stock_dates": 16996,
+      "unique_native_add_stock_dates": 16996,
+      "categories": {
+        "B": 5523,
+        "C": 16996,
+        "D": 5523,
+        "F": 2095,
+        "E": 4864
+      },
+      "exact_overlap": {
+        "B+C+D": 3321,
+        "B+C+D+F": 543,
+        "B+C+D+E": 1449,
+        "B+C+D+E+F": 210,
+        "C": 7307,
+        "C+E": 2824,
+        "C+F": 961,
+        "C+E+F": 381
+      },
+      "evidence_failed_fields": {
+        "position_profitable": 3441,
+        "positive_net_ev": 286,
+        "matured_trades": 2670
+      },
+      "other_exhausts": 12578,
+      "standalone_exceeds": 4418,
+      "queue_risk_exhausts": 0,
+      "evidence_valid_adds": 11473,
+      "evidence_valid_other_blocked": 8368,
+      "evidence_valid_other_blocked_cash_sufficient": 5465,
+      "other_risk_alone_at_least_2pct": 16981,
+      "aggregate_denies_any_standalone_safe_increment": 8367,
+      "settlement_alone_covers_cash_shortfall": 2670,
+      "insufficient_cash_even_including_receivables": 2194,
+      "evidence_15_pass": 11473,
+      "evidence_20_pass": 6704,
+      "other_risk_min": 0.0032945962142334442,
+      "other_risk_median": 0.081507756826052,
+      "other_risk_max": 0.15777580841749242
+    },
+    "strong_scale20": {
+      "unique_positive_ev_incumbent_stock_dates": 16996,
+      "unique_native_add_stock_dates": 16996,
+      "categories": {
+        "B": 10292,
+        "C": 16996,
+        "D": 10292,
+        "F": 2307,
+        "E": 6653
+      },
+      "exact_overlap": {
+        "B+C+D": 5409,
+        "B+C+D+F": 781,
+        "B+C+D+E": 3400,
+        "B+C+D+E+F": 702,
+        "C": 3728,
+        "C+F": 425,
+        "C+E": 2152,
+        "C+E+F": 399
+      },
+      "evidence_failed_fields": {
+        "position_profitable": 3441,
+        "positive_net_ev": 286,
+        "matured_trades": 4498,
+        "forward_folds": 8626
+      },
+      "other_exhausts": 8486,
+      "standalone_exceeds": 8510,
+      "queue_risk_exhausts": 0,
+      "evidence_valid_adds": 6704,
+      "evidence_valid_other_blocked": 3344,
+      "evidence_valid_other_blocked_cash_sufficient": 1578,
+      "other_risk_alone_at_least_2pct": 16981,
+      "aggregate_denies_any_standalone_safe_increment": 5575,
+      "settlement_alone_covers_cash_shortfall": 3031,
+      "insufficient_cash_even_including_receivables": 3622,
+      "evidence_15_pass": 11473,
+      "evidence_20_pass": 6704,
+      "other_risk_min": 0.0032945962142334442,
+      "other_risk_median": 0.081507756826052,
+      "other_risk_max": 0.15777580841749242
+    },
+    "weak_scale15": {
+      "unique_positive_ev_incumbent_stock_dates": 1750,
+      "unique_native_add_stock_dates": 1750,
+      "categories": {
+        "B": 1543,
+        "D": 1543,
+        "C": 1704,
+        "E": 145,
+        "F": 14
+      },
+      "exact_overlap": {
+        "B+D": 45,
+        "B+C+D": 1355,
+        "B+C+D+E": 131,
+        "C": 194,
+        "B+C+D+F": 8,
+        "B+C+D+E+F": 4,
+        "C+E": 10,
+        "C+F": 2,
+        "none": 1
+      },
+      "evidence_failed_fields": {
+        "position_profitable": 732,
+        "positive_net_ev": 303,
+        "matured_trades": 1322
+      },
+      "other_exhausts": 1339,
+      "standalone_exceeds": 362,
+      "queue_risk_exhausts": 3,
+      "evidence_valid_adds": 207,
+      "evidence_valid_other_blocked": 139,
+      "evidence_valid_other_blocked_cash_sufficient": 130,
+      "other_risk_alone_at_least_2pct": 1621,
+      "aggregate_denies_any_standalone_safe_increment": 139,
+      "settlement_alone_covers_cash_shortfall": 29,
+      "insufficient_cash_even_including_receivables": 116,
+      "evidence_15_pass": 207,
+      "evidence_20_pass": 1,
+      "other_risk_min": 0,
+      "other_risk_median": 0.05826187409852723,
+      "other_risk_max": 0.13405663142959948
+    },
+    "weak_scale20": {
+      "unique_positive_ev_incumbent_stock_dates": 1750,
+      "unique_native_add_stock_dates": 1750,
+      "categories": {
+        "B": 1749,
+        "D": 1749,
+        "C": 1714,
+        "F": 19,
+        "E": 200
+      },
+      "exact_overlap": {
+        "B+D": 36,
+        "B+C+D": 1501,
+        "B+C+D+F": 12,
+        "B+C+D+E": 193,
+        "C": 1,
+        "B+C+D+E+F": 7
+      },
+      "evidence_failed_fields": {
+        "position_profitable": 732,
+        "positive_net_ev": 303,
+        "matured_trades": 1745,
+        "forward_folds": 1011
+      },
+      "other_exhausts": 870,
+      "standalone_exceeds": 843,
+      "queue_risk_exhausts": 1,
+      "evidence_valid_adds": 1,
+      "evidence_valid_other_blocked": 0,
+      "evidence_valid_other_blocked_cash_sufficient": 0,
+      "other_risk_alone_at_least_2pct": 1621,
+      "aggregate_denies_any_standalone_safe_increment": 104,
+      "settlement_alone_covers_cash_shortfall": 28,
+      "insufficient_cash_even_including_receivables": 172,
+      "evidence_15_pass": 207,
+      "evidence_20_pass": 1,
+      "other_risk_min": 0,
+      "other_risk_median": 0.05826187409852723,
+      "other_risk_max": 0.13405663142959948
+    },
+    "misnull_scale15": {
+      "unique_positive_ev_incumbent_stock_dates": 17309,
+      "unique_native_add_stock_dates": 17309,
+      "categories": {
+        "B": 12217,
+        "C": 17305,
+        "D": 12217,
+        "E": 5074,
+        "F": 2181
+      },
+      "exact_overlap": {
+        "B+C+D": 7478,
+        "B+C+D+E": 3140,
+        "B+C+D+E+F": 525,
+        "B+C+D+F": 1070,
+        "C+E": 1193,
+        "C": 3313,
+        "C+F": 370,
+        "C+E+F": 216,
+        "B+D": 4
+      },
+      "evidence_failed_fields": {
+        "position_profitable": 9365,
+        "positive_net_ev": 4558,
+        "matured_trades": 2666
+      },
+      "other_exhausts": 13341,
+      "standalone_exceeds": 3963,
+      "queue_risk_exhausts": 1,
+      "evidence_valid_adds": 5092,
+      "evidence_valid_other_blocked": 3808,
+      "evidence_valid_other_blocked_cash_sufficient": 2509,
+      "other_risk_alone_at_least_2pct": 17266,
+      "aggregate_denies_any_standalone_safe_increment": 3807,
+      "settlement_alone_covers_cash_shortfall": 2745,
+      "insufficient_cash_even_including_receivables": 2329,
+      "evidence_15_pass": 5092,
+      "evidence_20_pass": 2456,
+      "other_risk_min": 0.006261799620098268,
+      "other_risk_median": 0.07962274873401291,
+      "other_risk_max": 0.15247196059020143
+    },
+    "misnull_scale20": {
+      "unique_positive_ev_incumbent_stock_dates": 17309,
+      "unique_native_add_stock_dates": 17309,
+      "categories": {
+        "B": 14853,
+        "C": 17306,
+        "D": 14853,
+        "E": 6792,
+        "F": 2396
+      },
+      "exact_overlap": {
+        "B+C+D": 7842,
+        "B+C+D+E": 4924,
+        "B+C+D+E+F": 986,
+        "B+C+D+F": 1098,
+        "C+E": 731,
+        "C": 1413,
+        "C+F": 161,
+        "C+E+F": 151,
+        "B+D": 3
+      },
+      "evidence_failed_fields": {
+        "position_profitable": 9365,
+        "positive_net_ev": 4558,
+        "matured_trades": 4364,
+        "forward_folds": 11140
+      },
+      "other_exhausts": 8997,
+      "standalone_exceeds": 8309,
+      "queue_risk_exhausts": 0,
+      "evidence_valid_adds": 2456,
+      "evidence_valid_other_blocked": 1220,
+      "evidence_valid_other_blocked_cash_sufficient": 614,
+      "other_risk_alone_at_least_2pct": 17266,
+      "aggregate_denies_any_standalone_safe_increment": 2465,
+      "settlement_alone_covers_cash_shortfall": 3137,
+      "insufficient_cash_even_including_receivables": 3655,
+      "evidence_15_pass": 5092,
+      "evidence_20_pass": 2456,
+      "other_risk_min": 0.006261799620098268,
+      "other_risk_median": 0.07962274873401291,
+      "other_risk_max": 0.15247196059020143
+    }
+  },
+  "all_variant_observations": {
+    "unique_positive_ev_incumbent_stock_dates": 72110,
+    "unique_native_add_stock_dates": 72110,
+    "categories": {
+      "B": 46177,
+      "C": 72021,
+      "D": 46177,
+      "F": 9012,
+      "E": 23728
+    },
+    "exact_overlap": {
+      "B+C+D": 26906,
+      "B+C+D+F": 3512,
+      "B+C+D+E": 13237,
+      "B+C+D+E+F": 2434,
+      "C": 15956,
+      "C+E": 6910,
+      "C+F": 1919,
+      "C+E+F": 1147,
+      "B+D": 88,
+      "none": 1
+    },
+    "evidence_failed_fields": {
+      "position_profitable": 27076,
+      "positive_net_ev": 10294,
+      "matured_trades": 17265,
+      "forward_folds": 20777
+    },
+    "other_exhausts": 45611,
+    "standalone_exceeds": 26405,
+    "queue_risk_exhausts": 5,
+    "evidence_valid_adds": 25933,
+    "evidence_valid_other_blocked": 16879,
+    "evidence_valid_other_blocked_cash_sufficient": 10296
+  },
+  "deduplicated_across_targets": {
+    "stock_dates": 36055,
+    "category_union_counts": {
+      "C": 36016,
+      "D": 26894,
+      "B": 26894,
+      "F": 4722,
+      "E": 13645
+    }
+  },
+  "cases": [
+    {
+      "seed": 1111,
+      "quality": "strong",
+      "variant": "scale15",
+      "date": "2030-06-26",
+      "ticker": "SYN02",
+      "native_action": "ADD",
+      "net_ev": 0.019329935663832218,
+      "current": 0.10020106152545674,
+      "requested": 0.15,
+      "evidence": {
+        "matured_trades": 109,
+        "forward_folds": 1,
+        "positive_net_ev": true,
+        "historical_mdd": 0.006642044885280973,
+        "current_signal_confirmed": true,
+        "position_profitable": true,
+        "independent_confirmation": false
+      },
+      "evidence_failed_fields": [],
+      "standalone_target_loss": 0.018449999999999998,
+      "other_equity_risk": 0.08791088855412514,
+      "reserved_loss": 0.0,
+      "per_dollar_loss": 0.123,
+      "other_exhausts": true,
+      "standalone_exceeds": false,
+      "queue_risk_exhausts": false,
+      "categories": [
+        "C"
+      ],
+      "concentration_cap": 0.15,
+      "nav": 156248.11335293378,
+      "cash": 14629.426808726572,
+      "unsettled": [
+        [
+          126,
+          16326.829099712937
+        ]
+      ],
+      "reservation": {
+        "requested": 0.15,
+        "current": 0.10020106152545674,
+        "cap_target": 0.15,
+        "approved": 0.10020106152545674,
+        "cap_rejected": false,
+        "risk_rejected": true
+      },
+      "reservation_detail": {
+        "other_equity_risk": 0.08791088855412514,
+        "reserved_loss": 0.0,
+        "per_dollar_loss": 0.12299999999999989,
+        "risk_cap": 0.0,
+        "remaining_cash_weight": 0.09362946210865006,
+        "initial_cash_weight": 0.09362946210865006,
+        "desired": 0.0,
+        "funded": 0.0,
+        "unsettled_weight": 0.10449296794281182,
+        "other_positions": {
+          "SYN07": {
+            "weight": 0.06504859289380766,
+            "loss": 0.24299999999999988
+          },
+          "SYN19": {
+            "weight": 0.0018027917155572293,
+            "loss": 0.24299999999999988
+          },
+          "SYN15": {
+            "weight": 0.08509257524260694,
+            "loss": 0.24299999999999988
+          },
+          "SYN14": {
+            "weight": 0.10224488291998132,
+            "loss": 0.12299999999999989
+          },
+          "SYN09": {
+            "weight": 0.049501839943454085,
+            "loss": 0.06299999999999989
+          },
+          "SYN12": {
+            "weight": 0.10402412491772375,
+            "loss": 0.03299999999999989
+          },
+          "SYN23": {
+            "weight": 0.004792586911043437,
+            "loss": 0.24299999999999988
+          },
+          "SYN20": {
+            "weight": 0.09815767393378173,
+            "loss": 0.03299999999999989
+          },
+          "SYN11": {
+            "weight": 0.08356579158691095,
+            "loss": 0.24299999999999988
+          },
+          "SYN05": {
+            "weight": 0.10108550484437027,
+            "loss": 0.06299999999999989
+          },
+          "SYN22": {
+            "weight": 0.006360143513844098,
+            "loss": 0.12299999999999989
+          }
+        }
+      },
+      "next_open_risk": null,
+      "next_open_fills": [],
+      "diagnostic_forward_return_to_next_native_exit": 0.15010300973733925,
+      "diagnostic_next_exit": "2030-07-26",
+      "diagnostic_whole_trade_realized_return": 0.20568692270664585,
+      "queue_rank": 1,
+      "higher_ranked_funded_requests": [],
+      "aggregate_risk_alone_exhausted": true,
+      "evidence_cap_15_pass": true,
+      "evidence_cap_20_pass": false,
+      "aggregate_denies_any_increment": true,
+      "E_settlement_alone_would_cover_shortfall": false,
+      "E_insufficient_even_including_receivables": false
+    },
+    {
+      "seed": 1101,
+      "quality": "strong",
+      "variant": "scale15",
+      "date": "2030-05-28",
+      "ticker": "SYN18",
+      "native_action": "ADD",
+      "net_ev": 0.01550249490590069,
+      "current": 0.0945484409362769,
+      "requested": 0.15,
+      "evidence": {
+        "matured_trades": 72,
+        "forward_folds": 1,
+        "positive_net_ev": true,
+        "historical_mdd": 0.005474773889097895,
+        "current_signal_confirmed": true,
+        "position_profitable": true,
+        "independent_confirmation": false
+      },
+      "evidence_failed_fields": [],
+      "standalone_target_loss": 0.018449999999999998,
+      "other_equity_risk": 0.05715586179902655,
+      "reserved_loss": 0.0,
+      "per_dollar_loss": 0.123,
+      "other_exhausts": true,
+      "standalone_exceeds": false,
+      "queue_risk_exhausts": false,
+      "categories": [
+        "C"
+      ],
+      "concentration_cap": 0.15,
+      "nav": 142586.71848370487,
+      "cash": 72738.43911928902,
+      "unsettled": [],
+      "reservation": {
+        "requested": 0.15,
+        "current": 0.0945484409362769,
+        "cap_target": 0.15,
+        "approved": 0.0945484409362769,
+        "cap_rejected": false,
+        "risk_rejected": true
+      },
+      "reservation_detail": {
+        "other_equity_risk": 0.05715586179902655,
+        "reserved_loss": 0.0,
+        "per_dollar_loss": 0.12299999999999989,
+        "risk_cap": 0.0,
+        "remaining_cash_weight": 0.5101347439144672,
+        "initial_cash_weight": 0.5101347439144672,
+        "desired": 0.0,
+        "funded": 0.0,
+        "unsettled_weight": 0.0,
+        "other_positions": {
+          "SYN15": {
+            "weight": 0.0973948091702437,
+            "loss": 0.24299999999999988
+          },
+          "SYN05": {
+            "weight": 0.09513143630479956,
+            "loss": 0.06299999999999989
+          },
+          "SYN04": {
+            "weight": 0.10372602736846982,
+            "loss": 0.03299999999999989
+          },
+          "SYN11": {
+            "weight": 0.016749849861626503,
+            "loss": 0.24299999999999988
+          },
+          "SYN07": {
+            "weight": 0.0823146924441163,
+            "loss": 0.24299999999999988
+          }
+        }
+      },
+      "next_open_risk": null,
+      "next_open_fills": [],
+      "diagnostic_forward_return_to_next_native_exit": 0.0432659061491627,
+      "diagnostic_next_exit": "2030-06-18",
+      "diagnostic_whole_trade_realized_return": 0.17728381439597551,
+      "queue_rank": 1,
+      "higher_ranked_funded_requests": [],
+      "aggregate_risk_alone_exhausted": true,
+      "evidence_cap_15_pass": true,
+      "evidence_cap_20_pass": false,
+      "aggregate_denies_any_increment": true,
+      "E_settlement_alone_would_cover_shortfall": false,
+      "E_insufficient_even_including_receivables": false
+    },
+    {
+      "seed": 1110,
+      "quality": "strong",
+      "variant": "scale15",
+      "date": "2030-07-03",
+      "ticker": "SYN01",
+      "native_action": "ADD",
+      "net_ev": 0.014847154316420752,
+      "current": 0.10314886231718032,
+      "requested": 0.15,
+      "evidence": {
+        "matured_trades": 109,
+        "forward_folds": 2,
+        "positive_net_ev": true,
+        "historical_mdd": 0.003010863389855123,
+        "current_signal_confirmed": true,
+        "position_profitable": true,
+        "independent_confirmation": false
+      },
+      "evidence_failed_fields": [],
+      "standalone_target_loss": 0.00945,
+      "other_equity_risk": 0.025545944728027063,
+      "reserved_loss": 0.0,
+      "per_dollar_loss": 0.063,
+      "other_exhausts": true,
+      "standalone_exceeds": false,
+      "queue_risk_exhausts": false,
+      "categories": [
+        "C"
+      ],
+      "concentration_cap": 0.2,
+      "nav": 167790.4496718289,
+      "cash": 91966.95069244438,
+      "unsettled": [
+        [
+          131,
+          17458.861015254446
+        ]
+      ],
+      "reservation": {
+        "requested": 0.15,
+        "current": 0.10314886231718032,
+        "cap_target": 0.15,
+        "approved": 0.10314886231718032,
+        "cap_rejected": false,
+        "risk_rejected": true
+      },
+      "reservation_detail": {
+        "other_equity_risk": 0.025545944728027063,
+        "reserved_loss": 0.0,
+        "per_dollar_loss": 0.06299999999999989,
+        "risk_cap": 0.0,
+        "remaining_cash_weight": 0.5481059909685977,
+        "initial_cash_weight": 0.5481059909685977,
+        "desired": 0.0,
+        "funded": 0.0,
+        "unsettled_weight": 0.10405157772329217,
+        "other_positions": {
+          "SYN05": {
+            "weight": 0.11148704377944123,
+            "loss": 0.06299999999999989
+          },
+          "SYN22": {
+            "weight": 0.10194020654187078,
+            "loss": 0.12299999999999989
+          },
+          "SYN03": {
+            "weight": 0.01781548640757665,
+            "loss": 0.24299999999999988
+          },
+          "SYN06": {
+            "weight": 0.013450832262041157,
+            "loss": 0.12299999999999989
+          }
+        }
+      },
+      "next_open_risk": null,
+      "next_open_fills": [],
+      "diagnostic_forward_return_to_next_native_exit": 0.5213665206659781,
+      "diagnostic_next_exit": "2030-08-21",
+      "diagnostic_whole_trade_realized_return": 0.6347508453329812,
+      "queue_rank": 1,
+      "higher_ranked_funded_requests": [],
+      "aggregate_risk_alone_exhausted": true,
+      "evidence_cap_15_pass": true,
+      "evidence_cap_20_pass": true,
+      "aggregate_denies_any_increment": true,
+      "E_settlement_alone_would_cover_shortfall": false,
+      "E_insufficient_even_including_receivables": false
+    },
+    {
+      "seed": 1101,
+      "quality": "strong",
+      "variant": "scale15",
+      "date": "2030-08-08",
+      "ticker": "SYN13",
+      "native_action": "ADD",
+      "net_ev": 0.01468204656690942,
+      "current": 0.09685690983427384,
+      "requested": 0.15,
+      "evidence": {
+        "matured_trades": 116,
+        "forward_folds": 2,
+        "positive_net_ev": true,
+        "historical_mdd": 0.014187340568625029,
+        "current_signal_confirmed": true,
+        "position_profitable": true,
+        "independent_confirmation": false
+      },
+      "evidence_failed_fields": [],
+      "standalone_target_loss": 0.00945,
+      "other_equity_risk": 0.05144088920735381,
+      "reserved_loss": 0.0,
+      "per_dollar_loss": 0.063,
+      "other_exhausts": true,
+      "standalone_exceeds": false,
+      "queue_risk_exhausts": false,
+      "categories": [
+        "C"
+      ],
+      "concentration_cap": 0.2,
+      "nav": 170229.22162704094,
+      "cash": 68997.98506429436,
+      "unsettled": [
+        [
+          157,
+          38756.58668116077
+        ]
+      ],
+      "reservation": {
+        "requested": 0.15,
+        "current": 0.09685690983427384,
+        "cap_target": 0.15,
+        "approved": 0.09685690983427384,
+        "cap_rejected": false,
+        "risk_rejected": true
+      },
+      "reservation_detail": {
+        "other_equity_risk": 0.05144088920735381,
+        "reserved_loss": 0.0,
+        "per_dollar_loss": 0.06299999999999989,
+        "risk_cap": 0.0,
+        "remaining_cash_weight": 0.40532397672277215,
+        "initial_cash_weight": 0.40532397672277215,
+        "desired": 0.0,
+        "funded": 0.0,
+        "unsettled_weight": 0.22767293600198357,
+        "other_positions": {
+          "SYN22": {
+            "weight": 0.07669269184158786,
+            "loss": 0.12299999999999989
+          },
+          "SYN17": {
+            "weight": 0.02771841800874681,
+            "loss": 0.06299999999999989
+          },
+          "SYN07": {
+            "weight": 0.08833315870261374,
+            "loss": 0.24299999999999988
+          },
+          "SYN09": {
+            "weight": 6.745940321203725e-05,
+            "loss": 0.06299999999999989
+          },
+          "SYN16": {
+            "weight": 2.426459944197529e-07,
+            "loss": 0.03299999999999989
+          },
+          "SYN23": {
+            "weight": 0.07733420683881552,
+            "loss": 0.24299999999999988
+          }
+        }
+      },
+      "next_open_risk": null,
+      "next_open_fills": [],
+      "diagnostic_forward_return_to_next_native_exit": 0.04706003024273975,
+      "diagnostic_next_exit": "2030-09-09",
+      "diagnostic_whole_trade_realized_return": 0.1458531710518598,
+      "queue_rank": 1,
+      "higher_ranked_funded_requests": [],
+      "aggregate_risk_alone_exhausted": true,
+      "evidence_cap_15_pass": true,
+      "evidence_cap_20_pass": true,
+      "aggregate_denies_any_increment": true,
+      "E_settlement_alone_would_cover_shortfall": false,
+      "E_insufficient_even_including_receivables": false
+    },
+    {
+      "seed": 1106,
+      "quality": "strong",
+      "variant": "scale15",
+      "date": "2030-09-20",
+      "ticker": "SYN04",
+      "native_action": "ADD",
+      "net_ev": 0.014307708387548121,
+      "current": 0.10883722399233543,
+      "requested": 0.15,
+      "evidence": {
+        "matured_trades": 148,
+        "forward_folds": 2,
+        "positive_net_ev": true,
+        "historical_mdd": 0.010166447951965307,
+        "current_signal_confirmed": true,
+        "position_profitable": true,
+        "independent_confirmation": false
+      },
+      "evidence_failed_fields": [],
+      "standalone_target_loss": 0.00495,
+      "other_equity_risk": 0.07089190515247241,
+      "reserved_loss": 0.0,
+      "per_dollar_loss": 0.033,
+      "other_exhausts": true,
+      "standalone_exceeds": false,
+      "queue_risk_exhausts": false,
+      "categories": [
+        "C"
+      ],
+      "concentration_cap": 0.2,
+      "nav": 193414.17544015456,
+      "cash": 70315.730581469,
+      "unsettled": [],
+      "reservation": {
+        "requested": 0.15,
+        "current": 0.10883722399233543,
+        "cap_target": 0.15,
+        "approved": 0.10883722399233543,
+        "cap_rejected": false,
+        "risk_rejected": true
+      },
+      "reservation_detail": {
+        "other_equity_risk": 0.07089190515247241,
+        "reserved_loss": 0.0,
+        "per_dollar_loss": 0.03299999999999989,
+        "risk_cap": 0.0,
+        "remaining_cash_weight": 0.36355003670982644,
+        "initial_cash_weight": 0.36355003670982644,
+        "desired": 0.0,
+        "funded": 0.0,
+        "unsettled_weight": 0.0,
+        "other_positions": {
+          "SYN23": {
+            "weight": 0.06027732885309795,
+            "loss": 0.24299999999999988
+          },
+          "SYN13": {
+            "weight": 0.09656378810562403,
+            "loss": 0.06299999999999989
+          },
+          "SYN12": {
+            "weight": 0.10443611156021802,
+            "loss": 0.03299999999999989
+          },
+          "SYN15": {
+            "weight": 0.08398110135644424,
+            "loss": 0.24299999999999988
+          },
+          "SYN07": {
+            "weight": 0.08232704714332008,
+            "loss": 0.24299999999999988
+          },
+          "SYN05": {
+            "weight": 0.10002736227913384,
+            "loss": 0.06299999999999989
+          }
+        }
+      },
+      "next_open_risk": null,
+      "next_open_fills": [],
+      "diagnostic_forward_return_to_next_native_exit": 0.04916666080076637,
+      "diagnostic_next_exit": "2030-10-14",
+      "diagnostic_whole_trade_realized_return": 0.1850805306492692,
+      "queue_rank": 1,
+      "higher_ranked_funded_requests": [],
+      "aggregate_risk_alone_exhausted": true,
+      "evidence_cap_15_pass": true,
+      "evidence_cap_20_pass": true,
+      "aggregate_denies_any_increment": true,
+      "E_settlement_alone_would_cover_shortfall": false,
+      "E_insufficient_even_including_receivables": false
+    },
+    {
+      "seed": 1104,
+      "quality": "strong",
+      "variant": "scale15",
+      "date": "2030-10-24",
+      "ticker": "SYN00",
+      "native_action": "ADD",
+      "net_ev": 0.013771752927700932,
+      "current": 0.10262416441285384,
+      "requested": 0.15,
+      "evidence": {
+        "matured_trades": 153,
+        "forward_folds": 3,
+        "positive_net_ev": true,
+        "historical_mdd": 0.006335362139981315,
+        "current_signal_confirmed": true,
+        "position_profitable": true,
+        "independent_confirmation": false
+      },
+      "evidence_failed_fields": [],
+      "standalone_target_loss": 0.00495,
+      "other_equity_risk": 0.08926902864530509,
+      "reserved_loss": 0.0,
+      "per_dollar_loss": 0.033,
+      "other_exhausts": true,
+      "standalone_exceeds": false,
+      "queue_risk_exhausts": false,
+      "categories": [
+        "C"
+      ],
+      "concentration_cap": 0.2,
+      "nav": 242224.09332742426,
+      "cash": 58460.41155352225,
+      "unsettled": [],
+      "reservation": {
+        "requested": 0.15,
+        "current": 0.10262416441285384,
+        "cap_target": 0.15,
+        "approved": 0.10262416441285384,
+        "cap_rejected": false,
+        "risk_rejected": true
+      },
+      "reservation_detail": {
+        "other_equity_risk": 0.08926902864530509,
+        "reserved_loss": 0.0,
+        "per_dollar_loss": 0.03299999999999989,
+        "risk_cap": 0.0,
+        "remaining_cash_weight": 0.24134845857178588,
+        "initial_cash_weight": 0.24134845857178588,
+        "desired": 0.0,
+        "funded": 0.0,
+        "unsettled_weight": 0.0,
+        "other_positions": {
+          "SYN21": {
+            "weight": 0.10773543435115726,
+            "loss": 0.06299999999999989
+          },
+          "SYN05": {
+            "weight": 0.10398911210466294,
+            "loss": 0.06299999999999989
+          },
+          "SYN13": {
+            "weight": 0.08239589452364386,
+            "loss": 0.06299999999999989
+          },
+          "SYN17": {
+            "weight": 0.09557746996179911,
+            "loss": 0.06299999999999989
+          },
+          "SYN11": {
+            "weight": 0.0823928352152325,
+            "loss": 0.24299999999999988
+          },
+          "SYN15": {
+            "weight": 0.01927785656340133,
+            "loss": 0.24299999999999988
+          },
+          "SYN07": {
+            "weight": 0.08234408185134695,
+            "loss": 0.24299999999999988
+          },
+          "SYN19": {
+            "weight": 0.08231469244411628,
+            "loss": 0.24299999999999988
+          }
+        }
+      },
+      "next_open_risk": null,
+      "next_open_fills": [],
+      "diagnostic_forward_return_to_next_native_exit": 0.09753434224693214,
+      "diagnostic_next_exit": "2030-11-14",
+      "diagnostic_whole_trade_realized_return": 0.16805024716522568,
+      "queue_rank": 1,
+      "higher_ranked_funded_requests": [],
+      "aggregate_risk_alone_exhausted": true,
+      "evidence_cap_15_pass": true,
+      "evidence_cap_20_pass": true,
+      "aggregate_denies_any_increment": true,
+      "E_settlement_alone_would_cover_shortfall": false,
+      "E_insufficient_even_including_receivables": false
+    },
+    {
+      "seed": 1104,
+      "quality": "strong",
+      "variant": "scale15",
+      "date": "2030-07-30",
+      "ticker": "SYN12",
+      "native_action": "ADD",
+      "net_ev": 0.013205809794695208,
+      "current": 0.1000513297123947,
+      "requested": 0.15,
+      "evidence": {
+        "matured_trades": 102,
+        "forward_folds": 2,
+        "positive_net_ev": true,
+        "historical_mdd": 0.00453197457408383,
+        "current_signal_confirmed": true,
+        "position_profitable": true,
+        "independent_confirmation": false
+      },
+      "evidence_failed_fields": [],
+      "standalone_target_loss": 0.00495,
+      "other_equity_risk": 0.09628133016815081,
+      "reserved_loss": 0.0,
+      "per_dollar_loss": 0.033,
+      "other_exhausts": true,
+      "standalone_exceeds": false,
+      "queue_risk_exhausts": false,
+      "categories": [
+        "C"
+      ],
+      "concentration_cap": 0.2,
+      "nav": 185118.70733287584,
+      "cash": 18420.624076276687,
+      "unsettled": [],
+      "reservation": {
+        "requested": 0.15,
+        "current": 0.1000513297123947,
+        "cap_target": 0.15,
+        "approved": 0.1000513297123947,
+        "cap_rejected": false,
+        "risk_rejected": true
+      },
+      "reservation_detail": {
+        "other_equity_risk": 0.09628133016815081,
+        "reserved_loss": 0.0,
+        "per_dollar_loss": 0.03299999999999989,
+        "risk_cap": 0.0,
+        "remaining_cash_weight": 0.09950709110750855,
+        "initial_cash_weight": 0.09950709110750855,
+        "desired": 0.0,
+        "funded": 0.0,
+        "unsettled_weight": 0.0,
+        "other_positions": {
+          "SYN08": {
+            "weight": 0.021469721119575357,
+            "loss": 0.03299999999999989
+          },
+          "SYN18": {
+            "weight": 0.11055778998994766,
+            "loss": 0.12299999999999989
+          },
+          "SYN19": {
+            "weight": 0.0029638449470683875,
+            "loss": 0.24299999999999988
+          },
+          "SYN22": {
+            "weight": 0.10016111547052582,
+            "loss": 0.12299999999999989
+          },
+          "SYN07": {
+            "weight": 0.0035235824993325535,
+            "loss": 0.24299999999999988
+          },
+          "SYN17": {
+            "weight": 0.10168439183293146,
+            "loss": 0.06299999999999989
+          },
+          "SYN14": {
+            "weight": 0.099113965796448,
+            "loss": 0.12299999999999989
+          },
+          "SYN23": {
+            "weight": 0.08208577681812128,
+            "loss": 0.24299999999999988
+          },
+          "SYN09": {
+            "weight": 0.10040707213362723,
+            "loss": 0.06299999999999989
+          },
+          "SYN03": {
+            "weight": 0.08246991822637309,
+            "loss": 0.24299999999999988
+          },
+          "SYN16": {
+            "weight": 0.09600440034614581,
+            "loss": 0.03299999999999989
+          }
+        }
+      },
+      "next_open_risk": null,
+      "next_open_fills": [],
+      "diagnostic_forward_return_to_next_native_exit": 0.3997064221645812,
+      "diagnostic_next_exit": "2030-09-10",
+      "diagnostic_whole_trade_realized_return": 0.4473169999529649,
+      "queue_rank": 1,
+      "higher_ranked_funded_requests": [],
+      "aggregate_risk_alone_exhausted": true,
+      "evidence_cap_15_pass": true,
+      "evidence_cap_20_pass": true,
+      "aggregate_denies_any_increment": true,
+      "E_settlement_alone_would_cover_shortfall": false,
+      "E_insufficient_even_including_receivables": false
+    },
+    {
+      "seed": 1103,
+      "quality": "strong",
+      "variant": "scale15",
+      "date": "2030-04-11",
+      "ticker": "SYN14",
+      "native_action": "ADD",
+      "net_ev": 0.01310761199364344,
+      "current": 0.0988962600697824,
+      "requested": 0.15,
+      "evidence": {
+        "matured_trades": 57,
+        "forward_folds": 1,
+        "positive_net_ev": true,
+        "historical_mdd": 0.005345423578267727,
+        "current_signal_confirmed": true,
+        "position_profitable": true,
+        "independent_confirmation": false
+      },
+      "evidence_failed_fields": [],
+      "standalone_target_loss": 0.018449999999999998,
+      "other_equity_risk": 0.0772248846365396,
+      "reserved_loss": 0.0,
+      "per_dollar_loss": 0.123,
+      "other_exhausts": true,
+      "standalone_exceeds": false,
+      "queue_risk_exhausts": false,
+      "categories": [
+        "C"
+      ],
+      "concentration_cap": 0.15,
+      "nav": 130926.09983113268,
+      "cash": 13187.15812332163,
+      "unsettled": [
+        [
+          72,
+          2652.2488539991623
+        ]
+      ],
+      "reservation": {
+        "requested": 0.15,
+        "current": 0.0988962600697824,
+        "cap_target": 0.15,
+        "approved": 0.0988962600697824,
+        "cap_rejected": false,
+        "risk_rejected": true
+      },
+      "reservation_detail": {
+        "other_equity_risk": 0.0772248846365396,
+        "reserved_loss": 0.0,
+        "per_dollar_loss": 0.12299999999999989,
+        "risk_cap": 0.0,
+        "remaining_cash_weight": 0.10072214890942531,
+        "initial_cash_weight": 0.10072214890942531,
+        "desired": 0.0,
+        "funded": 0.0,
+        "unsettled_weight": 0.020257602245999914,
+        "other_positions": {
+          "SYN02": {
+            "weight": 0.10081763631807163,
+            "loss": 0.12299999999999989
+          },
+          "SYN22": {
+            "weight": 0.10309403301211174,
+            "loss": 0.12299999999999989
+          },
+          "SYN09": {
+            "weight": 0.006852787460580477,
+            "loss": 0.06299999999999989
+          },
+          "SYN19": {
+            "weight": 0.01684265442003521,
+            "loss": 0.24299999999999988
+          },
+          "SYN13": {
+            "weight": 0.08204825096307261,
+            "loss": 0.06299999999999989
+          },
+          "SYN12": {
+            "weight": 0.08116200593408755,
+            "loss": 0.03299999999999989
+          },
+          "SYN06": {
+            "weight": 0.10100456511190001,
+            "loss": 0.12299999999999989
+          },
+          "SYN04": {
+            "weight": 0.09882324175058364,
+            "loss": 0.03299999999999989
+          },
+          "SYN03": {
+            "weight": 0.0030948044987747095,
+            "loss": 0.24299999999999988
+          },
+          "SYN11": {
+            "weight": 0.08183063991202079,
+            "loss": 0.24299999999999988
+          },
+          "SYN20": {
+            "weight": 0.09919830664638546,
+            "loss": 0.03299999999999989
+          },
+          "SYN00": {
+            "weight": 0.005355062747168641,
+            "loss": 0.03299999999999989
+          }
+        }
+      },
+      "next_open_risk": null,
+      "next_open_fills": [],
+      "diagnostic_forward_return_to_next_native_exit": 0.03410809797624159,
+      "diagnostic_next_exit": "2030-05-03",
+      "diagnostic_whole_trade_realized_return": 0.10095640434244887,
+      "queue_rank": 1,
+      "higher_ranked_funded_requests": [],
+      "aggregate_risk_alone_exhausted": true,
+      "evidence_cap_15_pass": true,
+      "evidence_cap_20_pass": false,
+      "aggregate_denies_any_increment": true,
+      "E_settlement_alone_would_cover_shortfall": false,
+      "E_insufficient_even_including_receivables": false
+    }
+  ],
+  "corrected_strong_aggregates": [
+    {
+      "variant": "ev",
+      "n": 12,
+      "cagr": 1.454873600696444,
+      "mdd": 0.010063179507242318,
+      "exposure": 0.7899475500242658,
+      "turnover": 33.4332518167554,
+      "scaled_fills": 0,
+      "full_target_fills": 0,
+      "max_scaled_weight": 0
+    },
+    {
+      "variant": "scale15",
+      "n": 12,
+      "cagr": 1.7975593495695394,
+      "mdd": 0.010079076890558591,
+      "exposure": 0.8385463369812515,
+      "turnover": 33.15836895251975,
+      "scaled_fills": 1019,
+      "full_target_fills": 776,
+      "max_scaled_weight": 0.15000000000000005
+    },
+    {
+      "variant": "scale20",
+      "n": 12,
+      "cagr": 1.8452043426760827,
+      "mdd": 0.010226602606611929,
+      "exposure": 0.8442282408906956,
+      "turnover": 32.82255165643009,
+      "scaled_fills": 988,
+      "full_target_fills": 204,
+      "max_scaled_weight": 0.20000000000000007
+    }
+  ],
+  "limitations": [
+    "Synthetic assets only, not historical stocks or native model alpha.",
+    "ScaleEvidence is endogenous pooled funded exits, not verified independent trades.",
+    "Categories are simultaneous counterfactual constraints on target; evidence failure and evidence-implied concentration cap overlap.",
+    "A counted over positive-EV incumbents; B-F over native ADDs; per-group keys are seed/quality/variant/date/ticker.",
+    "F means prior ranked commitments reduce available cash; no claim alternate queue improves outcomes.",
+    "Future return used only for post-run case selection, never callbacks.",
+    "Corrected rerun restricted to strong quality; weak and misnull only audited, not retuned."
+  ],
+  "native_incumbent_action_counts": {
+    "strong_scale15_ADD": 16996,
+    "strong_scale15_HOLD": 10047,
+    "strong_scale15_EXIT": 2445,
+    "strong_scale20_ADD": 16996,
+    "strong_scale20_HOLD": 10047,
+    "strong_scale20_EXIT": 2445,
+    "weak_scale15_ADD": 1750,
+    "weak_scale15_HOLD": 16023,
+    "weak_scale15_EXIT": 495,
+    "weak_scale20_ADD": 1750,
+    "weak_scale20_HOLD": 16023,
+    "weak_scale20_EXIT": 495,
+    "misnull_scale15_ADD": 17309,
+    "misnull_scale15_HOLD": 10213,
+    "misnull_scale15_EXIT": 2577,
+    "misnull_scale20_ADD": 17309,
+    "misnull_scale20_HOLD": 10213,
+    "misnull_scale20_EXIT": 2577
+  },
+  "evidence_record_dust_diagnostic": [
+    {
+      "seed": 1101,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 196,
+      "tiny_exit_records": 1
+    },
+    {
+      "seed": 1101,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 196,
+      "tiny_exit_records": 1
+    },
+    {
+      "seed": 1101,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 38,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1101,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 38,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1101,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 217,
+      "tiny_exit_records": 3
+    },
+    {
+      "seed": 1101,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 217,
+      "tiny_exit_records": 3
+    },
+    {
+      "seed": 1102,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 203,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1102,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 203,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1102,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 36,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1102,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 36,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1102,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 202,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1102,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 202,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1103,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 200,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1103,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 200,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1103,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 50,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1103,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 50,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1103,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 221,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1103,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 221,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1104,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 190,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1104,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 190,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1104,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 39,
+      "tiny_exit_records": 1
+    },
+    {
+      "seed": 1104,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 39,
+      "tiny_exit_records": 1
+    },
+    {
+      "seed": 1104,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 221,
+      "tiny_exit_records": 4
+    },
+    {
+      "seed": 1104,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 221,
+      "tiny_exit_records": 4
+    },
+    {
+      "seed": 1105,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 201,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1105,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 201,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1105,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 42,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1105,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 42,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1105,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 200,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1105,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 200,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1106,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 198,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1106,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 198,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1106,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 41,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1106,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 41,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1106,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 218,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1106,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 218,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1107,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 222,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1107,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 222,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1107,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 37,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1107,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 37,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1107,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 217,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1107,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 217,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1108,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 201,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1108,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 201,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1108,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 46,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1108,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 46,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1108,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 205,
+      "tiny_exit_records": 1
+    },
+    {
+      "seed": 1108,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 205,
+      "tiny_exit_records": 1
+    },
+    {
+      "seed": 1109,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 202,
+      "tiny_exit_records": 1
+    },
+    {
+      "seed": 1109,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 202,
+      "tiny_exit_records": 1
+    },
+    {
+      "seed": 1109,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 45,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1109,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 45,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1109,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 233,
+      "tiny_exit_records": 3
+    },
+    {
+      "seed": 1109,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 233,
+      "tiny_exit_records": 3
+    },
+    {
+      "seed": 1110,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 208,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1110,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 208,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1110,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 37,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1110,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 37,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1110,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 203,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1110,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 203,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1111,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 209,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1111,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 209,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1111,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 46,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1111,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 46,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1111,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 195,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1111,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 195,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1112,
+      "quality": "strong",
+      "variant": "scale15",
+      "realized_records": 209,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1112,
+      "quality": "strong",
+      "variant": "scale20",
+      "realized_records": 209,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1112,
+      "quality": "weak",
+      "variant": "scale15",
+      "realized_records": 36,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1112,
+      "quality": "weak",
+      "variant": "scale20",
+      "realized_records": 36,
+      "tiny_exit_records": 0
+    },
+    {
+      "seed": 1112,
+      "quality": "misnull",
+      "variant": "scale15",
+      "realized_records": 235,
+      "tiny_exit_records": 2
+    },
+    {
+      "seed": 1112,
+      "quality": "misnull",
+      "variant": "scale20",
+      "realized_records": 235,
+      "tiny_exit_records": 2
+    }
+  ],
+  "root_cause": "2% per-trade limit incorrectly reused as aggregate budget for scaling at manager reservation and kernel evidence gating; ordinary entry gate is per position.",
+  "double_counting_finding": "No blanket literal doubling: manager other_equity_risk covers other existing positions; reserved_loss covers queue-funded increments, normally disjoint. It does reserve ordinary increments too. Kernel uses max(other_equity_risk,reserved_risk), not their sum. Both wrongly make other trades consume the per-trade allowance; stale close-time floors survive exits and kernel reservation precedes cash fills.",
+  "intended_constraint": "For each admitted increase, total candidate post-trade weight * (max(stop_distance,gap_risk) + round_trip_cost) <= 0.02. Other holdings do not consume that trade budget. Optional aggregate guard must use a distinct explicitly configured limit and de-duplicated portfolio risk state.",
+  "tests": {
+    "passing_tests": 7,
+    "passing_test_invocations": 2,
+    "initial_fixture_errors": 2,
+    "final_regression_portfolio_replays": 11,
+    "initial_regression_portfolio_attempts": 9,
+    "total_regression_portfolio_attempts": 20,
+    "corrected_regression_portfolio_attempts": 14,
+    "partial_instrumentation_setup_portfolio_attempts": 1,
+    "logs": [
+      "tests.log",
+      "initial_test_fixture_failures.log",
+      "initial_instrumentation_failure.log",
+      "initial_analysis_key_failure.log"
+    ]
+  },
+  "corrected_comparison_scope": "12 seeds 1101-1112, calibrated strong tapes only, 10/15/20%, 36 corrected portfolios; 72 unchanged-policy audit replays for all 3 qualities at 15/20%. Test day executions counted separately; no search.",
+  "run_accounting": {
+    "original_comparison_replays": 72,
+    "corrected_comparison_replays": 36,
+    "corrected_including_all_regression_attempts": 50,
+    "regression_attempts": 20,
+    "partial_setup_attempts": 1,
+    "total_portfolio_attempts": 129,
+    "extra_analysis_replays": 0
+  },
+  "completed_utc": "2026-11-01T10:19:29.150111+00:00",
+  "citations": {
+    "manager_other_risk": "../stage2_fix/functional_niche_manager.py:377-381",
+    "manager_aggregate_gate": "../stage2_fix/functional_niche_manager.py:451-480",
+    "kernel_aggregate_gate": "/opt/Momentum-Trading-System_v5-alpha/engines/portfolio_replay/kernel.py:103-124",
+    "kernel_per_trade_gate": "/opt/Momentum-Trading-System_v5-alpha/engines/portfolio_replay/kernel.py:128-150",
+    "scale_evidence_thresholds": "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/progressive_scaling.py:24-35",
+    "synthetic_adds": "../stage2_fix/support.py:28-38",
+    "evidence_generator": "../stage2_fix/support.py:44-56",
+    "partial_exit_counts": "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/position_fill_book.py:40-47",
+    "alternate_evidence_book": "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/causal_scaling_evidence.py:36-56"
+  },
+  "category_definitions": {
+    "A": "No native ADD on a positive-EV incumbent stock-date. Zero in scaling variants; denominator must include opportunities, because an ADD-only denominator cannot contain missing ADDs.",
+    "B": "Full requested evidence tier not passed; exact failed fields stored. A 20% failure may still permit 15%. Independent_confirmation=False is NOT a failure under current 15/20 policy.",
+    "C": "Full target violates either standalone candidate risk, other holdings plus candidate risk, or prior queued modeled losses. Subcategories mutually partition these tests in that order.",
+    "D": "Requested concentration exceeds evidence-approved tier (10/15/20). Overlaps B; not an independent reason to remove evidence gates.",
+    "E": "Initial settled cash cannot cover standalone-safe requested increment with execution costs. Split into settlement-only shortfall and insufficient cash even including receivables.",
+    "F": "Prior ranked commitments reduce cash and leave less than standalone-safe requested increment. Overlaps E when both initial cash shortage and queue consumption apply; queue-risk subtype reported under C."
+  }
+}

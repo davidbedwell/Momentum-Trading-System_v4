@@ -1,0 +1,9 @@
+{
+  "source": "/opt/mts/sector-leadership-independent/experiments/dev79_minimal_manager_20261101/artifacts/manager/daily.csv",
+  "sha256": "5cc1861b75d20650d72041923fc61f265a2de8f6212b8d3434333215886afce8",
+  "period": "2009-01-02 through 2018-12-31",
+  "sessions": 2516,
+  "cagr": -0.008825427324032242,
+  "total_return": -0.08470175198535723,
+  "max_drawdown": 0.22737460214809713
+}

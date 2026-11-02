@@ -1,0 +1,290 @@
+[
+  {
+    "path": "competing_independent_tests/VALIDITY.md",
+    "bytes": 4705,
+    "sha256": "fa87eddce4c686bb3bf7b7c73385da9cf65e17534d788c066aba78e1aff55126",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/analyze.py",
+    "bytes": 10606,
+    "sha256": "52663a5d12cad7115b8c02f02dfb38c14f06d0d4607751e597c7ab3e024d102a",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/audit_artifacts.py",
+    "bytes": 4012,
+    "sha256": "8bff4011a24147fafb7f077824b5f652e64764c88b666b36543a28f1b65680c7",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/checksums.json",
+    "bytes": 1850,
+    "sha256": "27ae83eeb547d9eeb1825767aa691c6c9c7ada3c0bc63c20b219c2b05ddd1418",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "competing_independent_tests/claude_review.md",
+    "bytes": 35328,
+    "sha256": "1f26a303b664753c25104980c46da50d6e84965c4d18e29ae129f15b235b67d9",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/commitment.json",
+    "bytes": 831,
+    "sha256": "a23e313ae42c7ed64979845fde7682fd0d09ce50d530faca2bffecc139fb1c99",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "competing_independent_tests/engine.py",
+    "bytes": 4003,
+    "sha256": "86a6acc3b5eff4072f44efaf8715266007b35e83b97756a2901d5275344b0f17",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/frozen/iteration5_reference.py",
+    "bytes": 19758,
+    "sha256": "374e1fda136c50c643cbfce4ab2bd1ed26274b19b433dfc38109ead03a1b50a0",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/frozen/iteration6_engine.py",
+    "bytes": 6123,
+    "sha256": "0cb88a0fa95620f1d6881235bdf748be3349a142cd4002a565ba4d45bfb1b319",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/metrics.csv",
+    "bytes": 34157,
+    "sha256": "276594c7ffe599b611ab1c24e6e0f947f031022b46f675340e04cd9da01a2631",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/opportunities.jsonl.gz",
+    "bytes": 13133430,
+    "sha256": "c9af9e4bec21eb1ac5300d9fdeb805bb4dfe880a3bf1f85636cbb825f9b1a4ce",
+    "transmission": "full archive; whole-stream denominators and first two deterministic examples transmitted"
+  },
+  {
+    "path": "competing_independent_tests/per_seed.jsonl",
+    "bytes": 2236757,
+    "sha256": "a451180d203a1864441366135c17d7f32192bafba6b6ce1361575d8fe8946856",
+    "transmission": "archived duplicate rows; equality checks transmitted separately"
+  },
+  {
+    "path": "competing_independent_tests/preregister.json",
+    "bytes": 3634,
+    "sha256": "0a78e3619f972cdf38e42beb9f0ce04f529db9fd16de961999df9d3dcda3a518",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "competing_independent_tests/replays.jsonl.gz",
+    "bytes": 3648390,
+    "sha256": "0939ad51c3f371950e6ccd5e9c436822b177387901af5ddef1dd249177fedfdb",
+    "transmission": "full archive; whole-stream denominators and first two deterministic examples transmitted"
+  },
+  {
+    "path": "competing_independent_tests/report.json",
+    "bytes": 7409049,
+    "sha256": "0e573ccc77f3e02c72c781fbb6384d474147345949c417b29ce9fbceaa5cfe52",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "competing_independent_tests/results.json",
+    "bytes": 7330244,
+    "sha256": "04f05b2db987e8b12233d8355b606e6fc7b248dc284d7cb1405e23ed898adeaa",
+    "transmission": "archived duplicate rows; equality checks transmitted separately"
+  },
+  {
+    "path": "competing_independent_tests/run.log",
+    "bytes": 1370,
+    "sha256": "ecd8ffc1507579c3fd49a54267b94c74d06099661811a441d078dc65f5d98531",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/run.py",
+    "bytes": 5789,
+    "sha256": "efaf4047fab6bee3b6ac253247c8b7068e8a5a6227fead952b628d085b2c4ef9",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/seeds.json",
+    "bytes": 309,
+    "sha256": "1e23b2cd4d24820c767234ff24f8960f30ac24d06ce79c7dbd9ad2df86ffc20b",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "competing_independent_tests/summary.md",
+    "bytes": 11134,
+    "sha256": "ec62d2f8cac220f2f7da85e75eaa2575144a70be3c8a91d4bba323696c8fb3dc",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/test_engine.py",
+    "bytes": 1892,
+    "sha256": "cf2e03d85a665e163ff822529c6df74eecd5a5fa0f19f8eb02366d9aa0a362c9",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "competing_independent_tests/tests.log",
+    "bytes": 570,
+    "sha256": "fb198baf2554edd26a603e1c7bf0b02e6dc2f3976a564b3933158e964204374e",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/README.md",
+    "bytes": 6936,
+    "sha256": "8db5b65448905b58e26ad726aff16226e517b901d226e09793d0ff1d145062df",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/analyze.py",
+    "bytes": 11292,
+    "sha256": "789010a010d39f5a2713bdf845bfe8fe95a1e05f9fb92aec2aaef4a27f3593c8",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/audit.csv",
+    "bytes": 6665,
+    "sha256": "f94d042f765215a0405b278c3ee9e8c55054f70f741ab9d427d53acc35c4219c",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/checksums.json",
+    "bytes": 1657,
+    "sha256": "7abd6d9a24b081b75425e788560b090ee98ebe3526e1a7e679cf47510f20300f",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "discrimination_iteration6/commitment.json",
+    "bytes": 1100,
+    "sha256": "aacaaedb6fae349e737d8dd92d23463abfae354551e3fe3c7ceeb8da9ab3c596",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "discrimination_iteration6/confusion.csv",
+    "bytes": 20184,
+    "sha256": "a2c7049524f02ef77b14b0ff67401090c599ec21927b5db73734e050cf60b23a",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/detection.csv",
+    "bytes": 9887,
+    "sha256": "549b4af865c9cc210df6c86d92149225f6a1be3f7b430c48616d33082c2467a4",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/economic_paired.csv",
+    "bytes": 2726,
+    "sha256": "368befdbee6460fe954af6bdae2d3c952ee48fa56ff2f79104deddc9983cf343",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/engine.py",
+    "bytes": 6123,
+    "sha256": "0cb88a0fa95620f1d6881235bdf748be3349a142cd4002a565ba4d45bfb1b319",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/iteration5_diagnosis.json",
+    "bytes": 1954,
+    "sha256": "1374a92cd2c79654f86b71ee2da8bdae93c82cc25dab3c345395c2bf8945ea2b",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "discrimination_iteration6/opportunities.jsonl.gz",
+    "bytes": 2541837,
+    "sha256": "a59fc743228adcef3aa522dc15e4fc5e0677451bff602d84f889ad691c44e379",
+    "transmission": "full archive; whole-stream denominators and first two deterministic examples transmitted"
+  },
+  {
+    "path": "discrimination_iteration6/paired.csv",
+    "bytes": 1153,
+    "sha256": "ba5f70a5d2d343f863e4885e40f3e7377e87d65080db1826c698b4cd02d0c236",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/portfolio.csv",
+    "bytes": 13206,
+    "sha256": "51c0281836b479f73fac1d720bf9014465b4993e184bb4c0d977c35cfdefd0b5",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/preregister.json",
+    "bytes": 3716,
+    "sha256": "6fc3d1acbe2ad094c3986175f49a87c934e8c101965e96d8df2aa136c3ecdb57",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "discrimination_iteration6/replays.jsonl.gz",
+    "bytes": 1370054,
+    "sha256": "bcc810a063d1e6af49e1f2dd8c5d13ffc89fdc31eb0d4a63f6cef7a0b8b03f78",
+    "transmission": "full archive; whole-stream denominators and first two deterministic examples transmitted"
+  },
+  {
+    "path": "discrimination_iteration6/report.json",
+    "bytes": 786658,
+    "sha256": "bf5d6f58651f932cf36e2d32c4f77de80d2f8e5312d1f78063430eab007663b4",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "discrimination_iteration6/run.py",
+    "bytes": 9544,
+    "sha256": "0b01f2a6ffe8b15de312a3dc435bbfd9466657ff7b07f2e1d53defd06ca6df21",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/seeds.json",
+    "bytes": 181,
+    "sha256": "0d12cc468412377eeba76c2cc0e7de36abfc4b9f0206dba90e6464b40c6da511",
+    "transmission": "JSON semantic compaction of dates/trace only"
+  },
+  {
+    "path": "discrimination_iteration6/test_engine.py",
+    "bytes": 2565,
+    "sha256": "b517d042804dd3704d2636244a37c33f8fe89f8ef4d40409d90299d875627bd6",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration6/tests.log",
+    "bytes": 712,
+    "sha256": "ff49442e6ba703461108559dd030276de2effec6559ba2daf9644a36e4ab95d8",
+    "transmission": "verbatim"
+  },
+  {
+    "path": "discrimination_iteration5/experiment.py",
+    "bytes": 19758,
+    "sha256": "374e1fda136c50c643cbfce4ab2bd1ed26274b19b433dfc38109ead03a1b50a0",
+    "transmission": "verbatim historical source/response"
+  },
+  {
+    "path": "claude_architecture_review_iteration5_6/review.md",
+    "bytes": 35328,
+    "sha256": "1f26a303b664753c25104980c46da50d6e84965c4d18e29ae129f15b235b67d9",
+    "transmission": "verbatim historical source/response"
+  },
+  {
+    "path": "claude_architecture_review_iteration5_6/submission_metadata.json",
+    "bytes": 2415,
+    "sha256": "a03eec8ca4255eeee5c58bcac80896689421effb8deac8e8054023efe0fca6a5",
+    "transmission": "verbatim historical source/response"
+  },
+  {
+    "path": "claude_architecture_review_iteration5_6/README.md",
+    "bytes": 2942,
+    "sha256": "93fd13561abe7ba9ceddb1b7bf67d43676cf9bc590e7bb144f8494b73e992214",
+    "transmission": "verbatim historical source/response"
+  },
+  {
+    "path": "claude_architecture_review_iteration5_6/response.json",
+    "bytes": 37321,
+    "sha256": "d0603f1747be40a611e71da60a565d97c9adccf40b5c549fa269ccacdeb08210",
+    "transmission": "verbatim historical source/response"
+  },
+  {
+    "path": "claude_architecture_review_iteration5_6/submit.py",
+    "bytes": 7233,
+    "sha256": "10f49fb6d531cc9fcab32d0b3b3cc497e5ac3533921cdfed1107e4caa5ff5da5",
+    "transmission": "verbatim historical source/response"
+  }
+]

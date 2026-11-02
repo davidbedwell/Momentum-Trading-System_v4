@@ -1,0 +1,394 @@
+{
+  "NON_NICHE": {
+    "discovery": {
+      "avg_hold": 3.5722222222222224,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 2.4767585331317923,
+      "ev_r": 4.963607026765294,
+      "fold_ev_spread": 9.615535419192804,
+      "mae_stop_ratio": 0.0,
+      "trades": 180
+    },
+    "first_observed_generation": 72,
+    "genome": {
+      "capacity": 2,
+      "entry_pct": 0.09358409092011336,
+      "exit_rule": "signal_decay",
+      "family": "volatility",
+      "feature_a": "ga4_natr_14__v1",
+      "feature_b": "ga4_natr_14__v1",
+      "operator": "OR",
+      "stop_pct": 0.01959492315521231,
+      "threshold_a": 0.607517190325489,
+      "threshold_b": -0.8053187970985163
+    },
+    "identity": "0042a3d812ac05a1e01b",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0001": {
+    "discovery": {
+      "avg_hold": 7.575806977502445,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 0.18763639355025963,
+      "ev_r": 0.30101643470529876,
+      "fold_ev_spread": 2.0301144752112674,
+      "mae_stop_ratio": 0.0,
+      "trades": 6134
+    },
+    "first_observed_generation": 10,
+    "genome": {
+      "capacity": 2,
+      "entry_pct": 0.06876737344052311,
+      "exit_rule": "volatility",
+      "family": "relative_cross_sectional",
+      "feature_a": "ga4_return_126_percentile__v1",
+      "feature_b": "ga4_return_126_percentile__v1",
+      "operator": "OR",
+      "stop_pct": 0.010838158462096108,
+      "threshold_a": -0.2647416141536756,
+      "threshold_b": 0.35590034023313866
+    },
+    "identity": "00f3b14cd22843f7e006",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0002": {
+    "discovery": {
+      "avg_hold": 2.933774834437086,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 0.4474584562167432,
+      "ev_r": 0.9628935827076183,
+      "fold_ev_spread": 3.154375806376202,
+      "mae_stop_ratio": 0.0,
+      "trades": 302
+    },
+    "first_observed_generation": 19,
+    "genome": {
+      "capacity": 7,
+      "entry_pct": 0.05565975397145395,
+      "exit_rule": "signal_decay",
+      "family": "relative_cross_sectional",
+      "feature_a": "ga4_return_252_percentile__v1",
+      "feature_b": "ga4_return_252_percentile__v1",
+      "operator": "OR",
+      "stop_pct": 0.017426734492952435,
+      "threshold_a": -0.9017232805433535,
+      "threshold_b": 0.8606148397857094
+    },
+    "identity": "00b4e7beac0f4cc59bef",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0003": {
+    "discovery": {
+      "avg_hold": 7.395167022032694,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 0.12810745704073417,
+      "ev_r": 0.29958531595368415,
+      "fold_ev_spread": 2.806472870004061,
+      "mae_stop_ratio": 0.0,
+      "trades": 1407
+    },
+    "first_observed_generation": 32,
+    "genome": {
+      "capacity": 6,
+      "entry_pct": 0.06669434300393703,
+      "exit_rule": "volatility",
+      "family": "volatility",
+      "feature_a": "ga4_volatility_ratio_20_63__v1",
+      "feature_b": "ga4_natr_14__v1",
+      "operator": "OR",
+      "stop_pct": 0.01820017984450878,
+      "threshold_a": 0.6847838566031852,
+      "threshold_b": -0.8907554455425917
+    },
+    "identity": "01080ff1af9ff4d55bb2",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0004": {
+    "discovery": {
+      "avg_hold": 1.5,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 0.7311992565409671,
+      "ev_r": 2.582599809416858,
+      "fold_ev_spread": null,
+      "mae_stop_ratio": 0.0,
+      "trades": 4
+    },
+    "first_observed_generation": 13,
+    "genome": {
+      "capacity": 1,
+      "entry_pct": 0.03746875360058868,
+      "exit_rule": "signal_decay",
+      "family": "momentum",
+      "feature_a": "ga4_return_20__v1",
+      "feature_b": "ga4_return_5__v1",
+      "operator": "OR",
+      "stop_pct": 0.017167828308793726,
+      "threshold_a": -0.3899750376362774,
+      "threshold_b": 0.07077006514262285
+    },
+    "identity": "002dd0c6a30c060f922b",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0005": {
+    "discovery": {
+      "avg_hold": 7.401769911504425,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 0.39364882052528904,
+      "ev_r": 0.6966465311324569,
+      "fold_ev_spread": 4.092406174014405,
+      "mae_stop_ratio": 0.0,
+      "trades": 565
+    },
+    "first_observed_generation": 11,
+    "genome": {
+      "capacity": 10,
+      "entry_pct": 0.06530951535475825,
+      "exit_rule": "volatility",
+      "family": "relative_cross_sectional",
+      "feature_a": "ga4_return_252_percentile__v1",
+      "feature_b": "ga4_return_252_percentile__v1",
+      "operator": "AND",
+      "stop_pct": 0.016549740346984226,
+      "threshold_a": 0.9116936981805559,
+      "threshold_b": -0.7715547844531481
+    },
+    "identity": "009e61265f54b417d283",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0006": {
+    "discovery": {
+      "avg_hold": 9.951402106331685,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 0.14902586216666733,
+      "ev_r": 0.2150123708993989,
+      "fold_ev_spread": 1.5763849216476762,
+      "mae_stop_ratio": 0.0,
+      "trades": 7881
+    },
+    "first_observed_generation": 115,
+    "genome": {
+      "capacity": 5,
+      "entry_pct": 0.0883174979223001,
+      "exit_rule": "volatility",
+      "family": "relative_cross_sectional",
+      "feature_a": "ga4_return_126_percentile__v1",
+      "feature_b": "ga4_return_252_percentile__v1",
+      "operator": "AND",
+      "stop_pct": 0.0199918116320867,
+      "threshold_a": -0.17566701222745462,
+      "threshold_b": -0.5009625352348106
+    },
+    "identity": "0119f821d054770c8835",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0007": {
+    "discovery": {
+      "avg_hold": 9.496821515892421,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 0.19728062438092386,
+      "ev_r": 0.29074443857469867,
+      "fold_ev_spread": 2.613762825599508,
+      "mae_stop_ratio": 0.0,
+      "trades": 4090
+    },
+    "first_observed_generation": 265,
+    "genome": {
+      "capacity": 7,
+      "entry_pct": 0.07798024172931131,
+      "exit_rule": "volatility",
+      "family": "relative_cross_sectional",
+      "feature_a": "ga4_return_252_percentile__v1",
+      "feature_b": "ga4_return_126_percentile__v1",
+      "operator": "AND",
+      "stop_pct": 0.01885208429470904,
+      "threshold_a": 0.1780566886267514,
+      "threshold_b": -0.7091360717508177
+    },
+    "identity": "006cd822aec7516e12c1",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0008": {
+    "discovery": {
+      "avg_hold": 8.048951048951048,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 0.700123781259166,
+      "ev_r": 1.391039052843178,
+      "fold_ev_spread": 6.558090034705646,
+      "mae_stop_ratio": 0.0,
+      "trades": 143
+    },
+    "first_observed_generation": 379,
+    "genome": {
+      "capacity": 8,
+      "entry_pct": 0.03595389594787012,
+      "exit_rule": "volatility",
+      "family": "volatility",
+      "feature_a": "ga4_volatility_ratio_20_63__v1",
+      "feature_b": "ga4_natr_14__v1",
+      "operator": "AND",
+      "stop_pct": 0.012494908134702462,
+      "threshold_a": 0.7804688948561136,
+      "threshold_b": -0.9629377005692501
+    },
+    "identity": "00b8ad178aa4fa8ba110",
+    "provenance": [
+      "hall_of_fame"
+    ]
+  },
+  "PIT-NICHE-0009": {
+    "discovery": {
+      "avg_hold": 275.0,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 48.30030815340429,
+      "ev_r": 92.30220436018982,
+      "fold_ev_spread": null,
+      "mae_stop_ratio": 0.0,
+      "trades": 2
+    },
+    "first_observed_generation": 71,
+    "genome": {
+      "capacity": 6,
+      "entry_pct": 0.05228560216568495,
+      "exit_rule": "reversal",
+      "family": "volatility",
+      "feature_a": "ga4_volatility_ratio_20_63__v1",
+      "feature_b": "ga4_natr_14__v1",
+      "operator": "AND",
+      "stop_pct": 0.012524052460789952,
+      "threshold_a": -0.7964197702458335,
+      "threshold_b": -0.788986072439668
+    },
+    "identity": "005262c1462f24e8df25",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0010": {
+    "discovery": {
+      "avg_hold": 6.148148148148148,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 1.2193166361232146,
+      "ev_r": 5.170562144030545,
+      "fold_ev_spread": 11.019580994754083,
+      "mae_stop_ratio": 0.0,
+      "trades": 108
+    },
+    "first_observed_generation": 189,
+    "genome": {
+      "capacity": 9,
+      "entry_pct": 0.09813259841244029,
+      "exit_rule": "signal_decay",
+      "family": "trend",
+      "feature_a": "ga4_sma50_slope_10__v1",
+      "feature_b": "ga4_sma50_slope_10__v1",
+      "operator": "OR",
+      "stop_pct": 0.0149724389018996,
+      "threshold_a": -0.4822649953086837,
+      "threshold_b": -0.8311444147195488
+    },
+    "identity": "00450647863155db68d2",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0011": {
+    "discovery": {
+      "avg_hold": 3.25,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 2.689720651145133,
+      "ev_r": 3.848721573750921,
+      "fold_ev_spread": null,
+      "mae_stop_ratio": 0.0,
+      "trades": 4
+    },
+    "first_observed_generation": 250,
+    "genome": {
+      "capacity": 4,
+      "entry_pct": 0.04470128152097126,
+      "exit_rule": "volatility",
+      "family": "momentum",
+      "feature_a": "ga4_return_5__v1",
+      "feature_b": "ga4_return_5__v1",
+      "operator": "OR",
+      "stop_pct": 0.014554059611455214,
+      "threshold_a": -0.7688208080477223,
+      "threshold_b": -0.021857660467713202
+    },
+    "identity": "012139e73190d721400e",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  },
+  "PIT-NICHE-0012": {
+    "discovery": {
+      "avg_hold": 24.577242524916944,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 1.6729941798366137,
+      "ev_r": 3.375898796137863,
+      "fold_ev_spread": 8.547200122435827,
+      "mae_stop_ratio": 0.0,
+      "trades": 1204
+    },
+    "first_observed_generation": 297,
+    "genome": {
+      "capacity": 9,
+      "entry_pct": 0.03908772135944315,
+      "exit_rule": "reversal",
+      "family": "momentum",
+      "feature_a": "ga4_return_20__v1",
+      "feature_b": "ga4_return_5__v1",
+      "operator": "OR",
+      "stop_pct": 0.010001214715978481,
+      "threshold_a": -0.8801136680636448,
+      "threshold_b": -0.7443620714085442
+    },
+    "identity": "00e87731a4b2c3add70d",
+    "provenance": [
+      "hall_of_fame"
+    ]
+  },
+  "PIT-NICHE-0013": {
+    "discovery": {
+      "avg_hold": 8.075622208040842,
+      "behavioral_diversity": 0.0,
+      "conservative_ev_r": 0.19075612763537558,
+      "ev_r": 0.30265080401757355,
+      "fold_ev_spread": 1.4464729932363625,
+      "mae_stop_ratio": 0.0,
+      "trades": 3134
+    },
+    "first_observed_generation": 10,
+    "genome": {
+      "capacity": 1,
+      "entry_pct": 0.042693774311352586,
+      "exit_rule": "volatility",
+      "family": "relative_cross_sectional",
+      "feature_a": "ga4_return_126_percentile__v1",
+      "feature_b": "ga4_return_252_percentile__v1",
+      "operator": "OR",
+      "stop_pct": 0.018862725824322992,
+      "threshold_a": 0.7539011406642426,
+      "threshold_b": -0.5201220949602752
+    },
+    "identity": "011022a308f244e306ad",
+    "provenance": [
+      "checkpoint_survivor"
+    ]
+  }
+}

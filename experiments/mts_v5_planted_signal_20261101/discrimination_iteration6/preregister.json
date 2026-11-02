@@ -1,0 +1,28 @@
+{
+  "purpose": "Independent bounded reversal safety fix preserving iteration5 classifier; no GA, production, band or noise changes",
+  "max_portfolio_replays": 64,
+  "max_seconds": 720,
+  "planned_replays": 59,
+  "accounting": "3 tests + 4 fixed design probes + 12 paired regression + 40 final. No outcome-driven reruns or search.",
+  "design_seeds": [620101, 620102],
+  "final_seeds": "4 OS entropy seeds after local code/dependency/preregistration hash freeze",
+  "final_scenarios": ["learnable", "null", "outer_noise", "reversal", "random_reversal"],
+  "random_switch": "OS entropy uniform606+20..606+80, evaluator-only. Same switch applied to both candidates; random seed and switch never enter gate.",
+  "dgp": "Unchanged iteration5 generation for original scenarios; random_reversal changes ONLY sensor mapping switch time on exact learnable tape. Prices remain bit identical. No new sensor, sector label, oracle indicator, or noise reduction.",
+  "classifier": "Iteration5 unchanged fit/calibration/bands and stable gate. Safety latch may only replace label with UNKNOWN. No retraining or class forcing.",
+  "channels": "Cross-sectional cell4-cell0 forecast residual contrast with at least2 members per extreme cell per date; windows2,4,8; fixed envelope .014 times sqrt(2log(2*126*3/.01)/w). Actual funded-fill date-grouped weighted forecast surprise, at least3 mature dates in10-session span; fixed .018 envelope times sqrt(2log(2*126/.01)/n). Each channel alpha .01; envelope a synthetic conservative engineering assumption, not real-market certification. All signals+3<=now. Monitor pretest dates too, no forced test-start warmup.",
+  "other_channels": "Market breadth and independent sector breadth cannot reveal sensor remapping: prices and unconditional returns identical. No sector membership or sector shocks in DGP. Price-only veto rejected. Sensor-conditioned residual trend is informative and used in contrast. Funded surprise may corroborate or fire separately; ablations limited to trace evidence, not optimized.",
+  "risk": "Detected drift => full pre-entry abstention, no automatic re-entry. Existing one-session fills exit normally. Per-trade modeled loss <=2%, prescribed gaps 3/6/12/24%, 30bp costs, cash settlement and liquidation unchanged.",
+  "metrics_and_pass": {
+    "stable_coverage": ">=15% each fresh learnable and outer_noise seed",
+    "stable_extreme_errors": "false GREAT on TERRIBLE and false TERRIBLE on GREAT each <=1% conditional on true tier",
+    "five_tier_support": ">=20 inferred opportunities in each tier per fresh learnable seed",
+    "null": "100% abstention, zero costs and return",
+    "false_alarms": "zero observed among stable fresh scenarios; <=5% population rate cannot be certified with4 seeds",
+    "detection": "first switch alarm delay3..8 sessions on all8 fresh reversal episodes; first detection and evidence timestamps recorded for both versions",
+    "false_great": "strictly fewer on every paired reversal tape vs iteration5; report absolute counts and unavoidable first3 sessions separately",
+    "economics": "adverse segment return >=-5% and MDD<=5% for each fresh reversal; paired return/MDD/cost/trades and stable opportunity costs reported. No return target on stable planted alpha",
+    "accounting": "nonnegative cash, fees both legs, net reconciliation <1e-12, total PnL reconciliation<1e-6, one-session matched horizon, <=2% modeled trade risk; 50% gap test must exceed modeled risk"
+  },
+  "stop": "No repair after final outcomes. Any failed criterion => FAIL and precise blocker. Distinguish unavoidable information delay from preventable scan delay. Synthetic engineering only; no public timestamp, real PIT dataset or alpha claim."
+}

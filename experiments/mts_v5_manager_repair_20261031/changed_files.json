@@ -1,0 +1,42 @@
+[
+  {
+    "path": "discovery/competitive_ga/functional_niche_manager.py",
+    "baseline_sha256": "aa1695db252081b1aac401c7cfc457b0b4efe1e6f810d4d25e154dca1ac79fa9",
+    "repaired_sha256": "e6abdf744ce80bdf17416d38b4f8cc8fa3fbda9d03af28ab980417596c9fd834"
+  },
+  {
+    "path": "engines/portfolio_replay/kernel.py",
+    "baseline_sha256": "1593ebb59d9a29ab0aa98474260f1735dcf27efd7e3d8c6538032894b46ca566",
+    "repaired_sha256": "69ce56e126eca1242e65340cedd1c9f6a3ec6a35dc50fc27b277c467a845c2d5"
+  },
+  {
+    "path": "engines/portfolio_selector/shared_selector_competition_20261025.py",
+    "baseline_sha256": "be7bbdf988fb6afb9bde3aa512d23c275d9471638a2d758170b2adb051bfa206",
+    "repaired_sha256": "9215f9a9758a5ce5494310ee89e4b9f76ef6fcbe885d12c065dd314125516dfc"
+  },
+  {
+    "path": "engines/portfolio_selector/shared_selector_engine_contract_20261025.py",
+    "baseline_sha256": "e60ec7bd007695a6eb7f69cdac16b0e5207dfc42dc98322955b6ccecade98e99",
+    "repaired_sha256": "b4394829b2f310095b0b4f9c41e8e8ac8cdf7dcfce62dcf9325e71478ea988a8"
+  },
+  {
+    "path": "tests/test_functional_niche_manager.py",
+    "baseline_sha256": "274a267819fbadbbf7fbb09ceba9cbcaeb8d7caaa64c6c3bd43c5689e33eed24",
+    "repaired_sha256": "6424e1182359ffd75045a1cb8622043bb1cb4997bab60031531ef686a47af647"
+  },
+  {
+    "path": "tests/test_manager_repair_end_to_end.py",
+    "baseline_sha256": null,
+    "repaired_sha256": "be482768d4fce4b84bec88deb3ffd78c67f13dea4726233277cdba3738645585"
+  },
+  {
+    "path": "tests/test_mixed_ga6_ga7_functional.py",
+    "baseline_sha256": "800664adc397d9ce53c2405ad1d7cb2f40f5ddcb5d17ed811866726e6c955c57",
+    "repaired_sha256": "171608f650f0f0c660926c86a41b1d50ea28935fe650edcbf358b586978c47e0"
+  },
+  {
+    "path": "tests/test_paired_defense_functional.py",
+    "baseline_sha256": "ea7e8deeed29b1632411c09f6ab79c8af79083eda0407632de023d6d20138565",
+    "repaired_sha256": "d179243d2e0f0ffc88c7fea404503c656eeaf236fdf6829ee51e9fb128eeca90"
+  }
+]

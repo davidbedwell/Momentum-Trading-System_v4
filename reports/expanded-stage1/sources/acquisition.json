@@ -1,0 +1,719 @@
+{
+  "retrieved_utc": "2026-10-31T08:12:06.234Z",
+  "route": "connected GitHub read-only fetch; direct runtime DNS unavailable",
+  "historical_holdings": [
+    {
+      "file": "ishares_20061031.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20061031.csv",
+      "github_blob_sha": "08f58cbc9c1e27de65d226cb688953121be05688",
+      "size": 92040
+    },
+    {
+      "file": "ishares_20061130.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20061130.csv",
+      "github_blob_sha": "6fff36516002b37a1cb2ade2e25c1217d9667f2e",
+      "size": 92044
+    },
+    {
+      "file": "ishares_20061229.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20061229.csv",
+      "github_blob_sha": "5c38ec14328448071eed43c469f6a583dd89217c",
+      "size": 91916
+    },
+    {
+      "file": "ishares_20070131.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20070131.csv",
+      "github_blob_sha": "08035eaec6f7fa465aec4e27a6fad53378011e24",
+      "size": 91895
+    },
+    {
+      "file": "ishares_20070228.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20070228.csv",
+      "github_blob_sha": "582deea67456cb683c79b90452b80722bd80601e",
+      "size": 91910
+    },
+    {
+      "file": "ishares_20070330.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20070330.csv",
+      "github_blob_sha": "c0f9843327b8bdc2d1acd664c63169801d6f8da9",
+      "size": 91879
+    },
+    {
+      "file": "ishares_20070430.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20070430.csv",
+      "github_blob_sha": "b81dd6abd76bab3fa67b87ecc17e52459cccc62b",
+      "size": 98646
+    },
+    {
+      "file": "ishares_20070531.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20070531.csv",
+      "github_blob_sha": "8dc0e584969d7420b8533763b979cac5ac7d2fe7",
+      "size": 98692
+    },
+    {
+      "file": "ishares_20070629.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20070629.csv",
+      "github_blob_sha": "b4dbaf5a5b0e535cbb67828325e9702350ed5882",
+      "size": 98722
+    },
+    {
+      "file": "ishares_20070731.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20070731.csv",
+      "github_blob_sha": "cfcc0cf927c656fe28f758db8c9fb74579f7e838",
+      "size": 98634
+    },
+    {
+      "file": "ishares_20070831.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20070831.csv",
+      "github_blob_sha": "517f417375d4303a3c0832cd85a0f3a04cdb84ed",
+      "size": 98677
+    },
+    {
+      "file": "ishares_20070928.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20070928.csv",
+      "github_blob_sha": "c546b0779396ee084252c2a2b4113923a2ff4339",
+      "size": 98660
+    },
+    {
+      "file": "ishares_20071031.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20071031.csv",
+      "github_blob_sha": "cafebddd033c3f3bf6423db15446e4c7a914934f",
+      "size": 94755
+    },
+    {
+      "file": "ishares_20071130.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20071130.csv",
+      "github_blob_sha": "d443f59653c00fc143c2cd64cf9078bb700a1b90",
+      "size": 95101
+    },
+    {
+      "file": "ishares_20071231.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20071231.csv",
+      "github_blob_sha": "84e00eecc128d9b9d69b99333a6997de6629e42d",
+      "size": 94773
+    },
+    {
+      "file": "ishares_20080131.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20080131.csv",
+      "github_blob_sha": "ec3bc1f20440f2d30a4d6ea6c4cd65efd4d8d9b6",
+      "size": 94662
+    },
+    {
+      "file": "ishares_20080229.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20080229.csv",
+      "github_blob_sha": "d31cb0b23d4913266170c65148ed0d5fcc501f62",
+      "size": 94707
+    },
+    {
+      "file": "ishares_20080331.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20080331.csv",
+      "github_blob_sha": "abd6e81a543da5b0316163efa66af7951a35391c",
+      "size": 94826
+    },
+    {
+      "file": "ishares_20080430.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20080430.csv",
+      "github_blob_sha": "8a705418e9339db8991e064d20e3b02d2b38eb11",
+      "size": 94662
+    },
+    {
+      "file": "ishares_20080530.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20080530.csv",
+      "github_blob_sha": "ac25a9b0e6494509e3604c61b14fd2d60723a326",
+      "size": 94608
+    },
+    {
+      "file": "ishares_20080630.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20080630.csv",
+      "github_blob_sha": "3b58029e11468987d4a01cc13d3644d00f937194",
+      "size": 94625
+    },
+    {
+      "file": "ishares_20080731.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20080731.csv",
+      "github_blob_sha": "1c756adc6062d59f8c446af13d2e0c195beb6d1c",
+      "size": 94671
+    },
+    {
+      "file": "ishares_20080829.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20080829.csv",
+      "github_blob_sha": "3e59af8d28613f279d29607097d6969299112b10",
+      "size": 94667
+    },
+    {
+      "file": "ishares_20080930.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20080930.csv",
+      "github_blob_sha": "790ac6d45d5caa56d78fbc2d09f3c4369e5a7d1c",
+      "size": 94655
+    },
+    {
+      "file": "ishares_20081031.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20081031.csv",
+      "github_blob_sha": "b72d4c92a3da85a886319abe17bcfe366c85f21f",
+      "size": 94407
+    },
+    {
+      "file": "ishares_20081128.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20081128.csv",
+      "github_blob_sha": "8174b89b48db5a3d135e8bc4f81e01f0738d7c9c",
+      "size": 94430
+    },
+    {
+      "file": "ishares_20081231.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20081231.csv",
+      "github_blob_sha": "1b4f64f44dfd0389dcf55a0f4799133e72bdd2d5",
+      "size": 94264
+    },
+    {
+      "file": "ishares_20090130.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20090130.csv",
+      "github_blob_sha": "59e8d948242afdd923f3a845025517d38df59f38",
+      "size": 94251
+    },
+    {
+      "file": "ishares_20090227.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20090227.csv",
+      "github_blob_sha": "051d856a0cd5715403ffb7ec2e1f4efe8a1c6891",
+      "size": 94200
+    },
+    {
+      "file": "ishares_20090331.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20090331.csv",
+      "github_blob_sha": "54deeb5bd02d11bd86bbc828db112ad7bae38d76",
+      "size": 94255
+    },
+    {
+      "file": "ishares_20090430.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20090430.csv",
+      "github_blob_sha": "e450af09455b8c89eb9ec9b7a3e79fb28102aa58",
+      "size": 94283
+    },
+    {
+      "file": "ishares_20090529.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20090529.csv",
+      "github_blob_sha": "31e836fb8c6e6f517c1cc6ff9cc675c8a649bc56",
+      "size": 94467
+    },
+    {
+      "file": "ishares_20090630.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20090630.csv",
+      "github_blob_sha": "4fa6cb27c3ab36582bf94d1242c870ee8ea67f1d",
+      "size": 94334
+    },
+    {
+      "file": "ishares_20090731.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20090731.csv",
+      "github_blob_sha": "e0f8ed5d997a62ea48aae479af75f6667cbc769d",
+      "size": 94287
+    },
+    {
+      "file": "ishares_20090831.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20090831.csv",
+      "github_blob_sha": "ebe1aaedcd40064b138c4922e773b4c25a00b246",
+      "size": 94400
+    },
+    {
+      "file": "ishares_20090930.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20090930.csv",
+      "github_blob_sha": "ee1f78dc8952681ebd011cb1aa2185ec07a9670b",
+      "size": 94368
+    },
+    {
+      "file": "ishares_20091030.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20091030.csv",
+      "github_blob_sha": "9331b6d515ff79c6b263ab0f145ee29d5bc39b52",
+      "size": 94339
+    },
+    {
+      "file": "ishares_20091130.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20091130.csv",
+      "github_blob_sha": "9e6c426101e742292fda6a676d5a59aa75574006",
+      "size": 94327
+    },
+    {
+      "file": "ishares_20091231.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20091231.csv",
+      "github_blob_sha": "6a7a649df9ab1fc786bf0f6675ee7368afcc2f1b",
+      "size": 94382
+    },
+    {
+      "file": "ishares_20100129.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20100129.csv",
+      "github_blob_sha": "8178b9c7596a0a2a8c1f57861bc800f8586e3cb7",
+      "size": 94312
+    },
+    {
+      "file": "ishares_20100226.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20100226.csv",
+      "github_blob_sha": "a4134a7e4889833afbea91b065998df1946b9ac2",
+      "size": 94182
+    },
+    {
+      "file": "ishares_20100331.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20100331.csv",
+      "github_blob_sha": "c3823c81bef0a0f50910063d77bd0b1b15bfe82c",
+      "size": 94333
+    },
+    {
+      "file": "ishares_20100430.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20100430.csv",
+      "github_blob_sha": "9121447614dea005af96c570625070428449e0f5",
+      "size": 94350
+    },
+    {
+      "file": "ishares_20100528.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20100528.csv",
+      "github_blob_sha": "ddc6cd9ddfa3d6d06f955c417d4f5eb719dd627d",
+      "size": 94297
+    },
+    {
+      "file": "ishares_20100630.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20100630.csv",
+      "github_blob_sha": "c9d0c5537cacb209962e2191dcaac8aeba37c170",
+      "size": 94276
+    },
+    {
+      "file": "ishares_20100730.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20100730.csv",
+      "github_blob_sha": "66e6928f0111ed397b7bd12af250a95dd54f5390",
+      "size": 94314
+    },
+    {
+      "file": "ishares_20100831.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20100831.csv",
+      "github_blob_sha": "1ebec6712b62ba37fbabbe8d8c6f30f1bdf9368c",
+      "size": 94377
+    },
+    {
+      "file": "ishares_20100930.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20100930.csv",
+      "github_blob_sha": "1253cc17763159f6d9b23e646435c5166deb97b5",
+      "size": 94382
+    },
+    {
+      "file": "ishares_20101029.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20101029.csv",
+      "github_blob_sha": "ae13aec31d127b575ef95444d7de628fd9b1e780",
+      "size": 94328
+    },
+    {
+      "file": "ishares_20101130.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20101130.csv",
+      "github_blob_sha": "910d3cc9bfbc9786aa156db221ae2399c89ff2d0",
+      "size": 94316
+    },
+    {
+      "file": "ishares_20101231.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20101231.csv",
+      "github_blob_sha": "050e9b6a6b615a98bc7e4c87a30be4b3007da629",
+      "size": 94386
+    },
+    {
+      "file": "ishares_20110131.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20110131.csv",
+      "github_blob_sha": "e3c24f5ebdee4e0a35984cad4d403ee1f2a25243",
+      "size": 94433
+    },
+    {
+      "file": "ishares_20110228.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20110228.csv",
+      "github_blob_sha": "b5d62bc632513e323844b875d7b40214e754d965",
+      "size": 94426
+    },
+    {
+      "file": "ishares_20110331.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20110331.csv",
+      "github_blob_sha": "0a7ce8c6bc9abc14c2af6212ce75c4948f81227b",
+      "size": 94579
+    },
+    {
+      "file": "ishares_20110429.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20110429.csv",
+      "github_blob_sha": "9c7f3d22520307c2f9d491c4b2f89a622014be9f",
+      "size": 94438
+    },
+    {
+      "file": "ishares_20110531.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20110531.csv",
+      "github_blob_sha": "9aa3f5cff497b0779b9064b49ced337f84755633",
+      "size": 94428
+    },
+    {
+      "file": "ishares_20110630.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20110630.csv",
+      "github_blob_sha": "6c71e07e6050814fb6fd086b74fb05196795c634",
+      "size": 94484
+    },
+    {
+      "file": "ishares_20110729.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20110729.csv",
+      "github_blob_sha": "b6a46c1b0f6694cd1c640b48a05dafde17aa1b74",
+      "size": 94451
+    },
+    {
+      "file": "ishares_20110831.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20110831.csv",
+      "github_blob_sha": "f37ece65da8e259915be2fedefb0138ed3e4877a",
+      "size": 94437
+    },
+    {
+      "file": "ishares_20110930.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20110930.csv",
+      "github_blob_sha": "090205960393a977b1989a1fd3327a790f4a3182",
+      "size": 94293
+    },
+    {
+      "file": "ishares_20111031.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20111031.csv",
+      "github_blob_sha": "f1d7b9f49842def7fa10a81859af52abf74ab8dd",
+      "size": 94410
+    },
+    {
+      "file": "ishares_20111130.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20111130.csv",
+      "github_blob_sha": "bad1c901bce6b8150221e09211b889ac8ece1032",
+      "size": 94385
+    },
+    {
+      "file": "ishares_20111230.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20111230.csv",
+      "github_blob_sha": "043b4c662442f59d10af7bf850fa61d0858c0ea1",
+      "size": 94732
+    },
+    {
+      "file": "ishares_20120131.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20120131.csv",
+      "github_blob_sha": "fee5f0853ceddf9cb237ef4ee3dea9d09c315f36",
+      "size": 94363
+    },
+    {
+      "file": "ishares_20120229.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20120229.csv",
+      "github_blob_sha": "c9730f3a8b3f494ccdc5f448eb2cfa9ab24811df",
+      "size": 94327
+    },
+    {
+      "file": "ishares_20120330.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20120330.csv",
+      "github_blob_sha": "62acb3988b873dc8192091cf949d6a485f7eadd9",
+      "size": 94374
+    },
+    {
+      "file": "ishares_20120430.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20120430.csv",
+      "github_blob_sha": "de6976aa9f07899ba2c987a0c724c917d899b66e",
+      "size": 94426
+    },
+    {
+      "file": "ishares_20120531.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20120531.csv",
+      "github_blob_sha": "303a4f029d2d374595cd30137b5529416b6281b2",
+      "size": 94334
+    },
+    {
+      "file": "ishares_20120629.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20120629.csv",
+      "github_blob_sha": "4cbbe32e82e0a6a175e6ef1bb27b19983b2c704d",
+      "size": 94264
+    },
+    {
+      "file": "ishares_20120731.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20120731.csv",
+      "github_blob_sha": "14771a8f1ef215d345f634938cfe571348e723f9",
+      "size": 94292
+    },
+    {
+      "file": "ishares_20120831.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20120831.csv",
+      "github_blob_sha": "b5cbfc90e9a8fe7d01fc8be36161210824b25c5e",
+      "size": 94332
+    },
+    {
+      "file": "ishares_20120928.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20120928.csv",
+      "github_blob_sha": "9d205270eecec46c078d896ca01fd1f045e4feba",
+      "size": 94287
+    },
+    {
+      "file": "ishares_20121031.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20121031.csv",
+      "github_blob_sha": "a1b7ebc8dc050d259c71b6a2efee1b88cff913c1",
+      "size": 94254
+    },
+    {
+      "file": "ishares_20121130.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20121130.csv",
+      "github_blob_sha": "84693ee4497ad44c82f3795f8492ba62c08e8149",
+      "size": 94261
+    },
+    {
+      "file": "ishares_20121231.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20121231.csv",
+      "github_blob_sha": "8b44b87354f1f133ca449de25485fe89028fbbac",
+      "size": 94255
+    },
+    {
+      "file": "ishares_20130131.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20130131.csv",
+      "github_blob_sha": "15ff3bb2fc2e67fc92719c7ff0ee319276d5c74e",
+      "size": 94236
+    },
+    {
+      "file": "ishares_20130228.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20130228.csv",
+      "github_blob_sha": "8510e964989be7c63c57cc292518ca81c94795eb",
+      "size": 94427
+    },
+    {
+      "file": "ishares_20130328.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20130328.csv",
+      "github_blob_sha": "ea95501c1776b4ac28f0be2abd445d562c139b20",
+      "size": 94186
+    },
+    {
+      "file": "ishares_20130430.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20130430.csv",
+      "github_blob_sha": "e83468248d0d60336fe4e542c0e957a57a88593f",
+      "size": 94266
+    },
+    {
+      "file": "ishares_20130531.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20130531.csv",
+      "github_blob_sha": "d473d3d5c55eeece00d39e793472bc71b3f4d25b",
+      "size": 94166
+    },
+    {
+      "file": "ishares_20130628.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20130628.csv",
+      "github_blob_sha": "eeeff453607b85a2982d417b0e05d853ec483b4b",
+      "size": 94235
+    },
+    {
+      "file": "ishares_20130731.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20130731.csv",
+      "github_blob_sha": "fcef9d0944bc4ab88a7e59d7252205c9071101e6",
+      "size": 94170
+    },
+    {
+      "file": "ishares_20130830.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20130830.csv",
+      "github_blob_sha": "322bb3e436ec74c5d8ee722f0e0773bada5d604a",
+      "size": 94204
+    },
+    {
+      "file": "ishares_20130930.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20130930.csv",
+      "github_blob_sha": "684afbf29f543afa1158a15725e410e0feff4eca",
+      "size": 94261
+    },
+    {
+      "file": "ishares_20131031.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20131031.csv",
+      "github_blob_sha": "9083c49dad43bd79cf9c2cde17f6f00672b030f2",
+      "size": 94231
+    },
+    {
+      "file": "ishares_20131129.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20131129.csv",
+      "github_blob_sha": "2a5ceee2a37f11754258212ea972412dd5cb87fa",
+      "size": 94312
+    },
+    {
+      "file": "ishares_20131231.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20131231.csv",
+      "github_blob_sha": "205a765b2adfdea0e84319a57df11330330ae5c3",
+      "size": 94318
+    },
+    {
+      "file": "ishares_20140131.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20140131.csv",
+      "github_blob_sha": "5f80d9d5abbb704afc3c5ca21d5213943ea3cae2",
+      "size": 94476
+    },
+    {
+      "file": "ishares_20140228.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20140228.csv",
+      "github_blob_sha": "fef0ea86c43115bbbb4884b56d4466010db48f1c",
+      "size": 94256
+    },
+    {
+      "file": "ishares_20140331.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20140331.csv",
+      "github_blob_sha": "470df561d68bd9d07f64dd753163554dea63da5e",
+      "size": 94496
+    },
+    {
+      "file": "ishares_20140430.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20140430.csv",
+      "github_blob_sha": "5e742bd23549df727ea633788ad52d0b3f6a4451",
+      "size": 94911
+    },
+    {
+      "file": "ishares_20140530.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20140530.csv",
+      "github_blob_sha": "aa00acf967060c8bd658a4b87cf0039e63110f27",
+      "size": 95023
+    },
+    {
+      "file": "ishares_20140630.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20140630.csv",
+      "github_blob_sha": "5e4ad6fcec46969fd50664b8ed6ddc3a61f92400",
+      "size": 94740
+    },
+    {
+      "file": "ishares_20140731.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20140731.csv",
+      "github_blob_sha": "b9e7f15c2bbb1cf961ed96c9c5ac8c8a864c16dc",
+      "size": 94788
+    },
+    {
+      "file": "ishares_20140829.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20140829.csv",
+      "github_blob_sha": "65b6fd54300d63594db9b18798422f40f9957b31",
+      "size": 95002
+    },
+    {
+      "file": "ishares_20140930.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20140930.csv",
+      "github_blob_sha": "0b68aa72f6301e0353659d72c7c8eadd766fd9d3",
+      "size": 95012
+    },
+    {
+      "file": "ishares_20141031.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20141031.csv",
+      "github_blob_sha": "5fc497e8ea3e4c8f0cc0acff48009c0104f343ba",
+      "size": 95020
+    },
+    {
+      "file": "ishares_20141128.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20141128.csv",
+      "github_blob_sha": "686da9b6221e4206ee47f796026c52cdb46e414a",
+      "size": 101364
+    },
+    {
+      "file": "ishares_20141231.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20141231.csv",
+      "github_blob_sha": "1afddb65ebeae434413a5bcce0d1e71cdaed6be5",
+      "size": 101263
+    },
+    {
+      "file": "ishares_20150130.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20150130.csv",
+      "github_blob_sha": "491f8195968aea16602e31d9926297f2c0da1a33",
+      "size": 101235
+    },
+    {
+      "file": "ishares_20150227.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20150227.csv",
+      "github_blob_sha": "f3e8be08ad2797d2dbe24c7f4a083015cb3e6c35",
+      "size": 101245
+    },
+    {
+      "file": "ishares_20150331.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20150331.csv",
+      "github_blob_sha": "104cbc30913ec6c3c401824d5366e7db8031c187",
+      "size": 101090
+    },
+    {
+      "file": "ishares_20150430.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20150430.csv",
+      "github_blob_sha": "88f62502210b8daa90fa8e9234393961ccba2131",
+      "size": 101180
+    },
+    {
+      "file": "ishares_20150529.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20150529.csv",
+      "github_blob_sha": "f20f50f90ca1e13ae41239378a053371e118af93",
+      "size": 101271
+    },
+    {
+      "file": "ishares_20150630.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20150630.csv",
+      "github_blob_sha": "4ea66341d2b81e4a66b6de18da07ae5ae4632bda",
+      "size": 101631
+    },
+    {
+      "file": "ishares_20150731.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20150731.csv",
+      "github_blob_sha": "3a14ba0a1999a019a462ed153fa724325b4efd83",
+      "size": 101225
+    },
+    {
+      "file": "ishares_20150831.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20150831.csv",
+      "github_blob_sha": "2d2d0528071568edcd69f45f98f1eef7ac43acf6",
+      "size": 101179
+    },
+    {
+      "file": "ishares_20150930.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20150930.csv",
+      "github_blob_sha": "2bde38dc3d5194ca1c7589f46b4567b6529163ed",
+      "size": 101641
+    },
+    {
+      "file": "ishares_20151030.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20151030.csv",
+      "github_blob_sha": "b272ac7950848b9cb0a5e1662c3d60f3f8879df0",
+      "size": 101821
+    },
+    {
+      "file": "ishares_20151130.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20151130.csv",
+      "github_blob_sha": "ff0855afd8e392f7ab9cb8a6daab1b247679f926",
+      "size": 102042
+    },
+    {
+      "file": "ishares_20151231.csv",
+      "url": "https://github.com/riazarbi/sp500-scraper/blob/main/ishares/sp500/csv/20151231.csv",
+      "github_blob_sha": "6c316d8ef7013375b47f04035740bd1c6577e83b",
+      "size": 101556
+    }
+  ],
+  "membership": [
+    {
+      "file": "membership_2006.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2006.yaml"
+    },
+    {
+      "file": "membership_2007.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2007.yaml"
+    },
+    {
+      "file": "membership_2008.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2008.yaml"
+    },
+    {
+      "file": "membership_2009.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2009.yaml"
+    },
+    {
+      "file": "membership_2010.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2010.yaml"
+    },
+    {
+      "file": "membership_2011.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2011.yaml"
+    },
+    {
+      "file": "membership_2012.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2012.yaml"
+    },
+    {
+      "file": "membership_2013.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2013.yaml"
+    },
+    {
+      "file": "membership_2014.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2014.yaml"
+    },
+    {
+      "file": "membership_2015.yaml",
+      "url": "https://github.com/shardul0701/SP500-Survivorship-bias-data-2004-2026/blob/main/src/sp500_ticker_history/sp500-ticker-changes-2015.yaml"
+    }
+  ],
+  "sector_identity_exclusion": {
+    "file": "components_history.csv",
+    "url": "https://github.com/lawcal/sp500-components-history/blob/main/data/components_history.csv",
+    "role": "multiple CIK ticker ambiguity detection only; its present sectors never used in analysis"
+  }
+}

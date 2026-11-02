@@ -1,0 +1,57 @@
+{
+  "utc": "2026-10-31T13:11:38.148921+00:00",
+  "protocol_sha256": "23a49749f06cfc44c4c7f5a203e5f18cd04343d5763e7541100c4f977a2f756f",
+  "network_requests": 0,
+  "outcomes_computed": false,
+  "validation_outcomes_opened": false,
+  "files": [
+    {
+      "path": "/opt/mts/thunder-migration/Momentum-Trading-System_v4/Research/Data/ExternalMarket/G2/legacy_sector_etf_panel_2005_2026.parquet",
+      "status": "unreadable",
+      "error_type": "PermissionError",
+      "errno": 13,
+      "error": "[Errno 13] Permission denied: '/opt/mts/thunder-migration/Momentum-Trading-System_v4/Research/Data/ExternalMarket/G2/legacy_sector_etf_panel_2005_2026.parquet'"
+    },
+    {
+      "path": "/opt/mts/thunder-migration/mts-layered-run-20261007/Research/Runs/layered/stage1-context-map-20261007/sector_etf_extension_xlre_xlc_yfinance_20261007.parquet",
+      "status": "unreadable",
+      "error_type": "PermissionError",
+      "errno": 13,
+      "error": "[Errno 13] Permission denied: '/opt/mts/thunder-migration/mts-layered-run-20261007/Research/Runs/layered/stage1-context-map-20261007/sector_etf_extension_xlre_xlc_yfinance_20261007.parquet'"
+    },
+    {
+      "path": "/opt/mts/ga6-git-backup/Research/Data/Comparators/SPY_YFINANCE_2005_2026.parquet",
+      "sha256": "b182402afd15c074ee4cc596149bf0a821e6cbd00fa5329d84eef269636f6381",
+      "bytes": 279144,
+      "status": "readable",
+      "rows": 5459,
+      "columns": [
+        "date",
+        "adj_close",
+        "capital_gains",
+        "close",
+        "dividends",
+        "high",
+        "low",
+        "open",
+        "stock_splits",
+        "volume"
+      ],
+      "schema": "<pyarrow._parquet.ParquetSchema object at 0x773b0f6da200>\nrequired group field_id=-1 schema {\n  optional int64 field_id=-1 date (Timestamp(isAdjustedToUTC=false, timeUnit=milliseconds, is_from_converted_type=false, force_set_converted_type=false));\n  optional double field_id=-1 adj_close;\n  optional double field_id=-1 capital_gains;\n  optional double field_id=-1 close;\n  optional double field_id=-1 dividends;\n  optional double field_id=-1 high;\n  optional double field_id=-1 low;\n  optional double field_id=-1 open;\n  optional double field_id=-1 stock_splits;\n  optional int64 field_id=-1 volume;\n}\n",
+      "metadata_keys": [
+        "ARROW:schema",
+        "pandas"
+      ],
+      "first_date": "2005-01-03 00:00:00",
+      "last_date": "2026-09-15 00:00:00",
+      "duplicate_dates": 0,
+      "dates_increasing": true,
+      "rows_through_2025": 5283,
+      "adjusted_close_nulls": 0,
+      "adjusted_close_nonpositive": 0,
+      "adjusted_close_nonfinite": 0,
+      "provenance_limit": "Filename identifies YFINANCE; explicit adj_close and dividends/splits fields exist. Embedded metadata identifies pandas/Arrow only; no acquisition URL/timestamp or adjustment guarantee verified."
+    }
+  ],
+  "status": "BLOCKED_LOCAL_SECTOR_ACCESS"
+}

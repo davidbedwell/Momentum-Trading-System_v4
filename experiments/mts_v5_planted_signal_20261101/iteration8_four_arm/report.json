@@ -1,0 +1,13 @@
+{
+  "execution_status": "BLOCKED_SPECIFICATION",
+  "experiment_complete": false,
+  "utc": "2026-11-01T21:54:21.602893+00:00",
+  "portfolio_replays": 0,
+  "seed_draws": 0,
+  "commitment_created": false,
+  "source_files": 44,
+  "sources_unchanged": true,
+  "issues": "SPECIFICATION_ISSUES.md",
+  "preregistration": "preregister.draft.json",
+  "experiment_results": null
+}

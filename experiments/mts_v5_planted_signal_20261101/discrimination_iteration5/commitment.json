@@ -1,0 +1,9 @@
+{
+  "utc": "2026-11-01T14:24:04.481259+00:00",
+  "sources": {
+    "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration5/experiment.py": "374e1fda136c50c643cbfce4ab2bd1ed26274b19b433dfc38109ead03a1b50a0",
+    "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration5/test_experiment.py": "4ae56648ea21e1edb241d2699b08aeb00c3e3401baf9b8c8a4dadff82f6408a9",
+    "/opt/mts/sector-leadership-independent/experiments/mts_v5_planted_signal_20261101/discrimination_iteration5/preregister.json": "f6253010529818262e3b4f52511d307ae0cafb3129629c164e4293db06495b0c"
+  },
+  "preregister_sha256": "f6253010529818262e3b4f52511d307ae0cafb3129629c164e4293db06495b0c"
+}

@@ -1,0 +1,53 @@
+{
+  "runs": [
+    {
+      "seed": 1564008556893530022,
+      "scenario": "learnable",
+      "variant": "corrected_equal_universe",
+      "total_return": 0.0012100007917366096,
+      "cagr": 0.002421465685389146,
+      "mdd": 0.022706316339030863,
+      "costs": 19194.585079138906,
+      "final_nav": 100121.00007917365,
+      "trades": 1512
+    },
+    {
+      "seed": 1634635432866334191,
+      "scenario": "learnable",
+      "variant": "corrected_equal_universe",
+      "total_return": -0.022751766007440333,
+      "cagr": -0.04498588915842339,
+      "mdd": 0.03225819886723702,
+      "costs": 18594.00594861596,
+      "final_nav": 97724.82339925597,
+      "trades": 1512
+    },
+    {
+      "seed": 5015368413594993126,
+      "scenario": "learnable",
+      "variant": "corrected_equal_universe",
+      "total_return": 0.03000399146943411,
+      "cagr": 0.06090822244296601,
+      "mdd": 0.015172876533262714,
+      "costs": 19141.388367254258,
+      "final_nav": 103000.39914694341,
+      "trades": 1512
+    },
+    {
+      "seed": 3584306075979195116,
+      "scenario": "learnable",
+      "variant": "corrected_equal_universe",
+      "total_return": 0.005221912988778055,
+      "cagr": 0.010471094352818566,
+      "mdd": 0.03103160661240656,
+      "costs": 18944.136993032975,
+      "final_nav": 100522.1912988778,
+      "trades": 1512
+    }
+  ],
+  "elapsed_seconds": 0.24051805003546178,
+  "source_sha256": "f22cc50c64a942a22ed19a1d23b8d61269df6c9c239a84000f221acd65f8acc1",
+  "phase": "post-freeze correction on already viewed learnable tapes",
+  "reason": "Original benchmark forecast-ranked cash-limited purchases; invalid independent control.",
+  "additional_replays": 4
+}

@@ -1,0 +1,81 @@
+{
+  "overlap": {
+    "exact_tickers": [],
+    "normalized_tickers": [],
+    "yahoo_symbol_overlap": [],
+    "security_ids": [],
+    "independent_stock_holdout": true,
+    "identity_note": "Compared supplied security_id and DEV87 yahoo_symbol mappings; no external corporate-action identity registry available."
+  },
+  "dev79_control": {
+    "cagr": 0.23193680384098725,
+    "tickers_before_2019": 77,
+    "memberships_match": true
+  },
+  "2009-2018": {
+    "sessions": 2516,
+    "months": 120,
+    "start": "2009-01-02",
+    "end": "2018-12-31",
+    "warmup_start": "2005-09-14",
+    "tickers": 80,
+    "canceled_targets": 0,
+    "original_control_memberships_match": true,
+    "matched_active_schedule_equal": true,
+    "terminal_liquidation": false
+  },
+  "2019-2025": {
+    "sessions": 1760,
+    "months": 84,
+    "start": "2019-01-02",
+    "end": "2025-12-31",
+    "warmup_start": "2005-09-14",
+    "tickers": 87,
+    "canceled_targets": 0,
+    "original_control_memberships_match": true,
+    "matched_active_schedule_equal": true,
+    "terminal_liquidation": false
+  },
+  "status": "PASS",
+  "verification_errors": {
+    "dev79_monthly": 2.92300905702092e-16,
+    "dev79_cagr": 0.0,
+    "dev79_feature_rsi14": 7.105427357601002e-15,
+    "dev79_feature_return_252": 4.440892098500626e-16,
+    "dev79_feature_ma_distance_20": 9.8879238130678e-17,
+    "dev79_feature_acceleration_21": 9.8879238130678e-17,
+    "2009-2018_original_monthly": 0.0,
+    "2009-2018_original_mdd": 0.0,
+    "2009-2018_original_sharpe": 0.0,
+    "2009-2018_original_cagr": 0.0,
+    "2009-2018_dollar_nav": 1.1546319456101628e-13,
+    "2009-2018_fee": 3.189722791452354e-16,
+    "2009-2018_self_financing": 1.7763568394002505e-15,
+    "2009-2018_feature": 0.0,
+    "2019-2025_original_monthly": 0.0,
+    "2019-2025_original_mdd": 0.0,
+    "2019-2025_original_sharpe": 0.0,
+    "2019-2025_original_cagr": 0.0,
+    "2019-2025_dollar_nav": 3.197442310920451e-14,
+    "2019-2025_fee": 3.185385982762412e-16,
+    "2019-2025_self_financing": 8.881784197001252e-16,
+    "2019-2025_feature": 0.0
+  },
+  "source_hashes": {
+    "/opt/mts/sector-leadership-independent/experiments/dev87_rsi_frozen_validation_20261101/dev87_raw.parquet": "90d329bdd5d60605a2e4a2e70be8294f7b6c99d4a00736cf7a5de08fd6129be4",
+    "/opt/mts/portfolio_evolution_dev80/dev80_raw_no_smci.parquet": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+    "/opt/mts/sector-leadership-independent/experiments/dev87_rsi_frozen_validation_20261101/FROZEN_SPEC.md": "10f9612face695d6cdc93ac9157513855303b47c5a547054e70632c47a1648c5",
+    "/opt/mts/sector-leadership-independent/experiments/dev87_rsi_frozen_validation_20261101/study.py": "5670788409e28f15a874e0a6cd3a78b5c5b94b8a574b73cfe73057320add5c7a",
+    "/opt/mts/sector-leadership-independent/experiments/dev87_rsi_frozen_validation_20261101/verify.py": "3d324a5979a33c719d848a1075da7f05d0b51e0746199ef456e430f5870aaff0",
+    "/opt/mts/sector-leadership-independent/experiments/dev79_rsi_indicator_combinations_20261101/study.py": "4f64485acd2a08e9f10d07863207e57ba9edc98f8476a909556faa23ae20b469",
+    "/opt/mts/sector-leadership-independent/experiments/dev79_monthly_indicator_20261101/indicator_experiment.py": "df2cecb5a228a090d62d3d1ec17f689ff238f508b64fcd0c9ef1493c1dd7fb9e"
+  },
+  "versions": {
+    "pandas": "3.0.6",
+    "numpy": "2.5.4"
+  },
+  "source_rows": 418594,
+  "source_tickers": 87,
+  "source_start": "2005-09-14 00:00:00",
+  "source_end": "2026-09-14 00:00:00"
+}

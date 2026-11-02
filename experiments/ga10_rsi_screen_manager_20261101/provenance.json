@@ -1,0 +1,10 @@
+{
+  "source": "/opt/mts/portfolio_evolution_dev80/dev80_raw_no_smci.parquet",
+  "source_sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+  "plan_sha256": "8b88ea4daa97b4747c4984ea66cb1cfd8325b7dccd66ecd92fe4bd75b04853e2",
+  "seed": 10,
+  "elapsed_seconds": 16.221957101952285,
+  "stop": "bounded prototype complete; no further optimization",
+  "pit_archive_certified": false,
+  "holdout_previously_examined": true
+}

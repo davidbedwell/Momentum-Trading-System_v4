@@ -1,0 +1,54 @@
+{
+  "status": "DIAGNOSTIC_NOT_CERTIFIED",
+  "proof_opened": false,
+  "training_only": true,
+  "first": "2022-11-17",
+  "last": "2022-12-30",
+  "sessions": 32,
+  "tickers": 500,
+  "native_final_nav": 98606.18180919687,
+  "native_cash_residual": -1.4551915228366852e-11,
+  "native_requests": 15500,
+  "funded_shadow_nav": 95856.81920838593,
+  "funded_fills": 601,
+  "nav_difference": -2749.3626008109422,
+  "actions": {
+    "ENTER": 8990,
+    "EXIT": 272,
+    "HOLD": 301,
+    "REDUCE": 52
+  },
+  "paired_utility": {
+    "ADD": {
+      "entry_only_mean": null,
+      "n": 0,
+      "mean": null
+    },
+    "REDUCE": {
+      "entry_only_mean": -0.0053530356213912535,
+      "n": 50,
+      "mean": 4.7283989139355114e-05
+    },
+    "EXIT": {
+      "entry_only_mean": 0.006900177375301853,
+      "n": 264,
+      "mean": -0.0002761252743737223
+    }
+  },
+  "utility_contract": "one-next-session held action versus HOLD; net NAV fraction; not entry return; no fitting or certification",
+  "differences": [
+    "native integer shares versus shadow fractional shares",
+    "native capacity and three-per-sector limit versus shadow no capacity limit",
+    "native INCREASE incremental .03 versus shadow target weights",
+    "native REDUCE integer half versus shadow close-weight half at next open",
+    "native terminal close liquidation versus shadow retained holdings",
+    "native risk stop sizing versus shadow target sizing",
+    "both use T+1 proceeds and .001 fee; cash yield disabled",
+    "all-true diagnostic eligibility, unknown model lineage, no certified event tape"
+  ],
+  "sources": {
+    "/opt/mts/ga7-deploy/ga7_unbounded/runs/preflight_16/checkpoint.json": "8e70569141a33597449dbcbec81340dc9cb96e33d3f229d8319ce636ebf0f812",
+    "/tmp/mts_phase3_feature_audit/full.parquet": "da2a3d8e3ad72337bc145593c9942a98f25b0ff7b3155509b6d1f9972d643174",
+    "/opt/mts/synthetic-market-lab/runs/five_iteration_inputs/universe_1/stock_prices.parquet": "1fc1b849f81472e6d0684c010689c3bd6fca45021a1d9399d0ab1ddab0044a85"
+  }
+}

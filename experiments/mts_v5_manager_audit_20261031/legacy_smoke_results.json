@@ -1,0 +1,30 @@
+{
+  "zero_target_entry": [
+    [
+      "B",
+      "owner",
+      0.1
+    ],
+    [
+      "A",
+      "owner",
+      0.03
+    ]
+  ],
+  "nan_score_accepted": [
+    [
+      "N",
+      "owner",
+      0.1
+    ]
+  ],
+  "competition_self_test": "COMPETITIVE_ALLOCATION_TEST_OK",
+  "scope": "GA6 standalone allocation only",
+  "v4_tail_risk_sizer": {
+    "shares": 200,
+    "capital": 20000,
+    "estimated_loss": 2000.0,
+    "budget": 2000.0,
+    "downside": 0.1
+  }
+}

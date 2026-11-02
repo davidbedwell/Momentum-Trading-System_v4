@@ -1,0 +1,22 @@
+{
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "pandas": "3.0.6",
+  "numpy": "2.5.4",
+  "study_sha256": "796a1ff78baff80b480ce53cabe2dd9b44db389b7aced95b97bcbdc92950b15a",
+  "trades": 270109,
+  "selected": 817,
+  "sample": 680,
+  "entry_start": "2009-04-21 00:00:00",
+  "entry_end": "2018-03-23 00:00:00",
+  "final_code_hashes": {
+    "finish.py": "af4a186a7e17fefb732a42489aef053cf155e928ca062b9905941dc421439408",
+    "study.py": "6560d755add691f483db5df14f4e3b828bbd2443fd9f35f2f522e8ba352c84a4",
+    "test_study.py": "64d0e407a5928b4e6878f7c2154fb74904a48502ede55210ca31bf998c0b9f5e",
+    "refine.py": "cec80f1da2846f335c0b5dddd3c0a6b64078fe91e1e9ab3d09cf2b2e07189e0f",
+    "ga8_study.py": "7a4722c385e99e76035145463f6ec47c760bdc923ca5ef7b77da6610d887585f",
+    "native_ga6.py": "3490e9414f37daea924c4a7dc994d31d8a6b5e578b043e49e23809be9c97befb",
+    "inventory_detail.py": "fc44d23b4de63ff36481cbcb0cf069070bd7831f794f4ac2617a2da0b88643d3",
+    "report.py": "30cd46486312516db640cd129968b604b35875acbe360fff3870ad97a893c504"
+  },
+  "tests_total": 56
+}

@@ -1,0 +1,1 @@
+All outputs produced before the controlling v2 implementation, including reports/smoke, are exploratory/old protocol v1. They are not Stage1 results, gate evidence, pristine holdout evidence, or certified 2006–2026 research. Do not re-interpret their v1 labels under v2.

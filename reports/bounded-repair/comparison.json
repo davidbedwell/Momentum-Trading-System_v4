@@ -1,0 +1,115 @@
+{
+  "decision": "NO-GO; STOP",
+  "rerun_primary": false,
+  "reason": "Zero recovered price rows and zero newly verified PIT sector labels; no meaningful usable-coverage improvement.",
+  "meaningful_coverage_rule": "At least +5 percentage points in priced, historically sector-verified stock-month coverage, or 12 additional complete sector-month benchmarks. A membership-only addition does not qualify.",
+  "pitindex_commit": "2df030e5c9be7c83cf4b28c3d8597d74d274757e",
+  "snapshot_comparison": {
+    "months": 111,
+    "jaccard_mean": 0.7890075781999762,
+    "jaccard_min": 0.7399650959860384,
+    "common_mean": 439.7567567567568,
+    "ivv_only_total": 6658,
+    "pitindex_only_total": 6563,
+    "ivv_priced_total": 27511,
+    "pitindex_priced_total": 29821,
+    "pitindex_missing_price_stock_months": 25555,
+    "sector_comparable_total": 23975,
+    "sector_disagreements_total": 1577
+  },
+  "early_membership_candidates": [
+    {
+      "asof": "2006-01-31",
+      "membership": 498,
+      "current_sector_available": 232,
+      "historical_sector_verified": 0
+    },
+    {
+      "asof": "2006-02-28",
+      "membership": 498,
+      "current_sector_available": 233,
+      "historical_sector_verified": 0
+    },
+    {
+      "asof": "2006-03-31",
+      "membership": 498,
+      "current_sector_available": 233,
+      "historical_sector_verified": 0
+    },
+    {
+      "asof": "2006-04-30",
+      "membership": 498,
+      "current_sector_available": 236,
+      "historical_sector_verified": 0
+    },
+    {
+      "asof": "2006-05-31",
+      "membership": 498,
+      "current_sector_available": 236,
+      "historical_sector_verified": 0
+    },
+    {
+      "asof": "2006-06-30",
+      "membership": 498,
+      "current_sector_available": 236,
+      "historical_sector_verified": 0
+    },
+    {
+      "asof": "2006-07-31",
+      "membership": 498,
+      "current_sector_available": 236,
+      "historical_sector_verified": 0
+    },
+    {
+      "asof": "2006-08-31",
+      "membership": 498,
+      "current_sector_available": 237,
+      "historical_sector_verified": 0
+    },
+    {
+      "asof": "2006-09-30",
+      "membership": 498,
+      "current_sector_available": 237,
+      "historical_sector_verified": 0
+    }
+  ],
+  "baseline": {
+    "price_rows": 869522,
+    "priced_symbols": 322,
+    "universe_symbols": 803,
+    "missing_price_symbols": 481,
+    "stock_months": 55471,
+    "missing_price_stock_months": 27960,
+    "priced_known_sector_stock_months": 26018,
+    "known_sector_stock_month_coverage": 0.4690378756467343,
+    "strict_benchmark_rows": 0
+  },
+  "repair": {
+    "recovered_price_rows": 0,
+    "new_verified_historical_sector_labels": 0,
+    "usable_coverage_gain_percentage_points": 0,
+    "additional_complete_benchmark_rows": 0
+  },
+  "sourcing": {
+    "max_minutes": 10,
+    "local_targets": 10,
+    "free_price_requests": 6,
+    "full_universe_price_download": false
+  },
+  "protected_hashes": {
+    "manifest.json": "9684e85103b917df05192327d4ab74ba48c4bcf69caff81c2b4ca7ba258e8549",
+    "CONTROLLING_PROTOCOL_V2.md": "d7c78cc771741b38f8b8b06e74598c6f1352b770ff4dbd16bdea57bf8143af81",
+    "RESEARCH_PROTOCOL.md": "856d1e5b5e4a868891760f0c157018758444ad684a99239ab08ddc32a5dda4a7",
+    "sector_pipeline/core.py": "5f96b43bc7302f784415898e5afcc2600f40d479d5c3b9ab15015d45d12d06b2",
+    "sector_pipeline/executor.py": "a2fbe257c71dbf4a2d52194f8e2990282e3a56daa58aa2e1e6f6a8d0914435f4",
+    "sector_pipeline/gate.py": "a7e1e9d0178ff8c579c4b7bada4c2040b08fd4679f8c451bb2861b70b0c5073a"
+  },
+  "protected_unchanged_from_expanded": true,
+  "limitations": [
+    "Exact ticker comparison; differences include fund aliases, historical renames, share classes, and source errors; neither roster is treated as ground truth.",
+    "pitindex current sector enrichment is retrospective, not PIT GICS. Its historical roster can extend membership evidence but supplies no prices.",
+    "Current roster/metadata were read only for source assessment; no Stage2 prices or returns were loaded.",
+    "Six failed Yahoo probes and a bounded local search do not prove global nonexistence of free delisted prices.",
+    "No H3/H4/H6 historical analysis, no primary rerun, no new placebos or Holm family, no Stage2 release."
+  ]
+}

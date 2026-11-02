@@ -1,0 +1,452 @@
+"""Public query API.
+
+The runtime model is event-sourcing on a tiny event log:
+  - Load the seed roster (a single date snapshot, ~500 tickers).
+  - Load the change events (~1000-2000 events over 20 years).
+  - To get the membership at any point in time T, walk events in order
+    up to T, applying each one to a running set.
+
+Even with a naive O(N) walk per query this is < 1 ms — there is no
+need for a more sophisticated index for v1.
+
+Metadata enrichment (name, CIK, GICS sector) comes from the current
+Wikipedia roster snapshot for tickers that are still members today; for
+tickers that have since left the index, the only metadata we have is
+whatever the change-events table preserved (typically the company name).
+"""
+
+from __future__ import annotations
+
+import datetime as dt
+import functools
+import logging
+import os
+import warnings
+from collections.abc import Iterable
+
+import pandas as pd
+
+from . import _loader
+from ._registry import COMPOSITE_INDICES, validate_index
+
+log = logging.getLogger(__name__)
+
+DateLike = str | dt.date | dt.datetime
+
+_OUTPUT_COLUMNS = ["ticker", "name", "cik", "gics_sector", "gics_sub_industry"]
+_HISTORY_COLUMNS = ["as_of", *_OUTPUT_COLUMNS]
+
+# Default freshness budget: a week for the upstream cron to run plus a
+# week of grace before nagging the user. Override with the env var.
+_DEFAULT_STALE_DAYS = 14
+_STALE_DAYS = int(os.environ.get("PITINDEX_STALE_DAYS", _DEFAULT_STALE_DAYS))
+
+
+class StaleDataWarning(UserWarning):
+    """The bundled dataset is older than the configured freshness budget."""
+
+
+def _coerce_date(d: DateLike) -> dt.date:
+    if isinstance(d, dt.datetime):
+        return d.date()
+    if isinstance(d, dt.date):
+        return d
+    if isinstance(d, str):
+        return dt.date.fromisoformat(d)
+    raise TypeError(f"Unsupported date type: {type(d).__name__}")
+
+
+@functools.cache
+def _index(key: str = "sp500") -> _Index:
+    return _Index.load(key)
+
+
+class _Index:
+    __slots__ = ("current_by_ticker", "events", "key", "metadata", "name_by_ticker", "seed", "seed_date")
+
+    def __init__(
+        self,
+        key: str,
+        seed_date: dt.date,
+        seed: set[str],
+        events: list[_loader.Event],
+        current_by_ticker: dict[str, _loader.CurrentEntry],
+        name_by_ticker: dict[str, str],
+        metadata: dict,
+    ):
+        self.key = key
+        self.seed_date = seed_date
+        self.seed = seed
+        self.events = events
+        self.current_by_ticker = current_by_ticker
+        self.name_by_ticker = name_by_ticker
+        self.metadata = metadata
+
+    @classmethod
+    def load(cls, key: str = "sp500") -> _Index:
+        seed_date, seed = _loader.load_seed(key)
+        events = _loader.load_events(key)
+        current = _loader.load_current(key)
+        current_by_ticker = {c.ticker: c for c in current}
+        # Best-effort name lookup: prefer current name, fall back to name
+        # captured in a change event when the ticker has since left.
+        name_by_ticker: dict[str, str] = {c.ticker: c.name for c in current}
+        for e in events:
+            if e.ticker not in name_by_ticker and e.name:
+                name_by_ticker[e.ticker] = e.name
+        metadata = _index_metadata(_loader.load_metadata(), key)
+        _maybe_warn_stale(metadata)
+        return cls(key, seed_date, seed, events, current_by_ticker, name_by_ticker, metadata)
+
+    @property
+    def coverage_start(self) -> dt.date:
+        return self.seed_date
+
+    @property
+    def coverage_end(self) -> dt.date:
+        return dt.date.fromisoformat(self.metadata.get("end_date") or self.seed_date.isoformat())
+
+    def roster_at(self, as_of: dt.date) -> set[str]:
+        if as_of < self.seed_date:
+            raise ValueError(
+                f"as_of={as_of.isoformat()} is before seed coverage for {self.key} "
+                f"({self.seed_date.isoformat()}). pitindex does not extrapolate."
+            )
+        roster = set(self.seed)
+        for ev in self.events:
+            if ev.date > as_of:
+                break
+            if ev.action == "added":
+                roster.add(ev.ticker)
+            elif ev.action == "removed":
+                roster.discard(ev.ticker)
+        return roster
+
+    def to_frame(self, as_of: dt.date, tickers: Iterable[str]) -> pd.DataFrame:
+        rows = []
+        for t in sorted(tickers):
+            cur = self.current_by_ticker.get(t)
+            rows.append(
+                {
+                    "ticker": t,
+                    "name": cur.name if cur else self.name_by_ticker.get(t),
+                    "cik": cur.cik if cur else None,
+                    "gics_sector": cur.gics_sector if cur else None,
+                    "gics_sub_industry": cur.gics_sub_industry if cur else None,
+                }
+            )
+        df = pd.DataFrame(rows, columns=_OUTPUT_COLUMNS)
+        df.attrs["as_of"] = as_of.isoformat()
+        df.attrs["build_timestamp_utc"] = self.metadata.get("build_timestamp_utc")
+        return df
+
+
+def _index_metadata(full: dict, key: str) -> dict:
+    """Per-index section of build_metadata.json, plus the shared fields.
+
+    Falls back to the legacy flat layout (pre-0.2, sp500-only) when the
+    ``indices`` section is absent — e.g. an old user-cache file.
+    """
+    per_index = (full.get("indices") or {}).get(key)
+    if per_index is None:
+        if key != "sp500":
+            raise RuntimeError(
+                f"Loaded build_metadata.json has no section for {key!r}. "
+                "If a pre-0.2 cache is shadowing the bundled data, clear "
+                "~/.cache/pitindex or re-run pitindex.update()."
+            )
+        per_index = {k: v for k, v in full.items() if k != "indices"}
+    return {"build_timestamp_utc": full.get("build_timestamp_utc"), **per_index}
+
+
+def _data_age_days(metadata: dict) -> int | None:
+    raw = metadata.get("build_timestamp_utc")
+    if not raw:
+        return None
+    try:
+        built = dt.datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+    if built.tzinfo is None:
+        built = built.replace(tzinfo=dt.UTC)
+    delta = dt.datetime.now(dt.UTC) - built
+    return max(delta.days, 0)
+
+
+# Mutable holder (not a bare global) so the once-per-process latch works
+# without a `global` statement: three indices share one build timestamp,
+# and one nag about it is enough.
+_stale_warned = {"done": False}
+
+
+def _maybe_warn_stale(metadata: dict) -> None:
+    if _STALE_DAYS <= 0 or _stale_warned["done"]:
+        return  # opt-out via PITINDEX_STALE_DAYS=0; warn once per process
+    age = _data_age_days(metadata)
+    if age is None or age <= _STALE_DAYS:
+        return
+    _stale_warned["done"] = True
+    warnings.warn(
+        f"pitindex bundled data is {age} days old "
+        f"(threshold {_STALE_DAYS}). Run `pip install -U pitindex` to "
+        f"pick up the latest weekly refresh, or call `pitindex.update()` "
+        f"to rebuild from upstream sources right now. Suppress this "
+        f"warning with `PITINDEX_STALE_DAYS=0` or "
+        f"`warnings.filterwarnings('ignore', category=pitindex.StaleDataWarning)`.",
+        StaleDataWarning,
+        stacklevel=4,
+    )
+
+
+# --- public API ------------------------------------------------------------
+
+
+def get_constituents(as_of: DateLike, index: str = "sp500") -> pd.DataFrame:
+    """Return the index constituents as of ``as_of`` (end-of-day UTC).
+
+    Parameters
+    ----------
+    as_of
+        A ``datetime.date``, ``datetime.datetime``, or ISO-format string
+        (``YYYY-MM-DD``).
+    index
+        One of ``sp500`` (default), ``sp400``, ``sp600``, or the virtual
+        composite ``sp1500`` (union of the three; adds an ``index``
+        column telling which sub-index each ticker belongs to).
+
+    Returns
+    -------
+    pd.DataFrame
+        Columns: ``ticker, name, cik, gics_sector, gics_sub_industry``
+        (plus ``index`` for the composite). ``cik`` and GICS fields are
+        populated only for tickers that are still index members today;
+        historical members carry ``None`` for those fields. ``as_of`` is
+        exposed via ``df.attrs['as_of']``.
+    """
+    key = validate_index(index)
+    as_of_d = _coerce_date(as_of)
+    if as_of_d > dt.date.today():
+        raise ValueError(f"as_of={as_of_d.isoformat()} is in the future.")
+    if key in COMPOSITE_INDICES:
+        return _composite_frame(key, as_of_d)
+    idx = _index(key)
+    roster = idx.roster_at(as_of_d)
+    return idx.to_frame(as_of_d, roster)
+
+
+def _composite_frame(key: str, as_of_d: dt.date) -> pd.DataFrame:
+    members = COMPOSITE_INDICES[key]
+    floor = max(_index(k).seed_date for k in members)
+    if as_of_d < floor:
+        raise ValueError(
+            f"as_of={as_of_d.isoformat()} is before seed coverage for {key} "
+            f"({floor.isoformat()} — the latest floor of its members: "
+            f"{', '.join(members)}). Query the sub-indices individually for earlier dates."
+        )
+    frames = []
+    for k in members:
+        idx = _index(k)
+        snap = idx.to_frame(as_of_d, idx.roster_at(as_of_d))
+        snap["index"] = k
+        frames.append(snap)
+    df = pd.concat(frames, ignore_index=True)
+    df.attrs["as_of"] = as_of_d.isoformat()
+    return df
+
+
+def get_constituents_history(start: DateLike, end: DateLike, index: str = "sp500") -> pd.DataFrame:
+    """Return one snapshot per *change date* in ``[start, end]``.
+
+    The result is a sparse history: rows are emitted only on dates when
+    the membership actually changed (plus the boundary ``start`` date).
+    To obtain a *daily* history, iterate :func:`get_constituents` over
+    your trading calendar — this avoids materializing the full Cartesian
+    product when you only need it on specific days.
+
+    Parameters
+    ----------
+    start, end
+        Inclusive bounds (date / datetime / ISO string).
+    index
+        ``sp500`` (default), ``sp400``, ``sp600``, or ``sp1500``.
+
+    Returns
+    -------
+    pd.DataFrame
+        Columns: ``as_of, ticker, name, cik, gics_sector, gics_sub_industry``
+        (plus ``index`` for the composite).
+    """
+    key = validate_index(index)
+    start_d = _coerce_date(start)
+    end_d = _coerce_date(end)
+    if end_d < start_d:
+        raise ValueError(f"end {end_d} precedes start {start_d}")
+    today = dt.date.today()
+    end_d = min(end_d, today)
+
+    physical = COMPOSITE_INDICES.get(key, (key,))
+    change_dates = sorted(
+        {ev.date for k in physical for ev in _index(k).events if start_d <= ev.date <= end_d}
+    )
+    snapshot_dates = [start_d, *[d for d in change_dates if d != start_d]]
+
+    frames = []
+    for d in snapshot_dates:
+        snap = get_constituents(d, index=key)
+        snap.insert(0, "as_of", d.isoformat())
+        frames.append(snap)
+    if not frames:
+        return pd.DataFrame(columns=_HISTORY_COLUMNS)
+    return pd.concat(frames, ignore_index=True)
+
+
+def info(index: str = "sp500") -> dict:
+    """Return metadata about the bundled dataset (build time, sources, sizes).
+
+    Includes ``data_age_days`` (None if the build timestamp is missing),
+    ``stale_threshold_days`` (the configured freshness budget), and
+    ``is_stale`` (whether the data has crossed the threshold). For the
+    composite ``sp1500`` the sizes are synthesized from the members and
+    ``start_date`` is the composite floor.
+    """
+    key = validate_index(index)
+    if key in COMPOSITE_INDICES:
+        members = {k: _index(k).metadata for k in COMPOSITE_INDICES[key]}
+        out = {
+            "build_timestamp_utc": next(iter(members.values())).get("build_timestamp_utc"),
+            "start_date": max(m["start_date"] for m in members.values()),
+            "end_date": max(m["end_date"] for m in members.values()),
+            "current_size": sum(m["current_size"] for m in members.values()),
+            "events_count": sum(m["events_count"] for m in members.values()),
+            "members": members,
+        }
+    else:
+        out = dict(_index(key).metadata)
+    out["index"] = key
+    age = _data_age_days(out)
+    out["data_age_days"] = age
+    out["stale_threshold_days"] = _STALE_DAYS
+    out["is_stale"] = age is not None and _STALE_DAYS > 0 and age > _STALE_DAYS
+    return out
+
+
+class PitIndex:
+    """Object-oriented wrapper around the module-level query API.
+
+    Mirrors the shape of :class:`pitedgar.PitQuery` so the two
+    libraries compose naturally in a backtest pipeline:
+
+        from pitedgar import PitQuery
+        from pitindex import PitIndex
+
+        idx = PitIndex()                  # S&P 500 (default)
+        mid = PitIndex("sp400")           # S&P 400 MidCap
+        broad = PitIndex("sp1500")        # composite of 500+400+600
+        members = idx.as_of("2020-12-22")["ticker"].tolist()
+
+        q = PitQuery("data/pit_financials.parquet")
+        revenues = q.cross_section("us-gaap:Revenues", "2020-12-22")
+        revenues = revenues[revenues.ticker.isin(members)]
+
+    The class is stateless and threadsafe — all underlying data is
+    loaded once on first use and cached process-wide.
+    """
+
+    def __init__(self, index: str = "sp500"):
+        self.index = validate_index(index)
+
+    def as_of(self, date: DateLike) -> pd.DataFrame:
+        """Return the membership snapshot at ``date``."""
+        return get_constituents(date, index=self.index)
+
+    def history(self, start: DateLike, end: DateLike) -> pd.DataFrame:
+        """Return one snapshot per change date in ``[start, end]``."""
+        return get_constituents_history(start, end, index=self.index)
+
+    def contains(self, ticker: str, date: DateLike) -> bool:
+        """Whether ``ticker`` was an index member at ``date``."""
+        df = get_constituents(date, index=self.index)
+        return ticker.upper() in df["ticker"].values
+
+    def info(self) -> dict:
+        """Build metadata + staleness flags for the loaded dataset."""
+        return info(index=self.index)
+
+    @property
+    def coverage_start(self) -> dt.date:
+        """First date for which PIT membership is supported."""
+        if self.index in COMPOSITE_INDICES:
+            return max(_index(k).coverage_start for k in COMPOSITE_INDICES[self.index])
+        return _index(self.index).coverage_start
+
+    @property
+    def coverage_end(self) -> dt.date:
+        """Last date covered by the bundled dataset (build date)."""
+        if self.index in COMPOSITE_INDICES:
+            return max(_index(k).coverage_end for k in COMPOSITE_INDICES[self.index])
+        return _index(self.index).coverage_end
+
+
+def update(*, force: bool = False) -> dict:
+    """Refresh the local data cache from upstream sources.
+
+    Runs the same build pipeline used to ship the package and writes the
+    output to ``~/.cache/pitindex`` so that subsequent calls pick up the
+    fresher data without reinstalling. Requires the ``[build]`` extra
+    (``pip install pitindex[build]``).
+
+    Parameters
+    ----------
+    force
+        Refresh even if the cache was updated less than 24 hours ago.
+
+    Returns
+    -------
+    dict
+        The build metadata for the freshly-built dataset.
+    """
+    # Deferred imports: ``scripts`` is an optional build-time package that is
+    # absent when only the runtime extras are installed; ``json`` is local to
+    # this fallback path. Top-level imports would force the dependency on
+    # every consumer of the library.
+    try:
+        from scripts import build_dataset  # noqa: PLC0415
+    except ImportError as exc:
+        raise RuntimeError(
+            "pitindex.update() requires the build extras. Install with: pip install 'pitindex[build]'"
+        ) from exc
+
+    cache = _loader.USER_CACHE
+    cache.mkdir(parents=True, exist_ok=True)
+    metadata_path = cache / "build_metadata.json"
+    if not force and metadata_path.exists():
+        try:
+            mtime = dt.datetime.fromtimestamp(metadata_path.stat().st_mtime)
+            if (dt.datetime.now() - mtime) < dt.timedelta(hours=24):
+                log.info("Cache is fresh (< 24h). Pass force=True to override.")
+                with metadata_path.open() as f:
+                    import json  # noqa: PLC0415
+
+                    return json.load(f)
+        except OSError:
+            pass
+
+    # Redirect package data writes into the user cache for this run.
+    original = build_dataset.PACKAGE_DATA
+    build_dataset.PACKAGE_DATA = cache
+    try:
+        rc = build_dataset.main([])
+    finally:
+        build_dataset.PACKAGE_DATA = original
+    if rc != 0:
+        raise RuntimeError(f"update() build failed with exit code {rc}")
+    _index.cache_clear()
+    return info()
+
+
+__all__ = [
+    "get_constituents",
+    "get_constituents_history",
+    "info",
+    "update",
+]

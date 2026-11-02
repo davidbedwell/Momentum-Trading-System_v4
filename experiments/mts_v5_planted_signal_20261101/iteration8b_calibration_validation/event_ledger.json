@@ -1,0 +1,8395 @@
+[
+  {
+    "seed": 4537256206270286119,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04747799089651051,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.0225703329487,
+        "threshold": 0.017064405851291056,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.023997667831895365,
+        "threshold": 0.017486705934873413,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 7.347559556355396,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.038136711878268593,
+          0.0426367118782686
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.038136711878268593,
+          0.0426367118782686
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 655,
+    "first_alarm": 659,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 659,
+        "last_signal": 656,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04939977013111474,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 672,
+        "cell": 0,
+        "delta": 0.017707935140553837,
+        "threshold": 0.017064405851291056,
+        "last_signal": 669,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 672,
+        "cell": 4,
+        "delta": -0.017517141804251426,
+        "threshold": 0.017064405851291056,
+        "last_signal": 669,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 655,
+    "first_alarm": 661,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 661,
+        "log_e": 6.913204308359817,
+        "last_signal": 658
+      }
+    ]
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 655,
+    "first_alarm": 658,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 658,
+        "last_signal": 655,
+        "statistics": [
+          0.04900185665278663,
+          0.05800185665278663
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 655,
+    "first_alarm": 658,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 658,
+        "last_signal": 655,
+        "statistics": [
+          0.04900185665278663,
+          0.05800185665278663
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4537256206270286119,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.0533013440858948,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.025460241377700556,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.024585178813632015,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 611,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 611,
+        "log_e": 5.447469894652306,
+        "last_signal": 608
+      }
+    ]
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.04797326771402481,
+          0.052473267714024815
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.04797326771402481,
+          0.052473267714024815
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 662,
+    "first_alarm": 666,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 666,
+        "last_signal": 663,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04870645462258256,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 680,
+        "cell": 0,
+        "delta": 0.019177386955765038,
+        "threshold": 0.017062354508114826,
+        "last_signal": 677,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 680,
+        "cell": 4,
+        "delta": -0.019291821888907768,
+        "threshold": 0.01706337763346477,
+        "last_signal": 677,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 662,
+    "first_alarm": 668,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 668,
+        "log_e": 6.999085475891704,
+        "last_signal": 665
+      }
+    ]
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 662,
+    "first_alarm": 665,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 665,
+        "last_signal": 662,
+        "statistics": [
+          0.04137413838333587,
+          0.04587413838333587
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 662,
+    "first_alarm": 665,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 665,
+        "last_signal": 662,
+        "statistics": [
+          0.04137413838333587,
+          0.04587413838333587
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 694382096743991061,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04750543817355658,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.02484229815994756,
+        "threshold": 0.017064405851291056,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.02364114200211991,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 7.500118580510567,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03657267241038329,
+          0.041072672410383294
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03657267241038329,
+          0.041072672410383294
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 684,
+    "first_alarm": 689,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 689,
+        "last_signal": 686,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.03417870017768347,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 700,
+        "cell": 0,
+        "delta": 0.01771378593898216,
+        "threshold": 0.017064405851291056,
+        "last_signal": 697,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 684,
+    "first_alarm": 692,
+    "delay": 8,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 692,
+        "log_e": 6.545162518798582,
+        "last_signal": 689
+      }
+    ]
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 684,
+    "first_alarm": 687,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 687,
+        "last_signal": 684,
+        "statistics": [
+          0.0391654215257234,
+          0.043665421525723405
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 684,
+    "first_alarm": 687,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 687,
+        "last_signal": 684,
+        "statistics": [
+          0.0391654215257234,
+          0.043665421525723405
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1150718378971727077,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.050284995009515256,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.025334602745434885,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.021949692161350787,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 7.07774634093005,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03824556017281754,
+          0.04274556017281755
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03824556017281754,
+          0.04274556017281755
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 675,
+    "first_alarm": 680,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 680,
+        "last_signal": 677,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04914762521800618,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 692,
+        "cell": 0,
+        "delta": 0.01712617212552978,
+        "threshold": 0.017062354508114826,
+        "last_signal": 689,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 692,
+        "cell": 4,
+        "delta": -0.01722147797710491,
+        "threshold": 0.01706337763346477,
+        "last_signal": 689,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 675,
+    "first_alarm": 683,
+    "delay": 8,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 683,
+        "log_e": 6.604925773688175,
+        "last_signal": 680
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 675,
+    "first_alarm": 678,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 678,
+        "last_signal": 675,
+        "statistics": [
+          0.03256743607224618,
+          0.037067436072246183
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 675,
+    "first_alarm": 678,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 678,
+        "last_signal": 675,
+        "statistics": [
+          0.03256743607224618,
+          0.037067436072246183
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 694,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 694,
+        "last_signal": 691,
+        "statistics": [
+          0.014105531252225379,
+          0.02760553125222538
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 672,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 672,
+        "last_signal": 669,
+        "statistics": [
+          0.016181049702945705,
+          0.03418104970294571
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1167515651896656629,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 611,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 611,
+        "last_signal": 608,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04799582216364422,
+            "threshold": 0.04692237703041966
+          },
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.0349652038829798,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.023183192466950026,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.021260128116807955,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 6.419817317041085,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03850087024160905,
+          0.043000870241609056
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03850087024160905,
+          0.043000870241609056
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 660,
+    "first_alarm": 666,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 666,
+        "last_signal": 663,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.04168758312966089,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 680,
+        "cell": 0,
+        "delta": 0.019184899945018173,
+        "threshold": 0.01706337763346477,
+        "last_signal": 677,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 680,
+        "cell": 4,
+        "delta": -0.02108804383354646,
+        "threshold": 0.01706337763346477,
+        "last_signal": 677,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 660,
+    "first_alarm": 670,
+    "delay": 10,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 670,
+        "log_e": 5.519233698682182,
+        "last_signal": 667
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 660,
+    "first_alarm": 663,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 663,
+        "last_signal": 660,
+        "statistics": [
+          0.03651276556286553,
+          0.04101276556286553
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 660,
+    "first_alarm": 663,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 663,
+        "last_signal": 660,
+        "statistics": [
+          0.03651276556286553,
+          0.04101276556286553
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 622,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 622,
+        "last_signal": 619,
+        "statistics": [
+          0.020147760421609158,
+          0.03364776042160916
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 688,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 688,
+        "last_signal": 685,
+        "statistics": [
+          0.015382327430450789,
+          0.02847234903261345
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4831300176840824932,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": 691,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 691,
+        "last_signal": 688,
+        "statistics": [
+          0.02845295002495017,
+          0.05504297162711285
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.0475741164659787,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.023518001339825997,
+        "threshold": 0.017485702549722915,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.022947975375480083,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 7.374625844889447,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.046302291024973664,
+          0.05080229102497367
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.046302291024973664,
+          0.05080229102497367
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 671,
+    "first_alarm": 677,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 677,
+        "last_signal": 674,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04965185255870096,
+            "threshold": 0.04692237703041966
+          },
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.04675204602308134,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 688,
+        "cell": 4,
+        "delta": -0.0187157561732064,
+        "threshold": 0.01706337763346477,
+        "last_signal": 685,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 671,
+    "first_alarm": 677,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 677,
+        "log_e": 6.746118042075758,
+        "last_signal": 674
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 671,
+    "first_alarm": 674,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 674,
+        "last_signal": 671,
+        "statistics": [
+          0.03576383326862685,
+          0.040263833268626856
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 671,
+    "first_alarm": 674,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 674,
+        "last_signal": 671,
+        "statistics": [
+          0.03576383326862685,
+          0.040263833268626856
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 714,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 714,
+        "last_signal": 711,
+        "statistics": [
+          0.015797024453071566,
+          0.02929702445307156
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 440151416451439808,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 613,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 613,
+        "last_signal": 610,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.049353164924535585,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.022067414984959795,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.022945488762402683,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 613,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 613,
+        "log_e": 5.965487684726194,
+        "last_signal": 610
+      }
+    ]
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03433514125470085,
+          0.038835141254700854
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03433514125470085,
+          0.038835141254700854
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 679,
+    "first_alarm": 683,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 683,
+        "last_signal": 680,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04748489370384963,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 696,
+        "cell": 0,
+        "delta": 0.01779890053210884,
+        "threshold": 0.017062354508114826,
+        "last_signal": 693,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 679,
+    "first_alarm": 686,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 686,
+        "log_e": 7.3601259121676055,
+        "last_signal": 683
+      }
+    ]
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 679,
+    "first_alarm": 682,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 682,
+        "last_signal": 679,
+        "statistics": [
+          0.04195872206113908,
+          0.04645872206113908
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 679,
+    "first_alarm": 682,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 682,
+        "last_signal": 679,
+        "statistics": [
+          0.04195872206113908,
+          0.04645872206113908
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 628,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 628,
+        "last_signal": 625,
+        "statistics": [
+          0.02064948243924212,
+          0.02614042559461792
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3126421887925349304,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 613,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 613,
+        "last_signal": 610,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.048659904967312394,
+            "threshold": 0.04692237703041966
+          },
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.047053836803257434,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.02469320551424265,
+        "threshold": 0.017065439199714906,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.022243143802546602,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 613,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 613,
+        "log_e": 6.845881356082838,
+        "last_signal": 610
+      }
+    ]
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "statistics": [
+          0.034599608980279424,
+          0.03909960898027943
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "statistics": [
+          0.034599608980279424,
+          0.03909960898027943
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 633,
+    "first_alarm": 638,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 638,
+        "last_signal": 635,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.047691209940226784,
+            "threshold": 0.04692237703041966
+          },
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.03322258853947991,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 652,
+        "cell": 0,
+        "delta": 0.02041324951631999,
+        "threshold": 0.017065439199714906,
+        "last_signal": 649,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 652,
+        "cell": 4,
+        "delta": -0.01997669690507746,
+        "threshold": 0.017062354508114826,
+        "last_signal": 649,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 633,
+    "first_alarm": 641,
+    "delay": 8,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 641,
+        "log_e": 7.535017121830419,
+        "last_signal": 638
+      }
+    ]
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 633,
+    "first_alarm": 636,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 636,
+        "last_signal": 633,
+        "statistics": [
+          0.030909228476285647,
+          0.03540922847628565
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 633,
+    "first_alarm": 636,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 636,
+        "last_signal": 633,
+        "statistics": [
+          0.030909228476285647,
+          0.03540922847628565
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3783921666502362447,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04720414548595871,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.022761448657618123,
+        "threshold": 0.017064405851291056,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.02547300972991523,
+        "threshold": 0.017065439199714906,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 7.572113337608119,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03967251924359517,
+          0.04417251924359517
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03967251924359517,
+          0.04417251924359517
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 651,
+    "first_alarm": 655,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 655,
+        "last_signal": 652,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.05134379726625044,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 668,
+        "cell": 0,
+        "delta": 0.017942888993808272,
+        "threshold": 0.017064405851291056,
+        "last_signal": 665,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 668,
+        "cell": 4,
+        "delta": -0.020158430365466044,
+        "threshold": 0.017065439199714906,
+        "last_signal": 665,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 651,
+    "first_alarm": 660,
+    "delay": 9,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 660,
+        "log_e": 6.564793075068391,
+        "last_signal": 657
+      }
+    ]
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 651,
+    "first_alarm": 654,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 654,
+        "last_signal": 651,
+        "statistics": [
+          0.040622807845986396,
+          0.0451228078459864
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 651,
+    "first_alarm": 654,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 654,
+        "last_signal": 651,
+        "statistics": [
+          0.040622807845986396,
+          0.0451228078459864
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 634,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 634,
+        "last_signal": 631,
+        "statistics": [
+          0.013228374150631555,
+          0.02753807992675082
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4776512205175634938,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 613,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 613,
+        "last_signal": 610,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.05042753774250933,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.023518892130687405,
+        "threshold": 0.017065439199714906,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.02316486136918159,
+        "threshold": 0.017066477717239053,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 613,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 613,
+        "log_e": 6.766395699911789,
+        "last_signal": 610
+      }
+    ]
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.036648957265723175,
+          0.04114895726572318
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.036648957265723175,
+          0.04114895726572318
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 671,
+    "first_alarm": 676,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 676,
+        "last_signal": 673,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.03407801146292014,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 692,
+        "cell": 0,
+        "delta": 0.02122556278572623,
+        "threshold": 0.017065439199714906,
+        "last_signal": 689,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 692,
+        "cell": 4,
+        "delta": -0.0200356361806711,
+        "threshold": 0.017066477717239053,
+        "last_signal": 689,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 671,
+    "first_alarm": 678,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 678,
+        "log_e": 5.67221996308583,
+        "last_signal": 675
+      }
+    ]
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 671,
+    "first_alarm": 674,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 674,
+        "last_signal": 671,
+        "statistics": [
+          0.03533894122338091,
+          0.04155195933564277
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 671,
+    "first_alarm": 674,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 674,
+        "last_signal": 671,
+        "statistics": [
+          0.03533894122338091,
+          0.04155195933564277
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5049199660434344524,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.047878226615555845,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.0244156843642035,
+        "threshold": 0.01706133643749677,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.025252934391909006,
+        "threshold": 0.017066477717239053,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 7.220860153980694,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.04125634709333407,
+          0.04575634709333407
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.04125634709333407,
+          0.04575634709333407
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 645,
+    "first_alarm": 651,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 651,
+        "last_signal": 648,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04766103388751483,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 664,
+        "cell": 0,
+        "delta": 0.020595942965574755,
+        "threshold": 0.01706133643749677,
+        "last_signal": 661,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 664,
+        "cell": 4,
+        "delta": -0.019650700213040898,
+        "threshold": 0.017066477717239053,
+        "last_signal": 661,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 645,
+    "first_alarm": 653,
+    "delay": 8,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 653,
+        "log_e": 5.077894995273749,
+        "last_signal": 650
+      }
+    ]
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 645,
+    "first_alarm": 648,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 648,
+        "last_signal": 645,
+        "statistics": [
+          0.04129631189229865,
+          0.050297765503578146
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 645,
+    "first_alarm": 648,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 648,
+        "last_signal": 645,
+        "statistics": [
+          0.04129631189229865,
+          0.050297765503578146
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 726,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 726,
+        "last_signal": 723,
+        "statistics": [
+          0.00018809931360885476,
+          0.028666984018931498
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4282214295412051068,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.0473681726495813,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.023288449954080713,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.0229874070103989,
+        "threshold": 0.01706133643749677,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 7.438353851292544,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.04011658155480182,
+          0.044616581554801825
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.04011658155480182,
+          0.044616581554801825
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 682,
+    "first_alarm": 687,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 687,
+        "last_signal": 684,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.049414987030054494,
+            "threshold": 0.04692237703041966
+          },
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.03372106418853785,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 700,
+        "cell": 0,
+        "delta": 0.01880875799338659,
+        "threshold": 0.017062354508114826,
+        "last_signal": 697,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 700,
+        "cell": 4,
+        "delta": -0.018656871080883552,
+        "threshold": 0.01706133643749677,
+        "last_signal": 697,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 682,
+    "first_alarm": 690,
+    "delay": 8,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 690,
+        "log_e": 7.082745936634721,
+        "last_signal": 687
+      }
+    ]
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 682,
+    "first_alarm": 685,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 685,
+        "last_signal": 682,
+        "statistics": [
+          0.03381353234030253,
+          0.038313532340302534
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 682,
+    "first_alarm": 685,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 685,
+        "last_signal": 682,
+        "statistics": [
+          0.03381353234030253,
+          0.038313532340302534
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 3657275775949343587,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "last_signal": 609,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.04018706439002171,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.023831593148140418,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.022415821067505004,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 613,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 613,
+        "log_e": 6.7520980738434275,
+        "last_signal": 610
+      }
+    ]
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.035857428426633246,
+          0.04035742842663325
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.035857428426633246,
+          0.04035742842663325
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 634,
+    "first_alarm": 639,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 639,
+        "last_signal": 636,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04749334990099252,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 652,
+        "cell": 0,
+        "delta": 0.01900877999422954,
+        "threshold": 0.017485702549722915,
+        "last_signal": 649,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 652,
+        "cell": 4,
+        "delta": -0.01810625101680939,
+        "threshold": 0.01706337763346477,
+        "last_signal": 649,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 634,
+    "first_alarm": 643,
+    "delay": 9,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 643,
+        "log_e": 7.048002128029055,
+        "last_signal": 640
+      }
+    ]
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 634,
+    "first_alarm": 637,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 637,
+        "last_signal": 634,
+        "statistics": [
+          0.03353802228897131,
+          0.03803802228897132
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 634,
+    "first_alarm": 637,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 637,
+        "last_signal": 634,
+        "statistics": [
+          0.03353802228897131,
+          0.03803802228897132
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 711,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 711,
+        "last_signal": 708,
+        "statistics": [
+          0.018162029290849077,
+          0.022662029290849074
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 6969106638913461576,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.051276013608555604,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.024802756707934644,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.024422459294593205,
+        "threshold": 0.01706133643749677,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 611,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 611,
+        "log_e": 4.854921677388339,
+        "last_signal": 608
+      }
+    ]
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.038444469681692434,
+          0.04294446968169244
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.038444469681692434,
+          0.04294446968169244
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 630,
+    "first_alarm": 634,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 634,
+        "last_signal": 631,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04739824654177679,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 648,
+        "cell": 0,
+        "delta": 0.019525052248458376,
+        "threshold": 0.01706337763346477,
+        "last_signal": 645,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 648,
+        "cell": 4,
+        "delta": -0.018710475716525524,
+        "threshold": 0.01706133643749677,
+        "last_signal": 645,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 630,
+    "first_alarm": 637,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 637,
+        "log_e": 6.598771697322678,
+        "last_signal": 634
+      }
+    ]
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 630,
+    "first_alarm": 633,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 633,
+        "last_signal": 630,
+        "statistics": [
+          0.037481011132072105,
+          0.04198101113207211
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 630,
+    "first_alarm": 633,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 633,
+        "last_signal": 630,
+        "statistics": [
+          0.037481011132072105,
+          0.04198101113207211
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 687,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 687,
+        "last_signal": 684,
+        "statistics": [
+          0.014226454492299015,
+          0.032226454492299016
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4001078017255128230,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.05173239211172702,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.02304322285696482,
+        "threshold": 0.017064405851291056,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.02286832346411531,
+        "threshold": 0.017064405851291056,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 611,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 611,
+        "log_e": 5.001545321186827,
+        "last_signal": 608
+      }
+    ]
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.042910144805179316,
+          0.04741014480517932
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.042910144805179316,
+          0.04741014480517932
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 626,
+    "first_alarm": 630,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 630,
+        "last_signal": 627,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04770113509764518,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 644,
+        "cell": 0,
+        "delta": 0.02077578910149573,
+        "threshold": 0.017064405851291056,
+        "last_signal": 641,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 644,
+        "cell": 4,
+        "delta": -0.020566291756910098,
+        "threshold": 0.017064405851291056,
+        "last_signal": 641,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 626,
+    "first_alarm": 633,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 633,
+        "log_e": 5.825873132910475,
+        "last_signal": 630
+      }
+    ]
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 626,
+    "first_alarm": 629,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 629,
+        "last_signal": 626,
+        "statistics": [
+          0.03170297186444002,
+          0.043789014180388094
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 626,
+    "first_alarm": 629,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 629,
+        "last_signal": 626,
+        "statistics": [
+          0.03170297186444002,
+          0.043789014180388094
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1396858669394021498,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04777851818825277,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.021828895780143097,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.024474513055003505,
+        "threshold": 0.017065439199714906,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 6.971897996685365,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03402128269481851,
+          0.03852128269481851
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03402128269481851,
+          0.03852128269481851
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 627,
+    "first_alarm": 634,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 634,
+        "last_signal": 631,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04928306618058334,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 644,
+        "cell": 0,
+        "delta": 0.017782075107468927,
+        "threshold": 0.017062354508114826,
+        "last_signal": 641,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 644,
+        "cell": 4,
+        "delta": -0.018452445360501436,
+        "threshold": 0.017065439199714906,
+        "last_signal": 641,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 627,
+    "first_alarm": 635,
+    "delay": 8,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 635,
+        "log_e": 4.8702042673417525,
+        "last_signal": 632
+      }
+    ]
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 627,
+    "first_alarm": 631,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 631,
+        "last_signal": 628,
+        "statistics": [
+          0.041288041175299446,
+          0.04578804117529945
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 627,
+    "first_alarm": 631,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 631,
+        "last_signal": 628,
+        "statistics": [
+          0.041288041175299446,
+          0.04578804117529945
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 2859988942320173670,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 615,
+    "delay": 9,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 615,
+        "last_signal": 612,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.045944094449963134,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.024261662486199584,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.021172668600178853,
+        "threshold": 0.017067521442752503,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 614,
+    "delay": 8,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 614,
+        "log_e": 5.541381104641654,
+        "last_signal": 611
+      }
+    ]
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "statistics": [
+          0.025108890290031563,
+          0.029608890290031564
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "last_signal": 609,
+        "statistics": [
+          0.06587758079489582,
+          0.07487758079489581
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 641,
+    "first_alarm": 650,
+    "delay": 9,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 650,
+        "last_signal": 647,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.04484592640908482,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 660,
+        "cell": 0,
+        "delta": 0.019369770387365367,
+        "threshold": 0.017485702549722915,
+        "last_signal": 657,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 660,
+        "cell": 4,
+        "delta": -0.018413689137283702,
+        "threshold": 0.017067521442752503,
+        "last_signal": 657,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 641,
+    "first_alarm": 651,
+    "delay": 10,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 651,
+        "log_e": 6.049989200392237,
+        "last_signal": 648
+      }
+    ]
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 641,
+    "first_alarm": 644,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 644,
+        "last_signal": 641,
+        "statistics": [
+          0.036590178937373825,
+          0.043130566639108824
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 641,
+    "first_alarm": 644,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 644,
+        "last_signal": 641,
+        "statistics": [
+          0.036590178937373825,
+          0.043130566639108824
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 331215616702748929,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04749119447195049,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.023484848530357136,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.023140333552037564,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 6.680639524106871,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03839357186409923,
+          0.042893571864099235
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03839357186409923,
+          0.042893571864099235
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 634,
+    "first_alarm": 640,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 640,
+        "last_signal": 637,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.052964943188303415,
+            "threshold": 0.04692237703041966
+          },
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.04627525703543155,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 652,
+        "cell": 0,
+        "delta": 0.018728735270437096,
+        "threshold": 0.017062354508114826,
+        "last_signal": 649,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 634,
+    "first_alarm": 643,
+    "delay": 9,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 643,
+        "log_e": 6.4753726113783765,
+        "last_signal": 640
+      }
+    ]
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 634,
+    "first_alarm": 637,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 637,
+        "last_signal": 634,
+        "statistics": [
+          0.03161604132497346,
+          0.036116041324973466
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 634,
+    "first_alarm": 637,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 637,
+        "last_signal": 634,
+        "statistics": [
+          0.03161604132497346,
+          0.036116041324973466
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1419532715697785908,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "last_signal": 609,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.04316618767322703,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.024652617023667774,
+        "threshold": 0.017065439199714906,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.022486738100594993,
+        "threshold": 0.01748371065960014,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 5.362509459280371,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.028933008832275432,
+          0.033433008832275436
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.028933008832275432,
+          0.033433008832275436
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 629,
+    "first_alarm": 634,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 634,
+        "last_signal": 631,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.03354298509143179,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 648,
+        "cell": 0,
+        "delta": 0.020370336622569103,
+        "threshold": 0.017065439199714906,
+        "last_signal": 645,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 648,
+        "cell": 4,
+        "delta": -0.01873625542467966,
+        "threshold": 0.01706133643749677,
+        "last_signal": 645,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 629,
+    "first_alarm": 636,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 636,
+        "log_e": 5.573226307162228,
+        "last_signal": 633
+      }
+    ]
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 629,
+    "first_alarm": 632,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 632,
+        "last_signal": 629,
+        "statistics": [
+          0.036519160709738825,
+          0.04445589920454727
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 629,
+    "first_alarm": 632,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 632,
+        "last_signal": 629,
+        "statistics": [
+          0.036519160709738825,
+          0.04445589920454727
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 662918785606057485,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.05098949581807995,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.024681596343114696,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.022626682823070704,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 611,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 611,
+        "log_e": 4.983910187508444,
+        "last_signal": 608
+      }
+    ]
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.033525061760068385,
+          0.03802506176006839
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.033525061760068385,
+          0.03802506176006839
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 681,
+    "first_alarm": 686,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 686,
+        "last_signal": 683,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.033542402254492044,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 700,
+        "cell": 0,
+        "delta": 0.02130031118310687,
+        "threshold": 0.017062354508114826,
+        "last_signal": 697,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 700,
+        "cell": 4,
+        "delta": -0.019409664643179163,
+        "threshold": 0.01706337763346477,
+        "last_signal": 697,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 681,
+    "first_alarm": 688,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 688,
+        "log_e": 6.27958741173037,
+        "last_signal": 685
+      }
+    ]
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 681,
+    "first_alarm": 684,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 684,
+        "last_signal": 681,
+        "statistics": [
+          0.04217347291836373,
+          0.052037558722451194
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 681,
+    "first_alarm": 684,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 684,
+        "last_signal": 681,
+        "statistics": [
+          0.04217347291836373,
+          0.052037558722451194
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 4019347600276602974,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "last_signal": 609,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.04562815045009292,
+            "threshold": 0.03317913098760164
+          },
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 8,
+            "value": 0.02346363309575195,
+            "threshold": 0.02346118851520983
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.023914965234223297,
+        "threshold": 0.01706133643749677,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.023724537364227437,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 6.23604968992317,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.033028311044521884,
+          0.03752831104452189
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.033028311044521884,
+          0.03752831104452189
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 634,
+    "first_alarm": 640,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 640,
+        "last_signal": 637,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04836704018390532,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 652,
+        "cell": 0,
+        "delta": 0.018909481517547917,
+        "threshold": 0.01748371065960014,
+        "last_signal": 649,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 652,
+        "cell": 4,
+        "delta": -0.019023550184211518,
+        "threshold": 0.017062354508114826,
+        "last_signal": 649,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 634,
+    "first_alarm": 643,
+    "delay": 9,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 643,
+        "log_e": 5.653738235494556,
+        "last_signal": 640
+      }
+    ]
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 634,
+    "first_alarm": 637,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 637,
+        "last_signal": 634,
+        "statistics": [
+          0.04034991940809044,
+          0.044849919408090445
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 634,
+    "first_alarm": 637,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 637,
+        "last_signal": 634,
+        "statistics": [
+          0.04034991940809044,
+          0.044849919408090445
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 662,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 662,
+        "last_signal": 659,
+        "statistics": [
+          0.01386098125115449,
+          0.03186098125115449
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 8035674003159893401,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "last_signal": 609,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04855451637795172,
+            "threshold": 0.04692237703041966
+          },
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 4,
+            "value": 0.04703138828385465,
+            "threshold": 0.03317913098760164
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.02333259962951744,
+        "threshold": 0.017065439199714906,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.02362070535294048,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 612,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 612,
+        "log_e": 6.763279914113793,
+        "last_signal": 609
+      }
+    ]
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03621532189633971,
+          0.040715321896339716
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.03621532189633971,
+          0.040715321896339716
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 669,
+    "first_alarm": 673,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 673,
+        "last_signal": 670,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.048279091296131324,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 688,
+        "cell": 0,
+        "delta": 0.021012103780237462,
+        "threshold": 0.017487714329618,
+        "last_signal": 685,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 688,
+        "cell": 4,
+        "delta": -0.018628917149634508,
+        "threshold": 0.017062354508114826,
+        "last_signal": 685,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 669,
+    "first_alarm": 675,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 675,
+        "log_e": 5.001846942331589,
+        "last_signal": 672
+      }
+    ]
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 669,
+    "first_alarm": 672,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 672,
+        "last_signal": 669,
+        "statistics": [
+          0.04340438933152297,
+          0.047904389331522974
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 669,
+    "first_alarm": 672,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 672,
+        "last_signal": 669,
+        "statistics": [
+          0.04340438933152297,
+          0.047904389331522974
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5228269056551364461,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 610,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 610,
+        "last_signal": 607,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.05346373994788553,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.02376335484345731,
+        "threshold": 0.01706337763346477,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.023449424580791224,
+        "threshold": 0.017065439199714906,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 611,
+    "delay": 5,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 611,
+        "log_e": 5.269863746204526,
+        "last_signal": 608
+      }
+    ]
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.04323363411913237,
+          0.047733634119132375
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.04323363411913237,
+          0.047733634119132375
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 671,
+    "first_alarm": 675,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 675,
+        "last_signal": 672,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.049313135300040785,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 688,
+        "cell": 0,
+        "delta": 0.018271903690564847,
+        "threshold": 0.01706337763346477,
+        "last_signal": 685,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 688,
+        "cell": 4,
+        "delta": -0.017134278160478585,
+        "threshold": 0.017065439199714906,
+        "last_signal": 685,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 671,
+    "first_alarm": 677,
+    "delay": 6,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 677,
+        "log_e": 6.57865745044292,
+        "last_signal": 674
+      }
+    ]
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 671,
+    "first_alarm": 674,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 674,
+        "last_signal": 671,
+        "statistics": [
+          0.03931109986139461,
+          0.0442181744281589
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 671,
+    "first_alarm": 674,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 674,
+        "last_signal": 671,
+        "statistics": [
+          0.03931109986139461,
+          0.0442181744281589
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": 684,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": true,
+    "events": [
+      {
+        "index": 684,
+        "last_signal": 681,
+        "statistics": [
+          0.015657987728420746,
+          0.030290401399025852
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1691388399593399844,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "learnable",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "learnable",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "learnable",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "learnable",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "reversal",
+    "arm": "6",
+    "change": 606,
+    "first_alarm": 613,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 613,
+        "last_signal": 610,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.04813148009148364,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 628,
+        "cell": 0,
+        "delta": 0.02339130706529384,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 628,
+        "cell": 4,
+        "delta": -0.023085895470244103,
+        "threshold": 0.017062354508114826,
+        "last_signal": 625,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "reversal",
+    "arm": "7B",
+    "change": 606,
+    "first_alarm": 613,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 613,
+        "log_e": 7.479121814464687,
+        "last_signal": 610
+      }
+    ]
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "reversal",
+    "arm": "8B-D",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.043300870635684725,
+          0.04780087063568473
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "reversal",
+    "arm": "8B-Cal",
+    "change": 606,
+    "first_alarm": 609,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 609,
+        "last_signal": 606,
+        "statistics": [
+          0.043300870635684725,
+          0.04780087063568473
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "random_reversal",
+    "arm": "6",
+    "change": 642,
+    "first_alarm": 646,
+    "delay": 4,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 646,
+        "last_signal": 643,
+        "evidence": [
+          {
+            "channel": "CROSS_SECTIONAL_RESIDUAL",
+            "window": 2,
+            "value": 0.05142859494739227,
+            "threshold": 0.04692237703041966
+          }
+        ]
+      },
+      {
+        "index": 660,
+        "cell": 0,
+        "delta": 0.019710550783342322,
+        "threshold": 0.017062354508114826,
+        "last_signal": 657,
+        "reason": "CELL_RETURN_DRIFT"
+      },
+      {
+        "index": 660,
+        "cell": 4,
+        "delta": -0.02024625889662471,
+        "threshold": 0.017062354508114826,
+        "last_signal": 657,
+        "reason": "CELL_RETURN_DRIFT"
+      }
+    ]
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "random_reversal",
+    "arm": "7B",
+    "change": 642,
+    "first_alarm": 649,
+    "delay": 7,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 649,
+        "log_e": 4.9591156438861095,
+        "last_signal": 646
+      }
+    ]
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "random_reversal",
+    "arm": "8B-D",
+    "change": 642,
+    "first_alarm": 645,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 645,
+        "last_signal": 642,
+        "statistics": [
+          0.04983740962313495,
+          0.05883740962313495
+        ],
+        "thresholds": [
+          0.018,
+          0.02735626675064957
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "random_reversal",
+    "arm": "8B-Cal",
+    "change": 642,
+    "first_alarm": 645,
+    "delay": 3,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": [
+      {
+        "index": 645,
+        "last_signal": 642,
+        "statistics": [
+          0.04983740962313495,
+          0.05883740962313495
+        ],
+        "thresholds": [
+          0.027659290213926383,
+          0.055015578352069085
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "outer_noise",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "outer_noise",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "outer_noise",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "outer_noise",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "null",
+    "arm": "6",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "null",
+    "arm": "7B",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "null",
+    "arm": "8B-D",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  },
+  {
+    "seed": 5958543661589150472,
+    "scenario": "null",
+    "arm": "8B-Cal",
+    "change": null,
+    "first_alarm": null,
+    "delay": null,
+    "prechange_alarm": false,
+    "false_alarm": false,
+    "events": []
+  }
+]

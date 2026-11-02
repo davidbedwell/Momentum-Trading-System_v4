@@ -1,0 +1,9 @@
+{
+  "source_python_files_checked": 360,
+  "source_python_changes": [],
+  "source_git_status_unchanged": true,
+  "successful_component_tests": 65,
+  "audit_smoke": "PASS: expected defects reproduced",
+  "live_actions": false,
+  "long_ga": false
+}

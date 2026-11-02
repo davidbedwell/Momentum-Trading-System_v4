@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "scope": "Independent synthetic discrimination engineering experiment. No GA, production changes, optimization or real alpha claims.",
+  "history_sessions": 734,
+  "fit_signals": [
+    0,
+    399
+  ],
+  "calibration_signals": [
+    403,
+    602
+  ],
+  "test_signals": [
+    606,
+    731
+  ],
+  "outcome_available": "signal + 3; entry open signal+1; exit open signal+2",
+  "independence": "iid date-common and individual innovations; cell means count one observation per date, not per stock. Shared dates induce cross-cell dependence accounted for by Bonferroni.",
+  "primary_edges": [
+    -0.006,
+    -0.002,
+    0.002,
+    0.006
+  ],
+  "widened_band_ablation": "Not warranted; omitted. No bands changed or forced classes.",
+  "point_fit": "400 dates; sensor cell date means plus train-only centered lag-price slope; no calibration point adjustment",
+  "uncertainty": "max(2.576 SE_train, abs(cal_bias)+2.576 SE_cal) plus sensor/full displacement. Simultaneous approximate 99% cell mean diagnostic; Gaussian approximation, measured coverage; not individual prediction intervals.",
+  "reliability": "Training-only 99th percentile sensor/full disagreement with 5bp floor; minimum 100 dates in each fit/cal cell; identifiable range >30bp. Calibration only widens intervals.",
+  "drift": "26 maximum prespecified looks; first test+22 then every4 sessions; trailing 20 matured signals, >=15 cell dates; five cells, two-sided alpha .05 union bound across all looks. SubGaussian envelope .018 for date-cell means, conservative relative to DGP .012 bounded conditional component plus <=.01068 Gaussian innovation. Frozen training baseline uncertainty included. Latch until end, no refit.",
+  "seeds": "4 distinct OS entropy 63bit draws after source/preregistration local commitment, no seed filtering or reruns",
+  "scenarios": [
+    "learnable",
+    "null",
+    "reversal",
+    "outer_noise"
+  ],
+  "outer_noise": "separate prespecified DGP variant multiplies common and idiosyncratic noise by1.25; sensor unchanged",
+  "portfolio": "Three paired replays per seed/scenario: candidate10%, unchanged iteration2 estimator10%, equal-universe daily benchmark. Plus candidate15% allocation ablation on four learnable tapes only:52 phase B replays. All one-session open-to-open, entry/exit15bp each, sales unavailable until following open, nonnegative cash, final liquidation. Per-position modeled risk<=2% with cyclic gap3/6/12/24%. Zero yield cash measured in tests; no invented SGOV.",
+  "baseline": "Unmodified original iteration2 predict on last126 pretest+126 test sessions with exact net-cost conversion. This baseline uses pooled rolling calibration and is not certified independently calibrated. Paired outcome tape; baseline has less history by original design.",
+  "acceptance": {
+    "stable_ungated_coverage": 0.3,
+    "stable_gated_coverage": 0.15,
+    "stable_false_great_max": 0.01,
+    "middle_radii": "all3 <.002 on >=3 of4 learnable seeds",
+    "five_tiers": ">=20 assigned per tier per learnable seed",
+    "stable_alarm_seed_scenario_rate_max": 0.05,
+    "null_candidate_return_max": 0.02
+  },
+  "limits": {
+    "max_compute_seconds": 720,
+    "max_portfolio_replays": 64,
+    "optimization_runs": 0,
+    "phase_a_replays": 6,
+    "phase_b_replays": 52,
+    "total_replays_planned": 58
+  },
+  "process_limits": "Local timestamp only, trusted public commitment unavailable. Fresh tapes do not erase prior DGP adaptation. No real PIT dataset provided; audit reports missing evidence, no invented data.",
+  "pass": "All acceptance checks plus trusted timestamp and real PIT readiness; unmet prerequisites FAIL. Report engineering subchecks separately. Four seeds insufficient to prove5% false alarm rate. No threshold adaptation after results."
+}

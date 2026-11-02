@@ -1,0 +1,140 @@
+{
+  "sources": {
+    "SPY": {
+      "path": "/opt/mts/ga6-git-backup/Research/Data/Comparators/SPY_YFINANCE_2005_2026.parquet",
+      "sha256": "b182402afd15c074ee4cc596149bf0a821e6cbd00fa5329d84eef269636f6381",
+      "rows": 5459,
+      "end": "2026-09-15 00:00:00"
+    },
+    "DEV79": {
+      "path": "/opt/mts/portfolio_evolution_dev80/dev80_raw_no_smci.parquet",
+      "sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+      "rows": 394795,
+      "end": "2026-09-14 00:00:00"
+    },
+    "DEV87": {
+      "path": "/opt/mts/thunder-migration/mts-certification-20261011/dev87/dev87_raw.parquet",
+      "unavailable": "[Errno 13] Permission denied: '/opt/mts/thunder-migration/mts-certification-20261011/dev87/dev87_raw.parquet'"
+    }
+  },
+  "protocol_sha256": "fc2ca691e366b516b3c6bd6f5c32b7d7d3f0932e8244b84fd01e655ba1c77759",
+  "prior_code_sha256": "58da7f989523172219874b3e33992359635420b40e69f08d099267ab1ac6fa14",
+  "rule_count": 28,
+  "finite_pooled_tests": 1080,
+  "finite_annual_tests": 7278,
+  "components": {
+    "weak": [
+      "weak"
+    ],
+    "improving": [
+      "improving"
+    ],
+    "persistence": [
+      "persistence"
+    ],
+    "stabilization": [
+      "stabilization"
+    ],
+    "momentum": [
+      "momentum"
+    ],
+    "R1_proxy": [
+      "R1_proxy"
+    ],
+    "weak&improving": [
+      "weak",
+      "improving"
+    ],
+    "weak&persistence": [
+      "weak",
+      "persistence"
+    ],
+    "weak&stabilization": [
+      "weak",
+      "stabilization"
+    ],
+    "weak&momentum": [
+      "weak",
+      "momentum"
+    ],
+    "weak&R1_proxy": [
+      "weak",
+      "R1_proxy"
+    ],
+    "improving&persistence": [
+      "improving",
+      "persistence"
+    ],
+    "improving&stabilization": [
+      "improving",
+      "stabilization"
+    ],
+    "improving&momentum": [
+      "improving",
+      "momentum"
+    ],
+    "improving&R1_proxy": [
+      "improving",
+      "R1_proxy"
+    ],
+    "persistence&stabilization": [
+      "persistence",
+      "stabilization"
+    ],
+    "persistence&momentum": [
+      "persistence",
+      "momentum"
+    ],
+    "persistence&R1_proxy": [
+      "persistence",
+      "R1_proxy"
+    ],
+    "stabilization&momentum": [
+      "stabilization",
+      "momentum"
+    ],
+    "stabilization&R1_proxy": [
+      "stabilization",
+      "R1_proxy"
+    ],
+    "momentum&R1_proxy": [
+      "momentum",
+      "R1_proxy"
+    ],
+    "weak&improving&persistence": [
+      "weak",
+      "improving",
+      "persistence"
+    ],
+    "weak&improving&stabilization": [
+      "weak",
+      "improving",
+      "stabilization"
+    ],
+    "weak&improving&momentum": [
+      "weak",
+      "improving",
+      "momentum"
+    ],
+    "weak&persistence&stabilization": [
+      "weak",
+      "persistence",
+      "stabilization"
+    ],
+    "weak&persistence&momentum": [
+      "weak",
+      "persistence",
+      "momentum"
+    ],
+    "weak&stabilization&momentum": [
+      "weak",
+      "stabilization",
+      "momentum"
+    ],
+    "R1_proxy&persistence&stabilization": [
+      "R1_proxy",
+      "persistence",
+      "stabilization"
+    ]
+  }
+}

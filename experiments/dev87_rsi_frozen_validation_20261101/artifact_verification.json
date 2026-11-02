@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "source_hashes_verified": true,
+  "persisted_accounting_metrics_annual_endpoints_and_memberships_verified": true,
+  "max_saved_nav_error": 1.7763568394002505e-14,
+  "original_and_independent_ledger_errors": {
+    "dev79_monthly": 2.92300905702092e-16,
+    "dev79_cagr": 0.0,
+    "dev79_feature_rsi14": 7.105427357601002e-15,
+    "dev79_feature_return_252": 4.440892098500626e-16,
+    "dev79_feature_ma_distance_20": 9.8879238130678e-17,
+    "dev79_feature_acceleration_21": 9.8879238130678e-17,
+    "2009-2018_original_monthly": 0.0,
+    "2009-2018_original_mdd": 0.0,
+    "2009-2018_original_sharpe": 0.0,
+    "2009-2018_original_cagr": 0.0,
+    "2009-2018_dollar_nav": 1.1546319456101628e-13,
+    "2009-2018_fee": 3.189722791452354e-16,
+    "2009-2018_self_financing": 1.7763568394002505e-15,
+    "2009-2018_feature": 0.0,
+    "2019-2025_original_monthly": 0.0,
+    "2019-2025_original_mdd": 0.0,
+    "2019-2025_original_sharpe": 0.0,
+    "2019-2025_original_cagr": 0.0,
+    "2019-2025_dollar_nav": 3.197442310920451e-14,
+    "2019-2025_fee": 3.185385982762412e-16,
+    "2019-2025_self_financing": 8.881784197001252e-16,
+    "2019-2025_feature": 0.0
+  }
+}

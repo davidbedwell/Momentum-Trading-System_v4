@@ -1,0 +1,2403 @@
+{
+  "status": "BLOCKED",
+  "scope": "engineering_feature_audit_only",
+  "available_sessions": 1260,
+  "first_available": "2021-12-29",
+  "last_available": "2026-10-27",
+  "value_sessions": 393,
+  "value_end": "2023-06-30",
+  "sealed_sessions": 867,
+  "proof_values_read": false,
+  "metadata_columns_read": [
+    "Date",
+    "Ticker"
+  ],
+  "proof_start": "2023-07-03",
+  "validation_reused": "already opened Phase 3 engineering prefix; no tuning",
+  "parity": {
+    "features": 142,
+    "cells": 27903000,
+    "finite": 22544000,
+    "warmup": 5359000,
+    "passed": true,
+    "reference": "hash-verified Phase 3 native full-history build"
+  },
+  "performance": {
+    "wall_seconds": 239.55954645795282,
+    "cpu_seconds": 312.67717239200005,
+    "peak_rss_mib": 921.42578125
+  },
+  "sources": {
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/first_year_features.py": "5679fe7f8307e4336017f8507540b4b9cdced96fab3c0c7dc9b873b764784a47",
+    "/opt/mts/ga5_feature_families.py": "3e4000c54c163d84785a075e75501481bf60a34a569359056106075713708de9",
+    "/opt/mts/synthetic-market-lab/runs/five_iteration_inputs/universe_1/stock_prices.parquet": "1fc1b849f81472e6d0684c010689c3bd6fca45021a1d9399d0ab1ddab0044a85",
+    "/opt/mts/thunder-migration/mts-layered-run-20261007/Core/layered_ga/stage2_features_v3.py": "887d2d6949d2d130f3fa87fa91845182682e8eff785c8c11a5e0bc438666f8ea",
+    "/opt/mts/thunder-migration/mts-layered-run-20261007/Reconstruction/Certified-Stage2-Source-20261007/MTS_V4/derived_feature_factory.py": "a835697dccf07e142a6c142f286b9552b559d11fca64699f4b5115664cc47f73"
+  },
+  "implementation_sha256": "02b0726af024c09057310b94a462a50291b38c8daf31264edd692863eebd8efc",
+  "daily": [
+    {
+      "date": "2021-12-29",
+      "tickers": 500,
+      "next_open": "2021-12-30",
+      "features_sha256": "e33427507cfa7160ac01c42a4dcc948b6711539ac03a93648a5c848c4c6d9baf"
+    },
+    {
+      "date": "2021-12-30",
+      "tickers": 500,
+      "next_open": "2021-12-31",
+      "features_sha256": "a0ca5ba9ada5efc7c632dfd251bed76450f225934a7f3323b92b2a1ea56a7f01"
+    },
+    {
+      "date": "2021-12-31",
+      "tickers": 500,
+      "next_open": "2022-01-03",
+      "features_sha256": "1fa6d5d7b87752490935fc598a9c9abdc68c3e7b5509eea71839ddf65aa45db1"
+    },
+    {
+      "date": "2022-01-03",
+      "tickers": 500,
+      "next_open": "2022-01-04",
+      "features_sha256": "d0c0c50b05315412dac104e1c5beb2792af7cd22e8b1663578e16cf178d2b283"
+    },
+    {
+      "date": "2022-01-04",
+      "tickers": 500,
+      "next_open": "2022-01-05",
+      "features_sha256": "d0d0bc304fafa6733b80ceffe89a20fc80e5d0deea09df15fecdbb8a04e50975"
+    },
+    {
+      "date": "2022-01-05",
+      "tickers": 500,
+      "next_open": "2022-01-06",
+      "features_sha256": "b658e8b062d22a0fe0be7e95f42a5dc44bb0d6a88064f8cbe28875e4dea6d783"
+    },
+    {
+      "date": "2022-01-06",
+      "tickers": 500,
+      "next_open": "2022-01-07",
+      "features_sha256": "ea9fb075f8bc646e7fe7841eccc6ed659a7dd9f8bb27985a389ab05fccdb100f"
+    },
+    {
+      "date": "2022-01-07",
+      "tickers": 500,
+      "next_open": "2022-01-10",
+      "features_sha256": "46ca315b75e23e960b943ded0ced79dfac19dc325d862b8a2d993881624f322f"
+    },
+    {
+      "date": "2022-01-10",
+      "tickers": 500,
+      "next_open": "2022-01-11",
+      "features_sha256": "81059337c0b4a5b0c08afed2a138cc231ddc0180eb229f928e67106549d67c10"
+    },
+    {
+      "date": "2022-01-11",
+      "tickers": 500,
+      "next_open": "2022-01-12",
+      "features_sha256": "6317ebc89e9f91294d3d72a43cfe21e186da7d818db4de8eb3336caeefc51732"
+    },
+    {
+      "date": "2022-01-12",
+      "tickers": 500,
+      "next_open": "2022-01-13",
+      "features_sha256": "eeb890d55e77a7dbee7974b73018722bcefab5d75e88d1150834807a6f67fca0"
+    },
+    {
+      "date": "2022-01-13",
+      "tickers": 500,
+      "next_open": "2022-01-14",
+      "features_sha256": "659deb5c4978e7c0524ed46076c137dbb20a1ba7ec2846f4f00b53bb0f4023a7"
+    },
+    {
+      "date": "2022-01-14",
+      "tickers": 500,
+      "next_open": "2022-01-17",
+      "features_sha256": "9b063d5b7442951732e424093134a36b1650b685af3e82cb408ad103acbd8517"
+    },
+    {
+      "date": "2022-01-17",
+      "tickers": 500,
+      "next_open": "2022-01-18",
+      "features_sha256": "6a1dbe91fc59c7d76b6ef57f5bac2cc54b2fce7c3ee2330949de5c34af3dfcd8"
+    },
+    {
+      "date": "2022-01-18",
+      "tickers": 500,
+      "next_open": "2022-01-19",
+      "features_sha256": "7a77d590105afe4aa20c3077285c463d2f0755410b4099ffd67c8b398bca1f83"
+    },
+    {
+      "date": "2022-01-19",
+      "tickers": 500,
+      "next_open": "2022-01-20",
+      "features_sha256": "61e00dc7ebcd81fae31a2cc2ccff31f732e732a1dbaa4318e570cfae9f41f522"
+    },
+    {
+      "date": "2022-01-20",
+      "tickers": 500,
+      "next_open": "2022-01-21",
+      "features_sha256": "eb7da2d4fbd39810d439f837d88ca3c278686e5eb8ca1484dd52ddc9031bbc7f"
+    },
+    {
+      "date": "2022-01-21",
+      "tickers": 500,
+      "next_open": "2022-01-24",
+      "features_sha256": "79e1a02b755f23072227f4cfd912b94dab1781e29c8743ff01280247fc87f8e9"
+    },
+    {
+      "date": "2022-01-24",
+      "tickers": 500,
+      "next_open": "2022-01-25",
+      "features_sha256": "d3bf9bad86eca8f6e750380e36213f414c846fadf325c37f0bc17738e0dfcd7e"
+    },
+    {
+      "date": "2022-01-25",
+      "tickers": 500,
+      "next_open": "2022-01-26",
+      "features_sha256": "2c585cd52ab4afa74676a2eb96f1c31d5e232cacccfaacf219e541442833ba06"
+    },
+    {
+      "date": "2022-01-26",
+      "tickers": 500,
+      "next_open": "2022-01-27",
+      "features_sha256": "b03c3097d531fbe1911804639232e54030d0e75bbd404f8bdd5e73fde6fb5b80"
+    },
+    {
+      "date": "2022-01-27",
+      "tickers": 500,
+      "next_open": "2022-01-28",
+      "features_sha256": "2d75390ef86b83f43a371c32986534c00e78a20603f1ee73fd6dd3f9b01f9125"
+    },
+    {
+      "date": "2022-01-28",
+      "tickers": 500,
+      "next_open": "2022-01-31",
+      "features_sha256": "c19ed717d8540f313978bcd479cbcab3f82cb2b3451b43838e00412a60eee8fb"
+    },
+    {
+      "date": "2022-01-31",
+      "tickers": 500,
+      "next_open": "2022-02-01",
+      "features_sha256": "497667a8b214cb6c551689a9342079a077d796265b41fd6bd9b4360c4513fe01"
+    },
+    {
+      "date": "2022-02-01",
+      "tickers": 500,
+      "next_open": "2022-02-02",
+      "features_sha256": "f4642bd8575158648eb92222584ecbda4a8a182f06eb03d6bb6d8ea0271fd267"
+    },
+    {
+      "date": "2022-02-02",
+      "tickers": 500,
+      "next_open": "2022-02-03",
+      "features_sha256": "9a5130c29157d92a6bd60451fe5032321bf649245043b6abeefab421f964a8e0"
+    },
+    {
+      "date": "2022-02-03",
+      "tickers": 500,
+      "next_open": "2022-02-04",
+      "features_sha256": "c9c4ac31e0110049244f464a6e5215b5febcd3bc9b0432671a3fafd9a43e4b2c"
+    },
+    {
+      "date": "2022-02-04",
+      "tickers": 500,
+      "next_open": "2022-02-07",
+      "features_sha256": "da57242cd40504b5c132b7a12b9cc5657befc72dfa15827ba3ec8b72ddc1d7b7"
+    },
+    {
+      "date": "2022-02-07",
+      "tickers": 500,
+      "next_open": "2022-02-08",
+      "features_sha256": "7eec902fe80aa228a9791aa2155618b7859620abfed6ae7915c1bc0575e68dac"
+    },
+    {
+      "date": "2022-02-08",
+      "tickers": 500,
+      "next_open": "2022-02-09",
+      "features_sha256": "030aa5683057d7e6eb6d7a17ed98fd8ac9c899dea05013d35ede006848b4be19"
+    },
+    {
+      "date": "2022-02-09",
+      "tickers": 500,
+      "next_open": "2022-02-10",
+      "features_sha256": "09e9052a700e113825e27e860ae6a5ebe7f602aab0a0d409c19c463799e39a34"
+    },
+    {
+      "date": "2022-02-10",
+      "tickers": 500,
+      "next_open": "2022-02-11",
+      "features_sha256": "e68382982bff144291b6ae93a70f0ef99a31170e9003c93aec9c590f9cc14740"
+    },
+    {
+      "date": "2022-02-11",
+      "tickers": 500,
+      "next_open": "2022-02-14",
+      "features_sha256": "514e8f36c45fa5179007af58032c5c5781c016b53caaeeacfc2b53ec4bb6bb03"
+    },
+    {
+      "date": "2022-02-14",
+      "tickers": 500,
+      "next_open": "2022-02-15",
+      "features_sha256": "ac1d61e4394ec0af9fa665f551e0e56ce669b42bbb3bb79884101cd982344ae3"
+    },
+    {
+      "date": "2022-02-15",
+      "tickers": 500,
+      "next_open": "2022-02-16",
+      "features_sha256": "44c18fbedd3f5be43353505b7d17bfd56349bd8f499f179263977cb044e00c8a"
+    },
+    {
+      "date": "2022-02-16",
+      "tickers": 500,
+      "next_open": "2022-02-17",
+      "features_sha256": "43435874c92d996a30512bef554f94a2ebd23ec17cd84d47790dc95b83b1a888"
+    },
+    {
+      "date": "2022-02-17",
+      "tickers": 500,
+      "next_open": "2022-02-18",
+      "features_sha256": "155ff04565a48cecd18feaf415061f4a44b2e92367f89be2269c377aa6627d85"
+    },
+    {
+      "date": "2022-02-18",
+      "tickers": 500,
+      "next_open": "2022-02-21",
+      "features_sha256": "bd5bad1cdd772f7c613bc08b04897debe2030e43f32f15f421e8fb3c4324cdc1"
+    },
+    {
+      "date": "2022-02-21",
+      "tickers": 500,
+      "next_open": "2022-02-22",
+      "features_sha256": "83b7e74c51df233808a9a4853ff65b428fcc5dd59ed58ec42a6e8f456584a005"
+    },
+    {
+      "date": "2022-02-22",
+      "tickers": 500,
+      "next_open": "2022-02-23",
+      "features_sha256": "d6b80299652dc74afef9e409efdb1eb5a4a741c8233817ad8599741ed6e2770b"
+    },
+    {
+      "date": "2022-02-23",
+      "tickers": 500,
+      "next_open": "2022-02-24",
+      "features_sha256": "80a736873c84f3cf976f6f1d56fb482a1f4657df2e61503cb2f1753db3f90b0b"
+    },
+    {
+      "date": "2022-02-24",
+      "tickers": 500,
+      "next_open": "2022-02-25",
+      "features_sha256": "cb5c3c1d9da569180598651c3094b71fb1031c33269a81899ee46407a13e9c7c"
+    },
+    {
+      "date": "2022-02-25",
+      "tickers": 500,
+      "next_open": "2022-02-28",
+      "features_sha256": "77bda7507a72bec043afc65f409ad83b70ef52e772d834f84b3ea6de1cba2d11"
+    },
+    {
+      "date": "2022-02-28",
+      "tickers": 500,
+      "next_open": "2022-03-01",
+      "features_sha256": "71eb12f22a76c7967b74b2e0199b610638762af10f542c7e1391cf3b28e82811"
+    },
+    {
+      "date": "2022-03-01",
+      "tickers": 500,
+      "next_open": "2022-03-02",
+      "features_sha256": "0e557abc9859519365588420e52b912ffb34793636c600d7f0602f7263b0872a"
+    },
+    {
+      "date": "2022-03-02",
+      "tickers": 500,
+      "next_open": "2022-03-03",
+      "features_sha256": "6623d1211c4548e5f12ca8640132f431b35cf4ece555b10f9ec35c56dc225ae1"
+    },
+    {
+      "date": "2022-03-03",
+      "tickers": 500,
+      "next_open": "2022-03-04",
+      "features_sha256": "1da4e7a08743c79b4702e02bbea4df65855f929b7f01f99efc4b3a4a592baa57"
+    },
+    {
+      "date": "2022-03-04",
+      "tickers": 500,
+      "next_open": "2022-03-07",
+      "features_sha256": "57327b3e03339426ba566e6b6ad2521097aad856687105a8d3a9303e1edecbbd"
+    },
+    {
+      "date": "2022-03-07",
+      "tickers": 500,
+      "next_open": "2022-03-08",
+      "features_sha256": "9697106afb787fe6c4985429306825bc9c6e7eaf30c0e1d07db7f99aff6d726a"
+    },
+    {
+      "date": "2022-03-08",
+      "tickers": 500,
+      "next_open": "2022-03-09",
+      "features_sha256": "880c59e9c35e1028bd9716a29d5eb22a741d46899bd62ba971e9227302a7e83b"
+    },
+    {
+      "date": "2022-03-09",
+      "tickers": 500,
+      "next_open": "2022-03-10",
+      "features_sha256": "dc27910707295b1ab5ea850daf0b3ba563c30fd15d35074b4ad799f2241dd97d"
+    },
+    {
+      "date": "2022-03-10",
+      "tickers": 500,
+      "next_open": "2022-03-11",
+      "features_sha256": "8a5a190df6ab07100403fd0babcd923d58eda0dfbe2c3b0a06d00f425f280aaa"
+    },
+    {
+      "date": "2022-03-11",
+      "tickers": 500,
+      "next_open": "2022-03-14",
+      "features_sha256": "b23b6303b06bd83f86274540681fca7ea8eb161a8a15900d3d84d534f913c302"
+    },
+    {
+      "date": "2022-03-14",
+      "tickers": 500,
+      "next_open": "2022-03-15",
+      "features_sha256": "d3dd81354e3fc2060a0bca6a756b6d10fdb0f633602d36d4e963f602145a98de"
+    },
+    {
+      "date": "2022-03-15",
+      "tickers": 500,
+      "next_open": "2022-03-16",
+      "features_sha256": "e9a907059502e461593fc4fb2f1e8d51e5bb8151b5091bdb414f6cea093b3c57"
+    },
+    {
+      "date": "2022-03-16",
+      "tickers": 500,
+      "next_open": "2022-03-17",
+      "features_sha256": "b79a366e123b2a00aec1fb175c7807dfc668176296aeb0feb0c8e6f79a891854"
+    },
+    {
+      "date": "2022-03-17",
+      "tickers": 500,
+      "next_open": "2022-03-18",
+      "features_sha256": "de9ca0ec45e2fe5acbdd766b21a44325b825c9750da6f990bc96516d129ffc9b"
+    },
+    {
+      "date": "2022-03-18",
+      "tickers": 500,
+      "next_open": "2022-03-21",
+      "features_sha256": "198d18661b4ec806ee9ff36c7838b4aa5cadf50ca96d0392011c39241909a5c1"
+    },
+    {
+      "date": "2022-03-21",
+      "tickers": 500,
+      "next_open": "2022-03-22",
+      "features_sha256": "7bdb261956f82cb89205bdba1e1e130cae3607ff8b5418f39034805ae5de6177"
+    },
+    {
+      "date": "2022-03-22",
+      "tickers": 500,
+      "next_open": "2022-03-23",
+      "features_sha256": "af46c27a6888dd4ac735952c03e4117a7aa6eafbea13c6e3b8ec5e627224271d"
+    },
+    {
+      "date": "2022-03-23",
+      "tickers": 500,
+      "next_open": "2022-03-24",
+      "features_sha256": "6b94dba9f4700f127154e0961ee1e25c6739d835f27aba4d0f4267086085ad22"
+    },
+    {
+      "date": "2022-03-24",
+      "tickers": 500,
+      "next_open": "2022-03-25",
+      "features_sha256": "96e52a9727603c291cabc36985b9dd5310d284cc630ecee43615eda5d9ddea88"
+    },
+    {
+      "date": "2022-03-25",
+      "tickers": 500,
+      "next_open": "2022-03-28",
+      "features_sha256": "44c8eec07131192f775ed0f2994c7419be0dc3d000360b5166443dbcda125f4e"
+    },
+    {
+      "date": "2022-03-28",
+      "tickers": 500,
+      "next_open": "2022-03-29",
+      "features_sha256": "fb10f5219363c7b7fed92143d0199b328503d1742d43497ae618156757db6a69"
+    },
+    {
+      "date": "2022-03-29",
+      "tickers": 500,
+      "next_open": "2022-03-30",
+      "features_sha256": "2d062c76e4d59435dd31c4c2d6aa63c9f8ef29ea27bb750a93c0ece2cf3a4961"
+    },
+    {
+      "date": "2022-03-30",
+      "tickers": 500,
+      "next_open": "2022-03-31",
+      "features_sha256": "ca449b10881477b6f59b787e62ffccdabced2b3acfbae2fff5c63d6c14636439"
+    },
+    {
+      "date": "2022-03-31",
+      "tickers": 500,
+      "next_open": "2022-04-01",
+      "features_sha256": "541eaa55b7c795d57fe698a4c5bcc634db7b5b0573ed2adeed6cf663072bc3a3"
+    },
+    {
+      "date": "2022-04-01",
+      "tickers": 500,
+      "next_open": "2022-04-04",
+      "features_sha256": "b7b294a402d38b468e2dbea19f302d4dfa24cbd916902b3e085940bd4e9c9d63"
+    },
+    {
+      "date": "2022-04-04",
+      "tickers": 500,
+      "next_open": "2022-04-05",
+      "features_sha256": "c04a20c7752fb9f4c485bdd9ae1465545a1b8efa4c8cede2b9d6ce4e32af2602"
+    },
+    {
+      "date": "2022-04-05",
+      "tickers": 500,
+      "next_open": "2022-04-06",
+      "features_sha256": "ca2c468a465b0d52aa4968e8ad893bd55cd7dae393e86d1bfe7130f01ec16a6d"
+    },
+    {
+      "date": "2022-04-06",
+      "tickers": 500,
+      "next_open": "2022-04-07",
+      "features_sha256": "1fa65ad56f6ce2a74de2bbc6c3dd0d2845890b86a925e9fb1d4b3f14ae070f03"
+    },
+    {
+      "date": "2022-04-07",
+      "tickers": 500,
+      "next_open": "2022-04-08",
+      "features_sha256": "49fb1258a6894a7d03447bfb64e2853842b2bc3ba139b7f46bdcb632a483547a"
+    },
+    {
+      "date": "2022-04-08",
+      "tickers": 500,
+      "next_open": "2022-04-11",
+      "features_sha256": "bfc1de6f9b4a6a22ee5bf37228aaecb82c65b01997b24882fb0b83217a4aa37f"
+    },
+    {
+      "date": "2022-04-11",
+      "tickers": 500,
+      "next_open": "2022-04-12",
+      "features_sha256": "b046c1fe4c0645fa1588e5b7b1195d5c5c55dbd9272c783ff06dda65cfd23e7b"
+    },
+    {
+      "date": "2022-04-12",
+      "tickers": 500,
+      "next_open": "2022-04-13",
+      "features_sha256": "37b3db250e36b2254fa199016efce7a69e2496998a00a82ff0c06e484c847d00"
+    },
+    {
+      "date": "2022-04-13",
+      "tickers": 500,
+      "next_open": "2022-04-14",
+      "features_sha256": "bb61e13b8e953be6738c4ba486b88283f592f495651986504bd4a64a2a08b7f7"
+    },
+    {
+      "date": "2022-04-14",
+      "tickers": 500,
+      "next_open": "2022-04-15",
+      "features_sha256": "f1a1d2d1d51b5311bb0d0744d0510633af5fccc0dc15a8f415eeac183d967ae2"
+    },
+    {
+      "date": "2022-04-15",
+      "tickers": 500,
+      "next_open": "2022-04-18",
+      "features_sha256": "6b21aba13a3c9c8ed9163cab2ba1e5d0365b70be8a35b81e0445ec50666bf00e"
+    },
+    {
+      "date": "2022-04-18",
+      "tickers": 500,
+      "next_open": "2022-04-19",
+      "features_sha256": "f69d5a5f3064dc6ce727c6eb9260aa0d086fff3b335434463e151beec1a3153a"
+    },
+    {
+      "date": "2022-04-19",
+      "tickers": 500,
+      "next_open": "2022-04-20",
+      "features_sha256": "aa92bfba94d53b5a4568539d29e0edf13c022136f9006149a088916a84733caa"
+    },
+    {
+      "date": "2022-04-20",
+      "tickers": 500,
+      "next_open": "2022-04-21",
+      "features_sha256": "556a73cfe854231d8bbfd6528845d953c5885fe106050b0d37f0835611ccbbe2"
+    },
+    {
+      "date": "2022-04-21",
+      "tickers": 500,
+      "next_open": "2022-04-22",
+      "features_sha256": "4cc01cc4816a1b744c82351175c93b6bdc0aea2e578d8e28ef721faf45797600"
+    },
+    {
+      "date": "2022-04-22",
+      "tickers": 500,
+      "next_open": "2022-04-25",
+      "features_sha256": "312e4ca8d5b3b21803cd3994bee7e10617074aee62cb0cdb791b74af8ae60749"
+    },
+    {
+      "date": "2022-04-25",
+      "tickers": 500,
+      "next_open": "2022-04-26",
+      "features_sha256": "95960da8a57dd0e382bb1bd6eeac5a78086370c39f13088796eaf722772af6eb"
+    },
+    {
+      "date": "2022-04-26",
+      "tickers": 500,
+      "next_open": "2022-04-27",
+      "features_sha256": "801f97247d94f722032e28bd44b96225e93c28ff97353121a59e40a9d3c23f63"
+    },
+    {
+      "date": "2022-04-27",
+      "tickers": 500,
+      "next_open": "2022-04-28",
+      "features_sha256": "243820913869fdb4af1747f848d0cf8eb473639f9b5a09a9f1dadf91a9f44e81"
+    },
+    {
+      "date": "2022-04-28",
+      "tickers": 500,
+      "next_open": "2022-04-29",
+      "features_sha256": "ab4142d9bdc0aefc7a151020ee33d81718807c7f298e8aac1b5e862c748ea4c8"
+    },
+    {
+      "date": "2022-04-29",
+      "tickers": 500,
+      "next_open": "2022-05-02",
+      "features_sha256": "4e388d573582051ddc77ef1e4cb87f67d9e76478254515f73e042018d35839e7"
+    },
+    {
+      "date": "2022-05-02",
+      "tickers": 500,
+      "next_open": "2022-05-03",
+      "features_sha256": "fb4352e3fe009ee5c790eddf2af6819569862788eb9a0ee84144e4b27c610c03"
+    },
+    {
+      "date": "2022-05-03",
+      "tickers": 500,
+      "next_open": "2022-05-04",
+      "features_sha256": "ac25146d19d257ad7f0c1da9d2d2796a30f9aa1a4788fef78f3e0f39510eeeec"
+    },
+    {
+      "date": "2022-05-04",
+      "tickers": 500,
+      "next_open": "2022-05-05",
+      "features_sha256": "3f1cfb3725fe595e0d2120cb80c84cfc50c74b855a5380d11f1647755aae1d75"
+    },
+    {
+      "date": "2022-05-05",
+      "tickers": 500,
+      "next_open": "2022-05-06",
+      "features_sha256": "0a46a85f0fb575b569a2df9a053da68f85a56446f28c76f98a0b63c22998c1ab"
+    },
+    {
+      "date": "2022-05-06",
+      "tickers": 500,
+      "next_open": "2022-05-09",
+      "features_sha256": "7623a8b306da11201df2e9c8114a08453558f2e2cc53e1c1eaed779729ea3e69"
+    },
+    {
+      "date": "2022-05-09",
+      "tickers": 500,
+      "next_open": "2022-05-10",
+      "features_sha256": "2dcace86f6f452abc36bc2c428c93e2b4dd65bc933974b29c0e76b4bcfccec48"
+    },
+    {
+      "date": "2022-05-10",
+      "tickers": 500,
+      "next_open": "2022-05-11",
+      "features_sha256": "5e658cf2e5de90435b9dae8b135fee7d13a22df7d70b4c55c680b61240089428"
+    },
+    {
+      "date": "2022-05-11",
+      "tickers": 500,
+      "next_open": "2022-05-12",
+      "features_sha256": "2883019636ea48383a6e97ad59359ddbd46d05a9d9dd043db547fcd7f5c0d7dc"
+    },
+    {
+      "date": "2022-05-12",
+      "tickers": 500,
+      "next_open": "2022-05-13",
+      "features_sha256": "097c60611d764f2c0f7f8a22b6e7829abf3c770585e31cdc86af94405865071a"
+    },
+    {
+      "date": "2022-05-13",
+      "tickers": 500,
+      "next_open": "2022-05-16",
+      "features_sha256": "6c34c3e8d4653c5cd9a8d37a74b1c11f96c1ee911dca9c1f51dfd5c4355fd7a2"
+    },
+    {
+      "date": "2022-05-16",
+      "tickers": 500,
+      "next_open": "2022-05-17",
+      "features_sha256": "101f33d70201e553645e30e0a583648746ea440a9c6e8199e83e0a0e099883eb"
+    },
+    {
+      "date": "2022-05-17",
+      "tickers": 500,
+      "next_open": "2022-05-18",
+      "features_sha256": "3e9e6670b60de516c4c3383dc82e24bbd41a168129d52097bcdde7676b17b6b1"
+    },
+    {
+      "date": "2022-05-18",
+      "tickers": 500,
+      "next_open": "2022-05-19",
+      "features_sha256": "88f2fd6e16e30c7a79be1d364c5c0c33cf14cd4d535ec86c713c896e63e2286f"
+    },
+    {
+      "date": "2022-05-19",
+      "tickers": 500,
+      "next_open": "2022-05-20",
+      "features_sha256": "017c043efc6f6b37c5ce1915e02c14b9897490c2c677b4dda4b791b988a0c7b3"
+    },
+    {
+      "date": "2022-05-20",
+      "tickers": 500,
+      "next_open": "2022-05-23",
+      "features_sha256": "3ce339f365efc73d9261b496b7e7832501332261565f30ac3f6e0c90902e439e"
+    },
+    {
+      "date": "2022-05-23",
+      "tickers": 500,
+      "next_open": "2022-05-24",
+      "features_sha256": "4a0661e3d20cb7f3a0688bd0a7214b5754f604d6a9caf3e1f152d05cb7f8b162"
+    },
+    {
+      "date": "2022-05-24",
+      "tickers": 500,
+      "next_open": "2022-05-25",
+      "features_sha256": "ad2853f72c301fc83f59a835a0bf7784e2a1e769691df0e0ef66305e3aca8b0d"
+    },
+    {
+      "date": "2022-05-25",
+      "tickers": 500,
+      "next_open": "2022-05-26",
+      "features_sha256": "cc89f68e6ca3594aee9b869919f613227d925ebdd21e7acb69da42002c6a72b0"
+    },
+    {
+      "date": "2022-05-26",
+      "tickers": 500,
+      "next_open": "2022-05-27",
+      "features_sha256": "b5bb84add0f2d7b053a6c6fdf2029d84525b40e5ce64082ca9b877e05ac90fd4"
+    },
+    {
+      "date": "2022-05-27",
+      "tickers": 500,
+      "next_open": "2022-05-30",
+      "features_sha256": "c15bc2b0d67fef7d0d47c3aa773a226f721e8a9bb35b40b1a6811ed7e4b2990b"
+    },
+    {
+      "date": "2022-05-30",
+      "tickers": 500,
+      "next_open": "2022-05-31",
+      "features_sha256": "f432ec71d060c37f18e9dd6042daa102c4de54feb29597d88c3fde27c9e89715"
+    },
+    {
+      "date": "2022-05-31",
+      "tickers": 500,
+      "next_open": "2022-06-01",
+      "features_sha256": "040376328304781efd32fcb76dba680aec8b4fe1591667e64f0e2c99e181de69"
+    },
+    {
+      "date": "2022-06-01",
+      "tickers": 500,
+      "next_open": "2022-06-02",
+      "features_sha256": "31b34205f4a3620be0501e77038cbeb1cd9c071c431143eccfe5412446e4d61c"
+    },
+    {
+      "date": "2022-06-02",
+      "tickers": 500,
+      "next_open": "2022-06-03",
+      "features_sha256": "24291430604ee4c21769bd000302d40b96aeafd2fc725f6967078846a53b5f05"
+    },
+    {
+      "date": "2022-06-03",
+      "tickers": 500,
+      "next_open": "2022-06-06",
+      "features_sha256": "df54337a822c5bc239a9c47ebd92597757227ab4324a7be7be511610b0dddd5f"
+    },
+    {
+      "date": "2022-06-06",
+      "tickers": 500,
+      "next_open": "2022-06-07",
+      "features_sha256": "dd75e72e4790a5a190a60232a203272e54a4160db76bb78f214519005757390b"
+    },
+    {
+      "date": "2022-06-07",
+      "tickers": 500,
+      "next_open": "2022-06-08",
+      "features_sha256": "6e58ef03fe1b305357c4254e4c9b542f223be4633e281f7a3084ef82b7f498c9"
+    },
+    {
+      "date": "2022-06-08",
+      "tickers": 500,
+      "next_open": "2022-06-09",
+      "features_sha256": "5d4036875bb7bcbd3964d184b1a7395b1baa54034e58a9e28ebf9a8f41d66720"
+    },
+    {
+      "date": "2022-06-09",
+      "tickers": 500,
+      "next_open": "2022-06-10",
+      "features_sha256": "028fd8ded3e968d42dfbd71d968c6e3b224043b9e4118d7c85bf455719bd7ab1"
+    },
+    {
+      "date": "2022-06-10",
+      "tickers": 500,
+      "next_open": "2022-06-13",
+      "features_sha256": "8db248e90378a16e35e8239999fe0be18af7506ea335ba19f12a5c18a610c8f2"
+    },
+    {
+      "date": "2022-06-13",
+      "tickers": 500,
+      "next_open": "2022-06-14",
+      "features_sha256": "94260b36a84304b8ab4ea4aed66a6fd40f05e9fab33935bc40d629214e02a2ec"
+    },
+    {
+      "date": "2022-06-14",
+      "tickers": 500,
+      "next_open": "2022-06-15",
+      "features_sha256": "b33ef0d8ea565213db3d8ac737bb457d1605ab5cabafbb7e1704323650a01297"
+    },
+    {
+      "date": "2022-06-15",
+      "tickers": 500,
+      "next_open": "2022-06-16",
+      "features_sha256": "82d57b515c1c08a51e903a24902910b4c28cfadd55ee332e96a41a1fb7e62304"
+    },
+    {
+      "date": "2022-06-16",
+      "tickers": 500,
+      "next_open": "2022-06-17",
+      "features_sha256": "1814b3332b51e9e122fe879fe3f6ca0963168d2c3f1de35a61abc88cb45f15f7"
+    },
+    {
+      "date": "2022-06-17",
+      "tickers": 500,
+      "next_open": "2022-06-20",
+      "features_sha256": "9af486f9bfa4e08249151f31bb41b19109a646a4b5ee84076037fa08fa7cbbdd"
+    },
+    {
+      "date": "2022-06-20",
+      "tickers": 500,
+      "next_open": "2022-06-21",
+      "features_sha256": "07db98b9156b95a1b2d4be425d52e050de8f88f336e1cc6674d841e1d434356d"
+    },
+    {
+      "date": "2022-06-21",
+      "tickers": 500,
+      "next_open": "2022-06-22",
+      "features_sha256": "90cbdcd34583c688b91cfd37a0aca68beeb193a5b506a77cb23179d9b90174fa"
+    },
+    {
+      "date": "2022-06-22",
+      "tickers": 500,
+      "next_open": "2022-06-23",
+      "features_sha256": "eab6414996ef953675c5245a9decb8a992dbc22084ef4c74e8944c74c5a0b028"
+    },
+    {
+      "date": "2022-06-23",
+      "tickers": 500,
+      "next_open": "2022-06-24",
+      "features_sha256": "981973244fe52193615f2ec9a6c150cc1717623471f8f1553b2988641d968def"
+    },
+    {
+      "date": "2022-06-24",
+      "tickers": 500,
+      "next_open": "2022-06-27",
+      "features_sha256": "b564432b9a9ccf88605df6e75f48d22546806d167d33d58bfb6c31dd6d0ecdeb"
+    },
+    {
+      "date": "2022-06-27",
+      "tickers": 500,
+      "next_open": "2022-06-28",
+      "features_sha256": "b810b737621e4a64d9f712ff02237e45547e92e8f1d135df7382a3cdf5e7bf93"
+    },
+    {
+      "date": "2022-06-28",
+      "tickers": 500,
+      "next_open": "2022-06-29",
+      "features_sha256": "aa60c5b64ff1f511b442a57f90c91c84914c89df3f7ca40f62545cfe252e5919"
+    },
+    {
+      "date": "2022-06-29",
+      "tickers": 500,
+      "next_open": "2022-06-30",
+      "features_sha256": "6f23a59a35545ede98d7244bffa4db1299bd3d6b53f6fa8cbc0861fe850cd36f"
+    },
+    {
+      "date": "2022-06-30",
+      "tickers": 500,
+      "next_open": "2022-07-01",
+      "features_sha256": "3da1994f1dcda6ae363edcc587c70c965925b7f96b5e666a0ace37f5cf76e66a"
+    },
+    {
+      "date": "2022-07-01",
+      "tickers": 500,
+      "next_open": "2022-07-04",
+      "features_sha256": "79abc66e54a72c9a197ca6d600bde2fe7ca9c015d9d3f8840e226e5a39ec2621"
+    },
+    {
+      "date": "2022-07-04",
+      "tickers": 500,
+      "next_open": "2022-07-05",
+      "features_sha256": "5c78d3ab20dd44fdf0dfac070d7f1f287a1c452d54fa31911317f450a98cd3a2"
+    },
+    {
+      "date": "2022-07-05",
+      "tickers": 500,
+      "next_open": "2022-07-06",
+      "features_sha256": "8aa7b49129964ac21dc57cfb6df0804450103a05e2920d88889ddb6273c301c4"
+    },
+    {
+      "date": "2022-07-06",
+      "tickers": 500,
+      "next_open": "2022-07-07",
+      "features_sha256": "f7e8ade997c76d0660b3f30669b43c5573b5d65beaf32a4e5d043a4c5cf0c9bf"
+    },
+    {
+      "date": "2022-07-07",
+      "tickers": 500,
+      "next_open": "2022-07-08",
+      "features_sha256": "e2794d241266ddb144c9750d2aee4acbff6b87345ea949542285ad7146fdfaec"
+    },
+    {
+      "date": "2022-07-08",
+      "tickers": 500,
+      "next_open": "2022-07-11",
+      "features_sha256": "de08e99941c693d9069f14605f6656858596d91dfd56ec8ef3b5a58e75436457"
+    },
+    {
+      "date": "2022-07-11",
+      "tickers": 500,
+      "next_open": "2022-07-12",
+      "features_sha256": "7faa3a1e639b879dfdf1c5df350aafd8829d35e3b804af0a8614bed3ddd7b275"
+    },
+    {
+      "date": "2022-07-12",
+      "tickers": 500,
+      "next_open": "2022-07-13",
+      "features_sha256": "b7bef5bcb10db1f1c71d056cd75b5cde4324f2548cc6be191d962c18e4ab611c"
+    },
+    {
+      "date": "2022-07-13",
+      "tickers": 500,
+      "next_open": "2022-07-14",
+      "features_sha256": "912a76155836352253996a095bdf94a881fc9fffb1b4900f3ad2bc384e763f1f"
+    },
+    {
+      "date": "2022-07-14",
+      "tickers": 500,
+      "next_open": "2022-07-15",
+      "features_sha256": "4237a59afe99cf91865ce4bf1d801e685307dd116054edcb7c2df9487bb27cd4"
+    },
+    {
+      "date": "2022-07-15",
+      "tickers": 500,
+      "next_open": "2022-07-18",
+      "features_sha256": "3ffa34cc4e8ce4de92448134ee4f1b88e9217ca7e449f0be413bd2db9812d2df"
+    },
+    {
+      "date": "2022-07-18",
+      "tickers": 500,
+      "next_open": "2022-07-19",
+      "features_sha256": "91d54423da20ae29b3ef2b0fe11f4f50706a4ed5729adb0ef91c20dd902c793b"
+    },
+    {
+      "date": "2022-07-19",
+      "tickers": 500,
+      "next_open": "2022-07-20",
+      "features_sha256": "3857c5cb2647db02564943988fd88c6bdd130cf7db3ea980081451ade43c146f"
+    },
+    {
+      "date": "2022-07-20",
+      "tickers": 500,
+      "next_open": "2022-07-21",
+      "features_sha256": "a49ee5d40887d9532df70032aca9f7c728b5f78ff6f3bebe067eaad49dc468b0"
+    },
+    {
+      "date": "2022-07-21",
+      "tickers": 500,
+      "next_open": "2022-07-22",
+      "features_sha256": "cd6edb2c4813bb5f4072753cef129417223439738c5b3084d18cbba114b52f5c"
+    },
+    {
+      "date": "2022-07-22",
+      "tickers": 500,
+      "next_open": "2022-07-25",
+      "features_sha256": "5b96b7ee7165ea1314fef6f3e37d71b4d24c8250d09d4f099785be74d7cfd033"
+    },
+    {
+      "date": "2022-07-25",
+      "tickers": 500,
+      "next_open": "2022-07-26",
+      "features_sha256": "a734740f5b1ad65fc5c726c016447a9eb7cc992130426d628ccbb5ef18ea3a74"
+    },
+    {
+      "date": "2022-07-26",
+      "tickers": 500,
+      "next_open": "2022-07-27",
+      "features_sha256": "a3df20af1079b3291736c5ba73fac0a286172c50bc79dc317575d9e93fad0158"
+    },
+    {
+      "date": "2022-07-27",
+      "tickers": 500,
+      "next_open": "2022-07-28",
+      "features_sha256": "dacca0c2f3c57fa1a1b92e02a1de0a85881a2b16e8977640bb6f14dc9e57068e"
+    },
+    {
+      "date": "2022-07-28",
+      "tickers": 500,
+      "next_open": "2022-07-29",
+      "features_sha256": "7d038ee95d569f4172f4c38df79af4e3fd96e70f8d797a64c11c324920837891"
+    },
+    {
+      "date": "2022-07-29",
+      "tickers": 500,
+      "next_open": "2022-08-01",
+      "features_sha256": "0cc7281fc3f70ead2e207cdf2f56060a69c0c527d7384b91962cf8c9b8fb527d"
+    },
+    {
+      "date": "2022-08-01",
+      "tickers": 500,
+      "next_open": "2022-08-02",
+      "features_sha256": "6c3e6bffe63de9fa796cc88a89dd5b88865209f4940b2e499262a442fc271e98"
+    },
+    {
+      "date": "2022-08-02",
+      "tickers": 500,
+      "next_open": "2022-08-03",
+      "features_sha256": "a25a34db83e179f174a8b2f13bd341e40f6f37b504406fede23dfdc0549fb898"
+    },
+    {
+      "date": "2022-08-03",
+      "tickers": 500,
+      "next_open": "2022-08-04",
+      "features_sha256": "95d595400f4adaf9c6d1f289d7c00ec3cf9f5fca14851bf6ba568ae3aff2f106"
+    },
+    {
+      "date": "2022-08-04",
+      "tickers": 500,
+      "next_open": "2022-08-05",
+      "features_sha256": "cdec17fa0afe0e85225d130e81e3959cb39c614aa4510486ca32520cf011b969"
+    },
+    {
+      "date": "2022-08-05",
+      "tickers": 500,
+      "next_open": "2022-08-08",
+      "features_sha256": "e9fc1d758bd575aa66b2db7c211b4ce9a91c678c62ee65f74bb922a6bf4f002e"
+    },
+    {
+      "date": "2022-08-08",
+      "tickers": 500,
+      "next_open": "2022-08-09",
+      "features_sha256": "a81f2cb92e219d52b7ae28bf3077aaf187afd44114a1029272fd33e1a8b56e79"
+    },
+    {
+      "date": "2022-08-09",
+      "tickers": 500,
+      "next_open": "2022-08-10",
+      "features_sha256": "c004a98c0a424d325ca0528a3f641f1cba34fd6048727a9e548ca5fe7f3c419d"
+    },
+    {
+      "date": "2022-08-10",
+      "tickers": 500,
+      "next_open": "2022-08-11",
+      "features_sha256": "6bd745a58f3d6e63306a1c99ce78fc1b1bab016a899e3511676019aec97b1dc2"
+    },
+    {
+      "date": "2022-08-11",
+      "tickers": 500,
+      "next_open": "2022-08-12",
+      "features_sha256": "9f909e8292eb4dcc4178092d61120983d22e9bf37f8ca36cf03a698291b1f369"
+    },
+    {
+      "date": "2022-08-12",
+      "tickers": 500,
+      "next_open": "2022-08-15",
+      "features_sha256": "53b1fcf57c72c0a83340004fc261de9819551385c9f1e930fc0e0c49f00ce90f"
+    },
+    {
+      "date": "2022-08-15",
+      "tickers": 500,
+      "next_open": "2022-08-16",
+      "features_sha256": "3668ff27591473cb3e836915bb1375d618aeefb3537460a2b3f884c158a8e4dd"
+    },
+    {
+      "date": "2022-08-16",
+      "tickers": 500,
+      "next_open": "2022-08-17",
+      "features_sha256": "4592b73e9131928388a43dbb876e86bdc9caf2bc03fcba3791be25ab45e94e4f"
+    },
+    {
+      "date": "2022-08-17",
+      "tickers": 500,
+      "next_open": "2022-08-18",
+      "features_sha256": "8c0b259cbbcce59c0949af3a521b6f34df9fb266bcab7800852a104b8f5c502a"
+    },
+    {
+      "date": "2022-08-18",
+      "tickers": 500,
+      "next_open": "2022-08-19",
+      "features_sha256": "81f34b7842d6b33d4e2f4dac35156d5c4352c1e0b1c62e46a8ec42bce6a9f694"
+    },
+    {
+      "date": "2022-08-19",
+      "tickers": 500,
+      "next_open": "2022-08-22",
+      "features_sha256": "7fb82cc0297834dfbf0367b4ba84287a8c5963fd6791a1077c016fa3bda9763b"
+    },
+    {
+      "date": "2022-08-22",
+      "tickers": 500,
+      "next_open": "2022-08-23",
+      "features_sha256": "f525a6ac7cbdf2d07eb6a4a493d2516b2fa791af42b15b1a14e12279f241de26"
+    },
+    {
+      "date": "2022-08-23",
+      "tickers": 500,
+      "next_open": "2022-08-24",
+      "features_sha256": "54ddd2beb31d1c6bad2f07c757c37f0acc87c842648fb02e721b5970b6f01825"
+    },
+    {
+      "date": "2022-08-24",
+      "tickers": 500,
+      "next_open": "2022-08-25",
+      "features_sha256": "8b5ccbde9b120edf732c420e969c07e1bd5946ddd63754c3c441c7d097412da3"
+    },
+    {
+      "date": "2022-08-25",
+      "tickers": 500,
+      "next_open": "2022-08-26",
+      "features_sha256": "46dc9d6cf5e0e37768b67eba5ef8598f66a3c10ebeda706bb67167ad2821ea6f"
+    },
+    {
+      "date": "2022-08-26",
+      "tickers": 500,
+      "next_open": "2022-08-29",
+      "features_sha256": "323c8f2969de02d43682d4ce07667e4243887d167536b264d1d49dbcca854ab7"
+    },
+    {
+      "date": "2022-08-29",
+      "tickers": 500,
+      "next_open": "2022-08-30",
+      "features_sha256": "325377fa29151e5c43097bf8f2a04c221675bbbe7533ccdef4c8bf36ea7baaec"
+    },
+    {
+      "date": "2022-08-30",
+      "tickers": 500,
+      "next_open": "2022-08-31",
+      "features_sha256": "565d0ef982aa3dcaf3dcdc1790788cdb40d43be3d94cea7b444f2b7ac3492e7d"
+    },
+    {
+      "date": "2022-08-31",
+      "tickers": 500,
+      "next_open": "2022-09-01",
+      "features_sha256": "1ac3ab97c00acae3d2d7aa79bebb5a2d4b86c125e097f498b61d2feaae509e16"
+    },
+    {
+      "date": "2022-09-01",
+      "tickers": 500,
+      "next_open": "2022-09-02",
+      "features_sha256": "8b257a1d3a6750c117ba070ea7a2790e273e6cdcae6e2a1aa7312916268c76a6"
+    },
+    {
+      "date": "2022-09-02",
+      "tickers": 500,
+      "next_open": "2022-09-05",
+      "features_sha256": "64724f6333aeb80cc55c3e68f620e1a5110548ec7900d412d1239f8796bba5f5"
+    },
+    {
+      "date": "2022-09-05",
+      "tickers": 500,
+      "next_open": "2022-09-06",
+      "features_sha256": "a548784f7144ba20c530a4450000b9fa040e7ebc1dc192af93c685728761cd6d"
+    },
+    {
+      "date": "2022-09-06",
+      "tickers": 500,
+      "next_open": "2022-09-07",
+      "features_sha256": "f177d4fe4f3c02193ce4fb30a206d8a2c9e1403857179e8ab62af94039715c6b"
+    },
+    {
+      "date": "2022-09-07",
+      "tickers": 500,
+      "next_open": "2022-09-08",
+      "features_sha256": "a05cb3e3ae26fcb28f2a5176f8475cdb28e7aec08805aa00248640a24a632381"
+    },
+    {
+      "date": "2022-09-08",
+      "tickers": 500,
+      "next_open": "2022-09-09",
+      "features_sha256": "dd233438960ef3392d5949601e1639f7fa3b6e1f79efeb60a5e2a427f298fd2b"
+    },
+    {
+      "date": "2022-09-09",
+      "tickers": 500,
+      "next_open": "2022-09-12",
+      "features_sha256": "a7264fd61d829c348dc788ae26e993cd7f3e081593887607d65789f62b13ea62"
+    },
+    {
+      "date": "2022-09-12",
+      "tickers": 500,
+      "next_open": "2022-09-13",
+      "features_sha256": "9d24bd44cfde73be6cd0f6ab846762a82c3b04ed5d4af62a84782c74f2859b21"
+    },
+    {
+      "date": "2022-09-13",
+      "tickers": 500,
+      "next_open": "2022-09-14",
+      "features_sha256": "89f3fe4962eb592a0fc46a6401c13fdb718cfb206ad2373b64ed5dddcd11f577"
+    },
+    {
+      "date": "2022-09-14",
+      "tickers": 500,
+      "next_open": "2022-09-15",
+      "features_sha256": "f492f4f61b13b40f2309c872f8ff2713d25f1beb587171ea1f21ed5b837bb221"
+    },
+    {
+      "date": "2022-09-15",
+      "tickers": 500,
+      "next_open": "2022-09-16",
+      "features_sha256": "8b0ef1183a99f89a78e88f0327c59f47b5c38c4107b102811f0cdcb504c52cb5"
+    },
+    {
+      "date": "2022-09-16",
+      "tickers": 500,
+      "next_open": "2022-09-19",
+      "features_sha256": "858a0eb5f61b57f27beebb0c3f564c5ce619cc43ec141205acb5f45e6f31a73b"
+    },
+    {
+      "date": "2022-09-19",
+      "tickers": 500,
+      "next_open": "2022-09-20",
+      "features_sha256": "f51032c658a1fc06eeb96cad8ed00e7494923a9bcaaa0fdf494cee33914eff89"
+    },
+    {
+      "date": "2022-09-20",
+      "tickers": 500,
+      "next_open": "2022-09-21",
+      "features_sha256": "b72e6151a7f6d568db9a50ad496c4b3d8bb33d6a721c9a811021910fc19288dd"
+    },
+    {
+      "date": "2022-09-21",
+      "tickers": 500,
+      "next_open": "2022-09-22",
+      "features_sha256": "2acd8f41443d93b282967947cd419d6034a425cd72d711a819e1de45bb61cfb6"
+    },
+    {
+      "date": "2022-09-22",
+      "tickers": 500,
+      "next_open": "2022-09-23",
+      "features_sha256": "babdc93b2131388b53274f706220d37af307d935fe5bb3e5f92b40bf045eb752"
+    },
+    {
+      "date": "2022-09-23",
+      "tickers": 500,
+      "next_open": "2022-09-26",
+      "features_sha256": "329f559b477ef2ff21f082a44da6cf075042bdabdb07ff9fac96c603a77ba6d4"
+    },
+    {
+      "date": "2022-09-26",
+      "tickers": 500,
+      "next_open": "2022-09-27",
+      "features_sha256": "89e1b41091d772e1c8e2ee78cd32e53362e4f3675366c3395bc91ac16ca47054"
+    },
+    {
+      "date": "2022-09-27",
+      "tickers": 500,
+      "next_open": "2022-09-28",
+      "features_sha256": "3eb061a041b746d64e324cce9bf27c064ae33b4da5804f86b5debd5f3f2c35de"
+    },
+    {
+      "date": "2022-09-28",
+      "tickers": 500,
+      "next_open": "2022-09-29",
+      "features_sha256": "41061fab06b5c6c01c839bc41f504030fafff714e7dd0ff0d137fb4b8438364d"
+    },
+    {
+      "date": "2022-09-29",
+      "tickers": 500,
+      "next_open": "2022-09-30",
+      "features_sha256": "c86d85427fa90db78f7bb756ccd13e05addeae61d306062c88118fd32d88f412"
+    },
+    {
+      "date": "2022-09-30",
+      "tickers": 500,
+      "next_open": "2022-10-03",
+      "features_sha256": "6ae9669e888f102eea7a85ab5ec94588ffb322352f58b298ab8ed5c2e8311e72"
+    },
+    {
+      "date": "2022-10-03",
+      "tickers": 500,
+      "next_open": "2022-10-04",
+      "features_sha256": "59d6fcaf57dab0b24f28e6a514282cb2c957b18405fbef13512937fdc2a3f063"
+    },
+    {
+      "date": "2022-10-04",
+      "tickers": 500,
+      "next_open": "2022-10-05",
+      "features_sha256": "e2571c23f96c834ad38f3931265d6b3c97ec210823bbb20c5b80af38c3371af5"
+    },
+    {
+      "date": "2022-10-05",
+      "tickers": 500,
+      "next_open": "2022-10-06",
+      "features_sha256": "2bcfe2addd06e0c0e037bd98afbe0b5df4262a5a125b5596bda7d76cef9d1ce9"
+    },
+    {
+      "date": "2022-10-06",
+      "tickers": 500,
+      "next_open": "2022-10-07",
+      "features_sha256": "eb77773776f388c9d7f8b3a86a9b044a78e1966223ef11118ff3ee1f9ba639c1"
+    },
+    {
+      "date": "2022-10-07",
+      "tickers": 500,
+      "next_open": "2022-10-10",
+      "features_sha256": "7e3a7130102c1a195d117ab9b64818e107e86a079f8011ba58d50405b71ca54f"
+    },
+    {
+      "date": "2022-10-10",
+      "tickers": 500,
+      "next_open": "2022-10-11",
+      "features_sha256": "da9e1fa5c8f741661de33fbae3e88c4f643b781be2a2101bf69bad7107ea5e67"
+    },
+    {
+      "date": "2022-10-11",
+      "tickers": 500,
+      "next_open": "2022-10-12",
+      "features_sha256": "714b719dcaaaf34c925c58aa3b477b314b60798e93af2b04667c547574c5cc60"
+    },
+    {
+      "date": "2022-10-12",
+      "tickers": 500,
+      "next_open": "2022-10-13",
+      "features_sha256": "3a8b87ee8bd61c99a37281be88e10f8dc489a8b62be8b5c1791933e38b9a9185"
+    },
+    {
+      "date": "2022-10-13",
+      "tickers": 500,
+      "next_open": "2022-10-14",
+      "features_sha256": "482a3b59483b7ab9cffa1df9d72ebdb06b4046f00072cc94cf785b245c785e33"
+    },
+    {
+      "date": "2022-10-14",
+      "tickers": 500,
+      "next_open": "2022-10-17",
+      "features_sha256": "005729469c288538537676a4025ccbbedfd3b60631b78c70a93562d4aa92e7d2"
+    },
+    {
+      "date": "2022-10-17",
+      "tickers": 500,
+      "next_open": "2022-10-18",
+      "features_sha256": "97a2884533262e331dedd73908f12a79e9ac4ddd36bf18a74ecf937a5e64f8a7"
+    },
+    {
+      "date": "2022-10-18",
+      "tickers": 500,
+      "next_open": "2022-10-19",
+      "features_sha256": "55bdea692075a7b5247d3cbc1ec082ae2ea5ea34ffc9b2a04efb2b0ecd90be3b"
+    },
+    {
+      "date": "2022-10-19",
+      "tickers": 500,
+      "next_open": "2022-10-20",
+      "features_sha256": "05b26bc0a154c69ed07c7844f65885503994394df8d39c6f48acc63bedfd47a7"
+    },
+    {
+      "date": "2022-10-20",
+      "tickers": 500,
+      "next_open": "2022-10-21",
+      "features_sha256": "9ce222bb6a360f7dc92c39ec2f24afe293603a500a0da3922029598fead3777c"
+    },
+    {
+      "date": "2022-10-21",
+      "tickers": 500,
+      "next_open": "2022-10-24",
+      "features_sha256": "e9e2cb20f4cd55d9211103b239adc0ee918a90ad96fb8c981cfb33093b838ab5"
+    },
+    {
+      "date": "2022-10-24",
+      "tickers": 500,
+      "next_open": "2022-10-25",
+      "features_sha256": "64a858d2e63a839098102cb0775e6fd1075fde011e9122aae46c4b1f9e5612f9"
+    },
+    {
+      "date": "2022-10-25",
+      "tickers": 500,
+      "next_open": "2022-10-26",
+      "features_sha256": "4b3c13aa913cfd5e5256c5b264e96eb3272d961ca7a1f026d121c72ae66d9970"
+    },
+    {
+      "date": "2022-10-26",
+      "tickers": 500,
+      "next_open": "2022-10-27",
+      "features_sha256": "111f94f938363f7174cf3c7be8a6e9515894c2c3b70e026cf0cb09d0e268dd03"
+    },
+    {
+      "date": "2022-10-27",
+      "tickers": 500,
+      "next_open": "2022-10-28",
+      "features_sha256": "dc01a8604ac2fdcdaf32f75ca0a1f084ef37f942659b456ffa8c27e248e5b7ac"
+    },
+    {
+      "date": "2022-10-28",
+      "tickers": 500,
+      "next_open": "2022-10-31",
+      "features_sha256": "2f0b9588a12cdddaec9e942259ef47184efb5eab875c4d59d6023518fb635e8c"
+    },
+    {
+      "date": "2022-10-31",
+      "tickers": 500,
+      "next_open": "2022-11-01",
+      "features_sha256": "3659bfd889597fb5489ab2ed29aba5499545297761a0aaa8554c74c4562cbc3c"
+    },
+    {
+      "date": "2022-11-01",
+      "tickers": 500,
+      "next_open": "2022-11-02",
+      "features_sha256": "e826b2732c260e1392b6796f2af6f3f544bb02962824946df2be2eab4764a3c6"
+    },
+    {
+      "date": "2022-11-02",
+      "tickers": 500,
+      "next_open": "2022-11-03",
+      "features_sha256": "156ddd60ee56389c66760b22c58e202566d47710d218a62a15b86f18dec7d925"
+    },
+    {
+      "date": "2022-11-03",
+      "tickers": 500,
+      "next_open": "2022-11-04",
+      "features_sha256": "85e81afd8a94a98120532e1d2740dc8f2898680cb5caa1efda17ce513b9b979c"
+    },
+    {
+      "date": "2022-11-04",
+      "tickers": 500,
+      "next_open": "2022-11-07",
+      "features_sha256": "cd29a5f8c65b11deaba4fde00b0bcee71abf0d883b827566a1f0b930370c1f5c"
+    },
+    {
+      "date": "2022-11-07",
+      "tickers": 500,
+      "next_open": "2022-11-08",
+      "features_sha256": "93839cd2360f713da6b0f33a0fb68332ebddfc2a41dbb548b12ad1377940c868"
+    },
+    {
+      "date": "2022-11-08",
+      "tickers": 500,
+      "next_open": "2022-11-09",
+      "features_sha256": "0be34bb1d109ebc013e2173dcdc10b7f563f86824e7e80e4cb7e4c1a86d13042"
+    },
+    {
+      "date": "2022-11-09",
+      "tickers": 500,
+      "next_open": "2022-11-10",
+      "features_sha256": "386efcf51263bc4f66004b9a15f2c545d830bec5192c60ce8d041c6888fcaae7"
+    },
+    {
+      "date": "2022-11-10",
+      "tickers": 500,
+      "next_open": "2022-11-11",
+      "features_sha256": "f8b11b43fa1ac80ed6b4aa6afd266950e59ab25840fe0a6be156ad732a7b84b5"
+    },
+    {
+      "date": "2022-11-11",
+      "tickers": 500,
+      "next_open": "2022-11-14",
+      "features_sha256": "f101b57ece2035a74726134cd50e52bb7d464f8bef5ba8d52f388b61912dbe31"
+    },
+    {
+      "date": "2022-11-14",
+      "tickers": 500,
+      "next_open": "2022-11-15",
+      "features_sha256": "0c35983505006c56f11e1abcd8de06f36915b1cc5a4005b06bfb3f9b6d40d062"
+    },
+    {
+      "date": "2022-11-15",
+      "tickers": 500,
+      "next_open": "2022-11-16",
+      "features_sha256": "ea6e76bc9e610e01776c99224de006571f7f7c2986c5692b14b27d750f3d258e"
+    },
+    {
+      "date": "2022-11-16",
+      "tickers": 500,
+      "next_open": "2022-11-17",
+      "features_sha256": "9fa37c8bec439f7ae0701974356c9834480c322e187a22c01355252ae4861826"
+    },
+    {
+      "date": "2022-11-17",
+      "tickers": 500,
+      "next_open": "2022-11-18",
+      "features_sha256": "9680469d7fda03f3008e39ef1d52b33df2e74738288ed6af7d39332e238f2c95"
+    },
+    {
+      "date": "2022-11-18",
+      "tickers": 500,
+      "next_open": "2022-11-21",
+      "features_sha256": "cce5770540e6f76ca41a8a3fb3ff91a66043a03623745b9410995dc4d80f4620"
+    },
+    {
+      "date": "2022-11-21",
+      "tickers": 500,
+      "next_open": "2022-11-22",
+      "features_sha256": "9e8557077f5364793824cb10f005e2b79e3a17777c74967a3662d6ec5020af3e"
+    },
+    {
+      "date": "2022-11-22",
+      "tickers": 500,
+      "next_open": "2022-11-23",
+      "features_sha256": "6bcf524318cefbc66822b66dc01655298fa55d9279f3558d82706045fe6a588a"
+    },
+    {
+      "date": "2022-11-23",
+      "tickers": 500,
+      "next_open": "2022-11-24",
+      "features_sha256": "68897c4f0d64fba3f2bf6a97bb819d75356d40d09458652260b4feb0079a6bd4"
+    },
+    {
+      "date": "2022-11-24",
+      "tickers": 500,
+      "next_open": "2022-11-25",
+      "features_sha256": "70c16a991cf4d085b6996c61d94d59d7d8b2234c37ba18f5e1ebb30b3b7b6892"
+    },
+    {
+      "date": "2022-11-25",
+      "tickers": 500,
+      "next_open": "2022-11-28",
+      "features_sha256": "05b2774a686bef151dca680d8515806b1d8d90910594a3053629a5a7a5778b79"
+    },
+    {
+      "date": "2022-11-28",
+      "tickers": 500,
+      "next_open": "2022-11-29",
+      "features_sha256": "1573debb1980ab0a8d40ebf4bd2dc1570a0de6eafd82b6dbe1805ee578548252"
+    },
+    {
+      "date": "2022-11-29",
+      "tickers": 500,
+      "next_open": "2022-11-30",
+      "features_sha256": "18d4e232116d43f33c57ea074691c9e7d37ecb58ed4d6bfce870617a796f8751"
+    },
+    {
+      "date": "2022-11-30",
+      "tickers": 500,
+      "next_open": "2022-12-01",
+      "features_sha256": "55ecb3344f1a5c41ee9685844940b6e782592296c9e5272321f8fbd4e64559a7"
+    },
+    {
+      "date": "2022-12-01",
+      "tickers": 500,
+      "next_open": "2022-12-02",
+      "features_sha256": "8f0c7ed165176348fea979515d11010fe946329fd5f6ccbb61bacfcac325bcfd"
+    },
+    {
+      "date": "2022-12-02",
+      "tickers": 500,
+      "next_open": "2022-12-05",
+      "features_sha256": "408daaf825f473f33e6677b025982332824ca9af8f880e73c31c76c6c7840830"
+    },
+    {
+      "date": "2022-12-05",
+      "tickers": 500,
+      "next_open": "2022-12-06",
+      "features_sha256": "eab3ce9764321c131ee95c2b149ab3744537cdf8ffd21be64736187096c17962"
+    },
+    {
+      "date": "2022-12-06",
+      "tickers": 500,
+      "next_open": "2022-12-07",
+      "features_sha256": "dd4b51663c3f7d13958ffb083d9ef6dfd46787b634f33ad104802512ffb19271"
+    },
+    {
+      "date": "2022-12-07",
+      "tickers": 500,
+      "next_open": "2022-12-08",
+      "features_sha256": "f8d677abf7c1b5852e1537ec4782f4b9552e294f3e0e4072d7291a9a7bb79149"
+    },
+    {
+      "date": "2022-12-08",
+      "tickers": 500,
+      "next_open": "2022-12-09",
+      "features_sha256": "1095071b676100f04bf3cb61e972ed21ad841c8ab8f16e5d1709600e3862f9d3"
+    },
+    {
+      "date": "2022-12-09",
+      "tickers": 500,
+      "next_open": "2022-12-12",
+      "features_sha256": "8bfeaef7df96c5739039a373a282333e6c40e53f05e27c51f7808456e703370c"
+    },
+    {
+      "date": "2022-12-12",
+      "tickers": 500,
+      "next_open": "2022-12-13",
+      "features_sha256": "75dc34df92039106462e98c5fc0037087ba0ad6fc2ae4b96e1130579aa269085"
+    },
+    {
+      "date": "2022-12-13",
+      "tickers": 500,
+      "next_open": "2022-12-14",
+      "features_sha256": "0a12e24d5c977f1983b7a012b059c0d2c9b36104ad580d465dbc44d152ca7ef2"
+    },
+    {
+      "date": "2022-12-14",
+      "tickers": 500,
+      "next_open": "2022-12-15",
+      "features_sha256": "aa2f4d1ed19cf53010ef15132dfaab77f2e04d9ccc7d86a71d7fa009053c332c"
+    },
+    {
+      "date": "2022-12-15",
+      "tickers": 500,
+      "next_open": "2022-12-16",
+      "features_sha256": "01a3a6e00241721f00cfa2eba4ef1ad496af182fb2ee715e85fd8b45a0957503"
+    },
+    {
+      "date": "2022-12-16",
+      "tickers": 500,
+      "next_open": "2022-12-19",
+      "features_sha256": "1ab4e281e238045a37f070f7cb848b5ed449696ee36537055ac8114ab431223e"
+    },
+    {
+      "date": "2022-12-19",
+      "tickers": 500,
+      "next_open": "2022-12-20",
+      "features_sha256": "2ebbf3ec5c7e6b6b0a12b1c5678cc757c87afeec95067f1498315c7444af008c"
+    },
+    {
+      "date": "2022-12-20",
+      "tickers": 500,
+      "next_open": "2022-12-21",
+      "features_sha256": "872a242fc7930856fb8a6c6c59500266be246353d03cf7f2b1760048d795080d"
+    },
+    {
+      "date": "2022-12-21",
+      "tickers": 500,
+      "next_open": "2022-12-22",
+      "features_sha256": "2ee8849c3f16755d28ed780bcfb2e0edba42c65f06ca67b7a7214281b95b2bc0"
+    },
+    {
+      "date": "2022-12-22",
+      "tickers": 500,
+      "next_open": "2022-12-23",
+      "features_sha256": "4c04da7638c48c21f8daf55af29741d4ef923664e3028d38af49f783358f81f5"
+    },
+    {
+      "date": "2022-12-23",
+      "tickers": 500,
+      "next_open": "2022-12-26",
+      "features_sha256": "10f7e3d44a452f7544e17fa70d31c58e20070156fba8de8328670699ecf8184b"
+    },
+    {
+      "date": "2022-12-26",
+      "tickers": 500,
+      "next_open": "2022-12-27",
+      "features_sha256": "a96d7714e2da126672830e124040d2a0476694646fdf4822cf309b057374d480"
+    },
+    {
+      "date": "2022-12-27",
+      "tickers": 500,
+      "next_open": "2022-12-28",
+      "features_sha256": "8e9a252627e221c2bf2050f4ce8b025d976f726c9901c1314dff6ec6e266c101"
+    },
+    {
+      "date": "2022-12-28",
+      "tickers": 500,
+      "next_open": "2022-12-29",
+      "features_sha256": "dac55bea3338662b066062d71f7e35212dad768819c18e23e9601afecfb4430a"
+    },
+    {
+      "date": "2022-12-29",
+      "tickers": 500,
+      "next_open": "2022-12-30",
+      "features_sha256": "4038ecf69f3b741d93e85f44782791849add04af0becb392fb57ec2db94a75e9"
+    },
+    {
+      "date": "2022-12-30",
+      "tickers": 500,
+      "next_open": "2023-01-02",
+      "features_sha256": "9aea149c4ca98993510c5881ef39290a58e7a709938256892eac5a1956691865"
+    },
+    {
+      "date": "2023-01-02",
+      "tickers": 500,
+      "next_open": "2023-01-03",
+      "features_sha256": "dc0f267de78479d3d0e3b5c18d5a3cd298899cc7a83789d5a31291aac3b71699"
+    },
+    {
+      "date": "2023-01-03",
+      "tickers": 500,
+      "next_open": "2023-01-04",
+      "features_sha256": "8287206342c42f8079793dc2c0adc72bc8f2db15d0315426490f07c42f64725e"
+    },
+    {
+      "date": "2023-01-04",
+      "tickers": 500,
+      "next_open": "2023-01-05",
+      "features_sha256": "5f787bff745611ba860c705d3edc4150e32b172b67a43391274cbc8b6f50e159"
+    },
+    {
+      "date": "2023-01-05",
+      "tickers": 500,
+      "next_open": "2023-01-06",
+      "features_sha256": "dbc702eb240d8878b2d61f5e9a0ccc8794aff7d606e45334fab144178fb25dcf"
+    },
+    {
+      "date": "2023-01-06",
+      "tickers": 500,
+      "next_open": "2023-01-09",
+      "features_sha256": "9cbfa0ddd4002ae7ed50fd50ea03819ae8468def6337380852600d73d323a8fe"
+    },
+    {
+      "date": "2023-01-09",
+      "tickers": 500,
+      "next_open": "2023-01-10",
+      "features_sha256": "fb5cd0dd52ba7d89693761e08e6d7c40931803eaeb0452148dc3b908a39e1d78"
+    },
+    {
+      "date": "2023-01-10",
+      "tickers": 500,
+      "next_open": "2023-01-11",
+      "features_sha256": "9e252ea5f3892c8918b8c5a2e6e08f60f4f401169d2f8a2a56d5fce02870835e"
+    },
+    {
+      "date": "2023-01-11",
+      "tickers": 500,
+      "next_open": "2023-01-12",
+      "features_sha256": "46953fad45432c27520ecc4442a25dc349ba92eb4bbe7687e7b0f2722d25d245"
+    },
+    {
+      "date": "2023-01-12",
+      "tickers": 500,
+      "next_open": "2023-01-13",
+      "features_sha256": "b4c05d82db487a605bb0bb13d9d3c81e965c1530891d490c0298a03bb7a42bd4"
+    },
+    {
+      "date": "2023-01-13",
+      "tickers": 500,
+      "next_open": "2023-01-16",
+      "features_sha256": "d8fa808d0d1ef80ae3f0e2c5dfb34dc0e35eb4309f92a9f86e8ec4c3a0b0c43a"
+    },
+    {
+      "date": "2023-01-16",
+      "tickers": 500,
+      "next_open": "2023-01-17",
+      "features_sha256": "cb33a12040893cc22b926fe9dfbe3b9cb1769f83e14cc112f29a52e08b4e7fa2"
+    },
+    {
+      "date": "2023-01-17",
+      "tickers": 500,
+      "next_open": "2023-01-18",
+      "features_sha256": "56b8729cf5e56d814ab5c690c8cdf5c81ffeace3d09d4e0dcd5fdfde01a10d65"
+    },
+    {
+      "date": "2023-01-18",
+      "tickers": 500,
+      "next_open": "2023-01-19",
+      "features_sha256": "682d6fd1e3350136b807d86ddd22966e0c274077c4af2577d32f350a44937cf6"
+    },
+    {
+      "date": "2023-01-19",
+      "tickers": 500,
+      "next_open": "2023-01-20",
+      "features_sha256": "591b6846c3582803d476d0bb77141aad5e88b20bdc26f4d4fd1b2959e59f2c80"
+    },
+    {
+      "date": "2023-01-20",
+      "tickers": 500,
+      "next_open": "2023-01-23",
+      "features_sha256": "e86559a66fb40c0313f5ffb2e2e1b975f29769424617337cf189dbd83dac1f5d"
+    },
+    {
+      "date": "2023-01-23",
+      "tickers": 500,
+      "next_open": "2023-01-24",
+      "features_sha256": "c4214c11d8245942992fb71f6291b521520b211865efec23bbb834348e0807af"
+    },
+    {
+      "date": "2023-01-24",
+      "tickers": 500,
+      "next_open": "2023-01-25",
+      "features_sha256": "ed658adb33ab0267d409cd0f750f7f72aa10e3932b8da1e413ea6fad3b727f29"
+    },
+    {
+      "date": "2023-01-25",
+      "tickers": 500,
+      "next_open": "2023-01-26",
+      "features_sha256": "97f522cf0872172277d46fde2c41241648bfbe8f71c02b21a4eb4ed13ffad527"
+    },
+    {
+      "date": "2023-01-26",
+      "tickers": 500,
+      "next_open": "2023-01-27",
+      "features_sha256": "1180efe1d36af0457925dc83cd7be620196bf66f942dda85542bde236358ca24"
+    },
+    {
+      "date": "2023-01-27",
+      "tickers": 500,
+      "next_open": "2023-01-30",
+      "features_sha256": "8c8cae7ffa919618f8a3a17e8a72c24dff6d0a036baca28d474e22ed99290d72"
+    },
+    {
+      "date": "2023-01-30",
+      "tickers": 500,
+      "next_open": "2023-01-31",
+      "features_sha256": "d2b1f3f6833f4e4281fa29ad8591f42acb39e6ab2fab7ab6c86dc14168bb55df"
+    },
+    {
+      "date": "2023-01-31",
+      "tickers": 500,
+      "next_open": "2023-02-01",
+      "features_sha256": "e17d41c03e8d0d2b4382dd8b4ea5cc080f742a4a132eb086bf834448131e4e13"
+    },
+    {
+      "date": "2023-02-01",
+      "tickers": 500,
+      "next_open": "2023-02-02",
+      "features_sha256": "ce72eb2e501336dc2ef52c93b2610265f5ed9bd5e14b51c1b880636a41a76b88"
+    },
+    {
+      "date": "2023-02-02",
+      "tickers": 500,
+      "next_open": "2023-02-03",
+      "features_sha256": "a0e43f0a761fc23ee2b4f5cd47df1e5cf77d1732471e60cbe8d405daa5b0cb51"
+    },
+    {
+      "date": "2023-02-03",
+      "tickers": 500,
+      "next_open": "2023-02-06",
+      "features_sha256": "d181078b59c590bfe5f1ea2538e00816da03c951a437abd80c6d35e6afcdb3c9"
+    },
+    {
+      "date": "2023-02-06",
+      "tickers": 500,
+      "next_open": "2023-02-07",
+      "features_sha256": "cc2171fa686f440e119e2162db605e5809d1a7ec556eff6250365c78d2d00cfe"
+    },
+    {
+      "date": "2023-02-07",
+      "tickers": 500,
+      "next_open": "2023-02-08",
+      "features_sha256": "0ccce1f1143222e9cb6d9871188d18ab2d5948f68dab1289c7614c1860e998fb"
+    },
+    {
+      "date": "2023-02-08",
+      "tickers": 500,
+      "next_open": "2023-02-09",
+      "features_sha256": "1d7ac6642358598e6e9ffee48f975bf6b3e031f85d0f312e78c40fcf9487963f"
+    },
+    {
+      "date": "2023-02-09",
+      "tickers": 500,
+      "next_open": "2023-02-10",
+      "features_sha256": "e75c23e19efa980d45d41eafbd840c1ec0c24a72e629f456407cc0f823033934"
+    },
+    {
+      "date": "2023-02-10",
+      "tickers": 500,
+      "next_open": "2023-02-13",
+      "features_sha256": "597ce2a52955960c9f04be7ff352e8dbba80f49dd83044a77ba5aa6a85b7504d"
+    },
+    {
+      "date": "2023-02-13",
+      "tickers": 500,
+      "next_open": "2023-02-14",
+      "features_sha256": "04dc63ca2711aaae0a952bf32fab95aa664f7b735b601cfa00b2fc06c3caacdb"
+    },
+    {
+      "date": "2023-02-14",
+      "tickers": 500,
+      "next_open": "2023-02-15",
+      "features_sha256": "5384049a52bd0e36e49d1ec770abcc37816fe7e45133001c76286e0598f0e027"
+    },
+    {
+      "date": "2023-02-15",
+      "tickers": 500,
+      "next_open": "2023-02-16",
+      "features_sha256": "9967cf49d19569fc43475410efba77fff5990264dfd9dde9ebfba58eede2de45"
+    },
+    {
+      "date": "2023-02-16",
+      "tickers": 500,
+      "next_open": "2023-02-17",
+      "features_sha256": "fe58085711f1728fcab781f77df64cf6ed9a6e0c285b1a91af704e14183bc140"
+    },
+    {
+      "date": "2023-02-17",
+      "tickers": 500,
+      "next_open": "2023-02-20",
+      "features_sha256": "d36066dc5ff1830f4bb4992a379b6526db80ddfd103d7f44925c4228c20a6d5d"
+    },
+    {
+      "date": "2023-02-20",
+      "tickers": 500,
+      "next_open": "2023-02-21",
+      "features_sha256": "972376766f71c2938c08a11244238b34ea48afe2074f2dc6944c92639b4e58b4"
+    },
+    {
+      "date": "2023-02-21",
+      "tickers": 500,
+      "next_open": "2023-02-22",
+      "features_sha256": "3689af272d45f536bad8c15febff5bbad6777f6800b4f924f23ab8f73ac21994"
+    },
+    {
+      "date": "2023-02-22",
+      "tickers": 500,
+      "next_open": "2023-02-23",
+      "features_sha256": "271aeb6ba936280b0c7c320ad4a64d88e0f4c41bf294471974ae618e935691c3"
+    },
+    {
+      "date": "2023-02-23",
+      "tickers": 500,
+      "next_open": "2023-02-24",
+      "features_sha256": "aa4a66c79cf2ee0aaebb34afe4ad37aa69509a3eb6aa2541633f35dee6164c6b"
+    },
+    {
+      "date": "2023-02-24",
+      "tickers": 500,
+      "next_open": "2023-02-27",
+      "features_sha256": "6c5cc72d284d8a2be9fb164a3a63670a2db8451c3db74057f620fe98bc09700b"
+    },
+    {
+      "date": "2023-02-27",
+      "tickers": 500,
+      "next_open": "2023-02-28",
+      "features_sha256": "8ba63b7401258c0c6e8d1f3de8dd6185b45ede6624e379fde576b0032902f578"
+    },
+    {
+      "date": "2023-02-28",
+      "tickers": 500,
+      "next_open": "2023-03-01",
+      "features_sha256": "d12fe12dad352c637ca7d16697e1b0fd2fe34006aa83da68f221a0ddc64cad9f"
+    },
+    {
+      "date": "2023-03-01",
+      "tickers": 500,
+      "next_open": "2023-03-02",
+      "features_sha256": "0ff0bc05689348b820f8687f67e70b220c6493976d4c96131bc8516f8066c32b"
+    },
+    {
+      "date": "2023-03-02",
+      "tickers": 500,
+      "next_open": "2023-03-03",
+      "features_sha256": "3d9ae9513bfb625b50d03ecba781ff11f1fa8aea0fbd6e10502672be44177374"
+    },
+    {
+      "date": "2023-03-03",
+      "tickers": 500,
+      "next_open": "2023-03-06",
+      "features_sha256": "80f6bc9cc5bedd127fc8b51bb695dabc10d415ef8b1cd73c6ff61769fdd29761"
+    },
+    {
+      "date": "2023-03-06",
+      "tickers": 500,
+      "next_open": "2023-03-07",
+      "features_sha256": "33d1f8dc0e0ee47cd8a9180bfc7fa2d5f24809656bc9b762e4f0fcad2d3e8eab"
+    },
+    {
+      "date": "2023-03-07",
+      "tickers": 500,
+      "next_open": "2023-03-08",
+      "features_sha256": "924877497d5e535ba10987f16450b3d30453b8aecc4281bd08a0a181c483379c"
+    },
+    {
+      "date": "2023-03-08",
+      "tickers": 500,
+      "next_open": "2023-03-09",
+      "features_sha256": "59f8946b6c32065d3d63131ff3174bc260e8d5b05afe4d6f905d1e5806d921ca"
+    },
+    {
+      "date": "2023-03-09",
+      "tickers": 500,
+      "next_open": "2023-03-10",
+      "features_sha256": "fe34d6cde74f1db0bd17993904cdefb37dfaa3f80194267a2992ffb11e5b2877"
+    },
+    {
+      "date": "2023-03-10",
+      "tickers": 500,
+      "next_open": "2023-03-13",
+      "features_sha256": "30ea733edd88bfd43f7ca629f21f942d7073e6260ec7fcb0631c816d1958735b"
+    },
+    {
+      "date": "2023-03-13",
+      "tickers": 500,
+      "next_open": "2023-03-14",
+      "features_sha256": "fafea227e7a0f783208b59d9215f7488b7858f49c578314a26188b36720b31f6"
+    },
+    {
+      "date": "2023-03-14",
+      "tickers": 500,
+      "next_open": "2023-03-15",
+      "features_sha256": "dc5b60428435ad470cb77159b754ed37c60cce639a1027bfb34dc456f0199562"
+    },
+    {
+      "date": "2023-03-15",
+      "tickers": 500,
+      "next_open": "2023-03-16",
+      "features_sha256": "cad902c116e8cadf332d983bb27324623bcfa88528395819543867a3e26fdff4"
+    },
+    {
+      "date": "2023-03-16",
+      "tickers": 500,
+      "next_open": "2023-03-17",
+      "features_sha256": "4e713c05a430ec1b71c65edaf70452e50a5ba964a768a60a9bac053b75573ae8"
+    },
+    {
+      "date": "2023-03-17",
+      "tickers": 500,
+      "next_open": "2023-03-20",
+      "features_sha256": "be2446a934d6d7bbebcaa633d8b9775c7a4aa366b48d92d66da1f02df6e75dfe"
+    },
+    {
+      "date": "2023-03-20",
+      "tickers": 500,
+      "next_open": "2023-03-21",
+      "features_sha256": "c4eaa29939ae45b104ab461479a738674c2edbc464a3111a22d7c0e409213e2e"
+    },
+    {
+      "date": "2023-03-21",
+      "tickers": 500,
+      "next_open": "2023-03-22",
+      "features_sha256": "ae7890719bff764ca501d1182fc2749e652726eb3ffb9805746daeeab3545264"
+    },
+    {
+      "date": "2023-03-22",
+      "tickers": 500,
+      "next_open": "2023-03-23",
+      "features_sha256": "5a97f1b3d1db9af6869a47c63c60f5c1f4aa2894254a535a0cc16c0edee99b23"
+    },
+    {
+      "date": "2023-03-23",
+      "tickers": 500,
+      "next_open": "2023-03-24",
+      "features_sha256": "41ea1a7e90d92f2d84c5dcdc3fb9aedb3363337f722a730380d729bd116aa01d"
+    },
+    {
+      "date": "2023-03-24",
+      "tickers": 500,
+      "next_open": "2023-03-27",
+      "features_sha256": "68a94488d7402593d62fca5da6e446bbe00aef3db8d66959e122a93dc66c93c8"
+    },
+    {
+      "date": "2023-03-27",
+      "tickers": 500,
+      "next_open": "2023-03-28",
+      "features_sha256": "cc26c627b140e139571ae957f724d8337b4ef7e99017f08e590be144ad0c6753"
+    },
+    {
+      "date": "2023-03-28",
+      "tickers": 500,
+      "next_open": "2023-03-29",
+      "features_sha256": "5d781edf4b936ed54ce437747f33b9abebc8d6632ed525d3a8c9348e3740740e"
+    },
+    {
+      "date": "2023-03-29",
+      "tickers": 500,
+      "next_open": "2023-03-30",
+      "features_sha256": "73cc592c90b2381946b879c252be50b87a662bcb0b012abc3c9a7dd19dae28a9"
+    },
+    {
+      "date": "2023-03-30",
+      "tickers": 500,
+      "next_open": "2023-03-31",
+      "features_sha256": "51999e547889eea234074b2ca74b630167807ac4079f2317b21987be97aa91d8"
+    },
+    {
+      "date": "2023-03-31",
+      "tickers": 500,
+      "next_open": "2023-04-03",
+      "features_sha256": "6e72beb0bc9cbb532aa11dd5e278b7d0525603712844d4c210f01f23af517e50"
+    },
+    {
+      "date": "2023-04-03",
+      "tickers": 500,
+      "next_open": "2023-04-04",
+      "features_sha256": "0eba5778bbeb6b6ea5f6703125ccd00f287fec2fffb08ae6a54532678622f410"
+    },
+    {
+      "date": "2023-04-04",
+      "tickers": 500,
+      "next_open": "2023-04-05",
+      "features_sha256": "c56ee2b0d13162d4467352939559bbd2c2ec6a621c08388cc70bc79f48ef76c7"
+    },
+    {
+      "date": "2023-04-05",
+      "tickers": 500,
+      "next_open": "2023-04-06",
+      "features_sha256": "5382df3014ce1283b4c902e77c0e407733f3b458b22909eefbbd4f1b488f7df5"
+    },
+    {
+      "date": "2023-04-06",
+      "tickers": 500,
+      "next_open": "2023-04-07",
+      "features_sha256": "477f271f3881c866d2e0ce231649f9e3b3499fd58b67e786dd9d75fdf14524c2"
+    },
+    {
+      "date": "2023-04-07",
+      "tickers": 500,
+      "next_open": "2023-04-10",
+      "features_sha256": "3af68992c21373f192586ca619787d9878843472303cafb3b81e795f2027fe3b"
+    },
+    {
+      "date": "2023-04-10",
+      "tickers": 500,
+      "next_open": "2023-04-11",
+      "features_sha256": "ec8ffe828e982fa762815ccd528021392c07990727ad6298ea7102a7e840aba6"
+    },
+    {
+      "date": "2023-04-11",
+      "tickers": 500,
+      "next_open": "2023-04-12",
+      "features_sha256": "b42dbb7cb52ca78b0169aaf3db038252bbd5a5e938624d804db1bfa021337992"
+    },
+    {
+      "date": "2023-04-12",
+      "tickers": 500,
+      "next_open": "2023-04-13",
+      "features_sha256": "5d5da4ae92e8ecf9f3add02adc0263096b0295dfc54ef2930cca4ef5d7ac6a1e"
+    },
+    {
+      "date": "2023-04-13",
+      "tickers": 500,
+      "next_open": "2023-04-14",
+      "features_sha256": "5db4a40bed99f76a0211cbce7427435cc1a605e2d2efffe37837a50050987f22"
+    },
+    {
+      "date": "2023-04-14",
+      "tickers": 500,
+      "next_open": "2023-04-17",
+      "features_sha256": "dd19292d85be094af100b1f29dbd43acb4c4871204cb47991078b16bccd4331d"
+    },
+    {
+      "date": "2023-04-17",
+      "tickers": 500,
+      "next_open": "2023-04-18",
+      "features_sha256": "c46ecb4758424e7a9969309ffbfaa874937ab33f46322a01cbb89b421a5c0f1c"
+    },
+    {
+      "date": "2023-04-18",
+      "tickers": 500,
+      "next_open": "2023-04-19",
+      "features_sha256": "690375a7627ac44dece50c36d2d3e06ab942ca62d0bc0f12d59f2a93e9e8316b"
+    },
+    {
+      "date": "2023-04-19",
+      "tickers": 500,
+      "next_open": "2023-04-20",
+      "features_sha256": "b934e5ee56e1fb93f46b2a19c8d949054f4d3a019a7700bddc8e83c0e68c31b5"
+    },
+    {
+      "date": "2023-04-20",
+      "tickers": 500,
+      "next_open": "2023-04-21",
+      "features_sha256": "fc4477472d6120d962e0687d288bce39c60a09a6bf895cdc73f9691053707616"
+    },
+    {
+      "date": "2023-04-21",
+      "tickers": 500,
+      "next_open": "2023-04-24",
+      "features_sha256": "b68ab71c05e6fe4d8e6db7a7cf4fea74323dece1cb5f2319ef08de15cad00908"
+    },
+    {
+      "date": "2023-04-24",
+      "tickers": 500,
+      "next_open": "2023-04-25",
+      "features_sha256": "1244d99de579ec93c2cf88fab814cb985c6ab595f9930ec4dd0104bc8922975a"
+    },
+    {
+      "date": "2023-04-25",
+      "tickers": 500,
+      "next_open": "2023-04-26",
+      "features_sha256": "da6594dc481d997bffd50f4bcec9683284eb0a4d287f566c035d3395d3292b87"
+    },
+    {
+      "date": "2023-04-26",
+      "tickers": 500,
+      "next_open": "2023-04-27",
+      "features_sha256": "c2003aa6d1d5513a99300bdd415ead5981b0fb6b03e5f6ae517de7452fc23c60"
+    },
+    {
+      "date": "2023-04-27",
+      "tickers": 500,
+      "next_open": "2023-04-28",
+      "features_sha256": "e290d5c4dbc39bea5120e5243f7c34aa54c206a156263b2cd53c88daf89b4b3a"
+    },
+    {
+      "date": "2023-04-28",
+      "tickers": 500,
+      "next_open": "2023-05-01",
+      "features_sha256": "5d6f14ed9e26f470ad6f0812ae2eade3208d98b8813f173d529cb7caaabc6476"
+    },
+    {
+      "date": "2023-05-01",
+      "tickers": 500,
+      "next_open": "2023-05-02",
+      "features_sha256": "22cec512b1850681b09056023c622ab9c43b9316b2336916866f226e5730e59a"
+    },
+    {
+      "date": "2023-05-02",
+      "tickers": 500,
+      "next_open": "2023-05-03",
+      "features_sha256": "3d608fbff38e2e7d3ddbfdcb0c4157f2db7ed24af96cac43df7727a2c923731c"
+    },
+    {
+      "date": "2023-05-03",
+      "tickers": 500,
+      "next_open": "2023-05-04",
+      "features_sha256": "fafb61942d4fc5fdec5f635d1a7a3ae6c81540aae9dfec31fc74b45dafd6ad4d"
+    },
+    {
+      "date": "2023-05-04",
+      "tickers": 500,
+      "next_open": "2023-05-05",
+      "features_sha256": "5bfc88c843b8a7f5f1fde95d829d1a1582d34ddf7695229221e57b4a0625b918"
+    },
+    {
+      "date": "2023-05-05",
+      "tickers": 500,
+      "next_open": "2023-05-08",
+      "features_sha256": "c08b058cbe5e9b47d161a2f5f040ce0b60145a23333488cd897d15121aaee896"
+    },
+    {
+      "date": "2023-05-08",
+      "tickers": 500,
+      "next_open": "2023-05-09",
+      "features_sha256": "407ed477c291095f1a41e9aced17147053d95874e331330b8c0ce6ab5ad1ae3a"
+    },
+    {
+      "date": "2023-05-09",
+      "tickers": 500,
+      "next_open": "2023-05-10",
+      "features_sha256": "f5cdf964a29e4700ddd0203be5a8d998e64b2eda4b5c90951493a921971f623c"
+    },
+    {
+      "date": "2023-05-10",
+      "tickers": 500,
+      "next_open": "2023-05-11",
+      "features_sha256": "4e72b24b7adc8ed818f42adfe2df276b620fbc6335c5dd1689f6874d2ca98647"
+    },
+    {
+      "date": "2023-05-11",
+      "tickers": 500,
+      "next_open": "2023-05-12",
+      "features_sha256": "1c1c83057a0d38f465fe34f0aa6c51fce2b4e7bea59ae7c1da7904c6edf05d31"
+    },
+    {
+      "date": "2023-05-12",
+      "tickers": 500,
+      "next_open": "2023-05-15",
+      "features_sha256": "30d4a6b0ddc172b6aebe588c6303828f23d9764f4c52db367771c1d016260582"
+    },
+    {
+      "date": "2023-05-15",
+      "tickers": 500,
+      "next_open": "2023-05-16",
+      "features_sha256": "1132cf88852d73919bd6d61a477d97ba4e365befa93eaa0a2a352d57cb53044e"
+    },
+    {
+      "date": "2023-05-16",
+      "tickers": 500,
+      "next_open": "2023-05-17",
+      "features_sha256": "cebea2ec9870b7421adc31471af0de37c6c445a704fa2a17441462becfa9e29d"
+    },
+    {
+      "date": "2023-05-17",
+      "tickers": 500,
+      "next_open": "2023-05-18",
+      "features_sha256": "1e99872864d7d986623ca0181c8a274ff5e6b96bc84391b49320dba690b91f2b"
+    },
+    {
+      "date": "2023-05-18",
+      "tickers": 500,
+      "next_open": "2023-05-19",
+      "features_sha256": "311b451fd51c0e52593060f39551ccf964e09f658ba80854e1e489b83cef236a"
+    },
+    {
+      "date": "2023-05-19",
+      "tickers": 500,
+      "next_open": "2023-05-22",
+      "features_sha256": "66ea9fb9d469bbadb7172068c04f0f29d9f3e257cae0f4dc8e75bfdf494be2f4"
+    },
+    {
+      "date": "2023-05-22",
+      "tickers": 500,
+      "next_open": "2023-05-23",
+      "features_sha256": "da4df1a5b20f79ad8ddacb0bcf113af688f42d0b682573f51ab607dc31aae3c3"
+    },
+    {
+      "date": "2023-05-23",
+      "tickers": 500,
+      "next_open": "2023-05-24",
+      "features_sha256": "4b8e6499221ce1855ad10fa54a587095244cc2f16a5816e16a47c85d79832918"
+    },
+    {
+      "date": "2023-05-24",
+      "tickers": 500,
+      "next_open": "2023-05-25",
+      "features_sha256": "d421c0811614d19601c2f607f8786999bd7484e19aeb5ad46e19918d5dc3d02c"
+    },
+    {
+      "date": "2023-05-25",
+      "tickers": 500,
+      "next_open": "2023-05-26",
+      "features_sha256": "f497c96fdf0ae82424b27163e38a8f32f1632e45cae6e1730c634ebfe23d754a"
+    },
+    {
+      "date": "2023-05-26",
+      "tickers": 500,
+      "next_open": "2023-05-29",
+      "features_sha256": "9a757e15082e8fa1b52e92aee44089d98a61b311f65855685177c7e76c4c4a49"
+    },
+    {
+      "date": "2023-05-29",
+      "tickers": 500,
+      "next_open": "2023-05-30",
+      "features_sha256": "4609fa9f0afbdd7e120d7efa7b99016ffee46337124522a7389b0b5e6ba8a1a9"
+    },
+    {
+      "date": "2023-05-30",
+      "tickers": 500,
+      "next_open": "2023-05-31",
+      "features_sha256": "5159c6285d74d45b5e67f7f5ecdbc9be4f075ec4c9d7f20074b7f05f000bccdf"
+    },
+    {
+      "date": "2023-05-31",
+      "tickers": 500,
+      "next_open": "2023-06-01",
+      "features_sha256": "4553d8a612c236c15cc73d629cc61d9eb9a29da5ea9baab1d4acefc76c00e225"
+    },
+    {
+      "date": "2023-06-01",
+      "tickers": 500,
+      "next_open": "2023-06-02",
+      "features_sha256": "df91c32453cee44e55a907dbfea1fda3f142b29d68b44ab8668ca159bc8925fc"
+    },
+    {
+      "date": "2023-06-02",
+      "tickers": 500,
+      "next_open": "2023-06-05",
+      "features_sha256": "b4ad2f064fa1c323f207721bc29c6ba25996ac15eb456e5381a20833037c4dec"
+    },
+    {
+      "date": "2023-06-05",
+      "tickers": 500,
+      "next_open": "2023-06-06",
+      "features_sha256": "010b686ac05fdc26f1ab81e72b14c7818331e6cd0be334d9b802a49ae485c604"
+    },
+    {
+      "date": "2023-06-06",
+      "tickers": 500,
+      "next_open": "2023-06-07",
+      "features_sha256": "93ffa1ac63f42d4f354e6523b984324ceb4449e80244a4e3f8a74c082500bdfd"
+    },
+    {
+      "date": "2023-06-07",
+      "tickers": 500,
+      "next_open": "2023-06-08",
+      "features_sha256": "a0466a3fac971efb1875c6e6eb71ba2f623f378405c00a3be440efe608d70961"
+    },
+    {
+      "date": "2023-06-08",
+      "tickers": 500,
+      "next_open": "2023-06-09",
+      "features_sha256": "956bd95fc8ac126f9547a370e38f5c057f7ad69e20cb5b90910831980cc8df65"
+    },
+    {
+      "date": "2023-06-09",
+      "tickers": 500,
+      "next_open": "2023-06-12",
+      "features_sha256": "e78b0d9ae17a1abc6f9a2c610687266fc26d1e7e01e84d3f8eb01f75be390435"
+    },
+    {
+      "date": "2023-06-12",
+      "tickers": 500,
+      "next_open": "2023-06-13",
+      "features_sha256": "b33bed3f5034aaf363f82c38d09bacf2288d01eb553d2f8f9a41a525799f654f"
+    },
+    {
+      "date": "2023-06-13",
+      "tickers": 500,
+      "next_open": "2023-06-14",
+      "features_sha256": "8a0d7205c7b3702507e8ac836d813c50dc80bf7a27f9b203a56fe3fda25fce42"
+    },
+    {
+      "date": "2023-06-14",
+      "tickers": 500,
+      "next_open": "2023-06-15",
+      "features_sha256": "76bae924d4ae4ea2424f74ab39ed11acd7bc454b32c8047e24b8ccf76de16622"
+    },
+    {
+      "date": "2023-06-15",
+      "tickers": 500,
+      "next_open": "2023-06-16",
+      "features_sha256": "486783171c27c8a861719e0720f8edfe78fb75e45b1dc194b0a845c9271d9ba5"
+    },
+    {
+      "date": "2023-06-16",
+      "tickers": 500,
+      "next_open": "2023-06-19",
+      "features_sha256": "6cbb2ff9f3d53223648389b9f7808e1b37202b6b72e88dc5e9e6358ab59842dc"
+    },
+    {
+      "date": "2023-06-19",
+      "tickers": 500,
+      "next_open": "2023-06-20",
+      "features_sha256": "514180a0ca6549aa7118f3ea7e760daf48af608b14e783f698a81719b65ab7c9"
+    },
+    {
+      "date": "2023-06-20",
+      "tickers": 500,
+      "next_open": "2023-06-21",
+      "features_sha256": "c23e8d0dd6f2b042c05239e604776b6dda7cf660b25a38c8a35512bc0fa6f7b6"
+    },
+    {
+      "date": "2023-06-21",
+      "tickers": 500,
+      "next_open": "2023-06-22",
+      "features_sha256": "198e4d8190e29172c46b6de0927388c941bdbae61caff6c52591bd60fe8f066f"
+    },
+    {
+      "date": "2023-06-22",
+      "tickers": 500,
+      "next_open": "2023-06-23",
+      "features_sha256": "2bff185fb69b2cd4462784c6c4bf6f1c98a8135f7164571e9b6f3b084dbec292"
+    },
+    {
+      "date": "2023-06-23",
+      "tickers": 500,
+      "next_open": "2023-06-26",
+      "features_sha256": "a17c7778e019880ed75bb47652320a86db424e4704e484184d55a4343b1d66a1"
+    },
+    {
+      "date": "2023-06-26",
+      "tickers": 500,
+      "next_open": "2023-06-27",
+      "features_sha256": "48e36a6f12315ed1ab9d9da3fad7a9acae91b8892690b0eaf639e70f02d7fe6d"
+    },
+    {
+      "date": "2023-06-27",
+      "tickers": 500,
+      "next_open": "2023-06-28",
+      "features_sha256": "1da45ea1a42bcf9b68c9774d904f9ec782eb4cd091b29a76aff3a868734c4237"
+    },
+    {
+      "date": "2023-06-28",
+      "tickers": 500,
+      "next_open": "2023-06-29",
+      "features_sha256": "6b4704156058844bfc7999fa31319ff1886c54e20fc07d11e818d15d6774d74d"
+    },
+    {
+      "date": "2023-06-29",
+      "tickers": 500,
+      "next_open": "2023-06-30",
+      "features_sha256": "6dfc8f107fc4c235b3f4587e8c31b96cf4fadb46f07990f27202e636859ce1f0"
+    },
+    {
+      "date": "2023-06-30",
+      "tickers": 500,
+      "next_open": "2023-07-03",
+      "features_sha256": "f38ab90ffaafdfb5ec293019cbace5dc5f44f302e94f7f09216d48c2fe1f86ff"
+    }
+  ],
+  "blockers": [
+    "Remaining dates sealed by existing Phase 3 calendar; no authority to unseal",
+    "PIT, earnings, corporate actions, niche lineage, model training cutoffs unknown",
+    "GA4 approved exit and Horizons compatible stress provenance absent"
+  ]
+}

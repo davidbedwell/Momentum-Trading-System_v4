@@ -1,0 +1,226 @@
+[
+  {
+    "path": "/opt/mts/portfolio_evolution_dev80/dev80_raw_no_smci.parquet",
+    "sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+    "bytes": 7481179,
+    "rows": 394795,
+    "columns": [
+      "date",
+      "adj_close",
+      "close",
+      "high",
+      "low",
+      "open",
+      "volume",
+      "dividends",
+      "stock_splits",
+      "security_id",
+      "ticker"
+    ],
+    "first_date": "2004-09-01",
+    "last_date": "2026-09-14",
+    "sessions": 5543,
+    "tickers": 79,
+    "duplicate_date_ticker_rows": 0,
+    "corporate_action_columns": {
+      "dividends": {
+        "missing": 0,
+        "nonzero_rows": 4918
+      },
+      "stock_splits": {
+        "missing": 0,
+        "nonzero_rows": 48
+      }
+    },
+    "period_2009_2018": {
+      "rows": 179265,
+      "tickers": 77,
+      "sessions": 2516,
+      "absent_symbols": [
+        "COIN",
+        "GEV"
+      ]
+    },
+    "pit_timestamp_columns": []
+  },
+  {
+    "path": "/opt/mts/ga5_redesign/exploratory79_features.parquet",
+    "sha256": "88460b94aa6373f460b511cd46a1d7b5ad43cd88bca602a66f66ce52c10b33d4",
+    "bytes": 30224216,
+    "rows": 394795,
+    "columns": [
+      "date",
+      "adj_close",
+      "close",
+      "high",
+      "low",
+      "open",
+      "volume",
+      "dividends",
+      "stock_splits",
+      "security_id",
+      "ticker",
+      "trend",
+      "momentum",
+      "volatility",
+      "recursive",
+      "sector_name",
+      "sector",
+      "breadth",
+      "relative_strength"
+    ],
+    "first_date": "2004-09-01",
+    "last_date": "2026-09-14",
+    "sessions": 5543,
+    "tickers": 79,
+    "duplicate_date_ticker_rows": 0,
+    "corporate_action_columns": {
+      "dividends": {
+        "missing": 0,
+        "nonzero_rows": 4918
+      },
+      "stock_splits": {
+        "missing": 0,
+        "nonzero_rows": 48
+      }
+    },
+    "period_2009_2018": {
+      "rows": 179265,
+      "tickers": 77,
+      "sessions": 2516,
+      "absent_symbols": [
+        "COIN",
+        "GEV"
+      ]
+    },
+    "pit_timestamp_columns": []
+  },
+  {
+    "path": "/opt/mts/ga6/data/ga6d_defensive_features.parquet",
+    "sha256": "ead7e58cfdee0a71679886435ca1ff1d4e20f03290fa2438aa5607890e72773b",
+    "bytes": 198370937,
+    "rows": 394795,
+    "columns": [
+      "date",
+      "adj_close",
+      "close",
+      "high",
+      "low",
+      "open",
+      "volume",
+      "dividends",
+      "stock_splits",
+      "security_id",
+      "ticker",
+      "trend",
+      "momentum",
+      "volatility",
+      "recursive",
+      "sector_name",
+      "sector",
+      "breadth",
+      "relative_strength",
+      "ga4_return_1__v1",
+      "ga4_return_3__v1",
+      "ga4_return_5__v1",
+      "ga4_return_10__v1",
+      "ga4_return_20__v1",
+      "ga4_return_63__v1",
+      "ga4_return_126__v1",
+      "ga4_return_252__v1",
+      "ga4_return_252_skip_20__v1",
+      "ga4_sma_20__v1",
+      "ga4_close_to_sma_20__v1",
+      "ga4_sma_50__v1",
+      "ga4_close_to_sma_50__v1",
+      "ga4_sma_200__v1",
+      "ga4_close_to_sma_200__v1",
+      "ga4_sma20_slope_5__v1",
+      "ga4_sma50_slope_10__v1",
+      "ga4_sma200_slope_20__v1",
+      "ga4_trend_above_sma200_duration__v1",
+      "ga4_pullback_from_high_20__v1",
+      "ga4_prior_high_break_distance_20__v1",
+      "ga4_prior_high_break_distance_50__v1",
+      "ga4_range_width_20__v1",
+      "ga4_range_width_ratio_20_63__v1",
+      "ga4_price_zscore_20__v1",
+      "ga4_signed_return_streak__v1",
+      "ga4_volume_slope_20__v1",
+      "ga4_up_down_volume_balance_20__v1",
+      "ga4_atr_14__v1",
+      "ga4_atr_20__v1",
+      "ga4_natr_14__v1",
+      "ga4_natr_20__v1",
+      "ga4_high_low_spread_proxy__v1",
+      "ga4_adx_14__v1",
+      "ga4_relative_volume_20__v1",
+      "ga4_turnover__v1",
+      "ga4_turnover_relative_20__v1",
+      "ga4_rsi_14__v1",
+      "ga4_gap_return__v1",
+      "ga4_intraday_return__v1",
+      "ga4_candle_range_fraction__v1",
+      "ga4_close_location__v1",
+      "ga4_drawdown_252__v1",
+      "ga4_realized_vol_20__v1",
+      "ga4_realized_vol_63__v1",
+      "ga4_volatility_ratio_20_63__v1",
+      "ga4_volatility_expansion_transition__v1",
+      "ga4_volatility_contraction_duration__v1",
+      "ga4_dollar_volume__v1",
+      "ga4_dollar_volume_relative_20__v1",
+      "ga4_amihud_illiquidity_20__v1",
+      "ga4_compression_duration__v1",
+      "ga4_failed_breakout_20__v1",
+      "ga4_breakout_reentry_20__v1",
+      "ga4_exhaustion_score__v1",
+      "ga4_range_position_20__v1",
+      "ga4_range_position_50__v1",
+      "ga4_range_position_252__v1",
+      "ga4_return_252_percentile__v1",
+      "ga4_return_252_skip_20_percentile__v1",
+      "ga4_return_126_percentile__v1",
+      "ga4_relative_volume_20_percentile__v1",
+      "ga4_natr_20_percentile__v1",
+      "ga4_realized_vol_20_percentile__v1",
+      "ga4_sector_return_252_percentile__v1",
+      "ga4_breadth_above_sma_200__v1",
+      "ga4_breadth_positive_20__v1",
+      "ga4_advance_decline_breadth__v1",
+      "ga4_new_high_low_breadth_252__v1",
+      "ga4_sector_vs_universe_return_63__v1",
+      "ga4_relative_strength_change_20__v1",
+      "reversal_2d",
+      "volatility_10d",
+      "volume_change_5d",
+      "market_return_5d",
+      "market_drawdown_20d"
+    ],
+    "first_date": "2004-09-01",
+    "last_date": "2026-09-14",
+    "sessions": 5543,
+    "tickers": 79,
+    "duplicate_date_ticker_rows": 0,
+    "corporate_action_columns": {
+      "dividends": {
+        "missing": 0,
+        "nonzero_rows": 4918
+      },
+      "stock_splits": {
+        "missing": 0,
+        "nonzero_rows": 48
+      }
+    },
+    "period_2009_2018": {
+      "rows": 179265,
+      "tickers": 77,
+      "sessions": 2516,
+      "absent_symbols": [
+        "COIN",
+        "GEV"
+      ]
+    },
+    "pit_timestamp_columns": []
+  }
+]

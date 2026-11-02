@@ -1,0 +1,16 @@
+{
+  "counts_by_order": {
+    "0": 1,
+    "1": 9,
+    "2": 36,
+    "3": 84
+  },
+  "baseline_cagr": 0.23193680384098725,
+  "baseline_max_monthly_error": 2.92300905702092e-16,
+  "sessions": 2516,
+  "months": 120,
+  "candidates": 1651,
+  "data_max": "2018-12-31 00:00:00",
+  "plan_sha256": "955b9e7a743757a0cca292d27647efbd984b9112b2c95e2a74db896a3c04a9ea",
+  "source_features_sha256": "1003988855fce0b4a0a7700631fcb0c0ea4d15b9458643f0f752e6e5d6b0a860"
+}

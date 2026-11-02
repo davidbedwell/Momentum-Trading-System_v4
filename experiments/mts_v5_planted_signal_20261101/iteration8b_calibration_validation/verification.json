@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "portfolios": 480,
+  "opportunities": 1451520,
+  "calibration_maxima_recomputed": true,
+  "threshold_only_shared_models": true,
+  "latch_and_clock": true,
+  "seeds_disjoint": true
+}

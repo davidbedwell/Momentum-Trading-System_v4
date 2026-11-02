@@ -1,0 +1,4 @@
+{
+  "baseline_independent_python_nav_parity": true,
+  "no_optional_feature_eligibility_gate": true
+}

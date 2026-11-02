@@ -1,0 +1,63 @@
+{
+  "fixed": {
+    "cagr": 0.3261961943169731,
+    "mdd": 0.2944946179755238,
+    "calmar": 1.1076473877837867,
+    "final_nav": 1675450.563773091,
+    "sessions": 2516,
+    "entries": 302,
+    "completed_trades": 292,
+    "open_trades": 10,
+    "fills": 646,
+    "mean_exposure": 0.7416090282982909,
+    "active_sessions": 1907,
+    "fees": 81563.10226375317,
+    "slippage": 81563.1180452995,
+    "total_cost": 163126.22030905267,
+    "actions": {},
+    "missing": {},
+    "max_reconciliation_error": 9.313225746154785e-10
+  },
+  "ga7": {
+    "cagr": 0.019460392724040876,
+    "mdd": 0.03091611278173234,
+    "calmar": 0.6294579419292194,
+    "final_nav": 121219.00445206325,
+    "sessions": 2516,
+    "entries": 438,
+    "completed_trades": 438,
+    "open_trades": 0,
+    "fills": 2453,
+    "mean_exposure": 0.03752716459959743,
+    "active_sessions": 1516,
+    "fees": 3188.2652153553786,
+    "slippage": 3188.272114240471,
+    "total_cost": 6376.53732959585,
+    "actions": {
+      "ENTER": 441,
+      "HOLD": 1241,
+      "ADD": 150,
+      "REDUCE": 1762,
+      "EXIT": 618,
+      "SCREEN_BLOCK": 85
+    },
+    "missing": {
+      "entry_no_features": 19
+    },
+    "max_reconciliation_error": 1.7462298274040222e-10
+  },
+  "existing_fixed_reference": {
+    "cagr": 0.33298850843709027,
+    "mdd": 0.32423067955023743,
+    "calmar": 1.0270111048683037,
+    "fees": 176355.6427489503,
+    "slippage": 0.0,
+    "total_cost": 176355.6427489503,
+    "buys": 312,
+    "sells": 301,
+    "stock_months": 321,
+    "active_months": 92,
+    "mean_monthly_exposure": 0.7666666666666667,
+    "final_nav": 1763123.291601205
+  }
+}

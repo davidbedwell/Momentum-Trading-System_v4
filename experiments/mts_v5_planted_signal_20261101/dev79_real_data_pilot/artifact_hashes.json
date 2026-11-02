@@ -1,0 +1,15 @@
+{
+  "AUDIT.md": "3002bd78adf3907b4540d307f0aa4c89a70d7cf79c176eaa2fa14fdb75036cbb",
+  "archived_provenance_gate.json": "e2905bc38bf1a60655082435cf559b7767b7f9c003659e2f352f73582232ee6d",
+  "audit.py": "2db56efe2434ed0318ad8357ac25e1de1715c2ae072987a916b3c90936c1389c",
+  "constituents.json": "33815fa811dfafbf01c7cb9e9e6d84007f50323c5b769d5cddf45dd89aa024e5",
+  "data_inventory.json": "dab43610bf7674731a66b566d6b4c49bcb1343c6f144eeb516789cf7a0b0630d",
+  "dev80_raw_no_smci_constituents.csv": "baa69ab0280e8061b250724b4929a1a3f60a30e5cfeff7817b386cb716b6f511",
+  "exploratory79_features_constituents.csv": "baa69ab0280e8061b250724b4929a1a3f60a30e5cfeff7817b386cb716b6f511",
+  "frozen_8b_cal_identity.json": "5ae4729768b28774d4ee259a994b674a171d66725269c1cd01cb76f7bf008a3a",
+  "ga6d_defensive_features_constituents.csv": "baa69ab0280e8061b250724b4929a1a3f60a30e5cfeff7817b386cb716b6f511",
+  "independent_data_inventory.json": "45c43b0fd3f73b70c4b8b40823b6a7b4fd0c000a0cad6e00926ad2748eecf6b6",
+  "report.json": "7f8b2d71f58bcab2853b0c218bef047df2bb90ee30980f336992529129457d87",
+  "source_hashes.json": "cd021e3602a1e2060ae29de72e7800223082b233fcfd197eea7fe2233f6135eb",
+  "verification.json": "cba44a9c6d2a23c6b9157728e0e0ff6e4f7973f7064fbdf9a0ca146e2942aa40"
+}

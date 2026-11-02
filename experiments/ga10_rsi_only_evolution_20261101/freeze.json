@@ -1,0 +1,6 @@
+{
+  "completed": 1000,
+  "stop": "completed generation budget",
+  "champions_sha256": "a4ba85a812053cc28e4c991d0b6d29d61ff18abbeba9c58b1821106ce5c3319c",
+  "evaluation_started_after_freeze": true
+}

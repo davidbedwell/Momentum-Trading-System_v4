@@ -1,28 +1,19 @@
-# Independent sector leadership pipeline
+# Independent sector leadership pipeline — controlling v2
 
-Python 3.10+, standard-library runtime. All paths are restricted to this independent workspace. No protected datasets, secrets directory access, or GitHub push.
+CONTROLLING_PROTOCOL_V2.md is the user authority and supersedes CODEX_IMPLEMENTATION_BRIEF.md (historical v1). RESEARCH_PROTOCOL.md repeats v2 with frozen implementation conventions; manifest.json records the seal. Work remains within this repository. No subscriptions, protected datasets, or GitHub push.
 
-```sh
-python3 -m venv .venv
-.venv/bin/pip install pytest
-.venv/bin/python -m pytest
-.venv/bin/python -m sector_pipeline smoke --symbols 6
-.venv/bin/python -m sector_pipeline run --prices reports/smoke/prices.csv --members reports/smoke/members.csv --years 2019 --out reports/replay
-```
-
-Smoke downloads real daily prices for the first six existing pilot symbols, with no fundamentals fabricated. Network failure produces an incomplete JSON report and nonzero exit. Downloaded CSV permits offline replay. Existing pilot files have annual/quarterly derived values, not cached OHLCV, so they cannot replace a daily-price download. Never run legacy root-level `test_*.py` as pytest: they contain vendor probes; pytest configuration restricts collection to `tests/`.
-
-Inputs: prices CSV `symbol,date,adj_close,adj_open` (blank open allowed), optional `close,volume,source`; constituent CSV `symbol,sector,start,end,source` with exclusive end dates. Unique symbol/date and nonoverlapping membership intervals required. Symbols must identify continuous security history; use reconciled identities, not unverified ticker reuse. Optional `--fundamentals` and `--earnings` are JSON maps from these same symbols to raw SEC companyfacts / Alpha Vantage EARNINGS responses.
+Run offline fixture tests only:
 
 ```sh
-# Use environment credentials, never command-line secrets.
-.venv/bin/python -m sector_pipeline fetch sec 320193 --out reports/aapl_facts.json
-.venv/bin/python -m sector_pipeline fetch alpha AAPL --out reports/aapl_earnings.json
-.venv/bin/python -m sector_pipeline fetch fred UNRATE --asof 2019-01-31 --out reports/unrate_vintage.json
+.venv/bin/python -m pytest -q
 ```
 
-SEC requires `SEC_USER_AGENT` with contact; Alpha requires `ALPHAVANTAGE_API_KEY`; FRED requires `FRED_API_KEY`. Adapters surface access/rate/entitlement failures; no automatic fallback. FRED output is a regime input artifact; regime-stratified metrics are not implemented. Historical analyst revisions have no free-data assumption.
+The local v2 executor is implemented and tested with synthetic fixtures. See [EXECUTOR_V2.md](EXECUTOR_V2.md) for bundle schema, commands, immutable once-only ledger, source verification, stage release, diagnostics and limitations. Stage2 remains sealed until a valid complete Stage1 result logs passing signal/horizon pairs. No real-data pilot has run: a verified Stage1 source bundle is unavailable.
 
-Outputs: observations.csv, monthly_metrics.csv (sector/year breakdown), price_diagnostics.csv and report.json with coverage, exclusions, source limitations, manifest hash, HAC and Holm summaries. Read RESEARCH_PROTOCOL.md and manifest.json before interpretation. All runs currently report incomplete and prohibit predictive claims; certified PIT/delisting coverage and blind release remain outstanding.
+Existing reports/smoke are exploratory/old protocol v1. No 2006–2026 certification or predictive claim is made. No push or external MTS writes.
 
-Source contracts: [SEC APIs](https://www.sec.gov/edgar/sec-api-documentation), [Alpha Vantage earnings](https://www.alphavantage.co/documentation/), [FRED vintage semantics](https://fred.stlouisfed.org/docs/api/fred/realtime_period.html).
+A separately authorized **PROVISIONAL free-source Stage1** workflow is now available; see [PROVISIONAL_EXPLORATORY.md](PROVISIONAL_EXPLORATORY.md) for resumable pilot/full-universe commands and limitations. It cannot release Stage2 or consume the certified ledger. The real-source pilot was attempted but blocked at Wikipedia acquisition; no completed exploratory Stage1 result exists.
+
+2026-10-31: executed the separately authorized contaminated-2019 offline real-data pilot. See [results and limitations](reports/offline-provisional-2019/README.md) and [machine-readable results](reports/offline-provisional-2019/report.json). The earlier acquisition status above refers to the Wikipedia-dependent Stage1 command; Stage2 remains sealed.
+
+2026-10-31: completed the expanded **PROVISIONAL partial-period Stage1** using dated IVV sector evidence and existing pre-2016 local Yahoo prices. See [completed results](reports/expanded-stage1/README.md), [full statistics/provenance/missingness](reports/expanded-stage1/report.json), and [artifact validation](reports/expanded-stage1/validation.json). The older historical cache supplies 322 priced symbols; 317 contribute known-sector outcomes, compared with the former 15-label sample. Sector evidence starts April 2007; this is not complete 2006–2015 PIT coverage. No primary placebo passes; no certified passers or Stage2 release. The earlier 433-stock cache starts in 2016 and cannot supply Stage1 prices. Tests: 43 passed with the analysis dependencies; default fixture environment 39 passed, one optional module skipped.

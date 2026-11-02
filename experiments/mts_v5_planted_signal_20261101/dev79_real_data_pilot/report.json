@@ -1,0 +1,33 @@
+{
+  "status": "BLOCKED_NO_REAL_PREDICTOR_AND_UNVERIFIED_PIT_INPUTS",
+  "audit_completed": true,
+  "real_predictor_computable_as_defined": false,
+  "real_stock_sensor_mapping": null,
+  "pilot_run": false,
+  "portfolio_replays": 0,
+  "preregistration_status": "NOT_OPENED_FEASIBILITY_GATE_FAILED",
+  "production_changed": false,
+  "ga_launched": false,
+  "monitoring_launched": false,
+  "frozen_thresholds": [
+    0.027659290213926383,
+    0.055015578352069085
+  ],
+  "frozen_calibration_hash_matches": true,
+  "blockers": [
+    "No real-stock definition of synthetic latent-class-derived sensor cells",
+    "Historical PIT membership/sector/earnings/niche feature/dividend payment-date gates unverified",
+    "Frozen implementation hardcodes 24 assets; DEV79 universe and sparse cells require an explicit validated adapter",
+    "Real execution price basis, corporate-action accounting and outcome availability contract not verified"
+  ],
+  "smallest_next_step": "Specify and freeze a real-stock sensor feature contract with a source-backed PIT historical sample, without deriving cells from future returns or synthetic truth. This is a new predictor hypothesis; do not relabel momentum or GA4 features as the existing sensor.",
+  "resource": {
+    "cpu_affinity": [
+      0
+    ],
+    "cpu_limit_seconds": 1200,
+    "elapsed_seconds": 2.29326348984614,
+    "cpu_seconds": 2.620296
+  },
+  "completed_utc": "2026-11-01T22:50:12.920498+00:00"
+}

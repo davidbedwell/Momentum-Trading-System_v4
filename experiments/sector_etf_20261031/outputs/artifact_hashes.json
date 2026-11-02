@@ -1,0 +1,15 @@
+{
+  "completed_utc": "2026-10-31T10:39:34.114566+00:00",
+  "files": {
+    "PREREGISTRATION.md": "23a49749f06cfc44c4c7f5a203e5f18cd04343d5763e7541100c4f977a2f756f",
+    "README.md": "90f1dd92ac90ac9f6ca5c4c8cf9d9a38e1fead86d4544ef6db04fa84bf23e124",
+    "REPORT.md": "5362a7ea26d7fe3aa56c46385ca69bef62e270e7697dd3c52a292519a01f7274",
+    "outputs/acquisition.json": "6681c319c46fe29096407efb8b5c752441d9d648b98d2942455a2c23fab3e872",
+    "outputs/local_symbol_cache_search.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "outputs/run.log": "6681c319c46fe29096407efb8b5c752441d9d648b98d2942455a2c23fab3e872",
+    "outputs/tests.log": "d3f361c13488be69aafc2506c01d848fbc24cf61e6bb0700f5c0623e6f69af2c",
+    "preregistration.lock.json": "a01144d7d928a2f709ab203b6c07dce6c66be8f07e102223ea0b06057a954dfd",
+    "run.py": "2afe96f0fee08c540dc17f43d3e399176d680d54ae11cec7ffbb51744aa52036",
+    "tests/test_gate.py": "74db8c6de7b77c0280a1a8fbbf2c21ef0a20c42fa4e5e5fccdca7fabf7b68a34"
+  }
+}

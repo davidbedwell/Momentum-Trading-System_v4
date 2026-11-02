@@ -1,0 +1,68 @@
+{
+  "lifecycle": {
+    "final_nav": 99700.79156292375,
+    "mdd": 0.004875994527172578,
+    "fees": 13.723875438362123,
+    "fills": 4,
+    "unsettled": 3598.2426534516744
+  },
+  "independent_reconciliation": "PASS",
+  "specialist_priority": "PASS",
+  "general_fallback": "PASS",
+  "related_niche_fallback": "MISSING: positive-EV related candidate excluded by tier()",
+  "nonpositive_ev_abstention": "PASS",
+  "global_capital_ranking": {
+    "status": "FAIL",
+    "higher_ev_unfunded": "ZZZ",
+    "funded": [
+      "A00",
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09"
+    ],
+    "final_nav": 99900.0999000999,
+    "mdd": 0.0009990009990009652,
+    "fees": 99.9000999000999,
+    "fills": 10,
+    "unsettled": 0
+  },
+  "risk_gap_stress": {
+    "status": "FAIL_NOT_GUARANTEED",
+    "final_nav": 94990.0,
+    "mdd": 0.05010000000000003,
+    "fees": 10.0,
+    "fills": 1,
+    "unsettled": 0,
+    "native_action": "HOLD",
+    "stop_fraction": 0.02
+  },
+  "sgov_integration": "MISSING: no SGOV trades or accrual in run_slice",
+  "defense": {
+    "next_open_exit": "PASS",
+    "nav_defense_flag": "FAIL always False",
+    "final_nav": 99980.0,
+    "mdd": 0.00019999999999997797,
+    "fees": 20.0,
+    "fills": 2,
+    "unsettled": 0
+  },
+  "kernel_ordinary_entry_risk": {
+    "status": "FAIL",
+    "modeled_equity_risk": 0.08000000000000002,
+    "limit": 0.02
+  },
+  "portfolio_mdd_guard": {
+    "status": "MISSING: replay continues above 20% MDD",
+    "final_nav": 49950.04995004995,
+    "mdd": 0.5004995004995005,
+    "fees": 99.9000999000999,
+    "fills": 10,
+    "unsettled": 0
+  }
+}

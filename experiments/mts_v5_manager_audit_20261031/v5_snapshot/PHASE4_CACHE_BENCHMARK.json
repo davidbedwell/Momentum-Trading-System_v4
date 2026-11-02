@@ -1,0 +1,23 @@
+{
+  "status": "BLOCKED",
+  "available_sessions": 1260,
+  "value_sessions": 393,
+  "sealed_sessions": 867,
+  "proof_values_read": false,
+  "parity": {
+    "features": 142,
+    "cells": 27903000,
+    "finite": 22544000,
+    "warmup": 5359000,
+    "passed": true,
+    "reference": "hash-verified Phase 3 native full-history build"
+  },
+  "performance": {
+    "wall_seconds": 83.73244978289586,
+    "cpu_seconds": 137.24680114999998,
+    "peak_rss_mib": 965.12109375
+  },
+  "implementation_sha256": "02b0726af024c09057310b94a462a50291b38c8daf31264edd692863eebd8efc",
+  "cache": "SOURCE_AND_CONTENT_HASH_VERIFIED_WARM_CACHE",
+  "cold_manifest_sha256": "6404ba977c9f250899bcc2e5162cceac902cb45a44c6aac1b0756ce9bc8a073f"
+}

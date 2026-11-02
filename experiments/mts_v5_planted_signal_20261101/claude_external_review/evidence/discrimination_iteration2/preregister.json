@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "seeds": [3101,3102,3103,3104],
+  "scenarios": ["learnable","misleading","null","reversal"],
+  "train_signals": [0,77],
+  "calibration_signals": [80,121],
+  "holdout_signals": [126,249],
+  "portfolio_sessions": [126,251],
+  "split_detail": "Initial diagnostic fitting at decision126 uses rolling signals33..123, training33..92 and calibration93..123; never outcomes signal124+. Explicit split fields above are reserved for static ablation only; primary algorithm is causal prequential rolling throughout, not a frozen fit. No static-fit results used to choose parameters.",
+  "maturity": "signal i entry open i+1 exit open i+2 available close i+3; require i+2<decision clock",
+  "method": "Rolling91 signal dates [now-93,now-3]. Older60/recent31 dates. Cell date averages; six pseudo dates shrink toward weighted fitted linear parent, learned orientation isotonic projection. Radius=max(2.58*dateSE(all),abs(recent mean-estimate)+1.64*dateSE(recent))+shrinkage displacement. Minimum20 older/20 recent. Full interval inside one absolute economic band. Spread>=.003. Recent61 matured issued-forecast residual date means: if >=20 and absolute bias>max(.003,2.58SE), UNKNOWN. Drift: older>=24, recent9 dates>=7, difference>max(.004,3*hypot(SEs)). Global20-clock inclusive quarantine; reset outcome floor to alarm-10, no oracle reversal date. No parameter tuning on holdout.",
+  "boundaries": [-0.006,-0.002,0.002,0.006],
+  "sensors": "Injected PIT latent measurements, Gaussian errors sd.30/.50 class units, independent errors and inverse variance fusion rounded/clipped into five cells. Coarse comparator retains80% faithful sensor. Null sensors independent of latent class. Reversal unannounced at126 in generator only. All policies share realized tape. This measures a bundle of improved information and estimator, not estimator-only attribution.",
+  "policies": ["iteration2","previous_repaired","existing_ev10"],
+  "max_full_replays": 48,
+  "max_seconds": 840,
+  "pass_rule": "For every non-null scenario/seed: coverage>=.5, each predicted tier>=20, conditional latent-tier accuracy>=.7, each recall including UNKNOWN>=.5, false GREAT on true TERRIBLE<=.01, all five realized means strictly monotone. Null safety requires zero assigned. Robust overall claim requires every seed. Improvement additionally requires paired non-null coverage increase and no reversal false-GREAT rate increase versus previous repaired comparator. No portfolio gain alone constitutes discrimination.",
+  "risk": "10% position targets only; entire cost-inclusive modeled candidate risk<=2%; inherited corrected local kernel, T+1 and MDD latch; no GA or production modifications",
+  "limitations": ["Injected synthetic sensor quality is assumed, not calibrated to any real measurement; no real alpha claim.","Conditional mean uncertainty is not individual latent-state certainty; neighboring classes overlap even with narrow intervals.","Diagnostic SE intervals have no formal simultaneous or serial dependence coverage guarantee.","Unannounced inversion cannot be detected before strictly matured outcomes; pre-alarm false GREAT unavoidable.","Rolling online holdout ingests only matured realized returns, never evaluator truth; not a static untouched outcome fit.","Four paired seeds,126 sessions; no statistical robustness claim.","One-session DGP grosses up costs; multi-session portfolio holdings pay costs less often, null profits are not recognition.","Abstention opportunity costs are ex-post sums per opportunity, not attainable portfolio returns.","No terminal liquidation; modeled2% risk is not a realized-loss guarantee."]
+}

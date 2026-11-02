@@ -1,0 +1,19 @@
+{
+  "status": "FROZEN BEFORE HOLDOUT",
+  "arm_c": "Claude C_ablation exact section 6; INVALID e-process: outcome-dependent lambda and overlapping windows. No mathematical validity claim.",
+  "scenarios": [
+    "learnable",
+    "reversal",
+    "random_reversal",
+    "outer_noise",
+    "null"
+  ],
+  "design": "Stage1 16 fresh seeds x 4 arms x 5 scenarios; Stage2 independent 16 fresh seeds x 4 arms x 5 scenarios including two diagnostic history clones. Total 640 portfolios. No winner selection; both candidates confirmed.",
+  "budget": "1 CPU, 1170 second stop; calibration 32 seeds x 2 histories no portfolio replay. Full 16 planned based on existing bounded runner performance; report incomplete if budget exceeded.",
+  "seed_rule": "After source/calibration hash commitment: secrets.randbits(63), unique excluding historical seed manifests and calibration seeds; 32 seeds, first16 stage1 next16 independent stage2. Offsets secrets.randbelow(61)+20 paired across arms.",
+  "cusum": "Training mean mu of independent date contrast. At n consume only d=n-3>=START once per component. S_j=max(0,S_j+mu-D_d-k_j). k=(.018/sqrt(4),.018/sqrt(16)) represent short/long reference shifts, no rolling outcome reuse. Threshold_j=max(.018,1.1*maximum S_j across 32 independent stable calibration tapes), separate by history. Latch if either >=threshold. No population guarantee.",
+  "history": "Stage1 FIT0:400 CAL403:603 TEST606:732 N734; Stage2 FIT0:600 CAL603:903 TEST906:1032 N1034. Full candidates share exact fit_v3; clones retain original radius.",
+  "criteria": "Per seed: both reversal delays [3,8], no prechange alarms, adverse MDD<=.05 both reversal scenarios; stable no alarms all three nonreversal scenarios; all five learnable tier supports>=20; stable return mean delta>=-.05 vs within-history 6; descriptive paired t95 lower>-.05 separately. Strict all16 and relaxed>=12/16 separately. Secondary false GREAT post3 strictly lower than baseline both reversal scenarios; adverse return>=-.05. No selection or tuning.",
+  "uncertainty": "Seed-level union of stable scenarios; exact CP two-sided95 and one-sided95 upper; zero16 upper=1-.05**(1/16). Scenarios dependent within seed. No cross-arm familywise or real-market claim.",
+  "freeze": "Local SHA256 commitment before holdout, no trusted external timestamp; source hashes verified after run; production untouched."
+}

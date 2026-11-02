@@ -1,0 +1,8 @@
+{
+  "observations": 10699,
+  "duplicate_keys": 0,
+  "formations_exits_2019_only": true,
+  "membership_interval_checks": "passed",
+  "manifest_seal_unchanged": true,
+  "tests": "39 passed in 1.15s"
+}

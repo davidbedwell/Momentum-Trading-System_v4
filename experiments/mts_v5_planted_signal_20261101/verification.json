@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "retained_portfolios": 336,
+  "additional_portfolio_runs": 0,
+  "tape_observations_verified": 290304,
+  "next_open_forward_timing": "PASS",
+  "callback_closure_inspection": [
+    "counts",
+    "gross",
+    "index",
+    "net",
+    "quality",
+    "score",
+    "seed",
+    "variant"
+  ],
+  "rank_shuffle_positive_mask_and_multiset": "PASS",
+  "control_quality_invariance": "PASS",
+  "daily_metric_recomputation": "PASS",
+  "source_and_runner_hashes": "PASS",
+  "note": "Closure inspection establishes harness separation, not general proof of arbitrary callback safety. Oracle predictor is intentionally clairvoyant.",
+  "runtime_dependency_sha256": {
+    "/opt/Momentum-Trading-System_v5-alpha/engines/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/progressive_scaling.py": "7668cb5e16dee4ff31ca4800caf5636061f495e5c711d3449e142cd0e2a0837d",
+    "/opt/Momentum-Trading-System_v5-alpha/engines/portfolio_replay/kernel.py": "69ce56e126eca1242e65340cedd1c9f6a3ec6a35dc50fc27b277c467a845c2d5",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/hierarchical_search.py": "051533f76e5458d1d0da861ab39f8f5dd62776db328fbbbcb3f6851bbe30614b",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/native_signal_contract.py": "a44c77260a9b02556506b2f1b72f810d2163ae4a3122b138013bb495fa8f9026",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/position_fill_book.py": "1ec57ee5a21df726e0ff347687999ab8012f91429216a7ffbb260292d06a9798",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/capital_competition.py": "5105df7acb71b628ff4842879837c79d493231dc2aa73c11160ea02a5ad0d7e7",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/causal_calibration.py": "d52d110550a91dc34768091d4a60f92b8d6d1695b59a925ed856c44289741a8b",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/native_shadow_trade_book.py": "930327bc0109262ec6889a5b0dc798a27be842abab5ee81a76694b0cb4c4cbe5",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/shadow_learning_interface.py": "b951f87664662f0afc662c9b7947b2173ce9e2982e8a927f3999fd0e147a539e",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/evolved_selection_policy.py": "5e5ec9db379dd69acbebb37a1d49b21b77b3347f471dea2436213eecaaa81d5a",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/causal_market_state.py": "0cb08b98d5cfc2ded3993a25418e7db4e2c8710f447480c045be7caea22c0fbe",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/genome_identity.py": "eea9ee64abbec1cdc29c053d2639c93ccffa0aad1eac11ecfdb0fe567d819fde",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/functional_niche_manager.py": "e6abdf744ce80bdf17416d38b4f8cc8fa3fbda9d03af28ab980417596c9fd834"
+  }
+}

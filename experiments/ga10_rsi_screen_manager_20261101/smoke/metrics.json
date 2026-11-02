@@ -1,0 +1,126 @@
+[
+  {
+    "split": "train",
+    "strategy": "ga10",
+    "cagr": 0.0388242231685203,
+    "mdd": 0.02635245703111666,
+    "final_nav": 1.0791557666416796,
+    "annual_vol": 0.037517589051154994,
+    "sharpe": 1.033998654868932,
+    "turnover": 7.878849600546376,
+    "costs_initial_capital": 0.008340390391144772,
+    "mean_exposure": 0.023566719705774196,
+    "sessions": 504,
+    "actions": {
+      "entry": 141,
+      "hold": 186,
+      "add": 3,
+      "reduce": 2,
+      "exit": 140
+    }
+  },
+  {
+    "split": "train",
+    "strategy": "monthly_rsi_setup",
+    "cagr": 0.5839208796914521,
+    "mdd": 0.1905267262741981,
+    "final_nav": 2.508805353122544,
+    "annual_vol": 0.2335169929799443,
+    "sharpe": 2.087332439753903,
+    "turnover": 32.098439497843614,
+    "costs_initial_capital": 0.05751934001548471,
+    "mean_exposure": 0.7103174603173499,
+    "sessions": 504,
+    "actions": {
+      "entry": 57,
+      "hold": 1211,
+      "add": 0,
+      "reduce": 0,
+      "exit": 55,
+      "rebalance": 3
+    }
+  },
+  {
+    "split": "train",
+    "strategy": "monthly_rsi",
+    "cagr": 0.5266477420825448,
+    "mdd": 0.2973784964313282,
+    "final_nav": 2.3306533284057322,
+    "annual_vol": 0.2868240716126259,
+    "sharpe": 1.6193198036611358,
+    "turnover": 36.17423755593103,
+    "costs_initial_capital": 0.056604126184677896,
+    "mean_exposure": 0.9999999999998845,
+    "sessions": 504,
+    "actions": {
+      "entry": 222,
+      "hold": 5862,
+      "add": 0,
+      "reduce": 0,
+      "exit": 209,
+      "rebalance": 71
+    }
+  },
+  {
+    "split": "diagnostic",
+    "strategy": "ga10",
+    "cagr": -0.007068216521300519,
+    "mdd": 0.012002512877150373,
+    "final_nav": 0.9929317834786995,
+    "annual_vol": 0.008107708451893347,
+    "sharpe": -0.8708365280811321,
+    "turnover": 3.176347758613689,
+    "costs_initial_capital": 0.0031616870406858126,
+    "mean_exposure": 0.007334402620674281,
+    "sessions": 252,
+    "actions": {
+      "entry": 59,
+      "hold": 8,
+      "add": 1,
+      "reduce": 0,
+      "exit": 58
+    }
+  },
+  {
+    "split": "diagnostic",
+    "strategy": "monthly_rsi_setup",
+    "cagr": -0.0273980012526861,
+    "mdd": 0.2318901124852112,
+    "final_nav": 0.9726019987473139,
+    "annual_vol": 0.2911820172206004,
+    "sharpe": 0.04923175759754637,
+    "turnover": 18.32152260307954,
+    "costs_initial_capital": 0.018179877303353895,
+    "mean_exposure": 0.8373015873014396,
+    "sessions": 252,
+    "actions": {
+      "entry": 24,
+      "hold": 528,
+      "add": 0,
+      "reduce": 0,
+      "exit": 23,
+      "rebalance": 2
+    }
+  },
+  {
+    "split": "diagnostic",
+    "strategy": "monthly_rsi",
+    "cagr": 0.07232122866736068,
+    "mdd": 0.23097966310121043,
+    "final_nav": 1.0723212286673607,
+    "annual_vol": 0.29006975291739673,
+    "sharpe": 0.38536642520174674,
+    "turnover": 17.255156223796313,
+    "costs_initial_capital": 0.01841613335043951,
+    "mean_exposure": 0.9999999999999206,
+    "sessions": 252,
+    "actions": {
+      "entry": 116,
+      "hold": 3120,
+      "add": 0,
+      "reduce": 0,
+      "exit": 103,
+      "rebalance": 40
+    }
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "exact_Git_blob_matches": 105,
+  "one_extra_trailing_newline": 6,
+  "other_mismatches": [],
+  "note": "First six CSVs saved through heredoc have one extra trailing newline; parsed values unchanged; report SHA256 binds actual local bytes."
+}

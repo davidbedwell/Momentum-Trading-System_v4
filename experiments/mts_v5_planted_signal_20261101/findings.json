@@ -1,0 +1,41 @@
+{
+  "status": "Stage 1 executed; functional evidence only; hard stop; no certification",
+  "runtime_failures": [],
+  "limitations_and_failure_reasons": [
+    {
+      "code": "NO_SEPARATE_ALLOCATOR_SCORE_SEAM",
+      "reason": "Risk and cluster comparisons replace the conditional_ev ranking value with explicit adapter scores; these values are not calibrated EV fractions."
+    },
+    {
+      "code": "NO_INCREMENTAL_RANKING_BENEFIT_ESTABLISHED",
+      "reason": "Strong rank-shuffle CAGR exceeds baseline by 2.419 percentage points on average; weak differs by only 0.299 points. Oracle is strongly rank-sensitive."
+    },
+    {
+      "code": "NO_ROBUST_ALTERNATE_ALLOCATOR_WIN",
+      "reason": "Risk score strong mean CAGR is 1.773 points below baseline; cluster is 2.869 points above with 8/12 wins and seed standard deviation 8.819 points. Weak cluster is identical to baseline."
+    },
+    {
+      "code": "NULL_ABSTENTION_IS_KNOWN_EV_CASE",
+      "reason": "Null conditional mean EV is negative after costs; no manager entries. This does not establish rejection of falsely positive EV estimates."
+    },
+    {
+      "code": "POLICY_NOT_RETURN_GUARANTEE",
+      "reason": "2% gate is per-position modeled loss; 20% policy is a latched admission block. Main runs do not exercise the MDD latch; the separate opening-gap probe does."
+    },
+    {
+      "code": "SCALING_UNAVAILABLE_ON_MANAGER_SEAM",
+      "reason": "Manager clips entry/add targets to 10% and passes no scaling evidence. No 15-20% scaling runs."
+    },
+    {
+      "code": "SYNTHETIC_SIGNAL_MODEL",
+      "reason": "Known Gaussian generator, persistent planted alpha, static gap estimates, no liquidity/borrow/tax model. Large synthetic CAGRs and Calmar values have no historical-alpha interpretation."
+    }
+  ],
+  "verification": {
+    "max_reconciliation_error": 1.4042598195374012e-09,
+    "max_modeled_trade_loss": 0.02,
+    "max_observed_mdd": 0.11944460996879169,
+    "total_signal_switch_exit_decisions": 16549,
+    "total_denied_queue_increases": 45552
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "sector_daily_extremes": [
+    {
+      "ticker": "XLB",
+      "max_abs_daily_return": 0.14057663930810738,
+      "date": "2008-10-13 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLE",
+      "max_abs_daily_return": -0.20141195454930372,
+      "date": "2020-03-09 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLF",
+      "max_abs_daily_return": -0.1666668821402003,
+      "date": "2008-12-01 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLI",
+      "max_abs_daily_return": 0.12651198831747323,
+      "date": "2020-03-24 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLK",
+      "max_abs_daily_return": 0.13898272622204533,
+      "date": "2008-10-28 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLP",
+      "max_abs_daily_return": -0.09395634882178683,
+      "date": "2020-03-12 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLU",
+      "max_abs_daily_return": 0.12793402950880983,
+      "date": "2020-03-17 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLV",
+      "max_abs_daily_return": 0.12054689978750543,
+      "date": "2008-10-13 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLY",
+      "max_abs_daily_return": -0.12668618652080943,
+      "date": "2020-03-16 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLC",
+      "max_abs_daily_return": -0.11279477689824302,
+      "date": "2020-03-16 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    },
+    {
+      "ticker": "XLRE",
+      "max_abs_daily_return": -0.1600112515455131,
+      "date": "2020-03-16 00:00:00",
+      "last_2025": "2025-12-31 00:00:00"
+    }
+  ],
+  "spy_max_abs_adjustment_vs_cash_distribution_residual": 0.00025180706938365827,
+  "note": "Distribution reinvestment conventions can differ; no corporate-action ledger supplied for sectors."
+}

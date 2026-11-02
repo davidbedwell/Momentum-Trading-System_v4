@@ -1,0 +1,50 @@
+{
+  "source": "/opt/mts/portfolio_evolution_dev80/dev80_raw_no_smci.parquet",
+  "source_sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+  "spy": "/opt/mts/ga6-git-backup/Research/Data/Comparators/SPY_YFINANCE_2005_2026.parquet",
+  "spy_sha256": "b182402afd15c074ee4cc596149bf0a821e6cbd00fa5329d84eef269636f6381",
+  "spy_rows": 5459,
+  "spy_range": [
+    "2005-01-03 00:00:00",
+    "2026-09-15 00:00:00"
+  ],
+  "spy_missing_on_dev_sessions": 0,
+  "relative_strength": "SPY unadjusted-for-dividends close return, no verified sector history",
+  "coverage": [
+    {
+      "policy": "manager",
+      "all": 351629,
+      "matched": 329927,
+      "excluded": 21702,
+      "missing_action": 0,
+      "max_realized_reconciliation": 9.486029739491642e-10
+    },
+    {
+      "policy": "claude_approx",
+      "all": 351629,
+      "matched": 329927,
+      "excluded": 21702,
+      "missing_action": 0,
+      "max_realized_reconciliation": 2.9976945370435715e-09
+    },
+    {
+      "policy": "gemini_approx",
+      "all": 351629,
+      "matched": 329927,
+      "excluded": 21702,
+      "missing_action": 0,
+      "max_realized_reconciliation": 1.862645149230957e-09
+    },
+    {
+      "policy": "grok_dev79_approx",
+      "all": 351629,
+      "matched": 329927,
+      "excluded": 21702,
+      "missing_action": 0,
+      "max_realized_reconciliation": 2.3283064365386963e-10
+    }
+  ],
+  "selector": "not fitted; Phase 1 only",
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 79
+}

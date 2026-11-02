@@ -1,0 +1,38 @@
+{
+  "hashes": {
+    "/opt/mts/ga6/data/ga6d_defensive_features.parquet": "ead7e58cfdee0a71679886435ca1ff1d4e20f03290fa2438aa5607890e72773b",
+    "/opt/mts/sector-leadership-independent/experiments/breadth_chromosome_multihorizon_20261031/entry_features.csv": "062a6dab32773babc5c9efe4d390091f81c95563df0f6f02f42006cd9295b264",
+    "/opt/mts/ga6-git-backup/Research/Data/Comparators/SPY_YFINANCE_2005_2026.parquet": "b182402afd15c074ee4cc596149bf0a821e6cbd00fa5329d84eef269636f6381",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA6_36f53f73e2b62b0778aec28c674164627ddd5018e288f2e3f2602a911e5d638f.json.gz": "315efc3d58b041f9fd444b99d92866d2d896fbc14f3da34e962256e489fe4add",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA6_42a5f1a5fb345cdc235af029dfadc2276405d8351b0bfe8e71bf54229bb0fd92.json.gz": "d5e376e2320e5f724141ae0cc1066a8892659ecb3c6d7f35884e690e89995842",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA6_79b45b1fd15ce7adbe942d842322e0242129b770719fcf95cafed06c3b274f63.json.gz": "f720e1bce3c51803a2926ce307fb231554a2ee5301d900c3a2301aa643dbdbdb",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA6_dc024e6a4adfa26a9e12ee9af2f09a330f91218e247eb9090c916d973736199e.json.gz": "b38e782138963ddf3815e746df700c5a7128d1c78bb54c6b360ff081f90a875c",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA6_f087e59a0bfc9314bf10e61c53c09291854298be915a73ce322da67ff3e3e31e.json.gz": "96b1e2f59990be776bfbcc97ad18fef5775b7af758ad10e5402d5bfef46d8583",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA7_0042a3d812ac05a1e01b.json.gz": "9d59fd769a14f5477b12c1bf41d7ffce43f6e22aa663778eb8b1846f61572d65",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA7_02ef8253dc78171b086d.json.gz": "2f94f140a39cf67fef5245bb625365f76a40b040f52e66ca00d4d04763717dfa",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA7_0a6ec0b121614ab67898.json.gz": "743eb7af7a6e37c05eabec21ffcc71f1ccf6f3c687aa9f6bbe6c49a99d31d8d7",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA7_0ca35a5e40650b95f593.json.gz": "52b4a2c3536be4cd9dbb7135fba9eac5e6cfa30993c3ebc7004fe742dcc11562",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_v1_full_cohort_2009_2018/ledgers/GA7_0fe1feebc33d93e09e24.json.gz": "13dfa4fbba912fa4a185ff7c4f367f9235ca0e9e53c66014d20303c532666028",
+    "/opt/mts/sector-leadership-independent/experiments/breadth_risk_allocation_20261031/study.py": "03e9b17ae5e09fa2832666681cb8caf841f9d95452d42d3abdb022b6a27364ee",
+    "/opt/mts/sector-leadership-independent/experiments/top_chromosome_spy_breadth_replay_20261031/selection.csv": "a63b6ac3be237667e4ae1a7513539d392ffcba5f99fac9cdf3347673d5a2d2a9",
+    "/opt/mts/sector-leadership-independent/experiments/breadth_risk_allocation_20261031/engine_probe.log": "99fb818fc7163636e0633175b13d7c7d1b771c30859e0da3d2bbb98abb8925a8",
+    "/opt/mts/sector-leadership-independent/experiments/breadth_risk_allocation_20261031/report.py": "da55cf5b70b712871d02ef071da80cf84e8590729d806753b6994f9121f526ac",
+    "/opt/mts/sector-leadership-independent/experiments/breadth_risk_allocation_20261031/test_study.py": "dffb8a54d33dd37189fa12e21262ef9d7f65b69e2736bbd84450e30c977b0486",
+    "/opt/mts/sector-leadership-independent/experiments/breadth_risk_allocation_20261031/tests.log": "9e90091ee6ba5e4444b5e9d87564f1efcffde7d9fc749a80aea6cdde8f7a1397",
+    "/opt/mts/ga7-deploy/ga7_audit_v2/reports/ga7_final_518/ga6_ga7_common_execution_reference_v1.py": "0b111211dfbbf614e14943b15007065f2652314db56367b2f8a189da6716f36c",
+    "/opt/mts/sector-leadership-independent/experiments/breadth_chromosome_multihorizon_20261031/REPORT.md": "6b567cb6a31bd306ce332553d2a73fe024ca4685c1b1a3f3e6cf50e9b8ad5799",
+    "/opt/mts/sector-leadership-independent/experiments/top_chromosome_spy_breadth_replay_20261031/REPORT.md": "254c0823302ee6501f1c28b94beb04112c58ba0d7227c888cd9cddb90c7eb6ee",
+    "/opt/mts/sector-leadership-independent/experiments/breadth_ga_decision_pilot_20261031/REPORT.md": "c50a3b0a0f3b9e76b490a1c1233075885a1fec5bb5adf641e875d4f291759303"
+  },
+  "episodes": 3074,
+  "ledgers": 10,
+  "method": "OHLC proxies; not actual intraday MAE",
+  "portfolio_status": "BLOCKED",
+  "ga_run": false,
+  "versions": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "pandas": "3.0.6",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  }
+}

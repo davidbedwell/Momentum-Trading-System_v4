@@ -1,0 +1,47 @@
+{
+  "status": "CERTIFICATION_BLOCKED_INPUT_PROVENANCE",
+  "period": [
+    "2009-01-01",
+    "2018-12-31"
+  ],
+  "membership_rows": 179265,
+  "sessions": 2516,
+  "symbols": 77,
+  "membership_true_rows": 179265,
+  "membership_false_rows": 0,
+  "membership_is_price_bar_presence_proxy": true,
+  "risk_veto_true_sessions": 2516,
+  "risk_veto_false_sessions": 0,
+  "retrospective_earnings_blocked_symbol_sessions": 8623,
+  "earnings_archive_matches_79": 6035,
+  "niche_status": "CHRONOLOGY_VERIFIED_FEATURE_PROVENANCE_PENDING",
+  "niche_first_evaluation": "2009-01-02",
+  "checks": {
+    "policy_file_matches_manifest": true,
+    "independent_historical_index_membership": false,
+    "historical_sector_point_in_time": false,
+    "earnings_announcement_knowledge_time": false,
+    "niche_training_chronology": true,
+    "niche_input_feature_provenance": false,
+    "historical_dividend_payment_dates": false,
+    "cash_yield_historical": false
+  },
+  "certified": false,
+  "sources": {
+    "policy": "/opt/mts/ga5_redesign/exploratory79_policy.json",
+    "policy_sha256": "1f0c99c8154c81bdf10a54ba97a3d1bef833122c433356d02da3a97c23345dd9",
+    "assumptions": "/opt/mts/ga5_redesign/exploratory79_assumptions.json",
+    "niche_manifest": "/opt/mts/ga7-deploy/ga7_unbounded/niche_pit_manifest.json",
+    "earnings_reconciliation": "/opt/mts/ga5_redesign/earnings_reconciliation_79.json",
+    "policy_builder": "/opt/mts/ga5_redesign/launch_exploratory_79.py",
+    "earnings_builder": "/opt/mts/ga5_redesign/reconcile_existing_inputs.py"
+  },
+  "interpretation": [
+    "DEV79 is a fixed research sample, not certified point-in-time index membership. The policy marks every observed price row True.",
+    "Retrospective sector labels are static, not verified time-t labels.",
+    "Earnings dates are retrospective EODHD report dates with no historical knowledge timestamp.",
+    "Chronological niche reconstruction does not certify the source feature inputs.",
+    "These gaps do not invalidate exploratory metrics but forbid labeling historical GA6/GA7 CAGR/MDD as PIT certified."
+  ],
+  "dev87_accessed": false
+}

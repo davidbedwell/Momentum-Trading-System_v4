@@ -1,0 +1,14 @@
+{
+  "status": "STOPPED_ON_TEST_FAILURE",
+  "failure": "New reliability test failed to import: test file creation used an incorrect relative path; ModuleNotFoundError: test_reliability.",
+  "existing_regression_tests_passed": 7,
+  "reliability_tests_passed": false,
+  "reconstruction_exact": true,
+  "completed_saved_replays": 26,
+  "full_portfolio_attempts_upper_bound": 28,
+  "accounting": "One initial completed portfolio failed result assembly; up to one additional portfolio was in flight at interruption. No reruns after test failure.",
+  "comparison_complete": false,
+  "conclusions": null,
+  "original_source_modified": false,
+  "ga_launched": false
+}

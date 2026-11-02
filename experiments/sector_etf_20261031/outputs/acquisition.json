@@ -1,0 +1,27 @@
+{
+  "started_utc": "2026-10-31T10:38:28.013857+00:00",
+  "protocol_sha256": "23a49749f06cfc44c4c7f5a203e5f18cd04343d5763e7541100c4f977a2f756f",
+  "sources": [
+    {
+      "host": "query1.finance.yahoo.com",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?period1=725846400&period2=1767225600&interval=1d&includeAdjustedClose=true&events=div%2Csplits",
+      "status": "failed",
+      "error_type": "gaierror",
+      "error": "[Errno -3] Temporary failure in name resolution"
+    },
+    {
+      "host": "query2.finance.yahoo.com",
+      "url": "https://query2.finance.yahoo.com/v8/finance/chart/SPY?period1=725846400&period2=1767225600&interval=1d&includeAdjustedClose=true&events=div%2Csplits",
+      "status": "failed",
+      "error_type": "gaierror",
+      "error": "[Errno -3] Temporary failure in name resolution"
+    }
+  ],
+  "status": "BLOCKED_DATA",
+  "outcomes_computed": false,
+  "validation_opened": false,
+  "paid_requests": 0,
+  "stooq_connectivity": "gaierror: [Errno -3] Temporary failure in name resolution",
+  "acquired": {},
+  "ended_utc": "2026-10-31T10:38:28.018734+00:00"
+}

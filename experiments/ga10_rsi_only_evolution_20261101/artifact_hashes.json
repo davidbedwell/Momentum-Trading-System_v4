@@ -1,0 +1,12 @@
+{
+  "/opt/mts/sector-leadership-independent/experiments/ga10_rsi_only_evolution_20261101/study.py": "912a491ac267022c8bcffd21fb6d89a63e6e25fbdba7e2e1b37b61c285ef2d78",
+  "/opt/mts/sector-leadership-independent/experiments/ga10_rsi_only_evolution_20261101/prototype.py": "242b06d15f042adcb1252a5b152896c32acca14eb399a545ed31a07071e3e1af",
+  "/opt/mts/sector-leadership-independent/experiments/ga10_rsi_only_evolution_20261101/test_study.py": "c9df214128cbea16ce2981d749ccc1634320e6c762dc0839cd60a6e3d134d65f",
+  "/opt/mts/sector-leadership-independent/experiments/ga10_rsi_only_evolution_20261101/verify.py": "d3958e1e59feaac8fa5273e8924a0e0aa92a10e8de33af7b5aca8f3d97a64f71",
+  "/opt/mts/sector-leadership-independent/experiments/ga10_rsi_only_evolution_20261101/finalize.py": "d95e72c824ebcfee04c67a0343fd33f9c575c65e656f4402b70964e7769bee7a",
+  "/opt/mts/sector-leadership-independent/experiments/ga10_rsi_only_evolution_20261101/champions.json": "a4ba85a812053cc28e4c991d0b6d29d61ff18abbeba9c58b1821106ce5c3319c",
+  "/opt/mts/sector-leadership-independent/experiments/ga10_rsi_only_evolution_20261101/freeze.json": "3773b86f6718c3bb073682af62a8baea6780c5fd7456d5b57e5675429b000bb0",
+  "/opt/mts/sector-leadership-independent/experiments/ga10_rsi_only_evolution_20261101/checkpoint.json": "5da9906739b583b30458bd31b27fec5163c5fab4dc9ba182f3c76007ddef02ac",
+  "/opt/mts/portfolio_evolution_dev80/dev80_raw_no_smci.parquet": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+  "/opt/mts/sector-leadership-independent/experiments/dev87_rsi_frozen_validation_20261101/dev87_raw.parquet": "90d329bdd5d60605a2e4a2e70be8294f7b6c99d4a00736cf7a5de08fd6129be4"
+}

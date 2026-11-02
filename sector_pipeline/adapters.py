@@ -52,12 +52,12 @@ def sec_companyfacts(cik):
     return fetch(f'https://data.sec.gov/api/xbrl/companyfacts/CIK{int(cik):010d}.json', agent)
 
 
-def sec_quality(data, asof):
+def sec_quality(data, asof, cutoff=None):
     facts = data.get('facts', {}).get('us-gaap', {})
     eligible = {}
     for tag in ('GrossProfit', 'Assets'):
         eligible[tag] = [r for r in facts.get(tag, {}).get('units', {}).get('USD', [])
-                         if r.get('filed', '9999') < asof and r['end'] <= asof and r.get('form') in ('10-K', '10-Q', '10-K/A', '10-Q/A')]
+                         if r.get('filed', '9999') < asof and available(r.get('available_at'), cutoff or asof+'T00:00:00+00:00') and r['end'] <= asof and r.get('form') in ('10-K', '10-Q', '10-K/A', '10-Q/A')]
     # Annual gross profit only; preserve period and filing vintage. No proxy for missing tags.
     gp = [r for r in eligible['GrossProfit'] if 'start' in r and 330 <= (dt.date.fromisoformat(r['end'])-dt.date.fromisoformat(r['start'])).days <= 380]
     for g in sorted(gp, key=lambda r: (r['end'], r['filed']), reverse=True):
@@ -75,10 +75,10 @@ def alpha_earnings(symbol):
     return fetch('https://www.alphavantage.co/query?' + urllib.parse.urlencode(dict(function='EARNINGS', symbol=symbol, apikey=key)))
 
 
-def earnings_signal(data, asof):
+def earnings_signal(data, asof, cutoff=None):
     import statistics
-    events = sorted([e for e in data.get('quarterlyEarnings', []) if e.get('reportedDate', '9999') < asof], key=lambda e: e['reportedDate'])
-    # Standardize latest EPS error by prior eight errors; four observations required.
+    events = sorted([e for e in data.get('quarterlyEarnings', []) if e.get('reportedDate', '9999') < asof and available(e.get('available_at'), cutoff or asof+'T00:00:00+00:00')], key=lambda e: e['reportedDate'])
+    # Standardize latest EPS error by prior eight errors; all eight prior observations required.
     def error(e):
         try:
             return float(e['reportedEPS']) - float(e['estimatedEPS'])
@@ -87,7 +87,7 @@ def earnings_signal(data, asof):
     if not events or error(events[-1]) is None:
         return None
     prior = [error(e) for e in events[:-1][-8:]]
-    if len(prior) < 4 or any(v is None for v in prior):
+    if len(prior) != 8 or any(v is None for v in prior):
         return None
     sd = statistics.stdev(prior)
     return error(events[-1])/sd if sd else None
@@ -98,3 +98,27 @@ def fred(series, asof):
     if not key:
         raise ValueError('FRED_API_KEY unavailable; regime remains missing')
     return fetch('https://api.stlouisfed.org/fred/series/observations?' + urllib.parse.urlencode(dict(series_id=series, api_key=key, file_type='json', realtime_start=asof, realtime_end=asof, observation_end=asof)))
+
+
+def timestamp(value):
+    parsed = dt.datetime.fromisoformat(value.replace('Z','+00:00'))
+    if parsed.tzinfo is None:
+        raise ValueError('Availability timestamps require timezone')
+    return parsed
+
+
+def available(value, cutoff):
+    # Legacy pure adapters accept absent timestamps; certified executor requires them.
+    return value is None or timestamp(value) <= timestamp(cutoff)
+
+
+def checkpoint_source(provider, request, cache):
+    """Explicit resumable source operation. No fallback or automatic subscriptions.
+
+    Intended for authorized source preparation; the research CLI never fetches data.
+    """
+    from .storage import resume_source
+    loaders = {'sec':sec_companyfacts,'alpha':alpha_earnings,'yahoo':yahoo,'fred':fred}
+    if provider not in loaders:
+        raise ValueError('Unknown source provider')
+    return resume_source(local(cache),provider,request,lambda:loaders[provider](**request))

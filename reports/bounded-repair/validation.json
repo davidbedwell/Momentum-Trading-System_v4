@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "existing_suite": "43 passed in 2.50s",
+  "baseline_six_primary_means_reproduced": true,
+  "protected_files_unchanged": true,
+  "primary_rerun": false,
+  "diagnostic_only": true
+}

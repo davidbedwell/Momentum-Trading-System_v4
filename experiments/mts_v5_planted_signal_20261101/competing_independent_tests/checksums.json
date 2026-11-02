@@ -1,0 +1,23 @@
+{
+  "VALIDITY.md": "fa87eddce4c686bb3bf7b7c73385da9cf65e17534d788c066aba78e1aff55126",
+  "analyze.py": "52663a5d12cad7115b8c02f02dfb38c14f06d0d4607751e597c7ab3e024d102a",
+  "audit_artifacts.py": "8bff4011a24147fafb7f077824b5f652e64764c88b666b36543a28f1b65680c7",
+  "claude_review.md": "1f26a303b664753c25104980c46da50d6e84965c4d18e29ae129f15b235b67d9",
+  "commitment.json": "a23e313ae42c7ed64979845fde7682fd0d09ce50d530faca2bffecc139fb1c99",
+  "engine.py": "86a6acc3b5eff4072f44efaf8715266007b35e83b97756a2901d5275344b0f17",
+  "frozen/iteration5_reference.py": "374e1fda136c50c643cbfce4ab2bd1ed26274b19b433dfc38109ead03a1b50a0",
+  "frozen/iteration6_engine.py": "0cb88a0fa95620f1d6881235bdf748be3349a142cd4002a565ba4d45bfb1b319",
+  "metrics.csv": "276594c7ffe599b611ab1c24e6e0f947f031022b46f675340e04cd9da01a2631",
+  "opportunities.jsonl.gz": "c9af9e4bec21eb1ac5300d9fdeb805bb4dfe880a3bf1f85636cbb825f9b1a4ce",
+  "per_seed.jsonl": "a451180d203a1864441366135c17d7f32192bafba6b6ce1361575d8fe8946856",
+  "preregister.json": "0a78e3619f972cdf38e42beb9f0ce04f529db9fd16de961999df9d3dcda3a518",
+  "replays.jsonl.gz": "0939ad51c3f371950e6ccd5e9c436822b177387901af5ddef1dd249177fedfdb",
+  "report.json": "0e573ccc77f3e02c72c781fbb6384d474147345949c417b29ce9fbceaa5cfe52",
+  "results.json": "04f05b2db987e8b12233d8355b606e6fc7b248dc284d7cb1405e23ed898adeaa",
+  "run.log": "ecd8ffc1507579c3fd49a54267b94c74d06099661811a441d078dc65f5d98531",
+  "run.py": "efaf4047fab6bee3b6ac253247c8b7068e8a5a6227fead952b628d085b2c4ef9",
+  "seeds.json": "1e23b2cd4d24820c767234ff24f8960f30ac24d06ce79c7dbd9ad2df86ffc20b",
+  "summary.md": "ec62d2f8cac220f2f7da85e75eaa2575144a70be3c8a91d4bba323696c8fb3dc",
+  "test_engine.py": "cf2e03d85a665e163ff822529c6df74eecd5a5fa0f19f8eb02366d9aa0a362c9",
+  "tests.log": "fb198baf2554edd26a603e1c7bf0b02e6dc2f3976a564b3933158e964204374e"
+}

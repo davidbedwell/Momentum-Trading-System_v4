@@ -1,0 +1,18 @@
+{
+  "reports/bounded-repair/README.md": "32408c486a744cfc152f8e7b1ac76a54c297a988cfe5f897d74a5c868f70db73",
+  "reports/bounded-repair/comparison.json": "b3cb7c0af687c1b44a938d364cc8293b285ea70d145e970df54bf8e12851dfbc",
+  "reports/bounded-repair/diagnostics.json": "87046885cff559135d2246a8402231f7591f0edaed6bbe62e725c6df1e1bda35",
+  "reports/bounded-repair/local_price_search.json": "a918aa5849b8f338d7f418e405da4049373abd75f02a6255de2b6353197bafa9",
+  "reports/bounded-repair/membership_comparison.csv": "6c5a055defaf754d61d9257b6d9141020d2eb19dd2514c51935ba7b9a12c6289",
+  "reports/bounded-repair/price_probes.json": "5afd4368da4ab208533e89b9b874b5c6cf30842f8d7197537c27f5dbda7a59ad",
+  "reports/bounded-repair/sources/README.md": "716e9707b977254a8fecf92f2617dc99fde73b350d07acb689d979c58778352a",
+  "reports/bounded-repair/sources/_api.py": "d94b462a5392f751452fb3e964d54a19d017bb8599923fc1a0d75d9f1fc0a493",
+  "reports/bounded-repair/sources/_loader.py": "4834645840c0f8ea73a712aeceebb90e7eed57a5b4afe0ef161f7bb8b54797f7",
+  "reports/bounded-repair/sources/acquisition.json": "e4e2e21824e9c5ffafbebbcef4ff00daf9aa7b291beb03955df48d39a7051663",
+  "reports/bounded-repair/sources/build_metadata.json": "1fad2a065f348999f149c7aba986c52d0267e5ff47d750b4d09f038d18be4184",
+  "reports/bounded-repair/sources/sp500_changes.csv": "4d5757c55bb1c113fbd5bb15ae4196000e2a87a34271e680435b3b838e8e1456",
+  "reports/bounded-repair/sources/sp500_current.csv": "f3beb7103bb7e65b0097f909b10cfafdae8b5a17d3e1560d170800026afdc392",
+  "reports/bounded-repair/sources/sp500_seed.csv": "1a444b80576333455e6a77d24ac12b5eb1095fbdf2d208e1db07396592e3f8aa",
+  "reports/bounded-repair/sources/tree.json": "bcec0172c18822de893b0f39a225f4c650065d71ae0c70969ea494dae88d8b02",
+  "reports/bounded-repair/validation.json": "9cc4fe5227df50cd15b3a274f6ed983e5bee4a37d8dc3a73ad5637e9c2f0cec5"
+}

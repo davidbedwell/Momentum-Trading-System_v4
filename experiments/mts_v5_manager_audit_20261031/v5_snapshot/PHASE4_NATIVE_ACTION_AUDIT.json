@@ -1,0 +1,104 @@
+{
+  "shadow_reconciliation": {
+    "owner_sessions": 64,
+    "fills": 601,
+    "max_residual": 1.0186340659856796e-10,
+    "status": "RESEARCH_JOURNAL_RECONCILED",
+    "native_ledger_parity": false
+  },
+  "status": "DIAGNOSTIC_ONLY_NOT_LAUNCH_READY",
+  "first_date": "2022-11-17",
+  "last_date": "2022-12-30",
+  "sessions": 32,
+  "tickers": 500,
+  "action_audit_sessions": 393,
+  "action_audit_first": "2021-12-29",
+  "action_audit_last": "2023-06-30",
+  "shared_bank_fills": 0,
+  "shared_bank_nav": 100000.0,
+  "shared_bank_gate": "BLOCKED_UNKNOWN_PIT_AND_MODEL_TRAINING_LINEAGE",
+  "shadow_fills": 601,
+  "shadow_completed": 264,
+  "shadow_rejections": 8422,
+  "actions": {
+    "GA7:ENTER": 8990,
+    "GA7:EXIT": 272,
+    "GA7:HOLD": 301,
+    "GA7:REDUCE": 52
+  },
+  "GA6_state_probes": {
+    "adverse_entry:ADD": 23257,
+    "adverse_entry:HOLD": 47693,
+    "adverse_entry:NO_DATA": 125500,
+    "adverse_entry:REDUCE": 50,
+    "flat:ENTER": 8,
+    "flat:NO_DATA": 125500,
+    "flat:NO_ENTRY": 70992,
+    "held:ADD": 23257,
+    "held:HOLD": 47693,
+    "held:NO_DATA": 125500,
+    "held:REDUCE": 50
+  },
+  "GA7_native_oracle": {
+    "flat:ENTER": 3133,
+    "flat:PASS": 134959,
+    "held:ADD": 12,
+    "held:EXIT": 26644,
+    "held:HOLD": 26612,
+    "held:REDUCE": 4140
+  },
+  "parity_scope": {
+    "GA6_sessions": 393,
+    "GA6_tickers": 500,
+    "GA6_states_per_row": 3,
+    "GA7_oracle_sessions": 391,
+    "GA7_first_oracle_date": "2021-12-30",
+    "GA7_last_oracle_date": "2023-06-29",
+    "GA7_missing_boundary_oracle_dates": [
+      "2021-12-29",
+      "2023-06-30"
+    ],
+    "required_feature_warmup_gate": true
+  },
+  "native_calls": {
+    "GA6_native_action": 1195000,
+    "GA7_native_replay_requests": 195500,
+    "GA7_native_passes": 112500,
+    "GA7_native_score_signal": 112500
+  },
+  "sources": {
+    "/opt/mts/synthetic-market-lab/runs/five_iteration_inputs/universe_1/stock_prices.parquet": "1fc1b849f81472e6d0684c010689c3bd6fca45021a1d9399d0ab1ddab0044a85",
+    "/opt/mts/ga6/runs/frozen_four_run_20261024/catalogue.sqlite": "d46b43a773690986d1e2d477f0788affe6f96425781f5fed79cb5bd7045b48b1",
+    "/opt/mts/ga7-deploy/ga7_unbounded/runs/preflight_16/checkpoint.json": "8e70569141a33597449dbcbec81340dc9cb96e33d3f229d8319ce636ebf0f812",
+    "/opt/mts/ga6/native_position_decision_adapter.py": "4b23135d8ac938992495b7680a5c703befff7bf4590f38c39b7563baced3b1f3",
+    "/opt/mts/ga7-deploy/ga7_unbounded/ga7/request_replay.py": "efc9fa9d2ea39d2e3f5d247b402cdc1ebadf40b9954830568c910b1a3e5bc375",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/phase4_native_smoke.py": "b71a1c1530318b85d272d6abcb2ec4312a894863f7643ba5c446daf90d5e16d2",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/ga6_native_daily_producer.py": "491ce10036a1c5814d504b329e37870769ef31e49dcfd7b10305758ba44f25d5",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/ga7_native_daily_producer.py": "5f5ae285d09c7154aef8969195e022b8b75a54b6ce2f035b6651c230debd30df",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/funded_shadow.py": "fd491546415522ac80e2130edd6efbdfc0fafdecc6e6495d1e84df7d98d454fe",
+    "/opt/Momentum-Trading-System_v5-alpha/discovery/competitive_ga/ledger_audit.py": "875b9883a27e480b3cd2666b72a1ed33e1895adc643a38531d37fc6211be5948",
+    "/opt/mts/ga7-deploy/ga7_unbounded/ga7/runner.py": "610319316ebcf444b8a5ad174653f247b218cb59fd22ffe11b1b559f128d95e0",
+    "/opt/mts/ga7-deploy/ga7_unbounded/ga7/fold_features.py": "2abc921410a41c73ef8e1191558b2590ab40d276b3c1ec2626be6313639484c4",
+    "/opt/mts/ga5_redesign/fast_decision.py": "2d9fbdd034fa98a5f4d7365cd0a6f867af3f92bfd48f72d499eb352005e5e71a"
+  },
+  "checkpoint_sha256": "8e70569141a33597449dbcbec81340dc9cb96e33d3f229d8319ce636ebf0f812",
+  "model_trained_through": null,
+  "eligibility": "ALL_TRUE_DIAGNOSTIC_ONLY",
+  "corporate_actions": "NO_SUPPLIED_EVENT_STREAM; defaults are an unverified diagnostic convention",
+  "proof_values_read": false,
+  "validation_values_read": true,
+  "validation_scope": "previously open engineering prefix; no tuning or forward outcome columns",
+  "deterministic_sha256": "466c813200dd22a5d4b8ec418b62ff809f3bacf9563291f7a75463fba441113d",
+  "performance": {
+    "wall_seconds": 27.918011169997044,
+    "cpu_seconds": 28.373525940999997,
+    "peak_rss_mib": 2335.37109375
+  },
+  "limitations": [
+    "GA4 and Horizons blocked, not evaluated",
+    "GA6 hypothetical held probes are not authentic historical portfolios",
+    "GA7 isolated 3-session oracle verifies decisions, not full funded native ledger parity",
+    "Unknown lineage never passes authenticated proposal or DailyFeed gates",
+    "No certified eligibility, earnings, niche or risk inputs; no performance claim"
+  ]
+}

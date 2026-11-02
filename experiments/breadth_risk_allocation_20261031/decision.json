@@ -1,0 +1,8 @@
+{
+  "status": "NO_GA",
+  "historical_portfolio": "BLOCKED_PERMISSION_DEPENDENCY",
+  "actual_intraday_mae": "UNAVAILABLE",
+  "risk_pilot": "COMPLETE_OHLC_PROXY",
+  "synthetic_executor_tests": 4,
+  "genomes_evaluated": 0
+}

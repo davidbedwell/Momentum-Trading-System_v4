@@ -1,0 +1,14 @@
+{
+  "status": "DRAFT_NOT_COMMITTED_NOT_AUTHORIZATION_TO_TEST",
+  "arms": ["iteration6", "iteration7B", "8A", "8B"],
+  "unresolved": ["8B detector definition", "8A single-policy mapping", "four-arm budget and screening allocation", "acceptance precedence"],
+  "fixed_constraints": {
+    "isolation_axis": {"arms": ["iteration6", "iteration7B", "8B"], "fit": [0,400], "cal": [403,603], "test": [606,732], "n": 734},
+    "8A_package": {"fit": [0,600], "cal": [603,903], "test": [906,1032], "n": 1034, "radius": "review Part II section 5 fit_v3"},
+    "scenarios": ["learnable", "reversal", "random_reversal", "outer_noise", "null"],
+    "availability": "signal+3", "production_edits": false, "holdout_tuning": false
+  },
+  "proposed_seed_method_from_review": "16 unique secrets.randbits(63) after complete source/preregistration freeze; offsets secrets.randbelow(61)+20; reject previously used seeds; pair seeds/offsets across arms",
+  "independent_validation_required_before_testing": ["source identity and non-detector equivalence", "future mutation and signal+3 enforcement", "date increment uniqueness and detector math", "ledger/cost/risk reconciliation", "artifact-only independent recomputation"],
+  "seed_draws": 0, "portfolio_replays": 0
+}

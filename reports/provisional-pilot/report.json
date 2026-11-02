@@ -1,0 +1,15 @@
+{
+  "label": "PROVISIONAL exploratory only; not certified PIT. Wikipedia reconstructed membership is incomplete; historical sectors use current Wikipedia proxies where available, otherwise UNKNOWN. Yahoo retrospective adjustments, missing delisted securities and terminal prices, SEC companyfacts retrieval vintages and Alpha Vantage coverage cause source/availability/survivorship bias. No exploratory result releases Stage2. 2019/2020 remain contaminated.",
+  "status": "BLOCKED: Wikipedia unavailable",
+  "stage2": "SEALED",
+  "attempted_at": "2026-10-31T06:16:15.470725+00:00",
+  "errors": [
+    {
+      "provider": "wikipedia",
+      "request": {
+        "page": "S&P500"
+      },
+      "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+    }
+  ]
+}

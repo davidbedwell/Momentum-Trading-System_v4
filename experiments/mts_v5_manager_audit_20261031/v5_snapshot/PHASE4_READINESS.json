@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "authentic_families_ready": 0,
+  "total_families": 4,
+  "evidence_errors": [],
+  "proof_opened": false,
+  "coverage": {
+    "available_sessions": 1260,
+    "value_sessions": 393,
+    "sealed_sessions": 867,
+    "prefix_invariant_sessions": 263
+  },
+  "families": {
+    "GA4": {
+      "feature_sessions": 393,
+      "native_exit": "MISSING_APPROVED_ARCHIVE_LINK",
+      "funded_native_shadow": "BLOCKED",
+      "authentic_launch": "BLOCKED",
+      "PIT_earnings_corporate_actions": "UNKNOWN",
+      "model_training_lineage": "UNKNOWN"
+    },
+    "HORIZONS": {
+      "feature_sessions": 0,
+      "stress": "MISSING_JOINT_SCENARIO_PUBLICATION_AND_NORMALIZATION",
+      "native_parity": "BLOCKED",
+      "authentic_launch": "BLOCKED",
+      "PIT_earnings_corporate_actions": "UNKNOWN",
+      "model_training_lineage": "UNKNOWN"
+    },
+    "GA6": {
+      "feature_sessions": 393,
+      "native_action_sessions": 393,
+      "historical_training_cutoff": "UNKNOWN",
+      "observed_shadow_fills": 0,
+      "authentic_launch": "BLOCKED",
+      "PIT_earnings_corporate_actions": "UNKNOWN",
+      "model_training_lineage": "UNKNOWN"
+    },
+    "GA7": {
+      "feature_sessions": 393,
+      "native_held_oracle_sessions": 391,
+      "native_boundary_oracle": "INCOMPLETE_FIRST_AND_LAST_DATES",
+      "synthetic_niche_provenance": "UNKNOWN",
+      "authentic_launch": "BLOCKED",
+      "PIT_earnings_corporate_actions": "UNKNOWN",
+      "model_training_lineage": "UNKNOWN"
+    }
+  },
+  "execution": {
+    "shared_bank": "WIRED_AND_FIXTURE_TESTED",
+    "settlement": "EXPLICIT_RESEARCH_T_PLUS_0_1_2",
+    "shared_bank_native_smoke_fills": 0,
+    "funded_shadow_fills": 601,
+    "journal_reconciliation": {
+      "owner_sessions": 64,
+      "fills": 601,
+      "max_residual": 1.0186340659856796e-10,
+      "status": "RESEARCH_JOURNAL_RECONCILED",
+      "native_ledger_parity": false
+    },
+    "aggregate_incumbent_risk": "NOT_CERTIFIED",
+    "defense_timing": "CLOSE_TO_NEXT_OPEN_TESTED_NOT_GOVERNED_INPUT_CERTIFICATION",
+    "native_funded_portfolio_parity": "NOT_CERTIFIED",
+    "action_utility": "ENTRY_CONTEXT_ESTIMATES_NOT_CERTIFIED_ADD_REDUCE"
+  },
+  "required_dependencies": [
+    "Approved calendar authority preserving an untouched independent proof set; existing 867-session seal remains closed",
+    "500-name dated membership/security mapping, selected native earnings schedules or explicit absence coverage, and publication timestamps",
+    "Corporate-action identity, adjustment convention, dividend pay-date and settlement contracts",
+    "Independently verified GA4/Horizons/GA6/GA7 archived model training cutoffs and immutable daily feature snapshots",
+    "Approved executable GA4 exit policy linked to frozen archive; experimental callback is excluded from authentic runner",
+    "Horizons stress jointly generated with fictional OHLCV, dated publication and approved mapping/normalization",
+    "Chronological synthetic GA7 niche models/distances and publication times; DEV79 archive has zero synthetic ticker overlap",
+    "Dated synthetic defense/risk/gap/correlation controls plus aggregate incumbent risk implementation and native-ledger reconciliation",
+    "Complete remaining sealed-date feature/action parity after calendar authorization; GA7 boundary held oracle and native funded ledger comparisons",
+    "Validated incremental action utility, then bounded authentic training and frozen validation without proof selection"
+  ],
+  "evidence": {
+    "PHASE4_INPUT_MANIFEST.json": {
+      "sha256": "6404ba977c9f250899bcc2e5162cceac902cb45a44c6aac1b0756ce9bc8a073f",
+      "status": "BLOCKED"
+    },
+    "PHASE4_PREFIX_CHECK.json": {
+      "sha256": "4e024fa09ccc787db4ef030a9c075532d6d3bd4d893e2a82370b48ade748bfe8",
+      "status": "ENGINEERING_PREFIX_INVARIANCE_PASS"
+    },
+    "PHASE4_CACHE_BENCHMARK.json": {
+      "sha256": "b4864e7fe2567f7afa2b272b6f0a813c61bc40c921b524bd2bdae097a8e927a4",
+      "status": "BLOCKED"
+    },
+    "PHASE4_NATIVE_SMOKE.json": {
+      "sha256": "e7e4d1bf7074e9ea7755011ea7198d0766408eeaef3b9a38bd4631157b854720",
+      "status": "DIAGNOSTIC_ONLY_NOT_LAUNCH_READY"
+    },
+    "PHASE4_NATIVE_ACTION_AUDIT.json": {
+      "sha256": "742044231fcf8698a25275ff96d16ca757c6a0cf17f3f31384484ad2f3caac26",
+      "status": "DIAGNOSTIC_ONLY_NOT_LAUNCH_READY"
+    },
+    "PHASE4_CONTROL_DISCOVERY.json": {
+      "sha256": "7aab2471e51a6f4a4e82920827b06220ecb7f2168663d4f2937ffd21c9b3bd13",
+      "status": null
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS for 120 fixed decisions and 119 observed returns; full-period performance BLOCKED",
+  "checks": [
+    "120 identical entry dates each strategy",
+    "unique stored discovery rule and saved memberships match",
+    "321 fixed-rule selected stock-months across 92 active months",
+    "independent dollar accounting and per-stock contributions",
+    "December return and all full-period metrics explicitly unavailable",
+    "no terminal proxy or changed exit convention"
+  ]
+}

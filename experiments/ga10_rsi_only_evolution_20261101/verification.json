@@ -1,0 +1,11 @@
+{
+  "baseline_independent_python_nav_parity": true,
+  "no_optional_feature_eligibility_gate": true,
+  "generation_count_and_stagnation": true,
+  "frontier_replay": true,
+  "nondominated_frontier": true,
+  "champion_maximum_feasible_cagr": true,
+  "all_new_entries_screened": true,
+  "saved_daily_paths_exposure": true,
+  "source_hash": true
+}

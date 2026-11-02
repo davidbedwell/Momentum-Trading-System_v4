@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "five_reports": 5,
+  "source_hashes_checked": 135,
+  "exact_aggregate_csv_matrices_checked": 88,
+  "package_bytes": 626524,
+  "authorization_header_in_request": false,
+  "submission_status": "NOT_SUBMITTED"
+}

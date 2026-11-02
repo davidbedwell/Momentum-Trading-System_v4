@@ -1,0 +1,18 @@
+[
+  {
+    "basis": "adjusted",
+    "finalist": "rsi14_oversold",
+    "passed": false,
+    "t": 1.3795408917534178,
+    "p": 0.17031489489670287,
+    "bonferroni_p": 1
+  },
+  {
+    "basis": "price_only",
+    "finalist": "rsi14_oversold",
+    "passed": false,
+    "t": 1.4958730242698939,
+    "p": 0.13733414696212987,
+    "bonferroni_p": 1
+  }
+]

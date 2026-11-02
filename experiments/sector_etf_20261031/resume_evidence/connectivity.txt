@@ -1,0 +1,57 @@
+2026-10-31T11:16:04.335356+00:00
+DNS stooq.com: gaierror: [Errno -3] Temporary failure in name resolution
+DNS query1.finance.yahoo.com: gaierror: [Errno -3] Temporary failure in name resolution
+DNS query2.finance.yahoo.com: gaierror: [Errno -3] Temporary failure in name resolution
+GET https://stooq.com/q/d/l/?s=xlk.us&i=d&d1=19990101&d2=20261030
+exit=6
+http_code=000 remote_ip= bytes=0
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: stooq.com
+Warning: Problem : timeout. Will retry in 2 seconds. 3 retries left.
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: stooq.com
+Warning: Problem : timeout. Will retry in 2 seconds. 2 retries left.
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: stooq.com
+Warning: Problem : timeout. Will retry in 2 seconds. 1 retries left.
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: stooq.com
+
+GET https://query1.finance.yahoo.com/v8/finance/chart/XLK?range=max&interval=1d
+exit=6
+http_code=000 remote_ip= bytes=0
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: query1.finance.yahoo.com
+Warning: Problem : timeout. Will retry in 2 seconds. 3 retries left.
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: query1.finance.yahoo.com
+Warning: Problem : timeout. Will retry in 2 seconds. 2 retries left.
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: query1.finance.yahoo.com
+Warning: Problem : timeout. Will retry in 2 seconds. 1 retries left.
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: query1.finance.yahoo.com
+
+GET https://query2.finance.yahoo.com/v8/finance/chart/XLK?range=max&interval=1d
+exit=6
+http_code=000 remote_ip= bytes=0
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: query2.finance.yahoo.com
+Warning: Problem : timeout. Will retry in 2 seconds. 3 retries left.
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: query2.finance.yahoo.com
+Warning: Problem : timeout. Will retry in 2 seconds. 2 retries left.
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: query2.finance.yahoo.com
+Warning: Problem : timeout. Will retry in 2 seconds. 1 retries left.
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: query2.finance.yahoo.com

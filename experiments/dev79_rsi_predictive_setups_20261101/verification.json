@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "rules": 64,
+  "oos_months": 59,
+  "strategies": 85,
+  "checks": [
+    "pre-entry dates",
+    "no 2019+ endpoints",
+    "monthly labels/ties",
+    "open-to-open outcomes",
+    "strict training embargo",
+    "policy complements",
+    "common OOS months",
+    "no missing OOS returns",
+    "finite strategy accounting"
+  ],
+  "independent_replay": "PASS: dollar holdings, cash, fees, monthly turnover, net CAGR; training scores/choices and OOS counts"
+}

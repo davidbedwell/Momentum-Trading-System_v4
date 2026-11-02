@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "replay_records": 640,
+  "opportunity_records": 1935360,
+  "trace_clock": "all 640 x126 chronological decisions",
+  "seed_disjointness": true,
+  "frozen_hashes_match": true
+}

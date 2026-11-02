@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "replay_archives": 32,
+  "actual_buys": 3074,
+  "source_and_artifact_checksums": true,
+  "preregistration_unchanged": true,
+  "cash_nonnegative": true,
+  "modeled_risk_pass": true
+}

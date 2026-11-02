@@ -1,0 +1,40 @@
+{
+  "python": "3.12.3",
+  "numpy": "2.5.4",
+  "pandas": "3.0.6",
+  "scipy": "1.18.1",
+  "sources": {
+    "SPY": {
+      "path": "/opt/mts/ga6-git-backup/Research/Data/Comparators/SPY_YFINANCE_2005_2026.parquet",
+      "sha256": "b182402afd15c074ee4cc596149bf0a821e6cbd00fa5329d84eef269636f6381",
+      "rows": 5459,
+      "start": "2005-01-03 00:00:00",
+      "end": "2026-09-15 00:00:00"
+    },
+    "DEV79": {
+      "path": "/opt/mts/portfolio_evolution_dev80/dev80_raw_no_smci.parquet",
+      "sha256": "7eb869d0059dd976705c9673c5098d611b38c4970645168a28882fe15c055e0a",
+      "rows": 394795,
+      "start": "2004-09-01 00:00:00",
+      "end": "2026-09-14 00:00:00"
+    }
+  },
+  "hashes": {
+    "/opt/mts/sector-leadership-independent/experiments/spy_recovery_sequence_20261031/PROTOCOL.md": "914a891d9ef8a63ff9fa813c7e573f885f24ebaf997df4dc8544f120ded623f4",
+    "/opt/mts/sector-leadership-independent/experiments/spy_recovery_sequence_20261031/SOURCES.md": "235e07ac0d5738d3c3f36089cd47114373bf07d58ff3c925970298410789fa5d",
+    "/opt/mts/sector-leadership-independent/experiments/spy_recovery_sequence_20261031/study.py": "9e4278aa0598514be6887962bfe4a77f1a1ade163ce62bc3ba481455d3e31c73",
+    "/opt/mts/sector-leadership-independent/experiments/spy_recovery_sequence_20261031/test_study.py": "86770814558c2aceb14f36d2bf3e6ce8908434067419ba5bfbb6b4fd86cb91c9",
+    "/opt/mts/sector-leadership-independent/experiments/spy_recovery_sequence_20261031/report.py": "afa290129a1b4536a6456bd6538c9ff122c9489502e7ab8e453d254ea9bd08df",
+    "/opt/mts/sector-leadership-independent/experiments/spy_state_predictor_20261031/study.py": "58da7f989523172219874b3e33992359635420b40e69f08d099267ab1ac6fa14",
+    "/opt/mts/sector-leadership-independent/experiments/spy_r1_combinations_20261031/SOURCES.md": "d2d168c7eb8e3e53ce76d86cc7c66a1a90f6bd4890a486ffa1270a0f5e04e188",
+    "/opt/mts/sector-leadership-independent/experiments/spy_r1_combinations_20261031/REPORT.md": "6e3f8932a03ef7a0099db514379a674992e48844f992d33417ddac06e785df84",
+    "/opt/mts/sector-leadership-independent/experiments/spy_r1_combinations_20261031/PROTOCOL.md": "fc2ca691e366b516b3c6bd6f5c32b7d7d3f0932e8244b84fd01e655ba1c77759",
+    "/opt/mts/ga7-deploy/Momentum-Trading-System_v4-research-ga7-dev79/Research/Protocols/MTS_R1_MULTI_RECOVERY_MORPHOLOGY_COMPARISON_FREEZE_20261004.json": "28531707b6bbb380ad204f8b8f01803b3c0ca79072f736aebb383410d0eb8b5c",
+    "/opt/mts/ga7-deploy/Momentum-Trading-System_v4-research-ga7-dev79/Research/Protocols/MTS_TRUE_RECOVERY_EMERGENCE_DESCRIPTOR_DISCOVERY_FREEZE_20261004.json": "9b8d87eddbc014716b5d0813f58fa865572d60f66df5526a7b953f3c955f2bef",
+    "/opt/mts/ga7-deploy/Momentum-Trading-System_v4-research-ga7-dev79/Research/Protocols/MTS_REENTRY_CAUSAL_STATE_MACHINE_FREEZE_20261004.json": "2703e6444d7373946445d3661e18cb8223f50434f7ee784012937bb5d347f183"
+  },
+  "finite_pooled_tests": 198,
+  "finite_annual_tests": 732,
+  "sessions": 5283,
+  "breadth_min_required": 20
+}

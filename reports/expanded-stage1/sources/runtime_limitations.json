@@ -1,0 +1,11 @@
+{
+  "runtime_http_attempt": "urllib.request.urlopen to raw.githubusercontent.com",
+  "result": "URLError: [Errno -3] Temporary failure in name resolution",
+  "working_acquisition_route": "connected GitHub read-only fetch",
+  "environment_status_tool": "not available in enabled tool catalog",
+  "network_policy_file": "/etc/codex/network-policy.json absent",
+  "historical_cache_access": "sandbox read denied; automatic review approved elevated read-only access",
+  "external_writes": false,
+  "paid_data": false,
+  "push": false
+}

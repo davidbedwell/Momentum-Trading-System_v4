@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "identical_ledger_rows": 96000,
+  "identical_iteration2_scores": 16,
+  "portfolios": 48,
+  "buy_fills": 9155,
+  "checksums_match": true,
+  "paired_comparator_portfolios_identical": true
+}

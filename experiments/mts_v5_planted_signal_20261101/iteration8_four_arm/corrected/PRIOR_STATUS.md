@@ -1,0 +1,9 @@
+# Prior engineering and holdout audit
+
+Before corrected implementation, iteration8_four_arm contained only preflight.py, draft preregistration, specification issues, source inventory, and blocked report/summary. It had no engine.py, committed preregistration, commitment.json, seeds.json, per_seed.jsonl, or replay archives. Its existing report explicitly recorded zero seed draws and zero portfolio replays. Therefore there were no prior iteration8 holdout results to relabel or rerun with altered arms.
+
+Earlier iteration6 and competing_independent_tests (iteration7) holdouts and reviewed results existed. They were read as historical design evidence, never pooled into corrected results. They remain isolated in their original directories, unchanged. The corrected run uses only corrected/seeds.json. Its draw rule excludes integers in all historical seed manifests and calibration seeds; stage1 and stage2 seed sets are disjoint. CUSUM calibration uses separate newly generated tapes before holdout and stores its exact maxima and thresholds in calibration.json.
+
+The CRITICAL CORRECTION controls the obsolete definition in the first section of APPROVED_SIX_ARM_DESIGN.md. 8A-D and 8A-Full use direction-corrected outcome-adaptive-lambda C_ablation, INVALID as an e-process. 7B remains the original fixed-lambda mixture. The original blocked preflight outputs above are historical, not the corrected experiment report. Read corrected/summary.md and corrected/report.json for current results.
+
+All writes for this task are confined to the experiment tree (plus temporary build script under /tmp). Existing production modifications visible in initial git status predated this work and were left untouched. .git is read-only; the freeze is a local SHA256 commitment, not a Git commit or trusted external timestamp.

@@ -1,0 +1,10 @@
+{
+  "utc": "2026-11-01T22:20:54.680680+00:00",
+  "calibration_sha256": "dc43b9acf256c1b512015a4c6c58244485a3ddfaf6e83fdec03e4e5bad98314d",
+  "thresholds": [
+    0.027659290213926383,
+    0.055015578352069085
+  ],
+  "actual_calibration_sha256": "dc43b9acf256c1b512015a4c6c58244485a3ddfaf6e83fdec03e4e5bad98314d",
+  "calibration_hash_matches": true
+}

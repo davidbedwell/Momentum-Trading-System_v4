@@ -1,0 +1,73 @@
+{
+  "timestamp_utc": "2026-11-01T20:46:16.363178+00:00",
+  "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+  "submitted": true,
+  "http_status": 200,
+  "model": "anthropic/claude-sonnet-4.6",
+  "usage": {
+    "prompt_tokens": 710116,
+    "completion_tokens": 17392,
+    "total_tokens": 727508,
+    "cost": 2.391228,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 2.391228,
+      "upstream_inference_prompt_cost": 2.130348,
+      "upstream_inference_completions_cost": 0.26088
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "provider_response_verified": true,
+  "credential_path": "/opt/mts/thunder-migration/.openrouter_api_env",
+  "errors": [],
+  "models_http_status": 200,
+  "offered_claude_models": [
+    "anthropic/claude-sonnet-5.5",
+    "anthropic/claude-sonnet-5.5:batch",
+    "anthropic/claude-opus-5.5",
+    "anthropic/claude-opus-5.5:batch",
+    "anthropic/claude-opus-5",
+    "anthropic/claude-opus-5:batch",
+    "anthropic/claude-sonnet-5",
+    "anthropic/claude-sonnet-5:batch",
+    "anthropic/claude-opus-4.8",
+    "anthropic/claude-opus-4.8:batch",
+    "anthropic/claude-opus-4.7",
+    "anthropic/claude-opus-4.7:batch",
+    "anthropic/claude-sonnet-4.6",
+    "anthropic/claude-sonnet-4.6:batch",
+    "anthropic/claude-opus-4.6",
+    "anthropic/claude-opus-4.6:batch",
+    "anthropic/claude-opus-4.5",
+    "anthropic/claude-opus-4.5:batch",
+    "anthropic/claude-sonnet-4.5",
+    "anthropic/claude-sonnet-4.5:batch",
+    "anthropic/claude-opus-4.1",
+    "anthropic/claude-opus-4.1:batch"
+  ],
+  "model_context_length": 1000000,
+  "conservative_context_budget": 941679,
+  "request_sha256": "8ba867c1cdf9ac222a0dc8cb79365ad94411944e0cd1fa8d556477c621ed75cd",
+  "request_bytes": 1966928,
+  "post_attempted_at_utc": "2026-11-01T20:46:16.497095+00:00",
+  "response_model": "anthropic/claude-sonnet-4.6",
+  "provider": "Claude Platform on AWS",
+  "response_id": "gen-1793565976-DUZuxm1BEaAu8chhsPbB",
+  "finish_reason": "stop",
+  "claude_model_identity_verified": true,
+  "review_characters": 56334,
+  "substantive_review_check": true,
+  "completion_marker_verified": true,
+  "completed_at_utc": "2026-11-01T20:52:38.246916+00:00",
+  "status": "SUBMITTED_AND_VERIFIED"
+}

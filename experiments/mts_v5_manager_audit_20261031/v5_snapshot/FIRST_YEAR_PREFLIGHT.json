@@ -1,0 +1,98 @@
+{
+  "status": "BLOCKED_NOT_LAUNCH_READY",
+  "sources": {
+    "raw_synthetic_bars": {
+      "path": "/opt/mts/synthetic-market-lab/runs/five_iteration_inputs/universe_1/stock_prices.parquet",
+      "readable": true,
+      "bytes": 23224592
+    },
+    "ga4_feature_factory": {
+      "path": "/opt/mts/thunder-migration/mts-layered-run-20261007/Core/layered_ga/stage2_features_v3.py",
+      "readable": true,
+      "bytes": 5881
+    },
+    "ga4_predictor_registry": {
+      "path": "/opt/mts/thunder-migration/mts-layered-run-20261007/Research/Runs/layered/stage2-opportunity-v3-20261007/ga4_dev80_checkpoint/dev80_predictors.parquet",
+      "readable": true,
+      "bytes": 173114695
+    },
+    "legacy_chromosomes": {
+      "path": "/opt/mts/thunder-migration/mts-certification-20261011/cagr_mdd_library_20261013/STRATEGY_BANK_INDEX.sqlite",
+      "readable": true,
+      "bytes": 1003278336
+    },
+    "ga6_chromosomes": {
+      "path": "/opt/mts/ga6/runs/frozen_four_run_20261024/catalogue.sqlite",
+      "readable": true,
+      "bytes": 385466368
+    },
+    "ga6_native_decisions": {
+      "path": "/opt/mts/ga6/native_position_decision_adapter.py",
+      "readable": true,
+      "bytes": 2151
+    },
+    "recovered_vix": {
+      "path": "/opt/mts/thunder-migration/mts-v4-recovery-integration-20261004/Research/Data/CrashMultiMarketV1/VIX_History.csv",
+      "readable": true,
+      "bytes": 473329
+    },
+    "recovered_vvix": {
+      "path": "/opt/mts/thunder-migration/mts-v4-recovery-integration-20261004/Research/Data/CrashMultiMarketV1/VVIX_History.csv",
+      "readable": true,
+      "bytes": 108898
+    },
+    "recovered_ofr": {
+      "path": "/opt/mts/thunder-migration/mts-v4-recovery-integration-20261004/Research/Data/CrashCausalPackV1/ofr_fsi_raw_20261004.csv",
+      "readable": true,
+      "bytes": 515701
+    },
+    "ga7_checkpoint": {
+      "path": "/opt/mts/ga7-deploy/ga7_unbounded/runs/preflight_16/checkpoint.json",
+      "readable": true,
+      "bytes": 10566
+    },
+    "ga7_native_replay": {
+      "path": "/opt/mts/ga7-deploy/ga7_unbounded/ga7/request_replay.py",
+      "readable": true,
+      "bytes": 13997
+    }
+  },
+  "catalogues": {
+    "legacy_chromosomes": {
+      "DEV80_LONG": 1489,
+      "GA4_DIAGNOSTIC": 250110,
+      "HORIZONS": 31750
+    },
+    "ga6_chromosomes": {
+      "chromosomes": 261958
+    }
+  },
+  "dependencies": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "pytest": "9.1.1"
+  },
+  "blockers": [
+    "GA4 archive horizons are observations, not exit policies; held-state bridge fails closed without an explicit native exit producer.",
+    "Historical VIX/VVIX/OFR stress files recovered through 2026-09-30; no governed mapping to fictional market paths, full date coverage or publication-time certification.",
+    "GA6 native daily bridge and bounded archive restoration implemented; full causal synthetic feature/universe parity remains unverified.",
+    "GA7 explicit archive restoration and native eligible-universe ranks implemented; full-universe long-history feature and niche parity remain unverified.",
+    "Optional independently funded shadow books now reconcile cash/settlement; authentic native capacity, risk and ledger parity remain uncertified.",
+    "Portfolio execution lacks certified settlement, PIT controls, defense timing and independent accounting parity."
+  ],
+  "implemented": [
+    "bounded original-factory causal feature rebuild",
+    "500-ticker dated manifest, proof seal, PIT/earnings gates and native feature parity audit",
+    "optional independently funded owner shadows with session settlement",
+    "four-family proposal contract, GA6 native actions and fail-closed GA4 held state",
+    "bounded explicit GA6/GA7 archive restoration and native GA7 ranks",
+    "independent shadow native held-state production callback",
+    "close-timed defense and per-session cash/NAV identities",
+    "shared $100k next-open research replay and filled ownership",
+    "fee-inclusive shadow ENTER/ADD/REDUCE/EXIT accounting",
+    "bounded manager evolution with frozen chronological validation"
+  ],
+  "research_sources_modified": false,
+  "full_experiment_started": false
+}

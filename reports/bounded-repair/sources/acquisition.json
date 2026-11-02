@@ -1,0 +1,44 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/arielNacamulli/pitindex/2df030e5c9be7c83cf4b28c3d8597d74d274757e/README.md",
+    "sha256": "716e9707b977254a8fecf92f2617dc99fde73b350d07acb689d979c58778352a",
+    "bytes": 9738,
+    "retrieved_utc": "2026-10-31T10:09:21.414541+00:00"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/arielNacamulli/pitindex/2df030e5c9be7c83cf4b28c3d8597d74d274757e/pitindex/_api.py",
+    "sha256": "d94b462a5392f751452fb3e964d54a19d017bb8599923fc1a0d75d9f1fc0a493",
+    "bytes": 16619,
+    "retrieved_utc": "2026-10-31T10:09:21.657638+00:00"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/arielNacamulli/pitindex/2df030e5c9be7c83cf4b28c3d8597d74d274757e/pitindex/_loader.py",
+    "sha256": "4834645840c0f8ea73a712aeceebb90e7eed57a5b4afe0ef161f7bb8b54797f7",
+    "bytes": 3368,
+    "retrieved_utc": "2026-10-31T10:09:21.920702+00:00"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/arielNacamulli/pitindex/2df030e5c9be7c83cf4b28c3d8597d74d274757e/pitindex/data/sp500_seed.csv",
+    "sha256": "1a444b80576333455e6a77d24ac12b5eb1095fbdf2d208e1db07396592e3f8aa",
+    "bytes": 7970,
+    "retrieved_utc": "2026-10-31T10:09:22.158618+00:00"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/arielNacamulli/pitindex/2df030e5c9be7c83cf4b28c3d8597d74d274757e/pitindex/data/sp500_changes.csv",
+    "sha256": "4d5757c55bb1c113fbd5bb15ae4196000e2a87a34271e680435b3b838e8e1456",
+    "bytes": 68052,
+    "retrieved_utc": "2026-10-31T10:09:22.428193+00:00"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/arielNacamulli/pitindex/2df030e5c9be7c83cf4b28c3d8597d74d274757e/pitindex/data/sp500_current.csv",
+    "sha256": "f3beb7103bb7e65b0097f909b10cfafdae8b5a17d3e1560d170800026afdc392",
+    "bytes": 41621,
+    "retrieved_utc": "2026-10-31T10:09:22.658677+00:00"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/arielNacamulli/pitindex/2df030e5c9be7c83cf4b28c3d8597d74d274757e/pitindex/data/build_metadata.json",
+    "sha256": "1fad2a065f348999f149c7aba986c52d0267e5ff47d750b4d09f038d18be4184",
+    "bytes": 2378,
+    "retrieved_utc": "2026-10-31T10:09:22.894322+00:00"
+  }
+]

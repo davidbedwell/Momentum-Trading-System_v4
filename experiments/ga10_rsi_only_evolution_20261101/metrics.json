@@ -1,0 +1,362 @@
+[
+  {
+    "split": "dev79_train",
+    "policy": "feasible_cagr",
+    "cagr": 0.6020453927609541,
+    "mdd": 0.12130364548472938,
+    "calmar": 4.9631269559556985,
+    "final_nav": 10.513557235961125,
+    "fees": 0.05558346047364609,
+    "turnover": 15.202356784855539,
+    "open_close_mdd": 0.1398140446617211,
+    "actions": {
+      "entry": 13,
+      "hold": 3186,
+      "add": 748,
+      "reduce": 196,
+      "exit": 12
+    }
+  },
+  {
+    "split": "dev79_train",
+    "policy": "max_cagr",
+    "cagr": 0.6020453927609541,
+    "mdd": 0.12130364548472938,
+    "calmar": 4.9631269559556985,
+    "final_nav": 10.513557235961125,
+    "fees": 0.05558346047364609,
+    "turnover": 15.202356784855539,
+    "open_close_mdd": 0.1398140446617211,
+    "actions": {
+      "entry": 13,
+      "hold": 3186,
+      "add": 748,
+      "reduce": 196,
+      "exit": 12
+    }
+  },
+  {
+    "split": "dev79_train",
+    "policy": "max_calmar",
+    "cagr": 0.00015858591093631524,
+    "mdd": 6.313061184926028e-12,
+    "calmar": 25120287.33619401,
+    "final_nav": 1.000791921573488,
+    "fees": 2.331918547609375e-05,
+    "turnover": 0.023309403949424646,
+    "open_close_mdd": 1.1152517874202239e-05,
+    "actions": {
+      "entry": 3,
+      "hold": 0,
+      "add": 0,
+      "reduce": 0,
+      "exit": 3
+    }
+  },
+  {
+    "split": "dev79_train",
+    "policy": "monthly_rsi_buy_hold",
+    "cagr": 0.3581739087775784,
+    "mdd": 0.2973784964313283,
+    "calmar": 1.2044378227606285,
+    "final_nav": 4.610220679901124,
+    "fees": 0.22424124230242917,
+    "turnover": 89.54389684109469,
+    "open_close_mdd": 0.2973784964313283,
+    "actions": {
+      "entry": 759,
+      "hold": 16229,
+      "add": 0,
+      "reduce": 0,
+      "exit": 571
+    }
+  },
+  {
+    "split": "dev79_train",
+    "policy": "cash",
+    "cagr": 0.0,
+    "mdd": 0.0,
+    "calmar": 0.0,
+    "final_nav": 1.0,
+    "fees": 0.0,
+    "turnover": 0.0,
+    "open_close_mdd": 0.0,
+    "actions": {
+      "entry": 0,
+      "hold": 0,
+      "add": 0,
+      "reduce": 0,
+      "exit": 0
+    }
+  },
+  {
+    "split": "dev79_evaluation",
+    "policy": "feasible_cagr",
+    "cagr": 0.013505072325042056,
+    "mdd": 0.10392454237882509,
+    "calmar": 0.1299507509574923,
+    "final_nav": 1.0692601839695037,
+    "fees": 0.002976416876264863,
+    "turnover": 2.8458715810441015,
+    "open_close_mdd": 0.10392454237882509,
+    "actions": {
+      "entry": 2,
+      "hold": 590,
+      "add": 399,
+      "reduce": 38,
+      "exit": 1
+    }
+  },
+  {
+    "split": "dev79_evaluation",
+    "policy": "max_cagr",
+    "cagr": 0.013505072325042056,
+    "mdd": 0.10392454237882509,
+    "calmar": 0.1299507509574923,
+    "final_nav": 1.0692601839695037,
+    "fees": 0.002976416876264863,
+    "turnover": 2.8458715810441015,
+    "open_close_mdd": 0.10392454237882509,
+    "actions": {
+      "entry": 2,
+      "hold": 590,
+      "add": 399,
+      "reduce": 38,
+      "exit": 1
+    }
+  },
+  {
+    "split": "dev79_evaluation",
+    "policy": "max_calmar",
+    "cagr": 6.71647566452549e-07,
+    "mdd": 0.0,
+    "calmar": 0.0,
+    "final_nav": 1.0000033529117909,
+    "fees": 4.9636028764968164e-08,
+    "turnover": 4.9635939145163975e-05,
+    "open_close_mdd": 2.311674052180024e-08,
+    "actions": {
+      "entry": 1,
+      "hold": 0,
+      "add": 0,
+      "reduce": 0,
+      "exit": 1
+    }
+  },
+  {
+    "split": "dev79_evaluation",
+    "policy": "monthly_rsi_buy_hold",
+    "cagr": 0.11815741811967073,
+    "mdd": 0.2655742612901969,
+    "calmar": 0.44491291266572847,
+    "final_nav": 1.7463440254120084,
+    "fees": 0.12349360826337975,
+    "turnover": 86.33693353869916,
+    "open_close_mdd": 0.26668588177258823,
+    "actions": {
+      "entry": 851,
+      "hold": 18388,
+      "add": 0,
+      "reduce": 0,
+      "exit": 635
+    }
+  },
+  {
+    "split": "dev79_evaluation",
+    "policy": "cash",
+    "cagr": 0.0,
+    "mdd": 0.0,
+    "calmar": 0.0,
+    "final_nav": 1.0,
+    "fees": 0.0,
+    "turnover": 0.0,
+    "open_close_mdd": 0.0,
+    "actions": {
+      "entry": 0,
+      "hold": 0,
+      "add": 0,
+      "reduce": 0,
+      "exit": 0
+    }
+  },
+  {
+    "split": "dev87_train",
+    "policy": "feasible_cagr",
+    "cagr": 0.15917801746223548,
+    "mdd": 0.14703576678624175,
+    "calmar": 1.082580252012056,
+    "final_nav": 2.0904585227964914,
+    "fees": 0.010821345534260772,
+    "turnover": 8.930658447925437,
+    "open_close_mdd": 0.14703576678624175,
+    "actions": {
+      "entry": 10,
+      "hold": 1267,
+      "add": 471,
+      "reduce": 63,
+      "exit": 8
+    }
+  },
+  {
+    "split": "dev87_train",
+    "policy": "max_cagr",
+    "cagr": 0.15917801746223548,
+    "mdd": 0.14703576678624175,
+    "calmar": 1.082580252012056,
+    "final_nav": 2.0904585227964914,
+    "fees": 0.010821345534260772,
+    "turnover": 8.930658447925437,
+    "open_close_mdd": 0.14703576678624175,
+    "actions": {
+      "entry": 10,
+      "hold": 1267,
+      "add": 471,
+      "reduce": 63,
+      "exit": 8
+    }
+  },
+  {
+    "split": "dev87_train",
+    "policy": "max_calmar",
+    "cagr": 2.149198933709684e-05,
+    "mdd": 2.2369690895529537e-05,
+    "calmar": 0.9607638048048263,
+    "final_nav": 1.0001072939780142,
+    "fees": 8.08338700465667e-06,
+    "turnover": 0.008082670924459898,
+    "open_close_mdd": 2.236969766022945e-05,
+    "actions": {
+      "entry": 15,
+      "hold": 0,
+      "add": 0,
+      "reduce": 0,
+      "exit": 15
+    }
+  },
+  {
+    "split": "dev87_train",
+    "policy": "monthly_rsi_buy_hold",
+    "cagr": 0.26790260355543594,
+    "mdd": 0.41959277906194226,
+    "calmar": 0.638482397514965,
+    "final_nav": 3.2704787088578073,
+    "fees": 0.17253682592800693,
+    "turnover": 87.44198066605809,
+    "open_close_mdd": 0.41959277906194226,
+    "actions": {
+      "entry": 878,
+      "hold": 18870,
+      "add": 0,
+      "reduce": 0,
+      "exit": 653
+    }
+  },
+  {
+    "split": "dev87_train",
+    "policy": "cash",
+    "cagr": 0.0,
+    "mdd": 0.0,
+    "calmar": 0.0,
+    "final_nav": 1.0,
+    "fees": 0.0,
+    "turnover": 0.0,
+    "open_close_mdd": 0.0,
+    "actions": {
+      "entry": 0,
+      "hold": 0,
+      "add": 0,
+      "reduce": 0,
+      "exit": 0
+    }
+  },
+  {
+    "split": "dev87_evaluation",
+    "policy": "feasible_cagr",
+    "cagr": -0.008315319118025855,
+    "mdd": 0.06514338270732511,
+    "calmar": -0.12764641276589447,
+    "final_nav": 0.95917268676359,
+    "fees": 0.0011228979389510904,
+    "turnover": 1.1459230213164497,
+    "open_close_mdd": 0.06723004333608873,
+    "actions": {
+      "entry": 2,
+      "hold": 3,
+      "add": 23,
+      "reduce": 9,
+      "exit": 1
+    }
+  },
+  {
+    "split": "dev87_evaluation",
+    "policy": "max_cagr",
+    "cagr": -0.008315319118025855,
+    "mdd": 0.06514338270732511,
+    "calmar": -0.12764641276589447,
+    "final_nav": 0.95917268676359,
+    "fees": 0.0011228979389510904,
+    "turnover": 1.1459230213164497,
+    "open_close_mdd": 0.06723004333608873,
+    "actions": {
+      "entry": 2,
+      "hold": 3,
+      "add": 23,
+      "reduce": 9,
+      "exit": 1
+    }
+  },
+  {
+    "split": "dev87_evaluation",
+    "policy": "max_calmar",
+    "cagr": -0.00032309442769784535,
+    "mdd": 0.0601031745064855,
+    "calmar": -0.005375663271546189,
+    "final_nav": 0.9983881319430336,
+    "fees": 0.0005306777575687632,
+    "turnover": 0.5320777019435285,
+    "open_close_mdd": 0.06451728084922492,
+    "actions": {
+      "entry": 1,
+      "hold": 4,
+      "add": 25,
+      "reduce": 10,
+      "exit": 1
+    }
+  },
+  {
+    "split": "dev87_evaluation",
+    "policy": "monthly_rsi_buy_hold",
+    "cagr": 0.20144888424363572,
+    "mdd": 0.18516885697109087,
+    "calmar": 1.0879198993764192,
+    "final_nav": 2.4997346512836986,
+    "fees": 0.14924360765284986,
+    "turnover": 88.10113653683736,
+    "open_close_mdd": 0.18593181241278822,
+    "actions": {
+      "entry": 897,
+      "hold": 19269,
+      "add": 0,
+      "reduce": 0,
+      "exit": 675
+    }
+  },
+  {
+    "split": "dev87_evaluation",
+    "policy": "cash",
+    "cagr": 0.0,
+    "mdd": 0.0,
+    "calmar": 0.0,
+    "final_nav": 1.0,
+    "fees": 0.0,
+    "turnover": 0.0,
+    "open_close_mdd": 0.0,
+    "actions": {
+      "entry": 0,
+      "hold": 0,
+      "add": 0,
+      "reduce": 0,
+      "exit": 0
+    }
+  }
+]

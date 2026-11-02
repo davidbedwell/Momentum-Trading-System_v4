@@ -1,0 +1,297 @@
+{
+  "period_start": "2009-01-01",
+  "period_end_exclusive": "2019-01-01",
+  "rows": 179265,
+  "active_tickers": 77,
+  "unique_security_ids": 77,
+  "duplicate_ticker_dates": 0,
+  "missing_required_values": 0,
+  "split_events": 22,
+  "major_split_events_factor_ge_1p5": 16,
+  "major_events_favoring_adjusted": 16,
+  "dividend_event_rows": 2194,
+  "price_basis_recommendation": "split_adjusted",
+  "major_event_examples": [
+    {
+      "ticker": "BEN",
+      "date": "2013-07-26",
+      "factor": 3.0,
+      "open_to_previous_close": 0.9999305165948075,
+      "adjusted_error": 6.948340519252749e-05,
+      "raw_error": 1.9997915497844225,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "CME",
+      "date": "2012-07-23",
+      "factor": 5.0,
+      "open_to_previous_close": 0.9852139666601406,
+      "adjusted_error": 0.014786033339859395,
+      "raw_error": 3.926069833300703,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "CRM",
+      "date": "2013-04-18",
+      "factor": 4.0,
+      "open_to_previous_close": 0.9840453341478648,
+      "adjusted_error": 0.01595466585213523,
+      "raw_error": 2.936181336591459,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "CTSH",
+      "date": "2014-03-10",
+      "factor": 2.0,
+      "open_to_previous_close": 0.9975750593800565,
+      "adjusted_error": 0.002424940619943472,
+      "raw_error": 0.9951501187601131,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "DECK",
+      "date": "2010-07-06",
+      "factor": 3.0,
+      "open_to_previous_close": 1.0144569623273505,
+      "adjusted_error": 0.014456962327350498,
+      "raw_error": 2.0433708869820517,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "DELL",
+      "date": "2018-12-28",
+      "factor": 1.806,
+      "open_to_previous_close": 1.0384500238976213,
+      "adjusted_error": 0.03845002389762131,
+      "raw_error": 0.875440743159104,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "DLTR",
+      "date": "2010-06-25",
+      "factor": 1.5,
+      "open_to_previous_close": 1.0051841606035559,
+      "adjusted_error": 0.005184160603555865,
+      "raw_error": 0.5077762409053337,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "DLTR",
+      "date": "2012-06-27",
+      "factor": 2.0,
+      "open_to_previous_close": 1.0018020989565026,
+      "adjusted_error": 0.001802098956502629,
+      "raw_error": 1.0036041979130053,
+      "favors_adjusted": true
+    }
+  ],
+  "all_split_events": [
+    {
+      "ticker": "BEN",
+      "date": "2013-07-26",
+      "factor": 3.0,
+      "open_to_previous_close": 0.9999305165948075,
+      "adjusted_error": 6.948340519252749e-05,
+      "raw_error": 1.9997915497844225,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "CME",
+      "date": "2012-07-23",
+      "factor": 5.0,
+      "open_to_previous_close": 0.9852139666601406,
+      "adjusted_error": 0.014786033339859395,
+      "raw_error": 3.926069833300703,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "CRM",
+      "date": "2013-04-18",
+      "factor": 4.0,
+      "open_to_previous_close": 0.9840453341478648,
+      "adjusted_error": 0.01595466585213523,
+      "raw_error": 2.936181336591459,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "CTSH",
+      "date": "2014-03-10",
+      "factor": 2.0,
+      "open_to_previous_close": 0.9975750593800565,
+      "adjusted_error": 0.002424940619943472,
+      "raw_error": 0.9951501187601131,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "DECK",
+      "date": "2010-07-06",
+      "factor": 3.0,
+      "open_to_previous_close": 1.0144569623273505,
+      "adjusted_error": 0.014456962327350498,
+      "raw_error": 2.0433708869820517,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "DELL",
+      "date": "2018-12-28",
+      "factor": 1.806,
+      "open_to_previous_close": 1.0384500238976213,
+      "adjusted_error": 0.03845002389762131,
+      "raw_error": 0.875440743159104,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "DLTR",
+      "date": "2010-06-25",
+      "factor": 1.5,
+      "open_to_previous_close": 1.0051841606035559,
+      "adjusted_error": 0.005184160603555865,
+      "raw_error": 0.5077762409053337,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "DLTR",
+      "date": "2012-06-27",
+      "factor": 2.0,
+      "open_to_previous_close": 1.0018020989565026,
+      "adjusted_error": 0.001802098956502629,
+      "raw_error": 1.0036041979130053,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "ETN",
+      "date": "2011-03-01",
+      "factor": 2.0,
+      "open_to_previous_close": 1.0077631397348623,
+      "adjusted_error": 0.007763139734862312,
+      "raw_error": 1.0155262794697246,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "FCX",
+      "date": "2011-02-02",
+      "factor": 2.0,
+      "open_to_previous_close": 0.9969317219684627,
+      "adjusted_error": 0.003068278031537308,
+      "raw_error": 0.9938634439369254,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "GILD",
+      "date": "2013-01-28",
+      "factor": 2.0,
+      "open_to_previous_close": 1.0095766397477992,
+      "adjusted_error": 0.00957663974779921,
+      "raw_error": 1.0191532794955984,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "HPE",
+      "date": "2017-04-03",
+      "factor": 1.3348,
+      "open_to_previous_close": 1.0137721426651662,
+      "adjusted_error": 0.013772142665166243,
+      "raw_error": 0.353183056029464,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "HPE",
+      "date": "2017-09-01",
+      "factor": 1.289,
+      "open_to_previous_close": 1.0085033114151474,
+      "adjusted_error": 0.008503311415147374,
+      "raw_error": 0.2999607684141248,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "IRM",
+      "date": "2014-09-26",
+      "factor": 1.082,
+      "open_to_previous_close": 0.9825198401799234,
+      "adjusted_error": 0.017480159820076557,
+      "raw_error": 0.06308646707467713,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "MPC",
+      "date": "2015-06-11",
+      "factor": 2.0,
+      "open_to_previous_close": 1.0059927360729448,
+      "adjusted_error": 0.005992736072944815,
+      "raw_error": 1.0119854721458896,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "NFLX",
+      "date": "2015-07-15",
+      "factor": 7.0,
+      "open_to_previous_close": 0.9960005537446316,
+      "adjusted_error": 0.003999446255368411,
+      "raw_error": 5.972003876212421,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "PPG",
+      "date": "2015-06-15",
+      "factor": 2.0,
+      "open_to_previous_close": 0.9915541212402867,
+      "adjusted_error": 0.008445878759713255,
+      "raw_error": 0.9831082424805735,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "SPG",
+      "date": "2009-08-13",
+      "factor": 1.00722,
+      "open_to_previous_close": 1.0094547662036857,
+      "adjusted_error": 0.009454766203685683,
+      "raw_error": 0.016743029615676308,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "SPG",
+      "date": "2009-11-12",
+      "factor": 1.0063,
+      "open_to_previous_close": 1.000067841020185,
+      "adjusted_error": 6.784102018508875e-05,
+      "raw_error": 0.006368268418612155,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "SPG",
+      "date": "2014-05-29",
+      "factor": 1.063,
+      "open_to_previous_close": 1.0016150028026078,
+      "adjusted_error": 0.0016150028026078456,
+      "raw_error": 0.06471674797917215,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "V",
+      "date": "2015-03-19",
+      "factor": 4.0,
+      "open_to_previous_close": 0.9986923970338197,
+      "adjusted_error": 0.0013076029661802657,
+      "raw_error": 2.994769588135279,
+      "favors_adjusted": true
+    },
+    {
+      "ticker": "WAB",
+      "date": "2013-06-12",
+      "factor": 2.0,
+      "open_to_previous_close": 0.9891729378422677,
+      "adjusted_error": 0.010827062157732326,
+      "raw_error": 0.9783458756845353,
+      "favors_adjusted": true
+    }
+  ],
+  "data_provenance_certified": false,
+  "dev87_accessed": false,
+  "reference_engine_requires_config": "Config(price_basis=\"split_adjusted\")",
+  "limitations": [
+    "Price continuity around split dates is evidence, not source provenance certification",
+    "Dividend per-share split-adjustment requires separate source verification",
+    "GA6/GA7 signal parity and corporate action chronology remain uncertified",
+    "No historical shared-execution performance replay performed here"
+  ]
+}

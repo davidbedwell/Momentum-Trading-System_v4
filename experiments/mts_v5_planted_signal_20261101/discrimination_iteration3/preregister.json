@@ -1,0 +1,59 @@
+{
+  "version": 3,
+  "seeds": [
+    3101,
+    3102,
+    3103,
+    3104
+  ],
+  "scenarios": [
+    "learnable",
+    "misleading",
+    "null",
+    "reversal"
+  ],
+  "train_signals": [
+    0,
+    77
+  ],
+  "calibration_signals": [
+    80,
+    121
+  ],
+  "holdout_signals": [
+    126,
+    249
+  ],
+  "portfolio_sessions": [
+    126,
+    251
+  ],
+  "split_detail": "Frozen train0..77, calibration80..121, untouched scoring126..249. No holdout refit or interval recalibration. Matured holdout outcomes feed safety veto only. Prior iteration2 holdout already viewed: this is a prespecified synthetic regression comparison, not a novel confirmatory holdout.",
+  "maturity": "signal i entry open i+1 exit open i+2 available close i+3; require i+2<decision clock",
+  "method": "Training cell date means clipped at +/-5%; 5-date block standard errors. Partial pooling two pseudo dates toward adjacent-cell smooth parent with full shrinkage displacement penalty. Independent calibration estimates block residual bias and scale, never mean. Radius=abs(calibration residual mean)+2.58*hypot(train blockSE,calibration blockSE)+shrink displacement. Gaussian conditional-mean ordinal posterior using same conservative scale; full interval within economic band and posterior >=.95. Identifiable spread lower confidence bound >.003. Frozen fit. Separate safety monitor uses high-minus-low cell date contrast, nonoverlapping 5-date holdout blocks, union-bound 1% two-sided Gaussian threshold across26 looks; calibration variance and baseline uncertainty included, hard minimum shift .004. Alarm latches UNKNOWN permanently; no relearning. Gaussian/block stability assumptions explicit, not distribution-free certification.",
+  "boundaries": [
+    -0.006,
+    -0.002,
+    0.002,
+    0.006
+  ],
+  "sensors": "EXACT iteration2 generate; identical features, prices, truth scoring and seeds. iteration2 repaired comparator uses iteration2.predict on same fine sensors, EV baseline unchanged.",
+  "policies": [
+    "iteration3",
+    "iteration2_repaired",
+    "existing_ev10"
+  ],
+  "max_full_replays": 48,
+  "max_seconds": 840,
+  "pass_rule": "For every non-null scenario/seed: coverage>=.5, each predicted tier>=20, conditional latent-tier accuracy>=.7, each recall including UNKNOWN>=.5, false GREAT on true TERRIBLE<=.01, all five realized means strictly monotone. Null safety requires zero assigned. Robust overall claim requires every seed. Improvement additionally requires paired non-null coverage increase and no reversal false-GREAT rate increase versus iteration2 repaired comparator. No portfolio gain alone constitutes discrimination.",
+  "risk": "10% position targets only; entire cost-inclusive modeled candidate risk<=2%; inherited corrected local kernel, T+1 and MDD latch; no GA or production modifications",
+  "limitations": [
+    "Synthetic regression tapes previously evaluated in iteration2: untouched means no fit/update with holdout outcomes in iteration3, not fresh confirmatory data.",
+    "Five-date block independence and approximately Gaussian date-block means assumed; finite sample robust coverage is not guaranteed.",
+    "Posterior is over conditional mean bands, not individual latent class; no oracle labels in fit.",
+    "A shock before matured outcomes cannot be predicted by a safety alarm.",
+    "Calibration uncertainty may honestly preclude middle tiers; no thresholds relaxed.",
+    "Synthetic sensor information is injected; no real-market alpha claim.",
+    "One-session net labels differ from multi-session portfolio holdings; no terminal liquidation."
+  ]
+}

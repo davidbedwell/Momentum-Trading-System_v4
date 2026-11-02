@@ -1,0 +1,8 @@
+{
+  "url": "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+  "time_utc": "2026-10-31T06:18:16.440761+00:00",
+  "route": "urllib inherited proxy settings, TLS verification enabled",
+  "web_tool_route": "SUCCESS: web.run open returned official page and constituent table; no data substituted into offline pilot",
+  "exception_type": "URLError",
+  "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+}
