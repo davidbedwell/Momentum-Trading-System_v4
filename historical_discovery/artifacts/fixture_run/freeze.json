@@ -1,0 +1,68 @@
+{
+  "arms": {
+    "chart": [
+      "momentum",
+      "log_dollar_volume",
+      "market_return"
+    ],
+    "combined": [
+      "momentum",
+      "log_dollar_volume",
+      "market_return",
+      "revenue_growth"
+    ],
+    "fundamentals": [
+      "revenue_growth"
+    ]
+  },
+  "config": {
+    "advance_threshold": 1.0,
+    "calendar_threshold": 0.5,
+    "candidates": [
+      "equal",
+      "diagonal_covariance"
+    ],
+    "date_precision_lag_days": 2,
+    "features": [
+      "momentum",
+      "log_dollar_volume",
+      "market_return",
+      "revenue_growth"
+    ],
+    "metrics": [
+      "recall_at_k",
+      "precision_at_k",
+      "spearman",
+      "lead_days",
+      "remaining_upside"
+    ],
+    "snapshot_day": 30,
+    "snapshot_month": 6,
+    "top_k": 2
+  },
+  "development_status": "Known-winner development; never pristine. 2005 warmup; subsequent folds train on earlier years only.",
+  "feature_definition": "YTD return, mean adjusted dollar volume, YTD market return; annual revenue growth between latest two usable original reports.",
+  "freeze_hash": "8a7c8efc3a4bea8dad4a3ff22353b09d354aaff0b67d8cbb71c613550ecbdf7d",
+  "holdout_years": [
+    2010,
+    2011
+  ],
+  "holdouts_accessible": false,
+  "metric_definition": "Annual winner recall/precision; average-tie Spearman vs annual opportunity rank; calendar days to annual advance peak; post-snapshot maximum high relative to snapshot close.",
+  "policy": "Discovery only. No evaluation unlocking implemented.",
+  "prior_exposure": "No 2010/2011 labels inspected in this implementation session; exposure elsewhere unknown.",
+  "source_hashes": {
+    "__init__.py": "ce513e7ef313f00da1ac8e10d3236e6107559a8cd7a76cf458a246adecdf1044",
+    "__main__.py": "666ee3c4dcb469ab53a9392a9879a7d483d99a66fd4cf3e85bea84f1d0e42d05",
+    "adapters.py": "520c229cd2d3a46623357799c53a503f9746cae3cb65d18b68afa4ccccfe9f12",
+    "audit.py": "99762c37ecbfad2bee11919c09ab4a7d95ca8cf3b583d9311ab6bfab1b7a070c",
+    "core.py": "c6547a0b048292226420e265dc01f204633d1e2eae5a7224c15b27c3dc482eb3",
+    "fixture.py": "3493b40a3c36e2c3f69ee15452ef45b961ac818a35696ebe6d66ed92dd8b65e5",
+    "pipeline.py": "7f0e47162b2719ba5cf8bddf0feaa4c690fd54baef7b4f6e79a23bea907a1342"
+  },
+  "target": "Annual first eligible session adjusted open to terminal adjusted value; chronological strictly later-session low-to-high advance. Winner is OR of thresholds.",
+  "test_hashes": {
+    "test_pipeline.py": "f560925429ccc3b0adf72b1d9a2b2ca3a0a3377ad9ec73b84d76e1e71f14120b"
+  },
+  "training_target": "max(calendar_return,advance)"
+}

@@ -1,0 +1,33 @@
+{
+  "alpaca_connector_available": false,
+  "authenticated_account_probe": "Not possible: no checked credential pair, OAuth token or connected Alpaca tool available",
+  "checked_at": "2026-10-30",
+  "credential_presence": {
+    "ALPACA_API_KEY": false,
+    "ALPACA_API_KEY_ID": false,
+    "ALPACA_API_SECRET": false,
+    "ALPACA_API_SECRET_KEY": false,
+    "ALPACA_OAUTH_TOKEN": false,
+    "APCA_API_KEY_ID": false,
+    "APCA_API_SECRET_KEY": false,
+    "OIC_MANIFEST_PATH": false
+  },
+  "documentation_findings": {
+    "corporate_actions_endpoint": "https://data.alpaca.markets/v1/corporate-actions",
+    "historical_api_categories": [
+      "stocks",
+      "crypto",
+      "options",
+      "news"
+    ],
+    "historical_stocks_start": "2016 per current public market-data documentation",
+    "pit_financial_statement_endpoint": "No documented endpoint found; account-specific support not empirically verified"
+  },
+  "holdout_labels_accessed": false,
+  "payloads_downloaded": 0,
+  "sources": [
+    "https://docs.alpaca.markets/us/docs/about-market-data-api",
+    "https://docs.alpaca.markets/us/docs/historical-api",
+    "https://docs.alpaca.markets/us/reference/corporateactions-1"
+  ]
+}

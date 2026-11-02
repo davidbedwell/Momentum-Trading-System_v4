@@ -123,9 +123,10 @@ def main(argv=None):
     parser.add_argument('--swing-max-sessions',type=int,default=None,help='explicit constrained experiment; horizons must respect it')
     parser.add_argument('--membership',type=Path,help='dated historical membership CSV')
     parser.add_argument('--screen-top-k',type=int,default=20)
+    parser.add_argument('--broad-discovery',action='store_true',help='research: rank all observed momentum patterns, including mixed/negative horizons')
     args=parser.parse_args(argv)
     from .screening import ScreenPolicy
-    screen_policy=ScreenPolicy(top_k=args.screen_top_k)
+    screen_policy=ScreenPolicy(top_k=args.screen_top_k,require_all_positive=not args.broad_discovery)
     horizons=tuple(int(x) for x in args.horizons.split(','))
     if not horizons or min(horizons)<1 or len(set(horizons))!=len(horizons):
         parser.error('horizons must be unique positive session counts')

@@ -1,0 +1,77 @@
+{
+  "coverage": "Unverified; file metadata cannot establish historical membership, adjustment policy or PIT financial availability.",
+  "credential_files": {
+    ".aws/credentials": false,
+    ".env": false,
+    "/root/.aws/credentials": false
+  },
+  "credentials": {
+    "ALPACA_API_KEY": false,
+    "APCA_API_KEY_ID": false,
+    "APCA_API_SECRET_KEY": false,
+    "EODHD_API_KEY": false,
+    "FMP_API_KEY": false,
+    "MASSIVE_API_KEY": false,
+    "NASDAQ_DATA_LINK_API_KEY": false,
+    "POLYGON_API_KEY": false,
+    "QUANDL_API_KEY": false,
+    "TIINGO_API_KEY": false,
+    "WRDS_PASSWORD": false,
+    "WRDS_USERNAME": false
+  },
+  "holdout_labels_accessed": false,
+  "inventory": {
+    "Research": {
+      "bytes": 6272790,
+      "contents_read": false,
+      "extensions": {
+        ".csv": 2,
+        ".json": 130,
+        ".md": 67,
+        ".py": 5
+      },
+      "files": 204,
+      "symlink_root": true
+    },
+    "results": {
+      "bytes": 1844279,
+      "contents_read": false,
+      "extensions": {
+        ".json": 3
+      },
+      "files": 3,
+      "symlink_root": false
+    },
+    "results_final": {
+      "bytes": 2010119,
+      "contents_read": false,
+      "extensions": {
+        ".json": 3
+      },
+      "files": 3,
+      "symlink_root": false
+    },
+    "source": {
+      "bytes": 198246036,
+      "contents_read": false,
+      "extensions": {
+        ".csv": 152,
+        ".json": 657,
+        ".jsonl": 10,
+        ".lock": 1,
+        ".log": 12,
+        ".md": 24,
+        ".npz": 1,
+        ".parquet": 4,
+        ".py": 44,
+        ".service": 1,
+        ".sh": 1,
+        ".txt": 2,
+        "<none>": 1
+      },
+      "files": 910,
+      "symlink_root": false
+    }
+  },
+  "method": "Filesystem metadata only; no data payload opened"
+}

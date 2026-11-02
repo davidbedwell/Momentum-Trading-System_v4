@@ -1,0 +1,84 @@
+{
+  "coverage": {
+    "broad_chart": 7,
+    "intersection": 6,
+    "missing_fundamentals": 1
+  },
+  "incremental_value": {},
+  "labels": {
+    "SYN0": {
+      "advance": 1.8565656565656568,
+      "calendar_return": 1.8028028028028027,
+      "market_cap_at_start": 1000000.0,
+      "mean_dollar_volume": 38000.0,
+      "peak": "2005-12-30",
+      "rank_value": 1.8565656565656568,
+      "start": "2005-01-03",
+      "winner": true
+    },
+    "SYN1": {
+      "advance": 0.01803556803556794,
+      "calendar_return": -0.5495495495495495,
+      "market_cap_at_start": 2000000.0,
+      "mean_dollar_volume": 29000.0,
+      "peak": "2005-01-04",
+      "rank_value": 0.01803556803556794,
+      "start": "2005-01-03",
+      "winner": false
+    },
+    "SYN2": {
+      "advance": 0.9383838383838385,
+      "calendar_return": 0.9019019019019019,
+      "market_cap_at_start": 3000000.0,
+      "mean_dollar_volume": 87000.0,
+      "peak": "2005-12-30",
+      "rank_value": 0.9383838383838385,
+      "start": "2005-01-03",
+      "winner": true
+    },
+    "SYN3": {
+      "advance": 0.07121212121212128,
+      "calendar_return": 0.05105105105105112,
+      "market_cap_at_start": 4000000.0,
+      "mean_dollar_volume": 82000.0,
+      "peak": "2005-12-30",
+      "rank_value": 0.07121212121212128,
+      "start": "2005-01-03",
+      "winner": false
+    },
+    "SYN4": {
+      "advance": 0.019217269217269184,
+      "calendar_return": -0.2492492492492493,
+      "market_cap_at_start": 5000000.0,
+      "mean_dollar_volume": 87500.0,
+      "peak": "2005-01-04",
+      "rank_value": 0.019217269217269184,
+      "start": "2005-01-03",
+      "winner": false
+    },
+    "SYN6": {
+      "advance": 0.9705461393596988,
+      "calendar_return": 0.933458882611425,
+      "market_cap_at_start": 7000000.0,
+      "mean_dollar_volume": 233729.72972972973,
+      "peak": "2005-12-30",
+      "rank_value": 0.9705461393596988,
+      "start": "2005-02-14",
+      "winner": true
+    },
+    "SYN7": {
+      "advance": 0.017050817050817013,
+      "calendar_return": -1.0,
+      "market_cap_at_start": 8000000.0,
+      "mean_dollar_volume": 103166.02316602317,
+      "peak": "2005-01-04",
+      "rank_value": 0.017050817050817013,
+      "start": "2005-01-03",
+      "winner": false
+    }
+  },
+  "metrics": {},
+  "prediction_hash": "b516c5c46014e8630014aea8ce5864657e23df644e24fdc3c710177691b0dc08",
+  "warning": "Synthetic functionality only",
+  "year": 2005
+}

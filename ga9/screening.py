@@ -7,6 +7,7 @@ import pandas as pd
 class ScreenPolicy:
     top_k: int = 20
     horizons: tuple = (20, 60, 120)
+    require_all_positive: bool = True
     def __post_init__(self):
         if self.top_k < 1 or not self.horizons or min(self.horizons) < 1:
             raise ValueError('Positive screen size and horizons required')
@@ -56,7 +57,9 @@ def daily_screen(total_return, close, eligible, policy):
     trend = close / close.rolling(50, min_periods=50).mean() - 1
     parts = components + [trend]
     score = sum(x.where(eligible).rank(axis=1, pct=True) for x in parts) / len(parts)
-    valid = eligible & np.logical_and.reduce([x.gt(0).to_numpy() for x in parts])
+    observed = np.logical_and.reduce([x.notna().to_numpy() for x in parts])
+    positive = np.logical_and.reduce([x.gt(0).to_numpy() for x in parts])
+    valid = eligible & observed & (positive if policy.require_all_positive else True)
     score = score.where(valid)
     rank = score.rank(axis=1, ascending=False, method='first')
     return score.to_numpy(), rank.le(policy.top_k).to_numpy()

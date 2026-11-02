@@ -1,0 +1,521 @@
+{
+  "coverage": {
+    "broad_chart": 7,
+    "intersection": 6,
+    "missing_fundamentals": 1
+  },
+  "incremental_value": {
+    "diagonal_covariance": {
+      "combined_minus_chart": {
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0,
+        "spearman": 0.0
+      },
+      "combined_minus_fundamentals": {
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0,
+        "spearman": -0.05714285714285716
+      }
+    },
+    "equal": {
+      "combined_minus_chart": {
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0,
+        "spearman": 0.11428571428571421
+      },
+      "combined_minus_fundamentals": {
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0,
+        "spearman": -0.11428571428571432
+      }
+    }
+  },
+  "labels": {
+    "SYN0": {
+      "advance": 1.8565656565656568,
+      "calendar_return": 1.8028028028028027,
+      "market_cap_at_start": 1000000.0,
+      "mean_dollar_volume": 38000.0,
+      "peak": "2009-12-31",
+      "rank_value": 1.8565656565656568,
+      "start": "2009-01-01",
+      "winner": true
+    },
+    "SYN1": {
+      "advance": 0.018043900543900593,
+      "calendar_return": -0.5495495495495495,
+      "market_cap_at_start": 2000000.0,
+      "mean_dollar_volume": 29000.0,
+      "peak": "2009-01-02",
+      "rank_value": 0.018043900543900593,
+      "start": "2009-01-01",
+      "winner": false
+    },
+    "SYN2": {
+      "advance": 0.9383838383838385,
+      "calendar_return": 0.9019019019019019,
+      "market_cap_at_start": 3000000.0,
+      "mean_dollar_volume": 87000.0,
+      "peak": "2009-12-31",
+      "rank_value": 0.9383838383838385,
+      "start": "2009-01-01",
+      "winner": true
+    },
+    "SYN3": {
+      "advance": 0.07121212121212128,
+      "calendar_return": 0.05105105105105112,
+      "market_cap_at_start": 4000000.0,
+      "mean_dollar_volume": 82000.0,
+      "peak": "2009-12-31",
+      "rank_value": 0.07121212121212128,
+      "start": "2009-01-01",
+      "winner": false
+    },
+    "SYN4": {
+      "advance": 0.019221056721056673,
+      "calendar_return": -0.2492492492492493,
+      "market_cap_at_start": 5000000.0,
+      "mean_dollar_volume": 87500.0,
+      "peak": "2009-01-02",
+      "rank_value": 0.019221056721056673,
+      "start": "2009-01-01",
+      "winner": false
+    },
+    "SYN6": {
+      "advance": 0.9714714714714716,
+      "calendar_return": 0.9343667992316644,
+      "market_cap_at_start": 7000000.0,
+      "mean_dollar_volume": 233692.30769230766,
+      "peak": "2009-12-31",
+      "rank_value": 0.9714714714714716,
+      "start": "2009-02-12",
+      "winner": true
+    },
+    "SYN7": {
+      "advance": 0.017062937062937156,
+      "calendar_return": -1.0,
+      "market_cap_at_start": 8000000.0,
+      "mean_dollar_volume": 103138.46153846153,
+      "peak": "2009-01-02",
+      "rank_value": 0.017062937062937156,
+      "start": "2009-01-01",
+      "winner": false
+    }
+  },
+  "metrics": {
+    "baseline/constant": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 6,
+      "precision_at_k": 0.5,
+      "predicted_ranking": [
+        "SYN0",
+        "SYN1",
+        "SYN2",
+        "SYN3",
+        "SYN6",
+        "SYN7"
+      ],
+      "recall_at_k": 0.3333333333333333,
+      "spearman": null,
+      "top": [
+        {
+          "id": "SYN0",
+          "lead_days": 184,
+          "remaining_upside": 0.49934747145187597,
+          "winner": true
+        },
+        {
+          "id": "SYN1",
+          "lead_days": -179,
+          "remaining_upside": 0.007070147679324901,
+          "winner": false
+        }
+      ],
+      "winner_count": 3
+    },
+    "baseline/liquidity": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 6,
+      "precision_at_k": 0.5,
+      "predicted_ranking": [
+        "SYN6",
+        "SYN7",
+        "SYN3",
+        "SYN2",
+        "SYN1",
+        "SYN0"
+      ],
+      "recall_at_k": 0.3333333333333333,
+      "spearman": -0.2571428571428571,
+      "top": [
+        {
+          "id": "SYN6",
+          "lead_days": 184,
+          "remaining_upside": 0.3968085106382977,
+          "winner": true
+        },
+        {
+          "id": "SYN7",
+          "lead_days": -179,
+          "remaining_upside": 0.004873096446700531,
+          "winner": false
+        }
+      ],
+      "winner_count": 3
+    },
+    "baseline/momentum": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 6,
+      "precision_at_k": 1.0,
+      "predicted_ranking": [
+        "SYN0",
+        "SYN2",
+        "SYN6",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "spearman": 0.9428571428571428,
+      "top": [
+        {
+          "id": "SYN0",
+          "lead_days": 184,
+          "remaining_upside": 0.49934747145187597,
+          "winner": true
+        },
+        {
+          "id": "SYN2",
+          "lead_days": 184,
+          "remaining_upside": 0.32979744136460565,
+          "winner": true
+        }
+      ],
+      "winner_count": 3
+    },
+    "diagonal_covariance/broad_chart": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN4",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 7,
+      "precision_at_k": 1.0,
+      "predicted_ranking": [
+        "SYN0",
+        "SYN2",
+        "SYN6",
+        "SYN3",
+        "SYN1",
+        "SYN4",
+        "SYN7"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "spearman": 0.9285714285714286,
+      "top": [
+        {
+          "id": "SYN0",
+          "lead_days": 184,
+          "remaining_upside": 0.49934747145187597,
+          "winner": true
+        },
+        {
+          "id": "SYN2",
+          "lead_days": 184,
+          "remaining_upside": 0.32979744136460565,
+          "winner": true
+        }
+      ],
+      "winner_count": 3
+    },
+    "diagonal_covariance/chart": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 6,
+      "precision_at_k": 1.0,
+      "predicted_ranking": [
+        "SYN0",
+        "SYN2",
+        "SYN6",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "spearman": 0.9428571428571428,
+      "top": [
+        {
+          "id": "SYN0",
+          "lead_days": 184,
+          "remaining_upside": 0.49934747145187597,
+          "winner": true
+        },
+        {
+          "id": "SYN2",
+          "lead_days": 184,
+          "remaining_upside": 0.32979744136460565,
+          "winner": true
+        }
+      ],
+      "winner_count": 3
+    },
+    "diagonal_covariance/combined": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 6,
+      "precision_at_k": 1.0,
+      "predicted_ranking": [
+        "SYN0",
+        "SYN2",
+        "SYN6",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "spearman": 0.9428571428571428,
+      "top": [
+        {
+          "id": "SYN0",
+          "lead_days": 184,
+          "remaining_upside": 0.49934747145187597,
+          "winner": true
+        },
+        {
+          "id": "SYN2",
+          "lead_days": 184,
+          "remaining_upside": 0.32979744136460565,
+          "winner": true
+        }
+      ],
+      "winner_count": 3
+    },
+    "diagonal_covariance/fundamentals": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 6,
+      "precision_at_k": 1.0,
+      "predicted_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "spearman": 1.0,
+      "top": [
+        {
+          "id": "SYN0",
+          "lead_days": 184,
+          "remaining_upside": 0.49934747145187597,
+          "winner": true
+        },
+        {
+          "id": "SYN6",
+          "lead_days": 184,
+          "remaining_upside": 0.3968085106382977,
+          "winner": true
+        }
+      ],
+      "winner_count": 3
+    },
+    "equal/broad_chart": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN4",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 7,
+      "precision_at_k": 1.0,
+      "predicted_ranking": [
+        "SYN6",
+        "SYN2",
+        "SYN0",
+        "SYN3",
+        "SYN4",
+        "SYN7",
+        "SYN1"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "spearman": 0.8571428571428571,
+      "top": [
+        {
+          "id": "SYN6",
+          "lead_days": 184,
+          "remaining_upside": 0.3968085106382977,
+          "winner": true
+        },
+        {
+          "id": "SYN2",
+          "lead_days": 184,
+          "remaining_upside": 0.32979744136460565,
+          "winner": true
+        }
+      ],
+      "winner_count": 3
+    },
+    "equal/chart": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 6,
+      "precision_at_k": 1.0,
+      "predicted_ranking": [
+        "SYN6",
+        "SYN2",
+        "SYN0",
+        "SYN3",
+        "SYN7",
+        "SYN1"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "spearman": 0.7714285714285715,
+      "top": [
+        {
+          "id": "SYN6",
+          "lead_days": 184,
+          "remaining_upside": 0.3968085106382977,
+          "winner": true
+        },
+        {
+          "id": "SYN2",
+          "lead_days": 184,
+          "remaining_upside": 0.32979744136460565,
+          "winner": true
+        }
+      ],
+      "winner_count": 3
+    },
+    "equal/combined": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 6,
+      "precision_at_k": 1.0,
+      "predicted_ranking": [
+        "SYN6",
+        "SYN0",
+        "SYN2",
+        "SYN3",
+        "SYN7",
+        "SYN1"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "spearman": 0.8857142857142857,
+      "top": [
+        {
+          "id": "SYN6",
+          "lead_days": 184,
+          "remaining_upside": 0.3968085106382977,
+          "winner": true
+        },
+        {
+          "id": "SYN0",
+          "lead_days": 184,
+          "remaining_upside": 0.49934747145187597,
+          "winner": true
+        }
+      ],
+      "winner_count": 3
+    },
+    "equal/fundamentals": {
+      "actual_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "n": 6,
+      "precision_at_k": 1.0,
+      "predicted_ranking": [
+        "SYN0",
+        "SYN6",
+        "SYN2",
+        "SYN3",
+        "SYN1",
+        "SYN7"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "spearman": 1.0,
+      "top": [
+        {
+          "id": "SYN0",
+          "lead_days": 184,
+          "remaining_upside": 0.49934747145187597,
+          "winner": true
+        },
+        {
+          "id": "SYN6",
+          "lead_days": 184,
+          "remaining_upside": 0.3968085106382977,
+          "winner": true
+        }
+      ],
+      "winner_count": 3
+    }
+  },
+  "prediction_hash": "0fc3a915f612572607d9dd3217f6a0718f711b4f157aa390245c3ebeb36bbe4b",
+  "warning": "Synthetic functionality only",
+  "year": 2009
+}

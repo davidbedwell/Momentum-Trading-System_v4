@@ -1,0 +1,27 @@
+test_audit_never_opens_payload_or_credentials (test_pipeline.PipelineTests.test_audit_never_opens_payload_or_credentials) ... ok
+test_chronological_low_high_not_unordered_extrema (test_pipeline.PipelineTests.test_chronological_low_high_not_unordered_extrema) ... ok
+test_date_precision_lag (test_pipeline.PipelineTests.test_date_precision_lag) ... ok
+test_deterministic_full_pipeline (test_pipeline.PipelineTests.test_deterministic_full_pipeline) ... ok
+test_freeze_predictions_before_labels_and_equal_intersection (test_pipeline.PipelineTests.test_freeze_predictions_before_labels_and_equal_intersection) ... ok
+test_freeze_tamper_and_config (test_pipeline.PipelineTests.test_freeze_tamper_and_config) ... ok
+test_future_prices_and_caps_do_not_change_features (test_pipeline.PipelineTests.test_future_prices_and_caps_do_not_change_features) ... ok
+test_holdouts_rejected_before_io (test_pipeline.PipelineTests.test_holdouts_rejected_before_io) ... ok
+test_manifest_admission_and_json_roundtrip (test_pipeline.PipelineTests.test_manifest_admission_and_json_roundtrip) ... ok
+test_metrics_hand_computed (test_pipeline.PipelineTests.test_metrics_hand_computed) ... ok
+test_missing_is_not_zero (test_pipeline.PipelineTests.test_missing_is_not_zero) ... ok
+test_pit_future_reports_and_restatements (test_pipeline.PipelineTests.test_pit_future_reports_and_restatements) ... ok
+test_prediction_independent_of_current_future_labels (test_pipeline.PipelineTests.test_prediction_independent_of_current_future_labels) ... ok
+test_schema_delisting (test_pipeline.PipelineTests.test_schema_delisting) ... ok
+test_schema_duplicate (test_pipeline.PipelineTests.test_schema_duplicate) ... ok
+test_schema_nan (test_pipeline.PipelineTests.test_schema_nan) ... ok
+test_schema_overlap (test_pipeline.PipelineTests.test_schema_overlap) ... ok
+test_schema_price (test_pipeline.PipelineTests.test_schema_price) ... ok
+test_schema_restatement (test_pipeline.PipelineTests.test_schema_restatement) ... ok
+test_schema_source (test_pipeline.PipelineTests.test_schema_source) ... ok
+test_split_and_dividend_reconciled_adjusted_inputs (test_pipeline.PipelineTests.test_split_and_dividend_reconciled_adjusted_inputs) ... ok
+test_universe_ipo_delisting_and_types (test_pipeline.PipelineTests.test_universe_ipo_delisting_and_types) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 1.454s
+
+OK

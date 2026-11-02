@@ -1,0 +1,47 @@
+{
+  "asof": "2005-06-30",
+  "broad_chart_ids": [
+    "SYN0",
+    "SYN1",
+    "SYN2",
+    "SYN3",
+    "SYN4",
+    "SYN6",
+    "SYN7"
+  ],
+  "exclusions": [
+    {
+      "id": "SYN5",
+      "reason": "exchange_or_security_type"
+    }
+  ],
+  "fits": {},
+  "freeze_hash": "8a7c8efc3a4bea8dad4a3ff22353b09d354aaff0b67d8cbb71c613550ecbdf7d",
+  "input_hash": "5179589fbbb07d790cf4c606d9eda8fb6646d8cbd8eea91dae8f2908fcf9b9ad",
+  "intersection": [
+    "SYN0",
+    "SYN1",
+    "SYN2",
+    "SYN3",
+    "SYN6",
+    "SYN7"
+  ],
+  "missing_fundamentals": [
+    "SYN4"
+  ],
+  "provenance": {
+    "adjustment_policy": "Identity; synthetic corporate actions absent",
+    "coverage": "Invented weekday sessions; not an exchange calendar",
+    "release_date": "2026-10-30",
+    "revision_policy": "original_as_reported",
+    "source": "invented_fixture_v1",
+    "synthetic": true,
+    "years": [
+      2005
+    ]
+  },
+  "scores": {},
+  "training_years": [],
+  "warmup": true,
+  "year": 2005
+}
